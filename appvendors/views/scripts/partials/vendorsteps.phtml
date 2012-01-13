@@ -1,0 +1,58 @@
+<script type="text/javascript"> $(function(){ $('#steps li.active').prev('li').addClass('prev'); }); </script>
+<?php switch($this->type): 
+case '5': ?>
+<ul id="steps">
+    <li class="first"><strong>Step 1</strong><span>Listing Type</span></li>
+    <?php $class = ($this->step == 2) ? 'active' : ''; ?>
+    <li class="<?= $class ?>"><strong>Step 2</strong><span>Description</span></li>
+    <?php $class = ($this->step == 4) ? 'active' : ''; ?>
+    <li class="<?= $class ?>"><strong>Step 3</strong><span>Room Types</span></li>
+    <?php $class = ($this->step == 5) ? 'active' : ''; ?>
+    <li class="<?= $class ?>"><strong>Step 4</strong><span>Photos</span></li>
+    <?php $class = ($this->step == 6) ? 'active' : ''; ?>
+    <li class="<?= $class ?>"><strong>Step 5</strong><span>Pricing</span></li>
+</ul>
+<?php break; ?>
+<?php case '6': ?>
+<ul id="steps">
+    <li class="first"><strong>Step 1</strong><span>Listing Type</span></li>
+    <?php $class = ($this->step == 2) ? 'active' : ''; ?>
+    <li class="<?= $class ?>"><strong>Step 2</strong><span>Description</span></li>
+    <?php $class = ($this->step == 4) ? 'active' : ''; ?>
+    <li class="<?= $class ?>"><strong>Step 3</strong><span>Set Hours</span></li>
+    <?php $class = ($this->step == 5) ? 'active' : ''; ?>
+    <li class="<?= $class ?>"><strong>Step 4</strong><span>Photos</span></li>
+    <?php $class = ($this->step == 6) ? 'active' : ''; ?>
+    <li class="<?= $class ?>"><strong>Step 5</strong><span>Pricing</span></li>
+</ul>
+<?php break ?>
+<?php case '2': ?>
+<ul id="steps">
+    <li class="first"><strong>Step 1</strong><span>Listing Type</span></li>
+    <?php $class = ($this->step == 2) ? 'active' : ''; ?>
+    <li class="<?= $class ?>"><strong>Step 2</strong><span>Description</span></li>
+    <?php $class = ($this->step == 4) ? 'active' : ''; ?>
+    <li class="<?= $class ?>"><strong>Step 3</strong><span>Set hours</span></li>
+    <?php $class = ($this->step == 5) ? 'active' : ''; ?>
+    <li class="<?= $class ?>"><strong>Step 4</strong><span>Photos</span></li>
+</ul>
+<?php break ?>
+<?php case '4': ?>
+<ul id="steps">
+    <li class="first"><strong>Step 1</strong><span>Listing Type</span></li>
+    <?php $class = ($this->step == 2) ? 'active' : ''; ?>
+    <li class="<?= $class ?>"><strong>Step 2</strong><span>Description</span></li>
+    <?php $class = ($this->step == 5) ? 'active' : ''; ?>
+    <li class="<?= $class ?>"><strong>Step 3</strong><span>Photos</span></li>
+</ul>
+<?php break ?>
+<?php case '7': ?>
+<ul id="steps">
+    <li class="first"><strong>Step 1</strong><span>Listing Type</span></li>
+    <?php $class = ($this->step == 2) ? 'active' : ''; ?>
+    <li class="<?= $class ?>"><strong>Step 2</strong><span>Description</span></li>
+    <?php $class = ($this->step == 5) ? 'active' : ''; ?>
+    <li class="<?= $class ?>"><strong>Step 3</strong><span>Photos</span></li>
+</ul>
+<?php break ?>
+<?php endswitch ?>

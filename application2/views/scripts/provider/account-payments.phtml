@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> : Payments | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('input').ToggleInputValue();
+            $("a.lb").fancybox({
+                padding: 0,
+                showCloseButton: false,
+                overlayOpacity: 0.8,
+                overlayColor: '#FFFFFF'
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-backend">
+        	<?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'Payments','parentActive'=>'Account')); ?>
+                        <div id="features">
+                <div class="top">
+                    <img src="/images2/img-60.png" alt="" class="izq" />
+                    <h2>Payments</h2>
+                    <h3>Review, collect and manage your payments it´s easy through the TripFab platform.</h3>
+                    <p>On our payment platform you can see, manage and organize the data related to your past, present and pending payments.</p>
+                    <img src="/images2/img-49.png" alt="" class="corner" />
+                </div>
+                <!-- closes top -->
+                <div class="bottom">
+                    <img src="/images2/img-61.png" alt="" class="der" />
+                    <h4>Different Payment Accounts</h4>
+                    <p>You get to manage all the different payment methods available via TripFab. Whether it is a regular bank account, an official TripFab account or as simple as a Paypal account, your finances are always displayed clearly.</p>
+                    <div class="clear"></div>
+                    <img src="/images2/img-62.png" alt="" class="izq" />
+                    <h4>Choose Multiple Payment Methods</h4>
+                    <p>TripFab allows you to choose the payment method that best suits your business' needs whether you would like to use multiple payment methods or a single one you can always choose which works best. </p>
+                </div>
+                <!-- closes bottom -->
+            </div>
+            <!-- closes features -->
+        </div>
+        <!-- closes user-backend -->
+    </div>
+    <!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div>
+<!-- closes w1 -->
+</body>
+</html>

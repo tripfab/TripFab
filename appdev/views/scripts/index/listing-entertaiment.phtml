@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->listing->title ?> - <?= $this->city->title ?>, <?= $this->country->title ?> | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/jquery-ui-1.8.16.custom.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/index/listing-activity.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js2/jquery.cycle.all.js"></script>
+    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+    <script type="text/javascript" src="/js2/jquery.jcarousel.min.js"></script>
+    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <script type="text/javascript" src="/js2/index/listing-entertaiment.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
+    <style type="text/css">#mapcanvas { width:246px;  height:175px; }</style>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', 
+	array('user'=>$this->user,'full'=>true)); ?>
+    <div class="w2">
+        <div class="main wrapper">
+            <div class="content-2">
+                <div class="box">
+                    <?= $this->partial('partials/gallery.phtml', 
+					array('user'=>$this->user, 'listing' => $this->listing, 'city' => $this->city, 
+						  'country' => $this->country,'pictures' => $this->pictures,'trips'=>$this->trips)); ?>
+                    <?php // $this->partial('partials/tabs.phtml',  array('listing' => $this->listing, 'tabs' => $this->tabs, 'faqs' => $this->faqs, 'map' => false)); ?>
+                </div><!-- closes box -->
+                <div class="tabs-wrapper-2">
+                    <ul>
+                        <li><a href="#tabs-1">Overview</a></li>
+                        <li><a href="#tabs-2">FAQ's</a></li>
+                    </ul>
+                    <div class="tab" id="tabs-1">
+                        <div class="tab-ttl">
+                            About the spot
+                        </div>
+                        <!-- closes tab-ttl -->
+                        <div class="tab-content">
+                            <p>bibendum elementum tincidunt commodo, feugiat quis quam. Duis feugiat, purus nec mollis pulvinar, felis diam imperdiet justo, id consequat massa libero ac velit. Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam. Fusce neque mauris, semper et aliquam et, ornare non tortor. Phasellus po, id consequat massa libero ac velit. Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam. Fusce neque mauris, semper et aliquam et, ornare non tortor. Phasellus p o, id consequat massa libero ac velit. </p>
+                            <p>Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam. Fusce neque mauris, semper et aliquam et, ornare non tortor. Phasellus pellentesque viverra accumsan. bibendum elementum tincidunt commodo, feugiat quis quam. Duis feugiat, purus nec mollis pulvinar, felis diam imperdiet justo, id consequat massa libero ac velit. Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam.</p>
+                            <h2>Kind of entertainment you'll get</h2>
+                            <p>Aenean auctor, leo congue vehicula dictum, purus orci eleifend lacus, sit amet eleifend neque ipsum eu magna. Sed a tellus nisl.</p>
+                            <p>Nam ut nibh id est condimentum imperdiet at non massa. Pellentesque ac congue ipsum. Sed porta lacus non libero hendrerit ultrices. Quisque ac nisi ac purus feugiat mollis sed ut diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam sit amet aliquam ligula. Integer ac dolor sed urna lacinia vulputate et sed nibh.</p>
+                            <h2>When can you enjoy it?</h2>
+                            <p>bibendum elementum tincidunt commodo, feugiat quis quam. Duis feugiat, purus nec mollis pulvinar, felis diam imperdiet justo, id consequat massa libero ac velit. Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam. Fusce neque mauris, semper et aliquam et, ornare non tortor. Phasellus pellentesque viverra accumsan.</p>										
+                            <h2>Policies</h2>
+                            <ul>
+                                <li>Credit Cards Policy: We accept some credit cards.</li>
+                                <li>Attire Policy: Casual</li>
+                                <li>Parking Policy: Complimentary underground heated self-parking is available.</li>
+                                <li>Pet Policy: Pets are not permitted.</li>
+                                <li>Smoking Policy: Smoking is not permitted.</li>
+                            </ul>
+                        </div>
+                        <!-- closes tab-content -->
+                    </div>
+                    <!-- closes tab -->
+                    <div class="tab" id="tabs-2">
+                        <div class="tab-ttl">
+                            Frequently Asked Questions
+                        </div>
+                        <!-- closes tab-ttl -->
+                        <div class="tab-content faqs">
+                            <ul>
+                                <li>
+                                    <strong>Can children take this tour?</strong>
+                                    Yes, people of all ages can take and enjoy this tour.
+                                </li>
+                                <li>
+                                    <strong>Can I be picked up in Liberia?</strong>
+                                    For different pick ups other than San Jose, please contact tour operator for details and/or possible arrangements.
+                                </li>
+                                <li>
+                                    <strong>When is the best time to take this tour?</strong>
+                                    This tour can be taken and enjoyed year round.
+                                </li>
+                                <li>
+                                    <strong>What is the temperature on these locations?</strong>
+                                    Tortuguero and Guanacaste are hot and sunny, although it rains more in Tortuguero. Arenal on the other hand might get a bit chilly.
+                                </li>
+                                <li>
+                                    <strong>Where is the pick up for this tour?</strong>
+                                    The pick up and drop off for this tour is at the Juan Santamaria Airport.
+                                </li>
+                                <li>
+                                    <strong>At what time can I do this tour?</strong>
+                                    Tropical Bungee offers this tour twice a day. Their departure times daily can be found on the Tour Details tab.
+                                </li>
+                                <li>
+                                    <strong>Do I have to own and/or bring my own equipment?</strong>
+                                    No, this tour includes all certified equipment necessary to jump and it is carefully verified for safety.
+                                </li>
+                                <li>
+                                    <strong>How old do I have to be to do this activity?</strong>
+                                    There is no age limit. Tropical Bungee has had jumpers as young as 4 years old and as old as 80 years old.
+                                </li>
+                                <li>
+                                    <strong>At what time can I do this tour?</strong>
+                                    Tropical Bungee offers this tour twice a day. Their departure times daily can be found on the Tour Details tab.
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- closes tab-content -->
+                    </div>
+                    <!-- closes tab -->								
+                </div>
+                <!-- closes tabs-wrapper -->                
+                <div class="reviews-wrapper">
+                    <?= $this->partial('partials/reviews.phtml', 
+					array('reviews' => $this->reviews, 'questions' => $this->questions, 'answer_allow' => false,
+						  'user'=>$this->user, 'listing' => $this->listing->id)); ?>
+                </div><!-- closes reviews-wrapper -->
+            </div><!-- closes content-2 -->
+            
+            <div class="right-sidebar">
+                <div class="widget book">
+                    <div class="ttl">
+                        <span>Entertainment</span>
+                    </div><!-- closes ttl -->
+                    <div class="map-wrapper">
+                        <h4>Location</h4>
+                        <div id="mapcanvas"></div>
+                        <address>
+                            <p><strong><?= $this->listing->title ?></strong></p>
+                            <p><?= $this->listing->address ?></p>
+                        </address>
+                    </div><!-- closes map-wrapper -->
+                </div><!-- closes widget -->
+                <div class="widget talk">
+                    <?= $this->partial('partials/talk.phtml',array('vendor'=>$this->vendor,'user' => $this->user)); ?>
+                </div><!-- closes widget -->
+            </div><!-- closes right-sidebar -->
+        </div><!-- closes main -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->	
+<div id="citiesAutocompleteContainer"></div>
+<input type="hidden" value="<?= ($this->listing->lat) ? $this->listing->lat : 'none' ?>" name="listlat" />
+<input type="hidden" value="<?= ($this->listing->lng) ? $this->listing->lng : 'none' ?>" name="listlng" />
+<input type="hidden" value="<?= $this->listing->title ?>" name="listtitle" />
+
+<div class="hidden">
+	<div id="send_message">
+        <form action="" id="sendMessageForm">
+            <div class="lb-forgot">
+                <div class="ttl">Send a message to <?= $this->vendor->name ?></div>
+                <div class="content">
+                    <textarea cols="30" name="message" rows="1"></textarea>
+                </div><!-- closes content -->
+                <div class="bottom">
+                    <input type="submit" class="btn-1" value="Send Message" />
+                    <span onclick="$.fancybox.close()" class="btn-4">Cancel</span>				
+                </div><!-- closes bottom -->
+            </div><!-- closes lb-forgot -->
+            <input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+        </form>
+    </div>
+    <div id="live_chat">
+    	<img src="/images2/chat.png" />
+    </div>
+    <div id="start_call">
+    	<img src="/images2/phone.png" />
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> : Profile | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/calendar/jquery-ui-1.8.16.custom.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
+    <script type="text/javascript" src="/uploadify/swfobject.js"></script>
+	<script type="text/javascript" src="/uploadify/jquery.uploadify.v2.1.4.min.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
+    <script type="text/javascript">
+		$(document).ready(function() {
+			$('#file_upload').uploadify({
+				'uploader' 	: '/uploadify/uploadify.swf',
+				'script' 	: '/phpscripts/uploadUserPicture.php',
+				'cancelImg' : '/uploadify/cancel.png',
+				'folder' 	: '/uploads',
+				'buttonImg' : '/images2/file-1.png',
+				'height' 	: 27,
+				'width' 	: 92,
+				'auto' 		: true,
+				'fileExt'	: '*.jpg;*.gif;*.png',
+				'onError':function(e,a,c,d){
+					console.log(e);
+					console.log(a);
+					console.log(c);
+					console.log(d);
+				},
+				'onComplete':function(a,b,c,image){
+					console.log(a);
+					console.log(b);
+					console.log(c);
+					console.log(image);
+					if(image != 'error'){
+						$('img#userimage68').attr('width',68);
+						$('img#userimage68').attr('height',68);
+						$('img#userimage68').attr('src',image);
+					}
+				},
+				'scriptData':{
+					'userids':<?= $this->user->id ?>,
+					'formtoken':'<?= $this->user->token ?>',
+					'usertoken':'<?= md5($this->user->token.'change_picture') ?>',
+				},
+			});
+			//$('input').ToggleInputValue();
+			$('form select').jqTransSelect();
+			
+			$('input.calendar').datepicker({
+                dateFormat: 'MM d, yy',
+                defaultDate:$(this).val(),
+            });
+		});
+    </script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-backend">
+        	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Account','parentActive'=>'Profile')); ?>
+            <div class="vendor-profile">
+                <form id="user_account" method="post" action="">
+                    <?php if($this->errormessage): ?>
+                    <div class="errormessage">
+                        <p><?= $this->errormessage ?></p>
+                    </div>
+                    <?php endif ?>
+                    <?php if($this->successmessage): ?>
+                    <div class="green-message">
+                        <div class="wrapper">
+                            <img src="/images/ico-115.png" alt="" /> Your changes have been saved!
+                        </div><!-- closes wrapper -->
+                    </div><!-- closes green-message -->
+                    <?php endif ?>
+                    <div class="profile-items">							
+                        <div class="item-wrppr">
+                            <div class="item-ttl">
+                                Profile Picture
+                            </div><!-- closes item ttl -->
+                            <div class="item last">
+                                <div class="picture">
+                                	<?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
+                                	<?= $this->thumbnail(68,$image,'','1:1'); ?>
+                                    <input type="file" name="file_upload" id="file_upload"/>
+                                </div>
+                                <h4>Picture Requirements</h4>
+                                <span>Should be square, preferably 100x100 pixels, <br />and in JPEG, GIF, or PNG format.</span>
+                            </div><!-- closes item -->
+                            <div class="clear"></div>
+                        </div><!-- closes item-wrppr -->
+                        <div class="item-wrppr">
+                            <div class="item-ttl">
+                                Required Information
+                            </div><!-- closes item ttl -->
+                            <div class="item">
+                                <input type="text" name="name" value="<?= $this->user->name ?>" />
+                                <h4>First Name</h4>
+                                <span>Your real first name</span>
+                            </div><!-- closes item -->
+                            <div class="item">
+                                <input type="text" name="lname" value="<?= $this->user->lname ?>" />
+                                <h4>Last Name</h4>
+                                <span>Your real last name</span>
+                            </div><!-- closes item -->
+                            <div class="item">
+                                <input type="text" name="email" value="<?= $this->user->email ?>" />
+                                <h4>Email</h4>
+                                <span>Set your email contact information</span>
+                            </div><!-- closes item -->
+                            <div class="item last">
+                            	<select name="city_id" class="city">
+                                    <option value="">Which City</option>
+                                    <?php foreach($this->cities as $c): ?>
+                                    <?php if($this->user->city_id ==  $c->id):?>
+                                    <option value="<?= $c->id ?>" selected="selected"><?= $c->title ?></option>
+                                    <?php else: ?>
+                                    <option value="<?= $c->id ?>"><?= $c->title ?></option>
+                                    <?php endif ?>
+                                    <?php endforeach ?>
+                                </select>
+                                <select name="country_id" class="country">
+                                    <option value="">Select your Country</option>
+                                    <?php foreach($this->countries as $c): ?>
+                                    <?php if($this->user->country_id == $c->id): ?>
+                                    <option value="<?= $c->id ?>" selected="selected"><?= $c->title ?></option>
+                                    <?php else: ?>
+                                    <option value="<?= $c->id ?>"><?= $c->title ?></option>
+                                    <?php endif ?>
+                                    <?php endforeach ?>
+                                </select>
+                                <h4>Location</h4>
+                                <span>The country where you live</span>
+                            </div><!-- closes item -->
+                            <div class="clear"></div>									
+                        </div><!-- closes item-wrppr -->
+                        <div class="item-wrppr">
+                            <div class="item-ttl">
+                                Optional Information
+                            </div><!-- closes item ttl -->
+                            <div class="item">
+                                <select name="languages">
+	                                <option value="">Select one</option>
+                                    <?php $selected = ($this->user->languages == 'English') ? 'selected="selected"' : '' ?>
+                                    <option <?= $selected ?> value="English">English</option>
+                                    <?php $selected = ($this->user->languages == 'Spanish') ? 'selected="selected"' : '' ?>
+                                    <option <?= $selected ?> value="Spanish">Spanish</option>
+                                </select>
+                                <h4>Language</h4>
+                                <span>Select the language of your choice</span>
+                            </div><!-- closes item -->
+                            <div class="item">
+                                <select name="gender">
+                                	<option value="">Select</option>
+                                	<?php $checked = ($this->user->gender == 'Male') ? 'selected="selected"' : '' ?>
+                                    <option <?= $checked ?> value="Male">Male</option>
+                                    <?php $checked = ($this->user->gender == 'Female') ? 'selected="selected"' : '' ?>
+                                    <option <?= $checked ?> value="Female">Female</option>
+                                </select>
+                                <h4>Gender</h4>
+                                <span>Your gender</span>
+                            </div><!-- closes item -->
+                            <div class="item">
+                                <input type="text" name="phone" value="<?= $this->user->phone ?>" />
+                                <h4>Phone</h4>
+                                <span>Your Contact Phone</span>
+                            </div><!-- closes item -->
+                            <div class="item">
+                                <input type="text" name="birthdate" class="calendar" 
+								<?php if(!empty($this->user->birthdate)): ?>
+                                value="<?= date('F j, Y', strtotime($this->user->birthdate)) ?>" />
+                                <?php else: ?>
+                                value="" />
+                                <?php endif ?>
+                                <h4>Birthday</h4>
+                                <span>The magical day you were dropped <br /> from the sky by a stork</span>
+                            </div><!-- closes item -->
+                            <div class="item last">
+                                <input type="text" name="work" value="<?= $this->user->work ?>" />
+                                <h4>Work</h4>
+                                <span>Your work position</span>
+                            </div><!-- closes item -->
+                            <div class="clear"></div>									
+                        </div><!-- closes item-wrppr -->
+                    </div><!-- closes profile-items -->
+                    <div class="foot">
+                        <input type="submit" class="btn-1" value="Save Changes" />
+                        <a href="">Deactivate Account</a>
+                    </div><!-- closes foot -->
+                    <input type="hidden" name="userids" value="<?= $this->user->id ?>" />
+                    <input type="hidden" name="usertokens" value="<?= $this->user->token ?>" />
+                    <input type="hidden" name="formid" value="<?= md5($this->user->token.'update_user') ?>" />
+                    <input type="hidden" name="_task" value="<?= md5('update_user') ?>" />
+                </form>
+            </div><!-- closes vendor-profile -->
+        </div><!-- closes user-backend -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->	
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->listing->title ?> : <?= $this->data['sch']->name ?> Room | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/js/jwysiwyg/jquery.wysiwyg.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
+    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
+	<script type="text/javascript" src="/js/jwysiwyg/jquery.wysiwyg.js"></script>
+    <script type="text/javascript" src="/js/jwysiwyg/controls/wysiwyg.link.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $bed = 0;
+			$('a#addNewBedType').click(function(){
+				$item = $('.bed.new').html();
+				$item = $('<div class="bed">'+$item+'</div>');
+				$('select[name=quantity]', $item).attr('name','beds['+$bed+'][quantity]');
+				$('select[name=type]', $item).attr('name','beds['+$bed+'][type]');
+				$('.bed.new').before($item);
+				$bed++;
+				return false;
+			});
+			$('a.removeBed').live('click',function(){
+				$bed = $(this).parent('.bed');
+				$bed.fadeOut('fast', function(){
+					$('select', $bed).attr('disabled', 'disabled');
+				});
+				return false;
+			});
+        });
+    </script>
+    <style type="text/css">
+	textarea.wysiwyg { width:730px; height:500px;}
+	</style>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="listing-wrapper wrapper">
+			<?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'All Listings','parentActive'=>'Listings')); ?>   
+            <?= $this->partial('partials/vendorlistingstop.phtml', array('listing'=>$this->listing)); ?>
+            <div class="listing-content show">
+                <div class="left">
+                    <?= $this->partial('partials/vendorlistingsmenu.phtml', array('active'=>'Rooms', 'id' => $this->listing->id, 
+									   'type'=>$this->listing->main_type)) ?>
+                </div><!-- closes left -->
+                <div class="right">
+                    <?= $this->partial('listing/hotel/room.phtml', array('listing' => $this->listing,'amenities' => $this->amenities,
+					'errors'=>$this->errors, 'data' => $this->data)); ?>
+                </div><!-- closes right -->
+                <div class="clear"></div>
+            </div><!-- closes listing-content -->
+        </div><!-- closes listing-wrapper -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+</body>
+</html>

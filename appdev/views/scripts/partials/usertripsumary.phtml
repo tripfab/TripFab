@@ -1,0 +1,52 @@
+<div class="trip-smmr">
+    <div class="ttl">Trip Summary</div>
+    <div class="content">
+        <div class="name-cat">
+            <h4><?= $this->trip->title ?></h4>
+            <span>Family Trip</span>
+        </div><!-- closes name-cat -->	
+        <ul>
+            <li>
+                <div class="ball">
+                    <strong><?= $this->trip->days ?></strong>
+                    <span>Days</span>
+                </div><!-- closes ball -->
+                <div class="ball">
+                    <strong><?= $this->trip->days ?></strong>
+                    <span>People</span>
+                </div><!-- closes ball -->
+                <div class="ball last">
+                    <strong><?= $this->trip->cities ?></strong>
+                    <span>Cities</span>
+                </div><!-- closes ball -->
+                <div class="clear"></div>
+            </li>
+            <li>
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td><img src="images/ico-26.png" alt="" /><span>Activities</span></td>
+                            <td><strong><?= $this->counter[5] ?></strong></td>
+                        </tr>
+                        <tr>
+                            <td><img src="images/ico-27.png" alt="" /><span>Entertainment</span></td>
+                            <td><strong><?= $this->counter[7] ?></strong></td>
+                        </tr>
+                        <tr>
+                            <td><img src="images/ico-28.png" alt="" /><span>Tourists Sights</span></td>
+                            <td><strong><?= $this->counter[4] ?></strong></td>
+                        </tr>
+                        <tr>
+                            <td><img src="images/ico-29.png" alt="" /><span>Restaurants</span></td>
+                            <td><strong><?= $this->counter[2] ?></strong></td>
+                        </tr>
+                        <tr>
+                            <td><img src="images/ico-30.png" alt="" /><span>Hotels</span></td>
+                            <td><strong><?= $this->counter[5] ?></strong></td>
+                        </tr>
+                    </tbody>
+                </table>                <div class="clear"></div>
+            </li>
+        </ul>        <strong>$<?= $this->trip->price ?></strong>        <span>Grand Total</span>
+    </div><!-- closes content -->
+</div><!-- closes smmr -->

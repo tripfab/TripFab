@@ -1,0 +1,14 @@
+<?php $status = array('Inactive', 'Active'); ?>
+<div class="listing-ttl">
+	<a href="/provider/listings/" class="link-4">Back to My Listigns</a>
+    <?php if($this->listing->status == 0): ?>
+    <a href="/provider/listings/activate/<?= $this->listing->id ?>" class="btn-1">Activate Listing</a>
+    <?php else: ?>
+    <a href="/provider/listings/desactivate/<?= $this->listing->id ?>" class="btn-11">Deactivate Listing</a>
+    <?php endif ?>
+    <a href="/provider/listings/preview/<?= $this->listing->id ?>" class="btn-8">View Preview</a>
+    <?= $this->thumbnail(58, $this->listing->image, '', '1:1'); ?>
+    <h2><?= $this->listing->title ?></h2>
+    <p>This listing is <span class="<?= strtolower($status[$this->listing->status]) ?>"><?= $status[$this->listing->status] ?></span></p>
+</div>
+<!-- closes listing-ttl -->

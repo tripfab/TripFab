@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <meta name="robots" content="noindex, nofollow" />
+    <title><?= strip_tags($this->translate('Index Title')) ?> | Tripfab.com</title>
+    <meta http-equiv="description" name="description" content="<?= $this->translate('Index Description') ?>" />
+    <link type="text/css" rel="stylesheet" href="/css4/all.css" />
+	<link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <script type="text/javascript">
+	function loadJS(script){
+		$script = document.createElement('script');
+		$script.async = true;
+		$script.src   = script;
+		$script.type  = 'text/javascript';
+		document.body.appendChild($script);}
+	function onLoad(){
+		loadJS("/js2/jquery.js");}
+	function loadReady(){
+		$('.language a.current').click(function(){
+			$(this).toggleClass('active');
+			$('.language .select').toggleClass('show');
+			return false;
+		});}
+	</script>
+</head>
+<body class="home first" onload="onLoad()">
+<div id="container">
+    <div id="header-shadow">
+        <div id="header">
+            <div class="wrapper">
+                <h1 class="logo"><a href="/<?= $this->lang ?>">TripFab</a></h1>
+                <div class="right">
+                	<div class="language">
+                    	<a class="current" href="#"><?= $this->translate('language') ?></a>
+                        <div class="select">
+                        	<ul>
+                            	<?php $class = ($this->lang == 'en-US') ? 'active' : '' ?>
+                            	<li class="en <?= $class ?>"><a href="/en-US">English</a></li>
+                                <?php $class = ($this->lang == 'es-ES') ? 'active' : '' ?>
+                                <li class="es <?= $class ?>"><a href="/es-ES">Español</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <a href="/<?= $this->lang ?>/login" class="btn-1"><?= $this->translate('signin') ?></a>
+                    <?= $this->translate('Have an account') ?>
+                </div><!-- closes right -->
+            </div><!-- closes wrapper -->				
+        </div><!-- closes header -->
+    </div><!-- closes header-shadow -->
+    <div id="top">
+        <div id="shine">
+            <div class="content wrapper">
+                <h2><?= $this->translate('Index Title') ?></h2>
+                <h6><?= $this->translate('Index Description') ?></h6>
+                <div class="cycle-wrapper">
+                    <iframe src="<?= $this->translate('home video') ?>" width="640" height="360" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                    <div class="shadow">
+                    	<img src="/images4/loading2.gif" /><br />
+                        <span>Loading Video</span>
+                    </div>
+                </div><!-- closes cycle wrapper -->
+            </div><!-- closes wrapper -->
+        </div><!-- closes shine -->
+    </div><!-- closes top -->
+    <div class="sticky">
+        <div class="texture">
+            <div id="bottom">
+                <div class="wrapper">
+                    <div class="center">
+                        <div class="items-wrapper">
+                            <div class="item">
+                                <img src="/images4/img-13-<?= $this->lang ?>.png" alt="" />
+                            </div><!-- closes item -->
+                            <div class="item item-2">
+                                <a href="/<?= $this->lang ?>/signup" class="<?= $this->lang ?>"><img src="/images4/cleardot.gif" alt="" /></a>
+                            </div><!-- closes item -->
+                            <div class="item">
+                                <img src="/images4/img-15-en-US.png" alt="" />
+                            </div><!-- closes item -->
+                            <div class="item item-4">
+                                <a href="/<?= $this->lang ?>/about" class="<?= $this->lang ?>"><img src="/images4/cleardot.gif" alt="" /></a>
+                            </div><!-- closes item -->
+                            <div class="item">
+                                <img src="/images4/img-17-<?= $this->lang ?>.png" alt="" />
+                            </div><!-- closes item -->
+                        </div><!-- closes items-wrapper -->
+                    </div><!-- closes center -->
+                </div><!-- closes wrapper -->
+            </div><!-- closes bottom -->
+        </div><!-- closes texture -->		
+        <div id="footer">
+            <div id="footer-gradient">
+                <div class="wrapper">
+                    <ul>
+                        <li><a href="https://www.facebook.com/TripFab">Facebook</a></li>
+                        <li><a href="https://twitter.com/#!/TripFab">Twitter</a></li>
+                        <li><a href="https://plus.google.com/108576021199856132768">Google+</a></li>
+                        <li><a href="mailto:hello@tripfab.com">eMail</a></li>
+                        <li><a href="http://blog.tripfab.com/">Blog</a></li>
+                    </ul>
+                    <img src="/images4/logo-2.png" alt="" class="logo" />
+                    <strong><?= $this->translate('footer') ?></strong>
+                    <span>Copyright &copy; 2011 Tripfab</span>
+                </div><!-- closes wrapper -->	
+            </div><!-- closes footer-gradient -->					
+        </div><!-- footer -->
+    </div><!-- closes sticky -->
+</div><!-- closes container -->	
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24981182-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>

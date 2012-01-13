@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> : Profile | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('input').ToggleInputValue();
+            $('input:file').uploadify({
+                'uploader' 	: '/uploadify/uploadify.swf',
+				'script' 	: '/phpscripts/uploadUserPicture.php',
+				'cancelImg' : '/uploadify/cancel.png',
+				'folder' 	: '/uploads',
+				'buttonImg' : '/images2/file-1.png',
+				'height' 	: 27,
+				'width' 	: 92,
+				'auto' 		: true,
+				'fileExt'	: '*.jpg;*.gif;*.png',
+				'onError':function(e,a,c,d){
+					console.log(e);
+					console.log(a);
+					console.log(c);
+					console.log(d);
+				},
+				'onComplete':function(a,b,c,image){
+					console.log(a);
+					console.log(b);
+					console.log(c);
+					console.log(image);
+					if(image != 'error'){
+						$('img#userimage68').attr('width',68);
+						$('img#userimage68').attr('height',68);
+						$('img#userimage68').attr('src',image);
+					}
+				},
+				'scriptData':{
+					'userids':<?= $this->user->id ?>,
+					'formtoken':'<?= $this->user->token ?>',
+					'usertoken':'<?= md5($this->user->token.'change_picture') ?>',
+				},
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-backend">
+        	<?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'Profile','parentActive'=>'Account')); ?>
+            <div class="listings-main">
+            	<div class="sub-ttl">
+	                Account - Profile
+            	</div><!-- closes sub-ttl -->
+            </div>
+            <div class="vendor-profile">
+                <form action="" id="provider_form" method="post">
+                    <div class="profile-items">
+                    	<?php if($this->errormessage): ?>
+						<script type="text/javascript">
+                        showError("<?= $this->errormessage ?>");
+                        </script>
+                        <?php endif ?>
+                        <?php if($this->successmessage): ?>
+                        <script type="text/javascript">
+                        showAlert("Your changes have been saved");
+                        </script>
+                        <?php endif ?>				
+                        <div class="item-wrppr">
+                            <div class="item-ttl">
+                                Profile Picture
+                            </div>
+                            <!-- closes item ttl -->
+                            <div class="item last first">
+                                <div class="picture">
+                                	<?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
+                                	<?= $this->thumbnail(68,$image,'','1:1'); ?>
+                                    <input type="file" name="file_upload" id="file_upload" />
+                                </div>
+                                <h4>Picture Requirements</h4>
+                                <span>Should be square, preferably 100x100 pixels, <br />and in JPEG, GIF, or PNG format.</span>
+                            </div>
+                            <!-- closes item -->
+                            <div class="clear"></div>
+                        </div>
+                        <!-- closes item-wrppr -->
+                        <div class="item-wrppr">
+                            <div class="item-ttl">
+                                Basic Information
+                            </div>
+                            <!-- closes item ttl -->
+                            <div class="item first">
+                                <input type="text" name="name" value="<?= $this->vendor->name ?>" />
+                                <h4>Name</h4>
+                                <span>Your company name</span>
+                            </div>
+                            <!-- closes item -->
+                            <div class="item">
+                                <input type="text" name="email" value="<?= $this->vendor->email ?>" />
+                                <h4>Email</h4>
+                                <span>Set your email contact information</span>
+                            </div>
+                            <!-- closes item -->
+                            <div class="item last">
+                                <select name="place_id">
+	                                <option value="">Select your country</option>
+                                	<?php foreach($this->countries as $c): ?>
+                                    <?php $selected = ($c->id == $this->vendor->place_id) ? 'selected="selected"' : ''; ?>
+                                    <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                                <h4>Country</h4>
+                                <span>The country where you are based</span>
+                            </div><!-- closes item -->
+                            <div class="clear"></div>									
+                        </div>
+                        <!-- closes item-wrppr -->
+                        <div class="item-wrppr">
+                            <div class="item-ttl">
+                                Contact Information
+                            </div>
+                            <!-- closes item ttl -->
+                            <div class="item first">
+                                <input type="text" name="phone" value="<?= $this->vendor->phone ?>" />
+                                <h4>Phone</h4>
+                                <span>Your contact phone</span>
+                            </div>
+                            <!-- closes item -->
+                            <div class="item">
+                                <input type="text" name="address" value="<?= $this->vendor->address ?>" />
+                                <h4>Location</h4>
+                                <span>Your Office Location</span>
+                            </div>
+                            <!-- closes item -->
+                            <div class="item last">
+                                <input type="text" name="website" value="<?= $this->vendor->website ?>" />
+                                <h4>Website</h4>
+                                <span>Your company's website</span>
+                            </div>
+                            <!-- closes item -->
+                            <div class="clear"></div>									
+                        </div>
+                        <!-- closes item-wrppr -->
+                    </div>
+                    <!-- closes profile-items -->
+                    <div class="foot">
+                        <input type="submit" class="btn-1" value="Save Changes" />
+                        <a href="">Deactivate Account</a>
+                    </div>
+                    <!-- closes foot -->
+                    <input type="hidden" name="ids" value="<?= $this->user->id ?>" />
+                    <input type="hidden" name="vids" value="<?= $this->vendor->id ?>" />
+                    <input type="hidden" name="user_token" value="<?= $this->user->token ?>" />
+                    <input type="hidden" name="form_id" value="<?= md5($this->user->token.'provider_form') ?>" />
+                </form>
+            </div>
+            <!-- closes vendor-profile -->
+        </div>
+        <!-- closes user-backend -->
+    </div>
+    <!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div>
+<!-- closes w1 -->	
+</body>
+</html>

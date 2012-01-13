@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <meta name="robots" content="noindex, nofollow" />
+    <title><?= strip_tags($this->translate('Register Title')) ?> | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css4/all.css" />	
+    <link type="text/css" rel="stylesheet" href="http://tripfab.com/js/fancybox/jquery.fancybox-1.3.4.css" />
+	<link rel="icon" type="image/png" href="/images3/favicon.png" />
+	<link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <script type="text/javascript" src="http://tripfab.com/js2/jquery.js"></script>
+    <script type="text/javascript">
+	
+	var google_conversion_id = 956485843;
+	var google_conversion_language = "en";
+	var google_conversion_format = "3";
+	var google_conversion_color = "ffffff";
+	var google_conversion_label = "bejuCMXWuAMQ06GLyAM";
+	var google_conversion_value = 0;
+	
+	$(function(){
+		$('.language a.current').click(function(){
+			$(this).toggleClass('active');
+			$('.language .select').toggleClass('show');
+			return false;
+		});
+		
+		$('#register-wrapper form').validate({
+			rules: {
+				name:'required',
+				company:'required',
+				email:'required email',
+				code:'required',
+				phone:'required',
+				website:'required url',
+				business:'required',
+				country:'required',
+			}
+		});
+	});
+	</script>
+    <?php if($_POST): ?>
+    <script type="text/javascript">
+	$(function(){
+		$.fancybox({
+			href:'#thankslb',
+			padding:0,
+			centerOnScroll:1,
+			overlayColor:'#ffffff',
+			showCloseButton:0,
+			modal:1,						
+		});
+	});
+	</script>
+    <?php endif ?>
+    <style type="text/css">
+	.hidden { display:none; }
+	#fancybox-bg-n, #fancybox-bg-ne,
+	#fancybox-bg-e, #fancybox-bg-se,
+	#fancybox-bg-s, #fancybox-bg-sw,
+	#fancybox-bg-w, #fancybox-bg-nw {
+		background-image:none;}
+	</style>
+</head>
+<body class="home register">
+<div id="container">
+    <div id="header-shadow">
+        <div id="header">
+            <div class="wrapper">
+                <h1 class="logo"><a href="/<?= $this->lang ?>">TripFab</a></h1>
+                <div class="right">
+                	<div class="language">
+                    	<a class="current" href="#"><?= $this->translate('language') ?></a>
+                        <div class="select">
+                        	<ul>
+                            	<?php $class = ($this->lang == 'en-US') ? 'active' : '' ?>
+                            	<li class="en <?= $class ?>"><a href="/en-US/signup">English</a></li>
+                                <?php $class = ($this->lang == 'es-ES') ? 'active' : '' ?>
+                                <li class="es <?= $class ?>"><a href="/es-ES/signup">Español</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <a href="/<?= $this->lang ?>/login" class="btn-1"><?= $this->translate('signin') ?></a>
+                    <?= $this->translate('Have an account') ?>
+                </div><!-- closes right -->
+            </div><!-- closes wrapper -->				
+        </div><!-- closes header -->
+    </div><!-- closes header-shadow -->
+    <div id="top" class="signinbg signupbg">
+        <div id="shine">
+            <div class="content wrapper">
+                <h2><?= $this->translate('Register Title') ?></h2>
+                <h6><?= $this->translate('Register Description') ?></h6>
+                <div id="register-wrapper">
+                    <form action="" method="post">
+                        <fieldset>
+                        	<div>
+                                <input tabindex="1" type="text" name="name" placeholder="<?= $this->translate('name holder') ?>" />
+                                <h4><?= $this->translate('name name') ?></h4>
+                                <span><?= $this->translate('name description') ?></span>
+                                <div class="clear"></div>
+                            </div>
+                            <div>
+                                <input tabindex="1" type="text" name="company" placeholder="<?= $this->translate('company holder') ?>" />
+                                <h4><?= $this->translate('company name') ?></h4>
+                                <span><?= $this->translate('company description') ?></span>
+                                <div class="clear"></div>
+                            </div>
+                            <div>
+                                <input tabindex="2" type="text" name="email" placeholder="<?= $this->translate('email holder') ?>" />
+                                <h4><?= $this->translate('email name') ?></h4>
+                                <span><?= $this->translate('email description') ?></span>
+                                <div class="clear"></div>
+                            </div>
+                            <div>
+                                <input tabindex="4" type="text" name="phone" placeholder="<?= $this->translate('phone holder') ?>" class="phone" />
+                                <input tabindex="3" type="text" name="code" placeholder="<?= $this->translate('phone code') ?>" class="code" />
+                                <h4><?= $this->translate('phone name') ?></h4>
+                                <span><?= $this->translate('phone description') ?></span>
+                                <div class="clear"></div>
+                            </div>
+                            <div>
+                                <input class="noclean" tabindex="5" type="text" name="website" value="http://" />
+                                <h4><?= $this->translate('website name') ?></h4>
+                                <span><?= $this->translate('website description') ?></span>
+                                <div class="clear"></div>
+                            </div>
+                            <div>
+                                <select tabindex="6" name="business">
+                                	<option value="">--</option>
+                                    <option value="Hotel"><?= $this->translate('business hotel') ?></option>
+                                    <option value="Activity"><?= $this->translate('business activity') ?></option>
+                                    <option value="Restaurant"><?= $this->translate('business restaurant') ?></option>
+                                    <option value="Entertainment"><?= $this->translate('business entertainment') ?></option>
+                                </select>
+                                <h4><?= $this->translate('business name') ?></h4>
+                                <span><?= $this->translate('business description') ?></span>
+                                <div class="clear"></div>
+                            </div>
+                            <div>
+                                <select tabindex="7" name="country">
+                                	<option value="">--</option>
+                                	<?php foreach($this->countries as $c): ?>
+                                    <option value="<?= $c->title ?>"><?= $c->title ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                                <h4><?= $this->translate('country name') ?></h4>
+                                <span><?= $this->translate('country description') ?></span>
+                                <div class="clear"></div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <input class="noclean" tabindex="8" type="submit" value="" />
+                        </fieldset>
+                    </form>						
+                    <img src="/images4/shadow-6.png" alt="" />
+                    <img src="/images4/img-18.png" alt="" class="seal" />
+                </div><!-- closes register-wrapper -->
+                <p><?php printf($this->translate('Already Account'), $this->lang); ?></p>
+            </div><!-- closes wrapper -->
+        </div><!-- closes shine -->
+    </div><!-- closes top -->
+    <div id="footer">
+        <div id="footer-gradient">
+            <div class="wrapper">
+                <ul>
+                    <li><a href="https://www.facebook.com/TripFab">Facebook</a></li>
+                    <li><a href="https://twitter.com/#!/TripFab">Twitter</a></li>
+                    <li><a href="https://plus.google.com/108576021199856132768">Google+</a></li>
+                    <li><a href="mailto:hello@tripfab.com">eMail</a></li>
+                    <li><a href="http://blog.tripfab.com/">Blog</a></li>
+                </ul>
+                <img src="/images4/logo-2.png" alt="" class="logo" />
+                <strong><?= $this->translate('footer') ?></strong>
+                <span>Copyright &copy; 2011 Tripfab</span>
+            </div><!-- closes wrapper -->	
+        </div><!-- closes footer-gradient -->					
+    </div><!-- footer -->
+</div><!-- closes container -->
+<div class="hidden">
+	<div id="thankslb" class="lb-thanks">
+        <img src="/images4/img-19.png" alt="" />
+        <div class="lb-content">
+            <h3><?= $this->translate('Thanks Title') ?></h3>
+            <?= $this->translate('Thanks Description') ?>
+            <img src="/images4/img-20.png" alt="" />
+        </div><!-- closes lb-content -->
+    </div><!-- closes lb-thanks -->
+</div>
+<?php if($_POST): ?>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js"></script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/956485843/?label=bejuCMXWuAMQ06GLyAM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+<?php endif ?>	
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24981182-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>

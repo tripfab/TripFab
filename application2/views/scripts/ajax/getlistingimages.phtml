@@ -1,0 +1,69 @@
+<div class="left">
+	<?php foreach($this->pictures as $i=>$img): ?>
+    <?php if($i == (count($this->pictures) - 1)) $class='img active'; else $class='img'; ?>
+    <div class="<?= $class ?>" id="img_<?= $img->id ?>">
+    	<form action="" method="post" id="form_picture_<?= $img->id ?>">
+            <img src="<?= $this->baseUrl() ?>/images/image.php?width=371&amp;height=247&amp;cropratio=1.5:1&amp;image=<?= $img->url ?>" alt=""
+            width="371" height="247" />
+            <p>
+                <strong>Add caption</strong><span>
+                <?php if($img->main == 1): ?>
+                    <input id="main_image" name="main" checked="checked" type="checkbox" />
+                    <label for="main_image">This is my <strong>main photo</strong></label> </span>
+                <?php else: ?>
+                    <input id="main_image"  name="main" type="checkbox" />
+                    <label for="main_image">This is my <strong>main photo</strong></label> </span>
+                <?php endif ?>
+            </p>
+            <div class="entry entry-2">
+                <input type="text" name="location" value="<?= $img->location ?>" />
+                <input type="submit" class="btn-12" value="Save"/>
+            </div><!-- closes entry -->
+            <p><a href="#img_delete_<?= $img->id ?>" class="remove">Remove photo</a></p>
+            <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+            <input type="hidden" name="img_id" value="<?= $img->id ?>" />
+            <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+            <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'form_picture_'.$img->id) ?>" />
+            <input type="hidden" name="_task" value="<?= md5('edit_picture') ?>" />
+        </form>
+    </div>
+    <?php endforeach ?>
+</div><!-- closes left -->
+<div class="right">
+    <h4>Click a thumbnail to see the picture details</h4>
+    <ul class="thumbnails">
+        <?php foreach($this->pictures as $img): ?>
+        <li><a href="#img_<?= $img->id ?>">
+        <img src="<?= $this->baseUrl() ?>/images/image.php?width=49&amp;height=49&amp;cropratio=1:1&amp;image=<?= $img->url ?>" alt=""
+        width="49" height="49" /> <img src="<?= $this->baseUrl() ?>/images/img-15.png" alt="" class="over-img"/></a></li>
+        <?php endforeach ?>
+    </ul>
+</div><!-- closes right -->
+<div class="hidden">
+	<?php foreach($this->pictures as $img): ?>
+	<div id="img_delete_<?= $img->id ?>" class="img_delete">
+    	<form action="" method="post" id="form_picture_delete_<?= $img->id ?>">
+            <div class="lbox lb-size-1">
+                <div class="lb-wrapper">
+                    <div class="inner-wrapper">
+                        <div class="lb-ttl">
+                            Are you sure you want to remove this picture?
+                        </div><!-- closes lb-ttl -->
+                        <div class="lb-content">
+                            <div class="btns">
+                                <span class="btn-8" onclick="$.fancybox.close()">Cancel</span>
+                                <span class="btn-11">Remove</span>
+                            </div><!-- closes btns -->
+                        </div><!-- closes content -->
+                    </div><!-- closes inner-wrapper -->
+                </div><!-- closes lb-wrapper -->
+            </div><!-- closes lb-size-1 -->
+            <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+            <input type="hidden" name="img_id" value="<?= $img->id ?>" />
+            <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+            <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'form_picture_delete_'.$img->id) ?>" />
+            <input type="hidden" name="_task" value="<?= md5('delete_picture') ?>" />
+        </form>
+    </div>
+    <?php endforeach ?>
+</div>

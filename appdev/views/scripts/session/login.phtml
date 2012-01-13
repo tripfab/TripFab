@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= strip_tags($this->translate('Sign In Title')) ?> | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css4/all.css" />
+    <script type="text/javascript" src="http://tripfab.com/js2/jquery.js"></script>
+    <script type="text/javascript">
+	$(function(){
+		$('.language a.current').click(function(){
+			$(this).toggleClass('active');
+			$('.language .select').toggleClass('show');
+			return false;
+		});
+	});
+	</script>
+    <style type="text/css">
+	.error { border:1px solid #F00; padding:5px; margin-bottom:10px; color:#F00; font-style:italic;}
+	</style>
+</head>
+<body class="home signin">
+<div id="container">
+    <div id="header-shadow">
+        <div id="header">
+            <div class="wrapper">
+                <h1 class="logo"><a href="/<?= $this->lang ?>">TripFab</a></h1>
+                <div class="right">
+                	<div class="language">
+                    	<a class="current" href="#"><?= $this->translate('language') ?></a>
+                        <div class="select">
+                        	<ul>
+                            	<?php $class = ($this->lang == 'en-US') ? 'active' : '' ?>
+                            	<li class="en <?= $class ?>"><a href="/en-US/login">English</a></li>
+                                <?php $class = ($this->lang == 'es-ES') ? 'active' : '' ?>
+                                <li class="es <?= $class ?>"><a href="/es-ES/login">Español</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <a href="/<?= $this->lang ?>/login" class="btn-1"><?= $this->translate('signin') ?></a>
+                    <?= $this->translate('Have an account') ?>
+                </div><!-- closes right -->
+            </div><!-- closes wrapper -->				
+        </div><!-- closes header -->
+    </div><!-- closes header-shadow -->
+    <div id="top" class="signinbg">
+        <div id="shine">
+            <div class="content wrapper">
+                <h2><?= $this->translate('Sign In Title') ?></h2>
+                <h6><?= $this->translate('Sign In Description') ?></h6>
+                <div id="register-wrapper">
+                    <form action="" method="post">
+                        <fieldset>
+                            <div>
+							   <?php if($this->errors): ?>
+                               <div class="error">
+                                   <?= $this->translate('login error') ?>
+                               </div>
+                               <?php endif ?>
+                               <?php if($this->email): ?>
+                               <input type="text" placeholder="Email" name="email" value="<?= $this->email ?>" class="focus noclean in-2 required email" />
+                               <?php else: ?>
+                               <input type="text" placeholder="Email" name="email" value="" class="noclean in-2 required email" />
+                               <?php endif ?>
+                            </div>
+                            <div>
+                            	<input type="password" placeholder="<?= $this->translate('password') ?>" name="password" class="in-3 required pass" />
+                            </div>
+                            <div>
+                                <input id="rememberme" name="remember" value="1" class="noclean" type="checkbox" />
+                                <label><?= $this->translate('remember me') ?></label>
+                                <a href="#forgot" class="fb"><?= $this->translate('forgot') ?></a>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <input class="<?= $this->lang ?>" type="submit" value="" />
+                        </fieldset>
+                    </form>		
+                    <img src="/images4/shadow-5.png" alt="" />				
+                </div><!-- closes register-wrapper -->
+                <p><?php printf($this->translate('No Account'), $this->lang); ?></p>
+            </div><!-- closes wrapper -->
+        </div><!-- closes shine -->
+    </div><!-- closes top -->
+    <div id="footer">
+        <div id="footer-gradient">
+            <div class="wrapper">
+                <ul>
+                    <li><a href="https://www.facebook.com/TripFab">Facebook</a></li>
+                    <li><a href="https://twitter.com/#!/TripFab">Twitter</a></li>
+                    <li><a href="https://plus.google.com/108576021199856132768">Google+</a></li>
+                    <li><a href="mailto:hello@tripfab.com">eMail</a></li>
+                    <li><a href="http://blog.tripfab.com/">Blog</a></li>
+                </ul>
+                <img src="/images4/logo-2.png" alt="" class="logo" />
+                <strong><?= $this->translate('footer') ?></strong>
+                <span>Copyright &copy; 2011 Tripfab</span>
+            </div><!-- closes wrapper -->	
+        </div><!-- closes footer-gradient -->					
+    </div><!-- footer -->
+</div><!-- closes container -->
+</body>
+</html>

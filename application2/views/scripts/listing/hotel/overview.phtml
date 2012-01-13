@@ -1,0 +1,41 @@
+<form action="" method="post">
+    <div class="lstng-details pricing overview">
+  		<?php if($this->help->hot_overview == 0): ?>
+    	<div class="desc">
+    		<h3>What is the Hotel Overview?</h3>
+    		<p>Let people know about your hotel, how is the experience, what to expect, things they'll love about it.</p>
+    		<a href="" rel="hot_overview" class="remove">Remove</a>
+    	</div>
+    	<!-- closes desc -->
+        <?php endif ?>
+    	<div class="main-ttl">
+    		<p><strong>Hotel Overview</strong></p>    		
+    	</div>
+    	<!-- closes main-ttl -->								
+        <div class="lstng-detail">
+            <textarea placeholder="Write a nice overview about your hotel" class="noclean" name="about" cols="30" rows="1"><?= stripslashes($this->overview->about) ?></textarea>
+            <strong>About the hotel</strong>
+            <span>Write a detail description</span>
+            <!--<span class="counter">500</span>-->
+        </div><!-- closes lstng-detail -->
+        <div class="lstng-detail">
+            <textarea placeholder="Write a nice description about what to expect on this hotel" class="noclean" name="expect" cols="30" rows="1"><?= stripslashes($this->overview->expect) ?></textarea>
+            <strong>What to expect</strong>
+            <span>Tell us what the traveler can expect</span>
+            <!--<span class="counter">500</span>-->
+        </div><!-- closes lstng-detail -->
+        <div class="lstng-detail">
+            <textarea placeholder="Write a nice description about the thing people will love" class="noclean" name="love" cols="30" rows="1"><?= stripslashes($this->overview->love) ?></textarea>
+            <strong>Things you'll love</strong>
+            <span>Write about things people will love about it</span>
+            <!--<span class="counter">500</span>-->
+        </div><!-- closes lstng-detail -->
+    </div><!-- closes lstng-details -->
+    <div class="foot">
+        <input type="submit" class="btn-1" value="Save Changes" />
+    </div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'edit-overview') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_overview') ?>" />
+</form>

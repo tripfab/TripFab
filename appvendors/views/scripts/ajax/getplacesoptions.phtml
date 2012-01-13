@@ -1,0 +1,6 @@
+<option value="">Which city?</option>
+<?php if(count($this->places) > 0): ?>
+<?php foreach($this->places as $place): ?>
+<option value="<?= $place->id ?>"><?= $place->title ?></option>
+<?php endforeach ?>
+<?php endif ?>

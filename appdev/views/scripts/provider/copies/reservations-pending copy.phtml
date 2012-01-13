@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> : Profile | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
+    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('textarea').elastic();				
+            $('input').ToggleInputValue();
+            $('form select').jqTransSelect();
+        });
+    </script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-messages">
+            <?= $this->partial('partials/vendormainmenu.phtml', array('active'=>'Pending Approval','parentActive'=>'Reservations')); ?>
+            <div class="reservations">
+                <strong>You have 3 pending approval reservations</strong>
+                <?php foreach($this->reservations as $reserve): ?>
+                <div class="reservation">
+                    <?= $this->thumbnail(70, $reserve->listing_image, '', '1:1') ?>
+                    <div class="right">
+                        <div class="top">
+                            <strong>Reservation Code: <?= $reserve->code ?></strong>
+                            <h2><?= $reserve->listing_name ?></h2>
+                            <span><img src="/images2/ico-13.png" alt="" /><?= $reserve->listing_type ?></span>
+                        </div><!-- closes top -->
+                        <div class="bottom">
+                            <table border="0" cellpadding="0" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td>Booking Date</td>
+                                        <td><strong><?= date('F jS, Y', strtotime($reserve->created)) ?></strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Provider</td>
+                                        <td><strong><?= $reserve->vendor_name ?></strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Payment Method</td>
+                                        <td><strong><?= $reserve->method ?></strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Paid</td>
+                                        <td><strong>$<?= $reserve->ammount ?></strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table border="0" cellpadding="0" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td>Checkin</td>
+                                        <td><strong><?= date('F jS, Y', strtotime($reserve->checkin)) ?></strong></td>
+                                    </tr>
+                                    <?php if(!is_null($reserve->checkout)): ?>
+                                    <tr>
+                                        <td>Checkput</td>
+                                        <td><strong><?= date('F jS, Y', strtotime($reserve->checkout)) ?></strong></td>
+                                    </tr>
+                                    <?php endif ?>
+                                    <tr>
+                                        <td>Occupation</td>
+                                        <td><strong><?= $reserve->adults ?> adults
+                                        <?php if($reserve->kids > 0): ?>
+                                        and <?= $reserve->kids ?> kids 
+                                        <?php endif ?>
+                                        </strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="btns">
+                                <a href="" class="btn-1">Accept</a>
+                                <a href="">Reject</a><a href="">Contact Client</a>
+                            </div><!-- closes btns -->
+                        </div><!-- closes bottom -->
+                    </div><!-- closes right -->
+                </div><!-- closes reservation -->
+                <?php endforeach ?>
+            </div><!-- closes reservations -->
+        </div><!-- closes user-messages -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+</body>
+</html>

@@ -1,0 +1,206 @@
+<form action="" method="post">
+    <div class="profile-items">
+        <?php if($this->errors): ?>
+        <div class="errors">
+            <?php foreach($this->errors as $err): ?>
+            <p><?= $err ?></p>
+            <?php endforeach ?>
+        </div><!-- closes item -->
+        <?php endif ?>
+        <div class="item-wrppr">
+            <div class="item-ttl">
+                Basic Information
+            </div><!-- closes item ttl -->
+            <div class="item">
+                <input type="text" class="noclean" name="title" value="<?= $this->listing->title ?>" />
+                <h4>Title</h4>
+                <span>Your hotel name</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <input type="text" class="noclean" name="identifier" value="<?= $this->listing->identifier ?>" />
+                <h4>Identifier</h4>
+                <span>http://tripfab.com/identifier</span>
+            </div><!-- closes item -->
+            <div class="item last">
+                <textarea name="description" class="noclean" cols="30" rows="1"><?= $this->listing->description ?></textarea>
+                <h4>Short Description</h4>
+                <span>Write a short description <br /> for your listing</span>
+            </div><!-- closes item -->
+            <div class="clear"></div>									
+        </div><!-- closes item-wrppr -->
+        <div class="item-wrppr">
+            <div class="item-ttl">
+                Location
+            </div><!-- closes item ttl -->
+            <div class="item">
+                <select name="country_id" id="countries">
+                    <option>Select the country</option>
+                    <?php foreach($this->countries as $c): ?>
+                    <?php $selected = ($c->id == $this->listing->country_id) ? 'selected="selected"' : ''; ?>
+                    <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
+                    <?php endforeach ?>
+                </select>
+                <h4>Country</h4>
+                <span>Select the country</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <select name="city_id" id="cities">
+                    <?php if(count($this->cities) > 0): ?>
+                    <option>Select the city</option>
+                    <?php foreach($this->cities as $c): ?>
+                    <?php $selected = ($c->id == $this->listing->city_id) ? 'selected="selected"' : ''; ?>
+                    <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
+                    <?php endforeach ?>                                    
+                    <?php else: ?>
+                    <option>Country first</option>
+                    <?php endif ?>
+                </select>
+                <h4>City</h4>
+                <span>The city were you live</span>
+            </div><!-- closes item -->
+            <div class="item last">
+                <div class="inner-container">
+                    <input type="text" class="noclean" name="address" value="<?= $this->listing->address ?>" />
+                    <input type="submit" class="btn-4" id="setLocation" value="Set Location" />
+                    <div id="mapcanvas"></div>
+                    <input type="hidden" name="lat" value="<?= $this->listing->lat ?>" />
+                    <input type="hidden" name="lng" value="<?= $this->listing->lng ?>" />
+                </div>
+                <h4>Map</h4>
+                <span>This is how your address appears on your public listing<br /><br />
+                Set A location and them drag the mark to the specific location</span>
+                <div id="maplocations">
+                    <ul>
+                    </ul>
+                </div>
+            </div><!-- closes item -->
+            <div class="clear"></div>									
+        </div><!-- closes item-wrppr -->
+        <?php if($this->listing->main_type == 5): ?>
+        <div class="item-wrppr">
+            <div class="item-ttl">
+                Room Types
+            </div><!-- closes item ttl -->
+            <?php foreach($this->schedules as $type): ?>
+            <div class="item">
+                <div class="inner-container">
+                    <a href="#sch_delete_<?= $type->id ?>" class="lb link-7">Delete</a>
+                    <a href="#sch_<?= $type->id ?>" class="lb link-6">Edit</a>
+                </div><!-- closes hours -->
+                <h4><?= $type->name ?></h4>
+            </div><!-- closes item -->
+            <?php endforeach ?>
+            <div class="item last">
+                <div class="inner-container">
+                    <span><a href="#sch_new" class="lb link-5">Add a new Type</a></span>
+                </div><!-- closes hours -->
+                <h4></h4>
+            </div><!-- closes item -->
+            <div class="clear"></div>									
+        </div><!-- closes item-wrppr -->
+        <?php else: ?>
+        <div class="item-wrppr">
+            <div class="item-ttl">
+                Schedules
+            </div><!-- closes item ttl -->
+            <?php foreach($this->schedules as $type): ?>
+            <div class="item">
+                <div class="inner-container">
+                    <span><?= date('g:i A', strtotime($type->starting)) ?> - <?= date('g:i A', strtotime($type->ending)) ?></span>
+                    <a href="#sch_delete_<?= $type->id ?>" class="lb link-7">Delete</a>
+                    <a href="#sch_<?= $type->id ?>" class="lb link-6">Edit</a>
+                </div><!-- closes hours -->
+                <h4><?= $type->name ?></h4>
+            </div><!-- closes item -->
+            <?php endforeach ?>
+            <div class="item last">
+                <div class="inner-container">
+                    <span><a href="#sch_new" class="lb link-5">Add a new Type</a></span>
+                </div><!-- closes hours -->
+                <h4></h4>
+            </div><!-- closes item -->
+            <div class="clear"></div>									
+        </div><!-- closes item-wrppr -->
+        <?php endif ?>
+        <div class="item-wrppr">
+            <div class="item-ttl">
+                Includes and not Includes
+            </div><!-- closes item ttl -->
+            <?php foreach($this->attributes as $fact): ?>
+            <div class="item">
+                <div class="inner-container">
+                    <span><?= $fact->value ?></span>
+                    <a href="#attr_delete_<?= $fact->id ?>" class="lb link-7">Delete</a>
+                    <a href="#attr_<?= $fact->id ?>" class="lb link-6">Edit</a>
+                </div><!-- closes hours -->
+                <h4><?= $fact->name ?></h4>
+            </div><!-- closes item -->
+            <?php endforeach ?>
+            <div class="item last">
+                <div class="inner-container">
+                    <span><a href="#attr_new" class="lb link-5">Add a new Quick fact</a></span>
+                </div><!-- closes hours -->
+                <h4></h4>
+            </div><!-- closes item -->
+            <div class="clear"></div>									
+        </div><!-- closes item-wrppr -->
+        <div class="item-wrppr">
+            <div class="item-ttl">
+                Details
+            </div><!-- closes item ttl -->
+            <div class="item">
+                <div class="inner-container">
+                    <table>
+                        <tbody>
+                            <?php for($i=0; $i<count($this->categories); $i=$i+2): ?>
+                            <tr>
+                                <?php for($j=$i; ($j<count($this->categories)) && ($j<($i+2)); $j++): ?>
+                                <td>
+                                <?php $checked = (in_array($this->categories[$j]->id, $this->listing_types)) ? 'checked="checked"' : ''; ?>
+                                <input <?= $checked ?> name="types[<?= $this->categories[$j]->id ?>]" 
+                                value="<?= $this->categories[$j]->id ?>" type="checkbox"/>
+                                <?= $this->categories[$j]->name ?>
+                                </td>
+                                <?php endfor ?>
+                            </tr>
+                            <?php endfor ?>
+                        </tbody>
+                    </table>
+                </div><!-- closes inner-container -->
+                <h4>Categories</h4>
+                <span>Check all the things included</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="inner-container">
+                    <table>
+                        <tbody>
+                            <?php for($i=0; $i<count($this->tags); $i=$i+2): ?>
+                            <tr>
+                                <?php for($j=$i; ($j<count($this->tags)) && ($j<($i+2)); $j++): ?>
+                                <td>
+                                <?php $checked = (in_array($this->tags[$j]->id, $this->listing_tags)) ? 'checked="checked"' : ''; ?>
+                                <input <?= $checked ?> name="tags[<?= $this->tags[$j]->id ?>]" 
+                                value="<?= $this->tags[$j]->id ?>" type="checkbox"/>
+                                <?= $this->tags[$j]->name ?>
+                                </td>
+                                <?php endfor ?>
+                            </tr>
+                            <?php endfor ?>
+                        </tbody>
+                    </table>
+                </div><!-- closes inner-container -->
+                <h4>Tags</h4>
+                <span>Check all the Tags included</span>
+            </div><!-- closes item -->
+            <div class="clear"></div>									
+        </div><!-- closes item-wrppr -->
+    </div><!-- closes profile-items -->
+    <div class="foot">
+        <input type="submit" class="btn-1" value="Save Changes" />
+        <a href="/provider/listings/desactivate/<?= $this->listing->id ?>">Deactivate Listing</a>
+    </div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'edit-listing') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_listing') ?>" />
+</form>

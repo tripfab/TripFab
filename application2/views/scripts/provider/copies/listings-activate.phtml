@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->listing->title ?> : Missing Information | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link rel="stylesheet" href="guiders/guiders.css" type="text/css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
+</head>
+<body>
+<div class="w1">
+     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="listing-wrapper wrapper">
+            <?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'All Listings','parentActive'=>'Listings')); ?>
+            <?= $this->partial('partials/vendorlistingstop.phtml', array('listing'=>$this->listing)); ?>
+            <div class="listing-content">
+                <div class="left">
+                    <?= $this->partial('partials/vendorlistingsmenu.phtml', array('active'=>'', 'id' => $this->listing->id, 
+									   'type'=>$this->listing->main_type)) ?>
+                </div><!-- closes left -->
+                <div class="right">
+                    <div class="pending-steps">
+                        <div class="ttl">
+                            <h2>This listing can't be active yet! </h2>
+                            <h3>There are <span> steps remaining</span> before activate your listing</h3>
+                        </div><!-- closes ttl -->
+                        <ul>
+                        	<?php foreach($this->validate as $val): ?>
+                            <?php if($val['done']): ?>
+                            <li class="done">
+                                <img src="/images2/cleardot.gif" alt="" />
+                                <span><?= $val['label'] ?></span>
+                                <?= $val['desription'] ?>
+                            </li>
+                            <?php else: ?>
+                            <li>
+                                <img src="/images2/cleardot.gif" alt="" />
+                                <a href="<?= $val['url'] . $this->listing->id ?>"><?= $val['label'] ?></a>
+                                <?= $val['desription'] ?>
+                            </li>
+                            <?php endif ?>
+                            <?php endforeach ?>
+                        </ul>
+                    </div><!-- closes pending-steps -->
+                </div><!-- closes right -->
+            </div><!-- closes listing-content -->
+        </div><!-- closes listing-wrapper -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+</body>
+</html>

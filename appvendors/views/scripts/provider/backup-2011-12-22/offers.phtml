@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> : Offers | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+	<script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('input').ToggleInputValue();
+            $('form select').jqTransSelect();
+            $('#header .header-login a.user').click(function(){
+                $(this).next().toggleClass('show');
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-backend">
+            <?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'All Listings','parentActive'=>'Listings')); ?>
+            <div id="features">
+                <div class="top centered">							
+                    <h2>Offers &amp; Deals</h2>
+                    <h3>Check who is visiting your location soon <br />and make personalized and unique special offers to them.</h3>
+                    <img src="/images2/img-68.png" alt="" />
+                    <img src="/images2/img-49.png" alt="" class="corner" />
+                </div><!-- closes top -->
+                <div class="bottom">
+                    <img src="/images2/img-69.png" alt="" />
+                    <div class="box">
+                        <h4>Select which listing you want to offer</h4>
+                        <p>Choose among your current listings and create a unique and personalized offer for an individual user that is coming to your location with just one click. </p>
+                    </div>
+                    <div class="box">
+                        <p>Create an special deal, discount or promotion to atract them to your offer. Make sure it is a good deal they just can´t refuse to ensure success.</p>
+                    </div>
+                    <div class="box">
+                        <p>Make both massive or individual offers to your potential customers at any time: you choose what to offer, when to offer it, who to offer it to and for how long the special deal will last. </p>
+                    </div>							
+                </div><!-- closes bottom -->
+                <div class="two">
+                    <div class="box">
+                        <img src="/images2/img-70.png" alt="" />
+                        <h4>Select the offer you want to bring to the user</h4>
+                        <p>You have total control of each and every single offer you make, no matter if it is a massive or an individual offer: you choose the price, the deal, and the time of duration of any of the special deals you create.</p>
+                    </div>
+                    <div class="box">
+                        <img src="/images2/img-71.png" alt="" />
+                        <h4>Explore the user Itinerary</h4>
+                        <p>You can review the entire schedule of potential customers and see where can you provide them with great deals and discounts: different tours, packages, accomodations can be offered individually to these users.</p>
+                    </div>
+                </div><!-- closes two -->
+            </div><!-- closes features -->
+        </div><!-- closes user-backend -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+</body>
+</html>

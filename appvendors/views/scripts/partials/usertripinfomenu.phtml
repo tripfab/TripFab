@@ -1,0 +1,22 @@
+<?php 
+$items = array(
+	array(
+		'url' 	=> '/user/trips/itinerary/'.$this->id,
+		'label' => 'Itinerary Manager',
+	),
+); ?>
+<?php if($this->offers){
+$items[] = array(
+	'url' 	=> '/user/trips/offers/'.$this->id,
+	'label' => 'Offers',
+); } ?>
+
+<div class="trips-menu">
+	<a href="/user/trips" class="link-4">Back to My Trips</a>
+    <ul>
+    	<?php foreach($items as $item): ?>
+        <?php $class = ($this->active == $item['label']) ? 'current' : '' ?>
+        <li class="<?= $class ?>"><a href="<?= $item['url'] ?>"><?= $item['label'] ?></a></li>
+        <?php endforeach ?>
+    </ul>
+</div>

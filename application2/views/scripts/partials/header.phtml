@@ -1,0 +1,164 @@
+<div class="big-message green">
+    <div class="wrapper"><img src="/images2/cleardot.gif" alt=""> 
+    <span>Your changes have been saved!</span></div><!-- closes wrapper -->
+</div>
+<div id="header">
+    <div class="wrapper">
+        <h1 class="logo"><a href="/">Tripfab</a></h1>
+        <ul>
+            <!--<li><a href="/">Home</a></li>-->
+            <!--<li><a href="/trips">Browse Trips</a></li>-->
+            <!--<li><a href="/comunity">Community</a></li>-->
+            <!--<li><a href="/user/trips/new">Plan Trip</a></li>-->
+        </ul>
+        <!--
+        <div class="header-search">
+            <form method="post" action="">
+                <fieldset>
+                    <input id="citiesSearch" type="text" value="Search Places"/>
+                </fieldset>
+            </form>
+        </div>--><!-- closes header-search -->
+		<?php if(!$this->user): ?>
+        <div class="header-login not">
+        	<a href="" class="user"><em>Have an account?</em> Sign in<img src="/images/cleardot.gif" alt="" /></a>
+            <div class="dd login">
+                <img src="/images2/arrow-12.png" alt="" class="arrow" />
+                <div class="dd-content">
+                <form action="/login" method="post">
+                    <input type="text" value="E-Mail" class="in-2" name="email" />
+                    <input type="password" value="******"  name="password" class="in-3" />
+                    <div class="clear"></div>							
+                    <input name="remember" value="1" type="checkbox" />
+                    <label>Remember me</label>
+                    <input type="submit" class="btn-1" value="Sign In" />
+                </form>
+                </div><!-- closes dd-content -->
+                <div class="dd-footer">
+                    <a href="/login">Forgot password?</a>
+                </div><!-- closes dd-footer -->
+                <div class="facebook">
+                    <a href="/signup/facebook"><img src="/images2/img-58.png" alt="" /></a>
+                </div><!-- closes facebook -->
+            </div><!-- closes dd -->
+            <a href="/signup" class="btn-1">Sign Up Free!</a>
+        </div><!-- closes header-login -->
+        <?php else: ?>
+        <?php if($this->user->role_id == 2): ?>
+        <div class="header-login">
+            <a href="/user/account" class="user"><?= $this->user->name . " " . $this->user->lname ?><img src="/images2/cleardot.gif" alt="" /></a>
+            <div class="dd">
+                <img src="/images2/arrow-12.png" alt="" class="arrow" />
+                <div class="dd-content">
+                    <?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
+                    <?= $this->thumbnail(68,$image,'','1:1'); ?>
+                    <ul>
+                        <li><a href="/user/trips">Trips</a></li>
+                        <li><a href="/user/messages">Messages</a></li>
+                        <li><a href="/user/reservations">Reservations</a></li>
+                    </ul>
+                </div><!-- closes dd-content -->
+                <div class="dd-footer">
+                    <a href="/user">Account</a>
+                    <a href="/logout">Sign Out</a>
+                </div><!-- closes dd-footer -->
+            </div><!-- closes dd -->
+        </div><!-- closes header-login -->
+        <div class="links">
+            <a href="/user/trips" title="Trips" class="trips"><img src="/images2/cleardot.gif" alt="" /></a>
+            <!--<a href="/user/messages" title="Messages" class="messages"><img src="/images2/cleardot.gif" alt="" /></a>-->
+            <div class="dd messages">
+                <img src="/images2/arrow-12.png" alt="" class="arrow" />
+                <div class="ttl">
+                    Messages
+                </div><!-- closes ttl -->
+                <div class="content">
+                    <ul>
+                        <li class="new">
+                            <a href="">
+                                <img src="/images2/img-27.png" alt="" />
+                                <strong>Linna Pratts</strong>
+                                Hi!
+                                <span>4 hours ago</span>
+                            </a>										
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="/images2/img-27.png" alt="" />
+                                <strong>Linna Pratts</strong>
+                                Hey! I have some questions about...
+                                <span>4 hours ago</span>
+                            </a>										
+                        </li>
+                        <li>
+                            <a href="">
+                                <img src="/images2/img-27.png" alt="" />
+                                <strong>Linna Pratts</strong>
+                                Hi
+                                <span>4 hours ago</span>
+                            </a>										
+                        </li>
+                    </ul>
+                </div><!-- closes content -->
+                <div class="dd-footer">
+                    <a href="/user/messages">See all messages</a>
+                </div><!-- closes dd-footer -->
+            </div><!-- closes dd -->
+        </div><!-- closes links -->
+
+        <?php else: ?>
+        <div class="header-login">
+            <a href="/provider/account" class="user"><?= $this->user->name ?><img src="/images2/cleardot.gif" alt="" /></a>
+            <div class="dd">
+                <img src="/images2/arrow-12.png" alt="" class="arrow" />
+                <div class="dd-content">
+                    <?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
+                    <?= $this->thumbnail(68,$image,'','1:1'); ?>
+                    <ul>
+                        <li><a href="/provider/listings">Listings</a></li>
+                        <li><a href="/provider/messages">Messages</a></li>
+                        <li><a href="/provider/reservations">Reservations</a></li>
+                        <li><a href="/provider/reviews">Reviews</a></li>
+                        <li><a href="/provider/questions">Questions</a></li>                       
+                    </ul>
+                </div><!-- closes dd-content -->
+                <div class="dd-footer">
+                    <a href="/provider/account">Account</a>
+                    <a href="/logout">Sign Out</a>
+                </div><!-- closes dd-footer -->
+            </div><!-- closes dd -->
+        </div><!-- closes header-login -->
+        <div class="links">
+            <a href="/provider/listings" title="Listings" class="listings"><img src="/images2/cleardot.gif" alt="" /></a>
+            <!--<a href="/provider/messages" title="Messages" class="messages"><img src="/images2/cleardot.gif" alt="" /></a>-->
+            <div class="dd messages">
+                <img src="/images2/arrow-12.png" alt="" class="arrow" />
+                <div class="ttl">Messages</div>
+                <div class="content">
+                    <ul>
+                        <li class="new">
+                            <a href=""><img src="/images2/img-27.png" alt="" />
+                            <strong>Linna Pratts</strong>Hi!
+                            <span>4 hours ago</span></a>										
+                        </li>
+                        <li>
+                            <a href=""><img src="/images2/img-27.png" alt="" />
+                            <strong>Linna Pratts</strong>Hey! I have some questions about...
+                            <span>4 hours ago</span></a>										
+                        </li>
+                        <li>
+                            <a href=""><img src="/images2/img-27.png" alt="" />
+                            <strong>Linna Pratts</strong>Hi
+                            <span>4 hours ago</span></a>										
+                        </li>
+                    </ul>
+                </div><!-- closes content -->
+                <div class="dd-footer">
+                    <a href="">See all messages</a>
+                </div><!-- closes dd-footer -->
+            </div><!-- closes dd -->
+        </div><!-- closes links -->
+        <?php endif ?>
+        <?php endif ?>
+    </div><!-- closes wrapper -->			
+</div><!-- closes header -->

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> : Messages | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/messages.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+	<script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript" src="/js2/user/messages.js"></script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-messages">
+            <?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'All Messages','parentActive'=>'Messages')); ?>
+            <div id="features">
+                <div class="top centered">
+                    <h2>Messages</h2>
+                    <h3>On this tab you will be able to check and manage all the messages <br />you will receive from travelers all over the world.</h3>
+                    <img src="/images2/img-59.png" alt="" />
+                    <img src="/images2/img-49.png" alt="" class="corner" />
+                </div>
+                <!-- closes top -->
+                <div class="bottom">
+                    <img src="/images2/img-46.png" alt="" class="izq" />
+                    <h4>Sending a message</h4>
+                    <p>Sending a message is easy: all you need to do is choose the person you want to communicate with, write your message and click on the "Send" button. The message will arrive promptly to your recipient. What a great way to communicate with your future travelers!</p>
+                    <div class="clear"></div>
+                    <img src="/images2/img-47.png" alt="" class="der" />
+                    <h4>Receiving a Message</h4>
+                    <p>On this page you can keep track of received and sent messages at all times. Also these messages will be archived and organized for you to get easy access to them and perform the necessary actions. Travelers asking prices or availability? Answer them right away with the messages system!</p>
+                    <div class="clear"></div>
+                    <img src="/images2/img-48.png" alt="" class="izq" />
+                    <h4>Checking your Messages</h4>
+                    <p>By clicking on the bubble text boxes at the top on the main menu, you can easily access your inbox in just one click and perform different actions such as respond, ignore or delete your messages at all times. Keeping communication channels with your travelers organized and efficient with TripFab.</p>
+                </div>
+                <!-- closes bottom -->
+            </div>
+            <!-- closes features -->
+        </div>
+        <!-- closes user-messages -->
+    </div>
+    <!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div>
+<!-- closes w1 -->
+</body>
+</html>

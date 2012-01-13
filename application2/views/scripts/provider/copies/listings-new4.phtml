@@ -1,0 +1,538 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <?php if($this->listing->main_type == 5): ?>
+    <title>Create a New Listing : Set Room Types | Tripfab.com</title>
+    <?php else: ?>
+    <title>Create a New Listing : Set Schedules | Tripfab.com</title>
+    <?php endif ?>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('input:not(.noclean)').ToggleInputValue();
+			var i=1;
+			$('#newHour').click(function(){			
+				<?php if($this->listing->main_type == 5): ?>
+				var $item = $('<div class="item"><input name="sch['+i+'][name]" value="Standard, Familiar...." type="text" /><h4><a href="" class="remove">Remove</a>Room Name</h4><span>Write a name for this room</span><div class="clear"></div></div>');
+				$('.item-wrppr .item:last').before($item);
+				$('input').ToggleInputValue();
+				i++;
+				<?php else: ?>
+				var $item = $('.prcng-item.hidden.ltt').html();
+				$item = $('<div class="prcng-item item">'+$item+'</div>');
+				$('input[name=name]', $item).attr('name','sch['+i+'][name]');
+				$('select[name=start_time]', $item).attr('name','sch['+i+'][start][time]');
+				$('select[name=start_hour]', $item).attr('name','sch['+i+'][start][hour]');
+				$('select[name=end_time]', $item).attr('name','sch['+i+'][end][time]');
+				$('select[name=end_hour]', $item).attr('name','sch['+i+'][end][hour]');
+				$('input[name=duration_lb]', $item).attr('name','sch['+i+'][duration_lb]');
+				$('select[name=duration]', $item).attr('name','sch['+i+'][duration]');
+				$('input[name=same]', $item).attr('name','sch['+i+'][same]');
+				$('input.sameday', $item).attr('id','sameday'+i);
+				$('label[for=sameday1]', $item).attr('for','sameday'+i);
+				$('.left-ttl span', $item).text(i+1);
+				$('.prcng-item.hidden:first').before($item);
+				i++;
+				<?php endif ?>
+				return false;
+			});
+			
+			$('a.remove').live('click', function(){
+				$item = $(this).parents('.item');
+				$item.fadeOut('fast', function(){
+					$item.remove();
+				});
+				i--;
+				return false;
+			});
+			
+			$('input.sameday').live('change', function(){
+				$li = $(this).parents('li');
+				if($(this).attr('checked') == 'checked') {
+					$('select, input:not(.sameday)', $li).attr('disabled', 'disabled');
+				} else {
+					$('select, input:not(.sameday)', $li).removeAttr('disabled');
+				}
+			});
+        });
+    </script>
+    <style type="text/css">
+	.hidden { display:none; }
+	.sign-box.vendor.first .item-wrppr .item input[type="text"]  { 
+		width:350px;
+		vertical-align:middle;}
+	.sign-box.vendor.first .item-wrppr .item select {
+		border: 1px solid #CCCCCC;
+		float: right;
+		margin-left: 5px;
+		margin-top: 3px;
+		padding: 5px;}
+	.errors {
+		border:1px solid #F00;
+		padding:5px;
+		margin:30px;}
+		.errors p {
+			text-align:left;
+			line-height:18px;
+			font-style:italic;
+			font-size:12px;
+			font-weight:normal;
+			color:#F00 !important;}
+	</style>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?> 
+    <div class="w2">
+        <div class="wrapper">
+            <div class="vendor-steps">
+                <?= $this->partial('partials/vendorsteps.phtml',array('type'=>$this->listing->main_type,'step'=>4)) ?>
+            </div><!-- closes vendor-steps -->
+            <div class="sign-box vendor first">
+                <div class="ttl-2">
+                	<?php switch($this->listing->main_type): case '5': ?>
+                	<div class="text-right different2">
+                	    <p><strong>Add all the schedules available for your activity.</strong></p>
+                	    <p>Select the starting time, the ending time and the duration for your activity. 
+                	    You can add multiple schedules for each activity and set their prices individually later.</p>
+                	</div><!-- closes text-right -->
+                    <h2>Room Types</h2>
+                    <p>Enter the name of the hotel room types</p>
+                    <?php break; case '6': ?>
+                    <div class="text-right different2">
+                        <p><strong>Add all the schedules available for your activity.</strong></p>
+                        <p>Select the starting time, the ending time and the duration for your activity. 
+                        You can add multiple schedules for each activity and set their prices individually later.</p>
+                    </div><!-- closes text-right -->
+                    <h2>Activity Hours</h2>
+                    <p>Set the schedule for your activity.</p>
+                    <?php break; case '2': ?>
+                    <div class="text-right different2">
+                        <p><strong>Add all the schedules available for your activity.</strong></p>
+                        <p>Select the starting time, the ending time and the duration for your activity. 
+                        You can add multiple schedules for each activity and set their prices individually later.</p>
+                    </div><!-- closes text-right -->
+                    <h2>Restaurant Hours</h2>
+                    <p>When your restaurant is open</p>
+                    <?php break; endswitch ?>
+                </div><!-- closes ttl-2 -->
+                <form action="" method="post" id="form_sch_new">
+                	<?php if($this->listing->main_type == 5): ?>
+                    <div class="content ">
+                        <div class="profile-items rooms">
+                        	<?php if($this->errors): ?>
+                            <div class="errors">
+                            	<?php foreach($this->errors as $err): ?>
+                                <p><?= $err ?></p>
+                                <?php endforeach ?>
+                            </div>
+                            <?php endif ?>
+                            <div class="text-left">
+                                <h3>Write the names for your room types</h3>
+                                <p>Sed laoreet tempor pellentesque. Integer ultricies pellentesque rutrum. 
+                                Vestibulum quis orci non lacus dignissim cursus.</p>
+                            </div>
+                            <div class="item-wrppr">
+                                <?php if($this->sch): ?>
+                                <?php foreach($this->sch as $i => $sch): ?>
+                                <div class="item">
+                                    <input class="noclean" name="sch[<?= $i ?>][name]" value="<?= $sch['name'] ?>" type="text" />
+                                    <h4><a href="" class="remove">Remove</a>Room Name</h4>
+                                    <span>Write a name for this room</span>
+                                    <div class="clear"></div>	
+                                </div><!-- closes item -->
+                                <?php endforeach ?>
+                                <?php else: ?>
+                                <div class="item">
+                                    <input name="sch[0][name]" value="Standard, Familiar...." type="text" />
+                                    <h4>Room Name</h4>
+                                    <span>Write a name for this room</span>
+                                    <div class="clear"></div>	
+                                </div><!-- closes item -->
+                                <?php endif ?>
+                                <div class="item last">
+                                    <a id="newHour" href="" class="link-5">Add a New Room</a>
+                                    <div class="clear"></div>	
+                                </div><!-- closes item -->
+                            </div><!-- closes item-wrppr -->
+                        </div><!-- closes profile-items -->
+                    </div><!-- closes content -->
+                    <?php elseif($this->listing->main_type == 2): ?>
+                    <div class="content prcng hours days">
+	                    <?php if($this->errors): ?>
+                        <div class="errors">
+                            <?php foreach($this->errors as $err): ?>
+                            <p><?= $err ?></p>
+                            <?php endforeach ?>
+                        </div>
+                        <?php endif ?>
+                    	<?php $res_days = array('Monday', 'Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday') ?>
+                        <?php foreach($res_days as $i=>$day): ?>
+                        <div class="prcng-item">
+                            <div class="left-ttl">
+                                <strong><?= $day ?>'s Schedule</strong>
+                                Set a schedule for monday
+                            </div><!-- closes left-ttl -->
+                            <div class="right">
+                                <ul>
+                                    <li>
+                                        <div>
+                                            <h4>Open Time</h4>
+                                            <span>Set the open hour</span>
+                                        </div>
+                                        <select name="sch[<?= $i ?>][start][time]">
+                                            <option value="AM">AM</option>
+                                            <option value="PM">PM</option>
+                                        </select>
+                                        <select name="sch[<?= $i ?>][start][hour]">
+                                            <option value="">--:--</option>
+                                            <option value="1:00">1:00</option>
+                                            <option value="1:30">1:30</option>
+                                            <option value="2:00">2:00</option>
+                                            <option value="2:30">2:30</option>
+                                            <option value="3:00">3:00</option>
+                                            <option value="3:30">3:30</option>
+                                            <option value="4:00">4:00</option>
+                                            <option value="4:30">4:30</option>
+                                            <option value="5:00">5:00</option>
+                                            <option value="5:30">5:30</option>
+                                            <option value="6:00">6:00</option>
+                                            <option value="6:30">6:30</option>
+                                            <option value="7:00">7:00</option>
+                                            <option value="7:30">7:30</option>
+                                            <option value="8:00">8:00</option>
+                                            <option value="8:30">8:30</option>
+                                            <option value="9:00">9:00</option>
+                                            <option value="9:30">9:30</option>
+                                            <option value="10:00">10:00</option>
+                                            <option value="10:30">10:30</option>
+                                            <option value="11:00">11:00</option>
+                                            <option value="11:30">11:30</option>
+                                            <option value="12:00">12:00</option>
+                                            <option value="12:30">12:30</option>
+                                        </select>										
+                                        <div class="clear"></div>
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <h4>Close Time</h4>
+                                            <span>Set the closed hour</span>
+                                        </div>
+                                        <select name="sch[<?= $i ?>][end][time]">
+                                            <option value="AM">AM</option>
+                                            <option value="PM">PM</option>
+                                        </select>
+                                        <select name="sch[<?= $i ?>][end][hour]">
+                                            <option value="">--:--</option>
+                                            <option value="1:00">1:00</option>
+                                            <option value="1:30">1:30</option>
+                                            <option value="2:00">2:00</option>
+                                            <option value="2:30">2:30</option>
+                                            <option value="3:00">3:00</option>
+                                            <option value="3:30">3:30</option>
+                                            <option value="4:00">4:00</option>
+                                            <option value="4:30">4:30</option>
+                                            <option value="5:00">5:00</option>
+                                            <option value="5:30">5:30</option>
+                                            <option value="6:00">6:00</option>
+                                            <option value="6:30">6:30</option>
+                                            <option value="7:00">7:00</option>
+                                            <option value="7:30">7:30</option>
+                                            <option value="8:00">8:00</option>
+                                            <option value="8:30">8:30</option>
+                                            <option value="9:00">9:00</option>
+                                            <option value="9:30">9:30</option>
+                                            <option value="10:00">10:00</option>
+                                            <option value="10:30">10:30</option>
+                                            <option value="11:00">11:00</option>
+                                            <option value="11:30">11:30</option>
+                                            <option value="12:00">12:00</option>
+                                            <option value="12:30">12:30</option>
+                                        </select>
+                                        <input type="hidden" name="sch[<?= $i ?>][name]" value="<?= $day ?>" />
+                                        <div class="clear"></div>
+                                    </li>
+                                </ul>
+                            </div><!-- closes right -->
+                        </div><!-- closes prcng-item -->
+                        <?php endforeach ?>
+                    </div><!-- closes content -->
+                    <?php else: ?>
+                    <div class="content prcng hours">
+                    	<?php if($this->errors): ?>
+                        <div class="errors">
+                            <?php foreach($this->errors as $err): ?>
+                            <p><?= $err ?></p>
+                            <?php endforeach ?>
+                        </div>
+                        <?php endif ?>
+                        <div class="prcng-item">
+                            <div class="left-ttl">
+                                <span>1</span>
+                                <strong>First Schedule Settings</strong>
+                                Choose a name, the starting time, the ending time and the duration for your first schedule
+                            </div><!-- closes left-ttl -->
+                            <div class="right">
+                                <ul>
+                                    <li>
+                                        <div>
+                                            <h4>Schedule Name</h4>
+                                            <span>Set a name for this schedule</span>
+                                        </div>
+                                        <input class="noclean" name="sch[0][name]" value="<?= $sch['name'] ?>" type="text" />
+                                        <div class="clear"></div>
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <h4>Starting Time</h4>
+                                            <span>At what time does this activity start?</span>
+                                        </div>
+                                        <select name="sch[0][start][time]">
+                                            <option value="AM">AM</option>
+                                        	<option value="PM">PM</option>
+                                        </select>
+                                        <select name="sch[0][start][hour]">
+                                            <option value="">--:--</option>
+                                            <option value="1:00">1:00</option>
+                                            <option value="1:30">1:30</option>
+                                            <option value="2:00">2:00</option>
+                                            <option value="2:30">2:30</option>
+                                            <option value="3:00">3:00</option>
+                                            <option value="3:30">3:30</option>
+                                            <option value="4:00">4:00</option>
+                                            <option value="4:30">4:30</option>
+                                            <option value="5:00">5:00</option>
+                                            <option value="5:30">5:30</option>
+                                            <option value="6:00">6:00</option>
+                                            <option value="6:30">6:30</option>
+                                            <option value="7:00">7:00</option>
+                                            <option value="7:30">7:30</option>
+                                            <option value="8:00">8:00</option>
+                                            <option value="8:30">8:30</option>
+                                            <option value="9:00">9:00</option>
+                                            <option value="9:30">9:30</option>
+                                            <option value="10:00">10:00</option>
+                                            <option value="10:30">10:30</option>
+                                            <option value="11:00">11:00</option>
+                                            <option value="11:30">11:30</option>
+                                            <option value="12:00">12:00</option>
+                                            <option value="12:30">12:30</option>
+                                        </select>
+                                        <div class="clear"></div>											
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <h4>Ending Time</h4>
+                                            <span>At what time does this activity end?</span>
+                                        </div>
+                                        <select name="sch[0][end][time]">
+                                            <option value="AM">AM</option>
+                                        	<option value="PM">PM</option>
+                                        </select>
+                                        <select name="sch[0][end][hour]">
+                                            <option value="">--:--</option>
+                                            <option value="1:00">1:00</option>
+                                            <option value="1:30">1:30</option>
+                                            <option value="2:00">2:00</option>
+                                            <option value="2:30">2:30</option>
+                                            <option value="3:00">3:00</option>
+                                            <option value="3:30">3:30</option>
+                                            <option value="4:00">4:00</option>
+                                            <option value="4:30">4:30</option>
+                                            <option value="5:00">5:00</option>
+                                            <option value="5:30">5:30</option>
+                                            <option value="6:00">6:00</option>
+                                            <option value="6:30">6:30</option>
+                                            <option value="7:00">7:00</option>
+                                            <option value="7:30">7:30</option>
+                                            <option value="8:00">8:00</option>
+                                            <option value="8:30">8:30</option>
+                                            <option value="9:00">9:00</option>
+                                            <option value="9:30">9:30</option>
+                                            <option value="10:00">10:00</option>
+                                            <option value="10:30">10:30</option>
+                                            <option value="11:00">11:00</option>
+                                            <option value="11:30">11:30</option>
+                                            <option value="12:00">12:00</option>
+                                            <option value="12:30">12:30</option>
+                                        </select>	
+                                        <div class="clear"></div>										
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <h4>Activity Duration</h4>
+                                            <span>How long is it?</span>
+                                        </div>
+                                        <input disabled="disabled" type="hidden" name="sch[0][duration_lb]" value="days" />
+                                        <select disabled="disabled" name="sch[0][duration]">
+                                            <option value="1">1 day</option>
+                                            <option value="2">2 days</option>
+                                            <option value="3">3 days</option>
+                                            <option value="4">4 days</option>
+                                            <option value="5">5 days</option>
+                                            <option value="6">6 days</option>
+                                            <option value="7">7 days</option>
+                                            <option value="8">8 days</option>
+                                            <option value="9">9 days</option>
+                                            <option value="10">10 days</option>
+                                            <option value="15">15 days</option>
+                                            <option value="30">30 days</option>
+                                            <option value="45">45 days</option>
+                                        </select>                                        	
+                                        <label for="sameday0">Ends the same day</label>
+                                        <input checked="checked" name="sch[0][same]" id="sameday0" class="sameday" type="checkbox" />
+                                        <div class="clear"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="prcng-item hidden"></div>
+                        <div class="prcng-item hidden ltt">
+                            <div class="left-ttl">
+                                <span></span>
+                                <strong>New Schedule Settings</strong>
+                                Choose a name, the starting time, the ending time and the duration for your new schedule
+                            </div><!-- closes left-ttl -->
+                            <div class="right">
+                                <ul>
+                                    <li>
+                                        <div>
+                                            <h4>Schedule Name</h4>
+                                            <span>Set a name for this schedule</span>
+                                        </div>
+                                        <input class="noclean" name="name" value="<?= $sch['name'] ?>" type="text" />
+                                        <div class="clear"></div>
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <h4>Starting Time</h4>
+                                            <span>At what time does this activity start?</span>
+                                        </div>
+                                        <select name="start_time">
+                                            <option value="AM">AM</option>
+                                        	<option value="PM">PM</option>
+                                        </select>
+                                        <select name="start_hour">
+                                            <option value="">--:--</option>
+                                            <option value="1:00">1:00</option>
+                                            <option value="1:30">1:30</option>
+                                            <option value="2:00">2:00</option>
+                                            <option value="2:30">2:30</option>
+                                            <option value="3:00">3:00</option>
+                                            <option value="3:30">3:30</option>
+                                            <option value="4:00">4:00</option>
+                                            <option value="4:30">4:30</option>
+                                            <option value="5:00">5:00</option>
+                                            <option value="5:30">5:30</option>
+                                            <option value="6:00">6:00</option>
+                                            <option value="6:30">6:30</option>
+                                            <option value="7:00">7:00</option>
+                                            <option value="7:30">7:30</option>
+                                            <option value="8:00">8:00</option>
+                                            <option value="8:30">8:30</option>
+                                            <option value="9:00">9:00</option>
+                                            <option value="9:30">9:30</option>
+                                            <option value="10:00">10:00</option>
+                                            <option value="10:30">10:30</option>
+                                            <option value="11:00">11:00</option>
+                                            <option value="11:30">11:30</option>
+                                            <option value="12:00">12:00</option>
+                                            <option value="12:30">12:30</option>
+                                        </select>	
+                                        <div class="clear"></div>										
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <h4>Ending Time</h4>
+                                            <span>At what time does this activity end?</span>
+                                        </div>
+                                        <select name="end_time">
+                                            <option value="AM">AM</option>
+                                        	<option value="PM">PM</option>
+                                        </select>
+                                        <select name="end_hour]">
+                                            <option value="">--:--</option>
+                                            <option value="1:00">1:00</option>
+                                            <option value="1:30">1:30</option>
+                                            <option value="2:00">2:00</option>
+                                            <option value="2:30">2:30</option>
+                                            <option value="3:00">3:00</option>
+                                            <option value="3:30">3:30</option>
+                                            <option value="4:00">4:00</option>
+                                            <option value="4:30">4:30</option>
+                                            <option value="5:00">5:00</option>
+                                            <option value="5:30">5:30</option>
+                                            <option value="6:00">6:00</option>
+                                            <option value="6:30">6:30</option>
+                                            <option value="7:00">7:00</option>
+                                            <option value="7:30">7:30</option>
+                                            <option value="8:00">8:00</option>
+                                            <option value="8:30">8:30</option>
+                                            <option value="9:00">9:00</option>
+                                            <option value="9:30">9:30</option>
+                                            <option value="10:00">10:00</option>
+                                            <option value="10:30">10:30</option>
+                                            <option value="11:00">11:00</option>
+                                            <option value="11:30">11:30</option>
+                                            <option value="12:00">12:00</option>
+                                            <option value="12:30">12:30</option>
+                                        </select>											
+                                        <div class="clear"></div>
+                                    </li>
+                                    <li>
+                                        <div>
+                                            <h4>Activity Duration</h4>
+                                            <span>How long is it?</span>
+                                        </div>
+                                        <input disabled="disabled" type="hidden" name="duration_lb" value="days" />
+                                        <select disabled="disabled" name="duration">
+                                            <option value="1">1 day</option>
+                                            <option value="2">2 days</option>
+                                            <option value="3">3 days</option>
+                                            <option value="4">4 days</option>
+                                            <option value="5">5 days</option>
+                                            <option value="6">6 days</option>
+                                            <option value="7">7 days</option>
+                                            <option value="8">8 days</option>
+                                            <option value="9">9 days</option>
+                                            <option value="10">10 days</option>
+                                            <option value="15">15 days</option>
+                                            <option value="30">30 days</option>
+                                            <option value="45">45 days</option>
+                                        </select>
+                                        <label for="sameday1">Ends the same day</label>
+                                        <input checked="checked" name="same" id="sameday1" class="sameday" type="checkbox" />
+                                        <div class="clear"></div>
+                                    </li>
+                                    <li>
+                                    	<a href="" class="remove">Remove</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="prcng-item">
+                            <a href="" id="newHour" class="link-5">Add a New Schedule</a>
+                        </div>
+                    </div><!-- closes content -->
+                    <?php endif ?>
+                    <div class="foot">
+                        <input type="submit" class="btn-1" value="Continue" />
+                        <a class="link-4" href="/provider/listings/new/<?= $this->listing->id ?>/step2">Back</a>
+                    </div><!-- closes foot -->
+                    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+                    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+                    <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'form_sch_new') ?>" />
+                    <input type="hidden" name="_task" value="<?= md5('add_sch') ?>" />
+                </form>
+            </div><!-- closes sign-box -->
+        </div><!-- closes wrapper -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->	
+</body>
+</html>

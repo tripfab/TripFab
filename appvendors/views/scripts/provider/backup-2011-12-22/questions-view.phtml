@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> : Questions | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+	<script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('textarea').elastic();				
+            $('input, textarea').ToggleInputValue();
+            $('form select').jqTransSelect();
+        });
+    </script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-messages">
+            <?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'Questions','parentActive'=>'Reviews \&amp; Questions')); ?>				
+            <div id="features">
+                <div class="top">
+                    <img src="/images2/img-54.png" alt="" class="izq" />
+                    <h2>Reviews &amp; Questions.</h2>
+                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lorem risus, malesuada et elementum sit amet.</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lorem risus, malesuada et elementum sit amet. Vivamus elementum ipsum sit amet purus venenatis sed lacinia arcu euismod. Integer ut dignissim ligula. Proin sed lorem enim. Aliquam fermentum lacus sed urna consequat pellentesque. Praesent tempor neque at velit sagittis sed euismod lacus euismod. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <img src="/images2/img-49.png" alt="" class="corner" />
+                </div>
+                <!-- closes top -->
+                <div class="bottom">
+                    <div class="box">
+                        <img src="/images2/img-55.png" alt="" />
+                        <h4>Lorem ipsum dolor sit amet</h4>
+                        <p>Cconsectetur adipiscing elit. In lorem risus, malesuada et elementum sit amet, varius quis tellus. Vivamus elementum ipsum sit amet purus venenatis sed lacinia arcu euismod.</p>
+                    </div>
+                    <div class="box">
+                        <img src="/images2/img-56.png" alt="" />
+                        <h4>Lorem ipsum dolor sit amet</h4>
+                        <p>Cconsectetur adipiscing elit. In lorem risus, malesuada et elementum sit amet, varius quis tellus. Vivamus elementum ipsum sit amet purus venenatis sed lacinia arcu euismod.</p>
+                    </div>
+                    <div class="box">
+                        <img src="/images2/img-57.png" alt="" />
+                        <h4>Lorem ipsum dolor sit amet</h4>
+                        <p>Cconsectetur adipiscing elit. In lorem risus, malesuada et elementum sit amet, varius quis tellus. Vivamus elementum ipsum sit amet purus venenatis sed lacinia arcu euismod.</p>
+                    </div>
+                </div>
+                <!-- closes bottom -->
+            </div>
+            <!-- closes features -->
+        </div>
+        <!-- closes user-messages -->
+    </div>
+    <!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div>
+<!-- closes w1 -->
+</body>
+</html>

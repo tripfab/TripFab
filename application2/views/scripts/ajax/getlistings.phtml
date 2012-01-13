@@ -1,0 +1,34 @@
+<?php $url = $this->baseUrl() .'/'. $this->country->identifier .'/'. $this->city->identifier .'/filter';
+$cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this->stars; ?>
+<div class="loading"><div class="load">Loading...</div></div>
+<?php if(count($this->listings) > 0): ?>
+<?php foreach($this->listings as $i => $list): ?>
+<?php $class = ((($i+1) % 3) == 0) ? 'last' : '' ?>
+<div class="result <?= $class ?>">
+	<div class="img-wrapper">
+    	<?php if($this->user->role_id == 2): ?>
+		<a href="#" class="been">Been there</a>
+        <?php endif ?>
+        <a href="<?= str_replace('filter', $list->identifier, $url) ?>">
+		<?php // $this->thumbnail(array('width'=>'225', 'height'=>'167'), $list->image, '','225:167') ?>
+        <img width="225" height="167" src="/images/lph/th/<?= $this->image ?><?= $i + 1 ?>.jpg" />
+        
+		<h4><?= $list->title ?></h4>
+        </a>
+        <?php if($this->user->role_id == 2): ?>
+        <?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
+        <?php endif ?>
+	</div><!-- closes img-wrapper -->
+	<div class="meta">
+		<span class="cat-1"><img src="/images2/cleardot.gif" alt="" /><?= $this->categories[$list->main_type]['name'] ?></span>
+		<?php if($list->price > 0): ?>
+		<strong>$<?= $list->price ?><em> / person</em></strong>
+		<?php endif ?>
+	</div><!-- closes meta -->
+	<p class="listing_description"><?= $list->description ?></p>
+	<a href="<?= str_replace('filter', $list->identifier, $url) ?>" class="btn-1">View activity</a>
+</div><!-- closes result -->
+<?php endforeach ?>
+<?php else: ?>
+<p>No Listings Found</p>
+<?php endif ?>

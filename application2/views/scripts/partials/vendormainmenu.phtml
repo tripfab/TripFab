@@ -1,0 +1,103 @@
+<?php $items = array(
+	array(
+		'label' => 'Listings',
+		'url'	=> '/provider/listings/',
+		'submenu' => array(
+			array(
+				'label' => 'All Listings',
+				'url'	=> '/provider/listings/',
+			),
+			array(
+				'label' => 'Active',
+				'url'	=> '/provider/listings/active',
+			),
+			array(
+				'label' => 'Inactive',
+				'url'	=> '/provider/listings/inactive',
+			),
+		),
+	),
+	array(
+		'label' => 'Messages',
+		'url'	=> '/provider/messages/',
+	),
+	array(
+		'label' => 'Reservations',
+		'url'	=> '/provider/reservations/',
+		/*'submenu' => array(
+			array(
+				'label' => 'Incoming',
+				'url'	=> '/provider/reservations/',
+			),
+			array(
+				'label' => 'Waiting Approval',
+				'url'	=> '/provider/reservations/pending',
+			),
+			array(
+				'label' => 'History',
+				'url'	=> '/provider/reservations/history',
+			),
+			/*array(
+				'label' => 'Transactions',
+				'url'	=> '/provider/reservations/transactions',
+			),*/		
+		//),
+	),
+	array(
+		'label' => 'Reviews &amp; Questions',
+		'url'	=> '/provider/reviews/',
+	),
+	array(
+		'label' => 'Offers',
+		'url'	=> '/provider/offers/',
+	),
+	array(
+		'label' => 'Account',
+		'url'	=> '/provider/account/',
+		'submenu' => array(
+			array(
+				'label' => 'Profile',
+				'url'	=> '/provider/account/',
+			),
+			array(
+				'label' => 'Password',
+				'url'	=> '/provider/account/password',
+			),
+			array(
+				'label'	=> 'Payments',
+				'url'	=> '/provider/account/payments',
+			),
+			array(
+				'label'	=> 'Notifications',
+				'url'	=> '/provider/account/notifications',
+			),		
+		),
+	),
+) ?>
+<div class="main-menu">
+    <ul>
+    	<?php foreach($items as $i => $item): ?>
+        <?php $class = ($item['label'] == $this->parentActive) ? 'active' : '' ; ?>
+        <?php $class.= ($item['submenu']) ? ' sub-menu' : ''; ?>
+        <li class="<?= $class ?>">
+            <a href="<?= $item['url'] ?>"><?= $item['label'] ?></a>
+            <?php if($item['submenu']): ?>
+            <ul>
+            	<?php foreach($item['submenu'] as $subitem): ?>
+                <?php $class = ($subitem['label'] == $this->active) ? 'active' : '' ; ?>
+                <li class="<?= $class ?>"><a href="<?= $subitem['url'] ?>"><?= $subitem['label'] ?></a></li>
+                <?php endforeach ?>
+            </ul>
+            <img src="/images2/g-27.png" alt="" class="g-right" />
+            <?php if($i != 0): ?><img src="/images2/g-28.png" alt="" class="g-left" /><?php endif ?>
+            <?php endif ?>
+        </li>
+        <?php endforeach ?>
+    </ul>
+    <div class="clear"></div>
+</div><!-- closes menu -->
+<?php if($this->notifications): ?>
+<!--<div class="subttl">
+    <h4><a href="/provider/account/notifications">Set up your notifications</a></h4>
+</div>-->
+<?php endif ?>

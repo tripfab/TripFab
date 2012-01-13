@@ -1,0 +1,43 @@
+<div class="loading"><div class="load">Loading...</div></div>
+<?php if(count($this->trips) > 0): ?>
+<?php foreach($this->trips as $trip): ?>
+<div class="search-item">
+	<a class="img" href="/trips/view/<?= $trip->id ?>">
+	<?= $this->thumbnail(array('width'=>200,'height'=>164), $trip->image, '', '200:164') ?></a>
+	<div class="info">
+		<h2><?= $trip->title ?></h2>
+		<span><strong><?= $trip->country ?></strong></span>
+		<p><?= $trip->description ?></p>
+		<a href="/trips/view/<?= $trip->id ?>" class="btn-1">View Trip</a>
+	</div><!-- closes info -->
+	<div class="meta">200 164
+		<span>$<?= $trip->price ?></span><em>per person</em>
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tbody>
+				<tr>
+					<td>People</td>
+					<td><strong><?= $trip->min ?> - <?= $trip->max ?></strong></td>
+				</tr>
+				<tr>
+					<td>Category</td>
+					<td><strong>Adventure</strong></td>
+				</tr>
+				<tr>
+					<td>Tour Begins</td>
+					<td><strong><?= $trip->start_city_name ?></strong></td>
+				</tr>
+				<tr>
+					<td>Tour Ends</td>
+					<td><strong><?= $trip->end_city_name ?></strong></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="time-stamp-2">
+			<span><?= $trip->days ?> days</span>
+		</div><!-- closes time-stamp-2 -->
+	</div><!-- closes meta -->
+</div><!-- closes search-item -->
+<?php endforeach ?>
+<?php else: ?>
+<p>No trips found</p>
+<?php endif ?>

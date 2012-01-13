@@ -1,0 +1,29 @@
+<?php $cities = $this->cities ?>
+<h3><a href=""><img src="<?= $this->baseUrl() ?>/images/flag-3.png" alt="" /> <?= $this->country->title ?></a></h3>
+<div>
+    <p>Select all the cities you've been there:</p>
+    <ul>
+    	<?php for($i=0; $i<count($cities); $i=$i+12): ?>
+        <li>
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+                	<?php for($j=$i; ($j<$i+12) and ($j<count($cities)); $j=$j+2): ?>
+                    <tr>
+                    	<?php for($k=$j; ($k<$j+2) and ($k<count($cities)); $k++): ?>
+                        <td width="50%">
+                        <input type="checkbox" id="place_<?= $cities[$k]['id'] ?>" 
+                        	name="places[<?= $cities[$k]['id'] ?>]" value="<?= $cities[$k]['id'] ?>" />
+                        <label for="place_<?= $cities[$k]['id'] ?>"><?= $cities[$k]['title'] ?></label></td>
+                        <?php endfor ?>
+                    </tr>
+                    <?php endfor ?>
+                </tbody>
+            </table>
+        </li>
+        <?php endfor ?>
+    </ul>
+   	<?php if(count($cities) > 12): ?>
+    <a href="" class="prev">Prev</a>
+    <a href="" class="next">Next</a>
+    <?php endif ?>
+</div>

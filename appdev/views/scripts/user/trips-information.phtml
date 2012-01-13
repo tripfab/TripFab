@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> :: <?= $this->trip->title ?>, Trip Information | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/calendar/jquery-ui-1.8.16.custom.css">
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
+    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('textarea').elastic();
+            $('form select').jqTransSelect();
+			$('input.calendar:eq(1)').datepicker({
+				minDate:new Date(),
+				dateFormat:'M d yy',
+				onSelect:function(date){
+					$('input.calendar:eq(0)').datepicker('option','minDate',date);
+				}
+			});
+			$('input.calendar:eq(0)').datepicker({
+				minDate:new Date($('input.calendar:eq(1)').val()),
+				dateFormat:'M d yy',
+			});
+        });
+    </script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-messages user-trips">
+        	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Future Trips','parentActive'=>'My Trips')); ?>        	<div class="tripttl">        		<div>        			<a href="" class="btn-1">Proceed to Checkout</a>        			<?= $this->thumbnail(50, $this->trip->image, '', '1:1'); ?>        			<h2><?= $this->trip->title ?></h2>        		</div>        	</div>        	<!-- closes tripttl -->
+            <div class="past-trips">            	<?= $this->partial('partials/usertripinfomenu.phtml', array('active'=>'Information', 'id'=>$this->trip->id)); ?>
+                <div class="left">
+                	<?php if($this->errormessage): ?>
+                    <div class="errormessage">
+                        <p><?= $this->errormessage ?></p>
+                    </div>
+                    <?php endif ?>
+                    <?php if($this->successmessage): ?>
+                    <div class="green-message">
+                        <div class="wrapper">
+                            <img src="/images/ico-115.png" alt="" /> Your changes have been saved!
+                        </div><!-- closes wrapper -->
+                    </div><!-- closes green-message -->
+                    <?php endif ?>
+                    <form action="" method="post">
+                        <div class="profile-items">
+                            <div class="item-wrppr">
+                                <div class="item">
+                                    <input type="text" name="title" value="<?= $this->trip->title ?>" />
+                                    <h4>Trip Name</h4>
+                                    <span>Your trip name</span>
+                                </div><!-- closes item -->
+                                <div class="item">
+                                    <select>
+                                        <option>Family</option>
+                                        <option>Family</option>
+                                        <option>Family</option>
+                                    </select>
+                                    <h4>Category</h4>
+                                    <span>Select a category for your trip</span>
+                                </div><!-- closes item -->
+                                <div class="item">
+                                    <input type="text" class="shorter calendar" name="end" value="<?= date('M j Y', strtotime($this->trip->end)) ?>" />
+                                    <label>End</label>
+                                    <input type="text" class="shorter calendar" name="start" value="<?= date('M j Y',strtotime($this->trip->start)) ?>" />
+                                    <label>Start</label>
+                                    <h4>Trip Date</h4>
+                                    <span>Select the dates you want to travel</span>
+                                </div><!-- closes item -->
+                                <div class="item">
+                                    <select name="kids">
+                                        <?php for($i=0; $i<=12; $i++): ?>
+                                        <?php $selected = ($this->trip->kids == $i) ? 'selected="selected"' : ''; ?>
+                                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?></option>
+                                        <?php endfor ?>
+                                    </select>
+                                    <label>Children</label>
+                                    <select name="adults">
+                                    	<?php for($i=1; $i<=12; $i++): ?>
+                                        <?php $selected = ($this->trip->adults == $i) ? 'selected="selected"' : ''; ?>
+                                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?></option>
+                                        <?php endfor ?>
+                                    </select>
+                                    <label>Adults</label>
+                                    <h4>People</h4>
+                                    <span>Select how many people</span>
+                                </div><!-- closes item -->
+                                <div class="item last">
+                                    <textarea name="description" cols="30" rows="1"><?= $this->trip->description ?></textarea>
+                                    <h4>Description</h4>
+                                    <span>Add a short description about this trip</span>
+                                </div><!-- closes item -->
+                                <div class="clear"></div>									
+                            </div><!-- closes item-wrppr -->
+                        </div><!-- closes profile-items -->
+                        <div class="foot">
+                            <input type="submit" class="btn-1" value="Save Changes" />
+                            <a href="">Delete Trip</a>
+                        </div><!-- closes foot -->
+                        <input type="hidden" name="userid" value="<?= $this->user->id ?>" />
+                        <input type="hidden" name="usertoken" value="<?= md5($this->user->token) ?>" />
+                        <input type="hidden" name="tripid" value="<?= $this->trip->id ?>" />
+                        <input type="hidden" name="triptoken" value="<?= md5($this->trip->token) ?>" />
+                        <input type="hidden" name="_task" value="<?= md5('update_trip') ?>" />
+                    </form>
+                </div><!-- closes left -->
+                <div class="right">
+                    <?= $this->partial('partials/usertripsumary.phtml', array('trip'=>$this->trip, 'counter'=>$this->counter)) ?>
+                </div><!-- closes right -->
+            </div><!-- closes past-trips -->
+        </div><!-- closes user-messages -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+</body>
+</html>

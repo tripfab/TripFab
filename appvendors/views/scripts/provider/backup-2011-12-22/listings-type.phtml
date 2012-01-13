@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->listing->title ?> : Types | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('textarea').elastic();
+            $('#header .header-login a.user').click(function(){
+                $(this).next().toggleClass('show');
+                return false;
+            });
+			
+			$('input[name=kids]').change(function(){
+				if($(this).attr('checked') == undefined){
+					$('.accept-kids').addClass('hidden');
+					$('.accept-kids select').attr('disabled','disabled');
+				} else {
+					$('.accept-kids').removeClass('hidden');
+					$('.accept-kids select').removeAttr('disabled');
+				}
+			});
+			
+			$i = <?= (count($_POST['tip']) > 0) ? count($_POST['tip']) : 5 ?>;
+			$('#addNewTip').click(function(){
+				$item = $('.newitem.hidden').html();
+				$item = $('<div class="itemm">'+$item+'</div>');
+				$('input[name=text]', $item).attr('name','tip['+$i+'][text]');
+				$('.itemm:last').before($item);
+				$i++;
+				return false;
+			});
+			
+			$('.itemm a.remove').live('click', function(){
+				$(this).parent('.itemm').fadeOut('fast', function(){
+					$(this).remove();
+				});
+				return false;
+			});
+        });
+    </script>
+    <style type="text/css">
+	.hidden { display:none }
+	.error  {
+		padding:5px; 
+		border:1px solid #F00;
+		margin:20px 0 0;
+		color:#F00;
+		font-style:italic;}
+	</style>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="listing-wrapper wrapper">
+            <?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'All Listings','parentActive'=>'Listings')); ?>
+            <?= $this->partial('partials/vendorlistingstop.phtml', array('listing'=>$this->listing)); ?>
+            <div class="listing-content">
+                <div class="left">
+                    <?= $this->partial('partials/vendorlistingsmenu.phtml', array('active'=>'Activity Types', 'id' => $this->listing->id, 
+									   'type'=>$this->listing->main_type)) ?>
+                </div><!-- closes left -->
+                <div class="right">
+                    <?= $this->partial('listing/activity/type.phtml', array(
+							'listing' => $this->listing,
+							'data'	  => $this->data,
+					)); ?>
+                </div><!-- closes right -->
+            </div><!-- closes listing-content -->
+        </div><!-- closes listing-wrapper -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+</body>
+</html>

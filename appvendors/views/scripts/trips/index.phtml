@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title>Browse Trips | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/trips/index.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js2/jquery.cycle.all.js"></script>
+    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+    <script type="text/javascript" src="/js2/jquery.jcarousel.min.js"></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
+    <script type="text/javascript" src="/js2/trips/index.js"></script>
+</head>
+<body>
+<div class="w1">
+	<?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>
+    <div class="w2">
+        <div class="wrapper box">
+            <div class="intro">
+                <div class="gallery">
+                    <div class="gallery-w">
+                    	<?php foreach($this->recommended as $i => $trip): ?>
+                        <div class="gallery-item">
+                        	<?= $this->thumbnail(array('width'=>464,'height'=>308), '/images/tph/Trips-Big-0'.($i+1).'.jpg',  '','464:308') ?>
+                            <div class="time-stamp">
+                                <span><?= ($trip->days > 1) ? $trip->days . ' days' : $trip->days . ' day' ?> trip</span>
+                            </div><!-- closes time-stamp -->
+                            <div class="caption">
+                                <h3><?= $trip->title ?></h3>
+                                <span><?= $trip->country ?></span>
+                            </div><!-- closes caption -->
+                        </div><!-- closes gallery-item -->
+                        <?php endforeach ?>
+                    </div><!-- closes gallery-w -->
+                </div><!-- closes gallery -->
+                <h2>Pre-planned Trip Packages!</h2>
+                <p>Every part of your trip perfectly planned. Just purchase and go!</p>
+                <form action="">
+                    <fieldset>
+                        <input type="text" id="tripsSearch" value="What country?"/>
+                        <input type="submit" value="Go!" class="btn-1" />
+                    </fieldset>
+                </form>
+                <div class="clear"></div>
+                <div class="search-options">
+                    <em>Or search by:</em>
+                    <div class="options-wrapper">
+                        <div class="option">
+                            <h4>Category</h4>
+                            <ul>
+                            	<?php for($i=0;$i<4;$i++): ?>
+                                <li><a href="/trips/search?cat=<?= $this->categories[$i]->id ?>"><?= $this->categories[$i]->label ?></a></li>
+                                <?php endfor ?>
+                                <li><a href="#lb_categories" class="lb">SHOW ALL</a></li>
+                            </ul>
+                        </div><!-- closes option -->
+                        <div class="option">
+                            <h4>Budget per person</h4>
+                            <ul>
+                                <li><a href="/trips/search?price=less">Less Expensive</a></li>
+                                <li><a href="/trips/search?price=most">Most Expensive</a></li>
+                                <li><a href="/trips/search?price=1000">$1000</a></li>
+                                <li><a href="/trips/search?price=2000">$2000</a></li>
+                                <li><a href="/trips/search?price=3000">$3000</a></li>
+                            </ul>
+                        </div><!-- closes option -->
+                        <div class="option">
+                            <h4>Duration</h4>
+                            <ul>
+                                <li><a href="/trips/search?days=1">1 Day</a></li>
+                                <li><a href="/trips/search?days=2">2 Days</a></li>
+                                <li><a href="/trips/search?days=7">1 Week</a></li>
+                                <li><a href="/trips/search?days=15">2 Weeks</a></li>
+                                <li><a href="/trips/search?days=30">1 month and more</a></li>
+                            </ul>
+                        </div><!-- closes option -->
+                        <div class="option">
+                            <h4>Landscapes</h4>
+                            <ul>
+                                <?php for($i=0;$i<4;$i++): ?>
+                                <li><a href="/trips/search?land=<?= $this->landscapes[$i]->id ?>"><?= $this->landscapes[$i]->name ?></a></li>
+                                <?php endfor ?>
+                                <li><a href="#lb_landscapes" class="lb">SHOW ALL</a></li>
+                            </ul>
+                        </div><!-- closes option -->
+                        <div class="option">
+                            <h4>Continent</h4>
+                            <ul>
+                                <?php for($i=0;$i<4;$i++): ?>
+                                <li><a href="/trips/search?region=<?= $this->regions[$i]->id ?>"><?= $this->regions[$i]->title ?></a></li>
+                                <?php endfor ?>
+                                <li><a href="#lb_regions" class="lb">SHOW ALL</a></li>
+                            </ul>
+                        </div><!-- closes option -->
+                    </div><!-- closes option-wrapper -->
+                    <div class="clear"></div>
+                </div><!-- closes search-options -->
+            </div><!-- closes intro -->
+            <div class="trip-types">
+                <ul>
+                    <li><a href="#tabs-1">Latest Trips</a></li>
+                    <li><a href="#tabs-2">Recommended Trips</a></li>
+                    <li><a href="#tabs-3">Nearest Trips</a></li>
+                </ul>
+                <div id="tabs-1" class="tab">
+                    <ul>
+                    	<?php foreach($this->latest as $trip): ?>
+                        <li>
+                        	<a href="/trips/view/<?= $trip->id ?>">
+                        	<?= $this->thumbnail(array('width'=>180,'height'=>119), $trip->image, '','180:119'); ?></a>
+                            <h5><?= $trip->title ?></h5>
+                            <span><img src="/images2/flag-1.png" alt="" /> <?= $trip->country ?></span>
+                            <p><?= $trip->description ?></p>
+                            <a href="/trips/view/<?= $trip->id ?>" class="link-1">See Trip</a>
+                        </li>
+                        <?php endforeach ?>
+                    </ul>
+                </div><!-- closes tabs -->
+                <div id="tabs-2" class="tab">
+                    <ul>
+                        <?php foreach($this->recommended as $trip): ?>
+                        <li>
+                        	<a href="/trips/view/<?= $trip->id ?>">
+                        	<?= $this->thumbnail(array('width'=>180,'height'=>119), $trip->image, '','180:119'); ?>
+                            <h5><?= $trip->title ?></h5>
+                            <span><img src="/images2/flag-1.png" alt="" /> <?= $trip->country ?></span>
+                            <p><?= $trip->description ?></p>
+                            <a href="/trips/view/<?= $trip->id ?>" class="link-1">See Trip</a>
+                        </li>
+                        <?php endforeach ?>
+                    </ul>
+                </div><!-- closes tabs -->
+                <div id="tabs-3" class="tab">
+                    <ul>
+                        <?php foreach($this->nearest as $trip): ?>
+                        <li>
+                        	<a href="/trips/view/<?= $trip->id ?>">
+                        	<?= $this->thumbnail(array('width'=>180,'height'=>119), $trip->image, '','180:119'); ?>
+                            <h5><?= $trip->title ?></h5>
+                            <span><img src="/images2/flag-1.png" alt="" /> <?= $trip->country ?></span>
+                            <p><?= $trip->description ?></p>
+                            <a href="/trips/view/<?= $trip->id ?>" class="link-1">See Trip</a>
+                        </li>
+                        <?php endforeach ?>
+                    </ul>
+                </div><!-- closes tabs -->
+            </div><!-- closes trips-types -->
+            <div class="info-bottom">
+                <a href="" class="btn-2">Sell your trip</a>
+                <strong>Love traveling &amp; Know The Perfect Trip?</strong>
+            </div><!-- closes info-bottom -->
+        </div><!-- closes wrapper -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+<div id="tripsAutocompleteContainer"></div>
+
+<div class="lbcontainer">
+    <div id="lb_categories" class="lightbox">
+		<ul>
+        	<?php foreach($this->categories as $c): ?>
+        	<li><a href="/trips/search?cat=<?= $c->id ?>">
+            <img src="/images2/placeholder-icon.gif" />
+            <span><?= $c->label ?></span></a></li>
+            <?php endforeach ?>
+        </ul>
+    </div>
+    <div id="lb_landscapes" class="lightbox">
+		<ul>
+        	<?php foreach($this->landscapes as $c): ?>
+        	<li><a href="/trips/search?land=<?= $c->id ?>">
+            <img src="/images2/placeholder-icon.gif" />
+            <span><?= $c->name ?></span></a></li>
+            <?php endforeach ?>
+        </ul>
+    </div>
+    <div id="lb_regions" class="lightbox">
+		<ul>
+        	<?php foreach($this->regions as $c): ?>
+        	<li><a href="/trips/search?region=<?= $c->id ?>">
+            <img src="/images2/placeholder-icon.gif" />
+            <span><?= $c->title ?></span></a></li>
+            <?php endforeach ?>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

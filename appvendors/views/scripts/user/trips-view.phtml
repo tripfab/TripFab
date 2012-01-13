@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> : <?= $this->trip->title ?>, Trip | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.cycle.all.js"></script>
+    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
+    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.slider').cycle({
+                fx:     'fade', 
+                speed:  'fast', 
+                timeout: 0,
+                next:   '.next', 
+                prev:   '.prev'
+            });
+            $('textarea').elastic();				
+            $('input').ToggleInputValue();
+            $('form select').jqTransSelect();
+        });
+    </script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-messages user-trips">
+        	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Future Trips','parentActive'=>'My Trips')); ?>        	
+        	<div class="tripttl">
+        		<div>
+                    <a class="btn-1" href="">Sell Trip</a>
+                    <a href="" class="btn-8">Do this Trip Again</a>
+        			<?= $this->thumbnail(50, $this->trip->image, '', '1:1'); ?>
+        			<h2><?= $this->trip->title ?></h2>
+                    <span>Enjoyed from <?= date('M jS', strtotime($this->trip->start)) ?> to 
+                   <?= date('M jS Y', strtotime($this->trip->end)) ?></span>
+        		</div>
+        	</div><!-- closes tripttl -->
+            
+            <div class="subttl">
+                <a href="/user/trips" class="link-4">Back to My Past Trips</a>
+                <h4>Trip Itinerary</h4>
+            </div><!-- closes subttl -->
+            
+            <div class="past-trips">
+                <div class="left">
+                    <a href="" class="prev">Previous Day</a>
+                    <a href="" class="next">Next Day</a>
+                    <div class="slider">
+                        <?php foreach($this->listingsbyday as $daynumber=>$daytimes): ?>
+                        <div class="slide">
+                            <div class="hdr">Day <?= $daynumber ?></div>
+                            <div class="trip-details">
+                            	<?php foreach($daytimes as $time=>$listings): ?>
+                                <h6><?= $time ?></h6>
+                                <?php foreach($listings as $list): ?>
+                                <div class="trip-detail">
+                                    <?= $this->thumbnail(77, $list->image,'','1:1'); ?>
+                                    <h2><?= $list->title ?></h2>
+                                    <p><?= stripslashes($list->description) ?></p>
+                                </div><!-- closes trip-detail -->
+                                <?php endforeach ?>
+                                <?php endforeach ?>
+                            </div><!-- closes trip-details -->
+                        </div><!-- closes slide -->
+                        <?php endforeach ?>
+                    </div><!-- closes slider -->
+                </div><!-- closes left -->
+                <div class="right">
+                    <div class="trip-smmr">
+                        <?= $this->partial('partials/usertripsumary.phtml', array('trip'=>$this->trip, 'counter'=>$this->counter)) ?>
+                    </div><!-- closes smmr -->
+                </div><!-- closes right -->
+            </div><!-- closes past-trips -->
+        </div><!-- closes user-messages -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+</body>
+</html>

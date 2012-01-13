@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title>Admin - Listings | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all-admin.css" />
+    <script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#header .header-login a.user').click(function(){
+                $(this).next().toggleClass('show');
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="w1">
+	<?= $this->partial('adminPartials/header.phtml', array('active'=>'Listings')); ?>
+    <div class="w3_admin">
+        <div class="sub_menu">
+            <h2>All Listings. <span>There are 126,258.</span></h2>
+            <a href="#" class="btn-1">Create New</a>
+            <ul class="sub_links">
+                <li><a href="">All Listings</a></li>
+                <li><a href="">Restaurants</a></li>
+                <li><a href="">Entertainment</a></li>
+                <li><a href="">Tourist Sights</a></li>
+            </ul>
+        </div><!--SUB_MENU-->
+    </div><!--W3-->
+    <div class="all_listing">
+        <div class="search_list">
+            <form action="">
+                <input type="text" value="Search for listings" />
+                <input type="button" class="btn-1" value="Search" />
+            </form>
+            <ul class="control">
+            	<?php if($this->params['page'] == 1): ?>
+                <li><a href="?page=<?= $this->params['page'] + 1 ?>"><span class="next">Next</span></a></li>
+                <?php elseif(($this->params['page'] * 50) > $this->total): ?>
+                <li><a href="?page=<?= $this->params['page'] - 1 ?>"><span class="prev">Prev</span></a></li>
+                <?php else: ?>
+                <li><a href="?page=<?= $this->params['page'] - 1 ?>"><span class="prev">Prev</span></a></li>
+                <li><a href="?page=<?= $this->params['page'] + 1 ?>"><span class="next">Next</span></a></li>
+                <?php endif ?>
+            </ul>
+            <p class="pages">
+            <?= (($this->params['page'] - 1) * 50) ?> - 
+            <?= (($this->params['page'] * 50) > $this->total) ? $this->total : $this->params['page'] * 50 ?>
+            of <?= $this->total ?></p>
+        </div><!--SEARCH_LIST-->
+        <div class="list_content">
+            <table width="100%" border="1">
+                <tr>
+                	<?php $order = ($this->params['sort'] == 'title' and $this->params['order'] == 'ASC') ? 'DESC' : 'ASC' ?>
+                    <th width="250"><a href="?sort=title&amp;order=<?= $order ?>">Resturant Name</a></th>
+                    <?php $order = ($this->params['sort'] == 'main_type' and $this->params['order'] == 'ASC') ? 'DESC' : 'ASC' ?>
+                    <th width="110"><a href="?sort=main_type&amp;order=<?= $order ?>">Type</a></th>
+                    <?php $order = ($this->params['sort'] == 'status' and $this->params['order'] == 'ASC') ? 'DESC' : 'ASC' ?>
+                    <th width="96"><a href="?sort=status&amp;order=<?= $order ?>">Status</a></th>
+                    <?php $order = ($this->params['sort'] == 'city_id' and $this->params['order'] == 'ASC') ? 'DESC' : 'ASC' ?>
+                    <th width="150"><a href="?sort=city_id&amp;order=<?= $order ?>">City</a></th>
+                    <?php $order = ($this->params['sort'] == 'country_id' and $this->params['order'] == 'ASC') ? 'DESC' : 'ASC' ?>
+                    <th width="139"><a href="?sort=country_id&amp;order=<?= $order ?>">Country</a></th>
+                    <th width="67" class="last">&nbsp;</th>
+                </tr>
+                <?php foreach($this->listings as $i => $listing): ?>
+                <tr class="<?= ($i == 0) ? 'first' : '' ?>">
+                    <td><?= $listing->title ?></td>
+                    <td><?= $listing->main_type ?></td>
+                    <td><?= $listing->status ?></td>
+                    <td><?= $listing->city_id ?></td>
+                    <td><?= $listing->country_id ?></td>
+                    <td><a href="/admin/listings/edit/<?= $listing->id ?>" class="edit">Edit</a></td>
+                </tr>
+                <?php endforeach ?>
+            </table>
+        </div><!--LIST-CONTENT-->
+        <div class="paging_bottom">
+            <ul class="control">
+            	<?php if($this->params['page'] == 1): ?>
+                <li><a href="?page=<?= $this->params['page'] + 1 ?>"><span class="next">Next</span></a></li>
+                <?php elseif(($this->params['page'] * 50) > $this->total): ?>
+                <li><a href="?page=<?= $this->params['page'] - 1 ?>"><span class="prev">Prev</span></a></li>
+                <?php else: ?>
+                <li><a href="?page=<?= $this->params['page'] - 1 ?>"><span class="prev">Prev</span></a></li>
+                <li><a href="?page=<?= $this->params['page'] + 1 ?>"><span class="next">Next</span></a></li>
+                <?php endif ?>
+            </ul>
+            <p class="pages">
+            <?= (($this->params['page'] - 1) * 50) ?> - 
+            <?= (($this->params['page'] * 50) > $this->total) ? $this->total : $this->params['page'] * 50 ?>
+            of <?= $this->total ?></p>
+        </div><!--PAGING_BOTTOM-->
+    </div><!--ALL_LISTING-->
+            
+    <?= $this->partial('adminPartials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+</body>
+</html>

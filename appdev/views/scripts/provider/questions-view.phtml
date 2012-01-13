@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> : Profile | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
+    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('textarea').elastic();				
+            $('input, textarea').ToggleInputValue();
+            $('form select').jqTransSelect();
+        });
+    </script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-messages">
+            <?= $this->partial('partials/vendormainmenu.phtml', array('active'=>'Questions','parentActive'=>'Reviews \&amp; Questions')); ?>				
+            <div class="bc">
+                <a href="" class="link-4">Back to Questions</a>
+                You have 2 new questions for 'Hotel Silencio'
+            </div><!-- closes bc -->
+            <div class="reviews-questions">
+			<?php foreach($this->questions as $q): ?>
+                <form action="" method="post">
+                    <div class="s-qa new">
+                        <div class="q">
+                            <div class="left">
+                                <strong><?= $q[user_name] ?></strong>
+                                <span>Asked on <?= date('M d, Y', strtotime($q[created])) ?></span>
+                            </div><!-- closes left -->
+                            <div class="right">
+                                <?= $this->escape($q[question]) ?>?
+                            </div><!-- closes right -->
+                        </div><!-- closes q -->
+                        <?php if(count($q[answers]) == 0): ?>
+                        <div class="a">
+                            <div class="right">
+                                <textarea cols="30" rows="1">Write your answer</textarea>
+                            </div><!-- closes right -->
+                        </div><!-- closes a -->
+                        <div class="bottom">
+                            <div class="right">
+                                <input type="submit" class="btn-1" value="Send Answer" />
+                                <a href="">Report Abuse</a>
+                            </div><!-- closes right -->
+                        </div><!-- closes bottom -->
+                        <div class="timespan">
+                            <span>New</span>
+                        </div><!-- closes timespan -->
+                        <?php else: ?>
+                        <div class="a">    
+                            <div class="left">
+                                <strong>Me</strong>
+                                <span>Answered on <?= $q[answers][0]->created ?></span>
+                            </div><!-- closes left -->
+                            <div class="right">
+                                <?= $this->escape($q[answers][0]->answer) ?>
+                            </div><!-- closes right -->
+                        </div><!-- closes a -->
+                        <div class="bottom">
+                            <div class="right">
+                                <a href="" class="btn-1">Edit Answer</a>								
+                                <a href="">Delete Question</a>
+                            </div><!-- closes right -->
+                        </div>
+                        <?php endif ?>
+                    </div><!-- closes s-qa -->
+                    <input type="hidden" name="listing_id" value="<?= $this->listing->id ?>" />
+                    <input type="hidden" name="question_id" value="<?= $question[id] ?>" />
+                    <input type="hidden" name="form_id" value="<?= md5('form_edit_question') ?>" />
+                    <input type="hidden" name="_task" value="<?= md5('edit_answer') ?>" />
+                </form>
+			<?php endforeach ?>
+            </div><!-- closes reviews-questions -->
+        </div><!-- closes user-messages -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+</body>
+</html>

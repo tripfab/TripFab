@@ -1,0 +1,246 @@
+<form action="" method="post" id="form_pricing">
+    <div class="pricing-tabs">
+        <ul>
+            <li><a href="#tabs-1">Default Pricing</a></li>
+            <li><a href="#tabs-2">Seasonal Pricing</a></li>
+        </ul>
+        <div id="tabs-1" class="tab">
+            <?php if($this->help->act_pricing1 == 0): ?>
+            <div class="desc">
+                <h3>What is the basic pricing?</h3>
+                <p>Some general details about the experience, listing name, contact information, categories and more.</p>
+                <a href="" rel="act_pricing1" class="remove">Remove</a>
+            </div><!-- closes desc -->
+            <?php endif ?>
+            <h2>With the Default Pricing the rates apply for all the unspecified dates.</h2>
+            <?php if((is_null($this->listing->min) and is_null($this->listing->max)) and (count($this->types) > 0)): ?>
+            <?php foreach($this->types as $type): ?>
+            <div class="pricing-itm act-type first">
+                <span><?= $type->name ?></span>
+                <div class="right">
+                    <label>Per Adult</label>
+                    <input type="text" name="sch[0][<?= $type->id ?>][price]"
+                    value="<?= (isset($this->sch[0][$type->id]['price'])) 
+                    ? $this->sch[0][$type->id]['price'] : "0.00" ?>" />
+                    <h4>Adults Rate</h4>
+                    <span>The adult's rate for this type</span>
+                </div><!-- closes right -->
+                <?php if($type->kids == 1): ?>
+                <div class="right">
+                    <label>Rate per child</label>
+                    <?php $checked = ($this->sch[0][$type->id]['kids'] == $this->sch[0][$type->id]['price']) ? 'disabled="disabled"' : '' ?>
+                    <input type="text" name="sch[0][<?= $type->id ?>][kids]" <?= $checked ?>
+                    class="kids" value="<?= (isset($this->sch[0][$type->id]['kids'])) 
+                    ? $this->sch[0][$type->id]['kids'] : "0.00" ?>" />
+                    <h4>Children Rate</h4>
+                    <span>The children's rate for this type</span>
+                </div><!-- closes right -->
+                <div class="right lab">
+                	<?php $checked = ($this->sch[0][$type->id]['kids'] == $this->sch[0][$type->id]['price']) ? 'checked="checked"' : '' ?>
+                    <input type="checkbox" <?= $checked ?> class="sameprice" />
+                    <label>Children's rate is the same as the adult's</label>
+                </div><!-- closes right -->
+                <?php endif ?>
+            </div><!-- closes pricing-itm -->
+            <?php endforeach ?>
+            <?php else: ?>
+            <div class="pricing-itm act-type first">
+                <span>Standard Price</span>
+                <div class="right">
+                    <label>Per Adult</label>
+                    <input type="text" name="price" value="<?= (isset($this->basic_price->price)) ? $this->basic_price->price : "0.00" ?>" />											
+                    <h4>Adults Rate</h4>
+                    <span>The adult's standard rate</span>											
+                </div><!-- closes right -->
+                <?php if($this->listing->kids == 1): ?>
+                <div class="right">
+                    <label>Rate per child</label>
+                    <?php $checked = ($this->basic_price->kids == $this->basic_price->price) ? 'disabled="disabled"' : '' ?>
+                    <input class="kids" <?= $checked ?> type="text" 
+                    value="<?= (isset($this->basic_price->kids)) ? $this->basic_price->kids : "0.00" ?>" name="kids" />
+                    <h4>Children Rate</h4>
+                    <span>The children's rate for this type</span>																						
+                </div><!-- closes right -->
+                <div class="right lab">
+                	<?php $checked = ($this->basic_price->kids == $this->basic_price->price) ? 'checked="checked"' : '' ?>
+                    <input type="checkbox" <?= $checked ?> class="sameprice" />
+                    <label>Children's rate is the same as the adult's</label>
+                </div><!-- closes right -->
+                <?php endif ?>
+            </div><!-- closes pricing-itm -->
+            <?php endif ?>
+        </div><!-- closes tab -->
+        <div id="tabs-2" class="tab">
+            <?php if($this->help->act_pricing2 == 0): ?>
+            <div class="desc">
+                <h3>What is the seasonal pricing?</h3>
+                <p>Some general details about the experience, listing name, contact information, categories and more.</p>
+                <a href="" rel="act_pricing2" class="remove">Remove</a>
+            </div><!-- closes desc -->
+            <?php endif ?>
+            <h2>With the Basic Pricing the rates apply for all the unspecified dates. <a href="#newSeasson" class="lb link-5">Add New Season</a></h2>
+            <div class="carrousel">
+            	<?php foreach($this->seasons as $season): ?>
+                <h3><img src="/images2/cleardot.gif" alt="" /><?= $season->name ?></h3>
+                <div class="carrousel-itm">
+                    <div class="pricing-itm">
+                        This season goes from 
+                        <strong><?= date('M, jS', strtotime($season->starting)) ?></strong> to 
+                        <strong><?= date('M, jS', strtotime($season->ending)) ?></strong>
+                        <a href="#delete_season_<?= $season->id ?>" class="lb remove">Remove Season</a>
+                        <a href="#edit_season_<?= $season->id ?>" class="lb link-9">Edit Season</a>
+                    </div><!-- closes pricing-itm -->
+		            <?php if((is_null($this->listing->min) and is_null($this->listing->max)) and (count($this->types) > 0)): ?>
+                    <?php foreach($this->types as $i => $type): ?>
+                    <div class="pricing-itm act-type first">
+                        <span><?= $type->name ?></span>
+                        <div class="right">
+                            <label>Per Adult</label>
+                            <input type="text" name="sch[<?= $season->id ?>][<?= $type->id ?>][price]" 
+                            value="<?= (isset($this->season[$season->id][$type->id]['price'])) 
+                            ? $this->season[$season->id][$type->id]['price'] : "0.00" ?>"/>										
+                            <h4>Adults Rate</h4>
+                            <span>The adult's rate for this type</span>											
+                        </div><!-- closes right -->
+                        <?php if($type->kids == 1): ?>
+                        <div class="right">
+                            <label>Rate per child</label>
+                            <?php $checked = ($this->season[$season->id][$type->id]['kids'] == $this->season[$season->id][$type->id]['price'])
+									? 'disabled="disabled"' : '' ; ?>
+                            <input type="text" name="sch[<?= $season->id ?>][<?= $type->id ?>][kids]" <?= $checked ?>
+                            class="kids" value="<?= (isset($this->season[$season->id][$type->id]['kids'])) 
+                            ? $this->season[$season->id][$type->id]['kids'] : "0.00" ?>"/>
+                            <h4>Children Rate</h4>
+                            <span>The children's rate for this type</span>																						
+                        </div><!-- closes right -->
+                        <div class="right lab">
+                        	<?php $checked = ($this->season[$season->id][$type->id]['kids'] == $this->season[$season->id][$type->id]['price'])
+									? 'checked="checked"' : '' ; ?>
+                            <input type="checkbox" <?= $checked ?> class="sameprice" />
+                            <label>Children's rate is the same as the adult's</label>
+                        </div><!-- closes right -->
+                        <?php endif ?>
+                    </div><!-- closes pricing-itm -->
+                    <?php endforeach ?>
+                    <?php else: ?>
+                    <div class="pricing-itm act-type first">
+                        <span><?= $season->name ?> Price</span>	
+                        <div class="right">
+                            <label>Per Adult</label>
+                            <input type="text" name="sch[<?= $season->id ?>][<?= $sch->id ?>][price]" 
+                            value="<?= (isset($this->season[$season->id]['price'])) 
+                            ? $this->season[$season->id]['price'] : "0.00" ?>"/>
+                            <h4>Adults Rate</h4>
+                            <span>The adult's rate for this season</span>											
+                        </div><!-- closes right -->
+                        <?php if($this->listing->kids == 1): ?>
+                        <div class="right">
+                            <label>Rate per child</label>
+                            <?php $checked = ($this->season[$season->id]['kids'] == $this->season[$season->id]['price']) ? 'disabled="disabled"' : '' ?>
+                            <input type="text" name="sch[<?= $season->id ?>][<?= $sch->id ?>][kids]" <?= $checked ?>
+                            class="kids" value="<?= (isset($this->season[$season->id]['kids'])) 
+                            ? $this->season[$season->id]['kids'] : "0.00" ?>"/>
+                            <h4>Children Rate</h4>
+                            <span>The children's rate for this season</span>																						
+                        </div><!-- closes right -->
+                        <div class="right lab">
+                        	<?php $checked = ($this->season[$season->id]['kids'] == $this->season[$season->id]['price']) ? 'checked="checked"' : '' ?>
+                            <input type="checkbox" <?= $checked ?> class="sameprice" />
+                            <label>Children's rate is the same as the adult's</label>
+                        </div><!-- closes right -->
+                        <?php endif ?>
+                    </div><!-- closes pricing-itm -->
+                    <?php endif ?>
+                </div><!-- closes carrousel-itm -->
+                <?php endforeach ?>
+            </div><!-- closes carrousel -->																	
+        </div><!-- closes tab -->
+    </div><!-- closes pricing tabs -->
+    <div class="pricing-itm terms">
+        <span>Terms</span>
+        <div class="right">
+            <strong>Cancellation Policy</strong><br />
+            <span>Choose the cancellation policy you want</span>
+            <select>
+                <option>Flexible</option>
+                <option>Moderate</option>
+                <option>Strict</option>
+            </select>
+            <a href="/provider/cancellation-policies" class="learn">Learn More</a>									
+        </div><!-- closes right -->
+    </div><!-- closes pricing-itm -->
+    <div class="foot">
+        <input type="submit" class="btn-1" value="Save Changes" />
+    </div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token.'form_pricing') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('update_pricing') ?>" />
+</form>
+
+<div class="hidden">
+	<div id="newSeasson" class="lb-forgot season">
+        <form action="" method="post">
+            <div class="ttl">Create a Seasonal Pricing</div>
+            <div class="content">
+                <label for="">Season Name</label>
+                <input type="text" name="name" value="Ej: Green Season" />
+                <label for="">Starting Date</label>
+                <input type="text" name="starting" class="short" />
+                <label for="">Ending Date</label>
+                <input type="text" name="ending" class="short" />
+                <div class="clear"></div>
+            </div><!-- closes content -->
+            <div class="bottom">
+                <input type="submit" class="btn-1" value="Create Season" />
+                <span class="btn-4" onclick="$.fancybox.close()">Cancel</span>				
+            </div><!-- closes bottom -->
+            <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+            <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+            <input type="hidden" name="form_id" value="<?= md5($this->listing->token.'form_pricing') ?>" />
+            <input type="hidden" name="_task" value="<?= md5('add_season') ?>" />
+        </form>
+    </div><!-- closes lb-forgot -->
+    <?php foreach($this->seasons as $season): ?>
+    <div id="edit_season_<?= $season->id ?>" class="lb-forgot season">
+        <form action="" method="post">
+            <div class="ttl">Edit "<?= $season->name ?>" Season</div>
+            <div class="content">
+                <label for="">Season Name</label>
+                <input type="text" name="name" value="<?= $season->name ?>" />
+                <label for="">Starting Date</label>
+                <input type="text" name="starting" class="short" value="<?= date('M d, Y', strtotime($season->starting)) ?>" />
+                <label for="">Ending Date</label>
+                <input type="text" name="ending" class="short" value="<?= date('M d, Y', strtotime($season->ending)) ?>" />
+                <div class="clear"></div>
+            </div><!-- closes content -->
+            <div class="bottom">
+                <input type="submit" class="btn-1" value="Edit Season" />
+                <span class="btn-4" onclick="$.fancybox.close()">Cancel</span>				
+            </div><!-- closes bottom -->
+            <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+            <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+            <input type="hidden" name="season_id" value="<?= $season->id ?>" />
+            <input type="hidden" name="form_id" value="<?= md5($this->listing->token.'form_pricing') ?>" />
+            <input type="hidden" name="_task" value="<?= md5('edit_season') ?>" />
+        </form>
+    </div><!-- closes lb-forgot -->
+    <div id="delete_season_<?= $season->id ?>" class="lb-forgot delete">
+        <form action="" method="post" id="form_season_delete_<?= $list->id ?>">
+            <div class="ttl">Delete Season "<?= $season->name ?>"</div>
+            <div class="content">
+                <p>Are you sure you want to remove "<?= $season->name ?>"?</p>
+            </div><!-- closes content -->
+            <div class="bottom">
+                <input type="submit" class="btn-1" value="Delete" />
+                <span class="btn-4" onclick="$.fancybox.close()">Cancel</span>				
+            </div><!-- closes bottom -->     
+            <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+            <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+            <input type="hidden" name="season_id" value="<?= $season->id ?>" />
+            <input type="hidden" name="form_id" value="<?= md5($this->listing->token.'form_pricing') ?>" />
+            <input type="hidden" name="_task" value="<?= md5('delete_season') ?>" />
+        </form>
+    </div><!-- closes lb-forgot -->
+    <?php endforeach ?>
+</div>

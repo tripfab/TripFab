@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->listing->title ?> : Calendar | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+	<script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('textarea').elastic();	
+            $('input').ToggleInputValue();
+			
+			$selecting = false;
+			$changing  = false;
+			
+			$(document).keyup(function(key){
+				if(key.keyCode == 27){
+					$('.calendar-items li').removeClass('selectedFirst');
+					$('.calendar-items li').removeClass('selectedOne');
+					$('.calendar-items li').removeClass('selected');
+					$selecting = false;
+					$changing  = false;
+					$('input.hiddenDates').remove();
+				}
+			});
+			
+            $('.calendar-items > li').click(function () {
+				if(!$changing) {
+					if (!$(this).hasClass('disabled')) {
+						if($selecting) {
+							$(this).addClass('selectedOne');
+							$form = $('form', this);
+							$changing = true;
+							$('.calendar-items > li.selected').each(function(index){
+								$day  = $('input[name=day]', this).val();
+								$date = $('<input type="hidden" class="hiddenDates" name="dates['+index+']" value="'+$day+'" />');
+								$form.append($date);
+							});
+						} else {					
+							$('.calendar-items li').removeClass('selectedFirst');
+							$('.calendar-items li').removeClass('selectedOne');
+							$('.calendar-items li').removeClass('selected');
+							$(this).addClass('selectedFirst');
+							$changing = false;
+							$('input.hiddenDates').remove();
+						}
+							
+						$(this).addClass('selected');
+						$selecting = !$selecting;
+					}
+				}
+            });
+			$('.calendar-items > li').hover(function(){
+				if($selecting){
+					$selected = $('.calendar-items li.selectedFirst');
+					$this = $(this);
+					$('.calendar-items > li').each(function(index){
+						if (!$(this).hasClass('disabled')) {
+							if($this.index() >= $selected.index()){
+								if(index >= $selected.index() && index <= $this.index())
+									$(this).addClass('selected');
+								else 
+									$(this).removeClass('selected');
+							} else {
+								if(index <= $selected.index() && index >= $this.index()) 
+									$(this).addClass('selected');
+								else
+									$(this).removeClass('selected');
+							}
+						}
+					});
+				}
+			});
+			
+			$('input[name=state]').click(function(e){
+				$this = $(this);
+				$tooltip = $this.parents('form');
+				
+				if($this.hasClass('checked')){
+					$this.removeAttr('checked');
+					$this.removeClass('checked');
+				} else {
+					$('input.stateOPT.checked', $tooltip).removeAttr('checked');
+					$('input.stateOPT.checked', $tooltip).removeClass('checked');
+					$this.addClass('checked');					
+				}
+			});
+			
+			
+			$('.tooltip .cancel').click(function(e){
+				e.preventDefault();
+				$('.calendar-items li').removeClass('selectedFirst');
+				$('.calendar-items li').removeClass('selectedOne');
+				$('.calendar-items li').removeClass('selected');
+				$selecting = false;
+				$changing = false;
+				$('input.hiddenDates').remove();
+				return false;
+			});
+        });
+    </script>
+    <style type="text/css">
+	.calendar ul.calendar-items > li.selected > .tooltip {
+		display:none;}
+	.calendar ul.calendar-items > li.selectedOne > .tooltip {
+		display:block !important;}
+	.calendar ul.calendar-items > li.selected {
+		background-color: #CEF3FD !important;
+		border: 1px solid #DDF7FD !important;
+		color:#70D3F3 !important;
+	}
+	</style>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="listing-wrapper wrapper">
+			<?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'All Listings','parentActive'=>'Listings')); ?>
+            <?= $this->partial('partials/vendorlistingstop.phtml', array('listing'=>$this->listing)); ?>
+            <div class="listing-content show">
+                <div class="left">
+                    <?= $this->partial('partials/vendorlistingsmenu.phtml', array('active'=>'Calendar', 'id' => $this->listing->id, 
+									   'type'=>$this->listing->main_type)) ?>
+                </div><!-- closes left -->
+                <div class="right">
+                    <?= $this->partial('listing/common/calendar.phtml', array(
+							'prev'	=> array(
+								'month' 	=> $this->prevmonth,
+								'year' 		=> $this->prevyear,
+								'month_lb' 	=> $this->prevmonth_lb
+							),
+							'next' => array(
+								'month' 	=> $this->nextmonth,
+								'year' 		=> $this->nextyear,
+								'month_lb' 	=> $this->nextmonth_lb
+							),
+							'currentMonth' 	=> $this->currentMonth,
+							'days' 			=> $this->days,
+							'listing' 		=> $this->listing,
+							'help' 			=> $this->help,
+							'schedules'		=> $this->schedules,
+					)); ?>
+                </div><!-- closes right -->
+                <div class="clear"></div>
+            </div><!-- closes listing-content -->
+        </div><!-- closes listing-wrapper -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+</body>
+</html>

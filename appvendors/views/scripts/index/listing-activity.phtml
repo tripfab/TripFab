@@ -1,0 +1,332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->listing->title ?> - <?= $this->city->title ?>, <?= $this->country->title ?> | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/jquery-ui-1.8.16.custom.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/index/listing-activity.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
+    <script type="text/javascript" src="/js2/jquery.cycle.all.js"></script>
+    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+    <script type="text/javascript" src="/js2/jquery.jcarousel.min.js"></script>
+    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
+    <script type="text/javascript" src="/js2/index/listing-activity.js"></script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>    
+    <div class="w2">
+        <div class="main wrapper">
+            <div class="content-2">
+                <div class="box">
+                    <?= $this->partial('partials/gallery.phtml', 
+					array('user'=>$this->user, 'listing' => $this->listing, 'city' => $this->city, 
+						  'country' => $this->country,'pictures' => $this->pictures,'trips'=>$this->trips)); ?>
+                    <?php //$this->partial('partials/tabs.phtml', array('listing' => $this->listing, 'tabs' => $this->tabs, 'faqs' => $this->faqs, 'map' => true)); ?>
+                </div><!-- closes box -->
+                <div class="tabs-wrapper-2">
+                    <ul>
+                        <li><a href="#tabs-1">Overview</a></li>
+                        <li><a href="#tabs-2">Details</a></li>
+                        <li><a href="#tabs-3">Tips</a></li>
+                        <li><a href="#tabs-4">FAQ's</a></li>
+                        <li><a href="#tabs-5">How to Get There</a></li>
+                    </ul>
+                    <div class="tab" id="tabs-1">
+                        <div class="tab-ttl">
+                            About the activity
+                        </div>
+                        <!-- closes tab-ttl -->
+                        <div class="tab-content">
+                            <h2>What to Expect</h2>
+                            <p>Aenean auctor, leo congue vehicula dictum, purus orci eleifend lacus, sit amet eleifend neque ipsum eu magna. Sed a tellus nisl.</p>
+                            <p>Nam ut nibh id est condimentum imperdiet at non massa. Pellentesque ac congue ipsum. Sed porta lacus non libero hendrerit ultrices. Quisque ac nisi ac purus feugiat mollis sed ut diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam sit amet aliquam ligula. Integer ac dolor sed urna lacinia vulputate et sed nibh.</p>
+                            <h2>Things you'll love</h2>
+                            <p>bibendum elementum tincidunt commodo, feugiat quis quam. Duis feugiat, purus nec mollis pulvinar, felis diam imperdiet justo, id consequat massa libero ac velit. Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam. Fusce neque mauris, semper et aliquam et, ornare non tortor. Phasellus pellentesque viverra accumsan.</p>
+                            <p>bibendum elementum tincidunt commodo, feugiat quis quam. Duis feugiat, purus nec mollis pulvinar, felis diam imperdiet justo, id consequat massa libero ac velit. Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam. Fusce neque mauris, semper et aliquam et, ornare non tortor. Phasellus po, id consequat massa libero ac velit. Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam. Fusce neque mauris, semper et aliquam et, ornare non tortor. Phasellus p o, id consequat massa libero ac velit. </p>
+                            <p>Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam. Fusce neque mauris, semper et aliquam et, ornare non tortor. Phasellus pellentesque viverra accumsan. bibendum elementum tincidunt commodo, feugiat quis quam. Duis feugiat, purus nec mollis pulvinar, felis diam imperdiet justo, id consequat massa libero ac velit. Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam.</p>
+                        </div>
+                        <!-- closes tab-content -->
+                        <div class="message">
+                            <div>
+                                <p><strong>Schedule Details</strong></p>
+                                <p>9:00 AM</p>
+                                <p>10:00 AM</p>
+                                <p>2:00 PM</p>
+                            </div>
+                            <div>
+                                <p><strong>Duration</strong></p>
+                                <p>1.5 - 2 hours</p>
+                            </div>
+                            <div>
+                                <p><strong>Departure Point</strong></p>
+                                <p>Tamarindo</p>
+                            </div>
+                            <div>
+                                <p><strong>Return Point</strong></p>
+                                <p>Tour concludes at the original point of departure</p>
+                            </div>
+                        </div>
+                        <!-- closes message -->
+                    </div>
+                    <!-- closes tab -->
+                    <div class="tab" id="tabs-2">
+                        <div class="tab-ttl">
+                            Some details you must to know
+                        </div>
+                        <!-- closes tab-ttl -->
+                        <div class="tab-content">
+                            <h2>Inclusions</h2>
+                            <ul>
+                                <li>One or two-hour surf lesson with a qualified instructor</li>
+                                <li>Rash-guard shirt (rental)</li>
+                                <li>Surfboard equipment (rental)</li>
+                                <li>Rubberized fins (rental)</li>
+                                <li>Optional water shoes (rental)</li>
+                                <li>Hotel pickup and drop-off for private and semi-private lesson participants staying in Waikiki hotels.</li>
+                                <li>Stand up paddle lesson participants requesting hotel pickup and drop-off will be charged an 
+                                    additional $10 per person on the day of lesson.</li>
+                            </ul>
+                            <h2>Exclusions</h2>
+                            <ul>
+                                <li>One or two-hour surf lesson with a qualified instructor</li>
+                                <li>Rash-guard shirt (rental)</li>
+                                <li>Surfboard equipment (rental)</li>
+                                <li>Rubberized fins (rental)</li>
+                                <li>Optional water shoes (rental)</li>
+                                <li>Hotel pickup and drop-off for private and semi-private lesson participants staying in Waikiki hotels.</li>
+                                <li>Stand up paddle lesson participants requesting hotel pickup and drop-off will be charged an 
+                                    additional $10 per person on the day of lesson.</li>
+                            </ul>
+                            <h2>Policies</h2>
+                            <ul>
+                                <li>One or two-hour surf lesson with a qualified instructor</li>
+                                <li>Rash-guard shirt (rental)</li>
+                                <li>Surfboard equipment (rental)</li>
+                                <li>Rubberized fins (rental)</li>
+                                <li>Optional water shoes (rental)</li>
+                                <li>Hotel pickup and drop-off for private and semi-private lesson participants staying in Waikiki hotels.</li>
+                                <li>Stand up paddle lesson participants requesting hotel pickup and drop-off will be charged an 
+                                    additional $10 per person on the day of lesson.</li>
+                            </ul>
+                        </div>
+                        <!-- closes tab-content -->
+                    </div>
+                    <!-- closes tab -->
+                    <div class="tab" id="tabs-3">
+                        <div class="tab-ttl">
+                            Some recommendations before take the trip
+                        </div>
+                        <!-- closes tab-ttl -->
+                        <div class="tab-content tips">
+                            <ul>
+                                <li>Make sure you are always on time for all pick ups.</li>
+                                <li>While in San Jose avoid going too far away from your hotel and ask hotel staff for directions of where to go.</li>
+                                <li>Do not go too far away from your your traveling group on your transfer stops.</li>
+                                <li>In Tortuguero and in Guanacaste always wear sun screen, the sun is quite hot there.</li>
+                                <li>Carry a little cash with you, some places give discounts is you pay cash.</li>
+                                <li>Do not leave your items unnatended in any of the locations, specially at the beach.</li>
+                                <li>If you need assistance at any time during your trip, ask your guide. </li>
+                                <li>Always be on time for pick ups.</li>
+                                <li>If you have any food allergies or specific food requirements make sure you inform the tour operator.</li>
+                                <li>Follow the instructions provided by your tour guide at all times.</li>
+                                <li>Do not leave your items unattended, specially at the beach.</li>
+                                <li>Make sure you always wear sun screen.</li>
+                                <li>If you have any food allergies or specific food requirements make sure you inform the tour operator.</li>
+                                <li>Follow the instructions provided by your tour guide at all times.</li>
+                                <li>Do not leave your items unattended, specially at the beach.</li>
+                            </ul>
+                        </div>
+                        <!-- closes tab-content -->
+                    </div>
+                    <!-- closes tab -->
+                    <div class="tab" id="tabs-4">
+                        <div class="tab-ttl">
+                            Frequently Asked Questions
+                        </div>
+                        <!-- closes tab-ttl -->
+                        <div class="tab-content faqs">
+                            <ul>
+                                <li>
+                                    <strong>Can children take this tour?</strong>
+                                    Yes, people of all ages can take and enjoy this tour.
+                                </li>
+                                <li>
+                                    <strong>Can I be picked up in Liberia?</strong>
+                                    For different pick ups other than San Jose, please contact tour operator for details and/or possible arrangements.
+                                </li>
+                                <li>
+                                    <strong>When is the best time to take this tour?</strong>
+                                    This tour can be taken and enjoyed year round.
+                                </li>
+                                <li>
+                                    <strong>What is the temperature on these locations?</strong>
+                                    Tortuguero and Guanacaste are hot and sunny, although it rains more in Tortuguero. Arenal on the other hand might get a bit chilly.
+                                </li>
+                                <li>
+                                    <strong>Where is the pick up for this tour?</strong>
+                                    The pick up and drop off for this tour is at the Juan Santamaria Airport.
+                                </li>
+                                <li>
+                                    <strong>At what time can I do this tour?</strong>
+                                    Tropical Bungee offers this tour twice a day. Their departure times daily can be found on the Tour Details tab.
+                                </li>
+                                <li>
+                                    <strong>Do I have to own and/or bring my own equipment?</strong>
+                                    No, this tour includes all certified equipment necessary to jump and it is carefully verified for safety.
+                                </li>
+                                <li>
+                                    <strong>How old do I have to be to do this activity?</strong>
+                                    There is no age limit. Tropical Bungee has had jumpers as young as 4 years old and as old as 80 years old.
+                                </li>
+                                <li>
+                                    <strong>At what time can I do this tour?</strong>
+                                    Tropical Bungee offers this tour twice a day. Their departure times daily can be found on the Tour Details tab.
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- closes tab-content -->
+                    </div>
+                    <!-- closes tab -->
+                    <div class="tab" id="tabs-5">
+                        <div class="tab-ttl">
+                            How to get there
+                        </div>
+                        <!-- closes tab-ttl -->
+                        <div class="tab-content there">										
+                            <h2>By plane</h2>
+                            <p>Flights are available to John F. Kennedy International Airport (JFK) and LaGuardia Airport (LGA) from major U.S. cities on a variety of carriers</p>
+                            <h2>By car</h2>
+                            <p>Taxis to/from LGA, about 12 miles from the property, are approximately $40 per car, each way.</p>
+                            <h2>By train</h2>
+                            <p>Flights are available to John F. Kennedy International Airport (JFK) and LaGuardia Airport (LGA) from major U.S. cities on a variety of carriers</p>
+                            <div id="mapcanvas"></div>
+                        </div>
+                        <!-- closes tab-content -->
+                        <div class="message">
+                            <address>
+                                <p><strong>Detailed Address</strong></p>
+                                <p>9 Crosby Street</p>
+                                <p>New York, NY 10013</p>
+                                <p>United States</p>
+                            </address>
+                        </div>
+                        <!-- closes message -->
+                    </div>
+                    <!-- closes tab -->
+                </div>
+                <!-- closes tabs-wrapper -->                
+                <div class="reviews-wrapper">
+                    <?= $this->partial('partials/reviews.phtml', 
+					array('reviews' => $this->reviews, 'questions' => $this->questions, 'answer_allow' => false,
+						  'user'=>$this->user, 'listing' => $this->listing->id)); ?>
+                </div><!-- closes reviews-wrapper -->
+            </div><!-- closes content-2 -->
+            <div class="right-sidebar">
+            	<form id="booking" method="post" action="<?= $this->form_action ?>">
+                    <div class="widget book">
+                        <div class="ttl">
+                            <span>From only</span>
+                            <strong>$<?= $this->listing->price ?> <span>/ person</span></strong>
+                        </div><!-- closes ttl -->
+                        <ul>
+                            <li id="acordion">                            
+                                <a href=""><span>Select the date</span><img src="/images2/arrow-7.png" alt="" class="arrow" />
+                                <strong id="checkinlabel"></strong></a>
+                                <div id="datepicker" class="datepicker"></div>
+                                <a href=""><span>Occupation</span><img src="/images2/arrow-7.png" alt="" class="arrow" /></a>
+                                <div class="occupation">
+                                	<div class="room-types">
+	                                	<strong>Choose a schedule</strong>
+                                        <ul>
+											<?php foreach($this->options as $option): ?>
+                                            <li>
+                                                <input id="sch<?= $option->id ?>" name="option" value="<?= $option->id ?>" type="radio" />
+                                                <label for="sch<?= $option->id ?>"><?= $option->name ?></label>
+                                                <span>From: <strong><?= date('h:i a',strtotime($option->starting)) ?></strong>
+                                                To: <strong><?= date('h:i a',strtotime($option->ending)) ?></strong></span>
+                                            </li>
+                                            <?php endforeach ?>
+                                        </ul>
+                                    </div>
+                                    <p>
+                                        <label>Adults</label>
+                                        <select class="ocp adt"  name="adults">
+                                            <?php for($i=1; $i<=12; $i++): ?>
+                                            <option value="<?= $i ?>"><?= $i ?></option>
+                                            <?php endfor ?>
+                                        </select>
+                                    </p>
+                                    <p>
+                                        <label>Kids</label>
+                                        <select class="ocp kid" name="kids">
+                                            <option value="0">0</option>
+                                            <?php for($i=1; $i<=12; $i++): ?>
+                                            <option value="<?= $i ?>"><?= $i ?></option>
+                                            <?php endfor ?>
+                                        </select>
+                                    </p>
+                                    <div class="clear"></div>
+                                </div><!-- closes ocupation -->
+                            </li>
+                        </ul>
+                        <div class="summary">
+                            <span>Subtotal <strong>$<?= $this->listing->price ?></strong></span>
+                            <input type="submit" value="Book Now!" class="btn-1" />
+                        </div><!-- closes summary -->
+                	</div><!-- closes widget -->
+                	<?php foreach($this->form_fields as $name => $value): ?>
+                    <input type="hidden" name="<?= $name ?>" value="<?= $value ?>" />
+                    <?php endforeach ?>
+                    <input type="hidden" name="checkin" id="inputCheckin" value="" />
+                </form>
+                <div class="widget talk">
+                    <?= $this->partial('partials/talk.phtml',array('vendor'=>$this->vendor,'user' => $this->user)); ?>
+                </div><!-- closes widget -->
+            </div><!-- closes right-sidebar -->
+        </div><!-- closes main -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->	
+<div id="citiesAutocompleteContainer"></div>
+<input type="hidden" value="<?= ($this->listing->lat) ? $this->listing->lat : 'none' ?>" name="listlat" />
+<input type="hidden" value="<?= ($this->listing->lng) ? $this->listing->lng : 'none' ?>" name="listlng" />
+<input type="hidden" value="<?= $this->listing->title ?>" name="listtitle" />
+<input type="hidden" value="<?php foreach($this->disabledDates as $d): ?><?= $d ?>,<?php endforeach ?>" name="diableddates" />
+
+<div class="hidden">
+	<div id="send_message">
+        <form action="" id="sendMessageForm">
+            <div class="lb-forgot">
+                <div class="ttl">Send a message to <?= $this->vendor->name ?></div>
+                <div class="content">
+                    <textarea cols="30" name="message" rows="1"></textarea>
+                </div><!-- closes content -->
+                <div class="bottom">
+                    <input type="submit" class="btn-1" value="Send Message" />
+                    <span onclick="$.fancybox.close()" class="btn-4">Cancel</span>				
+                </div><!-- closes bottom -->
+            </div><!-- closes lb-forgot -->
+            <input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+        </form>
+    </div>
+    <div id="live_chat">
+    	<img src="/images2/chat.png" />
+    </div>
+    <div id="start_call">
+    	<img src="/images2/phone.png" />
+    </div>
+</div>
+</body>
+</html>

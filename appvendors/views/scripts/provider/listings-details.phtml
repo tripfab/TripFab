@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->listing->title ?> : Details | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+	<script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {			
+			$include = 10;
+			$noninclude = 10;
+			$restrict = 10;
+			
+			$('#addInclude').click(function(){
+				$item = $('.hidden.include.detail').html();
+				$item = $('<div class="item">'+$item+'</div>');
+				$('input',$item).attr('name','details[1]['+$include+'][text]');
+				$('.hidden.include.detail').before($item);
+				$include++;
+				return false;
+			});
+			
+			$('#addNonInclude').click(function(){
+				$item = $('.hidden.noninclude.detail').html();
+				$item = $('<div class="item">'+$item+'</div>');
+				$('input',$item).attr('name','details[2]['+$noninclude+'][text]');
+				$('.hidden.noninclude.detail').before($item);
+				$noninclude++;
+				return false;
+			});
+			
+			$('#addRestriction').click(function(){
+				$item = $('.hidden.restriction.detail').html();
+				$item = $('<div class="item">'+$item+'</div>');
+				$('input',$item).attr('name','details[3]['+$restrict+'][text]');
+				$('.hidden.restriction.detail').before($item);
+				$restrict++;
+				return false;
+			});
+			
+			$('.lstng-detail a.remove').live('click', function(){
+				$detail = $(this).parent('.item');
+				$detail.fadeOut('fast', function(){
+					$('input', $detail).attr('disabled','disabled');
+				});
+				return false;
+			});
+        });
+    </script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="listing-wrapper wrapper">
+            <?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'All Listings','parentActive'=>'Listings')); ?>
+            <?= $this->partial('partials/vendorlistingstop.phtml', array('listing'=>$this->listing)); ?>
+            <div class="listing-content">
+                <div class="left">
+                    <?= $this->partial('partials/vendorlistingsmenu.phtml', array('active'=>'Details', 'id' => $this->listing->id, 
+									   'type'=>$this->listing->main_type)) ?>
+                </div><!-- closes left -->
+                <div class="right">
+                <?php 	switch($this->listing->main_type):
+							case 2:
+								echo $this->partial('listing/restaurant/details.phtml', array(
+										'help' => $this->help,));
+								break;
+							case 4:
+								echo $this->partial('listing/sight/details.phtml', array(
+										'help' => $this->help,));
+								break;
+							case 5:
+								echo $this->partial('listing/hotel/details.phtml', array(
+										'listing' => $this->listing,
+										'details' => $this->details,
+										'help' => $this->help,
+								));
+								break;
+							case 6:
+								echo $this->partial('listing/activity/details.phtml', array(
+										'listing' => $this->listing,
+										'details' => $this->details,
+										'help' => $this->help,
+								));
+								break;
+							case 7:
+								echo $this->partial('listing/entertaiment/details.phtml', array(
+										'help' => $this->help,));
+								break;
+						endswitch ?>
+                </div><!-- closes right -->
+                <div class="clear"></div>
+            </div><!-- closes listing-content -->
+        </div><!-- closes listing-wrapper -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+</body>
+</html>

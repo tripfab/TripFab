@@ -1,0 +1,23 @@
+.ui-autocomplete {
+	border-radius:2px;
+	overflow-x:hidden;
+	overflow-y:auto;
+	width:462px;
+	background:#fff;
+	box-shadow: 0 0 10px #000000; 
+	max-height: 240px;
+}
+
+.ui-autocomplete li a {
+	line-height:24px;
+	color:#464646;
+	padding-left:10px;
+	font-weight:bold;
+	display:block;
+	font-size: 14px;
+}
+.ui-autocomplete li a:hover,  .ui-autocomplete li a.ui-state-hover {
+	background: url(/images2/arrow-25.png) no-repeat 98% 50% #60b6e8;
+	color: #FFFFFF;
+	text-decoration:none;
+}

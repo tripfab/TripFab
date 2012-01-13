@@ -1,0 +1,68 @@
+<style type="text/css">
+.hidden { display:none;}
+</style>
+<form action="" method="post">
+    <div class="lstng-details">
+    	<?php if($this->help->act_tips == 0): ?>
+    	<div class="desc">
+    		<h3>What is the Tips &amp; Recommendations Section?</h3>
+    		<p>Write some tips travelers need to know when doing this activity.</p>
+    		<a href="" rel="act_tips" class="remove">Remove</a>
+    	</div>
+    	<!-- closes desc -->
+        <?php endif ?>
+    	<div class="main-ttl">
+    		<p><strong>Tips &amp; Recommendations</strong></p>    		
+    	</div>
+    	<!-- closes main-ttl -->
+        <div class="lstng-detail faq">
+        	<?php $exist = false; ?>
+            <?php foreach($this->tips as $detail): ?>
+            <?php if($detail->type == 4): ?>
+            <?php $exist = true; ?>
+                <a href="#delete_detail_<?= $detail->id ?>" class="remove">remove</a>
+                <input type="text" class="noclean" name="tip[<?= $detail->id ?>][text]" value="<?= $detail->text ?>" />
+                <div class="clear"></div>
+            <?php endif ?>
+            <?php endforeach ?>
+            
+            <?php if($exist): ?>
+            <a href="" class="remove"></a>
+            <input type="text" placeholder="Enter the tip or recommendation text here" name="tips[0][text]" value="" />
+            <div class="clear"></div>
+            <?php else: ?>
+            <a href="" class="remove"></a>
+            <input type="text" placeholder="Enter the tip or recommendation text here" name="tips[0][text]" value="" />
+            <div class="clear"></div>
+            <a href="" class="remove"></a>
+            <input type="text" placeholder="Enter the tip or recommendation text here" name="tips[1][text]" value="" />
+            <div class="clear"></div>
+            <a href="" class="remove"></a>
+            <input type="text" placeholder="Enter the tip or recommendation text here" name="tips[2][text]" value="" />
+            <div class="clear"></div>
+            <a href="" class="remove"></a>
+            <input type="text" placeholder="Enter the tip or recommendation text here" name="tips[3][text]" value="" />
+            <div class="clear"></div>
+            <a href="" class="remove"></a>
+            <input type="text" placeholder="Enter the tip or recommendation text here" name="tips[4][text]" value="" />
+            <div class="clear"></div>            
+            <?php endif ?>
+            
+            <div class="hidden tip detail">
+            	<a href="" class="remove"></a>
+                <input type="text" placeholder="Enter the tip or recommendation text here" name="text" value="" />
+                <div class="clear"></div>
+            </div>
+        </div><!-- closes lstng-detail -->
+        <div class="lstng-detail last">
+            <a href="" id="addTip" class="link-5">Add another Tip</a>
+        </div><!-- closes lstng-detail -->
+    </div><!-- closes lstng-details -->
+    <div class="foot">
+        <input type="submit" class="btn-1" value="Save Changes" />
+    </div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'edit-listing') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_listing') ?>" />
+</form>

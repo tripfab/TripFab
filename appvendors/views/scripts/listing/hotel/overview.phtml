@@ -1,0 +1,89 @@
+<style type="text/css">
+.lstng-detail { position:relative;}
+.lstng-detail .help {
+	position:absolute;
+	top:20px;
+	left:240px;}
+.lstng-detail .help a.eye {
+	display:block;
+	background:url(/images2/eye.png) no-repeat top left;
+	width:18px;
+	height:12px;
+	text-indent:-9999px;
+	cursor:pointer;}
+	.lstng-detail .help:hover a.eye {
+		background-position:left -12px;}
+.lstng-detail.first .help {
+	top:0px;}
+	.lstng-detail .help a.tooltip3 {
+		background:url(/images2/help-tooltip-bg.png) top left no-repeat;
+		left: 17px;
+		padding:11px 12px;
+		position:absolute;
+		top:-102px;
+		z-index:1000;
+		display:none;}
+	.lstng-detail .help:hover a.tooltip3 {
+		display:block;}
+
+.lstng-detail {
+	overflow:visible;}
+	.listing-content { overflow:visible;}
+</style>
+<form action="" method="post">
+    <div class="lstng-details pricing overview">
+  		<?php if($this->help->hot_overview == 0): ?>
+    	<div class="desc">
+    		<h3>What is the Hotel Overview?</h3>
+    		<p>Let people know about your hotel, how is the experience, what to expect, things they'll love about it.</p>
+    		<a href="" rel="hot_overview" class="remove">Remove</a>
+    	</div><!-- closes desc -->
+        <?php endif ?>
+    	<div class="main-ttl">
+    		<p><strong>Hotel Overview</strong></p>    		
+    	</div><!-- closes main-ttl -->								
+        <div class="lstng-detail">
+            <textarea placeholder="Write a nice overview about your hotel" class="noclean" name="about" cols="30" rows="1"><?= stripslashes($this->overview->about) ?></textarea>
+            <strong>About the hotel</strong>
+            <span>Write a detail description</span>
+            <!--<span class="counter">500</span>-->
+            <div class="help">
+                <a href="/images2/help/big-hot-overview-about.png" class="eye">help</a>
+                <a href="/images2/help/big-hot-overview-about.png" class="tooltip3">
+                <img src="/images2/help/small-hot-overview-about.png" /></a>
+            </div>
+            <div class="clear"></div>
+        </div><!-- closes lstng-detail -->
+        <div class="lstng-detail">
+            <textarea placeholder="Write a nice description about what to expect on this hotel" class="noclean" name="expect" cols="30" rows="1"><?= stripslashes($this->overview->expect) ?></textarea>
+            <strong>What to expect</strong>
+            <span>Tell us what the traveler can expect</span>
+            <!--<span class="counter">500</span>-->
+            <div class="help">
+                <a href="/images2/help/big-hot-overview-expect.png" class="eye">help</a>
+                <a href="/images2/help/big-hot-overview-expect.png" class="tooltip3">
+                <img src="/images2/help/small-hot-overview-expect.png" /></a>
+            </div>
+            <div class="clear"></div>
+        </div><!-- closes lstng-detail -->
+        <div class="lstng-detail">
+            <textarea placeholder="Write a nice description about the thing people will love" class="noclean" name="love" cols="30" rows="1"><?= stripslashes($this->overview->love) ?></textarea>
+            <strong>Things you'll love</strong>
+            <span>Write about things people will love about it</span>
+            <!--<span class="counter">500</span>-->
+            <div class="help">
+                <a href="/images2/help/big-hot-overview-love.png" class="eye">help</a>
+                <a href="/images2/help/big-hot-overview-love.png" class="tooltip3">
+                <img src="/images2/help/small-hot-overview-love.png" /></a>
+            </div>
+            <div class="clear"></div>
+        </div><!-- closes lstng-detail -->
+    </div><!-- closes lstng-details -->
+    <div class="foot">
+        <input type="submit" class="btn-1 noclean" value="Save Changes" />
+    </div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'edit-overview') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_overview') ?>" />
+</form>

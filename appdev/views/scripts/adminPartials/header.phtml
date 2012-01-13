@@ -1,0 +1,128 @@
+<?php 
+$items = array(
+	array(
+		'label' => 'Listings',
+		'url'	=> '/admin/listings',
+		'submenu' => array(
+			array(
+				'label' => 'All Listings',
+				'url'	=> '/admin/listings'
+			),
+			array(
+				'label' => 'Hotels',
+				'url'	=> '/admin/listings?main_type=5'
+			),
+			array(
+				'label' => 'Activities',
+				'url'	=> '/admin/listings?main_type=6'
+			),
+			array(
+				'label' => 'Restaurants',
+				'url'	=> '/admin/listings?main_type=2'
+			),
+			array(
+				'label' => 'Entertainment',
+				'url'	=> '/admin/listings?main_type=7'
+			),
+			array(
+				'label' => 'Tourist Sights',
+				'url'	=> '/admin/listings?main_type=4'
+			),
+		),
+	),
+	array(
+		'label' => 'Trips',
+		'url'	=> '/admin/trips',
+	),
+	array(
+		'label' => 'Places',
+		'url'	=> '/admin/places',
+		'submenu' => array(
+			array(
+				'label' => 'Regions',
+				'url'	=> '/admin/places'
+			),
+			array(
+				'label' => 'Countries',
+				'url'	=> '/admin/places/countries'
+			),
+			array(
+				'label' => 'Cities',
+				'url'	=> '/admin/places/cities'
+			),
+		),
+	),
+	array(
+		'label' => 'Users',
+		'url'	=> '/admin/users',
+		'submenu' => array(
+			array(
+				'label' => 'All Users',
+				'url'	=> '/admin/users'
+			),
+			array(
+				'label' => 'All Partners',
+				'url'	=> '/admin/partners'
+			),
+		),
+	),
+	array(
+		'label' => 'Payments',
+		'url'	=> '/admin/payments',
+		'submenu' => array(
+			array(
+				'label' => 'Incomming',
+				'url'	=> '/admin/payments'
+			),
+			array(
+				'label' => 'Waiting Approval',
+				'url'	=> '/admin/payments/users/pending'
+			),
+			array(
+				'label' => 'Pending Payments',
+				'url'	=> '/admin/payments/partners'
+			),
+			array(
+				'label' => 'History Payments',
+				'url'	=> '/admin/payments/partners/history'
+			),
+		),
+	),
+	array(
+		'label' => 'Reservations',
+		'url'	=> '/admin/reservations',
+	),
+	array(
+		'label' => 'Reports',
+		'url'	=> '/admin/reports',
+		'last' => true,
+	),
+) ?>
+<div id="header">
+    <div class="wrapper">
+        <h1 class="logo_icon"><a href="/admin">Tripfab</a></h1>
+        <ul class="menu_admin">
+        	<?php foreach($items as $item): ?>
+            <?php $class = (count($item['submenu']) > 0) ? '' : 'single'; ?>
+            <?php $a_class = ($this->active == $item['label']) ? 'active' : ''; ?>
+            <?php $class = ($item['last']) ? 'last' : $class ?>
+            <?php $a_class.= ($item['last']) ? ' reports' : ''; ?>
+            <li class="<?= $class ?>"><a href="<?= $item['url'] ?>" class="<?= $a_class ?>">
+			<?= $item['label'] ?>
+            <?php if(count($item['submenu']) > 0): ?>
+            <img alt="" src="../images/cleardot.gif">
+            <?php endif ?></a>
+            	<?php if(count($item['submenu']) > 0): ?>
+                <ul>
+                	<?php foreach($item['submenu'] as $sunitem): ?>
+                    <?php $class = ($subitem['label'] == $this->subactive) ? 'select' : '' ?>
+                    <li><a href="<?= $sunitem['url'] ?>" class="<?= $class ?>"><?= $sunitem['label'] ?></a></li>
+                    <?php endforeach ?>
+                </ul>
+                <?php endif ?>
+            </li>
+            <?php endforeach ?>
+        </ul>
+        <a href="/logout" class="sign_log">Logout</a>
+    </div><!-- closes wrapper -->			
+</div><!-- closes header -->

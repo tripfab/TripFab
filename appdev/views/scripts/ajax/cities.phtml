@@ -1,0 +1,23 @@
+<ul class="items">
+<?php foreach($this->cities as $city): ?>
+<li><h2><a href="<?= $this->baseUrl() ?>/<?= $this->country->identifier ?>/<?= $city->identifier ?>"><?= $city->title ?></a></h2>
+<div class="image-wrapper">
+    <div id="<?= $city->identifier ?>_pictures"></div>
+    <script type="text/javascript">
+            var myRequest = { 'tag': '<?= $city->identifier ?> <?= $this->country->identifier ?>' };
+            var myOptions = { 'width': 197, 'height': 166, 'croppedPhotos':panoramio.Cropping.TO_FILL };
+            var widget = new panoramio.PhotoWidget('<?= $city->identifier ?>_pictures', myRequest,myOptions);
+            widget.setPosition(0);
+    </script>
+    <span class="land"><?= $this->active_land ?></span>
+</div><!-- closes image-wrapper -->
+<p><?= $this->escape($city->description) ?></p>
+<div class="meta">
+    <p><span><span><?= $city->listings ?></span></span> Listings</p>
+    <ul>
+        <li><a href=""><img src="<?= $this->baseUrl() ?>/images/ico-10.jpg" alt="" /></a></li>
+        <li><a href=""><img src="<?= $this->baseUrl() ?>/images/ico-11.jpg" alt="" /></a></li>
+    </ul>
+</div></li>
+<?php endforeach ?>
+</ul>

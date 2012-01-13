@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->listing->title ?> : Calendar | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+	<script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('textarea').elastic();	
+            $('input').ToggleInputValue();
+            $('.calendar-items li').click(function () {
+                if (!$(this).hasClass('disabled')) {
+                    $('.calendar-items li').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+			
+			$('input[name=state]').click(function(){
+				$this = $(this);
+				$tooltip = $this.parents('form');
+				if($this.hasClass('checked')){
+					$this.removeAttr('checked');
+					$this.removeClass('checked');
+				} else {
+					$('input[name=state]', $tooltip).removeClass('checked');
+					$this.addClass('checked');
+				}
+			});
+			
+			$('.tooltip .cancel').click(function(e){
+				e.preventDefault();
+				$li = $(this).parents('.selected');
+				$li.removeClass('selected');
+				return false;
+			});
+        });
+    </script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="listing-wrapper wrapper">
+			<?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'All Listings','parentActive'=>'Listings')); ?>
+            <?= $this->partial('partials/vendorlistingstop.phtml', array('listing'=>$this->listing)); ?>
+            <div class="listing-content show">
+                <div class="left">
+                    <?= $this->partial('partials/vendorlistingsmenu.phtml', array('active'=>'Calendar', 'id' => $this->listing->id, 
+									   'type'=>$this->listing->main_type)) ?>
+                </div><!-- closes left -->
+                <div class="right">
+                    <?= $this->partial('listing/common/calendar.phtml', array(
+							'prev'	=> array(
+								'month' 	=> $this->prevmonth,
+								'year' 		=> $this->prevyear,
+								'month_lb' 	=> $this->prevmonth_lb
+							),
+							'next' => array(
+								'month' 	=> $this->nextmonth,
+								'year' 		=> $this->nextyear,
+								'month_lb' 	=> $this->nextmonth_lb
+							),
+							'currentMonth' 	=> $this->currentMonth,
+							'days' 			=> $this->days,
+							'listing' 		=> $this->listing,
+							'help' 			=> $this->help,
+							'schedules'		=> $this->schedules,
+					)); ?>
+                </div><!-- closes right -->
+                <div class="clear"></div>
+            </div><!-- closes listing-content -->
+        </div><!-- closes listing-wrapper -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+</body>
+</html>

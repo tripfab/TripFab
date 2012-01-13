@@ -1,0 +1,105 @@
+<style type="text/css">
+.hidden { display:none;}.lstng-detail { position:relative;}
+.lstng-detail .help {
+	position:absolute;
+	top:20px;
+	left:240px;}
+.lstng-detail .help a.eye {
+	display:block;
+	background:url(/images2/eye.png) no-repeat top left;
+	width:18px;
+	height:12px;
+	text-indent:-9999px;
+	cursor:pointer;}
+	.lstng-detail .help:hover a.eye {
+		background-position:left -12px;}
+.lstng-detail.first .help {
+	top:0px;}
+	.lstng-detail .help a.tooltip3 {
+		background:url(/images2/help-tooltip-bg.png) top left no-repeat;
+		left: 17px;
+		padding:11px 12px;
+		position:absolute;
+		top:-102px;
+		z-index:1000;
+		display:none;}
+	.lstng-detail .help:hover a.tooltip3 {
+		display:block;}
+
+.lstng-detail {
+	overflow:visible;}
+.listing-content { overflow:visible;}
+</style>
+<form action="" method="post">
+    <div class="lstng-details">
+    	<?php if($this->help->act_tips == 0): ?>
+    	<div class="desc">
+    		<h3>What is the Tips &amp; Recommendations Section?</h3>
+    		<p>Write some tips travelers need to know when doing this activity.</p>
+    		<a href="" rel="act_tips" class="remove">Remove</a>
+    	</div><!-- closes desc -->
+        <?php endif ?>
+    	<div class="main-ttl">
+    		<p><strong>Write some activity tips</strong></p>    		
+    	</div><!-- closes main-ttl -->
+        <div class="lstng-detail faq">
+            <strong>Tips & Recommendations</strong>
+            <span>Write some tips travelers <br />need to know</span><br />
+        	<?php $exist = false; ?>
+            <?php $tab = 0 ?>
+            <?php foreach($this->tips as $detail): ?>
+            <?php if($detail->type == 4): ?>
+            <?php $exist = true; ?>
+                <a href="#delete_detail_<?= $detail->id ?>" class="remove">remove</a>
+                <input tabindex="<?= $tab ?>" type="text" class="noclean" name="tip[<?= $detail->id ?>][text]" value="<?= $detail->text ?>" />
+                <div class="clear"></div>
+            <?php $tab++ ?>
+            <?php endif ?>
+            <?php endforeach ?>
+            
+            <?php if($exist): ?>
+            <a href="" class="remove"></a>
+            <input tabindex="<?= $tab ?>" type="text" placeholder="Enter the tip or recommendation text here" name="tips[0][text]" value="" />
+            <div class="clear"></div>
+            <?php else: ?>
+            <a href="" class="remove"></a>
+            <input tabindex="1" type="text" placeholder="Enter the tip or recommendation text here" name="tips[0][text]" value="" />
+            <div class="clear"></div>
+            <a href="" class="remove"></a>
+            <input tabindex="2" type="text" placeholder="Enter the tip or recommendation text here" name="tips[1][text]" value="" />
+            <div class="clear"></div>
+            <a href="" class="remove"></a>
+            <input tabindex="3" type="text" placeholder="Enter the tip or recommendation text here" name="tips[2][text]" value="" />
+            <div class="clear"></div>
+            <a href="" class="remove"></a>
+            <input tabindex="4" type="text" placeholder="Enter the tip or recommendation text here" name="tips[3][text]" value="" />
+            <div class="clear"></div>
+            <a href="" class="remove"></a>
+            <input tabindex="5" type="text" placeholder="Enter the tip or recommendation text here" name="tips[4][text]" value="" />
+            <div class="clear"></div>            
+            <?php endif ?>
+            
+            <div class="hidden tip detail">
+            	<a href="" class="remove"></a>
+                <input type="text" placeholder="Enter the tip or recommendation text here" name="text" value="" />
+                <div class="clear"></div>
+            </div>
+            <div class="help">
+                <a href="/images2/help/big-act-tips.png" class="eye">help</a>
+                <a href="/images2/help/big-act-tips.png" class="tooltip3">
+                <img src="/images2/help/small-act-tips.png" /></a>
+            </div>
+        </div><!-- closes lstng-detail -->
+        <div class="lstng-detail last">
+            <a href="" id="addTip" class="link-5">Add another Tip</a>
+            <div class="clear"></div>
+        </div><!-- closes lstng-detail -->
+    </div><!-- closes lstng-details -->
+    <div class="foot">
+        <input type="submit" class="noclean btn-1" value="Save Changes" />
+    </div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'edit-listing') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_listing') ?>" />
+</form>

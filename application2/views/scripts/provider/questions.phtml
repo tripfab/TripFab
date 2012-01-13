@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> : Questions | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+	<script type="text/javascript" src="/js2/jquery.js"></script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-messages">
+            <?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'Questions','parentActive'=>'Reviews \&amp; Questions')); ?>
+            <div id="features">
+                <div class="top">
+                    <img src="/images2/img-54.png" alt="" class="izq" />
+                    <h2>Reviews &amp; Questions</h2>
+                    <h3>Your business can receive and check questions and reviews by real users on real time.</h3>
+                    <p>TripFab allows you to receive real reviews written by real users on real time which provides future clients with a sense of confidence when they book with you. Also you are able to see real questions posted by potential customers and provide them with a prompt answer. </p>
+                    <img src="/images2/img-49.png" alt="" class="corner" />
+                </div>
+                <!-- closes top -->
+                <div class="bottom">
+                    <div class="box">
+                        <img src="/images2/img-55.png" alt="" />
+                        <h4>See Real Questions</h4>
+                        <p>Through TripFab you can actually search for and watch questions made by potential customers and answer them right on the spot, making it easier for both, you and the customers, to make reservations and choose exactly what is needed. </p>
+                    </div>
+                    <div class="box">
+                        <img src="/images2/img-56.png" alt="" />
+                        <h4>Answer Questions From Potential Customers</h4>
+                        <p>Since you get access to the questions people have about your business, you can easily respond to potential customers in public with a single click, making customer assistance really easy and accessible. </p>
+                    </div>
+                    <div class="box">
+                        <img src="/images2/img-57.png" alt="" />
+                        <h4>Full Customer Reviews</h4>
+                        <p>You will be notified when a review of your business has been published and  not only check it, but also respond to it immediately. This allows your business to create fame and position yourself as a trustable business. </p>
+                    </div>
+                </div>
+                <!-- closes bottom -->
+            </div>
+            <!-- closes features -->            
+        </div>
+        <!-- closes user-messages -->
+    </div>
+    <!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div>
+<!-- closes w1 -->
+</body>
+</html>

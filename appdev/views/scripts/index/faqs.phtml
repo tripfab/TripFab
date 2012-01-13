@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title>FAQ's</title>
+    <link type="text/css" rel="stylesheet" href="/css4/all.css" />	
+    <script type="text/javascript" src="http://tripfab.com/js2/jquery.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        $('.language a.current').click(function(){
+            $(this).toggleClass('active');
+            $('.language .select').toggleClass('show');
+			return false;
+        });
+        $('.accordion').accordion();
+    });
+    </script>
+</head>
+<body class="home faq">
+<div id="container">
+    <div id="header-shadow">
+        <div id="header">
+            <div class="wrapper">
+                <h1 class="logo"><a href="/<?= $this->lang ?>">TripFab</a></h1>
+                <div class="right">
+                	<div class="language">
+                    	<a class="current" href="#"><?= $this->translate('language') ?></a>
+                        <div class="select">
+                        	<ul>
+                            	<?php $class = ($this->lang == 'en-US') ? 'active' : '' ?>
+                            	<li class="en <?= $class ?>"><a href="/en-US/faqs">English</a></li>
+                                <?php $class = ($this->lang == 'es-ES') ? 'active' : '' ?>
+                                <li class="es <?= $class ?>"><a href="/es-ES/faqs">Español</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <a href="/<?= $this->lang ?>/login" class="btn-1"><?= $this->translate('signin') ?></a>
+                    <?= $this->translate('Have an account') ?>
+                </div><!-- closes right -->
+            </div><!-- closes wrapper -->				
+        </div><!-- closes header -->
+    </div><!-- closes header-shadow -->
+    <div id="top">
+        <div class="faq-wrapper">
+            <div class="ttl">
+                FAQ's
+            </div><!-- closes ttl -->
+            <div class="accordion">
+            	<?php foreach($this->faqs as $faq): ?>
+                <h3><?= htmlentities($faq->question, ENT_NOQUOTES) ?><img src="/images4/cleardot.gif" atl=""></h3>
+                <div>
+                    <p><?= nl2br(htmlentities($faq->answer,ENT_NOQUOTES)) ?></p>
+                </div>
+                <?php endforeach ?>
+            </div><!-- closes accordion -->
+        </div><!-- closes faq-wrapper -->
+    </div><!-- closes top -->
+    <div id="footer">
+        <div id="footer-gradient">
+            <div class="wrapper">
+                <ul>
+                    <li><a href="https://www.facebook.com/TripFab">Facebook</a></li>
+                    <li><a href="https://twitter.com/#!/TripFab">Twitter</a></li>
+                    <li><a href="https://plus.google.com/108576021199856132768">Google+</a></li>
+                    <li><a href="mailto:hello@tripfab.com">eMail</a></li>
+                    <li><a href="http://blog.tripfab.com/">Blog</a></li>
+                </ul>
+                <img src="/images4/logo-2.png" alt="" class="logo" />
+                <strong><?= $this->translate('footer') ?></strong>
+                <span>Copyright &copy; 2011 Tripfab</span>
+            </div><!-- closes wrapper -->	
+        </div><!-- closes footer-gradient -->					
+    </div><!-- footer -->
+</div><!-- closes container -->
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->listing->title ?>, Reservation Checkout | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/cart/checkout.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
+    <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/js2/cart/checkout.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
+    <?php if($this->error): ?>
+    <script type="text/javascript">
+	$(function(){
+		showError("<?= $this->error ?>");
+	});
+	</script>
+    <?php endif ?>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', 
+	array('user'=>$this->user,'full'=>true)); ?>    
+    <div class="w2">
+        <div class="main wrapper">
+            <div class="checkout-header">
+            	<?= $this->thumbnail(array('width'=>960,'height'=>353),$this->listing->image, '', '960:353') ?>
+                <div>
+                    <span>Checkout</span>
+                    <h2><?= $this->listing->title ?></h2>
+                </div>
+            </div><!-- closes checkout-header -->
+            <div class="checkout-wrapper">
+                
+                <div class="left">
+                    <form id="checkout" action="/cart/charge" method="post">
+                        <div class="checkout-item">
+                            <div class="left">
+                                <span>1</span>
+                                <strong>How it works</strong>
+                            </div><!-- closes left -->
+                            <div class="right">
+                                <p>Please provide your billing details now. You will not be charged unless the host accepts your request (within 24 hours). If the host declines or does not respond, no charge is made and you can try booking with someone else. </p>
+                            </div><!-- closes right -->
+                        </div><!-- div checkout-item -->
+                        <div class="checkout-item">
+                            <div class="left">
+                                <span>2</span>
+                                <strong>Payment</strong>
+                            </div><!-- closes left -->
+                            <div class="right">
+                                <div class="payment-tabs">
+                                    <div class="tab">
+                                        <div class="payment-item">
+                                            <input name="method" value="paypal" checked="checked" type="radio" />
+                                            <strong><img src="https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif" 
+                                            style="margin-right:7px; vertical-align:middle;">The safer, easier way to pay.</strong><br />
+                                            <input class="other" name="method" value="creditcard" type="radio" />
+                                            <strong>Credit Card</strong>												
+                                            <select name="ctype">
+                                                <option value="" selected="selected">Select One</option>
+                                                <option>VISA</option>
+                                                <option>MasterCard</option>
+                                                <option>American Express</option>
+                                            </select>
+                                            <div class="clear"></div>
+											<div class="card-details hidden">
+                                                <div class="card-item first">
+                                                    <input type="text" name="cnumber" />
+                                                    <strong>Credit Card Number</strong>
+                                                    <span>No dashes or spaces</span>
+                                                </div><!-- closes card-item -->
+                                                <div class="card-item">
+                                                    <input type="text" name="cname" />
+                                                    <strong>Card Holder Name</strong>
+                                                    <span>As it appears on the credit card</span>
+                                                </div><!-- closes card-item -->
+                                                <div class="card-item">
+                                                    <select name="cmonth">
+                                                        <option value="">--</option>
+                                                        <option value="01">Jan (01)</option>
+                                                        <option value="02">Feb (02)</option>
+                                                        <option value="03">Mar (03)</option>
+                                                        <option value="04">May (04)</option>
+                                                        <option value="05">Jun (05)</option>
+                                                        <option value="06">Jul (06)</option>
+                                                        <option value="07">Aug (07)</option>
+                                                        <option value="08">Sep (08)</option>
+                                                        <option value="09">Oct (09)</option>
+                                                        <option value="10">Nov (10)</option>
+                                                        <option value="11">Dec (11)</option>
+                                                    </select>
+                                                    <select name="cyear">
+                                                        <option value="">----</option>
+                                                        <option>2011</option>
+                                                        <option>2012</option>
+                                                        <option>2013</option>
+                                                        <option>2014</option>
+                                                        <option>2015</option>
+                                                        <option>2016</option>
+                                                        <option>2017</option>
+                                                        <option>2018</option>
+                                                        <option>2019</option>
+                                                        <option>2020</option>
+                                                        <option>2021</option>
+                                                    </select>
+                                                    <strong>Expiration Date</strong>
+                                                    <span>Only month and year required</span>
+                                                </div><!-- closes card-item -->
+                                                <div class="card-item">
+                                                    <input type="text" name="ccode" />
+                                                    <strong>Security Code</strong>
+                                                    <span><a href="">What is this?</a></span>
+                                                </div><!-- closes card-item -->
+                                                <div class="card-item">
+                                                    <input type="text" value="<?= $this->billing->street1 ?>" name="street1" />
+                                                    <strong>Street Line 1</strong>
+                                                </div><!-- closes card-item -->
+                                                <div class="card-item">
+                                                    <input type="text" value="<?= $this->billing->street2 ?>" name="street2" />
+                                                    <strong>Street Line 2</strong>
+                                                </div><!-- closes card-item -->
+                                                <div class="card-item">
+                                                    <select name="country">
+                                                    	<option value="">Select One</option>
+                                                        <?php foreach($this->countries as $c): ?>
+                                                        <?php if($this->billing->country == $c->title): ?>
+                                                        <option selected="selected" value="<?= $c->title ?>"><?= $c->title ?></option>
+                                                        <?php else: ?>
+                                                        <option value="<?= $c->title ?>"><?= $c->title ?></option>
+                                                        <?php endif ?>
+                                                        <?php endforeach ?>
+                                                    </select>
+                                                    <strong>Country</strong>
+                                                </div><!-- closes card-item -->
+                                                <div class="card-item">
+                                                    <input type="text" value="<?= $this->billing->city ?>" name="city" />
+                                                    <strong>State / Province</strong>
+                                                </div><!-- closes card-item -->
+                                                <div class="card-item">
+                                                    <input type="text" value="<?= $this->billing->zip ?>" name="zip" />
+                                                    <strong>ZIP / Postal Code</strong>
+                                                </div><!-- closes card-item -->
+                                            </div>
+                                        </div><!-- closes payment-item -->
+                                    </div><!-- closes tab -->
+                                </div><!-- closes payment-tabs -->
+                            </div><!-- closes right -->
+                        </div><!-- closes checkout-item -->
+                        <div class="checkout-item">
+                            <div class="left">
+                                <span>3</span>
+                                <strong>Additional Info</strong>
+                            </div><!-- closes left -->
+                            <div class="right">
+                                <div class="card-item longer">
+                                    <strong>What are your expectations for this trip?</strong>
+                                    <textarea cols="30" rows="1" name="specs"><?= $this->billing->specs ?></textarea>
+                                </div><!-- closes card-item -->
+                                <div class="card-item longer">
+                                    <input type="text" value="<?= $this->billing->location ?>" name="location" />
+                                    <strong>What city are you currently in?</strong>
+                                    <span>e.g. New York, NY; San Francisco, CA</span>
+                                </div><!-- closes card-item -->
+                                <div class="card-item longer">
+                                    <input type="text" value="<?= $this->billing->phone ?>" name="phone" />
+                                    <strong>Contact phone number</strong>
+                                    <span>What is your best contact phone number?</span>
+                                </div><!-- closes card-item -->
+                                <div class="card-item longer">
+                                    <input type="text" value="<?= $this->billing->aboutus ?>" name="aboutus" />
+                                    <strong>How did you hear about Tripfab?</strong>
+                                    <span><em>Optional</em></span>
+                                </div><!-- closes card-item -->
+                            </div><!-- closes right -->
+                        </div><!-- closes checkout-item -->
+                        
+                        <div class="checkout-item">
+                            <div class="left">
+                                <span>4</span>
+                                <strong>Policies</strong>
+                            </div><!-- closes left -->
+                            <div class="right">
+                                <div class="card-item longer">
+                                    <strong>Cancellation</strong>
+                                    <a href="">Moderate &rarr;</a>
+                                </div><!-- closes card-item -->
+                                <div class="card-item longer">
+                                    <strong>Activity Requirements</strong>
+                                    <a href="">Read Requirements &rarr;</a>
+                                </div><!-- closes card-item -->
+                                <div class="card-item longer">
+                                    <input type="checkbox" name="terms" value="1" />
+                                    <label>I agree to the cancellation policy and <a href="">terms of use</a>.</label>
+                                </div><!-- closes card-item -->
+                            </div><!-- closes right -->
+                            <div class="clear"></div>
+                            <div class="bottom">
+                                <span>Grand Total<strong>$<?= $this->cartitem->total ?></strong></span>
+                                <input type="submit" class="btn-2" value="Book Hotel" />
+                            </div><!-- closes bottom -->
+                        </div><!-- closes checkout-item -->
+                        <input type="hidden" name="userids" value="<?= $this->user->id ?>" />
+                        <input type="hidden" name="userstoken" value="<?= $this->user->token ?>" />
+                        <input type="hidden" name="cartitemid" value="<?= $this->cartitem->id ?>" />
+                        <input type="hidden" name="cartitemtoken" value="<?= $this->cartitem->token ?>" />
+                        <input type="hidden" name="formids" value="<?= md5($this->user->token.'checkout') ?>" />
+                        <input type="hidden" name="_task" value="<?= md5('purchase') ?>" />
+                    </form>
+                </div><!-- closes left -->
+                
+                <div class="right">
+                    <div class="widget summary">
+                        <div class="ttl">Trip Summary</div><!-- closes ttl -->
+                        <ul>
+                            <li>Check in <span><?= date('D, F jS Y', strtotime($this->cartitem->checkin)) ?></span></li>
+                            <?php if($this->cartitem->checkout): ?>
+                            <li>Check out<span><?= date('D, F jS Y', strtotime($this->cartitem->checkout)) ?></span></li>
+                            <?php endif ?>
+                            <?php if($this->cartitem->nights > 0): ?>
+                            <li><?= $this->cartitem->nights ?> Nights</li>
+                            <?php endif ?>
+                            <li><?= $this->cartitem->adults ?> Adults</li>
+                            <?php if($this->cartitem->kids > 0): ?>
+                            <li><?= $this->cartitem->kids ?> Kids</li>
+                            <?php endif ?>
+                            <?php if($this->cartitem->rooms > 1): ?>
+                            <li><?= $this->cartitem->rooms ?> Rooms</li>
+                            <?php endif ?>
+                            <?php if($this->cartitem->rooms > 1): ?>
+                            <li>Maximun people per room: <?= $this->cartitem->max ?></li>
+                            <?php endif ?>
+                            <li>Charges
+                                <table cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                    	<td><?= $this->cartitem->rate_description ?></td>
+	                                    <td>$<?= $this->cartitem->rate ?></td></tr>
+                                    <?php if($this->cartitem->additional): ?>
+                                    <tr>
+                                    	<td><?= $this->cartitem->additional_description ?></td>
+                                    	<td>$<?= $this->cartitem->additional ?></td></tr>
+                                    <?php endif ?>
+                                    <tr>
+                                    	<td>Subtotal</td>
+                                    	<td>$<?= $this->cartitem->subtotal ?></td></tr>
+                                    <tr>
+                                    	<td>Taxes &amp; Fees</td>
+                                    	<td>$<?= $this->cartitem->taxes ?></td></tr>
+                                </table>
+                            </li>
+                        </ul>
+                        <div class="total">
+                            <strong>$<?= $this->cartitem->total ?></strong>
+                            Grand Total
+                        </div><!-- closes total -->
+                    </div><!-- closes widget -->
+                </div><!-- closes right -->
+            </div><!-- closes checkout wrapper -->
+        </div><!-- closes main -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->	
+</body>
+</html>

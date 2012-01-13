@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->listing->title ?> : Photos | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/lightboxes.css" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+	<script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+			$('a.lb').fancybox({
+				padding:0,
+				overlayColor:'#fff',
+				centerOnScroll:1,
+				overlayOpacity:0.7,
+				showCloseButton:0,
+			});
+			$('.lbox .btn-2, .lbox .btn-11').click(function(){
+				$(this).parents('form').submit();
+			});
+			$('#file_upload').uploadify({
+				'uploader'		  : '/uploadify/uploadify.swf',
+				'script'   		  : '/phpscripts/uploadListingPhotos.php',
+				'cancelImg'		  : '/uploadify/cancel.png',
+				'folder'  		  : '/uploads',
+				'buttonImg'		  : '/images2/upload-btn.gif',
+				'auto'      	  : true,
+				'multi' 		  : true,
+				'removeCompleted' : false,
+				'onError':function(e,a,c,d){
+					console.log(e);
+					console.log(a);
+					console.log(c);
+					console.log(d);
+				},
+				'onComplete':function(a,b,c,image){
+					console.log(image);
+				},
+				'scriptData':{
+					'userids':<?= $this->user->id ?>,
+					'vendorid':<?= $this->vendor->id ?>,
+					'listings':<?= $this->listing->id ?>,
+					'listtoken':'<?= $this->listing->token ?>',
+					'formtoken':'<?= $this->user->token ?>',
+					'usertoken':'<?= md5($this->user->token.'upload_listing_pictures') ?>',
+				},
+				'onAllComplete':function(){
+					window.location.reload();
+				}
+			});
+        });
+    </script>
+    <style type="text/css">
+	.hidden { display:none; }
+	</style>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="listing-wrapper wrapper">
+			<?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'All Listings','parentActive'=>'Listings')); ?>
+            <?= $this->partial('partials/vendorlistingstop.phtml', array('listing'=>$this->listing)); ?>
+            <div class="listing-content show">
+                <div class="left">
+                    <?= $this->partial('partials/vendorlistingsmenu.phtml', array('active'=>'Photos', 'id' => $this->listing->id, 
+									   'type'=>$this->listing->main_type)) ?>
+                </div><!-- closes left -->                
+                <div class="right">
+					<?= $this->partial('listing/common/photos.phtml', array(
+							'pictures' => $this->pictures,
+							'listing'  => $this->listing,
+							'help' => $this->help,
+					)) ?>
+                </div><!-- closes right -->
+                <div class="clear"></div>
+            </div><!-- closes listing-content -->
+        </div><!-- closes listing-wrapper -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+<div class="hidden">
+	<?php foreach($this->pictures as $img): ?>
+    <div id="img_delete_<?= $img->id ?>" class="lb-forgot">
+        <form action="" method="post" id="form_picture_delete_<?= $img->id ?>">
+            <div class="ttl">Delete Picture</div>
+            <div class="content">
+                <p>Are you sure you want to delete this picture?</p>
+            </div><!-- closes content -->
+            <div class="bottom">
+                <input type="submit" class="btn-1" value="Delete" />
+                <span class="btn-4" onclick="$.fancybox.close()">Cancel</span>				
+            </div><!-- closes bottom -->
+            <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+            <input type="hidden" name="img_id" value="<?= $img->id ?>" />
+            <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+            <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'form_picture_delete_'.$img->id) ?>" />
+            <input type="hidden" name="_task" value="<?= md5('delete_picture') ?>" />
+        </form>
+    </div><!-- closes lb-forgot -->
+    <?php endforeach ?>
+</div>
+</body>
+</html>

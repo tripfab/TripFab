@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> : Reviews | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+	<script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('textarea').elastic();				
+            $('input').ToggleInputValue();
+            $('form select').jqTransSelect();
+        });
+    </script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-messages">
+            <?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'Reviews','parentActive'=>'Reviews \&amp; Questions')); ?>
+            <div id="features">
+                <div class="top">
+                    <img src="/images2/img-54.png" alt="" class="izq" />
+                    <h2>Reviews</h2>
+                    <h3>Your business can receive and check questions and reviews by real users on real time.</h3>
+                    <p>TripFab allows you to receive real reviews written by real users on real time which provides future clients with a sense of confidence when they book with you. </p>
+                    <img src="/images2/img-49.png" alt="" class="corner" />
+                </div>
+                <!-- closes top -->
+                <div class="bottom">
+                    <div class="left">
+						<h4>Only real travelers can write and rate reviews</h4>
+						<p>Tourists who have visited your activity, hotel, restaurant or other service you offer can write reviews directly to your listing. They may also approve or disapprove comments written by other travelers. And it will be all from real travelers who have booked with you previously, because like you, we hate spammers.</p>
+						<img src="/images2/img-73.gif" width="392" height="208" alt="" />
+					</div><!--LEFT-->
+					<div class="right">
+						<img src="/images2/img-74.gif" width="412" height="215" alt="" />
+						<h4>Full Customer Reviews</h4>
+						<p>You will be notified when a review of your business has been published and not only check it, but also respond to it immediately. This allows your business to create fame and position yourself as a trustable business. </p>
+					</div><!--RIGHT-->
+                </div>
+                <!-- closes bottom -->
+            </div>
+            <!-- closes features -->
+        </div>
+        <!-- closes user-messages -->
+    </div>
+    <!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div>
+<!-- closes w1 -->
+</body>
+</html>

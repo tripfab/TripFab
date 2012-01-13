@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->listing->title ?> - <?= $this->city->title ?>, <?= $this->country->title ?> | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/jquery-ui-1.8.16.custom.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/index/listing-activity.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>    
+    <div class="w2">
+        <div class="main wrapper">
+        	<?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'All Listings','parentActive'=>'Listings')); ?>
+            <div class="content-2">
+                <div class="box">
+                    <?= $this->partial('partials/gallery.phtml', 
+					array('user'=>$this->user, 'listing' => $this->listing, 'city' => $this->city, 
+						  'country' => $this->country,'pictures' => $this->pictures,'trips'=>$this->trips)); ?>
+                    <?php //$this->partial('partials/tabs.phtml', array('listing' => $this->listing, 'tabs' => $this->tabs, 'faqs' => $this->faqs, 'map' => true)); ?>
+                </div><!-- closes box -->
+                <div class="tabs-wrapper-2">
+                    <ul>
+                        <li><a href="#tabs-1">Overview</a></li>
+                        <li><a href="#tabs-2">Details</a></li>
+                        <li><a href="#tabs-3">Tips</a></li>
+                        <li><a href="#tabs-4">FAQ's</a></li>
+                        <li><a href="#tabs-5">How to Get There</a></li>
+                    </ul>
+                    <div class="tab" id="tabs-1">
+                        <div class="tab-ttl">About <?= $this->listing->title ?></div>
+                        <div class="tab-content">
+                        	<h2>About the activity</h2>
+                        	<p><?= stripslashes(nl2br($this->overview->about)) ?></p>
+                            <h2>What to Expect</h2>
+                            <p><?= stripslashes(nl2br($this->overview->expect)) ?></p>
+                            <h2>Things you'll love</h2>
+                            <p><?= stripslashes(nl2br($this->overview->love)) ?></p>
+                        </div><!-- closes tab-content -->
+                        <div class="message">
+                            <div>
+                                <p><strong>Schedule Details</strong></p>
+                                <?php foreach($this->options as $sch): ?>
+                                <p><?= date('g:i A', strtotime($sch->starting)) ?></p>
+                                <?php endforeach ?>
+                            </div>
+                            <?php if(isset($this->options[0])): ?>
+                            <div>
+                                <p><strong>Duration</strong></p>
+                                <p><?= $this->options[0]->duration . ' ' . $this->options[0]->duration_label ?></p>
+                            </div>
+                            <?php endif ?>
+                            <div>
+                                <p><strong>Departure Point</strong></p>
+                                <p><?= $this->departure_city->title ?></p>
+                            </div>
+                            <div>
+                                <p><strong>Return Point</strong></p>
+                                <?php if($this->listing->return == $this->listing->departure): ?>
+                                <p>Tour concludes at the original point of departure</p>
+                                <?php else: ?>
+                                <p><?= $this->return_city ?></p>
+                                <?php endif ?>
+                            </div>
+                        </div><!-- closes message -->
+                    </div><!-- closes tab -->
+                    <div class="tab" id="tabs-2">
+                        <div class="tab-ttl">
+                            Some details you must to know
+                        </div><!-- closes tab-ttl -->
+                        <div class="tab-content">
+                            <h2>Inclusions</h2>
+                            <ul>
+                            	<?php foreach($this->details as $detail): ?>
+                                <?php if($detail->type == 1): ?>
+                                <li><?= stripslashes($detail->text) ?></li>
+                                <?php endif ?>
+                                <?php endforeach ?>
+                            </ul>
+                            <h2>Exclusions</h2>
+                            <ul>
+                                <?php foreach($this->details as $detail): ?>
+                                <?php if($detail->type == 2): ?>
+                                <li><?= stripslashes($detail->text) ?></li>
+                                <?php endif ?>
+                                <?php endforeach ?>
+                            </ul>
+                            <h2>Policies</h2>
+                            <ul>
+                                <?php foreach($this->details as $detail): ?>
+                                <?php if($detail->type == 3): ?>
+                                <li><?= stripslashes($detail->text) ?></li>
+                                <?php endif ?>
+                                <?php endforeach ?>
+                            </ul>
+                        </div><!-- closes tab-content -->
+                    </div><!-- closes tab -->
+                    <div class="tab" id="tabs-3">
+                        <div class="tab-ttl">
+                            Some recommendations before take the trip
+                        </div><!-- closes tab-ttl -->
+                        <div class="tab-content tips">
+                            <ul>
+                            	<?php foreach($this->details as $detail): ?>
+                                <?php if($detail->type == 4): ?>
+                                <li><?= stripslashes($detail->text) ?></li>
+                                <?php endif ?>
+                                <?php endforeach ?>
+                            </ul>
+                        </div><!-- closes tab-content -->
+                    </div><!-- closes tab -->
+                    <div class="tab" id="tabs-4">
+                        <div class="tab-ttl">
+                            Frequently Asked Questions
+                        </div><!-- closes tab-ttl -->
+                        <div class="tab-content faqs">
+                            <ul>
+                            	<?php foreach($this->faqs as $faq): ?>
+                                <li>
+                                    <strong><?= stripslashes(nl2br($faq->question)) ?></strong><br />
+                                    <?= stripslashes(nl2br($faq->answer)) ?>
+                                </li>
+                                <?php endforeach ?>
+                            </ul>
+                        </div><!-- closes tab-content -->
+                    </div><!-- closes tab -->
+                    <div class="tab" id="tabs-5">
+                        <div class="tab-ttl">
+                            How to get there
+                        </div><!-- closes tab-ttl -->
+                        <div class="tab-content there">										
+                            <h2>By plane</h2>
+                            <p><?= stripslashes(nl2br($this->getthere->plane)) ?></p>
+                            <h2>By car</h2>
+                            <p><?= stripslashes(nl2br($this->getthere->car)) ?></p>
+                            <h2>By train</h2>
+                            <p><?= stripslashes(nl2br($this->getthere->train)) ?></p>
+                            <div id="mapcanvas"></div>
+                        </div><!-- closes tab-content -->
+                        <div class="message">
+                            <address>
+                                <p><strong>Detailed Address</strong></p>
+                                <p><?= $this->listing->address ?></p>
+                            </address>
+                        </div><!-- closes message -->
+                    </div><!-- closes tab -->
+                </div><!-- closes tabs-wrapper -->
+                <div class="reviews-wrapper">
+                    <?= $this->partial('partials/reviews.phtml', 
+					array('reviews' => $this->reviews, 'questions' => $this->questions, 'answer_allow' => false,
+						  'user'=>$this->user, 'listing' => $this->listing->id)); ?>
+                </div><!-- closes reviews-wrapper -->
+            </div><!-- closes content-2 -->
+            <div class="right-sidebar">
+            	<form id="booking" method="post" action="">
+                    <div class="widget book">
+                        <div class="ttl">
+                            <span>From only</span>
+                            <strong>$<?= $this->listing->price ?> <span>/ person</span></strong>
+                        </div><!-- closes ttl -->
+                        <ul>
+                            <li id="acordion">                            
+                                <a href=""><span>Select the date</span><img src="/images2/arrow-7.png" alt="" class="arrow" />
+                                <strong id="checkinlabel"></strong></a>
+                                <div id="datepicker" class="datepicker"></div>
+                                <a href=""><span>Occupation</span><img src="/images2/arrow-7.png" alt="" class="arrow" /></a>
+                                <div class="occupation">
+                                	<div class="room-types">
+	                                	<strong>Choose a schedule</strong>
+                                        <ul>
+											<?php foreach($this->options as $option): ?>
+                                            <li>
+                                                <input id="sch<?= $option->id ?>" name="option" value="<?= $option->id ?>" type="radio" />
+                                                <label for="sch<?= $option->id ?>"><?= $option->name ?></label>
+                                                <span>From: <strong><?= date('h:i a',strtotime($option->starting)) ?></strong>
+                                                To: <strong><?= date('h:i a',strtotime($option->ending)) ?></strong></span>
+                                            </li>
+                                            <?php endforeach ?>
+                                        </ul>
+                                    </div>
+                                    <p>
+                                        <label>Adults</label>
+                                        <select class="ocp adt"  name="adults">
+                                            <?php for($i=1; $i<=12; $i++): ?>
+                                            <option value="<?= $i ?>"><?= $i ?></option>
+                                            <?php endfor ?>
+                                        </select>
+                                    </p>
+                                    <p>
+                                        <label>Kids</label>
+                                        <select class="ocp kid" name="kids">
+                                            <option value="0">0</option>
+                                            <?php for($i=1; $i<=12; $i++): ?>
+                                            <option value="<?= $i ?>"><?= $i ?></option>
+                                            <?php endfor ?>
+                                        </select>
+                                    </p>
+                                    <div class="clear"></div>
+                                </div><!-- closes ocupation -->
+                            </li>
+                        </ul>
+                        <div class="summary">
+                            <span>Subtotal <strong>$<?= $this->listing->price ?></strong></span>
+                            <input type="submit" value="Book Now!" class="btn-1" />
+                        </div><!-- closes summary -->
+                	</div><!-- closes widget -->
+                	<?php foreach($this->form_fields as $name => $value): ?>
+                    <input type="hidden" name="<?= $name ?>" value="<?= $value ?>" />
+                    <?php endforeach ?>
+                    <input type="hidden" name="checkin" id="inputCheckin" value="" />
+                </form>
+                <div class="widget talk">
+                    <?= $this->partial('partials/talk.phtml',array('vendor'=>$this->vendor,'user' => $this->user)); ?>
+                </div><!-- closes widget -->
+            </div><!-- closes right-sidebar -->
+        </div><!-- closes main -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->	
+<div id="citiesAutocompleteContainer"></div>
+<input type="hidden" value="<?= ($this->listing->lat) ? $this->listing->lat : 'none' ?>" name="listlat" />
+<input type="hidden" value="<?= ($this->listing->lng) ? $this->listing->lng : 'none' ?>" name="listlng" />
+<input type="hidden" value="<?= $this->listing->title ?>" name="listtitle" />
+<input type="hidden" value="<?php foreach($this->disabledDates as $d): ?><?= $d ?>,<?php endforeach ?>" name="diableddates" />
+
+<div class="hidden">
+	<div id="send_message">
+        <form action="" id="sendMessageForm">
+            <div class="lb-forgot">
+                <div class="ttl">Send a message to <?= $this->vendor->name ?></div>
+                <div class="content">
+                    <textarea cols="30" name="message" rows="1"></textarea>
+                </div><!-- closes content -->
+                <div class="bottom">
+                    <input type="submit" class="btn-1" value="Send Message" />
+                    <span onclick="$.fancybox.close()" class="btn-4">Cancel</span>				
+                </div><!-- closes bottom -->
+            </div><!-- closes lb-forgot -->
+            <input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+        </form>
+    </div>
+    <div id="live_chat">
+    	<img src="/images2/chat.png" />
+    </div>
+    <div id="start_call">
+    	<img src="/images2/phone.png" />
+    </div>
+</div>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript" src="/js2/index/listing-activity.js"></script>
+</body>
+</html>

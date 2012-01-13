@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> : Profile | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('textarea').elastic();				
+            $('input').ToggleInputValue();
+            $('form select').jqTransSelect();
+        });
+    </script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-messages">
+            <?= $this->partial('partials/vendormainmenu.phtml', array('active'=>'Incoming','parentActive'=>'Reservations')); ?>
+            <div class="subttl">
+            	<p>Incoming Reservations</p>
+            </div>
+            <?php if(count($this->reservations) > 0): ?>
+            <div class="reservations">
+                <?php foreach($this->reservations as $date => $reservations): ?>
+                <div class="reservation in">
+                	<strong><?= date('F jS, Y', strtotime($date)) ?></strong>
+                    <div class="right">
+                    	<?php foreach($reservations['listings'] as $listing): ?>
+                        <ul>
+                            <li><h2><?= $listing['name'] ?></h2></li>
+                            <?php foreach($listing['bookings'] as $booking): ?>
+                            <li>
+                                <div><?= $this->thumbnail(34, $booking['image'], '','1:1'); ?><?= $booking['user'] ?></div>
+                                <div><span>Reserve Code: <?= $booking['code'] ?></span></div>
+                                <div><a href="/cart/invoice/<?= $booking['id'] ?>">Order Details</a></div>
+                            </li>
+                            <?php endforeach ?>
+                        </ul>
+                        <?php endforeach ?>
+                    </div><!-- closes right -->
+                </div><!-- closes reservation -->
+                <?php endforeach ?>
+            </div><!-- closes reservations -->
+            <?php else: ?>
+            <div class="empty-container">
+                <img src="/images/empty-7.png" alt="" /><br />
+                There are no incoming reservations :(
+            </div><!-- closes empty -->
+            <?php endif ?>
+        </div><!-- closes user-messages -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+</body>
+</html>

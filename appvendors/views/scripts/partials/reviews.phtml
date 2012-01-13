@@ -1,0 +1,41 @@
+<style type="text/css">
+.message textarea { width:565px !important; margin-bottom:5px; }
+</style>
+<script type="text/javascript">
+$(function(){
+	$('.qa').click(function(){
+		$('.answers-wrapper', this).slideToggle();
+	});
+});
+</script>
+<ul>
+    <li><a href="#tabs2-1">Reviews</a></li>
+</ul>
+<div id="tabs2-1" class="tab box">
+    <div class="ttl">No reviews</div>
+    <ul class="reviews">
+    	<li><img src="/images2/empty-reviews.gif" /></li>
+    	<!--
+        <?php foreach($this->reviews as $review): ?>
+        <li>
+            <?php if(!empty($review->user_image)): ?>
+            <?= $this->thumbnail(60,$review->user_image,'border') ?>
+            <?php else: ?>
+            <?= $this->thumbnail(60,'/images/default-profile.gif','border') ?>
+            <?php endif ?>
+            <strong><?= $review->title ?></strong> <em>by</em> 
+            <a href="/users/<?= $review->username ?>"><?= $review->user_name ?></a>
+            <div>
+                <p><?= stripslashes(nl2br($review->text)) ?></p>
+                <div class="meta">
+                    <span><?= date('F jS, Y', strtotime($review->created)) ?></span>
+                    <a href="" class="down"><img src="/images2/cleardot.gif" alt="" /></a>											
+                    <a href="" class="up"><img src="/images2/cleardot.gif" alt="" /></a>
+                    <em class="green">+4</em>
+                </div>
+            </div>
+        </li>
+        <?php endforeach ?>
+        -->
+    </ul>
+</div><!-- closes tab -->

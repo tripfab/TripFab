@@ -1,0 +1,29 @@
+<form id="send_invites" method="post" action="<?= $this->baseUrl() ?>/signup/places">
+    <ul>
+        <?php for($i=0; $i<count($this->contacts); $i=$i+12): ?>
+        <li>
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+                    <?php for($j=$i;($j<$i+12) and ($j<count($this->contacts)); $j=$j+2): ?>
+                    <tr>
+                        <?php for($k=$j; ($k<$j+2) and ($k<count($this->contacts)); $k++): ?>
+                        <?php foreach($this->contacts[$k] as $email => $name): ?>
+                        <td width="50%"><input type="checkbox" name="emails[<?= $k ?>]" value="<?= $email ?>" /><label><?= $name ?></label></td>
+                        <?php endforeach ?>
+                        <?php endfor ?>
+                    </tr>
+                    <?php endfor ?>
+                </tbody>
+            </table>
+        </li>
+        <?php endfor ?>
+    </ul>
+    <?php if(count($this->contacts) > 12): ?>
+    <a class="prev" href="">Prev</a>
+    <a class="next" href="">Next</a>
+    <?php endif ?>
+    <input type="submit" class="btn-1" value="Send Invites" />
+    <input type="hidden" name="user_token" value="<?= $this->user->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->user->token.'send_invites') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('send_invites') ?>" />
+</form>

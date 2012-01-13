@@ -1,0 +1,434 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->trip->title ?>, <?= $this->trip->country ?> | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+	<link type="text/css" rel="stylesheet" href="/css2/jquery-ui-1.8.16.custom.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js2/jquery.cycle.all.js"></script>
+    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+    <script type="text/javascript" src="/js2/jquery.jcarousel.min.js"></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
+    <script type="text/javascript" src="/js2/trips/view.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //$('.trip-itinerary .ttl').scrollElement();
+            $('input, textarea').ToggleInputValue();
+            $('#slider-1').cycle({
+                next: 	'#next-1',
+                prev: 	'#prev-1',
+                pager:	'#cycle-pager-1',
+				timeout:0
+            });
+            $('#slider-2').cycle({
+                next: 	'#next-2',
+                prev: 	'#prev-2',
+                pager:	'#cycle-pager-2',
+				timeout:0
+            });
+            $('#slider-3').cycle({
+                next: 	'#next-3',
+                prev: 	'#prev-3',
+                pager:	'#cycle-pager-3',
+				timeout:0
+            });
+            $('#slider-4').cycle({
+                next: 	'#next-4',
+                prev: 	'#prev-4',
+                pager:	'#cycle-pager-4',
+				timeout:0
+            });
+            $('.tabs-wrapper, .tabs-bottom').tabs();
+        });
+    </script>
+    <style type="text/css">
+	.desc-wrapper #pager a { width:<?= (100 / count($this->images)) . '%'; ?>;} .hidden { display:none;}
+	.datepicker a.ui-state-active { background-color: #60B5F7; color: #FFFFFF;}
+	</style>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>    
+    <div class="w2">
+	    <div class="wrapper trip-itinerary">
+            <div class="ttl">
+                <a href="#dates_lb" class="lb btn-1">Buy Trip</a>
+                <?= $this->trip->title ?>
+            </div><!-- closes ttl -->
+            <div class="trip-menu">
+                <ul>
+                    <li class="current"><a href="/trips/view/<?= $this->trip->id ?>">Overview</a></li>
+                    <li><a href="/trips/itinerary/<?= $this->trip->id ?>">Itinerary</a></li>
+                </ul>
+            </div><!-- closes trip-menu -->
+            <div class="box main-image">
+                <img src="<?= $this->trip->image ?>" alt="" />
+                <span><strong><?= $this->trip->days ?></strong>Days</span>
+            </div><!-- closes box -->
+            <div class="summary">
+                <span><strong>$<?= $this->trip->price ?></strong><em>per person</em></span>
+                <div class="left">
+                    <h2><?= $this->trip->title ?></h2>
+                    <span><?= $this->trip->country ?></span>
+                    <p>Vivamus luctust tellus tristique purus iaculis non ornare erat ultrices. Morbi eros quam, imperdiet nec laoreet eget, condimentum id sapien. Aliquam non mi sapien, pharetra viverra orci. Vivamus luctust tellus tristique purus iaculis non ornare erat ultrices. Morbi eros quam.</p>
+                </div><!-- closes left -->
+                <div class="right">
+                    <img src="/images2/img-39.png" alt="" />
+                    <h3>Cities to Discover</h3>
+                    <ul>
+                        <li>Buenos Aires</li>
+                        <li>C&oacute;rdoba</li>
+                        <li>Concordia</li>
+                        <li>Lan&uacute;s</li>
+                        <li>La Plata</li>
+                    </ul>
+                </div><!-- closes right -->
+            </div><!-- closes sumary -->
+            <div class="box">
+                <div class="hight-lights">
+                    <h4>Trip Highlights</h4>
+                    <div>
+                        <h5>An extenisive tour of 25 wineries</h5>
+                        <p>Vivamus luctust tellus tristique purus iaculis non ornare erat ultrices. Morbi eros quam, imperdiet nec laoreet eget, condimentum id sapien. Aliquam non mi sapien, pharetra viverra orci. Vivamus luctust tellus tristique purus iaculis.</p>
+                    </div>
+                    <div>
+                        <h5>Shopping at the winery boutiques</h5>
+                        <p>Vivamus luctust tellus tristique purus iaculis non ornare erat ultrices. Morbi eros quam, imperdiet nec laoreet eget, condimentum id sapien. Aliquam non mi sapien, pharetra viverra orci. Vivamus luctust tellus tristique purus iaculis.</p>
+                    </div>
+                    <div>
+                        <h5>Variety of wine tasting</h5>
+                        <p>Vivamus luctust tellus tristique purus iaculis non ornare erat ultrices. Morbi eros quam, imperdiet nec laoreet eget, condimentum id sapien. Aliquam non mi sapien, pharetra viverra orci. Vivamus luctust tellus tristique purus iaculis.</p>
+                    </div>
+                </div><!-- closes high-lights -->
+                <div class="tabs-wrapper">
+                	<?php $show = array(); ?>
+					<?php foreach($this->listings as $listing): ?>
+						<?php if($listing->main_type == 6 or $listing->main_type == 7): ?>
+                        <?php $show[1] = true; ?>
+                        <?php elseif($listing->main_type == 4): ?>
+                        <?php $show[2] = true; ?>
+                        <?php elseif($listing->main_type == 5): ?>
+                        <?php $show[3] = true; ?>
+                        <?php elseif($listing->main_type == 2): ?>
+                        <?php $show[4] = true; ?>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                    <ul>
+                    	<?php if($show[1]): ?><li><a href="#tabs-1">Things to do</a></li><?php endif ?>
+                        <?php if($show[2]): ?><li><a href="#tabs-2">Attractions</a></li><?php endif ?>
+                        <?php if($show[3]): ?><li><a href="#tabs-3">Places to Stay</a></li><?php endif ?>
+                        <?php if($show[4]): ?><li><a href="#tabs-4">Dining Places</a></li><?php endif ?>
+                    </ul>
+                    <?php if($show[1]): ?>
+                    <div class="tab" id="tabs-1">
+                        <div id="slider-1">
+                        	<?php $used = array() ?>
+                        	<?php foreach($this->listings as $listing): ?>
+                            <?php if($listing->main_type == 6 or $listing->main_type == 7): ?>
+                            <?php if(!in_array($listing->id, $used)): $used[] = $listing->id ?>
+                            <div class="slide">
+                                <?= $this->thumbnail(array('width'=>855,'height'=>342), $listing->image, '', '855:342') ?>
+                                <div class="content">
+                                    <div class="left">
+                                        <?= $listing->title ?>
+                                    </div><!-- closes left -->
+                                    <div class="right">
+                                        <p>An action packed couples trip on the Big Island. Hawaii expert, Cathay, directed the pair to one of the island's best design hotels — the Waikiki Edition — for its lively pool scene, nightclub and Morimoto restaurant, as well as organized a private surfing lesson. The member, who's a frequent business traveler, described Cathay's spot-on recommendation as one of his "top 5 hotels of all time"</p>
+                                        <p>You'll be here in the <a href="">2nd Day</a></p>
+                                    </div><!-- closes right -->
+                                </div><!-- closes content -->
+                            </div><!-- closes slide -->
+                            <?php endif ?>
+                            <?php endif ?>
+                            <?php endforeach ?>
+                        </div><!-- closes slider -->
+                        <a href="" id="next-1" class="next">Next</a>
+                        <a href="" id="prev-1" class="prev">Prev</a>
+                        <div id="cycle-pager-1" class="cycle-pager"></div>
+                    </div><!-- closes tab -->
+                    <?php endif ?>
+                    <?php if($show[2]): ?>
+                    <div class="tab" id="tabs-2">
+                        <div id="slider-2" style="height: 525px;">
+                        	<?php $used = array() ?>
+                        	<?php foreach($this->listings as $listing): ?>
+                            <?php if($listing->main_type == 4): ?>
+                            <?php if(!in_array($listing->id, $used)): $used[] = $listing->id ?>
+                            <div class="slide">
+                                <?= $this->thumbnail(array('width'=>855,'height'=>342), $listing->image, '', '855:342') ?>
+                                <div class="content">
+                                    <div class="left">
+                                        <?= $listing->title ?>
+                                    </div><!-- closes left -->
+                                    <div class="right">
+                                        <p>An action packed couples trip on the Big Island. Hawaii expert, Cathay, directed the pair to one of the island's best design hotels — the Waikiki Edition — for its lively pool scene, nightclub and Morimoto restaurant, as well as organized a private surfing lesson. The member, who's a frequent business traveler, described Cathay's spot-on recommendation as one of his "top 5 hotels of all time"</p>
+                                        <p>You'll be here in the <a href="">2nd Day</a></p>
+                                    </div><!-- closes right -->
+                                </div><!-- closes content -->
+                            </div><!-- closes slide -->
+                            <?php endif ?>
+                            <?php endif ?>
+                            <?php endforeach ?>
+                        </div><!-- closes slider -->
+                        <a href="" id="next-2" class="next">Next</a>
+                        <a href="" id="prev-2" class="prev">Prev</a>
+                        <div id="cycle-pager-2" class="cycle-pager"></div>
+                    </div><!-- closes tab -->
+                    <?php endif ?>
+                    <?php if($show[3]): ?>
+                    <div class="tab" id="tabs-3">
+                        <div id="slider-3" style="height:525px">
+                        	<?php $used = array() ?>
+                        	<?php foreach($this->listings as $listing): ?>
+                            <?php if($listing->main_type == 5): ?>
+                            <?php if(!in_array($listing->id, $used)): $used[] = $listing->id ?>
+                            <div class="slide">
+                                <?= $this->thumbnail(array('width'=>855,'height'=>342), $listing->image, '', '855:342') ?>
+                                <div class="content">
+                                    <div class="left">
+                                        <?= $listing->title ?>
+                                    </div><!-- closes left -->
+                                    <div class="right">
+                                        <p>An action packed couples trip on the Big Island. Hawaii expert, Cathay, directed the pair to one of the island's best design hotels — the Waikiki Edition — for its lively pool scene, nightclub and Morimoto restaurant, as well as organized a private surfing lesson. The member, who's a frequent business traveler, described Cathay's spot-on recommendation as one of his "top 5 hotels of all time"</p>
+                                        <p>You'll be here in the <a href="">2nd Day</a></p>
+                                    </div><!-- closes right -->
+                                </div><!-- closes content -->
+                            </div><!-- closes slide -->
+                            <?php endif ?>
+                            <?php endif ?>
+                            <?php endforeach ?>
+                        </div><!-- closes slider -->
+                        <a href="" id="next-3" class="next">Next</a>
+                        <a href="" id="prev-3" class="prev">Prev</a>
+                        <div id="cycle-pager-3" class="cycle-pager"></div>
+                    </div><!-- closes tab -->
+                    <?php endif ?>
+                    <?php if($show[4]): ?>
+                    <div class="tab" id="tabs-4">
+                        <div id="slider-4" style="height:525px">
+                        	<?php $used = array() ?>
+                        	<?php foreach($this->listings as $listing): ?>
+                            <?php if($listing->main_type == 2): ?>
+                            <?php if(!in_array($listing->id, $used)): $used[] = $listing->id ?>
+                            <div class="slide">
+                               <?= $this->thumbnail(array('width'=>855,'height'=>342), $listing->image, '', '855:342') ?>
+                                <div class="content">
+                                    <div class="left">
+                                        <?= $listing->title ?>
+                                    </div><!-- closes left -->
+                                    <div class="right">
+                                        <p>An action packed couples trip on the Big Island. Hawaii expert, Cathay, directed the pair to one of the island's best design hotels — the Waikiki Edition — for its lively pool scene, nightclub and Morimoto restaurant, as well as organized a private surfing lesson. The member, who's a frequent business traveler, described Cathay's spot-on recommendation as one of his "top 5 hotels of all time"</p>
+                                        <p>You'll be here in the <a href="">2nd Day</a></p>
+                                    </div><!-- closes right -->
+                                </div><!-- closes content -->
+                            </div>
+                            <?php endif ?>
+                            <?php endif ?>
+                            <?php endforeach ?>
+                        </div><!-- closes slider -->
+                        <a href="" id="next-4" class="next">Next</a>
+                        <a href="" id="prev-4" class="prev">Prev</a>
+                        <div id="cycle-pager-4" class="cycle-pager"></div>
+                    </div><!-- closes tab -->
+                    <?php endif ?>
+                </div><!-- closes tabs-wrapper -->
+            </div><!-- closes box -->
+            <div class="box tabs-bottom">
+                <ul>
+                    <li class="item-1">
+                        <a href="#tabs-1"><img src="/images2/cleardot.gif" alt="" /><strong>The Culture</strong> Vivamus luctust tellus</a>
+                    </li>
+                    <li class="item-2">
+                        <a href="#tabs-2"><img src="/images2/cleardot.gif" alt="" /><strong>The Environment</strong> Vivamus luctust tellus</a>
+                    </li>
+                    <li class="item-3">
+                        <a href="#tabs-3"><img src="/images2/cleardot.gif" alt="" /><strong>Knowledge</strong> Vivamus luctust tellus</a>
+                    </li>
+                    <li class="item-4">
+                        <a href="#tabs-4"><img src="/images2/cleardot.gif" alt="" /><strong>Things you'll love</strong> Vivamus luctust tellus</a>
+                    </li>
+                    <li class="item-5">
+                        <a href="#tabs-5"><img src="/images2/cleardot.gif" alt="" /><strong>When to take this trip</strong> Vivamus luctust tellus</a>
+                    </li>
+                    <li class="item-6">
+                        <a href="#tabs-6"><img src="/images2/cleardot.gif" alt="" /><strong>Tips &amp; Recommendations</strong> Vivamus luctust tellus</a>
+                    </li>
+                </ul>
+                <div id="tabs-1" class="tab">
+                    <h4>About the Culture</h4>
+                    <img src="/images2/img-41.png" alt="" class="left" />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <div class="clear"></div>
+                    <img src="/images2/img-41.png" alt="" class="right" />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <div class="clear"></div>
+                    <img src="/images2/img-41.png" alt="" class="left" />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <div class="clear"></div>
+                </div>
+                <!-- closes tab -->
+                <div id="tabs-2" class="tab">
+                    <h4>About the Environment</h4>
+                    <img src="/images2/img-41.png" alt="" class="left" />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <div class="clear"></div>
+                    <img src="/images2/img-41.png" alt="" class="right" />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <div class="clear"></div>
+                    <img src="/images2/img-41.png" alt="" class="left" />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <div class="clear"></div>
+                </div>
+                <!-- closes tab -->
+                <div id="tabs-3" class="tab">
+                    <h4>About the knowledge</h4>
+                    <img src="/images2/img-41.png" alt="" class="left" />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <div class="clear"></div>
+                    <img src="/images2/img-41.png" alt="" class="right" />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <div class="clear"></div>
+                    <img src="/images2/img-41.png" alt="" class="left" />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <div class="clear"></div>
+                </div>
+                <!-- closes tab -->
+                <div id="tabs-4" class="tab">
+                    <h4>About the things you'll love</h4>
+                    <img src="/images2/img-41.png" alt="" class="left" />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <div class="clear"></div>
+                    <img src="/images2/img-41.png" alt="" class="right" />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <div class="clear"></div>
+                    <img src="/images2/img-41.png" alt="" class="left" />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <div class="clear"></div>
+                </div>
+                <!-- closes tab -->
+                <div id="tabs-5" class="tab">
+                    <h4>About when to take the trip</h4>
+                    <img src="/images2/img-41.png" alt="" class="left" />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <div class="clear"></div>
+                    <img src="/images2/img-41.png" alt="" class="right" />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <div class="clear"></div>
+                    <img src="/images2/img-41.png" alt="" class="left" />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <div class="clear"></div>
+                </div>
+                <!-- closes tab -->
+                <div id="tabs-6" class="tab">
+                    <h4>About tips &amp; recommendations</h4>
+                    <img src="/images2/img-41.png" alt="" class="left" />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <div class="clear"></div>
+                    <img src="/images2/img-41.png" alt="" class="right" />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <div class="clear"></div>
+                    <img src="/images2/img-41.png" alt="" class="left" />
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <div class="clear"></div>
+                </div>
+                <!-- closes tab -->
+            </div>
+            <!-- closes box -->
+            <div class="compare">
+                <div class="left">
+                    <ul>
+                        <li>6 luncheons</li>
+                        <li>Wine tasting dinner at Astrid y Gaston in Santiago</li>
+                        <li>Dinner at Veta Bistro with former French Laundry chef Roberto Leira</li>
+                        <li>Dinner at Mallman 1884 in Mendoza</li>
+                        <li>Tango Show with VIP seating in Buenos Aires</li>
+                    </ul>
+                </div>
+                <!-- closes left -->
+                <div class="right">
+                    <ul>
+                        <li>Santa Cruz Museum Entrance</li>
+                        <li>Gratuities for porters in airports and hotels</li>
+                        <li>Bottled mineral waters on buses</li>
+                        <li>All ground transportation in clean air conditioned and comfortable vehicle</li>
+                        <li>Professional bilingual guide</li>
+                    </ul>
+                </div>
+                <!-- closes right -->
+            </div>
+            <!-- closes compare -->
+            <a href="/trips/itinerary/<?= $this->trip->id ?>" class="btn-9 explore">Explore the Complete Itinerary <img src="/images2/cleardot.gif" alt="" /></a>
+        </div>
+        <!-- closes wrapper -->
+    </div>
+    <!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->	
+<div class="hidden">
+	<div id="dates_lb">
+    	<div class="lb-dates">
+			<div class="left">
+				<h2>First, select the dates you want to go on your vacation.</h2>
+				<ul>
+					<li>Your trip is going to be <?= $this->trip->days ?> days long.</li>
+					<li>This trip is available for children.</li>
+					<li>Maximum occupation is <?= $this->trip->max ?> people.</li>
+                    <?php if($this->trip->min > 1): ?>
+                    <li>Minimum occupation is <?= $this->trip->min ?> people.</li>
+                    <?php else: ?>
+					<li>No minimum  required.</li>
+                    <?php endif ?>
+                    <li><em>The price listed is an estimation, you will get a final price depending on your dates and ocupation requirements</em></li>
+				</ul>
+			</div><!-- closes left -->
+			<div class="right">
+				<div id="datepicker" class="datepicker"></div>
+                <form action="/trips/checkprice/<?= $this->trip->id ?>" method="post">
+                    <div class="occ">
+                        <label>Adults</label>
+                        <select name="adults">
+						<?php for($i=$this->trip->min; $i<=$this->trip->max; $i++): ?>
+                            <?php if($i==$this->trip->min): ?>
+                            <option value="<?= $i ?>">min <?= $i ?></option>
+                            <?php elseif($i==$this->trip->max): ?>
+                            <option value="<?= $i ?>">max <?= $i ?></option>
+                            <?php else: ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                            <?php endif ?>
+                        <?php endfor ?>
+                        </select>
+                        <label>Children</label>
+                        <select name="kids">
+                        	<option value="0">None</option>
+                        <?php for($i=$this->trip->min; $i<=$this->trip->max; $i++): ?>
+                            <?php if($i==$this->trip->min): ?>
+                            <option value="<?= $i ?>">min <?= $i ?></option>
+                            <?php elseif($i==$this->trip->max): ?>
+                            <option value="<?= $i ?>">max <?= $i ?></option>
+                            <?php else: ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                            <?php endif ?>
+                        <?php endfor ?>
+                        </select>
+                    </div><!-- closes occ -->
+                    <div class="occ">
+                        <input type="submit" class="btn-1" value="Check Availability" />
+                        <span onclick="$.fancybox.close()" class="btn-4">Cancel</span>
+                    </div><!-- closes occ -->
+                    <input type="hidden" name="date" value="" />
+                    <input type="hidden" name="ids" value="<?= $this->trip->id ?>" />
+                    <input type="hidden" name="token" value="<?= $this->trip->token ?>" />
+                </form>
+			</div><!-- closes right -->
+		</div><!-- closes dates -->
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<?php $items = array(
+	array(
+		'label' => 'My Trips',
+		'url'	=> '/user/trips/',
+		'submenu' => array(
+			array(
+				'label' => 'Future Trips',
+				'url'	=> '/user/trips/',
+			),
+			array(
+				'label' => 'Past Trips',
+				'url'	=> '/user/trips/past',
+			),
+		),
+	),
+	array(
+		'label' => 'Messages',
+		'url'	=> '/user/messages/',
+	),
+	array(
+		'label' => 'Reservations',
+		'url'	=> '/user/reservations/',
+		'submenu' => array(
+			array(
+				'label' => 'Confirmed',
+				'url'	=> '/user/reservations/',
+			),
+			array(
+				'label' => 'Pending Approval',
+				'url'	=> '/user/reservations/pending',
+			),
+			array(
+				'label' => 'History',
+				'url'	=> '/user/reservations/history',
+			),
+		),
+	),
+	array(
+		'label' => 'Account',
+		'url'	=> '/user/account/',
+		'submenu' => array(
+			array(
+				'label' => 'Profile',
+				'url'	=> '/user/account/',
+			),
+			array(
+				'label' => 'Password',
+				'url'	=> '/user/account/password',
+			),
+			array(
+				'label'	=> 'Payments',
+				'url'	=> '/user/account/payments',
+			),
+			array(
+				'label'	=> 'Notifications',
+				'url'	=> '/user/account/notifications',
+			),		
+		),
+	),
+) ?>
+<div class="main-menu">
+    <ul>
+    	<?php foreach($items as $i => $item): ?>
+        <?php $class = ($item['label'] == $this->parentActive) ? 'active' : '' ; ?>
+        <?php $class.= ($item['submenu']) ? ' sub-menu' : ''; ?>
+        <li class="<?= $class ?>">
+            <a href="<?= $item['url'] ?>"><?= $item['label'] ?></a>
+            <?php if($item['submenu']): ?>
+            <ul>
+            	<?php foreach($item['submenu'] as $subitem): ?>
+                <?php $class = ($subitem['label'] == $this->active) ? 'active' : '' ; ?>
+                <li class="<?= $class ?>"><a href="<?= $subitem['url'] ?>"><?= $subitem['label'] ?></a></li>
+                <?php endforeach ?>
+            </ul>
+            <img src="/images2/g-27.png" alt="" class="g-right" />
+            <?php if($i != 0): ?><img src="/images2/g-28.png" alt="" class="g-left" /><?php endif ?>
+            <?php endif ?>
+        </li>
+        <?php endforeach ?>
+    </ul>    <div class="clear"></div>
+</div><!-- closes menu -->

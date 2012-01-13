@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> : Reservations History | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
+    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('textarea').elastic();				
+            $('input').ToggleInputValue();
+            $('form select').jqTransSelect();
+        });
+    </script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-messages">
+        	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Reservations','parentActive'=>'History')); ?>
+        	<div class="subttl">
+        		<h4>You have <?= count($this->reservations) ?> confirmed reservations</h4>
+        	</div>
+        	<!-- closes subttl -->
+            <?php if(count($this->reservations) > 0): ?>
+            <div class="reservations past">
+                <table cellpadding="0" cellspacing="0" border="0">
+                	<tr>
+                        <th>Reservation Code</th>
+                        <th>Vendor</th>
+                        <th>Method</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Kind</th>
+                        <th>&nbsp;</th>
+                    </tr>
+					<?php foreach($this->reservations as $reserve): ?>
+                    <tr>
+                        <td><?= $reserve->code ?></td>
+                        <td><?= $reserve->vendor_name ?></td>
+                        <td><?= $reserve->method ?></td>
+                        <td>$<?= $reserve->ammount ?></td>
+                        <td><?= date('d/m/Y', strtotime($reserve->created)) ?></td>
+                        <td><?= $reserve->listing_type ?></td>
+                        <td><a href="">See details</a></td>
+                    </tr>
+                    <?php endforeach ?>
+                </table>
+            </div><!-- closes reservations -->
+            <?php else: ?>
+            <div class="empty-container">
+                <img src="/images/empty-8.png" alt="" /><br />
+                You don't have past reservations :(
+            </div><!-- closes empty -->
+            <?php endif ?>
+        </div><!-- closes user-messages -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+</body>
+</html>

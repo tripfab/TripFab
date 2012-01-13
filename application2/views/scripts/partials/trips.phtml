@@ -1,0 +1,21 @@
+<form action="/ajax/addtotrips" class="addtotrip" method="post">
+    <div class="dd-2">
+        <img src="/images2/arrow-24.png" alt="" class="arrow" />
+        <div>
+            <select name="trip">
+                <option value="">Select one of your trips</option>
+                <option value="new">Create New Trip</option>
+                <option disabled="disabled">------</option>
+                <?php foreach($this->trips as $trip): ?>
+                <option value="<?= $trip->id ?>"><?= $trip->title ?></option>
+                <?php endforeach ?>
+            </select>
+            <input class="hidden" name="title" type="text" value="Trip Name" />
+        </div>
+        <div>
+            <input type="submit" value="Add" class="btn-1" />
+            <a href="" class="btn-4">Cancel</a>
+        </div>
+    </div><!-- closes dd-2 -->
+    <input type="hidden" name="listing" value="<?= $this->id ?>" />
+</form>

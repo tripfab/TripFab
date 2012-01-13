@@ -1,0 +1,9 @@
+<div class="qa">
+    <div class="qa-box">
+        <div class="questions">
+            <?= stripslashes($this->question->question) ?>
+            <span><strong><?= $this->user ?></strong> asked on 
+            <?= date('F j, Y', strtotime($this->question->created)) ?></span>
+        </div><!-- closes question -->
+    </div><!-- closes box -->
+</div>

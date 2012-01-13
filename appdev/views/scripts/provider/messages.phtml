@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> : Profile | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/messages.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript" src="/js2/user/messages.js"></script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-messages">
+            <?= $this->partial('partials/vendormainmenu.phtml', array('active'=>'All Messages','parentActive'=>'Messages')); ?>
+            <?php if(count($this->conversations) > 0): ?>
+            <div class="left">
+                <div class="ttl">
+                    <ul>
+                        <li class="current"><a href="/provider/messages">All Messages</a></li>
+                        <li><a href="/provider/messages/starred">Stared</a></li>
+                        <li><a href="/provider/messages/unreplied">Unresponded</a></li>
+                    </ul>
+                    <select>
+                    	<option value="">Actions</option>
+                        <option value="1">Select All</option>
+                        <option value="2">Add Star</option>
+                        <option value="3">Mark as Read</option>
+                        <option value="4">Delete</option>
+                    </select>
+                </div><!-- closes ttl -->
+                <div class="messages-wrapper">
+                    <?php foreach($this->conversations as $message): ?>
+					<?php if($message->starter == $this->user->id): ?>
+                    <?php $class = ($message->snew == 1) ? 'new' : ''; ?>
+                    <div class="s-message <?= $class ?>">
+                        <span class="number"><?= $message->msgcount ?></span>
+                        <div>
+	                        <input type="checkbox" name="message_id" class="message_id" value="<?= $message->id ?>" />                        
+                            <img alt="" src="/images/cleardot.gif" class="star">
+                            <?php $image = (!empty($message->wimage)) ? $message->wimage : '/images/default-profile.gif' ?>
+                            <?= $this->thumbnail(47, $image, 'user', '1:1') ?>
+                        </div>
+                        <strong><?= $message->wname ?></strong>
+                        <span class="time"><?= date('F jS, Y g:i A', strtotime($message->updated)) ?></span>
+                    </div><!-- closes message -->                    
+                    <?php else: ?>
+                    <?php $class = ($message->wnew == 1) ? 'new' : ''; ?>
+                    <div class="s-message <?= $class ?>">
+                        <span class="number"><?= $message->msgcount ?></span>
+                        <div>
+                            <input type="checkbox" name="message_id" class="message_id" value="<?= $message->id ?>" />
+                            <img alt="" src="/images/cleardot.gif" class="star">
+                            <?php $image = (!empty($message->simage)) ? $message->simage : '/images/default-profile.gif' ?>
+                            <?= $this->thumbnail(47, $image, 'user', '1:1') ?>
+                        </div>
+                        <strong><?= $message->sname ?></strong>
+                        <span class="time"><?= date('F jS, Y g:i A', strtotime($message->updated)) ?></span>
+                    </div><!-- closes message -->
+                    <?php endif ?>
+                    <?php endforeach ?>
+                </div><!-- closet messages-wrapper -->
+            </div><!-- closes left -->
+            <div class="right">
+            	<div class="waiting" style="height:300px;">
+                    <p style="text-align:center; line-height:50px; margin-top:125px;">
+                    No message selected
+                    </p>
+                </div>
+                <div class="loading">Some Text</div>
+                <div class="conversation">
+                    <div>
+                        <h4>Send a message</h4>
+                        <textarea name="message" rows="1" cols="30"></textarea>
+                        <input class="btn-4" type="submit" id="sendmessage" value="Send">
+                    </div>
+                    <ul>
+                        <li>
+                            <h4>Me</h4>
+                            <p>Consectetur adipiscing elit. Duis ullamcorper arcu id eros faucibus pulvinar. Duis pellentesque molestie enim, a tincidunt lorem tristique ac. Donec ac justo quis odio molestie tristique? Consectetur adipiscing elit. Duis ullamcorper arcu id eros faucibus pulvinar. Duis pellentesque molestie enim, a tincidunt lorem tristique ac. Donec ac justo quis odio molestie tristique?</p>
+                            <span>26 Apr at 7:32 am</span>
+                        </li>
+                        <li>
+                            <h4>Costa Rica Tropical Tours</h4>
+                            <p>Consectetur adipiscing elit. Duis ullamcorper arcu id eros faucibus pulvinar. Duis pellentesque molestie enim, a tincidunt lorem tristique ac. Donec ac justo quis odio molestie tristique? Consectetur adipiscing elit. Duis ullamcorper arcu id eros faucibus pulvinar. Duis pellentesque molestie enim, a tincidunt lorem tristique ac. Donec ac justo quis odio molestie tristique?</p>
+                            <span>26 Apr at 7:32 am</span>
+                        </li>
+                        <li>
+                            <h4>Me</h4>
+                            <p>Consectetur adipiscing elit. Duis ullamcorper arcu id eros faucibus pulvinar. Duis pellentesque molestie enim, a tincidunt lorem tristique ac. Donec ac justo quis odio molestie tristique? Consectetur adipiscing elit. Duis ullamcorper arcu id eros faucibus pulvinar. Duis pellentesque molestie enim, a tincidunt lorem tristique ac. Donec ac justo quis odio molestie tristique?</p>
+                            <span>26 Apr at 7:32 am</span>
+                        </li>
+                    </ul>
+                </div>
+            </div><!-- closes right -->
+            <?php else: ?>
+            <div class="empty-container">
+                <img src="/images/empty-1.png" alt="" /><br />
+                There are no conversations :(
+            </div><!-- closes empty -->
+            <?php endif ?>
+        </div><!-- closes user-messages -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+</body>
+</html>

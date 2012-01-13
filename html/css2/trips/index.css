@@ -1,0 +1,71 @@
+.ui-autocomplete { 
+	background:#fff; 
+	border:1px solid #D8D8D8; 
+	border-top:none; 
+	width:220px !important; 
+	list-style:none; 
+	max-height:200px; 
+	overflow-y:auto; 
+	z-index:10 !important;
+	height:auto !important;}
+.ui-autocomplete li a {
+	display:block;
+	line-height:20px;
+	color:#000;}
+.ui-autocomplete li a.ui-state-hover {
+	background:#8DC63F;
+	color:#fff;
+	text-decoration:none;}
+#tripsAutocompleteContainer .ui-autocomplete { 
+	width:269px !important;
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-radius: 2px 2px 2px 2px;
+	box-shadow: 0 0 10px #000000;
+	max-height: 240px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+#tripsAutocompleteContainer .ui-autocomplete li a {
+	color: #464646;
+	display: block;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 24px;
+	padding-left: 10px;
+}
+#tripsAutocompleteContainer .ui-autocomplete li a.ui-state-hover {
+	background: url("/images2/arrow-25.png") no-repeat scroll 98% 50% #60B6E8;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.trip-types {height: 320px;}
+
+.lbcontainer { display:none;}
+
+.lightbox {
+	width:400px;
+	background:#fff;}
+.lightbox ul {
+	overflow:hidden;
+	list-style:none;}
+.lightbox ul li {
+	width:200px; 
+	float:left;
+	overflow:hidden;
+	margin-bottom:5px;}
+.lightbox ul li a {
+	overflow:hidden;
+	display:block;
+	color:#999;}
+	.lightbox ul li a:hover {
+		color:#333;}
+.lightbox ul li a img {
+	float:left;
+	width:40px;}
+.lightbox ul li a span {
+	float:right;
+	width:150px;
+	line-height:40px;}
+.intro .search-options .option {
+	margin: 0 45px; }

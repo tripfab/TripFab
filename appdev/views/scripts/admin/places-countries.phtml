@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title>Admin - Listings | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all-admin.css" />
+    <script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#header .header-login a.user').click(function(){
+                $(this).next().toggleClass('show');
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="w1">
+	<?= $this->partial('adminPartials/header.phtml'); ?>
+    
+            
+    <?= $this->partial('adminPartials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+</body>
+</html>

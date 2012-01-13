@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> : Payment Methods | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //$('input').ToggleInputValue();
+            $('form select').jqTransSelect();
+        });
+    </script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-backend">
+        	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Account','parentActive'=>'Payments')); ?>
+            <div class="vendor-profile">
+                <form action="">
+                    <?php if($this->errormessage): ?>
+                    <div class="errormessage">
+                        <p><?= $this->errormessage ?></p>
+                    </div>
+                    <?php endif ?>
+                    <?php if($this->successmessage): ?>
+                    <div class="green-message">
+                        <div class="wrapper">
+                            <img src="/images/ico-115.png" alt="" /> Your changes have been saved!
+                        </div><!-- closes wrapper -->
+                    </div><!-- closes green-message -->
+                    <?php endif ?>
+                    <div class="profile-items">
+                        <div class="item-wrppr">
+                            <div class="item-ttl">
+                                Credit Cards
+                            </div><!-- closes item ttl -->
+                            <div class="card">
+                                <div class="item">
+                                    <a href="" class="delete">Delete Credit Card</a>									
+                                    <img class="card" src="images/ico-21.png" alt="" />
+                                    <h4>Mastercard</h4>
+                                </div><!-- closes item -->
+                                <div class="item short">
+                                    <input type="text" value="5258478549654036" />
+                                    <h4>Card Number</h4>
+                                    <span>Your credit card number</span>
+                                </div><!-- closes item -->
+                                <div class="item short">
+                                    <input type="text" value="Karina Romaine" />
+                                    <h4>Cardholder Name</h4>
+                                    <span>As it appears on the credit card</span>
+                                </div><!-- closes item -->
+                                <div class="item short">
+                                    <select>
+                                        <option>1985</option>
+                                        <option>1985</option>
+                                        <option>1985</option>
+                                    </select>
+                                    <select>
+                                        <option>April</option>
+                                        <option>April</option>
+                                        <option>April</option>
+                                    </select>
+                                    <h4>Expiration Date</h4>
+                                    <span>Only month and year required</span>
+                                </div>
+                            </div><!-- closes card -->
+                            <div class="card">
+                                <div class="item">
+                                    <a href="" class="delete">Delete Credit Card</a>									
+                                    <img class="card" src="images/ico-22.png" alt="" />
+                                    <h4>Visa</h4>
+                                </div><!-- closes item -->
+                                <div class="item short">
+                                    <input type="text" value="5258478549654036" />
+                                    <h4>Card Number</h4>
+                                    <span>Your credit card number</span>
+                                </div><!-- closes item -->
+                                <div class="item short">
+                                    <input type="text" value="Karina Romaine" />
+                                    <h4>Cardholder Name</h4>
+                                    <span>As it appears on the credit card</span>
+                                </div><!-- closes item -->
+                                <div class="item short">
+                                    <select>
+                                        <option>1985</option>
+                                        <option>1985</option>
+                                        <option>1985</option>
+                                    </select>
+                                    <select>
+                                        <option>April</option>
+                                        <option>April</option>
+                                        <option>April</option>
+                                    </select>
+                                    <h4>Expiration Date</h4>
+                                    <span>Only month and year required</span>
+                                </div>										
+                            </div><!-- closes card -->
+                            <div class="item short last">
+                                <a href="" class="add">Add a New Credit Card</a>
+                            </div><!-- closes item -->
+                            <div class="clear"></div>									
+                        </div><!-- closes item-wrppr -->
+                        <div class="item-wrppr">
+                            <div class="item-ttl">
+                                Payment Services
+                            </div><!-- closes item ttl -->
+                            <div class="card">										
+                                <div class="item">
+                                    <a href="" class="delete">Delete Payment Service</a>									
+                                    <img class="card" src="images/ico-25.png" alt="" />
+                                    <h4>Paypal</h4>
+                                </div><!-- closes item -->
+                                <div class="item short">
+                                    <input type="text" value="karina@gmail.com" />
+                                    <h4>Account</h4>
+                                    <span>To what e-mail should we send the money?</span>
+                                </div><!-- closes item -->										
+                            </div><!-- closes card -->
+                            <div class="item last">
+                                <a href="" class="add">Add a New Payment Service</a>
+                            </div><!-- closes item -->
+                            <div class="clear"></div>									
+                        </div><!-- closes item-wrppr -->
+                    </div><!-- closes profile-items -->
+                    <div class="foot">
+                        <input type="submit" class="btn-1" value="Save Changes" />
+                        <a href="">Deactivate Account</a>
+                    </div><!-- closes foot -->
+                </form>
+            </div><!-- closes vendor-profile -->
+        </div><!-- closes user-backend -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->	
+</body>
+</html>

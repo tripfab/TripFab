@@ -1,0 +1,55 @@
+<style type="text/css">
+.photo object { float:right;}
+.photo .text { float:left;}
+</style>
+<form action="" method="post">
+    <div class="photos">
+    	<?php if($this->help->com_photos == 0): ?>
+    	<div class="desc">
+    		<h3>What is the Photos Section?</h3>
+    		<p>This is where you add the beautiful pictures of your listing, you can add pictures of your hotel, hotel rooms, surroundings, people taking your tour, your restaurant, restaurant foot and pretty much anything you want related to your listing. Remember the most beautiful the pictures are the most attractive your listing is.</p>
+    		<p>You can add a maximum of 10 pictures and we recommend the size is 640x425 pixels.</p>
+    		<p>Note: You need to own the pictures you post here.</p>
+    		<a href="" rel="com_photos" class="remove">Remove</a>
+    	</div><!-- closes desc -->
+        <?php endif ?>
+        <div class="photo ttl">
+        	<div class="text">
+                <strong>Photos</strong>
+            </div>
+            <input style="float:right;" id="file_upload" name="file_upload" type="file" />
+        </div>
+        <div class="photo">        	
+            <div class="text req">
+                <strong>Picture Requriments</strong>
+                <span><em>Upload limit</em> 10 photos per listing</span>
+                <span><em>Photo Dimension</em> 640x425 pixels</span>
+                <span><em>File size</em> 2MB or less</span>
+            </div>
+        </div><!-- closes photo -->
+        <?php foreach($this->pictures as $pic): ?>
+        <div class="photo">
+            <?= $this->thumbnail(array('width'=>133,'height'=>92), $pic->url, '','133:92') ?>
+            <strong>Photo Description</strong>
+            <input class="noclean" placeholder="Add a nice description of this photo" type="text" name="pic[<?= $pic->id ?>][location]" value="<?= $pic->location ?>" />
+            <a href="#img_delete_<?= $pic->id ?>" class="lb remove">Remove Picture</a>
+        </div><!-- closes photo -->
+        <?php endforeach ?>
+        <?php if(count($this->pictures) < 10): ?>
+        <?php for($i=0;$i<(10 - count($this->pictures));$i++): ?>
+        <div class="photo">
+        	<img src="/images2/photo-placeholder.gif" width="133" height="92" />
+            <strong>Photo Description</strong>
+            <input type="text" class="noclean" value="Add a photo before writing a description" />
+        </div>
+        <?php endfor ?>
+        <?php endif ?>
+    </div><!-- closes photos -->
+    <div class="foot">
+        <input type="submit" class="btn-1" value="Save Changes" />
+    </div><!-- closes foot -->
+	<input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token.'edit_picture') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_picture') ?>" />
+</form>

@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> : Profile | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
+    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('textarea').elastic();				
+            $('input').ToggleInputValue();
+            $('form select').jqTransSelect();
+			
+			$('.reservation .top h2').click(function(){
+				$parent = $(this).parents('.reservation');
+				$('.bottom', $parent).slideToggle();
+			});
+        });
+    </script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-messages">
+            <?= $this->partial('partials/vendormainmenu.phtml', array('active'=>'History','parentActive'=>'Reservations')); ?>
+            <div class="subttl">
+                <a href="/provider/reservations" class="link-4">Back to Reservations</a>
+                <h4>You have 30 past reservations.</h4>
+            </div>
+            <div class="reservations past">
+            	<div class="left">
+                    <table cellpadding="0" cellspacing="0" border="0">
+                        <tbody>
+                            <tr>
+                                <th>Reservation Code</th>
+                                <th>Client Name</th>
+                                <th>Method</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                            <?php foreach($this->reservations as $reserve): ?>
+                            <tr>
+                                <td><?= $reserve->code ?></td>
+                                <td><?= $reserve->user_name ?></td>
+                                <td><img class="card-3" src="images/cleardot.gif" alt=""/><?= $reserve->method ?></td>
+                                <td>$<?= $reserve->ammount ?></td>
+                                <td><?= date('d/m/Y', strtotime($reserve->checkin)) ?></td>
+                                <td><a href="/cart/invoice/<?= $reserve->id ?>">See details</a></td>
+                            </tr>
+                            <?php endforeach ?>					
+                        </tbody>
+                    </table>
+                </div>
+                <!-- closes left -->						
+                <div class="right">
+                    <div class="widget withdraw">
+                        <h2>My Total Earnings</h2>
+                        <div>
+                            $2,584
+                        </div>
+                        <a href="" class="btn-1">Widthdraw</a>
+                    </div>
+                    <!-- closes widget -->
+                </div>
+                <!-- closes right -->
+            </div>
+            <!-- closes reservations -->
+        </div>
+        <!-- closes user-messages -->
+    </div>
+    <!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div>
+<!-- closes w1 -->
+</body>
+</html>

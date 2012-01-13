@@ -1,0 +1,42 @@
+<div class="lstng-details rooms">
+    <?php if($this->help->hot_rooms == 0): ?>
+	<div class="desc">
+		<h3>What is the Rooms Section?</h3>
+        	<p>In this section you can manage your hotel's room types. You can add, edit, or remove them</p>
+		<a href="" rel="hot_rooms" class="remove">Remove</a>
+	</div>
+    <?php endif ?>
+    <div class="inner-ttl">
+        <a href="/provider/listings/newroom/<?= $this->listing->id ?>" class="link-5">Add a New Room</a>
+        You have <?= count($this->rooms) ?> room types
+    </div><!-- closes inner-ttl -->
+    <ul>
+    	<?php foreach($this->rooms as $room): ?>
+        <li><strong><?= $room->name ?></strong>
+        <div><a href="#remove_room_<?= $room->id ?>" class="lb remove">Remove</a>
+        <a href="/provider/listings/room/<?= $room->id ?>">Edit</a></div></li>
+        <?php endforeach ?>
+    </ul>
+</div><!-- closes lstng-details -->
+<div class="hidden">
+	<?php foreach($this->rooms as $room): ?>
+    <div id="remove_room_<?= $room->id ?>" class="lb-forgot delete">
+        <form action="" method="post" id="form_listing_delete_<?= $list->id ?>">
+            <div class="ttl">Delete "<?= $room->name ?>" Room</div>
+            <div class="content">
+                <p>Are you sure you want to remove "<?= $room->name ?>" Room?</p>
+            </div><!-- closes content -->
+            <div class="bottom">
+                <input type="submit" class="btn-1" value="Delete" />
+                <span class="btn-4" onclick="$.fancybox.close()">Cancel</span>				
+            </div><!-- closes bottom -->        
+            <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+            <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+            <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'delete-room') ?>" />
+            <input type="hidden" name="_task" value="<?= md5('delete_room') ?>" />
+            <input type="hidden" name="roomtoken" value="<?= md5($room->id) ?>" />
+            <input type="hidden" name="roomid" value="<?= $room->id ?>" />
+        </form>
+    </div>
+	<?php endforeach ?>
+</div>

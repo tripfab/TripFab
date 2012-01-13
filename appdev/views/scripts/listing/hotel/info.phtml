@@ -1,0 +1,551 @@
+<style type="text/css">
+.profile-items .item p.check { clear:both; margin-top:35px; }
+.profile-items .item p.check label { float: none; }
+.profile-items .item p.check input { vertical-align:baseline }
+input.schname { float:none !important; width:90px !important; }
+.item { position:relative;}
+.item .help {
+	position:absolute;
+	top:13px;
+	left:-35px;}
+.item .help a.eye {
+	display:block;
+	background:url(/images2/eye.png) no-repeat top left;
+	width:18px;
+	height:12px;
+	text-indent:-9999px;
+	cursor:pointer;}
+	.item .help:hover a.eye {
+		background-position:left -12px;}
+.item.first .help {
+	top:0px;}
+	.item .help a.tooltip3 {
+		background:url(/images2/help-tooltip-bg.png) top left no-repeat;
+		left: 17px;
+		padding:11px 12px;
+		position:absolute;
+		top:-102px;
+		z-index:1000;
+		display:none;}
+	.item .help:hover a.tooltip3 {
+		display:block;}
+
+.profile-items {
+	overflow:visible;}
+</style>
+<?php $durations = array(1,2,3,4,5,6,7,8,9,10,15,30,45,); ?>
+<?php $hours	 = array('1:00','2:00','3:00','4:00','5:00','6:00','7:00','8:00','9:00','10:00','11:00','12:00',); ?>
+<?php if($_POST): ?>
+<form action="" method="post">
+    <div class="profile-items">
+  		<?php if($this->help->hot_info == 0): ?>
+    	<div class="desc">
+        	<h3>What is the General Information?</h3>
+        	<p>Some general details about the experience, listing name, contact information, categories and more.</p>
+        	<a href="" rel="hot_info" class="remove">Remove</a>
+        </div>
+        <!-- closes desc -->
+        <?php endif ?>
+    	<?php if($this->errors): ?>
+        <div class="errors">
+            <?php foreach($this->errors as $err): ?>
+            <p><?= $err ?></p>
+            <?php endforeach ?>
+        </div><!-- closes item -->
+        <?php endif ?>
+        <div class="main-ttl">
+        	<p><strong>General information about your hotel</strong></p>
+        </div>
+        <!-- closes main-ttl -->
+		<div class="item-wrppr">
+			<div class="item-ttl">
+				Basic Information
+			</div><!-- closes item ttl -->
+			<div class="item first">
+				<input placeholder="Hotel's name" type="text" class="noclean limitcc" name="title" rel="60" value="<?= $_POST['title'] ?>" />
+				<h4>Title</h4>
+				<span>Hotel name<br />
+                <span class="charsLeftInp"></span> Character Left</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-name.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-name.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-general-name.png" /></a>
+                </div>
+			</div><!-- closes item -->
+			<div class="item last">
+                <textarea placeholder="Write a nice description about the hotel" name="description" class="noclean limitcc" rel="200" cols="30" rows="1"><?= $_POST['description'] ?></textarea>
+				<h4>Short Description</h4>
+				<span>Write a brief description for your hotel<br /><br />
+                You have <span class="charsLeftTxt">200</span> character left</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-description.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-description.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-general-description.png" /></a>
+                </div>
+			</div><!-- closes item -->
+			<div class="clear"></div>									
+		</div><!-- closes item-wrppr -->
+        
+        <div class="item-wrppr">
+			<div class="item-ttl">
+				Contact Information
+			</div><!-- closes item ttl -->		
+            <div class="item first">
+                <?php $checked = (isset($_POST['contactEqual'])) ? 'checked="checked"' : '' ?>
+                <input id="contactEqual" <?= $checked ?> type="checkbox" name="contactEqual" />
+                <label for="contactEqual">The contact information is the same as my company profile</label>
+            </div>	
+            <?php $disabled = (!empty($checked)) ? 'disabled="disabled"' : '' ?> 
+			<div class="item">
+				<input placeholder="Your phone number" <?= $disabled ?> type="text" name="phone" value="<?= $_POST['phone'] ?>" />
+				<h4>Phone</h4>
+				<span>Contact Phone</span>
+			</div><!-- closes item -->
+			<div class="item">
+				<input placeholder="Your email address" <?= $disabled ?> type="text" name="email" value="<?= $_POST['email'] ?>" />
+				<h4>Email</h4>
+				<span>Contact Email</span>
+			</div><!-- closes item -->
+			<div class="item last">
+				<input placeholder="Your website url" <?= $disabled ?> type="text" name="website" value="<?= $_POST['website'] ?>" />
+				<h4>Website</h4>
+				<span>Company Website</span>
+			</div><!-- closes item -->
+			<div class="clear"></div>									
+		</div><!-- closes item-wrppr -->
+        
+        <div class="item-wrppr">
+            <div class="item-ttl">
+                Details
+            </div><!-- closes item ttl -->
+            <div class="item first">
+                <div class="selects">
+                	<?php $checkin = $_POST['checkin_hour'] . ' ' . $_POST['checkin_time'] ?>
+                    <?php $checkout = $_POST['checkout_hour'] . ' ' . $_POST['checkout_time'] ?>
+                    <select name="checkin_hour">
+                    	<?php foreach($hours as $h): ?>
+                        <?php if($h == (date('g:i', strtotime($checkin)))): ?>
+                        <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                        <?php else: ?>
+                        <option value="<?= $h ?>"><?= $h ?></option>
+                        <?php endif ?>
+                        <?php endforeach ?>
+                    </select>
+                    <select name="checkin_time">
+                    	<?php if('AM' == (date('A', strtotime($checkin)))): ?>
+                        <option selected="selected" value="AM">AM</option>
+                        <option value="PM">PM</option>
+                        <?php elseif('PM' == (date('A', strtotime($checkin)))): ?>
+                        <option value="AM">AM</option>
+                        <option selected="selected" value="PM">PM</option>
+                        <?php else: ?>
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>                        
+                        <?php endif ?>
+                    </select>
+                </div><!-- closes selects -->
+                <h4>Check In</h4>
+                <span>Select the checkin hour</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-checkin.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-checkin.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-general-checkin.png" /></a>
+                </div>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">                    
+                    <select name="checkout_hour">
+                    	<?php foreach($hours as $h): ?>
+                        <?php if($h == (date('g:i', strtotime($checkout)))): ?>
+                        <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                        <?php else: ?>
+                        <option value="<?= $h ?>"><?= $h ?></option>
+                        <?php endif ?>
+                        <?php endforeach ?>
+                    </select>
+                    <select name="checkout_time">
+                        <?php if('AM' == (date('A', strtotime($checkout)))): ?>
+                        <option selected="selected" value="AM">AM</option>
+                        <option value="PM">PM</option>
+                        <?php elseif('PM' == (date('A', strtotime($checkout)))): ?>
+                        <option value="AM">AM</option>
+                        <option selected="selected" value="PM">PM</option>
+                        <?php else: ?>
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>                        
+                        <?php endif ?>
+                    </select>
+                </div><!-- closes selects -->
+                <h4>Check Out</h4>
+                <span>Select the checkout hour</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-checkout.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-checkout.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-general-checkout.png" /></a>
+                </div>
+            </div><!-- closes item -->
+            <div class="item">
+				<div class="inner-container">
+                	<?php if(is_array($_POST['types'])): ?>
+					<table>
+						<tbody>
+                        	<?php for($i=0; $i<count($this->categories); $i=$i+3): ?>
+                            <tr>
+                                <?php for($j=$i; ($j<count($this->categories)) && ($j<($i+3)); $j++): ?>
+                                <td>
+                                <?php $checked = (in_array($this->categories[$j]->id, $_POST['types'])) ? 'checked="checked"' : ''; ?>
+                                <input <?= $checked ?> name="types[<?= $this->categories[$j]->id ?>]" 
+                                value="<?= $this->categories[$j]->id ?>" type="checkbox"/>
+                                <?= $this->categories[$j]->name ?>
+                                </td>
+                                <?php endfor ?>
+                            </tr>
+                            <?php endfor ?>
+						</tbody>
+					</table>
+                    <?php else: ?>
+                    <table>
+						<tbody>
+                        	<?php for($i=0; $i<count($this->categories); $i=$i+3): ?>
+                            <tr>
+                                <?php for($j=$i; ($j<count($this->categories)) && ($j<($i+3)); $j++): ?>
+                                <td>
+                                <input name="types[<?= $this->categories[$j]->id ?>]" 
+                                value="<?= $this->categories[$j]->id ?>" type="checkbox"/>
+                                <?= $this->categories[$j]->name ?>
+                                </td>
+                                <?php endfor ?>
+                            </tr>
+                            <?php endfor ?>
+						</tbody>
+					</table>
+                    <?php endif ?>
+				</div><!-- closes inner-container -->
+				<h4>Category</h4>
+				<span>Select categories</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-category.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-category.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-general-category.png" /></a>
+                </div>
+			</div><!-- closes item -->
+            <!--
+			<div class="item last">
+				<div class="inner-container">
+                	<?php //if(is_array($_POST['tags'])): ?>
+					<table>
+						<tbody>
+							<?php // for($i=0; $i<count($this->tags); $i=$i+2): ?>
+                            <tr>
+                                <?php  //for($j=$i; ($j<count($this->tags)) && ($j<($i+2)); $j++): ?>
+                                <td>
+                                <?php //$checked = (in_array($this->tags[$j]->id, $_POST['tags'])) ? 'checked="checked"' : ''; ?>
+                                <input <? // $checked ?> name="tags[<? // $this->tags[$j]->id ?>]" 
+                                value="<? // $this->tags[$j]->id ?>" type="checkbox"/>
+                                <? //$this->tags[$j]->name ?>
+                                </td>
+                                <?php // endfor ?>
+                            </tr>
+                            <?php // endfor ?>
+						</tbody>
+					</table>
+                    <?php // else: ?>
+                    <table>
+						<tbody>
+							<?php //for($i=0; $i<count($this->tags); $i=$i+2): ?>
+                            <tr>
+                                <?php //for($j=$i; ($j<count($this->tags)) && ($j<($i+2)); $j++): ?>
+                                <td>
+                                <input name="tags[<? //$this->tags[$j]->id ?>]" 
+                                value="<? //$this->tags[$j]->id ?>" type="checkbox"/>
+                                <? //$this->tags[$j]->name ?>
+                                </td>
+                                <?php //endfor ?>
+                            </tr>
+                            <?php //endfor ?>
+						</tbody>
+					</table>
+                    <?php //endif ?>
+				</div>
+				<h4>Tags</h4>
+				<span>Select Tags</span>
+			</div> -->
+            <div class="item last">
+				<div class="inner-container">
+					<table>
+						<tbody>
+                            <?php for($i=0; $i<count($this->landscapes); $i=$i+3): ?>
+                            <tr>
+                                <?php for($j=$i; ($j<count($this->landscapes)) && ($j<($i+3)); $j++): ?>
+                                <td>
+                                <?php if(is_array($_POST['lands'])): ?>
+                                <?php $checked = (in_array($this->landscapes[$j]->id, $_POST['lands'])) ? 'checked="checked"' : ''; ?>
+                                <?php else: ?>
+                                <?php $checked = '' ?>
+                                <?php endif ?>
+                                <input <?= $checked ?> name="lands[<?= $this->landscapes[$j]->id ?>]" 
+                                value="<?= $this->landscapes[$j]->id ?>" type="checkbox"/>
+                                <?= $this->landscapes[$j]->name ?>
+                                </td>
+                                <?php endfor ?>
+                            </tr>
+                            <?php endfor ?>
+						</tbody>
+					</table>
+				</div><!-- closes inner-container -->
+				<h4>Landscapes</h4>
+				<span>Select Landscapes</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-landscape.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-landscape.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-general-landscape.png" /></a>
+                </div>
+			</div><!-- closes item -->
+			<div class="clear"></div>								
+        </div><!-- closes item-wrppr -->
+    </div><!-- closes profile-items -->
+    <div class="foot">
+        <input type="submit" class="btn-1" value="Save Changes" />
+        <a href="/provider/listings/desactivate/<?= $this->listing->id ?>">Delete Listing</a>
+    </div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'edit-listing') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_listing') ?>" />
+</form>
+<?php else: ?>
+<form action="" method="post">
+    <div class="profile-items">
+    	<?php if($this->help->hot_info == 0): ?>
+    	<div class="desc">
+        	<h3>What is the General Information?</h3>
+        	<p>Some general details about the experience, listing name, contact information, categories and more.</p>
+        	<a href="" rel="hot_info" class="remove">Remove</a>
+        </div>
+        <!-- closes desc -->
+        <?php endif ?>
+    	<?php if($this->errors): ?>
+        <div class="errors">
+            <?php foreach($this->errors as $err): ?>
+            <p><?= $err ?></p>
+            <?php endforeach ?>
+        </div><!-- closes item -->
+        <?php endif ?>
+        <div class="main-ttl">
+        	<p><strong>General information about your hotel</strong></p>
+        </div>
+        <!-- closes main-ttl -->
+		<div class="item-wrppr">
+			<div class="item-ttl">
+				Basic Information
+			</div><!-- closes item ttl -->
+			<div class="item first">
+				<input placeholder="Hotel's name" type="text" class="noclean limitcc" name="title" rel="60" value="<?= $this->listing->title ?>" />
+				<h4>Title</h4>
+				<span>Hotel name<br />
+                <span class="charsLeftInp"></span> Character Left</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-name.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-name.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-general-name.png" /></a>
+                </div>
+			</div><!-- closes item --> 
+			<div class="item last">
+                <textarea placeholder="Write a nice description about your hotel" name="description" class="noclean limitcc" rel="200" cols="30" rows="1"><?= $this->listing->description ?></textarea>
+				<h4>Short Description</h4>
+				<span>Write a nice brief for your hotel<br /><br />
+                You have <span class="charsLeftTxt"></span> Character left</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-description.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-description.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-general-description.png" /></a>
+                </div>
+			</div><!-- closes item -->
+			<div class="clear"></div>									
+		</div><!-- closes item-wrppr -->
+        
+        <div class="item-wrppr">
+			<div class="item-ttl">
+				Contact Information
+			</div><!-- closes item ttl -->
+            <div class="item first">
+            	<?php $checked = ($this->vendor->phone == $this->listing->phone &&
+						 		  $this->vendor->email == $this->listing->email &&
+								  $this->vendor->website == $this->listing->website) ? 'checked="checked"' : '' ?>
+                <input id="contactEqual" <?= $checked ?> type="checkbox" name="contactEqual" />
+                <label for="contactEqual">The contact information is the same as my company profile</label>
+            </div>	
+            <?php $disabled = ($checked != '') ? 'disabled="disabled"' : '' ?>
+			<div class="item">
+				<input placeholder="Your phone number" <?= $disabled ?> type="text" name="phone" value="<?= $this->listing->phone ?>" />
+				<h4>Phone</h4>
+				<span>Contact Phone</span>
+			</div><!-- closes item -->
+			<div class="item">
+				<input placeholder="Your email address" <?= $disabled ?> type="text" name="email" value="<?= $this->listing->email ?>" />
+				<h4>Email</h4>
+				<span>Contact Email</span>
+			</div><!-- closes item -->
+			<div class="item last">
+				<input placeholder="Your website url" <?= $disabled ?> type="text" name="website" value="<?= $this->listing->website ?>" />
+				<h4>Website</h4>
+				<span>Company Website</span>
+			</div><!-- closes item -->
+			<div class="clear"></div>									
+		</div><!-- closes item-wrppr -->
+        
+        <div class="item-wrppr">
+            <div class="item-ttl">
+                Details
+            </div><!-- closes item ttl -->
+            <div class="item first">
+                <div class="selects">                	
+                    <select name="checkin_hour">
+                    	<?php foreach($hours as $h): ?>
+                        <?php if($h == (date('g:i', strtotime($this->listing->checkin)))): ?>
+                        <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                        <?php else: ?>
+                        <option value="<?= $h ?>"><?= $h ?></option>
+                        <?php endif ?>
+                        <?php endforeach ?>
+                    </select>
+                    <select name="checkin_time">
+                    	<?php if('AM' == (date('A', strtotime($this->listing->checkin)))): ?>
+                        <option selected="selected" value="AM">AM</option>
+                        <option value="PM">PM</option>
+                        <?php elseif('PM' == (date('A', strtotime($this->listing->checkin)))): ?>
+                        <option value="AM">AM</option>
+                        <option selected="selected" value="PM">PM</option>
+                        <?php else: ?>
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>                        
+                        <?php endif ?>
+                    </select>
+                </div><!-- closes selects -->
+                <h4>Check In</h4>
+                <span>Select the checkin hour</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-checkin.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-checkin.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-general-checkin.png" /></a>
+                </div>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">                    
+                    <select name="checkout_hour">
+                    	<?php foreach($hours as $h): ?>
+                        <?php if($h == (date('g:i', strtotime($this->listing->checkout)))): ?>
+                        <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                        <?php else: ?>
+                        <option value="<?= $h ?>"><?= $h ?></option>
+                        <?php endif ?>
+                        <?php endforeach ?>
+                    </select>
+                    <select name="checkout_time">
+                        <?php if('AM' == (date('A', strtotime($this->listing->checkout)))): ?>
+                        <option selected="selected" value="AM">AM</option>
+                        <option value="PM">PM</option>
+                        <?php elseif('PM' == (date('A', strtotime($this->listing->checkout)))): ?>
+                        <option value="AM">AM</option>
+                        <option selected="selected" value="PM">PM</option>
+                        <?php else: ?>
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>                        
+                        <?php endif ?>
+                    </select>
+                </div><!-- closes selects -->
+                <h4>Check Out</h4>
+                <span>Select the checkout hour</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-checkout.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-checkout.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-general-checkout.png" /></a>
+                </div>
+            </div><!-- closes item -->
+            <div class="item">
+				<div class="inner-container">
+					<table>
+						<tbody>
+                        	<?php for($i=0; $i<count($this->categories); $i=$i+3): ?>
+                            <tr>
+                                <?php for($j=$i; ($j<count($this->categories)) && ($j<($i+3)); $j++): ?>
+                                <td>
+                                <?php $checked = (in_array($this->categories[$j]->id, $this->listing_types)) ? 'checked="checked"' : ''; ?>
+                                <input <?= $checked ?> name="types[<?= $this->categories[$j]->id ?>]" 
+                                value="<?= $this->categories[$j]->id ?>" type="checkbox"/>
+                                <?= $this->categories[$j]->name ?>
+                                </td>
+                                <?php endfor ?>
+                            </tr>
+                            <?php endfor ?>
+						</tbody>
+					</table>
+				</div><!-- closes inner-container -->
+				<h4>Category</h4>
+				<span>Select categories</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-category.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-category.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-general-category.png" /></a>
+                </div>
+			</div><!-- closes item -->
+			<!--
+			<div class="item last">
+				<div class="inner-container">
+					<table>
+						<tbody>
+							<?php //for($i=0; $i<count($this->tags); $i=$i+2): ?>
+                            <tr>
+                                <?php //for($j=$i; ($j<count($this->tags)) && ($j<($i+2)); $j++): ?>
+                                <td>
+                                <?php //$checked = (in_array($this->tags[$j]->id, $this->listing_tags)) ? 'checked="checked"' : ''; ?>
+                                <input <? //$checked ?> name="tags[<? // $this->tags[$j]->id ?>]" 
+                                value="<? //$this->tags[$j]->id ?>" type="checkbox"/>
+                                <? //$this->tags[$j]->name ?>
+                                </td>
+                                <?php //endfor ?>
+                            </tr>
+                            <?php // endfor ?>
+						</tbody>
+					</table>
+				</div>
+				<h4>Tags</h4>
+				<span>Select Tags</span>
+			</div>-->
+            <div class="item last">
+				<div class="inner-container">
+					<table>
+						<tbody>
+                        	<?php for($i=0;$i<count($this->landscapes);$i=$i+3): ?>
+							<tr>
+                            	<?php for($j=$i;($j<count($this->landscapes)) && ($j<($i+3));$j++): ?>
+                                <?php $checked = (in_array($this->landscapes[$j]->id, $this->l_lands)) ? 'checked="checked"' : ''; ?>
+								<td><input <?= $checked ?> name="lands[<?= $this->landscapes[$j]->id ?>]" value="<?= $this->landscapes[$j]->id ?>" 
+                                			type="checkbox"/><?= $this->landscapes[$j]->name ?></td>
+                                <?php endfor ?>
+							</tr>
+                            <?php endfor ?>
+						</tbody>
+					</table>
+				</div><!-- closes inner-container -->
+				<h4>Landscapes</h4>
+				<span>Select Landscapes</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-landscape.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-landscape.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-general-landscape.png" /></a>
+                </div>
+			</div><!-- closes item -->
+			<div class="clear"></div>								
+        </div><!-- closes item-wrppr -->
+    </div><!-- closes profile-items -->
+    <div class="foot">
+        <input type="submit" class="btn-1" value="Save Changes" />
+        <a href="/provider/listings/desactivate/<?= $this->listing->id ?>">Delete Listing</a>
+    </div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'edit-listing') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_listing') ?>" />
+</form>
+<?php endif ?>

@@ -1,0 +1,100 @@
+<style type="text/css">
+.hidden { display:none;}
+.main-ttl .help {
+	position:absolute;
+	top:18px;
+	left:210px;}
+.main-ttl .help a.eye {
+	display:block;
+	background:url(/images2/eye.png) no-repeat top left;
+	width:18px;
+	height:12px;
+	text-indent:-9999px;
+	cursor:pointer;}
+	.main-ttl .help:hover a.eye {
+		background-position:left -12px;}
+.main-ttl.first .help {
+	top:0px;}
+	.main-ttl .help a.tooltip3 {
+		background:url(/images2/help-tooltip-bg.png) top left no-repeat;
+		left: 17px;
+		padding:11px 12px;
+		position:absolute;
+		top:-102px;
+		z-index:1000;
+		display:none;}
+	.main-ttl .help:hover a.tooltip3 {
+		display:block;}
+
+.main-ttl {
+	overflow:visible;
+	position:relative;}
+.listing-content { overflow:visible;}
+</style>
+<form action="" method="post" id="form_faq">
+    <div class="lstng-details">
+  		<?php if($this->help->res_specialities == 0): ?>
+    	<div class="desc">
+    		<h3>What is the Restaurant Specialities Section?</h3>
+    		<p>Let people know about your type of cuisine, your specialties, promotions and related information. What are the best dishes you offer, day specials and more.</p>
+    		<a href="" rel="res_specialities" class="remove">Remove</a>
+    	</div>
+    	<!-- closes desc -->
+        <?php endif ?>
+    	<div class="main-ttl">
+    		<p><strong>Restaurant Specialities</strong></p>
+            <div class="help">
+                <a href="/images2/help/big-res-specialities.png" class="eye">help</a>
+                <a href="/images2/help/big-res-specialities.png" class="tooltip3">
+                <img src="/images2/help/small-res-specialities.png" /></a>
+            </div>		
+    	</div><!-- closes main-ttl -->
+        <?php if($this->errors): ?>
+    	<div class="errors">
+        	<?php foreach($this->errors as $err): ?>
+            <p><?= $err ?></p>
+            <?php endforeach ?>
+        </div>
+        <?php endif ?>
+        <?php foreach($this->specials as $special): ?>
+        <div class="lstng-detail faq">
+            <textarea placeholder="Write a nice title for your speciality" cols="30" class="noclean limitcc" rel="300" name="special[<?= $special->id ?>][title]" rows="1"><?= $special->title ?></textarea>
+            <strong>Speciality</strong>									
+            <div class="clear"></div>
+            <textarea placeholder="Describe what your speciality is all about" cols="30" class="noclean limitcc" rel="300" name="special[<?= $special->id ?>][description]" rows="1"><?= $special->description ?></textarea>
+            <strong>Description</strong>
+            <div class="clear"></div>
+            <a href="" class="remove remove-2">Remove</a>
+        </div><!-- closes lstng-detail -->
+        <?php endforeach ?>
+        <?php if(count($this->specials) > 0): ?>
+        <div id="addSpecial" class="lstng-detail faq hidden">
+            <textarea placeholder="Write a nice title for your speciality" class="limitcc" rel="300" cols="30" name="title" rows="1"></textarea>
+            <strong>Speciality</strong>									
+            <div class="clear"></div>
+            <textarea placeholder="Describe what your speciality is all about" class="limitcc" rel="300" cols="30" name="description" rows="1"></textarea>
+            <strong>Description</strong>
+            <div class="clear"></div>									
+        </div><!-- closes lstng-detail -->   
+        <div class="lstng-detail last">
+            <a href="" id="addmewspecial" class="link-5">Add a New Speciality</a>
+        </div><!-- closes lstng-detail -->     
+        <?php else: ?>
+        <div id="addSpecial" class="lstng-detail faq">
+            <textarea placeholder="Write a nice title for your speciality" cols="30" class="limitcc" rel="300" name="title" rows="1"></textarea>
+            <strong>Speciality</strong>									
+            <div class="clear"></div>
+            <textarea placeholder="Describe what your speciality is all about" cols="30" class="limitcc" rel="300" name="description" rows="1"></textarea>
+            <strong>Description</strong>
+            <div class="clear"></div>									
+        </div><!-- closes lstng-detail -->
+        <?php endif ?>
+    </div><!-- closes lstng-details -->
+    <div class="foot">
+        <input type="submit" class="btn-1" value="Save Changes" />
+    </div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token.'form_faq') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('update_faq') ?>" />
+</form>

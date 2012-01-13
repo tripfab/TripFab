@@ -1,0 +1,36 @@
+<div class="listing-gallery">
+    <div class="listing-ttl">
+    	<?php if($this->user): ?>
+        <a href="" class="been add">Add to my trips</a>
+        <?php if($this->user->role_id == 2): ?>
+		<?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$this->listing->id)); ?>
+        <?php endif ?>
+        <?php endif ?>
+        <h2><?= $this->listing->title ?></h2>
+        <span><?= $this->city->title ?>, <?= $this->country->title ?></span>
+    </div><!-- closes listing-ttl -->
+    <?php if(count($this->pictures) > 0): ?>
+    <?php foreach($this->pictures as $i => $pic): ?>
+    <?php $class = ($i == 0) ? 'img-wrapper active' : 'img-wrapper'; ?>
+    <div id="pic<?= $pic->id ?>" class="<?= $class ?>">
+        <?= $this->thumbnail(array('width'=>650,'height'=>368), $pic->url,'','650:368'); ?>
+        <p><?= $pic->location ?></p>
+    </div>
+    <?php endforeach ?>
+    <?php else: ?>
+    <div id="pic1" class="img-wrapper active">
+    <?= $this->thumbnail(array('width'=>650,'height'=>368), '/images/img-53.png','','650:368'); ?>
+    <p>Longboard Surfing Experience</p>
+    </div>
+    <?php endif ?>
+    <ul>
+        <?php if(count($this->pictures) > 0): ?>
+        <?php foreach($this->pictures as $i => $pic): ?>
+        <?php $class = ($i == 0) ? 'active' : ''; ?>
+        <li class="<?= $class ?>"><a href="#pic<?= $pic->id ?>"><?= $this->thumbnail(51, $pic->url); ?></a></li>
+        <?php endforeach ?>
+        <?php else: ?>
+        <li class="active"><a href="#pic1"><?= $this->thumbnail(51, '/images/img-53.png'); ?></a></li>
+        <?php endif ?>
+    </ul>
+</div><!-- closes listing-gallery -->

@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->trip->title ?>, <?= $this->trip->country ?> | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+	<link type="text/css" rel="stylesheet" href="/css2/jquery-ui-1.8.16.custom.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js2/jquery.cycle.all.js"></script>
+    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+    <script type="text/javascript" src="/js2/jquery.jcarousel.min.js"></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
+    <script type="text/javascript" src="/js2/trips/view.js"></script>
+    <script type="text/javascript">
+			$(document).ready(function() {
+				$('.days-cycle').cycle({
+					next: '.next',
+					prev: '.prev',
+					timeout: 0
+				});
+			});
+		</script>
+    <style type="text/css">
+	.desc-wrapper #pager a { width:<?= (100 / count($this->images)) . '%'; ?>;} .hidden { display:none;}
+	.datepicker a.ui-state-active { background-color: #60B5F7; color: #FFFFFF;}
+	</style>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>    
+        <div class="w2">
+        <div class="wrapper trip-itinerary">
+            <div class="ttl">
+                <a href="#dates_lb" class="lb btn-1">Buy Trip</a>
+                <?= $this->trip->title ?>
+            </div><!-- closes ttl -->
+            <div class="trip-menu">
+                <ul>
+                    <li><a href="/trips/view/<?= $this->trip->id ?>">Overview</a></li>
+                    <li class="current"><a href="/trips/itinerary/<?= $this->trip->id ?>">Itinerary</a></li>
+                </ul>
+            </div><!-- closes trip-menu -->
+            <div class="box days">
+                <a href="" class="prev">Previous Day</a>
+                <a href="" class="next">Next Day</a>
+                <div class="days-cycle">
+                	<?php for($i=1;$i<=count($this->listingsbyday);$i++): ?>
+                    <div class="day">
+                        <div class="day-ttl">
+                            <strong>Day <?= $i ?></strong>
+                            <h2><?= $this->trip->title ?></h2>
+                        </div><!-- closes day-ttl -->
+                        <?php foreach($this->listingsbyday[$i] as $time => $listings): ?>
+                        <div class="day-section">
+                            <span class="sub-ttl"><?= ucfirst($time) ?> Itinerary</span>
+                            <div class="clear"></div>
+                            <?php foreach($listings as $listing): ?>
+                            <div class="day-item">
+                                <div class="left">
+                                    <?= $this->thumbnail(array('width'=>267,'height'=>168), $listing->image, '', '267:168') ?>
+                                </div><!-- closes left -->
+                                <div class="right">
+                                    <strong>8:00 AM - 9:00 AM</strong>
+                                    <h4><?= $listing->title ?></h4>
+                                    <ul>
+                                        <li>Vivamus luctus tellus tristique purus iaculis non ornare erat ultrices. Morbi eros quam, imperdiet nec laoreet eget.</li>
+                                        <li>Aliquam non mi sapien, pharetra viverra orci.</li>
+                                        <li>Vivamus luctus tellus tristique purus iaculis non ornare erat ultrices. Morbi eros quam, imperdiet nec laoreet eget, condimentum id sapien. Aliquam non mi sapien, pharetra viverra orci.</li>
+                                    </ul>
+                                </div><!-- closes right -->
+                            </div><!-- closes day-item -->
+                            <?php endforeach ?>
+                        </div><!-- closes day-section -->
+                        <?php endforeach ?>
+                    </div><!-- closes day -->
+                    <?php endfor ?>
+                </div><!-- closes day-cycle -->
+                <div class="bottom">
+                    <a href="" class="prev">Previous Day</a>
+                    <a href="" class="next">Next Day</a>
+                </div><!-- closes bottom -->
+            </div><!-- closes days -->
+        </div><!-- closes wrapper -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->	
+<div class="hidden">
+	<div id="dates_lb">
+    	<div class="lb-dates">
+			<div class="left">
+				<h2>First, select the dates you want to go on your vacation.</h2>
+				<ul>
+					<li>Your trip is going to be <?= $this->trip->days ?> days long.</li>
+					<li>This trip is available for children.</li>
+					<li>Maximum occupation is <?= $this->trip->max ?> people.</li>
+                    <?php if($this->trip->min > 1): ?>
+                    <li>Minimum occupation is <?= $this->trip->min ?> people.</li>
+                    <?php else: ?>
+					<li>No minimum  required.</li>
+                    <?php endif ?>
+                    <li><em>The price listed is an estimation, you will get a final price depending on your dates and ocupation requirements</em></li>
+				</ul>
+			</div><!-- closes left -->
+			<div class="right">
+				<div id="datepicker" class="datepicker"></div>
+                <form action="/trips/checkprice/<?= $this->trip->id ?>" method="post">
+                    <div class="occ">
+                        <label>Adults</label>
+                        <select name="adults">
+						<?php for($i=$this->trip->min; $i<=$this->trip->max; $i++): ?>
+                            <?php if($i==$this->trip->min): ?>
+                            <option value="<?= $i ?>">min <?= $i ?></option>
+                            <?php elseif($i==$this->trip->max): ?>
+                            <option value="<?= $i ?>">max <?= $i ?></option>
+                            <?php else: ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                            <?php endif ?>
+                        <?php endfor ?>
+                        </select>
+                        <label>Children</label>
+                        <select name="kids">
+                        	<option value="0">None</option>
+                        <?php for($i=$this->trip->min; $i<=$this->trip->max; $i++): ?>
+                            <?php if($i==$this->trip->min): ?>
+                            <option value="<?= $i ?>">min <?= $i ?></option>
+                            <?php elseif($i==$this->trip->max): ?>
+                            <option value="<?= $i ?>">max <?= $i ?></option>
+                            <?php else: ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                            <?php endif ?>
+                        <?php endfor ?>
+                        </select>
+                    </div><!-- closes occ -->
+                    <div class="occ">
+                        <input type="submit" class="btn-1" value="Check Availability" />
+                        <span onclick="$.fancybox.close()" class="btn-4">Cancel</span>
+                    </div><!-- closes occ -->
+                    <input type="hidden" name="date" value="" />
+                    <input type="hidden" name="ids" value="<?= $this->trip->id ?>" />
+                    <input type="hidden" name="token" value="<?= $this->trip->token ?>" />
+                </form>
+			</div><!-- closes right -->
+		</div><!-- closes dates -->
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<div class="widget trip-menu">
+    <div class="ttl">My Trips</div>
+    <div class="w-content">
+        <h5>Future Trips</h5>
+        <ul>
+        	<?php foreach($this->future as $trip): ?>
+            <li><a href="/user/trips/view/<?= $trip->id ?>"><?= $trip->title ?></a></li>
+            <?php endforeach ?>
+        </ul>
+        <h5>PAST Trips</h5>
+        <ul>
+        	<?php foreach($this->past as $trip): ?>
+            <li><a href="/user/trips/view/<?= $trip->id ?>"><?= $trip->title ?></a></li>
+            <?php endforeach ?>
+        </ul>
+    </div><!-- closes w-content -->
+</div><!-- closes widget -->

@@ -1,0 +1,188 @@
+/*- End of Admin Listings Styles -----------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------*/
+
+/*- Add Listing Light Box Styles -----------------------------------------------------------*/
+.hidden { display:none;}
+
+.lbox {
+	background: url("../images/transparency-2.png") repeat 0 0;
+	padding: 5px;
+	border-radius: 5px;
+}
+.lb-small {
+	width: 506px;
+}
+.lb-wrapper {
+	background-color: #fff;
+	border: 1px solid #c8c9c7;
+}
+.lb-ttl {
+	border-bottom: 1px solid #C8C9C7;
+	color: #2F332B;
+	font-size: 19px;
+	font-weight: bold;
+	line-height: normal;
+	padding: 10px 0;
+	text-align: center;
+}
+.lb-selection {
+	padding: 0 20px;
+	border-bottom: 1px solid #c8c9c7;
+}
+.lb-selection table {
+	width: 100%;
+}
+.lb-selection table td {
+	vertical-align: middle;
+	line-height: 39px;
+}
+.lb-selection label {
+	color: #616161;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: normal;
+	vertical-align: middle;
+}
+.entry {
+	padding: 7px 10px;
+	background-color: #eefbff;
+	margin-bottom: 15px;
+	overflow: hidden;
+	border-radius: 5px;
+}
+.entry p {
+	border: 1px solid #93E0F9;
+	background: #fff;
+	margin: 0;
+	resize: none;
+	padding: 0;
+	padding: 5px;
+}
+.entry input[type="text"], .entry textarea {
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	display: block;
+	color: #616161;
+	font-size: 13px;
+	background: #fff;
+	height: 29px;
+	border: none;
+	width: 100%;
+	padding: 0;
+	resize: none;
+}
+.entry textarea {
+	height: 150px;
+}
+.entry.entry-2 {
+	background-color: #f4f4f4;
+}
+.entry.entry-2 p {
+	border: 1px solid #bfbfbf;
+}
+.lb-content {
+	padding: 15px 20px;
+}
+.btns {
+	overflow: hidden;
+}
+.btns span, .btns a {
+	float: left;
+	width: 140px;
+	text-align: center;
+	cursor: pointer;
+}
+.btns span.btn-8, .btns a.btn-8 {
+	margin-left: 86px;
+	margin-right: 12px;
+	padding:0 0 0 0;
+}
+/*- End of Add Listing Light Box Styles -----------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------*/
+
+/*- Light Box Size 1 Styles -----------------------------------------------------------*/
+.lb-size-1 {
+	width: 327px;
+}
+.inner-wrapper {
+	margin: 8px;
+	border: 1px solid #efefef;
+	padding: 12px;
+}
+.inner-wrapper .lb-ttl {
+	border-bottom: none;
+	font-size: 15px;
+}
+.inner-wrapper .btns a, .inner-wrapper .btns span {
+	margin: 0;
+	width: 98px;
+}
+.inner-wrapper .btns a.btn-8, .inner-wrapper .btns span.btn-8 {
+	margin-left: 15px!important;
+	margin-right: 14px;
+}
+.lb-size-1 .btns span, .lb-size-1 .btns a {
+	width: 97px;
+}
+.lb-size-1 .btns span.btn-8, .lb-size-1 .btns a.btn-8 {
+	margin-left: 33px;
+}
+.schedule-lb .entry select {
+	margin-left: 12px;
+}
+.schedule-lb .entry span, .schedule-lb .entry select {
+	float: left;
+	display: block;
+	line-height: 24px;
+}
+.schedule-lb .entry span {
+	font-size: 12px;
+	color: #616161;
+	font-weight: bold;
+	width: 60px;
+}
+.lbox .btn-2 {
+	background: url("../images/btn-2.jpg") repeat-x scroll 0 0 transparent;
+	border: 1px solid #C38018;
+	border-radius: 5px 5px 5px 5px;
+	color: #FFFFFF;
+	display: block;
+	font-size: 14px;
+	height: 36px;
+	line-height: 36px;
+	text-align: center;
+	text-shadow: -1px 1px 0 #D59727;
+}
+.lbox .btn-2:hover {
+	cursor: pointer;
+	text-decoration: none;
+}
+.lbox .btn-8 {
+	background: url("../images/btn-8.jpg") repeat-x scroll 0 0 transparent;
+	border: 1px solid #BCBBBB;
+	border-radius: 5px 5px 5px 5px;
+	box-shadow: 0 1px 0 #E3E3E3;
+	color: #616161;
+	display: block;
+	font-size: 14px;
+	height: 36px;
+	line-height: 36px;
+	text-shadow: 0 1px 0 #FFFFFF;
+	text-align: center;
+}
+.lbox .btn-8:hover {
+	text-decoration: none;
+}
+.lbox .btn-11 {
+	background: url("../images/btn-11.jpg") repeat-x scroll 0 0 transparent;
+	border: 1px solid #d46c43;
+	border-radius: 5px;
+	display: block;
+	height: 36px;
+	line-height: 36px;
+	font-size: 13px;
+	color: #fff;
+	text-shadow: 0 1px 0 #bb401d;
+}
+.lbox .btn-11:hover {
+	text-decoration: none;
+}

@@ -1,0 +1,73 @@
+.s-message { cursor:pointer;}
+.right { position:relative;z-index:1;}
+.s-message.current {
+	position:relative;
+	z-index:2;}
+	.conversation {
+		display:none;}
+	
+.loading {
+	position:absolute;
+	background:#FF9 !important;
+	color:#000 !important;
+	line-height:normal !important;
+	padding:2px 4px !important;
+	right: 0px !important;
+	top: 0px !important;
+	display:none;}
+	.user-messages > .right > div {
+		background-color:#fff;
+		border: 0px none;
+		border-radius: 0 0 0 0;
+		overflow: visible;
+		padding:0;
+	}
+.user-messages > .right .conversation div {
+	background-color: #F3F3F3;
+	border: 1px solid #FFFFFF;
+	border-radius: 2px 2px 2px 2px;
+	overflow: hidden;
+	padding: 12px 35px;
+}
+.user-messages > .right .conversation div h4 {
+	margin-bottom: 10px;
+}
+.user-messages .right  textarea {
+	border: 1px solid #DDDDDD;
+	box-shadow: -1px 0 0 #FFFFFF;
+	color: #303030;
+	font-size: 12px;
+	min-height: 41px;
+	padding: 5px;
+	resize: none;
+	width: 443px;
+}
+.user-messages .right input[type="submit"] {
+	border: medium none;
+	float: right;
+	height: 24px;
+	margin-top: 9px;
+}
+.user-messages .right .conversation ul {
+	list-style: none outside none;
+	padding: 0 35px;
+}
+.user-messages .right .conversation ul li {
+	border-bottom: 1px dotted #B2B2B2;
+	color: #303030;
+	padding: 17px 0;
+}
+.user-messages .right .conversation ul li:last-child {
+	border-bottom:0 none;}
+.user-messages .right .conversation ul li h4 {
+	font-size: 13px;
+	line-height: 20px;
+	margin: 0;
+}
+.user-messages .right .conversation ul li p {
+	line-height: 20px;
+}
+.user-messages .right .conversation ul li span {
+	font-size: 11px;
+	line-height: 20px;
+}

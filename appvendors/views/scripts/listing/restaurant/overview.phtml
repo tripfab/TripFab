@@ -1,0 +1,154 @@
+<style type="text/css">
+.hidden { display:none;}
+.lstng-detail { position:relative;}
+.lstng-detail .help {
+	position:absolute;
+	top:20px;
+	left:240px;}
+.lstng-detail .help a.eye {
+	display:block;
+	background:url(/images2/eye.png) no-repeat top left;
+	width:18px;
+	height:12px;
+	text-indent:-9999px;
+	cursor:pointer;}
+	.lstng-detail .help:hover a.eye {
+		background-position:left -12px;}
+.lstng-detail.first .help {
+	top:0px;}
+	.lstng-detail .help a.tooltip3 {
+		background:url(/images2/help-tooltip-bg.png) top left no-repeat;
+		left: 17px;
+		padding:11px 12px;
+		position:absolute;
+		top:-102px;
+		z-index:1000;
+		display:none;}
+	.lstng-detail .help:hover a.tooltip3 {
+		display:block;}
+
+.lstng-detail {
+	overflow:visible;}
+</style>
+<form action="" method="post">
+    <div class="lstng-details pricing overview">
+  		<?php if($this->help->res_overview == 0): ?>
+    	<div class="desc">
+    		<h3>What is the Overview Section?</h3>
+    		<p>Let people know about your restaurant, how is the experience, what to expect, things they'll love.</p>
+    		<a href="" rel="res_overview" class="remove">Remove</a>
+    	</div><!-- closes desc -->
+        <?php endif ?>
+    	<div class="main-ttl">
+    		<p><strong>Restaurant Overview</strong></p>    		
+    	</div><!-- closes main-ttl -->								
+        <div class="lstng-detail">
+            <textarea placeholder="Write a nice overview about your restaurant" class="noclean" name="about" cols="30" rows="1"><?= stripslashes($this->overview->about) ?></textarea>
+            <strong>About the restaurant</strong>
+            <span>Write a detail description</span>
+            <!--<span class="counter">500</span>-->
+            <div class="help">
+                <a href="/images2/help/big-res-overview-about.png" class="eye">help</a>
+                <a href="/images2/help/big-res-overview-about.png" class="tooltip3">
+                <img src="/images2/help/small-res-overview-about.png" /></a>
+            </div>
+            <div class="clear"></div>
+        </div><!-- closes lstng-detail -->
+        <div class="lstng-detail">
+            <textarea placeholder="Write a nice description about what to expect" class="noclean" name="expect" cols="30" rows="1"><?= stripslashes($this->overview->expect) ?></textarea>
+            <strong>Ambience</strong>
+            <span>Tell us what the traveler can expect</span>
+            <!--<span class="counter">500</span>-->
+            <div class="help">
+                <a href="/images2/help/big-res-overview-ambience.png" class="eye">help</a>
+                <a href="/images2/help/big-res-overview-ambience.png" class="tooltip3">
+                <img src="/images2/help/small-res-overview-ambience.png" /></a>
+            </div>
+            <div class="clear"></div>
+        </div><!-- closes lstng-detail -->
+        <div class="lstng-detail">
+            <textarea placeholder="Write a nice description about thing people will love" class="noclean" name="love" cols="30" rows="1"><?= stripslashes($this->overview->love) ?></textarea>
+            <strong>Good for</strong>
+            <span>Write about things people will love about it</span>
+            <!--<span class="counter">500</span>-->
+            <div class="help">
+                <a href="/images2/help/big-res-overview-good.png" class="eye">help</a>
+                <a href="/images2/help/big-res-overview-good.png" class="tooltip3">
+                <img src="/images2/help/small-res-overview-good.png" /></a>
+            </div>
+            <div class="clear"></div>
+        </div><!-- closes lstng-detail -->
+        <div class="lstng-detail faq last">								
+            <strong>Restrictions</strong>
+            <span>Write a detailed description</span><br />
+            
+            <div class="clear"></div>
+            <?php $exists = false; ?>
+            <?php foreach($this->details as $detail): ?>
+            <?php if($detail->type == 3): ?>
+            <?php $exists = true; ?>
+            <div class="item">
+                <a href="#delete_detail_<?= $detail->id ?>" class="remove">remove</a>
+                <input placeholder="Enter your restriction text here" type="text" class="noclean" name="detail[<?= $detail->id ?>][text]" value="<?= $detail->text ?>" />
+                <div class="clear"></div>
+            </div>
+            <?php endif ?>
+            <?php endforeach ?>
+            
+            
+            <?php if($exists): ?>
+            <div class="item">
+                <a href="" class="remove"></a>
+                <input placeholder="Enter your restriction text here" type="text" name="details[3][0][text]" value="" />
+                <div class="clear"></div>
+            </div>
+            <?php else: ?>
+            <div class="item">
+                <a href="" class="remove"></a>
+                <input placeholder="Enter your restriction text here" type="text" name="details[3][0][text]" value="" />
+                <div class="clear"></div>
+            </div>
+            <div class="item">
+                <a href="" class="remove"></a>
+                <input placeholder="Enter your restriction text here" type="text" name="details[3][1][text]" value="" />
+                <div class="clear"></div>
+            </div>
+            <div class="item">
+                <a href="" class="remove"></a>
+                <input placeholder="Enter your restriction text here" type="text" name="details[3][2][text]" value="" />
+                <div class="clear"></div>
+            </div>
+            <div class="item">
+                <a href="" class="remove"></a>
+                <input placeholder="Enter your restriction text here" type="text" name="details[3][3][text]" value="" />
+                <div class="clear"></div>
+            </div>
+            <div class="item">
+                <a href="" class="remove"></a>
+                <input placeholder="Enter your restriction text here" type="text" name="details[3][4][text]" value="" />
+                <div class="clear"></div>
+            </div>
+            <?php endif ?>
+            
+            <div class="hidden restriction detail">
+            	<a href="" class="remove"></a>
+                <input placeholder="Enter your restriction text here" type="text" name="text" value="" />
+                <div class="clear"></div>
+            </div>
+            <a href="" id="addRestriction" class="link-5">Add another item</a>
+            <div class="help">
+                <a href="/images2/help/big-res-specialities-policies.png" class="eye">help</a>
+                <a href="/images2/help/big-res-specialities-policies.png" class="tooltip3">
+                <img src="/images2/help/small-res-specialities-policies.png" /></a>
+            </div>
+            <div class="clear"></div>
+        </div><!-- closes lstng-detail -->
+    </div><!-- closes lstng-details -->
+    <div class="foot">
+        <input type="submit" class="btn-1 noclean" value="Save Changes" />
+    </div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'edit-overview') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_overview') ?>" />
+</form>

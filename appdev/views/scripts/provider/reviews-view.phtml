@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> : Profile | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+    <script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('textarea').elastic();				
+            $('input, textarea').ToggleInputValue();
+            $('form select').jqTransSelect();
+			
+			$('.s-qa a.reportAbuse').click(function(){
+				showAlert('This review has been successfuly reported');
+				return false;
+			});
+			$('.s-qa a.btn-4').fancybox({
+				padding:0,
+				showCloseButton:0,
+				overlayColor:'#fff',
+			});
+			$('.sendMessageForm').submit(function(){
+				$form = $(this);
+				$data = {
+					message:$('textarea[name=message]', $form).val(),
+					user:$('input[name=user]', $form).val(),
+				};
+				if($data.message == ''){
+					showError('Enter a message');
+					return false;
+				}
+				
+				$.ajax({
+					url:'/ajax/sendmsguser',
+					data:$data,
+					type:'post',
+					success:function(response){
+						$.fancybox.close();
+						if(response.type == 'success'){
+							showAlert(response.message);
+							$('textarea[name=message]', $form).val('');
+						} else {
+							showError(response.message);
+							$('textarea[name=message]', $form).val('');
+						}
+					},
+					error:function(){
+						$.fancybox.close();
+						showError('Something went wrong, Please try again later');
+						$('textarea[name=message]', $form).val('');
+					}
+				});
+				return false;
+			});
+			$('.s-qa a.btn-1').click(function(){
+				$(this).fadeOut('slow');
+				$parent = $(this).parents('.s-qa');
+				$('.timespan', $parent).fadeOut('slow');
+				showAlert('This review has been marked as read');
+				return false;
+			});
+        });
+    </script>
+    <style type="text/css">
+	.hidden { display:none;}
+	</style>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-messages">
+            <?= $this->partial('partials/vendormainmenu.phtml', array('active'=>'Reviews','parentActive'=>'Reviews \&amp; Questions')); ?>			
+            <div class="subttl">
+                <a href="" class="link-4">Back to Reviews</a>
+                You have <?= count($this->reviews) ?> new reviews for this listing
+            </div><!-- closes bc -->
+            <?php if(count($this->reviews) > 0): ?>
+            <div class="reviews-questions rev">
+            	<?php foreach($this->reviews as $review): ?>
+                <div class="s-qa new">
+                    <div class="q">
+                        <div class="left">
+                            <strong><?= $review->user_name ?></strong>
+                            <span>Posted on <?= date('M d, Y', strtotime($review->created)) ?></span>
+                        </div><!-- closes left -->
+                        <div class="right">
+                            <?= $this->escape($review->text) ?>
+                        </div><!-- closes right -->
+                    </div><!-- closes q -->
+                    <div class="bottom">
+                        <div class="right">
+                            <a href="" class="reportAbuse">Report Abuse</a>
+                            <a href="" class="btn-1">Mark as Read</a>
+                            <a href="#send_message_<?= $review->user_id ?>" class="btn-4">Contact Client</a>
+                        </div><!-- closes right -->
+                    </div><!-- closes bottom -->
+                    <div class="timespan">
+                        <span>New</span>
+                    </div><!-- closes timespan -->
+                </div><!-- closes s-qa -->
+                <?php endforeach ?>			
+            </div><!-- closes reviews-questions -->
+            <?php else: ?>
+            <div class="empty-container">
+                <img src="/images/empty-10.png" alt="" /><br />
+                There are no reviews for this listing :(
+            </div><!-- closes empty -->
+            <?php endif ?>
+        </div><!-- closes user-messages -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+<div class="hidden">
+	<?php $users = array(); ?>
+	<?php foreach($this->reviews as $review): ?>
+    <?php if(!in_array($review->user_id, $users)): $users[] = $review->user_id ?>
+	<div id="send_message_<?= $review->user_id ?>">
+        <form action="" class="sendMessageForm">
+            <div class="lb-forgot">
+                <div class="ttl">Send a message to <?= $review->user_name ?></div>
+                <div class="content">
+                    <textarea cols="30" name="message" rows="1"></textarea>
+                </div><!-- closes content -->
+                <div class="bottom">
+                    <input type="submit" class="btn-1" value="Send Message" />
+                    <span onclick="$.fancybox.close()" class="btn-4">Cancel</span>				
+                </div><!-- closes bottom -->
+            </div><!-- closes lb-forgot -->
+            <input type="hidden" name="user" value="<?= $review->user_id ?>" />
+        </form>
+    </div>
+    <?php endif ?>
+    <?php endforeach ?>
+</div>
+</body>
+</html>

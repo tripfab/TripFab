@@ -1,0 +1,671 @@
+<style type="text/css">
+label { float: left; padding: 5px 0; margin: 0;}
+.hidden { display:none;}
+.profile-items.rooms .item .selects a.link-5 { float:right;}
+.error  {
+	padding:5px; 
+	border:1px solid #F00;
+	margin:20px 0 0;
+	color:#F00;
+	font-style:italic;}
+.profile-items.rooms .item .selects a.remove {
+	margin-left:155px;
+	margin-top:5px;}
+.item { position:relative;}
+.item .help {
+	position:absolute;
+	top:13px;
+	left:-35px;}
+.item .help a.eye {
+	display:block;
+	background:url(/images2/eye.png) no-repeat top left;
+	width:18px;
+	height:12px;
+	text-indent:-9999px;
+	cursor:pointer;}
+	.item .help:hover a.eye {
+		background-position:left -12px;}
+.item.first .help {
+	top:0px;}
+	.item .help a.tooltip3 {
+		background:url(/images2/help-tooltip-bg.png) top left no-repeat;
+		left: 17px;
+		padding:11px 12px;
+		position:absolute;
+		top:-102px;
+		z-index:1000;
+		display:none;}
+	.item .help:hover a.tooltip3 {
+		display:block;}
+</style>
+<?php if($_POST): ?>
+<?php $sch = $this->data['sch'];$room = $this->data['room'];$beds = $this->data['beds'];$ammm = $this->data['ammm']; ?>
+<form action="" method="post">
+    <div class="profile-items rooms">
+    	<?php if($this->errors): ?>
+        <div class="error">
+        	<?php foreach($this->errors as $err): ?>
+            <p><?= $err ?></p>
+            <?php endforeach ?>
+        </div>
+        <?php endif ?>
+  		<?php if($this->help->hot_room == 0): ?>
+        <div class="desc">
+        	<h3>What is the Room Section?</h3>
+        	<p>In this section you can manage your hotel's room types. You can add, edit, or remove them</p>
+        	<a href="" rel="hot_room" class="remove">Remove</a>
+        </div><!-- closes desc -->
+        <?php endif ?>
+        <div class="item-wrppr">
+            <div class="item-ttl">
+                Basic Information
+            </div><!-- closes item ttl -->
+            <div class="item first">
+                <input placeholder="The room name (i.e. Standard)" type="text" class="noclean" name="name" value="<?= $_POST['name'] ?>" />
+                <h4>Room Name</h4>
+                <div class="help">
+                    <a href="/images2/help/big-hot-rooms-name.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-rooms-name.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-rooms-name.png" /></a>
+                </div>
+            </div><!-- closes item -->
+            <div class="item last">
+                <textarea placeholder="Write a nice description about this room" cols="30" class="noclean" name="room[description]" rows="1"><?= $_POST['room']['description'] ?></textarea>
+                <h4>Description</h4>
+                <span>Write a brief description for the room</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-rooms-description.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-rooms-description.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-rooms-description.png" /></a>
+                </div>
+            </div><!-- closes item -->
+            <div class="clear"></div>									
+        </div><!-- closes item-wrppr -->
+        <div class="item-wrppr">
+            <div class="item-ttl">
+                Details
+            </div><!-- closes item ttl -->
+            <div class="item first">
+                <div class="selects">
+                    <select name="room[quantity]">
+	                    <option value="1">1 room</option>
+                    	<?php for($i=2;$i<=100;$i++): ?>
+                        <?php $selected = ($_POST['room']['quantity'] == $i) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> rooms</option>
+    					<?php endfor ?>
+                    </select>
+                </div><!-- closes selects -->
+                <h4>Quantity</h4>
+                <span>The ammount of this kind of rooms</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">
+                    <select name="room[nights]">
+                        <option value="1">1 night</option>
+                        <?php for($i=2;$i<=5;$i++): ?>
+                        <?php $selected = ($_POST['room']['nights'] == $i) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> nights</option>
+    					<?php endfor ?>
+                    </select>
+                </div><!-- closes selects -->
+                <h4>Minimun Stay</h4>
+                <span>The minimun ammount of nights</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">
+                    <select name="room[people]">
+                    	<option value="1">1 person</option>
+                        <?php for($i=2;$i<=12;$i++): ?>
+                        <?php $selected = ($_POST['room']['people'] == $i) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> people</option>
+    					<?php endfor ?>
+                    </select>
+                </div> <!-- closes selects -->
+                <h4>Maximun Accommodates</h4>
+                <span>Maximun people per room</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">
+                    <select name="room[bedrooms]">
+                        <option value="1">1 bedroom</option>
+                        <?php for($i=2;$i<=12;$i++): ?>
+                        <?php $selected = ($_POST['room']['bedrooms'] == $i) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> bedrooms</option>
+    					<?php endfor ?>
+                    </select>
+                </div><!-- closes selects -->
+                <h4>Bedrooms</h4>
+                <span>How many bedrooms</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">
+                    <select name="room[beds]">
+                        <option value="1">1 bed</option>
+                        <?php for($i=2;$i<=20;$i++): ?>
+                        <?php $selected = ($_POST['room']['beds'] == $i) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> beds</option>
+    					<?php endfor ?>
+                    </select>
+                </div><!-- closes selects -->
+                <h4>Beds</h4>
+                <span>How many of this room there are in the hotel?</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">
+                	<?php if(is_array($_POST['bed'])): ?>
+                	<?php foreach($_POST['bed'] as $key => $bed): ?>
+                	<div class="bed">
+                    	<a class="remove removeBed" href="">Delete</a>
+                        <select name="bed[<?= $key ?>][quantity]">
+                            <?php for($i=1;$i<=20;$i++): ?>
+                            <?php $selected = ($bed[quantity] == $i) ? 'selected="selected"' : '' ?>
+                            <option <?= $selected ?> value="<?= $i ?>"><?= $i ?></option>
+                            <?php endfor ?>
+                        </select>
+                        <select name="bed[<?= $key ?>][type]">
+                            <?php $selected = ($bed[type] == "Single") ? 'selected="selected"' : '' ?>
+                            <option <?= $selected ?> value="Single">Single</option>
+                            <?php $selected = ($bed[type] == "Double") ? 'selected="selected"' : '' ?>
+                            <option <?= $selected ?> value="Double">Double</option>
+                            <?php $selected = ($bed[type] == "Queen") ? 'selected="selected"' : '' ?>
+                            <option <?= $selected ?> value="Queen">Queen</option>
+                            <?php $selected = ($bed[type] == "King") ? 'selected="selected"' : '' ?>
+                            <option <?= $selected ?> value="King">King</option>
+                        </select>
+                        <div class="clear"></div>
+                    </div>
+                    <?php endforeach ?>
+                    <?php endif ?>
+                    
+                    <?php if(is_array($_POST['beds'])): ?>
+                    <?php foreach($_POST['beds'] as $key => $bed): ?>
+                	<div class="bed">
+                    	<a class="remove removeBed" href="">Delete</a>
+                        <select name="beds[<?= $key ?>][quantity]">
+                            <?php for($i=1;$i<=20;$i++): ?>
+                            <?php $selected = ($bed[quantity] == $i) ? 'selected="selected"' : '' ?>
+                            <option <?= $selected ?> value="<?= $i ?>"><?= $i ?></option>
+                            <?php endfor ?>
+                        </select>
+                        <select name="beds[<?= $key ?>][type]">
+                            <?php $selected = ($bed[type] == "Single") ? 'selected="selected"' : '' ?>
+                            <option <?= $selected ?> value="Single">Single</option>
+                            <?php $selected = ($bed[type] == "Double") ? 'selected="selected"' : '' ?>
+                            <option <?= $selected ?> value="Double">Double</option>
+                            <?php $selected = ($bed[type] == "Queen") ? 'selected="selected"' : '' ?>
+                            <option <?= $selected ?> value="Queen">Queen</option>
+                            <?php $selected = ($bed[type] == "King") ? 'selected="selected"' : '' ?>
+                            <option <?= $selected ?> value="King">King</option>
+                        </select>
+                        <div class="clear"></div>
+                    </div>
+                    <?php endforeach ?>
+                    <?php endif ?>
+                    <div class="bed new hidden">
+                    	<a class="remove removeBed" href="">Delete</a>
+                        <select name="quantity">
+                            <?php for($i=1;$i<=20;$i++): ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                            <?php endfor ?>
+                        </select>
+                        <select name="type">
+                            <option value="Single">Single</option>
+                            <option value="Double">Double</option>
+                            <option value="Queen">Queen</option>
+                            <option value="King">King</option>
+                        </select>
+                        <div class="clear"></div>
+                    </div>
+                    <a href="#" id="addNewBedType" class="link-5">Add a New Bed Type</a>
+                </div><!-- closes selects -->
+                <h4>Bed Types</h4>
+                <span>What kind of beds are there in the room?</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">
+                    <select name="room[size_type]">
+                        <?php $selected = ($_POST['room']['size_type'] == "ft") ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="ft">Square Feet</option>
+                        <?php $selected = ($_POST['room']['size_type'] == "m") ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="m">Square Meters</option>												
+                    </select>
+                    <input name="room[size]" type="text" value="<?= $_POST['room']['size'] ?>" class="noclean short" />
+                </div><!-- closes selects -->
+                <h4>Size (optional)</h4>
+                <span>Size of the room</span>
+            </div><!-- closes item -->
+            <div class="item last">
+                <div class="inner-container">
+                    <table>
+                    	<?php for($i=0;$i<count($this->amenities);$i=$i+2): ?>
+                        <tr>
+                        	<?php for($j=$i;($j<count($this->amenities)) and ($j<$i+2); $j++): ?>
+                            <?php if(is_array($_POST['amenities'])): ?>
+                            <?php $checked = (in_array($this->amenities[$j]->id, $_POST['amenities'])) ? 'checked="checked"' : ''; ?>
+                            <?php endif ?>
+                            <td><input <?= $checked ?> name="amenities[<?= $this->amenities[$j]->id ?>]" 
+                            value="<?= $this->amenities[$j]->id ?>" type="checkbox"/>                            
+							<?= $this->amenities[$j]->name ?></td>
+                            <?php endfor ?>
+                        </tr>
+                        <?php endfor ?>
+                    </table>
+                </div><!-- closes inner-container -->
+                <h4>Amenities</h4>
+                <span>Select Amenities</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-rooms-amenities.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-rooms-amenities.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-rooms-details.png" /></a>
+                </div>
+            </div><!-- closes item -->
+            <div class="clear"></div>									
+        </div><!-- closes item-wrppr -->
+    </div><!-- closes profile-items -->
+    <div class="foot">
+        <input type="submit" class="noclean btn-1" value="Save Changes" />
+    </div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'edit-room') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_room') ?>" />
+    <input type="hidden" name="roomtoken" value="<?= md5($room->id) ?>" />
+    <input type="hidden" name="roomid" value="<?= $room->id ?>" />
+</form>
+<?php else: ?>
+<?php if($this->data): ?>
+<?php $sch = $this->data['sch'];$room = $this->data['room'];$beds = $this->data['beds'];$ammm = $this->data['ammm']; ?>
+<form action="" method="post">
+    <div class="profile-items rooms">
+    	<?php if($this->errors): ?>
+        <div class="error">
+        	<?php foreach($this->errors as $err): ?>
+            <p><?= $err ?></p>
+            <?php endforeach ?>
+        </div>
+        <?php endif ?>
+  		<?php if($this->help->hot_room == 0): ?>
+        <div class="desc">
+        	<h3>What is the Room Section?</h3>
+        	<p>In this section you can manage your hotel's room type. Add, remove or edit the information of this room.</p>
+        	<a href="" rel="hot_room" class="remove">Remove</a>
+        </div><!-- closes desc -->
+        <?php endif ?>
+        <div class="item-wrppr">
+            <div class="item-ttl">
+                Basic Information
+            </div><!-- closes item ttl -->
+            <div class="item first">
+                <input placeholder="The room title (i.e. Standard)" type="text" class="noclean" name="name" value="<?= $sch->name ?>" />
+                <h4>Room Name</h4>
+                <div class="help">
+                    <a href="/images2/help/big-hot-rooms-name.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-rooms-name.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-rooms-name.png" /></a>
+                </div>
+            </div><!-- closes item -->
+            <div class="item last">
+                <textarea cols="30" placeholder="Write a nice description about this room" class="noclean" name="room[description]" rows="1"><?= $room->description ?></textarea>
+                <h4>Description</h4>
+                <span>Write a brief description for the room</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-rooms-description.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-rooms-description.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-rooms-description.png" /></a>
+                </div>
+            </div><!-- closes item -->
+            <div class="clear"></div>									
+        </div><!-- closes item-wrppr -->
+        <div class="item-wrppr">
+            <div class="item-ttl">
+                Details
+            </div><!-- closes item ttl -->
+            <div class="item first">
+                <div class="selects">
+                    <select name="room[quantity]">
+	                    <option value="1">1 room</option>
+                    	<?php for($i=2;$i<=100;$i++): ?>
+                        <?php $selected = ($room->quantity == $i) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> rooms</option>
+    					<?php endfor ?>
+                    </select>
+                </div><!-- closes selects -->
+                <h4>Quantity</h4>
+                <span>The ammount of this kind of rooms</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">
+                    <select name="room[nights]">
+                        <option value="1">1 night</option>
+                        <?php for($i=2;$i<=5;$i++): ?>
+                        <?php $selected = ($room->nights == $i) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> nights</option>
+    					<?php endfor ?>
+                    </select>
+                </div><!-- closes selects -->
+                <h4>Minimun Stay</h4>
+                <span>The minimun ammount of nights</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">
+                    <select name="room[people]">
+                    	<option value="1">1 person</option>
+                        <?php for($i=2;$i<=12;$i++): ?>
+                        <?php $selected = ($room->people == $i) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> people</option>
+    					<?php endfor ?>
+                    </select>
+                </div> <!-- closes selects -->
+                <h4>Maximun Accommodates</h4>
+                <span>Maximun people per room</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">
+                    <select name="room[bedrooms]">
+                        <option value="1">1 bedroom</option>
+                        <?php for($i=2;$i<=12;$i++): ?>
+                        <?php $selected = ($room->bedrooms == $i) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> bedrooms</option>
+    					<?php endfor ?>
+                    </select>
+                </div><!-- closes selects -->
+                <h4>Bedrooms</h4>
+                <span>How many bedrooms</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">
+                    <select name="room[beds]">
+                        <option value="1">1 bed</option>
+                        <?php for($i=2;$i<=20;$i++): ?>
+                        <?php $selected = ($room->beds == $i) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> beds</option>
+    					<?php endfor ?>
+                    </select>
+                </div><!-- closes selects -->
+                <h4>Beds</h4>
+                <span>How many of this room there are in the hotel?</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">
+                	<?php foreach($beds as $bed): ?>
+                	<div class="bed">
+                    	<a class="remove removeBed" href="">Delete</a>
+                        <select name="bed[<?= $bed->id ?>][quantity]">
+                            <?php for($i=1;$i<=20;$i++): ?>
+                            <?php $selected = ($bed->quantity == $i) ? 'selected="selected"' : '' ?>
+                            <option <?= $selected ?> value="<?= $i ?>"><?= $i ?></option>
+                            <?php endfor ?>
+                        </select>
+                        <select name="bed[<?= $bed->id ?>][type]">
+                            <?php $selected = ($bed->type == "Single") ? 'selected="selected"' : '' ?>
+                            <option <?= $selected ?> value="Single">Single</option>
+                            <?php $selected = ($bed->type == "Double") ? 'selected="selected"' : '' ?>
+                            <option <?= $selected ?> value="Double">Double</option>
+                            <?php $selected = ($bed->type == "Queen") ? 'selected="selected"' : '' ?>
+                            <option <?= $selected ?> value="Queen">Queen</option>
+                            <?php $selected = ($bed->type == "King") ? 'selected="selected"' : '' ?>
+                            <option <?= $selected ?> value="King">King</option>
+                        </select>
+                        <div class="clear"></div>
+                    </div>
+                    <?php endforeach ?>
+                    <div class="bed new hidden">
+                    	<a class="remove removeBed" href="">Delete</a>
+                        <select name="quantity">
+                            <?php for($i=1;$i<=20;$i++): ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                            <?php endfor ?>
+                        </select>
+                        <select name="type">
+                            <option value="Single">Single</option>
+                            <option value="Double">Double</option>
+                            <option value="Queen">Queen</option>
+                            <option value="King">King</option>
+                        </select>
+                        <div class="clear"></div>
+                    </div>
+                    <a href="#" id="addNewBedType" class="link-5">Add a New Bed Type</a>
+                </div><!-- closes selects -->
+                <h4>Bed Types</h4>
+                <span>What kind of beds are there in the room?</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">
+                    <select name="room[size_type]">
+                        <?php $selected = ($room->size_type == "ft") ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="ft">Square Feet</option>
+                        <?php $selected = ($room->size_type == "m") ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="m">Square Meters</option>												
+                    </select>
+                    <input name="room[size]" type="text" value="<?= $room->size ?>" class="noclean short" />
+                </div><!-- closes selects -->
+                <h4>Size (optional)</h4>
+                <span>Size of the room</span>
+            </div><!-- closes item -->
+            <div class="item last">
+                <div class="inner-container">
+                    <table>
+                    	<?php for($i=0;$i<count($this->amenities);$i=$i+2): ?>
+                        <tr>
+                        	<?php for($j=$i;($j<count($this->amenities)) and ($j<$i+2); $j++): ?>
+                            <?php $checked = (in_array($this->amenities[$j]->id, $ammm)) ? 'checked="checked"' : ''; ?>
+                            <td><input <?= $checked ?> name="amenities[<?= $this->amenities[$j]->id ?>]" 
+                            value="<?= $this->amenities[$j]->id ?>" type="checkbox"/>                            
+							<?= $this->amenities[$j]->name ?></td>
+                            <?php endfor ?>
+                        </tr>
+                        <?php endfor ?>
+                    </table>
+                </div><!-- closes inner-container -->
+                <h4>Amenities</h4>
+                <span>Select Amenities</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-rooms-amenities.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-rooms-amenities.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-rooms-details.png" /></a>
+                </div>
+            </div><!-- closes item -->
+            <div class="clear"></div>									
+        </div><!-- closes item-wrppr -->
+    </div><!-- closes profile-items -->
+    <div class="foot">
+        <input type="submit" class="noclean btn-1" value="Save Changes" />
+    </div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'edit-room') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_room') ?>" />
+    <input type="hidden" name="roomtoken" value="<?= md5($room->id) ?>" />
+    <input type="hidden" name="roomid" value="<?= $room->id ?>" />
+</form>
+
+
+
+<?php else: ?>
+
+
+
+
+<form action="" method="post">
+    <div class="profile-items rooms">
+    	<?php if($this->errors): ?>
+        <div class="error">
+        	<?php foreach($this->errors as $err): ?>
+            <p><?= $err ?></p>
+            <?php endforeach ?>
+        </div>
+        <?php endif ?>
+        <?php if($this->help->hot_room == 0): ?>
+        <div class="desc">
+        	<h3>What is the Room Section?</h3>
+        	<p>In this section you can manage your hotel's room type. Add, remove or edit the information of this room.</p>
+        	<a href="" rel="hot_room" class="remove">Remove</a>
+        </div><!-- closes desc -->
+        <?php endif ?>
+        <div class="item-wrppr">
+            <div class="item-ttl">
+                Basic Information
+            </div><!-- closes item ttl -->
+            <div class="item first">
+                <input placeholder="The room name (i.e. Standard)" type="text" name="name" value="" />
+                <h4>Room Name</h4>
+                <div class="help">
+                    <a href="/images2/help/big-hot-rooms-name.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-rooms-name.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-rooms-name.png" /></a>
+                </div>
+            </div><!-- closes item -->
+            <div class="item last">
+                <textarea placeholder="Write a nice description about this room" cols="30" name="room[description]" rows="1"></textarea>
+                <h4>Description</h4>
+                <span>Write a brief description for the room</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-rooms-description.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-rooms-description.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-rooms-description.png" /></a>
+                </div>
+            </div><!-- closes item -->
+            <div class="clear"></div>									
+        </div><!-- closes item-wrppr -->
+        <div class="item-wrppr">
+            <div class="item-ttl">
+                Details
+            </div><!-- closes item ttl -->
+            <div class="item first">
+                <div class="selects">
+                    <select name="room[quantity]">
+	                    <option value="1">1 room</option>
+                    	<?php for($i=2;$i<=100;$i++): ?>
+                        <option value="<?= $i ?>"><?= $i ?> rooms</option>
+    					<?php endfor ?>
+                    </select>
+                </div><!-- closes selects -->
+                <h4>Quantity</h4>
+                <span>How many of this room there are in the hotel?</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">
+                    <select name="room[nights]">
+                        <option value="1">1 night</option>
+                        <?php for($i=2;$i<=5;$i++): ?>
+                        <option value="<?= $i ?>"><?= $i ?> nights</option>
+    					<?php endfor ?>
+                    </select>
+                </div><!-- closes selects -->
+                <h4>Minimun Stay</h4>
+                <span>Minimun amount of nights</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">
+                    <select name="room[people]">
+                    	<option value="1">1 person</option>
+                        <?php for($i=2;$i<=12;$i++): ?>
+                        <option value="<?= $i ?>"><?= $i ?> people</option>
+    					<?php endfor ?>
+                    </select>
+                </div> <!-- closes selects -->
+                <h4>Maximun Accommodates</h4>
+                <span>Maximun people per room</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">
+                    <select name="room[bedrooms]">
+                        <option value="1">1 bedroom</option>
+                        <?php for($i=2;$i<=12;$i++): ?>
+                        <option value="<?= $i ?>"><?= $i ?> bedrooms</option>
+    					<?php endfor ?>
+                    </select>
+                </div><!-- closes selects -->
+                <h4>Bedrooms</h4>
+                <span>How many bedrooms</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">
+                    <select name="room[beds]">
+                        <option value="1">1 bed</option>
+                        <?php for($i=2;$i<=20;$i++): ?>
+                        <option value="<?= $i ?>"><?= $i ?> beds</option>
+    					<?php endfor ?>
+                    </select>
+                </div><!-- closes selects -->
+                <h4>Beds</h4>
+                <span>How many beds in this room</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">
+                	<div class="bed">
+                        <select name="beds[0][quantity]">
+                            <?php for($i=1;$i<=20;$i++): ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                            <?php endfor ?>
+                        </select>
+                        <select name="beds[0][type]">
+                            <option value="Single">Single</option>
+                            <option value="Double">Double</option>
+                            <option value="King">King</option>
+                        </select>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="bed new hidden">
+                    	<a class="remove removeBed" href="">Delete</a>
+                        <select name="quantity">
+                            <?php for($i=1;$i<=20;$i++): ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                            <?php endfor ?>
+                        </select>
+                        <select name="type">
+                            <option value="Single">Single</option>
+                            <option value="Double">Double</option>
+                            <option value="King">King</option>
+                        </select>
+                        <div class="clear"></div>
+                    </div>
+                    <a href="#" id="addNewBedType" class="link-5">Add a New Bed Type</a>
+                </div><!-- closes selects -->
+                <h4>Bed Types</h4>
+                <span>What kind of beds are there in the room?</span>
+            </div><!-- closes item -->
+            <div class="item">
+                <div class="selects">
+                    <select name="room[size_type]">
+                        <option value="ft">Square Feet</option>
+                        <option value="m">Square Meters</option>												
+                    </select>
+                    <input name="room[size]" type="text" class="short" />
+                </div><!-- closes selects -->
+                <h4>Size</h4>
+                <span>Size of the room</span>
+            </div><!-- closes item -->
+            <div class="item last">
+                <div class="inner-container">
+                    <table>
+                    	<?php for($i=0;$i<count($this->amenities);$i=$i+2): ?>
+                        <tr>
+                        	<?php for($j=$i;($j<count($this->amenities)) and ($j<$i+2); $j++): ?>
+                            <td><input name="amenities[<?= $this->amenities[$j]->id ?>]" value="<?= $this->amenities[$j]->id ?>" type="checkbox"/>                            <?= $this->amenities[$j]->name ?></td>
+                            <?php endfor ?>
+                        </tr>
+                        <?php endfor ?>
+                    </table>
+                </div><!-- closes inner-container -->
+                <h4>Amenities</h4>
+                <span>Select Amenities</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-rooms-amenities.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-rooms-amenities.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-rooms-details.png" /></a>
+                </div>
+            </div><!-- closes item -->
+            <div class="clear"></div>									
+        </div><!-- closes item-wrppr -->
+    </div><!-- closes profile-items -->
+    <div class="foot">
+        <input type="submit" class="btn-1" value="Save Changes" />
+    </div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'edit-room') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_room') ?>" />
+</form>
+<?php endif ?>
+<?php endif ?>

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> : Reservations | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+	<script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('textarea').elastic();				
+            $('input').ToggleInputValue();
+            $('form select').jqTransSelect();
+        });
+    </script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-messages">
+            <?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'Incoming','parentActive'=>'Reservations')); ?>
+            <div id="features">
+                <div class="top">
+                    <img src="/images2/img-50.png" alt="" class="der"/>
+                    <h2>Reservations</h2>
+                    <h3>Keep track of your past and present reservations in an efficient and carefully customized way.</h3>
+                    <p>Through TripFab's reservation platform  you can really keep all your past and present reservations organized, making it easier for you to prepare for each customer, check current events, special requests and  analyze each one on real time.</p>
+                    <img src="/images2/img-49.png" alt="" class="corner" />
+                </div>
+                <!-- closes top -->
+                <div class="bottom">
+                    <img src="/images2/img-51.png" alt="" class="izq" />
+                    <h4>Payment Methods</h4>
+                    <p>On each reservation you can see which payment method was used, the amount of each payment and check for cancellations or missing payments. TripFab does everything else for you and gives you all the information you may need in order to plan your business.</p>
+                    <div class="clear"></div>
+                    <img src="/images2/img-52.png" alt="" class="der" />
+                    <h4>Communicate Efficiently With Your Customers</h4>
+                    <p>The Reservations Platform allows you to accept , reject or postpone reservation by sending a message to your customer and letting him or her know the different options you offer according to your services and the amount of reservations you currently have.  You will never lose a client again due to lack of communication.</p>
+                    <div class="clear"></div>
+                    <img src="/images2/img-53.png" alt="" class="izq" />
+                    <h4>Total Earnings Available</h4>
+                    <p>Through the Incoming Reservations page you can clearly see what your earnings are on real time and request withdrawals at any time. You have complete control of your finance and earnings made via TripFab's platform at all times.</p>
+                </div>
+                <!-- closes bottom -->
+            </div>
+            <!-- closes features -->
+        </div><!-- closes user-messages -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+</body>
+</html>
