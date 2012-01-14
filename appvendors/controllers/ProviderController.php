@@ -1295,8 +1295,14 @@ class ProviderController extends Zend_Controller_Action
                             if($data['price'] == '0.00' || empty($data['price']))
                                 $errors[] = 'Rate cannot be 0';
                         }
-                        if(count($errors) > 0)
-                            $this->view->errors = $errors;
+                        if(count($errors) > 0) {
+                            $listings = 1;//$this->listings->countListings(null, $this->user->getVendorId());
+                            if($listings == 1){
+                                $this->view->congrats = true;
+                            } else {
+                                $this->_redirect ('/provider/listings/');
+                            }
+                        }
                         else {
 							$data['additional'] = $data['price'];
 							$data['additional_after'] = 1;
@@ -1305,7 +1311,7 @@ class ProviderController extends Zend_Controller_Action
                             if($listings == 1){
                                 $this->view->congrats = true;
                             } else {
-                                $this->_redirect ('provider/listings/edit/'.$listing->id);
+                                $this->_redirect ('/provider/listings/');
                             }
                         }
                     }

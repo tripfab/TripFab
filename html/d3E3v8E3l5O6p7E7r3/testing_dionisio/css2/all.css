@@ -12536,6 +12536,9 @@ ul.reviews li > div div.meta em.red {
 /*LIGHTBOX CREATE NEW DIRECTION------------------------------------------ */
 #new_direction {
 	width:217px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 }
 #new_direction .top {
 	background:url(../images2/g-54.gif) repeat-x;
@@ -12545,6 +12548,12 @@ ul.reviews li > div div.meta em.red {
 	margin-bottom:10px;
 	height: 44px;
 	color: #FFF;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright: 4px;
+	-moz-border-radius-bottomright: 0px;
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-radius: 4px 4px 0px 0px;
+	border-radius: 4px 4px 0px 0px; 
 }
 #new_direction select {
 	margin: 10px 0 20px 22px;
@@ -12554,6 +12563,12 @@ ul.reviews li > div div.meta em.red {
 	background:url("../images2/g-52.gif") repeat-x scroll 0 0 #F6F6F6;
 	overflow:hidden;
 	padding:17px 0 17px 20px;
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-topright: 0px;
+	-moz-border-radius-bottomright: 4px;
+	-moz-border-radius-bottomleft: 4px;
+	-webkit-border-radius: 0px 0px 4px 4px;
+	border-radius: 0px 0px 4px 4px; 
 }
 #new_direction .bottom a {
 	float:left;
