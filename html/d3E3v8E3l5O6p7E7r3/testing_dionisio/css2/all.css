@@ -12547,19 +12547,30 @@ ul.reviews li > div div.meta em.red {
 	color: #FFF;
 }
 #new_direction select {
-	width: 190px;
-	margin: 10px 0 20px 10px;
+	margin: 10px 0 20px 22px;
+    width: 176px;
 }
 #new_direction .bottom {
 	background:url("../images2/g-52.gif") repeat-x scroll 0 0 #F6F6F6;
 	overflow:hidden;
-	padding:17px 20px 17px 0;
+	padding:17px 0 17px 20px;
 }
 #new_direction .bottom a {
-	float:right;
+	float:left;
 	height:30px;
 	padding:0 10px;
 	font:bold 12px/30px Helvetica, sans-serif;
+}
+#new_direction .bottom .btn-1 {
+	background: url("../images2/btn-1.gif") repeat-x scroll left top transparent;
+    border: 1px solid #7AB130;
+    display: block;
+    float: left;
+    font: bold 11px/30px Helvetica;
+    height: 30px;
+    margin-left: 20px;
+    text-shadow: -1px 1px 1px #5C961F;
+    -moz-border-radius: 4px;
 }
 /*END LIGHTBOX CREATE NEW DIRECTION-------------------------------------- */
 
