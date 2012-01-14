@@ -377,10 +377,13 @@ input.schname { float:none !important; width:90px !important; }
                 Details
             </div><!-- closes item ttl -->
             <div class="item first">
-                <div class="selects">                	
+                <div class="selects">
                     <select name="checkin_hour">
                     	<?php foreach($hours as $h): ?>
-                        <?php if($h == (date('g:i', strtotime($this->listing->checkin)))): ?>
+                        <?php if(!is_null($this->listing->checkin) and $this->listing->checkin != '00:00:00' and 
+									$h == (date('g:i', strtotime($this->listing->checkin)))): ?>
+                        <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                        <?php elseif($h == '2:00'): ?>
                         <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
                         <?php else: ?>
                         <option value="<?= $h ?>"><?= $h ?></option>
@@ -388,15 +391,17 @@ input.schname { float:none !important; width:90px !important; }
                         <?php endforeach ?>
                     </select>
                     <select name="checkin_time">
-                    	<?php if('AM' == (date('A', strtotime($this->listing->checkin)))): ?>
+                    	<?php if(!is_null($this->listing->checkin) and $this->listing->checkin != '00:00:00' and 
+									'AM' == (date('A', strtotime($this->listing->checkin)))): ?>
                         <option selected="selected" value="AM">AM</option>
                         <option value="PM">PM</option>
-                        <?php elseif('PM' == (date('A', strtotime($this->listing->checkin)))): ?>
+                        <?php elseif(!is_null($this->listing->checkin) and $this->listing->checkin != '00:00:00' and 
+										'PM' == (date('A', strtotime($this->listing->checkin)))): ?>
                         <option value="AM">AM</option>
                         <option selected="selected" value="PM">PM</option>
                         <?php else: ?>
                         <option value="AM">AM</option>
-                        <option value="PM">PM</option>                        
+                        <option selected="selected" value="PM">PM</option>                        
                         <?php endif ?>
                     </select>
                 </div><!-- closes selects -->
@@ -409,10 +414,13 @@ input.schname { float:none !important; width:90px !important; }
                 </div>
             </div><!-- closes item -->
             <div class="item">
-                <div class="selects">                    
+                <div class="selects">
                     <select name="checkout_hour">
                     	<?php foreach($hours as $h): ?>
-                        <?php if($h == (date('g:i', strtotime($this->listing->checkout)))): ?>
+                        <?php if(!is_null($this->listing->checkout) and $this->listing->checkout != '00:00:00' and 
+									$h == (date('g:i', strtotime($this->listing->checkout)))): ?>
+                        <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                        <?php elseif($h == '11:00'): ?>
                         <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
                         <?php else: ?>
                         <option value="<?= $h ?>"><?= $h ?></option>
@@ -420,14 +428,16 @@ input.schname { float:none !important; width:90px !important; }
                         <?php endforeach ?>
                     </select>
                     <select name="checkout_time">
-                        <?php if('AM' == (date('A', strtotime($this->listing->checkout)))): ?>
+                        <?php if(!is_null($this->listing->checkout) and $this->listing->checkout != '00:00:00' and 
+									'AM' == (date('A', strtotime($this->listing->checkout)))): ?>
                         <option selected="selected" value="AM">AM</option>
                         <option value="PM">PM</option>
-                        <?php elseif('PM' == (date('A', strtotime($this->listing->checkout)))): ?>
+                        <?php elseif(!is_null($this->listing->checkout) and $this->listing->checkout != '00:00:00' and 
+										'PM' == (date('A', strtotime($this->listing->checkout)))): ?>
                         <option value="AM">AM</option>
                         <option selected="selected" value="PM">PM</option>
                         <?php else: ?>
-                        <option value="AM">AM</option>
+                        <option selected="selected" value="AM">AM</option>
                         <option value="PM">PM</option>                        
                         <?php endif ?>
                     </select>
