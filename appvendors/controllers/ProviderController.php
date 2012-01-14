@@ -2761,7 +2761,7 @@ class ProviderController extends Zend_Controller_Action
             $errors = array();
             //var_dump($_POST); die;
             if(empty($_POST['name']))
-                $errors[] = 'Name cannot be empty';
+                $errors[] = 'Company name cannot be empty';
                 
             if(empty($_POST['email']))
                 $errors[] = 'Email cannot be empty';

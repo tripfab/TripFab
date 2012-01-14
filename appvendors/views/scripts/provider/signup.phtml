@@ -20,7 +20,7 @@
 			
 			$('.sign-box form').validate({
 				rules: {
-					contact:"required",
+					name:"required",
 					email:"required email",
 					password:"required",
 					password2:{
@@ -32,6 +32,7 @@
 				}
 			}); 
         });
+		
 		function isEmpty(element){
 			return (element.value == element.title) ? false : (element.value == "") ? false : true;
 		}

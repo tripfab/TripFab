@@ -3,14 +3,23 @@
 <head>
 <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
 <title>caballo : Location | Tripfab.com</title>
-<link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-<link type="text/css" rel="stylesheet" href="/css2/all.css" />
-<link type="text/css" rel="stylesheet" href="/css2/common.css" />
+<link type="text/css" rel="stylesheet" href="css2/reset.css" />
+<link type="text/css" rel="stylesheet" href="css2/all.css" />
+<link type="text/css" rel="stylesheet" href="css2/common.css" />
 <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
 <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript" src="/js2/provider/location.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("a.add_direc").fancybox();
+		
+		)};
+	});
+</script>
 </head>
 <body>
 <div class="w1">
@@ -460,17 +469,43 @@
 						<div class="lstng-detail">
 							<strong>Directions</strong> <span>Define the way to get there</span>
 							
-							<p class="no_direction">There is no any direction yet</p>
+							<div class="direction">
+								<div class="cont">
+									<p>There is no any direction yet</p>
+								</div><!--CONT-->
+								<a href="" class="add_direc">Add a New Direction</a>
+							</div><!--DIRECTION-->
 							<div class="clear"></div>
 						</div>
 						<!-- closes lstng-detail -->
 						
 						
 						<div class="lstng-detail">
-							<textarea placeholder="Nice description about to how to get to your place by plane" cols="30" class="noclean limitcc" rel="1000" name="plane" rows="1"></textarea>
+							<div class="direction">
+								<div class="cont">
+									<div class="top">
+										<strong>By Car</strong>
+										<a href="" class="delete">Remove</a>
+									</div><!--TOP-->
+									<textarea cols="" rows=""></textarea>
+									
+									<div class="top">
+										<strong>By Train</strong>
+										<a href="" class="delete">Remove</a>
+									</div><!--TOP-->
+									<textarea cols="" rows=""></textarea>
+									
+									<div class="top">
+										<strong>By Car</strong>
+										<a href="" class="delete">Remove</a>
+									</div><!--TOP-->
+									<textarea cols="" rows=""></textarea>
+								</div><!--CONT-->
+								<a href="" class="add_direc">Add a New Direction</a>
+							</div><!--DIRECTION-->
 							<strong>Directions</strong> <span>Define the way to get there</span>
-							
 							<div class="help"> <a href="/images2/help/big-act-howto-info.png" class="eye">help</a> <a href="/images2/help/big-act-howto-info.png" class="tooltip3"> <img src="/images2/help/small-act-howto-info.png" /></a> </div>
+							
 							<div class="clear"></div>
 						</div>
 						<!-- closes lstng-detail -->
@@ -513,5 +548,21 @@
 	<div id="citiesAutocompleteContainer"></div>
 </div>
 <!-- closes w1 -->
+<div class="hidden">
+	<div id="new_direction">
+		<div class="top"></div><!--TOP-->
+		<div class="content">
+			<select>
+				<option>By Train</option>
+				<option>By Train</option>
+				<option>By Train</option>
+			</select>
+		</div><!--CONTENT-->
+		<div class="bottom">
+			<a href="" class="btn-1">Add Direction</a>
+			<a href="" class="btn-10">Cancel</a>
+		</div><!--BOTTOM-->
+	</div><!--NEW-DIRECTION-->
+</div><!--HIDDEN-->
 </body>
 </html>
