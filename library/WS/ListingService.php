@@ -821,7 +821,19 @@ class WS_ListingService {
     public function updatePricesOf($listing, $data){   
         //var_dump($data); die;
         if($listing->main_type == 5) {
-            $ddata = reset($data['sch'][0]);
+            $__price = 100000;
+            $__key;
+            foreach($data['sch'][0] as $key => $value){
+                if($value['price'] < $__price){
+                    $__price = $value['price'];
+                    $__key   = $key;
+                }
+            }
+            if($__price != 100000){
+                $ddata = $data['sch'][0][$__key];
+            } else {
+                $ddata = reset($data['sch'][0]);
+            }
             //var_dump($ddata); die;
             $this->_updatePrice($listing->id, 1, $ddata, $ddata);
             $listing->price = $ddata['price'];
@@ -836,15 +848,27 @@ class WS_ListingService {
         } 
         else {
             if(!is_null($data['sch'][0])){
-                $ddata = reset($data['sch'][0]);
+                $__price = 100000;
+                $__key;
+                foreach($data['sch'][0] as $key => $value){
+                    if($value['price'] < $__price){
+                        $__price = $value['price'];
+                        $__key   = $key;
+                    }
+                }
+                if($__price != 100000){
+                    $ddata = $data['sch'][0][$__key];
+                } else {
+                    $ddata = reset($data['sch'][0]);
+                }
                 $this->_updatePrice($listing->id, 1, $data, $ddata);
+                $listing->price = $ddata['price'];
             } else {
                 $this->_updatePrice($listing->id, 1, $data, $data);
+                $listing->price = $data['price'];
             }
             //var_dump($ddata); die;
             //var_dump($ddata); die;
-            
-            $listing->price = $ddata['price'];
             foreach($data['season'] as $season => $info)
                 $this->_updatePrice($listing->id, 3, $data, $info, null, $season);
             foreach($data['sch'] as $season => $_info){
