@@ -537,10 +537,10 @@ class ProviderController extends Zend_Controller_Action
                     $errors[] = 'Select the country';
                 if(empty($_POST['city_id']))
                     $errors[] = 'Select the city';
-                if(empty($_POST['address']))
-                    $errors[] = 'Address can not be empty';
-                if(empty($_POST['lat']) || empty($_POST['lng']))
-                    $errors[] = 'You need to localize the listing in the map';
+                //if(empty($_POST['address']))
+                    //$errors[] = 'Address can not be empty';
+                //if(empty($_POST['lat']) || empty($_POST['lng']))
+                    //$errors[] = 'You need to localize the listing in the map';
                 
                 if(count($errors) > 0){
                     $this->view->errors = $errors;
@@ -566,8 +566,8 @@ class ProviderController extends Zend_Controller_Action
                     }
 
                     $listing->address = $data['address'];
-                    $listing->lat     = $data['lat'];
-                    $listing->lng     = $data['lng'];
+                    $listing->lat     = (!empty($data['lat'])) ? $data['lat'] : null;
+                    $listing->lng     = (!empty($data['lng'])) ? $data['lat'] : null;
                     
                     $listing->save();
                     
