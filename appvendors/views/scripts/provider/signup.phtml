@@ -29,8 +29,12 @@
 					phone:"required",
 					website:"required url",
 					country_id:'required',
-				}
+				},
+				
 			}); 
+			
+			$('input[name=email]').blur(function(){$(this).val($.trim($(this).val()));});
+			$('input[name=website]').blur(function(){$(this).val($.trim($(this).val()));});
         });
 		
 		function isEmpty(element){
