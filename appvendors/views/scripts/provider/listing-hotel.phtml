@@ -60,12 +60,16 @@
 									!empty($this->overview->about)): ?>
                         <div class="tab-ttl">About <?= $this->listing->title ?></div>
                         <div class="tab-content">
+                        	<?php if(!empty($this->overview->about)): ?>
                         	<h2>About the hotel</h2>
                         	<p><?= stripslashes(nl2br($this->overview->about)) ?></p>
+                            <?php endif; if(!empty($this->overview->expect)): ?>
                             <h2>What to Expect</h2>
                             <p><?= stripslashes(nl2br($this->overview->expect)) ?></p>
+                            <?php endif; if(!empty($this->overview->love)): ?>
                             <h2>Things you'll love</h2>
                             <p><?= stripslashes(nl2br($this->overview->love)) ?></p>
+                            <?php endif ?>
                         </div><!-- closes tab-content -->
                         <?php else: ?>
                         <div class="tab-content">
@@ -101,15 +105,17 @@
                     </div><!-- closes tab -->
                     <div class="tab" id="tabs-2">
                     	<?php $ok = true; $i=0; $limit = count($this->details) ?>
-                        <?php while($ok and $i<$limit) { 
-								if($this->details[$i]->type == 1) $ok = false;
-								if($this->details[$i]->type == 3) $ok = false;
+                        <?php $ok1 = true; $ok3 = true; ?>
+                        <?php while($i<$limit) { 
+								if($this->details[$i]->type == 1) {$ok = false; $ok1 = false; }
+								if($this->details[$i]->type == 3) {$ok = false; $ok3 = false; }
 								$i++; } ?>
 						<?php if(!$ok): ?>
                         <div class="tab-ttl">
                             Some details about the hotel
                         </div><!-- closes tab-ttl -->
                         <div class="tab-content">
+                        	<?PHP if(!$ok1): ?>
                             <h2>Hotel Amenities</h2>
                             <ul>
                                 <?php foreach($this->details as $detail): ?>
@@ -118,6 +124,7 @@
                                 <?php endif ?>
                                 <?php endforeach ?>
                             </ul>
+                            <?php endif; if(!$ok3): ?>
                             <h2>Policies</h2>
                             <ul>
                                 <?php foreach($this->details as $detail): ?>
@@ -126,6 +133,7 @@
                                 <?php endif ?>
                                 <?php endforeach ?>
                             </ul>
+                            <?php endif ?>
                         </div><!-- closes tab-content -->
                         <?php else: ?>
                         <div class="tab-content">
@@ -192,13 +200,17 @@
                         <div class="tab-ttl">
                             How to get there
                         </div><!-- closes tab-ttl -->
-                        <div class="tab-content there">										
+                        <div class="tab-content there">	
+                        	<?php if(!empty($this->getthere->plane)): ?>
                             <h2>By plane</h2>
                             <p><?= stripslashes(nl2br($this->getthere->plane)) ?></p>
+                            <?php endif; if(!empty($this->getthere->car)): ?>
                             <h2>By car</h2>
                             <p><?= stripslashes(nl2br($this->getthere->car)) ?></p>
+                            <?php endif; if(!empty($this->getthere->train)): ?>
                             <h2>By train</h2>
                             <p><?= stripslashes(nl2br($this->getthere->train)) ?></p>
+                            <?php endif; ?>
                             <div id="mapcanvas"></div>
                         </div><!-- closes tab-content -->
                         <div class="message">

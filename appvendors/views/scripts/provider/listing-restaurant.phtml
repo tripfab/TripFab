@@ -45,12 +45,16 @@
 									!empty($this->overview->about)): ?>
 	                    <div class="tab-ttl">About <?= $this->listing->title ?></div>
                         <div class="tab-content">
+                        	<?php if(!empty($this->overview->about)): ?>
                         	<h2>About the restaurant</h2>
                         	<p><?= stripslashes(nl2br($this->overview->about)) ?></p>
+                            <?php endif; if(!empty($this->overview->expect)): ?>
                             <h2>What to Expect</h2>
                             <p><?= stripslashes(nl2br($this->overview->expect)) ?></p>
+                            <?php endif; if(!empty($this->overview->love)): ?>
                             <h2>Things you'll love</h2>
                             <p><?= stripslashes(nl2br($this->overview->love)) ?></p>
+                            <?php endif ?>
                         </div><!-- closes tab-content -->
                         <?php else: ?>
                         <div class="tab-content">
@@ -60,15 +64,17 @@
 	                </div><!-- closes tab -->
 	                <div class="tab" id="tabs-2">
                     	<?php $ok = true; $i=0; $limit = count($this->details) ?>
-                        <?php while($ok and $i<$limit) { 
-								if($this->details[$i]->type == 1) $ok = false;
-								if($this->details[$i]->type == 3) $ok = false;
+                        <?php $ok1 = true; $ok3 = true; ?>
+                        <?php while($i<$limit) { 
+								if($this->details[$i]->type == 1) {$ok = false; $ok1 = false; }
+								if($this->details[$i]->type == 3) {$ok = false; $ok3 = false; }
 								$i++; } ?>
 						<?php if(!$ok): ?>
 	                    <div class="tab-ttl">
-	                        Some details you must to know
+	                        Some details you must know
 	                    </div><!-- closes tab-ttl -->
 	                    <div class="tab-content">
+                        	<?php if(!$ok1): ?>
 	                        <h2>Amenities</h2>
 	                        <ul>
 	                            <li>Recommend for Families and Groups</li>
@@ -82,6 +88,7 @@
 	                            <li>Alcohol Beverages</li>
 	                            <li>Wheelchair Accessible</li>
 	                        </ul>
+                            <?php endif; if(!$ok3): ?>
 	                        <h2>Policies</h2>
 	                        <ul>
 	                            <li>Credit Cards Policy: We accept some credit cards.</li>
@@ -90,6 +97,7 @@
 	                            <li>Pet Policy: Pets are not permitted.</li>
 	                            <li>Smoking Policy: Smoking is not permitted.</li>
 	                        </ul>
+                            <?php endif ?> 
 	                    </div><!-- closes tab-content -->
                         <?php else: ?>
                         <div class="tab-content">

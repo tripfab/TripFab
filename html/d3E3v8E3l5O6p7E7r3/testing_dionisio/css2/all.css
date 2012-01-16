@@ -7405,6 +7405,8 @@ ul.reviews li > div div.meta em.red {
 .listing-ttl img {
 	float: left;
 	margin-right: 15px;
+	background: url(../images2/shadow-2.png) no-repeat bottom center;
+	padding-bottom: 5px;
 }
 
 .listing-ttl h2 {
@@ -7415,6 +7417,34 @@ ul.reviews li > div div.meta em.red {
 .listing-ttl p {
 	font-size: 12px;
 	font-weight: bold;
+}
+.listing-ttl .left {
+	float: left;
+	width: 500px;
+}
+.listing-ttl .left h2 .inactive{
+	background-color: #f26522;
+	font: bold 9px/13px Helvetica;
+	text-transform: uppercase;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	text-align: center;
+	color: #FFF;
+	display: inline-block;
+	height: 13px;
+	padding: 0 8px;
+}
+.listing-ttl .right {
+	float: right;
+	width: 300px;
+}
+.listing-ttl p.pending{
+	padding-left: 25px;
+	background: url(../images2/ico-117.png) no-repeat left 50%;float: left;
+}
+.listing-ttl p.pending a {
+	 color: #60b5f7;
 }
 
 .listing-ttl p span.inactive {

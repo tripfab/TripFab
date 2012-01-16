@@ -37,12 +37,18 @@
 									!empty($this->overview->about)): ?>
                         <div class="tab-ttl">About <?= $this->listing->title ?></div>
                         <div class="tab-content">
+                        	<?php if(!empty($this->overview->about)): ?>
                         	<h2>About the spot</h2>
                         	<p><?= stripslashes(nl2br($this->overview->about)) ?></p>
+                            <?php endif ?>
+                            <?php if(!empty($this->overview->expect)): ?>
                             <h2>What to Expect</h2>
                             <p><?= stripslashes(nl2br($this->overview->expect)) ?></p>
+                            <?php endif ?>
+                            <?php if(!empty($this->overview->love)): ?>
                             <h2>Things you'll love</h2>
                             <p><?= stripslashes(nl2br($this->overview->love)) ?></p>
+                            <?php endif ?>
                             <h2>Polices</h2>
                             <ul>
                             	<?php foreach($this->details as $detail): ?>
