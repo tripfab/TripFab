@@ -7412,6 +7412,7 @@ ul.reviews li > div div.meta em.red {
 .listing-ttl h2 {
 	font-size: 19px;
 	line-height: 35px;
+	overflow: hidden;
 }
 
 .listing-ttl p {
@@ -7421,6 +7422,9 @@ ul.reviews li > div div.meta em.red {
 .listing-ttl .left {
 	float: left;
 	width: 500px;
+}
+.listing-ttl .left h2 strong {
+	float: left;
 }
 .listing-ttl .left h2 .inactive{
 	background-color: #f26522;
@@ -7434,6 +7438,8 @@ ul.reviews li > div div.meta em.red {
 	display: inline-block;
 	height: 13px;
 	padding: 0 8px;
+	float: left;
+	margin:12px 0 0 5px ;
 }
 .listing-ttl .right {
 	float: right;
