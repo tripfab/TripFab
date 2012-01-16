@@ -7430,9 +7430,9 @@ ul.reviews li > div div.meta em.red {
 	background-color: #f26522;
 	font: bold 9px/13px Helvetica;
 	text-transform: uppercase;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius:3px;
 	text-align: center;
 	color: #FFF;
 	display: inline-block;
@@ -7443,7 +7443,28 @@ ul.reviews li > div div.meta em.red {
 }
 .listing-ttl .right {
 	float: right;
-	width: 300px;
+	background: url(../images2/sep_11.png) no-repeat left 50%;
+	padding-left: 10px;
+	overflow: hidden;
+}
+.listing-ttl .right p {
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+.listing-ttl .right .link-4 {
+	float: right;
+}
+.listing-ttl .right a.btn-1 {
+	float: right;
+	background: url(../images2/btn-1.gif) repeat-x top left;
+	height: 30px;
+	border: 1px solid #7eb239;
+}
+.listing-ttl .right a.btn-1:hover {
+	background-position: bottom left;
+}
+.listing-ttl .right .btn-10 {
+	float: right;
 }
 .listing-ttl p.pending{
 	padding-left: 25px;
