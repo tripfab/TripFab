@@ -115,6 +115,45 @@ class WS_User {
         return $this->vendor;
     }
     
+    public function getContacts()
+    {
+        $contacts_db = new Zend_Db_Table('contacts');
+        $select = $contacts_db->select();
+        $select->where('vendor_id = ?', $this->vendor->id);
+        $contacts = $contacts_db->fetchAll($select);
+        return $contacts;
+    }
+    
+    public function updateContacts($data)
+    {
+        $contacts = $this->getContacts();
+        foreach($contacts as $contact){
+            if(!isset($data[$contact->id]))
+                $contact->delete();
+        }
+    }
+    
+    public function addContact($data){
+        $contacts = new Zend_Db_Table('contacts');
+        $contact = $contacts->fetchNew();
+        $contact->setFromArray($data);
+        $contact->vendor_id = $this->getVendorId();
+        $contact->created   = date('Y-m-d H:i:s');
+        $contact->updated   = date('Y-m-d H:i:s');
+        $contact->save();
+    }
+    
+    public function updateContact($id, $data){
+        $contacts = new Zend_Db_Table('contacts');
+        $select = $contacts->select();
+        $select->where('id = ?', $id);
+        $contact = $contacts->fetchRow($select);
+        
+        $contact->setFromArray($data);
+        $contact->updated = date('Y-m-d H:i:s');
+        $contact->save();
+    }
+    
     public function getId()
     {
         return $this->user->id;

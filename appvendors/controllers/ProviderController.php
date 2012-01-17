@@ -2483,14 +2483,36 @@ class ProviderController extends Zend_Controller_Action
     {
         if($this->getRequest()->isPost()){
             try {
-                $this->accountDefaultPostHandler();
-                $this->view->successmessage = 'Your changes has been applied';}
+                switch($_POST['_task']){
+                    case md5('add_contact'):
+                        var_dump($_POST); die;
+                        $data = $_POST;
+                        $this->user->addContact($data);
+                        setcookie('alert','Your changes have been saved');
+                        $this->_redirect('/provider/account');
+                        break;
+                    case md5('update_contact'):
+                        $data = $_POST;
+                        $id = $data['id'];
+                        unset($data['id']);
+                        $this->user->updateContact($id, $data);
+                        setcookie('alert','Your changes have been saved');
+                        $this->_redirect('/provider/account');
+                        break;
+                    default:
+                        $this->accountDefaultPostHandler();
+                        setcookie('alert','Your changes have been saved');
+                        $this->_redirect('/provider/account');
+                        break;
+                }}
             catch(Exception $e){
                 $this->view->errormessage = $e->getMessage();}
-            
-            $this->view->user = $this->user->getData(true);
-            $this->view->vendor = $this->user->getVendorData(true);
         }
+        
+        $this->view->user = $this->user->getData(true);
+        $this->view->vendor = $this->user->getVendorData(true);
+        $this->view->contacts = $this->user->getContacts();
+        
         $countries = $this->places->getPlaces(2);
         $this->view->countries = $countries;
     }
@@ -2525,7 +2547,8 @@ class ProviderController extends Zend_Controller_Action
         //    if(!$this->accounts->validateUsername($data['username']))
         //        throw new Exception ('This username its being user for another user');
         
-        
+        $this->user->updateContacts($data['contacts']);           
+            
         $vendor->name = $data['name'];
         $vendor->email = $data['email'];
         $vendor->place_id = $data['place_id'];
@@ -2537,6 +2560,7 @@ class ProviderController extends Zend_Controller_Action
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->phone = $data['phone'];
+        $user->lang  = $data['lang'];
         
         $vendor->image = $user->image;
         
@@ -2564,11 +2588,11 @@ class ProviderController extends Zend_Controller_Action
             catch(Exception $e){
                 $this->view->errormessage = $e->getMessage();}
                 
-        $user             = $this->user->getData(true);
-        $questions        = $this->user->getDefaultQuestions();
+        $user      = $this->user->getData(true);
+        $questions = $this->user->getDefaultQuestions();
         
-        $this->view->user         = $user;
-        $this->view->sq           = $questions;
+        $this->view->user = $user;
+        $this->view->sq   = $questions;
     }
     
     public function accountPasswordPostHandler()
