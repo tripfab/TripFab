@@ -211,6 +211,7 @@ class ProviderController extends Zend_Controller_Action
             if($this->getRequest()->isPost()){
                 $type = $_POST['typeid'];
                 $this->listings->deleteActivityType($type);
+                setcookie('alert', 'Your changes have been saved');
                 $this->_redirect('provider/listings/types/'.$listing->id);
             }
             
@@ -273,7 +274,7 @@ class ProviderController extends Zend_Controller_Action
                             $tip->save();
                         }
                     }
-                    
+                    setcookie('alert', 'Your changes have been saved');
                     $this->_redirect('provider/listings/type/'.$type->id);
                 }
             }
@@ -324,7 +325,7 @@ class ProviderController extends Zend_Controller_Action
                             $tip->save();
                         }
                     }
-                    
+                    setcookie('alert', 'Your changes have been saved');
                     $this->_redirect('provider/listings/types/'.$listing->id);
                 }
             }
@@ -385,6 +386,9 @@ class ProviderController extends Zend_Controller_Action
                 
                 $sch->delete();
                 $room->delete();
+                
+                setcookie('alert', 'Your changes have been saved');
+                $this->_redirect('/provider/listings/rooms/'.$listing->id);
             }
             
             $rooms = $this->listings->getSchedulesOf($listing->id);
@@ -417,6 +421,7 @@ class ProviderController extends Zend_Controller_Action
                     $this->view->errors = $errors;
                 else {
                     $this->listings->updateRoom($listing->id, $_POST);
+                    setcookie('alert', 'Your changes have been saved');
                     $this->_redirect('/provider/listings/room/'.$sch->id);
                 }
                 
@@ -463,6 +468,7 @@ class ProviderController extends Zend_Controller_Action
                     $this->view->errors = $errors;
                 else {
                     $this->listings->addScheduleTo($listing, $_POST);
+                    setcookie('alert', 'Your changes have been saved');
                     $this->_redirect('/provider/listings/rooms/'.$listing->id);
                 }
             }
@@ -507,7 +513,7 @@ class ProviderController extends Zend_Controller_Action
                 }
                 
                 $tips = $this->listings->getDetails($listing->id);
-                
+                setcookie('alert', 'Your changes have been saved');
                 $this->_redirect('provider/listings/tips/'.$listing->id);
             }
             
@@ -570,7 +576,7 @@ class ProviderController extends Zend_Controller_Action
                     $listing->lng     = (!empty($data['lng'])) ? $data['lat'] : null;
                     
                     $listing->save();
-                    
+                    setcookie('alert', 'Your changes have been save');
                     $this->_redirect('provider/listings/location/'.$listing->id);
                 }
                 
@@ -644,7 +650,7 @@ class ProviderController extends Zend_Controller_Action
                     }
                 }
                 $details = $this->listings->getDetails($listing->id);
-                
+                setcookie('alert','Your changes have been save');
                 $this->_redirect('provider/listings/overview/'.$listing->id);
             }
             $this->view->overview = $overview;
@@ -1792,6 +1798,8 @@ class ProviderController extends Zend_Controller_Action
 
             $listing->save();
             
+            setcookie('alert','Your changes have been save');
+            
             $this->_redirect('provider/listings/edit/'.$listing->id);
         }
     }
@@ -1853,12 +1861,20 @@ class ProviderController extends Zend_Controller_Action
             if(is_null($img))
                 throw new Exception('Img not found');
 
+            if($data['main'] == $img->id){
+                $db = Zend_Db_Table::getDefaultAdapter();
+                $db->query('Update listing_pictures set main = 0 where listing_id = '.$listing->id);
+                $img->main = 1;
+                $listing->image = $img->url;
+                $listing->save();
+            }
+            
             $img->location = $pic['location'];
             $img->save();
         }
         
         $this->view->activephoto = $img->id;
-        
+        setcookie('alert','Your changes have been save');
         $this->_redirect('provider/listings/photos/'.$listing->id);
     }
     
@@ -1916,7 +1932,7 @@ class ProviderController extends Zend_Controller_Action
                     }
                 }
                 $details = $this->listings->getDetails($listing->id);
-                
+                setcookie('alert', 'Your changes have been saved');
                 $this->_redirect('provider/listings/details/'.$listing->id);
             }
             
@@ -1985,13 +2001,9 @@ class ProviderController extends Zend_Controller_Action
         
         if(!empty($data['question']) && !empty($data['answer'])){
             $this->listings->addFAQsTo($listing->id, $data);
-        } else {
-            if(empty($data['question']) && !empty($data['answer'])){
-                throw new Exception('Question cannot be empty');
-            } elseif(!empty($data['question']) && empty($data['answer'])) {
-                throw new Exception('answer cannot be empty');
-            }
         }
+        setcookie('alert', 'Your changes have been saved');
+        $this->_redirect('/provider/listings/faqs/'.$listing->id);
         
     }
     
@@ -2132,6 +2144,8 @@ class ProviderController extends Zend_Controller_Action
             throw new Exception('Form id violated');
         
         $this->listings->saveDayInCalendar($listing, $data);
+        setcookie('alert', 'Your changes have been saved');
+        $this->_redirect('/provider/listings/calendar/'.$listing->id);
     }
     
     public function listingsPricingTask()
@@ -2240,6 +2254,8 @@ class ProviderController extends Zend_Controller_Action
             $season->ending = date('Y-m-d', strtotime($data['ending']));
             $season->save();
             
+            setcookie('alert', 'Your changes have been saved');
+            setcookie('season','active');
             $this->_redirect('provider/listings/pricing/'.$listing->id);
         }
     }
@@ -2283,6 +2299,8 @@ class ProviderController extends Zend_Controller_Action
             $season->ending = date('Y-m-d', strtotime($data['ending']));
             $season->save();
             
+            setcookie('alert', 'Your changes have been saved');
+            setcookie('season','active');
             $this->_redirect('provider/listings/pricing/'.$listing->id);
         }
     }
@@ -2308,6 +2326,8 @@ class ProviderController extends Zend_Controller_Action
 
         $season->delete();
         
+        setcookie('alert', 'Your changes have been saved');
+        setcookie('season','active');
         $this->_redirect('provider/listings/pricing/'.$listing->id);
     }
     
@@ -2349,6 +2369,10 @@ class ProviderController extends Zend_Controller_Action
         }
         $this->listings->updatePricesOf($listing, $data);
         
+        setcookie('alert', 'Your changes have been saved');
+        if($data['s'] == 1){
+            setcookie('season','active');
+        }
         $this->_redirect('provider/listings/pricing/'.$listing->id);
     }
     

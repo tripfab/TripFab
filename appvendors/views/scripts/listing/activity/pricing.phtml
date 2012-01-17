@@ -189,6 +189,7 @@
     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
     <input type="hidden" name="form_id" value="<?= md5($this->listing->token.'form_pricing') ?>" />
     <input type="hidden" name="_task" value="<?= md5('update_pricing') ?>" />
+    <input type="hidden" name="s" value="0" />
 </form>
 
 <div class="hidden">

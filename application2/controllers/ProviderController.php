@@ -1816,7 +1816,15 @@ class ProviderController extends Zend_Controller_Action
             $img = $this->listings->getPhoto($listing->id, $pic_id);
             if(is_null($img))
                 throw new Exception('Img not found');
-
+            
+            if($data['main'] == $img->id){
+                $db = Zend_Db_Table::getDefaultAdapter();
+                $db->query('Update listing_pictures set main = 0 where listing_id = '.$listing->id);
+                $img->main = 1;
+                $listing->image = $img->url;
+                $listing->save();
+            }
+            
             $img->location = $pic['location'];
             $img->save();
         }

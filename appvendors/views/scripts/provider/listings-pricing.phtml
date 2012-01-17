@@ -36,10 +36,21 @@
 					dateFormat:'M dd, yy',
 					defaultDate:$(this).val(),
 				});
-			})
+			});
 			
 			$('.carrousel').accordion();
-			$('.pricing-tabs').tabs();
+			
+			$season = $.cookie('season');
+			$tab = ($season != null) ? 1 : 0;
+			$('input[name=s]').val($tab);
+			$('.pricing-tabs').tabs({
+				selected:$tab,
+				select:function(e, ui) {
+					$('input[name=s]').val(ui.index);
+				}
+			});
+			$season = $.cookie('season', null);
+			
 			
 			$('#ui-datepicker-div').wrap('<div id="calendarContainer"></div>');
 			

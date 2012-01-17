@@ -50,6 +50,7 @@
 					'usertoken':'<?= md5($this->user->token.'upload_listing_pictures') ?>',
 				},
 				'onAllComplete':function(){
+					$.cookie('alert','Your changes have been save');
 					window.location.reload();
 				},
 				'sizeLimit': 2097152,
