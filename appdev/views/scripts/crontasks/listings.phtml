@@ -1,0 +1,33 @@
+<style type="text/css">
+* {
+	font-size:12px;
+	font-family:Arial, Helvetica, sans-serif;}
+</style>
+<table width="100%">
+<tr>
+<td width="50%" valign="top">
+<p>Genna</p>
+<?php foreach($this->genna as $some): ?>
+<h3>(<?= $some['listing']['id'] ?>) <?= $some['listing']['title'] ?></h3>
+<p>About<br />
+<?= nl2br($some['overview']['about']) ?></p>
+<p style="color:#069">What to expect<br />
+<?= nl2br($some['overview']['expect']) ?></p>
+<p style="color:#630">Things you'll love<br />
+<?= nl2br($some['overview']['love']) ?></p>
+<?php endforeach ?>
+</td>
+<td width="50%" valign="top">
+<p>Ricardo</p>
+<?php foreach($this->ricardo as $some): ?>
+<h3>(<?= $some['listing']['id'] ?>) <?= $some['listing']['title'] ?></h3>
+<p>About<br />
+<?= nl2br($some['overview']['about']) ?></p>
+<p style="color:#069">What to expect<br />
+<?= nl2br($some['overview']['expect']) ?></p>
+<p style="color:#630">Things you'll love<br />
+<?= nl2br($some['overview']['love']) ?></p>
+<?php endforeach ?>
+</td>
+</tr>
+</table>

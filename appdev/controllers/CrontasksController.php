@@ -5,9 +5,10 @@ class CrontasksController extends Zend_Controller_Action
 
     public function init()
     {
-        die;
+        //die;
     } 
     
+    /**
     public function createimagesAction()
     {
         $cats = array('all','activities','entertaiment','tourist-sights','restaurants','hotels');
@@ -498,7 +499,7 @@ class CrontasksController extends Zend_Controller_Action
         */
         
         
-        
+        /**
         die;
     }
     
@@ -547,6 +548,78 @@ class CrontasksController extends Zend_Controller_Action
         }
         
         die;  
+    }
+         * 
+         */
+    
+    public function listingsAction()
+    {
+        $gena = array(792,793,794,795,796,797,802,805,808,809,815,816,818,819);
+        $ricardo = array(830,831,832,833,834,835,836,837,838,839,840,841,842,843,
+                         844,845,846,847,848,849,850,851,853,854,855,856,857,858,859,860,861,);
+                         
+        $vendors = new Zend_Db_Table('vendors');
+        $listings = new Zend_Db_Table('listings');
+        $overviews = new Zend_Db_Table('listing_overviews');
+        
+        $gena_lists = array();
+        $gena_count = 0;
+        
+        foreach($gena as $id){
+            if($gena_count < 5){
+                $select1 = $vendors->select();
+                $select1->where('id = ?', $id);
+                $vendor = $vendors->fetchRow($select1);
+                if(!is_null($vendor)){
+                    $select2 = $listings->select();
+                    $select2->where('vendor_id = ?', $vendor->id);
+                    $lists = $listings->fetchAll($select2);
+                    if(count($lists) > 0){
+                        foreach($lists as $list){
+                            if($gena_count < 5){
+                                $select3 = $overviews->select();
+                                $select3->where('listing_id = ?', $list->id);
+                                $overview = $overviews->fetchRow($select3);
+                                if(!is_null($overview->about)){
+                                    $gena_lists[] = array(
+                                        'vendor' => $vendor->toArray(),
+                                        'listing' => $list->toArray(),
+                                        'overview' => $overview->toArray()
+                                    );
+                                    $gena_count++;
+        }}}}}}}
+        
+        $ric_lists = array();
+        $ric_count = 0;
+        
+        foreach($ricardo as $id){
+            if($ric_count < 5){
+                $select1 = $vendors->select();
+                $select1->where('id = ?', $id);
+                $vendor = $vendors->fetchRow($select1);
+                if(!is_null($vendor)){
+                    $select2 = $listings->select();
+                    $select2->where('vendor_id = ?', $vendor->id);
+                    $lists = $listings->fetchAll($select2);
+                    if(count($lists) > 0){
+                        foreach($lists as $list){
+                            if($ric_count <= 5){
+                                $select3 = $overviews->select();
+                                $select3->where('listing_id = ?', $list->id);
+                                $overview = $overviews->fetchRow($select3);
+                                if(!is_null($overview->about)){
+                                    $ric_lists[] = array(
+                                        'vendor' => $vendor->toArray(),
+                                        'listing' => $list->toArray(),
+                                        'overview' => $overview->toArray()
+                                    );
+                                    $ric_count++;
+        }}}}}}}
+        
+        
+        
+        $this->view->genna = $gena_lists;
+        $this->view->ricardo = $ric_lists;
     }
 }
 
