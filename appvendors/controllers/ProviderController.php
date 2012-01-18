@@ -2485,7 +2485,7 @@ class ProviderController extends Zend_Controller_Action
             try {
                 switch($_POST['_task']){
                     case md5('add_contact'):
-                        var_dump($_POST); die;
+                        //var_dump($_POST); die;
                         $data = $_POST;
                         $this->user->addContact($data);
                         setcookie('alert','Your changes have been saved');

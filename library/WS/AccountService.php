@@ -120,6 +120,26 @@ class WS_AccountService {
             $new->setting_id = $n->id;
             $new->save();
         }
+        
+        if(!empty($data['contact'])){
+            
+            $contact_data = array(
+                'fname' => $data['contact'],
+                'lname' => '',
+                'position' => '',
+                'email' => $data['email'],
+                'code'  => '',
+                'phone' => $data['phone'],
+                'ext'   => '',
+            );
+            $contacts = new Zend_Db_Table('contacts');
+            $contact = $contacts->fetchNew();
+            $contact->setFromArray($contact_data);
+            $contact->vendor_id = $vendor->id;
+            $contact->created   = date('Y-m-d H:i:s');
+            $contact->updated   = date('Y-m-d H:i:s');
+            $contact->save();
+        }
 
         $notifier = new WS_Notifier();
         $notifier->newSignup($user->email, $password, $user->name);
@@ -162,5 +182,4 @@ class WS_AccountService {
             }
         }
     }
-    
 }

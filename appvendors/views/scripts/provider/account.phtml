@@ -171,7 +171,7 @@
                             </div><!-- closes item -->
                             <?php endforeach ?>
                             <div class="item last">
-                                <a href="#new_member" class="add-btn f_b lb">Add another Staff Contact</a>
+                                <a href="#new_contact" class="add-btn f_b lb">Add another Staff Contact</a>
                             </div><!-- closes item -->
                             <div class="clear"></div>									
                         </div><!-- closes item-wrppr -->
@@ -237,28 +237,30 @@
         </div><!--NEW-MEMBER-->
     </div>
     <?php endforeach ?>
-    <div class="lb_connect" id="new_member">
-        <h2>Add a New Contact</h2>
-        <form action="" method="post">
-            <label>First Name</label>
-            <input type="text" name="fname" />
-            <label>Last Name</label>
-            <input type="text" name="lname" />
-            <label>Position</label>
-            <input type="text" name="position" />
-            <label>Contact e-mail</label>
-            <input type="text" name="email" />
-            <label>Phone</label>
-            <input type="text" class="code" value="Code" name="code" />
-            <input type="text" class="number" value="Number" name="phone" />
-            <input type="text" class="ext" value="Ext" name="ext" />
-            <ul>
-                <li><input type="submit" class="btn-1 noclean" value="Add Member" /></li>
-                <li><input type="button" class="btn-13 noclean" onclick="$.fancybox.close(); return false;" value="Cancel" /></li>
-            </ul>
-            <input type="hidden" name="_task" value="<?= md5('add_contact') ?>" />
-        </form>
-    </div><!--NEW-MEMBER-->
+    <div id="new_contact">
+        <div class="lb_connect" id="new_member">
+            <h2>Add a New Contact</h2>
+            <form action="" method="post">
+                <label>First Name</label>
+                <input type="text" name="fname" />
+                <label>Last Name</label>
+                <input type="text" name="lname" />
+                <label>Position</label>
+                <input type="text" name="position" />
+                <label>Contact e-mail</label>
+                <input type="text" name="email" />
+                <label>Phone</label>
+                <input type="text" class="code" value="Code" name="code" />
+                <input type="text" class="number" value="Number" name="phone" />
+                <input type="text" class="ext" value="Ext" name="ext" />
+                <ul>
+                    <li><input type="submit" class="btn-1 noclean" value="Add Member" /></li>
+                    <li><input type="button" class="btn-13 noclean" onclick="$.fancybox.close(); return false;" value="Cancel" /></li>
+                </ul>
+                <input type="hidden" name="_task" value="<?= md5('add_contact') ?>" />
+            </form>
+        </div><!--NEW-MEMBER-->
+    </div>
 </div><!--HIDDEN-->
 </body>
 </html>
