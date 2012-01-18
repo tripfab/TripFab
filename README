@@ -20,9 +20,9 @@ when asked for the password copy and paste this
 
 keep that password close to you as github will ask you for it everytime you run a "pull" or "push" request
 
-5. Add the remote path to git project
+Change directories to the Tripfab Folder
 
-	`$ git remote add origin git@github.com:cristian0789/TripFab.git`
+	`cd Tripfab/`
 
 5. Run the following commands:
 	
@@ -63,7 +63,7 @@ keep that password close to you as github will ask you for it everytime you run 
 	`$ git config user.name "Your Name"
      $ git config user.email "your@email.com"`
 
-11. Start making the changes needed, everytime you solve an issue you need to commit the changes run (replace issue_id with the numbre of the issue you are fixing)
+11. Start making the changes needed, every time you solve an issue you need to commit the changes run (replace issue_id with the numbre of the issue you are fixing)
 
 	`$ git status"
      $ git add .
@@ -71,7 +71,7 @@ keep that password close to you as github will ask you for it everytime you run 
 
 12. Once you are done with your work of the day you need to push you changes to GitHub. But before that it's a good practice to pull a copy from GitHun again and work a little bit more in mergin the changes if needed
 
-	`$ gut pull`
+	`$ git pull`
 
 13. Now you are ready to push
 

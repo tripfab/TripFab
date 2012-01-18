@@ -25,9 +25,13 @@ remember me;Remember me next time
 forgot;Forgot Password?
 login error;Wrong Email or Password
 password;Password
+Reset Password;Reset Password
+Reset Password Description;Enter your e-mail address to have the password associated with that account reset. A new password will be e-mailed to the address.
+Enter your e-mail;Enter your e-mail
+Cancel;Cancel
 
 #
-# Login Page /application/views/scripts/session/signup
+# Signup Page /application/views/scripts/session/signup
 #
 Register Title;Get a <em>Tripfab account!</em>
 Register Description;We are recruiting the best activities, hotels, tours and restaurants around the universe.
@@ -35,6 +39,9 @@ Already Account;Already a Tripfab member? <a href="/%s/login">Sign In Now.</a>
 company holder;Company Name
 company name;Company Name
 company description;Write your Company Name
+name holder;Contact Name
+name name;Contact Name
+name description;The person in charge
 email holder;Email Address
 email name;Email
 email description;Write an email
@@ -52,3 +59,5 @@ business name;Business Area
 business description;Select your business area
 country name;Country
 country description;Select your country
+Thanks Title;Your information has been sent!
+Thanks Description;<p>Thanks for trust in Tripfab. <br /> We will send you an invitation very soon.</p><p>Take care,</p>
