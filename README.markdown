@@ -1,80 +1,34 @@
-1. Login to the server with your username and password
+# Welcome to the TripFab application repository
 
-	`$ ssh root@tripfab.com`
-    
-    Password
-    
-    `devsrv01pstE31P4W`
+## About this repository
 
-2. change directory to /var/devlopment/[username] where username is the name assigned by your manager
+In this repo you will find three projects in one so be careful what file are you editing
 
-	`$ cd /var/devlopemnt/[username]`
++ _/application2_ and _/html_				Contain the application for www.tripfab.com
++ _/appvendors_ and _/partners_				Contain the application for partners.tripfab.com
++ _/appdev and _/html/d3E3v8E3l5O6p7E7r3/	Contain the application for developer.tripfab.com
 
-4. Grab a copy of the project (Just the first time)
+The three of them share the _/library_ folder where you can find usefull classes. _/library/WS/ contains the service layer classes pf the application, 
 
-	`$ git clone git@github.com:cristian0789/TripFab.git`
+### How to contribute
 
-when asked for the password copy and paste this
+First you need to be a freelance or inhouse developer hired by TripFab Ink and authorized by the application manager
 
-	`devsrv01pstE31P4W`
+If you are one of them just clone the project and start commiting, pulling and pushing updates
 
-keep that password close to you as github will ask you for it everytime you run a "pull" or "push" request
+### How to install
 
-Change directories to the Tripfab Folder
+Install it's supper easy
 
-	`cd Tripfab/`
-
-5. Run the following commands:
-	
-    `mkdir html/cache`
-    `mkdir html/cache/remote`
-    `mkdir html/d3E3v8E3l5O6p7E7r3/cache`
-    `mkdir html/d3E3v8E3l5O6p7E7r3/cache/remote`
-    `mkdir partners/cache`
-    `mkdir partners/cache/remote`
-    `mkdir library/Zend/`
-    `cp -r /var/www/library/Zend/* library/Zend/`
-
-6. Now you should be able to access all the three applications through
-
-	[username].www.tripfab.com		  
-    	// This application is managed by application2 files and the root at html/
-    [username].developer.tripfab.com  
-    	// This application is managed by appdev files and the root at html/d3E3v8E3l5O6p7E7r3/
-    [username].partners.tripfab.com	  
-    	// This application is managed by appvendors files and the root at partners/
-    
-7. My recomendation from here, is to set 4 diferent projects in netbeans or your selected IDE 
-		- one for application2
-        - one for appdev
-        - one for appvendors
-        - one for library/WS
-        	// This folder contains custom libraries created by programmers
-            // needed for the application
-
-8. Every time you are going to start working on an issue or a new feature you need to make a pull request to github to get the latest code available
-
-	`$ git pull
-
-9. Fix any issue you have if any
-
-10. Set up your credentials so we know who is gonna make the changes
-
-	`$ git config user.name "Your Name"
-     $ git config user.email "your@email.com"`
-
-11. Start making the changes needed, every time you solve an issue you need to commit the changes run (replace issue_id with the numbre of the issue you are fixing)
-
-	`$ git status"
-     $ git add .
-     $ git commit -m "The title of the issue you solved. Fixed #[issue_id]"`
-
-12. Once you are done with your work of the day you need to push you changes to GitHub. But before that it's a good practice to pull a copy from GitHun again and work a little bit more in mergin the changes if needed
-
-	`$ git pull`
-
-13. Now you are ready to push
-
-	`$ git push origin master`
-    
-That would be it please any questions or comments email me at  cristian@tripfab.com
+1. Off course you need to have git ready on your machine
+1. Clone the project with git to your computer
+2. Create a database and a database user with the configuration at /appdev/application.ini
+3. Create 3 virtual hosts one for each application described above for example:
+	+ http://tripfab.www        pointing to /html
+	+ http://tripfab.partners   pointing to /partners
+	+ http://tripfab.developer	pointing to /html/d3E3v8E3l5O6p7E7r3/
+4. When visiting http://tripfab.developer You will be asked for an username and password use: -u worldspot    -p admin2011Ws
+5. Start working on the issues and features assigned to you
+6. Commit every issue or feature you finish starting with : Fixed #<issue_id> Where <issue_id> is the number of the issue
+6. When you are done for the day PULL a copy of the application and merge with your copy Fix all the conflict that may occur 
+7. PUSH the changes to the repo and go to sleep
