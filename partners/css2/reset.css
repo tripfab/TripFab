@@ -82,7 +82,9 @@ textarea {
 
 input[type="text"], input[type="password"], textarea {
 	border: 1px solid #D8D8D8;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
 	color: #616161;
 	font-size: 12px;
 	height: 27px;
@@ -215,7 +217,9 @@ body {
 	display: block;
 	padding: 0 14px;
 	font-weight: bold;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
 }
 
 .btn-4:hover {
@@ -225,7 +229,9 @@ body {
 .btn-5 {
 	background-color: #e0f2fd;
 	border: 1px solid #bde1f7;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
 	line-height: 27px;
 	color: #073153;
 	text-shadow: 0 1px 0 #FFFFFF;
@@ -237,7 +243,9 @@ body {
 
 .btn-6 {
 	background-color: #000000;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
 	color: #FFFFFF;
 	display: block;
 	font-weight: bold;
@@ -255,7 +263,9 @@ body {
 	font-size: 11px;
 	font-weight: bold;
 	border: 1px solid #000000;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
 	line-height: 18px;
 	padding: 0 9px;
 	display: block;
@@ -273,7 +283,9 @@ body {
 	display: block;
 	padding: 0 14px;
 	font-weight: bold;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
 }
 
 .btn-8:hover {
@@ -302,7 +314,9 @@ body {
 .btn-10 {
 	background: url(../images2/btn-10.gif) repeat-x top left;
 	border: 1px solid #dbdbdb;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
 	height: 30px;
 	line-height: 30px;
 	color: #616161;
@@ -332,7 +346,9 @@ body {
 	display: block;
 	padding: 0 14px;
 	font-weight: bold;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
 }
 
 .btn-11:hover {
@@ -348,7 +364,9 @@ body {
 	display: block;
 	padding: 0 22px;
 	font-weight: bold;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
 	font-size: 13px;
 }
 
@@ -362,7 +380,9 @@ body {
 	display: block;
 	padding: 0 14px;
 	font-weight: bold;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
 	cursor: pointer;
 	border:1px solid #dbdbdb;
 }
