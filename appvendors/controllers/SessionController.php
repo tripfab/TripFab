@@ -16,8 +16,12 @@ class SessionController extends Zend_Controller_Action {
     public function logoutAction()
     {
         $this->auth = Zend_Auth::getInstance();
-        if($this->auth->hasIdentity())
+        if($this->auth->hasIdentity()){
+            $user = $this->auth->getIdentity();
+            WS_Log::info($user->id . ' has logged out');
+            
             $this->auth->clearIdentity();
+        }
         $this->_redirect('/provider/signup');
     }
     
@@ -67,6 +71,9 @@ class SessionController extends Zend_Controller_Action {
             $result = $this->accounts->login($_POST['email'], $_POST['password']);
             if($result === true){
                 $user = $this->auth->getIdentity();
+                
+                WS_Log::info($user->id . ' has logged in');
+                
                 $role = $user->role_id;
                 if(!empty($_POST['return_url']))
                     $this->_redirect ($_POST['return_url']);            
@@ -160,6 +167,7 @@ class SessionController extends Zend_Controller_Action {
             $message.= 'Country: '.$_POST['country']."\n";
 
             $notifier->sendEmail($to, $subject, $message);
+            WS_Log::info($_POST['email'] . ' has requested an Invitation');
         } catch(Exception $e) {
             return array($e->getMessage());
         }
