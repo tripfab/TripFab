@@ -12,11 +12,10 @@
 	<script type="text/javascript" src="/js2/jquery.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('input:not(.noclean)').ToggleInputValue();
 			var i=1;
 			$('#newHour').click(function(){			
 				<?php if($this->listing->main_type == 5): ?>
-				var $item = $('<div class="item"><input name="sch['+i+'][name]" value="Standard, Familiar...." type="text" /><h4><a href="" class="remove">Remove</a>Room Name</h4><span>Write a name for this room</span><div class="clear"></div></div>');
+				var $item = $('<div class="item"><input tabindex="'+(i+1)+'" name="sch['+i+'][name]" value="Standard, Familiar...." type="text" /><h4><a href="" class="remove">Remove</a>Room Name</h4><span>Write a name for this room</span><div class="clear"></div></div>');
 				$('.item-wrppr .item:last').before($item);
 				$('input').ToggleInputValue();
 				i++;
@@ -140,28 +139,31 @@
                                 Vestibulum quis orci non lacus dignissim cursus.</p>
                             </div>
                             <div class="item-wrppr">
+                            	<?php $tab = 1 ?>
                             	<?php if(count($this->schedules)>0): ?>
                                 <?php foreach($this->schedules as $sch): ?>
                                 <div class="item">
-                                    <input name="schs[<?= $sch->id ?>][name]" value="<?= $sch->name ?>" type="text" />
+                                    <input tabindex="<?= $tab ?>" name="schs[<?= $sch->id ?>][name]" value="<?= $sch->name ?>" type="text" />
                                     <h4><a href="" class="remove">Remove</a>Room Name</h4>
                                     <span>Write a name for this room</span>
                                     <div class="clear"></div>	
                                 </div><!-- closes item -->
+                                <?php $tab++ ?>
                                 <?php endforeach ?>
                                 <?php endif ?>
                                 <?php if($this->sch): ?>
                                 <?php foreach($this->sch as $i => $sch): ?>
                                 <div class="item">
-                                    <input class="noclean" name="sch[<?= $i ?>][name]" value="<?= $sch['name'] ?>" type="text" />
+                                    <input tabindex="<?= $tab ?>" class="noclean" name="sch[<?= $i ?>][name]" value="<?= $sch['name'] ?>" type="text" />
                                     <h4><a href="" class="remove">Remove</a>Room Name</h4>
                                     <span>Write a name for this room</span>
                                     <div class="clear"></div>	
                                 </div><!-- closes item -->
+                                <?php $tab++ ?>
                                 <?php endforeach ?>
                                 <?php elseif(count($this->schedules) == 0): ?>
                                 <div class="item">
-                                    <input name="sch[0][name]" value="Standard, Familiar...." type="text" />
+                                    <input tabindex="<?= $tab ?>" name="sch[0][name]" value="Standard, Familiar...." type="text" />
                                     <h4>Room Name</h4>
                                     <span>Write a name for this room</span>
                                     <div class="clear"></div>	
