@@ -186,7 +186,7 @@
 					if(response.success == 1){
 						$msg = $('<div></div>');
 						$msg.addClass(response.status);
-						$msg.append('<span>'+response.text+'</span>');
+						$msg.append('<span><a href="/provider/listings/activate/'+response.id+'">'+response.text+'</a></span>');
 						$('span', $msg).addClass(response.missing);
 						$('.listing'+response.id+' .right > ul').before($msg);
 					}

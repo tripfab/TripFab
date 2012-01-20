@@ -173,3 +173,28 @@ Stack trace:
     [module] => default
 )
 
+2012-01-20T17:01:41-06:00 CRIT (2): Application error, exception 'Zend_View_Exception' with message 'script 'provider/listings.phtml' not found in path (/var/www/appvendors/views/scripts/)' in /var/www/library/Zend/View/Abstract.php:988
+Stack trace:
+#0 /var/www/library/Zend/View/Abstract.php(884): Zend_View_Abstract->_script('provider/listin...')
+#1 /var/www/library/Zend/Controller/Action/Helper/ViewRenderer.php(908): Zend_View_Abstract->render('provider/listin...')
+#2 /var/www/library/Zend/Controller/Action/Helper/ViewRenderer.php(929): Zend_Controller_Action_Helper_ViewRenderer->renderScript('provider/listin...', NULL)
+#3 /var/www/library/Zend/Controller/Action.php(212): Zend_Controller_Action_Helper_ViewRenderer->render('listings', NULL, false)
+#4 /var/www/appvendors/controllers/ProviderController.php(86): Zend_Controller_Action->render('listings')
+#5 /var/www/library/Zend/Controller/Action.php(513): ProviderController->listingsAction()
+#6 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingsAction')
+#7 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#8 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#9 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#10 /var/www/partners/index.php(26): Zend_Application->run()
+#11 {main}
+2012-01-20T17:01:41-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [action] => listings
+    [controller] => provider
+    [module] => default
+    [task] => default
+    [id] => default
+    [tab] => default
+)
+
