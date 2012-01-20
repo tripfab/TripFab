@@ -81,8 +81,8 @@
                             <label for="stateOpt2_<?= $day['num'] ?>">Day Blocked</label>
                         </div>
                     </div>
-                    <input type="submit" class="btn-7" value="Done" />
-                    <input type="button" class="btn-7 cancel" value="Cancel" />
+                    <input type="submit" class="btn-7 noclean" value="Done" />
+                    <input type="button" class="btn-7 cancel noclean" value="Cancel" />
                     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
                     <input type="hidden" name="day" value="<?= $day['date'] ?>" />
                     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
@@ -110,7 +110,7 @@
                             <?php endif ?>
                         </select>
                     </div><!-- closes tooltip-wrapper -->
-                    <input type="submit" class="btn-7" value="Done" />
+                    <input type="submit" class="btn-7 noclean" value="Done" />
                     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
                     <input type="hidden" name="day" value="<?= $day['date'] ?>" />
                     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
