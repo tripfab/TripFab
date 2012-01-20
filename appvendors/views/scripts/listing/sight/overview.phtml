@@ -32,6 +32,9 @@
 	.listing-content {
 		overflow:visible;}
 </style>
+<script type="text/javascript">
+$('textarea').elastic();
+</script>
 <form action="" method="post">
     <div class="lstng-details pricing overview">
   		<?php if($this->help->sig_overview == 0): ?>
@@ -45,7 +48,7 @@
     		<p><strong>Sight Overview</strong></p>    		
     	</div><!-- closes main-ttl -->								
         <div class="lstng-detail">
-            <textarea placeholder="Write a nice overview about this sight" class="noclean" name="about" cols="30" rows="1"><?= stripslashes($this->overview->about) ?></textarea>
+            <textarea placeholder="Write a nice overview about this sight" class="noclean limitcc" rel="1000" name="about" cols="30" rows="1"><?= stripslashes($this->overview->about) ?></textarea>
             <strong>About the sight</strong>
             <span>Write a detail description</span>
             <!--<span class="counter">500</span>-->
@@ -57,7 +60,7 @@
             <div class="clear"></div>
         </div><!-- closes lstng-detail -->
         <div class="lstng-detail">
-            <textarea placeholder="Write a nice description about things people will love" class="noclean" name="love" cols="30" rows="1"><?= stripslashes($this->overview->love) ?></textarea>
+            <textarea placeholder="Write a nice description about things people will love" class="noclean limitcc" rel="1000" name="love" cols="30" rows="1"><?= stripslashes($this->overview->love) ?></textarea>
             <strong>Why do you love it?</strong>
             <span>Write about things people will love about it</span>
             <!--<span class="counter">500</span>-->
@@ -69,7 +72,7 @@
             <div class="clear"></div>
         </div><!-- closes lstng-detail -->
         <div class="lstng-detail">
-            <textarea placeholder="Write a nice description about what to expect" class="noclean" name="expect" cols="30" rows="1"><?= stripslashes($this->overview->expect) ?></textarea>
+            <textarea placeholder="Write a nice description about what to expect" class="noclean limitcc" rel="1000" name="expect" cols="30" rows="1"><?= stripslashes($this->overview->expect) ?></textarea>
             <strong>When can you enjoy it?</strong>
             <span>Tell us what the traveler can expect</span>
             <!--<span class="counter">500</span>-->
