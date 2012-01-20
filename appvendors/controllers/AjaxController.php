@@ -163,7 +163,7 @@ class AjaxController extends Zend_Controller_Action
                     $response = array(
                         'success' => 1,
                         'status'  => 'warning',
-                        'text'    => count($errors).' step remaining before activating',
+                        'text'    => count($errors).' step(s) remaining before activating',
                         'missing' => 'missing',
                         'id'      => $listing->id,
                     );

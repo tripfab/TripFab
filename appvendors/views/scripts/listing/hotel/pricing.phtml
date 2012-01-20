@@ -30,6 +30,8 @@
                         <?php foreach($this->persons as $i): ?>
                         <?php if($this->sch[0][$sch->id]['additional_after'] == $i): ?>
                         <option selected="selected" value="<?= $i ?>"><?= $i ?></option>
+                        <?php elseif($i == 2): ?>
+                        <option selected="selected" value="<?= $i ?>"><?= $i ?></option>
                         <?php else: ?>
                         <option value="<?= $i ?>"><?= $i ?></option>
                         <?php endif ?>
@@ -75,6 +77,8 @@
                             <select name="sch[<?= $season->id ?>][<?= $sch->id ?>][additional_after]">
                                 <?php foreach($this->persons as $i): ?>
                                 <?php if($this->season[$season->id][$sch->id]['additional_after'] == $i): ?>
+                                <option selected="selected" value="<?= $i ?>"><?= $i ?></option>
+                                <?php elseif($i == 2): ?>
                                 <option selected="selected" value="<?= $i ?>"><?= $i ?></option>
                                 <?php else: ?>
                                 <option value="<?= $i ?>"><?= $i ?></option>
