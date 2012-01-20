@@ -154,20 +154,76 @@ class SessionController extends Zend_Controller_Action {
     public function signupPostHandler()
     {
         try {
-            $notifier = new WS_Notifier();
-            $to      = 'cristian@tripfab.com; ricardo@tripfab.com';
-            $subject = 'New Invitation Request';
-            $message = 'New signup from: '.$_POST['company']."\n\n";
-            $message.= 'Contact: '.$_POST['name']."\n";
-            $message.= 'Company: '.$_POST['company']."\n";
-            $message.= 'Email: '.$_POST['email']."\n";
-            $message.= 'Phone: ('.$_POST['code'].') '.$_POST['phone']."\n";
-            $message.= 'Website: '.$_POST['website']."\n";
-            $message.= 'Business: '.$_POST['business']."\n";
-            $message.= 'Country: '.$_POST['country']."\n";
+            $errors = array();
+            //var_dump($_POST); die;
+            if(empty($_POST['name']))
+                $errors[] = 'Company name cannot be empty';
+                
+            if(empty($_POST['email']))
+                $errors[] = 'Email cannot be empty';
+                
+            if(empty($_POST['phone']))
+                $errors[] = 'Phone cannot be empty';
+                
+            if(empty($_POST['website']))
+                $errors[] = 'Website cannot be empty';
+                
+            if(empty($_POST['country']))
+                $errors[] = 'Select a country';
+                
 
-            $notifier->sendEmail($to, $subject, $message);
-            WS_Log::info($_POST['email'] . ' has requested an Invitation');
+            $email = new Zend_Validate_EmailAddress();
+            if(!$email->isValid(trim($_POST['email'])))
+                $errors[] = 'Invalid Emil Address';
+            
+            if(!Zend_Uri::check(trim($_POST['website'])))
+                $errors[] = 'Invalid Website try adding http://';
+            
+            if(count($errors) > 0) {
+                $notifier = new WS_Notifier();
+                $to      = 'cristian@tripfab.com; ricardo@tripfab.com';
+                $subject = 'New Invitation Request';
+                $message = 'New signup from: '.$_POST['company']."\n\n";
+                $message.= 'Contact: '.$_POST['contact']."\n";
+                $message.= 'Company: '.$_POST['name']."\n";
+                $message.= 'Email: '.$_POST['email']."\n";
+                $message.= 'Phone: ('.$_POST['code'].') '.$_POST['phone']."\n";
+                $message.= 'Website: '.$_POST['website']."\n";
+                $message.= 'Business: '.$_POST['business']."\n";
+                $message.= 'Country: '.$_POST['country']."\n\n";
+                $message.= 'The account for this company wasnt created beacuase there is information missing';
+
+                $notifier->sendEmail($to, $subject, $message);
+                WS_Log::info($_POST['email'] . ' has requested an Invitation');
+            } else {
+                $this->accounts = new WS_AccountService();
+                if($this->accounts->validateEmail(trim($_POST['email']))){
+                    $data = $_POST;
+                    $country = explode($_POST['country'],'-');
+                    $data['country_id'] = trim($country[1]);
+                    $data['password']   = substr(md5($_POST['email']), 3, 12);
+                    $this->accounts->signupVendor($data, false);
+                    $password = 'The password for this account is '. $data['password'];
+                } else {
+                    $password = 'The account for this company wasnt created beacuase seems like it already exists in the database';
+                }
+                
+                $notifier = new WS_Notifier();
+                $to      = 'cristian@tripfab.com; ricardo@tripfab.com';
+                $subject = 'New Invitation Request';
+                $message = 'New signup from: '.$_POST['company']."\n\n";
+                $message.= 'Contact: '.$_POST['contact']."\n";
+                $message.= 'Company: '.$_POST['name']."\n";
+                $message.= 'Email: '.$_POST['email']."\n";
+                $message.= 'Phone: ('.$_POST['code'].') '.$_POST['phone']."\n";
+                $message.= 'Website: '.$_POST['website']."\n";
+                $message.= 'Business: '.$_POST['business']."\n";
+                $message.= 'Country: '.$_POST['country']."\n\n";
+                $message.= $password;
+
+                $notifier->sendEmail($to, $subject, $message);
+                WS_Log::info($_POST['email'] . ' has requested an Invitation');
+            }
         } catch(Exception $e) {
             return array($e->getMessage());
         }

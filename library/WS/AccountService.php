@@ -77,7 +77,7 @@ class WS_AccountService {
         //var_dump($data); die;
     }
     
-    public function signupVendor($data)
+    public function signupVendor($data, $flag = true)
     {
         $settings = new Zend_Db_Table('email_settings');
         $select = $settings->select();
@@ -140,11 +140,13 @@ class WS_AccountService {
             $contact->updated   = date('Y-m-d H:i:s');
             $contact->save();
         }
+        
+        if($flag) {
+            $notifier = new WS_Notifier();
+            $notifier->newSignup($user->email, $password, $user->name);
 
-        $notifier = new WS_Notifier();
-        $notifier->newSignup($user->email, $password, $user->name);
-
-        $this->login($user->email, $password);
+            $this->login($user->email, $password);
+        }
     }
     
     public function login($data, $pw, $fb = false){
