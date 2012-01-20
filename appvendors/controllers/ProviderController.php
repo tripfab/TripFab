@@ -529,57 +529,64 @@ class ProviderController extends Zend_Controller_Action
             $listing = $this->listings->getListing($ids, $this->user->getVendorId());
             $getthere = $this->listings->getLocationOf($listing->id);
             if($this->getRequest()->isPost()){
-                //echo '<pre>'; print_r($_POST); echo '</pre>'; die;
-                
-                $getthere->plane = $_POST['plane'];
-                $getthere->car   = $_POST['car'];
-                $getthere->train = $_POST['train'];
-                $getthere->boat = $_POST['boat'];
-                
-                $getthere->save();
-                
-                $errors = array();
-                if(empty($_POST['country_id']))
-                    $errors[] = 'Select the country';
-                if(empty($_POST['city_id']))
-                    $errors[] = 'Select the city';
-                //if(empty($_POST['address']))
-                    //$errors[] = 'Address can not be empty';
-                //if(empty($_POST['lat']) || empty($_POST['lng']))
-                    //$errors[] = 'You need to localize the listing in the map';
-                
-                if(count($errors) > 0){
-                    $this->view->errors = $errors;
-                } else {
-                    $data = $_POST;
-                    if($data['country_id'] != $listing->country_id){
-                        $db = Zend_Db_Table::getDefaultAdapter();
-
-                        if($listing->country_id != 0 && !is_null($listing->country_id))
-                            $db->query('Update places set listings = listings - 1 where id = '.$listing->country_id);
-
-                        $db->query('Update places set listings = listings + 1 where id = '.$data['country_id']);
-                        $listing->country_id = $data['country_id'];
-                    }
-                    if($data['city_id'] != $listing->city_id){
-                        $db = Zend_Db_Table::getDefaultAdapter();
-
-                        if($listing->city_id != 0 && !is_null($listing->city_id))
-                            $db->query('Update places set listings = listings - 1 where id = '.$listing->city_id);
-
-                        $db->query('Update places set listings = listings + 1 where id = '.$data['city_id']);
-                        $listing->city_id    = $data['city_id']; 
-                    }
-
-                    $listing->address = $data['address'];
-                    $listing->lat     = (!empty($data['lat'])) ? $data['lat'] : null;
-                    $listing->lng     = (!empty($data['lng'])) ? $data['lat'] : null;
-                    
-                    $listing->save();
+                if($_POST['_task'] === md5('add_location')){
+                    $getthere->$_POST['location'] = ' ';
+                    $getthere->save();
                     setcookie('alert', 'Your changes have been save');
                     $this->_redirect('provider/listings/location/'.$listing->id);
-                }
+                } else {
+                    //echo '<pre>'; print_r($_POST); echo '</pre>'; die;
                 
+                    $getthere->plane = trim($_POST['plane']);
+                    $getthere->car   = trim($_POST['car']);
+                    $getthere->train = trim($_POST['train']);
+                    $getthere->boat  = trim($_POST['boat']);
+                    $getthere->bus   = trim($_POST['bus']);
+
+                    $getthere->save();
+
+                    $errors = array();
+                    if(empty($_POST['country_id']))
+                        $errors[] = 'Select the country';
+                    if(empty($_POST['city_id']))
+                        $errors[] = 'Select the city';
+                    //if(empty($_POST['address']))
+                        //$errors[] = 'Address can not be empty';
+                    //if(empty($_POST['lat']) || empty($_POST['lng']))
+                        //$errors[] = 'You need to localize the listing in the map';
+
+                    if(count($errors) > 0){
+                        $this->view->errors = $errors;
+                    } else {
+                        $data = $_POST;
+                        if($data['country_id'] != $listing->country_id){
+                            $db = Zend_Db_Table::getDefaultAdapter();
+
+                            if($listing->country_id != 0 && !is_null($listing->country_id))
+                                $db->query('Update places set listings = listings - 1 where id = '.$listing->country_id);
+
+                            $db->query('Update places set listings = listings + 1 where id = '.$data['country_id']);
+                            $listing->country_id = $data['country_id'];
+                        }
+                        if($data['city_id'] != $listing->city_id){
+                            $db = Zend_Db_Table::getDefaultAdapter();
+
+                            if($listing->city_id != 0 && !is_null($listing->city_id))
+                                $db->query('Update places set listings = listings - 1 where id = '.$listing->city_id);
+
+                            $db->query('Update places set listings = listings + 1 where id = '.$data['city_id']);
+                            $listing->city_id    = $data['city_id']; 
+                        }
+
+                        $listing->address = $data['address'];
+                        $listing->lat     = (!empty($data['lat'])) ? $data['lat'] : null;
+                        $listing->lng     = (!empty($data['lng'])) ? $data['lat'] : null;
+
+                        $listing->save();
+                        setcookie('alert', 'Your changes have been save');
+                        $this->_redirect('provider/listings/location/'.$listing->id);
+                    }
+                }                
             }
             
             $countries = $this->places->getPlaces(2);
