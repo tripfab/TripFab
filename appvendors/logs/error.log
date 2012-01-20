@@ -152,3 +152,24 @@ Stack trace:
     [form_id] => 66dc268455e3c34b3aee8052db077251
 )
 
+2012-01-20T16:38:34-06:00 CRIT (2): Application error, exception 'Exception' with message 'Page not found' in /var/www/appvendors/controllers/ProviderController.php:1334
+Stack trace:
+#0 /var/www/appvendors/controllers/ProviderController.php(147): ProviderController->listingsNewTask()
+#1 /var/www/library/Zend/Controller/Action.php(513): ProviderController->listingsAction()
+#2 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingsAction')
+#3 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#4 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#5 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#6 /var/www/partners/index.php(26): Zend_Application->run()
+#7 {main}
+2012-01-20T16:38:34-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [action] => listings
+    [task] => new
+    [id] => 400
+    [tab] => step3
+    [controller] => provider
+    [module] => default
+)
+
