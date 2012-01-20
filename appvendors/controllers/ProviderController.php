@@ -532,7 +532,7 @@ class ProviderController extends Zend_Controller_Action
                 if($_POST['_task'] === md5('add_location')){
                     $getthere->$_POST['location'] = ' ';
                     $getthere->save();
-                    setcookie('alert', 'Your changes have been save');
+                    setcookie('alert', 'Your changes have been saved');
                     $this->_redirect('provider/listings/location/'.$listing->id);
                 } else {
                     //echo '<pre>'; print_r($_POST); echo '</pre>'; die;
@@ -583,7 +583,7 @@ class ProviderController extends Zend_Controller_Action
                         $listing->lng     = (!empty($data['lng'])) ? $data['lat'] : null;
 
                         $listing->save();
-                        setcookie('alert', 'Your changes have been save');
+                        setcookie('alert', 'Your changes have been saved');
                         $this->_redirect('provider/listings/location/'.$listing->id);
                     }
                 }                
@@ -657,7 +657,7 @@ class ProviderController extends Zend_Controller_Action
                     }
                 }
                 $details = $this->listings->getDetails($listing->id);
-                setcookie('alert','Your changes have been save');
+                setcookie('alert','Your changes have been saved');
                 $this->_redirect('provider/listings/overview/'.$listing->id);
             }
             $this->view->overview = $overview;
@@ -1805,7 +1805,7 @@ class ProviderController extends Zend_Controller_Action
 
             $listing->save();
             
-            setcookie('alert','Your changes have been save');
+            setcookie('alert','Your changes have been saved');
             
             $this->_redirect('provider/listings/edit/'.$listing->id);
         }
@@ -1881,7 +1881,7 @@ class ProviderController extends Zend_Controller_Action
         }
         
         $this->view->activephoto = $img->id;
-        setcookie('alert','Your changes have been save');
+        setcookie('alert','Your changes have been saved');
         $this->_redirect('provider/listings/photos/'.$listing->id);
     }
     
