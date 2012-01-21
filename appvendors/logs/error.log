@@ -198,3 +198,60 @@ Stack trace:
     [tab] => default
 )
 
+2012-01-20T17:48:08-06:00 CRIT (2): Application error, exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'price' cannot be null' in /var/www/library/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query('INSERT INTO `pr...', Array)
+#4 /var/www/library/Zend/Db/Adapter/Abstract.php(575): Zend_Db_Adapter_Pdo_Abstract->query('INSERT INTO `pr...', Array)
+#5 /var/www/library/Zend/Db/Table/Abstract.php(1075): Zend_Db_Adapter_Abstract->insert('prices', Array)
+#6 /var/www/library/Zend/Db/Table/Row/Abstract.php(467): Zend_Db_Table_Abstract->insert(Array)
+#7 /var/www/library/Zend/Db/Table/Row/Abstract.php(438): Zend_Db_Table_Row_Abstract->_doInsert()
+#8 /var/www/library/WS/ListingService.php(938): Zend_Db_Table_Row_Abstract->save()
+#9 /var/www/library/WS/ListingService.php(838): WS_ListingService->_updatePrice('643', 1, NULL, NULL)
+#10 /var/www/appvendors/controllers/ProviderController.php(1322): WS_ListingService->updatePricesOf(Object(Zend_Db_Table_Row), Array)
+#11 /var/www/appvendors/controllers/ProviderController.php(147): ProviderController->listingsNewTask()
+#12 /var/www/library/Zend/Controller/Action.php(513): ProviderController->listingsAction()
+#13 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingsAction')
+#14 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#15 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#16 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#17 /var/www/partners/index.php(26): Zend_Application->run()
+#18 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'price' cannot be null' in /var/www/library/Zend/Db/Statement/Pdo.php:234
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#1 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query('INSERT INTO `pr...', Array)
+#3 /var/www/library/Zend/Db/Adapter/Abstract.php(575): Zend_Db_Adapter_Pdo_Abstract->query('INSERT INTO `pr...', Array)
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1075): Zend_Db_Adapter_Abstract->insert('prices', Array)
+#5 /var/www/library/Zend/Db/Table/Row/Abstract.php(467): Zend_Db_Table_Abstract->insert(Array)
+#6 /var/www/library/Zend/Db/Table/Row/Abstract.php(438): Zend_Db_Table_Row_Abstract->_doInsert()
+#7 /var/www/library/WS/ListingService.php(938): Zend_Db_Table_Row_Abstract->save()
+#8 /var/www/library/WS/ListingService.php(838): WS_ListingService->_updatePrice('643', 1, NULL, NULL)
+#9 /var/www/appvendors/controllers/ProviderController.php(1322): WS_ListingService->updatePricesOf(Object(Zend_Db_Table_Row), Array)
+#10 /var/www/appvendors/controllers/ProviderController.php(147): ProviderController->listingsNewTask()
+#11 /var/www/library/Zend/Controller/Action.php(513): ProviderController->listingsAction()
+#12 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingsAction')
+#13 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#14 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#15 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#16 /var/www/partners/index.php(26): Zend_Application->run()
+#17 {main}
+2012-01-20T17:48:08-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [action] => listings
+    [task] => new
+    [id] => 643
+    [tab] => step6
+    [controller] => provider
+    [module] => default
+    [ids] => 643
+    [listing_token] => 9dec71210277e8238bd3dea10f926cf6
+    [form_id] => 624a6e07ee6bac82480de2112230e7bb
+    [_task] => a8f2c4d77ff6470248a6b07e30f8cf63
+)
+
