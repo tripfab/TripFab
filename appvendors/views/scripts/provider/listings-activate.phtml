@@ -7,7 +7,25 @@
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <link rel="stylesheet" href="guiders/guiders.css" type="text/css" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
 	<script type="text/javascript" src="/js2/jquery.js"></script>
+    <?php if($this->ready): ?>
+    <script type="text/javascript">
+	$(function(){
+		$.fancybox({
+			href:'#finish_listing',
+			padding:0,
+			overlayColor:'#fff',
+			showCloseButton:0,
+			modal:1,
+			centerOnScroll:1
+		});
+	});
+	</script>
+    <style type="text/css">
+	#fancybox-content { background:#fff;}
+	</style>
+    <?php endif ?>
 </head>
 <body>
 <div class="w1">
@@ -55,5 +73,14 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<div class="hidden">
+	<div id="finish_listing">
+        <h3>Your listing is ready!</h3>
+        <p>Tripfab it's going to review your listing. We must check everything is ok. We'll notify you when it's ready to hit the entire world. Thanks!</p>
+        <div class="bottom">
+            <a href="/provider/listings" class="btn-1">Okay</a>
+        </div><!--BUTTONS-->
+    </div><!--FINISH_LISTING-->
+</div>
 </body>
 </html>

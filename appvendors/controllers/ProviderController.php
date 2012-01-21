@@ -973,9 +973,8 @@ class ProviderController extends Zend_Controller_Action
                 $this->view->validate = $validate;
             }
             else {
-                $listing->status = 1; 
-                $listing->save();
-                $this->_redirect('provider/listings');
+                $this->view->validate = $validate;
+                $this->view->ready = true;
             }            
         }
     }
