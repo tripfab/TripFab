@@ -11,8 +11,6 @@
 	<script type="text/javascript" src="/js2/jquery.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('textarea').elastic();	
-            $('input').ToggleInputValue();
 			
 			$selecting = false;
 			$changing  = false;
@@ -109,10 +107,16 @@
 	.calendar ul.calendar-items > li.selectedOne > .tooltip {
 		display:block !important;}
 	.calendar ul.calendar-items > li.selected {
-		background-color: #CEF3FD !important;
-		border: 1px solid #DDF7FD !important;
+		background-color: #d6f0fe !important;
+		border: 1px solid #d6f0fe !important;
 		color:#70D3F3 !important;
 	}
+	.calendar ul.calendar-items > li {
+		border:1px solid #e7f7ff;
+		background-color:#e7f7ff;}
+	.calendar ul.calendar-items > li.disabled {
+		border:1px solid #F9F9F9 !important;
+		background-color:#F9F9F9 !important;}
 	</style>
 </head>
 <body>
