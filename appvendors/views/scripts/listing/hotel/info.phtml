@@ -420,7 +420,7 @@ input.schname { float:none !important; width:90px !important; }
                         <?php if(!is_null($this->listing->checkout) and $this->listing->checkout != '00:00:00' and 
 									$h == (date('g:i', strtotime($this->listing->checkout)))): ?>
                         <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
-                        <?php elseif($h == '11:00'): ?>
+                        <?php elseif($h == '12:00'): ?>
                         <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
                         <?php else: ?>
                         <option value="<?= $h ?>"><?= $h ?></option>
@@ -437,8 +437,8 @@ input.schname { float:none !important; width:90px !important; }
                         <option value="AM">AM</option>
                         <option selected="selected" value="PM">PM</option>
                         <?php else: ?>
-                        <option selected="selected" value="AM">AM</option>
-                        <option value="PM">PM</option>                        
+                        <option value="AM">AM</option>
+                        <option selected="selected" value="PM">PM</option>                        
                         <?php endif ?>
                     </select>
                 </div><!-- closes selects -->
