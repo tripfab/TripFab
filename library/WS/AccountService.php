@@ -110,6 +110,7 @@ class WS_AccountService {
         $vendor->token    = md5('vendor'.$data['email'].time());
         $vendor->created  = date('Y-m-d H:i:s');
         $vendor->updated  = date('Y-m-d H:i:s');
+        $vendor->place_id = $user->country_id;
         
         $vendor->save();
         
