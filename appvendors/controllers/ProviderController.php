@@ -2861,7 +2861,7 @@ class ProviderController extends Zend_Controller_Action
                     $this->_redirect('/provider/listings/new');
                 }
 
-                $this->_helper->flashMessenger('Seem like you already have an account');
+                $this->_helper->flashMessenger('Seems like you already have an account.');
                 $this->_redirect('/login');
             }
         }

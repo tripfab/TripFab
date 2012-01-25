@@ -116,6 +116,11 @@
                                    <?= $this->translate('login error') ?>
                                </div>
                                <?php endif ?>
+							   <?php if(!empty($this->alerts)): ?>
+                               <div class="error">
+                                   <?= $this->alerts[0] ?>
+                               </div>
+                               <?php endif ?>
                                <?php if($this->email): ?>
                                <input type="text" placeholder="Email" name="email" value="<?= $this->email ?>" class="focus noclean in-2 required email" />
                                <?php else: ?>
