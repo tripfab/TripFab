@@ -580,9 +580,12 @@ class ProviderController extends Zend_Controller_Action
 
                         $listing->address = $data['address'];
                         $listing->lat     = (!empty($data['lat'])) ? $data['lat'] : null;
-                        $listing->lng     = (!empty($data['lng'])) ? $data['lat'] : null;
+                        $listing->lng     = (!empty($data['lng'])) ? $data['lng'] : null;
 
                         $listing->save();
+                        
+                        //var_dump($listing->toArray()); die;
+                        
                         setcookie('alert', 'Your changes have been saved');
                         $this->_redirect('provider/listings/location/'.$listing->id);
                     }
