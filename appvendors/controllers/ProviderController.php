@@ -49,8 +49,16 @@ class ProviderController extends Zend_Controller_Action
     {
         $auth = Zend_Auth::getInstance();
         if(!$auth->hasIdentity()){
-            if($this->_getParam('action') != 'signup')
+            if($this->_getParam('action') != 'signup' && $this->_getParam('task') != 'preview' )
                 $this->_redirect ('login');
+            else {
+                $this->messages     = new WS_MessagesService();
+                $this->reservations = new WS_ReservationsService();
+                $this->feeds        = new WS_FeedsService();
+                $this->listings     = new WS_ListingService();
+                $this->places       = new WS_PlacesService();
+                $this->accounts     = new WS_AccountService();
+            }
         } else {
             $this->user = new WS_User($auth->getStorage()->read());
             if($this->user->getRole() != 'provider'){
@@ -677,7 +685,7 @@ class ProviderController extends Zend_Controller_Action
             $this->reviews   = new WS_ReviewsService();
             $this->questions = new WS_PublicQuestionsService();
             
-            $listing = $this->listings->getListing($ids, $this->user->getVendorId());
+            $listing = $this->listings->getListing($ids);
             $country = $this->places->getPlaceById($listing->country_id);
             if(!is_null($country))
                 $city = $this->places->getPlaceById($listing->city_id);

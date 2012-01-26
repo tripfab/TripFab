@@ -255,3 +255,157 @@ Stack trace:
     [_task] => a8f2c4d77ff6470248a6b07e30f8cf63
 )
 
+2012-01-26T14:44:27-06:00 CRIT (2): Application error, exception 'Exception' in /var/www/library/WS/ListingService.php:524
+Stack trace:
+#0 /var/www/appvendors/controllers/ProviderController.php(1849): WS_ListingService->getListing('601', '836')
+#1 /var/www/appvendors/controllers/ProviderController.php(135): ProviderController->listingsPhotosTask()
+#2 /var/www/library/Zend/Controller/Action.php(513): ProviderController->listingsAction()
+#3 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingsAction')
+#4 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#5 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#6 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#7 /var/www/partners/index.php(26): Zend_Application->run()
+#8 {main}
+2012-01-26T14:44:27-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [action] => listings
+    [task] => photos
+    [id] => 601
+    [controller] => provider
+    [module] => default
+    [tab] => default
+)
+
+2012-01-26T14:55:23-06:00 CRIT (2): Application error, exception 'Exception' in /var/www/library/WS/ListingService.php:524
+Stack trace:
+#0 /var/www/appvendors/controllers/ProviderController.php(537): WS_ListingService->getListing('601', '837')
+#1 /var/www/appvendors/controllers/ProviderController.php(169): ProviderController->listingLocationTask()
+#2 /var/www/library/Zend/Controller/Action.php(513): ProviderController->listingsAction()
+#3 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingsAction')
+#4 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#5 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#6 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#7 /var/www/partners/index.php(26): Zend_Application->run()
+#8 {main}
+2012-01-26T14:55:23-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [action] => listings
+    [task] => location
+    [id] => 601
+    [controller] => provider
+    [module] => default
+    [tab] => default
+)
+
+2012-01-26T14:55:25-06:00 CRIT (2): Application error, exception 'Exception' in /var/www/library/WS/ListingService.php:524
+Stack trace:
+#0 /var/www/appvendors/controllers/ProviderController.php(1849): WS_ListingService->getListing('601', '837')
+#1 /var/www/appvendors/controllers/ProviderController.php(135): ProviderController->listingsPhotosTask()
+#2 /var/www/library/Zend/Controller/Action.php(513): ProviderController->listingsAction()
+#3 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingsAction')
+#4 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#5 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#6 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#7 /var/www/partners/index.php(26): Zend_Application->run()
+#8 {main}
+2012-01-26T14:55:25-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [action] => listings
+    [task] => photos
+    [id] => 601
+    [controller] => provider
+    [module] => default
+    [tab] => default
+)
+
+2012-01-26T14:55:25-06:00 CRIT (2): Application error, exception 'Exception' in /var/www/library/WS/ListingService.php:524
+Stack trace:
+#0 /var/www/appvendors/controllers/ProviderController.php(537): WS_ListingService->getListing('601', '837')
+#1 /var/www/appvendors/controllers/ProviderController.php(169): ProviderController->listingLocationTask()
+#2 /var/www/library/Zend/Controller/Action.php(513): ProviderController->listingsAction()
+#3 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingsAction')
+#4 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#5 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#6 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#7 /var/www/partners/index.php(26): Zend_Application->run()
+#8 {main}
+2012-01-26T14:55:25-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [action] => listings
+    [task] => location
+    [id] => 601
+    [controller] => provider
+    [module] => default
+    [tab] => default
+)
+
+2012-01-26T14:55:26-06:00 CRIT (2): Application error, exception 'Exception' in /var/www/library/WS/ListingService.php:524
+Stack trace:
+#0 /var/www/appvendors/controllers/ProviderController.php(1849): WS_ListingService->getListing('601', '837')
+#1 /var/www/appvendors/controllers/ProviderController.php(135): ProviderController->listingsPhotosTask()
+#2 /var/www/library/Zend/Controller/Action.php(513): ProviderController->listingsAction()
+#3 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingsAction')
+#4 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#5 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#6 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#7 /var/www/partners/index.php(26): Zend_Application->run()
+#8 {main}
+2012-01-26T14:55:26-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [action] => listings
+    [task] => photos
+    [id] => 601
+    [controller] => provider
+    [module] => default
+    [tab] => default
+)
+
+2012-01-26T14:55:28-06:00 CRIT (2): Application error, exception 'Exception' in /var/www/library/WS/ListingService.php:524
+Stack trace:
+#0 /var/www/appvendors/controllers/ProviderController.php(1849): WS_ListingService->getListing('601', '837')
+#1 /var/www/appvendors/controllers/ProviderController.php(135): ProviderController->listingsPhotosTask()
+#2 /var/www/library/Zend/Controller/Action.php(513): ProviderController->listingsAction()
+#3 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingsAction')
+#4 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#5 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#6 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#7 /var/www/partners/index.php(26): Zend_Application->run()
+#8 {main}
+2012-01-26T14:55:28-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [action] => listings
+    [task] => photos
+    [id] => 601
+    [controller] => provider
+    [module] => default
+    [tab] => default
+)
+
+2012-01-26T14:55:29-06:00 CRIT (2): Application error, exception 'Exception' in /var/www/library/WS/ListingService.php:524
+Stack trace:
+#0 /var/www/appvendors/controllers/ProviderController.php(1849): WS_ListingService->getListing('601', '837')
+#1 /var/www/appvendors/controllers/ProviderController.php(135): ProviderController->listingsPhotosTask()
+#2 /var/www/library/Zend/Controller/Action.php(513): ProviderController->listingsAction()
+#3 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingsAction')
+#4 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#5 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#6 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#7 /var/www/partners/index.php(26): Zend_Application->run()
+#8 {main}
+2012-01-26T14:55:29-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [action] => listings
+    [task] => photos
+    [id] => 601
+    [controller] => provider
+    [module] => default
+    [tab] => default
+)
+

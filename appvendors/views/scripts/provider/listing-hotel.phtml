@@ -80,7 +80,7 @@
                             <div>
                                 <p><strong>Check in</strong></p>
                                 <?php if(!empty($this->listing->checkin) and $this->listing->checkin != '00:00:00'): ?>
-                                <p><?= $this->listing->checkin ?></p>
+                                <p><?= date('g:i A', strtotime($this->listing->checkin)) ?></p>
                                 <?php else: ?>
                                 <p><a style="color:#60B5F7" href="/provider/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
                                 <?php endif ?>
@@ -88,7 +88,7 @@
                             <div>
                                 <p><strong>Check out</strong></p>
                                 <?php if(!empty($this->listing->checkout) and $this->listing->checkout != '00:00:00'): ?>
-                                <p><?= $this->listing->checkout ?></p>
+                                <p><?= date('g:i A', strtotime($this->listing->checkout)) ?></p>
                                 <?php else: ?>
                                 <p><a style="color:#60B5F7" href="/provider/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
                                 <?php endif ?>
@@ -150,16 +150,18 @@
                         	<?php foreach($this->rooms as $room): ?>
                             <h2><?= $room->name ?></h2>
                             <ul>
+                            	<?php if(!empty($room->description)): ?>
                                 <li><?= $room->description ?></li>
-                                <li>Minimun Stay <?= $room->nights ?>  nights</li>
-                                <li>Maximun Accommodates <?= $room->people ?> people</li>
+                                <?php endif ?>
+                                <li>Minimum Stay: <?= $room->nights ?> <?= (count($room->nights) > 1) ? "nights" : 'night' ?>   </li>
+                                <li>Maximum Accomodation: <?= $room->people ?> <?= (count($room->people) > 1) ? "people" : 'person' ?></li>
                                 <li>
-                                	<?= $room->bedrooms ?> Bedrooms 
+                                	<?= $room->bedrooms ?> <?= (count($room->bedrooms) > 1) ? "Bedrooms" : 'Bedroom' ?>  
                                 </li>
                                 <?php foreach($this->beds[$room->id] as $bed): ?>
-                                <li><?= $bed->quantity ?> <?= $bed->type ?> beds</li>
+                                <li><?= $bed->quantity ?> <?= $bed->type ?> <?= (count($room->quantity) > 1) ? "Beds" : 'Bed' ?></li>
                                 <?php endforeach ?>
-                                <li><b>Ameneties</b>
+                                <li><b>Amenities</b>
                                 <ul>
                                 <?php foreach($this->room_amenities[$room->id] as $amm): ?>
                                 <li><?= $this->amenities[$amm]->name ?></li>
