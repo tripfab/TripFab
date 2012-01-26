@@ -144,7 +144,8 @@ class WS_AccountService {
         
         if($flag) {
             $notifier = new WS_Notifier();
-            $notifier->newSignup($user->email, $password, $user->name);
+            //$notifier->newSignup($user->email, $password, $user->name);
+            $notifier->newSignup('genna@tripfab.com', $password, $user->name);
 
             $this->login($user->email, $password);
         }
