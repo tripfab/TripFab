@@ -1439,10 +1439,18 @@ class WS_ListingService {
         return $listing;
     }
     
-    public function getDefaultAmenities()
+    public function getDefaultAmenities($assoc = false)
     {
         $db = new Zend_Db_Table('amenities');
-        return $db->fetchAll();
+        $result = $db->fetchAll();
+        if(!$assoc)
+            return $result;
+        
+        $result2 = array();
+        foreach($result as $amm)
+            $result2[$amm->id] = $amm;
+        
+        return $result2;
     }
     
     public function getAmenities($room)

@@ -733,9 +733,14 @@ class ProviderController extends Zend_Controller_Action
                     $getthere = $this->listings->getLocationOf($listing->id);
                     
                     $rooms = $this->listings->getHotelRooms($listing->id);
+                    $amenities = $this->listings->getDefaultAmenities(true);
                     $beds = array();
                     foreach($rooms as $room){
                         $beds[$room->id] = $this->listings->getBeds($room->id);
+                    }
+                    $room_amenities = array();
+                    foreach($rooms as $room){
+                        $room_amenities[$room->id] = $this->listings->getAmenities($room->id);
                     }
                     
                     $this->view->overview = $overview;
@@ -743,6 +748,8 @@ class ProviderController extends Zend_Controller_Action
                     $this->view->getthere = $getthere;
                     $this->view->rooms    = $rooms;
                     $this->view->beds     = $beds;
+                    $this->view->room_amenities = $room_amenities;
+                    $this->view->amenities = $amenities;
                     
                     break;
                 case 2    : 

@@ -137,7 +137,7 @@
                         </div><!-- closes tab-content -->
                         <?php else: ?>
                         <div class="tab-content">
-                        	<a href="/provider/listings/details/<?= $this->listing->id ?>"><img src="/images2/empty-amenities.gif" /></a>
+                            <a href="/provider/listings/details/<?= $this->listing->id ?>"><img src="/images2/empty-amanities.gif" /></a>
                         </div>
                         <?php endif ?>
                     </div><!-- closes tab -->
@@ -152,16 +152,20 @@
                             <ul>
                                 <li><?= $room->description ?></li>
                                 <li>Size <?= $room->size . ' ' . $room->size_type . '2' ?> </li>
-                                <li>Quantity <?= $room->quantity ?> rooms</li>
                                 <li>Minimun Stay <?= $room->nights ?>  nights</li>
                                 <li>Maximun Accommodates <?= $room->people ?> people</li>
                                 <li>
                                 	<?= $room->bedrooms ?> Bedrooms 
-                                    <?= $room->beds ?> Beds
                                 </li>
                                 <?php foreach($this->beds[$room->id] as $bed): ?>
                                 <li><?= $bed->quantity ?> <?= $bed->type ?> beds</li>
                                 <?php endforeach ?>
+                                <li><b>Ameneties</b>
+                                <ul>
+                                <?php foreach($this->room_amenities[$room->id] as $amm): ?>
+                                <li><?= $this->amenities[$amm]->name ?></li>
+                                <?php endforeach ?>
+                                </ul></li>
                             </ul>
                             <?php endforeach ?>
                         </div><!-- closes tab-content -->
