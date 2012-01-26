@@ -10,7 +10,6 @@ $(document).ready(function() {
 	$('body').data('listingtoken', $('input[name=listingstoken]').val());
 	$('body').data('listingprice', $('input[name=listingprice]').val());
 	
-	$('input, textarea').ToggleInputValue();
 	$('.tabs-wrapper-2, .reviews-wrapper').tabs({
 		show:function(a,b){
 			if(b.tab.text == 'How to Get There'){
@@ -60,8 +59,9 @@ $(document).ready(function() {
 	$('#datepicker').datepicker({ 
 		showOtherMonths: true,
 		beforeShowDay:function(date){
-			var date = $.datepicker.formatDate('mm-dd-yy', date);
-			return ($.inArray(date,$disableddates) != -1) ? [false] : [true]; 
+			var date = $.datepicker.formatDate('m-dd-yy', date);
+			var result = ($.inArray(date,$disableddates) != -1) ? false : true;
+			return [result];
 		},
 		minDate:new Date(),
 		maxDate:'+1y',

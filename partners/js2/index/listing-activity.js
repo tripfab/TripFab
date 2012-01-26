@@ -10,7 +10,6 @@ $(document).ready(function() {
 	$('body').data('listingtoken', $('input[name=listingstoken]').val());
 	$('body').data('listingprice', $('input[name=listingprice]').val());
 	
-	$('input, textarea').ToggleInputValue();
 	$('.tabs-wrapper-2, .reviews-wrapper').tabs({
 		selected:0,
 		show:function(a,b){
@@ -62,7 +61,7 @@ $(document).ready(function() {
 	$( "#datepicker").datepicker({
 		showOtherMonths: true,
 		beforeShowDay:function(date){
-			var date = $.datepicker.formatDate('mm-dd-yy', date);
+			var date = $.datepicker.formatDate('m-dd-yy', date);
 			return ($.inArray(date,$disableddates) != -1) ? [false] : [true]; 
 		},
 		minDate:new Date(),
