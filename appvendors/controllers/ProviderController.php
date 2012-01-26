@@ -1050,7 +1050,9 @@ class ProviderController extends Zend_Controller_Action
                             $listing->image = '/images2/ico-101.png';
                             break;
                         case 5:
-                            $listing->image = '/images2/ico-98.png';
+                            $listing->image    = '/images2/ico-98.png';
+                            $listing->checkin  = '14:00:00';
+                            $listing->checkout = '12:00:00';
                             break;
                         case 6:
                             $listing->image = '/images2/ico-97.png';
