@@ -87,6 +87,13 @@
 	#photoQueue .photoQueueMeta { position:relative; height:30px;}
 	#photoQueue .photoQueueMeta .count { position:absolute; top:0; left:5px; line-height:30px; }
 	#photoQueue .photoQueueMeta .size { position:absolute; top:0; right:5px; line-height:30px; }
+	a.deny { 
+		height: 36px;
+		position: absolute;
+		right: 20px;
+		top: 12px;
+		width: 128px;
+		z-index:10000;}
 </style>
 <form action="" method="post">
     <div class="photos">
@@ -104,6 +111,9 @@
                 <strong>Photos</strong>
             </div>
             <input style="float:right;" id="file_upload" name="file_upload" type="file" />
+            <?php if(count($this->pictures) >= 10): ?>
+            <a href="#" class="deny"></a>
+            <?php endif ?>
             <div class="clear"></div>
         </div>
         <div class="photo">        	
