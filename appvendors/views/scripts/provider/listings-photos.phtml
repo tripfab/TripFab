@@ -31,7 +31,8 @@
 				'buttonImg'		  : '/images2/upload-btn.gif',
 				'auto'      	  : true,
 				'multi' 		  : true,
-				'removeCompleted' : false,
+				'removeCompleted' : true,
+				'queueID'		  : 'photoQueue',
 				'onError':function(e,a,c,d){
 					console.log(e);
 					console.log(a);
@@ -50,12 +51,24 @@
 					'usertoken':'<?= md5($this->user->token.'upload_listing_pictures') ?>',
 				},
 				'onAllComplete':function(){
+					$('#photoQueue').hide();
 					$.cookie('alert','Your changes have been save');
 					window.location.reload();
 				},
 				'sizeLimit': 2097152,
 			    'fileExt'  : '*.jpg;*.gif;*.png',
-			    'fileDesc' : 'Image Files'
+			    'fileDesc' : 'Image Files',
+				'onSelectOnce': function(e, data){
+					console.dir(data);
+					var size = (data.allBytesTotal > 1048576) ? (data.allBytesTotal / 1048576) : (data.allBytesTotal / 1024);
+					var medida = (data.allBytesTotal > 1048576) ? ' MB' : ' KB';
+					size = size.toFixed(2);
+					$('#photoQueue').append('<div class="photoQueueMeta"></div>');
+					$('#photoQueue .photoQueueMeta').append('<span class="count">Uploading ' + data.fileCount + ' files</span>');
+					$('#photoQueue .photoQueueMeta').append("<span class='size'>" + size + '' + medida + "</span>");
+					
+					$('#photoQueue').show();
+				}
 			});
 			<?php if(count($this->pictures) == 0): ?>
 			$('#file_upload2').uploadify({
@@ -66,8 +79,9 @@
 				'buttonImg'		  : '/images2/upload.gif',
 				'auto'      	  : true,
 				'multi' 		  : true,
-				'removeCompleted' : false,
+				'removeCompleted' : true,
 				'width'			  : 248,
+				'queueID'		  : 'photoQueue',
 				'onError':function(e,a,c,d){
 					console.log(e);
 					console.log(a);
@@ -90,7 +104,18 @@
 				},
 				'sizeLimit': 2097152,
 			    'fileExt'  : '*.jpg;*.gif;*.png',
-			    'fileDesc' : 'Image Files'
+			    'fileDesc' : 'Image Files',
+				'onSelectOnce': function(e, data){
+					console.dir(data);
+					var size = (data.allBytesTotal > 1048576) ? (data.allBytesTotal / 1048576) : (data.allBytesTotal / 1024);
+					var medida = (data.allBytesTotal > 1048576) ? ' MB' : ' KB';
+					size = size.toFixed(2);
+					$('#photoQueue').append('<div class="photoQueueMeta"></div>');
+					$('#photoQueue .photoQueueMeta').append('<span class="count">Uploading ' + data.fileCount + ' files</span>');
+					$('#photoQueue .photoQueueMeta').append("<span class='size'>" + size + '' + medida + "</span>");
+					
+					$('#photoQueue').show();
+				}
 			});
 			<?php endif ?>
         });
