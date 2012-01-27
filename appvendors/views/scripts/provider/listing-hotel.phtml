@@ -58,10 +58,9 @@
                     	<?php if(!empty($this->overview->about) or
 									!empty($this->overview->about) or
 									!empty($this->overview->about)): ?>
-                        <div class="tab-ttl">About <?= $this->listing->title ?></div>
+                        <div class="tab-ttl">About your stay</div>
                         <div class="tab-content">
                         	<?php if(!empty($this->overview->about)): ?>
-                        	<h2>About the hotel</h2>
                         	<p><?= stripslashes(nl2br($this->overview->about)) ?></p>
                             <?php endif; if(!empty($this->overview->expect)): ?>
                             <h2>What to expect</h2>
