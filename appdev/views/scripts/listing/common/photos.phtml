@@ -53,6 +53,47 @@
 
 .profile-items {
 	overflow:visible;}
+	#photoQueue {
+		float:right;
+		width:400px;
+		border:1px solid #CCC;
+		display:none;}
+		#photoQueue .uploadifyQueueItem {
+			border-bottom:1px solid #CCC;
+			position:relative;
+			height:40px;}
+			#photoQueue .uploadifyQueueItem .cancel {
+				position:absolute;
+				right:5px;
+				top:12px;}
+			#photoQueue .uploadifyQueueItem .fileName {
+				position:absolute;
+				bottom:5px;
+				left:5px;}
+			#photoQueue .uploadifyQueueItem .uploadifyProgress {
+				position:absolute;
+				left:5px;
+				top:5px;
+				height:10px;
+				width:370px;
+				background:#CCC;}
+				#photoQueue .uploadifyQueueItem .uploadifyProgress .uploadifyProgressBar {
+					position:absolute;
+					height:10px;
+					top:0px;
+					left:0px;
+					background:#09C;}
+			#photoQueue .uploadifyQueueItem .percentage { display:none;}
+	#photoQueue .photoQueueMeta { position:relative; height:30px;}
+	#photoQueue .photoQueueMeta .count { position:absolute; top:0; left:5px; line-height:30px; }
+	#photoQueue .photoQueueMeta .size { position:absolute; top:0; right:5px; line-height:30px; }
+	a.deny { 
+		height: 36px;
+		position: absolute;
+		right: 20px;
+		top: 12px;
+		width: 128px;
+		z-index:10000;}
 </style>
 <form action="" method="post">
     <div class="photos">
@@ -70,6 +111,9 @@
                 <strong>Photos</strong>
             </div>
             <input style="float:right;" id="file_upload" name="file_upload" type="file" />
+            <?php if(count($this->pictures) >= 10): ?>
+            <a href="#" class="deny"></a>
+            <?php endif ?>
             <div class="clear"></div>
         </div>
         <div class="photo">        	
@@ -84,6 +128,7 @@
                 <a href="/images2/help/big-act-photos.png" class="tooltip3">
                 <img src="/images2/help/small-act-photos.png" /></a>
             </div>
+            <div id="photoQueue"></div>
             <div class="clear"></div>
         </div><!-- closes photo -->
         <?php if(count($this->pictures) > 0): ?>
@@ -104,12 +149,14 @@
         <?php else: ?>
         <div class="photo empty">
         	<img src="/images/empty-5.png" />
-            <p>You don't have photos for this listing<br /><a href="">Upload some pictures now</a></p>
+            <p>You don't have photos for this listing<br />
+            <input id="file_upload2" name="file_upload" type="file" />
+            </p>
         </div>
         <?php endif ?>
     </div><!-- closes photos -->
     <div class="foot">
-        <input type="submit" class="btn-1" value="Save Changes" />
+        <input type="submit" class="noclean btn-1" value="Save Changes" />
     </div><!-- closes foot -->
 	<input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />

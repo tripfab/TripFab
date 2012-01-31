@@ -1,20 +1,14 @@
 <style type="text/css">
 .message textarea { width:565px !important; margin-bottom:5px; }
 </style>
-<script type="text/javascript">
-$(function(){
-	$('.qa').click(function(){
-		$('.answers-wrapper', this).slideToggle();
-	});
-});
-</script>
 <ul>
     <li><a href="#tabs2-1">Reviews</a></li>
-    <li><a href="#tabs2-2">Questions</a></li>
 </ul>
 <div id="tabs2-1" class="tab box">
-    <div class="ttl"><?= count($this->reviews) ?> reviews</div>
+    <div class="ttl">No reviews</div>
     <ul class="reviews">
+    	<li><img src="/images2/empty-reviews.gif" /></li>
+    	<!--
         <?php foreach($this->reviews as $review): ?>
         <li>
             <?php if(!empty($review->user_image)): ?>
@@ -28,61 +22,13 @@ $(function(){
                 <p><?= stripslashes(nl2br($review->text)) ?></p>
                 <div class="meta">
                     <span><?= date('F jS, Y', strtotime($review->created)) ?></span>
-                    <!--<a href="" class="down"><img src="/images2/cleardot.gif" alt="" /></a>											
+                    <a href="" class="down"><img src="/images2/cleardot.gif" alt="" /></a>											
                     <a href="" class="up"><img src="/images2/cleardot.gif" alt="" /></a>
-                    <em class="green">+4</em>-->
-                </div><!-- closes meta -->
+                    <em class="green">+4</em>
+                </div>
             </div>
         </li>
         <?php endforeach ?>
+        -->
     </ul>
-</div><!-- closes tab -->
-<div id="tabs2-2" class="tab box">
-    <div class="ttl">
-    	<?php if($this->user): ?>
-        <a href="" class="btn-1" id="showQuestionForm">Ask a new question</a>
-        <?php else: ?>
-        <a href="/login" class="btn-1">Ask a new question</a>
-        <?php endif ?>
-        <?= count($this->questions) ?> Questions
-    </div><!-- closes ttl -->
-    
-    <div class="qa">
-    	<div id="askQuestion" class="hidden message">
-            <span><strong>Write your question</strong></span>
-            <form action="" method="post" id="askQuestionForm">
-                <fieldset>
-                    <textarea cols="30" rows="1" name="question"></textarea>
-                    <input type="submit" class="btn-1" value="Ask" />
-                    <a href="" class="btn-4">Cancel</a>
-                </fieldset>
-                <input type="hidden" name="listing" value="<?= $this->listing ?>" />
-            </form>
-        </div><!-- closes message -->
-    </div>
-    <?php foreach($this->questions as $question): ?>
-    <div class="qa">
-        <div class="qa-box">
-            <div class="questions">
-                <?= stripslashes($question['question']) ?>
-                <span><strong><?= $question['user_name'] ?></strong> asked on 
-                <?= date('F j, Y', strtotime($question['created'])) ?></span>
-                <?php if($this->answer_allow): ?>
-                <a class="btn-3">Answer it!</a>
-                <?php endif ?>
-            </div><!-- closes question -->
-        </div><!-- closes box -->
-        <div class="answers-wrapper">
-			<?php foreach($question['answers'] as $answer): ?>
-            <div class="qa-box">
-                <div class="answer">
-                    <?= stripslashes(nl2br($answer->answer)) ?>
-                    <span><strong><?= $answer->user_name ?></strong> answered on 
-                    <?= date('F j, Y', strtotime($answer->created)) ?></span>
-                </div><!-- closes answer -->
-            </div><!-- closes box -->
-            <?php endforeach ?>	
-        </div>
-    </div><!-- closes qa -->
-    <?php endforeach ?>
 </div><!-- closes tab -->

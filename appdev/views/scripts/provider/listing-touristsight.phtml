@@ -30,23 +30,36 @@
                         <li><a href="#tabs-2">FAQ's</a></li>
                     </ul>
                     <div class="tab" id="tabs-1">
+                    	<?php if(!empty($this->overview->about) or
+									!empty($this->overview->about) or
+									!empty($this->overview->about)): ?>
                         <div class="tab-ttl">About <?= $this->listing->title ?></div>
                         <div class="tab-content">
+                        	<?php if(!empty($this->overview->about)): ?>
                         	<h2>About the spot</h2>
                         	<p><?= stripslashes(nl2br($this->overview->about)) ?></p>
-                            <h2>What to Expect</h2>
+                            <?php endif; if(!empty($this->overview->expect)): ?>
+                            <h2>What to expect</h2>
                             <p><?= stripslashes(nl2br($this->overview->expect)) ?></p>
+                            <?php endif; if(!empty($this->overview->love)): ?>
                             <h2>Things you'll love</h2>
                             <p><?= stripslashes(nl2br($this->overview->love)) ?></p>
+                            <?php endif ?>
                         </div><!-- closes tab-content -->
+                        <?php else: ?>
+                        <div class="tab-content">
+	                        <a href="/provider/listings/overview/<?= $this->listing->id ?>"><img src="/images2/empty-overview.gif" /></a>
+                        </div>
+                        <?php endif ?>
                     </div><!-- closes tab -->
                     <div class="tab" id="tabs-2">
+                        <?php if(count($this->faqs) > 0): ?>
                         <div class="tab-ttl">
                             Frequently Asked Questions
                         </div><!-- closes tab-ttl -->
                         <div class="tab-content faqs">
                             <ul>
-                                <?php foreach($this->faqs as $faq): ?>
+                            	<?php foreach($this->faqs as $faq): ?>
                                 <li>
                                     <strong><?= stripslashes(nl2br($faq->question)) ?></strong><br />
                                     <?= stripslashes(nl2br($faq->answer)) ?>
@@ -54,6 +67,11 @@
                                 <?php endforeach ?>
                             </ul>
                         </div><!-- closes tab-content -->
+                        <?php else: ?>
+                        <div class="tab-content">
+                        	<a href="/provider/listings/faqs/<?= $this->listing->id ?>"><img src="/images2/empty-faqs.gif" /></a>
+                        </div>
+                        <?php endif ?>
                     </div><!-- closes tab -->								
                 </div><!-- closes tabs-wrapper -->
                 <div class="reviews-wrapper">
@@ -68,118 +86,16 @@
                     <div class="ttl"><span>Tourist Sight</span></div>
                     <div class="map-wrapper">
                         <h4>Location</h4>
+                        <?php if(!is_null($this->listing->lat)): ?>
                         <div id="mapcanvas"></div>
                         <address>
                             <p><strong><?= $this->listing->title ?></strong></p>
                             <p><?= $this->listing->address ?></p>
                         </address>
+                        <?php else: ?>
+                        <a href="/provider/listings/location/<?= $this->listing->id ?>"><img src="/images2/empty-map.jpg" /></a>
+                        <?php endif ?>
                     </div><!-- closes map-wrapper -->
-                </div><!-- closes widget -->
-                <div class="widget near">
-                    <div>
-                        <h6>Nearest Hotels</h6>
-                        <ul>
-                            <li>
-                                <a href="">
-                                    <img src="/images2/img-29.png" alt="" />
-                                    <strong>Hotel Silencio</strong>
-                                    <span>2.5 Km</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="/images2/img-29.png" alt="" />
-                                    <strong>Hotel Silencio</strong>
-                                    <span>2.5 Km</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="/images2/img-29.png" alt="" />
-                                    <strong>Hotel Silencio</strong>
-                                    <span>2.5 Km</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h6>Nearest Activities</h6>
-                        <ul>
-                            <li>
-                                <a href="">
-                                    <img src="/images2/img-29.png" alt="" />
-                                    <strong>Surfing</strong>
-                                    <span>2.5 Km</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="/images2/img-29.png" alt="" />
-                                    <strong>Surfing</strong>
-                                    <span>2.5 Km</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="/images2/img-29.png" alt="" />
-                                    <strong>Surfing</strong>
-                                    <span>2.5 Km</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h6>Nearest Restaurants</h6>
-                        <ul>
-                            <li>
-                                <a href="">
-                                    <img src="/images2/img-29.png" alt="" />
-                                    <strong>Restaurant 1420</strong>
-                                    <span>2.5 Km</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="/images2/img-29.png" alt="" />
-                                    <strong>Restaurant 1420</strong>
-                                    <span>2.5 Km</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="/images2/img-29.png" alt="" />
-                                    <strong>Restaurant 1420</strong>
-                                    <span>2.5 Km</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h6>Nearest Entertainments</h6>
-                        <ul>
-                            <li>
-                                <a href="">
-                                    <img src="/images2/img-29.png" alt="" />
-                                    <strong>Teatro Oscar Fessler</strong>
-                                    <span>2.5 Km</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="/images2/img-29.png" alt="" />
-                                    <strong>Teatro Oscar Fessler</strong>
-                                    <span>2.5 Km</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="/images2/img-29.png" alt="" />
-                                    <strong>Teatro Oscar Fessler</strong>
-                                    <span>2.5 Km</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div><!-- closes widget -->
             </div><!-- closes right-sidebar -->
         </div><!-- closes main -->

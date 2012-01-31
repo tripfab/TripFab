@@ -61,7 +61,7 @@ input.schname { float:none !important; width:90px !important; }
 			<div class="item-ttl">
 				Basic Information
 			</div><!-- closes item ttl -->
-			<div class="item first">
+			<div class="item first last">
 				<input placeholder="Hotel's name" type="text" class="noclean limitcc" name="title" rel="60" value="<?= $_POST['title'] ?>" />
 				<h4>Title</h4>
 				<span>Hotel name<br />
@@ -70,17 +70,6 @@ input.schname { float:none !important; width:90px !important; }
                     <a href="/images2/help/big-hot-general-name.png" class="eye">help</a>
                     <a href="/images2/help/big-hot-general-name.png" class="tooltip3">
                     <img src="/images2/help/small-hot-general-name.png" /></a>
-                </div>
-			</div><!-- closes item -->
-			<div class="item last">
-                <textarea placeholder="Write a nice description about the hotel" name="description" class="noclean limitcc" rel="200" cols="30" rows="1"><?= $_POST['description'] ?></textarea>
-				<h4>Short Description</h4>
-				<span>Write a brief description for your hotel<br /><br />
-                You have <span class="charsLeftTxt">200</span> character left</span>
-                <div class="help">
-                    <a href="/images2/help/big-hot-general-description.png" class="eye">help</a>
-                    <a href="/images2/help/big-hot-general-description.png" class="tooltip3">
-                    <img src="/images2/help/small-hot-general-description.png" /></a>
                 </div>
 			</div><!-- closes item -->
 			<div class="clear"></div>									
@@ -305,7 +294,7 @@ input.schname { float:none !important; width:90px !important; }
         </div><!-- closes item-wrppr -->
     </div><!-- closes profile-items -->
     <div class="foot">
-        <input type="submit" class="btn-1" value="Save Changes" />
+        <input type="submit" class="btn-1 noclean" value="Save Changes" />
         <a href="/provider/listings/desactivate/<?= $this->listing->id ?>">Delete Listing</a>
     </div><!-- closes foot -->
     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
@@ -339,7 +328,7 @@ input.schname { float:none !important; width:90px !important; }
 			<div class="item-ttl">
 				Basic Information
 			</div><!-- closes item ttl -->
-			<div class="item first">
+			<div class="item first last">
 				<input placeholder="Hotel's name" type="text" class="noclean limitcc" name="title" rel="60" value="<?= $this->listing->title ?>" />
 				<h4>Title</h4>
 				<span>Hotel name<br />
@@ -350,17 +339,6 @@ input.schname { float:none !important; width:90px !important; }
                     <img src="/images2/help/small-hot-general-name.png" /></a>
                 </div>
 			</div><!-- closes item --> 
-			<div class="item last">
-                <textarea placeholder="Write a nice description about your hotel" name="description" class="noclean limitcc" rel="200" cols="30" rows="1"><?= $this->listing->description ?></textarea>
-				<h4>Short Description</h4>
-				<span>Write a nice brief for your hotel<br /><br />
-                You have <span class="charsLeftTxt"></span> Character left</span>
-                <div class="help">
-                    <a href="/images2/help/big-hot-general-description.png" class="eye">help</a>
-                    <a href="/images2/help/big-hot-general-description.png" class="tooltip3">
-                    <img src="/images2/help/small-hot-general-description.png" /></a>
-                </div>
-			</div><!-- closes item -->
 			<div class="clear"></div>									
 		</div><!-- closes item-wrppr -->
         
@@ -399,10 +377,13 @@ input.schname { float:none !important; width:90px !important; }
                 Details
             </div><!-- closes item ttl -->
             <div class="item first">
-                <div class="selects">                	
+                <div class="selects">
                     <select name="checkin_hour">
                     	<?php foreach($hours as $h): ?>
-                        <?php if($h == (date('g:i', strtotime($this->listing->checkin)))): ?>
+                        <?php if(!is_null($this->listing->checkin) and $this->listing->checkin != '00:00:00' and 
+									$h == (date('g:i', strtotime($this->listing->checkin)))): ?>
+                        <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                        <?php elseif($h == '2:00'): ?>
                         <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
                         <?php else: ?>
                         <option value="<?= $h ?>"><?= $h ?></option>
@@ -410,15 +391,17 @@ input.schname { float:none !important; width:90px !important; }
                         <?php endforeach ?>
                     </select>
                     <select name="checkin_time">
-                    	<?php if('AM' == (date('A', strtotime($this->listing->checkin)))): ?>
+                    	<?php if(!is_null($this->listing->checkin) and $this->listing->checkin != '00:00:00' and 
+									'AM' == (date('A', strtotime($this->listing->checkin)))): ?>
                         <option selected="selected" value="AM">AM</option>
                         <option value="PM">PM</option>
-                        <?php elseif('PM' == (date('A', strtotime($this->listing->checkin)))): ?>
+                        <?php elseif(!is_null($this->listing->checkin) and $this->listing->checkin != '00:00:00' and 
+										'PM' == (date('A', strtotime($this->listing->checkin)))): ?>
                         <option value="AM">AM</option>
                         <option selected="selected" value="PM">PM</option>
                         <?php else: ?>
                         <option value="AM">AM</option>
-                        <option value="PM">PM</option>                        
+                        <option selected="selected" value="PM">PM</option>                        
                         <?php endif ?>
                     </select>
                 </div><!-- closes selects -->
@@ -431,10 +414,13 @@ input.schname { float:none !important; width:90px !important; }
                 </div>
             </div><!-- closes item -->
             <div class="item">
-                <div class="selects">                    
+                <div class="selects">
                     <select name="checkout_hour">
                     	<?php foreach($hours as $h): ?>
-                        <?php if($h == (date('g:i', strtotime($this->listing->checkout)))): ?>
+                        <?php if(!is_null($this->listing->checkout) and $this->listing->checkout != '00:00:00' and 
+									$h == (date('g:i', strtotime($this->listing->checkout)))): ?>
+                        <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                        <?php elseif($h == '12:00'): ?>
                         <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
                         <?php else: ?>
                         <option value="<?= $h ?>"><?= $h ?></option>
@@ -442,15 +428,17 @@ input.schname { float:none !important; width:90px !important; }
                         <?php endforeach ?>
                     </select>
                     <select name="checkout_time">
-                        <?php if('AM' == (date('A', strtotime($this->listing->checkout)))): ?>
+                        <?php if(!is_null($this->listing->checkout) and $this->listing->checkout != '00:00:00' and 
+									'AM' == (date('A', strtotime($this->listing->checkout)))): ?>
                         <option selected="selected" value="AM">AM</option>
                         <option value="PM">PM</option>
-                        <?php elseif('PM' == (date('A', strtotime($this->listing->checkout)))): ?>
+                        <?php elseif(!is_null($this->listing->checkout) and $this->listing->checkout != '00:00:00' and 
+										'PM' == (date('A', strtotime($this->listing->checkout)))): ?>
                         <option value="AM">AM</option>
                         <option selected="selected" value="PM">PM</option>
                         <?php else: ?>
                         <option value="AM">AM</option>
-                        <option value="PM">PM</option>                        
+                        <option selected="selected" value="PM">PM</option>                        
                         <?php endif ?>
                     </select>
                 </div><!-- closes selects -->
@@ -540,7 +528,7 @@ input.schname { float:none !important; width:90px !important; }
         </div><!-- closes item-wrppr -->
     </div><!-- closes profile-items -->
     <div class="foot">
-        <input type="submit" class="btn-1" value="Save Changes" />
+        <input type="submit" class="btn-1 noclean" value="Save Changes" />
         <a href="/provider/listings/desactivate/<?= $this->listing->id ?>">Delete Listing</a>
     </div><!-- closes foot -->
     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />

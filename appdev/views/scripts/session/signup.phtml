@@ -1,128 +1,94 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
+    <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= strip_tags($this->translate('Register Title')) ?> | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css4/all.css" />	
-    <script type="text/javascript" src="http://tripfab.com/js2/jquery.js"></script>
+    <title>Sign Up | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
     <script type="text/javascript">
-	$(function(){
-		$('.language a.current').click(function(){
-			$(this).toggleClass('active');
-			$('.language .select').toggleClass('show');
-			return false;
-		});
-	});
-	</script>
+        $(document).ready(function() {
+            $('input:not(.noclean)').ToggleInputValue();
+        });
+    </script>
+    <style type="text/css">
+	.error { border:1px solid #F00; padding:5px; margin-bottom:10px; color:#F00; font-style:italic;}
+	.hidden { display:none;}
+	</style>
 </head>
-<body class="home register">
-<div id="container">
-    <div id="header-shadow">
-        <div id="header">
-            <div class="wrapper">
-                <h1 class="logo"><a href="/<?= $this->lang ?>">TripFab</a></h1>
-                <div class="right">
-                	<div class="language">
-                    	<a class="current" href="#"><?= $this->translate('language') ?></a>
-                        <div class="select">
-                        	<ul>
-                            	<?php $class = ($this->lang == 'en-US') ? 'active' : '' ?>
-                            	<li class="en <?= $class ?>"><a href="/en-US/signup">English</a></li>
-                                <?php $class = ($this->lang == 'es-ES') ? 'active' : '' ?>
-                                <li class="es <?= $class ?>"><a href="/es-ES/signup">Español</a></li>
-                            </ul>
-                        </div>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>        
+    <div class="w2">
+        <div class="small-wrapper">
+            <div class="sign-box">
+                <div class="ttl">
+                    Join Tripfab
+                </div><!-- closes ttl -->
+                <a href="<?= $this->fbLoginUrl ?>" class="fb"><img src="/images2/t-28.png" alt="" /></a>
+                <div class="content">
+                    <span>Or</span>
+                    <?php if($this->errors): ?>
+                    <div class="error">
+                    	<?php foreach($this->errors as $err): ?>
+	                    	<?= $err ?><br />
+                        <?php endforeach ?>
                     </div>
-                </div>
-                <div class="right">
-                    <a href="/<?= $this->lang ?>/login" class="btn-1"><?= $this->translate('signin') ?></a>
-                    <?= $this->translate('Have an account') ?>
-                </div><!-- closes right -->
-            </div><!-- closes wrapper -->				
-        </div><!-- closes header -->
-    </div><!-- closes header-shadow -->
-    <div id="top" class="signinbg signupbg">
-        <div id="shine">
-            <div class="content wrapper">
-                <h2><?= $this->translate('Register Title') ?></h2>
-                <h6><?= $this->translate('Register Description') ?></h6>
-                <div id="register-wrapper">
-                    <form action="" method="post">
+                    <?php endif ?>
+                    <?php if($this->alerts): ?>
+                    <div class="alert">
+                    	<?= $this->alerts ?>
+                    </div>
+                    <?php endif ?>
+                    <form method="post">
                         <fieldset>
-                            <div>
-                                <input type="text" name="company" placeholder="<?= $this->translate('company holder') ?>" />
-                                <h4><?= $this->translate('company name') ?></h4>
-                                <span><?= $this->translate('company description') ?><</span>
-                                <div class="clear"></div>
-                            </div>
-                            <div>
-                                <input type="text" name="email" placeholder="<?= $this->translate('email holder') ?>" />
-                                <h4><?= $this->translate('email name') ?></h4>
-                                <span><?= $this->translate('email description') ?></span>
-                                <div class="clear"></div>
-                            </div>
-                            <div>
-                                <input type="text" name="phone" placeholder="<?= $this->translate('phone holder') ?>" class="phone" />
-                                <input type="text" name="code" placeholder="<?= $this->translate('phone code') ?>" class="code" />
-                                <h4><?= $this->translate('phone name') ?></h4>
-                                <span><?= $this->translate('phone description') ?></span>
-                                <div class="clear"></div>
-                            </div>
-                            <div>
-                                <input type="text" name="website" value="http://" />
-                                <h4><?= $this->translate('website name') ?></h4>
-                                <span><?= $this->translate('website description') ?></span>
-                                <div class="clear"></div>
-                            </div>
-                            <div>
-                                <select name="business">
-                                    <option value="Hotel"><?= $this->translate('business hotel') ?></option>
-                                    <option value="Activity"><?= $this->translate('business activity') ?></option>
-                                    <option value="Restaurant"><?= $this->translate('business restaurant') ?></option>
-                                    <option value="Entertainment"><?= $this->translate('business entertainment') ?></option>
-                                </select>
-                                <h4><?= $this->translate('business name') ?></h4>
-                                <span><?= $this->translate('business description') ?></span>
-                                <div class="clear"></div>
-                            </div>
-                            <div>
-                                <select name="country">
-                                	<?php foreach($this->countries as $c): ?>
-                                    <option value="<?= $c->title ?>"><?= $c->title ?></option>
-                                    <?php endforeach ?>
-                                </select>
-                                <h4><?= $this->translate('country name') ?></h4>
-                                <span><?= $this->translate('country description') ?></span>
-                                <div class="clear"></div>
-                            </div>
+                        	<?php if($this->name): ?>
+                            <input name="name" type="text" value="<?= $this->name ?>" class="noclean in-1 name required" />
+                            <?php else: ?>
+                            <input name="name" type="text" value="Name" class="in-1 name required" />
+                            <?php endif ?>
+                            <?php if($this->lname): ?>
+                            <input name="lname" type="text" value="<?= $this->lname ?>" class="noclean in-1 lastname required" />
+                            <?php else: ?>
+                            <input name="lname" type="text" value="Last Name" class="in-1 lastname required" />
+                            <?php endif ?>
+                            <?php if($this->email): ?>
+                            <input name="email" type="text" value="<?= $this->email ?>" class="noclean in-2 email required" />
+                            <?php else: ?>
+                            <input name="email" type="text" value="E-Mail" class="in-2 email required" />
+                            <?php endif ?>
+                            <input name="password" type="password" value="Password" class="in-3 password required" />
+                            <input name="password2" type="password" value="Confirm Password" class="in-4 password required" />
+                            <select name="country_id">
+                                <option value="">Select your country</option>
+                                <?php foreach($this->countries as $c): ?>
+                                <?php $selected = ($this->country == $c->id) ? 'selected="selected"' : ''; ?>
+                                <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
+                                <?php endforeach ?>
+                            </select>
                         </fieldset>
                         <fieldset>
-                            <input type="submit" value="" />
+                            <input type="checkbox" />
+                            <label>Remember me next time</label>
+                            <input type="submit" value="Create Account" class="btn-1" />
                         </fieldset>
-                    </form>						
-                    <img src="/images4/shadow-6.png" alt="" />
-                    <img src="/images4/img-18.png" alt="" class="seal" />
-                </div><!-- closes register-wrapper -->
-                <p><?php printf($this->translate('Already Account'), $this->lang); ?></p>
-            </div><!-- closes wrapper -->
-        </div><!-- closes shine -->
-    </div><!-- closes top -->
-    <div id="footer">
-        <div id="footer-gradient">
-            <div class="wrapper">
-                <ul>
-                    <li><a href="https://www.facebook.com/TripFab">Facebook</a></li>
-                    <li><a href="https://twitter.com/#!/TripFab">Twitter</a></li>
-                    <li><a href="https://plus.google.com/108576021199856132768">Google+</a></li>
-                    <li><a href="mailto:hello@tripfab.com">eMail</a></li>
-                    <li><a href="http://blog.tripfab.com/">Blog</a></li>
-                </ul>
-                <img src="/images4/logo-2.png" alt="" class="logo" />
-                <strong><?= $this->translate('footer') ?></strong>
-                <span>Copyright &copy; 2011 Tripfab</span>
-            </div><!-- closes wrapper -->	
-        </div><!-- closes footer-gradient -->					
-    </div><!-- footer -->
-</div><!-- closes container -->
+                    </form>
+                </div><!-- closes content -->
+                <div class="foot">
+                    By clicking "Create Account" or "Sign up with Facebook," <br /> you confirm that you accept the <a href="">Terms of Service</a>.
+                </div><!-- closes foot -->
+            </div><!-- closes sign-box -->
+            <div class="sign-box">
+                <p>Already a Tripfab member? <a href="/login">Sign In Now!</a></p>
+            </div><!-- closes sign-box -->
+        </div><!-- closes small-wrapper -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->	
 </body>
 </html>

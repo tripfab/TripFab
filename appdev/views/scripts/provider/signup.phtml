@@ -17,11 +17,52 @@
             		$(this).prev('label').removeClass('hide');
             	}
             });
+			
+			$('.sign-box form').validate({
+				rules: {
+					name:"required",
+					email:"required email",
+					password:"required",
+					password2:{
+						required:true,
+						equalTo:'#password'},
+					phone:"required",
+					website:"required url",
+					country_id:'required',
+				},
+				
+			}); 
+			
+			$('input[name=email]').blur(function(){$(this).val($.trim($(this).val()));});
+			$('input[name=website]').blur(function(){$(this).val($.trim($(this).val()));});
         });
+		
+		function isEmpty(element){
+			return (element.value == element.title) ? false : (element.value == "") ? false : true;
+		}
     </script>
     <style type="text/css">
 	.error { border:1px solid #F00; padding:5px; margin-bottom:10px; color:#F00; font-style:italic;}
 	.hidden { display:none;}
+	label.error { 
+		right:0px !important;
+		bottom:0px !important;
+		line-height:14px !important;
+		font-size:12px !important;
+		top:auto !important;
+		left:auto !important;
+		height:auto !important;
+		padding:2px 4px !important;
+		margin-bottom:0px !important;
+		background:#F00 !important;
+		color:#fff !important;
+		font-weight:bold !important;
+		border:0 none !important;
+	    z-index: 100;}
+	.sign-box .content input.in-1 {
+		background-image:url(/images2/ico-200.png);}
+	.sign-box .content input.in-6 {
+		background-image:url(/images2/ico-201.png);}
 	</style>
 </head>
 <body>
@@ -42,45 +83,54 @@
                     <?php endif ?>
                     <form method="post" action="">
                         <fieldset>
+                            <span>
                         	<?php if(isset($_POST['name'])): ?>
                             <input type="text" name="name" value="<?= $_POST['name'] ?>" class="in-1 noclean" />
                             <?php else: ?>
-                            <input type="text" name="name" value="Company Name" class="in-1" />                            
+                        		<label for="name">Company Name</label>
+                            	<input type="text" name="name" class="in-1" />                            
                             <?php endif ?>
+                            </span>
+                        	<span>
+                        	<?php if(isset($_POST['contact'])): ?>
+                            <input type="text" name="contact" value="<?= $_POST['contact'] ?>" class="in-1 noclean" />
+                            <?php else: ?>
+                        		<label for="contact">Contact Name</label>
+                            	<input type="text" name="contact" class="in-6" />                            
+                            <?php endif ?>
+                            </span>
+                            <span>
                         	<?php if(isset($_POST['email'])): ?>
                             <input type="text" name="email" value="<?= $_POST['email'] ?>" class="in-2 noclean" />
                             <?php else: ?>
-                            <input type="text" name="email" value="E-Mail" class="in-2" />
+                        		<label for="email">E-Mail</label>
+	                            <input type="text" name="email" class="in-2" />
                             <?php endif ?>
-                        	<?php if(isset($_POST['password'])): ?>
-                        	<span>
-                        		<label for="password"><?= $_POST['password'] ?></label>
-                        		<input type="password" name="password" class="in-3 noclean" />	
-                        	</span>                            
-                            <?php else: ?>
+                            </span>
                             <span>
                             	<label for="password">Password</label>
-                            	<input type="password" name="password" class="in-3" />
-                            </span>                            
-                            <?php endif ?>
-                        	<?php if(isset($_POST['password2'])): ?>
-                            <input type="password" name="password2" value="<?= $_POST['password2'] ?>" class="in-4 noclean" />
-                            <?php else: ?>
+                            	<input id="password" type="password" name="password" class="in-3" />
+                            </span>    
                             <span>
                             	<label for="password2">Confirm Password</label>
                             	<input type="password" name="password2" class="in-4" />
-                            </span>	                            
-                            <?php endif ?>
+                            </span>
+                            <span>
                         	<?php if(isset($_POST['phone'])): ?>
                             <input type="text" name="phone" value="<?= $_POST['phone'] ?>" class="in-5 noclean" />
-                            <?php else: ?>
-                            <input type="text" name="phone" value="Phone" class="in-5" />
+                            <?php else: ?>  
+                            	<label for="phone">Phone</label>                            
+                            	<input type="text" name="phone" class="in-5" />
                             <?php endif ?>
+                            </span>
+                            <span>
                         	<?php if(isset($_POST['website'])): ?>
                             <input type="text" name="website" value="<?= $_POST['website'] ?>" class="in-6 noclean" />
                             <?php else: ?>
-                            <input type="text" name="website" value="http://" class="in-6 noclean" />
+	                        <input type="text" name="website" value="http://" class="in-6 noclean" />
                             <?php endif ?>
+                            </span>
+                            <span>
                         	<?php if(isset($_POST['country_id'])): ?>
                             <select name="country_id">
                                 <option value="">Select Country</option>
@@ -100,11 +150,12 @@
                                 <?php endforeach ?>
                             </select>
                             <?php endif ?>
+                            </span>
                         </fieldset>
                         <fieldset>
                             <input type="checkbox" />
                             <label>Remember me next time</label>
-                            <input type="submit" value="Activate Account" class="btn-1" />
+                            <input type="submit" value="Activate Account" class="noclean btn-1" />
                         </fieldset>
                     </form>
                 </div><!-- closes content -->

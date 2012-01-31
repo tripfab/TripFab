@@ -15,8 +15,6 @@
     <script type="text/javascript" src="/js2/provider/listing-edit2.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('textarea').elastic();
-            $('input').ToggleInputValue();
 			$('a.lb').fancybox({
 				padding:0,
 				overlayColor:'#000',
@@ -165,7 +163,7 @@
                                     <div class="clear"></div>	
                                 </div><!-- closes item -->
                                 <div class="item">
-                                    <input type="submit" class="btn-4" id="setLocation" value="Set Location" />
+                                    <input type="submit" class="btn-4 noclean" id="setLocation" value="Set Location" />
                                     <input type="text" class="noclean shorter" name="address" value="<?= $_POST['address'] ?>" />
                                     <div id="maplocations" class="w-m">
                                         <h5>Location Results</h5>
@@ -237,7 +235,7 @@
                                     <div class="clear"></div>	
                                 </div><!-- closes item -->
                                 <div class="item">
-                                    <input type="submit" class="btn-4" id="setLocation" value="Set Location" />
+                                    <input type="submit" class="btn-4 noclean" id="setLocation" value="Set Location" />
                                     <input type="text" class="noclean shorter" name="address" value="<?= $this->listing->address ?>" />
                                     <div id="maplocations" class="w-m">
                                         <h5>Location Results</h5>
@@ -280,7 +278,7 @@
                         </div><!-- closes profile-items -->
                     </div><!-- closes content -->
                     <div class="foot">
-                        <input type="submit" class="btn-1" value="Continue" />
+                        <input type="submit" class="btn-1 noclean" value="Continue" />
                     </div><!-- closes foot -->
                     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
                     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />

@@ -11,13 +11,6 @@
 	<script type="text/javascript" src="/js2/jquery.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('textarea').elastic();	
-            //$('input').ToggleInputValue();
-            $('select').jqTransSelect();
-            $('#header .header-login a.user').click(function(){
-                $(this).next().toggleClass('show');
-                return false;
-            });
 			$restrict = 10; 
 			$('#addRestriction').click(function(){
 				$item = $('.hidden.restriction.detail').html();
@@ -34,8 +27,12 @@
 				});
 				return false;
 			});
+			$('textarea').elastic();
         });
     </script>
+    <style type="text/css">
+	.listing-content { overflow:visible;}
+	</style>
 </head>
 <body>
 <div class="w1">

@@ -46,34 +46,36 @@
             <strong>Tips & Recommendations</strong>
             <span>Write some tips travelers <br />need to know</span><br />
         	<?php $exist = false; ?>
+            <?php $tab = 0 ?>
             <?php foreach($this->tips as $detail): ?>
             <?php if($detail->type == 4): ?>
             <?php $exist = true; ?>
                 <a href="#delete_detail_<?= $detail->id ?>" class="remove">remove</a>
-                <input type="text" class="noclean" name="tip[<?= $detail->id ?>][text]" value="<?= $detail->text ?>" />
+                <input tabindex="<?= $tab ?>" type="text" class="noclean" name="tip[<?= $detail->id ?>][text]" value="<?= $detail->text ?>" />
                 <div class="clear"></div>
+            <?php $tab++ ?>
             <?php endif ?>
             <?php endforeach ?>
             
             <?php if($exist): ?>
             <a href="" class="remove"></a>
-            <input type="text" placeholder="Enter the tip or recommendation text here" name="tips[0][text]" value="" />
+            <input tabindex="<?= $tab ?>" type="text" placeholder="Enter the tip or recommendation text here" name="tips[0][text]" value="" />
             <div class="clear"></div>
             <?php else: ?>
             <a href="" class="remove"></a>
-            <input type="text" placeholder="Enter the tip or recommendation text here" name="tips[0][text]" value="" />
+            <input tabindex="1" type="text" placeholder="Enter the tip or recommendation text here" name="tips[0][text]" value="" />
             <div class="clear"></div>
             <a href="" class="remove"></a>
-            <input type="text" placeholder="Enter the tip or recommendation text here" name="tips[1][text]" value="" />
+            <input tabindex="2" type="text" placeholder="Enter the tip or recommendation text here" name="tips[1][text]" value="" />
             <div class="clear"></div>
             <a href="" class="remove"></a>
-            <input type="text" placeholder="Enter the tip or recommendation text here" name="tips[2][text]" value="" />
+            <input tabindex="3" type="text" placeholder="Enter the tip or recommendation text here" name="tips[2][text]" value="" />
             <div class="clear"></div>
             <a href="" class="remove"></a>
-            <input type="text" placeholder="Enter the tip or recommendation text here" name="tips[3][text]" value="" />
+            <input tabindex="4" type="text" placeholder="Enter the tip or recommendation text here" name="tips[3][text]" value="" />
             <div class="clear"></div>
             <a href="" class="remove"></a>
-            <input type="text" placeholder="Enter the tip or recommendation text here" name="tips[4][text]" value="" />
+            <input tabindex="5" type="text" placeholder="Enter the tip or recommendation text here" name="tips[4][text]" value="" />
             <div class="clear"></div>            
             <?php endif ?>
             
@@ -94,7 +96,7 @@
         </div><!-- closes lstng-detail -->
     </div><!-- closes lstng-details -->
     <div class="foot">
-        <input type="submit" class="btn-1" value="Save Changes" />
+        <input type="submit" class="noclean btn-1" value="Save Changes" />
     </div><!-- closes foot -->
     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />

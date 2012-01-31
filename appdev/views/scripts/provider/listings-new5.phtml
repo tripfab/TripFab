@@ -37,7 +37,10 @@
 					'listtoken':'<?= $this->listing->token ?>',
 					'formtoken':'<?= $this->user->token ?>',
 					'usertoken':'<?= md5($this->user->token.'upload_listing_pictures') ?>',
-				}
+				},
+				'sizeLimit': 2097152,
+			    'fileExt'  : '*.jpg;*.gif;*.png',
+			    'fileDesc' : 'Image Files'
 			});
 			<?php if($this->congrats): ?>
 			$.fancybox({
@@ -105,7 +108,7 @@
                 </div><!-- closes content -->
                 <div class="foot">
                 	<form id="uploadphotos" method="post">
-	                    <input id="uploadphotos" type="submit" class="btn-1" value="Continue" />
+	                    <input id="uploadphotos" type="submit" class="btn-1 noclean" value="Continue" />
                     </form>
                     <?php if($this->listing->main_type == 5 || $this->listing->main_type == 6): ?>
                     <a class="skip" href="/provider/listings/new/<?= $this->listing->id ?>/step6">Skip Step</a>                    

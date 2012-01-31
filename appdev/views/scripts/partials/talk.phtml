@@ -1,6 +1,10 @@
 <div class="ttl">Talk with the vendor</div>
 <div class="widget-content">
-    <img src="/images2/img-28.png" alt="" />
+    <?php if(!empty($this->user->image)): ?>
+    <?= $this->thumbnail(67, $this->user->image, '', '1:1') ?>
+    <?php else: ?>
+    <a href="/provider/account"><img src="/images2/empty-profile-pic.png" /></a>
+    <?php endif ?>
     <h2><?= $this->vendor->name ?></h2>
     <a href="" class="online"><img src="/images2/cleardot.gif" alt="" />Online</a>
 </div><!-- closes widget-content -->

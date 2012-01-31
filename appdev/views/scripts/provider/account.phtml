@@ -8,10 +8,10 @@
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
     <script type="text/javascript" src="/js2/jquery.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('input').ToggleInputValue();
             $('input:file').uploadify({
                 'uploader' 	: '/uploadify/uploadify.swf',
 				'script' 	: '/phpscripts/uploadUserPicture.php',
@@ -23,20 +23,22 @@
 				'auto' 		: true,
 				'fileExt'	: '*.jpg;*.gif;*.png',
 				'onError':function(e,a,c,d){
+					console.log('ERROR');
 					console.log(e);
 					console.log(a);
 					console.log(c);
 					console.log(d);
 				},
 				'onComplete':function(a,b,c,image){
+					console.log('COMPLETE');
 					console.log(a);
 					console.log(b);
 					console.log(c);
 					console.log(image);
 					if(image != 'error'){
-						$('img#userimage68').attr('width',68);
-						$('img#userimage68').attr('height',68);
-						$('img#userimage68').attr('src',image);
+						$('.picture img').attr('width',68);
+						$('.picture img').attr('height',68);
+						$('.picture img').attr('src',image);
 					}
 				},
 				'scriptData':{
@@ -45,8 +47,32 @@
 					'usertoken':'<?= md5($this->user->token.'change_picture') ?>',
 				},
             });
+			
+			$('#provider_form').validate({
+				//errorLabelContainer:$('#provider_form .errors'),
+				success:function(error){
+					error.parents('.item').removeClass('error');
+				},
+				errorPlacement:function(error, element){
+					if(error.html() == "")
+						return;
+					element.parents('.item').addClass('error');
+					element.after(error);
+				},
+			});
+			
+			$('a.f_b').fancybox({
+				padding: 0,
+				overlayColor: '#FFF',
+				overlayOpacity: 0.7,
+				showCloseButton: false,
+				centerOnScroll:1
+			});
         });
     </script>
+    <style type="text/css">
+	.item label.error { display:none !important; }
+	</style>
 </head>
 <body>
 <div class="w1">
@@ -71,44 +97,28 @@
                         <script type="text/javascript">
                         showAlert("Your changes have been saved");
                         </script>
-                        <?php endif ?>				
+                        <?php endif ?>	
                         <div class="item-wrppr">
                             <div class="item-ttl">
-                                Profile Picture
-                            </div>
-                            <!-- closes item ttl -->
-                            <div class="item last first">
-                                <div class="picture">
-                                	<?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
-                                	<?= $this->thumbnail(68,$image,'','1:1'); ?>
-                                    <input type="file" name="file_upload" id="file_upload" />
-                                </div>
-                                <h4>Picture Requirements</h4>
-                                <span>Should be square, preferably 100x100 pixels, <br />and in JPEG, GIF, or PNG format.</span>
-                            </div>
-                            <!-- closes item -->
-                            <div class="clear"></div>
-                        </div>
-                        <!-- closes item-wrppr -->
-                        <div class="item-wrppr">
-                            <div class="item-ttl">
-                                Basic Information
-                            </div>
-                            <!-- closes item ttl -->
+                                Company Information
+                            </div><!-- closes item ttl -->
                             <div class="item first">
-                                <input type="text" name="name" value="<?= $this->vendor->name ?>" />
+                                <input type="text" name="name" class="required noclean" value="<?= $this->vendor->name ?>" />
                                 <h4>Name</h4>
                                 <span>Your company name</span>
-                            </div>
-                            <!-- closes item -->
+                            </div><!-- closes item -->
                             <div class="item">
-                                <input type="text" name="email" value="<?= $this->vendor->email ?>" />
+                                <input type="text" name="email" class="required email noclean" value="<?= $this->vendor->email ?>" />
                                 <h4>Email</h4>
                                 <span>Set your email contact information</span>
-                            </div>
-                            <!-- closes item -->
-                            <div class="item last">
-                                <select name="place_id">
+                            </div><!-- closes item -->
+                            <div class="item">
+                                <input type="text" name="phone" class="required noclean" value="<?= $this->vendor->phone ?>" />
+                                <h4>Phone</h4>
+                                <span>Your contact phone</span>
+                            </div><!-- closes item -->
+                            <div class="item">
+                                <select name="place_id" class="required">
 	                                <option value="">Select your country</option>
                                 	<?php foreach($this->countries as $c): ?>
                                     <?php $selected = ($c->id == $this->vendor->place_id) ? 'selected="selected"' : ''; ?>
@@ -118,55 +128,139 @@
                                 <h4>Country</h4>
                                 <span>The country where you are based</span>
                             </div><!-- closes item -->
-                            <div class="clear"></div>									
-                        </div>
-                        <!-- closes item-wrppr -->
-                        <div class="item-wrppr">
-                            <div class="item-ttl">
-                                Contact Information
-                            </div>
-                            <!-- closes item ttl -->
-                            <div class="item first">
-                                <input type="text" name="phone" value="<?= $this->vendor->phone ?>" />
-                                <h4>Phone</h4>
-                                <span>Your contact phone</span>
-                            </div>
-                            <!-- closes item -->
                             <div class="item">
-                                <input type="text" name="address" value="<?= $this->vendor->address ?>" />
+                                <input type="text" name="address" class="noclean" value="<?= $this->vendor->address ?>" />
                                 <h4>Location</h4>
                                 <span>Your Office Location</span>
-                            </div>
-                            <!-- closes item -->
+                            </div><!-- closes item -->
                             <div class="item last">
-                                <input type="text" name="website" value="<?= $this->vendor->website ?>" />
+                                <input type="text" name="website" class="noclean" value="<?= $this->vendor->website ?>" />
                                 <h4>Website</h4>
                                 <span>Your company's website</span>
-                            </div>
-                            <!-- closes item -->
+                            </div><!-- closes item -->
                             <div class="clear"></div>									
-                        </div>
-                        <!-- closes item-wrppr -->
-                    </div>
-                    <!-- closes profile-items -->
+                        </div><!-- closes item-wrppr -->
+                        <div class="item-wrppr">
+                            <div class="item-ttl">
+                                Profile Picture
+                            </div><!-- closes item ttl -->
+                            <div class="item last first">
+                                <div class="picture">
+                                	<?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
+                                	<?= $this->thumbnail(68,$image,'','1:1'); ?>
+                                    <input type="file" name="file_upload" id="file_upload" />
+                                </div>
+                                <h4>Picture Requirements</h4>
+                                <span>Should be square, preferably 100x100 pixels, <br />and in JPEG, GIF, or PNG format.</span>
+                            </div><!-- closes item -->
+                            <div class="clear"></div>
+                        </div><!-- closes item-wrppr -->
+                        <div class="item-wrppr">
+                            <div class="item-ttl">
+                                Staff Contacts
+                            </div><!-- closes item ttl -->
+                            <?php foreach($this->contacts as $i => $contact): ?>
+                            <?php $class = ($i == 0) ? 'first' : '' ?>
+                            <div class="item <?= $class ?>">
+                                <ul class="controls">
+                                    <li><a href="#edit_contact_<?= $contact->id ?>" class="edit f_b lb">Edit</a></li>
+                                    <li><a href="" class="remove">Remove</a></li>
+                                </ul>
+                                <h4><?= $contact->fname ?> <?= $contact->lname ?></h4>
+                                <input type="hidden" name="contactid[<?= $contact->id ?>]" value="<?= $contact->id ?>" />
+                            </div><!-- closes item -->
+                            <?php endforeach ?>
+                            <div class="item last">
+                                <a href="#new_contact" class="add-btn f_b lb">Add another Staff Contact</a>
+                            </div><!-- closes item -->
+                            <div class="clear"></div>									
+                        </div><!-- closes item-wrppr -->
+						
+                        <div class="item-wrppr">
+                            <div class="item-ttl">Language</div>
+                            <div class="item_descr">
+                                <p>
+                                    <strong>Choose Language</strong>
+                                    What language would you like to use?
+                                </p>
+                                <select class="language" name="lang">
+                                	<?php if($this->user->lang == 'en-US'): ?>
+                                    <option selected="selected" value="en-US">English</option>
+                                    <option value="es-ES">Español</option>
+                                    <?php else: ?>
+                                    <option value="en-US">English</option>
+                                    <option selected="selected" value="es-ES">Spanish</option>
+                                    <?php endif ?>
+                                </select>
+                            </div><!--ITEM_DESCR-->
+                        </div><!-- closes item-wrppr -->
+                    </div><!-- closes profile-items -->
                     <div class="foot">
-                        <input type="submit" class="btn-1" value="Save Changes" />
+                        <input type="submit" class="btn-1 noclean" value="Save Changes" />
                         <a href="">Deactivate Account</a>
-                    </div>
-                    <!-- closes foot -->
+                    </div><!-- closes foot -->
                     <input type="hidden" name="ids" value="<?= $this->user->id ?>" />
                     <input type="hidden" name="vids" value="<?= $this->vendor->id ?>" />
                     <input type="hidden" name="user_token" value="<?= $this->user->token ?>" />
                     <input type="hidden" name="form_id" value="<?= md5($this->user->token.'provider_form') ?>" />
                 </form>
-            </div>
-            <!-- closes vendor-profile -->
-        </div>
-        <!-- closes user-backend -->
-    </div>
-    <!-- closes w2 -->
+            </div><!-- closes vendor-profile -->
+        </div><!-- closes user-backend -->
+    </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
-</div>
-<!-- closes w1 -->	
+</div><!-- closes w1 -->
+<div class="hidden">
+	<?php foreach($this->contacts as $contact): ?>
+    <div id="edit_contact_<?= $contact->id ?>">
+        <div class="lb_connect" id="new_member">
+            <h2>Edit Contact</h2>
+            <form action="" method="post">
+                <label>First Name</label>
+                <input type="text" name="fname" class="noclean" value="<?= $contact->fname ?>" />
+                <label>Last Name</label>
+                <input type="text" name="lname" class="noclean" value="<?= $contact->lname ?>" />
+                <label>Position</label>
+                <input type="text" name="position" class="noclean" value="<?= $contact->position ?>" />
+                <label>Contact e-mail</label>
+                <input type="text" name="email" class="noclean" value="<?= $contact->email ?>" />
+                <label>Phone</label>
+                <input type="text" class="code" class="noclean" value="<?= $contact->code ?>" name="code" />
+                <input type="text" class="number" class="noclean" value="<?= $contact->phone ?>" name="phone" />
+                <input type="text" class="ext" class="noclean" value="<?= $contact->ext ?>" name="ext" />
+                <ul>
+                    <li><input type="submit" class="btn-1 noclean" value="Add Member" /></li>
+                    <li><input type="button" class="btn-13 noclean" onclick="$.fancybox.close(); return false;" value="Cancel" /></li>
+                </ul>
+                <input type="hidden" name="_task" value="<?= md5('update_contact') ?>" />
+                <input type="hidden" name="id" value="<?= $contact->id ?>" />
+            </form>
+        </div><!--NEW-MEMBER-->
+    </div>
+    <?php endforeach ?>
+    <div id="new_contact">
+        <div class="lb_connect" id="new_member">
+            <h2>Add a New Contact</h2>
+            <form action="" method="post">
+                <label>First Name</label>
+                <input type="text" name="fname" />
+                <label>Last Name</label>
+                <input type="text" name="lname" />
+                <label>Position</label>
+                <input type="text" name="position" />
+                <label>Contact e-mail</label>
+                <input type="text" name="email" />
+                <label>Phone</label>
+                <input type="text" class="code" value="Code" name="code" />
+                <input type="text" class="number" value="Number" name="phone" />
+                <input type="text" class="ext" value="Ext" name="ext" />
+                <ul>
+                    <li><input type="submit" class="btn-1 noclean" value="Add Member" /></li>
+                    <li><input type="button" class="btn-13 noclean" onclick="$.fancybox.close(); return false;" value="Cancel" /></li>
+                </ul>
+                <input type="hidden" name="_task" value="<?= md5('add_contact') ?>" />
+            </form>
+        </div><!--NEW-MEMBER-->
+    </div>
+</div><!--HIDDEN-->
 </body>
 </html>
