@@ -1,0 +1,467 @@
+
+/*SEARCH ALL---------------------------------------------------------------*/
+.search_box {
+	padding: 14px 0 0 5px;
+	background-color: #FFF;
+	border-bottom: 1px solid #e0e0e0;
+	overflow: hidden;
+}
+.search_box .standard {
+	height: 38px;
+	background-color: #303030;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding: 15px 0 15px 22px;
+	position: relative;
+	z-index: 2;
+}
+.search_box .standard input[type="text"] {
+	background: url(../images2/ico-23.png) no-repeat 10px 50% #FFF;
+	padding-left: 47px;
+	height: 35px;
+	font: bold 16px/45px Helvetica;
+	color: #303030;
+	width: 580px;
+	float: left;
+}
+.search_box .standard .btn-1 {
+	height: 35px;
+	font: bold 14px/35px Helvetica;
+	float: left;
+	margin-left: 20px;
+}
+.search_box .advance {
+	background-color: #f4f4f4;
+	margin: -10px 0 0 0;
+	padding: 20px 0 0 0;
+	position: relative;
+	z-index: 100000;
+	border: 1px solid #e5e5e5;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	overflow: hidden;
+	display: none;
+}
+.search_box .advance.show {
+	display: block !important;
+}
+.search_box .advance .filter {
+	width: 355px;
+	float: left;
+	position: relative;
+}
+.search_box .advance .filter .cycle,.search_box .advance .filter .cycle2 {
+	margin-left: 37px;
+}
+.search_box .advance .filter.last {
+	width: 235px;
+}
+.search_box .advance .filter p {
+	font: bold 11px Helvetica;
+	color: #303030;
+	text-align: center;
+	margin-bottom: 10px;
+}
+.search_box .advance .filter .each {
+	overflow: hidden;
+	width: 285px;
+	z-index: 1000;
+	display: block;
+}
+.search_box .advance .filter > a {
+	background: url(../images2/arrow_55.png) no-repeat;
+	width: 17px;
+	height: 29px;
+	display: block;
+	position: absolute;
+	top: 70px;
+	z-index: 1000;
+}
+.search_box .more {
+	background: url(../images2/arrow_56.png) no-repeat 0 2px ;
+	padding-left: 10px;
+	color: #60b5f7;
+	float: right;
+	font-size: 11px;
+	margin: 15px 0;
+}
+.search_box .more:hover {
+	background-position: 0 -17px;
+	text-decoration: none;
+}
+
+
+
+
+.search_box .advance .filter a.prev, .search_box .advance .filter a.prev2 {
+	background-position: top left;
+	left: 10px;
+}
+.search_box .advance .filter a.prev:hover, .search_box .advance .filter a.prev2:hover {
+	background-position: bottom left;
+}
+.search_box .advance .filter a.next, .search_box .advance .filter a.next2 {
+	background-position: top right;
+	right: 17px;
+}
+.search_box .advance .filter a.next:hover, .search_box .advance .filter a.next2:hover {
+	background-position: bottom right;
+}
+.search_box .filter .pager, .search_box .filter .pager2  {
+	margin: 0 auto;
+	width: 55px;
+	overflow: hidden;
+}
+.search_box .filter .pager a, .search_box .filter .pager2 a {
+	background-color: #d7d7d7;
+    border-radius: 15px 15px 15px 15px;
+    display: block;
+    float: left;
+    height: 8px;
+    margin-right: 5px;
+    text-indent: -99999px;
+    width: 9px;
+    border-top: 1px solid #afafaf;
+}
+.search_box .filter .pager a.activeSlide, .search_box .filter .pager2 a.activeSlide {
+	background-color: #60b5f7;
+	border-top: 1px solid #4c92d4;
+}
+.search_box .advance .filter .each ul {
+	overflow: hidden;
+}
+.search_box .advance .filter .each ul li{
+	float: left;
+	width: 85px;
+	margin:0 10px 10px 0;
+	list-style: none;
+}
+.search_box .advance .filter .each ul li a {
+	background: url(../images2/search-adv-bg.png) no-repeat;
+	width: 85px;
+	height: 63px;
+	color:#707070;
+	display: block;
+	font: bold 9px Helvetica;
+	text-align: center;
+	text-transform: uppercase;
+}
+.search_box .advance .filter .each ul li:hover a {	
+	text-decoration: none;
+	background-position: 0 -72px;
+}
+.search_box .advance .filter .each ul li.selected a{
+	background-position: 0 -216px;
+	color: #FFF;
+}
+.search_box .advance .filter .each ul li.selected:hover a {
+	background-position: 0 -144px;
+}
+.search_box .advance .filter .each ul li a span {
+	position: relative;
+	overflow: hidden;
+	display: block;
+	background: url(../images2/search-adv-icons.png) no-repeat 18px 0;
+	width: 85px;
+	height: 48px;
+}
+.search_box .advance .filter .each ul li.selected a span {
+	background-position: -54px 0;
+}
+
+.search_box .advance .filter .each ul li a .icon-1 {
+	background-position: 18px 11px;
+}
+.search_box .advance .filter .each ul li.selected a .icon-1 {
+	background-position: -54px 11px;
+}
+
+.search_box .advance .filter .each ul li a .icon-2 {
+	background-position: 18px -38px;
+}
+.search_box .advance .filter .each ul li.selected a .icon-2 {
+	background-position: -54px -38px;
+}
+
+.search_box .advance .filter .each ul li a .icon-3 {
+	background-position: 18px -86px;
+}
+.search_box .advance .filter .each ul li.selected a .icon-3 {
+	background-position: -54px -86px;
+}
+
+.search_box .advance .filter .each ul li a .icon-4 {
+	background-position: 18px -134px;
+}
+.search_box .advance .filter .each ul li.selected a .icon-4 {
+	background-position: -54px -134px;
+}
+
+.search_box .advance .filter .each ul li a .icon-5 {
+	background-position: 18px -182px;
+}
+.search_box .advance .filter .each ul li.selected a .icon-5 {
+	background-position: -54px -182px;
+}
+
+.search_box .advance .filter .each ul li a .icon-6 {
+	background-position: 18px -229px;
+}
+.search_box .advance .filter .each ul li.selected a .icon-6 {
+	background-position: -54px -229px;
+}
+
+.search_box .advance .filter .each ul li a .icon-7 {
+	background-position: 18px -279px;
+}
+.search_box .advance .filter .each ul li.selected a .icon-7 {
+	background-position: -54px -279px;
+}
+
+.search_box .advance .filter .each ul li a .icon-8 {
+	background-position: 18px -324px;
+}
+.search_box .advance .filter .each ul li.selected a .icon-8 {
+	background-position: -54px -324px;
+}
+
+.search_box .advance .filter .each ul li a .icon-9 {
+	background-position: 18px -373px;
+}
+.search_box .advance .filter .each ul li.selected a .icon-9 {
+	background-position: -54px -373px;
+}
+
+.search_box .advance .filter .each ul li a .icon-10 {
+	background-position: 18px -420px;
+}
+.search_box .advance .filter .each ul li.selected a .icon-10 {
+	background-position: -54px -420px;
+}
+
+.search_box .advance .filter .each ul li a .icon-11 {
+	background-position: 18px -472px;
+}
+.search_box .advance .filter .each ul li.selected a .icon-11 {
+	background-position: -54px -472px;
+}
+
+.search_box .advance .filter .each ul li a .icon-12 {
+	background-position: 18px -518px;
+}
+.search_box .advance .filter .each ul li.selected a .icon-12 {
+	background-position: -54px -518px;
+}
+
+.search_box .advance .filter .each ul li a .icon-13 {
+	background-position: 18px -566px;
+}
+.search_box .advance .filter .each ul li.selected a .icon-13 {
+	background-position: -54px -566px;
+}
+
+.search_box .advance .filter .each ul li a .icon-12 {
+	background-position: 18px -615px;
+}
+.search_box .advance .filter .each ul li.selected a .icon-12 {
+	background-position: -54px -615px;
+}
+
+.search_box .advance .filter .each ul li a .icon-13 {
+	background-position: 18px -661px;
+}
+.search_box .advance .filter .each ul li.selected a .icon-13 {
+	background-position: -54px -661px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#search_all .map {
+	background: url(../images2/);
+}
+
+
+#search_all .places > ul{
+	background: url("../images2/g_65.gif") repeat-x scroll 0 0 transparent;
+    height: 56px;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 20px;
+}
+#search_all .places > ul > li {
+	-moz-box-shadow: 0 0 4px 0 #000000;
+    float: left;
+    margin: 13px 20px 0 0;
+}
+#search_all .places > ul > li > a {
+	-moz-border-radius: 4px 4px 0 0;
+    -moz-box-shadow: 0 -2px 4px 0 #585858 inset;
+    background-color: #a0a0a0;
+    border-top: 1px solid #B2B2B2;
+    color: #F2F2F2;
+    display: block;
+    font: bold 13px/43px Helvetica;
+    height: 43px;
+    text-align: center;
+    text-shadow: 0 1px 0 #636363;
+    width: 150px;
+}
+#search_all .places > ul > li > a:hover, #search_all .places > ul > li.ui-state-active a{
+    -moz-box-shadow: none;
+    background-color: #FFFFFF;
+    border-top: none;
+    color: #303030;
+    text-decoration: none;
+    text-shadow: none;
+}
+#search_all .places > ul > li > a > span {
+	background: url(../images2/search-tabs.png) no-repeat 0 0;
+	display: block;
+	padding-left: 15px;
+}
+#search_all .places ul li a.popular span{
+	background-position: 12px 6px;
+}
+#search_all .places ul li a.popular:hover span {
+	background-position: 12px -191px;
+}
+#search_all .places ul li a.landscapes span{
+	background-position: 12px -42px;
+}
+#search_all .places ul li a.landscapes:hover span {
+	background-position: 12px -240px;
+}
+#search_all .places ul li a.nearest span{
+	background-position: 12px -93px;
+}
+#search_all .places ul li a.nearest:hover span {
+	background-position: 12px -293px;
+}
+#search_all .places ul li a.collections span{
+	background-position: 12px -141px;
+}
+#search_all .places ul li a.collections:hover span {
+	background-position: 12px -351px;
+}
+#search_all .places .tab {
+	background-color: #FFF;
+	border: 1px solid #e7e7e7;
+	border-top: 1px solid #FFF;
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-topright: 0px;
+	-moz-border-radius-bottomright: 4px;
+	-moz-border-radius-bottomleft: 4px;
+	-webkit-border-radius: 0px 0px 4px 4px;
+	border-radius: 0px 0px 4px 4px;
+	overflow: hidden;
+}
+#search_all .places .tab .sidebar {
+	float: left;
+    padding:0;
+    width: 200px;
+}
+#search_all .places .tab .sidebar .heading {
+	color: #898989;
+	font: 11px/17px Helvetica;
+	text-transform: uppercase;
+}
+
+
+
+
+
+
+
+
+
+#search_all .places .tab .content {
+	float: left;
+}
+/*END SEARCH ALL-----------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

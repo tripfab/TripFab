@@ -114,9 +114,12 @@
                             Some details about the hotel
                         </div><!-- closes tab-ttl -->
                         <div class="tab-content">
-                        	<?PHP if(!$ok1): ?>
+                        	<?PHP if(!$ok1 or (count($this->listing_amenities) > 0)): ?>
                             <h2>Hotel Amenities</h2>
                             <ul>
+                            	<?php foreach($this->listing_amenities  as $amm): ?>
+                                <li><?= $this->def_amenities[$amm]->name ?></li>
+                                <?php endforeach ?>
                                 <?php foreach($this->details as $detail): ?>
                                 <?php if($detail->type == 1): ?>
                                 <li><?= stripslashes($detail->text) ?></li>

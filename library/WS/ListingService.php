@@ -1453,6 +1453,20 @@ class WS_ListingService {
         return $result2;
     }
     
+    public function getDefaultGenAmenities($assoc = false)
+    {
+        $db = new Zend_Db_Table('gen_amenities');
+        $result = $db->fetchAll();
+        if(!$assoc)
+            return $result;
+        
+        $result2 = array();
+        foreach($result as $amm)
+            $result2[$amm->id] = $amm;
+        
+        return $result2;
+    }
+    
     public function getAmenities($room)
     {
         $db = new Zend_Db_Table('room_amenities');
@@ -1464,6 +1478,19 @@ class WS_ListingService {
             $ammm[] = $r->amenity_id;
         
         return $ammm;
+    }
+    
+    public function getGenAmenities($listing)
+    {
+        $db = new Zend_Db_Table('listing_amenities');
+        $select = $db->select();
+        $select->where('listing_id = ?', $listing);
+        $result = $db->fetchAll($select);
+        $amm = array();
+        foreach($result as $r)
+            $amm[] = $r->amenitie_id;
+        
+        return $amm;
     }
     
     public function getRoom($sch)

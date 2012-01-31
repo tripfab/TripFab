@@ -40,132 +40,151 @@
     		<a href="" rel="hot_details" class="remove">Remove</a>
     	</div><!-- closes desc -->
         <?php endif ?>
-    	<div class="main-ttl">
-    		<p><strong>Write some details about the Hotel</strong></p>    		
-    	</div><!-- closes main-ttl -->
+        
+        <div class="main-ttl">
+            <p><strong>General Amenities</strong></p>
+        </div>
         <div class="lstng-detail faq">
-            <strong>Amenities</strong>
-            <span>Write the hotel amenities</span><br />
-            <?php $exists = false; ?>
-            <?php foreach($this->details as $detail): ?>
-            <?php if($detail->type == 1): ?>
-            <?php $exists = true; ?>
-            	<div class="item">
-                <a href="#delete_detail_<?= $detail->id ?>" class="remove">remove</a>
-                <input placeholder="The amenitie text here" type="text" class="noclean" name="detail[<?= $detail->id ?>][text]" value="<?= $detail->text ?>" />
-                <div class="clear"></div>
+            <div class="ttl-left"> <strong>Amenities</strong> <span>Write the hotel amenities</span><br />
+            </div>
+            <!--TTL-LEFT-->
+            <div class="cont">
+                <div class="item lists">
+                	<?php $diff = count($this->amenities) % 3; ?>
+                	<?php $percol = ($diff == 0) ? count($this->amenities) / 3 : (count($this->amenities) - $diff) / 3; ?>
+                    <?php for($i=0; $i<count($this->amenities); $i=$i+$percol): ?>
+                    <ul class="amenities">
+                    	<?php for($j=$i; ($j < ($i+$percol)) and ($j < count($this->amenities)); $j++): ?>
+                        <?php $amm = $this->amenities[$j]; ?>
+                        <?php $checked = (in_array($amm->id, $this->list_amenities)) ? 'checked="checked"' : "" ?>
+                        <li><label><input <?= $checked ?> name="amm[<?= $amm->id ?>]" type="checkbox" value="<?= $amm->id ?>"  />
+                                <?= $amm->name ?></label></li>
+                        <?php endfor ?>
+                    </ul>
+                    <?php endfor ?>                    
                 </div>
-            <?php endif ?>
-            <?php endforeach ?>
-            
-            <?php if($exists): ?>
-            <div class="item">
-                <a href="" class="remove"></a>
-                <input placeholder="The amenitie text here" type="text" name="details[1][0][text]" value="" />
-                <div class="clear"></div>
-            </div>
-            <?php else: ?>
-            <div class="item">
-                <a href="" class="remove"></a>
-                <input placeholder="The amenitie text here" type="text" name="details[1][0][text]" value="" />
-                <div class="clear"></div>
-            </div>
-            <div class="item">
-                <a href="" class="remove"></a>
-                <input placeholder="The amenitie text here" type="text" name="details[1][1][text]" value="" />
-                <div class="clear"></div>
-            </div>
-            <div class="item">
-                <a href="" class="remove"></a>
-                <input placeholder="The amenitie text here" type="text" name="details[1][2][text]" value="" />
-                <div class="clear"></div>
-            </div>
-            <div class="item">
-                <a href="" class="remove"></a>
-                <input placeholder="The amenitie text here" type="text" name="details[1][3][text]" value="" />
-                <div class="clear"></div>
-            </div>
-            <div class="item">
-                <a href="" class="remove"></a>
-                <input placeholder="The amenitie text here" type="text" name="details[1][4][text]" value="" />
-                <div class="clear"></div>
-            </div>
-            <?php endif ?>
-            
-            <div class="hidden include detail">
-            	<a href="" class="remove"></a>
-                <input placeholder="The amenitie text here" type="text" name="text" value="" />
-                <div class="clear"></div>
-            </div>
-            <a href="" id="addInclude" class="link-5">Add another item</a>
-            <div class="help">
-                <a href="/images2/help/big-hot-overview-amenities.png" class="eye">help</a>
-                <a href="/images2/help/big-hot-overview-amenities.png" class="tooltip3">
-                <img src="/images2/help/small-hot-amenities-amenities.png" /></a>
-            </div>
+                <!--ITEM-->
+                <?php $exists = false; ?>
+				<?php foreach($this->details as $detail): ?>
+                <?php if($detail->type == 1): ?>
+                <?php $exists = true; ?>
+                    <div class="item">
+                    <a href="#delete_detail_<?= $detail->id ?>" class="remove">remove</a>
+                    <input placeholder="The amenitie text here" type="text" class="noclean" name="detail[<?= $detail->id ?>][text]" value="<?= $detail->text ?>" />
+                    <div class="clear"></div>
+                    </div>
+                <?php endif ?>
+                <?php endforeach ?>
+                
+                <?php if($exists): ?>
+                <div class="item">
+                    <a href="" class="remove"></a>
+                    <input placeholder="The amenitie text here" type="text" name="details[1][0][text]" value="" />
+                    <div class="clear"></div>
+                </div>
+                <?php else: ?>
+                <div class="item">
+                    <a href="" class="remove"></a>
+                    <input placeholder="The amenitie text here" type="text" name="details[1][0][text]" value="" />
+                    <div class="clear"></div>
+                </div>
+                <div class="item">
+                    <a href="" class="remove"></a>
+                    <input placeholder="The amenitie text here" type="text" name="details[1][1][text]" value="" />
+                    <div class="clear"></div>
+                </div>
+                <div class="item">
+                    <a href="" class="remove"></a>
+                    <input placeholder="The amenitie text here" type="text" name="details[1][2][text]" value="" />
+                    <div class="clear"></div>
+                </div>
+                <div class="item">
+                    <a href="" class="remove"></a>
+                    <input placeholder="The amenitie text here" type="text" name="details[1][3][text]" value="" />
+                    <div class="clear"></div>
+                </div>
+                <div class="item">
+                    <a href="" class="remove"></a>
+                    <input placeholder="The amenitie text here" type="text" name="details[1][4][text]" value="" />
+                    <div class="clear"></div>
+                </div>
+                <?php endif ?>
+                
+                <div class="hidden include detail">
+                    <a href="" class="remove"></a>
+                    <input placeholder="The amenitie text here" type="text" name="text" value="" />
+                    <div class="clear"></div>
+                </div>
+                <a href="" id="addInclude" class="link-5">Add another item</a>
+                <div class="help">
+                    <a href="/images2/help/big-hot-overview-amenities.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-overview-amenities.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-amenities-amenities.png" /></a>
+                </div>
+            </div><!--CONT--> 
         </div><!-- closes lstng-detail -->
-
-        <div class="lstng-detail faq last">								
-            <strong>Restrictions</strong>
-            <span>Write a detailed description</span><br />
-            
-            <?php $exists = false; ?>
-            <?php foreach($this->details as $detail): ?>
-            <?php if($detail->type == 3): ?>
-            <?php $exists = true; ?>
-            <div class="item">
-                <a href="#delete_detail_<?= $detail->id ?>" class="remove">remove</a>
-                <input placeholder="The restriction text here" type="text" class="noclean" name="detail[<?= $detail->id ?>][text]" value="<?= $detail->text ?>" />
-                <div class="clear"></div>
+        <div class="lstng-detail faq last">
+            <div class="ttl-left"> <strong>Restrictions</strong> <span>Write a detailed description</span><br />
             </div>
-            <?php endif ?>
-            <?php endforeach ?>
-            
-            <?php if($exists): ?>
-            <div class="item">
-                <a href="" class="remove"></a>
-                <input placeholder="The restriction text here" type="text" name="details[3][0][text]" value="" />
-                <div class="clear"></div>
+            <div class="cont">
+                <?php $exists = false; ?>
+				<?php foreach($this->details as $detail): ?>
+                <?php if($detail->type == 3): ?>
+                <?php $exists = true; ?>
+                <div class="item">
+                    <a href="#delete_detail_<?= $detail->id ?>" class="remove">remove</a>
+                    <input placeholder="The restriction text here" type="text" class="noclean" name="detail[<?= $detail->id ?>][text]" value="<?= $detail->text ?>" />
+                    <div class="clear"></div>
+                </div>
+                <?php endif ?>
+                <?php endforeach ?>
+                
+                <?php if($exists): ?>
+                <div class="item">
+                    <a href="" class="remove"></a>
+                    <input placeholder="The restriction text here" type="text" name="details[3][0][text]" value="" />
+                    <div class="clear"></div>
+                </div>
+                <?php else: ?>
+                <div class="item">
+                    <a href="" class="remove"></a>
+                    <input placeholder="The restriction text here" type="text" name="details[3][0][text]" value="" />
+                    <div class="clear"></div>
+                </div>
+                <div class="item">
+                    <a href="" class="remove"></a>
+                    <input placeholder="The restriction text here" type="text" name="details[3][1][text]" value="" />
+                    <div class="clear"></div>
+                </div>
+                <div class="item">
+                    <a href="" class="remove"></a>
+                    <input placeholder="The restriction text here" type="text" name="details[3][2][text]" value="" />
+                    <div class="clear"></div>
+                </div>
+                <div class="item">
+                    <a href="" class="remove"></a>
+                    <input placeholder="The restriction text here" type="text" name="details[3][3][text]" value="" />
+                    <div class="clear"></div>
+                </div>
+                <div class="item">
+                    <a href="" class="remove"></a>
+                    <input placeholder="The restriction text here" type="text" name="details[3][4][text]" value="" />
+                    <div class="clear"></div>
+                </div>
+                <?php endif ?>
+                <div class="hidden restriction detail">
+                    <a href="" class="remove"></a>
+                    <input placeholder="The restriction text here" type="text" name="text" value="" />
+                    <div class="clear"></div>
+                </div>
+                <a href="" id="addRestriction" class="link-5">Add another item</a>
+                <div class="help">
+                    <a href="/images2/help/big-hot-amenities-policies.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-amenities-policies.png" class="tooltip3">
+                    <img src="/images2/help/small-hot-details-policies.png" /></a>
+                </div>
             </div>
-            <?php else: ?>
-            <div class="item">
-                <a href="" class="remove"></a>
-                <input placeholder="The restriction text here" type="text" name="details[3][0][text]" value="" />
-                <div class="clear"></div>
-            </div>
-            <div class="item">
-                <a href="" class="remove"></a>
-                <input placeholder="The restriction text here" type="text" name="details[3][1][text]" value="" />
-                <div class="clear"></div>
-            </div>
-            <div class="item">
-                <a href="" class="remove"></a>
-                <input placeholder="The restriction text here" type="text" name="details[3][2][text]" value="" />
-                <div class="clear"></div>
-            </div>
-            <div class="item">
-                <a href="" class="remove"></a>
-                <input placeholder="The restriction text here" type="text" name="details[3][3][text]" value="" />
-                <div class="clear"></div>
-            </div>
-            <div class="item">
-                <a href="" class="remove"></a>
-                <input placeholder="The restriction text here" type="text" name="details[3][4][text]" value="" />
-                <div class="clear"></div>
-            </div>
-            <?php endif ?>
-            <div class="hidden restriction detail">
-            	<a href="" class="remove"></a>
-                <input placeholder="The restriction text here" type="text" name="text" value="" />
-                <div class="clear"></div>
-            </div>
-            <a href="" id="addRestriction" class="link-5">Add another item</a>
-            <div class="help">
-                <a href="/images2/help/big-hot-amenities-policies.png" class="eye">help</a>
-                <a href="/images2/help/big-hot-amenities-policies.png" class="tooltip3">
-                <img src="/images2/help/small-hot-details-policies.png" /></a>
-            </div>
-        </div><!-- closes lstng-detail -->
+        </div><!-- closes lstng-detail --> 
     </div><!-- closes lstng-details -->
     <div class="foot">
         <input type="submit" class="btn-1 noclean" value="Save Changes" />

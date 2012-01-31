@@ -751,6 +751,9 @@ class ProviderController extends Zend_Controller_Action
                         $room_amenities[$room->id] = $this->listings->getAmenities($room->id);
                     }
                     
+                    $listing_amenities = $this->listings->getGenAmenities($listing->id);
+                    $def_amenities     = $this->listings->getDefaultGenAmenities(true);
+                    
                     $this->view->overview = $overview;
                     $this->view->details  = $details;
                     $this->view->getthere = $getthere;
@@ -758,6 +761,11 @@ class ProviderController extends Zend_Controller_Action
                     $this->view->beds     = $beds;
                     $this->view->room_amenities = $room_amenities;
                     $this->view->amenities = $amenities;
+                    
+                    $this->view->def_amenities = $def_amenities;
+                    $this->view->listing_amenities = $listing_amenities;
+                    
+                    
                     
                     break;
                 case 2    : 
@@ -1932,7 +1940,6 @@ class ProviderController extends Zend_Controller_Action
             $details = $this->listings->getDetails($listing->id);
             if($this->getRequest()->isPost()){
                 //die;
-                
                 foreach($details as $detail){
                     if($detail->type != 4) {
                         if(isset($_POST['detail'][$detail->id])){
@@ -1957,12 +1964,33 @@ class ProviderController extends Zend_Controller_Action
                         }
                     }
                 }
+                
+                if($listing->main_type == 5) {
+                    $listing_amenities = new Zend_Db_Table('listing_amenities');
+                    $listing_amenities->delete("listing_id = {$listing->id}");
+                    foreach($_POST['amm'] as $amm) {
+                        $row = $listing_amenities->fetchNew();
+                        $row->listing_id = $listing->id;
+                        $row->amenitie_id = $amm;
+                        $row->save();
+                    }
+                }
+                
                 $details = $this->listings->getDetails($listing->id);
                 setcookie('alert', 'Your changes have been saved');
                 $this->_redirect('provider/listings/details/'.$listing->id);
             }
             
             //$tabs    = $this->listings->getTabsOf($listing->id);
+            
+            if($listing->main_type == 5) 
+            {
+                $amenities = $this->listings->getDefaultGenAmenities();
+                $list_amenities = $this->listings->getGenAmenities($listing->id);
+                
+                $this->view->amenities = $amenities;
+                $this->view->list_amenities = $list_amenities;
+            }
             
             $this->view->listing = $listing;
             $this->view->details = $details;

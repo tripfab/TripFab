@@ -61,7 +61,7 @@
             <?= $this->partial('partials/vendorlistingstop.phtml', array('listing'=>$this->listing)); ?>
             <div class="listing-content">
                 <div class="left">
-                    <?= $this->partial('partials/vendorlistingsmenu.phtml', array('active'=>'Details', 'id' => $this->listing->id, 
+                    <?= $this->partial('partials/vendorlistingsmenu.phtml', array('active'=>'General Amenities', 'id' => $this->listing->id, 
 									   'type'=>$this->listing->main_type)) ?>
                 </div><!-- closes left -->
                 <div class="right">
@@ -79,6 +79,8 @@
 										'listing' => $this->listing,
 										'details' => $this->details,
 										'help' => $this->help,
+										'amenities' => $this->amenities,
+										'list_amenities' => $this->list_amenities
 								));
 								break;
 							case 6:
