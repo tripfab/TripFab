@@ -9,6 +9,8 @@
     <link type="text/css" rel="stylesheet" href="/css2/jquery-ui-1.8.16.custom.css" />
     <link type="text/css" rel="stylesheet" href="/css2/index/listing-activity.css" />
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.17.custom.css" />
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
@@ -16,6 +18,7 @@
     <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
     <script type="text/javascript" src="/js2/jquery.jcarousel.min.js"></script>
     <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
     <script type="text/javascript" src="/js2/index/listing-touristsight.js"></script>
     <script type="text/javascript" src="/js2/common.js"></script>
     <style type="text/css">#mapcanvas { width:246px;  height:175px; }</style>
@@ -30,7 +33,8 @@
                     <?= $this->partial('partials/gallery.phtml', 
 					array('user'=>$this->user,'listing'	=> $this->listing, 'city' => $this->city, 
 						  'country' => $this->country,'pictures' => $this->pictures,'trips'=>$this->trips)); ?>
-                    <?php //$this->partial('partials/tabs.phtml', array('listing' => $this->listing, 'tabs' => $this->tabs, 'faqs' => $this->faqs, 'map' => false)); ?>                </div><!-- closes box -->                    
+                    <?php //$this->partial('partials/tabs.phtml', array('listing' => $this->listing, 'tabs' => $this->tabs, 'faqs' => $this->faqs, 'map' => false)); ?>
+                </div><!-- closes box -->                    
                 <div class="tabs-wrapper-2">
                     <ul>
                         <li><a href="#tabs-1">Overview</a></li>
@@ -237,5 +241,45 @@
 <input type="hidden" value="<?= ($this->listing->lat) ? $this->listing->lat : 'none' ?>" name="listlat" />
 <input type="hidden" value="<?= ($this->listing->lng) ? $this->listing->lng : 'none' ?>" name="listlng" />
 <input type="hidden" value="<?= $this->listing->title ?>" name="listtitle" />
+<div style="display:none">
+    <div id="newtrip">
+    	<div id="create_trip">
+			<form action="">
+                <div class="top">
+                    <h3>Create a New Trip</h3>
+                    <p>Complete the information below to start your next trip</p>
+                </div><!--TOP-->
+                <div class="cont">
+                    <fieldset>
+                        <div class="item">
+                            <label class="trip">Trip Name</label>
+                            <input type="text" name="title" value="" />
+                        </div><!--ITEM-->
+                        <div class="item">
+                            <label class="dates">Trip Dates</label>
+                            <input class="start" type="text" name="start" value="Starting Date" />
+                            <input class="end"type="text" name="end" value="Ending Date" />
+                            <label class="check">
+                                <input type="checkbox" class="nodatesyet"/>
+                                I don't know the travel dates yet
+                            </label>
+                        </div><!--ITEM-->
+                        <div class="item last">
+                                <input type="checkbox" checked="checked" />
+                                <p>I want to receive special offers from vendors near
+                                    of the places I'll visit in this trip</p>
+                        </div><!--ITEM-->
+                    </fieldset>
+                </div><!--CONT-->
+                <div class="bottom">
+                    <input type="submit" class="btn-1 noclean" value="Create Trip" />
+                    <input type="button" onclick="$.fancybox.close(); return false;" class="btn-10 noclean" value="Cancel" />
+                </div><!--BOTTOM-->
+                <input type="hidden" name="trip" value="new" />
+                <input type="hidden" name="listing" value="" />
+            </form>
+		</div><!--CREATE_TRIP-->
+    </div>
+</div>
 </body>
 </html>

@@ -32,14 +32,23 @@
                         <li><a href="#tabs-2">FAQ's</a></li>
                     </ul>
                     <div class="tab" id="tabs-1">
+                    	<?php if(!empty($this->overview->about) or
+									!empty($this->overview->about) or
+									!empty($this->overview->about)): ?>
                         <div class="tab-ttl">About <?= $this->listing->title ?></div>
                         <div class="tab-content">
+                        	<?php if(!empty($this->overview->about)): ?>
                         	<h2>About the spot</h2>
                         	<p><?= stripslashes(nl2br($this->overview->about)) ?></p>
-                            <h2>What to Expect</h2>
+                            <?php endif ?>
+                            <?php if(!empty($this->overview->expect)): ?>
+                            <h2>What to expect</h2>
                             <p><?= stripslashes(nl2br($this->overview->expect)) ?></p>
+                            <?php endif ?>
+                            <?php if(!empty($this->overview->love)): ?>
                             <h2>Things you'll love</h2>
                             <p><?= stripslashes(nl2br($this->overview->love)) ?></p>
+                            <?php endif ?>
                             <h2>Polices</h2>
                             <ul>
                             	<?php foreach($this->details as $detail): ?>
@@ -49,14 +58,20 @@
                                 <?php endforeach ?>
                             </ul>
                         </div><!-- closes tab-content -->
+                        <?php else: ?>
+                        <div class="tab-content">
+	                        <a href="/provider/listings/overview/<?= $this->listing->id ?>"><img src="/images2/empty-overview.gif" /></a>
+                        </div>
+                        <?php endif ?>
                     </div><!-- closes tab -->
                     <div class="tab" id="tabs-2">
+                        <?php if(count($this->faqs) > 0): ?>
                         <div class="tab-ttl">
                             Frequently Asked Questions
                         </div><!-- closes tab-ttl -->
                         <div class="tab-content faqs">
                             <ul>
-                                <?php foreach($this->faqs as $faq): ?>
+                            	<?php foreach($this->faqs as $faq): ?>
                                 <li>
                                     <strong><?= stripslashes(nl2br($faq->question)) ?></strong><br />
                                     <?= stripslashes(nl2br($faq->answer)) ?>
@@ -64,6 +79,11 @@
                                 <?php endforeach ?>
                             </ul>
                         </div><!-- closes tab-content -->
+                        <?php else: ?>
+                        <div class="tab-content">
+                        	<a href="/provider/listings/faqs/<?= $this->listing->id ?>"><img src="/images2/empty-faqs.gif" /></a>
+                        </div>
+                        <?php endif ?>
                     </div><!-- closes tab -->								
                 </div><!-- closes tabs-wrapper -->                
                 <div class="reviews-wrapper">
@@ -80,11 +100,15 @@
                     </div><!-- closes ttl -->
                     <div class="map-wrapper">
                         <h4>Location</h4>
+                        <?php if(!is_null($this->listing->lat)): ?>
                         <div id="mapcanvas"></div>
                         <address>
                             <p><strong><?= $this->listing->title ?></strong></p>
                             <p><?= $this->listing->address ?></p>
                         </address>
+                        <?php else: ?>
+                        <a href="/provider/listings/location/<?= $this->listing->id ?>"><img src="/images2/empty-map.jpg" /></a>
+                        <?php endif ?>
                     </div><!-- closes map-wrapper -->
                 </div><!-- closes widget -->
                 <div class="widget talk">

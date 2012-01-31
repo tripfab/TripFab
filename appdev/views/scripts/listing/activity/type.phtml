@@ -77,7 +77,7 @@
                 Basic Information
             </div><!-- closes item ttl -->
             <div class="item first">
-                <input name="name" class="noclean" placeholder="Enter the name here" type="text" value="<?= $_POST['name'] ?>" />
+                <input tabindex="1" name="name" class="noclean" placeholder="Enter the name here" type="text" value="<?= $_POST['name'] ?>" />
                 <h4>Activity Type Name</h4>
                 <span>Write the name for this activity type</span>
                 <div class="help">
@@ -87,7 +87,7 @@
                 </div>
             </div><!-- closes item -->
             <div class="item last">
-                <textarea class="noclean" name="description" placeholder="Write a short description here" cols="30" rows="1"><?= $_POST['description'] ?></textarea>
+                <textarea tabindex="2" class="noclean" name="description" placeholder="Write a short description here" cols="30" rows="1"><?= $_POST['description'] ?></textarea>
                 <h4>Description</h4>
                 <span>Write the description for this activity type</span>
                 <div class="help">
@@ -104,7 +104,7 @@
             </div><!-- closes item ttl -->
             <div class="item first">
                 <div class="selects">
-                    <select name="min">
+                    <select tabindex="3" name="min">
                         <option value="1">1 person</option>
                     	<?php for($i=2;$i<=50;$i++): ?>
                         <?php $selected = ($i == $_POST['min']) ? 'selected="selected"' : '' ?>
@@ -122,7 +122,7 @@
             </div><!-- closes item -->
             <div class="item last">
                 <div class="selects">
-                    <select name="max">
+                    <select tabindex="4" name="max">
                         <option value="1">1 person</option>
                     	<?php for($i=2;$i<=50;$i++): ?>
                         <?php $selected = ($i == $_POST['max']) ? 'selected="selected"' : '' ?>
@@ -141,7 +141,7 @@
             </div><!-- closes item ttl -->
             <div class="item first">
 				<?php $checked = (isset($_POST['kids'])) ? 'checked="checked"' : '' ?>
-                <input <?= $checked ?> type="checkbox" name="kids" value="1" />
+                <input tabindex="5" <?= $checked ?> type="checkbox" name="kids" value="1" />
                 <label>This activity type accepts children</label>
                 <div class="help">
                     <a href="/images2/help/big-act-types-children.png" class="eye">help</a>
@@ -152,9 +152,9 @@
             <?php $class = (isset($_POST['kids'])) ? '' : 'hidden' ?>
             <?php $disabled = (!empty($class)) ? 'disabled="disabled"' : '' ?>
             <div class="accept-kids <?= $class ?>">
-                <div class="item">
+                <div class="item last">
                     <div class="selects">
-                        <select <?= $disabled ?> name="kid_age_max">
+                        <select tabindex="6" <?= $disabled ?> name="kid_age_max">
                         	<?php for($i=1;$i<=12;$i++): ?>
                             <?php $selected = ($i == $_POST['kid_age_max']) ? 'selected="selected"' : '' ?>
                             <option <?= $selected ?> value="<?= $i ?>">Under <?= $i ?> years</option>
@@ -164,18 +164,6 @@
                     <h4>Child Age</h4>
                     <span>What age do you consider as a child?</span>
                 </div><!-- closes item -->
-                <div class="item last">
-                    <div class="selects">
-                        <select <?= $disabled ?> name="kid_age_min">
-                        	<?php for($i=0;$i<=11;$i++): ?>
-                            <?php $selected = ($i == $_POST['kid_age_min']) ? 'selected="selected"' : '' ?>
-                            <option <?= $selected ?> value="<?= $i ?>">Over <?= $i ?> years</option>
-                            <?php endfor ?>
-                        </select>
-                    </div><!-- closes selects -->
-                    <h4>Minimum Age</h4>
-                    <span>Select the minimum age</span>
-                </div><!-- closes item -->
             </div><!-- accept-kids -->
             <div class="clear"></div>
         </div><!-- closes item-wrppr -->
@@ -184,13 +172,15 @@
                 <strong>Activity Type Requirements</strong>
                 <span>Write the requeriments for this activity type</span>
                 <br />
+				<?php $tab = 8; ?>
                 <?php if(count($_POST['tips']) > 0): ?>
                 <?php foreach($_POST['tips'] as $i => $tip): ?>
                 <div class="itemm">
                     <a href="" class="remove">remove</a>
-                    <input class="noclean" placeholder="Enter the requirement text here" type="text" name="tips[<?= $i ?>][text]" value="<?= $tip['text'] ?>" />
+                    <input tabindex="<?= $tab ?>" class="noclean" placeholder="Enter the requirement text here" type="text" name="tips[<?= $i ?>][text]" value="<?= $tip['text'] ?>" />
                     <div class="clear"></div>
                 </div>
+                <?php $tab++ ?>
                 <?php endforeach ?>
                 <?php endif ?>
                 
@@ -198,35 +188,36 @@
                 <?php foreach($_POST['tip'] as $i => $tip): ?>
                 <div class="itemm">
                     <a href="" class="remove">remove</a>
-                    <input class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[<?= $i ?>][text]" value="<?= $tip['text'] ?>" />
+                    <input tabindex="<?= $tab ?>" class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[<?= $i ?>][text]" value="<?= $tip['text'] ?>" />
                     <div class="clear"></div>
                 </div>
+                <?php $tab++ ?>
                 <?php endforeach ?>
                 <?php endif ?>
                 <?php if(count($_POST['tips']) == 0 and count($_POST['tip']) == 0): ?>
                 <div class="itemm">
                     <a href="" class="remove">remove</a>
-                    <input class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[0]" />
+                    <input tabindex="<?= $tab ?>" class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[0]" />
                     <div class="clear"></div>
                 </div>
                 <div class="itemm">
                     <a href="" class="remove">remove</a>
-                    <input class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[1]" />
+                    <input tabindex="<?= $tab++ ?>" class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[1]" />
                     <div class="clear"></div>
                 </div>
                 <div class="itemm">
                     <a href="" class="remove">remove</a>
-                    <input class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[2]" />
+                    <input tabindex="<?= $tab++ ?>" class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[2]" />
                     <div class="clear"></div>
                 </div>
                 <div class="itemm">
                     <a href="" class="remove">remove</a>
-                    <input class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[3]" />
+                    <input tabindex="<?= $tab++ ?>" class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[3]" />
                     <div class="clear"></div>
                 </div>
                 <div class="itemm">
                     <a href="" class="remove">remove</a>
-                    <input class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[4]" />
+                    <input tabindex="<?= $tab++ ?>" class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[4]" />
                     <div class="clear"></div>
                 </div>
                 <?php endif ?>
@@ -246,7 +237,7 @@
          </div><!-- closes lstng-details -->
     </div><!-- closes profile-items -->
     <div class="foot">
-        <input type="submit" class="btn-1" value="Save Changes" />
+        <input type="submit" class="noclean btn-1" value="Save Changes" />
         <a href="">Deactivate Listing</a>
     </div><!-- closes foot -->
     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
@@ -272,7 +263,7 @@
                 Basic Information
             </div><!-- closes item ttl -->
             <div class="item first">
-                <input class="noclean" name="name" placeholder="Enter the name here" type="text" value="<?= $type->name ?>" />
+                <input tabindex="1" class="noclean" name="name" placeholder="Enter the name here" type="text" value="<?= $type->name ?>" />
                 <h4>Activity Type Name</h4>
                 <span>Write the name for this activity type</span>
                 <div class="help">
@@ -282,7 +273,7 @@
                 </div>
             </div><!-- closes item -->
             <div class="item last">
-                <textarea class="noclean" name="description" placeholder="Write a short description here" 
+                <textarea tabindex="2" class="noclean" name="description" placeholder="Write a short description here" 
                 cols="30" rows="1"><?= $type->description ?></textarea>
                 <h4>Description</h4>
                 <span>Write the description for this activity type</span>
@@ -300,7 +291,7 @@
             </div><!-- closes item ttl -->
             <div class="item first">
                 <div class="selects">
-                    <select name="min">
+                    <select tabindex="3" name="min">
                         <option value="1">1 person</option>
                     	<?php for($i=2;$i<=50;$i++): ?>
                         <?php $selected = ($i == $type->min) ? 'selected="selected"' : '' ?>
@@ -318,7 +309,7 @@
             </div><!-- closes item -->
             <div class="item last">
                 <div class="selects">
-                    <select name="max">
+                    <select tabindex="4" name="max">
                         <option value="1">1 person</option>
                     	<?php for($i=2;$i<=50;$i++): ?>
                         <?php $selected = ($i == $type->max) ? 'selected="selected"' : '' ?>
@@ -337,7 +328,7 @@
             </div><!-- closes item ttl -->
             <div class="item first">
 				<?php $checked = ($type->kids == 1) ? 'checked="checked"' : '' ?>
-                <input <?= $checked ?> type="checkbox" name="kids" value="1" />
+                <input tabindex="5" <?= $checked ?> type="checkbox" name="kids" value="1" />
                 <label>This activity type accepts children</label>
                 <div class="help">
                     <a href="/images2/help/big-act-types-children.png" class="eye">help</a>
@@ -348,9 +339,9 @@
             <?php $class = ($type->kids == 1) ? '' : 'hidden' ?>
             <?php $disabled = (!empty($class)) ? 'disabled="disabled"' : '' ?>
             <div class="accept-kids <?= $class ?>">
-                <div class="item">
+                <div class="item last">
                     <div class="selects">
-                        <select <?= $disabled ?> name="kid_age_max">
+                        <select tabindex="6" <?= $disabled ?> name="kid_age_max">
                         	<?php for($i=1;$i<=12;$i++): ?>
                             <?php $selected = ($i == $type->kid_age_max) ? 'selected="selected"' : '' ?>
                             <option <?= $selected ?> value="<?= $i ?>">Under <?= $i ?> years</option>
@@ -360,18 +351,6 @@
                     <h4>Child Age</h4>
                     <span>What age do you consider as a child?</span>
                 </div><!-- closes item -->
-                <div class="item last">
-                    <div class="selects">
-                        <select <?= $disabled ?> name="kid_age_min">
-                        	<?php for($i=0;$i<=11;$i++): ?>
-                            <?php $selected = ($i == $type->kid_age_min) ? 'selected="selected"' : '' ?>
-                            <option <?= $selected ?> value="<?= $i ?>">Over <?= $i ?> years</option>
-                            <?php endfor ?>
-                        </select>
-                    </div><!-- closes selects -->
-                    <h4>Minimum Age</h4>
-                    <span>Select the minimum age</span>
-                </div><!-- closes item -->
             </div><!-- accept-kids -->
             <div class="clear"></div>
         </div><!-- closes item-wrppr -->
@@ -380,43 +359,45 @@
                 <strong>Activity Type Requeriments</strong>
                 <span>Write the requeriments for this activity type</span>
                 <br />
+                <?php $tab = 8 ?>
                 <?php if(count($tips) > 0): ?>
                 <?php foreach($tips as $tip): ?>
                 <div class="itemm">
                     <a href="" class="remove">remove</a>
-                    <input class="noclean" placeholder="Enter the requirement text here" type="text" name="tips[<?= $tip->id ?>][text]" value="<?= $tip->text ?>" />
+                    <input tabindex="<?= $tab ?>" class="noclean" placeholder="Enter the requirement text here" type="text" name="tips[<?= $tip->id ?>][text]" value="<?= $tip->text ?>" />
                     <div class="clear"></div>
                 </div>
+                <?php $tab++ ?>
                 <?php endforeach ?>
                 <div class="itemm">
                     <a href="" class="remove">remove</a>
-                    <input class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[0][text]" value="" />
+                    <input tabindex="<?= $tab ?>" class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[0][text]" value="" />
                     <div class="clear"></div>
                 </div>
                 <?php else: ?>
                 <div class="itemm">
                     <a href="" class="remove">remove</a>
-                    <input class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[0]" />
+                    <input tabindex="<?= $tab ?>" class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[0]" />
                     <div class="clear"></div>
                 </div>
                 <div class="itemm">
                     <a href="" class="remove">remove</a>
-                    <input class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[1]" />
+                    <input tabindex="<?= $tab++ ?>" class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[1]" />
                     <div class="clear"></div>
                 </div>
                 <div class="itemm">
                     <a href="" class="remove">remove</a>
-                    <input class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[2]" />
+                    <input tabindex="<?= $tab++ ?>" class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[2]" />
                     <div class="clear"></div>
                 </div>
                 <div class="itemm">
                     <a href="" class="remove">remove</a>
-                    <input class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[3]" />
+                    <input tabindex="<?= $tab++ ?>" class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[3]" />
                     <div class="clear"></div>
                 </div>
                 <div class="itemm">
                     <a href="" class="remove">remove</a>
-                    <input class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[4]" />
+                    <input tabindex="<?= $tab++ ?>" class="noclean" placeholder="Enter the requirement text here" type="text" name="tip[4]" />
                     <div class="clear"></div>
                 </div>
                 <?php endif ?>
@@ -436,7 +417,7 @@
          </div><!-- closes lstng-details -->
     </div><!-- closes profile-items -->
     <div class="foot">
-        <input type="submit" class="btn-1" value="Save Changes" />
+        <input type="submit" class="noclean btn-1" value="Save Changes" />
         <a href="">Deactivate Listing</a>
     </div><!-- closes foot -->
     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
@@ -457,7 +438,7 @@
                 Basic Information
             </div><!-- closes item ttl -->
             <div class="item first">
-                <input class="noclean" placeholder="Enter the name here" name="name" type="text" value="" />
+                <input tabindex="1" class="noclean" placeholder="Enter the name here" name="name" type="text" value="" />
                 <h4>Activity Type Name</h4>
                 <span>Write the name for this activity type</span>
                 <div class="help">
@@ -467,7 +448,7 @@
                 </div>
             </div><!-- closes item -->
             <div class="item last">
-                <textarea placeholder="Write a short description here" name="description" cols="30" rows="1"></textarea>
+                <textarea tabindex="2" placeholder="Write a short description here" name="description" cols="30" rows="1"></textarea>
                 <h4>Description</h4>
                 <span>Write the description for this activity type</span>
                 <div class="help">
@@ -484,7 +465,7 @@
             </div><!-- closes item ttl -->
             <div class="item first">
                 <div class="selects">
-                    <select name="min">
+                    <select tabindex="3" name="min">
                         <option value="1">1 person</option>
                     	<?php for($i=2;$i<=50;$i++): ?>
                         <option value="<?= $i ?>"><?= $i ?> people</option>
@@ -501,7 +482,7 @@
             </div><!-- closes item -->
             <div class="item last">
                 <div class="selects">
-                    <select name="max">
+                    <select tabindex="4" name="max">
                         <option value="1">1 person</option>
                     	<?php for($i=2;$i<=50;$i++): ?>
                         <option value="<?= $i ?>"><?= $i ?> people</option>
@@ -518,7 +499,7 @@
                 Children Options
             </div><!-- closes item ttl -->
             <div class="item first">
-                <input type="checkbox" name="kids" value="1" />
+                <input tabindex="5" type="checkbox" name="kids" value="1" />
                 <label>This activity type accepts children</label>
                 <div class="help">
                     <a href="/images2/help/big-act-types-children.png" class="eye">help</a>
@@ -527,9 +508,9 @@
                 </div>
             </div><!-- closes item -->
             <div class="accept-kids hidden">
-                <div class="item">
+                <div class="item last">
                     <div class="selects">
-                        <select disabled="disabled" name="kid_age_max">
+                        <select tabindex="6" disabled="disabled" name="kid_age_max">
                         	<?php for($i=1;$i<=12;$i++): ?>
                             <option value="<?= $i ?>">Under <?= $i ?> years</option>
                             <?php endfor ?>
@@ -537,17 +518,6 @@
                     </div><!-- closes selects -->
                     <h4>Child Age</h4>
                     <span>What age do you consider as a child?</span>
-                </div><!-- closes item -->
-                <div class="item last">
-                    <div class="selects">
-                        <select disabled="disabled" name="kid_age_min">
-                        	<?php for($i=0;$i<=11;$i++): ?>
-                            <option value="<?= $i ?>">Over <?= $i ?> years</option>
-                            <?php endfor ?>
-                        </select>
-                    </div><!-- closes selects -->
-                    <h4>Minimum Age</h4>
-                    <span>Select the minimum age</span>
                 </div><!-- closes item -->
             </div><!-- accept-kids -->
             <div class="clear"></div>
@@ -559,32 +529,32 @@
                 <br />
                 <div class="itemm">
                     <a href="" class="remove">remove</a>
-                    <input placeholder="Enter the requirement text here" type="text" name="tip[0][text]" value="" />
+                    <input tabindex="8" placeholder="Enter the requirement text here" type="text" name="tip[0][text]" value="" />
                     <div class="clear"></div>
                 </div>
                 <div class="itemm">
                     <a href="" class="remove">remove</a>
-                    <input placeholder="Enter the requirement text here" type="text" name="tip[1][text]" value="" />
+                    <input tabindex="9" placeholder="Enter the requirement text here" type="text" name="tip[1][text]" value="" />
                     <div class="clear"></div>
                 </div>
                 <div class="itemm">
                     <a href="" class="remove">remove</a>
-                    <input placeholder="Enter the requirement text here" type="text" name="tip[2][text]" value="" />
+                    <input tabindex="10" placeholder="Enter the requirement text here" type="text" name="tip[2][text]" value="" />
                     <div class="clear"></div>
                 </div>
                 <div class="itemm">
                     <a href="" class="remove">remove</a>
-                    <input placeholder="Enter the requirement text here" type="text" name="tip[3][text]" value="" />
+                    <input tabindex="11" placeholder="Enter the requirement text here" type="text" name="tip[3][text]" value="" />
                     <div class="clear"></div>
                 </div>
                 <div class="itemm">
                     <a href="" class="remove">remove</a>
-                    <input placeholder="Enter the requirement text here" type="text" name="tip[4][text]" value="" />
+                    <input tabindex="12" placeholder="Enter the requirement text here" type="text" name="tip[4][text]" value="" />
                     <div class="clear"></div>
                 </div> 
                 <div class="itemm newitem hidden">
                     <a href="" class="remove">remove</a>
-                    <input placeholder="Enter the requirement text here" type="text" name="text" value="" />
+                    <input tabindex="13" placeholder="Enter the requirement text here" type="text" name="text" value="" />
                     <div class="clear"></div>
                 </div>
                 <a href="" id="addNewTip" class="link-5">Add another requirement</a>
@@ -598,7 +568,7 @@
          </div><!-- closes lstng-details -->
     </div><!-- closes profile-items -->
     <div class="foot">
-        <input type="submit" class="btn-1" value="Save Changes" />
+        <input type="submit" class="noclean btn-1" value="Save Changes" />
     </div><!-- closes foot -->
     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />

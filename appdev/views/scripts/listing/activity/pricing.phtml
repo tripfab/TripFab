@@ -13,57 +13,63 @@
             </div><!-- closes desc -->
             <?php endif ?>
             <h2>With the Default Pricing the rates apply for all the unspecified dates.</h2>
+            <?php $tab = 1 ?>
             <?php if((is_null($this->listing->min) and is_null($this->listing->max)) and (count($this->types) > 0)): ?>
             <?php foreach($this->types as $type): ?>
             <div class="pricing-itm act-type first">
                 <span><?= $type->name ?></span>
                 <div class="right">
                     <label>Per Adult</label>
-                    <input type="text" name="sch[0][<?= $type->id ?>][price]"
+                    <input tabindex="<?= $tab ?>" type="text" name="sch[0][<?= $type->id ?>][price]"
                     value="<?= (isset($this->sch[0][$type->id]['price'])) 
                     ? $this->sch[0][$type->id]['price'] : "0.00" ?>" />
                     <h4>Adults Rate</h4>
                     <span>The adult's rate for this type</span>
                 </div><!-- closes right -->
                 <?php if($type->kids == 1): ?>
+                <?php $tab++ ?>
                 <div class="right">
                     <label>Rate per child</label>
                     <?php $checked = ($this->sch[0][$type->id]['kids'] == $this->sch[0][$type->id]['price']) ? 'disabled="disabled"' : '' ?>
-                    <input type="text" name="sch[0][<?= $type->id ?>][kids]" <?= $checked ?>
+                    <input tabindex="<?= $tab ?>" type="text" name="sch[0][<?= $type->id ?>][kids]" <?= $checked ?>
                     class="kids" value="<?= (isset($this->sch[0][$type->id]['kids'])) 
                     ? $this->sch[0][$type->id]['kids'] : "0.00" ?>" />
                     <h4>Children Rate</h4>
                     <span>The children's rate for this type</span>
                 </div><!-- closes right -->
                 <div class="right lab">
+                	<?php $tab++ ?>
                 	<?php $checked = ($this->sch[0][$type->id]['kids'] == $this->sch[0][$type->id]['price']) ? 'checked="checked"' : '' ?>
-                    <input type="checkbox" <?= $checked ?> class="sameprice" />
+                    <input tabindex="<?= $tab ?>" type="checkbox" <?= $checked ?> class="sameprice" />
                     <label>Children's rate is the same as the adult's</label>
                 </div><!-- closes right -->
                 <?php endif ?>
             </div><!-- closes pricing-itm -->
+            <?php $tab++ ?>
             <?php endforeach ?>
             <?php else: ?>
             <div class="pricing-itm act-type first">
                 <span>Standard Price</span>
                 <div class="right">
                     <label>Per Adult</label>
-                    <input type="text" name="price" value="<?= (isset($this->basic_price->price)) ? $this->basic_price->price : "0.00" ?>" />											
+                    <input tabindex="<?= $tab ?>" type="text" name="price" value="<?= (isset($this->basic_price->price)) ? $this->basic_price->price : "0.00" ?>" />											
                     <h4>Adults Rate</h4>
                     <span>The adult's standard rate</span>											
                 </div><!-- closes right -->
                 <?php if($this->listing->kids == 1): ?>
+                <?php $tab++ ?>
                 <div class="right">
                     <label>Rate per child</label>
                     <?php $checked = ($this->basic_price->kids == $this->basic_price->price) ? 'disabled="disabled"' : '' ?>
-                    <input class="kids" <?= $checked ?> type="text" 
+                    <input tabindex="<?= $tab ?>" class="kids" <?= $checked ?> type="text" 
                     value="<?= (isset($this->basic_price->kids)) ? $this->basic_price->kids : "0.00" ?>" name="kids" />
                     <h4>Children Rate</h4>
                     <span>The children's rate for this type</span>																						
                 </div><!-- closes right -->
                 <div class="right lab">
+                	<?php $tab++ ?>
                 	<?php $checked = ($this->basic_price->kids == $this->basic_price->price) ? 'checked="checked"' : '' ?>
-                    <input type="checkbox" <?= $checked ?> class="sameprice" />
+                    <input tabindex="<?= $tab ?>" type="checkbox" <?= $checked ?> class="sameprice" />
                     <label>Children's rate is the same as the adult's</label>
                 </div><!-- closes right -->
                 <?php endif ?>
@@ -80,6 +86,7 @@
             <?php endif ?>
             <h2>With the Basic Pricing the rates apply for all the unspecified dates. <a href="#newSeasson" class="lb link-5">Add New Season</a></h2>
             <div class="carrousel">
+            	<?php $tab = 1 ?>
             	<?php foreach($this->seasons as $season): ?>
                 <h3><img src="/images2/cleardot.gif" alt="" /><?= $season->name ?></h3>
                 <div class="carrousel-itm">
@@ -96,62 +103,68 @@
                         <span><?= $type->name ?></span>
                         <div class="right">
                             <label>Per Adult</label>
-                            <input type="text" name="sch[<?= $season->id ?>][<?= $type->id ?>][price]" 
+                            <input tabindex="<?= $tab ?>" type="text" name="sch[<?= $season->id ?>][<?= $type->id ?>][price]" 
                             value="<?= (isset($this->season[$season->id][$type->id]['price'])) 
                             ? $this->season[$season->id][$type->id]['price'] : "0.00" ?>"/>										
                             <h4>Adults Rate</h4>
                             <span>The adult's rate for this type</span>											
                         </div><!-- closes right -->
                         <?php if($type->kids == 1): ?>
+                        <?php $tab++ ?>
                         <div class="right">
                             <label>Rate per child</label>
                             <?php $checked = ($this->season[$season->id][$type->id]['kids'] == $this->season[$season->id][$type->id]['price'])
 									? 'disabled="disabled"' : '' ; ?>
-                            <input type="text" name="sch[<?= $season->id ?>][<?= $type->id ?>][kids]" <?= $checked ?>
+                            <input tabindex="<?= $tab ?>" type="text" name="sch[<?= $season->id ?>][<?= $type->id ?>][kids]" <?= $checked ?>
                             class="kids" value="<?= (isset($this->season[$season->id][$type->id]['kids'])) 
                             ? $this->season[$season->id][$type->id]['kids'] : "0.00" ?>"/>
                             <h4>Children Rate</h4>
                             <span>The children's rate for this type</span>																						
                         </div><!-- closes right -->
                         <div class="right lab">
+                        	<?php $tab++ ?>
                         	<?php $checked = ($this->season[$season->id][$type->id]['kids'] == $this->season[$season->id][$type->id]['price'])
 									? 'checked="checked"' : '' ; ?>
-                            <input type="checkbox" <?= $checked ?> class="sameprice" />
+                            <input tabindex="<?= $tab ?>" type="checkbox" <?= $checked ?> class="sameprice" />
                             <label>Children's rate is the same as the adult's</label>
                         </div><!-- closes right -->
                         <?php endif ?>
                     </div><!-- closes pricing-itm -->
+                    <?php $tab++ ?>
                     <?php endforeach ?>
                     <?php else: ?>
                     <div class="pricing-itm act-type first">
                         <span><?= $season->name ?> Price</span>	
                         <div class="right">
                             <label>Per Adult</label>
-                            <input type="text" name="sch[<?= $season->id ?>][<?= $sch->id ?>][price]" 
+                            <input tabindex="<?= $tab ?>" type="text" name="sch[<?= $season->id ?>][<?= $sch->id ?>][price]" 
                             value="<?= (isset($this->season[$season->id]['price'])) 
                             ? $this->season[$season->id]['price'] : "0.00" ?>"/>
                             <h4>Adults Rate</h4>
                             <span>The adult's rate for this season</span>											
                         </div><!-- closes right -->
                         <?php if($this->listing->kids == 1): ?>
+                        <?php $tab++ ?>
                         <div class="right">
                             <label>Rate per child</label>
                             <?php $checked = ($this->season[$season->id]['kids'] == $this->season[$season->id]['price']) ? 'disabled="disabled"' : '' ?>
-                            <input type="text" name="sch[<?= $season->id ?>][<?= $sch->id ?>][kids]" <?= $checked ?>
+                            <input tabindex="<?= $tab ?>" type="text" name="sch[<?= $season->id ?>][<?= $sch->id ?>][kids]" <?= $checked ?>
                             class="kids" value="<?= (isset($this->season[$season->id]['kids'])) 
                             ? $this->season[$season->id]['kids'] : "0.00" ?>"/>
                             <h4>Children Rate</h4>
                             <span>The children's rate for this season</span>																						
                         </div><!-- closes right -->
                         <div class="right lab">
+                        	<?php $tab++ ?>
                         	<?php $checked = ($this->season[$season->id]['kids'] == $this->season[$season->id]['price']) ? 'checked="checked"' : '' ?>
-                            <input type="checkbox" <?= $checked ?> class="sameprice" />
+                            <input tabindex="<?= $tab ?>" type="checkbox" <?= $checked ?> class="sameprice" />
                             <label>Children's rate is the same as the adult's</label>
                         </div><!-- closes right -->
                         <?php endif ?>
                     </div><!-- closes pricing-itm -->
                     <?php endif ?>
                 </div><!-- closes carrousel-itm -->
+                <?php $tab++ ?>
                 <?php endforeach ?>
             </div><!-- closes carrousel -->																	
         </div><!-- closes tab -->
@@ -161,21 +174,22 @@
         <div class="right">
             <strong>Cancellation Policy</strong><br />
             <span>Choose the cancellation policy you want</span>
-            <select>
+            <select tabindex="<?= $tab ?>">
                 <option>Flexible</option>
                 <option>Moderate</option>
                 <option>Strict</option>
             </select>
-            <a href="/provider/cancellation-policies" class="learn">Learn More</a>									
+            <a href="/provider/cancellation-policies/activities" class="learn">Learn More</a>									
         </div><!-- closes right -->
     </div><!-- closes pricing-itm -->
     <div class="foot">
-        <input type="submit" class="btn-1" value="Save Changes" />
+        <input type="submit" class="noclean btn-1" value="Save Changes" />
     </div><!-- closes foot -->
     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
     <input type="hidden" name="form_id" value="<?= md5($this->listing->token.'form_pricing') ?>" />
     <input type="hidden" name="_task" value="<?= md5('update_pricing') ?>" />
+    <input type="hidden" name="s" value="0" />
 </form>
 
 <div class="hidden">
@@ -192,7 +206,7 @@
                 <div class="clear"></div>
             </div><!-- closes content -->
             <div class="bottom">
-                <input type="submit" class="btn-1" value="Create Season" />
+                <input type="submit" class="noclean btn-1" value="Create Season" />
                 <span class="btn-4" onclick="$.fancybox.close()">Cancel</span>				
             </div><!-- closes bottom -->
             <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
@@ -215,7 +229,7 @@
                 <div class="clear"></div>
             </div><!-- closes content -->
             <div class="bottom">
-                <input type="submit" class="btn-1" value="Edit Season" />
+                <input type="submit" class="noclean btn-1" value="Edit Season" />
                 <span class="btn-4" onclick="$.fancybox.close()">Cancel</span>				
             </div><!-- closes bottom -->
             <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
@@ -232,7 +246,7 @@
                 <p>Are you sure you want to remove "<?= $season->name ?>"?</p>
             </div><!-- closes content -->
             <div class="bottom">
-                <input type="submit" class="btn-1" value="Delete" />
+                <input type="submit" class="noclean btn-1" value="Delete" />
                 <span class="btn-4" onclick="$.fancybox.close()">Cancel</span>				
             </div><!-- closes bottom -->     
             <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />

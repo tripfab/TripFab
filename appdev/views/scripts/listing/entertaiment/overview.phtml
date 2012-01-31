@@ -30,6 +30,9 @@
 .lstng-detail {
 	overflow:visible;}
 </style>
+<script type="text/javascript">
+$('textarea').elastic();
+</script>
 <form action="" method="post">
     <div class="lstng-details pricing overview">		
     	<?php if($this->help->ent_overview == 0): ?>						
@@ -43,7 +46,7 @@
     		<p><strong>Entertainment Overview</strong></p>    		
     	</div><!-- closes main-ttl -->
         <div class="lstng-detail">
-            <textarea placeholder="Write a nice description about the entertaiment" class="noclean" name="about" cols="30" rows="1"><?= stripslashes($this->overview->about) ?></textarea>
+            <textarea placeholder="Write a nice description about the entertaiment" class="noclean limitcc" rel="1000" name="about" cols="30" rows="1"><?= stripslashes($this->overview->about) ?></textarea>
             <strong>About the entertainment</strong>
             <span>Write a detailed description</span>
             <!--<span class="counter">500</span>-->
@@ -55,7 +58,7 @@
             <div class="clear"></div>
         </div><!-- closes lstng-detail -->
         <div class="lstng-detail">
-            <textarea placeholder="Write a nice description about what to expect" class="noclean" name="expect" cols="30" rows="1"><?= stripslashes($this->overview->expect) ?></textarea>
+            <textarea placeholder="Write a nice description about what to expect" class="noclean limitcc" rel="1000" name="expect" cols="30" rows="1"><?= stripslashes($this->overview->expect) ?></textarea>
             <strong>Kind of entertaimment you will get</strong>
             <span>Tell us what the traveler can expect</span>
             <!--<span class="counter">500</span>-->
@@ -134,7 +137,7 @@
         </div><!-- closes lstng-detail -->
     </div><!-- closes lstng-details -->
     <div class="foot">
-        <input type="submit" class="btn-1" value="Save Changes" />
+        <input type="submit" class="btn-1 noclean" value="Save Changes" />
     </div><!-- closes foot -->
     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />

@@ -10,14 +10,7 @@
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
 	<script type="text/javascript" src="/js2/jquery.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('textarea').elastic();
-            $('select').jqTransSelect();
-            $('#header .header-login a.user').click(function(){
-                $(this).next().toggleClass('show');
-                return false;
-            });
-			
+        $(document).ready(function() {			
 			$include = 10;
 			$noninclude = 10;
 			$restrict = 10;
@@ -68,7 +61,7 @@
             <?= $this->partial('partials/vendorlistingstop.phtml', array('listing'=>$this->listing)); ?>
             <div class="listing-content">
                 <div class="left">
-                    <?= $this->partial('partials/vendorlistingsmenu.phtml', array('active'=>'Details', 'id' => $this->listing->id, 
+                    <?= $this->partial('partials/vendorlistingsmenu.phtml', array('active'=>'General Amenities', 'id' => $this->listing->id, 
 									   'type'=>$this->listing->main_type)) ?>
                 </div><!-- closes left -->
                 <div class="right">
@@ -86,6 +79,8 @@
 										'listing' => $this->listing,
 										'details' => $this->details,
 										'help' => $this->help,
+										'amenities' => $this->amenities,
+										'list_amenities' => $this->list_amenities
 								));
 								break;
 							case 6:

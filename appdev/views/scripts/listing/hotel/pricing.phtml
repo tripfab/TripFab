@@ -30,6 +30,8 @@
                         <?php foreach($this->persons as $i): ?>
                         <?php if($this->sch[0][$sch->id]['additional_after'] == $i): ?>
                         <option selected="selected" value="<?= $i ?>"><?= $i ?></option>
+                        <?php elseif($i == 2): ?>
+                        <option selected="selected" value="<?= $i ?>"><?= $i ?></option>
                         <?php else: ?>
                         <option value="<?= $i ?>"><?= $i ?></option>
                         <?php endif ?>
@@ -76,6 +78,8 @@
                                 <?php foreach($this->persons as $i): ?>
                                 <?php if($this->season[$season->id][$sch->id]['additional_after'] == $i): ?>
                                 <option selected="selected" value="<?= $i ?>"><?= $i ?></option>
+                                <?php elseif($i == 2): ?>
+                                <option selected="selected" value="<?= $i ?>"><?= $i ?></option>
                                 <?php else: ?>
                                 <option value="<?= $i ?>"><?= $i ?></option>
                                 <?php endif ?>
@@ -90,13 +94,27 @@
             </div><!-- closes carrousel -->																	
         </div><!-- closes tab -->
     </div><!-- closes pricing tabs -->
+    <div class="pricing-itm terms">
+        <span>Terms</span>
+        <div class="right">
+            <strong>Cancellation Policy</strong><br />
+            <span>Choose the cancellation policy you want</span>
+            <select>
+                <option>Flexible</option>
+                <option>Moderate</option>
+                <option>Strict</option>
+            </select>
+            <a href="/provider/cancellation-policies/hotels" class="learn">Learn More</a>									
+        </div><!-- closes right -->
+    </div><!-- closes pricing-itm -->
     <div class="foot">
-        <input type="submit" class="btn-1" value="Save Changes" />
+        <input type="submit" class="btn-1 noclean" value="Save Changes" />
     </div><!-- closes foot -->
     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
     <input type="hidden" name="form_id" value="<?= md5($this->listing->token.'form_pricing') ?>" />
     <input type="hidden" name="_task" value="<?= md5('update_pricing') ?>" />
+    <input type="hidden" name="s" value="0" />
 </form>
 <div class="hidden">
 	<div id="newSeasson" class="lb-forgot season">
@@ -112,7 +130,7 @@
                 <div class="clear"></div>
             </div><!-- closes content -->
             <div class="bottom">
-                <input type="submit" class="btn-1" value="Create Season" />
+                <input type="submit" class="btn-1 noclean" value="Create Season" />
                 <span class="btn-4" onclick="$.fancybox.close()">Cancel</span>				
             </div><!-- closes bottom -->
             <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
@@ -135,7 +153,7 @@
                 <div class="clear"></div>
             </div><!-- closes content -->
             <div class="bottom">
-                <input type="submit" class="btn-1" value="Edit Season" />
+                <input type="submit" class="btn-1 noclean" value="Edit Season" />
                 <span class="btn-4" onclick="$.fancybox.close()">Cancel</span>				
             </div><!-- closes bottom -->
             <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
@@ -152,7 +170,7 @@
                 <p>Are you sure you want to remove "<?= $season->name ?>"?</p>
             </div><!-- closes content -->
             <div class="bottom">
-                <input type="submit" class="btn-1" value="Delete" />
+                <input type="submit" class="btn-1 noclean" value="Delete" />
                 <span class="btn-4" onclick="$.fancybox.close()">Cancel</span>				
             </div><!-- closes bottom -->     
             <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />

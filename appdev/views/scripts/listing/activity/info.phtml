@@ -32,6 +32,7 @@ input.schname { float:none !important; width:90px !important; }
 
 .profile-items {
 	overflow:visible;}
+.departure select { width:150px;}
 
 
 </style>
@@ -62,25 +63,14 @@ input.schname { float:none !important; width:90px !important; }
 			<div class="item-ttl">
 				Basic Information
 			</div><!-- closes item ttl -->
-			<div class="item first">
-				<input type="text" class="noclean limitcc" name="title" rel="60" value="<?= $_POST['title'] ?>" />
+			<div class="item first last">
+				<input tabindex="1" type="text" class="noclean limitcc" name="title" rel="60" value="<?= $_POST['title'] ?>" />
 				<h4>Title</h4>
 				<span>Activity name<br />
                 <span class="charsLeftInp"></span> Character Left</span>
                 <div class="help">
                     <a href="/images2/help/big-act-general-name.png" class="eye">help</a>
                     <a href="/images2/help/big-act-general-name.png" class="tooltip3"><img src="/images2/help/small-act-general-name.png" /></a>
-                </div>
-			</div><!-- closes item -->
-			<div class="item">
-				<textarea name="description" placeholder="Description goes here" class="noclean limitcc" rel="200" cols="30" rows="1"><?= $_POST['description'] ?></textarea>
-				<h4>Short Description</h4>
-				<span>Write a brief description for the activity<br /><br />
-                You have <span class="charsLeftTxt">200</span> character left</span>
-                <div class="help">
-                    <a href="/images2/help/big-act-general-description.png" class="eye">help</a>
-                    <a href="/images2/help/big-act-general-description.png" class="tooltip3">
-                    <img src="/images2/help/small-act-general-description.png" /></a>
                 </div>
 			</div><!-- closes item -->
 			<div class="clear"></div>									
@@ -92,22 +82,22 @@ input.schname { float:none !important; width:90px !important; }
 			</div><!-- closes item ttl -->		
             <div class="item first">
                 <?php $checked = (isset($_POST['contactEqual'])) ? 'checked="checked"' : '' ?>
-                <input id="contactEqual" <?= $checked ?> type="checkbox" name="contactEqual" />
+                <input tabindex="2" id="contactEqual" <?= $checked ?> type="checkbox" name="contactEqual" />
                 <label for="contactEqual">The contact information is the same as my company profile</label>
             </div>	
             <?php $disabled = (!empty($checked)) ? 'disabled="disabled"' : '' ?> 
 			<div class="item">
-				<input <?= $disabled ?> placeholder="Enter your phone" type="text" name="phone" value="<?= $_POST['phone'] ?>" />
+				<input tabindex="3" <?= $disabled ?> placeholder="Enter your phone" type="text" name="phone" value="<?= $_POST['phone'] ?>" />
 				<h4>Phone</h4>
 				<span>Contact Phone</span>
 			</div><!-- closes item -->
 			<div class="item">
-				<input <?= $disabled ?> placeholder="Enter your email" type="text" name="email" value="<?= $_POST['email'] ?>" />
+				<input tabindex="4" <?= $disabled ?> placeholder="Enter your email" type="text" name="email" value="<?= $_POST['email'] ?>" />
 				<h4>Email</h4>
 				<span>Contact Email</span>
 			</div><!-- closes item -->
 			<div class="item last">
-				<input <?= $disabled ?> placeholder="Enter your website url" type="text" name="website" value="<?= $_POST['website'] ?>" />
+				<input tabindex="5" <?= $disabled ?> placeholder="Enter your website url" type="text" name="website" value="<?= $_POST['website'] ?>" />
 				<h4>Website</h4>
 				<span>Company Website</span>
 			</div><!-- closes item -->
@@ -120,22 +110,22 @@ input.schname { float:none !important; width:90px !important; }
             </div><!-- closes item ttl -->
             <?php if($_POST['capacity'] == 'multiple'): ?>
             <div class="item first">
-                <input checked="checked" type="radio" name="capacity" value="multiple">
+                <input tabindex="7" checked="checked" type="radio" name="capacity" class="multiple" value="multiple">
                 <strong>Multiple. </strong><span>Choose multiple if you have different types of capacity and pricing for this activity.</span><br />
                 <span>You can set those types of Activities in the <a href="">Activity Types</a> section.</span>
             </div><!-- closes item -->
             <div class="item last">
-                <input type="radio" name="capacity" value="single">
+                <input tabindex="8" type="radio" name="capacity" class="single" value="single">
                 <strong>Single. </strong><span>Choose single if you have just one type of capacity for this listing.</span>
             </div><!-- closes item -->
             <?php else: ?>
             <div class="item first">
-                <input type="radio" name="capacity" value="multiple">
+                <input tabindex="7" type="radio" name="capacity" class="multiple" value="multiple">
                 <strong>Multiple. </strong><span>Choose multiple if you have different types of capacity and pricing for this activity.</span><br />
                 <span>You can set those types of Activities in the <a href="">Activity Types</a> section.</span>
             </div><!-- closes item -->
             <div class="item last">
-                <input checked="checked" type="radio" name="capacity" value="single">
+                <input tabindex="8" checked="checked" type="radio" name="capacity" class="single" value="single">
                 <strong>Single. </strong><span>Choose single if you have just one type of capacity for this listing.</span>
             </div><!-- closes item -->
             <?php endif ?>
@@ -144,7 +134,7 @@ input.schname { float:none !important; width:90px !important; }
             <div class="single-schedule <?= $class ?>">
                 <div class="item color first">
                     <div class="selects">
-                        <select <?= $disabled ?> name="min">
+                        <select tabindex="9" <?= $disabled ?> name="min">
                             <option value="1">1 person</option>
                             <?php for($i=2; $i<=50; $i++): ?>
                             <?php $selected = ($i == $_POST['min']) ? 'selected="selected"' : ''; ?>
@@ -157,7 +147,7 @@ input.schname { float:none !important; width:90px !important; }
                 </div><!-- closes item -->
                 <div class="item color">
                     <div class="selects">
-                        <select <?= $disabled ?> name="max">
+                        <select tabindex="10" <?= $disabled ?> name="max">
                             <option value="1">1 person</option>
                             <?php for($i=2; $i<=50; $i++): ?>
                             <?php $selected = ($i == $_POST['max']) ? 'selected="selected"' : ''; ?>
@@ -170,7 +160,7 @@ input.schname { float:none !important; width:90px !important; }
                 </div><!-- closes item -->
                 <div class="item color">
                 	<?php $checked = ($_POST['kids'] == 1) ? 'checked="checked"' : '' ?>
-                    <input <?= $checked ?> type="checkbox" name="kids" value="1" />
+                    <input tabindex="11" <?= $checked ?> type="checkbox" name="kids" value="1" />
                     <label>This activity accepts children</label>
                 </div><!-- closes item -->
                 <?php $class = ($_POST['kids'] != 1) ? 'hidden' : ''; ?>
@@ -178,7 +168,7 @@ input.schname { float:none !important; width:90px !important; }
                 <div class="accept-kids <?= $class ?>">
                     <div class="item color">
                         <div class="selects">
-                            <select name="kid_age_max" <?= $disabled ?>>
+                            <select tabindex="12" name="kid_age_max" <?= $disabled ?>>
                             	<?php for($i=1;$i<=12;$i++): ?>
                                 <?php $selected = ($i == $_POST['kid_age_max']) ? 'selected="selected"' : ''; ?>
                                 <option <?= $selected ?> value="<?= $i ?>">Under <?= $i ?> years</option>
@@ -187,18 +177,6 @@ input.schname { float:none !important; width:90px !important; }
                         </div><!-- closes selects -->
                         <h4>Child Age</h4>
                         <span>What age is a child?</span>
-                    </div><!-- closes item -->
-                    <div class="item color">
-                        <div class="selects">
-                            <select name="kid_age_min" <?= $disabled ?>>
-                                <?php for($i=0;$i<12;$i++): ?>
-                                <?php $selected = ($i == $_POST['kid_age_min']) ? 'selected="selected"' : ''; ?>
-                                <option <?= $selected ?> value="<?= $i ?>">Over <?= $i ?> years</option>
-                                <?php endfor ?>
-                            </select>
-                        </div><!-- closes selects -->
-                        <h4>Minimum Age</h4>
-                        <span>Select the minimum age</span>
                     </div><!-- closes item -->
                 </div><!-- accept-kids -->
             </div><!-- closes single-schedule -->	
@@ -211,14 +189,14 @@ input.schname { float:none !important; width:90px !important; }
 			</div><!-- closes item ttl -->
 			<div class="item first">
 				<div class="selects departure">					
-					<select id="country2" name="departure_country_id">
+					<select tabindex="14" id="country2" name="departure_country_id">
                     	<option value="">Select Country</option>
 						<?php foreach($this->countries as $c): ?>
 						<?php $selected = ($c->id == $_POST['departure_country_id']) ? 'selected="selected"' : ''; ?>
                         <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
                         <?php endforeach ?>
 					</select>
-					<select name="departure" id="cities2">
+					<select tabindex="15" name="departure" id="cities2">
 						<?php if(count($this->cities2) > 0): ?>
 					    <option value="">Select the city</option>
 					    <?php foreach($this->cities2 as $c): ?>
@@ -241,14 +219,14 @@ input.schname { float:none !important; width:90px !important; }
 			<div class="item last">
 				<div class="selects departure">
                 	<?php if(isset($_POST['returnEqual'])): ?>
-					<select disabled="disabled" name="return_country_id" id="country3">
+					<select tabindex="16" disabled="disabled" name="return_country_id" id="country3">
                     	<option value="">Select Country</option>
 						<?php foreach($this->countries as $c): ?>
 						<?php $selected = ($c->id == $_POST['return_country_id']) ? 'selected="selected"' : ''; ?>
                         <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
                         <?php endforeach ?>
 					</select>
-					<select disabled="disabled" name="return" id="cities3">
+					<select tabindex="17" disabled="disabled" name="return" id="cities3">
 						<?php if(count($this->cities3) > 0): ?>
 					    <option value="">Select the city</option>
 					    <?php foreach($this->cities3 as $c): ?>
@@ -259,10 +237,17 @@ input.schname { float:none !important; width:90px !important; }
 					    <option value="">Country first</option>
 					    <?php endif ?>
 					</select>
-					<p class="check"><input checked="checked" id="returnEqual" name="returnEqual" value="1" type="checkbox" />
+					<p class="check"><input tabindex="18" checked="checked" id="returnEqual" name="returnEqual" value="1" type="checkbox" />
                     <label>Activity ends at original point of departure</label></p>
                     <?php else: ?>
-                    <select name="return" id="cities3">
+					<select tabindex="16" name="return_country_id" id="country3">
+                    	<option value="">Select Country</option>
+						<?php foreach($this->countries as $c): ?>
+						<?php $selected = ($c->id == $_POST['return_country_id']) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
+                        <?php endforeach ?>
+					</select>
+                    <select tabindex="17" name="return" id="cities3">
 						<?php if(count($this->cities3) > 0): ?>
                         <option value="">Select the city</option>
                         <?php foreach($this->cities3 as $c): ?>
@@ -273,14 +258,7 @@ input.schname { float:none !important; width:90px !important; }
                         <option value="">Country first</option>
                         <?php endif ?>
 					</select>
-					<select name="return_country_id" id="country3">
-                    	<option value="">Select Country</option>
-						<?php foreach($this->countries as $c): ?>
-						<?php $selected = ($c->id == $_POST['return_country_id']) ? 'selected="selected"' : ''; ?>
-                        <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
-                        <?php endforeach ?>
-					</select>
-                    <p class="check"><input id="returnEqual" name="returnEqual" value="1" type="checkbox" />
+                    <p class="check"><input tabindex="18" id="returnEqual" name="returnEqual" value="1" type="checkbox" />
                     <label>Activity concludes at original point of departure</label></p>
                     <?php endif ?>
 				</div><!-- closes selects -->
@@ -301,20 +279,20 @@ input.schname { float:none !important; width:90px !important; }
 			</div><!-- closes item ttl -->
             <?php if($_POST['schedules'] == 'custom'): ?>
 			<div class="item first">
-				<input type="radio" name="schedules" value="flex" />
+				<input tabindex="19" type="radio" name="schedules" class="flex" value="flex" />
 				<strong>Flexible. </strong><span>The schedules will be flexible. The user will choose the hour that want to take the activity.</span>
 			</div><!-- closes item -->
 			<div class="item last">
-				<input type="radio" checked="checked" name="schedules" value="custom" />
+				<input tabindex="20" type="radio" checked="checked" class="custom" name="schedules" value="custom" />
 				<strong>Custom. </strong><span>The schedules will be flexible. I want to set specific hours for the activity.</span>
 			</div><!-- closes item -->
             <?php else: ?>
             <div class="item first">
-				<input type="radio" checked="checked" name="schedules" value="flex" />
+				<input tabindex="19" type="radio" checked="checked" class="flex" name="schedules" value="flex" />
 				<strong>Flexible. </strong><span>The schedules will be flexible. The user will choose the hour that want to take the activity.</span>
 			</div><!-- closes item -->
 			<div class="item last">
-				<input type="radio" name="schedules" value="custom" />
+				<input tabindex="20" type="radio" name="schedules" class="custom" value="custom" />
 				<strong>Custom. </strong><span>The schedules will be flexible. I want to set specific hours for the activity.</span>
 			</div><!-- closes item -->
             <?php endif ?>
@@ -746,8 +724,8 @@ input.schname { float:none !important; width:90px !important; }
 			<div class="item-ttl">
 				Basic Information
 			</div><!-- closes item ttl -->
-			<div class="item first">
-				<input type="text" class="noclean limitcc" name="title" rel="60" value="<?= $this->listing->title ?>" />
+			<div class="item first last">
+				<input tabindex="1" type="text" class="noclean limitcc" name="title" rel="60" value="<?= $this->listing->title ?>" />
 				<h4>Title</h4>
 				<span>Activity name<br />
                 <span class="charsLeftInp"></span> Character Left</span>
@@ -755,17 +733,6 @@ input.schname { float:none !important; width:90px !important; }
                     <a href="/images2/help/big-act-general-name.png" class="eye">help</a>
                     <a href="/images2/help/big-act-general-name.png" class="tooltip3">
                     <img src="/images2/help/small-act-general-name.png" /></a>
-                </div>
-			</div><!-- closes item -->
-			<div class="item last">
-				<textarea  placeholder="Description Goes Here" name="description" class="noclean limitcc" rel="200" cols="30" rows="1"><?= $this->listing->description ?></textarea>
-				<h4>Short Description</h4>
-				<span>Write a brief description for the activity<br /><br />
-                You have <span class="charsLeftTxt"></span> Character left</span>
-                <div class="help">
-                    <a href="/images2/help/big-act-general-description.png" class="eye">help</a>
-                    <a href="/images2/help/big-act-general-description.png" class="tooltip3">
-                    <img src="/images2/help/small-act-general-description.png" /></a>
                 </div>
 			</div><!-- closes item -->
 			<div class="clear"></div>									
@@ -779,22 +746,22 @@ input.schname { float:none !important; width:90px !important; }
             	<?php $checked = ($this->vendor->phone == $this->listing->phone &&
 						 		  $this->vendor->email == $this->listing->email &&
 								  $this->vendor->website == $this->listing->website) ? 'checked="checked"' : '' ?>
-                <input id="contactEqual" <?= $checked ?> type="checkbox" name="contactEqual" />
+                <input tabindex="2" id="contactEqual" <?= $checked ?> type="checkbox" name="contactEqual" />
                 <label for="contactEqual">The contact information is the same as my company profile</label>
             </div>	
             <?php $disabled = ($checked != '') ? 'disabled="disabled"' : '' ?>
 			<div class="item">
-				<input <?= $disabled ?> placeholder="Enter your phone" type="text" name="phone" value="<?= $this->listing->phone ?>" />
+				<input tabindex="3" <?= $disabled ?> placeholder="Enter your phone" type="text" name="phone" value="<?= $this->listing->phone ?>" />
 				<h4>Phone</h4>
 				<span>Contact Phone</span>
 			</div><!-- closes item -->
 			<div class="item">
-				<input <?= $disabled ?> placeholder="Enter your email" type="text" name="email" value="<?= $this->listing->email ?>" />
+				<input tabindex="4" <?= $disabled ?> placeholder="Enter your email" type="text" name="email" value="<?= $this->listing->email ?>" />
 				<h4>Email</h4>
 				<span>Contact Email</span>
 			</div><!-- closes item -->
 			<div class="item last">
-				<input <?= $disabled ?> placeholder="Enter your website url" type="text" name="website" value="<?= $this->listing->website ?>" />
+				<input tabindex="5" <?= $disabled ?> placeholder="Enter your website url" type="text" name="website" value="<?= $this->listing->website ?>" />
 				<h4>Website</h4>
 				<span>Company Website</span>
 			</div><!-- closes item -->
@@ -807,22 +774,22 @@ input.schname { float:none !important; width:90px !important; }
             </div><!-- closes item ttl -->
             <?php if(is_null($this->listing->min) or is_null($this->listing->max)): ?>
             <div class="item first">
-                <input checked="checked" type="radio" name="capacity" value="multiple">
+                <input checked="checked" type="radio" name="capacity" class="multiple" value="multiple">
                 <strong>Multiple. </strong><span>Choose multiple if you have different types of capacity and pricing for this activity.</span><br />
                 <span>You can set those types of Activities in the <a href="">Activity Types</a> section.</span>
             </div><!-- closes item -->
             <div class="item last">
-                <input type="radio" name="capacity" value="single">
+                <input type="radio" name="capacity" class="single" value="single">
                 <strong>Single. </strong><span>Choose single if you have just one type of capacity for this listing.</span>
             </div><!-- closes item -->
             <?php else: ?>
             <div class="item first">
-                <input type="radio" name="capacity" value="multiple">
+                <input type="radio" name="capacity" class="multiple" value="multiple">
                 <strong>Multiple. </strong><span>Choose multiple if you have different types of capacity and pricing for this activity.</span><br />
                 <span>You can set those types of Activities in the <a href="">Activity Types</a> section.</span>
             </div><!-- closes item -->
             <div class="item last">
-                <input checked="checked" type="radio" name="capacity" value="single">
+                <input checked="checked" type="radio" name="capacity" class="single" value="single">
                 <strong>Single. </strong><span>Choose single if you have just one type of capacity for this listing.</span>
             </div><!-- closes item -->
             <?php endif ?>
@@ -831,7 +798,7 @@ input.schname { float:none !important; width:90px !important; }
             <div class="single-schedule <?= $class ?>">
                 <div class="item color first">
                     <div class="selects">
-                        <select <?= $disabled ?> name="min">
+                        <select tabindex="8" <?= $disabled ?> name="min">
                             <option value="1">1 person</option>
                             <?php for($i=2; $i<=50; $i++): ?>
                             <?php $selected = ($i == $this->listing->min) ? 'selected="selected"' : ''; ?>
@@ -844,7 +811,7 @@ input.schname { float:none !important; width:90px !important; }
                 </div><!-- closes item -->
                 <div class="item color">
                     <div class="selects">
-                        <select <?= $disabled ?> name="max">
+                        <select tabindex="9" <?= $disabled ?> name="max">
                             <option value="1">1 person</option>
                             <?php for($i=2; $i<=50; $i++): ?>
                             <?php $selected = ($i == $this->listing->max) ? 'selected="selected"' : ''; ?>
@@ -857,7 +824,7 @@ input.schname { float:none !important; width:90px !important; }
                 </div><!-- closes item -->
                 <div class="item color">
                 	<?php $checked = ($this->listing->kids == 1) ? 'checked="checked"' : '' ?>
-                    <input <?= $checked ?> type="checkbox" name="kids" value="1" />
+                    <input tabindex="10" <?= $checked ?> type="checkbox" name="kids" value="1" />
                     <label>This activity accepts children</label>
                 </div><!-- closes item -->
                 <?php $class = ($this->listing->kids != 1) ? 'hidden' : ''; ?>
@@ -865,7 +832,7 @@ input.schname { float:none !important; width:90px !important; }
                 <div class="accept-kids <?= $class ?>">
                     <div class="item color">
                         <div class="selects">
-                            <select name="kid_age_max" <?= $disabled ?>>
+                            <select tabindex="11" name="kid_age_max" <?= $disabled ?>>
                             	<?php for($i=1;$i<=12;$i++): ?>
                                 <?php $selected = ($i == $this->listing->kid_age_max) ? 'selected="selected"' : ''; ?>
                                 <option <?= $selected ?> value="<?= $i ?>">Under <?= $i ?> years</option>
@@ -874,18 +841,6 @@ input.schname { float:none !important; width:90px !important; }
                         </div><!-- closes selects -->
                         <h4>Child Age</h4>
                         <span>What age is a child?</span>
-                    </div><!-- closes item -->
-                    <div class="item color">
-                        <div class="selects">
-                            <select name="kid_age_min" <?= $disabled ?>>
-                                <?php for($i=0;$i<12;$i++): ?>
-                                <?php $selected = ($i == $this->listing->kid_age_min) ? 'selected="selected"' : ''; ?>
-                                <option <?= $selected ?> value="<?= $i ?>">Over <?= $i ?> years</option>
-                                <?php endfor ?>
-                            </select>
-                        </div><!-- closes selects -->
-                        <h4>Minimum Age</h4>
-                        <span>Select the minimum age</span>
                     </div><!-- closes item -->
                 </div><!-- accept-kids -->
             </div><!-- closes single-schedule -->	
@@ -899,14 +854,14 @@ input.schname { float:none !important; width:90px !important; }
 			</div><!-- closes item ttl -->
 			<div class="item first">
 				<div class="selects departure">					
-					<select id="country2" name="departure_country_id">
+					<select tabindex="13" id="country2" name="departure_country_id">
                     	<option value="">Select Country</option>
 						<?php foreach($this->countries as $c): ?>
 						<?php $selected = ($c->id == $this->listing->departure_country_id) ? 'selected="selected"' : ''; ?>
                         <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
                         <?php endforeach ?>
 					</select>
-					<select name="departure" id="cities2">
+					<select tabindex="14" name="departure" id="cities2">
 						<?php if(count($this->cities2) > 0): ?>
 					    <option value="">Select the city</option>
 					    <?php foreach($this->cities2 as $c): ?>
@@ -929,14 +884,14 @@ input.schname { float:none !important; width:90px !important; }
 			<div class="item last">
 				<div class="selects departure">
                 	<?php if($this->listing->departure == $this->listing->return): ?>					
-					<select disabled="disabled" name="return_country_id" id="country3">
+					<select tabindex="15" disabled="disabled" name="return_country_id" id="country3">
                     	<option value="">Select Country</option>
 						<?php foreach($this->countries as $c): ?>
 						<?php $selected = ($c->id == $this->listing->return_country_id) ? 'selected="selected"' : ''; ?>
                         <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
                         <?php endforeach ?>
 					</select>
-					<select disabled="disabled" name="return" id="cities3">
+					<select tabindex="16" disabled="disabled" name="return" id="cities3">
 						<?php if(count($this->cities3) > 0): ?>
 					    <option value="">Select the city</option>
 					    <?php foreach($this->cities3 as $c): ?>
@@ -947,10 +902,17 @@ input.schname { float:none !important; width:90px !important; }
 					    <option value="">Country first</option>
 					    <?php endif ?>
 					</select>
-					<p class="check"><input checked="checked" id="returnEqual" name="returnEqual" value="1" type="checkbox" />
+					<p class="check"><input tabindex="17" checked="checked" id="returnEqual" name="returnEqual" value="1" type="checkbox" />
                     <label>Activity ends at original point of departure</label></p>
                     <?php else: ?>
-                    <select name="return" id="cities3">
+					<select tabindex="15" name="return_country_id" id="country3">
+                    	<option value="">Select Country</option>
+						<?php foreach($this->countries as $c): ?>
+						<?php $selected = ($c->id == $this->listing->return_country_id) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
+                        <?php endforeach ?>
+					</select>
+                    <select tabindex="16" name="return" id="cities3">
 						<?php if(count($this->cities3) > 0): ?>
                         <option value="">Select the city</option>
                         <?php foreach($this->cities3 as $c): ?>
@@ -961,14 +923,7 @@ input.schname { float:none !important; width:90px !important; }
                         <option value="">Country first</option>
                         <?php endif ?>
 					</select>
-					<select name="return_country_id" id="country3">
-                    	<option value="">Select Country</option>
-						<?php foreach($this->countries as $c): ?>
-						<?php $selected = ($c->id == $this->listing->return_country_id) ? 'selected="selected"' : ''; ?>
-                        <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
-                        <?php endforeach ?>
-					</select>
-                    <p class="check"><input id="returnEqual" name="returnEqual" value="1" type="checkbox" />
+                    <p class="check"><input tabindex="17" id="returnEqual" name="returnEqual" value="1" type="checkbox" />
                     <label>Activity concludes at original point of departure</label></p>
                     <?php endif ?>
 				</div><!-- closes selects -->
@@ -989,21 +944,21 @@ input.schname { float:none !important; width:90px !important; }
 			</div><!-- closes item ttl -->
             <?php if(count($this->schedules) > 0): ?>
 			<div class="item first">
-				<input type="radio" name="schedules" value="flex" />
+				<input tabindex="18" type="radio" name="schedules" class="flex" value="flex" />
 				<strong>Flexible. </strong><span>The schedules will be flexible. The user will choose the hour that want to take the activity.</span>
                 <a class="help">help</a>
 			</div><!-- closes item -->
 			<div class="item last">
-				<input type="radio" checked="checked" name="schedules" value="custom" />
+				<input tabindex="19" type="radio" checked="checked" name="schedules" class="custom" value="custom" />
 				<strong>Custom. </strong><span>The schedules will be flexible. I want to set specific hours for the activity.</span>
 			</div><!-- closes item -->
             <?php else: ?>
             <div class="item first">
-				<input type="radio" checked="checked" name="schedules" value="flex" />
+				<input tabindex="18" type="radio" checked="checked" name="schedules" class="flex" value="flex" />
 				<strong>Flexible. </strong><span>The schedules will be flexible. The user will choose the hour that want to take the activity.</span>
 			</div><!-- closes item -->
 			<div class="item last">
-				<input type="radio" name="schedules" value="custom" />
+				<input tabindex="19" type="radio" name="schedules" value="custom" class="custom" />
 				<strong>Custom. </strong><span>The schedules will be flexible. I want to set specific hours for the activity.</span>
 			</div><!-- closes item -->
             <?php endif ?>
@@ -1018,7 +973,7 @@ input.schname { float:none !important; width:90px !important; }
 				<?php foreach($this->schedules as $type): ?>
                 <div class="single-schedule">
                     <div class="item color first">
-                        <input type="text" placeholder="Enter the schedule name" name="schs[<?= $type->id ?>][name]" value="<?= $type->name ?>" />
+                        <input class="required" type="text" placeholder="Enter the schedule name" name="schs[<?= $type->id ?>][name]" value="<?= $type->name ?>" />
                         <h4>Schedule Name</h4>
                         <span>Set a name for this schedule</span>
                     </div><!-- closes item -->
@@ -1100,7 +1055,7 @@ input.schname { float:none !important; width:90px !important; }
                 <?php else: ?>
                 <div class="single-schedule">
                     <div class="item color first">
-                        <input type="text" placeholder="Enter the schedule name" name="sch[0][name]" value="" />
+                        <input disabled="disabled" class="required" type="text" placeholder="Enter the schedule name" name="sch[0][name]" value="" />
                         <h4>Schedule Name</h4>
                         <span>Set a name for this schedule</span>
                     </div><!-- closes item -->
@@ -1152,7 +1107,7 @@ input.schname { float:none !important; width:90px !important; }
                 <?php endif ?>
                 <div class="single-schedule newsch hidden">
                     <div class="item color first">
-                        <input type="text" placeholder="Enter the schedule name" name="name" value="" />
+                        <input disabled="disabled" type="text" placeholder="Enter the schedule name" name="name" value="" />
                         <h4>Schedule Name</h4>
                         <span>Set a name for this schedule</span>
                     </div><!-- closes item -->

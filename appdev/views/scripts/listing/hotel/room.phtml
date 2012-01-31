@@ -72,7 +72,7 @@ label { float: left; padding: 5px 0; margin: 0;}
             <div class="item last">
                 <textarea placeholder="Write a nice description about this room" cols="30" class="noclean" name="room[description]" rows="1"><?= $_POST['room']['description'] ?></textarea>
                 <h4>Description</h4>
-                <span>Write a brief description for the room</span>
+                <span>Write a brief description about the room</span>
                 <div class="help">
                     <a href="/images2/help/big-hot-rooms-description.png" class="eye">help</a>
                     <a href="/images2/help/big-hot-rooms-description.png" class="tooltip3">
@@ -87,19 +87,6 @@ label { float: left; padding: 5px 0; margin: 0;}
             </div><!-- closes item ttl -->
             <div class="item first">
                 <div class="selects">
-                    <select name="room[quantity]">
-	                    <option value="1">1 room</option>
-                    	<?php for($i=2;$i<=100;$i++): ?>
-                        <?php $selected = ($_POST['room']['quantity'] == $i) ? 'selected="selected"' : ''; ?>
-                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> rooms</option>
-    					<?php endfor ?>
-                    </select>
-                </div><!-- closes selects -->
-                <h4>Quantity</h4>
-                <span>The ammount of this kind of rooms</span>
-            </div><!-- closes item -->
-            <div class="item">
-                <div class="selects">
                     <select name="room[nights]">
                         <option value="1">1 night</option>
                         <?php for($i=2;$i<=5;$i++): ?>
@@ -109,7 +96,7 @@ label { float: left; padding: 5px 0; margin: 0;}
                     </select>
                 </div><!-- closes selects -->
                 <h4>Minimun Stay</h4>
-                <span>The minimun ammount of nights</span>
+                <span>The minimum number of nights</span>
             </div><!-- closes item -->
             <div class="item">
                 <div class="selects">
@@ -117,12 +104,13 @@ label { float: left; padding: 5px 0; margin: 0;}
                     	<option value="1">1 person</option>
                         <?php for($i=2;$i<=12;$i++): ?>
                         <?php $selected = ($_POST['room']['people'] == $i) ? 'selected="selected"' : ''; ?>
+                        <?php $selected = (empty($selected) && $i == 2 && empty($_POST['room']['people'])) ? 'selected="selected"' : ''; ?>
                         <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> people</option>
     					<?php endfor ?>
                     </select>
                 </div> <!-- closes selects -->
-                <h4>Maximun Accommodates</h4>
-                <span>Maximun people per room</span>
+                <h4>Maximum Accomodations</h4>
+                <span>Maximum number of people per room</span>
             </div><!-- closes item -->
             <div class="item">
                 <div class="selects">
@@ -136,19 +124,6 @@ label { float: left; padding: 5px 0; margin: 0;}
                 </div><!-- closes selects -->
                 <h4>Bedrooms</h4>
                 <span>How many bedrooms</span>
-            </div><!-- closes item -->
-            <div class="item">
-                <div class="selects">
-                    <select name="room[beds]">
-                        <option value="1">1 bed</option>
-                        <?php for($i=2;$i<=20;$i++): ?>
-                        <?php $selected = ($_POST['room']['beds'] == $i) ? 'selected="selected"' : ''; ?>
-                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> beds</option>
-    					<?php endfor ?>
-                    </select>
-                </div><!-- closes selects -->
-                <h4>Beds</h4>
-                <span>How many of this room there are in the hotel?</span>
             </div><!-- closes item -->
             <div class="item">
                 <div class="selects">
@@ -220,19 +195,6 @@ label { float: left; padding: 5px 0; margin: 0;}
                 </div><!-- closes selects -->
                 <h4>Bed Types</h4>
                 <span>What kind of beds are there in the room?</span>
-            </div><!-- closes item -->
-            <div class="item">
-                <div class="selects">
-                    <select name="room[size_type]">
-                        <?php $selected = ($_POST['room']['size_type'] == "ft") ? 'selected="selected"' : ''; ?>
-                        <option <?= $selected ?> value="ft">Square Feet</option>
-                        <?php $selected = ($_POST['room']['size_type'] == "m") ? 'selected="selected"' : ''; ?>
-                        <option <?= $selected ?> value="m">Square Meters</option>												
-                    </select>
-                    <input name="room[size]" type="text" value="<?= $_POST['room']['size'] ?>" class="noclean short" />
-                </div><!-- closes selects -->
-                <h4>Size (optional)</h4>
-                <span>Size of the room</span>
             </div><!-- closes item -->
             <div class="item last">
                 <div class="inner-container">
@@ -307,7 +269,7 @@ label { float: left; padding: 5px 0; margin: 0;}
             <div class="item last">
                 <textarea cols="30" placeholder="Write a nice description about this room" class="noclean" name="room[description]" rows="1"><?= $room->description ?></textarea>
                 <h4>Description</h4>
-                <span>Write a brief description for the room</span>
+                <span>Write a brief description about the room</span>
                 <div class="help">
                     <a href="/images2/help/big-hot-rooms-description.png" class="eye">help</a>
                     <a href="/images2/help/big-hot-rooms-description.png" class="tooltip3">
@@ -322,19 +284,6 @@ label { float: left; padding: 5px 0; margin: 0;}
             </div><!-- closes item ttl -->
             <div class="item first">
                 <div class="selects">
-                    <select name="room[quantity]">
-	                    <option value="1">1 room</option>
-                    	<?php for($i=2;$i<=100;$i++): ?>
-                        <?php $selected = ($room->quantity == $i) ? 'selected="selected"' : ''; ?>
-                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> rooms</option>
-    					<?php endfor ?>
-                    </select>
-                </div><!-- closes selects -->
-                <h4>Quantity</h4>
-                <span>The ammount of this kind of rooms</span>
-            </div><!-- closes item -->
-            <div class="item">
-                <div class="selects">
                     <select name="room[nights]">
                         <option value="1">1 night</option>
                         <?php for($i=2;$i<=5;$i++): ?>
@@ -344,7 +293,7 @@ label { float: left; padding: 5px 0; margin: 0;}
                     </select>
                 </div><!-- closes selects -->
                 <h4>Minimun Stay</h4>
-                <span>The minimun ammount of nights</span>
+                <span>The minimum number of nights</span>
             </div><!-- closes item -->
             <div class="item">
                 <div class="selects">
@@ -352,12 +301,13 @@ label { float: left; padding: 5px 0; margin: 0;}
                     	<option value="1">1 person</option>
                         <?php for($i=2;$i<=12;$i++): ?>
                         <?php $selected = ($room->people == $i) ? 'selected="selected"' : ''; ?>
+                        <?php $selected = (empty($selected) && $i == 2 && empty($room->people)) ? 'selected="selected"' : ''; ?>
                         <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> people</option>
     					<?php endfor ?>
                     </select>
                 </div> <!-- closes selects -->
-                <h4>Maximun Accommodates</h4>
-                <span>Maximun people per room</span>
+                <h4>Maximum Accomodations</h4>
+                <span>Maximum number of people per room</span>
             </div><!-- closes item -->
             <div class="item">
                 <div class="selects">
@@ -371,19 +321,6 @@ label { float: left; padding: 5px 0; margin: 0;}
                 </div><!-- closes selects -->
                 <h4>Bedrooms</h4>
                 <span>How many bedrooms</span>
-            </div><!-- closes item -->
-            <div class="item">
-                <div class="selects">
-                    <select name="room[beds]">
-                        <option value="1">1 bed</option>
-                        <?php for($i=2;$i<=20;$i++): ?>
-                        <?php $selected = ($room->beds == $i) ? 'selected="selected"' : ''; ?>
-                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> beds</option>
-    					<?php endfor ?>
-                    </select>
-                </div><!-- closes selects -->
-                <h4>Beds</h4>
-                <span>How many of this room there are in the hotel?</span>
             </div><!-- closes item -->
             <div class="item">
                 <div class="selects">
@@ -428,19 +365,6 @@ label { float: left; padding: 5px 0; margin: 0;}
                 </div><!-- closes selects -->
                 <h4>Bed Types</h4>
                 <span>What kind of beds are there in the room?</span>
-            </div><!-- closes item -->
-            <div class="item">
-                <div class="selects">
-                    <select name="room[size_type]">
-                        <?php $selected = ($room->size_type == "ft") ? 'selected="selected"' : ''; ?>
-                        <option <?= $selected ?> value="ft">Square Feet</option>
-                        <?php $selected = ($room->size_type == "m") ? 'selected="selected"' : ''; ?>
-                        <option <?= $selected ?> value="m">Square Meters</option>												
-                    </select>
-                    <input name="room[size]" type="text" value="<?= $room->size ?>" class="noclean short" />
-                </div><!-- closes selects -->
-                <h4>Size (optional)</h4>
-                <span>Size of the room</span>
             </div><!-- closes item -->
             <div class="item last">
                 <div class="inner-container">
@@ -518,7 +442,7 @@ label { float: left; padding: 5px 0; margin: 0;}
             <div class="item last">
                 <textarea placeholder="Write a nice description about this room" cols="30" name="room[description]" rows="1"></textarea>
                 <h4>Description</h4>
-                <span>Write a brief description for the room</span>
+                <span>Write a brief description about the room</span>
                 <div class="help">
                     <a href="/images2/help/big-hot-rooms-description.png" class="eye">help</a>
                     <a href="/images2/help/big-hot-rooms-description.png" class="tooltip3">
@@ -533,18 +457,6 @@ label { float: left; padding: 5px 0; margin: 0;}
             </div><!-- closes item ttl -->
             <div class="item first">
                 <div class="selects">
-                    <select name="room[quantity]">
-	                    <option value="1">1 room</option>
-                    	<?php for($i=2;$i<=100;$i++): ?>
-                        <option value="<?= $i ?>"><?= $i ?> rooms</option>
-    					<?php endfor ?>
-                    </select>
-                </div><!-- closes selects -->
-                <h4>Quantity</h4>
-                <span>How many of this room there are in the hotel?</span>
-            </div><!-- closes item -->
-            <div class="item">
-                <div class="selects">
                     <select name="room[nights]">
                         <option value="1">1 night</option>
                         <?php for($i=2;$i<=5;$i++): ?>
@@ -553,31 +465,20 @@ label { float: left; padding: 5px 0; margin: 0;}
                     </select>
                 </div><!-- closes selects -->
                 <h4>Minimun Stay</h4>
-                <span>Minimun amount of nights</span>
+                <span>The minimum number of nights</span>
             </div><!-- closes item -->
             <div class="item">
                 <div class="selects">
                     <select name="room[people]">
                     	<option value="1">1 person</option>
                         <?php for($i=2;$i<=12;$i++): ?>
-                        <option value="<?= $i ?>"><?= $i ?> people</option>
+                        <?php $selected = ($i == 2) ? 'selected="selected"' : '' ?>
+                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> people</option>
     					<?php endfor ?>
                     </select>
                 </div> <!-- closes selects -->
-                <h4>Maximun Accommodates</h4>
-                <span>Maximun people per room</span>
-            </div><!-- closes item -->
-            <div class="item">
-                <div class="selects">
-                    <select name="room[bedrooms]">
-                        <option value="1">1 bedroom</option>
-                        <?php for($i=2;$i<=12;$i++): ?>
-                        <option value="<?= $i ?>"><?= $i ?> bedrooms</option>
-    					<?php endfor ?>
-                    </select>
-                </div><!-- closes selects -->
-                <h4>Bedrooms</h4>
-                <span>How many bedrooms</span>
+                <h4>Maximum Accomodations</h4>
+                <span>Maximum number of people per room</span>
             </div><!-- closes item -->
             <div class="item">
                 <div class="selects">
@@ -602,6 +503,7 @@ label { float: left; padding: 5px 0; margin: 0;}
                         <select name="beds[0][type]">
                             <option value="Single">Single</option>
                             <option value="Double">Double</option>
+                            <option value="Queen">Queen</option>
                             <option value="King">King</option>
                         </select>
                         <div class="clear"></div>
@@ -616,6 +518,7 @@ label { float: left; padding: 5px 0; margin: 0;}
                         <select name="type">
                             <option value="Single">Single</option>
                             <option value="Double">Double</option>
+                            <option value="Queen">Queen</option>
                             <option value="King">King</option>
                         </select>
                         <div class="clear"></div>
@@ -624,17 +527,6 @@ label { float: left; padding: 5px 0; margin: 0;}
                 </div><!-- closes selects -->
                 <h4>Bed Types</h4>
                 <span>What kind of beds are there in the room?</span>
-            </div><!-- closes item -->
-            <div class="item">
-                <div class="selects">
-                    <select name="room[size_type]">
-                        <option value="ft">Square Feet</option>
-                        <option value="m">Square Meters</option>												
-                    </select>
-                    <input name="room[size]" type="text" class="short" />
-                </div><!-- closes selects -->
-                <h4>Size</h4>
-                <span>Size of the room</span>
             </div><!-- closes item -->
             <div class="item last">
                 <div class="inner-container">
@@ -660,7 +552,7 @@ label { float: left; padding: 5px 0; margin: 0;}
         </div><!-- closes item-wrppr -->
     </div><!-- closes profile-items -->
     <div class="foot">
-        <input type="submit" class="btn-1" value="Save Changes" />
+        <input type="submit" class="btn-1 noclean" value="Save Changes" />
     </div><!-- closes foot -->
     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />

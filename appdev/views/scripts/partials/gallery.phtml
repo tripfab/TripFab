@@ -6,8 +6,22 @@
 		<?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$this->listing->id)); ?>
         <?php endif ?>
         <?php endif ?>
-        <h2><?= $this->listing->title ?></h2>
+        <?php if($this->listing->title == 'Untitle Listing' or
+					$this->listing->title == 'Untitled Listing'): ?>
+        <h2>Untitled Listing <a style="color:#60B5F7" href="/provider/listings/edit/<?= $this->listing->id ?>">Edit title</a></h2>
+        <?php if($this->country->title): ?>
         <span><?= $this->city->title ?>, <?= $this->country->title ?></span>
+        <?php else: ?>
+        <span>Unknown Location. <a style="color:#60B5F7" href="/provider/listings/location/<?= $this->listing->id ?>">Set the location</a></span>        
+        <?php endif ?>
+        <?php else: ?>
+        <h2><?= $this->listing->title ?></h2>
+        <?php if($this->country->title): ?>
+        <span><?= $this->city->title ?>, <?= $this->country->title ?></span>
+        <?php else: ?>
+        <span>Unknown Location. <a style="color:#60B5F7" href="/provider/listings/location/<?= $this->listing->id ?>">Set the location</a></span>        
+        <?php endif ?>
+        <?php endif ?>
     </div><!-- closes listing-ttl -->
     <?php if(count($this->pictures) > 0): ?>
     <?php foreach($this->pictures as $i => $pic): ?>
@@ -19,18 +33,25 @@
     <?php endforeach ?>
     <?php else: ?>
     <div id="pic1" class="img-wrapper active">
-    <?= $this->thumbnail(array('width'=>650,'height'=>368), '/images/img-53.png','','650:368'); ?>
-    <p>Longboard Surfing Experience</p>
+    <a href="/provider/listings/photos/<?= $this->listing->id ?>"><img src="/images2/empty-main-photo.gif" /></a>
+    <p>The description goes here</p>
     </div>
     <?php endif ?>
     <ul>
         <?php if(count($this->pictures) > 0): ?>
-        <?php foreach($this->pictures as $i => $pic): ?>
+        <?php for($i=0; $i<10;$i++): ?>
+        <?php if(isset($this->pictures[$i])): ?>
+        <?php $pic = $this->pictures[$i] ?>
         <?php $class = ($i == 0) ? 'active' : ''; ?>
-        <li class="<?= $class ?>"><a href="#pic<?= $pic->id ?>"><?= $this->thumbnail(51, $pic->url); ?></a></li>
-        <?php endforeach ?>
+        <li class="<?= $class ?>"><a href="#pic<?= $pic->id ?>"><?= $this->thumbnail(65, $pic->url); ?></a></li>
         <?php else: ?>
-        <li class="active"><a href="#pic1"><?= $this->thumbnail(51, '/images/img-53.png'); ?></a></li>
+        <li><a><img src="/images2/empty-small-photo.png" /></a></li>
+        <?php endif ?>
+        <?php endfor ?>
+        <?php else: ?>
+        <?php for($i=0;$i<10;$i++): ?>
+        <li class="active"><a><img src="/images2/empty-small-photo.png" /></a></li>
+        <?php endfor ?>
         <?php endif ?>
     </ul>
 </div><!-- closes listing-gallery -->
