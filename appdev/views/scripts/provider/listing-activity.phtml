@@ -11,6 +11,26 @@
     <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+    <style type="text/css">
+	.noprice {
+		float:right;
+		font-size:12px;
+		color:#898989;
+		line-height:15px;
+		text-align:center;
+		margin-top:10px;}
+		.noprice p {
+			font-size:12px;
+			line-height:15px;
+			display:inline;
+			float:none;}
+		.noprice a {
+			color:#60b5f7;
+			font-size:12px;
+			line-height:15px;
+			display:inline;
+			float:none;}
+	</style>
 </head>
 <body>
 <div class="w1">
@@ -34,47 +54,88 @@
                         <li><a href="#tabs-5">How to Get There</a></li>
                     </ul>
                     <div class="tab" id="tabs-1">
+                    	<?php if(!empty($this->overview->about) or
+									!empty($this->overview->about) or
+									!empty($this->overview->about)): ?>
                         <div class="tab-ttl">About <?= $this->listing->title ?></div>
                         <div class="tab-content">
+                        	<?php if(!empty($this->overview->about)): ?>
                         	<h2>About the activity</h2>
                         	<p><?= stripslashes(nl2br($this->overview->about)) ?></p>
-                            <h2>What to Expect</h2>
+                            <?php endif ?>
+                            <?php if(!empty($this->overview->expect)): ?>
+                            <h2>What to expect</h2>
                             <p><?= stripslashes(nl2br($this->overview->expect)) ?></p>
+                            <?php endif ?>
+                            <?php if(!empty($this->overview->love)): ?>
                             <h2>Things you'll love</h2>
                             <p><?= stripslashes(nl2br($this->overview->love)) ?></p>
+                            <?php endif ?>
                         </div><!-- closes tab-content -->
+                        <?php else: ?>
+                        <div class="tab-content">
+	                        <a href="/provider/listings/overview/<?= $this->listing->id ?>"><img src="/images2/empty-overview.gif" /></a>
+                        </div>
+                        <?php endif ?>
                         <div class="message">
                             <div>
                                 <p><strong>Schedule Details</strong></p>
+                                <?php if(count($this->options) > 0): ?>
                                 <?php foreach($this->options as $sch): ?>
                                 <p><?= date('g:i A', strtotime($sch->starting)) ?></p>
                                 <?php endforeach ?>
+                                <?php else: ?>
+                                <p><a style="color:#60B5F7" href="/provider/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
+                                <?php endif ?>
                             </div>
-                            <?php if(isset($this->options[0])): ?>
                             <div>
                                 <p><strong>Duration</strong></p>
+                                <?php if(count($this->options) > 0): ?>
                                 <p><?= $this->options[0]->duration . ' ' . $this->options[0]->duration_label ?></p>
+                                <?php else: ?>
+                                <p><a style="color:#60B5F7" href="/provider/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
+                                <?php endif ?>
                             </div>
-                            <?php endif ?>
                             <div>
                                 <p><strong>Departure Point</strong></p>
+                                <?php if($this->departure_city): ?>
                                 <p><?= $this->departure_city->title ?></p>
+                                <?php else: ?>
+                                <p><a style="color:#60B5F7" href="/provider/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
+                                <?php endif ?>
                             </div>
                             <div>
                                 <p><strong>Return Point</strong></p>
                                 <?php if($this->listing->return == $this->listing->departure): ?>
+                                <?php if($this->departure_city): ?>
                                 <p>Tour concludes at the original point of departure</p>
                                 <?php else: ?>
-                                <p><?= $this->return_city ?></p>
+                                <p><a style="color:#60B5F7" href="/provider/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
+                                <?php endif ?>
+                                <?php else: ?>
+                                <?php if($this->return_city): ?>
+                                <p><?= $this->return_city->title ?></p>
+                                <?php else: ?>
+                                <p><a style="color:#60B5F7" href="/provider/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
+                                <?php endif ?>
                                 <?php endif ?>
                             </div>
                         </div><!-- closes message -->
                     </div><!-- closes tab -->
                     <div class="tab" id="tabs-2">
+                    	<?php $ok = true; $i=0; $limit = count($this->details) ?>
+                        <?php $ok1 = true; $ok2 = true; $ok3 = true; ?>
+                        <?php while($i<$limit) { 
+								if($this->details[$i]->type == 1) {$ok = false; $ok1 = false;}
+								if($this->details[$i]->type == 2) {$ok = false; $ok2 = false;}
+								if($this->details[$i]->type == 3) {$ok = false; $ok3 = false;}
+								$i++; } ?>
+						<?php if(!$ok): ?>
                         <div class="tab-ttl">
                             Some details you must to know
                         </div><!-- closes tab-ttl -->
                         <div class="tab-content">
+                        	<?php if(!$ok1): ?>
                             <h2>Inclusions</h2>
                             <ul>
                             	<?php foreach($this->details as $detail): ?>
@@ -83,6 +144,7 @@
                                 <?php endif ?>
                                 <?php endforeach ?>
                             </ul>
+                            <?php endif; if(!$ok2): ?>
                             <h2>Exclusions</h2>
                             <ul>
                                 <?php foreach($this->details as $detail): ?>
@@ -91,6 +153,7 @@
                                 <?php endif ?>
                                 <?php endforeach ?>
                             </ul>
+                            <?php endif; if(!$ok3): ?>
                             <h2>Policies</h2>
                             <ul>
                                 <?php foreach($this->details as $detail): ?>
@@ -99,9 +162,20 @@
                                 <?php endif ?>
                                 <?php endforeach ?>
                             </ul>
+                            <?php endif ?>
                         </div><!-- closes tab-content -->
+                        <?php else: ?>
+                        <div class="tab-content">
+	                        <a href="/provider/listings/details/<?= $this->listing->id ?>"><img src="/images2/empty-details.gif" /></a>
+                        </div>
+                        <?php endif ?>
                     </div><!-- closes tab -->
                     <div class="tab" id="tabs-3">
+                    	<?php $ok = true; $i=0; $limit = count($this->details) ?>
+                        <?php while($ok and $i<$limit) { 
+								if($this->details[$i]->type == 4) $ok = false;
+								$i++; } ?>
+						<?php if(!$ok): ?>
                         <div class="tab-ttl">
                             Some recommendations before take the trip
                         </div><!-- closes tab-ttl -->
@@ -114,8 +188,14 @@
                                 <?php endforeach ?>
                             </ul>
                         </div><!-- closes tab-content -->
+                        <?php else: ?>
+                        <div class="tab-content">
+                        	<a href="/provider/listings/tips/<?= $this->listing->id ?>"><img src="/images2/empty-tips.gif" /></a>
+                        </div>
+                        <?php endif ?>
                     </div><!-- closes tab -->
                     <div class="tab" id="tabs-4">
+                    	<?php if(count($this->faqs) > 0): ?>
                         <div class="tab-ttl">
                             Frequently Asked Questions
                         </div><!-- closes tab-ttl -->
@@ -129,18 +209,31 @@
                                 <?php endforeach ?>
                             </ul>
                         </div><!-- closes tab-content -->
+                        <?php else: ?>
+                        <div class="tab-content">
+                        	<a href="/provider/listings/faqs/<?= $this->listing->id ?>"><img src="/images2/empty-faqs.gif" /></a>
+                        </div>
+                        <?php endif ?>
                     </div><!-- closes tab -->
                     <div class="tab" id="tabs-5">
+                    	<?php if(!empty($this->getthere->plane) or
+									!empty($this->getthere->car) or
+									!empty($this->getthere->train) or
+									!is_null($this->listing->lat)): ?>
                         <div class="tab-ttl">
                             How to get there
                         </div><!-- closes tab-ttl -->
-                        <div class="tab-content there">										
+                        <div class="tab-content there">
+                        	<?php if(!empty($this->getthere->plane)): ?>
                             <h2>By plane</h2>
                             <p><?= stripslashes(nl2br($this->getthere->plane)) ?></p>
+                            <?php endif; if(!empty($this->getthere->car)): ?>
                             <h2>By car</h2>
                             <p><?= stripslashes(nl2br($this->getthere->car)) ?></p>
+                            <?php endif; if(!empty($this->getthere->train)): ?>
                             <h2>By train</h2>
                             <p><?= stripslashes(nl2br($this->getthere->train)) ?></p>
+                            <?php endif; ?>
                             <div id="mapcanvas"></div>
                         </div><!-- closes tab-content -->
                         <div class="message">
@@ -149,6 +242,11 @@
                                 <p><?= $this->listing->address ?></p>
                             </address>
                         </div><!-- closes message -->
+                        <?php else: ?>
+                        <div class="tab-content">
+                        	<a href="/provider/listings/location/<?= $this->listing->id ?>"><img src="/images2/empty-getthere.gif" /></a>
+                        </div>
+                        <?php endif ?>
                     </div><!-- closes tab -->
                 </div><!-- closes tabs-wrapper -->
                 <div class="reviews-wrapper">
@@ -162,7 +260,14 @@
                     <div class="widget book">
                         <div class="ttl">
                             <span>From only</span>
+                            <?php if($this->listing->price > 0): ?>
                             <strong>$<?= $this->listing->price ?> <span>/ person</span></strong>
+                            <?php else: ?>
+                            <div class="noprice">
+                            	<p>There isn't pricing info yet<br />
+                                <a href="/provider/listings/pricing/<?= $this->listing->id ?>">Set Pricing now</a></p>
+                            </div>
+                            <?php endif ?>
                         </div><!-- closes ttl -->
                         <ul>
                             <li id="acordion">                            

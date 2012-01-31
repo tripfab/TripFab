@@ -9,7 +9,6 @@
 	<script type="text/javascript" src="/js2/jquery.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('input').ToggleInputValue();
 			
 			<?php if($this->congrats): ?>
 			$.fancybox({
@@ -47,6 +46,9 @@
 			color:#F00 !important;}
 	.hidden { display:none;}
 	.lb-congrats { background:#F3F3F3;}
+	.sign-box.vendor .content.prcng .prcng-item .right ul li input[type="text"] {
+		background: url("/images2/ico-95.png") no-repeat scroll 5px 50% transparent;
+		padding: 0 5px 0 16px;}
 	</style>
 </head>
 <body>
@@ -192,7 +194,7 @@
                         <?php endif ?>
                     </div><!-- closes content -->
                     <div class="foot">							
-                        <input type="submit" class="btn-1" value="Finish" />
+                        <input type="submit" class="btn-1 noclean" value="Finish" />
                         <a class="link-4" href="/provider/listings/new/<?= $this->listing->id ?>/step5">Back</a>
                     </div><!-- closes foot -->
                     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />

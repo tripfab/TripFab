@@ -55,6 +55,8 @@ $(function(){
 		$('select[name=end_time]', $item).attr('name','sch['+$idss+'][end_time]');
 		$('select[name=duration]', $item).attr('name','sch['+$idss+'][duration]');
 		$('select[name=duration_lb]', $item).attr('name','sch['+$idss+'][duration_lb]');
+		$('input[name=name]', $item).addClass('required');
+		$('input[name=name]', $item).removeAttr('disabled');
 		$('input[name=name]', $item).attr('name','sch['+$idss+'][name]');
 		$('input[name=same]', $item).attr('id','sameday'+$idss);
 		$('input[name=same]', $item).attr('name','sch['+$idss+'][same]');
@@ -159,9 +161,12 @@ $(function(){
 		}
 	});
 	$('input[name=schedules]').live('change',function(){
-		if($(this).val() == 'flex'){
-			$('.custom_schedules').fadeOut('fast');
+		if($(this).hasClass('flex')){
+			$('.custom_schedules').fadeOut('fast', function(){
+				$('input', this).attr('disabled','disabled');
+			});
 		} else {
+			$('.custom_schedules input:not:(.hidden input)').removeAttr('disabled');
 			$('.custom_schedules').fadeIn('fast');
 		}
 	});

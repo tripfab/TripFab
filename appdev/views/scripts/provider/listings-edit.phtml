@@ -61,7 +61,10 @@
 				color:#F00;
 				font-weight:normal;
 				font-style:italic;}
-				
+		input.error {
+			border:1px solid #F00 !important;}
+		label.error {
+			display:none !important;}
 	</style>
 </head>
 <body>
@@ -186,329 +189,10 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
-
-<div class="hidden">
-	<?php $hours = array('01','02','03','04','05','06','07','08','09','10','11','12'); ?>
-	<?php $mins	 = array('00','15','30','45'); ?>
-    <?php $times = array('AM','PM'); ?>
-	<?php foreach($this->attributes as $attr): ?>
-    <div class="attr" id="attr_<?= $attr->id ?>">
-        <form action="" method="post" id="form_attr_<?= $attr->id ?>">
-            <div class="lbox lb-size-1">
-                <div class="lb-wrapper">
-                    <div class="lb-ttl">
-                        Edit <?= $attr->name ?>
-                    </div><!-- closes lb-ttl -->
-                    <div class="lb-content">
-                        <div class="entry entry-2">
-                            <p><input name="name" class="noclean" type="text" value="<?= stripslashes($attr->name) ?>" /></p>
-                        </div><!-- closes entry -->
-                        <div class="entry entry-2">
-                            <p><input name="value" class="noclean" type="text" value="<?= stripslashes($attr->value) ?>" /></p>
-                        </div><!-- closes entry -->
-                        <div class="btns">
-                            <span class="btn-8" onclick="$.fancybox.close()">Cancel</span>
-                            <span class="btn-2">Save</span>
-                        </div><!-- closes btns -->
-                    </div><!-- closes content -->
-                </div><!-- closes lb-wrapper -->
-            </div><!-- closes lb-small -->
-            <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
-            <input type="hidden" name="attr_id" value="<?= $attr->id ?>" />
-            <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
-            <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'form_attr_'.$attr->id) ?>" />
-            <input type="hidden" name="_task" value="<?= md5('edit_attr') ?>" />
-        </form>
-    </div>
-    <?php endforeach ?>
-    <?php foreach($this->attributes as $attr): ?>
-    <div id="attr_delete_<?= $attr->id ?>" class="attr">
-        <form action="" method="post" id="form_attr_delete_<?= $attr->id ?>">
-            <div class="lbox lb-size-1">
-                <div class="lb-wrapper">
-                    <div class="inner-wrapper">
-                        <div class="lb-ttl">
-                            Are you sure you want to remove "<?= $attr->name ?>" ?
-                        </div><!-- closes lb-ttl -->
-                        <div class="lb-content">
-                            <div class="btns">
-                                <span class="btn-8" onclick="$.fancybox.close()">Cancel</span>
-                                <span class="btn-11">Delete</span>
-                            </div><!-- closes btns -->
-                        </div><!-- closes content -->
-                    </div><!-- closes inner-wrapper -->
-                </div><!-- closes lb-wrapper -->
-            </div><!-- closes lb-size-1 -->
-            <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
-            <input type="hidden" name="attr_id" value="<?= $attr->id ?>" />
-            <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
-            <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'form_attr_delete_'.$attr->id) ?>" />
-            <input type="hidden" name="_task" value="<?= md5('delete_attr') ?>" />
-        </form>
-    </div>
-    <?php endforeach ?>
-    <div class="attr" id="attr_new">
-        <form action="" method="post" id="form_attr_new">
-            <div class="lbox lb-size-1">
-                <div class="lb-wrapper">
-                    <div class="lb-ttl">
-                        Add a new quick fact
-                    </div><!-- closes lb-ttl -->
-                    <div class="lb-content">
-                        <div class="entry entry-2">
-                            Quick Fact Name
-                            <p><input  class="noclean" name="name" type="text" /></p>
-                        </div><!-- closes entry -->
-                        <div class="entry entry-2">
-                            Quick Fact Value
-                            <p><input  class="noclean" name="value" type="text" /></p>
-                        </div><!-- closes entry -->
-                        <div class="btns">
-                            <span class="btn-8" onclick="$.fancybox.close()">Cancel</span>
-                            <span class="btn-2">Add</span>
-                        </div><!-- closes btns -->
-                    </div><!-- closes content -->
-                </div><!-- closes lb-wrapper -->
-            </div><!-- closes lb-small -->
-            <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
-            <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
-            <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'form_attr_new') ?>" />
-            <input type="hidden" name="_task" value="<?= md5('add_attr') ?>" />
-        </form>
-    </div>
-    <?php foreach($this->schedules as $sch): ?>
-	<?php if($this->listing->main_type == 5): ?>
-    <div id="sch_<?= $sch->id ?>" class="sch">
-        <form action="" method="post" id="form_sch_<?= $sch->id ?>">
-            <div class="lbox lb-size-1 schedule-lb">
-                <div class="lb-wrapper">                    
-                    <div class="lb-ttl">Edit <?= $sch->name ?> Room type</div><!-- closes lb-ttl -->
-                    <div class="lb-content">
-                        <div class="entry entry-2 season-entry">
-                            <p><input type="text" class="noclean" name="name" value="<?= $sch->name ?>" /></p>
-                        </div><!-- closes entry -->
-                        <div class="btns">
-                            <span class="btn-8" onclick="$.fancybox.close()">Cancel</span>
-                            <span class="btn-2">Save</span>
-                        </div><!-- closes btns -->
-                    </div><!-- closes content -->
-                </div><!-- closes lb-wrapper -->
-            </div><!-- closes lb-small -->
-            <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
-            <input type="hidden" name="sch_id" value="<?= $sch->id ?>" />
-            <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
-            <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'form_sch_'.$sch->id) ?>" />
-            <input type="hidden" name="_task" value="<?= md5('edit_sch') ?>" />
-        </form>
-    </div>
-    <?php else: ?>
-    <div id="sch_<?= $sch->id ?>" class="sch">
-        <form action="" method="post" id="form_sch_<?= $sch->id ?>">
-            <div class="lbox lb-size-1 schedule-lb">
-                <div class="lb-wrapper">                    
-                    <div class="lb-ttl">Edit <?= $sch->name ?> Schedule</div><!-- closes lb-ttl -->
-                    <div class="lb-content">
-                        <div class="entry entry-2 season-entry">
-                            <p><input type="text" class="noclean" name="name" value="<?= $sch->name ?>" /></p>
-                        </div><!-- closes entry -->
-                        <div class="entry entry-2">
-                            <span>Starting at</span>
-                            <?php $time = date('h:i:A', strtotime($sch->starting)) ?>
-                            <?php $time = explode(':',$time); ?>
-                            <select class="noselect" name="start_hour">
-                                <?php foreach($hours as $h): ?>
-                                <?php if($h == $time[0]): ?>
-                                <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
-                                <?php else: ?>
-                                <option value="<?= $h ?>"><?= $h ?></option>
-                                <?php endif ?>
-                                <?php endforeach ?>
-                            </select>
-                            <select class="noselect" name="start_min">
-                                <?php foreach($mins as $h): ?>
-                                <?php if($h == $time[1]): ?>
-                                <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
-                                <?php else: ?>
-                                <option value="<?= $h ?>"><?= $h ?></option>
-                                <?php endif ?>
-                                <?php endforeach ?>
-                            </select>
-                            <select class="noselect" name="start_time">
-                                <?php foreach($times as $h): ?>
-                                <?php if($h == $time[2]): ?>
-                                <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
-                                <?php else: ?>
-                                <option value="<?= $h ?>"><?= $h ?></option>
-                                <?php endif ?>
-                                <?php endforeach ?>
-                            </select>
-                        </div><!-- closes entry -->
-                        <div class="entry entry-2">
-                            <span>Ending at</span>
-                            <?php $time = date('h:i:A', strtotime($sch->ending)) ?>
-                            <?php $time = explode(':',$time); ?>
-                            <select class="noselect" name="end_hour">
-                                <?php foreach($hours as $h): ?>
-                                <?php if($h == $time[0]): ?>
-                                <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
-                                <?php else: ?>
-                                <option value="<?= $h ?>"><?= $h ?></option>
-                                <?php endif ?>
-                                <?php endforeach ?>
-                            </select>
-                            <select class="noselect" name="end_min">
-                                <?php foreach($mins as $h): ?>
-                                <?php if($h == $time[1]): ?>
-                                <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
-                                <?php else: ?>
-                                <option value="<?= $h ?>"><?= $h ?></option>
-                                <?php endif ?>
-                                <?php endforeach ?>
-                            </select>
-                            <select class="noselect" name="end_time">
-                                <?php foreach($times as $h): ?>
-                                <?php if($h == $time[2]): ?>
-                                <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
-                                <?php else: ?>
-                                <option value="<?= $h ?>"><?= $h ?></option>
-                                <?php endif ?>
-                                <?php endforeach ?>
-                            </select>
-                        </div><!-- closes entry -->
-                        <div class="btns">
-                            <span class="btn-8" onclick="$.fancybox.close()">Cancel</span>
-                            <span class="btn-2">Save</span>
-                        </div><!-- closes btns -->
-                    </div><!-- closes content -->
-                </div><!-- closes lb-wrapper -->
-            </div><!-- closes lb-small -->
-            <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
-            <input type="hidden" name="sch_id" value="<?= $sch->id ?>" />
-            <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
-            <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'form_sch_'.$sch->id) ?>" />
-            <input type="hidden" name="_task" value="<?= md5('edit_sch') ?>" />
-        </form>
-    </div>
-    <?php endif ?>
-    <?php endforeach ?>
-    <?php foreach($this->schedules as $sch): ?>
-    <div id="sch_delete_<?= $sch->id ?>" class="sch">
-        <form action="" method="post" id="form_sch_delete_<?= $sch->id ?>">
-            <div class="lbox lb-size-1">
-                <div class="lb-wrapper">
-                    <div class="inner-wrapper">
-                        <div class="lb-ttl">
-                            Are you sure you want to remove "<?= $sch->name ?>" ?
-                        </div><!-- closes lb-ttl -->
-                        <div class="lb-content">
-                            <div class="btns">
-                                <span class="btn-8" onclick="$.fancybox.close()">Cancel</span>
-                                <span class="btn-11">Delete</span>
-                            </div><!-- closes btns -->
-                        </div><!-- closes content -->
-                    </div><!-- closes inner-wrapper -->
-                </div><!-- closes lb-wrapper -->
-            </div><!-- closes lb-size-1 -->
-            <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
-            <input type="hidden" name="sch_id" value="<?= $sch->id ?>" />
-            <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
-            <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'form_sch_delete_'.$sch->id) ?>" />
-            <input type="hidden" name="_task" value="<?= md5('delete_sch') ?>" />
-        </form>
-    </div>
-    <?php endforeach ?>
-    <?php if($this->listing->main_type == 5) :?>
-    <div id="sch_new" class="sch">
-        <form action="" method="post" id="form_sch_new">
-            <div class="lbox lb-size-1 schedule-lb">
-                <div class="lb-wrapper">                    
-                    <div class="lb-ttl">Add New Room Type</div><!-- closes lb-ttl -->
-                    <div class="lb-content">
-                        <div class="entry entry-2 season-entry">
-                            <p><input type="text" name="name"  class="noclean" /></p>
-                        </div><!-- closes entry -->
-                        <div class="btns">
-                            <span class="btn-8" onclick="$.fancybox.close()">Cancel</span>
-                            <span class="btn-2">Add</span>
-                        </div><!-- closes btns -->
-                    </div><!-- closes content -->
-                </div><!-- closes lb-wrapper -->
-            </div><!-- closes lb-small -->
-            <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
-            <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
-            <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'form_sch_new') ?>" />
-            <input type="hidden" name="_task" value="<?= md5('add_sch') ?>" />
-        </form>
-    </div>
-    <?php else: ?>
-    <div id="sch_new" class="sch">
-        <form action="" method="post" id="form_sch_new">
-            <div class="lbox lb-size-1 schedule-lb">
-                <div class="lb-wrapper">                    
-                    <div class="lb-ttl">Add New Schedule</div><!-- closes lb-ttl -->
-                    <div class="lb-content">
-                        <div class="entry entry-2 season-entry">
-                            <p><input type="text" name="name" class="clean" /></p>
-                        </div><!-- closes entry -->
-                        <div class="entry entry-2">
-                            <span>Starting at</span>
-                            <?php $time = explode(':',$sch->starting); ?>
-                            <select class="noselect" name="start_hour">
-                                <?php foreach($hours as $h): ?>
-                                <option value="<?= $h ?>"><?= $h ?></option>
-                                <?php endforeach ?>
-                            </select>
-                            <select class="noselect" name="start_min">
-                                <?php foreach($mins as $h): ?>
-                                <option value="<?= $h ?>"><?= $h ?></option>
-                                <?php endforeach ?>
-                            </select>
-                            <select class="noselect" name="start_time">
-                                <?php foreach($times as $h): ?>
-                                <option value="<?= $h ?>"><?= $h ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        </div><!-- closes entry -->
-                        <div class="entry entry-2">
-                            <span>Ending at</span>
-                            <?php $time = explode(':',$sch->ending); ?>
-                            <select class="noselect" name="end_hour">
-                                <?php foreach($hours as $h): ?>
-                                <option value="<?= $h ?>"><?= $h ?></option>
-                                <?php endforeach ?>
-                            </select>
-                            <select class="noselect" name="end_min">
-                                <?php foreach($mins as $h): ?>
-                                <option value="<?= $h ?>"><?= $h ?></option>
-                                <?php endforeach ?>
-                            </select>
-                            <select class="noselect" name="end_time">
-                                <?php foreach($times as $h): ?>
-                                <option value="<?= $h ?>"><?= $h ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        </div><!-- closes entry -->
-                        <div class="btns">
-                            <span class="btn-8" onclick="$.fancybox.close()">Cancel</span>
-                            <span class="btn-2">Add</span>
-                        </div><!-- closes btns -->
-                    </div><!-- closes content -->
-                </div><!-- closes lb-wrapper -->
-            </div><!-- closes lb-small -->
-            <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
-            <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
-            <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'form_sch_new') ?>" />
-            <input type="hidden" name="_task" value="<?= md5('add_sch') ?>" />
-        </form>
-    </div>
-    <?php endif ?>
-</div>
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript" src="/js2/provider/listing-edit.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('textarea').elastic();	
-		//$('select:not(.noselect)').jqTransSelect();			
+	$(document).ready(function() {	
 		$('a.lb').fancybox({
 			padding:0,
 			overlayColor:'#000',
@@ -550,17 +234,17 @@
 				'main':'1',
 			}
 		});
-		$('input[name=capacity]').change(function(){
+		$('input[name=capacity]').click(function(){
 			$cont = $(this).parents('.item-wrppr').find('.single-schedule');
-			if($(this).val() == 'single'){
-				$cont.fadeIn('slow', function(){
-					$('select', $cont).removeAttr('disabled');
-				});
-			} else {
+			if($(this).hasClass('multiple')){
 				$('select', $cont).attr('disabled', 'disabled');
 				$('input', $cont).removeAttr('checked');
 				$('input', $cont).change();
 				$cont.fadeOut('slow');
+			} else {
+				$cont.fadeIn('slow', function(){
+					$('select', $cont).removeAttr('disabled');
+				});
 			}
 		});
 		$('input[name=kids]').change(function(){
@@ -572,6 +256,8 @@
 				$('.accept-kids select').removeAttr('disabled');
 			}
 		});
+		
+		$('.listing-content .right form').validate();		
 	});
 </script>
 </body>

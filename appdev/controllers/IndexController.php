@@ -90,6 +90,11 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        if($this->view->lang == 'es-ES')
+            $this->render('index-es');
+        
+        $this->view->countries = $this->places->getPlaces(2);
+        
         /*
         $countries = $this->places->getPlaces(2);
         $country   = $this->places->getPlaceById(18);

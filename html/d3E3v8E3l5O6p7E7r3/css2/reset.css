@@ -82,7 +82,9 @@ textarea {
 
 input[type="text"], input[type="password"], textarea {
 	border: 1px solid #D8D8D8;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
 	color: #616161;
 	font-size: 12px;
 	height: 27px;
@@ -157,21 +159,33 @@ body {
 /*- Buttons Styles -----------------------------------------------------------*/
 
 .btn-1 {
-	background-color: #8dc63f;
-	color: #FFFFFF!important;
-	line-height: 25px;
-	display: block;
-	padding: 0 14px;
-	font-weight: bold;
-	border-radius: 4px;
+	-moz-border-radius: 4px 4px 4px 4px;
+    background: url("../images2/btn-1.gif") repeat-x  0 0 #8dc73f;
+    border: 1px solid #7AB130;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    font: bold 11px/30px Helvetica;
+    height: 30px;
+    margin-left: 10px;
+    text-align: center;
 	cursor: pointer;
+	padding: 0 8px;
+	text-shadow: 0px 1px 0px #5C961F;
+	filter: dropshadow(color=#5C961F, offx=0, offy=1);
 }
 
 .btn-1:hover {
-	background-color: #9bd848;
+	-webkit-box-shadow: 0px 1px 1px 0px #C5C5C5;
+	-moz-box-shadow: 0px 1px 1px 0px #C5C5C5;
+	box-shadow: 0px 1px 1px 0px #C5C5C5;
 	text-decoration: none;
 }
-
+.btn-1:active {
+	-webkit-box-shadow: inset 0px 0px 3px 1px #6BA52D;
+	-moz-box-shadow: inset 0px 0px 3px 1px #6BA52D;
+	box-shadow: inset 0px 0px 3px 1px #6BA52D;
+}
 .btn-2 {
 	background: url(../images2/g-2.png) repeat-x #527a1b;
 	display: block;
@@ -215,7 +229,9 @@ body {
 	display: block;
 	padding: 0 14px;
 	font-weight: bold;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
 }
 
 .btn-4:hover {
@@ -225,7 +241,9 @@ body {
 .btn-5 {
 	background-color: #e0f2fd;
 	border: 1px solid #bde1f7;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
 	line-height: 27px;
 	color: #073153;
 	text-shadow: 0 1px 0 #FFFFFF;
@@ -237,7 +255,9 @@ body {
 
 .btn-6 {
 	background-color: #000000;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
 	color: #FFFFFF;
 	display: block;
 	font-weight: bold;
@@ -255,7 +275,9 @@ body {
 	font-size: 11px;
 	font-weight: bold;
 	border: 1px solid #000000;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
 	line-height: 18px;
 	padding: 0 9px;
 	display: block;
@@ -273,7 +295,9 @@ body {
 	display: block;
 	padding: 0 14px;
 	font-weight: bold;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
 }
 
 .btn-8:hover {
@@ -300,21 +324,29 @@ body {
 }
 
 .btn-10 {
-	background: url(../images2/g-37.png) repeat-x 0 0;
-	border: 1px solid #dbdbdb;
-	border-radius: 4px;
+	background: url(../images2/btn-10.gif) repeat-x top left; 
 	height: 30px;
-	line-height: 30px;
 	color: #616161;
-	font-size: 12px;
-	font-weight: bold;
+	font: bold 11px/30px Helvetica;
 	padding: 0 17px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	text-shadow: 0px 1px 0px #FFFFFF;
+	filter: dropshadow(color=#FFFFFF, offx=0, offy=1);
+	border: 1px solid #dbdbdb;
 }
-
 .btn-10:hover {
+	-webkit-box-shadow: 0px 1px 1px 0px #C5C5C5;
+	-moz-box-shadow: 0px 1px 1px 0px #C5C5C5;
+	box-shadow: 0px 1px 1px 0px #C5C5C5;
 	text-decoration: none;
 }
-
+.btn-10:active {
+	-webkit-box-shadow: inset 0px 0px 3px 1px #d2d2d2;
+	-moz-box-shadow: inset 0px 0px 3px 1px #d2d2d2;
+	box-shadow: inset 0px 0px 3px 1px #d2d2d2;
+}
 .remove {
 	background: url(../images2/ico-64.png) no-repeat;
 	display: block;
@@ -331,7 +363,9 @@ body {
 	display: block;
 	padding: 0 14px;
 	font-weight: bold;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
 }
 
 .btn-11:hover {
@@ -347,14 +381,31 @@ body {
 	display: block;
 	padding: 0 22px;
 	font-weight: bold;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
 	font-size: 13px;
 }
 
 .btn-12:hover {
 	text-decoration: none;
 }
-
+.btn-13 {
+	background: url(../images2/g-53.gif) top left repeat-x;
+	color: #7d7d7d!important;
+	line-height: 30px;
+	display: block;
+	padding: 0 14px;
+	font-weight: bold;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
+	cursor: pointer;
+	border:1px solid #dbdbdb;
+}
+.btn-13:hover {
+	text-decoration:none;
+}
 /*- End of Buttons Styles -----------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------*/
 
