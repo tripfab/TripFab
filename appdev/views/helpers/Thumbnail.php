@@ -33,13 +33,13 @@ class Zend_View_Helper_Thumbnail {
         );
 
         if (!file_exists($imagePath)) {
-            $imagePath = APPLICATION_PATH . '/../partners' . $imagePath;
+            $imagePath = APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3' . $imagePath;
             if (!file_exists($imagePath)) {
                 $imagePath = 'http://tripfab.com' . $imagePath;
             }
         }
 
-        $cacheFolder = APPLICATION_PATH . '/../partners/cache/'; # path to your cache folder, must be writeable by web server
+        $cacheFolder = APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3/cache/'; # path to your cache folder, must be writeable by web server
         $remoteFolder = $cacheFolder . 'remote/'; # path to the folder you wish to download remote images into
         $quality = 90; # image quality to use for ImageMagick (0 - 100)
 
@@ -146,7 +146,7 @@ class Zend_View_Helper_Thumbnail {
         endif;
 
         # return cache file path
-        return '<img class="' . $class . '" src="' . str_replace(APPLICATION_PATH . '/../partners', '', $newPath) . '" width="' . $opts['w'] . '" height="' . $opts['h'] . '" />';
+        return '<img class="' . $class . '" src="' . str_replace(APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3', '', $newPath) . '" width="' . $opts['w'] . '" height="' . $opts['h'] . '" />';
     }
 
 }

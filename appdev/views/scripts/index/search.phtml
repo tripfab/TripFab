@@ -1,234 +1,936 @@
-<?php $url = $this->baseUrl() .'/'. $this->country->identifier .'/'. $this->city->identifier .'/filter';
-$cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this->stars; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-    <meta content="noindex,nofollow" name="robots" />
-    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $_GET['q'] ?>, Search Results | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+	<title>My First Hotel : Details | Tripfab.com</title>
+	<link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+	<link type="text/css" rel="stylesheet" href="/css2/all.css" />
+	<link type="text/css" rel="stylesheet" href="/css2/search.css" />
+	<link type="text/css" rel="stylesheet" href="/css2/common.css" />
+	<link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+	<script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
     <script type="text/javascript" src="/js2/index.city.js"></script>
-    <script type="text/javascript" src="/js/scrollElement.jQuery.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('input').ToggleInputValue();
-        });
-		
-		$(function(){
-			var $search = <?= $this->tags ?>;
-	    	$( "#citiesSearch" ).autocomplete({
-	    		source: $search,
-	    		select:function(e, ui){
-	    			window.location = ui.item.url
-	    		},
-				appendTo:'#citiesAutocompleteContainer'
-			}).data( "autocomplete" )._renderItem = function( ul, item ) {
-				return $( "<li></li>" )
-				.data( "item.autocomplete", item )
-				.append( '<a href="'+item.url+'">' + item.label + "</a>" )
-				.appendTo( ul ); 
-			};
-			$( "#citiesSearch2" ).autocomplete({
-	    		source: $search,
-	    		select:function(e, ui){
-	    			window.location = ui.item.url
-	    		},
-				appendTo:'#citiesAutocompleteContainer2'
-			}).data( "autocomplete" )._renderItem = function( ul, item ) {
-				return $( "<li></li>" )
-				.data( "item.autocomplete", item )
-				.append( '<a href="'+item.url+'">' + item.label + "</a>" )
-				.appendTo( ul );
-			};
+		$(document).ready(function() {
+			var $cycle = false;
+			$( ".more" ).click(function() {
+				$( ".advance" ).toggleClass('show');
+				if(!$cycle){
+					$('.cycle').cycle({
+						fx: 'scrollLeft',
+						pager: '.pager',
+						next:   '.prev', 
+						prev:   '.next',
+						timeout: null
+					});
+					$('.cycle2').cycle({
+						fx: 'scrollLeft',
+						pager: '.pager2',
+						next:   '.prev2', 
+						prev:   '.next2',
+						timeout: null
+					});
+					$cycle = true;
+				}
+				$( ".each ul li a" ).click(function() {
+					$(this).parents("li").toggleClass('selected');
+					return false
+				});
+				return false
+			});
+
+    		$('.cycle-places').cycle({
+    			fx: 'scrollLeft',
+    			pager: '.pager3',
+    			next:   '.left', 
+    		   	prev:   '.right',
+    		   	timeout: null
+    		});
+    		$(".places").tabs ();
+    		$('a.lbc').fancybox({
+				padding: 0,
+				overlayColor: '#FFF',
+				overlayOpacity: '0.7',
+				showCloseButton: 'false'
+			});
+			
+			$('#search_all .map .cont > a').click(function(){
+				$('#search_all .map .cont > a').removeClass('active');
+				$(this).addClass('active');
+				return false;
+			});
 		});
     </script>
     <style type="text/css">
-	.ui-autocomplete { 
-		background:#fff; 
-		border:1px solid #D8D8D8; 
-		border-top:none; 
-		width:220px !important; 
-		list-style:none; 
-		max-height:200px; 
-		overflow-y:auto; 
-		z-index:100 !important;
-		height:auto !important;}
-	.ui-autocomplete li a {
-		display:block;
-		line-height:20px;
-		color:#000;}
-	.ui-autocomplete li a.ui-state-hover {
-		background:#8DC63F;
-		color:#fff;
-		text-decoration:none;}
-	#citiesAutocompleteContainer2 .ui-autocomplete { min-height:210px; width:546px !important; background:#fff; border-color:#E8E7E7;}
-	#citiesAutocompleteContainer2 .ui-autocomplete li a { line-height:35px; color:#616161; padding:0 20px; font-size:16px; font-weight:bold;}
-	#citiesAutocompleteContainer2 .ui-autocomplete li a.ui-state-hover { 
-		color:#fff;
-		text-shadow:1px 1px #030;
-	}
-	
-	.result { height:340px; }
-	
-	.results-wrapper { position:relative;}
-	.results-wrapper .loading { 
-		position:absolute; 
-		width:100%; 
-		height:100%; 
-		background:url('/images2/loading-bg.png');
-		top:0; 
-		left:0px; 
-		z-index:10;
-		display:none;}
-	.results-wrapper .loading .load {
-		width:200px;
-		margin:0 0 0 283px;
-		background:#303030;
-		line-height:50px;
-		font-size:26px;
-		color:#fff;
-		font-weight:bold;
-		text-align:center;
-		position:fixed;
-		top:250px;
-		left:1;}
-	ul.cat-menu { margin-top:0px; padding-top:14px; }
-	ul.cat-menu li a { 
-		position:relative;
-		z-index:11;}
-	.main.wrapper .left-sidebar { min-height:1px; }
+	#search_all .map .cont > a {
+    background: url("../images2/search-pin-off.png") no-repeat scroll center top transparent;
+    color: #FFFFFF;
+    display: block;
+    height: 14px;
+    padding-top: 30px;
+    position: absolute;
+    width: 44px;
+}#search_all .map .cont > a span {
+    -moz-border-radius: 20px 20px 20px 20px;
+    background-color: #707070;
+    display: block;
+    font: bold 11px/22px Helvetica;
+    height: 22px;
+    padding: 0 10px;
+    position: absolute;
+    text-align: center;
+    text-shadow: 0 1px 0 #4B4B4B;
+    white-space: nowrap;
+}
+	#search_all .map .listings { display:none; 
+    left: -32px;
+    position: absolute;
+    top: -30px;}
+	#search_all .map .soon {
+    display: none;
+    left: -32px;
+    position: absolute;
+    top: -30px;
+}
+	#search_all .map .active .listings { display:block;}
+	#search_all .map .active .soon { display:block;}
 	</style>
 </head>
 <body>
 <div class="w1">
-    <?php if(!$this->user): ?>
-    <div id="sign-up">
-        <div class="wrapper">
-            <a href="/signup" class="btn-2">Sign Up</a>
-            Tripfab helps you to create, share and book fabolous trips, removing middle layers that saves you money!
-        </div><!-- closes wrapper -->
-    </div><!-- closes sign-up -->
-    <?php endif ?>
-    <div id="header">
-        <div class="wrapper">
-            <h1 class="logo"><a href="/">Tripfab</a></h1>
-            <ul>
-                <li><a href="/top-spots">Top Spots</a></li>
-                <li><a href="/trips">Browse Trips</a></li>
-                <li><a href="/comunity">Community</a></li>
-                <li class="imp"><a href="/trip/plan">Plan Trip</a></li>
-            </ul>
-            <div class="header-search">
-                <form method="post" action="">
-                    <fieldset>
-                        <input id="citiesSearch" type="text" value="Search Places"/>
-                    </fieldset>
-                </form>
-            </div><!-- closes header-search -->
-            <div class="header-login">
-            	<?php if(!$this->user): ?>
-                <a href="/login" class="btn-1">Login</a>
-    			<?php else: ?>
-                <a href="/user/account" class="user"><?= $this->user->name ?></a>
-	            <?php endif ?>
-            </div><!-- closes header-login -->
-        </div><!-- closes wrapper -->			
-    </div><!-- closes header -->
-    <div class="w2">
-        <div class="main-search wrapper">
-            <span><a href="" class="link-2">View Trip Plans in your country</a></span>
-            <form action="">
-                <fieldset>
-                    <input id="citiesSearch2" type="text" value="<?= $_GET['q'] ?>" />
-                    <input type="submit" value="Search" class="btn-1"/>
-                </fieldset>
-            </form>
-        </div><!-- closes main-search -->
-        
-        <div class="main wrapper">
-            <div class="left-sidebar">
-            	<div class="scrollcontainer">
-                <ul class="cat-menu">
-                	<?php $ii = 1 ?>
-                	<?php foreach($this->categories as $i => $category): ?>
-					<?php $_cat = strtolower(str_replace(' ','-',$category['name'])) ?>
-                    <?php $class = ($cat == $_cat) ? 'active ' : ''; ?>
-                    <?php $class.= ($i == (count($this->categories) - 1)) ? 'last' : ''; ?>
-                    <li class="item-<?= $ii ?> <?= $class ?>">
-                    <a data-cat="<?= $_cat ?>" href="#<?= $_cat ?>">
-                    <img src="/images2/cleardot.gif" alt="" />
-                    <?= $category['name'] ?></a></li>
-                    <?php $ii++ ?>
-                    <?php endforeach ?>
-                </ul>
-                <div class="widget slider">
-                    <h4><img src="/images2/cleardot.gif" alt="" />Price Per Person</h4>
-                    <span id="value-4">Free - $1000</span>
-                    <div id="slider-4"></div>
-                </div><!-- closes widget -->
-                <div class="widget destinations">
-                    <h4><img src="/images2/cleardot.gif" alt="" />Destinations</h4>
-                    <form action="">
-                        <fieldset>
-                            <p><input type="checkbox" /><label>All Destinations</label></p>
-                            <p><input type="checkbox" /><label>Tamarindo</label></p>
-                            <p><input type="checkbox" /><label>Manuel Antonio</label></p>
-                            <p><input type="checkbox" /><label>Jac&oacute;</label></p>
-                            <p><input type="checkbox" /><label>Uvita</label></p>
-                            <p><input type="checkbox" /><label>San Jos&eacute;</label></p>
-                            <p><input type="checkbox" /><label>Cartago</label></p>
-                        </fieldset>
-                    </form>
-                    <a href="">See More &darr;</a>
-                </div><!-- closes widget -->
-                </div>
-            </div><!-- closes left-sidebar -->
-            <div class="content">
-                <div class="results-wrapper">
-                	<div class="loading"><div class="load">Loading...</div></div>
-                	<?php foreach($this->listings as $i => $list): ?>
-                    <?php $class = ((($i+1) % 3) == 0) ? 'last' : '' ?>
-                    <div class="result <?= $class ?>">
-                        <div class="img-wrapper">
-                            <a href="<?= str_replace('filter', $list->identifier, $url) ?>" class="been">Been there</a>
-                            <?= $this->thumbnail(array('width'=>'225', 'height'=>'167'), $list->image, '','225:167') ?>
-                            <h4><?= $list->title ?></h4>
-                        </div><!-- closes img-wrapper -->
-                        <div class="meta">
-                            <span class="cat-1"><img src="/images2/cleardot.gif" alt="" /><?= $this->categories[$list->main_type]['name'] ?></span>
-                            <?php if($list->price > 0): ?>
-                            <strong>$<?= $list->price ?><em> / person</em></strong>
-                            <?php endif ?>
-                        </div><!-- closes meta -->
-                        <p class="listing_description"><?= $list->description ?></p>
-                        <a href="<?= str_replace('filter', $list->identifier, $url) ?>" class="btn-1">View activity</a>
-                    </div><!-- closes result -->
-                    <?php endforeach ?>
-                </div><!-- closes results-wrapper -->
-            </div><!-- closes content -->
-        </div><!-- closes main -->
-    </div><!-- closes w2 -->
-    <div class="footer">
-        <div class="wrapper">
-            <p><img src="/images2/logo-2.png" alt="" /><strong>Tripfab</strong> is lovely designed in a <strong>tropical paradise</strong></p>
-            <ul>
-                <li><a href="">Contact</a></li>
-                <li><a href="">Blog</a></li>
-                <li><a href="">Twitter</a></li>
-                <li><a href="">Facebook</a></li>
-                <li><a href="">Terms</a></li>
-                <li><a href="">Privacy</a></li>
-            </ul>
-        </div><!-- closes wrapper -->
-    </div><!-- closes footer -->
-</div><!-- closes w1 -->
-<div id="citiesAutocompleteContainer"></div>
-<div id="citiesAutocompleteContainer2"></div>
-<input type="hidden" id="hddCityId" name="hddCityId" value="<?= $this->city->identifier ?>" />
-<input type="hidden" id="hddCountryId" name="hddCountryId" value="<?= $this->country->identifier ?>" />
+	<?= $this->partial('partials/header.phtml', 
+	array('user'=>$this->user,'full'=>true)); ?>
+	<div class="search_box">
+		<div class="wrapper">
+			<div class="standard">
+				<form action="post">
+					<fieldset>
+						<input type="text" value="" />
+						<input class="btn-1" type="submit" name="" value="Search Countries, Places or Things" />
+					</fieldset>
+				</form>
+			</div><!--STANDARD-->
+			
+			<div class="advance">
+				<div class="filter">
+					<p>Select your interestes</p>
+					<div class="cycle">
+						<div class="each">
+							<ul>
+								<li><a href=""><span class="icon-1"></span>ART</a></li>
+								<li><a href=""><span class="icon-2"></span>WATER SPORTS</a></li>
+								<li><a href=""><span class="icon-3"></span>ROMANCE</a></li>
+								<li><a href=""><span class="icon-4"></span>FOOD</a></li>
+								<li><a href=""><span class="icon-5"></span>NIGHT LIFE</a></li>
+								<li><a href=""><span class="icon-6"></span>ECO</a></li>
+							</ul>
+						</div><!--EACH-->
+						<div class="each">
+							<ul>
+								<li><a href=""><span class="icon-7"></span>SHOPPING</a></li>
+								<li><a href=""><span class="icon-8"></span>LUXURY</a></li>
+								<li><a href=""><span class="icon-9"></span>OUTDOORS</a></li>
+								<li><a href=""><span class="icon-10"></span>ENTERTAIMENT</a></li>
+								<li><a href=""><span class="icon-11"></span>LANDMARKS</a></li>
+								<li><a href=""><span class="icon-12"></span>SINGLES</a></li>
+							</ul>
+						</div><!--EACH-->
+						<div class="each">
+							<ul>
+								<li><a href=""><span class="icon-13"></span>EXTREME</a></li>
+								<li><a href=""><span class="icon-14"></span>ADVENTURE</a></li>
+								<li><a href=""><span class="icon-15"></span>FAMILY</a></li>
+							</ul>
+						</div><!--EACH-->
+					</div><!--CYCLE-->
+					<div class="pager"></div><!--PAGER-->
+					<a href="#" class="prev"></a>
+					<a href="#" class="next"></a>
+				</div><!--FILTER-->
+				
+				<div class="filter landscapes">
+					<p>Select the landscapes want to explore</p>
+					<div class="cycle2">
+						<div class="each">
+							<ul>
+								<li><a href=""><span class="icon-1"></span>FOREST</a></li>
+								<li><a href=""><span class="icon-2"></span>MOUNTAIN</a></li>
+								<li><a href=""><span class="icon-3"></span>LAKE</a></li>
+								<li><a href=""><span class="icon-4"></span>BEACH</a></li>
+								<li><a href=""><span class="icon-5"></span>PLAIN</a></li>
+								<li><a href=""><span class="icon-6"></span>URBAN</a></li>
+							</ul>
+						</div><!--EACH-->
+						<div class="each">
+							<ul>
+								<li><a href=""><span class="icon-7"></span>RURAL</a></li>
+								<li><a href=""><span class="icon-8"></span>MANGLAR</a></li>
+								<li><a href=""><span class="icon-9"></span>COAST</a></li>
+								<li><a href=""><span class="icon-10"></span>ISLAND</a></li>
+								<li><a href=""><span class="icon-11"></span>DESERT</a></li>
+								<li><a href=""><span class="icon-12"></span>VOLCANO</a></li>
+							</ul>
+						</div><!--EACH-->
+						<div class="each">
+							<ul>
+								<li><a href=""><span class="icon-13"></span>CITY</a></li>
+								<li><a href=""><span class="icon-14"></span>HISTORIC</a></li>
+								<li><a href=""><span class="icon-15"></span>RIVER</a></li>
+								<li><a href=""><span class="icon-16"></span>VALLEY</a></li>
+							</ul>
+						</div><!--EACH-->
+					</div><!--CYCLE-->
+					<div class="pager2"></div><!--PAGER-->
+					<a href="#" class="prev2"></a>
+					<a href="#" class="next2"></a>
+				</div><!--FILTER-->
+				
+				<div class="filter last">
+					<p>Select filters options</p>
+					<strong>Travelers: <span> - 3</span></strong>
+					<div class="bg">
+						<div id="slider-4"></div>
+					</div>
+					<strong>Cost per person: <span>$0 - $1,000</span></strong>
+					<div class="bg">
+						<div id="slider-4"></div>
+					</div>
+				</div><!--FILTER LAST-->
+				
+			</div><!--ADVANCE-->
+		
+			<a href="JavaScript:void(0);" class="more">Advanced Search</a>	
+		
+		</div><!--WRAPPER-->
+	</div><!--SEARCH-BOX-->
+	<div class="w2">
+		
+		<div id="search_all" class="wrapper">
+			<div class="map">
+				<h2>Discover the world</h2>
+				<h3>Explore the most amazing destinations around the globe</h3>
+				<div class="cont">
+					<a href="" class="north_america"><span>North America</span>
+                    <div class="soon">
+						<p>Comming Soon</p>
+					</div><!--SOON-->
+                    </a>
+					<a href="" class="caribbean"><span>Caribbean</span>
+                    <div class="soon">
+						<p>Comming Soon</p>
+					</div><!--SOON-->
+                    </a>
+					<a href="" class="central_america"><span class="btn-1">Central America</span>
+                    <div class="listings">
+						<div class="beta">
+							<p>The Beta version of Tripfab<br /> includes only Costa Rican Listings</p>
+							<em><span>Explore Costa Rica</span></em>
+						</div><!--BETA-->
+					</div><!--LISTINGS-->
+                    </a>
+					<a href="" class="south_america"><span>South America</span>
+                    <div class="soon">
+						<p>Comming Soon</p>
+					</div><!--SOON-->
+                    </a>
+					<a href="" class="europe"><span>Europe</span>
+                    <div class="soon">
+						<p>Comming Soon</p>
+					</div><!--SOON-->
+                    </a>
+					<a href="" class="middle-east"><span>Middle East</span>
+                    <div class="soon">
+						<p>Comming Soon</p>
+					</div><!--SOON-->
+                    </a>
+					<a href="" class="africa"><span>Africa</span>
+                    <div class="soon">
+						<p>Comming Soon</p>
+					</div><!--SOON-->
+                    </a>
+					<a href="" class="asia"><span>Asia</span>
+                    <div class="soon">
+						<p>Comming Soon</p>
+					</div><!--SOON-->
+                    </a>
+					<a href="" class="pacific"><span>Pacific</span>
+                    <div class="soon">
+						<p>Comming Soon</p>
+					</div><!--SOON-->
+                    </a>
+				</div><!--CONT-->
+			</div><!--MAP-->
+			
+			<div class="places">
+				<ul>
+					<li><a href="#popular" class="popular"><span>Popular Places</span></a></li>
+					<li><a href="#landscapes" class="landscapes"><span>Landscapes</span></a></li>
+					<li><a href="#nearest" class="nearest"><span>Nearest Spots</span></a></li>
+					<li><a href="#collections" class="collections"><span>Collections</span></a></li>
+				</ul>
+				<div id="popular" class="tab">
+					<div class="sidebar">
+						<ul>
+							<li><a href="">Tamarindo</a></li>
+							<li><a href="">La Fortuna</a></li>
+							<li><a href="" class="active">Jacó</a></li>
+							<li><a href="">Montezuma</a></li>
+							<li><a href="">Malpais</a></li>
+						</ul>
+					</div><!--SIDEBAR-->
+					
+					<div class="content">
+						<h4>Places in Costa Rica</h4>
+						<div class="cycle-places">
+							<div class="slide">
+								<div class="featured">
+									<img src="/images2/search-featured.jpg"  width="722" height="346" alt="" />
+									
+									<div class="info">
+										<div class="data">
+											<strong>Monkey Quest</strong>
+											<p>Monteverde, Costa Rica</p>
+											<a href="">View Activity</a>
+										</div><!--DATA-->
+										<p>FROM <strong>$75 </strong>/ PERSON</p>
+									</div><!--INFO-->
+									
+								</div><!--FEATURED-->
+								
+								<div class="all">
+								
+									<div class="single">
+										<img src="/images2/search-img-1.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+									<div class="single right">
+										<img src="/images2/search-img-2.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+									<div class="single">
+										<img src="/images2/search-img-3.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+									<div class="single right">
+										<img src="/images2/search-img-4.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+								</div><!--ALL-->
+							</div><!--SLIDE-->
+							
+							<div class="slide">
+								<div class="featured">
+									<img src="/images2/search-featured.jpg"  width="722" height="346" alt="" />
+									
+									<div class="info">
+										<div class="data">
+											<strong>Monkey Quest</strong>
+											<p>Monteverde, Costa Rica</p>
+											<a href="">View Activity</a>
+										</div><!--DATA-->
+										<p>FROM <strong>$75 </strong>/ PERSON</p>
+									</div><!--INFO-->
+									
+								</div><!--FEATURED-->
+								
+								<div class="all">
+								
+									<div class="single">
+										<img src="/images2/search-img-1.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+									<div class="single right">
+										<img src="/images2/search-img-2.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+									<div class="single">
+										<img src="/images2/search-img-3.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+									<div class="single right">
+										<img src="/images2/search-img-4.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+								</div><!--ALL-->
+							</div><!--SLIDE-->
+							
+						</div><!--CYCLE-PLACES-->
+						
+						<div class="controls">
+							<div class="pager3"></div><!--PAGER-->
+							<div class="buttons">
+								<a href="" class="left"></a>
+								<a href="" class="right"></a>
+							</div><!--BUTTONS-->
+							<div class="bottom"><a href="" class="view-all">View All Popular Places in Costa Rica</a></div><!--BOTTOM--> 
+						</div><!--CONTROLS-->
+						
+					</div><!--CONTENT-->
+					
+				</div><!--POPULAR-->
+				
+				<div id="landscapes" class="tab">
+				
+				
+					<div class="sidebar">
+						<ul>
+							<li><a href="">Mountain</a></li>
+							<li><a href="">Forest</a></li>
+							<li><a href="">Valley</a></li>
+							<li><a href="">River</a></li>
+							<li><a href="">Coast</a></li>
+							<li><a href="">Beach</a></li>
+							<li><a href="">City</a></li>
+							<li><a href="">Rural</a></li>
+							<li><a href="">Historic</a></li>
+							<li><a href="">Volcano</a></li>
+							<li><a href="">Lake</a></li>
+							<li><a href="">Plain</a></li>
+							<li><a href="">Manglar</a></li>
+							<li><a href="">Urban</a></li>
+							<li><a href="">Island</a></li>
+							<li><a href="">Desert</a></li>
+						</ul>
+					</div><!--SIDEBAR-->
+					
+					<div class="content">
+						<h4>Landscapes Places in Costa Rica</h4>
+						<div class="cycle-places">
+							<div class="slide">
+								<div class="featured">
+									<img src="/images2/search-featured.jpg"  width="722" height="346" alt="" />
+									
+									<div class="info">
+										<div class="data">
+											<strong>Monkey Quest</strong>
+											<p>Monteverde, Costa Rica</p>
+											<a href="">View Activity</a>
+										</div><!--DATA-->
+										<p>FROM <strong>$75 </strong>/ PERSON</p>
+									</div><!--INFO-->
+									
+								</div><!--FEATURED-->
+								
+								<div class="all">
+								
+									<div class="single">
+										<img src="/images2/search-img-1.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+									<div class="single right">
+										<img src="/images2/search-img-2.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+									<div class="single">
+										<img src="/images2/search-img-3.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+									<div class="single right">
+										<img src="/images2/search-img-4.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+								</div><!--ALL-->
+							</div><!--SLIDE-->
+							
+							<div class="slide">
+								<div class="featured">
+									<img src="/images2/search-featured.jpg"  width="722" height="346" alt="" />
+									
+									<div class="info">
+										<div class="data">
+											<strong>Monkey Quest</strong>
+											<p>Monteverde, Costa Rica</p>
+											<a href="">View Activity</a>
+										</div><!--DATA-->
+										<p>FROM <strong>$75 </strong>/ PERSON</p>
+									</div><!--INFO-->
+									
+								</div><!--FEATURED-->
+								
+								<div class="all">
+								
+									<div class="single">
+										<img src="/images2/search-img-1.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+									<div class="single right">
+										<img src="/images2/search-img-2.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+									<div class="single">
+										<img src="/images2/search-img-3.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+									<div class="single right">
+										<img src="/images2/search-img-4.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+								</div><!--ALL-->
+							</div><!--SLIDE-->
+														
+						</div><!--CYCLE-PLACES-->
+						
+						<div class="controls">
+							<div class="pager3"></div><!--PAGER-->
+							<div class="buttons">
+								<a href="" class="left"></a>
+								<a href="" class="right"></a>
+							</div><!--BUTTONS-->
+							<div class="bottom"><a href="" class="view-all">View All Lanscapes in Costa Rica</a></div><!--BOTTOM--> 
+						</div><!--CONTROLS-->
+						
+					</div><!--CONTENT-->
+				
+				</div><!--LANDSCAPES-->
+				<div id="nearest" class="tab">
+				
+					<div class="sidebar">
+						<ul>
+							<li class="heading">CATEGORIES</li>
+							<li><a href="">Activities</a></li>
+							<li><a href="">Hotels</a></li>
+							<li><a href="">Resturants</a></li>
+							<li><a href="">Entertainment</a></li>
+							<li><a href="">Tourist Sights</a></li>
+						</ul>
+						<ul>
+							<li class="heading">NEAREST Cities</li>
+							<li><a href="">Tamarindo</a></li>
+							<li><a href="">La Fortuna</a></li>
+							<li><a href="">Jacó</a></li>
+							<li><a href="">Montezuma</a></li>
+							<li><a href="">Malpais</a></li>
+						</ul>
+					</div><!--SIDEBAR-->
+					
+					<div class="content">
+						<h4>Nearests Activities<span>Puntarenas, Costa Rica<a href="#change_location" class="lbc" >Change my location</a></span></h4>
+						<div class="cycle-places">
+								
+							<div class="slide">
+								<div class="featured">
+									<img src="/images2/search-featured.jpg"  width="722" height="346" alt="" />
+									
+									<div class="info">
+										<div class="data">
+											<strong>Monkey Quest</strong>
+											<p>Monteverde, Costa Rica</p>
+											<a href="">View Activity</a>
+										</div><!--DATA-->
+										<p>FROM <strong>$75 </strong>/ PERSON</p>
+									</div><!--INFO-->
+									
+								</div><!--FEATURED-->
+								
+								<div class="all">
+								
+									<div class="single">
+										<img src="/images2/search-img-1.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+									<div class="single right">
+										<img src="/images2/search-img-2.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+									<div class="single">
+										<img src="/images2/search-img-3.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+									<div class="single right">
+										<img src="/images2/search-img-4.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+								</div><!--ALL-->
+							</div><!--SLIDE-->
+							
+							<div class="slide">
+								<div class="featured">
+									<img src="/images2/search-featured.jpg"  width="722" height="346" alt="" />
+									
+									<div class="info">
+										<div class="data">
+											<strong>Monkey Quest</strong>
+											<p>Monteverde, Costa Rica</p>
+											<a href="">View Activity</a>
+										</div><!--DATA-->
+										<p>FROM <strong>$75 </strong>/ PERSON</p>
+									</div><!--INFO-->
+									
+								</div><!--FEATURED-->
+								
+								<div class="all">
+								
+									<div class="single">
+										<img src="/images2/search-img-1.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+									<div class="single right">
+										<img src="/images2/search-img-2.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+									<div class="single">
+										<img src="/images2/search-img-3.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+									<div class="single right">
+										<img src="/images2/search-img-4.jpg" width="349" height="215" alt="" />
+										<div class="info">
+											<div class="data">
+												<strong>Monkey Quest</strong>
+												<p>Monteverde, Costa Rica</p>
+												<a href="">View Activity</a>
+											</div><!--DATA-->
+											<p>FROM <strong>$75 </strong>/ PERSON</p>
+										</div><!--INFO-->
+									</div><!--SINGLE-->
+									
+								</div><!--ALL-->
+							</div><!--SLIDE-->
+							
+						</div><!--CYCLE-PLACES-->
+						
+						<div class="controls">
+							<div class="pager3"></div><!--PAGER-->
+							<div class="buttons">
+								<a href="" class="left"></a>
+								<a href="" class="right"></a>
+							</div><!--BUTTONS-->
+							<div class="bottom"><a href="" class="view-all">View All Nearest Places</a></div><!--BOTTOM--> 
+						</div><!--CONTROLS-->
+						
+					</div><!--CONTENT-->
+				
+				</div><!--NEAREST-->
+				
+				<div id="collections" class="tab">
+					<h4>Our Wonderful Collections</h4>
+					<div class="collection">
+						<a href=""><img src="/images2/collection1.jpg" width="286" height="168" alt="" /></a>
+						<div class="descrip">
+							<a href="">
+								<span class="spots">10<strong>SPOTS</strong></span>
+								<em>Watch Collection</em>
+							</a>
+						</div><!--DESCRIP-->
+					</div><!--COLLECTION-->
+					<div class="collection">
+						<a href=""><img src="/images2/collection2.jpg" width="286" height="168" alt="" /></a>
+					<div class="descrip">
+							<a href="">
+								<span class="spots">10<strong>SPOTS</strong></span>
+								<em>Watch Collection</em>
+							</a>
+						</div><!--DESCRIP-->
+					</div><!--COLLECTION-->
+					<div class="collection">
+						<a href=""><img src="/images2/collection3.jpg" width="286" height="168" alt="" /></a>
+					<div class="descrip">
+							<a href="">
+								<span class="spots">10<strong>SPOTS</strong></span>
+								<em>Watch Collection</em>
+							</a>
+						</div><!--DESCRIP-->
+					</div><!--COLLECTION-->
+					<div class="collection">
+						<a href=""><img src="/images2/collection4.jpg" width="286" height="168" alt="" /></a>
+					<div class="descrip">
+							<a href="">
+								<span class="spots">10<strong>SPOTS</strong></span>
+								<em>Watch Collection</em>
+							</a>
+						</div><!--DESCRIP-->
+					</div><!--COLLECTION-->
+					<div class="collection">
+						<a href=""><img src="/images2/collection5.jpg" width="286" height="168" alt="" /></a>
+					<div class="descrip">
+							<a href="">
+								<span class="spots">10<strong>SPOTS</strong></span>
+								<em>Watch Collection</em>
+							</a>
+						</div><!--DESCRIP-->
+					</div><!--COLLECTION-->
+					<div class="collection">
+						<a href=""><img src="/images2/collection6.jpg" width="286" height="168" alt="" /></a>
+					<div class="descrip">
+							<a href="">
+								<span class="spots">10<strong>SPOTS</strong></span>
+								<em>Watch Collection</em>
+							</a>
+						</div><!--DESCRIP-->
+					</div><!--COLLECTION-->
+					<div class="collection">
+						<a href=""><img src="/images2/collection7.jpg" width="286" height="168" alt="" /></a>
+					<div class="descrip">
+							<a href="">
+								<span class="spots">10<strong>SPOTS</strong></span>
+								<em>Watch Collection</em>
+							</a>
+						</div><!--DESCRIP-->
+					</div><!--COLLECTION-->
+					<div class="collection">
+						<a href=""><img src="/images2/collection8.jpg" width="286" height="168" alt="" /></a>
+					<div class="descrip">
+							<a href="">
+								<span class="spots">10<strong>SPOTS</strong></span>
+								<em>Watch Collection</em>
+							</a>
+						</div><!--DESCRIP-->
+					</div><!--COLLECTION-->
+					<div class="collection">
+						<a href=""><img src="/images2/collection1.jpg" width="286" height="168" alt="" /></a>
+					<div class="descrip">
+							<a href="">
+								<span class="spots">10<strong>SPOTS</strong></span>
+								<em>Watch Collection</em>
+							</a>
+						</div><!--DESCRIP-->
+					</div><!--COLLECTION-->
+				</div><!--COLLECTIONS-->
+				
+			</div><!--PLACES-->
+		</div><!--SEARCH-ALL-->
+		 
+	</div><!-- closes w2 -->
+	<div class="footer">
+		<div class="wrapper">
+			<p><img src="/images2/logo-2.png" alt="" /><strong>Tripfab</strong> is lovely designed in a <strong>tropical paradise</strong></p>
+			<ul>
+				<li><a href="">Contact</a></li>
+				<li><a href="">Blog</a></li>
+				<li><a href="">Twitter</a></li>
+				<li><a href="">Facebook</a></li>
+				<li><a href="">Terms</a></li>
+				<li><a href="">Privacy</a></li>
+			</ul>
+		</div>
+		<!-- closes wrapper --> 
+	</div>
+	<!-- closes footer -->
+	<div id="citiesAutocompleteContainer"></div>
+</div>
+<!-- closes w1 -->
+<div class="hidden">
+	<div id="change_location" class="lb">
+		<div class="top">Change your location</div><!--TOP-->
+			<div class="mid">
+				<form method="post" action="">
+					<label>Enter New Location</label>
+					<input type="text" name="" value="" />
+			</div><!--MID-->
+			<div class="bottom">
+					<input type="button" class="btn-1" name="" value="Change Location" />
+					<input type="button" class="btn-10" name="" value="Cancel" />
+				</form>
+			</div><!--BOT-->
+		</div><!--CHANGE_LOCATION-->
+		<div id="send_to_friend">
+			<div class="top">Share this hotel via email</div><!--TOP-->
+			<div class="mid">
+				<img src="/images2/img_email.jpg" width="239" height="131" alt="" />
+				<p><strong>Surfing Lessons for Beginners</strong> Tamarindo, Costa Rica </p>
+			</div><!--MID-->
+			<div class="bot">
+				<form method="post" action="">
+					<div class="emails">
+						<label>Email Addresses</label>
+						<input type="text" name="" value="email@example.com" />
+						<a href="#">Add more</a>
+					</div><!--EMAILS-->
+					<label>Message</label>
+					<textarea cols="" rows="">Check out this amazing Destination on Tripfab.</textarea>
+					<p>Your friend will receive a message with a link to this page.
+					Recipients who are not Tripfab members will receive an invitation to join.</p>
+					<input type="submit" class="btn-1" value="Send Emails" />
+					<input type="submit" class="btn-10" value="Cancel" />
+				</form>
+			</div><!--BOT-->
+		</div><!--SEND_TO_FRIEND-->
+</div><!--HIDDEN-->
 </body>
 </html>

@@ -2178,7 +2178,7 @@ function replaceAll( text, busca, reemplaza ){
 }
 $(function(){
 	$('input:not(.noclean),textarea:not(.noclean)').ToggleInputValue();
-	if($('"#citiesSearch').html() != null){
+	if($('.header-search').html() != null){
 		$.ajax({
 			url:'/ajax/getsearchtags',
 			success:function(tags){

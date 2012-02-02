@@ -10,8 +10,8 @@
 #booking .ui-datepicker select.ui-datepicker-year { width: 49%;}
 #booking .ui-datepicker table {width: 100%; font-size: .9em; border-collapse: collapse;}
 #booking .ui-datepicker th { border: 0 none; color: #ACACAC; font-size: 11px; font-weight: bold; line-height: 20px; padding: 1px; text-align: center; }
-#booking .ui-datepicker td { border: 0; padding: 1px; line-height: 26px; }
-#booking .ui-datepicker td span, .ui-datepicker td a { display: block; padding: .2em; text-align: center; text-decoration: none; }
+#booking .ui-datepicker td { border: 0; padding: 3px; line-height: 26px ;  }
+#booking .ui-datepicker td span, .ui-datepicker td a { display: block; padding: .2em; text-align: center; text-decoration: none; color: #acacac; font-size:  13px; font-weight: bold; }
 #booking .ui-datepicker .ui-datepicker-buttonpane { background-image: none; margin: .7em 0 0 0; padding:0 .2em; border-left: 0; border-right: 0; border-bottom: 0; }
 #booking .ui-datepicker .ui-datepicker-buttonpane button { float: right; margin: .5em .2em .4em; cursor: pointer; padding: .2em .6em .3em .6em; width:auto; overflow:visible; }
 #booking .ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current { float:left; }
@@ -53,3 +53,22 @@
     width: 200px; /*must have*/
     height: 200px; /*must have*/
 }
+
+/*NEW STYLES----------------------------------------*/
+#booking  .ui-state-disabled .undefined span {
+	color: #acacac;
+	font-size: 13px;
+}
+#booking .ui-datepicker-other-month span{
+	background-color: #e1e1e1;
+	color: #acacac !important;
+	font-size: 13px;
+}
+
+
+
+
+
+
+
+

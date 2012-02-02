@@ -12,24 +12,20 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
     <link type="text/css" rel="stylesheet" href="/css2/index/city.css" />
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
     <link type="text/css" rel="stylesheet" href="/css2/calendar/jquery-ui-1.8.16.custom.css" />
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
+    <script type="text/javascript" src="/js2/jquery.js"></script>
     <script type="text/javascript" src="/js2/index.city.js"></script>
     <script type="text/javascript" src="/js/scrollElement.jQuery.js"></script>
-    <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js"></script>
     <style type="text/css">
 		.hidden { display:none;}
 		.img-wrapper a { display:block;}
 		.result .img-wrapper h4 { bottom:3px;}
 		.big-message { z-index:100000}
+		#search_result .widget.cats { display:none;}
 	</style>
 </head>
 <body>
 <div class="w1">
-    <?= $this->partial('partials/header.phtml', 
-	array('user'=>$this->user,'full'=>true)); ?>
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>
     <div class="w2">
         <div class="main-search wrapper">
             <span><a href="" class="link-2">View Trip Plans in your country</a></span>
@@ -41,7 +37,7 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
             </form>
         </div><!-- closes main-search -->
         
-        <div class="main wrapper">
+        <div class="main wrapper" id="search_result">
             <div class="left-sidebar">
             	<div class="scrollcontainer">
                 <ul class="cat-menu">
@@ -57,14 +53,27 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
                     <?php $ii++ ?>
                     <?php endforeach ?>
                 </ul>
+                <h3 class="filter"><span>FILTER OPTIONS</span></h3>
+                <div class="travelers">
+                    <label>TRAVELERS </label>
+                    <select>
+                        <option>1</option>
+                        <option>1</option>
+                    </select>
+                </div><!--TRAVELERS-->
                 <div class="widget slider">
                     <h4><img src="/images2/cleardot.gif" alt="" />Price Per Person</h4>
                     <span id="value-4">Free - $1000</span>
-                    <div id="slider-4"></div>
+                    <div class="bg">
+	                    <div id="slider-4"></div>
+                    </div>
                 </div><!-- closes widget -->
+                <div class="widget destinations listing-2">
+                	<h4 class="location"><img src="/images2/cleardot.gif" alt="" />CITIES</h4>
+                </div>
                 <?php foreach($this->subcats as $_cat => $c): ?>
-                <div rel="#<?= $_cat ?>" class="widget destinations listing-2">
-                    <h4><img src="/images2/cleardot.gif" alt="" />Categories</h4>
+                <div rel="#<?= $_cat ?>" class="widget cats destinations listing-2">
+                    <h4 class="categories"><img src="/images2/cleardot.gif" alt="" />Categories</h4>
                     <?php foreach($c as $sc): ?>
                     <p><input type="checkbox" /><label><?= $sc->name ?></label></p>
                     <?php endforeach ?>
@@ -73,36 +82,40 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
                 </div>
             </div><!-- closes left-sidebar -->
             <div class="content">
+            	<h3>There are <strong>1258 things to do in Costa Rica</strong></h3>
                 <div class="results-wrapper">
                 	<div class="loading"><div class="load">Loading...</div></div>
                 	<?php foreach($this->listings as $i => $list): ?>
                     <?php $class = ((($i+1) % 3) == 0) ? 'last' : '' ?>
                     <div class="result <?= $class ?>">
-                        <div class="img-wrapper">
-                        	<?php if($this->user->role_id == 2): ?>
-                            <a href="#" class="been">Been there</a>
+                    	<div class="holder">
+                            <div class="img-wrapper">
+                                <?php if($this->user->role_id == 2): ?>
+                                <a href="#" class="been">Been there</a>
+                                <?php endif ?>
+                                <a href="<?= str_replace('filter', $list->identifier, $url) ?>">
+                                <?= $this->thumbnail(array('width'=>'225', 'height'=>'167'), $list->image, '','225:167') ?>
+                                <h4><?= $list->title ?></h4>
+                                </a>
+                                <?php if($this->user->role_id == 2): ?>
+                                <?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
+                                <?php endif ?>
+                            </div><!-- closes img-wrapper -->
+                            <div class="meta">
+                            	<span class="location"><strong>Tamarindo</strong>, CR</span> 
+                                <span class="cat"><img src="/images2/cleardot.gif" alt="" /></span>
+                            </div><!-- closes meta -->
+                            <p class="listing_description"><?= $list->description ?></p>
+							<?php if($list->price > 0): ?>
+                            <strong class="price">$<?= $list->price ?><em> / person</em></strong>
                             <?php endif ?>
-                            <a href="<?= str_replace('filter', $list->identifier, $url) ?>">
-                            <?php // $this->thumbnail(array('width'=>'225', 'height'=>'167'), $list->image, '','225:167') ?>
-                            <img width="225" height="167" src="/images/lph/th/All-Activities-0<?= $i + 1 ?>.jpg" />
-                            <h4><?= $list->title ?></h4>
-                            </a>
-                            <?php if($this->user->role_id == 2): ?>
-                            <?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
-                            <?php endif ?>
-                        </div><!-- closes img-wrapper -->
-                        <div class="meta">
-                            <span class="cat-1"><img src="/images2/cleardot.gif" alt="" /><?= $this->categories[$list->main_type]['name'] ?></span>
-                            <?php if($list->price > 0): ?>
-                            <strong>$<?= $list->price ?><em> / person</em></strong>
-                            <?php endif ?>
-                        </div><!-- closes meta -->
-                        <p class="listing_description"><?= $list->description ?></p>
-                        <a href="<?= str_replace('filter', $list->identifier, $url) ?>" class="btn-1">View activity</a>
+                            <a href="<?= str_replace('filter', $list->identifier, $url) ?>" class="btn-1">View activity</a>
+                        </div>
                     </div><!-- closes result -->
                     <?php endforeach ?>
                 </div><!-- closes results-wrapper -->
             </div><!-- closes content -->
+            <div class="clear"></div>
         </div><!-- closes main -->
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>

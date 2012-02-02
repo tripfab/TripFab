@@ -90,12 +90,6 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        if($this->view->lang == 'es-ES')
-            $this->render('index-es');
-        
-        $this->view->countries = $this->places->getPlaces(2);
-        
-        /*
         $countries = $this->places->getPlaces(2);
         $country   = $this->places->getPlaceById(18);
         $cities    = $this->places->getPlaces(3, $country->id);
@@ -103,7 +97,6 @@ class IndexController extends Zend_Controller_Action
         $this->view->countries = $countries;
         $this->view->cities    = $cities;
         $this->view->country   = $country;
-        */
     }
     
     public function aboutAction()
@@ -198,65 +191,16 @@ class IndexController extends Zend_Controller_Action
     
     public function searchAction()
     {
-        $q = $_GET['q'];
         
-        $cat    = $this->_getParam('cat', 'activities');
-        $subcat = $this->_getParam('subcat', 'all');
-        $sort   = $this->_getParam('sort', 'newest');
-        $stars  = $this->_getParam('stars', 'all');
-        
-        $google = new WS_Googlemap();
-        $address = $google->findAddress($q);
-        
-        $place = $address->Placemark[0];
-        
-        $north = $place->ExtendedData->LatLonBox->north;
-        $south = $place->ExtendedData->LatLonBox->south;
-        $west  = $place->ExtendedData->LatLonBox->west;
-        $east  = $place->ExtendedData->LatLonBox->east;
-        
-        $ratio = ($east - $west) * 111;
-        if($ratio < 10){
-            $west  = $place->Point->coordinates[0] - (10 / 111);
-            $east  = $place->Point->coordinates[0] + (10 / 111);
-        }
-        
-        $ratio = ($north - $south) * 111;
-        if($ratio < 5){
-            $north  = $place->Point->coordinates[1] + (5 / 111);
-            $south  = $place->Point->coordinates[1] - (5 / 111);
-        }
+    }
     
+    public function collectionsAction()
+    {
         
-        $db = Zend_Db_Table::getDefaultAdapter();
-        $select = $db->select();
-        $select->from('listings');
-        $select->where("listings.lat BETWEEN {$south} and {$north}");
-        $select->where("listings.lng BETWEEN {$west} and {$east}");
-        //$select->where('main_type = 4');
-        $select->join('vendors','listings.vendor_id = vendors.id',array('vendor_name'=>'name'));
-        $select->join('places','listings.city_id = places.id',array('city_idf'=>'title'));
-        $select->join(array('places2'=>'places'),'listings.country_id = places2.id',array('country_idf'=>'title'));
-        
-        $bounds = array($north, $south, $east, $west);
-        
-        $result = $db->fetchAll($select, array(), 5);
-        
-        $categories  = $this->listings->getMainCategories(true);
-        if($cat != 'all'){
-            $category = $this->listings->getCategoryByIdf($cat);
-            $subcategories = $this->listings->getSubCategoriesOf($category->id);
-        }
-        
-        $this->view->listings    = $result;
-        $this->view->class       = 'landscape-1';
-        $this->view->cat         = $cat;
-        $this->view->subcat      = $subcat;
-        $this->view->sort        = $sort;
-        $this->view->stars       = $stars;
-        $this->view->categories  = $categories;
-        
-        
+    }
+    
+    public function resultsAction()
+    {
         
     }
     
