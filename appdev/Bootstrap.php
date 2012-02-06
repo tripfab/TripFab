@@ -465,5 +465,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $logger = new Zend_Log($writer);
         Zend_Registry::set('activity_logger', $logger);
     }
+    
+    protected function _initStripeConfig()
+    {
+        $config = $this->getOption('stripe');
+        Zend_Registry::set('stripe', $config);
+    }
 }
 

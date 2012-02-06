@@ -41,13 +41,13 @@
 
 #header .logo {
 	float: left;
-	margin-top: 9px;
+	margin-top: 12px;
 }
 
 #header .logo a {
 	background: url(../images2/logo.png) no-repeat scroll 0 0 transparent;
 	display: block;
-	height: 34px;
+	height: 28px;
 	text-indent: -9999px;
 	width: 102px;
 }
@@ -106,7 +106,6 @@
 	padding: 0 25px 0 5px;
 	color: #d7d7d7;
 	margin-top: 11px;
-	font: normal 12px/25px Helvetica;
 }
 
 #header .header-search input:hover {
@@ -2115,7 +2114,7 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 	background-color: #e4e4e4;
 	border-radius: 4px 4px 0 0;
 	overflow: visible;
-	padding: 12px 20px 0;
+	padding: 12px 20px;
 	position: relative;
 }
 
@@ -2695,13 +2694,7 @@ ul.reviews li > div div.meta em.red {
 .right-sidebar .widget.book ul a.ui-state-active span + span {
 	background: none;
 }
-.right-sidebar .widget.book ul a.ui-state-active span.icon {
-	background: url(../images2/icon-calendar.png) no-repeat ;
-	display: block;
-	float: right;
-	height: 16px;
-	width: 15px;
-}
+
 .right-sidebar .widget.book ul li a img.arrow {
     bottom: -8px;
     display: none;
@@ -2724,7 +2717,7 @@ ul.reviews li > div div.meta em.red {
 .datepicker a.ui-state-default {
 	background-color: #b7b7b7;
 	color: #464646;
-	font-size: 13px;
+	font-size: 12px;
 	font-weight: bold;
 }
 
@@ -3243,60 +3236,45 @@ ul.reviews li > div div.meta em.red {
 
 .checkout-wrapper > .left {
 	float: left;
-	width: 650px;
-	background-color:#FFF;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	border: 1px solid #e9e9e9;
-	-webkit-box-shadow: 0px 0px 2px 0px #e9e9e9;
-	-moz-box-shadow: 0px 0px 2px 0px #e9e9e9;
-	box-shadow: 0px 0px 2px 0px #e9e9e9;
+	width: 712px;
 }
 
 .checkout-item {
+	background-color: #FFFFFF;
+	border: 1px solid #E7E7E7;
+	border-radius: 4px;
+	box-shadow: 0 0 2px #EAEAEA;
 	overflow: hidden;
-	padding: 25px 0 25px 25px;
-	background: url(../images2/g-54.png) repeat-x left top;
+	padding: 25px 0;
 }
-.checkout-item.first {
-	background: none;
-}
+
 .checkout-item + .checkout-item {
 	margin-top: 22px;
 }
-.checkout-item .ttl {
-	overflow: hidden;
-	margin-bottom: 10px;
+
+.checkout-item .left {
+	width: 162px;
+	float: left;
 }
-.checkout-item .ttl > span {
-	background: url(../images2/checkout-circle.png) no-repeat;
+
+.checkout-item .left > span {
+	background: url(../images2/t-14.png) no-repeat;
 	color: #FFFFFF;
 	display: block;
 	font-size: 14px;
 	font-weight: bold;
-	height: 21px;
-	line-height: 21px;
+	height: 24px;
+	line-height: 24px;
 	text-align: center;
-	width: 21px;
+	width: 40px;
 	float: left;
 }
-.checkout-item .process {
-	background-color: #ecf7ff;
-	padding: 20px;
+
+.checkout-item .left > strong {
+	float: left;
+	line-height: 24px;
 	color: #303030;
-	width: 560px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	line-height: 16px;
 	font-size: 12px;
-}
-.checkout-item  .ttl > strong {
-	float: left;
-	line-height: 21px;
-	color: #303030;
-	font-size: 15px;
 	margin-left: 9px;
 }
 
@@ -7383,7 +7361,7 @@ ul.reviews li > div div.meta em.red {
 	line-height: 25px;
 	font-weight: bold;
 	font-size: 15px;
-	padding:0 0 0 23px;
+	padding: 0 23px;
 }
 
 .listings-main .sub-ttl a.btn-1 {
@@ -7699,38 +7677,7 @@ ul.reviews li > div div.meta em.red {
 	right: 25px;
 	margin: 0;
 }
-.listing-ttl .social {
-	overflow: hidden;
-	padding: 5px 0;
-	background: url(../images2/sep_social-top.png) repeat-x;
-}
-.listing-ttl .social .facebook {
-	background: url(../images2/sep_social-mid.gif) repeat-y right top;
-	float: left;
-    height: 28px;
-    overflow: hidden;
-    padding-top: 7px;
-    width: 130px;
-}
-.listing-ttl .social .twitter {
-	float: left;
-	height: 28px;
-	overflow: hidden;
-	padding: 7px 0 0 10px;
-	width: 130px;
-} 
-.listing-ttl .social .email {
-	float: right;
-	width: 100px;
-	background: url(../images2/social_email.png) no-repeat right top;
-	width: 112px;
-	height: 20px;
-	display: block;
-	margin-top: 7px;
-}
-.listing-ttl .social .email:hover {
-	background-position: left bottom;
-}
+
 .listing-content {
 	background: url(../images2/sep-3.png) repeat-y;
 	border-top: 1px solid #e8e8e8;
@@ -8455,52 +8402,6 @@ ul.reviews li > div div.meta em.red {
 	width: auto;
 }
 
-.lstng-details .direction {
-	float: right;
-	width: 490px;
-}
-.lstng-details .direction .cont {
-	border-bottom: 1px solid #f0f0f0;
-	padding:3px 0 10px 0;
-	margin-bottom: 10px;
-	overflow: hidden;
-}
-.lstng-details .direction .cont > p {
-	font: bold 12px/16px Helvetica;
-	color: #898989;
-	text-align: center;
-}
-.lstng-details .add_direc {
-	background: url(../images2/ico-32.png) no-repeat left 50%;
-	padding-left: 20px;
-	color: #60b5f7;
-	font: bold 11px Helvetica;
-	float: right;
-	height: 15px;
-	display: block;
-}
-.lstng-details .direction .cont .top {
-	overflow: hidden;
-	padding: 0 0 10px 0;
-	width: 490px;
-}
-.lstng-details .direction .cont .top strong {
-	float: left;
-}
-.lstng-details .direction .cont .top a {
-	float: right;
-	background: url(../images2/ico-31.png) no-repeat left 50%;
-	padding-left: 20px;
-	color: #f26522;
-	font-weight: bold;
-}
-.lstng-details.pricing.overview .lstng-detail .direction .cont textarea{
-	width: 477px;
-	height: 50px;
-	min-height: 0;
-}
-
-
 /*- Vendor Listings Styles -----------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------*/
 
@@ -8858,73 +8759,9 @@ ul.reviews li > div div.meta em.red {
 /*- Reservations Styles -----------------------------------------------------------*/
 
 .reservations {
-	padding-bottom: 60px;
+	overflow: hidden;
 }
 
-
-.reservations .control {
-	display: none;
-    position: absolute;
-    right: 17px;
-    top: 51px;
-    z-index: 10000;
-}
-.reservations .control span.arrow {
-    display: block;
-    position: absolute;
-    right: 24px;
-    top: -5px;
-    width: 0;
-	height: 0;
-	border-left: 5px solid transparent;
-	border-right: 5px solid transparent;
-	border-bottom: 5px solid #FFF;
-}
-.reservations .control ul {
-	-webkit-box-shadow: 0px 0px 6px 2px #d5d4d4;
-	-moz-box-shadow: 0px 0px 6px 2px #d5d4d4;
-	box-shadow: 0px 0px 6px 2px #d5d4d4;
-	background-color: #FFF;
-	list-style: none;
-	padding: 5px 0;
-}
-.reservations .control ul li {
-	height: 23px;
-	padding-right: 10px;
-}
-.reservations .control ul li:hover {
-	background-color: #5AB2E5;
-}
-.reservations .control ul li a {
-	color: #303030;
-    display: block;
-    font: bold 11px/23px Helvetica,Arial,sans-serif;
-    text-indent: 10px;
-    text-shadow: -1px 1px #FFFFFF;
-}
-.reservations .control ul li:hover a {
-	color: #FFFFFF;
-    text-decoration: none;
-    text-shadow: -1px 1px #2573B4;
-}
-.reservations div.control.show {
-	display: block;
-}
-.reservations .top a.btn-10 {
-	color: #464646;
-	font: bold 11px/26px Helvetica;
-	height: 26px;
-	color: #303030;
-}
-.reservations .btn-10.edit {
-	padding: 0;
-	width: 50px;
-}
-.reservations .btn-10.edit span{
-	background: url("../images2/ico-121.png") no-repeat scroll 7px 50% transparent;
-    text-indent: -99999px;
-    display: block;
-}
 .reservations > strong {
 	line-height: 50px;
 	display: block;
@@ -8938,6 +8775,7 @@ ul.reviews li > div div.meta em.red {
 	border: 1px solid #E7E7E7;
 	border-radius: 4px;
 	margin-bottom: 14px;
+	overflow: hidden;
 }
 
 .reservation.in {
@@ -8946,12 +8784,12 @@ ul.reviews li > div div.meta em.red {
 
 .reservation .top {
 	padding: 15px 23px;
-	position: relative;
+	overflow: hidden;
 }
 
 .reservation .top > img {
 	float: left;
-	margin:0 22px 15px 0;
+	margin-right: 22px;
 	width: 48px;
 	height: 48px;
 }
@@ -9021,11 +8859,10 @@ ul.reviews li > div div.meta em.red {
 
 .reservation .bottom {
 	overflow: hidden;
-	background: url(../images2/g-55.png) repeat-x scroll 0 -1px #F7F7F7;
+	background: url(../images2/g-3.png) repeat-x scroll 0 0 #FFFFFF;
 	border-top: 1px solid #E8E8E8;
 	padding: 15px 23px;
 	display: none;
-	clear: both;
 }
 
 .reservation.show .bottom {
@@ -11640,15 +11477,11 @@ ul.reviews li > div div.meta em.red {
 	font-size:12px;
 }
 .main-menu ul li.avaible-balance a.btn-1 {
-	color: #FFFFFF;
-    float: left;
-    font: bold 11px/23px Helvetica;
-    height: 23px;
-    margin: 5px 5px 0 0;
-    padding-left: 10px;
-    padding-right: 10px;
-    text-shadow: 0px 1px 0px #5C961F;
-    filter: dropshadow(color=#5C961F, offx=0, offy=1); 
+	float:left;
+	font-size:11px;
+	margin:5px 5px 0 0;
+	padding-left:10px;
+	padding-right:10px;
 }
 /*END VENDOR OFFERS-----------------------------------------*/
 /*VENDOR OFFERS ACTIVITY------------------------------------*/
@@ -14684,17 +14517,12 @@ ul.reviews li > div div.meta em.red {
 	display: block;
 }
 #search_result .left-sidebar .widget {
-	margin: 0;
+	margin: 0 0 14px 0;
 	padding: 0;
 	background: url(../images2/g-52.gif) repeat-x #f8f8f8;
 	border: none;
-	padding:30px 0 20px 15px;
+	padding:15px 0 0 15px;
 	margin-right: 1px;
-	overflow: hidden;
-	width: 175px !important;
-}
-#search_result .left-sidebar .widget .scroll-pane {
-	height: 173px !important;
 }
 #search_result .left-sidebar .widget.slider .bg{
 	margin-left: 10px;
@@ -14928,169 +14756,7 @@ ul.reviews li > div div.meta em.red {
 /*SEARCH ALL---------------------------------------------------------------*/
 
 /*END SEARCH ALL-----------------------------------------------------------*/
-/*LIGHTBOX EMAIL TO FRIEND-------------------------------------------------*/
-#send_to_friend {
-	background-color: #FFF;
-	width: 460px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	position: relative;
-	margin: 0 auto;
-}
-#send_to_friend .top {
-	-moz-border-radius-topleft: 4px;
-	-moz-border-radius-topright: 4px;
-	-moz-border-radius-bottomright: 0px;
-	-moz-border-radius-bottomleft: 0px;
-	-webkit-border-radius: px 4px 0px 0px;
-	border-radius: px 4px 0px 0px;
-	background: url(../images2/g-54.png) repeat-x left bottom;
-	height: 78px;
-	color: #303030;
-	font: bold 20px/82px Helvetica;
-	text-align: center;
-	position: relative;
-}
-#send_to_friend .top .stamp {
-	background: url(../images2/email_stamp.png) no-repeat 0 0;
-	display: block;
-	width: 70px;
-	height: 102px;
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-#send_to_friend .mid img {
-	display: block;
-	background: url(../images2/email_shadow.png) no-repeat center bottom;
-	padding-bottom: 16px;
-	margin: 0 auto;
-}
-#send_to_friend .mid p {
-	text-align: center;
-	color: #898989;
-	margin-bottom: 25px;
-}
-#send_to_friend .mid p span {
-	color: #303030;
-	font: bold 16px/20px Helvetica;
-	display: block;
-}
-#send_to_friend .bot {
-	background: url(../images2/g-55.png) repeat-x left top #f8f8f8;
-	-moz-border-radius-topleft: 0px;
-	-moz-border-radius-topright: 0px;
-	-moz-border-radius-bottomright: 4px;
-	-moz-border-radius-bottomleft: 4px;
-	-webkit-border-radius: 0px 0px 4px 4px;
-	border-radius: 0px 0px 4px 4px; 
-}
-#send_to_friend .emails {
-	border-bottom: 1px solid #eaeaea;
-	padding: 25px 0 0 25px;
-}
-#send_to_friend .bot label {
-	display: block;
-	font: bold 13px/15px Helvetica;
-	margin-bottom: 7px;
-}
-#send_to_friend .bot input[type="text"] {
-	width: 400px;
-	color: #898989;
-	margin-bottom: 7px;
-	display: block;
-}
-#send_to_friend .bot .add {
-	background: url(../images2/ico-32.png) no-repeat left 50%;
-	color: #60b5f7;
-	padding-left: 20px;
-	font-size: 11px;
-	display: block;
-	margin-bottom: 10px;
-}
-#send_to_friend .bot .add:hover {
-	text-decoration: none;
-	color: #90ceff;
-}
 
-#send_to_friend .messages {
-	border-top: 1px solid #fcfcfc;
-	padding: 25px 0 20px 25px;
-	overflow: hidden;
-}
-#send_to_friend .messages textarea {
-	width: 400px;
-	height: 45px;
-}
-#send_to_friend .messages p {
-	color: #898989;
-	font: normal 11px/14px Helvetica;
-	padding: 10px 0;
-}
-#send_to_friend .messages .btn-1 {
-	float: right;
-	margin-right: 25px;
-}
-#send_to_friend .messages .btn-10 {
-	float: right;
-}
-/*END LIGHTBOX EMAIL TO FRIEND---------------------------------------------*/
-/*LIGHTBOX CREATE NEW DIRECTION------------------------------------------ */
-#new_direction {
-	width:217px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-}
-#new_direction .top {
-	background:url(../images2/g-54.gif) repeat-x;
-	font:bold 13px/44px Helvetica, sans-serif;
-	color:#FFF;
-	padding-left:20px;
-	margin-bottom:10px;
-	height: 44px;
-	color: #FFF;
-	-moz-border-radius-topleft: 4px;
-	-moz-border-radius-topright: 4px;
-	-moz-border-radius-bottomright: 0px;
-	-moz-border-radius-bottomleft: 0px;
-	-webkit-border-radius: 4px 4px 0px 0px;
-	border-radius: 4px 4px 0px 0px; 
-}
-#new_direction select {
-	margin: 10px 0 20px 22px;
-    width: 176px;
-}
-#new_direction .bottom {
-	background:url("../images2/g-52.gif") repeat-x scroll 0 0 #F6F6F6;
-	overflow:hidden;
-	padding:17px 0 17px 20px;
-	-moz-border-radius-topleft: 0px;
-	-moz-border-radius-topright: 0px;
-	-moz-border-radius-bottomright: 4px;
-	-moz-border-radius-bottomleft: 4px;
-	-webkit-border-radius: 0px 0px 4px 4px;
-	border-radius: 0px 0px 4px 4px; 
-}
-#new_direction .bottom a {
-	float:left;
-	height:30px;
-	padding:0 10px;
-	font:bold 12px/30px Helvetica, sans-serif;
-}
-#new_direction .bottom .btn-1 {
-	background: url("../images2/btn-1.gif") repeat-x scroll left top transparent;
-    border: 1px solid #7AB130;
-    display: block;
-    float: left;
-    font: bold 11px/30px Helvetica;
-    height: 30px;
-    margin-left: 20px;
-    text-shadow: -1px 1px 1px #5C961F;
-    -moz-border-radius: 4px;
-}
-/*END LIGHTBOX CREATE NEW DIRECTION-------------------------------------- */
 
 
 

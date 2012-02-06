@@ -29,7 +29,7 @@ class Zend_View_Helper_Thumbnail {
             'w' => $width,
             'h' => $height,
             'crop' => true,
-            'scale' => true,
+            //'scale' => true,
         );
 
         if (!file_exists($imagePath)) {

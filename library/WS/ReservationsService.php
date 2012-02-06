@@ -46,7 +46,7 @@ class WS_ReservationsService {
         ));
         $select->join('listings','reservations.listing_id = listings.id',array('listing_name'=>'title'));
         $select->where('reservations.vendor_id = ?', $vendor);
-        $select->where('reservations.status_id = ?',1);
+        $select->where('reservations.status_id = ?',2);
         
         $_reservs = $db->fetchAll($select);
         
@@ -136,7 +136,7 @@ class WS_ReservationsService {
         $select->join('listing_types','listings.main_type = listing_types.id',array('listing_type'=>'name'));
         $select->join('transactions','reservations.transaction_id = transactions.id',array('method'));
         $select->where('reservations.vendor_id = ?', $vendor);
-        $select->where('reservations.status_id = ?',1);
+        $select->where('reservations.status_id = ?',3);
         
         $_reservs = $db->fetchAll($select, array(), 5);
         
@@ -156,7 +156,7 @@ class WS_ReservationsService {
         $select->join('listing_types','listings.main_type = listing_types.id',array('listing_type'=>'name'));
         $select->join('transactions','reservations.transaction_id = transactions.id',array('method'));
         $select->where('reservations.user_id = ?', $user);
-        $select->where('reservations.status_id = ?',1);
+        $select->where('reservations.status_id = ?',2);
         
         $reservations = $db->fetchAll($select, array(), 5);
         
@@ -250,7 +250,7 @@ class WS_ReservationsService {
         $select->join('listing_types','listings.main_type = listing_types.id',array('listing_type'=>'name'));
         $select->join('transactions','reservations.transaction_id = transactions.id',array('method'));
         $select->where('reservations.user_id = ?', $user);
-        $select->where('reservations.status_id = ?',1);
+        $select->where('reservations.status_id = ?',3);
         
         $_reservs = $db->fetchAll($select, array(), 5);
         

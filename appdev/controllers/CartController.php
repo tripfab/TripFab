@@ -101,56 +101,34 @@ class CartController extends Zend_Controller_Action {
             $vendor = $this->listings->getVendor($listing->vendor_id);
             
             if($listing->main_type == 6){
+                $rowR = $this->listings->getActivityQuote(
+                            $listing, 
+                            $data['adults'], 
+                            $data['kids'], 
+                            date('Y-m-d', strtotime($data['checkin'])), 
+                            $data['option'], 
+                            $data['capacity']);
+                
                 $row = $this->cart->fetchNew();
+                
                 $row->user_id    = $this->user->getId();
                 $row->checkin    = date('Y-m-d', strtotime($data['checkin']));
-                $row->option_id  = $data['option'];
-                $row->adults     = $data['adults'];
-                $row->kids       = $data['kids'];
+                $row->checkout   = date('Y-m-d', strtotime($data['checkout']));
                 $row->listing_id = $listing->id;
+                $row->option_id  = $rowR->option_id;
+                $row->adults     = $rowR->adults;
+                $row->kids       = $rowR->kids;
+                $row->rate       = $rowR->rate;
+                $row->rate       = $rowR->rate;
+                $row->additional = $rowR->additional;
+                $row->subtotal   = $rowR->subtotal;
+                $row->taxes      = $rowR->taxes;
+                $row->total      = $rowR->total;
+                $row->created    = date('Y-m-d g:i:s');
+                $row->token      = md5($this->user->getToken().$row->created);
                 
-                $seasson = $this->listings->getSeassonFor($row->checkin, $listing->id);
-                if(!is_null($seasson)){
-                    $price = $this->listings->getSeassonPrice($seasson->id, $listing->id);
-                    if($price->price == '0.00'){
-                        $price = $this->listings->getBasicPrice($listing->id); 
-                    }
-                } else {
-                    $price = $this->listings->getBasicPrice($listing->id);
-                }
-                
-                //var_dump($price->toArray()); die;
-                
-                $total_people = $row->kids + $row->adults;
-                if($price->min > $total_people)
-                        throw new Exception('you need more people');
-                if($price->max < $total_people)
-                        throw new Exception('too many people');
-                $row->rate = $price->price;
-                if($price->type_id == 1){
-                    $row->rate_description = 'Basic Price';
-                } else {
-                    $row->rate_description = $seasson->name . ' seasson price';
-                }
-                if($price->additional_after < $total_people){
-                    $extra = $total_people - $price->additional_after;
-                    $row->additional = $price->additional;
-                    $row->additional_description = 'Additional after '.$price->additional_after.' person(s)';
-                }
-                
-                if($extra){
-                    $row->subtotal = $price->price;
-                    $row->subtotal = $row->subtotal + ($row->additional * $extra);
-                } else {
-                    $row->subtotal = $price->price;
-                }
-                $row->taxes = ($row->subtotal * 0.1);
-                $row->total = $row->subtotal + $row->taxes;
-                
-                $row->created = date('Y-m-d g:i:s');
-                $row->token = md5($this->user->getToken().$row->created);
-                
-                //var_dump($row->toArray()); die;
+                $row->rate_description       = $rowR->rate_description;
+                $row->additional_description = $rowR->additional_description;
                 
                 $row->save();
                 
@@ -158,99 +136,37 @@ class CartController extends Zend_Controller_Action {
             }
             elseif($listing->main_type == 5)
             {
-                /*
-                Array
-                (
-                    [option] => 8
-                    [rooms] => 2
-                    [adults] => 4
-                    [userids] => 29
-                    [userstoken] => 47a0183b6dda816b9e012bb7a80698bc
-                    [formids] => 98f4b1724db0da1d6b8029a40e35d9c7
-                    [_task] => 6ffab885c2a7c356633c76013c63c275
-                    [listingids] => 148
-                    [listingstoken] => 6728edb0ec93cd4d9c7a289cd3803738
-                    [cityid] => 25
-                    [countryid] => 18
-                    [checkin] => 2011-7-26
-                    [checkout] => 2011-7-28
-                )
-                 * 
-                 */
+                $rowR = $this->listings->getQuote(
+                            $listing, 
+                            $data['adults'], 
+                            $data['kids'], 
+                            date('Y-m-d', strtotime($data['checkin'])), 
+                            date('Y-m-d', strtotime($data['checkout'])), 
+                            null, $data['option']);
+                               
                 $row = $this->cart->fetchNew();
+                
                 $row->user_id    = $this->user->getId();
                 $row->checkin    = date('Y-m-d', strtotime($data['checkin']));
                 $row->checkout   = date('Y-m-d', strtotime($data['checkout']));
-                $row->option_id  = $data['option'];
-                $row->adults     = $data['adults'];
-                $row->kids       = 0;
                 $row->listing_id = $listing->id;
+                $row->option_id  = $rowR->option_id;
+                $row->adults     = $rowR->adults;
+                $row->kids       = $rowR->kids;
+                $row->rate       = $rowR->rate;
+                $row->rate       = $rowR->rate;
+                $row->additional = $rowR->additional;
+                $row->rooms      = $rowR->rooms;
+                $row->nights     = $rowR->nights;
+                $row->subtotal   = $rowR->subtotal;
+                $row->taxes      = $rowR->taxes;
+                $row->total      = $rowR->total;
+                $row->max        = $rowR->max;
+                $row->created    = date('Y-m-d g:i:s');
+                $row->token      = md5($this->user->getToken().$row->created);
                 
-                $fday = strtotime($row->checkin);
-                $lday = strtotime($row->checkout);
-                
-                $nights = $lday - $fday;
-                $nights = $nights / 86400;
-                
-                $option = $this->listings->getSchedule($data['option']);
-                
-                //echo '<pre>'; print_r($_POST); echo '</pre>'; die;
-                
-                $price = $this->listings->getOptionPrice($listing->id, $row->option_id);
-                
-                $total_people = $row->kids + $row->adults;
-                
-                $row->rate = $price->price;                
-                if($price->type_id == 1){
-                    $row->rate_description = 'Basic Price per night';
-                } else {
-                    $row->rate_description = 'Price for '. $option->name .' Room per night';
-                }
-                
-                if($total_people > $price->max){
-                    $aux   = $total_people % $price->max;
-                    $rooms = ($total_people - $aux) / $price->max;
-                    $rooms = ($aux > 0) ? $rooms + 1 : $rooms;
-                } else {
-                    $rooms = 1;
-                }
-                
-                $_prices = array();
-                $aux = $total_people;
-                for($i = 0; $i < $rooms; $i++)
-                {
-                    $personas   = ($aux > $price->max) ? $price->max : $aux;
-                    $basic      = $price->price;
-                    $additional = ($personas > $price->additional_after) ? $price->additional * ($personas - $price->additional_after) : 0;
-                    $_prices[] = array(
-                        'personas' => $personas,
-                        'basic'    => $basic,
-                        'additional'=> $additional
-                    );
-                    $aux = $aux - $personas;
-                }
-                
-                $row->additional = ($total_people > $price->additional_after) ? $price->additional : 0;
-                $row->additional_description = ($row->additional > 0) ? 'Additional after '.$price->additional_after.' per person, per room, per night' : '' ;
-                
-                $row->rooms = $rooms;
-                $row->nights = $nights;
-                
-                
-                $subtotal = 0;
-                foreach($_prices as $p){
-                    $subtotal = $subtotal + (($p['basic'] + $p['additional']) * $nights);
-                }
-                $row->subtotal = $subtotal;
-                $row->taxes = ($row->subtotal * 0.1);
-                $row->total = $row->subtotal + $row->taxes;
-                
-                $row->created = date('Y-m-d g:i:s');
-                $row->token = md5($this->user->getToken().$row->created);
-                
-                $row->max = $price->max;
-                
-                //var_dump($row->toArray()); die;
+                $row->rate_description       = $rowR->rate_description;
+                $row->additional_description = $rowR->additional_description;
                 
                 $row->save();
                 
@@ -258,11 +174,11 @@ class CartController extends Zend_Controller_Action {
             }
             else
             {
-                $this->_redirect('/');
+                throw new Exception('Bad Listing type');
             }
         }
         else
-            $this->_redirect('/');
+            throw new Exception('Bad Request');
     }
     
     public function addtripAction()
@@ -622,13 +538,13 @@ class CartController extends Zend_Controller_Action {
             //var_dump($_POST); die;
             $data = $_POST;
             if($data['userids'] != $this->user->getId())
-                    $this->chargeReturnError('There is something wrong with the form please try later');
+                    throw new Exception('There is something wrong with the form please try later');
             if($data['userstoken'] != $this->user->getToken())
-                    $this->chargeReturnError('There is something wrong with the form please try later');
+                    throw new Exception('There is something wrong with the form please try later');
             if($data['formids'] != md5($this->user->getToken().'checkout'))
-                    $this->chargeReturnError('There is something wrong with the form please try later');
+                    throw new Exception('There is something wrong with the form please try later');
             if($data['_task'] != md5('purchase'))
-                    $this->chargeReturnError('There is something wrong with the form please try later');
+                    throw new Exception('There is something wrong with the form please try later');
             
             $select = $this->cart->select();
             $select->where('id = ?', $data['cartitemid']);
@@ -640,44 +556,61 @@ class CartController extends Zend_Controller_Action {
             if($cartitem->token != $data['cartitemtoken'])
                     throw new Exception();
             
-            $_billing = array(
-                'user_id' =>$this->user->getId(),
-                'street1' =>$data['street1'],
-                'street2' =>$data['street2'],
-                'country' =>$data['country'],
-                'city'    =>$data['city'],
-                'state'   =>'',
-                'zip'     =>$data['zip'],
-                'specs'   =>$data['specs'],
-                'location'=>$data['location'],
-                'phone'   =>$data['phone'],
-                'aboutus' =>$data['aboutus'],
-                'updated' =>date('Y-m-d g:i:s')
+            require_once "Stripe/Stripe.php";
+            // set your secret key: remember to change this to your live secret key in production
+            // see your keys here https://manage.stripe.com/account
+            $keys = Zend_Registry::get('stripe');
+            Stripe::setApiKey($keys['secret_key']);
+
+            // get the credit card details submitted by the form
+            $token = $_POST['stripeToken'];
+
+            // create a Customer
+            $customer = Stripe_Customer::create(array(
+              "card" => $token,
+              "description" => $this->user->email)
             );
             
-            $billing = $this->billing->fetchRow("user_id = {$this->user->getId()}"); 
-            if(is_null($billing)){
-                $_billing['created'] = $_billing['updated'];
-                $this->billing->insert($_billing);
-            } else {
-                $this->billing->update($_billing, "id = {$billing->id}");
-            }
+            //var_dump($customer->active_card); die;
             
-            switch($data['method']){
-                case 'paypal':
-                    $service = new WS_Paypal(true);
-                    $returnURL = "http://cristiantests.com/cart/confirm/paypal/".$cartitem->id;
-                    $cancelURL = "http://cristiantests.com/cart/checkout/".$cartitem->id;
-                    $service->proceed($cartitem->total, $returnURL, $cancelURL);
-                    break;
-                case 'creditcard':
-                    $service   = new WS_Creditcard(true);
-                    $returnURL = "http://cristiantests.com/cart/confirm/creditcard/".$cartitem->id;
-                    $cancelURL = "http://cristiantests.com/cart/checkout/".$cartitem->id;
-                    $service->proceed($cartitem->total, $returnURL, $cancelURL);
-                    break;
-                default: throw new Exception(); break;
-            }       
+            $strip_accounts = new Zend_Db_Table('stripe_accounts');
+            $account = $strip_accounts->fetchNew();
+            $account->stripe_id = $customer->id;
+            $account->user_id   = $this->user->getId();
+            $account->type      = $customer->active_card->type;
+            $account->last4     = $customer->active_card->last4;
+            $account->created   = date('Y-m-d H:i:s');
+            $account->updated   = date('Y-m-d H:i:s');
+            
+            $account->save();
+            
+            $listing = $this->listings->getListing($cartitem->listing_id);
+            $vendor  = $this->listings->getVendor($listing->vendor_id);
+            $method  = $customer->active_card->type . ' ************'.$customer->active_card->last4;
+            $code    = $this->user->getId().$vendor->id.time();
+
+            $_transaction = array(
+                'code'      => $code,
+                'user_name' => $this->user->getName(),
+                'method'    => $method,
+                'ammount'   => $cartitem->total,
+                'date'      => date('Y-m-d G:i:s'),
+                'listing_id'=> $listing->id,
+                'vendor_id' => $vendor->id,
+                'status'    => 0,
+                'created'   => date('Y-m-d G:i:s'),
+                'updated'   => date('Y-m-d G:i:s')
+            );
+
+            $transaction = $this->transactions->fetchNew();
+            $transaction->setFromArray($_transaction);
+            $transaction->save();
+
+            $reservation = $this->reservations->create($transaction, $cartitem, $listing);
+
+            $cartitem->delete();
+
+            $this->_redirect('cart/invoice/'.$reservation->id);
         }
     }
     

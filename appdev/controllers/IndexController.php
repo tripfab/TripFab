@@ -154,6 +154,8 @@ class IndexController extends Zend_Controller_Action
         $ls_count = $this->listings->countListings($city->id);
         
         $listings = $this->listings->getListings2($city->id, $cat, $subcat, $sort, $stars);
+        $this->view->listing_count = count($listings);
+        //var_dump($this->view->listing_count); die;
         
         if($this->user)
             $favorites = $this->user->getFavotites();
@@ -216,7 +218,6 @@ class IndexController extends Zend_Controller_Action
         $city        = $this->places->getPlaceByIdf($city_idf, 3, $country->id);
         $listing     = $this->listings->getListingByIdf($listing_idf, $city->id, $country->id);
         
-        $tabs        = $this->listings->getTabsOf($listing->id);
         $faqs        = $this->listings->getFAQsOf($listing->id);
         $vendor      = $this->vendors->getVendorById($listing->vendor_id);
         
@@ -229,18 +230,107 @@ class IndexController extends Zend_Controller_Action
         
         switch($listing->main_type){
             case self::ACTIVITY: 
+                $keys = Zend_Registry::get('stripe');
                 $template = 'listing-activity';      
                 $options = $this->listings->getSchedulesOf($listing->id);
                 $this->view->options = $options;
-                break;
-            case self::ENTERTAIMENT  : $template = 'listing-entertaiment';  break;
+                $overview = $this->listings->getOverviewOf2($listing->id);
+                if($listing->departure)
+                    $departure_city = $this->places->getPlaceById($listing->departure);
+                if($listing->departure != $listing->return){
+                    if($listing->return)
+                        $return_city = $this->places->getPlaceById($listing->return);
+                }
+                
+                if(is_null($listing->min) or is_null($listing->max)){
+                    $capacities = $this->listings->getActivityTypes($listing->id);
+                    $this->view->capacities = $capacities;
+                    
+                    $prices = $this->listings->getSchPrices($listing);
+                    if(!is_null($prices))
+                        $prices = $prices[0];
+                    
+                    $this->view->prices = $prices;
+                }
+
+                $details = $this->listings->getDetails($listing->id);
+
+                $getthere = $this->listings->getLocationOf($listing->id);
+
+                $this->view->overview       = $overview;
+                $this->view->departure_city = $departure_city;
+                $this->view->return_city    = $return_city;
+                $this->view->details        = $details;
+                $this->view->getthere       = $getthere;
+                $this->view->key            = $keys['public_key'];
+            break;
+            case self::ENTERTAIMENT  : 
+                $template = 'listing-entertaiment';  
+                $overview = $this->listings->getOverviewOf2($listing->id);
+                $details = $this->listings->getDetails($listing->id);
+
+                $this->view->overview = $overview;
+                $this->view->details  = $details;
+            break;
             case self::HOTEL: 
+                $keys = Zend_Registry::get('stripe');
                 $template = 'listing-hotel';         
                 $options = $this->listings->getSchedulesOf($listing->id);
                 $this->view->options = $options;
-                break;
-            case self::RESTAURANT    : $template = 'listing-restaurant';    break;
-            case self::TOURIST_SIGHT : $template = 'listing-touristsight'; break;
+
+                $overview = $this->listings->getOverviewOf2($listing->id);
+                $details = $this->listings->getDetails($listing->id);
+                $getthere = $this->listings->getLocationOf($listing->id);
+
+                $rooms = $this->listings->getHotelRooms($listing->id);
+                $amenities = $this->listings->getDefaultAmenities(true);
+                $beds = array();
+                foreach($rooms as $room){
+                    $beds[$room->id] = $this->listings->getBeds($room->id);
+                }
+                $room_amenities = array();
+                foreach($rooms as $room){
+                    $room_amenities[$room->id] = $this->listings->getAmenities($room->id);
+                }
+
+                $listing_amenities = $this->listings->getGenAmenities($listing->id);
+                $def_amenities     = $this->listings->getDefaultGenAmenities(true);
+                
+                if($listing->main_type == 5){
+                    $prices = $this->listings->getSchPrices($listing);
+                    if(!is_null($prices))
+                        $prices = $prices[0];
+                    
+                    $this->view->prices = $prices;
+                }
+
+                $this->view->overview = $overview;
+                $this->view->details  = $details;
+                $this->view->getthere = $getthere;
+                $this->view->rooms    = $rooms;
+                $this->view->beds     = $beds;
+                $this->view->room_amenities = $room_amenities;
+                $this->view->amenities = $amenities;
+
+                $this->view->def_amenities = $def_amenities;
+                $this->view->listing_amenities = $listing_amenities;
+                $this->view->key            = $keys['public_key'];
+            break;
+            case self::RESTAURANT    : 
+                $template = 'listing-restaurant';    
+                $overview = $this->listings->getOverviewOf2($listing->id);
+                $details  = $this->listings->getDetails($listing->id);
+
+                //var_dump($details->toArray()); die;
+
+                $this->view->overview = $overview;
+            break;
+            case self::TOURIST_SIGHT : 
+                $template = 'listing-touristsight'; 
+                $overview = $this->listings->getOverviewOf2($listing->id);
+
+                $this->view->overview = $overview;
+            break;
             default: break;
         }
         
@@ -257,14 +347,8 @@ class IndexController extends Zend_Controller_Action
         if(count($reviews) > 0)
             $this->view->reviews = $reviews;
         
-        $questions = $this->questions->getQuestionsOn($listing->id);
-        if(count($questions) > 0)
-            $this->view->questions = $questions;
-        
-        $this->view->answer_allow = false;
-        
         if(!is_null($this->user)){
-            $this->view->form_action = '/cart/add';
+            $this->view->form_action = 'cart/add';
             $fields = array(
                 'userids'       => $this->user->getId(),
                 'userstoken'    => md5($this->user->getToken()),
@@ -279,7 +363,7 @@ class IndexController extends Zend_Controller_Action
             $this->view->form_fields = $fields;
         }
         else{
-            $this->view->form_action = '/login';
+            $this->view->form_action = 'login';
             $fields = array(
                 'redirect[task]'          => md5('bookit'),
                 'redirect[listingids]'    => $listing->id,
@@ -294,30 +378,17 @@ class IndexController extends Zend_Controller_Action
             $this->view->form_fields = $fields;
         }
         
-        $prices = $this->listings->getBasicPrice($listing->id);
-        if(!is_null($prices))
-            $prices = $prices->toArray();
-        
-        if($listing->main_type == 5){
-            $prices = $this->listings->getSchPrices($listing);
-            if(!is_null($prices))
-                $prices = $prices[0];
-        }
-        
         if($this->user)
             $favorites = $this->user->getFavotites();
-        
         
         //var_dump($listing); die;
         $this->view->region          = $region;
         $this->view->country         = $country;
         $this->view->city            = $city;
         $this->view->listing         = $listing;
-        $this->view->tabs            = $tabs;
         $this->view->faqs            = $faqs;
         $this->view->vendor          = $vendor;
         $this->view->attributes      = $attributes;
-        $this->view->prices          = $prices;
         $this->view->pictures        = $pictures;
         $this->view->trips           = $trips;
         $this->view->favorites       = $favorites;

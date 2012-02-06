@@ -1081,6 +1081,8 @@ class AjaxController extends Zend_Controller_Action
         $ls_count = $this->listings->countListings($city->id);
         
         $listings = $this->listings->getListings2($city->id, $cat, $subcat, $sort, $stars, $pricemin, $pricemax);
+        $this->view->listing_count = count($listings);
+        //var_dump($this->view->listing_count); die;
         
         if($this->user)
             $favorites = $this->user->getFavotites();
@@ -1204,42 +1206,65 @@ class AjaxController extends Zend_Controller_Action
     }
     
     public function getquoteAction(){
-        if(!isset($_GET['option']))
-            echo 'Option Missing';
-        else {
-            if(!isset($_GET['checkin']) || empty($_GET['checkin'])){
-                echo 'Checking Missing'; die; }
-            
-            $id = $_GET['id'];
-            $listings = new WS_ListingService();
-            $listing = $listings->getListing($id);
-            if($listing->token != $_GET['token']){
-                if(md5($listing->token) != $_GET['token']){
-                    echo 'Error, try later'; die; } }
-            
-            if($listing->main_type == 5){
-                if(!isset($_GET['checkout']) || empty($_GET['checkout'])){
-                    echo 'Checkout Missing'; die; }
+        try {
+            if(!isset($_GET['option']))
+                throw new Exception ("Option Missing", 1);
+            else {
+                if(!isset($_GET['checkin']) || empty($_GET['checkin']))
+                    throw new Exception ("Checking Missing", 1);
+
+                $id = $_GET['id'];
+                $listings = new WS_ListingService();
+                $listing = $listings->getListing($id);
+                if($listing->token != $_GET['token']){
+                    if(md5($listing->token) != $_GET['token'])
+                        throw new Exception ("Error, try later", 1);
+                }
+
+                if($listing->main_type == 5){
+                    if(!isset($_GET['checkout']) || empty($_GET['checkout']))
+                        throw new Exception ("Checkout Missing", 1);
+                }
+                
+                if($listing->main_type == 6) {
+                    if((is_null($listing->min) || is_null($listing->max)) && 
+                            (!isset($_GET['capacity']) || empty($_GET['capacity']))){
+                        throw new Exception ("Capacity Missing", 1);
+                    }
+                }
+                $adults   = $_GET['adults'];
+                $kids     = $_GET['kids'];
+                $checkin  = $_GET['checkin'];
+                if($listing->main_type == 5)
+                    $checkout = $_GET['checkout'];
+                else
+                    $checkout = null;
+                
+                $option = $_GET['option'];
+                
+                if($listing->main_type == 6)
+                    $capacity = $_GET['capacity'];
+                else
+                    $capacity = null;
+
+                $quote  = $listings->getQuote(
+                             $listing, $adults, $kids, $checkin, $checkout, null, $option, $capacity);
+
+                if($quote->available)
+                    echo '$'.$quote->subtotal;
+                else
+                    throw new Exception($quote->error, 1);
+                die;
             }
-            $adults   = $_GET['adults'];
-            $kids     = $_GET['kids'];
-            $checkin  = $_GET['checkin'];
-            if($listing->main_type == 5)
-                $checkout = $_GET['checkout'];
-            else
-                $checkout = null;
-            $option   = $_GET['option'];
-            
-            $quote = $listings->getQuote(
-                        $listing, $adults, $kids, $checkin, $checkout, null, $option);
-            
-            if($quote->available)
-                echo '$'.$quote->subtotal;
-            else
-                echo $quote->error;
-            die;
+            die;  
+        } catch(Exception $e) {
+            //if($e->getCode() == 1){
+                
+            //} else {
+                
+            //}
+            throw $e;
         }
-        die;        
     }
     
     public function postmessageAction()

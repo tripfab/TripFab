@@ -86,6 +86,7 @@ $(document).ready(function() {
 	});
 	
 	$('input[name=option]').click(refreshPrice);
+	$('input[name=capacity]').click(refreshPrice);
 	$('select[name=kids]').change(refreshPrice);
 	$('select[name=adults]').change(refreshPrice);
 });
@@ -117,6 +118,7 @@ function refreshPrice()
 	var $data = {
 		checkin	 : $('#inputCheckin').val(),
 		option	 : $('input[name=option]:checked').val(),
+		capacity : $('input[name=capacity]:checked').val(),
 		adults	 : $('select[name=adults]').val(),
 		kids	 : $('select[name=kids]').val(),
 		id		 : $('body').data('listingid'),

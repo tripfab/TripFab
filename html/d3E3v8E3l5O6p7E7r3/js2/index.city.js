@@ -43,86 +43,15 @@ $(function(){
 	});
 	
 	$('ul.cat-menu li a').live('click', function(){
-		
-		$rel = $(this).attr('href');
-		$('.widget.destinations').hide();
-		$('.widget[rel='+$rel+']').show();
-		
-		var $a = $(this);
-		var $data = {category :$(this).data('category'),
-					 country  :$(this).data('country'),
-					 city	  :$(this).data('city')};
-			
-		if($a.parents('li').hasClass('active'))
+		if($(this).parents('li').hasClass('active'))
 			return false;
-		
-		if(ajax != false)
-			ajax.abort();
-			
-		$('.results-wrapper .loading').show();
-		ajax = $.ajax({
-			url:'/ajax/getlistings',
-			data:$data,
-			success:function(results){
-				//refresh_price = false;
-				$('.results-wrapper .loading').hide();
-				$('ul.cat-menu li.active').removeClass('active');
-				$a.parents('li').addClass('active');
-				$('.results-wrapper').html(results);
-				$( '#slider-4' ).slider('values',[0,3000]);
-				$('#value-4').text( '$' + $( '#slider-4' ).slider( 'values', 0 ) + ' - $' + $( '#slider-4' ).slider( 'values', 1 ) );
-				//refresh_price = true;
-			},
-			error:function(){
-				$('.results-wrapper .loading').hide();
-			}
-		});
-		
+		document.location.hash = $(this).attr('href');
 		return false;
 	});
 	
 	//$('.scrollcontainer').scrollElement();
 	
-	$( '#slider-4' ).slider({
-		step: 50,
-		range: true,
-		min: 0,
-		max: 3000,
-		values: [ 0, 3000 ],
-		slide: function( event, ui ) {
-			$('#value-4').text( '$' + ui.values[ 0 ] + ' - $' + ui.values[ 1 ] );
-		},
-		change:function(event, ui) {
-			var $a = $('ul.cat-menu li.active a');
-			var $data = {category :$a.data('category'),
-						 country  :$a.data('country'),
-						 city	  :$a.data('city'),
-						 pricemin :ui.values[0],
-						 pricemax :ui.values[1]};
-			
-			if(ajax != false)
-				ajax.abort();
-				
-			$('.results-wrapper .loading').show();
-			$( '#slider-4' ).slider('disable');
-			ajax = $.ajax({
-				url:'/ajax/getlistings',
-				data:$data,
-				success:function(results){
-					$('.results-wrapper .loading').hide();
-					$( '#slider-4' ).slider('enable');
-					$('ul.cat-menu li.active').removeClass('active');
-					$a.parents('li').addClass('active');
-					$('.results-wrapper').html(results);
-				},
-				error:function(){
-					$('.results-wrapper .loading').hide();
-					$( '#slider-4' ).slider('enable');
-				}
-			});
-		}
-	});
-	$('#value-4').text( '$' + $( '#slider-4' ).slider( 'values', 0 ) + ' - $' + $( '#slider-4' ).slider( 'values', 1 ) );
+	
 });
 
 $(function(){
@@ -260,4 +189,85 @@ $(function(){
 		});
 		return false;
 	});
+});
+
+$(function(){
+	var ajax = false;
+	var refresh_price = true;
+	$.address.change(function($ev){
+		$rel = document.location.hash;
+		
+		$('.widget.destinations').hide();
+		$('.widget[rel="'+$rel+'"]').show();
+		
+		var $a = $('ul.cat-menu li a[href="'+$rel+'"]');
+		var $data = {category :$a.data('category'),
+					 country  :$a.data('country'),
+					 city	  :$a.data('city')};
+		
+		if(ajax != false)
+			ajax.abort();
+			
+		$('.results-wrapper .loading').show();
+		ajax = $.ajax({
+			url:'/ajax/getlistings',
+			data:$data,
+			success:function(results){
+				refresh_price = false;
+				$('.results-wrapper .loading').hide();
+				$('ul.cat-menu li.active').removeClass('active');
+				$a.parents('li').addClass('active');
+				$('.results-wrapper').html(results);
+				$( '#slider-4' ).slider('values',[0,3000]);
+				$('#value-4').text( '$' + $( '#slider-4' ).slider( 'values', 0 ) + ' - $' + $( '#slider-4' ).slider( 'values', 1 ) );
+				refresh_price = true;
+			},
+			error:function(){
+				$('.results-wrapper .loading').hide();
+			}
+		});
+	});
+	
+	$('#slider-4').slider({
+		step: 50,
+		range: true,
+		min: 0,
+		max: 3000,
+		values: [ 0, 3000 ],
+		slide: function( event, ui ) {
+			$('#value-4').text( '$' + ui.values[ 0 ] + ' - $' + ui.values[ 1 ] );
+		},
+		change:function(event, ui) {
+			if(refresh_price) {
+				var $a = $('ul.cat-menu li.active a');
+				var $data = {category :$a.data('category'),
+							 country  :$a.data('country'),
+							 city	  :$a.data('city'),
+							 pricemin :ui.values[0],
+							 pricemax :ui.values[1]};
+				
+				if(ajax != false)
+					ajax.abort();
+					
+				$('.results-wrapper .loading').show();
+				$( '#slider-4' ).slider('disable');
+				ajax = $.ajax({
+					url:'/ajax/getlistings',
+					data:$data,
+					success:function(results){
+						$('.results-wrapper .loading').hide();
+						$( '#slider-4' ).slider('enable');
+						$('ul.cat-menu li.active').removeClass('active');
+						$a.parents('li').addClass('active');
+						$('.results-wrapper').html(results);
+					},
+					error:function(){
+						$('.results-wrapper .loading').hide();
+						$( '#slider-4' ).slider('enable');
+					}
+				});
+			}
+		}
+	});
+	$('#value-4').text( '$' + $( '#slider-4' ).slider( 'values', 0 ) + ' - $' + $( '#slider-4' ).slider( 'values', 1 ) );
 });

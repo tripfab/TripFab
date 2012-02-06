@@ -338,7 +338,7 @@ class WS_ListingService {
         $db = Zend_Db_Table::getDefaultAdapter();
         $select = $db->select();
         $select->from('listings');
-        $select->where('listings.status = ?', 1);
+        //$select->where('listings.status = ?', 1);
         $select->where('listings.city_id = ?', $place);
         if($cat != 'all'){
             $_cat = $this->getCategoryByIdf($cat);
@@ -368,8 +368,8 @@ class WS_ListingService {
        $select->join('vendors','listings.vendor_id = vendors.id',array('vendor_name'=>'name'));
        //print $select->assemble(); //die;
        
-       $count = 9;
-       $select->limit($count);
+       //$count = 9;
+       //$select->limit($count);
        
        $select->where('listings.price >= ?', $pricemin);
        $select->where('listings.price <= ?', $pricemax);
@@ -992,6 +992,7 @@ class WS_ListingService {
             }
         }
         
+        //var_dump($result); die;
         return $result;
     }
     public function getSchPrices($listing)
@@ -1203,6 +1204,7 @@ class WS_ListingService {
     }
     
     public function getSeassonFor($date, $listing){
+        $date = date('Y-m-d', strtotime($date));
         $select = $this->seasons_db->select();
         $select->where('`starting` <= ?', $date);
         $select->where('`ending` >= ?', $date);
@@ -1230,7 +1232,7 @@ class WS_ListingService {
         $select->where('listing_id = ?', $listing);
         if(!is_null($room)){
             $select->where('schedule_id = ?', $room);
-            $select->where('season_id = ?', 0);
+            $select->where('type_id = ?', 4);
         } else {
             $select->where('type_id = ?', 1);
         }
@@ -1245,6 +1247,7 @@ class WS_ListingService {
         $select->where('listing_id = ?', $listing);
         $select->where('schedule_id = ?', $option);
         $select->where('type_id = 4');
+        //echo $select->assemble(); die;
         
         $price = $this->prices_db->fetchRow($select);
         if(is_null($price)){
@@ -1269,31 +1272,53 @@ class WS_ListingService {
         return $user;
     }
     
-    public function getActivityQuote($listing, $adults, $kids, $checkin, $checkout = null, $days = null, $option = null)
+    public function getActivityQuote(
+            $listing, $adults, $kids, $checkin, $option = null, $capacity = null)
     {
+        
+        $option = ($option != 'flex') ? $this->getSchedule($option) : null;
+        $capacity = ($capacity != 'single') ? $this->getActivityType($capacity) : null;
         $seasson = $this->getSeassonFor($checkin, $listing->id);
-        if(!is_null($seasson)){
-            $price = $this->getSeassonPrice($seasson->id, $listing->id);
-            if($price->price == '0.00'){
-                $price = $this->getBasicPrice($listing->id);
-            }
-        } else {
-            $price = $this->getBasicPrice($listing->id);
-        }
+        
+        $price = null;
+        if(!is_null($seasson)) 
+            $price = $this->getSeassonPrice($seasson->id, $listing->id, $capacity->id);
+        if(is_null($price) || $price->price == '0.00') {
+            $price = $this->getBasicPrice($listing->id, $capacity->id);
+            if(is_null($price) || $price == '0.00') 
+                $price = $this->getBasicPrice($listing->id);}
+        if(is_null($price) || $price->price == '0.00') 
+            throw new Exception('We couldn\'t find the price', 1);
+        
+        //var_dump($price); die;
+        
+        
+        $min = (!is_null($capacity)) ? $capacity->min : $listing->min; 
+        $max = (!is_null($capacity)) ? $capacity->max : $listing->max;
+        $kids_alowed = (!is_null($capacity)) ? $capacity->kids : $listing->kids;
+        
+        if($kids > 0 && !is_null($kids_alowed))
+            throw new Exception('Kids are not allowed', 1);
         
         $total_people = $kids + $adults;
-        if($price->min > $total_people)
-                throw new Exception('you need more people');
-        if($price->max < $total_people)
-                throw new Exception('too many people');
+        if($min > $total_people)
+            throw new Exception("You need min {$min} person(people)", 1);
+        if($max < $total_people)
+            throw new Exception("Too many people max {$max} person(people)", 1);
         
         $cart = new stdClass();
         $cart->rate = $price->price;
         
-        if($price->type_id == 1){
-            $cart->rate_description = 'Basic Price';
+        if($price->type_id == 3){
+            $cart->rate_description = (is_null($capacity))
+                    ? "Price for {$seasson->name} Season"
+                    : "Price for {$capacity->name} Type on {$seasson->name} Season";
+        } elseif($price->type_id == 4){
+            $cart->rate_description = (is_null($seasson)) 
+                    ? "Price for {$capacity->name} Type" 
+                    : "Price for {$capacity->name} Type on {$seasson->name} Season";
         } else {
-            $cart->rate_description = $seasson->name . ' seasson price';
+            $cart->rate_description = 'Basic Price';
         }
         
         if($price->additional_after < $total_people){
@@ -1315,6 +1340,8 @@ class WS_ListingService {
         $cart->checkin = date('D M d Y',strtotime($checkin));
         $cart->kids    = $kids;
         $cart->adults  = $adults;
+        
+        $cart->option_id = (!is_null($capacity)) ? $capacity->id : 0;
 
         return $cart;
     }
@@ -1324,7 +1351,7 @@ class WS_ListingService {
         $row = new stdClass();
         
         if(is_null($checkout) && is_null($days))
-                throw new Exception('Not checkout date provided');
+                throw new Exception('Not checkout date provided', 1);
         
         if(is_null($checkout)){
             $checkout = strtotime($checkin);
@@ -1343,30 +1370,41 @@ class WS_ListingService {
         } else {
             $nights = $days - 1;
         }
+        
         if(is_null($option)){
-            $options = $this->getSchedulesOf($listing->id);
+            $options = $this->getHotelRooms($listing->id);
             $option  = $options[0];
         } else {
-            $option = $this->getSchedule($option);
+            $option = $this->getRoom($option);
         }
-        //echo '<pre>'; print_r($_POST); echo '</pre>'; die;
-
-        $price = $this->getOptionPrice($listing->id, $option->id);
-        if(is_null($price))
-            $price = $this->getBasePrice($listing->id);
+        
+        $row->max = $option->people;
+        
+        $sch = $this->getSchedule($option->schedule_id);
+        
+        $seasson = $this->getSeassonFor($checkin, $listing->id);
+        if(!is_null($seasson))
+            $price = $this->getSeassonPrice($seasson->id, $listing->id, $option->schedule_id);
+        else
+            $price = $this->getOptionPrice($listing->id, $option->schedule_id);
+        
+        //echo '<pre>'; var_dump($option); echo '</pre>'; die;
         
         $total_people = $kids + $adults;
 
         $row->rate = $price->price;
-        if($price->type_id == 1){
+        if($price->type_id == 3)
+            $row->rate_description = 'Price for '. $sch->name .' on '.$seasson->name.' Seasson per night';
+        elseif($price->type_id == 4) 
+            $row->rate_description = 'Price for '. $sch->name .' per night';
+        else 
             $row->rate_description = 'Basic Price per night';
-        } else {
-            $row->rate_description = 'Price for '. $option->name .' Room per night';
-        }
+        
+        //echo $row->rate_description; die;
 
-        if($total_people > $price->max){
-            $aux   = $total_people % $price->max;
-            $rooms = ($total_people - $aux) / $price->max;
+        if($total_people > $option->people){
+            $aux   = $total_people % $option->people;
+            $rooms = ($total_people - $aux) / $option->people;
             $rooms = ($aux > 0) ? $rooms + 1 : $rooms;
         } else {
             $rooms = 1;
@@ -1376,7 +1414,7 @@ class WS_ListingService {
         $aux = $total_people;
         for($i = 0; $i < $rooms; $i++)
         {
-            $personas   = ($aux > $price->max) ? $price->max : $aux;
+            $personas   = ($aux > $option->people) ? $option->people : $aux;
             $basic      = $price->price;
             $additional = ($personas > $price->additional_after) ? $price->additional * ($personas - $price->additional_after) : 0;
             $_prices[] = array(
@@ -1411,20 +1449,25 @@ class WS_ListingService {
         return $row;
     }
     
-    public function getQuote($listing, $adults, $kids, $checkin, $checkout = null, $days = null, $option = null)
+    public function getQuote(
+                $listing, $adults, $kids, $checkin, $checkout = null, $days = null, $option = null, $capacity = null)
     {        
         try {
             $cart = ($listing->main_type == 6)
-                        ? $this->getActivityQuote($listing, $adults, $kids, $checkin, $checkout, $days, $option)
+                        ? $this->getActivityQuote($listing, $adults, $kids, $checkin, $option, $capacity)
                         : $this->getHotelQuote($listing, $adults, $kids, $checkin, $checkout, $days, $option);
             $cart->available = true;
         } catch(Exception $e) {
-            $cart->available = false;
-            $cart->error     = $e->getMessage();
-            
-            $cart->checkin = $checkin;
-            $cart->kids  = $kids;
-            $cart->adults = $adults;
+            if($e->getCode() == 1){
+                $cart->available = false;
+                $cart->error     = $e->getMessage();
+
+                $cart->checkin = $checkin;
+                $cart->kids  = $kids;
+                $cart->adults = $adults;
+            } else {
+                throw $e;
+            }
         }
         
         $cart->listing_title = $listing->title;

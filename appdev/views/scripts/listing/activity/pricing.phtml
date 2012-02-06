@@ -138,8 +138,8 @@
                         <div class="right">
                             <label>Per Adult</label>
                             <input tabindex="<?= $tab ?>" type="text" name="sch[<?= $season->id ?>][<?= $sch->id ?>][price]" 
-                            value="<?= (isset($this->season[$season->id]['price'])) 
-                            ? $this->season[$season->id]['price'] : "0.00" ?>"/>
+                            value="<?= (isset($this->season[$season->id][0]['price'])) 
+                            ? $this->season[$season->id][0]['price'] : "0.00" ?>"/>
                             <h4>Adults Rate</h4>
                             <span>The adult's rate for this season</span>											
                         </div><!-- closes right -->
@@ -147,16 +147,16 @@
                         <?php $tab++ ?>
                         <div class="right">
                             <label>Rate per child</label>
-                            <?php $checked = ($this->season[$season->id]['kids'] == $this->season[$season->id]['price']) ? 'disabled="disabled"' : '' ?>
+                            <?php $checked = ($this->season[$season->id][0]['kids'] == $this->season[$season->id][0]['price']) ? 'disabled="disabled"' : '' ?>
                             <input tabindex="<?= $tab ?>" type="text" name="sch[<?= $season->id ?>][<?= $sch->id ?>][kids]" <?= $checked ?>
-                            class="kids" value="<?= (isset($this->season[$season->id]['kids'])) 
-                            ? $this->season[$season->id]['kids'] : "0.00" ?>"/>
+                            class="kids" value="<?= (isset($this->season[$season->id][0]['kids'])) 
+                            ? $this->season[$season->id][0]['kids'] : "0.00" ?>"/>
                             <h4>Children Rate</h4>
                             <span>The children's rate for this season</span>																						
                         </div><!-- closes right -->
                         <div class="right lab">
                         	<?php $tab++ ?>
-                        	<?php $checked = ($this->season[$season->id]['kids'] == $this->season[$season->id]['price']) ? 'checked="checked"' : '' ?>
+                        	<?php $checked = ($this->season[$season->id][0]['kids'] == $this->season[$season->id][0]['price']) ? 'checked="checked"' : '' ?>
                             <input tabindex="<?= $tab ?>" type="checkbox" <?= $checked ?> class="sameprice" />
                             <label>Children's rate is the same as the adult's</label>
                         </div><!-- closes right -->

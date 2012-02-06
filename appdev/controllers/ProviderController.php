@@ -768,13 +768,13 @@ class ProviderController extends Zend_Controller_Action
                     
                     
                     break;
-                case 2    : 
+                case 2: 
                     $template = 'listing-restaurant';    
                     $overview = $this->listings->getOverviewOf2($listing->id);
                     
                     $this->view->overview = $overview;
                     break;
-                case 4 : 
+                case 4: 
                     $template = 'listing-touristsight'; 
                     $overview = $this->listings->getOverviewOf2($listing->id);
                     
@@ -795,12 +795,6 @@ class ProviderController extends Zend_Controller_Action
             $reviews = $this->reviews->getReviewsFor($listing->id);
             if(count($reviews) > 0)
                 $this->view->reviews = $reviews;
-
-            $questions = $this->questions->getQuestionsOn($listing->id);
-            if(count($questions) > 0)
-                $this->view->questions = $questions;
-
-            $this->view->answer_allow = false;
 
             if(!is_null($this->user)){
                 $this->view->form_action = '/cart/add';
@@ -852,7 +846,6 @@ class ProviderController extends Zend_Controller_Action
             $this->view->country         = $country;
             $this->view->city            = $city;
             $this->view->listing         = $listing;
-            $this->view->tabs            = $tabs;
             $this->view->faqs            = $faqs;
             $this->view->vendor          = $vendor;
             $this->view->attributes      = $attributes;

@@ -12,17 +12,26 @@
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
     <link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.17.custom.css" />
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
-    <script type="text/javascript" src="/js2/jquery.cycle.all.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js2/jquery.jcarousel.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
-    <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-    <script type="text/javascript" src="/js2/index/listing-hotel.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
+    <style type="text/css">
+	.noprice {
+		float:right;
+		font-size:12px;
+		color:#898989;
+		line-height:15px;
+		text-align:center;
+		margin-top:10px;}
+		.noprice p {
+			font-size:12px;
+			line-height:15px;
+			display:inline;
+			float:none;}
+		.noprice a {
+			color:#60b5f7;
+			font-size:12px;
+			line-height:15px;
+			display:inline;
+			float:none;}
+	</style>
 </head>
 <body>
 <div class="w1">
@@ -46,214 +55,184 @@
                         <li><a href="#tabs-5">How to Get There</a></li>
                     </ul>
                     <div class="tab" id="tabs-1">
-                        <div class="tab-ttl">
-                            About the activity
-                        </div>
-                        <!-- closes tab-ttl -->
+                    	<?php if(!empty($this->overview->about) or
+									!empty($this->overview->about) or
+									!empty($this->overview->about)): ?>
+                        <div class="tab-ttl">About your stay</div>
                         <div class="tab-content">
-                            <p>bibendum elementum tincidunt commodo, feugiat quis quam. Duis feugiat, purus nec mollis pulvinar, felis diam imperdiet justo, id consequat massa libero ac velit. Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam. Fusce neque mauris, semper et aliquam et, ornare non tortor. Phasellus po, id consequat massa libero ac velit. Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam. Fusce neque mauris, semper et aliquam et, ornare non tortor. Phasellus p o, id consequat massa libero ac velit. </p>
-                            <p>Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam. Fusce neque mauris, semper et aliquam et, ornare non tortor. Phasellus pellentesque viverra accumsan. bibendum elementum tincidunt commodo, feugiat quis quam. Duis feugiat, purus nec mollis pulvinar, felis diam imperdiet justo, id consequat massa libero ac velit. Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam.</p>
-                            <h2>What to Expect</h2>
-                            <p>Aenean auctor, leo congue vehicula dictum, purus orci eleifend lacus, sit amet eleifend neque ipsum eu magna. Sed a tellus nisl.</p>
-                            <p>Nam ut nibh id est condimentum imperdiet at non massa. Pellentesque ac congue ipsum. Sed porta lacus non libero hendrerit ultrices. Quisque ac nisi ac purus feugiat mollis sed ut diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam sit amet aliquam ligula. Integer ac dolor sed urna lacinia vulputate et sed nibh.</p>
+                        	<?php if(!empty($this->overview->about)): ?>
+                        	<p><?= stripslashes(nl2br($this->overview->about)) ?></p>
+                            <?php endif; if(!empty($this->overview->expect)): ?>
+                            <h2>What to expect</h2>
+                            <p><?= stripslashes(nl2br($this->overview->expect)) ?></p>
+                            <?php endif; if(!empty($this->overview->love)): ?>
                             <h2>Things you'll love</h2>
-                            <p>bibendum elementum tincidunt commodo, feugiat quis quam. Duis feugiat, purus nec mollis pulvinar, felis diam imperdiet justo, id consequat massa libero ac velit. Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam. Fusce neque mauris, semper et aliquam et, ornare non tortor. Phasellus pellentesque viverra accumsan.</p>										
+                            <p><?= stripslashes(nl2br($this->overview->love)) ?></p>
+                            <?php endif ?>
+                        </div><!-- closes tab-content -->
+                        <?php else: ?>
+                        <div class="tab-content">
+	                        <a href="/provider/listings/overview/<?= $this->listing->id ?>"><img src="/images2/empty-overview.gif" /></a>
                         </div>
-                        <!-- closes tab-content -->
+                        <?php endif ?>
                         <div class="message">
                             <div>
                                 <p><strong>Check in</strong></p>
-                                <p>2:00 PM</p>
+                                <?php if(!empty($this->listing->checkin) and $this->listing->checkin != '00:00:00'): ?>
+                                <p><?= date('g:i A', strtotime($this->listing->checkin)) ?></p>
+                                <?php else: ?>
+                                <p><a style="color:#60B5F7" href="/provider/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
+                                <?php endif ?>
                             </div>
                             <div>
                                 <p><strong>Check out</strong></p>
-                                <p>11:00 AM</p>
-                            </div>
-                            <div>
-                                <p><strong>Category</strong></p>
-                                <p>Boutique</p>
+                                <?php if(!empty($this->listing->checkout) and $this->listing->checkout != '00:00:00'): ?>
+                                <p><?= date('g:i A', strtotime($this->listing->checkout)) ?></p>
+                                <?php else: ?>
+                                <p><a style="color:#60B5F7" href="/provider/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
+                                <?php endif ?>
                             </div>
                             <div>
                                 <p><strong>Room Types</strong></p>
-                                <p>3</p>
+                                <?php if($this->rooms): ?>
+                                <p><?= count($this->rooms) ?></p>
+                                <?php else: ?>
+                                <p><a style="color:#60B5F7" href="/provider/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
+                                <?php endif ?>
                             </div>
-                        </div>
-                        <!-- closes message -->
-                    </div>
-                    <!-- closes tab -->
+                        </div><!-- closes message -->
+                    </div><!-- closes tab -->
                     <div class="tab" id="tabs-2">
+                    	<?php $ok = true; $i=0; $limit = count($this->details) ?>
+                        <?php $ok1 = true; $ok3 = true; ?>
+                        <?php while($i<$limit) { 
+								if($this->details[$i]->type == 1) {$ok = false; $ok1 = false; }
+								if($this->details[$i]->type == 3) {$ok = false; $ok3 = false; }
+								$i++; } ?>
+						<?php if(!$ok): ?>
                         <div class="tab-ttl">
                             Some details about the hotel
-                        </div>
-                        <!-- closes tab-ttl -->
+                        </div><!-- closes tab-ttl -->
                         <div class="tab-content">
+                        	<?PHP if(!$ok1 or (count($this->listing_amenities) > 0)): ?>
                             <h2>Hotel Amenities</h2>
                             <ul>
-                                <li>USA Today (weekdays only) available in Lobby and Java Coast coffee shop</li>
-                                <li>In-Room High-Speed Internet Access</li>
-                                <li>Wireless internet access in the guestrooms, dining outlets and atriums</li>
-                                <li>Fitness Center access</li>
-                                <li>2 bottles of water per day in guestroom</li>
-                                <li>Local phone calls (1st 20 minutes per call)</li>
-                                <li>800 access and toll free calls (1st 20 minutes per call)</li>
-                                <li>Fax services, nominal fee</li>
-                                <li>Dataports</li>
-                                <li>Photocopy, nominal fee</li>
-                                <li>Photocopy machine</li>
-                                <li>Audio/visual equipment</li>
-                                <li>Conference services</li>
-                                <li>Outdoor parking, open air lot</li>
-                                <li>Restaurant on-site</li>
-                                <li>Multilingual staff (English and Spanish)</li>
-                                <li>Doctor on call After Hours Clinic, Ambulance, Hospital Emergency</li>
-                                <li>Interior corridor</li>
-                                <li>Mail services Available through front desk</li>
-                                <li>Wedding services Catering, planning onsite for small weddings under 80 people</li>
-                                <li>Guest laundry, MacIntosh Drycleaners - Third Party</li>
-                                <li>Guest laundry facility, 8:00 a.m. to 10:00 p.m.</li>
+                            	<?php foreach($this->listing_amenities  as $amm): ?>
+                                <li><?= $this->def_amenities[$amm]->name ?></li>
+                                <?php endforeach ?>
+                                <?php foreach($this->details as $detail): ?>
+                                <?php if($detail->type == 1): ?>
+                                <li><?= stripslashes($detail->text) ?></li>
+                                <?php endif ?>
+                                <?php endforeach ?>
                             </ul>
+                            <?php endif; if(!$ok3): ?>
                             <h2>Policies</h2>
                             <ul>
-                                <li>Minimum Check-In Age: 18</li>
-                                <li>Parking Policy: Complimentary underground heated self-parking is available.</li>
-                                <li>Transfer Policy: Transfers to/from Salt Lake City International Airport (SLC), which is about 36 miles
-                                   away, are approximately $44 per person, each way, and can be arranged through the property.</li>
-                                <li>Pet Policy: Pets are not permitted.</li>
-                                <li>Smoking Policy: Smoking is not permitted.</li>
+                                <?php foreach($this->details as $detail): ?>
+                                <?php if($detail->type == 3): ?>
+                                <li><?= stripslashes($detail->text) ?></li>
+                                <?php endif ?>
+                                <?php endforeach ?>
                             </ul>
-                            <h2>Policies</h2>
-                            <ul>
-                                <li>One or two-hour surf lesson with a qualified instructor</li>
-                                <li>Rash-guard shirt (rental)</li>
-                                <li>Surfboard equipment (rental)</li>
-                                <li>Rubberized fins (rental)</li>
-                                <li>Optional water shoes (rental)</li>
-                                <li>Hotel pickup and drop-off for private and semi-private lesson participants staying in Waikiki hotels.</li>
-                                <li>Stand up paddle lesson participants requesting hotel pickup and drop-off will be charged an 
-                                    additional $10 per person on the day of lesson.</li>
-                            </ul>
-                        </div>
-                        <!-- closes tab-content -->
-                    </div>
-                    <!-- closes tab -->
-                    <div class="tab" id="tabs-3">
-                        <div class="tab-ttl">
-                            Some recommendations before take the trip
-                        </div>
-                        <!-- closes tab-ttl -->
+                            <?php endif ?>
+                        </div><!-- closes tab-content -->
+                        <?php else: ?>
                         <div class="tab-content">
-                            <h2>Garden View Junior Suite</h2>
-                            <ul>
-                                <li>Daily continental breakfast is included.</li>
-                                <li>Garden View Junior Suites are 620 square feet and feature a kitchenette.</li>
-                                <li>Maximum Occupancy: 2 (Rates are quoted for 2 people.)</li>
-                                <li>Bed Type: 1 King</li>
-                                <li>Children Policy: Children are permitted at no additional cost using existing bedding within maximum 
-                                   occupancy.</li>
-                                <li>Handicap-Accessible: No</li>
-                            </ul>
-                            <h2>Ocean Front Junior Suite</h2>
-                            <ul>
-                                <li>Daily continental breakfast is included.</li>
-                                <li>Ocean Front Junior Suites are 700 square feet and feature a furnished terrace and views of the 
-                                   ocean.</li>
-                                <li>Maximum Occupancy: 2 (Rates are quoted for 2 people.)</li>
-                                <li>Bed Type: 1 King</li>
-                                <li>Children Policy: Children are permitted at no additional cost using existing bedding within maximum 
-                                   occupancy.</li>
-                                <li>Handicap-Accessible: No</li>
-                            </ul>
-                            <h2>Premier Oceanfront Two-Bedroom</h2>
-                            <ul>
-                                <li>Daily continental breakfast is included.</li>
-                                <li>Two-Bedroom Oceanfront Suites are 2,150 square feet and feature a full kitchen, living area, ocean 
-                                   views from the master bedroom and garden views from the second bedroom.</li>
-                                <li>Maximum Occupancy: 4 (Rates are quoted for 4 people.)</li>
-                                <li>Bed Type: 1 King, plus 2 Twin</li>
-                                <li>Children Policy: Children are permitted at no additional cost using existing bedding within maximum 
-                                   occupancy.</li>
-                                <li>Handicap-Accessible: No</li>
-                            </ul>
+                            <a href="/provider/listings/details/<?= $this->listing->id ?>"><img src="/images2/empty-amanities.gif" /></a>
                         </div>
-                        <!-- closes tab-content -->
-                    </div>
-                    <!-- closes tab -->
+                        <?php endif ?>
+                    </div><!-- closes tab -->
+                    <div class="tab" id="tabs-3">
+                    	<?php if(count($this->rooms) > 0): ?>
+                        <div class="tab-ttl">
+                            Our Room Types
+                        </div><!-- closes tab-ttl -->
+                        <div class="tab-content">
+                        	<?php foreach($this->rooms as $room): ?>
+                            <h2><?= $room->name ?></h2>
+                            <ul>
+                            	<?php if(!empty($room->description)): ?>
+                                <li><?= $room->description ?></li>
+                                <?php endif ?>
+                                <li>Minimum Stay: <?= $room->nights ?> <?= (count($room->nights) > 1) ? "nights" : 'night' ?>   </li>
+                                <li>Maximum Accomodation: <?= $room->people ?> <?= (count($room->people) > 1) ? "people" : 'person' ?></li>
+                                <li>
+                                	<?= $room->bedrooms ?> <?= (count($room->bedrooms) > 1) ? "Bedrooms" : 'Bedroom' ?>  
+                                </li>
+                                <?php foreach($this->beds[$room->id] as $bed): ?>
+                                <li><?= $bed->quantity ?> <?= $bed->type ?> <?= (count($room->quantity) > 1) ? "Beds" : 'Bed' ?></li>
+                                <?php endforeach ?>
+                                <li><b>Amenities</b>
+                                <ul>
+                                <?php foreach($this->room_amenities[$room->id] as $amm): ?>
+                                <li><?= $this->amenities[$amm]->name ?></li>
+                                <?php endforeach ?>
+                                </ul></li>
+                            </ul>
+                            <?php endforeach ?>
+                        </div><!-- closes tab-content -->
+                        <?php else: ?>
+                        <div class="tab-content">
+                        	<a href="/provider/listings/rooms/<?= $this->listing->id ?>"><img src="/images2/empty-rooms.gif" /></a>
+                        </div>                        
+                        <?php endif ?>
+                    </div><!-- closes tab -->
                     <div class="tab" id="tabs-4">
+                        <?php if(count($this->faqs) > 0): ?>
                         <div class="tab-ttl">
                             Frequently Asked Questions
-                        </div>
-                        <!-- closes tab-ttl -->
+                        </div><!-- closes tab-ttl -->
                         <div class="tab-content faqs">
                             <ul>
+                            	<?php foreach($this->faqs as $faq): ?>
                                 <li>
-                                    <strong>Can children take this tour?</strong>
-                                    Yes, people of all ages can take and enjoy this tour.
+                                    <strong><?= stripslashes(nl2br($faq->question)) ?></strong><br />
+                                    <?= stripslashes(nl2br($faq->answer)) ?>
                                 </li>
-                                <li>
-                                    <strong>Can I be picked up in Liberia?</strong>
-                                    For different pick ups other than San Jose, please contact tour operator for details and/or possible arrangements.
-                                </li>
-                                <li>
-                                    <strong>When is the best time to take this tour?</strong>
-                                    This tour can be taken and enjoyed year round.
-                                </li>
-                                <li>
-                                    <strong>What is the temperature on these locations?</strong>
-                                    Tortuguero and Guanacaste are hot and sunny, although it rains more in Tortuguero. Arenal on the other hand might get a bit chilly.
-                                </li>
-                                <li>
-                                    <strong>Where is the pick up for this tour?</strong>
-                                    The pick up and drop off for this tour is at the Juan Santamaria Airport.
-                                </li>
-                                <li>
-                                    <strong>At what time can I do this tour?</strong>
-                                    Tropical Bungee offers this tour twice a day. Their departure times daily can be found on the Tour Details tab.
-                                </li>
-                                <li>
-                                    <strong>Do I have to own and/or bring my own equipment?</strong>
-                                    No, this tour includes all certified equipment necessary to jump and it is carefully verified for safety.
-                                </li>
-                                <li>
-                                    <strong>How old do I have to be to do this activity?</strong>
-                                    There is no age limit. Tropical Bungee has had jumpers as young as 4 years old and as old as 80 years old.
-                                </li>
-                                <li>
-                                    <strong>At what time can I do this tour?</strong>
-                                    Tropical Bungee offers this tour twice a day. Their departure times daily can be found on the Tour Details tab.
-                                </li>
+                                <?php endforeach ?>
                             </ul>
+                        </div><!-- closes tab-content -->
+                        <?php else: ?>
+                        <div class="tab-content">
+                        	<a href="/provider/listings/faqs/<?= $this->listing->id ?>"><img src="/images2/empty-faqs.gif" /></a>
                         </div>
-                        <!-- closes tab-content -->
-                    </div>
-                    <!-- closes tab -->
+                        <?php endif ?>
+                    </div><!-- closes tab -->
                     <div class="tab" id="tabs-5">
+                        <?php if(!empty($this->getthere->plane) or
+									!empty($this->getthere->car) or
+									!empty($this->getthere->train) or
+									!is_null($this->listing->lat)): ?>
                         <div class="tab-ttl">
                             How to get there
-                        </div>
-                        <!-- closes tab-ttl -->
-                        <div class="tab-content there">										
+                        </div><!-- closes tab-ttl -->
+                        <div class="tab-content there">	
+                        	<?php if(!empty($this->getthere->plane)): ?>
                             <h2>By plane</h2>
-                            <p>Flights are available to John F. Kennedy International Airport (JFK) and LaGuardia Airport (LGA) from major U.S. cities on a variety of carriers</p>
+                            <p><?= stripslashes(nl2br($this->getthere->plane)) ?></p>
+                            <?php endif; if(!empty($this->getthere->car)): ?>
                             <h2>By car</h2>
-                            <p>Taxis to/from LGA, about 12 miles from the property, are approximately $40 per car, each way.</p>
+                            <p><?= stripslashes(nl2br($this->getthere->car)) ?></p>
+                            <?php endif; if(!empty($this->getthere->train)): ?>
                             <h2>By train</h2>
-                            <p>Flights are available to John F. Kennedy International Airport (JFK) and LaGuardia Airport (LGA) from major U.S. cities on a variety of carriers</p>
+                            <p><?= stripslashes(nl2br($this->getthere->train)) ?></p>
+                            <?php endif; ?>
                             <div id="mapcanvas"></div>
-                        </div>
-                        <!-- closes tab-content -->
+                        </div><!-- closes tab-content -->
                         <div class="message">
                             <address>
                                 <p><strong>Detailed Address</strong></p>
-                                <p>9 Crosby Street</p>
-                                <p>New York, NY 10013</p>
-                                <p>United States</p>
+                                <p><?= $this->listing->address ?></p>
                             </address>
+                        </div><!-- closes message -->
+                        <?php else: ?>
+                        <div class="tab-content">
+                        	<a href="/provider/listings/location/<?= $this->listing->id ?>"><img src="/images2/empty-getthere.gif" /></a>
                         </div>
-                        <!-- closes message -->
-                    </div>
-                    <!-- closes tab -->
-                </div>
-                <!-- closes tabs-wrapper -->	                
+                        <?php endif ?>
+                    </div><!-- closes tab -->
+                </div><!-- closes tabs-wrapper -->	                
                 <div class="reviews-wrapper">
                     <?= $this->partial('partials/reviews.phtml', 
 					array('reviews' => $this->reviews, 'questions' => $this->questions, 'answer_allow' => false,
@@ -262,18 +241,25 @@
             </div><!-- closes content-2 -->
             
             <div class="right-sidebar">               
-                <form id="booking" method="post" action="<?= $this->form_action ?>">
+                <form id="booking" method="post" action="/en-US/<?= $this->form_action ?>">
                     <div class="widget book">
                         <div class="ttl">
                             <span>From only</span>
+                            <?php if($this->listing->price > 0): ?>
                             <strong>$<?= $this->listing->price ?> <span>/ person</span></strong>
+                            <?php else: ?>
+                            <div class="noprice">
+                            	<p>There isn't pricing info yet<br />
+                                <a href="/provider/listings/pricing/<?= $this->listing->id ?>">Set Pricing now</a></p>
+                            </div>
+                            <?php endif ?>
                         </div><!-- closes ttl -->
                         <ul>
                             <li id="acordion">                            
                                 <a href=""><span>Select the date</span><img src="/images/arrow-46.png" alt="" class="arrow" />
                                 <strong id="checkinlabel"></strong></a>
                                 <div id="datepicker" class="datepicker"></div>
-                                <a href=""><span>Checkout</span><img src="images/arrow-7.png" alt="" class="arrow" />
+                                <a href=""><span>Checkout</span><img src="/images/arrow-46.png" alt="" class="arrow" />
                                 <strong id="checkoutlabel"></strong></a>
 	                            <div id="datepicker-2" class="datepicker"></div>
                                 <a href=""><span>Occupation</span><img src="/images/arrow-46.png" alt="" class="arrow" /></a>
@@ -283,7 +269,7 @@
                                         <ul>
 											<?php foreach($this->options as $option): ?>
                                             <li>
-                                                <input id="sch<?= $option->id ?>" name="option" value="<?= $option->id ?>" type="radio" />
+                                                <input id="sch<?= $option->id ?>" class="noclean" name="option" value="<?= $option->id ?>" type="radio" />
                                                 <label for="sch<?= $option->id ?>"><?= $option->name ?></label>
                                                 <span><strong>$<?= $this->prices[$option->id]['price'] ?></strong> / night
                                                 <strong>Max <?= $this->prices[$option->id]['max'] ?> people</strong> per room</span>
@@ -314,7 +300,7 @@
                         </ul>
                         <div class="summary">
                             <span>Subtotal <strong id="Subtotal">$<?= $this->listing->price ?></strong></span>
-                            <input type="submit" value="Book Now!" class="btn-1" />
+                            <input type="submit" value="Book Now!" class="btn-1 noclean" />
                         </div><!-- closes summary -->
                 	</div><!-- closes widget -->
                 	<?php foreach($this->form_fields as $name => $value): ?>
@@ -398,5 +384,8 @@
 		</div><!--CREATE_TRIP-->
     </div>
 </div>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript" src="/js2/index/listing-hotel.js"></script>
 </body>
 </html>

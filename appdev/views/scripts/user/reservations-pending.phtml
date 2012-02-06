@@ -34,7 +34,7 @@
         <div class="wrapper user-messages">
         	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Reservations','parentActive'=>'Waiting Approval')); ?>
         	<div class="subttl">
-        		<h4>You have <?= count($this->reservations) ?> confirmed reservations</h4>
+        		<h4>You have <?= count($this->reservations) ?> reservations pending approval</h4>
         	</div>
         	<!-- closes subttl -->
             <?php if(count($this->reservations) > 0): ?>
