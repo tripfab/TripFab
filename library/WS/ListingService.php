@@ -59,6 +59,12 @@ class WS_ListingService {
     protected $vendors;
     
     /**
+     *
+     * @var Zend_Cache_Core
+     */
+    protected $cache;
+    
+    /**
      * 
      */
     public function __construct() 
@@ -90,6 +96,9 @@ class WS_ListingService {
         $this->calendar = new Model_Calendar();
         
         $this->vendors = new Model_Vendors();
+        
+        if(Zend_Registry::isRegistered('cache'))
+            $this->cache = Zend_Registry::get('cache');
     }
     
     public function getDefaultListing($vendor)
@@ -335,46 +344,65 @@ class WS_ListingService {
     }
     
     public function getListings2($place, $cat, $subcat, $sort, $stars, $pricemin = 0, $pricemax = 3000){
-        $db = Zend_Db_Table::getDefaultAdapter();
-        $select = $db->select();
-        $select->from('listings');
-        //$select->where('listings.status = ?', 1);
-        $select->where('listings.city_id = ?', $place);
-        if($cat != 'all'){
-            $_cat = $this->getCategoryByIdf($cat);
-            $select->where('listings.main_type = ?', $_cat->id);}
-        if($subcat != 'all'){
-            $_subcat = $this->getCategoryByIdf($subcat);
-            $select->join('listing_listingtypes', 'listing_listingtypes.listing_id = listings.id' ,array('subcat' => 'listingtype_id'));
-            $select->where('listing_listingtypes.listingtype_id = ?', $_subcat->id);}
-        if($sort != 'newest'){
-            switch($sort){
-                case 'popular': $select->order('listings.views DESC'); break;
-                case 'name'   : $select->order('listings.title ASC'); break;
-                case 'free'   : $select->where('listings.price = ?',0); break;
-                case 'rating' : $select->order('listings.loves DESC');break;
-                case 'lowest' : $select->where('listings.price <> ?',0);
-                    $select->order('listings.price ASC'); break;
-                case 'highest': $select->where('listings.price <> ?',0);
-                    $select->order('listings.price DESC'); break;
-                default: break;
-            }}
-        if($stars != 'all'){
-            $_stars = (int) str_replace('-stars','',$stars);
-            if(is_int($_stars) && $_stars > 0 && $_stars < 6){
-                $select->where('listings.rate = ?', $_stars);
-            }}
-       
-       $select->join('vendors','listings.vendor_id = vendors.id',array('vendor_name'=>'name'));
-       //print $select->assemble(); //die;
-       
-       //$count = 9;
-       //$select->limit($count);
-       
-       $select->where('listings.price >= ?', $pricemin);
-       $select->where('listings.price <= ?', $pricemax);
-       
-       $listings = $db->fetchAll($select, array(), Zend_Db::FETCH_OBJ);
+        $args = func_get_args();
+        $cacheId = "LS_getListings2_".md5(print_r($args, true));
+        
+        if(!$this->cache->test($cacheId)) {
+            $db = Zend_Db_Table::getDefaultAdapter();
+            $select = $db->select();
+            $select->from('listings');
+            //$select->where('listings.status = ?', 1);
+            $select->where('listings.city_id = ?', $place);
+            if($cat != 'all'){
+                $_cat = $this->getCategoryByIdf($cat);
+                $select->where('listings.main_type = ?', $_cat->id);}
+            if($subcat != 'all'){
+                $select->join('listing_listingtypes', 'listing_listingtypes.listing_id = listings.id' ,array('subcat' => 'listingtype_id'));
+                if(count($subcat) == 1) {
+                    $select->where('listing_listingtypes.listingtype_id = ?', reset($subcat));
+                } else {
+                    $i = 0;
+                    foreach($subcat as $sc) {
+                        if($i === 0) $select->where('(listing_listingtypes.listingtype_id = ?', $sc);
+                        elseif($i === (count($subcat) - 1)) $select->orWhere('listing_listingtypes.listingtype_id = ?)', $sc);
+                        else $select->orWhere('listing_listingtypes.listingtype_id = ?', $sc);
+                        $i++;}
+                }
+            }
+            //echo $select->assemble(); die;
+            if($sort != 'newest'){
+                switch($sort){
+                    case 'popular': $select->order('listings.views DESC'); break;
+                    case 'name'   : $select->order('listings.title ASC'); break;
+                    case 'free'   : $select->where('listings.price = ?',0); break;
+                    case 'rating' : $select->order('listings.loves DESC');break;
+                    case 'lowest' : $select->where('listings.price <> ?',0);
+                        $select->order('listings.price ASC'); break;
+                    case 'highest': $select->where('listings.price <> ?',0);
+                        $select->order('listings.price DESC'); break;
+                    default: break;
+                }}
+            if($stars != 'all'){
+                $_stars = (int) str_replace('-stars','',$stars);
+                if(is_int($_stars) && $_stars > 0 && $_stars < 6){
+                    $select->where('listings.rate = ?', $_stars);
+                }}
+
+           $select->join('vendors','listings.vendor_id = vendors.id',array('vendor_name'=>'name'));
+           //print $select->assemble(); //die;
+
+           //$count = 9;
+           //$select->limit($count);
+
+           $select->where('listings.price >= ?', $pricemin);
+           $select->where('listings.price <= ?', $pricemax);
+
+           $listings = $db->fetchAll($select, array(), Zend_Db::FETCH_OBJ);
+           
+           $this->cache->save($listings, $cacheId, array(), 86400);
+       } else {
+           $listings = $this->cache->load($cacheId);
+       }
        return $listings;
     }
     

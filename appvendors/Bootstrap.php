@@ -185,8 +185,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     'lang'       => $lang
                 )
             )
-        );
-        $router->addRoute(
+        );*/
+        $router->addRoute( 
             'listing',
             new Zend_Controller_Router_Route(
                 '/:lang/:country/:city/:listing',
@@ -196,8 +196,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     'module'     => 'default',
                     'lang'       => $lang
                 )
-            )
-        );
+            )   
+        );/*
         $router->addRoute(
             'city_filter',
             new Zend_Controller_Router_Route(

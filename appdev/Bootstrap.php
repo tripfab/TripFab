@@ -325,14 +325,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             )
         );
         $router->addRoute(
-            'phonetest',
+            'phone',
             new Zend_Controller_Router_Route(
-                '/:lang/phonetest/:action',
+                '/phone/:action',
                 array(
-                    'controller' => 'phonetest',
+                    'controller' => 'calls',
                     'action'     => 'index',
                     'module'     => 'default',
-                    'lang'       => $lang
                 )
             )
         );
@@ -470,6 +469,35 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $config = $this->getOption('stripe');
         Zend_Registry::set('stripe', $config);
+    }
+    
+    protected function _initCache()
+    {
+        $config = $this->getOption('memcached');
+        $back = new Zend_Cache_Backend_Memcached(array(
+            'servers'  => array(array(
+                'host' => $config['host'],
+                'port' => $config['port'],  
+            )),
+            'compression' => $config['compression'],
+        ));
+        
+        $front = new Zend_Cache_Core(array(
+            'caching'                 => true,
+            'cache_id_prefix'         => $config['prefix'],
+            'write_control'           => false,
+            'automatic_serialization' => true,
+            'ignore_user_abort'       => true
+        ));
+        
+        $Cache = Zend_Cache::factory($front, $back);
+        Zend_Registry::set('cache', $Cache);
+    }
+    
+    protected function _initTwilioConfig()
+    {
+        $config = $this->getOption('twilio');
+        Zend_Registry::set('twilio', $config);
     }
 }
 

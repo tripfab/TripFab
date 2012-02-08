@@ -19,24 +19,21 @@ class WS_Controller_Plugin_Language
     {
         if(isset($_SERVER['REDIRECT_URL'])) {
             if(strpos($_SERVER['REDIRECT_URL'], "ajax") === false &&
-                    strpos($_SERVER['REDIRECT_URL'], "admin") === false){
+                    strpos($_SERVER['REDIRECT_URL'], "admin") === false &&
+                    strpos($_SERVER['REDIRECT_URL'], "phone") === false){
+                
                 $finfo = pathinfo($_SERVER['REDIRECT_URL']);
                 if(isset($finfo['extension'])) {
                     if(!in_array($finfo['extension'], $this->extensions)) {
-                        $this->setLanguage($request); 
-					}
+                        $this->setLanguage($request); }
                     else {
                         if(!file_exists($_SERVER['REDIRECT_URL'])) {
-                            header('Location: http://tripfab.com'.$_SERVER['REDIRECT_URL']); exit; 
-						} 
-					}
+                            header('Location: http://tripfab.com'.$_SERVER['REDIRECT_URL']); exit; } }
                 } else {
-                    $this->setLanguage($request);
-				}
+                    $this->setLanguage($request);}
             }
         } else {
-            $this->setLanguage($request); 
-		}
+            $this->setLanguage($request); }
     }
     
     private function setLanguage($request)

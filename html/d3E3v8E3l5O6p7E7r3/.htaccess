@@ -30,12 +30,8 @@ AddOutputFilterByType DEFLATE application/x-javascript
 AddOutputFilterByType DEFLATE application/json
 
 
-AuthUserFile /var/www/html/d3E3v8E3l5O6p7E7r3/.htpasswd
-AuthGroupFile /dev/null
-AuthName "Password Protected Area"
-AuthType Basic
-
-<limit GET POST>
-require valid-user
-</limit>
+#AuthUserFile /var/www/html/d3E3v8E3l5O6p7E7r3/.htpasswd
+#AuthGroupFile /dev/null
+#AuthName "Password Protected Area"
+#AuthType Basic
 

@@ -115,12 +115,7 @@ class IndexController extends Zend_Controller_Action
     }
     
     public function cityAction()
-    {       
-        $cat    = $this->_getParam('cat', 'all');
-        $subcat = $this->_getParam('subcat', 'all');
-        $sort   = $this->_getParam('sort', 'newest');
-        $stars  = $this->_getParam('stars', 'all');
-        
+    {   
         $countries   = $this->places->getPlaces(2);
         
         $country_idf = $this->getRequest()->getParam('country');
@@ -136,35 +131,7 @@ class IndexController extends Zend_Controller_Action
                 $subcats[$s] = $this->listings->getSubCategoriesOf($c);
         }
         
-        $sortOptions = array(
-            'newest' => 'Newest',
-            'popular' => 'Most Popular',
-            'name' => 'Name',
-            'free' => 'Free',
-            'lowest' => 'Lowest Price',
-            'highest' => 'Highest Price',
-            'rating' => 'Rating' 
-        );
         
-        if($cat != 'all'){
-            $category = $this->listings->getCategoryByIdf($cat);
-            $subcategories = $this->listings->getSubCategoriesOf($category->id);
-        }
-        
-        $ls_count = $this->listings->countListings($city->id);
-        
-        $listings = $this->listings->getListings2($city->id, $cat, $subcat, $sort, $stars);
-        $this->view->listing_count = count($listings);
-        //var_dump($this->view->listing_count); die;
-        
-        if($this->user)
-            $favorites = $this->user->getFavotites();
-        
-        $this->view->class  = 'landscape-1';
-        $this->view->cat    = $cat;
-        $this->view->subcat = $subcat;
-        $this->view->sort   = $sort;
-        $this->view->stars  = $stars;
         
         $this->view->countries = $countries;
         
@@ -172,23 +139,8 @@ class IndexController extends Zend_Controller_Action
         $this->view->country = $country;
         $this->view->city    = $city;
         
-        $this->view->categories    = $categories;
-        $this->view->sortOptions   = $sortOptions;
-        $this->view->subcategories = $subcategories;
-        $this->view->ls_count      = $ls_count;
-        
-        $this->view->listings = $listings;
-        
-        $this->view->favorites = $favorites;
-        
-        $this->view->subcats = $subcats;
-        
-        if($this->user){
-            $trips = $this->trips->getFutureTripsBy($this->user->getId(), true);
-            $this->view->trips = $trips; 
-        }
-        
-        
+        $this->view->categories = $categories;
+        $this->view->subcats    = $subcats;
     }
     
     public function searchAction()

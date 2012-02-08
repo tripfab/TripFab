@@ -371,3 +371,29 @@ $(function(){
 	
 	$('#ui-datepicker-div').wrap('<div id="calendarContainer"></div>');
 });
+
+$(function(){
+	$('.phonecall').click(function(){
+		$href = $(this).attr('href');
+		$.fancybox({		
+			padding:0,
+			overlayColor:'#fff',
+			centerOnScroll:1,
+			showCloseButton:0,
+			href:$href,
+		});
+		
+		$.ajax({
+			url:'/phone/call',
+			type:'post',
+			data:{
+				listing:$('body').data('listingid'),
+				number:'+50683200338',
+			},
+			success:function(res){
+				console.log(res);
+			}
+		});
+		return false;
+	});
+});

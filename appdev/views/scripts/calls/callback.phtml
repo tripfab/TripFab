@@ -1,0 +1,7 @@
+<?= "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" ?>
+
+<?php // <play>PATH_TO_FILE</play>  ?>
+<Response>
+    <Say voice="woman">Hi, <?= $this->username ?> is calling from Tripfab.com regarding your listing <?= $this->listing ?>, Please wait</Say>
+    <Dial action="<?= $this->action ?>" method="POST" record="true"><?= $this->number ?></Dial>
+</Response>

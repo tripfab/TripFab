@@ -1027,16 +1027,15 @@ class AjaxController extends Zend_Controller_Action
         if($auth->hasIdentity()){
             $user = $auth->getIdentity();
             if($user->role_id == 2){
-                $this->view->user = $user;         
-
                 $trips = $this->trips->getFutureTripsBy($user->id, true);
+                $this->view->user  = $user;
                 $this->view->trips = $trips; 
             }
          
         }
         
         $cat      = $this->_getParam('category', 'activities');
-        $subcat   = $this->_getParam('subcat', 'all');
+        $subcat   = $this->_getParam('cats', 'all');
         $sort     = $this->_getParam('sort', 'newest');
         $stars    = $this->_getParam('stars', 'all');
         $pricemax = $this->_getParam('pricemax', 3000);

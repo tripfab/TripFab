@@ -7,10 +7,6 @@
 		return json;
 	};
 })( jQuery );
-
-$(document).ready(function() {
-	$('input[type=text]').ToggleInputValue();
-});
 $(function(){	
 	$.ajax({
 		url:'/ajax/getsearchtags',
@@ -34,24 +30,12 @@ $(function(){
 $(function(){	
 	var ajax = false;
 	var refresh_price = true;
-	
 	$('ul.cat-menu li').each(function(index){
 		var $cat = $('a', this).data('cat');
 		$('a', this).data('category', $cat);
 		$('a', this).data('country', $('#hddCountryId').val());
 		$('a', this).data('city', $('#hddCityId').val());
 	});
-	
-	$('ul.cat-menu li a').live('click', function(){
-		if($(this).parents('li').hasClass('active'))
-			return false;
-		document.location.hash = $(this).attr('href');
-		return false;
-	});
-	
-	//$('.scrollcontainer').scrollElement();
-	
-	
 });
 
 $(function(){
@@ -195,35 +179,71 @@ $(function(){
 	var ajax = false;
 	var refresh_price = true;
 	$.address.change(function($ev){
-		$rel = document.location.hash;
-		
-		$('.widget.destinations').hide();
-		$('.widget[rel="'+$rel+'"]').show();
+		// Get main category from the url
+		//console.dir($ev);
+		$rel = '#/'+$ev.pathNames[0];
+		$validHashes = new Array("#/all","#/activities","#/entertaiment","#/tourist-sights","#/restaurants","#/hotels");
+		if(!$rel == "#/undefined") {
+			document.location.hash = "#/all"; return; }
+		if($.inArray($rel, $validHashes) == -1){
+			document.location.hash = "#/all"; return;}
 		
 		var $a = $('ul.cat-menu li a[href="'+$rel+'"]');
-		var $data = {category :$a.data('category'),
-					 country  :$a.data('country'),
-					 city	  :$a.data('city')};
+		var $data = $ev.parameters;
+		$data.category = $a.data('category');
+		$data.country  = $a.data('country');
+		$data.city 	   = $a.data('city');
+		
+		if(typeof $data.cats != "object"){
+			$data.cats = [$data.cats];
+		}
+		
+		
+		refresh_price = false;
+		$widget = $('.widget[rel="'+$rel+'"]');
+		$slider = $('#slider-4');
+		$('input[type=checkbox]', $widget).removeAttr('checked');
+		$('.widget.destinations').hide();
+		
+		if($ev.queryString == "") {
+			$slider.slider('values',[0,3000]);
+		} else {
+			$slider.slider('values',[$data.pricemin,$data.pricemax]);
+			if(typeof $data.cats == "object") {
+				$.each($data.cats, function(index, val){
+					$('input[value='+val+']', $widget).attr('checked',1);
+				});
+			} else {
+				$('input[value='+$data.cats+']', $widget).attr('checked',1);
+			}
+		}
+		$widget.show();
+		refresh_price = true;
 		
 		if(ajax != false)
 			ajax.abort();
 			
 		$('.results-wrapper .loading').show();
+		$('input[type=checkbox]', $widget).attr('disabled','1');
+		$('#slider-4').slider('disable');
+		
 		ajax = $.ajax({
 			url:'/ajax/getlistings',
 			data:$data,
 			success:function(results){
-				refresh_price = false;
 				$('.results-wrapper .loading').hide();
+				$('input[type=checkbox]', $widget).removeAttr('disabled');
+				$('#slider-4').slider('enable');
+				refresh_price = true;
+				
 				$('ul.cat-menu li.active').removeClass('active');
 				$a.parents('li').addClass('active');
 				$('.results-wrapper').html(results);
-				$( '#slider-4' ).slider('values',[0,3000]);
-				$('#value-4').text( '$' + $( '#slider-4' ).slider( 'values', 0 ) + ' - $' + $( '#slider-4' ).slider( 'values', 1 ) );
-				refresh_price = true;
 			},
 			error:function(){
 				$('.results-wrapper .loading').hide();
+				$('input[type=checkbox]', $widget).removeAttr('disabled');
+				$('#slider-4').slider('enable');
 			}
 		});
 	});
@@ -239,35 +259,52 @@ $(function(){
 		},
 		change:function(event, ui) {
 			if(refresh_price) {
-				var $a = $('ul.cat-menu li.active a');
-				var $data = {category :$a.data('category'),
-							 country  :$a.data('country'),
-							 city	  :$a.data('city'),
-							 pricemin :ui.values[0],
-							 pricemax :ui.values[1]};
+				// Get selected subcategories
+				$rel  = '#/'+$.address.pathNames()[0];
+				$cats = new Array();
+				$widget = $('.widget[rel="'+$rel+'"]');
+				$('input[type=checkbox]:checked', $widget).each(function(){
+					$cats.push($(this).val());});
 				
-				if(ajax != false)
-					ajax.abort();
-					
-				$('.results-wrapper .loading').show();
-				$( '#slider-4' ).slider('disable');
-				ajax = $.ajax({
-					url:'/ajax/getlistings',
-					data:$data,
-					success:function(results){
-						$('.results-wrapper .loading').hide();
-						$( '#slider-4' ).slider('enable');
-						$('ul.cat-menu li.active').removeClass('active');
-						$a.parents('li').addClass('active');
-						$('.results-wrapper').html(results);
-					},
-					error:function(){
-						$('.results-wrapper .loading').hide();
-						$( '#slider-4' ).slider('enable');
-					}
-				});
+				var $data = {pricemin :ui.values[0],
+							 pricemax :ui.values[1],
+							 cats	  :$cats};
+				
+				$.address.queryString($.param($data, true));
 			}
 		}
 	});
 	$('#value-4').text( '$' + $( '#slider-4' ).slider( 'values', 0 ) + ' - $' + $( '#slider-4' ).slider( 'values', 1 ) );
+	
+	$('.widget.cats input[type=checkbox]').live('click',function(){
+		// Get selected subcategories
+		$widget = $(this).parents('.widget.cats');
+		$cats = new Array();
+		$('input[type=checkbox]:checked', $widget).each(function(){
+			$cats.push($(this).val());});
+		
+		// Get Price slider values
+		$price  = $('#slider-4').slider('values');
+		$('#slider-4').slider('disable');
+		
+		// Init data to send over ajax request
+		var $data = {pricemin :$price[0],
+					 pricemax :$price[1],
+					 cats	  :$cats};
+		
+		$.address.queryString($.param($data, true));
+	});
+	
+	$('ul.cat-menu li a').live('click', function(){
+		if($(this).parents('li').hasClass('active'))
+			return false;
+		
+		refresh_price = false;
+		
+		$widget = $('.widget[rel="'+$(this).attr('href')+'"]');
+		$('input[type=checkbox]',$widget).removeAttr('checked');
+		
+		document.location.hash = $(this).attr('href');
+		return false;
+	});
 });
