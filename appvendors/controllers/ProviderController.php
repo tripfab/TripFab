@@ -2601,7 +2601,7 @@ class ProviderController extends Zend_Controller_Action
         //    if(!$this->accounts->validateUsername($data['username']))
         //        throw new Exception ('This username its being user for another user');
         
-        $this->user->updateContacts($data['contacts']);           
+        $this->user->updateContacts($data['contactid']);           
             
         $vendor->name = $data['name'];
         $vendor->email = $data['email'];

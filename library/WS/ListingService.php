@@ -34,28 +34,76 @@ class WS_ListingService {
      */
     protected $listings_types_db;
     
+    /**
+     *
+     * @var Zend_Db_Table_Abstract
+     */
     protected $tags_db;
     
+    /**
+     *
+     * @var Zend_Db_Table_Abstract
+     */
     protected $tabs_db;
     
+    /**
+     *
+     * @var Zend_Db_Table_Abstract
+     */
     protected $faqs_db;
     
+    /**
+     *
+     * @var Zend_Db_Table_Abstract
+     */
     protected $listing_attributes;
     
+    /**
+     *
+     * @var Zend_Db_Table_Abstract
+     */
     protected $listing_listingtypes_db;
     
+    /**
+     *
+     * @var Zend_Db_Table_Abstract
+     */
     protected $listing_tags_db;
     
+    /**
+     *
+     * @var Zend_Db_Table_Abstract
+     */
     protected $schedules_db;
     
+    /**
+     *
+     * @var Zend_Db_Table_Abstract
+     */
     protected $pictures_db;
     
+    /**
+     *
+     * @var Zend_Db_Table_Abstract
+     */
     protected $seasons_db;
     
+    /**
+     *
+     * @var Zend_Db_Table_Abstract
+     */
     protected $prices_db;
     
+    /**
+     *
+     * @var Zend_Db_Table_Abstract
+     */
     protected $calendar;
     
+    /**
+     *
+     * @var Zend_Db_Table_Abstract
+     */
     protected $vendors;
     
     /**
@@ -63,6 +111,12 @@ class WS_ListingService {
      * @var Zend_Cache_Core
      */
     protected $cache;
+    
+    /**
+     *
+     * @var Boolean
+     */
+    public $use_cache;
     
     /**
      * 
@@ -99,31 +153,67 @@ class WS_ListingService {
         
         if(Zend_Registry::isRegistered('cache'))
             $this->cache = Zend_Registry::get('cache');
+        
+        $this->use_cache = true;
     }
     
     public function getDefaultListing($vendor)
     {
-        $select = $this->listings->select();
-        $select->where('vendor_id = ?', $vendor);
-        $select->where('status != ?', 3);
-        $select->order('created ASC');
-        $row = $this->listings->fetchRow($select);
+        $args = func_get_args();
+        $cacheId = "LS_getDefaultListing_".md5(print_r($args,true));
         
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+        
+            $select = $this->listings->select();
+            $select->where('vendor_id = ?', $vendor);
+            $select->where('status != ?', 3);
+            $select->order('created ASC');
+            $row = $this->listings->fetchRow($select);
+        
+            if($this->use_cache)
+                $this->cache->save($row, $cacheId);
+        } else {
+            $row = $this->cache->load($cacheId);
+        }
         return (!is_null($row)) ? $row : null;
     }
     
     public function getDefaultLandscapes()
     {
-        $table = new Zend_Db_Table('landscapes');
-        return $table->fetchAll();
+        $cacheId = "LS_getDefaultLandscapes";
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+        
+            $table  = new Zend_Db_Table('landscapes');
+            $result = $table->fetchAll();
+            
+            if($this->use_cache)
+                $this->cache->save($result, $cacheId);
+            
+        } else {
+            $result = $this->cache->load($cacheId);
+        }
+        
+        return $result;
     }
     
     public function getLandscapesOf($listing)
     {
-        $table = new Zend_Db_Table('listing_landscapes');
-        $select = $table->select();
-        $select->where('listing_id = ?', $listing);
-        $lands = $table->fetchAll($select);
+        $args = func_get_args();
+        $cacheId = "LS_getLandscapesOf_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+        
+            $table = new Zend_Db_Table('listing_landscapes');
+            $select = $table->select();
+            $select->where('listing_id = ?', $listing);
+            $lands = $table->fetchAll($select);
+            
+            if($this->use_cache)
+                $this->cache->save($lands, $cacheId);
+            
+        } else {
+            $lands = $this->cache->load($cacheId);
+        }
         
         return $lands;
     }
@@ -152,23 +242,47 @@ class WS_ListingService {
      */
     public function getTopFreeFrom($place)
     {
-        $select = $this->listings->select();
-        $select->where('country_id = ?',$place);
-        $select->order('loves DESC');
-        $select->limit(5);
-        $free_listings = $this->listings->fetchAll($select);
-        if(is_null($free_listings))
-            $free_listings = array();
+        $args = func_get_args();
+        $cacheId = "LS_getTopFreeFrom_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+        
+            $select = $this->listings->select();
+            $select->where('country_id = ?',$place);
+            $select->order('loves DESC');
+            $select->limit(5);
+            $free_listings = $this->listings->fetchAll($select);
+            if(is_null($free_listings))
+                $free_listings = array();
+            
+            if($this->use_cache)
+                $this->cache->save($free_listings, $cacheId);
+            
+        } else {
+            $free_listings = $this->cache->load($cacheId);
+        }
         
         return $free_listings;
     }
     
     public function getDetails($listing)
     {
-        $details_db = new Zend_Db_Table('listing_details');
-        $select = $details_db->select();
-        $select->where('listing_id = ?', $listing);
-        $details = $details_db->fetchAll($select);
+        $args = func_get_args();
+        $cacheId = "LS_getDetails_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+        
+            $details_db = new Zend_Db_Table('listing_details');
+            $select = $details_db->select();
+            $select->where('listing_id = ?', $listing);
+            $details = $details_db->fetchAll($select);
+            
+            if($this->use_cache)
+                $this->cache->save($details, $cacheId);
+            
+        } else {
+            $details = $this->cache->load($cacheId);
+        }
         
         return $details;
     }
@@ -181,7 +295,20 @@ class WS_ListingService {
      */
     public function getTopThingsToDoIn($place)
     {
-        $top_thingToDo = $this->_getTop5($place, self::CAT_TODO);
+        $args = func_get_args();
+        $cacheId = "LS_getTopThingsToDoIn_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+        
+            $top_thingToDo = $this->_getTop5($place, self::CAT_TODO);
+            
+            if($this->use_cache)
+                $this->cache->save($top_thingToDo, $cacheId);
+            
+        } else {
+            $top_thingToDo = $this->cache->load($cacheId);
+        }
+            
         return $top_thingToDo;
         
     }
@@ -192,22 +319,33 @@ class WS_ListingService {
      */
     public function getMainCategories($assoc = false)
     {
-        if(!$assoc){
-            $select = $this->listings_types_db->select();
-            $select->where('parent_id is null');
-            $select->order('weight asc');
-            return $this->listings_types_db->fetchAll($select);
-        } else {
-            $db = Zend_Db_Table::getDefaultAdapter();
-            $select = $db->select();
-            $select->from('listing_types');
-            $select->where('parent_id is null');
-            $select->order('weight asc');
-            $result = $db->fetchAssoc($select, array(), Zend_Db::FETCH_OBJ);;
+        $args = func_get_args();
+        $cacheId = "LS_getMainCategories_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+        
+            if(!$assoc){
+                $select = $this->listings_types_db->select();
+                $select->where('parent_id is null');
+                $select->order('weight asc');
+                $result = $this->listings_types_db->fetchAll($select);
+            } else {
+                $db = Zend_Db_Table::getDefaultAdapter();
+                $select = $db->select();
+                $select->from('listing_types');
+                $select->where('parent_id is null');
+                $select->order('weight asc');
+                $result = $db->fetchAssoc($select, array(), Zend_Db::FETCH_OBJ);;
+            }
             
-            //var_dump($result); die;
-            return $result;
+            if($this->use_cache)
+                $this->cache->save($result, $cacheId);
+            
+        } else {
+            $result = $this->cache->load($cacheId);
         }
+        
+        return $result;
     }
     
     /**
@@ -218,8 +356,21 @@ class WS_ListingService {
      */
     public function getCategoryByIdf($idf)
     {
-        $active_cat_idf = ucwords(str_replace('-',' ',$idf));
-        $active_category = $this->listings_types_db->fetchRow('name = "'.$active_cat_idf.'"');
+        $args = func_get_args();
+        $cacheId = "LS_getCategoryByIdf_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+        
+            $active_cat_idf = ucwords(str_replace('-',' ',$idf));
+            $active_category = $this->listings_types_db->fetchRow('name = "'.$active_cat_idf.'"');
+            
+            if($this->use_cache)
+                $this->cache->save($active_category, $cacheId);
+            
+        } else {
+            $active_category = $this->cache->load($cacheId);
+        }
+        
         if(is_null($active_category))
             throw new Exception;
         
@@ -228,7 +379,19 @@ class WS_ListingService {
     
     public function getCategory($id)
     {
-        $category = $this->listings_types_db->fetchRow('id = '.$id);
+        $args = func_get_args();
+        $cacheId = "LS_getCategory_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+        
+            $category = $this->listings_types_db->fetchRow('id = '.$id);
+            
+            if($this->use_cache)
+                $this->cache->save($category, $cacheId);
+            
+        } else {
+            $category = $this->cache->load($cacheId);
+        }
         if(is_null($category))
             throw new Exception();
         
@@ -243,10 +406,23 @@ class WS_ListingService {
      */
     public function getSubCategoriesOf($cat)
     {
-        $select = $this->listings_types_db->select();
-        $select->where('parent_id = ?',$cat);
-        $select->order('name ASC');
-        $subcategories = $this->listings_types_db->fetchAll($select);
+        $args = func_get_args();
+        $cacheId = "LS_getSubCategoriesOf_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+        
+            $select = $this->listings_types_db->select();
+            $select->where('parent_id = ?',$cat);
+            $select->order('name ASC');
+            $subcategories = $this->listings_types_db->fetchAll($select);
+            
+            if($this->use_cache)
+                $this->cache->save($subcategories, $cacheId);
+            
+        } else {
+            $subcategories = $this->cache->load($cacheId);
+        }
+        
         if(is_null($subcategories))
             $subcategories = array();
         
@@ -262,92 +438,141 @@ class WS_ListingService {
      */
     protected function _getTop5($place, $cat)
     {
-        $lisring_types = $this->listings_types_db->fetchAll('parent_id = '.$cat);
+        $args = func_get_args();
+        $cacheId = "LS__getTop5_".md5(print_r($args,true));
         
-        $select = $this->listings->select();
-        foreach($lisring_types as $lt)
-            $select->orWhere('main_type = ?', $lt->id);
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
         
-        $select->where('city_id = ?', $place);
-        $select->order('loves DESC');
-        $select->limit(5,0);
-        
-        $top5 = $this->listings->fetchAll($select);
-        if(is_null($top5))
-            $top5 = array();
-        
+            $lisring_types = $this->listings_types_db->fetchAll('parent_id = '.$cat);
+
+            $select = $this->listings->select();
+            foreach($lisring_types as $lt)
+                $select->orWhere('main_type = ?', $lt->id);
+
+            $select->where('city_id = ?', $place);
+            $select->order('loves DESC');
+            $select->limit(5,0);
+
+            $top5 = $this->listings->fetchAll($select);
+            if(is_null($top5))
+                $top5 = array();
+            
+            if($this->use_cache)
+                $this->cache->save($top5, $cacheId);
+            
+        } else {
+            $top5 = $this->cache->load($cacheId);
+        }
         return $top5;
     }
     
     public function getTagsFor($cat)
     {
-        $select = $this->tags_db->select();
+        $args = func_get_args();
+        $cacheId = "LS_getTagsFor_".md5(print_r($args,true));
         
-        if($cat->id == self::CAT_TODO){
-            $subcats = $this->getSubCategoriesOf($cat->id);
-            $select->where('listing_type = ?', $subcats[0]->id);} 
-        elseif((is_null($cat->parent_id)) or ($cat->parent_id == self::CAT_TODO))
-            $select->where('listing_type = ?', $cat->id);
-        else 
-            $select->where('listing_type = ?', $cat->parent_id);
-        $tags = $this->tags_db->fetchAll($select);
-        if(is_null($tags))
-            $tags = array();
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+        
+            $select = $this->tags_db->select();
+        
+            if($cat->id == self::CAT_TODO){
+                $subcats = $this->getSubCategoriesOf($cat->id);
+                $select->where('listing_type = ?', $subcats[0]->id);} 
+            elseif((is_null($cat->parent_id)) or ($cat->parent_id == self::CAT_TODO))
+                $select->where('listing_type = ?', $cat->id);
+            else 
+                $select->where('listing_type = ?', $cat->parent_id);
+            $tags = $this->tags_db->fetchAll($select);
+            if(is_null($tags))
+                $tags = array();
+            
+            if($this->use_cache)
+                $this->cache->save($tags, $cacheId);
+            
+        } else {
+            $tags = $this->cache->load($cacheId);
+        }
         
         return $tags;
     }
     
     public function getTagsOf($listing)
     {
-        $select = $this->listing_tags_db->select();
-        $select->where('listing_id = ?', $listing);
-        $tags = $this->listing_tags_db->fetchAll($select);
+        $args = func_get_args();
+        $cacheId = "LS_getTagsOf_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+        
+            $select = $this->listing_tags_db->select();
+            $select->where('listing_id = ?', $listing);
+            $tags = $this->listing_tags_db->fetchAll($select);
+            
+            if($this->use_cache)
+                $this->cache->save($tags, $cacheId);
+            
+        } else {
+            $tags = $this->cache->load($cacheId);
+        }
         
         return $tags;
     }
     
     public function getListings($cat, $place)
     {
-        $select = $this->listings->select();
-        if($cat->id == self::CAT_TODO){
-            $subcats = $this->getSubCategoriesOf($cat->id);
-            $select->where('main_type = ?', $subcats[0]->id);
-            $select->where('city_id = ?', $place);
-            $select->order('listings.loves DESC');
-            $select->limit(12, 0);
-            //var_dump($select->assemble()); die;
-            $lists = $this->listings->fetchAll($select);
-        } 
-        elseif((is_null($cat->parent_id)) or ($cat->parent_id == self::CAT_TODO)){
-            $select->where('main_type = ?',$cat->id);
-            $select->where('city_id = ?', $place);
-            $select->order('listings.loves DESC');
-            $select->limit(12, 0);
-            $lists = $this->listings->fetchAll($select);
-        } 
-        else {
-            $db = $this->listings->getDefaultAdapter();
-            $select = $db->select();
-            $select->from('listings');
-            $select->join('listing_listingtypes', 'listings.id = listing_listingtypes.listing_id');
-            $select->join('listing_types', 'listing_listingtypes.listingtype_id = listing_types.id');
-            $select->where('listings.city_id = ?', $place);
-            $select->where('listing_types.id = ?', $cat->id);
-            $select->order('listings.loves DESC');
-            $select->limit(12, 0);
+        $args = func_get_args();
+        $cacheId = "LS_getListings_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+        
+            $select = $this->listings->select();
+            if($cat->id == self::CAT_TODO){
+                $subcats = $this->getSubCategoriesOf($cat->id);
+                $select->where('main_type = ?', $subcats[0]->id);
+                $select->where('city_id = ?', $place);
+                $select->order('listings.loves DESC');
+                $select->limit(12, 0);
+                //var_dump($select->assemble()); die;
+                $lists = $this->listings->fetchAll($select);
+            } 
+            elseif((is_null($cat->parent_id)) or ($cat->parent_id == self::CAT_TODO)){
+                $select->where('main_type = ?',$cat->id);
+                $select->where('city_id = ?', $place);
+                $select->order('listings.loves DESC');
+                $select->limit(12, 0);
+                $lists = $this->listings->fetchAll($select);
+            } 
+            else {
+                $db = $this->listings->getDefaultAdapter();
+                $select = $db->select();
+                $select->from('listings');
+                $select->join('listing_listingtypes', 'listings.id = listing_listingtypes.listing_id');
+                $select->join('listing_types', 'listing_listingtypes.listingtype_id = listing_types.id');
+                $select->where('listings.city_id = ?', $place);
+                $select->where('listing_types.id = ?', $cat->id);
+                $select->order('listings.loves DESC');
+                $select->limit(12, 0);
+
+                $lists = $db->fetchAll($select->assemble(), array(), Zend_Db::FETCH_OBJ);
+            }
+            if(is_null($lists))
+                $lists = array();
             
-            $lists = $db->fetchAll($select->assemble(), array(), Zend_Db::FETCH_OBJ);
+            if($this->use_cache)
+                $this->cache->save($lists, $cacheId);
+            
+        } else {
+            $lists = $this->cache->load($cacheId);
         }
-        if(is_null($lists))
-            $lists = array();
         return $lists;
     }
     
-    public function getListings2($place, $cat, $subcat, $sort, $stars, $pricemin = 0, $pricemax = 3000){
+    public function getListings2($place, $cat, $subcat, $sort, $stars, $pricemin = 0, $pricemax = 3000)
+    {
         $args = func_get_args();
         $cacheId = "LS_getListings2_".md5(print_r($args, true));
         
         if(!$this->cache->test($cacheId)) {
+            
             $db = Zend_Db_Table::getDefaultAdapter();
             $select = $db->select();
             $select->from('listings');
@@ -408,12 +633,24 @@ class WS_ListingService {
     
     public function getListingByIdf($idf, $city, $country)
     {
-        $idf = trim(strtolower($idf));
-        $select = $this->listings->select();
-        $select->where('identifier = ?', $idf);
-        $select->where('city_id = ?', $city);
-        $select->where('country_id = ?', $country);
-        $listing = $this->listings->fetchRow($select);
+        $args = func_get_args();
+        $cacheId = "LS_getListingByIdf_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+
+            $idf = trim(strtolower($idf));
+            $select = $this->listings->select();
+            $select->where('identifier = ?', $idf);
+            $select->where('city_id = ?', $city);
+            $select->where('country_id = ?', $country);
+            $listing = $this->listings->fetchRow($select);
+            
+            if($this->use_cache)
+                $this->cache->save($listing, $cacheId);
+            
+        } else {
+            $listing = $this->cache->load($cacheId);
+        }
         if(is_null($listing))
             throw new Exception();
         
@@ -422,9 +659,22 @@ class WS_ListingService {
     
     public function getTabsOf($ids)
     {
-        $select = $this->tabs_db->select();
-        $select->where('listing_id = ?', $ids);
-        $tabs = $this->tabs_db->fetchAll($select);
+        $args = func_get_args();
+        $cacheId = "LS_getTabsOf_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+
+            $select = $this->tabs_db->select();
+            $select->where('listing_id = ?', $ids);
+            $tabs = $this->tabs_db->fetchAll($select);
+            
+            if($this->use_cache)
+                $this->cache->save($tabs, $cacheId);
+            
+        } else {
+            $tabs = $this->cache->load($cacheId);
+        }
+        
         if(is_null($tabs))
             throw new Exception();
         
@@ -433,29 +683,81 @@ class WS_ListingService {
     
     public function getFAQsOf($ids)
     {
-        $select = $this->faqs_db->select();
-        $select->where('listing_id = ?',$ids);
-        $faqs = $this->faqs_db->fetchAll($select);
-        if(is_null($faqs))
-            $faqs = array();
+        $args = func_get_args();
+        $cacheId = "LS_getFAQsOf_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+
+            $select = $this->faqs_db->select();
+            $select->where('listing_id = ?',$ids);
+            $faqs = $this->faqs_db->fetchAll($select);
+            if(is_null($faqs))
+                $faqs = array();
+            
+            if($this->use_cache)
+                $this->cache->save($faqs, $cacheId);
+            
+        } else {
+            $faqs = $this->cache->load($cacheId);
+        }
         
         return $faqs;
     }
     
     public function getAttributesOf($ids)
     {
-        $select = $this->listing_attributes->select();
-        $select->where('listing_id = ?',$ids);
-        $attrs = $this->listing_attributes->fetchAll($select);
-        if(is_null($attrs))
-            $attrs = null;
+        $args = func_get_args();
+        $cacheId = "LS_getAttributesOf_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+
+            $select = $this->listing_attributes->select();
+            $select->where('listing_id = ?',$ids);
+            $attrs = $this->listing_attributes->fetchAll($select);
+            
+            if($this->use_cache)
+                $this->cache->save($attrs, $cacheId);
+            
+        } else {
+            $attrs = $this->cache->load($cacheId);
+        }
+            
         return $attrs;
     }
     
     public function getMainTypes()
     {
-        return $this->listings_types_db->fetchAll('parent_id is null');
+        $args = func_get_args();
+        $cacheId = "LS_getMainTypes";
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+
+            $types = $this->listings_types_db->fetchAll('parent_id is null');
+            
+            if($this->use_cache)
+                $this->cache->save($types, $cacheId);
+            
+        } else {
+            $types = $this->cache->load($cacheId);
+        }
+        
+        return $types;
     }
+    
+    ############################################################################
+    ############################################################################
+    ############################################################################
+    ############################################################################
+    ############################################################################
+    ############################################################################
+    ############################################################################
+    ############################################################################
+    ############################################################################
+    ############################################################################
+    ############################################################################
+    ############################################################################
+    ############################################################################
+    ############################################################################
     
     public function getOverviewOf($listing)
     {
