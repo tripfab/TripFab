@@ -19,8 +19,6 @@
     <script type="text/javascript" src="/js2/trips/view.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            //$('.trip-itinerary .ttl').scrollElement();
-            $('input, textarea').ToggleInputValue();
             $('#slider-1').cycle({
                 next: 	'#next-1',
                 prev: 	'#prev-1',
@@ -77,36 +75,34 @@
                 <div class="left">
                     <h2><?= $this->trip->title ?></h2>
                     <span><?= $this->trip->country ?></span>
-                    <p>Vivamus luctust tellus tristique purus iaculis non ornare erat ultrices. Morbi eros quam, imperdiet nec laoreet eget, condimentum id sapien. Aliquam non mi sapien, pharetra viverra orci. Vivamus luctust tellus tristique purus iaculis non ornare erat ultrices. Morbi eros quam.</p>
+                    <p><?= $this->trip->description ?></p>
                 </div><!-- closes left -->
                 <div class="right">
                     <img src="/images2/img-39.png" alt="" />
                     <h3>Cities to Discover</h3>
                     <ul>
-                        <li>Buenos Aires</li>
-                        <li>C&oacute;rdoba</li>
-                        <li>Concordia</li>
-                        <li>Lan&uacute;s</li>
-                        <li>La Plata</li>
+                    	<?php $used_cities = array(); ?>
+                    	<?php foreach($this->listings as $list): ?>
+                        <?php if(!in_array($list->city, $used_cities)): ?>
+                        <li><?= $list->city ?></li>
+                        <?php $used_cities[] = $list->city ?>
+                        <?php endif ?>
+                        <?php endforeach ?>
                     </ul>
                 </div><!-- closes right -->
             </div><!-- closes sumary -->
             <div class="box">
+                <?php if(count($this->highlights) > 0): ?>
                 <div class="hight-lights">
                     <h4>Trip Highlights</h4>
+                    <?php foreach($this->highlights as $high): ?>
                     <div>
-                        <h5>An extenisive tour of 25 wineries</h5>
-                        <p>Vivamus luctust tellus tristique purus iaculis non ornare erat ultrices. Morbi eros quam, imperdiet nec laoreet eget, condimentum id sapien. Aliquam non mi sapien, pharetra viverra orci. Vivamus luctust tellus tristique purus iaculis.</p>
+                        <h5><?= $high->title ?></h5>
+                        <p><?= nl2br($high->text) ?></p>
                     </div>
-                    <div>
-                        <h5>Shopping at the winery boutiques</h5>
-                        <p>Vivamus luctust tellus tristique purus iaculis non ornare erat ultrices. Morbi eros quam, imperdiet nec laoreet eget, condimentum id sapien. Aliquam non mi sapien, pharetra viverra orci. Vivamus luctust tellus tristique purus iaculis.</p>
-                    </div>
-                    <div>
-                        <h5>Variety of wine tasting</h5>
-                        <p>Vivamus luctust tellus tristique purus iaculis non ornare erat ultrices. Morbi eros quam, imperdiet nec laoreet eget, condimentum id sapien. Aliquam non mi sapien, pharetra viverra orci. Vivamus luctust tellus tristique purus iaculis.</p>
-                    </div>
+                    <?php endforeach ?>
                 </div><!-- closes high-lights -->
+                <?php endif ?>
                 <div class="tabs-wrapper">
                 	<?php $show = array(); ?>
 					<?php foreach($this->listings as $listing): ?>
@@ -140,8 +136,7 @@
                                         <?= $listing->title ?>
                                     </div><!-- closes left -->
                                     <div class="right">
-                                        <p>An action packed couples trip on the Big Island. Hawaii expert, Cathay, directed the pair to one of the island's best design hotels — the Waikiki Edition — for its lively pool scene, nightclub and Morimoto restaurant, as well as organized a private surfing lesson. The member, who's a frequent business traveler, described Cathay's spot-on recommendation as one of his "top 5 hotels of all time"</p>
-                                        <p>You'll be here in the <a href="">2nd Day</a></p>
+                                        <p><?= $listing->description ?></p>
                                     </div><!-- closes right -->
                                 </div><!-- closes content -->
                             </div><!-- closes slide -->
@@ -168,8 +163,7 @@
                                         <?= $listing->title ?>
                                     </div><!-- closes left -->
                                     <div class="right">
-                                        <p>An action packed couples trip on the Big Island. Hawaii expert, Cathay, directed the pair to one of the island's best design hotels — the Waikiki Edition — for its lively pool scene, nightclub and Morimoto restaurant, as well as organized a private surfing lesson. The member, who's a frequent business traveler, described Cathay's spot-on recommendation as one of his "top 5 hotels of all time"</p>
-                                        <p>You'll be here in the <a href="">2nd Day</a></p>
+                                        <p><?= $listing->description ?></p>
                                     </div><!-- closes right -->
                                 </div><!-- closes content -->
                             </div><!-- closes slide -->
@@ -196,8 +190,7 @@
                                         <?= $listing->title ?>
                                     </div><!-- closes left -->
                                     <div class="right">
-                                        <p>An action packed couples trip on the Big Island. Hawaii expert, Cathay, directed the pair to one of the island's best design hotels — the Waikiki Edition — for its lively pool scene, nightclub and Morimoto restaurant, as well as organized a private surfing lesson. The member, who's a frequent business traveler, described Cathay's spot-on recommendation as one of his "top 5 hotels of all time"</p>
-                                        <p>You'll be here in the <a href="">2nd Day</a></p>
+                                        <p><?= $listing->description ?></p>
                                     </div><!-- closes right -->
                                 </div><!-- closes content -->
                             </div><!-- closes slide -->
@@ -224,8 +217,7 @@
                                         <?= $listing->title ?>
                                     </div><!-- closes left -->
                                     <div class="right">
-                                        <p>An action packed couples trip on the Big Island. Hawaii expert, Cathay, directed the pair to one of the island's best design hotels — the Waikiki Edition — for its lively pool scene, nightclub and Morimoto restaurant, as well as organized a private surfing lesson. The member, who's a frequent business traveler, described Cathay's spot-on recommendation as one of his "top 5 hotels of all time"</p>
-                                        <p>You'll be here in the <a href="">2nd Day</a></p>
+                                        <p><?= $listing->description ?></p>
                                     </div><!-- closes right -->
                                 </div><!-- closes content -->
                             </div>
@@ -241,134 +233,150 @@
                 </div><!-- closes tabs-wrapper -->
             </div><!-- closes box -->
             <div class="box tabs-bottom">
+            	<?php $show = array(); ?>
+            	<?php foreach($this->facts as $fact): ?>
+                	<?php if($fact->type == 1) $show[1] = true; ?>
+                    <?php if($fact->type == 2) $show[2] = true; ?>
+                    <?php if($fact->type == 3) $show[3] = true; ?>
+                    <?php if($fact->type == 4) $show[4] = true; ?>
+                    <?php if($fact->type == 5) $show[5] = true; ?>
+                    <?php if($fact->type == 6) $show[6] = true; ?>
+                <?php endforeach ?>
+                <?php if(count($show) > 0): ?>
                 <ul>
+                	<?php if($show[1] === true): ?>
                     <li class="item-1">
                         <a href="#tabs-1"><img src="/images2/cleardot.gif" alt="" /><strong>The Culture</strong> Vivamus luctust tellus</a>
                     </li>
+                    <?php endif; if($show[2] === true): ?>
                     <li class="item-2">
                         <a href="#tabs-2"><img src="/images2/cleardot.gif" alt="" /><strong>The Environment</strong> Vivamus luctust tellus</a>
                     </li>
+                    <?php endif; if($show[3] === true): ?>
                     <li class="item-3">
                         <a href="#tabs-3"><img src="/images2/cleardot.gif" alt="" /><strong>Knowledge</strong> Vivamus luctust tellus</a>
                     </li>
+                    <?php endif; if($show[4] === true): ?>
                     <li class="item-4">
                         <a href="#tabs-4"><img src="/images2/cleardot.gif" alt="" /><strong>Things you'll love</strong> Vivamus luctust tellus</a>
                     </li>
+                    <?php endif; if($show[5] === true): ?>
                     <li class="item-5">
                         <a href="#tabs-5"><img src="/images2/cleardot.gif" alt="" /><strong>When to take this trip</strong> Vivamus luctust tellus</a>
                     </li>
+                    <?php endif; if($show[6] === true): ?>
                     <li class="item-6">
                         <a href="#tabs-6"><img src="/images2/cleardot.gif" alt="" /><strong>Tips &amp; Recommendations</strong> Vivamus luctust tellus</a>
                     </li>
+                    <?php endif ?>
                 </ul>
+				<?php if($show[1] === true): ?>
                 <div id="tabs-1" class="tab">
                     <h4>About the Culture</h4>
-                    <img src="/images2/img-41.png" alt="" class="left" />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <?php $right = false; ?>
+                    <?php foreach($this->facts as $fact): ?>
+                    <?php if($fact->type == 1): ?>
+                    <?php $class = ($right) ? 'right' : 'left' ?> <?php $right = !$right ?>
+                    <?= $this->thumbnail(array('width'=>193,'height'=>123), $fact->image, $class, '193:123') ?>
+                    <p><?= nl2br($fact->text) ?></p>
                     <div class="clear"></div>
-                    <img src="/images2/img-41.png" alt="" class="right" />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
-                    <div class="clear"></div>
-                    <img src="/images2/img-41.png" alt="" class="left" />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
-                    <div class="clear"></div>
+                    <?php endif ?>
+                    <?php endforeach ?>
                 </div>
-                <!-- closes tab -->
+                <?php endif; if($show[2] === true): ?>
                 <div id="tabs-2" class="tab">
                     <h4>About the Environment</h4>
-                    <img src="/images2/img-41.png" alt="" class="left" />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <?php $right = false; ?>
+                    <?php foreach($this->facts as $fact): ?>
+                    <?php if($fact->type == 2): ?>
+                    <?php $class = ($right) ? 'right' : 'left' ?> <?php $right = !$right ?>
+                    <?= $this->thumbnail(array('width'=>193,'height'=>123), $fact->image, $class, '193:123') ?>
+                    <p><?= nl2br($fact->text) ?></p>
                     <div class="clear"></div>
-                    <img src="/images2/img-41.png" alt="" class="right" />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
-                    <div class="clear"></div>
-                    <img src="/images2/img-41.png" alt="" class="left" />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
-                    <div class="clear"></div>
+                    <?php endif ?>
+                    <?php endforeach ?>
                 </div>
-                <!-- closes tab -->
+                <?php endif; if($show[3] === true): ?>
                 <div id="tabs-3" class="tab">
                     <h4>About the knowledge</h4>
-                    <img src="/images2/img-41.png" alt="" class="left" />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <?php $right = false; ?>
+                    <?php foreach($this->facts as $fact): ?>
+                    <?php if($fact->type == 3): ?>
+                    <?php $class = ($right) ? 'right' : 'left' ?> <?php $right = !$right ?>
+                    <?= $this->thumbnail(array('width'=>193,'height'=>123), $fact->image, $class, '193:123') ?>
+                    <p><?= nl2br($fact->text) ?></p>
                     <div class="clear"></div>
-                    <img src="/images2/img-41.png" alt="" class="right" />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
-                    <div class="clear"></div>
-                    <img src="/images2/img-41.png" alt="" class="left" />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
-                    <div class="clear"></div>
+                    <?php endif ?>
+                    <?php endforeach ?>
                 </div>
-                <!-- closes tab -->
+                <?php endif; if($show[4] === true): ?>
                 <div id="tabs-4" class="tab">
                     <h4>About the things you'll love</h4>
-                    <img src="/images2/img-41.png" alt="" class="left" />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <?php $right = false; ?>
+                    <?php foreach($this->facts as $fact): ?>
+                    <?php if($fact->type == 4): ?>
+                    <?php $class = ($right) ? 'right' : 'left' ?> <?php $right = !$right ?>
+                    <?= $this->thumbnail(array('width'=>193,'height'=>123), $fact->image, $class, '193:123') ?>
+                    <p><?= nl2br($fact->text) ?></p>
                     <div class="clear"></div>
-                    <img src="/images2/img-41.png" alt="" class="right" />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
-                    <div class="clear"></div>
-                    <img src="/images2/img-41.png" alt="" class="left" />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
-                    <div class="clear"></div>
+                    <?php endif ?>
+                    <?php endforeach ?>
                 </div>
-                <!-- closes tab -->
+                <?php endif; if($show[5] === true): ?>
                 <div id="tabs-5" class="tab">
                     <h4>About when to take the trip</h4>
-                    <img src="/images2/img-41.png" alt="" class="left" />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <?php $right = false; ?>
+                    <?php foreach($this->facts as $fact): ?>
+                    <?php if($fact->type == 5): ?>
+                    <?php $class = ($right) ? 'right' : 'left' ?> <?php $right = !$right ?>
+                    <?= $this->thumbnail(array('width'=>193,'height'=>123), $fact->image, $class, '193:123') ?>
+                    <p><?= nl2br($fact->text) ?></p>
                     <div class="clear"></div>
-                    <img src="/images2/img-41.png" alt="" class="right" />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
-                    <div class="clear"></div>
-                    <img src="/images2/img-41.png" alt="" class="left" />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
-                    <div class="clear"></div>
+                    <?php endif ?>
+                    <?php endforeach ?>
                 </div>
-                <!-- closes tab -->
+                <?php endif; if($show[6] === true): ?>
                 <div id="tabs-6" class="tab">
                     <h4>About tips &amp; recommendations</h4>
-                    <img src="/images2/img-41.png" alt="" class="left" />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
+                    <?php $right = false; ?>
+                    <?php foreach($this->facts as $fact): ?>
+                    <?php if($fact->type == 6): ?>
+                    <?php $class = ($right) ? 'right' : 'left' ?> <?php $right = !$right ?>
+                    <?= $this->thumbnail(array('width'=>193,'height'=>123), $fact->image, $class, '193:123') ?>
+                    <p><?= nl2br($fact->text) ?></p>
                     <div class="clear"></div>
-                    <img src="/images2/img-41.png" alt="" class="right" />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
-                    <div class="clear"></div>
-                    <img src="/images2/img-41.png" alt="" class="left" />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at nisl enim. Fusce condimentum ornare nisl, non cursus nunc euismod ut. Phasellus tristique ante in nibh fermentum auctor. Aenean id lacus nisl. In hac habitasse platea dictumst. In hac habitasse platea dictumst. Fusce vitae felis ligula, vitae viverra quam. In a lectus magna.</p>
-                    <div class="clear"></div>
+                    <?php endif ?>
+                    <?php endforeach ?>
                 </div>
-                <!-- closes tab -->
+	            <?php endif ?>
             </div>
-            <!-- closes box -->
+            <?php endif ?>
+            <?php if(count($this->includes) > 0): ?>
             <div class="compare">
                 <div class="left">
                     <ul>
-                        <li>6 luncheons</li>
-                        <li>Wine tasting dinner at Astrid y Gaston in Santiago</li>
-                        <li>Dinner at Veta Bistro with former French Laundry chef Roberto Leira</li>
-                        <li>Dinner at Mallman 1884 in Mendoza</li>
-                        <li>Tango Show with VIP seating in Buenos Aires</li>
+                    	<?php foreach($this->includes as $inc): ?>
+                        <?php if($inc->included == 1): ?>
+                        <li><?= nl2br($inc->text) ?></li>
+                        <?php endif ?>
+                        <?php endforeach ?>
                     </ul>
-                </div>
-                <!-- closes left -->
+                </div><!-- closes left -->
                 <div class="right">
                     <ul>
-                        <li>Santa Cruz Museum Entrance</li>
-                        <li>Gratuities for porters in airports and hotels</li>
-                        <li>Bottled mineral waters on buses</li>
-                        <li>All ground transportation in clean air conditioned and comfortable vehicle</li>
-                        <li>Professional bilingual guide</li>
+                    	<?php foreach($this->includes as $inc): ?>
+                        <?php if($inc->included == 0): ?>
+                        <li><?= nl2br($inc->text) ?></li>
+                        <?php endif ?>
+                        <?php endforeach ?>
                     </ul>
-                </div>
-                <!-- closes right -->
+                </div><!-- closes right -->
             </div>
-            <!-- closes compare -->
-            <a href="/trips/itinerary/<?= $this->trip->id ?>" class="btn-9 explore">Explore the Complete Itinerary <img src="/images2/cleardot.gif" alt="" /></a>
-        </div>
-        <!-- closes wrapper -->
-    </div>
-    <!-- closes w2 -->
+            <?php endif ?>
+            <a href="/trips/itinerary/<?= $this->trip->id ?>" class="btn-9 explore">Explore the Complete Itinerary 
+            <img src="/images2/cleardot.gif" alt="" /></a>
+        </div><!-- closes wrapper -->
+    </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->	
 <div class="hidden">
@@ -378,14 +386,17 @@
 				<h2>First, select the dates you want to go on your vacation.</h2>
 				<ul>
 					<li>Your trip is going to be <?= $this->trip->days ?> days long.</li>
+                    <?php if($this->trip->kids): ?>
 					<li>This trip is available for children.</li>
+                    <?php else: ?>
+					<li>This trip is not available for children.</li>                    
+                    <?php endif ?>
 					<li>Maximum occupation is <?= $this->trip->max ?> people.</li>
                     <?php if($this->trip->min > 1): ?>
                     <li>Minimum occupation is <?= $this->trip->min ?> people.</li>
                     <?php else: ?>
 					<li>No minimum  required.</li>
                     <?php endif ?>
-                    <li><em>The price listed is an estimation, you will get a final price depending on your dates and ocupation requirements</em></li>
 				</ul>
 			</div><!-- closes left -->
 			<div class="right">
@@ -404,6 +415,7 @@
                             <?php endif ?>
                         <?php endfor ?>
                         </select>
+                        <?php if($this->trip->kids): ?>
                         <label>Children</label>
                         <select name="kids">
                         	<option value="0">None</option>
@@ -417,6 +429,7 @@
                             <?php endif ?>
                         <?php endfor ?>
                         </select>
+                        <?php endif ?>
                     </div><!-- closes occ -->
                     <div class="occ">
                         <input type="submit" class="btn-1" value="Check Availability" />

@@ -537,4 +537,38 @@ class WS_TripsService {
         return $result;        
     }
     
+    
+    public function getHighlights($trip)
+    {
+        $trip = 23;
+        $table = new Zend_Db_Table('trip_highlights');
+        $select = $table->select();
+        $select->where('trip_id = ?', $trip);
+        $select->limit(3);
+        $result = $table->fetchAll($select);
+        
+        return $result;
+    }
+    
+    public function getFacts($trip)
+    {
+        $trip = 23;
+        $table = new Zend_Db_Table('trip_facts');
+        $select = $table->select();
+        $select->where('trip_id = ?', $trip);
+        $result = $table->fetchAll($select);
+        
+        return $result;
+    }
+    
+    public function getIncludes($trip)
+    {
+        $trip = 23;
+        $table = new Zend_Db_Table('trip_includes');
+        $select = $table->select();
+        $select->where('trip_id = ?', $trip);
+        $result = $table->fetchAll($select);
+        
+        return $result;
+    }
 }

@@ -3344,3 +3344,831 @@ Stack trace:
     [module] => default
 )
 
+2012-02-07T18:47:46-06:00 CRIT (2): Application error, exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#5 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#6 /var/www/library/WS/PlacesService.php(103): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#7 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#8 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#9 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#10 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 /var/www/partners/index.php(26): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:234
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#1 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#3 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#5 /var/www/library/WS/PlacesService.php(103): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#6 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#7 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#8 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#9 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 /var/www/partners/index.php(26): Zend_Application->run()
+#13 {main}
+2012-02-07T18:47:46-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [country] => en-US
+    [city] => en-US
+    [listing] => favicon.ico
+    [controller] => index
+    [action] => listing
+    [module] => default
+)
+
+2012-02-07T18:52:12-06:00 CRIT (2): Application error, exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#5 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#6 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#7 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#8 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#9 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#10 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 /var/www/partners/index.php(26): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:234
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#1 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#3 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#5 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#6 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#7 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#8 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#9 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 /var/www/partners/index.php(26): Zend_Application->run()
+#13 {main}
+2012-02-07T18:52:12-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [country] => en-US
+    [city] => en-US
+    [listing] => favicon.ico
+    [controller] => index
+    [action] => listing
+    [module] => default
+)
+
+2012-02-07T18:57:52-06:00 CRIT (2): Application error, exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#5 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#6 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#7 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#8 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#9 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#10 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 /var/www/partners/index.php(26): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:234
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#1 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#3 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#5 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#6 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#7 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#8 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#9 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 /var/www/partners/index.php(26): Zend_Application->run()
+#13 {main}
+2012-02-07T18:57:52-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [country] => en-US
+    [city] => en-US
+    [listing] => favicon.ico
+    [controller] => index
+    [action] => listing
+    [module] => default
+)
+
+2012-02-07T19:17:34-06:00 CRIT (2): Application error, exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#5 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#6 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#7 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#8 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#9 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#10 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 /var/www/partners/index.php(26): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:234
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#1 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#3 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#5 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#6 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#7 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#8 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#9 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 /var/www/partners/index.php(26): Zend_Application->run()
+#13 {main}
+2012-02-07T19:17:34-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [country] => en-US
+    [city] => en-US
+    [listing] => favicon.ico
+    [controller] => index
+    [action] => listing
+    [module] => default
+)
+
+2012-02-07T19:17:56-06:00 CRIT (2): Application error, exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#5 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#6 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#7 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#8 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#9 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#10 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 /var/www/partners/index.php(26): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:234
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#1 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#3 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#5 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#6 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#7 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#8 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#9 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 /var/www/partners/index.php(26): Zend_Application->run()
+#13 {main}
+2012-02-07T19:17:56-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [country] => en-US
+    [city] => en-US
+    [listing] => favicon.ico
+    [controller] => index
+    [action] => listing
+    [module] => default
+)
+
+2012-02-07T19:17:57-06:00 CRIT (2): Application error, exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#5 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#6 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#7 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#8 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#9 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#10 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 /var/www/partners/index.php(26): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:234
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#1 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#3 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#5 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#6 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#7 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#8 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#9 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 /var/www/partners/index.php(26): Zend_Application->run()
+#13 {main}
+2012-02-07T19:17:57-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [country] => en-US
+    [city] => en-US
+    [listing] => favicon.ico
+    [controller] => index
+    [action] => listing
+    [module] => default
+)
+
+2012-02-07T19:17:58-06:00 CRIT (2): Application error, exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#5 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#6 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#7 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#8 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#9 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#10 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 /var/www/partners/index.php(26): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:234
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#1 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#3 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#5 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#6 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#7 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#8 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#9 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 /var/www/partners/index.php(26): Zend_Application->run()
+#13 {main}
+2012-02-07T19:17:58-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [country] => en-US
+    [city] => en-US
+    [listing] => favicon.ico
+    [controller] => index
+    [action] => listing
+    [module] => default
+)
+
+2012-02-07T19:18:14-06:00 CRIT (2): Application error, exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#5 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#6 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#7 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#8 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#9 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#10 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 /var/www/partners/index.php(26): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:234
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#1 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#3 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#5 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#6 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#7 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#8 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#9 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 /var/www/partners/index.php(26): Zend_Application->run()
+#13 {main}
+2012-02-07T19:18:14-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [country] => en-US
+    [city] => en-US
+    [listing] => favicon.ico
+    [controller] => index
+    [action] => listing
+    [module] => default
+)
+
+2012-02-07T19:18:18-06:00 CRIT (2): Application error, exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#5 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#6 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#7 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#8 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#9 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#10 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 /var/www/partners/index.php(26): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:234
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#1 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#3 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#5 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#6 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#7 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#8 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#9 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 /var/www/partners/index.php(26): Zend_Application->run()
+#13 {main}
+2012-02-07T19:18:18-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [country] => en-US
+    [city] => en-US
+    [listing] => favicon.ico
+    [controller] => index
+    [action] => listing
+    [module] => default
+)
+
+2012-02-07T19:19:06-06:00 CRIT (2): Application error, exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#5 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#6 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#7 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#8 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#9 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#10 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 /var/www/partners/index.php(26): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:234
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#1 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#3 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#5 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#6 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#7 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#8 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#9 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 /var/www/partners/index.php(26): Zend_Application->run()
+#13 {main}
+2012-02-07T19:19:06-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [country] => en-US
+    [city] => en-US
+    [listing] => favicon.ico
+    [controller] => index
+    [action] => listing
+    [module] => default
+)
+
+2012-02-07T19:19:08-06:00 CRIT (2): Application error, exception 'Exception' in /var/www/library/WS/PlacesService.php:289
+Stack trace:
+#0 /var/www/appvendors/controllers/IndexController.php(96): WS_PlacesService->getPlaces(2)
+#1 /var/www/library/Zend/Controller/Action.php(513): IndexController->indexAction()
+#2 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('indexAction')
+#3 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#4 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#5 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#6 /var/www/partners/index.php(26): Zend_Application->run()
+#7 {main}
+2012-02-07T19:19:08-06:00 CRIT (2): Request Parameters, Array
+(
+    [controller] => index
+    [action] => index
+    [module] => default
+    [lang] => es-ES
+)
+
+2012-02-07T19:19:10-06:00 CRIT (2): Application error, exception 'Exception' in /var/www/library/WS/PlacesService.php:289
+Stack trace:
+#0 /var/www/appvendors/controllers/IndexController.php(96): WS_PlacesService->getPlaces(2)
+#1 /var/www/library/Zend/Controller/Action.php(513): IndexController->indexAction()
+#2 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('indexAction')
+#3 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#4 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#5 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#6 /var/www/partners/index.php(26): Zend_Application->run()
+#7 {main}
+2012-02-07T19:19:10-06:00 CRIT (2): Request Parameters, Array
+(
+    [controller] => index
+    [action] => index
+    [module] => default
+    [lang] => es-ES
+)
+
+2012-02-07T19:19:20-06:00 CRIT (2): Application error, exception 'Exception' in /var/www/library/WS/PlacesService.php:289
+Stack trace:
+#0 /var/www/appvendors/controllers/IndexController.php(96): WS_PlacesService->getPlaces(2)
+#1 /var/www/library/Zend/Controller/Action.php(513): IndexController->indexAction()
+#2 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('indexAction')
+#3 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#4 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#5 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#6 /var/www/partners/index.php(26): Zend_Application->run()
+#7 {main}
+2012-02-07T19:19:20-06:00 CRIT (2): Request Parameters, Array
+(
+    [controller] => index
+    [action] => index
+    [module] => default
+    [lang] => es-ES
+)
+
+2012-02-07T19:19:22-06:00 CRIT (2): Application error, exception 'Exception' in /var/www/library/WS/PlacesService.php:289
+Stack trace:
+#0 /var/www/appvendors/controllers/IndexController.php(96): WS_PlacesService->getPlaces(2)
+#1 /var/www/library/Zend/Controller/Action.php(513): IndexController->indexAction()
+#2 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('indexAction')
+#3 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#4 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#5 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#6 /var/www/partners/index.php(26): Zend_Application->run()
+#7 {main}
+2012-02-07T19:19:22-06:00 CRIT (2): Request Parameters, Array
+(
+    [controller] => index
+    [action] => index
+    [module] => default
+    [lang] => es-ES
+)
+
+2012-02-07T19:19:27-06:00 CRIT (2): Application error, exception 'Exception' in /var/www/library/WS/PlacesService.php:289
+Stack trace:
+#0 /var/www/appvendors/controllers/IndexController.php(96): WS_PlacesService->getPlaces(2)
+#1 /var/www/library/Zend/Controller/Action.php(513): IndexController->indexAction()
+#2 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('indexAction')
+#3 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#4 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#5 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#6 /var/www/partners/index.php(26): Zend_Application->run()
+#7 {main}
+2012-02-07T19:19:27-06:00 CRIT (2): Request Parameters, Array
+(
+    [controller] => index
+    [action] => index
+    [module] => default
+    [lang] => es-ES
+)
+
+2012-02-07T19:20:11-06:00 CRIT (2): Application error, exception 'Exception' in /var/www/library/WS/PlacesService.php:289
+Stack trace:
+#0 /var/www/appvendors/controllers/IndexController.php(96): WS_PlacesService->getPlaces(2)
+#1 /var/www/library/Zend/Controller/Action.php(513): IndexController->indexAction()
+#2 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('indexAction')
+#3 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#4 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#5 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#6 /var/www/partners/index.php(26): Zend_Application->run()
+#7 {main}
+2012-02-07T19:20:11-06:00 CRIT (2): Request Parameters, Array
+(
+    [controller] => index
+    [action] => index
+    [module] => default
+    [lang] => es-ES
+)
+
+2012-02-07T19:20:15-06:00 CRIT (2): Application error, exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#5 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#6 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#7 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#8 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#9 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#10 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 /var/www/partners/index.php(26): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:234
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#1 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#3 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#5 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#6 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#7 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#8 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#9 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 /var/www/partners/index.php(26): Zend_Application->run()
+#13 {main}
+2012-02-07T19:20:15-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [country] => en-US
+    [city] => en-US
+    [listing] => favicon.ico
+    [controller] => index
+    [action] => listing
+    [module] => default
+)
+
+2012-02-07T19:20:30-06:00 CRIT (2): Application error, exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#5 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#6 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#7 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#8 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#9 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#10 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 /var/www/partners/index.php(26): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:234
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#1 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#3 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#5 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#6 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#7 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#8 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#9 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 /var/www/partners/index.php(26): Zend_Application->run()
+#13 {main}
+2012-02-07T19:20:30-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [country] => en-US
+    [city] => en-US
+    [listing] => favicon.ico
+    [controller] => index
+    [action] => listing
+    [module] => default
+)
+
+2012-02-07T19:21:10-06:00 CRIT (2): Application error, exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#5 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#6 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#7 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#8 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#9 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#10 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 /var/www/partners/index.php(26): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:234
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#1 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#3 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#5 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#6 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#7 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#8 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#9 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 /var/www/partners/index.php(26): Zend_Application->run()
+#13 {main}
+2012-02-07T19:21:10-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [country] => en-US
+    [city] => en-US
+    [listing] => favicon.ico
+    [controller] => index
+    [action] => listing
+    [module] => default
+)
+
+2012-02-07T19:21:39-06:00 CRIT (2): Application error, exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#5 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#6 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#7 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#8 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#9 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#10 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 /var/www/partners/index.php(26): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:234
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#1 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#3 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#5 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#6 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#7 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#8 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#9 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 /var/www/partners/index.php(26): Zend_Application->run()
+#13 {main}
+2012-02-07T19:21:39-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [country] => en-US
+    [city] => en-US
+    [listing] => favicon.ico
+    [controller] => index
+    [action] => listing
+    [module] => default
+)
+
+2012-02-07T19:21:58-06:00 CRIT (2): Application error, exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#5 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#6 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#7 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#8 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#9 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#10 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 /var/www/partners/index.php(26): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:234
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#1 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#3 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#5 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#6 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#7 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#8 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#9 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 /var/www/partners/index.php(26): Zend_Application->run()
+#13 {main}
+2012-02-07T19:21:58-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [country] => en-US
+    [city] => en-US
+    [listing] => favicon.ico
+    [controller] => index
+    [action] => listing
+    [module] => default
+)
+
+2012-02-07T20:03:46-06:00 CRIT (2): Application error, exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#5 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#6 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#7 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#8 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#9 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#10 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 /var/www/partners/index.php(26): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in /var/www/library/Zend/Db/Statement/Pdo.php:234
+Stack trace:
+#0 /var/www/library/Zend/Db/Statement.php(300): Zend_Db_Statement_Pdo->_execute(Array)
+#1 /var/www/library/Zend/Db/Adapter/Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 /var/www/library/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#3 /var/www/library/Zend/Db/Table/Abstract.php(1529): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#4 /var/www/library/Zend/Db/Table/Abstract.php(1391): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#5 /var/www/library/WS/PlacesService.php(102): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#6 /var/www/appvendors/controllers/IndexController.php(271): WS_PlacesService->getPlaceById(NULL)
+#7 /var/www/library/Zend/Controller/Action.php(513): IndexController->listingAction()
+#8 /var/www/library/Zend/Controller/Dispatcher/Standard.php(295): Zend_Controller_Action->dispatch('listingAction')
+#9 /var/www/library/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 /var/www/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 /var/www/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 /var/www/partners/index.php(26): Zend_Application->run()
+#13 {main}
+2012-02-07T20:03:46-06:00 CRIT (2): Request Parameters, Array
+(
+    [lang] => en-US
+    [country] => en-US
+    [city] => en-US
+    [listing] => favicon.ico
+    [controller] => index
+    [action] => listing
+    [module] => default
+)
+

@@ -84,13 +84,17 @@ class Zend_View_Helper_Thumbnail {
             endif;
         endif;
 
-        if (isset($opts['w'])): $w = $opts['w'];
+        if (isset($opts['w'])): 
+            $w = $opts['w'];
         endif;
-        if (isset($opts['h'])): $h = $opts['h'];
+        if (isset($opts['h'])): 
+            $h = $opts['h'];
         endif;
 
         $filename = md5_file($imagePath);
-
+        
+        //return $w . ' x ' . $h;
+        
         if (!empty($w) and !empty($h)):
             $newPath = $cacheFolder . $filename . '_w' . $w . '_h' . $h . (isset($opts['crop']) && $opts['crop'] == true ? "_cp" : "") . (isset($opts['scale']) && $opts['scale'] == true ? "_sc" : "") . '.' . $ext;
         elseif (!empty($w)):
@@ -102,7 +106,7 @@ class Zend_View_Helper_Thumbnail {
         endif;
 
         $create = true;
-
+        
         if (file_exists($newPath) == true):
             $create = false;
             $origFileTime = date("YmdHis", filemtime($imagePath));
@@ -112,6 +116,8 @@ class Zend_View_Helper_Thumbnail {
             endif;
         endif;
 
+        //$create = true;
+        
         if ($create == true):
             if (!empty($w) and !empty($h)):
 
@@ -131,16 +137,17 @@ class Zend_View_Helper_Thumbnail {
                 endif;
 
                 if (isset($opts['scale']) && $opts['scale'] == true):
-                    $cmd = $path_to_convert . " " . $imagePath . " -resize " . $resize . " -quality " . $quality . " " . $newPath;
+                    $cmd = $path_to_convert . " '" . $imagePath . "' -resize " . $resize . " -quality " . $quality . " " . $newPath;
                 else:
-                    $cmd = $path_to_convert . " " . $imagePath . " -resize " . $resize . " -size " . $w . "x" . $h . " xc:" . (isset($opts['canvas-color']) ? $opts['canvas-color'] : "transparent") . " +swap -gravity center -composite -quality " . $quality . " " . $newPath;
+                    $cmd = $path_to_convert . " '" . $imagePath . "' -resize " . $resize . " -size " . $w . "x" . $h . " xc:" . (isset($opts['canvas-color']) ? $opts['canvas-color'] : "transparent") . " +swap -gravity center -composite -quality " . $quality . " " . $newPath;
                 endif;
 
             else:
-                $cmd = $path_to_convert . " " . $imagePath . " -thumbnail " . (!empty($h) ? 'x' : '') . $w . "" . (isset($opts['maxOnly']) && $opts['maxOnly'] == true ? "\>" : "") . " -quality " . $quality . " " . $newPath;
+                $cmd = $path_to_convert . " '" . $imagePath . "' -thumbnail " . (!empty($h) ? 'x' : '') . $w . "" . (isset($opts['maxOnly']) && $opts['maxOnly'] == true ? "\>" : "") . " -quality " . $quality . " " . $newPath;
             endif;
             //echo $cmd;
             //die;
+            //return $cmd;
             $c = exec($cmd);
 
         endif;

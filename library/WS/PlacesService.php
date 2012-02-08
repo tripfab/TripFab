@@ -39,6 +39,12 @@ class WS_PlacesService {
     protected $landscapes;
     
     /**
+     *
+     * @var Zend_Cache_Core
+     */
+    protected $cache;
+    
+    /**
      * 
      */
     public function __construct() 
@@ -54,6 +60,8 @@ class WS_PlacesService {
         $this->placeslandscapes_db = new Model_PlacesLandscapes();
         
         $this->landscapes = NULL;
+        
+        $this->cache = Zend_Registry::get('cache');
     }
     
     /**
@@ -278,12 +286,21 @@ class WS_PlacesService {
     
     public function getPlaces($type, $parent = null)
     {
-        $select = $this->places_db->select();
-        $select->where('type_id = ?', $type);
-        $select->order('title ASC');
-        if(!is_null($parent))
-            $select->where('parent_id = ?', $parent);
-                
-        return $this->places_db->fetchAll($select);
+        $args = func_get_args();
+        $cacheId = "PS_getplaces_".md5(print_r($args, true));
+        if($this->cache->test($cacheId) !== false) {
+            $places = $this->cache->load($cacheId);
+        }
+        else {
+            $select = $this->places_db->select();
+            $select->where('type_id = ?', $type);
+            $select->order('title ASC');
+            if(!is_null($parent))
+                $select->where('parent_id = ?', $parent);
+            $places = $this->places_db->fetchAll($select);
+            
+            $this->cache->save($places, $cacheId, array(), 86400);
+        }
+        return $places;
     }
 }

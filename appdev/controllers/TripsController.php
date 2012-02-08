@@ -113,7 +113,7 @@ class TripsController extends Zend_Controller_Action {
     
     public function countryAction()
     {
-        $this->view->countries = $this->json->getCountryTerms();
+        $this->view->countries  = $this->json->getCountryTerms();
         $this->view->categories = $this->trips->getCategories();
         $this->view->landscapes = $this->trips->getLandscapes();
         $this->view->regions    = $this->places->getPlaces(1);
@@ -141,8 +141,15 @@ class TripsController extends Zend_Controller_Action {
     
     public function viewAction()
     {        
-        $trip = $this->_getTrip();
-        $this->view->trip = $trip;
+        $trip            = $this->_getTrip();
+        $trip_highlights = $this->trips->getHighlights($trip->id);
+        $trip_facts      = $this->trips->getFacts($trip->id);
+        $trip_includes   = $this->trips->getIncludes($trip->id); 
+        
+        $this->view->trip       = $trip;
+        $this->view->highlights = $trip_highlights;
+        $this->view->facts      = $trip_facts;
+        $this->view->includes   = $trip_includes;
 
         $listings = $this->trips->getListingOf($trip->id, false);
         $this->view->listings = $listings;
