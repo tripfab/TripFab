@@ -154,7 +154,7 @@ class WS_ListingService {
         if(Zend_Registry::isRegistered('cache'))
             $this->cache = Zend_Registry::get('cache');
         
-        $this->use_cache = true;
+        $this->use_cache = false;
     }
     
     public function getDefaultListing($vendor)
@@ -571,7 +571,7 @@ class WS_ListingService {
         $args = func_get_args();
         $cacheId = "LS_getListings2_".md5(print_r($args, true));
         
-        if(!$this->cache->test($cacheId)) {
+        if(!$this->use_cache || !$this->cache->test($cacheId)) {
             
             $db = Zend_Db_Table::getDefaultAdapter();
             $select = $db->select();
@@ -624,7 +624,8 @@ class WS_ListingService {
 
            $listings = $db->fetchAll($select, array(), Zend_Db::FETCH_OBJ);
            
-           $this->cache->save($listings, $cacheId, array(), 86400);
+           if($this->use_cache)
+               $this->cache->save($listings, $cacheId, array(), 86400);
        } else {
            $listings = $this->cache->load($cacheId);
        }

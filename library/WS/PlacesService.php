@@ -45,6 +45,12 @@ class WS_PlacesService {
     protected $cache;
     
     /**
+     *
+     * @var Noolean
+     */
+    public $use_cache;
+    
+    /**
      * 
      */
     public function __construct() 
@@ -60,6 +66,8 @@ class WS_PlacesService {
         $this->placeslandscapes_db = new Model_PlacesLandscapes();
         
         $this->landscapes = NULL;
+        
+        $this->use_cache = false;
         
         $this->cache = Zend_Registry::get('cache');
     }
@@ -288,10 +296,7 @@ class WS_PlacesService {
     {
         $args = func_get_args();
         $cacheId = "PS_getplaces_".md5(print_r($args, true));
-        if($this->cache->test($cacheId) !== false) {
-            $places = $this->cache->load($cacheId);
-        }
-        else {
+        if(!$this->use_cache || $this->cache->test($cacheId) === false) {
             $select = $this->places_db->select();
             $select->where('type_id = ?', $type);
             $select->order('title ASC');
@@ -299,7 +304,11 @@ class WS_PlacesService {
                 $select->where('parent_id = ?', $parent);
             $places = $this->places_db->fetchAll($select);
             
-            $this->cache->save($places, $cacheId, array(), 86400);
+            if($this->use_cache)
+                $this->cache->save($places, $cacheId, array(), 86400);
+        }
+        else {
+            $places = $this->cache->load($cacheId);
         }
         return $places;
     }

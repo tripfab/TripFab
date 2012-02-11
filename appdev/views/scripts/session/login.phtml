@@ -19,7 +19,10 @@
 			$('a.lb').fancybox({
 				padding:0,
 				overlayColor:'#ffffff',
-				centerOnScroll:1,				padding: 0,				overlayOpacity: 0.8,				showCloseButton: false
+				centerOnScroll:1,
+				padding: 0,
+				overlayOpacity: 0.8,
+				showCloseButton: false
 			});
 			$('#forgot form').submit(function(){
 				$form = $(this);
@@ -47,7 +50,15 @@
 				});
 				
 				return false;
-			});			$('form input').focus(function() {				$(this).prev('label').addClass('hide');			});			$('form input').focusout(function() {				if (!$(this).val()) {					$(this).prev('label').removeClass('hide');				}			});
+			});
+			$('form input').focus(function() {
+				$(this).prev('label').addClass('hide');
+			});
+			$('form input').focusout(function() {
+				if (!$(this).val()) {
+					$(this).prev('label').removeClass('hide');
+				}
+			});
         });
     </script>
     <style type="text/css">
@@ -88,13 +99,16 @@
                             <input type="text" name="email" value="<?= $this->email ?>" class="noclean in-2 required email" />
                             <?php else: ?>
                             <input type="text" name="email" value="E-Mail" class="in-2 required email" />
-                            <?php endif ?>                            <span>                            	<label for="password">Password</label>                            	<input type="password" name="password" class="in-3 required password" />                            </span>                            
+                            <?php endif ?>
+                            <span>
+                            	<label for="password">Password</label>
+                            	<input type="password" name="password" class="in-3 required password" />
+                            </span>                            
                         </fieldset>
                         <fieldset>
                             <input id="rememberme" name="remember" value="1" type="checkbox" />
                             <label for="rememberme">Remember me next time</label>
                             <input type="submit" value="Sign In" class="btn-1" />
-                            <input type="hidden" value="<?= $_GET['return_url'] ?>" name="return_url" />
                         </fieldset>
                     </form>
                 </div><!-- closes content -->

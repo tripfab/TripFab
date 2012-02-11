@@ -47,7 +47,6 @@ class WS_Controller_Plugin_Language
             Zend_Registry::set('Zend_Locale',$lang);
             Zend_Registry::set('Zend_Translate', $translate);
         } else {
-            echo $_SERVER['REDIRECT_URL'];
             header('Location: /en-US'.$_SERVER['REDIRECT_URL']); exit;
         }
     }

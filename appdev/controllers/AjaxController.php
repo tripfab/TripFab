@@ -8,6 +8,7 @@ class AjaxController extends Zend_Controller_Action
     protected $listings_db;
     protected $trips;
     protected $listings;
+    protected $user;
 
 
     public function init()
@@ -21,6 +22,8 @@ class AjaxController extends Zend_Controller_Action
         $this->listings = new WS_ListingService();
         
         $this->trips = new WS_TripsService();
+        
+        $this->user = null;
         
         $headers = getallheaders();
         if(array_key_exists('X-Requested-With', $headers) === false){
@@ -1072,6 +1075,8 @@ class AjaxController extends Zend_Controller_Action
             'rating' => 'Rating' 
         );
         
+        $subcategories = null;
+        $category = null;
         if($cat != 'all'){
             $category = $this->listings->getCategoryByIdf($cat);
             $subcategories = $this->listings->getSubCategoriesOf($category->id);
@@ -1082,9 +1087,6 @@ class AjaxController extends Zend_Controller_Action
         $listings = $this->listings->getListings2($city->id, $cat, $subcat, $sort, $stars, $pricemin, $pricemax);
         $this->view->listing_count = count($listings);
         //var_dump($this->view->listing_count); die;
-        
-        if($this->user)
-            $favorites = $this->user->getFavotites();
         
         $this->view->class  = 'landscape-1';
         $this->view->cat    = $cat;
@@ -1104,8 +1106,6 @@ class AjaxController extends Zend_Controller_Action
         $this->view->ls_count      = $ls_count;
         
         $this->view->listings = $listings;
-        
-        $this->view->favorites = $favorites;            
     }
     
     public function gettripsAction()

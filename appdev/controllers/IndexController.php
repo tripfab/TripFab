@@ -177,6 +177,7 @@ class IndexController extends Zend_Controller_Action
         
         $pictures    = $this->listings->getPictures($listing->id);
         
+        $trips = null;
         if($this->user)
             $trips = $this->trips->getFutureTripsBy($this->user->getId());
         
@@ -330,9 +331,6 @@ class IndexController extends Zend_Controller_Action
             $this->view->form_fields = $fields;
         }
         
-        if($this->user)
-            $favorites = $this->user->getFavotites();
-        
         //var_dump($listing); die;
         $this->view->region          = $region;
         $this->view->country         = $country;
@@ -343,7 +341,6 @@ class IndexController extends Zend_Controller_Action
         $this->view->attributes      = $attributes;
         $this->view->pictures        = $pictures;
         $this->view->trips           = $trips;
-        $this->view->favorites       = $favorites;
         
         if(!is_null($this->user))
                 $this->view->user = $this->user->getData();

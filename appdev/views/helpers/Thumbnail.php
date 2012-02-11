@@ -35,7 +35,8 @@ class Zend_View_Helper_Thumbnail {
         if (!file_exists($imagePath)) {
             $imagePath = APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3' . $imagePath;
             if (!file_exists($imagePath)) {
-                $imagePath = 'http://tripfab.com' . $imagePath;
+                $imagePath = 'http://partners.tripfab.com' . $image;
+                //return $imagePath;
             }
         }
 
@@ -45,7 +46,7 @@ class Zend_View_Helper_Thumbnail {
 
         $cache_http_minutes = 20;  # cache downloaded http images 20 minutes
 
-        $path_to_convert = 'convert'; # this could be something like /usr/bin/convert or /opt/local/share/bin/convert
+        $path_to_convert = '/Users/magentodeveloper/ImageMagick/bin/convert'; # this could be something like /usr/bin/convert or /opt/local/share/bin/convert
         ## you shouldn't need to configure anything else beyond this point
 
         $purl = parse_url($imagePath);
@@ -149,7 +150,6 @@ class Zend_View_Helper_Thumbnail {
             //die;
             //return $cmd;
             $c = exec($cmd);
-
         endif;
 
         # return cache file path

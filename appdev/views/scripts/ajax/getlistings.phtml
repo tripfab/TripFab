@@ -7,14 +7,14 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
 <div class="result <?= $class ?>">
 	<div class="holder">
 		<div class="img-wrapper">
-			<?php if($this->user->role_id == 2): ?>
+			<?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
 			<a href="#" class="been">Been there</a>
 			<?php endif ?>
 			<a href="<?= str_replace('filter', $list->identifier, $url) ?>">
 			<?= $this->thumbnail(array('width'=>'225', 'height'=>'167'), $list->image, '','225:167') ?>
 			<h4><?= $list->title ?></h4>
 			</a>
-			<?php if($this->user->role_id == 2): ?>
+			<?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
 			<?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
 			<?php endif ?>
 		</div><!-- closes img-wrapper -->

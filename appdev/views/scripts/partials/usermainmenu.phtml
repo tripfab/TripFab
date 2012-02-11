@@ -62,10 +62,10 @@
     <ul>
     	<?php foreach($items as $i => $item): ?>
         <?php $class = ($item['label'] == $this->parentActive) ? 'active' : '' ; ?>
-        <?php $class.= ($item['submenu']) ? ' sub-menu' : ''; ?>
+        <?php $class.= (isset($item['submenu'])) ? ' sub-menu' : ''; ?>
         <li class="<?= $class ?>">
             <a href="<?= $item['url'] ?>"><?= $item['label'] ?></a>
-            <?php if($item['submenu']): ?>
+            <?php if(isset($item['submenu'])): ?>
             <ul>
             	<?php foreach($item['submenu'] as $subitem): ?>
                 <?php $class = ($subitem['label'] == $this->active) ? 'active' : '' ; ?>
@@ -77,5 +77,6 @@
             <?php endif ?>
         </li>
         <?php endforeach ?>
-    </ul>    <div class="clear"></div>
+    </ul>
+    <div class="clear"></div>
 </div><!-- closes menu -->
