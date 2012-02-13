@@ -52,13 +52,9 @@ class TripsController extends Zend_Controller_Action {
         $this->view->json_countries  = $this->json->getCountries();
         
         $this->trips = new WS_TripsService();
-        
         $this->listings = new WS_ListingService();
-        
         $this->users = new WS_UsersService();
-        
         $this->places = new WS_PlacesService();
-        
         $this->view->tags = $this->json->getSerchTerms();
     }
     
@@ -408,5 +404,6 @@ class TripsController extends Zend_Controller_Action {
             
             $this->view->trip = $trip;
         }
+        //var_dump($_POST); die;
     }
 }

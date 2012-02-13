@@ -474,10 +474,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initCache()
     {
         $config = $this->getOption('memcached');
-        $back = new Zend_Cache_Backend_Test(array(
+        $back = new Zend_Cache_Backend_Memcached(array(
             'servers'  => array(array(
                 'host' => $config['host'],
-                'port' => $config['port'],  
+                'port' => $config['port'],
             )),
             'compression' => $config['compression'],
         ));

@@ -153,8 +153,6 @@ class WS_ListingService {
         
         if(Zend_Registry::isRegistered('cache'))
             $this->cache = Zend_Registry::get('cache');
-        
-        $this->use_cache = false;
     }
     
     public function getDefaultListing($vendor)
@@ -1607,15 +1605,15 @@ class WS_ListingService {
             $listing, $adults, $kids, $checkin, $option = null, $capacity = null)
     {
         
-        $option = ($option != 'flex') ? $this->getSchedule($option) : null;
-        $capacity = ($capacity != 'single') ? $this->getActivityType($capacity) : null;
+        $option = (!is_null($option) && $option != 'flex') ? $this->getSchedule($option) : null;
+        $capacity = (!is_null($capacity) && $capacity != 'single') ? $this->getActivityType($capacity) : null;
         $seasson = $this->getSeassonFor($checkin, $listing->id);
         
         $price = null;
         if(!is_null($seasson)) 
             $price = $this->getSeassonPrice($seasson->id, $listing->id, $capacity->id);
         if(is_null($price) || $price->price == '0.00') {
-            $price = $this->getBasicPrice($listing->id, $capacity->id);
+            $price = (!is_null($capacity)) ? $this->getBasicPrice($listing->id, $capacity->id) : null;
             if(is_null($price) || $price == '0.00') 
                 $price = $this->getBasicPrice($listing->id);}
         if(is_null($price) || $price->price == '0.00') 
@@ -1626,6 +1624,11 @@ class WS_ListingService {
         
         $min = (!is_null($capacity)) ? $capacity->min : $listing->min; 
         $max = (!is_null($capacity)) ? $capacity->max : $listing->max;
+        
+        if(is_null($min))
+            $min = 1;
+        if(is_null($max))
+            $max = 50;
         $kids_alowed = (!is_null($capacity)) ? $capacity->kids : $listing->kids;
         
         if($kids > 0 && !is_null($kids_alowed))
@@ -1652,6 +1655,7 @@ class WS_ListingService {
             $cart->rate_description = 'Basic Price';
         }
         
+        $extra = false;
         if($price->additional_after < $total_people){
             $extra = $total_people - $price->additional_after;
             $cart->additional = $price->additional;

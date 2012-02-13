@@ -117,12 +117,12 @@
                         <?php endif ?>
                     <?php endforeach ?>
                     <ul>
-                    	<?php if($show[1]): ?><li><a href="#tabs-1">Things to do</a></li><?php endif ?>
-                        <?php if($show[2]): ?><li><a href="#tabs-2">Attractions</a></li><?php endif ?>
-                        <?php if($show[3]): ?><li><a href="#tabs-3">Places to Stay</a></li><?php endif ?>
-                        <?php if($show[4]): ?><li><a href="#tabs-4">Dining Places</a></li><?php endif ?>
+                    	<?php if(isset($show[1]) and $show[1] == true): ?><li><a href="#tabs-1">Things to do</a></li><?php endif ?>
+                        <?php if(isset($show[2]) and $show[2] == true): ?><li><a href="#tabs-2">Attractions</a></li><?php endif ?>
+                        <?php if(isset($show[3]) and $show[3] == true): ?><li><a href="#tabs-3">Places to Stay</a></li><?php endif ?>
+                        <?php if(isset($show[4]) and $show[4] == true): ?><li><a href="#tabs-4">Dining Places</a></li><?php endif ?>
                     </ul>
-                    <?php if($show[1]): ?>
+                    <?php if(isset($show[1]) and $show[4] == true): ?>
                     <div class="tab" id="tabs-1">
                         <div id="slider-1">
                         	<?php $used = array() ?>
@@ -149,7 +149,7 @@
                         <div id="cycle-pager-1" class="cycle-pager"></div>
                     </div><!-- closes tab -->
                     <?php endif ?>
-                    <?php if($show[2]): ?>
+                    <?php if(isset($show[2]) and $show[4] == true): ?>
                     <div class="tab" id="tabs-2">
                         <div id="slider-2" style="height: 525px;">
                         	<?php $used = array() ?>
@@ -176,7 +176,7 @@
                         <div id="cycle-pager-2" class="cycle-pager"></div>
                     </div><!-- closes tab -->
                     <?php endif ?>
-                    <?php if($show[3]): ?>
+                    <?php if(isset($show[3]) and $show[4] == true): ?>
                     <div class="tab" id="tabs-3">
                         <div id="slider-3" style="height:525px">
                         	<?php $used = array() ?>
@@ -203,7 +203,7 @@
                         <div id="cycle-pager-3" class="cycle-pager"></div>
                     </div><!-- closes tab -->
                     <?php endif ?>
-                    <?php if($show[4]): ?>
+                    <?php if(isset($show[4]) and $show[4] == true): ?>
                     <div class="tab" id="tabs-4">
                         <div id="slider-4" style="height:525px">
                         	<?php $used = array() ?>
@@ -401,7 +401,7 @@
 			</div><!-- closes left -->
 			<div class="right">
 				<div id="datepicker" class="datepicker"></div>
-                <form action="/trips/checkprice/<?= $this->trip->id ?>" method="post">
+                <form action="/en-US/trips/checkprice/<?= $this->trip->id ?>" method="post">
                     <div class="occ">
                         <label>Adults</label>
                         <select name="adults">
