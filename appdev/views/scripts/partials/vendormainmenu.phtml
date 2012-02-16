@@ -24,7 +24,7 @@
 	array(
 		'label' => 'Reservations',
 		'url'	=> '/provider/reservations/',
-		/*'submenu' => array(
+		'submenu' => array(
 			array(
 				'label' => 'Incoming',
 				'url'	=> '/provider/reservations/',
@@ -37,11 +37,7 @@
 				'label' => 'History',
 				'url'	=> '/provider/reservations/history',
 			),
-			/*array(
-				'label' => 'Transactions',
-				'url'	=> '/provider/reservations/transactions',
-			),*/		
-		//),
+		),
 	),
 	array(
 		'label' => 'Reviews',
@@ -77,11 +73,11 @@
 <div class="main-menu">
     <ul>
     	<?php foreach($items as $i => $item): ?>
-        <?php $class = ($item['label'] == $this->parentActive) ? 'active' : '' ; ?>
-        <?php $class.= ($item['submenu']) ? ' sub-menu' : ''; ?>
+        <?php $class = (isset($item['label']) && $item['label'] == $this->parentActive) ? 'active' : '' ; ?>
+        <?php $class.= (isset($item['submenu']) && $item['submenu']) ? ' sub-menu' : ''; ?>
         <li class="<?= $class ?>">
             <a href="<?= $item['url'] ?>"><?= $item['label'] ?></a>
-            <?php if($item['submenu']): ?>
+            <?php if(isset($item['submenu'])): ?>
             <ul>
             	<?php foreach($item['submenu'] as $subitem): ?>
                 <?php $class = ($subitem['label'] == $this->active) ? 'active' : '' ; ?>
