@@ -9,7 +9,6 @@ class SessionController extends Zend_Controller_Action {
     public function init()
     {
         $this->places = new WS_PlacesService();
-        
         $this->view->lang = $this->_getParam('lang');
     }
     
@@ -22,11 +21,15 @@ class SessionController extends Zend_Controller_Action {
             
             $this->auth->clearIdentity();
         }
-        $this->_redirect('/provider/signup');
+        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
+            header("Location: http://" . $_SERVER["SERVER_NAME"]);
+            exit();
+        }
     }
     
     public function loginAction()
     {
+        $this->_requireSSL();
         $this->auth = Zend_Auth::getInstance();
         if($this->auth->hasIdentity()){
             $user = $this->auth->getIdentity();
@@ -99,6 +102,7 @@ class SessionController extends Zend_Controller_Action {
     
     public function signupAction()
     {
+        $this->_requireSSL();
         $auth = Zend_Auth::getInstance();
         if($auth->hasIdentity()){
             $user = $auth->getIdentity();
@@ -251,6 +255,15 @@ class SessionController extends Zend_Controller_Action {
     public function vendorsignupAction()
     {
         
+    }
+    
+    private function _requireSSL()
+    {
+        if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on') {
+            header("HTTP/1.1 301 Moved Permanently");
+            header("Location: https://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"]);
+            exit();
+        }
     }
 }
 
