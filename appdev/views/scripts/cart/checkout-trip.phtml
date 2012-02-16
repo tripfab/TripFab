@@ -8,13 +8,9 @@
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
     <link type="text/css" rel="stylesheet" href="/css2/cart/checkout.css" />
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
-    <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
+    <script type="text/javascript" src="/js2/jquery.js"></script>
     <script type="text/javascript" src="/js2/cart/checkout.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
     <?php if($this->error): ?>
     <script type="text/javascript">
 	$(function(){
@@ -28,16 +24,9 @@
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
     <div class="w2">
         <div class="main wrapper">
-            <div class="checkout-header">
-            	<?= $this->thumbnail(array('width'=>960,'height'=>353),$this->trip->image, '', '960:353') ?>
-                <div>
-                    <span>Checkout</span>
-                    <h2><?= $this->trip->title ?></h2>
-                </div>
-            </div><!-- closes checkout-header -->
             <div class="checkout-wrapper">
                 <div class="left">
-                    <form id="checkout" action="/cart/charge" method="post">
+                    <form id="checkout" action="/en-US/cart/charge" method="post">
                         <div class="checkout-item">
                             <div class="left">
                                 <span>1</span>
@@ -56,94 +45,57 @@
                                 <div class="payment-tabs">
                                     <div class="tab">
                                         <div class="payment-item">
-                                            <input name="method" value="paypal" checked="checked" type="radio" />
-                                            <strong><img src="https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif" 
-                                            style="margin-right:7px; vertical-align:middle;">The safer, easier way to pay.</strong><br />
-                                            <input class="other" name="method" value="creditcard" type="radio" />
-                                            <strong>Credit Card</strong>												
-                                            <select name="ctype">
-                                                <option value="" selected="selected">Select One</option>
-                                                <option>VISA</option>
-                                                <option>MasterCard</option>
-                                                <option>American Express</option>
-                                            </select>
-                                            <div class="clear"></div>
-											<div class="card-details hidden">
-                                                <div class="card-item first">
-                                                    <input type="text" name="cnumber" />
+											<div class="card-details">
+                                            	<div class="card-item longer">
+                                                    <strong>Credit Card</strong>
+                                                </div><!-- closes card-item -->
+                                                <div class="card-item longer">
+                                                    <input type="text" autocomplete="off" class="cnum" />
                                                     <strong>Credit Card Number</strong>
                                                     <span>No dashes or spaces</span>
                                                 </div><!-- closes card-item -->
-                                                <div class="card-item">
-                                                    <input type="text" name="cname" />
+                                                <div class="card-item longer">
+                                                    <input type="text" autocomplete="off" class="cname" />
                                                     <strong>Card Holder Name</strong>
                                                     <span>As it appears on the credit card</span>
                                                 </div><!-- closes card-item -->
-                                                <div class="card-item">
-                                                    <select name="cmonth">
+                                                <div class="card-item longer">
+                                                    <select class="cmonth">
                                                         <option value="">--</option>
                                                         <option value="01">Jan (01)</option>
                                                         <option value="02">Feb (02)</option>
                                                         <option value="03">Mar (03)</option>
-                                                        <option value="04">May (04)</option>
-                                                        <option value="05">Jun (05)</option>
-                                                        <option value="06">Jul (06)</option>
-                                                        <option value="07">Aug (07)</option>
-                                                        <option value="08">Sep (08)</option>
-                                                        <option value="09">Oct (09)</option>
-                                                        <option value="10">Nov (10)</option>
-                                                        <option value="11">Dec (11)</option>
+                                                        <option value="04">Avr (04)</option>
+                                                        <option value="05">May (05)</option>
+                                                        <option value="06">Jun (06)</option>
+                                                        <option value="07">Jul (07)</option>
+                                                        <option value="08">Aug (08)</option>
+                                                        <option value="09">Sep (09)</option>
+                                                        <option value="10">Oct (10)</option>
+                                                        <option value="11">Nov (11)</option>
+                                                        <option value="12">Dec (12)</option>
                                                     </select>
-                                                    <select name="cyear">
+                                                    <select class="cyear">
                                                         <option value="">----</option>
-                                                        <option>2011</option>
-                                                        <option>2012</option>
-                                                        <option>2013</option>
-                                                        <option>2014</option>
-                                                        <option>2015</option>
-                                                        <option>2016</option>
-                                                        <option>2017</option>
-                                                        <option>2018</option>
-                                                        <option>2019</option>
-                                                        <option>2020</option>
-                                                        <option>2021</option>
+                                                        <option value="2011">2011</option>
+                                                        <option value="2012">2012</option>
+                                                        <option value="2013">2013</option>
+                                                        <option value="2014">2014</option>
+                                                        <option value="2015">2015</option>
+                                                        <option value="2016">2016</option>
+                                                        <option value="2017">2017</option>
+                                                        <option value="2018">2018</option>
+                                                        <option value="2019">2019</option>
+                                                        <option value="2020">2020</option>
+                                                        <option value="2021">2021</option>
                                                     </select>
                                                     <strong>Expiration Date</strong>
                                                     <span>Only month and year required</span>
                                                 </div><!-- closes card-item -->
-                                                <div class="card-item">
-                                                    <input type="text" name="ccode" />
+                                                <div class="card-item longer">
+                                                    <input maxlength="4" type="text" class="ccode" />
                                                     <strong>Security Code</strong>
                                                     <span><a href="">What is this?</a></span>
-                                                </div><!-- closes card-item -->
-                                                <div class="card-item">
-                                                    <input type="text" value="<?= $this->billing->street1 ?>" name="street1" />
-                                                    <strong>Street Line 1</strong>
-                                                </div><!-- closes card-item -->
-                                                <div class="card-item">
-                                                    <input type="text" value="<?= $this->billing->street2 ?>" name="street2" />
-                                                    <strong>Street Line 2</strong>
-                                                </div><!-- closes card-item -->
-                                                <div class="card-item">
-                                                    <select name="country">
-                                                    	<option value="">Select One</option>
-                                                        <?php foreach($this->countries as $c): ?>
-                                                        <?php if($this->billing->country == $c->title): ?>
-                                                        <option selected="selected" value="<?= $c->title ?>"><?= $c->title ?></option>
-                                                        <?php else: ?>
-                                                        <option value="<?= $c->title ?>"><?= $c->title ?></option>
-                                                        <?php endif ?>
-                                                        <?php endforeach ?>
-                                                    </select>
-                                                    <strong>Country</strong>
-                                                </div><!-- closes card-item -->
-                                                <div class="card-item">
-                                                    <input type="text" value="<?= $this->billing->city ?>" name="city" />
-                                                    <strong>State / Province</strong>
-                                                </div><!-- closes card-item -->
-                                                <div class="card-item">
-                                                    <input type="text" value="<?= $this->billing->zip ?>" name="zip" />
-                                                    <strong>ZIP / Postal Code</strong>
                                                 </div><!-- closes card-item -->
                                             </div>
                                         </div><!-- closes payment-item -->
@@ -151,34 +103,6 @@
                                 </div><!-- closes payment-tabs -->
                             </div><!-- closes right -->
                         </div><!-- closes checkout-item -->
-                        <div class="checkout-item">
-                            <div class="left">
-                                <span>3</span>
-                                <strong>Additional Info</strong>
-                            </div><!-- closes left -->
-                            <div class="right">
-                                <div class="card-item longer">
-                                    <strong>What are your expectations for this trip?</strong>
-                                    <textarea cols="30" rows="1" name="specs"><?= $this->billing->specs ?></textarea>
-                                </div><!-- closes card-item -->
-                                <div class="card-item longer">
-                                    <input type="text" value="<?= $this->billing->location ?>" name="location" />
-                                    <strong>What city are you currently in?</strong>
-                                    <span>e.g. New York, NY; San Francisco, CA</span>
-                                </div><!-- closes card-item -->
-                                <div class="card-item longer">
-                                    <input type="text" value="<?= $this->billing->phone ?>" name="phone" />
-                                    <strong>Contact phone number</strong>
-                                    <span>What is your best contact phone number?</span>
-                                </div><!-- closes card-item -->
-                                <div class="card-item longer">
-                                    <input type="text" value="<?= $this->billing->aboutus ?>" name="aboutus" />
-                                    <strong>How did you hear about Tripfab?</strong>
-                                    <span><em>Optional</em></span>
-                                </div><!-- closes card-item -->
-                            </div><!-- closes right -->
-                        </div><!-- closes checkout-item -->
-                        
                         <div class="checkout-item">
                             <div class="left">
                                 <span>4</span>
@@ -201,7 +125,7 @@
                             <div class="clear"></div>
                             <div class="bottom">
                                 <span>Grand Total<strong>$<?= $this->cartitem->total ?></strong></span>
-                                <input type="submit" class="btn-2" value="Book it" />
+                                <input type="submit" class="btn-2 noclean" value="Book Trip" />
                             </div><!-- closes bottom -->
                         </div><!-- closes checkout-item -->
                         <input type="hidden" name="userids" value="<?= $this->user->id ?>" />
@@ -210,6 +134,7 @@
                         <input type="hidden" name="cartitemtoken" value="<?= $this->cartitem->token ?>" />
                         <input type="hidden" name="formids" value="<?= md5($this->user->token.'checkout') ?>" />
                         <input type="hidden" name="_task" value="<?= md5('purchase') ?>" />
+                        <input type="hidden" name="ammount" value="<?= $this->cartitem->total ?>" />
                     </form>
                 </div><!-- closes left -->
                 
@@ -218,49 +143,9 @@
                         <div class="ttl">Trip Summary</div><!-- closes ttl -->
                         <ul>
                         	<li><?= $this->cartitem->adults ?> Adults
-                            <?php if($this->cartitem->kids > 0): ?>, <?= $this->cartitem->kids ?> Kids</li><?php endif ?>
-	                        <?php foreach($this->items as $item): ?>
-                            	<?php if($item->listing_type == 5 || $item->listing_type == 6): ?>
-                                <li class="hotel">
-                                    <div class="head">
-                                        <?= $item->listing_name ?>
-                                        <img src="/images2/arrow-11.png" alt="" />
-                                    </div>
-                                    <table cellpadding="0" cellspacing="0" border="0">
-                                    	<tr>
-                                            <td>Check In</td>
-                                            <td><?= date('M jS Y', strtotime($item->checkin)) ?></td></tr>
-                                            <?php if($item->checkout): ?>
-                                            <td>Check Out</td>
-                                            <td><?= date('M jS Y', strtotime($item->checkout)) ?></td></tr>
-                                            <?php endif ?>
-                                    </table>			
-                                    <?php if($item->nights > 0): ?><strong><?= $item->nights ?> Nights
-                                    <?php if($item->rooms > 1): ?> , <?= $item->rooms ?> Rooms</strong>
-                                    <?php endif ?><?php endif ?>			
-                                    <table cellpadding="0" cellspacing="0" border="0">
-                                        <tr>
-                                            <td><?= $item->rate_description ?></td>
-                                            <td>$<?= $item->rate ?></td></tr>
-                                        <?php if($item->additional != 0): ?>
-                                        <tr>
-                                            <td><?= $item->additional_description ?></td>
-                                            <td>$<?= $item->additional ?></td></tr>
-                                        <?php endif ?>
-                                        <tr>
-                                            <td>Subtotal</td>
-                                            <td>$<?= $item->subtotal ?></td></tr>
-                                        <tr>
-                                            <td>Taxes &amp; Fees</td>
-                                            <td>$<?= $item->taxes ?></td></tr>
-                                        <tr>
-                                            <td>Total</td>
-                                            <td>$<?= $item->total ?></td></tr>
-                                    </table>
-                                </li>
-                                <?php else: ?>
-                                <li><?= $item->listing_name ?><span>$0.00</span></li>
-                                <?php endif ?>
+                            <?php if($this->cartitem->kids > 0): ?>, <?= $this->cartitem->kids ?> Kids<?php endif ?></li>
+	                        <?php foreach($this->listings as $item): ?>
+                                <li><?= $item->title ?></li>
 							<?php endforeach ?>
                         </ul>
                         <div class="total">

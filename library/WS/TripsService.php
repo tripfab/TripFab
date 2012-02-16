@@ -39,6 +39,12 @@ class WS_TripsService {
      */
     protected $itineraries;
     
+    /**
+     *
+     * @var Zend_Db_Table_Abstract
+     */
+    protected $purchases;
+    
     public function __construct() {
         $this->trips_db = new Model_Trips();
         $this->DB       = Zend_Db_Table::getDefaultAdapter();
@@ -48,6 +54,8 @@ class WS_TripsService {
         $this->landscapes = new Zend_Db_Table('landscapes');
         
         $this->itineraries = new Zend_Db_Table('itineraries');
+        
+        $this->purchases = new Zend_Db_Table('trip_purchases');
     }
     
     public function getPopularTrips(){
@@ -124,7 +132,7 @@ class WS_TripsService {
         }
     }
     
-    public function get($trip, $arr = false)
+    public function get($trip, $arr = false, $user = null)
     {
         if(!$arr)
         {
@@ -297,11 +305,7 @@ class WS_TripsService {
             'country' => 'title',
             'countryurl'=>'identifier'
         ));
-        $select->join(array('tabs'=>'listing_tabs'), 'tabs.listing_id = listings.id', array(
-            'overview' => 'text'
-        ));
         $select->where("itinerary_listings.itinerary_id = {$trip}");
-        $select->where("tabs.title = 'Overview'");
         $select->order('itinerary_listings.time ASC');
         
         if($exclude == 'notnull')
@@ -511,7 +515,7 @@ class WS_TripsService {
             $select->where('trips.max >= ?', $people); }
         
         $select->order('trips.created DESC');
-        $select->limit(5);
+        //$select->limit(5);
         $trips = $this->DB->fetchAll($select, array(), 5);
         //var_dump($trips); die;
         return $trips;
@@ -570,5 +574,45 @@ class WS_TripsService {
         $result = $table->fetchAll($select);
         
         return $result;
+    }
+    
+    public function createPurchase($transaction, $cart, $trip)
+    {
+        $data = $cart->toArray();
+        $data['transaction_id'] = $transaction->id;
+        $data['status_id']      = 1;
+        $data['code']           = $transaction->code;
+        $data['created']        = date('Y-m-d g:i:s');
+        $data['trip_id']        = $trip->id;
+        
+        unset($data['id']);
+        unset($data['option_id']);
+        unset($data['token']);
+        unset($data['created']);
+        unset($data['checkout']);
+        unset($data['nights']);
+        unset($data['rooms']);
+        unset($data['listing_id']);
+        unset($data['rate_description']);
+        unset($data['additional']);
+        unset($data['additional_description']);
+        unset($data['max']);
+        unset($data['token']);
+        unset($data['type']);
+        
+        $row = $this->purchases->fetchNew();
+        $row->setFromArray($data);
+        $row->save();
+        
+        return $row;
+    }
+    
+    public function getPurchase($id)
+    {
+        $select = $this->purchases->select();
+        $select->where('id = ?', $id);
+        $purchase = $this->purchases->fetchRow($select);
+        
+        return $purchase;
     }
 }

@@ -9,12 +9,7 @@
     <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
     <link type="text/css" rel="stylesheet" href="/css2/calendar/jquery-ui-1.8.16.custom.css">
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
-    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
+    <script type="text/javascript" src="/js2/jquery.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('textarea').elastic();
@@ -38,8 +33,17 @@
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
     <div class="w2">
         <div class="wrapper user-messages user-trips">
-        	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Future Trips','parentActive'=>'My Trips')); ?>        	<div class="tripttl">        		<div>        			<a href="" class="btn-1">Proceed to Checkout</a>        			<?= $this->thumbnail(50, $this->trip->image, '', '1:1'); ?>        			<h2><?= $this->trip->title ?></h2>        		</div>        	</div>        	<!-- closes tripttl -->
-            <div class="past-trips">            	<?= $this->partial('partials/usertripinfomenu.phtml', array('active'=>'Information', 'id'=>$this->trip->id)); ?>
+        	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Future Trips','parentActive'=>'My Trips')); ?>
+        	<div class="tripttl">
+        		<div>
+        			<a href="" class="btn-1">Proceed to Checkout</a>
+        			<?= $this->thumbnail(50, $this->trip->image, '', '1:1'); ?>
+        			<h2><?= $this->trip->title ?></h2>
+        		</div>
+        	</div>
+        	<!-- closes tripttl -->
+            <div class="past-trips">
+            	<?= $this->partial('partials/usertripinfomenu.phtml', array('active'=>'Information', 'id'=>$this->trip->id)); ?>
                 <div class="left">
                 	<?php if($this->errormessage): ?>
                     <div class="errormessage">

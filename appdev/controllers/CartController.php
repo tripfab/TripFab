@@ -208,13 +208,9 @@ class CartController extends Zend_Controller_Action {
     
     public function purchasetripAction()
     {
-        if($this->getRequest()->isPost())
-        {
-            $auth = Zend_Auth::getInstance();
-            if(!$auth->hasIdentity())
-                    $this->_redirect ('/login');
-            
-            $user = $auth->getIdentity();
+        if($this->getRequest()->isPost()){
+                        
+            $user = $this->user->getData();
             
             $id    = $_POST['trip'];
             
@@ -222,99 +218,39 @@ class CartController extends Zend_Controller_Action {
             if($trip->token != $_POST['triptoken'])
                     throw new Exception();
             
-            $date   = date('Y-m-d G:i:s', strtotime($_POST['checkin']));
-            $adults = $_POST['adults'];
-            $kids   = $_POST['kids'];
-            $items  = array();
-            $items2 = array();
+            $today = time();
+            $checkin = strtotime($_POST['checkin']);
+            
+            if($today >= $checkin)
+                    throw new Exception('No checkin date provided');
+            
+            $date   = date('Y-m-d G:i:s', $checkin);
+            $adults = (isset($_POST['adults']) and !empty($_POST['adults'])) ? $_POST['adults'] : 0;
+            $kids   = (isset($_POST['kids']) and !empty($_POST['kids'])) ? $_POST['kids'] : 0;
+            $people = $adults + $kids;
+            
+            if($adults == 0)
+                    throw new Exception('Adult cannot be 0');
+            if($people < $trip->min)
+                    throw new Exception('You need more people. Minimun '.$trip->min);
+            if($people > $trip->max)
+                    throw new Exception('Too many people. Maximun '.$trip->max);
             
             $cart = $this->cart->fetchNew();
-            $cart->user_id  = $user->id;
+            $cart->user_id    = $user->id;
             $cart->listing_id = $trip->id;
-            $cart->checkin  = $date;
-            $cart->adults   = $adults;
-            $cart->kids     = $kids;
-            $cart->rate     = 0;
+            $cart->checkin    = $date;
+            $cart->adults     = $adults;
+            $cart->kids       = $kids;
+            $cart->rate       = $trip->price;
             $cart->rate_description = $trip->title . ' - Trip Purchase';
-            $cart->subtotal = 0;
-            $cart->taxes    = 0;
-            $cart->total    = 0;
-            $cart->token    = md5($user->token . time());
-            $cart->type     = 2;
-            $cart->created  = date('Y-m-d H:i:s');
+            $cart->subtotal   = ($cart->rate * $people);
+            $cart->taxes      = 0;
+            $cart->total      = $cart->subtotal;
+            $cart->token      = md5($trip->id . $user->token . time());
+            $cart->type       = 2;
+            $cart->created    = date('Y-m-d H:i:s');
             
-            $cart->save();
-            
-            $cartitems = new Zend_Db_Table('cartitems');            
-            
-            $listings = $this->trips->getListingOf($trip->id, false);
-            
-            foreach($listings as $listing){
-                if($listing->main_type == 6 || $listing->main_type == 5){
-                    $checkin   = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
-                    $checkin   = date('Y-m-d', $checkin);
-                    $item      = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $trip->days);
-                    $item->day = $listing->day;
-                    
-                    $cartitem = $cartitems->fetchNew();
-                    $cartitem->cart_id      = $cart->id;
-                    $cartitem->checkin      = $checkin;
-                    $cartitem->listing_id   = $listing->id;
-                    $cartitem->rate         = $item->rate;
-                    $cartitem->additional   = $item->additional;
-                    $cartitem->subtotal     = $item->subtotal;
-                    $cartitem->taxes        = $item->taxes;
-                    $cartitem->total        = $item->total;
-                    $cartitem->additional_description = $item->additional_description;
-                    $cartitem->rate_description       = $item->rate_description;
-                    
-                    if($listing->main_type == 5){
-                        $cartitem->checkout  = date('Y-m-d', strtotime($item->checkout));
-                        $cartitem->option_id = $item->option_id;
-                        $cartitem->nights    = $item->nights;
-                        $cartitem->rooms     = $item->rooms;
-                    }
-                    
-                    $cartitem->created = date('Y-m-d H:i:s');
-                    $cartitem->triplisting = $listing->triplisting_id;
-                    $cartitem->save();
-                    
-                    $items[] = $cartitem;
-                }
-            }
-            
-            foreach($listings as $listing){
-                if($listing->main_type != 6 && $listing->main_type != 5){                    
-                    $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
-                    $cartitem = $cartitems->fetchNew();
-                    $cartitem->cart_id      = $cart->id;
-                    $cartitem->checkin      = $checkin;
-                    $cartitem->listing_id   = $listing->id;
-                    $cartitem->rate         = 0;
-                    $cartitem->additional   = 0;
-                    $cartitem->subtotal     = 0;
-                    $cartitem->taxes        = 0;
-                    $cartitem->total        = 0;
-                    $cartitem->created      = date('Y-m-d H:i:s');
-                    $cartitem->rate_description = 'Price not charget';
-                    $cartitem->save();
-                    
-                    $items2[] = $cartitem;
-                }
-            }
-            
-            $total = 0;
-            $subtotal = 0;
-            $taxes  = 0;
-            foreach($items as $c){
-                $total = $total + $c->total;
-                $subtotal = $subtotal + $c->subtotal;
-                $taxes = $c->taxes;
-            }
-            
-            $cart->total = $total;
-            $cart->subtotal = $subtotal;
-            $cart->taxes = $taxes;
             $cart->save();
             
             $this->_redirect('cart/checkout/'.$cart->id);
@@ -446,9 +382,6 @@ class CartController extends Zend_Controller_Action {
         if($this->user->getRole() != 'user')
                 throw new Exception('No access allowed');
         
-        if($_GET['error_message'])
-            $this->view->error = $_GET['error_message'];
-        
         $ids = $this->_getParam('task');
         
         $select = $this->cart->select();
@@ -461,14 +394,13 @@ class CartController extends Zend_Controller_Action {
         if($cartitem->user_id != $this->user->getId())
                 $this->_redirect('/');
         
-        if($cartitem->type == 1){
+        if($cartitem->type == 1)
+        {
             $listing = $this->listings->getListing($cartitem->listing_id);
             $country = $this->places->getPlaceById($listing->country_id);
             $city    = $this->places->getPlaceById($listing->city_id);
             $vendor  = $this->listings->getVendor($listing->vendor_id);
             $countries = $this->places->getPlaces(2);
-
-            $billing = $this->billing->fetchRow("user_id = {$this->user->getId()}");
 
             $this->view->cartitem  = $cartitem;
             $this->view->listing   = $listing;
@@ -477,31 +409,22 @@ class CartController extends Zend_Controller_Action {
             $this->view->city      = $city;
             $this->view->vendor    = $vendor;
             $this->view->countries = $this->places->getPlaces(2);
-            $this->view->billing   = $billing;
-        } elseif($cartitem->type == 2) {
             
+        } 
+        elseif($cartitem->type == 2) 
+        { 
             $trip = $this->trips->get($cartitem->listing_id);
-            
-            $billing = $this->billing->fetchRow("user_id = {$this->user->getId()}");
-            
-            $db = Zend_Db_Table::getDefaultAdapter();
-            $select = $db->select();
-            $select->from('cartitems');
-            $select->join('listings','cartitems.listing_id = listings.id', array(
-                'listing_name'=>'title',
-                'listing_type'=>'main_type'
-            ));
-            $select->where('cartitems.cart_id = ?', $cartitem->id);
-            $items = $db->fetchAll($select, array(), 5);
+            $listings = $this->trips->getListingOf($trip->id, false);
             
             $this->view->trip      = $trip;
             $this->view->cartitem  = $cartitem;
             $this->view->user      = $this->user->getData();
             $this->view->countries = $this->places->getPlaces(2);
-            $this->view->billing   = $billing;
-            $this->view->items     = $items;
+            $this->view->listings  = $listings;
+            
             $this->render('checkout-trip');
-        } elseif($cartitem->type == 3) {
+        } 
+        elseif($cartitem->type == 3) {
             
             $trip = $this->trips->getItn($cartitem->listing_id);
             
@@ -523,7 +446,7 @@ class CartController extends Zend_Controller_Action {
             $this->view->countries = $this->places->getPlaces(2);
             $this->view->billing   = $billing;
             $this->view->items     = $items;
-            $this->render('checkout-trip');
+            $this->render('checkout-itn');
         }
         
     }
@@ -584,33 +507,67 @@ class CartController extends Zend_Controller_Action {
             
             $account->save();
             
-            $listing = $this->listings->getListing($cartitem->listing_id);
-            $vendor  = $this->listings->getVendor($listing->vendor_id);
-            $method  = $customer->active_card->type . ' ************'.$customer->active_card->last4;
-            $code    = $this->user->getId().$vendor->id.time();
+            switch($cartitem->type) {
+                case 1:
+                    $listing = $this->listings->getListing($cartitem->listing_id);
+                    $vendor  = $this->listings->getVendor($listing->vendor_id);
+                    $method  = $customer->active_card->type . ' ************'.$customer->active_card->last4;
+                    $code    = $this->user->getId().$vendor->id.time();
+                    
+                    $_transaction = array(
+                        'code'      => $code,
+                        'user_name' => $this->user->getName(),
+                        'method'    => $method,
+                        'ammount'   => $cartitem->total,
+                        'date'      => date('Y-m-d G:i:s'),
+                        'listing_id'=> $listing->id,
+                        'vendor_id' => $vendor->id,
+                        'status'    => 0,
+                        'created'   => date('Y-m-d G:i:s'),
+                        'updated'   => date('Y-m-d G:i:s')
+                    );
 
-            $_transaction = array(
-                'code'      => $code,
-                'user_name' => $this->user->getName(),
-                'method'    => $method,
-                'ammount'   => $cartitem->total,
-                'date'      => date('Y-m-d G:i:s'),
-                'listing_id'=> $listing->id,
-                'vendor_id' => $vendor->id,
-                'status'    => 0,
-                'created'   => date('Y-m-d G:i:s'),
-                'updated'   => date('Y-m-d G:i:s')
-            );
+                    $transaction = $this->transactions->fetchNew();
+                    $transaction->setFromArray($_transaction);
+                    $transaction->save();
+                    
+                    $reservation = $this->reservations->create($transaction, $cartitem, $listing);
 
-            $transaction = $this->transactions->fetchNew();
-            $transaction->setFromArray($_transaction);
-            $transaction->save();
+                    $cartitem->delete();
 
-            $reservation = $this->reservations->create($transaction, $cartitem, $listing);
+                    $this->_redirect('cart/invoice/'.$reservation->id);
+                break;
+                case 2:
+                    $listing = $this->trips->get($cartitem->listing_id);
+                    $method  = $customer->active_card->type . ' ************'.$customer->active_card->last4;
+                    $code    = $this->user->getId().$vendor->id.time();                    
+                    
+                    $_transaction = array(
+                        'code'      => $code,
+                        'user_name' => $this->user->getName(),
+                        'method'    => $method,
+                        'ammount'   => $cartitem->total,
+                        'date'      => date('Y-m-d G:i:s'),
+                        'trip_id'   => $listing->id,
+                        'status'    => 0,
+                        'created'   => date('Y-m-d G:i:s'),
+                        'updated'   => date('Y-m-d G:i:s')
+                    );
 
-            $cartitem->delete();
+                    $transaction = $this->transactions->fetchNew();
+                    $transaction->setFromArray($_transaction);
+                    $transaction->save();
+                    
+                    $reservation = $this->trips->createPurchase($transaction, $cartitem, $listing);
+                    
+                    $cartitem->delete();
 
-            $this->_redirect('cart/invoice/'.$reservation->id);
+                    $this->_redirect('cart/tripinvoice/'.$reservation->id);
+                break;
+                case 3:
+                    $listing = $this->trips->get($cartitem->listing_id);
+                break;
+            }
         }
     }
     
@@ -933,6 +890,32 @@ class CartController extends Zend_Controller_Action {
     }
     
     public function tripinvoiceAction()
+    {
+        $id = $this->_getParam('task');
+        
+        if($this->user->getRole() != 'user' and $this->user->getRole() != 'admin'){
+            throw new Exception('No access allowed');
+        } else {
+            $reservation = $this->trips->getPurchase($id);
+            $listing = $this->trips->get($reservation->trip_id);
+            if(is_null($listing))
+                    throw new Exception('No access allowed');
+            
+            $users = new WS_UsersService();
+            $user  = $users->get($reservation->user_id);
+            
+            $select = $this->transactions->select();
+            $select->where('id = ?', $reservation->transaction_id);
+            $transaction = $this->transactions->fetchRow($select);
+
+            $this->view->transaction = $transaction;
+            $this->view->listing     = $listing;
+            $this->view->user        = $user;
+            $this->view->reservation = $reservation;
+        }
+    }
+    
+    public function itninvoiceAction()
     {
         $id = $this->_getParam('task');
         

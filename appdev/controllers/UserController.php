@@ -586,6 +586,9 @@ class UserController extends Zend_Controller_Action
         $listings = $this->trips->getItnListingOf($trip->id, false, 'null', true);
 
         $date = date('Y-m-d G:i:s', strtotime($trip->start));
+        
+        $main_types = $this->listings->getMainCategories(true);
+        $this->view->types = $main_types;
 
         $items  = array();
         $items2 = array();
@@ -595,15 +598,21 @@ class UserController extends Zend_Controller_Action
                 $checkin = date('Y-m-d', $checkin);
                 $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $trip->days);
                 $item->day = $listing->day;
+                $item->listing_type = $listing->main_type;
+                $item->listing_city = $listing->city;
+                $item->listing_country = $listing->country;
                 $items[] = $item;
             }
         }
         foreach($listings as $listing){
             if($listing->main_type != 6 && $listing->main_type != 5){
                 $item = new stdClass();
-                $item->available = true;
+                $item->available = false;
                 $item->listing_title = $listing->title;
                 $item->listing_image = $listing->image;
+                $item->listing_type  = $listing->main_type;
+                $item->listing_city = $listing->city;
+                $item->listing_country = $listing->country;
                 $items2[] = $item;
             }
         }
@@ -616,8 +625,12 @@ class UserController extends Zend_Controller_Action
 
         $this->view->trip = $trip;
         $this->view->items = $items;
+        //print_r($items); die;
         $this->view->items2 = $items2;
         $this->view->bigtotal = $total;
+        
+        $country = $this->places->getPlaceById($trip->country_id);
+        $this->view->country = $country;
     }
     
     public function activateoffersTripsTask()

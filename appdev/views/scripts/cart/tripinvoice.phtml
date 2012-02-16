@@ -14,111 +14,60 @@
 </head>
 <body>
 <div class="w1">
-    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>
+    <?= $this->partial('partials/header.phtml', 
+	array('user'=>$this->user,'full'=>true)); ?>    
     <div class="w2">
         <div class="main wrapper">
             <div class="confirmation-header">
-                <span class="code">Reservations Code: #<?= $this->transaction->code ?></span>
+                <span class="code">Code: <?= $this->reservation->code ?></span>
                 <h4>Congratulations <?= $this->user->name ?>!</h4>
-                <p>Your reservations for <?= $this->trip->title ?> Trip has been booked!</p>
+                <p>Your reservation in <?= $this->listing->title ?> has been booked!</p>
             </div><!-- closes confirmation-header -->
-            
-            <div class="confirmation-wrapper trip">
-                <?= $this->thumbnail(117, $this->trip->image); ?>
+            <div class="confirmation-wrapper">
+            	<?= $this->thumbnail(117, $this->listing->image); ?>
                 <div class="detail">
                     <h3>Payment</h3>
                     <strong>Payment Method</strong>
                     <p><?= $this->transaction->method ?></p>
-                    <strong>Billing Address</strong>
-                    <address>
-                        <p><?= $this->user->name ?></p>
-                        <p><?= $this->billing->street1 ?></p>
-                        <p><?= $this->billing->street2 ?></p>
-                        <p><?= $this->billing->city ?></p>
-                        <p><?= $this->billing->country ?></p>
-                    </address>
                 </div><!-- closes detail -->
+                <div class="detail">
+                    <h3>Purchase Details</h3>
+                    <strong>Check In</strong>
+                    <p><?= date('D, F jS Y', strtotime($this->reservation->checkin)) ?></p>
+                    <strong>Ocupation</strong>
+                    <p><?= $this->reservation->adults ?> Adults
+                    <?php if($this->reservation->kids): ?>
+                    , <?= $this->reservation->kids ?> Children<?php endif ?></p>
+                </div>
+                <!-- closes detail -->
                 <div class="detail last">
                     <h3>Total Paid</h3>
                     <strong>Charges</strong>
                     <table cellpadding="0" cellspacing="0" border="0">
                         <tbody>
-                        	<?php foreach($this->listings as $list): ?>
                             <tr>
-                                <td><?= $list->title ?></td>
-                                <td>$<?= ($list->ammount) ? $list->ammount : '0.00' ?></td>
+                                <td>Price per person</td>
+                                <td>$<?= $this->reservation->rate ?></td>
                             </tr>
-                            <?php endforeach ?>
+                            <tr>
+                                <td>Subtotal</td>
+                                <td>$<?= $this->reservation->subtotal ?></td>
+                            </tr>
+                            <tr>
+                                <td>Taxes &amp; Fees</td>
+                                <td>$0.00</td>
+                            </tr>
                             <tr>
                                 <td><strong>Total</strong></td>
-                                <td><strong>$<?= $this->trip->price ?></strong></td>
+                                <td><strong>$<?= $this->reservation->total ?></strong></td>
                             </tr>
                         </tbody>
                     </table>
                 </div><!-- closes detail -->
                 <div class="clear"></div>
-                <div class="details-wrapper">
-                	<?php foreach($this->reservations as $reserve): ?>
-                    <div>
-                        <img src="/images2/cleardot.gif" alt="" />
-                        <div class="detail">
-                            <h3>Item</h3>
-                            <strong><?= $reserve->listing_name ?></strong>
-                            <p><a href="">Contact Operator</a></p>
-                            <p><a href="">Print Reservation</a></p>
-                        </div><!-- closes detail -->
-                        <div class="detail">
-                            <h3>Purchase Details</h3>
-                            <?php if($reserve->room_type): ?>
-                            <strong>Room</strong>
-                            <p><?= $reserve->room_type ?></p>
-                            <?php endif ?>
-                            <strong>Check In</strong>
-                            <p><?= date('F jS, Y', strtotime($reserve->checkin)) ?></p>
-                            <?php if($reserve->checkout): ?>
-                            <strong>Check Out</strong>
-                            <p><?= date('F jS, Y', strtotime($reserve->checkout)) ?></p>
-                            <?php endif ?>
-                            <strong>Ocupation</strong>
-                            <p><?= $reserve->adults ?> Adults, 
-                            <?php if($reserve->kids): ?>
-                            <?= $reserve->kids ?> Children<?php endif ?></p>
-                        </div><!-- closes detail -->
-                        <div class="detail last">
-                            <h3>Charges</h3>
-                            <table cellpadding="0" cellspacing="0" border="0">
-                                <tbody>
-                                    <tr>
-                                        <td><?= $reserve->rate_description ?></td>
-                                        <td>$<?= $reserve->rate ?></td>
-                                    </tr>
-                                    <?php if($reserve->additional > 0): ?>
-                                    <tr>
-                                        <td><?= $reserve->additional_description ?></td>
-                                        <td><?= $reserve->additional ?></td>
-                                    </tr>
-                                    <?php endif ?>
-                                    <tr>
-                                        <td>Subtotal</td>
-                                        <td>$<?= $reserve->subtotal ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Taxes &amp; Fees</td>
-                                        <td>$<?= $reserve->taxes ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Total</strong></td>
-                                        <td><strong>$<?= $reserve->ammount ?></strong></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div><!-- closes detail -->
-                    </div>
-                    <?php endforeach ?>
-                </div><!-- closes details wrapper -->
                 <div class="confirmation-footer">
                     <p><strong>Questions?</strong> Contact <a href="">service@tripfab.com</a></p>
-                    <p><a href="">Contact Operator</a><a href="">Print Reservation</a></p>
+                    <p><a href="">Print Reservation</a></p>
                 </div><!-- closes conformation-footer -->
             </div><!-- closes confirmation-wrapper -->
         </div><!-- closes main -->

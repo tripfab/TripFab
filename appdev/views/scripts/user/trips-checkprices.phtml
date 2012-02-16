@@ -8,188 +8,224 @@
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
-	<link type="text/css" rel="stylesheet" href="/css2/calendar/jquery-ui-1.8.16.custom.css" />
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.scrollTo.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
-    <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-    <script type="text/javascript" src="/js/scrollElement.jQuery.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css2/calendar/jquery-ui-1.8.16.custom.css" />
+    <script type="text/javascript" src="/js2/jquery.js"></script>
     <script type="text/javascript" src="/js2/trips/checkprices.js"></script>
+    <script type="text/javascript">
+		$(document).ready(function() {
+			$('a.helptip').click(function() {
+				$('.tip').toggleClass('hidden');
+				return false
+			});
+			$("#checkout_accordion").accordion({
+				autoHeight: false 
+			});
+		});
+    </script>
+    <style type="text/css">
+	#custom_checkout .details .item.last {
+		border-bottom:0px none;}
+	</style>
 </head>
 <body>
 <div class="w1">
-    <?= $this->partial('partials/header.phtml', 
-	array('user'=>$this->user,'full'=>true)); ?>
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>
     <div class="w2">
-        <div class="main wrapper">
-            <div class="checkout-header">
-                <?= $this->thumbnail(array('width'=>960,'height'=>353), $this->trip->image, '','960:353') ?>
-                <div>
-                    <span>Trip Availability</span>
-                    <h2><?= $this->trip->title ?></h2>
-                    <div class="timestamp">
-                        <span><?= $this->trip->days ?> days trip</span>
-                    </div><!-- closes timestamp -->	
-                </div>
-            </div><!-- closes checkout-header -->
-            <div class="checkout-wrapper">
-                <div class="trip-settings">
-                    <form action="" method="post">
-                        <fieldset>
-                            <label>Adults</label>
-                            <select name="adultss">
-                            	<?php for($i=1; $i<=12; $i++): ?>
-                            	<?php $selected = ($_POST['adultss'] == $i) ? 'selected=selected' : ''; ?>
-                                <option <?= $selected ?> value="<?= $i ?>"><?= $i ?></option>
-                            	<?php endfor ?>																
-                            </select>
-                        </fieldset>
-                        <fieldset>
-                            <label>Children</label>
-                            <select name="kids">
-                            	<option value="0">None</option>
-                                <?php for($i=1; $i<=12; $i++): ?>
-                            	<?php $selected = ($_POST['kids'] == $i) ? 'selected=selected' : ''; ?>
-                                <option <?= $selected ?> value="<?= $i ?>"><?= $i ?></option>
-                            	<?php endfor ?>	
-                            </select>
-                        </fieldset>
-                        <fieldset class="last">
-                            <input type="submit" class="btn-1" value="Check Availability" />
-                        </fieldset>
-                        <input type="hidden" name="ids" value="<?= $this->trip->id ?>" />
-                        <input type="hidden" name="token" value="<?= $this->trip->token ?>" />
-                    </form>
-                </div><!-- closes trip-settings -->
-                <div class="trip-items">
-                	<?php if($this->items > 0 or $this->items2 > 0): ?>
-                    <div class="left">
-                    	<?php foreach($this->items as $key => $cart): ?>
-                        <div class="trip-item" id="item-<?= $key ?>">
-                            <div class="top">
-                                <?= $this->thumbnail(35, $cart->listing_image, '','1:1'); ?>
-                                <p><strong><?= $cart->listing_title ?></strong>
-                                <?php if($cart->available): ?>
-                                </p><span class="green">Green</span>
-                                <?php else: ?>
-                                <span>(Not Available)</span> Don't worry! 
-                                <a class="lb" href="#lb-recommendations">We have some recommendations for you.</a></p>
-                                <span class="red">Red</span>
-                                <?php endif ?>
-                            </div><!-- closes top -->
-                            <?php if($cart->available): ?>
-                            <div class="bottom">
-                                <ul>
-                                	<li><strong>Ocupation</strong>
-                                    <span>Adults: <?= $cart->adults ?>, Kids: <?= $cart->kids ?>, 
-                                    <?php if(isset($cart->rooms)): ?>
-                                    Rooms: <?= $cart->rooms ?>, Nights: <?= $cart->nights ?></span>
-                                    <?php else: ?>
-                                    </span>
-                                    <?php endif ?>
-                                    <li><strong>Dates</strong>
-                                    <span>Day # <?= $cart->day ?> | Checkin: <?= $cart->checkin ?>, 
-                                    <?php if(isset($cart->checkout)): ?>
-                                    Checkout: <?= $cart->checkout ?></span>
-                                    <?php else: ?>
-                                    </span>
-                                    <?php endif ?>
-                                    </li>
-                                    <li>
-                                        <strong>$<?= $cart->rate ?></strong>
-                                        <span><?= $cart->rate_description ?></span>
-                                    </li>
-                                    <?php if($cart->additional > 0): ?>
-                                    <li>
-                                        <strong>$<?= $cart->additional ?></strong>
-                                        <span><?= $cart->additional_description ?></span>
-                                    </li>
-                                    <?php endif ?>
-                                    <li>
-                                    	<strong>$<?= $cart->subtotal ?></strong>
-                                        <span>Subtotal</span>
-                                    </li>
-                                    <li>
-                                    	<strong>$<?= $cart->taxes ?></strong>
-                                        <span>Taxes and Fees</span>
-                                    </li>
-                                    <li>
-                                    	<strong>$<?= $cart->total ?></strong>
-                                        <span>Total</span>
-                                    </li>
-                                </ul>
-                            </div><!-- closes bottom -->
-                            <?php else: ?>
-                            <div class="bottom">
-                                <ul>
-                                	<li><strong>Ocupation</strong>
-                                    <span>Adults: <?= $cart->adults ?>, Kids: <?= $cart->kids ?>, Date: <?= $cart->checkin ?></span></li>
-                                    <li>
-                                        <strong>Error</strong>
-                                        <span><?= $cart->error ?></span>
-                                    </li>
-                                </ul>
-                            </div><!-- closes bottom -->
-                            <?php endif ?>
-                        </div><!-- closes trip-item -->
-                        <?php endforeach ?>
-                        <?php foreach($this->items2 as $key => $cart): ?>
-                        <div class="trip-item" id="item2-<?= $key ?>">
-                            <div class="top">
-                                <?= $this->thumbnail(35, $cart->listing_image, '','1:1'); ?>
-                                <p><strong><?= $cart->listing_title ?></strong></p><span class="green">Green</span>
-                            </div><!-- closes top -->
-                            <div class="bottom">
-                                <ul>
-                                    <li>
-                                        <strong>Price not charged</strong>
-                                        <span>Check the prices when you get there</span>
-                                    </li>
-                                </ul>
-                            </div><!-- closes bottom -->
-                        </div><!-- closes trip-item -->
-                        <?php endforeach ?>
-                    </div><!-- closes left -->
-                    <div class="right">
-                        <div class="widget summary">
-                            <div class="ttl">
-                                Trip Summary
-                            </div><!-- closes ttl -->
-                            <ul>
-                            	<?php foreach($this->items as $key => $cart): ?>
-                                <?php $class = ($cart->available) ? '' : 'error' ?>
-                                <li class="<?= $class ?>">
-                                    <a href="#item-<?= $key ?>"><span>&larr;</span> <?= $cart->listing_title ?>
-                                    <?php if($cart->available): ?><strong>$<?= $cart->total ?></trong><?php endif ?></a>
-                                </li>
-                                <?php endforeach ?>
-                                <?php foreach($this->items2 as $key => $cart): ?>
-                                <li>
-                                    <a href="#item2-<?= $key ?>"><span>&larr;</span> <?= $cart->listing_title ?></a>
-                                </li>
-                                <?php endforeach ?>
-                            </ul>
-                            <div class="total">
-                            <form action="/cart/purchaseitinerary" method="post">
-                                <input type="submit" class="btn-2" value="Process to Checkout" />
-                                <span>Trip Total <strong>$<?= $this->bigtotal ?></strong></span>
-                                <input type="hidden" name="kids" value="<?= $_POST['kids'] ?>" />
-                                <input type="hidden" name="adults" value="<?= $_POST['adultss'] ?>" />
-                                <input type="hidden" name="trip" value="<?= $this->trip->id ?>" />
-                                <input type="hidden" name="triptoken" value="<?= $this->trip->token ?>" />
-                            </form>
-                            </div>
-                        </div><!-- closes widget -->
-                    </div><!-- closes right -->
-                    <?php endif ?>
-                </div><!-- closes trip-items -->
-            </div><!-- closes checkout-wrapper -->
-        </div><!-- closes main -->
-    </div><!-- closes w2 -->
-    <?= $this->partial('partials/footer.phtml'); ?>
-</div><!-- closes w1 -->
+        <div class="checkout_headerB">
+            <h2><?= $this->trip->title ?></h2>
+            <span class="place"><?= $this->country->title ?></span> 
+            <span class="label"><em></em><?= $this->trip->days ?> <?= ($this->trip->days > 1) ? 'Days' : 'Day' ?> Trip</span> 
+        </div><!--CHECKOUT_HEADERB-->
+        <div class="wrapper" id="custom_checkout">
+            <div class="left_block">
+                <h3>Check the availability for your trip and the listing options before continue with the checkout</h3>
+                <div id="checkout_accordion">
+                	<?php foreach($this->items as $item): ?>
+                    <div class="header"> <span class="arrow"></span> <a href="#"></a>
+                        <div class="descrip"> 
+                        	<?= $this->thumbnail(49, $item->listing_image, '', '1:1'); ?>
+                            <h4><?= $item->listing_title ?></h4>
+                            <span class="type"><?= $this->types[$item->listing_type]['name'] ?></span>
+                            <p><?= $item->listing_city ?>, <?= $item->listing_country ?></p>
+                        </div><!--DESCRIP-->
+                        <?php if($item->available): ?>
+                        <div class="info"> 
+                        	<span><em></em>Available</span>
+                            <p>Ready to go!</p>
+                        </div><!--INFO--> 
+                        <?php else: ?>
+        				<div class="info">
+        					<span class="unavaible"><em></em>Not Available</span>
+        				</div><!--INFO-->
+                        <?php endif ?>
+                    </div><!--HEADER-->
+                    <div class="details">
+                        <div class="item"> 
+                        	<strong>Occupation</strong>
+                            <div class="edit">
+                                <label for="adults">Adults</label>
+                                <select name="adults" id="adults">
+                                    <option>2</option>
+                                </select>
+                                <label for="Children">Children</label>
+                                <select name="Children" id="Children">
+                                    <option>2</option>
+                                </select>
+                            </div><!--EDIT--> 
+                        </div><!--ITEM-->
+                        <?php if($item->listing_type == 5): ?>
+                        <div class="item"> 
+                        	<strong>Check In</strong>
+                            <div class="edit">Friday, April 25, 2012</div>
+                        </div><!--ITEM-->
+                        <div class="item"> 
+                        	<strong>Check Out</strong>
+                            <div class="edit">Sunday, April 27, 2012</div><!--EDIT--> 
+                        </div><!--ITEM-->
+                        <div class="item"> 
+                        	<strong>Rooms</strong>
+                            <div class="edit">
+                            	1
+                            </div><!--EDIT--> 
+                        </div><!--ITEM-->
+                        <div class="item"> 
+                        	<strong>Room Type</strong>
+                            <div class="room-type">
+                                <p>Select the room type you want to stay:</p>
+                                <div class="single">
+                                    <label for="Room1"> 
+                                    <strong><input type="radio" name="Room" id="Room1" value="" />Garden Queen Room</strong> 
+                                    <span> sq ft with 1 queen bed and located on the higher floors, with a private, 150 sq ft with 1 queen bed and located on the higher floors.</span> </label>
+                                    <span class="price">$125</span> 
+                                </div><!--SINGLE-->
+                                <div class="single">
+                                    <label for="Room1"> 
+                                    <strong><input type="radio" name="Room" id="Room1" value="" />Garden Queen Room</strong> 
+                                    <span> sq ft with 1 queen bed and located on the higher floors, with a private, 150 sq ft with 1 queen bed and located on the higher floors.</span> </label>
+                                    <span class="price">$125</span> 
+                                </div><!--SINGLE-->
+                                <div class="single">
+                                    <label for="Room1"> 
+                                    <strong><input type="radio" name="Room" id="Room1" value="" />Garden Queen Room</strong> 
+                                    <span> sq ft with 1 queen bed and located on the higher floors, with a private, 150 sq ft with 1 queen bed and located on the higher floors.</span> </label>
+                                    <span class="price">$125</span> 
+                                </div><!--SINGLE-->                                
+                            </div><!--ROOM-TYPE--> 
+                        </div><!--ITEM-->
+                        <?php else: ?>
+                        <div class="item"> 
+                        	<strong>Activity Date</strong>
+                            <div class="edit">Friday, April 25, 2012</div><!--EDIT--> 
+                        </div><!--ITEM-->
+                        <div class="item"> 
+                        	<strong>Activity Type</strong>
+                            <div class="room-type">
+                                <p>Select the room type you want to stay:</p>
+                                <div class="single">
+                                   <label for="activity1"> 
+                                   <strong><input type="radio" name="Activity" id="activity1" value="" />Surfing Type A</strong>
+                                   </label><span class="price">$125</span> 
+                                </div><!--SINGLE-->
+                                <div class="single">
+                                   <label for="activity1"> 
+                                   <strong><input type="radio" name="Activity" id="activity1" value="" />Surfing Type A</strong>
+                                   </label><span class="price">$125</span> 
+                                </div><!--SINGLE-->
+                                <div class="single">
+                                   <label for="activity1"> 
+                                   <strong><input type="radio" name="Activity" id="activity1" value="" />Surfing Type A</strong>
+                                   </label><span class="price">$125</span> 
+                                </div><!--SINGLE-->
+                            </div><!--ROOM-TYPE--> 
+                        </div><!--ITEM-->
+                        <div class="item"> 
+                        	<strong>Schedule</strong>
+                            <div class="edit">
+                                <select name="schedule" id="schedule">
+                                    <option>3:00 pm</option>
+                                </select>
+                            </div><!--EDIT--> 
+                        </div><!--ITEM-->
+                        <?php endif ?>
+                        
+                        <div class="item"> 
+                        	<strong>Cancellation</strong> 
+                            <a href="#" class="restriction">High Restrictions &rarr;</a> 
+                        </div><!--ITEM-->
+                        <div class="item"> 
+                        	<strong>Hotel Restrictions</strong> 
+                            <a href="#" class="restriction">Read Hotel Restrictions &rarr;</a> 
+                        </div><!--ITEM-->
+                        <div class="last">
+                            <label for=""><input type="checkbox" name="" value="" />
+                            I agree to the cancellation policy, hotel restrictions and <a href="#">terms of use.</a> </label>
+                        </div><!--LAST-->
+                    </div><!--DETAILS-->
+                    <?php endforeach ?>
+                    <?php foreach($this->items2 as $item): ?>
+                    <div class="header"> <span class="arrow"></span> <a href="#"></a>
+                        <div class="descrip"> 
+                        	<?= $this->thumbnail(49, $item->listing_image, '', '1:1'); ?>
+                            <h4><?= $item->listing_title ?></h4>
+                            <span class="type"><?= $this->types[$item->listing_type]['name'] ?></span>
+                            <p><?= $item->listing_city ?>, <?= $item->listing_country ?></p>
+                        </div><!--DESCRIP-->
+                        <?php if($item->available): ?>
+                        <div class="info"> 
+                        	<span><em></em>Available</span>
+                            <p>Ready to go!</p>
+                        </div><!--INFO--> 
+                        <?php else: ?>
+                        <div class="info"> 
+                        	<span><em></em>Unavailable</span>
+                            <p>There is a problem</p>
+                        </div><!--INFO--> 
+                        <?php endif ?>
+                    </div><!--HEADER-->
+                    <div class="details">                        
+                        <div class="item last">
+                        	<strong>Price not charged</strong>
+                            <div class="edit">Check the prices when you get there</div>
+                        </div><!--LAST-->
+                    </div><!--DETAILS-->
+                    <?php endforeach ?>
+                </div><!--CHECKOUT_ACCORDION--> 
+            </div><!--LEFT_BLOCK-->
+            
+            <div class="right_block">
+                <h5>Trip Details</h5>
+                <ul>
+                    <li><em></em><a href="">Tropical Bungee<span>$310</span></a></li>
+                    <li><em></em><a href="">Extreme Tour<span>Pending</span></a></li>
+                    <li><em></em><a href="">Hotel Costa de Oro<span>$150</span></a></li>
+                    <li><em></em><a href="">Folk Evening<span>$85</span></a></li>
+                    <li><em></em><a href="">Hotel Silencio<span>Pending</span></a></li>
+                    <li><em></em><a href="">Aerial Tram Tour<span>$125</span></a></li>
+                </ul>
+                <div class="bottom"> <a href="" class="btn-1">Okay, continue</a>
+                    <p>Grand Total<strong>$1,995</strong></p>
+                </div><!--BOTTOM--> 
+            </div><!--RIGHT_BLOCK--> 
+        </div><!--CUSTOM_CHECKOUT--> 
+    </div>
+    <!-- closes w2 -->
+    <div class="footer">
+        <div class="wrapper">
+            <p><img src="/images2/logo-2.png" alt="" /><strong>Tripfab</strong> is lovely designed in a <strong>tropical paradise</strong></p>
+            <ul>
+                <li><a href="">Contact</a></li>
+                <li><a href="">Blog</a></li>
+                <li><a href="">Twitter</a></li>
+                <li><a href="">Facebook</a></li>
+                <li><a href="">Terms</a></li>
+                <li><a href="">Privacy</a></li>
+            </ul>
+        </div>
+        <!-- closes wrapper --> 
+    </div>
+    <!-- closes footer -->
+    <div id="citiesAutocompleteContainer"></div>
+</div>
+<!-- closes w1 -->
 </body>
 </html>

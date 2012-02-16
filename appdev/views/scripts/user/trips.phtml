@@ -11,13 +11,7 @@
     <link type="text/css" rel="stylesheet" href="/css2/lightboxes.css" />
     <link type="text/css" rel="stylesheet" href="/css2/calendar/jquery-ui-1.8.16.custom.css" />
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
-    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
-    <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
+    <script type="text/javascript" src="/js2/jquery.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('textarea').elastic();				
@@ -66,7 +60,7 @@
             <?php if(count($this->trips) > 0): ?>
             <div class="subttl">
             	<a href="/user/trips/create" class="btn-1">Plan a New Trip</a>
-            	<h4>You are planning 3 trips</h4>
+            	<h4>You are planning <?= count($this->trips) ?> trips</h4>
             </div>
             <div class="past-trips">
                 <div class="left">

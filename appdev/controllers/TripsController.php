@@ -397,6 +397,9 @@ class TripsController extends Zend_Controller_Action {
             $this->view->items = $items;
             $this->view->items2 = $items2;
             $this->view->bigtotal = $total;
+            
+            $country = $this->places->getPlaceById($trip->country_id);
+            $this->country = $country;
         }
         else {
             $id  = $this->_getParam('id');

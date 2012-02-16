@@ -29,7 +29,7 @@ class AjaxController extends Zend_Controller_Action
         if(array_key_exists('X-Requested-With', $headers) === false){
             error_log('Wrong request');
             echo 'Wrong request'; die;
-        }        
+        }
     }
     
     public function activateAction()
@@ -1370,7 +1370,7 @@ class AjaxController extends Zend_Controller_Action
                 $select->where('user_id = ?', $user->id);
                 $trip = $trips->fetchRow($select);
                 if(is_null($trip))
-                        throw new Exception();
+                        throw new Exception('Trip not found');
                 
                 $triplistings = new Zend_Db_Table('itinerary_listings');
                 $select = $triplistings->select();
@@ -1382,34 +1382,40 @@ class AjaxController extends Zend_Controller_Action
                         throw new Exception();
                 
                 $times = array(
-                    'Morning'=>1,
-                    'Afternoon'=>2,
-                    'Night'=>3,
-                    'stay'=>4,
+                    'Morning'   => 1,
+                    'Afternoon' => 2,
+                    'Night'     => 3,
+                    'stay'      => 4,
                 );
                 
+                $updatePrice = false;
+                if(is_null($listing->day) || is_null($listing->time))
+                    $updatePrice = true;                
+                
                 if($_POST['time'] == 'stay'){
-                    $listing->day = 1;
+                    $listing->day  = 1;
                     $listing->time = $times[$_POST['time']];
                 } else {
-                    $listing->day = $_POST['day'];
+                    $listing->day  = $_POST['day'];
                     $listing->time = $times[$_POST['time']];
                 }
                 
                 $listing->save();
                 
-                $listings = new Model_Listings();
-                $list = $listings->fetchRow("id = {$listing->listing_id}");
-                
-                $trip->price = $trip->price + $list->price;
-                $trip->save();
+                if($updatePrice){
+                    $listings = new Model_Listings();
+                    $list = $listings->fetchRow("id = {$listing->listing_id}");
+
+                    $trip->price = $trip->price + $list->price;
+                    $trip->save();
+                }
                 
                 echo $trip->price; die;
             } else {
-                throw new Exception();
+                throw new Exception('No access allowed');
             }
         } else {
-            throw new Exception();
+            throw new Exception('Wrong request');
         }
     }
     
@@ -1436,20 +1442,18 @@ class AjaxController extends Zend_Controller_Action
                     $select->where('user_id = ?', $user->id);
                     $listing = $triplistings->fetchRow($select);
                     if(is_null($listing))
-                            throw new Exception();
+                            throw new Exception('Listing not found');
                     
                     $listing->sort = $data['sort'];
                     $listing->save();
                 }
                 
                 echo 'Success'; die;
-                
-                
             } else {
-                throw new Exception();
+                throw new Exception('No access allowed');
             }
         } else {
-            throw new Exception();
+            throw new Exception('Wrong Request');
         }
     }
     
@@ -1466,7 +1470,7 @@ class AjaxController extends Zend_Controller_Action
                 $select->where('user_id = ?', $user->id);
                 $trip = $trips->fetchRow($select);
                 if(is_null($trip))
-                        throw new Exception();
+                        throw new Exception('Trip not found');
                 
                 $triplistings = new Zend_Db_Table('itinerary_listings');
                 $select = $triplistings->select();
@@ -1475,12 +1479,12 @@ class AjaxController extends Zend_Controller_Action
                 $select->where('user_id = ?', $user->id);
                 $listing = $triplistings->fetchRow($select);
                 if(is_null($listing))
-                        throw new Exception();
+                        throw new Exception('Listing not found');
                 
                 $times = array(
-                    'Morning'=>1,
-                    'Afternoon'=>2,
-                    'Night'=>3,
+                    'Morning'   => 1,
+                    'Afternoon' => 2,
+                    'Night'     => 3,
                 );
                 
                 $listing->day = NULL;
@@ -1495,15 +1499,11 @@ class AjaxController extends Zend_Controller_Action
                 $trip->save();
                 
                 echo $trip->price; die;
-                
-                echo 'Success'; die;
-                
-                
             } else {
-                throw new Exception();
+                throw new Exception('No access allowed');
             }
         } else {
-            throw new Exception();
+            throw new Exception('Wrong request');
         }
     }
     
