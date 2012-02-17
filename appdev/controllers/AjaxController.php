@@ -1248,7 +1248,7 @@ class AjaxController extends Zend_Controller_Action
 
                 $quote  = $listings->getQuote(
                              $listing, $adults, $kids, $checkin, $checkout, null, $option, $capacity);
-
+                
                 if($quote->available)
                     echo '$'.$quote->subtotal;
                 else

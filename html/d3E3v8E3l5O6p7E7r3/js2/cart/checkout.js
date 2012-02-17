@@ -1,6 +1,4 @@
-$(document).ready(function() {
-    $('textarea').elastic();
-	
+$(document).ready(function() {	
     $('input[name=method]').click(function(){
         $('.card-details').addClass('hidden');
         if ($('input.other').is(':checked')) {
@@ -20,33 +18,64 @@ $(document).ready(function() {
     function isCreditCardActive(){
         return $('input.other').is(':checked');
     }
+    var creditCard = $('#checkout .cnum');
+    creditCard.cardcheck({
+        iconLocation: 'ul.cards',
+        iconDir:'/images/'
+    });
 
     $('#checkout').submit(function(){
-        Stripe.setPublishableKey('pk_HkcJUP3pJLpO1G6AeHNKGmDHF9Ahh');
-        $data = {
-            number:    $('.cnum', this).val(),
-            cvc: 	   $('.ccode', this).val(),
-            exp_month: $('.cmonth', this).val(),
-            exp_year:  $('.cyear', this).val()
-        };
-        $('input, select', this).attr('disabled', 'disabled');
-        var amount = $('body').data('secretAmmount') * 100; //amount you want to charge in cents
-        Stripe.createToken($data, amount, stripeResponseHandler);
-        // prevent the form from submitting with the default action
-        return false;
+        if($('input[name=account]:checked').val() == '') {
+            showError('Select an account');
+            return false;
+        } else if(!$('input[name=terms]').is(':checked')) {
+            showError('Please accept the terms and conditions');
+            return false;
+        } else if($('input[name=account]:checked').val() == 'new') { 
+            
+            if($('.cnum', this).val() == '') {
+                showError('Credit Card cannot be empty');
+                return false;
+            } else if($('.ccode', this).val() == '') {
+                showError('Security Code cannot be empty');
+                return false;
+            } else if($('.cmonth', this).val() == '') {
+                showError('Please select the expiration month');
+                return false;
+            } else if($('.cyear', this).val() == '') {
+                showError('Please select the expiration year');
+                return false;
+            } else {
+                alert('asd');
+                Stripe.setPublishableKey('pk_HkcJUP3pJLpO1G6AeHNKGmDHF9Ahh');
+                $data = {
+                    number:    $('.cnum', this).val(),
+                    cvc: 	   $('.ccode', this).val(),
+                    exp_month: $('.cmonth', this).val(),
+                    exp_year:  $('.cyear', this).val()
+                };
+                $('input, select', this).attr('disabled', 'disabled');
+                var amount = $('body').data('secretAmmount') * 100; //amount you want to charge in cents
+                Stripe.createToken($data, amount, stripeResponseHandler);
+                // prevent the form from submitting with the default action
+                return false;
+            }
+        } else 
+            return true;
     });
+    
     $ammount = $('input[name=ammount]').val();
     $('body').data('secretAmmount', $ammount);
+    
 });
 
 function stripeResponseHandler(status, response) {
+    var $form = $("#checkout");
     if (response.error) {
         //show the errors on the form
-        var $form = $("#checkout");
         $('input, select', $form).removeAttr('disabled');
         showError(response.error.message);
     } else {
-        var $form = $("#checkout");
         // token contains id, last4, and card type
         var token = response['id'];
 		

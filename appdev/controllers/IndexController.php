@@ -249,13 +249,13 @@ class IndexController extends Zend_Controller_Action
                 $listing_amenities = $this->listings->getGenAmenities($listing->id);
                 $def_amenities     = $this->listings->getDefaultGenAmenities(true);
                 
-                if($listing->main_type == 5){
-                    $prices = $this->listings->getSchPrices($listing);
-                    if(!is_null($prices))
-                        $prices = $prices[0];
-                    
-                    $this->view->prices = $prices;
-                }
+                
+                $prices = $this->listings->getSchPrices($listing);
+                if(!is_null($prices))
+                    $prices = $prices[0];
+
+                $this->view->prices = $prices;
+
 
                 $this->view->overview = $overview;
                 $this->view->details  = $details;

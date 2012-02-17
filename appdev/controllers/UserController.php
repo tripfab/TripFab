@@ -592,22 +592,42 @@ class UserController extends Zend_Controller_Action
 
         $items  = array();
         $items2 = array();
+        $options = array();
+        
         foreach($listings as $listing){
             if($listing->main_type == 6 || $listing->main_type == 5){
                 $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
                 $checkin = date('Y-m-d', $checkin);
                 $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $trip->days);
+                
                 $item->day = $listing->day;
-                $item->listing_type = $listing->main_type;
                 $item->listing_city = $listing->city;
                 $item->listing_country = $listing->country;
+                
                 $items[] = $item;
+                
+                if($listing->main_type == 6){
+                    $options[$listing->id]['options'] = $this->listings->getSchedulesOf($listing->id);
+                    
+                    if(is_null($listing->min) or is_null($listing->max)){
+                        $options[$listing->id]['capacity'] = $this->listings->getActivityTypes($listing->id);
+
+                        $prices = $this->listings->getSchPrices($listing);
+                        $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+                    }
+                } else {
+                    $options[$listing->id]['options'] = $this->listings->getHotelRooms($listing->id);
+                    
+                    $prices = $this->listings->getSchPrices($listing);
+                    $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+                }
             }
         }
+        
         foreach($listings as $listing){
             if($listing->main_type != 6 && $listing->main_type != 5){
                 $item = new stdClass();
-                $item->available = false;
+                $item->available = true;
                 $item->listing_title = $listing->title;
                 $item->listing_image = $listing->image;
                 $item->listing_type  = $listing->main_type;
@@ -631,6 +651,8 @@ class UserController extends Zend_Controller_Action
         
         $country = $this->places->getPlaceById($trip->country_id);
         $this->view->country = $country;
+        
+        $this->view->options = $options;
     }
     
     public function activateoffersTripsTask()

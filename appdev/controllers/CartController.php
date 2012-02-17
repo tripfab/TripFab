@@ -401,6 +401,9 @@ class CartController extends Zend_Controller_Action {
             $city    = $this->places->getPlaceById($listing->city_id);
             $vendor  = $this->listings->getVendor($listing->vendor_id);
             $countries = $this->places->getPlaces(2);
+            $types = $this->listings->getMainCategories(true);
+            
+            $accounts = $this->user->getAccounts();
 
             $this->view->cartitem  = $cartitem;
             $this->view->listing   = $listing;
@@ -409,6 +412,20 @@ class CartController extends Zend_Controller_Action {
             $this->view->city      = $city;
             $this->view->vendor    = $vendor;
             $this->view->countries = $this->places->getPlaces(2);
+            
+            $this->view->types = $types;
+            $this->view->accounts = $accounts;
+            
+            $creditcards = array(
+                'Visa'          => '/images2/checkout-card1.png',
+                'Master Card'   => '/images2/checkout-card2.png',
+                'Amex'          => '/images2/checkout-card3.png',
+                'Dinner Club'   => '/images2/checkout-card4.png',
+                'Discover'      => '/images2/checkout-card5.png',
+                'JCB'           => '/images2/checkout-card6.png',
+            );
+            
+            $this->view->creditcards = $creditcards;
             
         } 
         elseif($cartitem->type == 2) 

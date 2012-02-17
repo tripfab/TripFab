@@ -374,4 +374,14 @@ class WS_User {
     {
         return $this->vendor->token;
     }
+    
+    public function getAccounts()
+    {
+        $accounts = new Zend_Db_Table('stripe_accounts');
+        $select = $accounts->select();
+        $select->where('user_id = ?', $this->user->id);
+        $result = $accounts->fetchAll($select);
+        
+        return $result;
+    }
 }

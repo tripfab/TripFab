@@ -1605,8 +1605,38 @@ class WS_ListingService {
             $listing, $adults, $kids, $checkin, $option = null, $capacity = null)
     {
         
-        $option = (!is_null($option) && $option != 'flex') ? $this->getSchedule($option) : null;
-        $capacity = (!is_null($capacity) && $capacity != 'single') ? $this->getActivityType($capacity) : null;
+        $available = $this->getDayFromCalendar($listing->id, $checkin);
+        if(!is_null($available))
+            throw new Exception('The Activity is not available the selected date', 1);
+        
+        if(!is_null($listing->min) && !is_null($listing->max) or ($capacity == 'single')) {
+            $capacity = 'single';
+        } else {
+            if(is_null($capacity)) {
+                $capacities = $this->getActivityTypes($listing->id);
+                $capacity = (isset($capacities[0])) ? $capacities[0] : null;
+            } else {
+                $capacity = $this->getActivityType($capacity);
+            }
+        }
+        
+        if($option == 'flex') {
+            $option = 'flex';
+        } else {
+            if(is_null($option)) {
+                $options = $this->getSchedulesOf($listing->id);
+                $option = (isset($options[0])) ? $options[0] : null;
+            } else {
+                $option = $this->getActivityType($option);
+            }
+        }
+        
+        if($option != 'flex' && !is_null($option)) {
+            $available = $this->getDayFromCalendar($listing->id, $checkin, $option->id);
+            if(!is_null($available))
+                throw new Exception('The Activity type is not available this date', 2);
+        }
+        
         $seasson = $this->getSeassonFor($checkin, $listing->id);
         
         $price = null;
@@ -1632,13 +1662,13 @@ class WS_ListingService {
         $kids_alowed = (!is_null($capacity)) ? $capacity->kids : $listing->kids;
         
         if($kids > 0 && !is_null($kids_alowed))
-            throw new Exception('Kids are not allowed', 1);
+            throw new Exception('Kids are not allowed', 2);
         
         $total_people = $kids + $adults;
         if($min > $total_people)
-            throw new Exception("You need min {$min} person(people)", 1);
+            throw new Exception("You need min {$min} person(people)", 2);
         if($max < $total_people)
-            throw new Exception("Too many people max {$max} person(people)", 1);
+            throw new Exception("Too many people max {$max} person(people)", 2);
         
         $cart = new stdClass();
         $cart->rate = $price->price;
@@ -1669,7 +1699,7 @@ class WS_ListingService {
             $cart->subtotal = $price->price;
         }
         
-        $cart->taxes = ($cart->subtotal * 0.1);
+        $cart->taxes = 0;
         $cart->total = $cart->subtotal + $cart->taxes;
         
         $cart->checkin = date('D M d Y',strtotime($checkin));
@@ -1677,6 +1707,7 @@ class WS_ListingService {
         $cart->adults  = $adults;
         
         $cart->option_id = (!is_null($capacity)) ? $capacity->id : 0;
+        $cart->schedule_id = (!is_null($option)) ? $option->id : 0;
 
         return $cart;
     }
@@ -1702,9 +1733,25 @@ class WS_ListingService {
 
             $nights = $lday - $fday;
             $nights = $nights / 86400;
+            
+            $days = $nights + 1;
         } else {
             $nights = $days - 1;
         }
+        
+        $_start = strtotime($checkin);
+        for($i=0; $i<($days - 1); $i++) {
+            $date = date('Y-m-d', $_start + ($i * 86400));
+            $available = $this->getDayFromCalendar($listing->id, $date);
+            if(!is_null($available))
+                throw new Exception('The hotel is not available on'.$date, 1);
+            
+            $available = $this->getDayFromCalendar($listing->id, $date);
+            if(!is_null($available))
+                throw new Exception('The selected room is not available on'.$date, 2);            
+        }
+        
+        
         
         if(is_null($option)){
             $options = $this->getHotelRooms($listing->id);
@@ -1718,8 +1765,12 @@ class WS_ListingService {
         $sch = $this->getSchedule($option->schedule_id);
         
         $seasson = $this->getSeassonFor($checkin, $listing->id);
-        if(!is_null($seasson))
+        if(!is_null($seasson)){
             $price = $this->getSeassonPrice($seasson->id, $listing->id, $option->schedule_id);
+            if($price->price == '0.00'){
+                $price = $this->getOptionPrice($listing->id, $option->schedule_id);
+            }
+        }
         else
             $price = $this->getOptionPrice($listing->id, $option->schedule_id);
         
@@ -1768,7 +1819,7 @@ class WS_ListingService {
             $subtotal = $subtotal + (($p['basic'] + $p['additional']) * $nights);
         }
         $row->subtotal = $subtotal;
-        $row->taxes = ($row->subtotal * 0.1);
+        $row->taxes = 0;
         $row->total = $row->subtotal + $row->taxes;
         
         $row->checkin = date('D M d Y',strtotime($checkin));
@@ -1777,7 +1828,7 @@ class WS_ListingService {
         $row->adults = $adults;
         $row->nights = $nights;
         $row->rooms = $rooms;
-        $row->option_id = $option->id;
+        $row->option_id = $sch->id;
 
         //var_dump($row->toArray()); die;
 
@@ -1793,20 +1844,35 @@ class WS_ListingService {
                         : $this->getHotelQuote($listing, $adults, $kids, $checkin, $checkout, $days, $option);
             $cart->available = true;
         } catch(Exception $e) {
-            if($e->getCode() == 1){
-                $cart->available = false;
-                $cart->error     = $e->getMessage();
+            switch($e->getCode()){
+                case 1:
+                    $cart->available = false;
+                    $cart->error     = $e->getMessage();
 
-                $cart->checkin = $checkin;
-                $cart->kids  = $kids;
-                $cart->adults = $adults;
-            } else {
-                throw $e;
+                    $cart->checkin = $checkin;
+                    $cart->kids  = $kids;
+                    $cart->adults = $adults;
+                    break;
+                case 2:
+                    $cart->available = 0;
+                    $cart->error     = $e->getMessage();
+
+                    $cart->checkin = $checkin;
+                    $cart->kids  = $kids;
+                    $cart->adults = $adults;
+                    break;
+                default:
+                    throw $e;
             }
         }
         
         $cart->listing_title = $listing->title;
         $cart->listing_image = $listing->image;
+        $cart->listing_type  = $listing->main_type;
+        $cart->listing_min   = $listing->min;
+        $cart->listing_max   = $listing->max;
+        $cart->listing_price = $listing->price;
+        $cart->id            = $listing->id;
         
         return $cart;
     }
