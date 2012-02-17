@@ -34,29 +34,26 @@
 <body>
 <div class="w1">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w3_itinerary">
+        <div class="wrapper">
+            <h2><?= $this->trip->title ?> <a href="#">Rename Itinerary</a></h2>
+            <a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1">Process to Checkout</a>
+        </div><!--WRAPPER-->
+    </div><!--w3_itinerary-->
+    <div class="title_itinerary">
+        <h3>Itinerary Manager</h3>
+        <a href="/user/trips">&larr; Back to My Future Trips</a>
+    </div><!--title_itinerary-->
     <div class="w2">
         <div class="wrapper user-messages user-trips">
-        	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Future Trips','parentActive'=>'My Trips')); ?>
-        	<div class="tripttl">
-        		<div>
-        			<a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1">Proceed to Checkout</a>
-                    <?php if(!$this->trip->offers): ?>
-                    <a class="btn-8" href="/user/trips/activateoffers/<?= $this->trip->id ?>">Request Offers</a>
-                    <?php endif ?>
-        			<?= $this->thumbnail(50, $this->trip->image, '', '1:1'); ?>
-        			<h2><?= $this->trip->title ?></h2>
-                    <a class="rename lb" href="#delete_trip_<?= $this->trip->id ?>">Rename Trip</a>
-        		</div>
-        	</div><!-- closes tripttl -->
-            <?= $this->partial('partials/usertripinfomenu.phtml', array('active'=>'Itinerary Manager', 'id'=>$this->trip->id, 'offers'=> $this->trip->offers)); ?>
             <div class="itinerary-wrapper">
                 <div class="activities-tabs">
                     <ul>
-                        <li><a href="#tab-1">Activities</a></li>
-                        <li><a href="#tab-2">Entertainment</a></li>
-                        <li><a href="#tab-3">Tourist Sights</a></li>
-                        <li><a href="#tab-4">Restaurants</a></li>
-                        <li><a href="#tab-5">Hotels</a></li>
+                        <li class="activity"><a href="#tab-1">Activities</a></li>
+                        <li class="entertaiment"><a href="#tab-2">Entertainment</a></li>
+                        <li class="sights"><a href="#tab-3">Tourist Sights</a></li>
+                        <li class="restaurants"><a href="#tab-4">Restaurants</a></li>
+                        <li class="hotels"><a href="#tab-5">Hotels</a></li>
                     </ul>
                     <?php $class = array('','cat-activity','cat-entertainment','cat-sight','cat-restaurant','cat-hotel'); ?>
                     <?php for($i=1; $i<=5; $i++): ?>

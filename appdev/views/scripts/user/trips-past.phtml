@@ -56,7 +56,6 @@
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
     <div class="w2">
         <div class="wrapper user-messages">
-        	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Future Trips','parentActive'=>'My Trips')); ?>
             <?php if(count($this->trips) > 0): ?>
             <div class="subttl">
             	<a href="/user/trips/create" class="btn-1">Plan a New Trip</a>
