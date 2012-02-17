@@ -30,7 +30,7 @@ a {
 	text-decoration: none;
 }
 a:hover {
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 /* change colours to suit your needs */
@@ -159,7 +159,6 @@ body {
 /*- Buttons Styles -----------------------------------------------------------*/
 
 .btn-1 {
-	-moz-border-radius: 4px 4px 4px 4px;
     background: url("../images2/btn-1.gif") repeat-x  0 0 #8dc73f;
     border: 1px solid #7AB130;
     color: #FFFFFF;
@@ -171,8 +170,13 @@ body {
     text-align: center;
 	cursor: pointer;
 	padding: 0 8px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 	text-shadow: 0px 1px 0px #5C961F;
-	filter: dropshadow(color=#5C961F, offx=0, offy=1);
+	
+	filter: progid:DXImageTransform.Microsoft.Chroma(Color=#000000)
+		    progid:DXImageTransform.Microsoft.DropShadow(OffX=0, OffY=4, Color=#000000);
 }
 
 .btn-1:hover {
@@ -324,7 +328,7 @@ body {
 }
 
 .btn-10 {
-	background: url(../images2/btn-10.gif) repeat-x top left; 
+	background: url(../images2/btn-10.gif) repeat-x bottom left #fff; 
 	height: 30px;
 	color: #616161;
 	font: bold 11px/30px Helvetica;
@@ -335,6 +339,7 @@ body {
 	text-shadow: 0px 1px 0px #FFFFFF;
 	filter: dropshadow(color=#FFFFFF, offx=0, offy=1);
 	border: 1px solid #dbdbdb;
+	text-align: center;
 }
 .btn-10:hover {
 	-webkit-box-shadow: 0px 1px 1px 0px #C5C5C5;
@@ -490,7 +495,13 @@ body {
 	font-weight: bold;
 	text-indent: 16px;
 }
-
-
+.link-10 {
+	color: #60B5F7;
+	font: bold 12px Helvetica;
+	background: none;
+}
+.link-10:hover {
+	color: #9BD2FC;
+}
 /*- End of Links Styles -----------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------*/

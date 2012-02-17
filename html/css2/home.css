@@ -1,0 +1,149 @@
+
+/*NEW HOME-----------------------------------------------------------------*/
+
+	.top {
+		height: 540px !important;
+		margin: 0;
+		overflow: hidden !important;
+		padding: 0;
+		position: relative;
+		width: 100%;	
+	}
+	img.bg {
+		min-height: 100%;
+		min-width: 960px;
+		
+		width: 100%;
+		height: auto;
+		
+		position: absolute;
+		bottom: 0;
+		right: 0;
+	}
+	
+	@media screen and (max-width: 1024px){
+		img.bg {
+			left: 50%;
+			margin-left: -512px; }
+	}
+
+#wrapper-top img {
+z-index: -1000;
+}
+#wrapper-top {
+	height: 736px !important;
+	max-height: 736px !important;
+	overflow: hidden;
+	width: 100%;
+}
+.wrap {
+	width: 960px;
+	margin: 0 auto;
+}
+#wrapper-top h1 {
+	width: 152px;
+	height: 45px;
+	float: left;
+	margin: 20px 0 0 15px;
+}
+#wrapper-top #header {
+	height: 78px;
+	background: url(../images2/home-sep1.png) no-repeat bottom center;
+}
+#wrapper-top h1 a{
+	display: block;
+	background: url(../images2/home-logo.png) no-repeat 0 0;
+	width: 152px;
+	height: 45px;
+}
+#wrapper-top .signIn {
+	float: right;
+	width: 200px;
+	color: #CCC;
+	text-shadow: 0px 1px 0px #000000;
+	filter: dropshadow(color=#000000, offx=0, offy=1);
+	font: 11px/78px Helvetica;
+	text-align: right;
+}
+#wrapper-top .signIn a {
+	font: bold 11px/78px Helvetica;
+	color: #FFF;
+	background: url(../images2/home-arrow1.png) no-repeat right 50%;
+	padding-right: 15px;
+}
+/*END NEW HOME-------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
