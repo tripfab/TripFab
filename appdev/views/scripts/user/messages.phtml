@@ -22,17 +22,9 @@
             <div class="left">
                 <div class="ttl">
                     <ul>
-                        <li class="current"><a href="">All Messages</a></li>
-                        <li><a href="">Stared</a></li>
-                        <li><a href="">Unresponded</a></li>
-                    </ul>
-                    <select>
-                    	<option value="">Actions</option>
-                        <option value="1">Select All</option>
-                        <option value="2">Add Star</option>
-                        <option value="3">Mark as Read</option>
-                        <option value="4">Delete</option>
-                    </select>
+						<li class="current"><a class="btn-10 selectAll" href="">Select All</a></li>
+						<li><a class="btn-10 removeSelected" href="">Remove Selected</a></li>
+					</ul>
                 </div><!-- closes ttl -->
                 <div class="messages-wrapper">
                 	<?php foreach($this->conversations as $message): ?>
@@ -68,35 +60,17 @@
                 </div><!-- closet messages-wrapper -->
             </div><!-- closes left -->
             <div class="right">
-            	<div class="waiting" style="height:300px;">
-                    <p style="text-align:center; line-height:50px; margin-top:125px;">
-                    No message selected
-                    </p>
-                </div>
+				<div class="waiting" style="height:300px;">
+					<p style="text-align:center; line-height:50px; margin-top:125px;"> No message selected </p>
+				</div>
                 <div class="loading">Some Text</div>
                 <div class="conversation">
-                    <div>
+                    <div class="sendMessageFormWrapper">
                         <h4>Send a message</h4>
                         <textarea name="message" rows="1" cols="30"></textarea>
                         <input class="btn-4" type="submit" id="sendmessage" value="Send">
                     </div>
-                    <ul>
-                        <li>
-                            <h4>Me</h4>
-                            <p>Consectetur adipiscing elit. Duis ullamcorper arcu id eros faucibus pulvinar. Duis pellentesque molestie enim, a tincidunt lorem tristique ac. Donec ac justo quis odio molestie tristique? Consectetur adipiscing elit. Duis ullamcorper arcu id eros faucibus pulvinar. Duis pellentesque molestie enim, a tincidunt lorem tristique ac. Donec ac justo quis odio molestie tristique?</p>
-                            <span>26 Apr at 7:32 am</span>
-                        </li>
-                        <li>
-                            <h4>Costa Rica Tropical Tours</h4>
-                            <p>Consectetur adipiscing elit. Duis ullamcorper arcu id eros faucibus pulvinar. Duis pellentesque molestie enim, a tincidunt lorem tristique ac. Donec ac justo quis odio molestie tristique? Consectetur adipiscing elit. Duis ullamcorper arcu id eros faucibus pulvinar. Duis pellentesque molestie enim, a tincidunt lorem tristique ac. Donec ac justo quis odio molestie tristique?</p>
-                            <span>26 Apr at 7:32 am</span>
-                        </li>
-                        <li>
-                            <h4>Me</h4>
-                            <p>Consectetur adipiscing elit. Duis ullamcorper arcu id eros faucibus pulvinar. Duis pellentesque molestie enim, a tincidunt lorem tristique ac. Donec ac justo quis odio molestie tristique? Consectetur adipiscing elit. Duis ullamcorper arcu id eros faucibus pulvinar. Duis pellentesque molestie enim, a tincidunt lorem tristique ac. Donec ac justo quis odio molestie tristique?</p>
-                            <span>26 Apr at 7:32 am</span>
-                        </li>
-                    </ul>
+                    <ul></ul>
                 </div>
             </div><!-- closes right -->
             <?php else: ?>

@@ -430,16 +430,24 @@ class AjaxController extends Zend_Controller_Action
         $user = $auth->getIdentity();
         $messages = new WS_MessagesService();
         $con = $messages->getConversationById($id, $user->id);
+        
+        $users = new WS_UsersService();
+        
         if($con->starter == $user->id){
             //$con->snew = 0;
-            $_sender = $con->wname;
+            $_sender = $users->get($con->wwith);
+            if(is_null($_sender))
+                throw new Exception();
+            
             $con->snew = 0;
             $con->save();
+            $image  = $_sender->image;
         }else {
             //$con->wnew = 0;
-            $_sender = $con->sname;
+            $_sender = $users->get($con->starter);
             $con->wnew = 0;
             $con->save();
+            $image  = $_sender->image;
         }
         
         $_messages = $messages->getConversationMessages($con->id);
@@ -450,15 +458,21 @@ class AjaxController extends Zend_Controller_Action
         $result['conversation'] = $con->toArray();
         $result['user'] = $user->id;
         foreach($_messages as $m){
-            if($m->user_id == $user->id)
+            $image2 = '';
+            if($m->user_id == $user->id) {
                 $sender = 'Me';
-            else
-                $sender = $_sender;
+                $image2  = $user->image;
+            }
+            else {
+                $sender = $_sender->name;
+                $image2  = $image;
+            }
                 
             $result['messages'][] = array(
                 'sender' => $sender,
                 'text'   => nl2br(stripslashes($m->text)),
                 'date'   => date('M jS \a\t g:i a', strtotime($m->created)),
+                'image'  => $image2
             );
         }
         
@@ -1288,6 +1302,7 @@ class AjaxController extends Zend_Controller_Action
                 if($conversation->starter != $user->id && $conversation->wwith != $user->id)
                         throw new Exception();
                 
+                $users = new WS_UsersService();
                 if($conversation->starter == $user->id)
                 {
                     $conversation->wnew     = 1;
@@ -1307,7 +1322,8 @@ class AjaxController extends Zend_Controller_Action
                     
                     $message->save();
                     
-                    $_sender = $conversation->wname;
+                    $_sender = $users->get($conversation->wwoth);
+                    $image   = $_sender->image;
                 } 
                 elseif($conversation->wwith == $user->id) 
                 {
@@ -1327,7 +1343,8 @@ class AjaxController extends Zend_Controller_Action
                     
                     $message->save();
                     
-                    $_sender = $con->sname;
+                    $_sender = $users->get($conversation->starter);
+                    $image   = $_sender->image;
                 }
                 else 
                 {
@@ -1343,9 +1360,10 @@ class AjaxController extends Zend_Controller_Action
                 $result['user'] = $user->id;
                 foreach($_messages as $m){
                     $result['messages'][] = array(
-                        'sender' => ($m->user_id == $user->id) ? 'Me' : $_sender,
+                        'sender' => ($m->user_id == $user->id) ? 'Me' : $_sender->name,
                         'text'   => nl2br(stripslashes($m->text)),
                         'date'   => date('M jS \a\t g:i a', strtotime($m->created)),
+                        'image'  => ($m->user_id == $user->id) ? $user->image : $_sender->image
                     );
                 }
 
@@ -1354,6 +1372,37 @@ class AjaxController extends Zend_Controller_Action
                         
             }
         }    
+        die;
+    }
+    
+    public function removemessagesAction()
+    {
+        if($this->getRequest()->isPost())
+        {
+            $auth = Zend_Auth::getInstance();
+            if($auth->hasIdentity())
+            {
+                $user = $auth->getIdentity();
+                $id   = $_POST['message'];
+                
+                $conversations = new Model_Conversations();
+                $select = $conversations->select();
+                $select->where('id = ?', $id);
+                $con = $conversations->fetchRow($select);
+                if(is_null($con))
+                        throw new Exception('Conversation not found');
+                
+                if($con->starter == $user->id){
+                    $con->sdelete = 1;
+                    $con->save();
+                } else {
+                    $con->wdelete = 1;
+                    $con->save();
+                }
+                
+                echo $id;
+            }
+        }
         die;
     }
     

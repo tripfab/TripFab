@@ -56,7 +56,7 @@ class WS_MessagesService {
     public function getConversationOf($user)
     {
         $select = $this->conversations->select();
-        $select->where('(starter = ?) or wwith = ?', $user, $user);
+        $select->where("(starter = {$user} and sdelete = 0) or (wwith = {$user} and wdelete = 0)");
         $select->order('updated DESC');
         
         $conversations = $this->conversations->fetchAll($select);

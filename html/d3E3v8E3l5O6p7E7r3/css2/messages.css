@@ -1,73 +1,106 @@
 .s-message { cursor:pointer;}
 .right { position:relative;z-index:1;}
 .s-message.current {
-	position:relative;
-	z-index:2;}
-	.conversation {
-		display:none;}
-	
+    position:relative;
+    z-index:2;}
+.conversation {
+    display:none;}
+
 .loading {
-	position:absolute;
-	background:#FF9 !important;
-	color:#000 !important;
-	line-height:normal !important;
-	padding:2px 4px !important;
-	right: 0px !important;
-	top: 0px !important;
-	display:none;}
-	.user-messages > .right > div {
-		background-color:#fff;
-		border: 0px none;
-		border-radius: 0 0 0 0;
-		overflow: visible;
-		padding:0;
-	}
+    position:absolute;
+    background:#FF9 !important;
+    color:#000 !important;
+    line-height:normal !important;
+    padding:2px 4px !important;
+    right: 0px !important;
+    top: 0px !important;
+    display:none;}
+.user-messages > .right > div {
+    background: url(../images2/g_68.png) repeat-y 0 0 #FFF;
+    border: 0px none;
+    padding:0;
+    -moz-border-radius-topleft: 0px;
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-bottomright: 4px;
+    -moz-border-radius-bottomleft: 0px;
+    -webkit-border-radius: 0px 4px 4px 0px;
+    border-radius: 0px 4px 4px 0px;
+}
+.user-messages > .right > .waiting {
+    background: url(../images2/g_68.png) repeat-y 0 0 #FFF;
+}
 .user-messages > .right .conversation div {
-	background-color: #F3F3F3;
-	border: 1px solid #FFFFFF;
-	border-radius: 2px 2px 2px 2px;
-	overflow: hidden;
-	padding: 12px 35px;
+    background: url(../images2/g_68.png) repeat-y 0 0 #F3F3F3;
+    border-top: 1px solid #FFF;
+    border-right: 1px solid #FFF;
+    overflow: hidden;
+    padding: 12px 35px;
+    -moz-border-radius-topleft: 0px;
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-bottomright: 0px;
+    -moz-border-radius-bottomleft: 0px;
+    -webkit-border-radius: 0px 4px 0px 0px;
+    border-radius: 0px 4px 0px 0px; 
 }
 .user-messages > .right .conversation div h4 {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 .user-messages .right  textarea {
-	border: 1px solid #DDDDDD;
-	box-shadow: -1px 0 0 #FFFFFF;
-	color: #303030;
-	font-size: 12px;
-	min-height: 41px;
-	padding: 5px;
-	resize: none;
-	width: 443px;
+    border: 1px solid #DDDDDD;
+    box-shadow: -1px 0 0 #FFFFFF;
+    color: #303030;
+    font-size: 12px;
+    min-height: 41px;
+    padding: 5px;
+    resize: none;
+    width: 443px;
 }
 .user-messages .right input[type="submit"] {
-	border: medium none;
-	float: right;
-	height: 24px;
-	margin-top: 9px;
+    border: medium none;
+    float: right;
+    height: 30px;
+    margin-top: 9px;
+    line-height: 30px;
 }
 .user-messages .right .conversation ul {
-	list-style: none outside none;
-	padding: 0 35px;
+    list-style: none outside none;
+    padding: 0 35px;
+    background: url(../images2/g-54.png) repeat-x 0 0;
+    overflow-y: auto;
 }
 .user-messages .right .conversation ul li {
-	border-bottom: 1px dotted #B2B2B2;
-	color: #303030;
-	padding: 17px 0;
+    border-bottom: 1px solid #B2B2B2;
+    color: #303030;
+    padding: 17px 0;
+    overflow: hidden;
+}
+.user-messages .right .conversation ul li .info {
+    background: none repeat scroll 0 0 transparent;
+    float: left;
+    padding: 0;
+    width: 385px;
+}
+.user-messages .right .conversation ul li img {
+    float: left;
+    margin-right: 20px;
 }
 .user-messages .right .conversation ul li:last-child {
-	border-bottom:0 none;}
+    border-bottom:0 none;}
 .user-messages .right .conversation ul li h4 {
-	font-size: 13px;
-	line-height: 20px;
-	margin: 0;
+    font-size: 13px;
+    line-height: 20px;
+    margin: 0;
 }
 .user-messages .right .conversation ul li p {
-	line-height: 20px;
+    line-height: 20px;
 }
 .user-messages .right .conversation ul li span {
-	font-size: 11px;
-	line-height: 20px;
+    font-size: 11px;
+    line-height: 20px;
+    color: #898989;
+}
+
+.user-messages > .right.fixed {
+    position: fixed;
+    right: 0px;
 }

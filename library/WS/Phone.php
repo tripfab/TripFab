@@ -37,6 +37,9 @@ class WS_Phone {
             'vendor'     => $vendor,
             'user'       => $user_id
         );
+        
+        //var_dump($partner); die;
+        
         $query = http_build_query($params);
         $callback = $callback . '?' . $query;
         $this->service->account->calls->create($this->number, $partner, $callback);

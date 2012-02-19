@@ -342,6 +342,9 @@ class IndexController extends Zend_Controller_Action
         $this->view->pictures        = $pictures;
         $this->view->trips           = $trips;
         
+        $places = $this->places->getPlaces(2);
+        $this->view->countries = $places;
+        
         if(!is_null($this->user))
                 $this->view->user = $this->user->getData();
         
