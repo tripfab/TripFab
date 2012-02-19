@@ -123,8 +123,7 @@ class UserController extends Zend_Controller_Action
                 $template = 'account-password';
                 break;
             case 'payments':
-                $this->paymentsAccountTask();
-                $template = 'account-payments';
+                $template = $this->paymentsAccountTask();
                 break;
             case 'notifications':
                 $this->notificationsAccountTask();
@@ -328,11 +327,135 @@ class UserController extends Zend_Controller_Action
     
     public function paymentsAccountTask()
     {
-        $user             = $this->user->getData(true);
-        $new_messages     = $this->messages->countNew($this->user->getId());
+        switch($this->_getParam('id','default')) {
+            case 'default':
+                $user             = $this->user->getData(true);
+                $new_messages     = $this->messages->countNew($this->user->getId());
+                
+                if($this->getRequest()->isPost())
+                {
+                    $id = $_POST['card'];
+                    $account = $this->user->getAccount($id);
+                    $account->delete();
+                    
+                    setcookie('alert', 'The credit card has been deleted');
+                    $this->_redirect('/user/account/payments');
+                }
+
+                $accounts = $this->user->getAccounts();
+                
+                $creditcards = array(
+                    'Visa'             => '/images2/checkout-card1.png',
+                    'MasterCard'       => '/images2/checkout-card2.png',
+                    'American Express' => '/images2/checkout-card3.png',
+                    'Diners Club'     => '/images2/checkout-card4.png',
+                    'Discover'         => '/images2/checkout-card5.png',
+                    'JCB'              => '/images2/checkout-card6.png',
+                );
+
+                $this->view->new_messages = $new_messages;
+                $this->view->user         = $user;
+                $this->view->accounts     = $accounts;
+                
+                $this->view->cards        = $creditcards;
+                
+                return 'account-payments';
+                break;
+            case 'new':
+                return $this->addPaymentAccountTask();
+                break;
+            default:
+                return $this->editPaymentsAccountTask();
+                break;
+        }
+    }
+    
+    public function addPaymentAccountTask()
+    {
+        if($this->getRequest()->isPost())
+                $this->addPaymentsAccountPostHandler();
         
-        $this->view->new_messages = $new_messages;
-        $this->view->user         = $user;
+        $this->view->user = $this->user->getData();
+        
+        return 'account-newpayment';
+    }
+    
+    public function addPaymentsAccountPostHandler()
+    {
+        require_once "Stripe/Stripe.php";
+        // set your secret key: remember to change this to your live secret key in production
+        // see your keys here https://manage.stripe.com/account
+        $keys = Zend_Registry::get('stripe');
+        Stripe::setApiKey($keys['secret_key']);
+
+        // get the credit card details submitted by the form
+        $token = $_POST['stripeToken'];
+
+        // create a Customer
+        $customer = Stripe_Customer::create(array(
+          "card" => $token,
+          "description" => $this->user->email)
+        );
+        
+        $strip_accounts = new Zend_Db_Table('stripe_accounts');
+        $account = $strip_accounts->fetchNew();
+        $account->stripe_id = $customer->id;
+        $account->user_id   = $this->user->getId();
+        $account->type      = $customer->active_card->type;
+        $account->last4     = $customer->active_card->last4;
+        $account->created   = date('Y-m-d H:i:s');
+        $account->updated   = date('Y-m-d H:i:s');
+
+        $account->save();
+        
+        setcookie('alert', 'The new credit card has been added');
+        $this->_redirect('/user/account/payments');
+    }
+    
+    public function editPaymentsAccountTask()
+    {
+        if($this->getRequest()->isPost())
+                $this->editPaymentsAccountPostHandler();
+        
+        $id = $this->_getParam('id');
+        $account = $this->user->getAccount($id);
+        
+        $this->view->user    = $this->user->getData();
+        $this->view->account = $account;
+        
+        return 'account-editpayment';
+    }
+    
+    public function editPaymentsAccountPostHandler()
+    {
+        $id = $this->_getParam('id');
+        $account = $this->user->getAccount($id);
+        
+        require_once "Stripe/Stripe.php";
+        // set your secret key: remember to change this to your live secret key in production
+        // see your keys here https://manage.stripe.com/account
+        $keys = Zend_Registry::get('stripe');
+        Stripe::setApiKey($keys['secret_key']);
+
+        // get the credit card details submitted by the form
+        $token = $_POST['stripeToken'];
+
+        // create a Customer
+        $customer = Stripe_Customer::create(array(
+          "card" => $token,
+          "description" => $this->user->email)
+        );
+        
+        
+        $account->stripe_id = $customer->id;
+        $account->type      = $customer->active_card->type;
+        $account->last4     = $customer->active_card->last4;
+        $account->updated   = date('Y-m-d H:i:s');
+        
+        $account->save();
+        
+        setcookie('alert', 'The credit card has been updated');
+        $this->_redirect('/user/account/payments');
     }
     
     public function notificationsAccountTask()

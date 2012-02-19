@@ -384,4 +384,18 @@ class WS_User {
         
         return $result;
     }
+    
+    public function getAccount($id)
+    {
+        $accounts = new Zend_Db_Table('stripe_accounts');
+        $select = $accounts->select();
+        $select->where('user_id = ?', $this->user->id);
+        $select->where('id = ?', $id);
+        $result = $accounts->fetchRow($select);
+        
+        if(is_null($result))
+            throw new Exception();
+        
+        return $result;
+    }
 }
