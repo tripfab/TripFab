@@ -1322,7 +1322,7 @@ class AjaxController extends Zend_Controller_Action
                     
                     $message->save();
                     
-                    $_sender = $users->get($conversation->wwoth);
+                    $_sender = $users->get($conversation->wwith);
                     $image   = $_sender->image;
                 } 
                 elseif($conversation->wwith == $user->id) 

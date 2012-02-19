@@ -151,10 +151,13 @@ class WS_ReservationsService {
         $select->join('listings','reservations.listing_id = listings.id',array(
             'listing_name'=>'title',
             'listing_image'=>'image',
+            'listing_idf'=>'identifier'
         ));
         $select->join('vendors','reservations.vendor_id = vendors.id',array('vendor_name'=>'name'));
         $select->join('listing_types','listings.main_type = listing_types.id',array('listing_type'=>'name'));
         $select->join('transactions','reservations.transaction_id = transactions.id',array('method'));
+        $select->join('places','listings.city_id = places.id',array('listing_city'=>'identifier'));
+        $select->join(array('places2'=>'places'),'listings.country_id = places2.id',array('listing_country'=>'identifier'));
         $select->where('reservations.user_id = ?', $user);
         $select->where('reservations.status_id = ?',2);
         
@@ -218,9 +221,12 @@ class WS_ReservationsService {
         $select->join('listings','reservations.listing_id = listings.id',array(
             'listing_name'=>'title',
             'listing_image'=>'image',
+            'listing_idf'=>'identifier'
         ));
         $select->join('listing_types','listings.main_type = listing_types.id',array('listing_type'=>'name'));
         $select->join('transactions','reservations.transaction_id = transactions.id',array('method'));
+        $select->join('places','listings.city_id = places.id',array('listing_city'=>'identifier'));
+        $select->join(array('places2'=>'places'),'listings.country_id = places2.id',array('listing_country'=>'identifier'));
         $select->joinLeft('listing_schedules', 'reservations.schedule_id = listing_schedules.id', array(
             'schedule_name'     => 'name',
             'schedule_starting' => 'starting',

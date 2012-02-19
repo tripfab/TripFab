@@ -19,6 +19,11 @@
 				$parent = $(this).parents('.reservation');
 				$('.bottom', $parent).slideToggle();
 			});
+			
+			$( ".reservation .top a.edit" ).click(function() {
+				$(this).siblings("div.control").toggleClass('show');
+				return false
+			});
         });
     </script>
 </head>
@@ -28,11 +33,10 @@
     <div class="w2">
         <div class="wrapper user-messages">
         	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Reservations','parentActive'=>'Waiting Approval')); ?>
+            <?php if(count($this->reservations) > 0): ?>
         	<div class="subttl">
         		<h4>You have <?= count($this->reservations) ?> reservations pending approval</h4>
-        	</div>
-        	<!-- closes subttl -->
-            <?php if(count($this->reservations) > 0): ?>
+        	</div><!-- closes subttl -->
             <div class="reservations">
             	<?php foreach($this->reservations as $reserve): ?>
                 <div class="reservation">							
@@ -41,10 +45,19 @@
                         <div class="meta">
                             <h2><?= $reserve->listing_name ?></h2>
                             <span><?= $reserve->listing_type ?></span>
-                        </div><!-- closes meta -->								
-                        <a href="">Send Message to Vendor</a>
-                        <a href="" class="cncl">Cancel Reservation</a>
+                        </div><!-- closes meta -->
+                        <a href="" class="btn-10 edit"><span>Edit</span></a>
+                        <div class="control"> <span class="arrow"></span>
+                            <ul>
+                            	<?php $link = '/'.$reserve->listing_country.'/'.$reserve->listing_city.'/'.$reserve->listing_idf; ?>
+                                <li><a href="<?= $link ?>">View Actitvity</a></li>
+                                <li><a href="">Contatct Partner</a></li>
+                                <li><a href="/user/reservations/view/<?= $reserve->id ?>">Reservation Details</a></li>
+                            </ul>
+                        </div><!--CONTROL-CONT-->
+                        <a href="" class="btn-10">Cancel Reservation</a>
                     </div><!-- closes top -->
+                    <div class="clear"></div>
                     <div class="bottom">
                         <div class="ttl">
                             <strong>Reserve Code: <?= $reserve->code ?></strong>
@@ -97,14 +110,16 @@
                             </tbody>
                         </table>
                     </div><!-- closes bottom -->
+                    <div class="clear"></div>
                 </div><!-- closes reservation -->
                 <?php endforeach ?>
             </div><!-- closes reservations -->
             <?php else: ?>
-            <div class="empty-container">
-                <img src="/images/empty-9.png" alt="" /><br />
-                You don't have waiting approval reservations
-            </div><!-- closes empty -->
+            <div id="reservations">
+                <div class="no-reserv">
+                    <h3>You don't have reservations wairing approval</h3>
+                </div><!--NO-PAYMENT-->
+            </div><!-- closes u-payments --> 
             <?php endif ?>
         </div><!-- closes user-messages -->
     </div><!-- closes w2 -->

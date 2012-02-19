@@ -314,14 +314,6 @@ class UserController extends Zend_Controller_Action
             $user->password = md5($data['npassword']);
         }
         
-        if(empty($data['question']))
-            throw new Exception ('Select a Security Question');
-        if(empty($data['answer']))
-            throw new Exception ('Write an answer for your security question');
-        
-        $user->question = $data['question'];
-        $user->answer   = $data['answer'];
-        
         $user->save();
     }
     
@@ -1119,6 +1111,10 @@ class UserController extends Zend_Controller_Action
                 $this->historyReservationsTask();
                 $template = 'reservations-history';
                 break;
+            case 'view':
+                $this->viewReservationTask();
+                $template = 'reservations-view';
+                break;
             default:
                 throw new Exception('Page not found'); break;
         }
@@ -1160,5 +1156,22 @@ class UserController extends Zend_Controller_Action
         
         $this->view->reservations = $_reservs;
         $this->view->confirmed    = $confirmed;
+    }
+    
+    public function viewReservationTask()
+    {
+        $id = $this->_getParam('id');
+        $reservation = $this->reservations->get($id, $this->user->getId());
+        $listing = $this->listings->getListing($reservation->listing_id);
+
+        $this->transactions = new Model_Transactions();
+        $select = $this->transactions->select();
+        $select->where('id = ?', $reservation->transaction_id);
+        $transaction = $this->transactions->fetchRow($select);
+
+        $this->view->transaction = $transaction;
+        $this->view->listing     = $listing;
+        $this->view->user        = $this->user->getData();
+        $this->view->reservation = $reservation;
     }
 }

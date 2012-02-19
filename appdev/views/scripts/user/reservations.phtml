@@ -30,11 +30,10 @@
     <div class="w2">
         <div class="wrapper user-messages">
         	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Reservations','parentActive'=>'Confirmed')); ?>
+            <?php if(count($this->reservations) > 0): ?>
         	<div class="subttl">
         		<h4>You have <?= count($this->reservations) ?> confirmed reservations</h4>
-        	</div>
-        	<!-- closes subttl -->
-            <?php if(count($this->reservations) > 0): ?>
+        	</div><!-- closes subttl -->
             <div class="reservations">
             	<?php foreach($this->reservations as $reserve): ?>
                 <div class="reservation">							
@@ -44,9 +43,17 @@
                             <h2><?= $reserve->listing_name ?></h2>
                             <span><?= $reserve->listing_type ?></span>
                         </div><!-- closes meta -->
-                        <span class="remain">Remaining time: 2 months</span>
-                        <a href="">Send Message to Vendor</a>
+                        <div class="remaining">
+                            <span><img src="images2/ico_146.png" width="14" height="15" alt="" />Remaining time: 20 days</span>
+                            <ul>
+                                <li><a href="/user/reservations/view/<?= $reserve->id ?>">Reservation Details</a></li>
+                                <li><a href="">Contact Partner</a></li>
+                                <?php $link = '/'.$reserve->listing_country.'/'.$reserve->listing_city.'/'.$reserve->listing_idf; ?>
+                                <li class="last"><a href="<?= $link ?>">View Activity</a></li>
+                            </ul>
+                        </div><!--REMAINING-->
                     </div><!-- closes top -->
+                    <div class="clear"></div>
                     <div class="bottom">
                         <div class="ttl">
                             <strong>Reserve Code: <?= $reserve->code ?></strong>
@@ -99,14 +106,16 @@
                             </tbody>
                         </table>
                     </div><!-- closes bottom -->
+                    <div class="clear"></div>
                 </div><!-- closes reservation -->
                 <?php endforeach ?>
             </div><!-- closes reservations -->
             <?php else: ?>
-            <div class="empty-container">
-                <img src="/images/empty-7.png" alt="" /><br />
-                You don't have confirmed reservations :(
-            </div><!-- closes empty -->
+            <div id="reservations">
+                <div class="no-reserv">
+                    <h3>You don't have confirmed reservations</h3>
+                </div><!--NO-PAYMENT-->
+            </div><!-- closes u-payments --> 
             <?php endif ?>
         </div><!-- closes user-messages -->
     </div><!-- closes w2 -->

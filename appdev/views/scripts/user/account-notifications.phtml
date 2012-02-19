@@ -21,14 +21,12 @@
     </script>
 </head>
 <body>
-<div class="w1">
+<div class="w1 profile">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
     <div class="w2">
         <div class="wrapper user-backend">
             <?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Notifications','parentActive'=>'Account')); ?>
-            <div class="subttl">
-                <h4>Set up your notifications</h4>
-            </div><!-- closes subttl -->
+            <h2 class="title">Notifications</h2>
             <div class="vendor-profile">
             	<form action="" id="user_form_notifications" method="post">
                     <div class="profile-items">
@@ -67,7 +65,6 @@
                     </div><!-- closes profile-items -->
                     <div class="foot">
                         <input type="submit" class="btn-1" value="Save Changes" />
-                        <a href="">Deactivate Account</a>
                     </div><!-- closes foot -->
                     <input type="hidden" name="userids" value="<?= $this->user->id ?>" />
                     <input type="hidden" name="usertokens" value="<?= $this->user->token ?>" />
