@@ -398,4 +398,28 @@ class WS_User {
         
         return $result;
     }
+    
+    public function getBankAccounts()
+    {
+        $accounts = new Zend_Db_Table('bankaccounts');
+        $select = $accounts->select();
+        $select->where('vendor_id = ?', $this->user->id);
+        $result = $accounts->fetchAll($select);
+        
+        return $result;
+    }
+    
+    public function getBankAccount($id)
+    {
+        $accounts = new Zend_Db_Table('bankaccounts');
+        $select = $accounts->select();
+        $select->where('vendor_id = ?', $this->user->id);
+        $select->where('id = ?', $id);
+        $result = $accounts->fetchRow($select);
+        
+        if(is_null($result))
+            throw new Exception();
+        
+        return $result;
+    }
 }

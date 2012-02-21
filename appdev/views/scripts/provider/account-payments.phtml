@@ -3,70 +3,80 @@
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->user->name ?> : Payments | Tripfab.com</title>
+    <title>My First Hotel : Details | Tripfab.com</title>
     <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-    <link rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
     <script type="text/javascript" src="/js2/jquery.js"></script>
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="css2/ie.css" /><![endif]-->
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('input').ToggleInputValue();
-            $("a.lb").fancybox({
-                padding: 0,
-                showCloseButton: false,
-                overlayOpacity: 0.8,
-                overlayColor: '#FFFFFF'
-            });
-        });
+    $(document).ready(function() {
+		$('a.lbc').fancybox({
+			padding: 0,
+			overlayColor:'#FFF',
+			overlayOpacity:0.7
+		});
+		
+		$('a.delete_btn').click(function(){
+			$form = $(this).parents('form');
+			$form.submit();
+			return false;
+		});
+    });
     </script>
 </head>
 <body>
-<div class="w1">
+<div class="w1 profile">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
     <div class="w2">
         <div class="wrapper user-backend">
-        	<?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'Payments','parentActive'=>'Account')); ?>
-           	<div class="listings-main">
-                <div class="sub-ttl">
-                    Payment Methods
-                </div>            
-            </div>
-            <div class="vendor-profile">
-                <form action="">
-                    <div class="profile-items">
-                        <div class="item-wrppr payments">
-                            <div class="item-ttl">
-                                Accounts
-                            </div><!-- closes item ttl -->
-                            <div class="item">
-                                <h4>Paypal</h4>
-                                <span>5614484161561 (USD)</span>
-                                <a href="" class="link-7">Delete</a>	
-                                <a href="" class="link-6">Edit</a>
-                            </div><!-- closes item -->
-                            <div class="item">
-                                <h4>Bac | Credomatic Bank</h4>
-                                <span>5614484161561 (USD)</span>
-                                <a href="" class="link-7">Delete</a>	
-                                <a href="" class="link-6">Edit</a>
-                            </div><!-- closes item -->
-                            <div class="item last">
-                                <a href="lb-add-payment.html" class="link-5 lb">Add a New Account</a>
-                            </div><!-- closes item -->
-                            <div class="clear"></div>									
-                        </div><!-- closes item-wrppr -->
-                    </div><!-- closes profile-items -->
-                    <div class="foot">
-                        <input type="submit" class="btn-1" value="Save Changes" />
-                        <a href="">Deactivate Account</a>
-                    </div><!-- closes foot -->
-                </form>
-            </div><!-- closes vendor-profile -->
-        </div><!-- closes user-backend -->
+            <?= $this->partial('partials/vendormainmenu.phtml', 
+			array('notifications'=> $this->pendingSettings,'active'=>'Password','parentActive'=>'Account')); ?>            
+            <?php if(count($this->accounts) > 0): ?>
+            <h2 class="title">Bank Accounts <a href="/provider/account/payments/new" class="add">Add a New Account</a></h2>
+            <div id="b_accounts">
+            	<?php foreach($this->accounts as $a): ?>
+                <div class="each"> 
+                	<span class="type"><img src="/images2/bank-bac.png" width="41" height="31" alt="" /> <?= $this->banks[$a->bank_id]['name'] ?></span>
+                    <span class="number">Account Name <strong><?= $a->holder ?></strong></span> 
+                    <span class="expiration">Account Number<strong>*****************</strong></span> 
+                    <a class="delete lbc" href="#delete_card_<?= $a->id ?>">Delete Account</a> 
+                    <a class="edit" href="/provider/account/payments/<?= $a->id ?>">Edit</a> 
+	            </div><!--EACH-->
+                <?php endforeach ?>
+            </div><!-- B_ACCOUNTS --> 
+            <?php else: ?>
+            <div id="u-payments">
+                <div class="no-payment">
+                    <h3>You don't have any bank account yet</h3>
+                    <a href="/provider/account/payments/new">Add a bank account now</a>
+                </div><!--NO-PAYMENT-->
+            </div><!-- closes u-payments -->             
+            <?php endif ?>
+        </div><!-- closes user-backend --> 
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<div class="hidden">
+	<?php foreach($this->accounts as $a): ?>
+    <div id="delete_card_<?= $a->id ?>" class="lb delete_card_lb">
+    	<form action="" method="post">
+            <div class="mid">
+                <h3>Are you sure you want to remove this bank account?</h3>
+                <p>You will loose all the information for thi bank account</p>
+            </div>
+            <div class="bottom">
+                <a href="#" class="btn-1 delete_btn">Delete</a>
+                <a href="#" onclick="$.fancybox.close(); return false;" class="btn-10">Cancel</a>
+            </div><!--BOTTOM-->
+            <input type="hidden" name="account" value="<?= $a->id ?>" />
+            <input type="hidden" name="user" value="<?= $this->user->id ?>" />
+            <input type="hidden" name="usertoken" value="<?= $this->user->token ?>" />
+            <input type="hidden" name="_task" value="<?= md5('delete_card') ?>" />
+        </form>
+    </div><!--DELETE_CARD--> 
+    <?php endforeach ?>
+</div><!--HIDDEN-->
 </body>
 </html>

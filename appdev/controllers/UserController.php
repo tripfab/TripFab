@@ -355,7 +355,7 @@ class UserController extends Zend_Controller_Action
                     'Visa'             => '/images2/checkout-card1.png',
                     'MasterCard'       => '/images2/checkout-card2.png',
                     'American Express' => '/images2/checkout-card3.png',
-                    'Diners Club'     => '/images2/checkout-card4.png',
+                    'Diners Club'      => '/images2/checkout-card4.png',
                     'Discover'         => '/images2/checkout-card5.png',
                     'JCB'              => '/images2/checkout-card6.png',
                 );

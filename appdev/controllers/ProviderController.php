@@ -2513,8 +2513,7 @@ class ProviderController extends Zend_Controller_Action
                 $template = 'account-password';
                 break;
             case 'payments':
-                $this->accountPaymentsTask();
-                $template = 'account-payments';
+                $template = $this->accountPaymentsTask();
                 break;
             case 'notifications':
                 $this->accountNotificationsTask();
@@ -2682,7 +2681,122 @@ class ProviderController extends Zend_Controller_Action
 
     public function accountPaymentsTask()
     {
+        switch($this->_getParam('id','default')) {
+            case 'default':
+                $user = $this->user->getData(true);
+                
+                if($this->getRequest()->isPost())
+                {
+                    $id = $_POST['account'];
+                    $account = $this->user->getBankAccount($id);
+                    $account->delete();
+                    
+                    setcookie('alert', 'The bank account has been deleted');
+                    $this->_redirect('/provider/account/payments');
+                }
+
+                $accounts = $this->user->getBankAccounts();
+                
+                $this->view->banks = $this->_getBanks($user->country_id, true);
+
+                $this->view->user         = $user;
+                $this->view->accounts     = $accounts;
+                
+                return 'account-payments';
+                break;
+            case 'new':
+                return $this->addPaymentAccountTask();
+                break;
+            default:
+                return $this->editPaymentsAccountTask();
+                break;
+        }
+    }
+    
+    public function addPaymentAccountTask()
+    {
+        if($this->getRequest()->isPost())
+                $this->addPaymentsAccountPostHandler();
         
+        $user = $this->user->getData(true);
+        
+        $this->view->user  = $user;
+        $this->view->banks = $this->_getBanks($user->country_id);
+        
+        return 'account-newpayment';
+    }
+    
+    public function addPaymentsAccountPostHandler()
+    {   
+        $bankaccounts = new Zend_Db_Table('bankaccounts');
+        $account = $bankaccounts->fetchNew();
+        $account->bank_id   = $_POST['bank_id'];
+        $account->legalid   = $_POST['legalid'];
+        $account->holder    = $_POST['holder'];
+        $account->number    = $_POST['number'];
+        $account->vendor_id = $this->user->getId();
+        $account->created   = date('Y-m-d H:i:s');
+        $account->updated   = date('Y-m-d H:i:s');
+        
+        $account->save();
+        
+        setcookie('alert', 'The new bank account has been added');
+        $this->_redirect('/provider/account/payments');
+    }
+    
+    public function editPaymentsAccountTask()
+    {
+        if($this->getRequest()->isPost())
+                $this->editPaymentsAccountPostHandler();
+        
+        $user = $this->user->getData(true);
+        
+        $id = $this->_getParam('id');
+        $account = $this->user->getBankAccount($id);
+        
+        $this->view->user    = $user;
+        $this->view->account = $account;
+        $this->view->banks   = $this->_getBanks($user->country_id);
+        
+        return 'account-editpayment';
+    }
+    
+    public function editPaymentsAccountPostHandler()
+    {
+        $id = $this->_getParam('id');
+        $account = $this->user->getBankAccount($id);
+        $account->bank_id   = $_POST['bank_id'];
+        $account->legalid   = $_POST['legalid'];
+        $account->holder    = $_POST['holder'];
+        $account->number    = $_POST['number'];
+        $account->updated   = date('Y-m-d H:i:s');
+        
+        $account->save();
+        
+        setcookie('alert', 'The bank account has been updated');
+        $this->_redirect('/provider/account/payments');
+    }
+    
+    private function _getBanks($country, $assoc = false) 
+    {
+        if($assoc) {
+            $db = Zend_Db_Table::getDefaultAdapter();
+            $select = $db->select();
+            $select->from('banks');
+            $select->where('country_id = ?', $country);
+            $select->order('name ASC');
+            
+            $banks = $db->fetchAssoc($select);
+        } else {
+            $accounts = new Zend_Db_Table('banks');
+            $select = $accounts->select();
+            $select->where('country_id = ?', $country);
+            $select->order('name ASC');
+            
+            $banks = $accounts->fetchAll($select);
+        }
+        
+        return $banks;
     }
     
     public function accountNotificationsTask()
@@ -2697,7 +2811,6 @@ class ProviderController extends Zend_Controller_Action
             } catch(Exception $e){
                 $this->view->errorsmessage  = 'Something went wrong';
             }
-            
             
         $usersettings  = $this->user->getNotificationsSettings();
         //echo '<pre>'; var_dump($notifications); echo '</pre>'; die;
