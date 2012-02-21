@@ -638,16 +638,30 @@ class AjaxController extends Zend_Controller_Action
                 $select->where('email = ?', $_POST['email']);
                 $user = $users->fetchRow($select);
                 
-                $password = substr(md5(time().$_POST['email']), 3, 10);
+                $tokens = new Zend_Db_Table('resetpass_tokens');
+                $token  = $tokens->fetchNew();
+                $token->user_id = $user->id;
+                $token->token   = md5($user->email.time());
+                $token->created = date('Y-m-d H:i:s');
+                $token->save();
                 
-                $user->password = md5($password);
-                $user->save();
+                $url = "https://".$_SERVER['HTTP_HOST']."/reset/".$user->email."/".$token->token;
+                
+                $to = $user->email;
+                $subject = 'Password Reset Request';
+                
+                $message = "Hi ".$user->name."\n\n"
+                         . "We have receive a new request to reset your passowrd\n"
+                         . "If you made the request please confirm by clicking in trhe link\n\n"
+                         . $url . "\n\n"
+                         . "If you did not request this change please ognore this message";
+                        
                 
                 $notifier = new WS_Notifier();
-                $notifier->passwordReset($user->name, $user->email, $password);
+                $notifier->sendEmail($to, $subject, $message);                
                 
                 $result['type'] = 'success';
-                $result['message'] = 'The password has been reset. We emailed you the new password';
+                $result['message'] = 'We have sent you confirmation message to the provided email address';
             } catch (Exception $e) {
                 $result['type'] = 'error';
                 $result['message'] = $e->getMessage();

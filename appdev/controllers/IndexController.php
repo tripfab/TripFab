@@ -353,4 +353,62 @@ class IndexController extends Zend_Controller_Action
     {
         
     }
+    
+    public function resetAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if($auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $email = $this->_getParam('email','default');
+        if($email == 'default') 
+                throw new Exception('No email provided');
+        
+        $_token = $this->_getParam('token','default');
+        if($_token == 'default') 
+                throw new Exception('No token provided');
+        
+        $users = new Model_Users();
+        $select = $users->select();
+        $select->where('email = ?', $email);
+        $user = $users->fetchRow($select);
+        
+        if(is_null($user)) 
+                throw new Exception('Email not found');
+        
+        $tokens = new Zend_Db_Table('resetpass_tokens');
+        $select = $tokens->select();
+        $select->where('user_id = ?', $user->id);
+        $select->where('token = ?', $_token);
+        $token = $tokens->fetchRow($select);
+        
+        if(is_null($token)) 
+                throw new Exception('Token not found');
+        
+        $created = strtotime($token->created);
+        $diff    = time() - $created;
+        
+        $caducated = false;
+        if($diff > (60 * 60)) {
+            $caducated = true;            
+            $token->delete();
+        }
+        
+        if($this->getRequest()->isPost()){
+            if(!$caducated){
+                if($_POST['npassword'] == $_POST['rpassword']) {
+                    $user->password = md5($_POST['npassword']);
+                    $user->save();
+                    
+                    $token->delete();
+                    
+                    setcookie('alert','Your password has been change. Please Login');
+                    $this->_redirect('/login');
+                } else {
+                    $this->view->error = "Password verification incorrect";                    
+                }
+            }
+        }
+        $this->view->caducated = $caducated;
+    }
 }

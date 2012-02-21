@@ -198,33 +198,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             )
         );
         $router->addRoute(
-            'city_filter',
+            'reset',
             new Zend_Controller_Router_Route(
-                '/:lang/:country/:city/filter/:cat/:subcat/:sort/:stars',
+                '/:lang/reset/:email/:token/',
                 array(
                     'controller' => 'index',
-                    'action'     => 'city',
+                    'action'     => 'reset',
                     'module'     => 'default',
-                    'cat'        => 'all',
-                    'subcat'     => 'all',
-                    'sort'       => 'newest',
-                    'stars'      => 'all',
-                    'lang'       => $lang
-                )
-            )
-        );
-        $router->addRoute(
-            'listing_search',
-            new Zend_Controller_Router_Route(
-                '/:lang/search/',
-                array(
-                    'controller' => 'index',
-                    'action'     => 'search',
-                    'module'     => 'default',
-                    'cat'        => 'all',
-                    'subcat'     => 'all',
-                    'sort'       => 'newest',
-                    'stars'      => 'all',
+                    'email'      => 'default',
+                    'token'      => 'default',
                     'lang'       => $lang
                 )
             )
