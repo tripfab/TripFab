@@ -121,7 +121,7 @@ class WS_ListingService {
     /**
      * 
      */
-    public function __construct() 
+    public function __construct($use_cache = false)
     {
         $this->listings = new Model_Listings();
         
@@ -153,6 +153,8 @@ class WS_ListingService {
         
         if(Zend_Registry::isRegistered('cache'))
             $this->cache = Zend_Registry::get('cache');
+        
+        $this->use_cache = false; # $use_cache;
     }
     
     public function getDefaultListing($vendor)
@@ -575,7 +577,7 @@ class WS_ListingService {
             $select = $db->select();
             $select->from('listings');
             //$select->where('listings.status = ?', 1);
-            $select->where('listings.city_id = ?', $place);
+            $select->where('listings.country_id = ?', $place);
             if($cat != 'all'){
                 $_cat = $this->getCategoryByIdf($cat);
                 $select->where('listings.main_type = ?', $_cat->id);}
@@ -640,8 +642,9 @@ class WS_ListingService {
             $idf = trim(strtolower($idf));
             $select = $this->listings->select();
             $select->where('identifier = ?', $idf);
-            $select->where('city_id = ?', $city);
-            $select->where('country_id = ?', $country);
+            //$select->where('city_id = ?', $city);
+            //$select->where('country_id = ?', $country);
+            
             $listing = $this->listings->fetchRow($select);
             
             if($this->use_cache)

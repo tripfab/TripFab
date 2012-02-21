@@ -1112,7 +1112,7 @@ class AjaxController extends Zend_Controller_Action
         
         $ls_count = $this->listings->countListings($city->id);
         
-        $listings = $this->listings->getListings2($city->id, $cat, $subcat, $sort, $stars, $pricemin, $pricemax);
+        $listings = $this->listings->getListings2($country->id, $cat, $subcat, $sort, $stars, $pricemin, $pricemax);
         $this->view->listing_count = count($listings);
         //var_dump($this->view->listing_count); die;
         
