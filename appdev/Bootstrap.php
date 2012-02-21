@@ -114,30 +114,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             )
         );
         $router->addRoute(
-            'policy',
-            new Zend_Controller_Router_Route(
-                '/:lang/policy',
-                array(
-                    'controller' => 'index',
-                    'action'     => 'policy',
-                    'module'     => 'default',
-                    'lang'       => $lang
-                )
-            )
-        );
-        $router->addRoute(
-            'reward-store',
-            new Zend_Controller_Router_Route(
-                '/:lang/store',
-                array(
-                    'controller' => 'store',
-                    'action'     => 'index',
-                    'module'     => 'default',
-                    'lang'       => $lang
-                )
-            )
-        );
-        $router->addRoute(
             'city',
             new Zend_Controller_Router_Route(
                 '/:lang/:country/:city',

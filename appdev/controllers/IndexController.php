@@ -131,8 +131,6 @@ class IndexController extends Zend_Controller_Action
                 $subcats[$s] = $this->listings->getSubCategoriesOf($c);
         }
         
-        
-        
         $this->view->countries = $countries;
         
         $this->view->region  = $region;
@@ -349,5 +347,10 @@ class IndexController extends Zend_Controller_Action
                 $this->view->user = $this->user->getData();
         
         $this->render($template);     
+    }
+    
+    public function termsAction()
+    {
+        
     }
 }
