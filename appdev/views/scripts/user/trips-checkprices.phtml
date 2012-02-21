@@ -41,232 +41,251 @@
         <div class="wrapper" id="custom_checkout">
             <div class="left_block">
                 <h3>Check the availability for your trip and the listing options before continue with the checkout</h3>
-                <div id="checkout_accordion">
-                	<?php foreach($this->items as $item): ?>
-                    <?php if($item->available || ($item->available === 0)): ?>
-                    <div class="header active"> 
-                    	<span class="arrow"></span> 
-                        <a href="#"></a>
-                        <div class="descrip"> 
-                        	<?= $this->thumbnail(49, $item->listing_image, '', '1:1'); ?>
-                            <h4><?= $item->listing_title ?></h4>
-                            <span class="type"><?= $this->types[$item->listing_type]['name'] ?></span>
-                            <p><?= $item->listing_city ?>, <?= $item->listing_country ?></p>
-                        </div><!--DESCRIP-->
-                        <?php if($item->available): ?>
-                        <div class="info"> 
-                        	<span><em></em>Available</span>
-                            <p>Ready to go! Just accept the terms</p>
-                        </div><!--INFO--> 
-                        <?php else: ?>
-                        <div class="info"> 
-                        	<span><em></em>Available</span>
-                            <p>But there are some problems</p>
-                        </div><!--INFO--> 
-                        <?php endif ?>
-                    </div><!--HEADER-->
-                    <div class="details">
-	                    <?php if(!$item->available): ?>
-        				<div class="warning"><?= $item->error ?></div><!--WARNING-->
-                        <?php endif ?>
-                        <div class="item"> 
-                        	<strong>Occupation</strong>
-                            <div class="edit">
-                                <label for="adults">Adults</label>
-                                <select name="bookings[<?= $item->id ?>][adults]" id="adults">
-									<?php for($i=1; $i<=12; $i++): ?>
-                                    <?php $selected = ($i == $item->adults) ? 'selected="selected"' : ''; ?>
-                                    <option <?= $selected ?> value="<?= $i ?>"><?= $i ?></option>
-                                    <?php endfor ?>
-                                </select>
-                                <label for="Children">Children</label>
-                                <select name="bookings[<?= $item->id ?>][kids]" id="Children">
-									<?php for($i=0; $i<=12; $i++): ?>
-                                    <?php $selected = ($i == $item->kids) ? 'selected="selected"' : ''; ?>
-                                    <option <?= $selected ?> value="<?= $i ?>"><?= $i ?></option>
-                                    <?php endfor ?>
-                                </select>
-                            </div><!--EDIT--> 
-                        </div><!--ITEM-->
-                        <?php if($item->listing_type == 5): ?>
-                        <div class="item"> 
-                        	<strong>Check In</strong>
-                            <div class="edit"><?= date('L, F jS, Y', strtotime($item->checkin)) ?></div>
-                        </div><!--ITEM-->
-                        <div class="item"> 
-                        	<strong>Check Out</strong>
-                            <div class="edit"><?= date('L, F jS, Y', strtotime($item->checkout)) ?></div><!--EDIT--> 
-                        </div><!--ITEM-->
-                        <div class="item"> 
-                        	<strong>Rooms</strong>
-                            <div class="edit"><?= $item->rooms ?></div><!--EDIT--> 
-                        </div><!--ITEM-->
-                        <?php if(isset($this->options[$item->id]['options']) && 
-								(count($this->options[$item->id]['options'] > 0))): ?>
-                        <div class="item"> 
-                        	<strong>Room Type</strong>
-                            <div class="room-type">
-                                <p>Select the room type you want to stay:</p>
-                                <?php foreach($this->options[$item->id]['options'] as $room): ?>
-                                <div class="single">
-                                    <label for="Room1">
-                                    	<?php $checked = ($item->option_id == $room->schedule_id) ? 'checked="checked"' : ''; ?>
-                                        <strong><input <?= $checked ?> type="radio" name="bookings[<?= $item->id ?>][option]" 
-                                        id="Room1" value="<?= $room->schedule_id ?>" /><?= $room->name ?></strong> 
-                                        <span><?= $room->description ?></span>
-                                    </label>
-                                    <span class="price">$<?= $this->options[$item->id]['prices'][$room->schedule_id]['price'] ?></span> 
-                                </div><!--SINGLE-->
-                                <?php endforeach ?>
-                            </div><!--ROOM-TYPE--> 
-                        </div><!--ITEM-->
-                        <?php endif ?>
-                        <?php else: ?>
-                        <div class="item"> 
-                        	<strong>Activity Date</strong>
-                            <div class="edit"><?= date('L, F jS, Y', strtotime($item->checkin)) ?></div><!--EDIT--> 
-                        </div><!--ITEM-->
-                        <div class="item"> 
-                        	<strong>Activity Type</strong>
-                            <div class="room-type">
-                                <p>Select the capacity type that must fit your needs:</p>
-                            	<?php if((is_null($item->listing_min) or is_null($item->listing_max)) &&
-										(count($this->options[$item->id]['capacity']) > 0)): ?>
-                                <?php foreach($this->options[$item->id]['capacity'] as $option): ?>
-                                <div class="single">
-                                	<?php $checked = (isset($item->option_id) && ($item->option_id == $option->id)) ? 'checked="checked"' : '' ?>
-                                   <label for="activity1">
-                                        <strong><input type="radio" name="bookings[<?= $item->id ?>][capacity]" 
-                                        value="<?= $option->id ?>" <?= $checked ?> /><?= $option->name ?></strong>
-                                        <span>Minimun: <?= (!is_null($option->min)) 
-																		? ($option->min == 1) 
-																			? '1 person' 
-																			: $option->min .' people'  
-																		: 'Not defined'  ?>
-                                   		Maximun: <?= (!is_null($option->max)) 
-																		? ($option->max == 1) 
-																			? '1 person' 
-																			: $option->max .' people'  
-																		: 'Not defined'  ?></span>
-                                   </label>
-                                   <span class="price">$<?= $this->options[$item->id]['prices'][$option->id]['price'] ?></span> 
-                                </div><!--SINGLE-->
-                                <?php endforeach ?>
-                                <?php else: ?>
-                                <div class="single">
-                                   <label for="activity1"> 
-                                   <strong><input checked="checked" type="radio" name="bookings[<?= $item->id ?>][capacity]" value="single" />
-                                   Single Capacity</strong>
-                                   <span>Minimun: <?= (!is_null($item->listing_min)) 
-																	? ($item->listing_min == 1) 
-																		? '1 person' 
-																		: $item->listing_min .' people'  
-																	: 'Not defined'  ?>
-									Maximun: <?= (!is_null($item->listing_max)) 
-																	? ($item->listing_max == 1) 
-																		? '1 person' 
-																		: $item->listing_max .' people'  
-																	: 'Not defined'  ?></span>
-                                   </label><span class="price">$<?= $item->listing_price ?></span>
-                                </div><!--SINGLE-->
-                                <?php endif ?>
-                            </div><!--ROOM-TYPE--> 
-                        </div><!--ITEM-->
-                        <div class="item"> 
-                        	<strong>Schedule</strong>
-                            <?php if(count($this->options[$item->id]['options']) > 0): ?>
-                            <div class="edit">
-                                <select name="bookings[<?= $item->id ?>][option]">
-                                	<?php foreach($this->options[$item->id]['options'] as $sch): ?>
-                                	<?php $selected = ((isset($item->schedule_id)) && ($item->schedule_id == $sch->id)) ? 'selected="selected"' : '' ?>
-                                    <option <?= $selected ?> value="<?= $sch->id ?>"><?= $sch->name ?> (<?= date('h:i a',strtotime($sch->starting)) ?> - 
-                                    <?= date('h:i a',strtotime($sch->ending)) ?>)</option>
-                                    <?php endforeach ?>
-                                </select>
-                            </div><!--EDIT--> 
+                <form method="post" action="" id="checkprices_form">
+                    <div id="checkout_accordion">
+                        <?php foreach($this->items as $item): ?>
+                        <?php if($item->available || ($item->available === 0)): ?>
+                        <div class="header active"> 
+                            <span class="arrow"></span> 
+                            <a href="#"></a>
+                            <div class="descrip"> 
+                                <?= $this->thumbnail(49, $item->listing_image, '', '1:1'); ?>
+                                <h4><?= $item->listing_title ?></h4>
+                                <span class="type"><?= $this->types[$item->listing_type]['name'] ?></span>
+                                <p><?= $item->listing_city ?>, <?= $item->listing_country ?></p>
+                            </div><!--DESCRIP-->
+                            <?php if($item->available): ?>
+                            <div class="info"> 
+                                <span><em></em>Available</span>
+                                <p>Ready to go! Just accept the terms</p>
+                            </div><!--INFO--> 
                             <?php else: ?>
-                            <div class="edit">
-                            	Flexible Schedule. You choose the hour
-                                <input type="hidden" name="bookings[<?= $item->id ?>][option]" value="flex" />
+                            <div class="info"> 
+                                <span><em></em>Available</span>
+                                <p>But there are some problems</p>
+                            </div><!--INFO--> 
+                            <?php endif ?>
+                        </div><!--HEADER-->
+                        <div class="details">
+                            <?php if(!$item->available): ?>
+                            <div class="warning"><?= $item->error ?></div><!--WARNING-->
+                            <?php endif ?>
+                            <div class="item"> 
+                                <strong>Occupation</strong>
+                                <div class="edit">
+                                    <label for="adults">Adults</label>
+                                    <select name="bookings[<?= $item->id ?>][adults]" id="adults">
+                                        <?php for($i=1; $i<=12; $i++): ?>
+                                        <?php $selected = ($i == $item->adults) ? 'selected="selected"' : ''; ?>
+                                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?></option>
+                                        <?php endfor ?>
+                                    </select>
+                                    <label for="Children">Children</label>
+                                    <select name="bookings[<?= $item->id ?>][kids]" id="Children">
+                                        <?php for($i=0; $i<=12; $i++): ?>
+                                        <?php $selected = ($i == $item->kids) ? 'selected="selected"' : ''; ?>
+                                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?></option>
+                                        <?php endfor ?>
+                                    </select>
+                                </div><!--EDIT--> 
+                            </div><!--ITEM-->
+                            <?php if($item->listing_type == 5): ?>
+                            <div class="item"> 
+                                <strong>Check In</strong>
+                                <div class="edit"><?= date('L, F jS, Y', strtotime($item->checkin)) ?></div>
+                            </div><!--ITEM-->
+                            <div class="item"> 
+                                <strong>Check Out</strong>
+                                <div class="edit"><?= date('L, F jS, Y', strtotime($item->checkout)) ?></div><!--EDIT--> 
+                            </div><!--ITEM-->
+                            <div class="item"> 
+                                <strong>Rooms</strong>
+                                <div class="edit"><?= $item->rooms ?></div><!--EDIT--> 
+                            </div><!--ITEM-->
+                            <?php if(isset($this->options[$item->id]['options']) && 
+                                    (count($this->options[$item->id]['options'] > 0))): ?>
+                            <div class="item"> 
+                                <strong>Room Type</strong>
+                                <div class="room-type">
+                                    <p>Select the room type you want to stay:</p>
+                                    <?php foreach($this->options[$item->id]['options'] as $room): ?>
+                                    <div class="single">
+                                        <label for="Room1">
+                                            <?php $checked = ($item->option_id == $room->schedule_id) ? 'checked="checked"' : ''; ?>
+                                            <strong><input <?= $checked ?> type="radio" name="bookings[<?= $item->id ?>][option]" 
+                                            id="Room1" value="<?= $room->schedule_id ?>" /><?= $room->name ?></strong> 
+                                            <span><?= $room->description ?></span>
+                                        </label>
+                                        <span class="price">$<?= $this->options[$item->id]['prices'][$room->schedule_id]['price'] ?></span> 
+                                    </div><!--SINGLE-->
+                                    <?php endforeach ?>
+                                </div><!--ROOM-TYPE--> 
+                            </div><!--ITEM-->
+                            <?php endif ?>
+                            <?php else: ?>
+                            <div class="item"> 
+                                <strong>Activity Date</strong>
+                                <div class="edit"><?= date('L, F jS, Y', strtotime($item->checkin)) ?></div><!--EDIT--> 
+                            </div><!--ITEM-->
+                            <div class="item"> 
+                                <strong>Activity Type</strong>
+                                <div class="room-type">
+                                    <p>Select the capacity type that must fit your needs:</p>
+                                    <?php if((is_null($item->listing_min) or is_null($item->listing_max)) &&
+                                            (count($this->options[$item->id]['capacity']) > 0)): ?>
+                                    <?php foreach($this->options[$item->id]['capacity'] as $option): ?>
+                                    <div class="single">
+                                        <?php $checked = (isset($item->option_id) && ($item->option_id == $option->id)) ? 'checked="checked"' : '' ?>
+                                       <label for="activity1">
+                                            <strong><input type="radio" name="bookings[<?= $item->id ?>][capacity]" 
+                                            value="<?= $option->id ?>" <?= $checked ?> /><?= $option->name ?></strong>
+                                            <span>Minimun: <?= (!is_null($option->min)) 
+                                                                            ? ($option->min == 1) 
+                                                                                ? '1 person' 
+                                                                                : $option->min .' people'  
+                                                                            : 'Not defined'  ?>
+                                            Maximun: <?= (!is_null($option->max)) 
+                                                                            ? ($option->max == 1) 
+                                                                                ? '1 person' 
+                                                                                : $option->max .' people'  
+                                                                            : 'Not defined'  ?></span>
+                                       </label>
+                                       <span class="price">$<?= $this->options[$item->id]['prices'][$option->id]['price'] ?></span> 
+                                    </div><!--SINGLE-->
+                                    <?php endforeach ?>
+                                    <?php else: ?>
+                                    <div class="single">
+                                       <label for="activity1"> 
+                                       <strong><input checked="checked" type="radio" name="bookings[<?= $item->id ?>][capacity]" value="single" />
+                                       Single Capacity</strong>
+                                       <span>Minimun: <?= (!is_null($item->listing_min)) 
+                                                                        ? ($item->listing_min == 1) 
+                                                                            ? '1 person' 
+                                                                            : $item->listing_min .' people'  
+                                                                        : 'Not defined'  ?>
+                                        Maximun: <?= (!is_null($item->listing_max)) 
+                                                                        ? ($item->listing_max == 1) 
+                                                                            ? '1 person' 
+                                                                            : $item->listing_max .' people'  
+                                                                        : 'Not defined'  ?></span>
+                                       </label><span class="price">$<?= $item->listing_price ?></span>
+                                    </div><!--SINGLE-->
+                                    <?php endif ?>
+                                </div><!--ROOM-TYPE--> 
+                            </div><!--ITEM-->
+                            <div class="item"> 
+                                <strong>Schedule</strong>
+                                <?php if(count($this->options[$item->id]['options']) > 0): ?>
+                                <div class="edit">
+                                    <select name="bookings[<?= $item->id ?>][option]">
+                                        <?php foreach($this->options[$item->id]['options'] as $sch): ?>
+                                        <?php $selected = ((isset($item->schedule_id)) && ($item->schedule_id == $sch->id)) ? 'selected="selected"' : '' ?>
+                                        <option <?= $selected ?> value="<?= $sch->id ?>"><?= $sch->name ?> (<?= date('h:i a',strtotime($sch->starting)) ?> - 
+                                        <?= date('h:i a',strtotime($sch->ending)) ?>)</option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div><!--EDIT--> 
+                                <?php else: ?>
+                                <div class="edit">
+                                    Flexible Schedule. You choose the hour
+                                    <input type="hidden" name="bookings[<?= $item->id ?>][option]" value="flex" />
+                                </div>
+                                <?php endif ?>
+                            </div><!--ITEM-->
+                            <?php endif ?>
+                            <?php if($item->available): ?>
+                            <div class="item">
+                                <strong>Rate</strong>
+                                <div class="edit">
+                                    $<?= $item->rate ?>, <?= $item->rate_description ?>
+                                </div>
+                            </div>
+                            <?php if(isset($item->additional) and $item->additional > 0): ?>
+                            <div class="item">
+                                <strong>Additional</strong>
+                                <div class="edit">
+                                    $<?= $item->additional ?>, <?= $item->additional_description ?>
+                                </div>
+                            </div>                        
+                            <?php endif ?>
+                            <div class="item">
+                            	<strong>Taxes</strong>
+                                <div class="edit">
+                                	$<?= $item->taxes ?>
+                                </div>
+                            </div>
+                            <div class="item">
+                            	<strong>Total</strong>
+                                <div class="edit">
+                                	$<?= $item->total ?>
+                                </div>
                             </div>
                             <?php endif ?>
-                        </div><!--ITEM-->
-                        <?php endif ?>
-                        <?php if($item->available): ?>
-                        <div class="item">
-                        	<strong>Rate</strong>
-                            <div class="edit">
-                            	$<?= $item->rate ?>, <?= $item->rate_description ?>
-                            </div>
-                        </div>
-                        <?php if(isset($item->additional) and $item->additional > 0): ?>
-                        <div class="item">
-                        	<strong>Additional</strong>
-                            <div class="edit">
-                            	$<?= $item->additional ?>, <?= $item->additional_description ?>
-                            </div>
-                        </div>                        
-                        <?php endif ?>
-                        <?php endif ?>
-                        <div class="item"> 
-                        	<strong>Cancellation</strong> 
-                            <a href="#" class="restriction">High Restrictions &rarr;</a> 
-                        </div><!--ITEM-->
-                        <div class="item"> 
-                        	<strong>Hotel Restrictions</strong> 
-                            <a href="#" class="restriction">Read Hotel Restrictions &rarr;</a> 
-                        </div><!--ITEM-->
-                        <div class="last">
-                            <label for=""><input type="checkbox" name="" value="" />
-                            I agree to the cancellation policy, hotel restrictions and <a href="#">terms of use.</a> </label>
-                        </div><!--LAST-->
-                    </div><!--DETAILS-->
-                    <?php else: ?>
-                    <div class="header inactive"> 
-                    	<span class="arrow"></span> 
-                        <a href="#"></a>
-                        <div class="descrip"> 
-                        	<?= $this->thumbnail(49, $item->listing_image, '', '1:1'); ?>
-                            <h4><?= $item->listing_title ?></h4>
-                            <span class="type"><?= $this->types[$item->listing_type]['name'] ?></span>
-                            <p><?= $item->listing_city ?>, <?= $item->listing_country ?></p>
-                        </div><!--DESCRIP-->
-        				<div class="info">
-        					<span class="unavaible"><em></em>Not Available</span>
-        					<p class="recommendation"><?= $item->error ?> 
-                            <a href="#recomendation_listing" class="link-10 lbc">See our recommendations</a></p>
-        				</div><!--INFO-->
-                    </div><!--HEADER-->
-                    <?php endif ?>
-                    <?php endforeach ?>
-                    <?php foreach($this->items2 as $item): ?>
-                    <div class="header active"> <span class="arrow"></span> <a href="#"></a>
-                        <div class="descrip"> 
-                        	<?= $this->thumbnail(49, $item->listing_image, '', '1:1'); ?>
-                            <h4><?= $item->listing_title ?></h4>
-                            <span class="type"><?= $this->types[$item->listing_type]['name'] ?></span>
-                            <p><?= $item->listing_city ?>, <?= $item->listing_country ?></p>
-                        </div><!--DESCRIP-->
-                        <?php if($item->available): ?>
-                        <div class="info"> 
-                        	<span><em></em>Available</span>
-                            <p>Ready to go!</p>
-                        </div><!--INFO--> 
+                            <div class="item"> 
+                                <strong>Cancellation</strong> 
+                                <a href="#" class="restriction">High Restrictions &rarr;</a> 
+                            </div><!--ITEM-->
+                            <div class="item"> 
+                                <strong>Hotel Restrictions</strong> 
+                                <a href="#" class="restriction">Read Hotel Restrictions &rarr;</a> 
+                            </div><!--ITEM-->
+                            <div class="last">
+                                <label for=""><input type="checkbox" name="bookings[<?= $item->id ?>][terms]" value="1" class="termscheck" />
+                                I agree to the cancellation policy, hotel restrictions and <a href="#">terms of use.</a> </label>
+                            </div><!--LAST-->
+                        </div><!--DETAILS-->
                         <?php else: ?>
-                        <div class="info"> 
-                        	<span><em></em>Unavailable</span>
-                            <p>There is a problem</p>
-                        </div><!--INFO--> 
+                        <div class="header inactive"> 
+                            <span class="arrow"></span> 
+                            <a href="#"></a>
+                            <div class="descrip"> 
+                                <?= $this->thumbnail(49, $item->listing_image, '', '1:1'); ?>
+                                <h4><?= $item->listing_title ?></h4>
+                                <span class="type"><?= $this->types[$item->listing_type]['name'] ?></span>
+                                <p><?= $item->listing_city ?>, <?= $item->listing_country ?></p>
+                            </div><!--DESCRIP-->
+                            <div class="info">
+                                <span class="unavaible"><em></em>Not Available</span>
+                                <p class="recommendation"><?= $item->error ?> 
+                                <a href="#recomendation_listing" class="link-10 lbc">See our recommendations</a></p>
+                            </div><!--INFO-->
+                        </div><!--HEADER-->
                         <?php endif ?>
-                    </div><!--HEADER-->
-                    <div class="details">                        
-                        <div class="item last">
-                        	<strong>Price not charged</strong>
-                            <div class="edit">Check the prices when you get there</div>
-                        </div><!--LAST-->
-                    </div><!--DETAILS-->
-                    <?php endforeach ?>
-                </div><!--CHECKOUT_ACCORDION--> 
+                        <?php endforeach ?>
+                        <?php foreach($this->items2 as $item): ?>
+                        <div class="header active"> <span class="arrow"></span> <a href="#"></a>
+                            <div class="descrip"> 
+                                <?= $this->thumbnail(49, $item->listing_image, '', '1:1'); ?>
+                                <h4><?= $item->listing_title ?></h4>
+                                <span class="type"><?= $this->types[$item->listing_type]['name'] ?></span>
+                                <p><?= $item->listing_city ?>, <?= $item->listing_country ?></p>
+                            </div><!--DESCRIP-->
+                            <?php if($item->available): ?>
+                            <div class="info"> 
+                                <span><em></em>Available</span>
+                                <p>Ready to go!</p>
+                            </div><!--INFO--> 
+                            <?php else: ?>
+                            <div class="info"> 
+                                <span><em></em>Unavailable</span>
+                                <p>There is a problem</p>
+                            </div><!--INFO--> 
+                            <?php endif ?>
+                        </div><!--HEADER-->
+                        <div class="details">                        
+                            <div class="item last">
+                                <strong>Price not charged</strong>
+                                <div class="edit">Check the prices when you get there</div>
+                            </div><!--LAST-->
+                        </div><!--DETAILS-->
+                        <?php endforeach ?>
+                    </div><!--CHECKOUT_ACCORDION--> 
+                    <input type="hidden" name="userid" value="<?= $this->user->id ?>" />
+                    <input type="hidden" name="ids" value="<?= $this->trip->id ?>" />
+                    <input type="hidden" name="token" value="<?= $this->trip->token ?>" />
+                    <input type="hidden" name="_task" value="<?= md5('proceed') ?>" class="proceed" />
+                    <input type="hidden" name="_task" value="<?= md5('recalculate') ?>" class="recalculate" disabled="disabled" />
+                </form>
             </div><!--LEFT_BLOCK-->
             
             <div class="right_block">

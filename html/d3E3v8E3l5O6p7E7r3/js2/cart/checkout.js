@@ -46,8 +46,7 @@ $(document).ready(function() {
                 showError('Please select the expiration year');
                 return false;
             } else {
-                alert('asd');
-                Stripe.setPublishableKey('pk_HkcJUP3pJLpO1G6AeHNKGmDHF9Ahh');
+                Stripe.setPublishableKey('pk_2zRRbxtjPQAoqfkECkELiRf9dCz2U');
                 $data = {
                     number:    $('.cnum', this).val(),
                     cvc: 	   $('.ccode', this).val(),
@@ -66,6 +65,19 @@ $(document).ready(function() {
     
     $ammount = $('input[name=ammount]').val();
     $('body').data('secretAmmount', $ammount);
+    
+    $('input, select','#checkout .new-card').focus(function(){
+        if(!$('.new-card input[name=account]').is(':checked')) {
+            $('input[name=account]').removeAttr('checked');
+            $('.new-card input[name=account]').attr('checked','checked');
+        }
+    });
+    
+    if(typeof $.address.parameter('error') != 'undefined') {
+        showError($.address.parameter('error'));
+    }
+    
+    console.log();
     
 });
 

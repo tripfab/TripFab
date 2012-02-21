@@ -272,13 +272,12 @@ class WS_ReservationsService {
         $data['transaction_id'] = $transaction->id;
         $data['status_id']      = 1;
         $data['code']           = $transaction->code;
-        $data['created']        = date('Y-m-d g:i:s');
+        $data['created']        = date('Y-m-d H:i:s');
         
         unset($data['id']);
         unset($data['option_id']);
         unset($data['total']);
         unset($data['token']);
-        unset($data['created']);
         
         $row = $this->reservations->fetchNew();
         $row->setFromArray($data);
@@ -296,16 +295,13 @@ class WS_ReservationsService {
         $data['transaction_id'] = $transaction->id;
         $data['status_id']      = 1;
         $data['code']           = $transaction->code;
-        $data['created']        = date('Y-m-d g:i:s');
-        $data['adults']         = $cart->adults;
-        $data['kids']           = $cart->kids;
+        $data['created']        = date('Y-m-d H:i:s');
         $data['user_id']        = $cart->user_id;
         
         unset($data['id']);
         unset($data['option_id']);
         unset($data['total']);
         unset($data['token']);
-        unset($data['created']);
         
         $row = $this->reservations->fetchNew();
         $row->setFromArray($data);

@@ -185,7 +185,6 @@ class CartController extends Zend_Controller_Action {
     {
         if($this->getRequest()->isPost())
         {
-            
             if($this->user->getRole() != 'user')
                     throw new Exception('No access allowed');
             
@@ -417,12 +416,12 @@ class CartController extends Zend_Controller_Action {
             $this->view->accounts = $accounts;
             
             $creditcards = array(
-                'Visa'          => '/images2/checkout-card1.png',
-                'Master Card'   => '/images2/checkout-card2.png',
-                'Amex'          => '/images2/checkout-card3.png',
-                'Dinner Club'   => '/images2/checkout-card4.png',
-                'Discover'      => '/images2/checkout-card5.png',
-                'JCB'           => '/images2/checkout-card6.png',
+                'Visa'             => '/images2/checkout-card1.png',
+                'MasterCard'       => '/images2/checkout-card2.png',
+                'American Express' => '/images2/checkout-card3.png',
+                'Diners Club'      => '/images2/checkout-card4.png',
+                'Discover'         => '/images2/checkout-card5.png',
+                'JCB'              => '/images2/checkout-card6.png',
             );
             
             $this->view->creditcards = $creditcards;
@@ -433,19 +432,34 @@ class CartController extends Zend_Controller_Action {
             $trip = $this->trips->get($cartitem->listing_id);
             $listings = $this->trips->getListingOf($trip->id, false);
             
+            $country = $this->places->getPlaceById($trip->country_id);
+            $this->view->country   = $country;
+            
+            $accounts = $this->user->getAccounts();
+            $this->view->accounts  = $accounts;
+            
             $this->view->trip      = $trip;
             $this->view->cartitem  = $cartitem;
             $this->view->user      = $this->user->getData();
             $this->view->countries = $this->places->getPlaces(2);
             $this->view->listings  = $listings;
             
+            $creditcards = array(
+                'Visa'             => '/images2/checkout-card1.png',
+                'MasterCard'       => '/images2/checkout-card2.png',
+                'American Express' => '/images2/checkout-card3.png',
+                'Diners Club'      => '/images2/checkout-card4.png',
+                'Discover'         => '/images2/checkout-card5.png',
+                'JCB'              => '/images2/checkout-card6.png',
+            );
+            
+            $this->view->creditcards = $creditcards;
+            
             $this->render('checkout-trip');
         } 
         elseif($cartitem->type == 3) {
             
             $trip = $this->trips->getItn($cartitem->listing_id);
-            
-            $billing = $this->billing->fetchRow("user_id = {$this->user->getId()}");
             
             $db = Zend_Db_Table::getDefaultAdapter();
             $select = $db->select();
@@ -461,11 +475,27 @@ class CartController extends Zend_Controller_Action {
             $this->view->cartitem  = $cartitem;
             $this->view->user      = $this->user->getData();
             $this->view->countries = $this->places->getPlaces(2);
-            $this->view->billing   = $billing;
             $this->view->items     = $items;
+            
+            $country = $this->places->getPlaceById($trip->country_id);
+            $this->view->country   = $country;
+            
+            $accounts = $this->user->getAccounts();
+            $this->view->accounts  = $accounts;
+            
+            $creditcards = array(
+                'Visa'             => '/images2/checkout-card1.png',
+                'MasterCard'       => '/images2/checkout-card2.png',
+                'American Express' => '/images2/checkout-card3.png',
+                'Diners Club'      => '/images2/checkout-card4.png',
+                'Discover'         => '/images2/checkout-card5.png',
+                'JCB'              => '/images2/checkout-card6.png',
+            );
+            
+            $this->view->creditcards = $creditcards;
+            
             $this->render('checkout-itn');
         }
-        
     }
     
     public function chargeAction()
@@ -496,39 +526,47 @@ class CartController extends Zend_Controller_Action {
             if($cartitem->token != $data['cartitemtoken'])
                     throw new Exception();
             
-            require_once "Stripe/Stripe.php";
-            // set your secret key: remember to change this to your live secret key in production
-            // see your keys here https://manage.stripe.com/account
-            $keys = Zend_Registry::get('stripe');
-            Stripe::setApiKey($keys['secret_key']);
+            if($data['account'] == 'new') {
+            
+                require_once "Stripe/Stripe.php";
+                // set your secret key: remember to change this to your live secret key in production
+                // see your keys here https://manage.stripe.com/account
+                $keys = Zend_Registry::get('stripe');
+                Stripe::setApiKey($keys['secret_key']);
 
-            // get the credit card details submitted by the form
-            $token = $_POST['stripeToken'];
+                // get the credit card details submitted by the form
+                $token = $_POST['stripeToken'];
 
-            // create a Customer
-            $customer = Stripe_Customer::create(array(
-              "card" => $token,
-              "description" => $this->user->email)
-            );
+                // create a Customer
+                $customer = Stripe_Customer::create(array(
+                  "card" => $token,
+                  "description" => $this->user->getEmail())
+                );
+
+                //var_dump($customer->active_card); die;
+
+                $strip_accounts = new Zend_Db_Table('stripe_accounts');
+                $account = $strip_accounts->fetchNew();
+                $account->stripe_id = $customer->id;
+                $account->user_id   = $this->user->getId();
+                $account->type      = $customer->active_card->type;
+                $account->last4     = $customer->active_card->last4;
+                $account->created   = date('Y-m-d H:i:s');
+                $account->updated   = date('Y-m-d H:i:s');
+
+                $account->save();
+            } else {
+                $account = $this->user->getAccount($_POST['account']);
+            }
             
-            //var_dump($customer->active_card); die;
-            
-            $strip_accounts = new Zend_Db_Table('stripe_accounts');
-            $account = $strip_accounts->fetchNew();
-            $account->stripe_id = $customer->id;
-            $account->user_id   = $this->user->getId();
-            $account->type      = $customer->active_card->type;
-            $account->last4     = $customer->active_card->last4;
-            $account->created   = date('Y-m-d H:i:s');
-            $account->updated   = date('Y-m-d H:i:s');
-            
-            $account->save();
+            if(is_null($account)) 
+                    throw new Excpeiton('Account not found');
             
             switch($cartitem->type) {
                 case 1:
                     $listing = $this->listings->getListing($cartitem->listing_id);
                     $vendor  = $this->listings->getVendor($listing->vendor_id);
-                    $method  = $customer->active_card->type . ' ************'.$customer->active_card->last4;
+                    $method  = $account->type . ' ************'.$account->last4;
                     $code    = $this->user->getId().$vendor->id.time();
                     
                     $_transaction = array(
@@ -541,7 +579,8 @@ class CartController extends Zend_Controller_Action {
                         'vendor_id' => $vendor->id,
                         'status'    => 0,
                         'created'   => date('Y-m-d G:i:s'),
-                        'updated'   => date('Y-m-d G:i:s')
+                        'updated'   => date('Y-m-d G:i:s'),
+                        'paywoth'   => $account->id,
                     );
 
                     $transaction = $this->transactions->fetchNew();
@@ -555,34 +594,109 @@ class CartController extends Zend_Controller_Action {
                     $this->_redirect('cart/invoice/'.$reservation->id);
                 break;
                 case 2:
-                    $listing = $this->trips->get($cartitem->listing_id);
-                    $method  = $customer->active_card->type . ' ************'.$customer->active_card->last4;
-                    $code    = $this->user->getId().$vendor->id.time();                    
-                    
-                    $_transaction = array(
-                        'code'      => $code,
-                        'user_name' => $this->user->getName(),
-                        'method'    => $method,
-                        'ammount'   => $cartitem->total,
-                        'date'      => date('Y-m-d G:i:s'),
-                        'trip_id'   => $listing->id,
-                        'status'    => 0,
-                        'created'   => date('Y-m-d G:i:s'),
-                        'updated'   => date('Y-m-d G:i:s')
-                    );
+                    try {
+                        $listing = $this->trips->get($cartitem->listing_id);
 
-                    $transaction = $this->transactions->fetchNew();
-                    $transaction->setFromArray($_transaction);
-                    $transaction->save();
-                    
-                    $reservation = $this->trips->createPurchase($transaction, $cartitem, $listing);
-                    
-                    $cartitem->delete();
+                        if($data['account'] != 'new') {
+                            require_once "Stripe/Stripe.php";
+                            // set your secret key: remember to change this to your live secret key in production
+                            // see your keys here https://manage.stripe.com/account
+                            $keys = Zend_Registry::get('stripe');
+                            Stripe::setApiKey($keys['secret_key']);
+                        }
 
-                    $this->_redirect('cart/tripinvoice/'.$reservation->id);
+                        $charge = Stripe_Charge::create(array(
+                            'amount'    => 200,//$cartitem->total * 100,
+                            'currency'  => 'usd',
+                            'customer'  => $account->stripe_id,
+                            'description' => $cartitem->rate_description
+                        ));
+
+                        //echo get_class($charge); die;
+
+                        $method  = $account->type . ' ************'.$account->last4;
+                        $code    = 'U'.$this->user->getId().'I'.$cartitem->id.'T'.time();
+
+                        $_transaction = array(
+                            'code'      => $code,
+                            'charge_id' => $charge->id,
+                            'user_name' => $this->user->getName(),
+                            'method'    => $method,
+                            'ammount'   => $cartitem->total,
+                            'date'      => date('Y-m-d G:i:s'),
+                            'trip_id'   => $listing->id,
+                            'status'    => 0,
+                            'created'   => date('Y-m-d G:i:s'),
+                            'updated'   => date('Y-m-d G:i:s')
+                        );
+
+                        $transaction = $this->transactions->fetchNew();
+                        $transaction->setFromArray($_transaction);
+                        $transaction->save();
+
+                        $reservation = $this->trips->createPurchase($transaction, $cartitem, $listing);
+
+                        $cartitem->delete();
+
+                        $this->_redirect('/cart/tripinvoice/'.$reservation->id);
+                    } catch(Exception $e) {
+                        $this->_redirect('/en-US/cart/checkout/'.$cartitem->id.'/#/?error='.$e->getMessage());
+                    }
                 break;
                 case 3:
-                    $listing = $this->trips->get($cartitem->listing_id);
+                    $cartitems = new Zend_Db_Table('cartitems');
+                    $select = $cartitems->select();
+                    $select->where('cart_id = ?', $cartitem->id);
+                    $items = $cartitems->fetchAll($select);
+                    
+                    foreach($items as $item) 
+                    {
+                        if($item->total > 0) 
+                        {
+                            $listing = $this->listings->getListing($item->listing_id);
+                            $vendor  = $this->listings->getVendor($listing->vendor_id);
+                            $method  = $account->type . ' ************'.$account->last4;
+                            $code    = $this->user->getId().$vendor->id.time();
+
+                            $_transaction = array(
+                                'code'      => $code,
+                                'user_name' => $this->user->getName(),
+                                'method'    => $method,
+                                'ammount'   => $cartitem->total,
+                                'date'      => date('Y-m-d G:i:s'),
+                                'listing_id'=> $listing->id,
+                                'vendor_id' => $vendor->id,
+                                'status'    => 0,
+                                'created'   => date('Y-m-d G:i:s'),
+                                'updated'   => date('Y-m-d G:i:s'),
+                                'paywoth'   => $account->id,
+                            );
+
+                            $transaction = $this->transactions->fetchNew();
+                            $transaction->setFromArray($_transaction);
+                            $transaction->save();
+
+                            $reservation = $this->reservations->createOfTrip($transaction, $item, $listing, $cartitem);
+                            
+                            $itnlistings = new Zend_Db_Table('itinerary_listings');
+                            $select = $itnlistings->select();
+                            $select->where('id = ?', $item->triplisting);
+                            $itnlist = $itnlistings->fetchRow($select);
+                            $itnlist->reservation_id = $reservation->id;
+                            $itnlist->save();
+                            
+                            $item->delete();
+                        }
+                        else 
+                        {
+                            $item->delete();
+                        }
+                    }
+                    
+                    $trip = $cartitem->listing_id;
+                    $cartitem->delete();
+
+                    $this->_redirect('cart/itninvoice/'.$trip);
                 break;
             }
         }
@@ -852,7 +966,7 @@ class CartController extends Zend_Controller_Action {
                         }
                     }
                     
-                    $this->_redirect('cart/tripinvoice/'.$trip->id);
+                    $this->_redirect('cart/itninvoice/'.$trip->id);
                 }
                 break;
             default:

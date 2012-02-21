@@ -1610,7 +1610,7 @@ class WS_ListingService {
             throw new Exception('The Activity is not available the selected date', 1);
         
         if(!is_null($listing->min) && !is_null($listing->max) or ($capacity == 'single')) {
-            $capacity = 'single';
+            $capacity = null;
         } else {
             if(is_null($capacity)) {
                 $capacities = $this->getActivityTypes($listing->id);
@@ -1621,7 +1621,7 @@ class WS_ListingService {
         }
         
         if($option == 'flex') {
-            $option = 'flex';
+            $option = null;
         } else {
             if(is_null($option)) {
                 $options = $this->getSchedulesOf($listing->id);
@@ -1641,7 +1641,10 @@ class WS_ListingService {
         
         $price = null;
         if(!is_null($seasson)) 
-            $price = $this->getSeassonPrice($seasson->id, $listing->id, $capacity->id);
+            if(!is_null($capacity))
+                $price = $this->getSeassonPrice($seasson->id, $listing->id, $capacity->id);
+            else
+                $price = $this->getSeassonPrice($seasson->id, $listing->id);
         if(is_null($price) || $price->price == '0.00') {
             $price = (!is_null($capacity)) ? $this->getBasicPrice($listing->id, $capacity->id) : null;
             if(is_null($price) || $price == '0.00') 
@@ -1738,6 +1741,9 @@ class WS_ListingService {
         } else {
             $nights = $days - 1;
         }
+        
+        if($nights == 0)
+            throw new Exception('You need to stay at least 1 night', 1);
         
         $_start = strtotime($checkin);
         for($i=0; $i<($days - 1); $i++) {

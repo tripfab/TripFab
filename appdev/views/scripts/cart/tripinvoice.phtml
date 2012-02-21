@@ -3,76 +3,68 @@
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title>Congratulations | Tripfab.com</title>
+    <title>Adventure Inn, Reservation Checkout | Tripfab.com</title>
     <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/cart/checkout.css" />
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
+    <script type="text/javascript" src="/js2/jquery.js"></script>
 </head>
 <body>
 <div class="w1">
-    <?= $this->partial('partials/header.phtml', 
-	array('user'=>$this->user,'full'=>true)); ?>    
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>    
     <div class="w2">
         <div class="main wrapper">
-            <div class="confirmation-header">
-                <span class="code">Code: <?= $this->reservation->code ?></span>
-                <h4>Congratulations <?= $this->user->name ?>!</h4>
-                <p>Your reservation in <?= $this->listing->title ?> has been booked!</p>
-            </div><!-- closes confirmation-header -->
-            <div class="confirmation-wrapper">
-            	<?= $this->thumbnail(117, $this->listing->image); ?>
-                <div class="detail">
-                    <h3>Payment</h3>
-                    <strong>Payment Method</strong>
-                    <p><?= $this->transaction->method ?></p>
-                </div><!-- closes detail -->
-                <div class="detail">
-                    <h3>Purchase Details</h3>
-                    <strong>Check In</strong>
-                    <p><?= date('D, F jS Y', strtotime($this->reservation->checkin)) ?></p>
-                    <strong>Ocupation</strong>
-                    <p><?= $this->reservation->adults ?> Adults
-                    <?php if($this->reservation->kids): ?>
-                    , <?= $this->reservation->kids ?> Children<?php endif ?></p>
-                </div>
-                <!-- closes detail -->
-                <div class="detail last">
-                    <h3>Total Paid</h3>
-                    <strong>Charges</strong>
-                    <table cellpadding="0" cellspacing="0" border="0">
-                        <tbody>
-                            <tr>
-                                <td>Price per person</td>
-                                <td>$<?= $this->reservation->rate ?></td>
-                            </tr>
-                            <tr>
-                                <td>Subtotal</td>
-                                <td>$<?= $this->reservation->subtotal ?></td>
-                            </tr>
-                            <tr>
-                                <td>Taxes &amp; Fees</td>
-                                <td>$0.00</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Total</strong></td>
-                                <td><strong>$<?= $this->reservation->total ?></strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div><!-- closes detail -->
-                <div class="clear"></div>
-                <div class="confirmation-footer">
-                    <p><strong>Questions?</strong> Contact <a href="">service@tripfab.com</a></p>
-                    <p><a href="">Print Reservation</a></p>
-                </div><!-- closes conformation-footer -->
-            </div><!-- closes confirmation-wrapper -->
-        </div><!-- closes main -->
+            <div id="confirmation"> <img src="/images2/confirmation-img.png" width="" height="" alt="" />
+                <div class="wrap"> <span class="stamp"></span>
+                    <h2>Thank You <?= $this->user->name ?>!</h2>
+                    <h3>We wish you the best trip ever!</h3>
+                    <a href="#" class="btn-10">Print your Reservation</a>
+                    <div class="warning">
+                        <p><strong>We'll contact you in the next 24 hours</strong><br />To help you with all of the details</p>
+                    </div><!--WARNING-->
+                    <div class="overview"> 
+                    	<span class="name"><?= $this->listing->title ?></span> 
+                        <span class="code">Reservation Code: <?= $this->reservation->code ?></span> 
+                    </div><!--OVERVIEW-->
+                    
+                    <div class="details">
+                        <h4>Payment</h4>
+                        <ul>
+                            <li><strong>Credit Card</strong><?= $this->transaction->method ?></li>
+                        </ul>
+                    </div><!--DETAILS-->
+                    
+                    <div class="details">
+                        <h4>Reservation Dettails</h4>
+                        <ul>
+                            <li><strong>Trip Starts </strong> </li>
+                            <li><strong>Trips Ends Sat,</strong> <?= date('F jS Y', strtotime($this->reservation->checkin)) ?></li>
+                            <li><strong>Trip Duration</strong> <?= $this->listing->days ?> Days</li>
+                            <li><strong>Travelers</strong> <?= $this->reservation->adults ?> Adults
+                            <?php if($this->reservation->kids > 0) ?>
+                            , <?= $this->reservation->kids ?> Children</li>
+                        </ul>
+                    </div><!--DETAILS-->
+                    
+                    <div class="details">
+                        <h4>Total Paid</h4>
+                        <dl>
+                            <dt class="total">Total</dt>
+                            <dd class="total">$<?= $this->transaction->ammount ?></dd>
+                        </dl>
+                    </div><!--DETAILS-->
+                    
+                    <div class="bottom">
+                        <p><strong>Questions?</strong> Contact service@tripfab.com </p>
+                        <a href="#">Reservation Details</a> <a href="#">Print Reservation</a> 
+                    </div><!--BOTTOM--> 
+                </div><!--WRAP--> 
+            </div><!--CONFIRMATION--> 
+        </div><!-- closes main --> 
     </div><!-- closes w2 -->
-    <?= $this->partial('partials/footer.phtml'); ?>
-</div><!-- closes w1 -->	
+    <div class="footer">
+	<?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
 </body>
 </html>
