@@ -1,29 +1,61 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Zend Framework Default Application</title>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title>Cristian Andrés  : Change Password | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <script type="text/javascript" src="/js2/jquery.js"></script>
 </head>
 <body>
-  <h1>An error occurred</h1>
-  <h2><?php echo $this->message ?></h2>
+<div class="w1" id="errorpage">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>
+    <div class="w2">
+        <div class="top">
+            <div> </div>
+        </div><!--TOP-->
+        <div class="bottom">
+            <div class="island"><img src="/images2/404-island.png"  alt="" /></div>
+            <h2>You found a desert Island!</h2>
+            <h3>Unfortunately Tripfab can't take you here.</h3>
+            <div class="search">
+                <form action="">
+                    <fieldset>
+                        <input type="text" value="Where do you want to go?"  />
+                        <input type="submit" class="btn-1 noclean" value="Go!" />
+                    </fieldset>
+                </form>
+            </div><!--SEARCH--> 
+            <span class="previous-page"><a href="">Go back</a> to the previous page</span> 
+        </div><!--BOTTOM--> 
+    </div><!-- closes w2 -->
+	<?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
 
-  <?php if (isset($this->exception)): ?>
-  
-  <h3>Exception information:</h3>
-  <p>
-      <b>Message:</b> <?php echo $this->exception->getMessage() ?>
-  </p>
 
-  <h3>Stack trace:</h3>
-  <pre><?php echo $this->exception->getTraceAsString() ?>
-  </pre>
+<!--
+<h1>An error occurred</h1>
+<h2><?php //echo $this->message ?></h2>
 
-  <h3>Request Parameters:</h3>
-  <pre><?php echo $this->escape(var_export($this->request->getParams(), true)) ?>
-  </pre>
+<?php //if (isset($this->exception)): ?>
 
-  <?php endif ?>
+<h3>Exception information:</h3>
+<p>
+<b>Message:</b> <?php //echo $this->exception->getMessage() ?>
+</p>
 
+<h3>Stack trace:</h3>
+<pre><?php //echo $this->exception->getTraceAsString() ?>
+</pre>
+
+<h3>Request Parameters:</h3>
+<pre><?php //echo $this->escape(var_export($this->request->getParams(), true)) ?>
+</pre>
+
+<?php //endif ?>
+-->
 </body>
 </html>
