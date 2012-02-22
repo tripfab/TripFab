@@ -121,7 +121,7 @@ class WS_ListingService {
     /**
      * 
      */
-    public function __construct($use_cache = false)
+    public function __construct($use_cache = true)
     {
         $this->listings = new Model_Listings();
         
@@ -154,7 +154,7 @@ class WS_ListingService {
         if(Zend_Registry::isRegistered('cache'))
             $this->cache = Zend_Registry::get('cache');
         
-        $this->use_cache = false; # $use_cache;
+        $this->use_cache = $use_cache;
     }
     
     public function getDefaultListing($vendor)

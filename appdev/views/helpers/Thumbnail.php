@@ -46,7 +46,7 @@ class Zend_View_Helper_Thumbnail {
 
         $cache_http_minutes = 20;  # cache downloaded http images 20 minutes
 
-        $path_to_convert = 'convert'; # this could be something like /usr/bin/convert or /opt/local/share/bin/convert
+        $path_to_convert = Zend_Registry::get('convert'); # this could be something like /usr/bin/convert or /opt/local/share/bin/convert
         ## you shouldn't need to configure anything else beyond this point
 
         $purl = parse_url($imagePath);
@@ -60,7 +60,7 @@ class Zend_View_Helper_Thumbnail {
             $local_filepath = $remoteFolder . $filename;
             $download_image = true;
             if (file_exists($local_filepath)):
-                    $download_image = true;
+                    $download_image = false;
             endif;
             if ($download_image == true):
 				if(file_exists($local_filepath))
