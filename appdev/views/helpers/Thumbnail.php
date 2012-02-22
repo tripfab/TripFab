@@ -22,7 +22,7 @@ class Zend_View_Helper_Thumbnail {
 
         # start configuration
         $imagePath = $image;
-
+		
         $width = (is_array($size)) ? $size['width'] : $size;
         $height = (is_array($size)) ? $size['height'] : $size;
         $opts = array(
@@ -46,7 +46,7 @@ class Zend_View_Helper_Thumbnail {
 
         $cache_http_minutes = 20;  # cache downloaded http images 20 minutes
 
-        $path_to_convert = '/Users/magentodeveloper/ImageMagick/bin/convert'; # this could be something like /usr/bin/convert or /opt/local/share/bin/convert
+        $path_to_convert = 'convert'; # this could be something like /usr/bin/convert or /opt/local/share/bin/convert
         ## you shouldn't need to configure anything else beyond this point
 
         $purl = parse_url($imagePath);
@@ -60,11 +60,12 @@ class Zend_View_Helper_Thumbnail {
             $local_filepath = $remoteFolder . $filename;
             $download_image = true;
             if (file_exists($local_filepath)):
-                if (filemtime($local_filepath) < strtotime('+' . $cache_http_minutes . ' minutes')):
-                    $download_image = false;
-                endif;
+                    $download_image = true;
             endif;
             if ($download_image == true):
+				if(file_exists($local_filepath))
+					unlink($local_filepath);
+				
                 $ch = curl_init($imagePath);
                 $fp = fopen($local_filepath, "w");
 
@@ -75,7 +76,8 @@ class Zend_View_Helper_Thumbnail {
                 curl_close($ch);
                 fclose($fp);
             endif;
-            $imagePath = $local_filepath;
+			
+			$imagePath = $local_filepath;
         endif;
 
         if (file_exists($imagePath) == false):

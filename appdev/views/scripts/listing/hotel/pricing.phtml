@@ -53,7 +53,7 @@
             <div class="carrousel">
 				<?php if(count($this->seasons) > 0): ?>
                 <?php foreach($this->seasons as $season): ?>
-                <h3><img src="images/cleardot.gif" alt="" /><?= $season->name ?></h3>
+                <h3><img src="/images/cleardot.gif" alt="" /><?= $season->name ?></h3>
                 <div class="carrousel-itm">
                     <div class="pricing-itm">
                         This season goes from <strong><?= date('M jS,', strtotime($season->starting)) ?></strong> 

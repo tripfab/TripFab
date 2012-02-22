@@ -410,7 +410,7 @@
                             <div id="container" style="position:absolute;width:282px;left:0;top:0">
                                 <p>ALL COUNTRIES</p>
                                 <?php foreach($this->countries as $c): ?>
-                                <a href="#" data-code="<?= $c->phone ?>"><img src="/images2/flags/<?= $c->code ?>.png" width="16" height="16" alt="" />
+                                <a href="#" data-code="<?= $c->phone ?>"><img src="/images2/flags/<?= strtolower($c->code) ?>.png" width="16" height="16" alt="" />
                                 <?= $c->title ?> <strong>(+<?= $c->phone ?>)</strong></a>
                                 <?php endforeach ?> 
                             </div><!--CONTAINER-->
