@@ -54,7 +54,7 @@ class CartController extends Zend_Controller_Action {
     {
         $auth = Zend_Auth::getInstance();
         if(!$auth->hasIdentity()){
-            $this->_redirect('login');
+            $this->_redirect('/en-US/login?b='.$_SERVER['REQUEST_URI']);
             //var_dump($_SESSION); die;
         } else {
             $this->user = new WS_User($auth->getStorage()->read());

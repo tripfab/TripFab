@@ -50,7 +50,7 @@ class ProviderController extends Zend_Controller_Action
         $auth = Zend_Auth::getInstance();
         if(!$auth->hasIdentity()){
             if($this->_getParam('action') != 'signup' && $this->_getParam('task') != 'preview' )
-                $this->_redirect ('login');
+                $this->_redirect('/en-US/login?b='.$_SERVER['REQUEST_URI']);
             else {
                 $this->messages     = new WS_MessagesService();
                 $this->reservations = new WS_ReservationsService();

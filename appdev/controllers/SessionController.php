@@ -54,8 +54,16 @@ class SessionController extends Zend_Controller_Action {
             }
         }
         
+        $returnUrl = "";
+        if(isset($_GET['b']))
+            $returnUrl = $_GET['b'];
+        elseif(isset($_POST['returnURL'])) 
+            $returnUrl = $_POST['returnURL'];
+        
         $flashMessenger = $this->_helper->getHelper('FlashMessenger');
         $this->view->alerts = $flashMessenger->getMessages();
+        
+        $this->view->returnUrl = $returnUrl;
     }
     
     public function loginPostHandler()
@@ -78,8 +86,8 @@ class SessionController extends Zend_Controller_Action {
                 WS_Log::info($user->id . ' has logged in');
                 
                 $role = $user->role_id;
-                if(!empty($_POST['return_url']))
-                    $this->_redirect ($_POST['return_url']);            
+                if(!empty($_POST['returnURL']))
+                    $this->_redirect ($_POST['returnURL']);            
                 switch($role){
                     case 1:
                         $this->_redirect('/'); break;
