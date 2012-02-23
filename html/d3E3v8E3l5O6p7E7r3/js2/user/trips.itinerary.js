@@ -10,6 +10,11 @@ $(document).ready(function() {
     $('.lbox .btn-2, .lbox .btn-11').click(function(){
         $(this).parents('form').submit();
     });
+    
+    $('.activities-tabs > ul > li').each(function(){
+        $class = '.tab > ul > .cat-'+$(this).attr('class');
+        $('> a > em',this).text('('+$($class).length+')');
+    });
 
     $fancybox = true;
     $drop     = false;
