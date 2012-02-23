@@ -1,3 +1,5 @@
+<h3>There are <strong><?= $this->listing_count ?> <?= $this->categ ?> in <?= $this->city->title ?>, <?= $this->country->title ?></strong></h3>
+<div class="results-wrapper">
 <?php $url = $this->baseUrl() .'/'. $this->country->identifier .'/'. $this->city->identifier .'/filter';
 $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this->stars; ?>
 <div class="loading"><div class="load">Loading...</div></div>
@@ -33,4 +35,6 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
 <div class="clear"></div>
 <?php else: ?>
 <p>No Listings Found</p>
+<div class="clear"></div>
 <?php endif ?>
+</div><!-- closes results-wrapper -->

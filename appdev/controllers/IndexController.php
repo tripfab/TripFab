@@ -131,6 +131,8 @@ class IndexController extends Zend_Controller_Action
                 $subcats[$s] = $this->listings->getSubCategoriesOf($c);
         }
         
+        $ls_count = $this->listings->countListings($city->id);
+        
         $this->view->countries = $countries;
         
         $this->view->region  = $region;
@@ -139,6 +141,10 @@ class IndexController extends Zend_Controller_Action
         
         $this->view->categories = $categories;
         $this->view->subcats    = $subcats;
+        
+        $this->view->ls_count = $ls_count;
+        
+        //var_dump($ls_count); die;
     }
     
     public function searchAction()

@@ -49,7 +49,8 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
                     <li class="item-<?= $ii ?> <?= $class ?>">
                     <a data-cat="<?= $_cat ?>" href="#/<?= $_cat ?>">
                     <img src="/images2/cleardot.gif" alt="" />
-                    <?= $category['name'] ?></a></li>
+                    <?= $category['name'] ?><span><?= $this->ls_count[$category['id']] ?></span></a>
+                    </li>
                     <?php $ii++ ?>
                     <?php endforeach ?>
                 </ul>
@@ -82,7 +83,7 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
                 </div>
             </div><!-- closes left-sidebar -->
             <div class="content">
-            	<h3>There are <strong><?= $this->listing_count ?> things to do in Costa Rica</strong></h3>
+            	<h3></h3>
                 <div class="results-wrapper">
                 	<div class="loading"><div class="load">Loading...</div></div>
 		            <div class="clear"></div>

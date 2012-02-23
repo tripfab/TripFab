@@ -577,7 +577,7 @@ class WS_ListingService {
             $select = $db->select();
             $select->from('listings');
             //$select->where('listings.status = ?', 1);
-            $select->where('listings.country_id = ?', $place);
+            $select->where('listings.city_id = ?', $place);
             if($cat != 'all'){
                 $_cat = $this->getCategoryByIdf($cat);
                 $select->where('listings.main_type = ?', $_cat->id);}
@@ -621,7 +621,9 @@ class WS_ListingService {
 
            $select->where('listings.price >= ?', $pricemin);
            $select->where('listings.price <= ?', $pricemax);
-
+           
+           $select->group('listings.id');
+           
            $listings = $db->fetchAll($select, array(), Zend_Db::FETCH_OBJ);
            
            if($this->use_cache)

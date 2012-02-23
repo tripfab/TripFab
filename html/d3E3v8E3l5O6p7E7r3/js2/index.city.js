@@ -245,7 +245,7 @@ $(function(){
 				
                 $('ul.cat-menu li.active').removeClass('active');
                 $a.parents('li').addClass('active');
-                $('.results-wrapper').html(results);
+                $('#search_result .content').html(results);
             },
             error:function(){
                 $('.results-wrapper .loading').hide();

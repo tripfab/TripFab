@@ -448,6 +448,7 @@ $(document).ready(function() {
             showError('Please enter your phone number');
             return false;
         }
+        
         $.ajax({
             url:'/phone/call',
             type:'post',
