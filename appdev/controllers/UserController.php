@@ -1104,7 +1104,7 @@ class UserController extends Zend_Controller_Action
             }
         }
         
-        $labels = array('','Morning','Afternoon', 'Night');
+        $labels = array('','Morning','Afternoon', 'Night','Hotel');
         $times = array();
         $days  = array();
         $results = array();

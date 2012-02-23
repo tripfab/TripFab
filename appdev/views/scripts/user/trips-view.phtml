@@ -10,7 +10,7 @@
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <script type="text/javascript" src="/js2/jquery.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function() { 
             $('.slider').cycle({
                 fx:     'fade', 
                 speed:  'fast', 
@@ -23,30 +23,29 @@
             $('form select').jqTransSelect();
         });
     </script>
+    <style type="text/css">
+	.slide { width:100%; }
+	.slider { width:auto; }
+	</style>
 </head>
 <body>
 <div class="w1">
-    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
-    <div class="w2">
+   <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+   <div class="w2">
+		<div class="w3 pasttrips">
+			<div class="wrapper">
+				<h2><?= $this->trip->title ?></h2>
+			</div><!--WRAPPER-->
+		</div><!--W3-->
         <div class="wrapper user-messages user-trips">
-        	<div class="tripttl">
-        		<div>
-                    <a class="btn-1" href="">Sell Trip</a>
-                    <a href="" class="btn-8">Do this Trip Again</a>
-        			<?= $this->thumbnail(50, $this->trip->image, '', '1:1'); ?>
-        			<h2><?= $this->trip->title ?></h2>
-                    <span>Enjoyed from <?= date('M jS', strtotime($this->trip->start)) ?> to 
-                   <?= date('M jS Y', strtotime($this->trip->end)) ?></span>
-        		</div>
-        	</div><!-- closes tripttl -->
             
             <div class="subttl">
-                <a href="/user/trips" class="link-4">Back to My Past Trips</a>
-                <h4>Trip Itinerary</h4>
+                <a href="/user/trips/past" class="link-4">Back to My Past Trips</a>
+                <h4>Trip Details</h4>
             </div><!-- closes subttl -->
             
             <div class="past-trips">
-                <div class="left">
+            	<div class="left">
                     <a href="" class="prev">Previous Day</a>
                     <a href="" class="next">Next Day</a>
                     <div class="slider">
@@ -69,10 +68,11 @@
                         <?php endforeach ?>
                     </div><!-- closes slider -->
                 </div><!-- closes left -->
+                
                 <div class="right">
                     <div class="trip-smmr">
                         <?= $this->partial('partials/usertripsumary.phtml', array('trip'=>$this->trip, 'counter'=>$this->counter)) ?>
-                    </div><!-- closes smmr -->
+					</div><!-- closes smmr -->
                 </div><!-- closes right -->
             </div><!-- closes past-trips -->
         </div><!-- closes user-messages -->

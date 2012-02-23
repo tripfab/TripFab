@@ -306,7 +306,7 @@ class WS_TripsService {
             'countryurl'=>'identifier'
         ));
         $select->where("itinerary_listings.itinerary_id = {$trip}");
-        $select->order('itinerary_listings.time ASC');
+        $select->order('itinerary_listings.day ASC');
         
         if($exclude == 'notnull')
         {
