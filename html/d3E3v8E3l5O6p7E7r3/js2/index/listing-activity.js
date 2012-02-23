@@ -441,17 +441,13 @@ $(document).ready(function() {
         return false;
     });
     
-    $('input[name=start]').click(function(){
-        alert('asd');
-        
+    $('#start_call input[name=start]').click(function(){        
         $code = $('input[name=code]').val();
-        $numb = $('input[name=number]').val();
-        
+        $numb = $('input[name=number]').val();        
         if($numb == '') {
             showError('Please enter your phone number');
             return false;
         }
-        
         $.ajax({
             url:'/phone/call',
             type:'post',
