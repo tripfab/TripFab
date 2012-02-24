@@ -566,18 +566,21 @@ class WS_ListingService {
         return $lists;
     }
     
-    public function getListings2($place, $cat, $subcat, $sort, $stars, $pricemin = 0, $pricemax = 3000)
+    public function getListings2($place, $cat, $subcat, $sort, $stars, $pricemin = 0, $pricemax = 3000, $country = null)
     {
         $args = func_get_args();
         $cacheId = "LS_getListings2_".md5(print_r($args, true));
         
-        if(!$this->use_cache || !$this->cache->test($cacheId)) {
+        if($this->use_cache || !$this->cache->test($cacheId)) {
             
             $db = Zend_Db_Table::getDefaultAdapter();
             $select = $db->select();
             $select->from('listings');
             //$select->where('listings.status = ?', 1);
-            $select->where('listings.city_id = ?', $place);
+            if(!is_null($place))
+                $select->where('listings.city_id = ?', $place);
+            else
+                $select->where('listings.country_id = ?', $country);
             if($cat != 'all'){
                 $_cat = $this->getCategoryByIdf($cat);
                 $select->where('listings.main_type = ?', $_cat->id);}
@@ -614,6 +617,15 @@ class WS_ListingService {
                 }}
 
            $select->join('vendors','listings.vendor_id = vendors.id',array('vendor_name'=>'name'));
+           
+           $select->join('places','listings.city_id = places.id', array(
+               'city'=>'title',
+               'cityidf'=>'identifier'
+           ));
+           $select->join(array('places2'=>'places'),'listings.country_id = places2.id', array(
+               'country'=>'title',
+               'countryidf'=>'identifier'
+           ));
            //print $select->assemble(); //die;
 
            //$count = 9;
@@ -1475,7 +1487,7 @@ class WS_ListingService {
         return $row->title;
     }
     
-    public function countListings($city, $vendor = null)
+    public function countListings($city, $vendor = null, $country = null)
     {
         if(!is_null($city)){
             $db = Zend_Db_Table::getDefaultAdapter();
@@ -1501,7 +1513,23 @@ class WS_ListingService {
             $counter = $count['c'];
             
             return $counter;
-        } else{
+        } elseif(!is_null($country)){
+            $db = Zend_Db_Table::getDefaultAdapter();
+            $cats = $this->getMainCategories();
+            $counter = array();
+            foreach($cats as $cat){
+                if($cat->name == 'All'){
+                    $sql = "Select count(*) as c from listings where country_id = {$country}";
+                    $count = $db->fetchRow($sql);
+                    $counter[$cat->id] = $count['c'];
+                } else {
+                    $sql = "Select count(*) as c from listings where country_id = {$country} and main_type = {$cat->id}";
+                    $count = $db->fetchRow($sql);
+                    $counter[$cat->id] = $count['c'];
+                }
+            }
+            return $counter;
+        } else {
             throw new Exception();
         }
     }

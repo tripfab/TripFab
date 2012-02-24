@@ -50,7 +50,7 @@ class WS_TripsService {
         $this->DB       = Zend_Db_Table::getDefaultAdapter();
         $this->listings = new Model_TripListings();
         
-        $this->categories = new Zend_Db_Table('tripcategories');
+        $this->categories = new Zend_Db_Table('trip_categories');
         $this->landscapes = new Zend_Db_Table('landscapes');
         
         $this->itineraries = new Zend_Db_Table('itineraries');
@@ -496,14 +496,17 @@ class WS_TripsService {
         return $trips;
     }
     
-    public function getTripsOf($country, $price=array(), $days = array(), $people = 0, $page = 1)
+    public function getTripsOf($country, $price=array(), $days = array(), $people = 0, $category = "all", $page = 1)
     {
         $select = $this->DB->select();
         $select->from('trips');
         $select->join('places', 'trips.country_id = places.id', array('country'=>'title'));
         $select->join(array('places2'=>'places'), 'trips.start_city = places2.id',array('start_city_name'=>'title'));
         $select->join(array('places3'=>'places'), 'trips.end_city = places3.id',array('end_city_name'=>'title'));
+        $select->join('trip_categories','trips.category_id = trip_categories.id',array('category'=>'name'));
         $select->where('trips.country_id = ?',$country);
+        if($category != 'all') 
+            $select->where('trips.category_id = ?', $category);
         if(isset($price['max']) && isset($price['min'])){
             $select->where('trips.price >= ?', $price['min']);
             $select->where('trips.price <= ?', $price['max']); }
@@ -515,6 +518,8 @@ class WS_TripsService {
             $select->where('trips.max >= ?', $people); }
         
         $select->order('trips.created DESC');
+        
+        //echo $select->assemble(); die;
         //$select->limit(5);
         $trips = $this->DB->fetchAll($select, array(), 5);
         //var_dump($trips); die;

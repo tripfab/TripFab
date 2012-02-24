@@ -41,41 +41,44 @@
         });
     </script>
     <style type="text/css">
-	.desc-wrapper #pager a { width:<?= (100 / count($this->images)) . '%'; ?>;} .hidden { display:none;}
+	.desc-wrapper #pager a { width:<?= (100 / count($this->images)) . '%'; ?>;} 
+	.hidden { display:none;}
 	.datepicker a.ui-state-active { background-color: #60B5F7; color: #FFFFFF;}
 	</style>
 </head>
 <body>
-<div class="w1">
+<div class="w1 profile"> 
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>    
     <div class="w2">
-	    <div class="wrapper trip-itinerary">
-            <div class="ttl">
-                <a href="#dates_lb" class="lb btn-1">Buy Trip</a>
-                <?= $this->trip->title ?>
-            </div><!-- closes ttl -->
-            <div class="trip-menu">
-                <ul>
-                    <li class="current"><a href="/trips/view/<?= $this->trip->id ?>">Overview</a></li>
+    	 <div class="w3 itinerary">
+        	<div class="wrapper">
+        	    <a href="#dates_lb" class="lb btn-1">Buy Itinerary</a>
+        	    <h2><?= $this->trip->title ?></h2>
+        	</div><!-- closes ttl -->
+        </div>
+        <div class="wrapper trip-itinerary">
+            <div class="overview">
+                <ul class="menu">
+                    <li class="active"><a href="/trips/view/<?= $this->trip->id ?>">Overview</a></li>
                     <li><a href="/trips/itinerary/<?= $this->trip->id ?>">Itinerary</a></li>
                 </ul>
-            </div><!-- closes trip-menu -->
-            <div class="box main-image">
-            	<?= $this->thumbnail(array('width'=>928,'height'=>435), $this->trip->image, '', '928::435'); ?>
-                <span><strong><?= $this->trip->days ?></strong>Days</span>
-            </div><!-- closes box -->
-            <div class="summary">
-                <span><strong>$<?= $this->trip->price ?></strong><em>per person</em></span>
-                <div class="left">
-                    <h2><?= $this->trip->title ?></h2>
-                    <span><?= $this->trip->country ?></span>
-                    <p><?= $this->trip->description ?></p>
-                </div><!-- closes left -->
-                <div class="right">
-                    <img src="/images2/img-39.png" alt="" />
-                    <h3>Cities to Discover</h3>
+                <div class="image">
+                    <img src="/images2/itinerary-img1.jpg" width="" height="" alt="" />
+                    <div class="info">
+                        <h3><?= $this->trip->title ?></h3>
+                        <span class="place"><?= $this->trip->country ?></span>
+                        <span class="duration"><?= $this->trip->days ?> days</span>
+                        <h4><sup>$</sup><?= $this->trip->price ?><span>per person</span></h4>
+                    </div><!--INFO-->
+                </div><!--IMAGE-->
+            </div><!--OVERVIEW-->
+            
+            <div class="facts">
+                <div class="cities">
+                    <h3>Some cities you'll explore</h3>
+                    <img src="/images2/itinerary-map.png" width="" height="" alt="" />
                     <ul>
-                    	<?php $used_cities = array(); ?>
+                        <?php $used_cities = array(); ?>
                     	<?php foreach($this->listings as $list): ?>
                         <?php if(!in_array($list->city, $used_cities)): ?>
                         <li><?= $list->city ?></li>
@@ -83,151 +86,152 @@
                         <?php endif ?>
                         <?php endforeach ?>
                     </ul>
-                </div><!-- closes right -->
-            </div><!-- closes sumary -->
-            <div class="box">
-                <?php if(count($this->highlights) > 0): ?>
-                <div class="hight-lights">
-                    <h4>Trip Highlights</h4>
-                    <?php foreach($this->highlights as $high): ?>
-                    <div>
-                        <h5><?= $high->title ?></h5>
-                        <p><?= nl2br($high->text) ?></p>
-                    </div>
-                    <?php endforeach ?>
-                </div><!-- closes high-lights -->
-                <?php endif ?>
-                <div class="tabs-wrapper">
-                	<?php $show = array(); ?>
-					<?php foreach($this->listings as $listing): ?>
-						<?php if($listing->main_type == 6 or $listing->main_type == 7): ?>
-                        <?php $show[1] = true; ?>
-                        <?php elseif($listing->main_type == 4): ?>
-                        <?php $show[2] = true; ?>
-                        <?php elseif($listing->main_type == 5): ?>
-                        <?php $show[3] = true; ?>
-                        <?php elseif($listing->main_type == 2): ?>
-                        <?php $show[4] = true; ?>
+                </div><!--CITIES-->
+                <h3>Trip Overview</h3>
+                <p><?= $this->trip->description ?></p>
+            </div><!--FACTS-->
+            
+            <?php if(count($this->highlights) > 0): ?>
+            <div class="hight-lights">
+                <h4>Trip Highlights</h4>
+                <?php foreach($this->highlights as $high): ?>
+                <div>
+                    <h5><?= $high->title ?></h5>
+                    <p><?= nl2br($high->text) ?></p>
+                </div>
+                <?php endforeach ?>
+            </div><!-- closes high-lights -->
+            <?php endif ?>
+            <div class="tabs-wrapper">
+				<?php $show = array(); ?>
+                <?php foreach($this->listings as $listing): ?>
+                    <?php if($listing->main_type == 6 or $listing->main_type == 7): ?>
+                    <?php $show[1] = true; ?>
+                    <?php elseif($listing->main_type == 4): ?>
+                    <?php $show[2] = true; ?>
+                    <?php elseif($listing->main_type == 5): ?>
+                    <?php $show[3] = true; ?>
+                    <?php elseif($listing->main_type == 2): ?>
+                    <?php $show[4] = true; ?>
+                    <?php endif ?>
+                <?php endforeach ?>
+                <ul>
+                    <?php if(isset($show[1]) and $show[1] == true): ?><li><a href="#tabs-1">Things to do</a></li><?php endif ?>
+                    <?php if(isset($show[2]) and $show[2] == true): ?><li><a href="#tabs-2">Attractions</a></li><?php endif ?>
+                    <?php if(isset($show[3]) and $show[3] == true): ?><li><a href="#tabs-3">Places to Stay</a></li><?php endif ?>
+                    <?php if(isset($show[4]) and $show[4] == true): ?><li><a href="#tabs-4">Dining Places</a></li><?php endif ?>
+                </ul>
+                <?php if(isset($show[1]) and $show[1] == true): ?>
+                <div class="tab" id="tabs-1">
+                    <div id="slider-1">
+                        <?php $used = array() ?>
+                        <?php foreach($this->listings as $listing): ?>
+                        <?php if($listing->main_type == 6 or $listing->main_type == 7): ?>
+                        <?php if(!in_array($listing->id, $used)): $used[] = $listing->id ?>
+                        <div class="slide">
+                            <?= $this->thumbnail(array('width'=>855,'height'=>342), $listing->image, '', '855:342') ?>
+                            <div class="content">
+                                <div class="left">
+                                    <?= $listing->title ?>
+                                </div><!-- closes left -->
+                                <div class="right">
+                                    <p><?= $listing->description ?></p>
+                                </div><!-- closes right -->
+                            </div><!-- closes content -->
+                        </div><!-- closes slide -->
                         <?php endif ?>
-                    <?php endforeach ?>
-                    <ul>
-                    	<?php if(isset($show[1]) and $show[1] == true): ?><li><a href="#tabs-1">Things to do</a></li><?php endif ?>
-                        <?php if(isset($show[2]) and $show[2] == true): ?><li><a href="#tabs-2">Attractions</a></li><?php endif ?>
-                        <?php if(isset($show[3]) and $show[3] == true): ?><li><a href="#tabs-3">Places to Stay</a></li><?php endif ?>
-                        <?php if(isset($show[4]) and $show[4] == true): ?><li><a href="#tabs-4">Dining Places</a></li><?php endif ?>
-                    </ul>
-                    <?php if(isset($show[1]) and $show[1] == true): ?>
-                    <div class="tab" id="tabs-1">
-                        <div id="slider-1">
-                        	<?php $used = array() ?>
-                        	<?php foreach($this->listings as $listing): ?>
-                            <?php if($listing->main_type == 6 or $listing->main_type == 7): ?>
-                            <?php if(!in_array($listing->id, $used)): $used[] = $listing->id ?>
-                            <div class="slide">
-                                <?= $this->thumbnail(array('width'=>855,'height'=>342), $listing->image, '', '855:342') ?>
-                                <div class="content">
-                                    <div class="left">
-                                        <?= $listing->title ?>
-                                    </div><!-- closes left -->
-                                    <div class="right">
-                                        <p><?= $listing->description ?></p>
-                                    </div><!-- closes right -->
-                                </div><!-- closes content -->
-                            </div><!-- closes slide -->
-                            <?php endif ?>
-                            <?php endif ?>
-                            <?php endforeach ?>
-                        </div><!-- closes slider -->
-                        <a href="" id="next-1" class="next">Next</a>
-                        <a href="" id="prev-1" class="prev">Prev</a>
-                        <div id="cycle-pager-1" class="cycle-pager"></div>
-                    </div><!-- closes tab -->
-                    <?php endif ?>
-                    <?php if(isset($show[2]) and $show[2] == true): ?>
-                    <div class="tab" id="tabs-2">
-                        <div id="slider-2" style="height: 525px;">
-                        	<?php $used = array() ?>
-                        	<?php foreach($this->listings as $listing): ?>
-                            <?php if($listing->main_type == 4): ?>
-                            <?php if(!in_array($listing->id, $used)): $used[] = $listing->id ?>
-                            <div class="slide">
-                                <?= $this->thumbnail(array('width'=>855,'height'=>342), $listing->image, '', '855:342') ?>
-                                <div class="content">
-                                    <div class="left">
-                                        <?= $listing->title ?>
-                                    </div><!-- closes left -->
-                                    <div class="right">
-                                        <p><?= $listing->description ?></p>
-                                    </div><!-- closes right -->
-                                </div><!-- closes content -->
-                            </div><!-- closes slide -->
-                            <?php endif ?>
-                            <?php endif ?>
-                            <?php endforeach ?>
-                        </div><!-- closes slider -->
-                        <a href="" id="next-2" class="next">Next</a>
-                        <a href="" id="prev-2" class="prev">Prev</a>
-                        <div id="cycle-pager-2" class="cycle-pager"></div>
-                    </div><!-- closes tab -->
-                    <?php endif ?>
-                    <?php if(isset($show[3]) and $show[3] == true): ?>
-                    <div class="tab" id="tabs-3">
-                        <div id="slider-3" style="height:525px">
-                        	<?php $used = array() ?>
-                        	<?php foreach($this->listings as $listing): ?>
-                            <?php if($listing->main_type == 5): ?>
-                            <?php if(!in_array($listing->id, $used)): $used[] = $listing->id ?>
-                            <div class="slide">
-                                <?= $this->thumbnail(array('width'=>855,'height'=>342), $listing->image, '', '855:342') ?>
-                                <div class="content">
-                                    <div class="left">
-                                        <?= $listing->title ?>
-                                    </div><!-- closes left -->
-                                    <div class="right">
-                                        <p><?= $listing->description ?></p>
-                                    </div><!-- closes right -->
-                                </div><!-- closes content -->
-                            </div><!-- closes slide -->
-                            <?php endif ?>
-                            <?php endif ?>
-                            <?php endforeach ?>
-                        </div><!-- closes slider -->
-                        <a href="" id="next-3" class="next">Next</a>
-                        <a href="" id="prev-3" class="prev">Prev</a>
-                        <div id="cycle-pager-3" class="cycle-pager"></div>
-                    </div><!-- closes tab -->
-                    <?php endif ?>
-                    <?php if(isset($show[4]) and $show[4] == true): ?>
-                    <div class="tab" id="tabs-4">
-                        <div id="slider-4" style="height:525px">
-                        	<?php $used = array() ?>
-                        	<?php foreach($this->listings as $listing): ?>
-                            <?php if($listing->main_type == 2): ?>
-                            <?php if(!in_array($listing->id, $used)): $used[] = $listing->id ?>
-                            <div class="slide">
-                               <?= $this->thumbnail(array('width'=>855,'height'=>342), $listing->image, '', '855:342') ?>
-                                <div class="content">
-                                    <div class="left">
-                                        <?= $listing->title ?>
-                                    </div><!-- closes left -->
-                                    <div class="right">
-                                        <p><?= $listing->description ?></p>
-                                    </div><!-- closes right -->
-                                </div><!-- closes content -->
-                            </div>
-                            <?php endif ?>
-                            <?php endif ?>
-                            <?php endforeach ?>
-                        </div><!-- closes slider -->
-                        <a href="" id="next-4" class="next">Next</a>
-                        <a href="" id="prev-4" class="prev">Prev</a>
-                        <div id="cycle-pager-4" class="cycle-pager"></div>
-                    </div><!-- closes tab -->
-                    <?php endif ?>
-                </div><!-- closes tabs-wrapper -->
-            </div><!-- closes box -->
+                        <?php endif ?>
+                        <?php endforeach ?>
+                    </div><!-- closes slider -->
+                    <a href="" id="next-1" class="next">Next</a>
+                    <a href="" id="prev-1" class="prev">Prev</a>
+                    <div id="cycle-pager-1" class="cycle-pager"></div>
+                </div><!-- closes tab -->
+                <?php endif ?>
+                <?php if(isset($show[2]) and $show[2] == true): ?>
+                <div class="tab" id="tabs-2">
+                    <div id="slider-2" style="height: 525px;">
+                        <?php $used = array() ?>
+                        <?php foreach($this->listings as $listing): ?>
+                        <?php if($listing->main_type == 4): ?>
+                        <?php if(!in_array($listing->id, $used)): $used[] = $listing->id ?>
+                        <div class="slide">
+                            <?= $this->thumbnail(array('width'=>855,'height'=>342), $listing->image, '', '855:342') ?>
+                            <div class="content">
+                                <div class="left">
+                                    <?= $listing->title ?>
+                                </div><!-- closes left -->
+                                <div class="right">
+                                    <p><?= $listing->description ?></p>
+                                </div><!-- closes right -->
+                            </div><!-- closes content -->
+                        </div><!-- closes slide -->
+                        <?php endif ?>
+                        <?php endif ?>
+                        <?php endforeach ?>
+                    </div><!-- closes slider -->
+                    <a href="" id="next-2" class="next">Next</a>
+                    <a href="" id="prev-2" class="prev">Prev</a>
+                    <div id="cycle-pager-2" class="cycle-pager"></div>
+                </div><!-- closes tab -->
+                <?php endif ?>
+                <?php if(isset($show[3]) and $show[3] == true): ?>
+                <div class="tab" id="tabs-3">
+                    <div id="slider-3" style="height:525px">
+                        <?php $used = array() ?>
+                        <?php foreach($this->listings as $listing): ?>
+                        <?php if($listing->main_type == 5): ?>
+                        <?php if(!in_array($listing->id, $used)): $used[] = $listing->id ?>
+                        <div class="slide">
+                            <?= $this->thumbnail(array('width'=>855,'height'=>342), $listing->image, '', '855:342') ?>
+                            <div class="content">
+                                <div class="left">
+                                    <?= $listing->title ?>
+                                </div><!-- closes left -->
+                                <div class="right">
+                                    <p><?= $listing->description ?></p>
+                                </div><!-- closes right -->
+                            </div><!-- closes content -->
+                        </div><!-- closes slide -->
+                        <?php endif ?>
+                        <?php endif ?>
+                        <?php endforeach ?>
+                    </div><!-- closes slider -->
+                    <a href="" id="next-3" class="next">Next</a>
+                    <a href="" id="prev-3" class="prev">Prev</a>
+                    <div id="cycle-pager-3" class="cycle-pager"></div>
+                </div><!-- closes tab -->
+                <?php endif ?>
+                <?php if(isset($show[4]) and $show[4] == true): ?>
+                <div class="tab" id="tabs-4">
+                    <div id="slider-4" style="height:525px">
+                        <?php $used = array() ?>
+                        <?php foreach($this->listings as $listing): ?>
+                        <?php if($listing->main_type == 2): ?>
+                        <?php if(!in_array($listing->id, $used)): $used[] = $listing->id ?>
+                        <div class="slide">
+                           <?= $this->thumbnail(array('width'=>855,'height'=>342), $listing->image, '', '855:342') ?>
+                            <div class="content">
+                                <div class="left">
+                                    <?= $listing->title ?>
+                                </div><!-- closes left -->
+                                <div class="right">
+                                    <p><?= $listing->description ?></p>
+                                </div><!-- closes right -->
+                            </div><!-- closes content -->
+                        </div>
+                        <?php endif ?>
+                        <?php endif ?>
+                        <?php endforeach ?>
+                    </div><!-- closes slider -->
+                    <a href="" id="next-4" class="next">Next</a>
+                    <a href="" id="prev-4" class="prev">Prev</a>
+                    <div id="cycle-pager-4" class="cycle-pager"></div>
+                </div><!-- closes tab -->
+            	<?php endif ?>
+            </div>
             <div class="box tabs-bottom">
-            	<?php $show = array(); ?>
+                <?php $show = array(); ?>
             	<?php foreach($this->facts as $fact): ?>
                 	<?php if($fact->type == 1) $show[1] = true; ?>
                     <?php if($fact->type == 2) $show[2] = true; ?>
@@ -343,36 +347,39 @@
                     <?php endforeach ?>
                 </div>
 	            <?php endif ?>
+                <?php endif ?>
             </div>
-            <?php endif ?>
-            <?php if(count($this->includes) > 0): ?>
+
             <div class="compare">
-                <div class="left">
-                    <ul>
-                    	<?php foreach($this->includes as $inc): ?>
-                        <?php if($inc->included == 1): ?>
-                        <li><?= nl2br($inc->text) ?></li>
-                        <?php endif ?>
-                        <?php endforeach ?>
-                    </ul>
-                </div><!-- closes left -->
-                <div class="right">
-                    <ul>
-                    	<?php foreach($this->includes as $inc): ?>
-                        <?php if($inc->included == 0): ?>
-                        <li><?= nl2br($inc->text) ?></li>
-                        <?php endif ?>
-                        <?php endforeach ?>
-                    </ul>
-                </div><!-- closes right -->
+                <div class="inner">
+                	<div class="left">
+                        <ul>
+                            <?php foreach($this->includes as $inc): ?>
+							<?php if($inc->included == 1): ?>
+                            <li><?= nl2br($inc->text) ?></li>
+                            <?php endif ?>
+                            <?php endforeach ?>
+                        </ul>
+                    </div><!-- closes left -->
+                    <div class="right">
+                        <ul>
+                            <?php foreach($this->includes as $inc): ?>
+							<?php if($inc->included == 0): ?>
+                            <li><?= nl2br($inc->text) ?></li>
+                            <?php endif ?>
+                            <?php endforeach ?>
+                        </ul>
+                    </div><!-- closes right --> 
+                </div>
             </div>
-            <?php endif ?>
-            <a href="/trips/itinerary/<?= $this->trip->id ?>" class="btn-9 explore">Explore the Complete Itinerary 
-            <img src="/images2/cleardot.gif" alt="" /></a>
-        </div><!-- closes wrapper -->
+            <div class="result">
+                <a href="#dates_lb" class="lb btn-1">Buy Itinerary</a>
+                <span><sup>$</sup><?= $this->trip->price ?> <em>per person</em></span>
+            </div><!--RESULT-->
+        </div><!-- closes BROWSE_TRIPS --> 
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
-</div><!-- closes w1 -->	
+</div><!-- closes w1 -->
 <div class="hidden">
 	<div id="dates_lb">
     	<div class="lb-dates">

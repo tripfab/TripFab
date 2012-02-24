@@ -305,7 +305,7 @@
                                         </ul>
                                     </div>
                                     <?php endif ?>
-                                    <?php if(is_null($this->listing->min) or is_null($this->listing->max)): ?>
+                                    <?php if((is_null($this->listing->min) or is_null($this->listing->max)) and count($this->capacities) > 0): ?>
                                     <div class="room-types">
                                     	<strong>Capacity types</strong>
                                         <ul>

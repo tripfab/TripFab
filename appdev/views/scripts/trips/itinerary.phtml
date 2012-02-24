@@ -16,7 +16,7 @@
 				$('.days-cycle').cycle({
 					next: '.next',
 					prev: '.prev',
-					timeout: 0
+					timeout: 0,
 				});
 			});
 		</script>
@@ -28,19 +28,19 @@
 <body>
 <div class="w1">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>    
-        <div class="w2">
+	<div class="w2">
+    	<div class="w3 itinerary">
+        	<div class="wrapper">
+        	    <a href="#dates_lb" class="lb btn-1">Buy Itinerary</a>
+        	    <h2><?= $this->trip->title ?></h2>
+        	</div><!-- closes ttl -->
+        </div>
         <div class="wrapper trip-itinerary">
-            <div class="ttl">
-                <a href="#dates_lb" class="lb btn-1">Buy Trip</a>
-                <?= $this->trip->title ?>
-            </div><!-- closes ttl -->
-            <div class="trip-menu">
-                <ul>
-                    <li><a href="/trips/view/<?= $this->trip->id ?>">Overview</a></li>
-                    <li class="current"><a href="/trips/itinerary/<?= $this->trip->id ?>">Itinerary</a></li>
-                </ul>
-            </div><!-- closes trip-menu -->
             <div class="box days">
+            	<ul class="menu">
+            		<li><a href="/trips/view/<?= $this->trip->id ?>">Overview</a></li>
+            		<li class="active"><a href="/trips/view/<?= $this->trip->id ?>">Itinerary</a></li>
+            	</ul>
                 <a href="" class="prev">Previous Day</a>
                 <a href="" class="next">Next Day</a>
                 <div class="days-cycle">
@@ -75,10 +75,10 @@
                     </div><!-- closes day -->
                     <?php endfor ?>
                 </div><!-- closes day-cycle -->
-                <div class="bottom">
-                    <a href="" class="prev">Previous Day</a>
-                    <a href="" class="next">Next Day</a>
-                </div><!-- closes bottom -->
+                <div class="result">
+                    <a href="#dates_lb" class="lb btn-1">Buy Itinerary</a>
+                    <span><sup>$</sup><?= $this->trip->price ?> <em>per person</em></span>
+                </div><!--RESULT-->
             </div><!-- closes days -->
         </div><!-- closes wrapper -->
     </div><!-- closes w2 -->

@@ -1,11 +1,20 @@
+<?php if(!is_null($this->city)): ?>
 <?php $url = $this->baseUrl() .'/'. $this->country->identifier .'/'. $this->city->identifier .'/filter';
 $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this->stars; ?>
+<?php else: ?>
+<?php $url = $this->baseUrl() .'/'. $this->country->identifier .'/filter';
+$cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this->stars; ?>
+<?php endif ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <?php if(!is_null($this->city)): ?>
     <title><?= $this->city->title ?>, <?= $this->country->title ?> | Tripfab.com</title>
+    <?php else: ?>
+    <title><?= $this->country->title ?> | Tripfab.com</title>
+    <?php endif ?>
     <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
@@ -31,7 +40,11 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
             <span><a href="" class="link-2">View Trip Plans in your country</a></span>
             <form action="">
                 <fieldset>
-                    <input id="citiesSearch2" type="text" value="<?= $this->country->title ?>, <?= $this->city->title ?>" />
+                	<?php if(!is_null($this->city)): ?>
+                    <input id="citiesSearch2" type="text" value="<?= $this->city->title ?>, <?= $this->country->title ?>" />
+                    <?php else: ?>
+                    <input id="citiesSearch2" type="text" value="<?= $this->country->title ?>" />                    
+                    <?php endif ?>
                     <input type="submit" value="Search" class="btn-1"/>
                 </fieldset>
             </form>
@@ -95,7 +108,11 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
 <div id="citiesAutocompleteContainer2"></div>
+<?php if(!is_null($this->city)): ?>
 <input type="hidden" id="hddCityId" name="hddCityId" value="<?= $this->city->identifier ?>" />
+<?php else: ?>
+<input type="hidden" id="hddCityId" name="hddCityId" value="default" />
+<?php endif ?>
 <input type="hidden" id="hddCountryId" name="hddCountryId" value="<?= $this->country->identifier ?>" />
 <div style="display:none">
 	<div id="newtrip">

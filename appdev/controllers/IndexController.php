@@ -122,7 +122,10 @@ class IndexController extends Zend_Controller_Action
         $city_idf    = $this->getRequest()->getParam('city');
         $country     = $this->places->getPlaceByIdf($country_idf);
         $region      = $this->places->getPlaceById($country->parent_id);
-        $city        = $this->places->getPlaceByIdf($city_idf, 3, $country->id);
+        
+        $city = null;
+        if($city_idf != 'default') 
+            $city    = $this->places->getPlaceByIdf($city_idf, 3, $country->id);
         
         $categories  = $this->listings->getMainCategories(true);
         foreach($categories as $c => $a){
@@ -131,14 +134,16 @@ class IndexController extends Zend_Controller_Action
                 $subcats[$s] = $this->listings->getSubCategoriesOf($c);
         }
         
-        $ls_count = $this->listings->countListings($city->id);
+        if(!is_null($city)) 
+            $ls_count = $this->listings->countListings($city->id);
+        else
+            $ls_count = $this->listings->countListings(null, null, $country->id);
         
         $this->view->countries = $countries;
         
         $this->view->region  = $region;
         $this->view->country = $country;
         $this->view->city    = $city;
-        
         $this->view->categories = $categories;
         $this->view->subcats    = $subcats;
         
@@ -192,8 +197,10 @@ class IndexController extends Zend_Controller_Action
                 $options = $this->listings->getSchedulesOf($listing->id);
                 $this->view->options = $options;
                 $overview = $this->listings->getOverviewOf2($listing->id);
+                $departure_city = null;
                 if($listing->departure)
                     $departure_city = $this->places->getPlaceById($listing->departure);
+                $return_city = null;
                 if($listing->departure != $listing->return){
                     if($listing->return)
                         $return_city = $this->places->getPlaceById($listing->return);
@@ -204,7 +211,7 @@ class IndexController extends Zend_Controller_Action
                     $this->view->capacities = $capacities;
                     
                     $prices = $this->listings->getSchPrices($listing);
-                    if(!is_null($prices))
+                    if(!is_null($prices) and isset($prices[0]))
                         $prices = $prices[0];
                     
                     $this->view->prices = $prices;

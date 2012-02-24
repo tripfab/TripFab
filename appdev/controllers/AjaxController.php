@@ -1090,7 +1090,10 @@ class AjaxController extends Zend_Controller_Action
         $city_idf    = $this->getRequest()->getParam('city');
         $country     = $this->places->getPlaceByIdf($country_idf);
         $region      = $this->places->getPlaceById($country->parent_id);
-        $city        = $this->places->getPlaceByIdf($city_idf, 3, $country->id);
+        
+        $city = null;
+        if($city_idf != 'default')
+            $city = $this->places->getPlaceByIdf($city_idf, 3, $country->id);
         
         $categories  = $this->listings->getMainCategories(true);
         
@@ -1113,9 +1116,16 @@ class AjaxController extends Zend_Controller_Action
         
         $this->view->categ = ($cat == 'all') ? 'things to do' : $category->name; 
         
-        $ls_count = $this->listings->countListings($city->id);
+        if(!is_null($city))
+            $ls_count = $this->listings->countListings($city->id);
+        else
+            $ls_count = $this->listings->countListings(null, null, $country->id);
         
-        $listings = $this->listings->getListings2($city->id, $cat, $subcat, $sort, $stars, $pricemin, $pricemax);
+        if(!is_null($city)) 
+            $listings = $this->listings->getListings2($city->id, $cat, $subcat, $sort, $stars, $pricemin, $pricemax);
+        else
+            $listings = $this->listings->getListings2(null, $cat, $subcat, $sort, $stars, $pricemin, $pricemax, $country->id);
+        
         $this->view->listing_count = count($listings);
         //var_dump($this->view->listing_count); die;
         
@@ -1159,7 +1169,9 @@ class AjaxController extends Zend_Controller_Action
         );
         $people   = $this->_getParam('people');
         
-        $trips = $trips->getTripsOf($country->id, $price, $days, $people);
+        $category = $this->_getParam('category');
+        
+        $trips = $trips->getTripsOf($country->id, $price, $days, $people, $category);
         $this->view->country = $country;
         $this->view->trips   = $trips;
     }

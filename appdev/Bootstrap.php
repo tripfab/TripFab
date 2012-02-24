@@ -42,6 +42,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             )
         );
         $router->addRoute(
+            'country',
+            new Zend_Controller_Router_Route(
+                '/:lang/:country',
+                array(
+                    'controller' => 'index',
+                    'action'     => 'city',
+                    'module'     => 'default',
+                    'city'       => 'default'
+                )
+            )
+        );
+        $router->addRoute(
             'login',
             new Zend_Controller_Router_Route(
                 '/:lang/login',
