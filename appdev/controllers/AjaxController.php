@@ -26,7 +26,8 @@ class AjaxController extends Zend_Controller_Action
         $this->user = null;
         
         $headers = getallheaders();
-        if(array_key_exists('X-Requested-With', $headers) === false){
+        if((array_key_exists('X-Requested-With', $headers) === false) and 
+                (array_key_exists('x-requested-with', $headers) === false)){
             error_log('Wrong request');
             echo 'Wrong request'; die;
         }

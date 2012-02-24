@@ -133,51 +133,6 @@
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript" src="/js2/index/index.js"></script>
 <script type="text/javascript">
-(function($) {
-  $.fn.fullBg = function(){
-    var bgImg = $(this);		
- 
-    function resizeImg() {
-        console.log(bgImg.attr('width'));
-        console.log(bgImg.attr('height'));
-        
-        var imgwidth = 1400;
-        var imgheight = 736;
-        
-        var winwidth = $(window).width();
-        var winheight = $(window).height();
-        
-        var winCenter = winwidth / 2;
-        var imgCenter = imgwidth / 2;
-        
-        
-        
-        var left = (winwidth > imgwidth) ? 0 : (winCenter - imgCenter);
-        
-        var width = (winwidth > imgwidth) ? winwidth : imgwidth;
-        
-        var height = (winwidth > imgwidth) ? ((imgheight * winwidth) / imgwidth) : height;
-        
-        var winCenter2 = imgheight / 2;
-        var imgCenter2 = height / 2;
-        
-        var top = (winwidth > imgwidth) ? (winCenter2 - imgCenter2) : 0;
-        
-        bgImg.css({
-            left:left+'px',
-            width:width+'px',
-            height:height+'px',
-            top:top+'px',
-        });
-    } 
-    resizeImg();
-    $(window).resize(function() {
-      resizeImg();
-    }); 
-  };
-})(jQuery)
-</script>
-<script type="text/javascript">
 $(document).ready(function() {
     $( ".signinButton:not(.not) a" ).click(function() {
         $( ".dd.login" ).toggleClass('show');
@@ -190,14 +145,44 @@ $(document).ready(function() {
         centerOnScroll:1
     });
 });
-
-$(function(){
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
     img_ready($('img.background.high'));
 });
 
 function img_ready($obj){
-    $obj.fullBg();
-    $obj.fadeIn(1500);
+    resizeImg($obj);
+	$(window).resize(function() {
+	   resizeImg($obj);
+	});
+	$obj.fadeIn();
+}
+function resizeImg($bgImg) { 
+	var imgwidth = 1400;
+	var imgheight = 736;
+	
+	var winwidth = $(window).width();
+	var winheight = $(window).height();
+	
+	var winCenter = winwidth / 2;
+	var imgCenter = imgwidth / 2;
+	
+	var left = (winwidth > imgwidth) ? 0 : (winCenter - imgCenter);
+	
+	var width = (winwidth > imgwidth) ? winwidth : imgwidth;
+	
+	var height = (winwidth > imgwidth) ? ((imgheight * winwidth) / imgwidth) : height;
+	
+	var winCenter2 = imgheight / 2;
+	var imgCenter2 = height / 2;
+	
+	var top = (winwidth > imgwidth) ? (winCenter2 - imgCenter2) : 0;
+	
+	$bgImg.css('left',left);
+	$bgImg.css('width',width);
+	$bgImg.css('height',height);
+	$bgImg.css('top',left);
 }
 </script>
 </body>
