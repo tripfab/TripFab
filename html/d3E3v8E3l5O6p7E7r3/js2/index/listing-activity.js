@@ -383,20 +383,6 @@ $(function(){
             showCloseButton:0,
             href:$href
         });
-	
-        /**
-        $.ajax({
-            url:'/phone/call',
-            type:'post',
-            data:{
-                listing:$('body').data('listingid'),
-                number:'+50683200338'
-            },
-            success:function(res){
-                console.log(res);
-            }
-        });
-        **/
         return false;
         
     });
@@ -457,7 +443,13 @@ $(document).ready(function() {
                 number:'+'+$code+''+$numb
             },
             success:function(res){
-                console.log(res);
+                if(res.type == "ok") {
+                    $.fancybox.close();
+                    showAlert('You will receive a call from TRIPFAB in the next 5 minutes. Please wait');
+                } else {
+                    $.fancybox.close();
+                    showError('Sorry: '+res.message);
+                }
             },
             error:function(res){
                 console.log(res);

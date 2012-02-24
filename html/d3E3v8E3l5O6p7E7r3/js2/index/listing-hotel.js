@@ -394,20 +394,94 @@ $(function(){
             overlayColor:'#fff',
             centerOnScroll:1,
             showCloseButton:0,
-            href:$href,
+            href:$href
         });
-		
+        return false;
+        
+    });
+});
+
+$(document).ready(function() {
+    $( ".flag" ).click(function() {
+        $( ".all_flags" ).toggleClass('show');
+        return false;
+    });
+    
+    $("#all_flags").simplyScroll({
+        customClass: 'vert',
+        orientation: 'vertical',
+        auto: false,
+        manualMode: 'loop',
+        frameRate: 20,
+        speed: 100
+    });
+    
+    $('.number-display .all_flags a').click(function(){
+        
+        $img  = $('img', this).attr('src');
+        $code = $(this).data('code');
+        
+        $('.flag img').attr('src', $img);
+        $('input[name=code]').val($code);
+        
+        $( ".all_flags" ).removeClass('show');
+        
+        return false;
+        
+    });
+    
+    $('#dialpad .middle .numbers a').click(function(){
+        $num = $(this).data('num');
+        if($num != "*" && $num != "#") {
+            $number = $('.number-display input[name=number]');
+            $number.val($number.val()+''+$num);
+            $number.focus();
+        } 
+        return false;
+    });
+    
+    $('#start_call input[name=start]').click(function(){        
+        $code = $('input[name=code]').val();
+        $numb = $('input[name=number]').val();        
+        if($numb == '') {
+            showError('Please enter your phone number');
+            return false;
+        }
+        
         $.ajax({
             url:'/phone/call',
             type:'post',
             data:{
                 listing:$('body').data('listingid'),
-                number:'+50683200338',
+                number:'+'+$code+''+$numb
             },
             success:function(res){
+                if(res.type == "ok") {
+                    $.fancybox.close();
+                    showAlert('You will receive a call from TRIPFAB in the next 5 minutes. Please wait');
+                } else {
+                    $.fancybox.close();
+                    showError('Sorry: '+res.message);
+                }
+            },
+            error:function(res){
                 console.log(res);
             }
         });
+        
         return false;
     });
 });
+
+function move(id,spd){
+    var obj=document.getElementById(id),max=-obj.offsetHeight+obj.parentNode.offsetHeight,top=parseInt(obj.style.top);
+    if ((spd>0&&top<=0)||(spd<0&&top>=max)){
+        obj.style.top=top+spd+"px";
+        move.to=setTimeout(function(){
+            move(id,spd);
+        },20);
+    }
+    else {
+        obj.style.top=(spd>0?0:max)+"px";
+    }
+}

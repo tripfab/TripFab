@@ -21,7 +21,7 @@
         <?php if(!$this->user): ?>
         <div id="header">
             <h1><a href="/"></a></h1>
-            <div class="signIn">Have an Account? <a href="javascript:void(0);" class="signinButton">Sign In</a></div><!--SIGNIN-->
+            <div class="signIn">Have an Account? <a href="javascript:void(0);" class="signinButton yes">Sign In</a></div><!--SIGNIN-->
             <div class="dd login">
                 <img src="/images2/arrow-12.png" alt="" class="arrow" />
                 <div class="dd-content">
@@ -134,7 +134,7 @@
 <script type="text/javascript" src="/js2/index/index.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $( ".signinButton:not(.not) a" ).click(function() {
+    $( ".signinButton.yes" ).click(function() {
         $( ".dd.login" ).toggleClass('show');
         return false
     });
