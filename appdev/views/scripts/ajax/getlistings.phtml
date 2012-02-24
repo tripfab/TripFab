@@ -21,7 +21,7 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
 			<?php endif ?>
 		</div><!-- closes img-wrapper -->
 		<div class="meta">
-			<span class="location"><strong>Tamarindo</strong>, CR</span> 
+			<span class="location"><strong><?= $this->city->title ?></strong>, <?= $this->country->code ?></span> 
 			<span class="cat"><img src="/images2/cleardot.gif" alt="" /></span>
 		</div><!-- closes meta -->
 		<p class="listing_description"><?= $list->description ?></p>
