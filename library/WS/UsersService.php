@@ -179,4 +179,16 @@ class WS_UsersService {
         $result = $this->users_db->fetchRow($select);
         return $result;
     }
+    
+    public function getFull($user) {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = $db->select();
+        $select->from(array('users'), array('*', 'if(birthdate=\'0000-00-00\', null, year(now()) - year(birthdate)) as age'))
+               ->joinleft(array('city' => 'places'), 'users.city_id=city.id', array('cityName' => 'title'))
+               ->joinleft(array('country' => 'places'), 'users.country_id=country.id', array('countryName' => 'title'))
+               ->where('users.id = ?', $user);
+
+        return $db->fetchRow($select);
+    }
 }

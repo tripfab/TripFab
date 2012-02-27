@@ -1,0 +1,13 @@
+<?php if ($this->pageCount): ?>
+<ul class="control">
+    <?php if (isset($this->previous)): ?>
+		    <li><a href="<?php echo $this->url(array('page' => $this->previous, 'sort'=>$this->sort, 'seq'=>$this->seq, 'q'=>$this->q)); ?>"><span class="prev">Prev</span></a></li>
+	<?php endif;?>
+   
+    <?php if (isset($this->next)): ?>
+        <li><a href="<?php echo $this->url(array('page' => $this->next, 'sort'=>$this->sort, 'seq'=>$this->seq, 'q'=>$this->q)); ?>"><span class="next">Next</span></a></li>
+	<?php endif;?>
+
+</ul>
+<p class="pages"><?php echo $this->firstItemNumber ?> - <?php echo $this->lastItemNumber ?> of <?php echo $this->totalItemCount ?></p>
+<?php endif;?>

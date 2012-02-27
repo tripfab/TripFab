@@ -1,0 +1,387 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<title>Trips</title>
+        <link type="text/css" rel="stylesheet" href="/css5/reset.css" />
+        <link type="text/css" rel="stylesheet" href="/css5/all.css" />
+		<script type="text/javascript" src="/js2/jquery.js"></script>
+		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+  		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css" />   
+		<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js"></script>
+    	<script type="text/javascript" src="/js2/admin/traveller-view.js"></script>
+			<script>
+				$(document).ready(function() {
+					$('a.lbc').fancybox({
+						padding: 0,
+						overlayColor: '#FFF',
+						overlayOpacity: '0.7',
+						showCloseButton: 'false',
+					});
+					
+            		$("#report_tabs").tabs();
+					panel(<?php echo $this->user->id?>, 1, 'partner');
+				});
+			</script>
+		</head>
+		<body>
+			<div class="w1">
+    		<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
+			
+			<div class="w3_admin">
+				<div class="sub_menu">
+					<h2>Create. <span>New Trip.</span></h2>
+					<a href="#" class="back">Back to Trips</a>
+					
+				</div><!--SUB_MENU-->
+            </div><!--W3-->
+				
+				<div id="trips" class="listing-wrapper wrapper">
+					<div class="listing-content">
+						<div class="left">
+							<ul>
+								<li><a href="<?php echo $this->url(array('page'=>1))?>">General Information</a></li>
+								<li><a href="<?php echo $this->url(array('page'=>2))?>">Trip Facts</a></li>
+								<li ><a href="<?php echo $this->url(array('page'=>3))?>">Photos</a></li>
+								<li class="current" ><a href="<?php echo $this->url(array('page'=>4))?>">Trip Details</a></li>
+								<li><a href="<?php echo $this->url(array('page'=>5))?>">Itinerary</a></li>
+							</ul>
+						</div>
+						<!-- closes left -->
+						<div class="right">
+							<div class="lstng-details">
+								<h3 class="title">Inclusions</h3>
+								<div class="lstng-detail faq">
+									<table width="100%" border="0">
+										<tr>
+											<td width="150">
+												<strong>Inclusions</strong>
+												<span>Write the inclusions<br /> around the whole trip</span>
+											</td>
+											<td width="590">
+												<textarea cols="" rows=""></textarea>
+												<div class="clear"></div>
+												<textarea cols="" rows=""></textarea>
+												<div class="clear"></div>
+												<textarea cols="" rows=""></textarea>
+												<div class="clear"></div>
+												<a href="" class="remove">remove</a>
+												<input type="text" value="Write a inclusion here" />
+												<div class="clear"></div>
+												<a href="" class="remove">remove</a>
+												<input type="text" value="Write a inclusion here" />
+												<div class="clear"></div>
+												<a href="" class="link-5">Add a new inclusion</a>
+											</td>
+										</tr>
+									</table>
+								</div>
+								<!-- closes lstng-detail -->
+								<div class="lstng-detail faq last">								
+									<table width="100%" border="0">
+										<tr>
+											<td width="150">
+												<strong>Exclusions</strong>
+												<span>Write the exclusions<br /> around the whole trip</span>
+											</td>
+											<td width="590">
+												<textarea cols="" rows=""></textarea>
+												<div class="clear"></div>
+												<textarea cols="" rows=""></textarea>
+												<div class="clear"></div>
+												<textarea cols="" rows=""></textarea>
+												<div class="clear"></div>
+												<a href="" class="remove">remove</a>
+												<input type="text" value="Write a inclusion here" />
+												<div class="clear"></div>
+												<a href="" class="remove">remove</a>
+												<input type="text" value="Write a inclusion here" />
+												<div class="clear"></div>
+												<a href="" class="link-5">Add a new inclusion</a>
+											</td>
+										</tr>
+									</table>
+								</div>
+								<!-- closes lstng-detail -->
+							</div>
+							<!-- closes lstng-details -->
+							<div class="foot">
+								<input type="submit" class="btn-1" value="Save Changes" />
+								<a href="">Deactivate Listing</a>
+							</div>
+							<!-- closes foot -->
+						</div>
+						<!-- closes right -->
+					</div>
+					<!-- closes listing-content -->
+				</div>
+					
+			<div class="footer black">
+				<div class="wrapper">
+					<a href="" class="logo">Tripfab</a>
+				</div><!--WRAPPER-->
+			</div>
+			<!-- closes footer -->
+		</div>
+		<!-- closes w1 -->
+		<div class="hidden">
+				<div id="getReport">
+						<div class="top">
+							<h3>Get a Report</h3>
+						</div><!--TOP-->
+						<div class="cont">
+							<div id="report_tabs">
+								<ul>
+									<li><a href="#report-1" class="active">Sales Reports</a></li>
+									<li><a href="#report-2">Finance Reports</a></li>
+								</ul>
+								<div id="report-1">
+									A
+									<div class="type">
+										<label>Select an Report</label>
+										<select>
+											<option>User Log Time by Date</option>
+										</select>
+									</div>
+									<div class="filter">
+										<span>Filter results</span>
+									</div><!--FILTER-->
+									<div class="item">
+										<label>Select Dates</label>
+										<input type="text" value="" />
+										<strong>to</strong>
+										<input type="text" value="" />
+									</div><!--ITEM-->
+									
+									<div class="item last">
+										<label>Select an User</label>
+										<select>
+											<option>Karina Romaine</option>
+										</select>
+									</div><!--ITEM-->
+									
+									<div class="hidden">B
+										<div class="type">
+											<label>Select an Report</label>
+											<select>
+												<option>User account access by date</option>
+											</select>
+										</div>
+										<div class="filter">
+											<span>Filter results</span>
+										</div><!--FILTER-->
+										<div class="item">
+											<label>Select Dates</label>
+											<input type="text" value="" />
+											<strong>to</strong>
+											<input type="text" value="" />
+										</div><!--ITEM-->
+										
+										<div class="item last">
+											<label>Select an User</label>
+											<select>
+												<option>Karina Romaine</option>
+											</select>
+										</div><!--ITEM-->
+										
+										C
+										<div class="type">
+											<label>Select an Report</label>
+											<select>
+												<option>Partner pending information by account manager</option>
+											</select>
+										</div>
+										<div class="filter">
+											<span>Filter results</span>
+										</div><!--FILTER-->
+										<div class="item">
+											<label>Select an User</label>
+											<select>
+												<option>Karina Romaine</option>
+											</select>
+										</div><!--ITEM-->
+										
+										<div class="item">
+											<label>Select Partner</label>
+											<select>
+												<option>Rafting Panama Tours</option>
+											</select>
+										</div><!--ITEM-->
+										
+										<div class="item last">
+											<label>Select Listing</label>
+											<select>
+												<option>Rafting Somewhere</option>
+											</select>
+										</div><!--ITEM-->
+										
+										
+										D
+										<div class="type">
+											<label>Select an Report</label>
+											<select>
+												<option>Partner account changes by user</option>
+											</select>
+										</div>
+										<div class="filter">
+											<span>Filter results</span>
+										</div><!--FILTER-->
+										<div class="item">
+											<label>Select an User</label>
+											<select>
+												<option>Karina Romaine</option>
+											</select>
+										</div><!--ITEM-->
+										
+										<div class="item">
+											<label>Select Partner</label>
+											<select>
+												<option>Rafting Panama Tours</option>
+											</select>
+										</div><!--ITEM-->
+										
+										<div class="item last">
+											<label>Select Listing</label>
+											<select>
+												<option>Rafting Somewhere</option>
+											</select>
+										</div><!--ITEM-->
+										
+										E
+										<div class="type">
+											<label>Select an Report</label>
+											<select>
+												<option>Partner account activity by date</option>
+											</select>
+										</div>
+										<div class="filter">
+											<span>Filter results</span>
+										</div><!--FILTER-->
+										<div class="item">
+											<label>Select Dates</label>
+											<input type="text" value="" />
+											<strong>to</strong>
+											<input type="text" value="" />
+										</div><!--ITEM-->
+										
+										<div class="item">
+											<label>Select Partner</label>
+											<select>
+												<option>Hotel Boca</option>
+											</select>
+										</div><!--ITEM-->
+										
+										<div class="item last">
+											<label>Select Listing</label>
+											<select>
+												<option>Hotel Boca</option>
+											</select>
+										</div><!--ITEM--></div>
+									
+								</div><!--REPORT-1-->
+								<div id="report-2">
+									A
+									<div class="type">
+										<label>Select an Report</label>
+										<select>
+											<option>Payment Receipt Report</option>
+										</select>
+									</div>
+									<div class="filter">
+										<span>Filter results</span>
+									</div><!--FILTER-->
+									<div class="item">
+										<label>Select Dates</label>
+										<input type="text" value="" />
+										<strong>to</strong>
+										<input type="text" value="" />
+									</div><!--ITEM-->
+									
+									<div class="item">
+										<label>Payment Method</label>
+										<select>
+											<option>All Methods</option>
+										</select>
+									</div><!--ITEM-->
+									
+									<div class="item last">
+										<label>Status</label>
+										<select>
+											<option>Completed</option>
+										</select>
+									</div><!--ITEM-->
+									
+									
+									<div class="hidden">B
+										<div class="type">
+											<label>Select an Report</label>
+											<select>
+												<option>Reservations by Date</option>
+											</select>
+										</div>
+										<div class="filter">
+											<span>Filter results</span>
+										</div><!--FILTER-->
+										
+										<div class="item">
+											<label>Select Dates</label>
+											<input type="text" value="" />
+											<strong>to</strong>
+											<input type="text" value="" />
+										</div><!--ITEM-->
+										
+										<div class="item last">
+											<label>Reservation Status</label>
+											<select>
+												<option>All Status</option>
+											</select>
+										</div><!--ITEM-->
+										
+										C
+										<div class="type">
+											<label>Select an Report</label>
+											<select>
+												<option>Transactions by Date</option>
+											</select>
+										</div>
+										<div class="filter">
+											<span>Filter results</span>
+										</div><!--FILTER-->
+										
+										<div class="item last">
+											<label>Select Dates</label>
+											<input type="text" value="" />
+											<strong>to</strong>
+											<input type="text" value="" />
+										</div><!--ITEM-->
+										
+										D
+										<div class="type">
+											<label>Select an Report</label>
+											<select>
+												<option>Partner Balance by Date</option>
+											</select>
+										</div>
+										<div class="filter">
+											<span>Filter results</span>
+										</div><!--FILTER-->
+										
+										<div class="item last">
+											<label>Select Dates</label>
+											<input type="text" value="" />
+											<strong>to</strong>
+											<input type="text" value="" />
+										</div><!--ITEM--></div>
+									
+								</div><!--REPORT-1-->
+							</div><!--TABS-->
+						</div><!--CONT-->
+						
+						<div class="bottom">
+							<input type="button" class="btn-1" value="Get Report" />
+							<input type="button" class="btn-10" value="Cancel" />
+						</div><!--BOTTOM-->
+					</div><!--GETREPORT-->
+			</div><!--HIDDEN-->
+	</body>
+</html>

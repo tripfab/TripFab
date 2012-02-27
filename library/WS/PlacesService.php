@@ -312,4 +312,32 @@ class WS_PlacesService {
         }
         return $places;
     }
+    
+    public function getLandscapesOf($place) {
+        if (!$place) {
+            return array();
+        }
+        $table = new Zend_Db_Table('places_landscapes');
+        $select = $table->select();
+        $select->where('place_id = ?', $place);
+        $lands = $table->fetchAll($select);
+
+        return $lands;
+    }
+
+    public function saveLandscapes($place, $lands) {
+        $table = new Zend_Db_Table('places_landscapes');
+        $table->delete('place_id = ' . $place);
+        foreach ($lands as $land) {
+            $row = $table->fetchNew();
+            $row->landscape_id = $land;
+            $row->place_id = $place;
+            $row->save();
+        }
+    }
+
+    public function getPlaceNew() {
+        $place = $this->places_db->fetchNew();
+        return $place;
+    }
 }

@@ -325,6 +325,20 @@ class WS_ReservationsService {
         return $reservation;
     }
     
+    public function details($id) {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = $db->select();
+
+        $select->from('reservations')
+                ->join('listings', 'reservations.listing_id = listings.id', array('listing_name' => 'title', 'listing_image' => 'image'))
+                ->join('listing_types', 'listings.main_type = listing_types.id', array('listing_type' => 'name'))
+                ->join('users', 'users.id=reservations.user_id', array('user_name' => 'name'))
+                ->join('vendors', 'vendors.id=reservations.vendor_id', array('vendor_name' => 'name'))
+                ->where('reservations.id=?', $id);
+        return $db->fetchRow($select);
+    }
+    
 }
 
 ?>

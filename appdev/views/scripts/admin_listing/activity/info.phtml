@@ -1,0 +1,1259 @@
+<style type="text/css">
+.profile-items .item p.check { clear:both; margin-top:35px; }
+.profile-items .item p.check label { float: none; }
+.profile-items .item p.check input { vertical-align:baseline }
+input.schname { float:none !important; width:90px !important; }
+.item { position:relative;}
+.item .help {
+	position:absolute;
+	top:13px;
+	left:-35px;}
+.item .help a.eye {
+	display:block;
+	background:url(/images2/eye.png) no-repeat top left;
+	width:18px;
+	height:12px;
+	text-indent:-9999px;
+	cursor:pointer;}
+	.item .help:hover a.eye {
+		background-position:left -12px;}
+.item.first .help {
+	top:0px;}
+	.item .help a.tooltip3 {
+		background:url(/images2/help-tooltip-bg.png) top left no-repeat;
+		left: 17px;
+		padding:11px 12px;
+		position:absolute;
+		top:-102px;
+		z-index:1000;
+		display:none;}
+	.item .help:hover a.tooltip3 {
+		display:block;}
+
+.profile-items {
+	overflow:visible;}
+.departure select { width:150px;}
+
+
+</style>
+<?php $durations = array(1,2,3,4,5,6,7,8,9,10,15,30,45,); ?>
+<?php if($_POST): ?>
+<form action="" method="post">
+	<div class="profile-items info">
+    	<?php if($this->errors): ?>
+        <div class="errors">
+            <?php foreach($this->errors as $err): ?>
+            <p><?= $err ?></p>
+            <?php endforeach ?>
+        </div><!-- closes item -->
+        <?php endif ?>
+        <?php if($this->help->act_info == 0): ?>
+        <div class="desc">
+        	<h3>What is the General Information Section?</h3>
+        	<p>Some general details about the experience, activity name, contact information, categories and more.</p>
+        	<p>The "title" is the name of your listing, this is the name the travelers will see all the time throughout the entire application. The "short description" will appear on the search results page and it has to be catchy because this is the first thing the travelers read when they see your listing in the search results page.</p>
+        	<p>It is important to fill your contact info accurately because this is how the travelers will get in touch with you using the TripFab tools.</p>
+        	<a href="" rel="act_info" class="remove">Remove</a>
+        </div><!-- closes desc -->
+        <?php endif ?>
+        <div class="main-ttl">
+        	<p><strong>General information about your activity</strong></p>        	
+        </div><!-- closes main-ttl -->
+		<div class="item-wrppr">
+			<div class="item-ttl">
+				Basic Information
+			</div><!-- closes item ttl -->
+			<div class="item first last">
+				<input tabindex="1" type="text" class="noclean limitcc" name="title" rel="60" value="<?= $_POST['title'] ?>" />
+				<h4>Title</h4>
+				<span>Activity name<br />
+                <span class="charsLeftInp"></span> Character Left</span>
+                <div class="help">
+                    <a href="/images2/help/big-act-general-name.png" class="eye">help</a>
+                    <a href="/images2/help/big-act-general-name.png" class="tooltip3"><img src="/images2/help/small-act-general-name.png" /></a>
+                </div>
+			</div><!-- closes item -->
+			<div class="clear"></div>									
+		</div><!-- closes item-wrppr -->
+		
+		<div class="item-wrppr">
+			<div class="item-ttl">
+				Contact Information
+			</div><!-- closes item ttl -->		
+            <div class="item first">
+                <?php $checked = (isset($_POST['contactEqual'])) ? 'checked="checked"' : '' ?>
+                <input tabindex="2" id="contactEqual" <?= $checked ?> type="checkbox" name="contactEqual" />
+                <label for="contactEqual">The contact information is the same as my company profile</label>
+            </div>	
+            <?php $disabled = (!empty($checked)) ? 'disabled="disabled"' : '' ?> 
+			<div class="item">
+				<input tabindex="3" <?= $disabled ?> placeholder="Enter your phone" type="text" name="phone" value="<?= $_POST['phone'] ?>" />
+				<h4>Phone</h4>
+				<span>Contact Phone</span>
+			</div><!-- closes item -->
+			<div class="item">
+				<input tabindex="4" <?= $disabled ?> placeholder="Enter your email" type="text" name="email" value="<?= $_POST['email'] ?>" />
+				<h4>Email</h4>
+				<span>Contact Email</span>
+			</div><!-- closes item -->
+			<div class="item last">
+				<input tabindex="5" <?= $disabled ?> placeholder="Enter your website url" type="text" name="website" value="<?= $_POST['website'] ?>" />
+				<h4>Website</h4>
+				<span>Company Website</span>
+			</div><!-- closes item -->
+			<div class="clear"></div>									
+		</div><!-- closes item-wrppr -->
+        
+        <div class="item-wrppr">
+            <div class="item-ttl">
+                Capacity Options
+            </div><!-- closes item ttl -->
+            <?php if($_POST['capacity'] == 'multiple'): ?>
+            <div class="item first">
+                <input tabindex="7" checked="checked" type="radio" name="capacity" class="multiple" value="multiple">
+                <strong>Multiple. </strong><span>Choose multiple if you have different types of capacity and pricing for this activity.</span><br />
+                <span>You can set those types of Activities in the <a href="">Activity Types</a> section.</span>
+            </div><!-- closes item -->
+            <div class="item last">
+                <input tabindex="8" type="radio" name="capacity" class="single" value="single">
+                <strong>Single. </strong><span>Choose single if you have just one type of capacity for this listing.</span>
+            </div><!-- closes item -->
+            <?php else: ?>
+            <div class="item first">
+                <input tabindex="7" type="radio" name="capacity" class="multiple" value="multiple">
+                <strong>Multiple. </strong><span>Choose multiple if you have different types of capacity and pricing for this activity.</span><br />
+                <span>You can set those types of Activities in the <a href="">Activity Types</a> section.</span>
+            </div><!-- closes item -->
+            <div class="item last">
+                <input tabindex="8" checked="checked" type="radio" name="capacity" class="single" value="single">
+                <strong>Single. </strong><span>Choose single if you have just one type of capacity for this listing.</span>
+            </div><!-- closes item -->
+            <?php endif ?>
+            <?php $class = ($_POST['capacity'] == 'multiple') ? 'hidden' : '' ?>
+            <?php $disabled = (!empty($class)) ? 'disabled="disabled"' : '' ?>
+            <div class="single-schedule <?= $class ?>">
+                <div class="item color first">
+                    <div class="selects">
+                        <select tabindex="9" <?= $disabled ?> name="min">
+                            <option value="1">1 person</option>
+                            <?php for($i=2; $i<=50; $i++): ?>
+                            <?php $selected = ($i == $_POST['min']) ? 'selected="selected"' : ''; ?>
+                            <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> people</option>
+                            <?php endfor ?>
+                        </select>
+                    </div><!-- closes selects -->
+                    <h4>Minimum Capacity</h4>
+                    <span>Select the maximum people</span>
+                </div><!-- closes item -->
+                <div class="item color">
+                    <div class="selects">
+                        <select tabindex="10" <?= $disabled ?> name="max">
+                            <option value="1">1 person</option>
+                            <?php for($i=2; $i<=50; $i++): ?>
+                            <?php $selected = ($i == $_POST['max']) ? 'selected="selected"' : ''; ?>
+                            <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> people</option>
+                            <?php endfor ?>
+                        </select>		
+                    </div><!-- closes selects -->
+                    <h4>Maximum Capacity</h4>
+                    <span>Select the maximum people</span>
+                </div><!-- closes item -->
+                <div class="item color">
+                	<?php $checked = ($_POST['kids'] == 1) ? 'checked="checked"' : '' ?>
+                    <input tabindex="11" <?= $checked ?> type="checkbox" name="kids" value="1" />
+                    <label>This activity accepts children</label>
+                </div><!-- closes item -->
+                <?php $class = ($_POST['kids'] != 1) ? 'hidden' : ''; ?>
+                <?php $disabled = (!empty($class)) ? 'disabled="disabled"' : '' ?>
+                <div class="accept-kids <?= $class ?>">
+                    <div class="item color">
+                        <div class="selects">
+                            <select tabindex="12" name="kid_age_max" <?= $disabled ?>>
+                            	<?php for($i=1;$i<=12;$i++): ?>
+                                <?php $selected = ($i == $_POST['kid_age_max']) ? 'selected="selected"' : ''; ?>
+                                <option <?= $selected ?> value="<?= $i ?>">Under <?= $i ?> years</option>
+                                <?php endfor ?>
+                            </select>
+                        </div><!-- closes selects -->
+                        <h4>Child Age</h4>
+                        <span>What age is a child?</span>
+                    </div><!-- closes item -->
+                </div><!-- accept-kids -->
+            </div><!-- closes single-schedule -->	
+            <div class="clear"></div>									
+        </div><!-- closes item-wrppr -->
+		
+		<div class="item-wrppr">
+			<div class="item-ttl">
+				Departure / Return
+			</div><!-- closes item ttl -->
+			<div class="item first">
+				<div class="selects departure">					
+					<select tabindex="14" id="country2" name="departure_country_id">
+                    	<option value="">Select Country</option>
+						<?php foreach($this->countries as $c): ?>
+						<?php $selected = ($c->id == $_POST['departure_country_id']) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
+                        <?php endforeach ?>
+					</select>
+					<select tabindex="15" name="departure" id="cities2">
+						<?php if(count($this->cities2) > 0): ?>
+					    <option value="">Select the city</option>
+					    <?php foreach($this->cities2 as $c): ?>
+					    <?php $selected = ($c->id == $_POST['departure']) ? 'selected="selected"' : ''; ?>
+					    <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
+					    <?php endforeach ?>                                    
+					    <?php else: ?>
+					    <option value="">Country first</option>
+					    <?php endif ?>
+					</select>
+				</div><!-- closes selects -->
+				<h4>Departure Point</h4>
+				<span>Select the departure point</span>
+                <div class="help">
+                    <a href="/images2/help/big-act-general-departure.png" class="eye">help</a>
+                    <a href="/images2/help/big-act-general-departure.png" class="tooltip3">
+                    <img src="/images2/help/small-act-general-departure.png" /></a>
+                </div>
+			</div><!-- closes item -->
+			<div class="item last">
+				<div class="selects departure">
+                	<?php if(isset($_POST['returnEqual'])): ?>
+					<select tabindex="16" disabled="disabled" name="return_country_id" id="country3">
+                    	<option value="">Select Country</option>
+						<?php foreach($this->countries as $c): ?>
+						<?php $selected = ($c->id == $_POST['return_country_id']) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
+                        <?php endforeach ?>
+					</select>
+					<select tabindex="17" disabled="disabled" name="return" id="cities3">
+						<?php if(count($this->cities3) > 0): ?>
+					    <option value="">Select the city</option>
+					    <?php foreach($this->cities3 as $c): ?>
+					    <?php $selected = ($c->id == $_POST['return']) ? 'selected="selected"' : ''; ?>
+					    <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
+					    <?php endforeach ?>                                    
+					    <?php else: ?>
+					    <option value="">Country first</option>
+					    <?php endif ?>
+					</select>
+					<p class="check"><input tabindex="18" checked="checked" id="returnEqual" name="returnEqual" value="1" type="checkbox" />
+                    <label>Activity ends at original point of departure</label></p>
+                    <?php else: ?>
+					<select tabindex="16" name="return_country_id" id="country3">
+                    	<option value="">Select Country</option>
+						<?php foreach($this->countries as $c): ?>
+						<?php $selected = ($c->id == $_POST['return_country_id']) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
+                        <?php endforeach ?>
+					</select>
+                    <select tabindex="17" name="return" id="cities3">
+						<?php if(count($this->cities3) > 0): ?>
+                        <option value="">Select the city</option>
+                        <?php foreach($this->cities3 as $c): ?>
+                        <?php $selected = ($c->id == $_POST['return']) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
+                        <?php endforeach ?>                                    
+                        <?php else: ?>
+                        <option value="">Country first</option>
+                        <?php endif ?>
+					</select>
+                    <p class="check"><input tabindex="18" id="returnEqual" name="returnEqual" value="1" type="checkbox" />
+                    <label>Activity concludes at original point of departure</label></p>
+                    <?php endif ?>
+				</div><!-- closes selects -->
+				<h4>Return Point</h4>
+				<span>Select the return point</span>
+                <div class="help">
+                    <a href="/images2/help/big-act-general-return.png" class="eye">help</a>
+                    <a href="/images2/help/big-act-general-return.png" class="tooltip3">
+                    <img src="/images2/help/small-act-general-return.png" /></a>
+                </div>
+			</div><!-- closes item -->
+			<div class="clear"></div>									
+		</div><!-- closes item-wrppr -->
+		
+		<div class="item-wrppr">
+			<div class="item-ttl">
+				Schedule
+			</div><!-- closes item ttl -->
+            <?php if($_POST['schedules'] == 'custom'): ?>
+			<div class="item first">
+				<input tabindex="19" type="radio" name="schedules" class="flex" value="flex" />
+				<strong>Flexible. </strong><span>The schedules will be flexible. The user will choose the hour that want to take the activity.</span>
+			</div><!-- closes item -->
+			<div class="item last">
+				<input tabindex="20" type="radio" checked="checked" class="custom" name="schedules" value="custom" />
+				<strong>Custom. </strong><span>The schedules will be flexible. I want to set specific hours for the activity.</span>
+			</div><!-- closes item -->
+            <?php else: ?>
+            <div class="item first">
+				<input tabindex="19" type="radio" checked="checked" class="flex" name="schedules" value="flex" />
+				<strong>Flexible. </strong><span>The schedules will be flexible. The user will choose the hour that want to take the activity.</span>
+			</div><!-- closes item -->
+			<div class="item last">
+				<input tabindex="20" type="radio" name="schedules" class="custom" value="custom" />
+				<strong>Custom. </strong><span>The schedules will be flexible. I want to set specific hours for the activity.</span>
+			</div><!-- closes item -->
+            <?php endif ?>
+            
+            <?php $hours = array('1:00','1:15','1:30','1:45','2:00','2:15','2:30','2:45','3:00','3:15','3:30','3:45','4:00','4:15','4:30','4:45','5:00','5:15','5:30','5:45','6:00','6:15','6:30','6:45','7:00','7:15','7:30','7:45','8:00','8:15','8:30','8:45','9:00','9:15','9:30','9:45','10:00','10:15','10:30','10:45','11:00','11:15','11:30','11:45','12:00','12:15','12:30','12:45') ?>
+            <?php $times = array('AM','PM'); ?>
+            
+            <?php $class = ($_POST['schedules'] == 'custom') ? '' : 'hidden' ?>
+            <div class="custom_schedules <?= $class ?>">
+            	<?php $yy = 0; ?>
+            	<?php if(count($_POST['schs']) > 0): ?>
+				<?php foreach($_POST['schs'] as $id => $type): ?>
+                <div class="single-schedule">
+                    <div class="item color first">
+                        <input placeholder="Enter the schedule name" type="text" name="schs[<?= $id ?>][name]" value="<?= $type['name'] ?>" />
+                        <h4>Schedule Name</h4>
+                        <span>Set a name for this schedule</span>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <select class="noselect" name="schs[<?= $id ?>][start_hour]">
+                                <?php foreach($hours as $h): ?>
+                                <?php if($h == $type['start_hour']): ?>
+                                <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                                <?php else: ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endif ?>
+                                <?php endforeach ?>
+                            </select>
+                            <select class="noselect" name="schs[<?= $id ?>][start_time]">
+                                <?php foreach($times as $h): ?>
+                                <?php if($h == $type['start_time']): ?>
+                                <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                                <?php else: ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endif ?>
+                                <?php endforeach ?>
+                            </select>
+                        </div><!-- closes selects -->
+                        <h4>Starting Time</h4>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <select class="noselect" name="schs[<?= $id ?>][end_hour]">
+                                <?php foreach($hours as $h): ?>
+                                <?php if($h == $type['end_hour']): ?>
+                                <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                                <?php else: ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endif ?>
+                                <?php endforeach ?>
+                            </select>
+                            <select class="noselect" name="schs[<?= $id ?>][end_time]">
+                                <?php foreach($times as $h): ?>
+                                <?php if($h == $$type['end_time']): ?>
+                                <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                                <?php else: ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endif ?>
+                                <?php endforeach ?>
+                            </select>
+                        </div><!-- closes selects -->
+                        <h4>Ending Time</h4>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <?php $disabled = (!isset($type['duration'])) ? 'disabled="disabled"' : '' ?>
+                            <select <?= $disabled ?> name="schs[<?= $id ?>][duration]">
+                                <option value="1">1 day</option>
+                                <?php for($d=2;$d<=30;$d++): ?>
+                                <?php $selected = ($d == $type['duration']) ? 'selected="selected"' : ''; ?>
+                                <option <?= $selected ?> value="<?= $d ?>"><?= $d ?> days</option>
+                                <?php endfor ?>
+                            </select>
+                            <?php $checked = (!empty($disabled)) ? 'checked="checked"' : '' ?>
+                            <input <?= $checked ?> type="checkbox" name="schs[<?= $id ?>][same]" id="sameday<?= $id ?>" class="sameday" />
+                            <label for="sameday<?= $id ?>">Ends same day</label>
+                            <input type="hidden" name="schs[<?= $id ?>][duration_lb]" value="days" />
+                        </div><!-- closes selects -->
+                        <h4>Activity Duration</h4>
+                    </div><!-- closes item -->
+                    <?php if($yy != 0): ?>
+                    <div class="item color">
+                        <a href="" class="remove">Remove this Schedule</a>
+                    </div><!-- closes item -->
+                    <?php endif ?>
+                </div><!-- closes single-schedule -->
+                <?php $yy++ ?>
+                <?php endforeach ?>
+                <?php endif ?>
+                
+                <?php if(count($_POST['sch']) > 0): ?>
+				<?php foreach($_POST['sch'] as $id => $type): ?>
+                <div class="single-schedule">
+                    <div class="item color first">
+                        <input placeholder="Enter the schedule name" type="text" name="sch[<?= $id ?>][name]" value="<?= $type['name'] ?>" />
+                        <h4>Schedule Name</h4>
+                        <span>Set a name for this schedule</span>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <select class="noselect" name="sch[<?= $id ?>][start_hour]">
+                                <?php foreach($hours as $h): ?>
+                                <?php if($h == $type['start_hour']): ?>
+                                <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                                <?php else: ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endif ?>
+                                <?php endforeach ?>
+                            </select>
+                            <select class="noselect" name="sch[<?= $id ?>][start_time]">
+                                <?php foreach($times as $h): ?>
+                                <?php if($h == $type['start_time']): ?>
+                                <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                                <?php else: ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endif ?>
+                                <?php endforeach ?>
+                            </select>
+                        </div><!-- closes selects -->
+                        <h4>Starting Time</h4>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <select class="noselect" name="sch[<?= $id ?>][end_hour]">
+                                <?php foreach($hours as $h): ?>
+                                <?php if($h == $type['end_hour']): ?>
+                                <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                                <?php else: ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endif ?>
+                                <?php endforeach ?>
+                            </select>
+                            <select class="noselect" name="sch[<?= $id ?>][end_time]">
+                                <?php foreach($times as $h): ?>
+                                <?php if($h == $$type['end_time']): ?>
+                                <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                                <?php else: ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endif ?>
+                                <?php endforeach ?>
+                            </select>
+                        </div><!-- closes selects -->
+                        <h4>Ending Time</h4>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <?php $disabled = (!isset($type['duration'])) ? 'disabled="disabled"' : '' ?>
+                            <select <?= $disabled ?> name="sch[<?= $id ?>][duration]">
+                                <option value="1">1 day</option>
+                                <?php for($d=2;$d<=30;$d++): ?>
+                                <?php $selected = ($d == $type['duration']) ? 'selected="selected"' : ''; ?>
+                                <option <?= $selected ?> value="<?= $d ?>"><?= $d ?> days</option>
+                                <?php endfor ?>
+                            </select>
+                            <?php $checked = (!empty($disabled)) ? 'checked="checked"' : '' ?>
+                            <input <?= $checked ?> type="checkbox" name="sch[<?= $id ?>][same]" id="sameday<?= $id ?>" class="sameday" />
+                            <label for="sameday<?= $id ?>">Ends same day</label>
+                            <input type="hidden" name="sch[<?= $id ?>][duration_lb]" value="days" />
+                        </div><!-- closes selects -->
+                        <h4>Activity Duration</h4>
+                    </div><!-- closes item -->
+                    <?php if($yy != 0): ?>
+                    <div class="item color">
+                        <a href="" class="remove">Remove this Schedule</a>
+                    </div><!-- closes item -->
+                    <?php endif ?>
+                </div><!-- closes single-schedule -->
+                <?php $yy++ ?>
+                <?php endforeach ?>
+                <?php elseif(count($_POST['schs']) == 0): ?>
+                <div class="single-schedule">
+                    <div class="item color first">
+                        <input placeholder="Enter the schedule name" type="text" name="sch[0][name]" value="" />
+                        <h4>Schedule Name</h4>
+                        <span>Set a name for this schedule</span>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <select class="noselect" name="sch[0][start_hour]">
+                                <?php foreach($hours as $h): ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endforeach ?>
+                            </select>
+                            <select class="noselect" name="sch[0][start_time]">
+                                <?php foreach($times as $h): ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div><!-- closes selects -->
+                        <h4>Starting Time</h4>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <select class="noselect" name="sch[0][end_hour]">
+                                <?php foreach($hours as $h): ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endforeach ?>
+                            </select>
+                            <select class="noselect" name="sch[0][end_time]">
+                                <?php foreach($times as $h): ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div><!-- closes selects -->
+                        <h4>Ending Time</h4>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <select disabled="disabled" name="sch[0][duration]">
+                                <option value="1">1 day</option>
+                                <?php for($d=2;$d<=30;$d++): ?>
+                                <option value="<?= $d ?>"><?= $d ?> days</option>
+                                <?php endfor ?>
+                            </select>
+                            <input checked="checked" type="checkbox" name="sch[0][same]" id="sameday0" class="sameday" />
+                            <label for="sameday0">Ends same day</label>
+                            <input type="hidden" name="sch[0][duration_lb]" value="days" />
+                        </div><!-- closes selects -->
+                        <h4>Activity Duration</h4>
+                    </div><!-- closes item -->
+                </div><!-- closes single-schedule -->
+                <?php endif ?>
+                <div class="single-schedule newsch hidden">
+                    <div class="item color first">
+                        <input placeholder="Enter the schedule name" type="text" name="name" value="" />
+                        <h4>Schedule Name</h4>
+                        <span>Set a name for this schedule</span>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <select class="noselect" name="start_hour">
+                                <?php foreach($hours as $h): ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endforeach ?>
+                            </select>
+                            <select class="noselect" name="start_time">
+                                <?php foreach($times as $h): ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div><!-- closes selects -->
+                        <h4>Starting Time</h4>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <select class="noselect" name="end_hour">
+                                <?php foreach($hours as $h): ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endforeach ?>
+                            </select>
+                            <select class="noselect" name="end_time">
+                                <?php foreach($times as $h): ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div><!-- closes selects -->
+                        <h4>Ending Time</h4>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <select disabled="disabled" name="duration">
+                                <option value="1">1 day</option>
+                                <?php for($d=2;$d<=30;$d++): ?>
+                                <option value="<?= $d ?>"><?= $d ?> days</option>
+                                <?php endfor ?>
+                            </select>
+                            <input checked="checked" type="checkbox" name="same" id="sameday1" class="sameday" />
+                            <label for="sameday1">Ends same day</label>
+                            <input type="hidden" name="duration_lb" value="days" />
+                        </div><!-- closes selects -->
+                        <h4>Activity Duration</h4>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <a href="" class="remove">Remove this Schedule</a>
+                    </div><!-- closes item -->
+                </div><!-- closes single-schedule -->
+                <div class="item last">
+                    <a href="" id="addSchedule" class="link-5">Add Another Schedule</a>
+                </div><!-- closes item -->
+            </div>
+			<div class="clear"></div>									
+		</div><!-- closes item-wrppr -->
+		
+		<div class="item-wrppr">
+			<div class="item-ttl">
+				Details
+			</div><!-- closes item ttl -->
+			<div class="item first">
+				<div class="inner-container">
+					<table>
+						<tbody>
+                        	<?php for($i=0; $i<count($this->categories); $i=$i+2): ?>
+                            <tr>
+                                <?php for($j=$i; ($j<count($this->categories)) && ($j<($i+2)); $j++): ?>
+                                <td>
+                                <?php if(is_array($_POST['types'])): ?>
+                                <?php $checked = (in_array($this->categories[$j]->id, $_POST['types'])) ? 'checked="checked"' : ''; ?>
+                                <?php else: ?>
+                                <?php $checked = '' ?>
+                                <?php endif ?>
+                                <input <?= $checked ?> name="types[<?= $this->categories[$j]->id ?>]" 
+                                value="<?= $this->categories[$j]->id ?>" type="checkbox"/>
+                                <?= $this->categories[$j]->name ?>
+                                </td>
+                                <?php endfor ?>
+                            </tr>
+                            <?php endfor ?>
+						</tbody>
+					</table>
+				</div><!-- closes inner-container -->
+				<h4>Category</h4>
+				<span>Select categories</span>
+                <div class="help">
+                    <a href="/images2/help/big-act-general-category.png" class="eye">help</a>
+                    <a href="/images2/help/big-act-general-category.png" class="tooltip3">
+                    <img src="/images2/help/small-act-general-category.png" /></a>
+                </div>
+			</div><!-- closes item -->
+			<!--
+			<div class="item last">
+				<div class="inner-container">
+                	<?php //if(is_array($_POST['tags'])): ?>
+					<table>
+						<tbody>
+							<?php // for($i=0; $i<count($this->tags); $i=$i+2): ?>
+                            <tr>
+                                <?php  //for($j=$i; ($j<count($this->tags)) && ($j<($i+2)); $j++): ?>
+                                <td>
+                                <?php //$checked = (in_array($this->tags[$j]->id, $_POST['tags'])) ? 'checked="checked"' : ''; ?>
+                                <input <? // $checked ?> name="tags[<? // $this->tags[$j]->id ?>]" 
+                                value="<? // $this->tags[$j]->id ?>" type="checkbox"/>
+                                <? //$this->tags[$j]->name ?>
+                                </td>
+                                <?php // endfor ?>
+                            </tr>
+                            <?php // endfor ?>
+						</tbody>
+					</table>
+                    <?php // else: ?>
+                    <table>
+						<tbody>
+							<?php //for($i=0; $i<count($this->tags); $i=$i+2): ?>
+                            <tr>
+                                <?php //for($j=$i; ($j<count($this->tags)) && ($j<($i+2)); $j++): ?>
+                                <td>
+                                <input name="tags[<? //$this->tags[$j]->id ?>]" 
+                                value="<? //$this->tags[$j]->id ?>" type="checkbox"/>
+                                <? //$this->tags[$j]->name ?>
+                                </td>
+                                <?php //endfor ?>
+                            </tr>
+                            <?php //endfor ?>
+						</tbody>
+					</table>
+                    <?php //endif ?>
+				</div>
+				<h4>Tags</h4>
+				<span>Select Tags</span>
+			</div> -->
+            <div class="item last">
+				<div class="inner-container">
+					<table>
+						<tbody>
+                            <?php for($i=0; $i<count($this->landscapes); $i=$i+3): ?>
+                            <tr>
+                                <?php for($j=$i; ($j<count($this->landscapes)) && ($j<($i+3)); $j++): ?>
+                                <td>
+                                <?php if(is_array($_POST['lands'])): ?>
+                                <?php $checked = (in_array($this->landscapes[$j]->id, $_POST['lands'])) ? 'checked="checked"' : ''; ?>
+                                <?php else: ?>
+                                <?php $checked = '' ?>
+                                <?php endif ?>
+                                <input <?= $checked ?> name="lands[<?= $this->landscapes[$j]->id ?>]" 
+                                value="<?= $this->landscapes[$j]->id ?>" type="checkbox"/>
+                                <?= $this->landscapes[$j]->name ?>
+                                </td>
+                                <?php endfor ?>
+                            </tr>
+                            <?php endfor ?>
+						</tbody>
+					</table>
+				</div><!-- closes inner-container -->
+				<h4>Landscapes</h4>
+				<span>Select Landscapes</span>
+                <div class="help">
+                    <a href="/images2/help/big-act-general-landscape.png" class="eye">help</a>
+                    <a href="/images2/help/big-act-general-landscape.png" class="tooltip3">
+                    <img src="/images2/help/small-act-general-landscape.png" /></a>
+                </div>
+			</div><!-- closes item -->
+			<div class="clear"></div>									
+		</div><!-- closes item-wrppr -->
+	</div><!-- closes profile-items -->
+	<div class="foot">
+		<input type="submit" class="btn-1 noclean" value="Save Changes" />
+		<a href="/admin/listings/delete/<?= $this->listing->id ?>">Delete Listing</a>
+	</div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'edit-listing') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_listing') ?>" />
+</form>
+<?php else: ?>
+<form action="" method="post">
+	<div class="profile-items info">
+    	<?php if($this->errors): ?>
+        <div class="errors">
+            <?php foreach($this->errors as $err): ?>
+            <p><?= $err ?></p>
+            <?php endforeach ?>
+        </div><!-- closes item -->
+        <?php endif ?>
+        <?php if($this->help->act_info == 0): ?>
+        <div class="desc">
+        	<h3>What is the General Information Section?</h3>
+        	<p>Some general details about the experience, activity name, contact information, categories and more.</p>
+        	<p>The "title" is the name of your listing, this is the name the travelers will see all the time throughout the entire application. The "short description" will appear on the search results page and it has to be catchy because this is the first thing the travelers read when they see your listing in the search results page.</p>
+        	<p>It is important to fill your contact info accurately because this is how the travelers will get in touch with you using the TripFab tools.</p>
+        	<a href="" rel="act_info" class="remove">Remove</a>
+        </div> 
+        <!-- closes desc -->
+        <?php endif ?>
+        <div class="main-ttl">
+        	<p><strong>General information about your activity</strong></p>        	
+        </div>
+        <!-- closes main-ttl -->
+		<div class="item-wrppr">
+			<div class="item-ttl">
+				Basic Information
+			</div><!-- closes item ttl -->
+			<div class="item first last">
+				<input tabindex="1" type="text" class="noclean limitcc" name="title" rel="60" value="<?= $this->listing->title ?>" />
+				<h4>Title</h4>
+				<span>Activity name<br />
+                <span class="charsLeftInp"></span> Character Left</span>
+                <div class="help">
+                    <a href="/images2/help/big-act-general-name.png" class="eye">help</a>
+                    <a href="/images2/help/big-act-general-name.png" class="tooltip3">
+                    <img src="/images2/help/small-act-general-name.png" /></a>
+                </div>
+			</div><!-- closes item -->
+			<div class="clear"></div>									
+		</div><!-- closes item-wrppr -->
+		
+		<div class="item-wrppr">
+			<div class="item-ttl">
+				Contact Information
+			</div><!-- closes item ttl -->
+            <div class="item first">
+            	<?php $checked = ($this->vendor->phone == $this->listing->phone &&
+						 		  $this->vendor->email == $this->listing->email &&
+								  $this->vendor->website == $this->listing->website) ? 'checked="checked"' : '' ?>
+                <input tabindex="2" id="contactEqual" <?= $checked ?> type="checkbox" name="contactEqual" />
+                <label for="contactEqual">The contact information is the same as my company profile</label>
+            </div>	
+            <?php $disabled = ($checked != '') ? 'disabled="disabled"' : '' ?>
+			<div class="item">
+				<input tabindex="3" <?= $disabled ?> placeholder="Enter your phone" type="text" name="phone" value="<?= $this->listing->phone ?>" />
+				<h4>Phone</h4>
+				<span>Contact Phone</span>
+			</div><!-- closes item -->
+			<div class="item">
+				<input tabindex="4" <?= $disabled ?> placeholder="Enter your email" type="text" name="email" value="<?= $this->listing->email ?>" />
+				<h4>Email</h4>
+				<span>Contact Email</span>
+			</div><!-- closes item -->
+			<div class="item last">
+				<input tabindex="5" <?= $disabled ?> placeholder="Enter your website url" type="text" name="website" value="<?= $this->listing->website ?>" />
+				<h4>Website</h4>
+				<span>Company Website</span>
+			</div><!-- closes item -->
+			<div class="clear"></div>									
+		</div><!-- closes item-wrppr -->
+        
+        <div class="item-wrppr">
+            <div class="item-ttl">
+                Capacity Options
+            </div><!-- closes item ttl -->
+            <?php if(is_null($this->listing->min) or is_null($this->listing->max)): ?>
+            <div class="item first">
+                <input checked="checked" type="radio" name="capacity" class="multiple" value="multiple">
+                <strong>Multiple. </strong><span>Choose multiple if you have different types of capacity and pricing for this activity.</span><br />
+                <span>You can set those types of Activities in the <a href="">Activity Types</a> section.</span>
+            </div><!-- closes item -->
+            <div class="item last">
+                <input type="radio" name="capacity" class="single" value="single">
+                <strong>Single. </strong><span>Choose single if you have just one type of capacity for this listing.</span>
+            </div><!-- closes item -->
+            <?php else: ?>
+            <div class="item first">
+                <input type="radio" name="capacity" class="multiple" value="multiple">
+                <strong>Multiple. </strong><span>Choose multiple if you have different types of capacity and pricing for this activity.</span><br />
+                <span>You can set those types of Activities in the <a href="">Activity Types</a> section.</span>
+            </div><!-- closes item -->
+            <div class="item last">
+                <input checked="checked" type="radio" name="capacity" class="single" value="single">
+                <strong>Single. </strong><span>Choose single if you have just one type of capacity for this listing.</span>
+            </div><!-- closes item -->
+            <?php endif ?>
+            <?php $class = (is_null($this->listing->min) or is_null($this->listing->max)) ? 'hidden' : '' ?>
+            <?php $disabled = (!empty($class)) ? 'disabled="disabled"' : "" ?>
+            <div class="single-schedule <?= $class ?>">
+                <div class="item color first">
+                    <div class="selects">
+                        <select tabindex="8" <?= $disabled ?> name="min">
+                            <option value="1">1 person</option>
+                            <?php for($i=2; $i<=50; $i++): ?>
+                            <?php $selected = ($i == $this->listing->min) ? 'selected="selected"' : ''; ?>
+                            <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> people</option>
+                            <?php endfor ?>
+                        </select>
+                    </div><!-- closes selects -->
+                    <h4>Minimum Capacity</h4>
+                    <span>Select the maximum people</span>
+                </div><!-- closes item -->
+                <div class="item color">
+                    <div class="selects">
+                        <select tabindex="9" <?= $disabled ?> name="max">
+                            <option value="1">1 person</option>
+                            <?php for($i=2; $i<=50; $i++): ?>
+                            <?php $selected = ($i == $this->listing->max) ? 'selected="selected"' : ''; ?>
+                            <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> people</option>
+                            <?php endfor ?>
+                        </select>
+                    </div><!-- closes selects -->
+                    <h4>Maximum Capacity</h4>
+                    <span>Select the maximum people</span>
+                </div><!-- closes item -->
+                <div class="item color">
+                	<?php $checked = ($this->listing->kids == 1) ? 'checked="checked"' : '' ?>
+                    <input tabindex="10" <?= $checked ?> type="checkbox" name="kids" value="1" />
+                    <label>This activity accepts children</label>
+                </div><!-- closes item -->
+                <?php $class = ($this->listing->kids != 1) ? 'hidden' : ''; ?>
+                <?php $disabled = (!empty($class)) ? 'disabled="disabled"' : '' ?>
+                <div class="accept-kids <?= $class ?>">
+                    <div class="item color">
+                        <div class="selects">
+                            <select tabindex="11" name="kid_age_max" <?= $disabled ?>>
+                            	<?php for($i=1;$i<=12;$i++): ?>
+                                <?php $selected = ($i == $this->listing->kid_age_max) ? 'selected="selected"' : ''; ?>
+                                <option <?= $selected ?> value="<?= $i ?>">Under <?= $i ?> years</option>
+                                <?php endfor ?>
+                            </select>
+                        </div><!-- closes selects -->
+                        <h4>Child Age</h4>
+                        <span>What age is a child?</span>
+                    </div><!-- closes item -->
+                </div><!-- accept-kids -->
+            </div><!-- closes single-schedule -->	
+            <div class="clear"></div>									
+        </div>
+        <!-- closes item-wrppr -->
+		
+		<div class="item-wrppr">
+			<div class="item-ttl">
+				Departure / Return
+			</div><!-- closes item ttl -->
+			<div class="item first">
+				<div class="selects departure">					
+					<select tabindex="13" id="country2" name="departure_country_id">
+                    	<option value="">Select Country</option>
+						<?php foreach($this->countries as $c): ?>
+						<?php $selected = ($c->id == $this->listing->departure_country_id) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
+                        <?php endforeach ?>
+					</select>
+					<select tabindex="14" name="departure" id="cities2">
+						<?php if(count($this->cities2) > 0): ?>
+					    <option value="">Select the city</option>
+					    <?php foreach($this->cities2 as $c): ?>
+					    <?php $selected = ($c->id == $this->listing->departure) ? 'selected="selected"' : ''; ?>
+					    <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
+					    <?php endforeach ?>                                    
+					    <?php else: ?>
+					    <option value="">Country first</option>
+					    <?php endif ?>
+					</select>
+				</div><!-- closes selects -->
+				<h4>Departure Point</h4>
+				<span>Select the departure point</span>
+                <div class="help">
+                    <a href="/images2/help/big-act-general-departure.png" class="eye">help</a>
+                    <a href="/images2/help/big-act-general-departure.png" class="tooltip3">
+                    <img src="/images2/help/small-act-general-departure.png" /></a>
+                </div>
+			</div><!-- closes item -->
+			<div class="item last">
+				<div class="selects departure">
+                	<?php if($this->listing->departure == $this->listing->return): ?>					
+					<select tabindex="15" disabled="disabled" name="return_country_id" id="country3">
+                    	<option value="">Select Country</option>
+						<?php foreach($this->countries as $c): ?>
+						<?php $selected = ($c->id == $this->listing->return_country_id) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
+                        <?php endforeach ?>
+					</select>
+					<select tabindex="16" disabled="disabled" name="return" id="cities3">
+						<?php if(count($this->cities3) > 0): ?>
+					    <option value="">Select the city</option>
+					    <?php foreach($this->cities3 as $c): ?>
+					    <?php $selected = ($c->id == $this->listing->return) ? 'selected="selected"' : ''; ?>
+					    <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
+					    <?php endforeach ?>                                    
+					    <?php else: ?>
+					    <option value="">Country first</option>
+					    <?php endif ?>
+					</select>
+					<p class="check"><input tabindex="17" checked="checked" id="returnEqual" name="returnEqual" value="1" type="checkbox" />
+                    <label>Activity ends at original point of departure</label></p>
+                    <?php else: ?>
+					<select tabindex="15" name="return_country_id" id="country3">
+                    	<option value="">Select Country</option>
+						<?php foreach($this->countries as $c): ?>
+						<?php $selected = ($c->id == $this->listing->return_country_id) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
+                        <?php endforeach ?>
+					</select>
+                    <select tabindex="16" name="return" id="cities3">
+						<?php if(count($this->cities3) > 0): ?>
+                        <option value="">Select the city</option>
+                        <?php foreach($this->cities3 as $c): ?>
+                        <?php $selected = ($c->id == $this->listing->return) ? 'selected="selected"' : ''; ?>
+                        <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
+                        <?php endforeach ?>                                    
+                        <?php else: ?>
+                        <option value="">Country first</option>
+                        <?php endif ?>
+					</select>
+                    <p class="check"><input tabindex="17" id="returnEqual" name="returnEqual" value="1" type="checkbox" />
+                    <label>Activity concludes at original point of departure</label></p>
+                    <?php endif ?>
+				</div><!-- closes selects -->
+				<h4>Return Point</h4>
+				<span>Select the return point</span>
+                <div class="help">
+                    <a href="/images2/help/big-act-general-return.png" class="eye">help</a>
+                    <a href="/images2/help/big-act-general-return.png" class="tooltip3">
+                    <img src="/images2/help/small-act-general-return.png" /></a>
+                </div>
+			</div><!-- closes item -->
+			<div class="clear"></div>									
+		</div><!-- closes item-wrppr -->
+		
+		<div class="item-wrppr">
+			<div class="item-ttl">
+				Schedule
+			</div><!-- closes item ttl -->
+            <?php if(count($this->schedules) > 0): ?>
+			<div class="item first">
+				<input tabindex="18" type="radio" name="schedules" class="flex" value="flex" />
+				<strong>Flexible. </strong><span>The schedules will be flexible. The user will choose the hour that want to take the activity.</span>
+                <a class="help">help</a>
+			</div><!-- closes item -->
+			<div class="item last">
+				<input tabindex="19" type="radio" checked="checked" name="schedules" class="custom" value="custom" />
+				<strong>Custom. </strong><span>The schedules will be flexible. I want to set specific hours for the activity.</span>
+			</div><!-- closes item -->
+            <?php else: ?>
+            <div class="item first">
+				<input tabindex="18" type="radio" checked="checked" name="schedules" class="flex" value="flex" />
+				<strong>Flexible. </strong><span>The schedules will be flexible. The user will choose the hour that want to take the activity.</span>
+			</div><!-- closes item -->
+			<div class="item last">
+				<input tabindex="19" type="radio" name="schedules" value="custom" class="custom" />
+				<strong>Custom. </strong><span>The schedules will be flexible. I want to set specific hours for the activity.</span>
+			</div><!-- closes item -->
+            <?php endif ?>
+            
+            <?php $hours = array('1:00','1:15','1:30','1:45','2:00','2:15','2:30','2:45','3:00','3:15','3:30','3:45','4:00','4:15','4:30','4:45','5:00','5:15','5:30','5:45','6:00','6:15','6:30','6:45','7:00','7:15','7:30','7:45','8:00','8:15','8:30','8:45','9:00','9:15','9:30','9:45','10:00','10:15','10:30','10:45','11:00','11:15','11:30','11:45','12:00','12:15','12:30','12:45') ?>
+            <?php $times = array('AM','PM'); ?>
+            
+            <?php $class = (count($this->schedules) > 0) ? '' : 'hidden' ?>
+            <div class="custom_schedules <?= $class ?>">
+            	<?php $yy = 0 ?>
+            	<?php if(count($this->schedules) > 0): ?>
+				<?php foreach($this->schedules as $type): ?>
+                <div class="single-schedule">
+                    <div class="item color first">
+                        <input class="required" type="text" placeholder="Enter the schedule name" name="schs[<?= $type->id ?>][name]" value="<?= $type->name ?>" />
+                        <h4>Schedule Name</h4>
+                        <span>Set a name for this schedule</span>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <?php $time = date('g:i,A', strtotime($type->starting)) ?>
+                            <?php $time = explode(',',$time); ?>
+                            <select class="noselect" name="schs[<?= $type->id ?>][start_hour]">
+                                <?php foreach($hours as $h): ?>
+                                <?php if($h == $time[0]): ?>
+                                <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                                <?php else: ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endif ?>
+                                <?php endforeach ?>
+                            </select>
+                            <select class="noselect" name="schs[<?= $type->id ?>][start_time]">
+                                <?php foreach($times as $h): ?>
+                                <?php if($h == $time[1]): ?>
+                                <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                                <?php else: ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endif ?>
+                                <?php endforeach ?>
+                            </select>
+                        </div><!-- closes selects -->
+                        <h4>Starting Time</h4>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <?php $time = date('g:i,A', strtotime($type->ending)) ?>
+                            <?php $time = explode(',',$time); ?>
+                            <select class="noselect" name="schs[<?= $type->id ?>][end_hour]">
+                                <?php foreach($hours as $h): ?>
+                                <?php if($h == $time[0]): ?>
+                                <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                                <?php else: ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endif ?>
+                                <?php endforeach ?>
+                            </select>
+                            <select class="noselect" name="schs[<?= $type->id ?>][end_time]">
+                                <?php foreach($times as $h): ?>
+                                <?php if($h == $time[1]): ?>
+                                <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                                <?php else: ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endif ?>
+                                <?php endforeach ?>
+                            </select>
+                        </div><!-- closes selects -->
+                        <h4>Ending Time</h4>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <?php $disabled = ($type->duration == 1) ? 'disabled="disabled"' : '' ?>
+                            <select <?= $disabled ?> name="schs[<?= $type->id ?>][duration]">
+                                <option value="1">1 day</option>
+                                <?php for($d=2;$d<=30;$d++): ?>
+                                <?php $selected = ($d == $type->duration) ? 'selected="selected"' : ''; ?>
+                                <option <?= $selected ?> value="<?= $d ?>"><?= $d ?> days</option>
+                                <?php endfor ?>
+                            </select>
+                            <?php $checked = (!empty($disabled)) ? 'checked="checked"' : '' ?>
+                            <input <?= $checked ?> type="checkbox" name="schs[<?= $type->id ?>][same]" id="sameday<?= $type->id ?>" class="sameday" />
+                            <label for="sameday<?= $type->id ?>">Ends same day</label>
+                            <input type="hidden" name="schs[<?= $type->id ?>][duration_lb]" value="days" />
+                        </div><!-- closes selects -->
+                        <h4>Activity Duration</h4>
+                    </div><!-- closes item -->
+                    <?php if($yy != 0): ?> 
+                    <div class="item color">
+                        <a href="" class="remove">Remove this Schedule</a>
+                    </div><!-- closes item -->
+                    <?php endif ?>
+                </div><!-- closes single-schedule -->
+                <?php $yy++ ?>
+                <?php endforeach ?>
+                <?php else: ?>
+                <div class="single-schedule">
+                    <div class="item color first">
+                        <input disabled="disabled" class="required" type="text" placeholder="Enter the schedule name" name="sch[0][name]" value="" />
+                        <h4>Schedule Name</h4>
+                        <span>Set a name for this schedule</span>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <select class="noselect" name="sch[0][start_hour]">
+                                <?php foreach($hours as $h): ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endforeach ?>
+                            </select>
+                            <select class="noselect" name="sch[0][start_time]">
+                                <?php foreach($times as $h): ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div><!-- closes selects -->
+                        <h4>Starting Time</h4>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <select class="noselect" name="sch[0][end_hour]">
+                                <?php foreach($hours as $h): ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endforeach ?>
+                            </select>
+                            <select class="noselect" name="sch[0][end_time]">
+                                <?php foreach($times as $h): ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div><!-- closes selects -->
+                        <h4>Ending Time</h4>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <select disabled="disabled" name="sch[0][duration]">
+                                <option value="1">1 day</option>
+                                <?php for($d=2;$d<=30;$d++): ?>
+                                <option value="<?= $d ?>"><?= $d ?> days</option>
+                                <?php endfor ?>
+                            </select>
+                            <input checked="checked" type="checkbox" name="sch[0][same]" id="sameday0" class="sameday" />
+                            <label for="sameday0">Ends same day</label>
+                            <input type="hidden" name="sch[0][duration_lb]" value="days" />
+                        </div><!-- closes selects -->
+                        <h4>Activity Duration</h4>
+                    </div><!-- closes item -->
+                </div><!-- closes single-schedule -->
+                <?php endif ?>
+                <div class="single-schedule newsch hidden">
+                    <div class="item color first">
+                        <input disabled="disabled" type="text" placeholder="Enter the schedule name" name="name" value="" />
+                        <h4>Schedule Name</h4>
+                        <span>Set a name for this schedule</span>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <select class="noselect" name="start_hour">
+                                <?php foreach($hours as $h): ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endforeach ?>
+                            </select>
+                            <select class="noselect" name="start_time">
+                                <?php foreach($times as $h): ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div><!-- closes selects -->
+                        <h4>Starting Time</h4>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <select class="noselect" name="end_hour">
+                                <?php foreach($hours as $h): ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endforeach ?>
+                            </select>
+                            <select class="noselect" name="end_time">
+                                <?php foreach($times as $h): ?>
+                                <option value="<?= $h ?>"><?= $h ?></option>
+                                <?php endforeach ?>
+                            </select>
+                        </div><!-- closes selects -->
+                        <h4>Ending Time</h4>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <div class="selects">
+                            <select disabled="disabled" name="duration">
+                                <option value="1">1 day</option>
+                                <?php for($d=2;$d<=30;$d++): ?>
+                                <option value="<?= $d ?>"><?= $d ?> days</option>
+                                <?php endfor ?>
+                            </select>
+                            <input checked="checked" type="checkbox" name="same" id="sameday1" class="sameday" />
+                            <label for="sameday1">Ends same day</label>
+                            <input type="hidden" name="duration_lb" value="days" />
+                        </div><!-- closes selects -->
+                        <h4>Activity Duration</h4>
+                    </div><!-- closes item -->
+                    <div class="item color">
+                        <a href="" class="remove">Remove this Schedule</a>
+                    </div><!-- closes item -->
+                </div><!-- closes single-schedule -->
+                <div class="item last">
+                    <a href="" id="addSchedule" class="link-5">Add Another Schedule</a>
+                </div><!-- closes item -->
+            </div>
+			<div class="clear"></div>									
+		</div><!-- closes item-wrppr -->
+		
+		<div class="item-wrppr">
+			<div class="item-ttl">
+				Details
+			</div><!-- closes item ttl -->
+			<div class="item first">
+				<div class="inner-container">
+					<table>
+						<tbody>
+                        	<?php for($i=0; $i<count($this->categories); $i=$i+2): ?>
+                            <tr>
+                                <?php for($j=$i; ($j<count($this->categories)) && ($j<($i+2)); $j++): ?>
+                                <td>
+                                <?php $checked = (in_array($this->categories[$j]->id, $this->listing_types)) ? 'checked="checked"' : ''; ?>
+                                <input <?= $checked ?> name="types[<?= $this->categories[$j]->id ?>]" 
+                                value="<?= $this->categories[$j]->id ?>" type="checkbox"/>
+                                <?= $this->categories[$j]->name ?>
+                                </td>
+                                <?php endfor ?>
+                            </tr>
+                            <?php endfor ?>
+						</tbody>
+					</table>
+				</div><!-- closes inner-container -->
+				<h4>Category</h4>
+				<span>Select categories</span>
+                <div class="help">
+                    <a href="/images2/help/big-act-general-category.png" class="eye">help</a>
+                    <a href="/images2/help/big-act-general-category.png" class="tooltip3">
+                    <img src="/images2/help/small-act-general-category.png" /></a>
+                </div>
+			</div><!-- closes item -->
+			<!--
+			<div class="item last">
+				<div class="inner-container">
+					<table>
+						<tbody>
+							<?php //for($i=0; $i<count($this->tags); $i=$i+2): ?>
+                            <tr>
+                                <?php //for($j=$i; ($j<count($this->tags)) && ($j<($i+2)); $j++): ?>
+                                <td>
+                                <?php //$checked = (in_array($this->tags[$j]->id, $this->listing_tags)) ? 'checked="checked"' : ''; ?>
+                                <input <? //$checked ?> name="tags[<? // $this->tags[$j]->id ?>]" 
+                                value="<? //$this->tags[$j]->id ?>" type="checkbox"/>
+                                <? //$this->tags[$j]->name ?>
+                                </td>
+                                <?php //endfor ?>
+                            </tr>
+                            <?php // endfor ?>
+						</tbody>
+					</table>
+				</div>
+				<h4>Tags</h4>
+				<span>Select Tags</span>
+			</div>-->
+			<div class="item last">
+				<div class="inner-container">
+					<table>
+						<tbody>
+                        	<?php for($i=0;$i<count($this->landscapes);$i=$i+3): ?>
+							<tr>
+                            	<?php for($j=$i;($j<count($this->landscapes)) && ($j<($i+3));$j++): ?>
+                                <?php $checked = (in_array($this->landscapes[$j]->id, $this->l_lands)) ? 'checked="checked"' : ''; ?>
+								<td><input <?= $checked ?> name="lands[<?= $this->landscapes[$j]->id ?>]" value="<?= $this->landscapes[$j]->id ?>" 
+                                			type="checkbox"/><?= $this->landscapes[$j]->name ?></td>
+                                <?php endfor ?>
+							</tr>
+                            <?php endfor ?>
+						</tbody>
+					</table>
+				</div><!-- closes inner-container -->
+				<h4>Landscapes</h4>
+				<span>Select Landscapes</span>
+                <div class="help">
+                    <a href="/images2/help/big-act-general-landscape.png" class="eye">help</a>
+                    <a href="/images2/help/big-act-general-landscape.png" class="tooltip3">
+                    <img src="/images2/help/small-act-general-landscape.png" /></a>
+                </div>
+			</div><!-- closes item -->
+			<div class="clear"></div>									
+		</div><!-- closes item-wrppr -->
+	</div><!-- closes profile-items -->
+	<div class="foot">
+		<input type="submit" class="btn-1 noclean" value="Save Changes" />
+		<a href="/admin/listings/desactivate/<?= $this->listing->id ?>">Delete Listing</a>
+	</div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'edit-listing') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_listing') ?>" />
+</form>
+<?php endif ?>

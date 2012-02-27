@@ -1,103 +1,115 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
-<head>
-    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title>Admin - Listings | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all-admin.css" />
-    <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<title>Listings</title>
+        <link type="text/css" rel="stylesheet" href="/css5/reset.css" />
+        <link type="text/css" rel="stylesheet" href="/css5/all.css" />
+  		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css" />   
+  		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+		<script type="text/javascript" src="/js2/jquery.js"></script>
+		<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js"></script>
+		<script>
         $(document).ready(function() {
-            $('#header .header-login a.user').click(function(){
-                $(this).next().toggleClass('show');
-                return false;
+            $('a.lbc').fancybox({
+                padding: 0,
+                overlayColor: '#FFF',
+                overlayOpacity: '0.7',
+                showCloseButton: 'false',
             });
+			
+			$('input[name=fdate]').each(function(){
+				$val = $(this).val();
+				$(this).datepicker({
+					dateFormat:'M dd, yy',
+					defaultDate:$val,
+					onSelect:function(date){
+						$('input[name=fdate]').datepicker('option','minDate', date);
+					},
+				});
+			});
+
+			$('input[name=to-date]').each(function(){
+				$val = $(this).val();
+				$(this).datepicker({
+					dateFormat:'M dd, yy',
+					defaultDate:$(this).val(),
+				});
+			});
+            $("#report_tabs").tabs();
+			$('#ui-datepicker-div').wrap('<div id="calendarContainer"></div>');
+
         });
     </script>
-</head>
-<body>
-<div class="w1">
-	<?= $this->partial('adminPartials/header.phtml', array('active'=>'Listings')); ?>
-    <div class="w3_admin">
-        <div class="sub_menu">
-            <h2>All Listings. <span>There are 126,258.</span></h2>
-            <a href="#" class="btn-1">Create New</a>
-            <ul class="sub_links">
-                <li><a href="">All Listings</a></li>
-                <li><a href="">Restaurants</a></li>
-                <li><a href="">Entertainment</a></li>
-                <li><a href="">Tourist Sights</a></li>
-            </ul>
-        </div><!--SUB_MENU-->
-    </div><!--W3-->
-    <div class="all_listing">
-        <div class="search_list">
-            <form action="">
-                <input type="text" value="Search for listings" />
-                <input type="button" class="btn-1" value="Search" />
-            </form>
-            <ul class="control">
-            	<?php if($this->params['page'] == 1): ?>
-                <li><a href="?page=<?= $this->params['page'] + 1 ?>"><span class="next">Next</span></a></li>
-                <?php elseif(($this->params['page'] * 50) > $this->total): ?>
-                <li><a href="?page=<?= $this->params['page'] - 1 ?>"><span class="prev">Prev</span></a></li>
-                <?php else: ?>
-                <li><a href="?page=<?= $this->params['page'] - 1 ?>"><span class="prev">Prev</span></a></li>
-                <li><a href="?page=<?= $this->params['page'] + 1 ?>"><span class="next">Next</span></a></li>
-                <?php endif ?>
-            </ul>
-            <p class="pages">
-            <?= (($this->params['page'] - 1) * 50) ?> - 
-            <?= (($this->params['page'] * 50) > $this->total) ? $this->total : $this->params['page'] * 50 ?>
-            of <?= $this->total ?></p>
-        </div><!--SEARCH_LIST-->
-        <div class="list_content">
-            <table width="100%" border="1">
-                <tr>
-                	<?php $order = ($this->params['sort'] == 'title' and $this->params['order'] == 'ASC') ? 'DESC' : 'ASC' ?>
-                    <th width="250"><a href="?sort=title&amp;order=<?= $order ?>">Resturant Name</a></th>
-                    <?php $order = ($this->params['sort'] == 'main_type' and $this->params['order'] == 'ASC') ? 'DESC' : 'ASC' ?>
-                    <th width="110"><a href="?sort=main_type&amp;order=<?= $order ?>">Type</a></th>
-                    <?php $order = ($this->params['sort'] == 'status' and $this->params['order'] == 'ASC') ? 'DESC' : 'ASC' ?>
-                    <th width="96"><a href="?sort=status&amp;order=<?= $order ?>">Status</a></th>
-                    <?php $order = ($this->params['sort'] == 'city_id' and $this->params['order'] == 'ASC') ? 'DESC' : 'ASC' ?>
-                    <th width="150"><a href="?sort=city_id&amp;order=<?= $order ?>">City</a></th>
-                    <?php $order = ($this->params['sort'] == 'country_id' and $this->params['order'] == 'ASC') ? 'DESC' : 'ASC' ?>
-                    <th width="139"><a href="?sort=country_id&amp;order=<?= $order ?>">Country</a></th>
-                    <th width="67" class="last">&nbsp;</th>
-                </tr>
-                <?php foreach($this->listings as $i => $listing): ?>
-                <tr class="<?= ($i == 0) ? 'first' : '' ?>">
-                    <td><?= $listing->title ?></td>
-                    <td><?= $listing->main_type ?></td>
-                    <td><?= $listing->status ?></td>
-                    <td><?= $listing->city_id ?></td>
-                    <td><?= $listing->country_id ?></td>
-                    <td><a href="/admin/listings/edit/<?= $listing->id ?>" class="edit">Edit</a></td>
-                </tr>
-                <?php endforeach ?>
-            </table>
-        </div><!--LIST-CONTENT-->
-        <div class="paging_bottom">
-            <ul class="control">
-            	<?php if($this->params['page'] == 1): ?>
-                <li><a href="?page=<?= $this->params['page'] + 1 ?>"><span class="next">Next</span></a></li>
-                <?php elseif(($this->params['page'] * 50) > $this->total): ?>
-                <li><a href="?page=<?= $this->params['page'] - 1 ?>"><span class="prev">Prev</span></a></li>
-                <?php else: ?>
-                <li><a href="?page=<?= $this->params['page'] - 1 ?>"><span class="prev">Prev</span></a></li>
-                <li><a href="?page=<?= $this->params['page'] + 1 ?>"><span class="next">Next</span></a></li>
-                <?php endif ?>
-            </ul>
-            <p class="pages">
-            <?= (($this->params['page'] - 1) * 50) ?> - 
-            <?= (($this->params['page'] * 50) > $this->total) ? $this->total : $this->params['page'] * 50 ?>
-            of <?= $this->total ?></p>
-        </div><!--PAGING_BOTTOM-->
-    </div><!--ALL_LISTING-->
-            
-    <?= $this->partial('adminPartials/footer.phtml'); ?>
-</div><!-- closes w1 -->
-</body>
+
+	</head>
+	<body>
+		<div class="w1">
+    	<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
+
+			<div class="w3_admin">
+				<div class="sub_menu">
+					<h2><?php echo $this->title ?>. <span>There are <?php echo $this->numCount?></span></h2>
+					<a href="#new_listing" class="btn-1 lbc">Create New</a>
+					<ul class="sub_links">
+						<li <?php echo $this->listingContext=='all' ? 'class="select"' : '';?>><a href="/admin/listings/all">All</a></li>
+						<li <?php echo $this->listingContext=='activities' ? 'class="select"' : '';?>><a href="/admin/listings/activities">Activities</a></li>
+						<li <?php echo $this->listingContext=='hotels' ? 'class="select"' : '';?>><a href="/admin/listings/hotels">Hotels</a></li>
+						<li <?php echo $this->listingContext=='restaurants' ? 'class="select"' : '';?>><a href="/admin/listings/restaurants">Restaurants</a></li>
+						<li <?php echo $this->listingContext=='entertainments' ? 'class="select"' : '';?>><a href="/admin/listings/entertainment">Entertainment</a></li>
+						<li <?php echo $this->listingContext=='tourist' ? 'class="select"' : '';?>><a href="/admin/listings/tourist">Tourist Sights</a></li>
+					</ul>
+				</div><!--SUB_MENU-->
+            </div><!--W3-->
+
+
+			<div class="all_listing">
+				<div class="search_list">
+					<form action="" onsubmit="return false">
+						<input type="text" placeholder="Search for listings" name="q" id="q" value="<?php echo $this->searchText?>" />
+						<input type="button" class="btn-1" value="Search" onclick="searchSubmit()" />
+					</form>
+					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
+				</div><!--SEARCH_LIST-->
+				<div class="list_content">
+					<table width="100%" border="0">
+						<tr>
+							<th width="250"><a href="<?php echo $this->url(array('sort'=>0, 'seq'=>$this->paramSort == 0 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Listing Name</a></th>
+							<th width="110"><a href="<?php echo $this->url(array('sort'=>1, 'seq'=>$this->paramSort == 1 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Type</a></th>
+							<th width="120"><a href="<?php echo $this->url(array('sort'=>2, 'seq'=>$this->paramSort == 2 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Category</a></th>
+							<th width="96"><a href="<?php echo $this->url(array('sort'=>3, 'seq'=>$this->paramSort == 3 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Status</a></th>
+							<th width="150"><a href="<?php echo $this->url(array('sort'=>4, 'seq'=>$this->paramSort == 4 && $this->paramSequence !='desc' ? 'desc':'default'));?>">City</a></th>
+							<th width="139"><a href="<?php echo $this->url(array('sort'=>5, 'seq'=>$this->paramSort == 5 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Country</a></th>
+							<th width="67" class="last">&nbsp;</th>
+						</tr>
+						<?php foreach($this->paginator as $key=>$listing):?>
+                        <tr <?php echo $key==0 ? 'class="first"' : ''?>>
+							<td><?php echo $listing->title?></td>
+							<td><?php echo $listing->type_name?></td>
+							<td><?php echo $listing->type_name?></td>
+							<td><?php echo $listing->status ? 'Active' : 'Deactive' ?></td>
+							<td><?php echo $listing->city_name?></td>
+							<td><?php echo $listing->country_name?></td>
+							<td><a href="/admin/listings/edit/<?= $listing->id ?>" class="edit">Edit</a></td>
+						</tr>
+                        <?php endforeach;?>
+					</table>
+				</div><!--LIST-CONTENT-->
+				<div class="paging_bottom">
+					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort)); ?>
+				</div><!--PAGING_BOTTOM-->
+			</div><!--ALL_LISTING-->
+			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+		</div>
+		<!-- closes w1 -->
+    	
+		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+		
+        <script>
+			function searchSubmit(){
+				location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
+			}
+		</script>
+		
+	</body>
 </html>

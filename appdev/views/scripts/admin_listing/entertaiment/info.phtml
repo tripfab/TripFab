@@ -1,0 +1,196 @@
+<style type="text/css">
+.profile-items .item p.check { clear:both; margin-top:35px; }
+.profile-items .item p.check label { float: none; }
+.profile-items .item p.check input { vertical-align:baseline }
+input.schname { float:none !important; width:90px !important; }
+.item { position:relative;}
+.item .help {
+	position:absolute;
+	top:13px;
+	left:-35px;}
+.item .help a.eye {
+	display:block;
+	background:url(/images2/eye.png) no-repeat top left;
+	width:18px;
+	height:12px;
+	text-indent:-9999px;
+	cursor:pointer;}
+	.item .help:hover a.eye {
+		background-position:left -12px;}
+.item.first .help {
+	top:0px;}
+	.item .help a.tooltip3 {
+		background:url(/images2/help-tooltip-bg.png) top left no-repeat;
+		left: 17px;
+		padding:11px 12px;
+		position:absolute;
+		top:-102px;
+		z-index:1000;
+		display:none;}
+	.item .help:hover a.tooltip3 {
+		display:block;}
+
+.profile-items {
+	overflow:visible;}
+</style>
+<?php $durations = array(1,2,3,4,5,6,7,8,9,10,15,30,45,); ?>
+<form action="" method="post">
+	<div class="profile-items">
+    	<?php if($this->errors): ?>
+        <div class="errors">
+            <?php foreach($this->errors as $err): ?>
+            <p><?= $err ?></p>
+            <?php endforeach ?>
+        </div><!-- closes item -->
+        <?php endif ?>
+        
+    	<?php if($this->help->ent_info == 0): ?>
+        <div class="desc">
+        	<h3>What is the General Information Section?</h3>
+        	<p>Some general details about the experience, entertainment listing name, contact information, categories and more.</p>
+        	<a href="" rel="ent_info" class="remove">Remove</a>
+        </div>
+        <!-- closes desc -->
+        <?php endif ?>
+        <div class="main-ttl">
+        	<p><strong>General information about your entertainment listing</strong></p>        	
+        </div>
+        <!-- closes main-ttl -->
+		<div class="item-wrppr">
+			<div class="item-ttl">
+				Basic Information
+			</div><!-- closes item ttl -->
+			<div class="item first last">
+				<input placeholder="Listing title here" type="text" class="noclean limitcc" name="title" rel="60" value="<?= $this->listing->title ?>" />
+				<h4>Title</h4>
+				<span>Listing name<br />
+                <span class="charsLeftInp"></span> Character Left</span>
+                <div class="help">
+                    <a href="/images2/help/big-ent-general-name.png" class="eye">help</a>
+                    <a href="/images2/help/big-ent-general-name.png" class="tooltip3">
+                    <img src="/images2/help/small-ent-general-name.png" /></a>
+                </div>
+			</div><!-- closes item -->
+			<div class="clear"></div>									
+		</div><!-- closes item-wrppr -->
+		
+		<div class="item-wrppr">
+			<div class="item-ttl">
+				Contact Information
+			</div><!-- closes item ttl -->
+            <div class="item first">
+            	<?php $checked = ($this->vendor->phone == $this->listing->phone &&
+						 		  $this->vendor->email == $this->listing->email &&
+								  $this->vendor->website == $this->listing->website) ? 'checked="checked"' : '' ?>
+                <input id="contactEqual" <?= $checked ?> type="checkbox" name="contactEqual" />
+                <label for="contactEqual">The contact information is the same as my company profile</label>
+            </div>	
+            <?php $disabled = ($checked != '') ? 'disabled="disabled"' : '' ?>
+			<div class="item">
+				<input placeholder="Your phone number" <?= $disabled ?> type="text" name="phone" value="<?= $this->listing->phone ?>" />
+				<h4>Phone</h4>
+				<span>Contact Phone</span>
+			</div><!-- closes item -->
+			<div class="item">
+				<input placeholder="Your email address" <?= $disabled ?> type="text" name="email" value="<?= $this->listing->email ?>" />
+				<h4>Email</h4>
+				<span>Contact Email</span>
+			</div><!-- closes item -->
+			<div class="item last">
+				<input placeholder="Your website url" <?= $disabled ?> type="text" name="website" value="<?= $this->listing->website ?>" />
+				<h4>Website</h4>
+				<span>Company Website</span>
+			</div><!-- closes item -->
+			<div class="clear"></div>									
+		</div><!-- closes item-wrppr -->
+        
+        <div class="item-wrppr">
+			<div class="item-ttl">
+				Details
+			</div><!-- closes item ttl -->
+			<div class="item first">
+				<div class="inner-container">
+					<table>
+						<tbody>
+                        	<?php for($i=0; $i<count($this->categories); $i=$i+3): ?>
+                            <tr>
+                                <?php for($j=$i; ($j<count($this->categories)) && ($j<($i+3)); $j++): ?>
+                                <td>
+                                <?php $checked = (in_array($this->categories[$j]->id, $this->listing_types)) ? 'checked="checked"' : ''; ?>
+                                <input <?= $checked ?> name="types[<?= $this->categories[$j]->id ?>]" 
+                                value="<?= $this->categories[$j]->id ?>" type="checkbox"/>
+                                <?= $this->categories[$j]->name ?>
+                                </td>
+                                <?php endfor ?>
+                            </tr>
+                            <?php endfor ?>
+						</tbody>
+					</table>
+				</div><!-- closes inner-container -->
+				<h4>Category</h4>
+				<span>Select categories</span>
+                <div class="help">
+                    <a href="/images2/help/big-ent-general-category.png" class="eye">help</a>
+                    <a href="/images2/help/big-ent-general-category.png" class="tooltip3">
+                    <img src="/images2/help/small-ent-general-category.png" /></a>
+                </div>
+			</div><!-- closes item -->
+			<!--
+			<div class="item last">
+				<div class="inner-container">
+					<table>
+						<tbody>
+							<?php //for($i=0; $i<count($this->tags); $i=$i+2): ?>
+                            <tr>
+                                <?php //for($j=$i; ($j<count($this->tags)) && ($j<($i+2)); $j++): ?>
+                                <td>
+                                <?php //$checked = (in_array($this->tags[$j]->id, $this->listing_tags)) ? 'checked="checked"' : ''; ?>
+                                <input <? //$checked ?> name="tags[<? // $this->tags[$j]->id ?>]" 
+                                value="<? //$this->tags[$j]->id ?>" type="checkbox"/>
+                                <? //$this->tags[$j]->name ?>
+                                </td>
+                                <?php //endfor ?>
+                            </tr>
+                            <?php // endfor ?>
+						</tbody>
+					</table>
+				</div>
+				<h4>Tags</h4>
+				<span>Select Tags</span>
+			</div>-->
+            <div class="item last">
+				<div class="inner-container">
+					<table>
+						<tbody>
+                        	<?php for($i=0;$i<count($this->landscapes);$i=$i+3): ?>
+							<tr>
+                            	<?php for($j=$i;($j<count($this->landscapes)) && ($j<($i+3));$j++): ?>
+                                <?php $checked = (in_array($this->landscapes[$j]->id, $this->l_lands)) ? 'checked="checked"' : ''; ?>
+								<td><input <?= $checked ?> name="lands[<?= $this->landscapes[$j]->id ?>]" value="<?= $this->landscapes[$j]->id ?>" 
+                                			type="checkbox"/><?= $this->landscapes[$j]->name ?></td>
+                                <?php endfor ?>
+							</tr>
+                            <?php endfor ?>
+						</tbody>
+					</table>
+				</div><!-- closes inner-container -->
+				<h4>Landscapes</h4>
+				<span>Select Landscapes</span>
+                <div class="help">
+                    <a href="/images2/help/big-ent-general-landscape.png" class="eye">help</a>
+                    <a href="/images2/help/big-ent-general-landscape.png" class="tooltip3">
+                    <img src="/images2/help/small-ent-general-landscapes.png" /></a>
+                </div>
+			</div><!-- closes item -->
+			<div class="clear"></div>									
+		</div><!-- closes item-wrppr -->
+	</div><!-- closes profile-items -->
+	<div class="foot">
+		<input type="submit" class="btn-1 noclean" value="Save Changes" />
+		<a href="/admin/listings/desactivate/<?= $this->listing->id ?>">Delete Listing</a>
+	</div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'edit-listing') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_listing') ?>" />
+</form>

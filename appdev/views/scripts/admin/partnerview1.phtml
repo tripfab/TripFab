@@ -1,0 +1,37 @@
+<div class="single_trip">
+    <div class="image"><img src="images2/img-76.jpg" width="134" height="134" alt="" /></div><!--IMAGE-->
+    <table width="520" border="0" class="info">
+        <tr>
+            <td width="180">Company Name</td>
+            <td width="340"><?php echo $this->user->name?></td>
+        </tr>
+        <tr>
+            <td width="180">E-mail</td>
+            <td width="340"><?php echo $this->user->email?></td>
+        </tr>
+        <tr>
+            <td width="180">Contact Name</td>
+            <td width="340"><?php echo $this->user->contact_name?></td>
+        </tr>
+        <tr>
+            <td width="180">Partner Since</td>
+            <td width="340"><?php echo date('M d, Y', strtotime($this->user->created))?></td>
+        </tr>
+        <tr>
+            <td width="180">Country</td>
+            <td width="340"><?php echo $this->user->countryName?></td>
+        </tr>
+        <tr>
+            <td width="180">City</td>
+            <td width="340"><?php echo $this->user->cityName?></td>
+        </tr>
+        <tr>
+            <td width="180">Phone</td>
+            <td width="340"><?php echo $this->user->phone?></td>
+        </tr>
+        <tr>
+            <td width="180">Website</td>
+            <td width="340"><?php echo $this->user->website?></td>
+        </tr>
+    </table>
+</div><!--SINGLE_TRIP-->

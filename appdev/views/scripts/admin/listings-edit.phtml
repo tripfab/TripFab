@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->listing->title ?> : General Info | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/lightboxes.css" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+    <!--
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
+    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+	<script type="text/javascript" src="/uploadify/swfobject.js"></script>
+    <script type="text/javascript" src="/uploadify/jquery.uploadify.v2.1.4.min.js"></script>
+    -->
+    <style type="text/css">
+	#maplocations ul {
+		list-style:none;
+		margin-top:10px;
+		background:#FFC;}
+		#maplocations ul li {
+			margin-bottom:5px;}
+	#mapcanvas {
+		width:356px;
+		height:207px;
+		background:#09C;
+		clear:both;
+		margin-top:35px;}
+	.listing-content .profile-items .item .inner-container > a {
+		display:none;}
+	.listing-content .profile-items .item:hover .inner-container > a {
+		display:block;}
+	.item .inner-form {
+		clear:both;
+		overflow:hidden;
+		padding-top:5px;}
+		.item .inner-form input.text {
+			float:left;
+			width:200px !important;
+			vertical-align:middle;}
+		.item .inner-form input.btn {
+			float:left;
+			vertical-align:middle;}
+		.item .inner-form .selects {
+			display:block;
+			clear:both;}
+		.hidden { display:none; }
+		.errors {
+			border:1px solid #F00;
+			margin:20px 0 0;
+			padding:5px;}
+			.errors p {
+				color:#F00;
+				font-weight:normal;
+				font-style:italic;}
+		input.error {
+			border:1px solid #F00 !important;}
+		label.error {
+			display:none !important;}
+	</style>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('admin_partials/header.phtml', array()); ?>
+    <div class="w3_admin">
+        <div class="sub_menu">
+            <h2>Editing. <span><?php echo $this->listing->title ?></span></h2>
+            <a href="#new_listing" class="btn-1 lbc">Create New</a>
+        </div><!--SUB_MENU-->
+    </div><!--W3-->
+    <div class="w2">
+        <div class="listing-wrapper wrapper">
+            <div class="listing-content show">
+                <div class="left">
+                    <?= $this->partial('admin_partials/vendorlistingsmenu.phtml', array('active'=>'General Information', 'id' => $this->listing->id, 
+									   'type'=>$this->listing->main_type)) ?>
+                </div><!-- closes left -->
+                <div class="right">
+                <?php 	switch($this->listing->main_type):
+							case 2:
+								echo $this->partial('admin_listing/restaurant/info.phtml', array(
+										'errors' 	 => $this->errors,
+										'listing'	 => $this->listing,
+										'countries'	 => $this->countries,
+										'cities'	 => $this->cities,
+										'schedules'	 => $this->schedules,
+										'attributes' => $this->attributes,
+										'categories' => $this->categories,
+										'tags'		 => $this->tags,
+										'listing_types' => $this->listing_types,
+										'listing_tags'	=> $this->listing_tags,
+										'cities2'		=> $this->cities2,
+										'cities3'		=> $this->cities3,
+										'help' => $this->help,
+										'vendor' => $this->vendor,
+										'landscapes' => $this->landscapes,
+										'l_lands'	=> $this->l_lands,
+								));
+								break;
+							case 4:
+								echo $this->partial('admin_listing/sight/info.phtml', array(
+										'errors' 	 => $this->errors,
+										'listing'	 => $this->listing,
+										'countries'	 => $this->countries,
+										'cities'	 => $this->cities,
+										'schedules'	 => $this->schedules,
+										'attributes' => $this->attributes,
+										'categories' => $this->categories,
+										'tags'		 => $this->tags,
+										'listing_types' => $this->listing_types,
+										'listing_tags'	=> $this->listing_tags,
+										'cities2'		=> $this->cities2,
+										'cities3'		=> $this->cities3,
+										'help' => $this->help,
+										'vendor' => $this->vendor,
+										'landscapes' => $this->landscapes,
+										'l_lands'	=> $this->l_lands,
+								));
+								break;
+							case 5:
+								echo $this->partial('admin_listing/hotel/info.phtml', array(
+										'errors' 	 => $this->errors,
+										'listing'	 => $this->listing,
+										'countries'	 => $this->countries,
+										'cities'	 => $this->cities,
+										'schedules'	 => $this->schedules,
+										'attributes' => $this->attributes,
+										'categories' => $this->categories,
+										'tags'		 => $this->tags,
+										'listing_types' => $this->listing_types,
+										'listing_tags'	=> $this->listing_tags,
+										'cities2'		=> $this->cities2,
+										'cities3'		=> $this->cities3,
+										'help' => $this->help,
+										'vendor' => $this->vendor,
+										'landscapes' => $this->landscapes,
+										'l_lands'	=> $this->l_lands,
+								));
+								break;
+							case 6:
+								echo $this->partial('admin_listing/activity/info.phtml', array(
+										'errors' 	 => $this->errors,
+										'listing'	 => $this->listing,
+										'countries'	 => $this->countries,
+										'cities'	 => $this->cities,
+										'schedules'	 => $this->schedules,
+										'attributes' => $this->attributes,
+										'categories' => $this->categories,
+										'tags'		 => $this->tags,
+										'listing_types' => $this->listing_types,
+										'listing_tags'	=> $this->listing_tags,
+										'cities2'		=> $this->cities2,
+										'cities3'		=> $this->cities3,
+										'help' => $this->help,
+										'vendor' => $this->vendor,
+										'landscapes' => $this->landscapes,
+										'l_lands'	=> $this->l_lands,
+								));
+								break;
+							case 7:
+								echo $this->partial('admin_listing/entertaiment/info.phtml', array(
+										'errors' 	 => $this->errors,
+										'listing'	 => $this->listing,
+										'countries'	 => $this->countries,
+										'cities'	 => $this->cities,
+										'schedules'	 => $this->schedules,
+										'attributes' => $this->attributes,
+										'categories' => $this->categories,
+										'tags'		 => $this->tags,
+										'listing_types' => $this->listing_types,
+										'listing_tags'	=> $this->listing_tags,
+										'cities2'		=> $this->cities2,
+										'cities3'		=> $this->cities3,
+										'help' => $this->help,
+										'vendor' => $this->vendor,
+										'landscapes' => $this->landscapes,
+										'l_lands'	=> $this->l_lands,
+								));
+								break;
+						endswitch ?>
+                </div><!-- closes right -->
+                <div class="clear"></div>
+            </div><!-- closes listing-content -->
+        </div><!-- closes listing-wrapper -->
+    </div><!-- closes w2 -->
+	<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript" src="/js2/provider/listing-edit.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {	
+		$('a.lb').fancybox({
+			padding:0,
+			overlayColor:'#000',
+			centerOnScroll:1,
+			overlayOpacity:0.3
+		});
+		$('.lbox .btn-2, .lbox .btn-11').click(function(){
+			$(this).parents('form').submit();
+		});
+		$('#file_upload').uploadify({
+			'uploader'		  : '/uploadify/uploadify.swf',
+			'script'   		  : '/phpscripts/uploadListingPhotos.php',
+			'cancelImg'		  : '/uploadify/cancel.png',
+			'folder'  		  : '/uploads',
+			'buttonImg' 	  : '/images2/file-1.png',
+			'buttonText' 	  : 'Add Photos',
+			'auto'      	  : true,
+			'removeCompleted' : false,
+			'onError':function(e,a,c,d){
+				console.log(e);
+				console.log(a);
+				console.log(c);
+				console.log(d);
+			},
+			'onComplete':function(a,b,c,image){
+				var $img = $('.picture img:eq(0)');
+				$img.attr('src',image);
+				$img.attr('width',58);
+				$img.attr('height',58);
+				console.log(image);
+			},
+			'scriptData':{
+				'userids':<?= $this->user->id ?>,
+				'vendorid':<?= $this->vendor->id ?>,
+				'listings':<?= $this->listing->id ?>,
+				'listtoken':'<?= $this->listing->token ?>',
+				'formtoken':'<?= $this->user->token ?>',
+				'usertoken':'<?= md5($this->user->token.'upload_listing_pictures') ?>',
+				'main':'1',
+			}
+		});
+		$('input[name=capacity]').click(function(){
+			$cont = $(this).parents('.item-wrppr').find('.single-schedule');
+			if($(this).hasClass('multiple')){
+				$('select', $cont).attr('disabled', 'disabled');
+				$('input', $cont).removeAttr('checked');
+				$('input', $cont).change();
+				$cont.fadeOut('slow');
+			} else {
+				$cont.fadeIn('slow', function(){
+					$('select', $cont).removeAttr('disabled');
+				});
+			}
+		});
+		$('input[name=kids]').change(function(){
+			if($(this).attr('checked') == undefined){
+				$('.accept-kids').addClass('hidden');
+				$('.accept-kids select').attr('disabled','disabled');
+			} else {
+				$('.accept-kids').removeClass('hidden');
+				$('.accept-kids select').removeAttr('disabled');
+			}
+		});
+		
+		$('.listing-content .right form').validate();		
+	});
+</script>
+</body>
+</html>

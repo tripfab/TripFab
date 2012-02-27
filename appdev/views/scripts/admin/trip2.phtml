@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<title>Trips</title>
+        <link type="text/css" rel="stylesheet" href="/css5/reset.css" />
+        <link type="text/css" rel="stylesheet" href="/css5/all.css" />
+		<link type="text/css" rel="stylesheet" href="html/jqtransform/jqtransform.css" />
+		<link type="text/css" rel="stylesheet" href="fancybox/jquery.fancybox-1.3.4.css" />
+  		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css" />   
+		<script type="text/javascript" src="/js2/jquery.js"></script>
+       	<script>
+			$(document).ready(function() {
+				$('a.lbc').fancybox({
+					padding: 0,
+					overlayColor: '#FFF',
+					overlayOpacity: '0.7',
+					showCloseButton: 'false',
+				});
+				$("#report_tabs").tabs();
+				$('.carrousel').accordion({
+					autoHeight: false
+				});
+			});
+		</script>
+
+	</head>
+	<body>
+		<div class="w1">
+    		<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
+			<div class="w3_admin">
+				<div class="sub_menu">
+					<h2>Create. <span>New Trip.</span></h2>
+					<a href="#" class="back">Back to Trips</a>
+					
+				</div><!--SUB_MENU-->
+            </div><!--W3-->
+				
+				<div id="trips" class="listing-wrapper wrapper">
+					<div class="listing-content">
+						<div class="left">
+							<ul>
+								<li><a href="<?php echo $this->url(array('page'=>1))?>">General Information</a></li>
+								<li class="current"><a href="<?php echo $this->url(array('page'=>2))?>">Trip Facts</a></li>
+								<li><a href="<?php echo $this->url(array('page'=>3))?>">Photos</a></li>
+								<li><a href="<?php echo $this->url(array('page'=>4))?>">Trip Details</a></li>
+								<li><a href="<?php echo $this->url(array('page'=>5))?>">Itinerary</a></li>
+							</ul>
+						</div>
+						<!-- closes left -->
+						<div class="right">
+
+							<?php if($this->successMessage): ?>
+							<script type="text/javascript">
+                                showAlert("Your changes have been saved");
+                            </script>
+                            <?php endif ?>	
+            
+                            <?php if(count($this->errors)) : ?>
+                            <center>
+                            <div style="border:1px solid red; margin-left:22px; margin-right:22px; margin-bottom:10px;">
+                                <?php foreach($this->errors as $error):?>
+                                    <p><?php echo $error;?></p>
+                                <?php endforeach;?>
+                            </div>
+                            </center>
+                            <?php endif;?>
+
+
+                        	<form name="f1" method="post" enctype="multipart/form-data">
+							<div class="pricing-tabs">
+								<div id="tabs-2" class="tab">
+									<div class="carrousel">
+									<?php foreach($this->paragraphs as $key=>$paragraph):?>
+                                        <h3><img src="/images/cleardot.gif" alt="" /><?php echo $paragraph?></h3>
+										<div class="carrousel-itm">
+											<div class="profile-items">
+												
+                                                <?php foreach($this->paras[$key] as $para):?>
+                                                <div class="item-wrppr">
+													<div class="item first last">
+														<textarea cols="30" rows="1" name="t<?php echo $key?>[]"><?php echo $para['text'] ?></textarea>
+														<h4><span>1</span>Paragraph</h4>
+														<p>Write the first paragraph</p>
+													</div>
+													<!-- closes item -->
+													<div class="clear"></div>			
+												</div>
+												<!-- closes item-wrppr -->
+												<div class="item-wrppr">
+													<div class="item first last">
+														
+														<table width="100%" border="0">
+															<tr>
+																<td width="245">
+																	<h4>Paragraph Picture</h4>
+																	<p>Upload a Picture for this paragraph</p>
+																</td>
+																<td width="270">
+																	<h4>Picture Requeriments</h4>
+																	<dl class="photo-limit">
+																		<dt>Upload limit</dt>
+																		<dd>10 photos per listing</dd>
+																		<dt>Photo Dimention</dt>
+																		<dd>640x425 pixels</dd>
+																		<dt>File size</dt>
+																		<dd>2MB or less</dd>
+																	</dl>
+																</td>
+																<td width="200">
+																	<img src="<?php echo $para['image'] ?>" width="68" height="68" alt="" />
+																	<input type="file" name="f<?php echo $key?>[]" />
+																	<input type="hidden" name="h<?php echo $key?>[]" value="<?php echo $para['image'] ?>" />
+																</td>
+															</tr>
+														</table>
+													</div>
+													<!-- closes item -->
+													<div class="clear"></div>
+												</div>
+												<!-- closes item-wrppr -->
+												<?php endforeach;?>
+												
+												
+											</div>
+											<!-- closes profile-items -->
+										</div>
+										<!-- closes carrousel-itm -->
+                                      <?php endforeach;?>
+                                        
+									
+									</div>
+									<!-- closes carrousel -->
+								</div>
+								<!-- closes tab -->
+							</div>
+							<!-- closes pricing-tabs -->							
+							<div class="foot">
+								<input type="submit" class="btn-1" value="Save Changes" />
+								<a href="">Deactivate Listing</a>
+							</div>
+							<!-- closes foot -->
+							</form>
+                        </div>
+						<!-- closes right -->
+					</div>
+					<!-- closes listing-content -->
+				</div>
+				<!-- closes listing-wrapper -->
+					
+			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+		</div>
+		<!-- closes w1 -->
+		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+	</body>
+</html>

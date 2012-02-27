@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->listing->title ?> - <?= $this->city->title ?>, <?= $this->country->title ?> | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/jquery-ui-1.8.16.custom.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/index/listing-activity.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <style type="text/css">#mapcanvas { width:246px;  height:175px; }</style>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>    
+    <div class="w2">
+        <div class="main wrapper">
+        	<?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'All Listings','parentActive'=>'Listings')); ?>
+            <div class="content-2">
+                <div class="box">
+                    <?= $this->partial('partials/gallery.phtml', 
+					array('user'=>$this->user,'listing'	=> $this->listing, 'city' => $this->city, 
+						  'country' => $this->country,'pictures' => $this->pictures,'trips'=>$this->trips)); ?>
+                    <?php //$this->partial('partials/tabs.phtml', array('listing' => $this->listing, 'tabs' => $this->tabs, 'faqs' => $this->faqs, 'map' => false)); ?>
+                </div><!-- closes box -->                    
+                <div class="tabs-wrapper-2">
+                    <ul>
+                        <li><a href="#tabs-1">Overview</a></li>
+                        <li><a href="#tabs-2">FAQ's</a></li>
+                    </ul>
+                    <div class="tab" id="tabs-1">
+                    	<?php if(!empty($this->overview->about) or
+									!empty($this->overview->about) or
+									!empty($this->overview->about)): ?>
+                        <div class="tab-ttl">About <?= $this->listing->title ?></div>
+                        <div class="tab-content">
+                        	<?php if(!empty($this->overview->about)): ?>
+                        	<h2>About the spot</h2>
+                        	<p><?= stripslashes(nl2br($this->overview->about)) ?></p>
+                            <?php endif; if(!empty($this->overview->expect)): ?>
+                            <h2>What to expect</h2>
+                            <p><?= stripslashes(nl2br($this->overview->expect)) ?></p>
+                            <?php endif; if(!empty($this->overview->love)): ?>
+                            <h2>Things you'll love</h2>
+                            <p><?= stripslashes(nl2br($this->overview->love)) ?></p>
+                            <?php endif ?>
+                        </div><!-- closes tab-content -->
+                        <?php else: ?>
+                        <div class="tab-content">
+	                        <a href="/provider/listings/overview/<?= $this->listing->id ?>"><img src="/images2/empty-overview.gif" /></a>
+                        </div>
+                        <?php endif ?>
+                    </div><!-- closes tab -->
+                    <div class="tab" id="tabs-2">
+                        <?php if(count($this->faqs) > 0): ?>
+                        <div class="tab-ttl">
+                            Frequently Asked Questions
+                        </div><!-- closes tab-ttl -->
+                        <div class="tab-content faqs">
+                            <ul>
+                            	<?php foreach($this->faqs as $faq): ?>
+                                <li>
+                                    <strong><?= stripslashes(nl2br($faq->question)) ?></strong><br />
+                                    <?= stripslashes(nl2br($faq->answer)) ?>
+                                </li>
+                                <?php endforeach ?>
+                            </ul>
+                        </div><!-- closes tab-content -->
+                        <?php else: ?>
+                        <div class="tab-content">
+                        	<a href="/provider/listings/faqs/<?= $this->listing->id ?>"><img src="/images2/empty-faqs.gif" /></a>
+                        </div>
+                        <?php endif ?>
+                    </div><!-- closes tab -->								
+                </div><!-- closes tabs-wrapper -->
+                <div class="reviews-wrapper">
+                    <?= $this->partial('partials/reviews.phtml', 
+					array('reviews' => $this->reviews, 'questions' => $this->questions, 'answer_allow' => false,
+						  'user'=>$this->user, 'listing' => $this->listing->id)); ?>
+                </div><!-- closes reviews-wrapper -->
+            </div><!-- closes content-2 -->
+            
+            <div class="right-sidebar">
+                <div class="widget book">
+                    <div class="ttl"><span>Tourist Sight</span></div>
+                    <div class="map-wrapper">
+                        <h4>Location</h4>
+                        <?php if(!is_null($this->listing->lat)): ?>
+                        <div id="mapcanvas"></div>
+                        <address>
+                            <p><strong><?= $this->listing->title ?></strong></p>
+                            <p><?= $this->listing->address ?></p>
+                        </address>
+                        <?php else: ?>
+                        <a href="/provider/listings/location/<?= $this->listing->id ?>"><img src="/images2/empty-map.jpg" /></a>
+                        <?php endif ?>
+                    </div><!-- closes map-wrapper -->
+                </div><!-- closes widget -->
+            </div><!-- closes right-sidebar -->
+        </div><!-- closes main -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->	
+<div id="citiesAutocompleteContainer"></div>
+<input type="hidden" value="<?= ($this->listing->lat) ? $this->listing->lat : 'none' ?>" name="listlat" />
+<input type="hidden" value="<?= ($this->listing->lng) ? $this->listing->lng : 'none' ?>" name="listlng" />
+<input type="hidden" value="<?= $this->listing->title ?>" name="listtitle" />
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript" src="/js2/index/listing-touristsight.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->listing->title ?> : Specialities | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+	<script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+			$('a#addmewspecial').click(function(){
+				$('#addSpecial').removeClass('hidden');
+				return false;
+			});
+			$('a.remove-2').click(function(){
+				$special = $(this).parent('.lstng-detail.faq');
+				$special.fadeOut('fast', function(){
+					$('textarea', $special).attr('disabled', 'disabled');
+				});
+				return false;
+			});
+        });
+    </script>
+    <style type="text/css">
+	textarea.wysiwyg { width:730px; height:500px;}
+	</style>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('admin_partials/header.phtml', array()); ?>
+    <div class="w3_admin">
+        <div class="sub_menu">
+            <h2>Editing. <span><?php echo $this->listing->title ?></span></h2>
+            <a href="#new_listing" class="btn-1 lbc">Create New</a>
+        </div><!--SUB_MENU-->
+    </div><!--W3-->
+    <div class="w2">
+        <div class="listing-wrapper wrapper">
+            <div class="listing-content show">
+                <div class="left">
+                    <?= $this->partial('admin_partials/vendorlistingsmenu.phtml', array('active'=>'Specialities', 'id' => $this->listing->id, 
+									   'type'=>$this->listing->main_type)) ?>
+                </div><!-- closes left -->
+                <div class="right">
+                    <?= $this->partial('admin_listing/restaurant/specialities.phtml', array(
+							'listing' => $this->listing,
+							'specials' => $this->specials,
+							'errors' => $this->errors,
+							'help' => $this->help,
+					)); ?>
+                </div><!-- closes right -->
+                <div class="clear"></div>
+            </div><!-- closes listing-content -->
+        </div><!-- closes listing-wrapper -->
+    </div><!-- closes w2 -->
+	<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+</div><!-- closes w1 -->
+</body>
+</html>

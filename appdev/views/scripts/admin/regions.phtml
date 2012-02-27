@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+	<title>Regions</title>
+        <link type="text/css" rel="stylesheet" href="/css5/reset.css" />
+        <link type="text/css" rel="stylesheet" href="/css5/all.css" />
+		<script type="text/javascript" src="/js2/jquery.js"></script>
+		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+  		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css" />   
+		<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js"></script>
+    	<script type="text/javascript" src="/js2/admin/traveller-view.js"></script>
+			<script>
+				$(document).ready(function() {
+					$('a.lbc').fancybox({
+						padding: 0,
+						overlayColor: '#FFF',
+						overlayOpacity: '0.7',
+						showCloseButton: 'false',
+					});
+            		$("#report_tabs").tabs();
+					
+					panel(<?php echo $this->user->id?>, 1, 'partner');
+				});
+			</script>
+		</head>
+		<body>
+			<div class="w1">
+    		<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
+			
+			<div class="w3_admin">
+				<div class="sub_menu">
+					<h2>Regions. <span>There are <?php echo $this->numCount?>.</span></h2>
+					<a href="/admin/places/add/region" class="btn-1">Create New Region</a>
+					<ul class="sub_links">
+						<li class="select"><a href="/admin/places/regions">Regions</a></li>
+						<li><a href="/admin/places/countries">Countries</a></li>
+						<li><a href="/admin/places/cities">Cities</a></li>
+					</ul>
+				</div><!--SUB_MENU-->
+            </div><!--W3-->
+			<div class="all_listing">
+				<div class="search_list">
+					<form action="" onsubmit="return false">
+						<input type="text" placeholder="Search for listings" name="q" id="q" value="<?php echo $this->searchText?>" />
+						<input type="button" class="btn-1" value="Search" onclick="searchSubmit()" />
+					</form>
+					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
+				</div><!--SEARCH_LIST-->
+				<div class="list_content">
+					<table width="100%" border="0">
+						<tr>
+							<th width="130" class="all_listing_th"><a href="<?php echo $this->url(array('sort'=>0, 'seq'=>$this->paramSort == 0 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Region Name</a></th>
+							<th width="70"><a href="<?php echo $this->url(array('sort'=>1, 'seq'=>$this->paramSort == 1 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Countries</a></th>
+							<th width="90"><a href="<?php echo $this->url(array('sort'=>2, 'seq'=>$this->paramSort == 2 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Cities</a></th>
+							<th width="80"><a href="<?php echo $this->url(array('sort'=>3, 'seq'=>$this->paramSort == 3 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Hotels</a></th>
+							<th width="90"><a href="<?php echo $this->url(array('sort'=>4, 'seq'=>$this->paramSort == 4 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Activities</a></th>
+							<th width="105"><a href="<?php echo $this->url(array('sort'=>5, 'seq'=>$this->paramSort == 5 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Restaurants</a></th>
+							<th width="125"><a href=<?php echo $this->url(array('sort'=>6, 'seq'=>$this->paramSort == 6 && $this->paramSequence !='desc' ? 'desc':'default'));?>"">Entertainments</a></th>
+							<th width="105"><a href="<?php echo $this->url(array('sort'=>7, 'seq'=>$this->paramSort == 7 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Tourist Sighs</a></th>
+							<th width="65" class="last">&nbsp;</th>
+						</tr>
+						<?php foreach($this->paginator as $key=>$listing):?>
+						<tr  <?php echo $key==0 ? 'class="first"' : ''?>>
+							<td><?php echo $listing->regionName?></td>
+							<td><?php echo $listing->countryTotal?></td>
+							<td><?php echo $listing->cityTotal?></td>
+							<td><?php echo $listing->hotelsTotal?></td>
+							<td><?php echo $listing->activityTotal?></td>
+							<td><?php echo $listing->restaurantTotal?></td>
+							<td><?php echo $listing->entertainmentTotal?></td>
+							<td><?php echo $listing->touristTotal?></td>
+							<td><a href="/admin/places/edit/<?php echo $listing->id?>" class="edit">Edit</a></td>
+						</tr>
+                        <?php endforeach;?>
+					</table>
+				</div><!--LIST-CONTENT-->
+				<div class="paging_bottom">
+					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
+				</div><!--PAGING_BOTTOM-->
+			</div><!--ALL_LISTING-->
+					
+			<div class="footer black">
+				<div class="wrapper">
+					<a href="" class="logo">Tripfab</a>
+				</div><!--WRAPPER-->
+			</div>
+			<!-- closes footer -->
+		</div>
+		<!-- closes w1 -->
+			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+		</div>
+		<!-- closes w1 -->
+		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+        <script>
+			function searchSubmit(){
+				location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
+			}
+		</script>
+
+		
+	</body>
+</html>

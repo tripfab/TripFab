@@ -8,8 +8,8 @@ class WS_ReviewsService {
     
     public function getReviewsBy($user)
     {
-        $user = 1;
         $db = Zend_Db_Table::getDefaultAdapter();
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = $db->select();
         $select->from('reviews');
         $select->join('listings', 'reviews.listing_id = listings.id', array('listing_name' => 'title'));

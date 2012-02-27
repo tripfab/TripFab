@@ -384,16 +384,20 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute(
             'admin',
             new Zend_Controller_Router_Route(
-                '/admin/:action/:task/:id',
+                '/admin/:action/:task/:page/:sort/:seq/:q',
                 array(
                     'controller' => 'admin',
                     'action'     => 'listings',
                     'module'     => 'default',
-                    'task'       => 'default',
-                    'id'         => 'default',
+                    'task'       => 'all',
+                    'page'       => 1,
+                    'sort'       => 'default',
+                    'seq'	 => 'default',
+                    'q'		 => null
                 )
             )
         );
+        
     }
     
     

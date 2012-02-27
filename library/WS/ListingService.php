@@ -1634,6 +1634,13 @@ class WS_ListingService {
         return $user;
     }
     
+    public function getVendorOfListing($listing)
+    {
+        $listing = $this->getListing($listing);
+        $vendor  = $this->getVendor($listing->vendor_id);
+        return $vendor;
+    }
+    
     public function getActivityQuote(
             $listing, $adults, $kids, $checkin, $option = null, $capacity = null)
     {
@@ -2103,5 +2110,39 @@ class WS_ListingService {
             
             return $this->getSchedulesOf($listing->id);
         }
+    }
+	
+    public function getAdminListings($listingType=null){
+        $db = $this->listings->getDefaultAdapter();
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = $db->select();
+        $select->from('listings', array(new Zend_Db_Expr('SQL_CALC_FOUND_ROWS *')));
+        $select->join('listing_types', 'listings.main_type = listing_types.id', array("type_name"=>"name"));
+        $select->join('places', 'listings.city_id = places.id', array("city_name"=>"title"));
+        $select->join(array('country'=>'places'), 'country.id = listings.country_id', array("country_name"=>"title"));
+
+        if($listingType){
+            $select->where("listings.main_type=?", $listingType );	
+        }
+        $select->order('listings.loves DESC');
+        $select->limit(12, 0);
+        $lists = $db->fetchAll($select);
+        $lCount = $db->fetchOne('select FOUND_ROWS()');
+        return array('data'=>$lists, 'count'=>$lCount) ;
+    }
+
+    public function getVendorListings($vendor)
+    {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = $db->select();
+        $select->from('listings');
+        $select->join('listing_types', 'listings.main_type = listing_types.id', array("type_name"=>"name"));
+        $select->joinleft('places', 'listings.city_id = places.id', array("city_name"=>"title"));
+        $select->joinleft(array('country'=>'places'), 'country.id = listings.country_id', array("country_name"=>"title"));
+        $select->joinleft('reservations', 'reservations.listing_id = listings.id', array("reservationTotal"=>"count(reservations.listing_id)"));
+        $select->where("listings.vendor_id=?", $vendor);
+        $select->group("listings.id");	
+        return $db->fetchAll($select);
     }
 }

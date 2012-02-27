@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->listing->title ?> : Set Pricing | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css" />    
+	<script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {			
+			$('a.lb').fancybox({
+				padding:0,
+				overlayColor:'#000',
+				centerOnScroll:1,
+				overlayOpacity:0.3,
+				showCloseButton:0,
+			});
+			$('input[name=starting]').each(function(){
+				$val = $(this).val();
+				$(this).datepicker({
+					dateFormat:'M dd, yy',
+					defaultDate:$val,
+					onSelect:function(date){
+						$('input[name=ending]').datepicker('option','minDate', date);
+					},
+				});
+			});
+			$('input[name=ending]').each(function(){
+				$val = $(this).val();
+				$(this).datepicker({
+					dateFormat:'M dd, yy',
+					defaultDate:$(this).val(),
+				});
+			});
+			
+			$('.carrousel').accordion();
+			
+			$season = $.cookie('season');
+			$tab = ($season != null) ? 1 : 0;
+			$('input[name=s]').val($tab);
+			$('.pricing-tabs').tabs({
+				selected:$tab,
+				select:function(e, ui) {
+					$('input[name=s]').val(ui.index);
+				}
+			});
+			$season = $.cookie('season', null);
+			
+			
+			$('#ui-datepicker-div').wrap('<div id="calendarContainer"></div>');
+			
+			$('input.sameprice').change(function(){
+				if($(this).attr('checked') == undefined){
+					$item = $(this).parents('.pricing-itm');
+					$('input.kids', $item).removeAttr('disabled');
+				} else {
+					$item = $(this).parents('.pricing-itm');
+					$('input.kids', $item).attr('disabled','disabled');
+				}
+			});
+        });
+    </script>
+    <style type="text/css">
+	.hidden { display:none;}
+	</style>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('admin_partials/header.phtml', array()); ?>
+    <div class="w3_admin">
+        <div class="sub_menu">
+            <h2>Editing. <span><?php echo $this->listing->title ?></span></h2>
+            <a href="#new_listing" class="btn-1 lbc">Create New</a>
+        </div><!--SUB_MENU-->
+    </div><!--W3-->
+    <div class="w2">
+        <div class="listing-wrapper wrapper">
+            <div class="listing-content show">
+                <div class="left">
+                    <?= $this->partial('admin_partials/vendorlistingsmenu.phtml', array('active'=>'Pricing', 'id' => $this->listing->id, 
+									   'type'=>$this->listing->main_type)) ?>
+                </div><!-- closes left -->
+                <div class="right">
+                    <?php 	switch($this->listing->main_type):
+							case 2:
+								echo $this->partial('admin_listing/restaurant/pricing.phtml', array(
+										'listing' 		=> $this->listing,
+										'schedules'		=> $this->schedules,
+										'sch'			=> $this->sch,
+										'seasons'		=> $this->seasons,
+										'season'		=> $this->season,
+										'basic_price'	=> $this->basic_price,
+										'persons'		=> $this->persons,
+										'help'			=> $this->help,
+								));
+								break;
+							case 4:
+								echo $this->partial('admin_listing/sight/pricing.phtml', array(
+										'listing' 		=> $this->listing,
+										'schedules'		=> $this->schedules,
+										'sch'			=> $this->sch,
+										'seasons'		=> $this->seasons,
+										'season'		=> $this->season,
+										'basic_price'	=> $this->basic_price,
+										'persons'		=> $this->persons,
+										'help'			=> $this->help,
+								));
+								break;
+							case 5:
+								echo $this->partial('admin_listing/hotel/pricing.phtml', array(
+										'listing' 		=> $this->listing,
+										'schedules'		=> $this->schedules,
+										'sch'			=> $this->sch,
+										'seasons'		=> $this->seasons,
+										'season'		=> $this->season,
+										'basic_price'	=> $this->basic_price,
+										'persons'		=> $this->persons,
+										'help' 			=> $this->help,
+								));
+								break;
+							case 6:
+								echo $this->partial('admin_listing/activity/pricing.phtml', array(
+										'listing' 		=> $this->listing,
+										'schedules'		=> $this->schedules,
+										'sch'			=> $this->sch,
+										'seasons'		=> $this->seasons,
+										'season'		=> $this->season,
+										'basic_price'	=> $this->basic_price,
+										'persons'		=> $this->persons,
+										'help' 			=> $this->help,
+										'types'			=> $this->types,
+								));
+								break;
+							case 7:
+								echo $this->partial('admin_listing/entertaiment/pricing.phtml', array(
+										'listing' 		=> $this->listing,
+										'schedules'		=> $this->schedules,
+										'sch'			=> $this->sch,
+										'seasons'		=> $this->seasons,
+										'season'		=> $this->season,
+										'basic_price'	=> $this->basic_price,
+										'persons'		=> $this->persons,
+										'help' 			=> $this->help,
+								));
+								break;
+						endswitch ?>
+                </div><!-- closes right -->
+                <div class="clear"></div>
+            </div><!-- closes listing-content -->
+        </div><!-- closes listing-wrapper -->
+    </div><!-- closes w2 -->
+	<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+</div><!-- closes w1 -->
+</body>
+</html>
