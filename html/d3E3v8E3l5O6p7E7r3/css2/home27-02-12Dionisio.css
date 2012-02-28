@@ -113,33 +113,29 @@
 	font: bold 45px/55px Helvetica;
 	text-align: center;
 	margin-bottom: 10px;
-	height: 50px;
-	text-shadow: 0 1px 0 #000000;
-	filter: progid:DXImageTransform.Microsoft.Chroma(Color=#000000)
-		    progid:DXImageTransform.Microsoft.DropShadow(OffX=0, OffY=1, Color=#000000);
+	text-shadow: 0px 1px 0px #000000;
+	filter: dropshadow(color=#000000, offx=0, offy=1);
 }
 #wrapper-top .main h3{
 	font: normal 19px/25px Helvetica;
 	text-align: center;
+	text-shadow: 0px 1px 0px #000000;
+	filter: dropshadow(color=#000000, offx=0, offy=1);
 	color: #FFF;
 	margin-bottom: 35px;
-	height: 30px;
-	text-shadow: 0 1px 0 #000000;
-	filter: progid:DXImageTransform.Microsoft.Chroma(Color=#000000)
-		    progid:DXImageTransform.Microsoft.DropShadow(OffX=0, OffY=1, Color=#000000);
 }
 #search-box {
-	-webkit-box-shadow:inset  0px 0px 1px #FFF;
+	-webkit-box-shadow: inset 0px 0px 1px #FFF;
 	-moz-box-shadow: inset 0px 0px 1px #FFF;
-	box-shadow: inset 0px 0px 1px #FFF;
+	box-shadow: inset 0px 0px 1px #FFF; 
+	background-color: rgba(255, 255, 255, 0.12);
+	color: rgba(255, 255, 255, 0.12);
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	behavior: (PIE.htc);
 	width: 640px;
 	margin: 0 auto 30px;
 	padding: 18px 0 18px 18px;
-	background: url(../images2/home-search.png) repeat;
 	behavior: url(PIE.htc);
 }
 #search-box input[type="text"] {
@@ -151,22 +147,12 @@
 	font: bold 20px/46px Helvetica;
 	color: #7d7d7d;
 }
-#search-box input.text:focus,
-#search-box input.text:hover {
-	border-color: #addeff !important;
-	box-shadow: 0 0 5px #addeff!important;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px; 
-	behavior: url(PIE.htc);
-}
 #search-box .btn-1 {
 	float: left;
 	margin-left: 15px;
 	height: 47px;
 	font: bold 20px/47px Helvetica;
 	width: 110px;
-	behavior: url(PIE.htc);
 }
 #search-box .btn-1:hover {
 	-webkit-box-shadow: 0px 1px 1px 0px #303030;
@@ -196,9 +182,9 @@
 	bottom: 0;
 	left: 0;
 	height: 75px;
-	background: url(../images2/home-bot.png) repeat;
+	background-color: rgba(0, 0, 0, 0.7);
+	color: rgba(0, 0, 0, 0.7);
 	width: 100%;
-	z-index:0;
 }
 #wrapper-top .bottom .video {
 	width: 332px;
@@ -246,7 +232,6 @@
 	display: block;
 	float: right;
 	margin: 20px 0 0 10px;
-	behavior: url(PIE.htc);
 }
 #wrapper-top .bottom .singUp a.btn-1:hover {
 	-webkit-box-shadow: 0px 1px 1px 0px #000;
@@ -290,11 +275,8 @@
 	border-radius: 4px; 
 	-webkit-box-shadow: 1px 1px 0px #DDD;
 	-moz-box-shadow: 1px 1px 0px #DDD;
-	box-shadow: 1px 1px 0px #DDD;
-	position: relative;
+	box-shadow: 1px 1px 0px #DDD; 
 	background-color: #FFF;
-	z-index: 0 !important;
-	behavior: url(PIE.htc);
 }
 #newsletter .cont {
 	background: url(../images2/home-map.gif) no-repeat 12px 50%;
@@ -309,8 +291,8 @@
 	float: left;
 	
 }
-#newsletter section {
-	float: left;
+#newsletter form {
+	float: right;
 	width: 390px;
 	height: 67px;
 	overflow: hidden;
@@ -328,8 +310,6 @@
 	-webkit-box-shadow: inset 0px 1px 2px 0px #DDD;
 	-moz-box-shadow: inset 0px 1px 2px 0px #DDD;
 	box-shadow: inset 0px 1px 2px 0px #DDD; 
-	behavior: url(PIE.htc);;
-	z-index: 1000 !important;
 }
 #newsletter input.btn-1 {
 	float: left;
@@ -337,7 +317,6 @@
 	font: bold 14px/34px Helvetica;
 	margin: 15px 0 0 10px;
 	padding: 0 10px;
-	behavior: url(PIE.htc);
 }
 #newsletter .sent {
 	font: 14px/67px Helvetica;
@@ -411,8 +390,7 @@
 	z-index: 10;
 	-webkit-box-shadow: 0px 0px 3px 0px ;
 	-moz-box-shadow: 0px 0px 3px 0px ;
-	box-shadow: 0px 0px 3px 0px ;
-	behavior: url(PIE.htc);
+	box-shadow: 0px 0px 3px 0px ; 
 }
 #home2  .dd.show {
 	display: block;
@@ -469,7 +447,7 @@
  	display: block;
  	background: url(../images2/home-icon3.png) top left no-repeat;
  	width: 181px;
- 	height: 26px;
+ 	height: 27px;
  	margin: 0 auto;
  }
   .dd.login .facebook a:hover {
@@ -486,7 +464,6 @@
 	float: right;
 	height: 25px;
 	font: bold 12px/25px Helvetica;
-	behavior: url(PIE.htc); 
 }
  .dd.login input.in-2 {
 	background: url(../images2/ico-36.png) no-repeat scroll 97% 50% transparent;

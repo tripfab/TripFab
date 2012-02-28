@@ -6,7 +6,59 @@ class CrontasksController extends Zend_Controller_Action
     public function init()
     {
         //die;
-    } 
+    }
+    
+    public function deleteAction() {
+        //die;
+        $listings_db = new Zend_Db_Table('listings');
+        $select = $listings_db->select();
+        $select->where('country_id != 18');
+        $select->where('country_id != 65');
+        $select->where('country_id != 0');
+        $listings = $listings_db->fetchAll($select);
+        foreach ($listings as $list) {
+            if (!is_null($list)) {
+                echo $list->id . '<br>';
+                $this->deleteListing($list);
+            } else {
+                echo 'null<br>';
+                echo '------------------------ <br><br>';
+            }
+        }
+        die;
+    }
+
+    private function deleteListing($listing) {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        echo $db->delete('activity_types', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('calendar', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('favorites', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('itinerary_listings', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_amenities', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_attributes', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_faqs', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_getthere', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_landscapes', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_listingtypes', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_overviews', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_pictures', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_schedules', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_tabs', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_tags', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('offers', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('prices', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('public_questions', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('reservations', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('reviews', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('seasons', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('specialities', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('transactions', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('trip_listings', 'listing_id = ' . $listing->id) . '<br>';
+
+        $listing->delete();
+
+        echo '------------------------ <br><br>';
+    }
     
     /**
     public function createimagesAction()

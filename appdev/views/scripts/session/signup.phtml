@@ -7,6 +7,7 @@
     <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
     <script type="text/javascript" src="/js2/jquery.js"></script>
     <style type="text/css">
 	.error { border:1px solid #F00; padding:5px; margin-bottom:10px; color:#F00; font-style:italic;}
@@ -65,17 +66,16 @@
                             </select>
                         </fieldset>
                         <fieldset>
-                            <input type="checkbox" />
-                            <label>Remember me next time</label>
-                            <input type="submit" value="Create Account" class="btn-1" />
+                            <label><input type="checkbox" /> Remember me next time</label>
+                            <input type="submit" value="Create Account" class="btn-1 noclean" />
                         </fieldset>
                     </form>
                 </div><!-- closes content -->
                 <div class="foot">
-                    By clicking "Create Account" or "Sign up with Facebook," <br /> you confirm that you accept the <a href="">Terms of Service</a>.
+                    <p>By clicking "Create Account" or "Sign up with Facebook," <br /> you confirm that you accept the <a target="_blank" href="/terms">Terms of Service</a>.</p>
                 </div><!-- closes foot -->
             </div><!-- closes sign-box -->
-            <div class="sign-box">
+            <div class="sign-box last">
                 <p>Already a Tripfab member? <a href="/login">Sign In Now!</a></p>
             </div><!-- closes sign-box -->
         </div><!-- closes small-wrapper -->

@@ -8,6 +8,7 @@
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
     <script type="text/javascript" src="/js2/jquery.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -101,9 +102,8 @@
                             </span>                            
                         </fieldset>
                         <fieldset>
-                            <input id="rememberme" name="remember" value="1" type="checkbox" />
-                            <label for="rememberme">Remember me next time</label>
-                            <input type="submit" value="Sign In" class="btn-1" />
+                            <label for="rememberme"><input id="rememberme" name="remember" value="1" type="checkbox" /> Remember me next time</label>
+                            <input type="submit" value="Sign In" class="btn-1 noclean" />
                         </fieldset>
                         <input type="hidden" value="<?= $this->returnUrl ?>" name="returnURL" />
                     </form>
@@ -112,7 +112,7 @@
                     <a href="#forgot" class="lb">Forgot pasword?</a>
                 </div><!-- closes foot -->
             </div><!-- closes sign-box -->
-            <div class="sign-box">
+            <div class="sign-box last">
                 <p>New on Tripfab? <a href="/signup">Sign Up Now!</a></p>
             </div><!-- closes sign-box -->
         </div><!-- closes small-wrapper -->

@@ -37,8 +37,6 @@
 #header {
 	background: url(../images2/g-32.png) repeat-x scroll 0 0 transparent;
 	height: 51px;
-	position: relative;
-	z-index: 100000;
 }
 
 #header .logo {
@@ -112,18 +110,13 @@
 	border-radius: 4px; 
 	-webkit-box-shadow: 0px 1px 0px 0px #474747;
 	-moz-box-shadow: 0px 1px 0px 0px #474747;
-	box-shadow: 0px 1px 0px 0px #474747;
-	behavior: url(/PIE.htc);
+	box-shadow: 0px 1px 0px 0px #474747; 
 }
 
 #header .header-search input:hover {
 	border-color: #000000!important;
 	background-color: #777777!important;
 	color: #FFFFFF!important;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px; 
-	behavior: url(/PIE.htc);
 }
 
 #header .header-search input:focus {
@@ -139,7 +132,6 @@
 	float: right;
 	height: 51px;
 	position: relative;
-	z-index: 100000;
 }
 
 #header .header-login > a {
@@ -208,7 +200,7 @@
 	right: -28px;
 	top: 42px;
 	width: 234px;
-	z-index: 100000;
+	z-index: 10000;
 }
 
 .header-login .dd.show {
@@ -433,8 +425,7 @@
 	width: 161px;
 	margin-bottom: 10px;
 	padding-right: 30px;
-	height: 27px;
-	line-height: 27px;
+	
 }
 
 .header-login .dd.login .dd-footer {
@@ -462,14 +453,13 @@
 	font-size: 11px;
 	line-height: 25px;
 }
-.header-login .dd.login .lb-rem {
-	float: left;
-	display: block;
-}
+
 .header-login .dd.login input[type="submit"] {
+	border: none;
 	float: right;
 	height: 25px;
-	font: 12px/25px Helvetica;
+	font-size: 12px;
+	font-weight: bold;
 }
 
 .header-login .dd.login input.in-2 {
@@ -1807,7 +1797,6 @@ border-top: 1px solid #e3e3e3;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
-	behavior: url(/PIE.htc);
 }
 
 .main-search > span {
@@ -1960,11 +1949,7 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 }
-.result .img-wrapper a {
-	position: relative;
-	width: 225px;
-	height: 167px;
-}
+
 .results-wrapper {
 	padding: 10px 0 50px 10px;
 }
@@ -2324,11 +2309,11 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 .listing-gallery .img-wrapper {
 	position: relative;
 	height: 368px;
+	display: none;
 }
 
 .listing-gallery .img-wrapper.active {
 	display: block;
-	height: 368px;
 }
 
 .listing-gallery .img-wrapper p {
@@ -4753,8 +4738,6 @@ ul.reviews li > div div.meta em.red {
 .lb-forgot {
 	width: 420px;
 	background-color: #FFFFFF;
-	z-index: 0;
-	position: relative;
 }
 
 .lb-forgot .ttl {
@@ -4782,10 +4765,12 @@ ul.reviews li > div div.meta em.red {
 .lb-forgot .content input[type="text"] {
 	margin-top: 12px;
 	width: 340px;
-	font:bold 16px/36px Helvetica;
+	font-size:16px;
 	height:36px;
 	padding:0 10px;
+	font-weight:bold;
 }
+
 
 .lb-forgot .content textarea {
 	width: 348px;
@@ -4795,7 +4780,7 @@ ul.reviews li > div div.meta em.red {
 	line-height:18px;}
 
 .lb-forgot .bottom {
-	background: url(../images2/g-3.png) repeat-x scroll 0 0 ;
+	background: url(../images2/g-3.png) repeat-x scroll 0 0 #FFFFFF;
 	border-top: 1px solid #E8E8E8;
 	overflow: hidden;
 	padding: 10px 29px;
@@ -4804,8 +4789,7 @@ ul.reviews li > div div.meta em.red {
 	-moz-border-radius-bottomright: 4px;
 	-moz-border-radius-bottomleft: 4px;
 	-webkit-border-radius: 0px 0px 4px 4px;
-	border-radius: 0px 0px 4px 4px;
-	behavior: url(PIE.htc);
+	border-radius: 0px 0px 4px 4px; 
 }
 
 .lb-forgot .bottom span, .lb-forgot .bottom input {
@@ -4818,7 +4802,6 @@ ul.reviews li > div div.meta em.red {
 	border: none;
 	height: 25px;
 	margin-left: 8px;
-	line-height: 25px;
 }
 
 .lb-size-1 {
@@ -5758,6 +5741,12 @@ ul.reviews li > div div.meta em.red {
 	padding: 0 18px;
 }
 
+.foot a {
+	color: #F26522;
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 43px;
+}
 
 .foot a.btn-4 {
 	float: right;
@@ -7661,22 +7650,19 @@ h2.title .back:hover,
 	width: 463px;
 	margin: 0 auto;
 }
-.small-wrapper .sign-box {
-	margin-top: 20px;
-}
+
 .sign-box {
 	background-color: #FFFFFF;
 	border: 1px solid #E7E7E7;
-	margin: 18px 0;
+	box-shadow: 0 0 2px #EAEAEA;
+	margin-top: 18px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
-	border-radius: 4px;
-	behavior: url(/PIE.htc);
+	border-radius: 4px; 
 }
 
 .sign-box + .sign-box {
-	height: 70px;
-	line-height: 70px;
+	padding-top: 25px;
 }
 
 .sign-box.vendor > h2 {
@@ -7693,13 +7679,8 @@ h2.title .back:hover,
 	font-weight: bold;
 	line-height: 50px;
 	text-align: center;
-	-moz-border-radius-topleft: 4px;
-	-moz-border-radius-topright: 4px;
-	-moz-border-radius-bottomright: 0px;
-	-moz-border-radius-bottomleft: 0px;
-	-webkit-border-radius: 4px 4px 0px 0px;
-	border-radius: 4px 4px 0px 0px; 
-	behavior: url(/PIE.htc);
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
 }
 
 .sign-box a.fb {
@@ -7722,8 +7703,6 @@ h2.title .back:hover,
 .sign-box .content.su {
 	background: url(../images2/g-3.png) repeat-x scroll 0 0 #FFFFFF;
 	border-top: 1px solid #E8E8E8;
-	position: relative;
-	z-index: 0;
 }
 
 .sign-box .content input[type="text"], .sign-box .content input[type="password"] {
@@ -7740,9 +7719,7 @@ h2.title .back:hover,
 	z-index: 10;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
-	border-radius: 4px;
-	line-height: 39px;
-	behavior: (PIE.htc);
+	border-radius: 4px; 
 }
 
 .sign-box .content.su input[type="text"]:focus, 
@@ -7768,14 +7745,11 @@ h2.title .back:hover,
 	padding: 5px;
 	position: relative;
 	z-index: 10;
-	width: 409px;
-	margin-bottom: 20px;
 }
 
 .sign-box .content span {
 	position: relative;
 	display: block;
-	background-color: #FFF;
 }
 
 .sign-box .content span label {
@@ -7790,7 +7764,6 @@ h2.title .back:hover,
 	top: 0;
 	left: 0;
 	cursor: text;
-	z-index: 1;
 }
 
 .sign-box .content span label.hide {
@@ -7824,8 +7797,7 @@ h2.title .back:hover,
 	height: 40px;
 	border: none;
 	font-size: 16px;
-	padding:0 10px;
-}
+	padding:0 20px;}
 
 .sign-box .content label {
 	color: #616161;
@@ -7833,16 +7805,13 @@ h2.title .back:hover,
 	font-weight: bold;
 	line-height: 40px;
 	vertical-align: middle;
-	display: block;
-	float: left;
 }
 
 .sign-box > p {
 	color: #242424;
 	font-size: 16px;
 	text-align: center;
-	height: 70px;
-	line-height: 70px;
+	padding-bottom: 25px;
 	font-weight:bold;
 }
 
@@ -7851,8 +7820,8 @@ h2.title .back:hover,
 }
 
 .sign-box .foot {
-	background:url(../images2/fp-bg.gif) repeat-x top left #F9F9F9;
-	padding: 10px 0 10px 0;
+	background:url(../images2/fp-bg.gif) repeat-x top left;
+	padding:0;
 	text-align: center;
 	color: #616161;
 	line-height: normal;
@@ -7862,27 +7831,25 @@ h2.title .back:hover,
 	-moz-border-radius-bottomright: 4px;
 	-moz-border-radius-bottomleft: 4px;
 	-webkit-border-radius: 0px 0px 4px 4px;
-	border-radius: 0px 0px 4px 4px;
-	behavior: url(/PIE.htc);
+	border-radius: 0px 0px 4px 4px; 
 }
 
 .sign-box .foot a {
 	color: #60b5f7;
 	font-size: 12px;
+	line-height:43px;
 }
-.sign-box .foot > p {
-	font: normal 12px/18px Helvetica;
-}
+
 .sign-box .content input.in-1 {
 	background: url(../images2/ico-35.png) no-repeat 97% 50%;
 }
 
 .sign-box .content input.in-2 {
-	background: url(../images2/ico-36.png) no-repeat 97% 50% #FFF;
+	background: url(../images2/ico-36.png) no-repeat 97% 50%;
 }
 
 .sign-box .content input.in-3 {
-	background: url(../images2/ico-37.png) no-repeat 97% 50% ;
+	background: url(../images2/ico-37.png) no-repeat 97% 50%;
 }
 
 .sign-box .content input.in-4 {
@@ -16254,14 +16221,13 @@ h2.title .back:hover,
 #search_result ul.cat-menu {
 	background-color:#303030;
 	-moz-border-radius-topleft: 4px;
-	-moz-border-radius-topright: 0px;
+	-moz-border-radius-topright: px;
 	-moz-border-radius-bottomright: 0px;
 	-moz-border-radius-bottomleft: 0px;
-	-webkit-border-radius: 4px 0px 0px 0px;
-	border-radius: 4px 0px 0px 0px;
+	-webkit-border-radius: 4px px 0px 0px;
+	border-radius: 4px px 0px 0px;
 	padding-bottom: 5px;
 	margin-bottom: 10px;
-	behavior: url(PIE.htc);
 }
 #search_result ul.cat-menu li {
 	border-top: 1px solid #303030;
@@ -16495,12 +16461,9 @@ h2.title .back:hover,
 	position: absolute;
 	bottom: 13px;
 	right: 13px;
-	height: 25px;
-	line-height: 25px;
 }
 #search_result .result .img-wrapper h4 {
 	bottom: 4px;
-	left: 0;
 }
 #search_result .result .img-wrapper .been{
 	position: absolute;
@@ -18114,27 +18077,7 @@ h2.title .back:hover,
 }
 
 /*END-NEW-BROWSE-TRIPS-----------------------------------------------------*/
-/*LIGHTBOX-NEW-LISTING-----------------------------------------------------*/
-.NewListing {
-	width: 340px;
-}
-.NewListing form {
-	background-color: #FFF;
-}
-.NewListing .top {
-	padding-left: 20px;
-}
-.NewListing .mid {
-	padding: 0 0 20px 20px;
-	background-color: #FFF;
-}
-.NewListing .mid select {
-	display: block;
-	margin-top: 15px;
-	width: 300px;
-}
 
-/*END-LIGHTBOX-NEW-LISTING-------------------------------------------------*/
 
 
 
