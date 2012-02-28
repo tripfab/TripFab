@@ -34,7 +34,7 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
 		<?php if($list->price > 0): ?>
 		<strong class="price">$<?= $list->price ?><em> / person</em></strong>
 		<?php endif ?>
-		<a href="<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>" class="btn-1">View activity</a>
+		<a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>" class="btn-1">View activity</a>
 	</div>
 </div><!-- closes result -->
 <?php endforeach ?>

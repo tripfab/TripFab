@@ -99,7 +99,7 @@ $(function(){
         var $days   = $('#slider-2');
         var $people = $('#slider-3');
         
-        var $a = $('ul.cat-menu li a[href="'+$rel+'"]');
+        var $a = $('ul.cats-menu li a[href="'+$rel+'"]');
         var $data = $ev.parameters;
         
         $data.category = $a.data('category');
