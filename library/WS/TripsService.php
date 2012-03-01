@@ -668,5 +668,29 @@ class WS_TripsService {
 
         return $purchase;
     }
+    
+    public function getCities($trip) {
+        $select = $this->DB->select();
+        $this->DB->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select->from('trip_cities', array('*'));
+        $select->where('trip_id = ?', $trip);
+        $select->order('id');
+        $cities = $this->DB->fetchAll($select);
+        return $cities;
+    }
 
+    public function saveCities($trip, $country, $cities) {
+        $table = new Zend_Db_Table('trip_cities');
+        $table->delete('trip_id = ' . $trip);
+        foreach ($cities as $city) {
+            if (!$city->city_id) {
+                continue;
+            }
+            $row = $table->fetchNew();
+            $row->trip_id = $trip;
+            $row->country_id = $country;
+            $row->city_id = $city->city_id;
+            $row->save();
+        }
+    }
 }

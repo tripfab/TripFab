@@ -9,6 +9,10 @@ class AjaxController extends Zend_Controller_Action
     protected $trips;
     protected $listings;
     protected $user;
+    protected $accounts;
+    protected $users;
+    protected $reviewes;
+    protected $vendors;
 
 
     public function init()
@@ -22,6 +26,13 @@ class AjaxController extends Zend_Controller_Action
         $this->listings = new WS_ListingService();
         
         $this->trips = new WS_TripsService();
+        
+        $this->accounts = new WS_AccountService();
+        $this->users = new WS_UsersService();
+        $this->reviewes = new WS_ReviewsService();
+        $this->vendors = new WS_VendorService();
+        
+        $this->reservations = new WS_ReservationsService();
         
         $this->user = null;
         
@@ -1583,6 +1594,101 @@ class AjaxController extends Zend_Controller_Action
         } else {
             throw new Exception('Wrong request');
         }
+    }
+    
+    public function placesAction() {
+        switch (@$_GET['type']) {
+            case 'region':
+                $regions = $this->places->getPlaces(1);
+                self::jsonEcho(json_encode(array('attempt' => 'success', 'error_code' => '0', 'description' => '', 'data' => $regions->toArray())));
+                break;
+            case 'country':
+                $countries = $this->places->getPlaces(2);
+                self::jsonEcho(json_encode(array('attempt' => 'success', 'error_code' => '0', 'description' => '', 'data' => $countries->toArray())));
+                break;
+            case 'city':
+                $countryId = $_GET['c'];
+                $cities = $this->places->getPlaces(3, $countryId);
+                self::jsonEcho(json_encode(array('attempt' => 'success', 'error_code' => '0', 'description' => '', 'data' => $cities->toArray())));
+                break;
+            default:
+                self::jsonEcho(json_encode(array('attempt' => 'fail', 'error_code' => '404', 'description' => 'Invalid API call')));
+        }
+    }
+
+    public function listingsAction() {
+        switch (@$_GET['type']) {
+            case 'type':
+                $listingTypes = $this->listings->getMainCategories(true);
+                self::jsonEcho(json_encode(array('attempt' => 'success', 'error_code' => '0', 'description' => '', 'data' => $listingTypes)));
+                break;
+            default:
+                self::jsonEcho(json_encode(array('attempt' => 'fail', 'error_code' => '404', 'description' => 'Invalid API call')));
+        }
+    }
+
+    public function travellerAction() {
+        $userId = $_GET['user'];
+        $panel = $_GET['page'];
+        switch ($panel) {
+            case 1:
+                $user = $this->users->getFull($userId);
+                $this->view->user = $user;
+                $this->render('admin/travellerview1');
+                break;
+            case 2:
+                $trips = $this->trips->getTripsBy($userId);
+                $this->view->trips = $trips;
+                $this->render('admin/travellerview2');
+                break;
+            case 3:
+                $reservations = $this->reservations->getUserHistory($userId);
+                $this->view->reservations = $reservations;
+                $this->render('admin/travellerview3');
+                break;
+            case 4:
+                $reviewes = $this->reviewes->getReviewsBy($userId);
+                $this->view->reviewes = $reviewes;
+                $this->render('admin/travellerview4');
+                break;
+            default:
+                throw new Exception("Invalid panel type");
+        }
+    }
+
+    public function partnerAction() {
+        $userId = $_GET['user'];
+        $panel = $_GET['page'];
+        switch ($panel) {
+            case 1:
+                $user = $this->vendors->getVendorDetailsById($userId);
+                $this->view->user = $user;
+                $this->render('admin/partnerview1');
+                break;
+            case 2:
+                $listings = $this->listings->getVendorListings($userId);
+                $this->view->listings = $listings;
+                $this->render('admin/partnerview2');
+                break;
+            case 3:
+                $reservations = $this->reservations->getHistory($userId);
+                $this->view->reservations = $reservations;
+                $this->render('admin/partnerview3');
+                break;
+            case 4:
+                $offers = $this->vendors->getOffersBy($userId);
+                $this->view->offers = $offers;
+                $this->render('admin/partnerview4');
+                break;
+            default:
+                throw new Exception("Invalid panel type");
+        }
+    }
+
+    static function jsonEcho($jsonString) {
+        header("content-type:text/json");
+        echo $jsonString;
+        exit;
     }
     
     private function _getTrip($var = 'id', $user = false, $obj = false)

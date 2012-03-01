@@ -13578,7 +13578,8 @@ h2.title .back:hover,
 	-moz-border-radius-bottomleft: 4px;
 	-webkit-border-radius: 0px 0px 4px 4px;
 	border-radius: 0px 0px 4px 4px;
-	list-style:none;	
+	list-style:none;
+        z-index:100;
 }
 #header .wrapper .menu_admin li ul li {
 	margin:0;

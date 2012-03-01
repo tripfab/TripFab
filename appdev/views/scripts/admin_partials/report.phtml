@@ -97,7 +97,7 @@
 									<option value='0'>Completed</option>
 									<option value='1'>In Progress...</option>
 								</select>
-							</div><!--ITEM-->
+							</div><!--ITEM--> 
 							
 							
 							
@@ -192,7 +192,7 @@
 	});
 	
 	function fillCountry(){
-		var url = "/admin/ajax/country/";
+		var url = "/ajax/places/?type=country";
 		$("#s-country" ).children().remove();
 		$.getJSON(url, function(fsdata) {
 			$.each(fsdata.data, function(i,country){ 
@@ -203,7 +203,7 @@
 	}
 	
 	function fillCity(countryId){
-		var url = "/admin/ajax/city/" + countryId;
+		var url = "/ajax/places/?type=city&c=" + countryId;
 		$("#s-city" ).children().remove();
 		$.getJSON(url, function(fsdata) {
 			$.each(fsdata.data, function(i,city){ 
@@ -213,7 +213,7 @@
 	}
 
 	function fillListingType(){
-		var url = "/admin/ajax/listingtype/" ;
+		var url = "/ajax/listings/?type=type" ;
 		$("#s-listing-type" ).children().remove();
 		$.getJSON(url, function(fsdata) {
 			$.each(fsdata.data, function(i,type){ 

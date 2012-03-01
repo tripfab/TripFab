@@ -4,10 +4,12 @@ class WS_AccountService {
  
     protected $users_db;
     protected $vendors_db;
+    protected $user_log_db;
     
     public function __construct() {
         $this->users_db   = new Model_Users();
         $this->vendors_db = new Model_Vendors();
+        $this->user_log_db = new Model_UserLog();
     }
     public function validateEmail($email){
         
@@ -77,7 +79,7 @@ class WS_AccountService {
         //var_dump($data); die;
     }
     
-    public function signupVendor($data, $flag = true)
+    public function signupVendor($data, $flag = true, $new = false)
     {
         $settings = new Zend_Db_Table('email_settings');
         $select = $settings->select();
@@ -146,9 +148,10 @@ class WS_AccountService {
             $notifier = new WS_Notifier();
             //$notifier->newSignup($user->email, $password, $user->name);
             $notifier->newSignup('genna@tripfab.com', $password, $user->name);
-
-            $this->login($user->email, $password);
+            if(!$new)
+                $this->login($user->email, $password);
         }
+        return $vendor->id;
     }
     
     public function login($data, $pw, $fb = false){
@@ -164,6 +167,7 @@ class WS_AccountService {
                 if($result->isValid()){
                     $user = $adapter->getResultRowObject();
                     $auth->getStorage()->write($user);
+                    $this->logUserAccessTime();
                     return true;
                 } else {
                     $errors = $result->getMessages();
@@ -184,6 +188,33 @@ class WS_AccountService {
             } else {
                 throw new Exception();                
             }
+        }
+    }
+    
+    public function logUserAccessTime($logout=false) {
+        $auth = Zend_Auth::getInstance();
+        if (!$auth->hasIdentity()) {  // return silently
+            return false;
+        }
+        if ($logout) {
+            $this->user_log_db->update(array('last_accessed' => date("Y-m-d H:i:s"), 'logout_time' => date("Y-m-d H:i:s")), "logout_time is NULL and session_id = '" . session_id() . "'");
+            return true;
+        }
+        $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+        $select = $this->user_log_db->select();
+        $select->where('logout_time is NULL and session_id = ?', session_id());
+        $log = $this->user_log_db->fetchRow($select);
+        if (!is_null($log)) {
+            $this->user_log_db->update(array('last_accessed' => date("Y-m-d H:i:s")), 'id=' . $log->id);
+        } else {
+            $data = array(
+                'user_id' => $userInfo->id,
+                'session_id' => session_id(),
+                'ip' => @$_SERVER['REMOTE_ADDR'],
+                'login_at' => date("Y-m-d H:i:s"),
+                'last_accessed' => date("Y-m-d H:i:s")
+            );
+            $this->user_log_db->insert($data);
         }
     }
 }

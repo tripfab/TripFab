@@ -14,11 +14,13 @@ class SessionController extends Zend_Controller_Action {
     
     public function logoutAction()
     {
+        $userRole = 0;
         $this->auth = Zend_Auth::getInstance();
         if($this->auth->hasIdentity()){
-            $user = $this->auth->getIdentity();
-            WS_Log::info($user->id . ' has logged out');
-            
+            $userInfo = Zend_Auth::getInstance()->getStorage()->read();
+            $userRole = $userInfo->role_id;
+            $accounts = new WS_AccountService();
+            $accounts->logUserAccessTime(true);
             $this->auth->clearIdentity();
         }
         if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
@@ -81,10 +83,7 @@ class SessionController extends Zend_Controller_Action {
             $this->accounts = new WS_AccountService();
             $result = $this->accounts->login($_POST['email'], $_POST['password']);
             if($result === true){
-                $user = $this->auth->getIdentity();
-                
-                WS_Log::info($user->id . ' has logged in');
-                
+                $user = $this->auth->getIdentity();                
                 $role = $user->role_id;
                 if(!empty($_POST['returnURL']))
                     $this->_redirect ($_POST['returnURL']);            
