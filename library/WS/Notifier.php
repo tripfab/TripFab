@@ -10,7 +10,7 @@ class WS_Notifier {
         if(is_null($from))
             $from = 'From: TripFab <hello@tripfab.com>';
         
-        mail($to, $subject, $message, $from);
+        @mail($to, $subject, $message, $from);
     }
     
     public function newSignup($email, $pass, $name){

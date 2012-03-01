@@ -41,9 +41,8 @@
 							<ul>
 								<li class="current"><a href="<?php echo $this->url(array('page'=>1))?>">General Information</a></li>
 								<li><a href="<?php echo $this->url(array('page'=>2))?>">Trip Facts</a></li>
-								<li><a href="<?php echo $this->url(array('page'=>3))?>">Photos</a></li>
 								<li><a href="<?php echo $this->url(array('page'=>4))?>">Trip Details</a></li>
-								<li><a href="<?php echo $this->url(array('page'=>5))?>">Itinerary</a></li>
+								<li><a href="">Itinerary</a></li>
 							</ul>
 						</div>
 						<!-- closes left -->
@@ -132,9 +131,9 @@
 									<!-- closes item -->
 									<div class="item">
 										<div class="selects big">
-											<select name="country">
+											<select id="trip_country"  name="trip_country">
 												<?php foreach($this->countries as $country):?>
-                                                <option <?php echo $this->trip->country_id == $country->id ? ' selected' : ''; ?>><?php echo $country->title?></option>
+                                                <option <?php echo $this->trip->country_id == $country->id ? ' selected' : ''; ?> value="<?php echo $country->id?>"><?php echo $country->title?></option>
                                                 <?php endforeach;?>
 											</select>
 										</div>
@@ -145,40 +144,20 @@
 									<!-- closes item -->
 									<div class="item last">
 										<div class="selects big">
-											<select>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
+											<select  id="trip_city1"  name="trip_city1">
+												<option>Select City</option>
 											</select>
-											<select>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
+											<select  id="trip_city2"  name="trip_city2">
+												<option>Select City</option>
 											</select>
-											<select>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
+											<select  id="trip_city3"  name="trip_city3">
+												<option>Select City</option>
 											</select>
-											<select>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
+											<select  id="trip_city4"  name="trip_city4">
+												<option>Select City</option>
 											</select>
-											<select>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
-												<option>Costa Rica</option>
+											<select  id="trip_city5"  name="trip_city5">
+												<option>Select City</option>
 											</select>
 										</div>
 										<!-- closes selects -->
@@ -236,5 +215,55 @@
 		</div>
 		<!-- closes w1 -->
 		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+        <script>
+			var selectedCities = <?php echo $this->cities ?>;
+			fillCityTrip($('#trip_country').val());
+			$('select#trip_country').change(function(){
+				fillCityTrip($('#trip_country').val());
+			});
+			
+			
+			function fillCityTrip(countryId){
+				var url = "/ajax/places/?type=city&c=" + countryId;
+				$("#trip_city1" ).children().remove();
+				$("#trip_city2" ).children().remove();
+				$("#trip_city3" ).children().remove();
+				$("#trip_city4" ).children().remove();
+				$("#trip_city5" ).children().remove();
+				$("#trip_city1" ).append(new Option('Select City', 0, true, true));
+				$("#trip_city2" ).append(new Option('Select City', 0, true, true));
+				$("#trip_city3" ).append(new Option('Select City', 0, true, true));
+				$("#trip_city4" ).append(new Option('Select City', 0, true, true));
+				$("#trip_city5" ).append(new Option('Select City', 0, true, true));
+				var selected = false;
+				$.getJSON(url, function(fsdata) {
+					$.each(fsdata.data, function(i,city){ 
+						
+						selected = false;
+						if(typeof selectedCities[0] != "undefined"){ selected = selectedCities[0].city_id == city.id ? true : false ;}
+						$("#trip_city1" ).append(new Option(city.title, city.id, true, selected));
+						
+						selected = false;
+						if(typeof selectedCities[1] != "undefined"){ selected = selectedCities[1].city_id == city.id ? true : false ;}
+						$("#trip_city2" ).append(new Option(city.title, city.id, true, selected));
+						
+						selected = false;
+						if(typeof selectedCities[2] != "undefined"){ selected = selectedCities[2].city_id == city.id ? true : false ;}
+						$("#trip_city3" ).append(new Option(city.title, city.id, true, selected));
+						
+						selected = false;
+						if(typeof selectedCities[3] != "undefined"){ selected = selectedCities[3].city_id == city.id ? true : false ;}
+						$("#trip_city4" ).append(new Option(city.title, city.id, true, selected));
+						
+						selected = false;
+						if(typeof selectedCities[4] != "undefined"){ selected = selectedCities[4].city_id == city.id ? true : false ;}
+						$("#trip_city5" ).append(new Option(city.title, city.id, true, selected));
+						
+					});
+				});	
+			}
+				
+		
+		</script>
 	</body>
 </html>

@@ -23,7 +23,18 @@
 					panel(<?php echo $this->user->id?>, 1, 'partner');
 				});
 			</script>
-		</head>
+         <style>
+			.triplabel{
+				background-position: 0 -51px;
+				margin-right: 25px;
+				width:42px;
+			}		 
+			.triplabel1{
+				background-position: 0 -51px;
+				margin-right: 25px;
+				width:32px;
+			}		 
+		 </style>   
 		</head>
 		<body>
 			<div class="w1">
@@ -31,7 +42,7 @@
 			<div class="w3_admin">
 				<div class="sub_menu">
 					<h2>Trips.<span>There are <?php echo $this->numCount?>.</span></h2>
-					<a href="#create_trip" class="btn-1 lbc">Create New Trip</a>
+					<a href="#create_trip" class="btn-1 lbc" id="create_nt">Create New Trip</a>
 					
 				</div><!--SUB_MENU-->
             </div><!--W3-->
@@ -75,11 +86,135 @@
 			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
 		</div>
 		<!-- closes w1 -->
+		<div class="hidden">
+		
+			<div id="create_trip">
+				<div class="top">
+					<h3>Create a New Trip</h3>
+					<p>Complete the information below to start your next trip</p>
+				</div><!--TOP-->
+				<div class="cont">
+					<form name="trip_form" id="trip_form" action="">
+						<fieldset>
+							<div class="item">
+								<label class="trip">Trip Name</label>
+								<input type="text" name="t_name" value="" />
+								<div id="_t_name" class="errdiv" style="float:right; margin-right:15px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div>
+							</div><!--ITEM-->
+							<div class="item">
+								<label class="triplabel">Country</label>
+                                <select id="trip_country"  name="trip_country">
+                                	<option>Select Country</option>
+                                </select>
+								<div id="_trip_country" class="errdiv" style="float:right; margin-right:130px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div>
+							</div><!--ITEM-->
+							<div class="item">
+								<label class="triplabel">City</label>
+								<select  id="trip_scity"  name="trip_scity">
+									<option>Start</option>
+								</select>
+								<select id="trip_ecity"  name="trip_ecity">
+									<option>End</option>
+								</select>
+								<div id="_trip_scity" class="errdiv" style="float:right; margin-right:15px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div>
+							</div><!--ITEM-->
+							<div class="item">
+								<label class="triplabel1">Traveller</label>
+								<input class="start" type="text" name="trip_min" value="" placeholder="Min" />
+								<input class="end"type="text" name="trip_max" value="" placeholder="Max" />
+								<div id="_trip_min" class="errdiv" style="float:right; margin-right:15px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div>
+							</div><!--ITEM-->
+							<div class="item">
+								<label class="triplabel1">Price</label>
+								<input class="start" type="text" name="trip_price" value=""/>
+								<div id="_trip_price" class="errdiv" style="float:right; margin-right:130px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div>
+							</div><!--ITEM-->
+						</fieldset>
+					</form>
+				</div><!--CONT-->
+				<div class="bottom">
+					<input type="button" id="t-create" class="btn-1" value="Create Trip" onclick=/admin/trips/add>
+					<input type="button" class="btn-10" value="Cancel" onclick="$.fancybox.close()" />
+				</div><!--BOTTOM-->
+			</div><!--CREATE_TRIP-->
+        
 		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
           <script>
 			function searchSubmit(){
 				location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
 			}
+			$("#q").keypress(function(e) {
+				var keycode;
+				if (window.event) keycode = window.event.keyCode;
+				else if (e) keycode = e.which;
+				else return true;
+				if (keycode == 13) {
+				   location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
+				   return false;
+				}
+				else
+				   return true;
+			});
+			
+			$('#t-create').click(function(){
+				$('.errdiv').hide();
+				$.ajax({ 
+				   type: "POST", 
+				   url: "/admin/trips/add", 
+				   data: $("#trip_form").serialize() ,
+				   success: function(json, status){
+					   if(json.attempt=='success'){
+							$.fancybox.close();
+							showAlert("Trip added successfully");
+							return;
+					   }
+					   
+					   if(json.error_code == "validation_error"){
+							$.each(json.data, function(i,validationError){ 
+								$("#_" + validationError.field).show();
+								$("#_" + validationError.field).text(validationError.message);
+							});
+					   }
+				   }, 
+				   error:function(jqXHR, textStatus, errorThrown){ 
+						alert(textStatus);
+				   }
+				});
+			});
+			
+			$('#create_nt').click(function(){
+				fillTripCountry();
+			});
+			$('select#trip_country').change(function(){
+				fillTripCity($('#trip_country').val());
+			});
+			
+			function fillTripCountry(){
+				var url = "/admin/ajax/country/";
+				$("#trip_country" ).children().remove();
+				$("#trip_country" ).append(new Option('Select Country', 0, true, true));
+				$.getJSON(url, function(fsdata) {
+					$.each(fsdata.data, function(i,country){ 
+						$("#trip_country" ).append(new Option(country.title, country.id, true, false));
+					});
+					fillTripCity($('#trip_country').val());
+				});	
+			}
+			
+			function fillTripCity(countryId){
+				var url = "/admin/ajax/city/" + countryId;
+				$("#trip_scity" ).children().remove();
+				$("#trip_ecity" ).children().remove();
+				$("#trip_scity" ).append(new Option('Start', 0, true, true));
+				$("#trip_ecity" ).append(new Option('End', 0, true, true));
+				$.getJSON(url, function(fsdata) {
+					$.each(fsdata.data, function(i,city){ 
+						$("#trip_scity" ).append(new Option(city.title, city.id, true, false));
+						$("#trip_ecity" ).append(new Option(city.title, city.id, true, false));
+					});
+				});	
+			}
+
 		</script>
 
 

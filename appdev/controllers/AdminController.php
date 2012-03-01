@@ -2553,7 +2553,8 @@ class AdminController extends Zend_Controller_Action {
                         ->where('region.parent_id IS NULL and region.type_id=1')
                         ->group('region.id');
                 if ($this->view->searchText) {
-                    $select->where("region.title like '{$this->view->searchText}%'");
+					$identifierCompatible = str_replace(' ', '_',$this->view->searchText);
+                    $select->where("region.title like '{$this->view->searchText}%' or region.identifier like '{$identifierCompatible}%'");
                 }
                 $select->order(array_key_exists($this->view->paramSort, $regionsFields) ? $regionsFields[$this->view->paramSort] . "$seq" : $regionsFields[0]);
                 break;
@@ -2563,10 +2564,12 @@ class AdminController extends Zend_Controller_Action {
                 $select->from(array('country' => 'places'), array('id', 'countryName' => 'title'))
                         ->join(array('city' => 'places'), 'city.parent_id = country.id', array('cityTotal' => 'COUNT(city.id)'))
                         ->joinleft('listings', 'city.id=listings.city_id', array('activityTotal' => 'COUNT(IF(listings.main_type=2, 1, NULL))', 'entertainmentTotal' => 'COUNT(IF(listings.main_type=3, 1, NULL))', 'touristTotal' => 'COUNT(IF(listings.main_type=4, 1, NULL))', 'restaurantTotal' => 'COUNT(IF(listings.main_type=5, 1, NULL))', 'hotelsTotal' => 'COUNT(IF(listings.main_type=6, 1, NULL))'))
-                        ->where('country.type_id =2')
+                        //->joinleft('vendors', 'country.id=vendors.place_id', array('partnerTotal' => 'COUNT(vendors.id)'))
+						->where('country.type_id =2')
                         ->group('country.id');
                 if ($this->view->searchText) {
-                    $select->where("country.title like '{$this->view->searchText}%'");
+					$identifierCompatible = str_replace(' ', '_',$this->view->searchText);
+                    $select->where("country.title like '{$this->view->searchText}%' or country.identifier like '{$identifierCompatible}%'");
                 }
                 $select->order(array_key_exists($this->view->paramSort, $countryFields) ? $countryFields[$this->view->paramSort] . "$seq" : $countryFields[0]);
 
@@ -2581,7 +2584,8 @@ class AdminController extends Zend_Controller_Action {
                         ->where('city.type_id =3')
                         ->group('city.id');
                 if ($this->view->searchText) {
-                    $select->where("city.title like '{$this->view->searchText}%'");
+					$identifierCompatible = str_replace(' ', '_',$this->view->searchText);
+                    $select->where("city.title like '{$this->view->searchText}%' or city.identifier like '{$identifierCompatible}%'");
                 }
                 $select->order(array_key_exists($this->view->paramSort, $cityFields) ? $cityFields[$this->view->paramSort] . "$seq" : $cityFields[0]);
 
@@ -2968,63 +2972,6 @@ class AdminController extends Zend_Controller_Action {
         }
     }
 
-    private function travellerDataTask() {
-        $userId = $this->_getParam('sort');
-        $panel = $this->_getParam('seq');
-        switch ($panel) {
-            case 1:
-                $user = $this->users->getFull($userId);
-                $this->view->user = $user;
-                $this->render('travellerview1');
-                break;
-            case 2:
-                $trips = $this->trips->getTripsBy($userId);
-                $this->view->trips = $trips;
-                $this->render('travellerview2');
-                break;
-            case 3:
-                $reservations = $this->reservations->getUserHistory($userId);
-                $this->view->reservations = $reservations;
-                $this->render('travellerview3');
-                break;
-            case 4:
-                $reviewes = $this->reviewes->getReviewsBy($userId);
-                $this->view->reviewes = $reviewes;
-                $this->render('travellerview4');
-                break;
-            default:
-                throw new Exception("Invalid panel type");
-        }
-    }
-
-    private function partnerDataTask() {
-        $userId = $this->_getParam('sort');
-        $panel = $this->_getParam('seq');
-        switch ($panel) {
-            case 1:
-                $user = $this->vendors->getVendorDetailsById($userId);
-                $this->view->user = $user;
-                $this->render('partnerview1');
-                break;
-            case 2:
-                $listings = $this->listings->getVendorListings($userId);
-                $this->view->listings = $listings;
-                $this->render('partnerview2');
-                break;
-            case 3:
-                $reservations = $this->reservations->getHistory($userId);
-                $this->view->reservations = $reservations;
-                $this->render('partnerview3');
-                break;
-            case 4:
-                $offers = $this->vendors->getOffersBy($userId);
-                $this->view->offers = $offers;
-                $this->render('partnerview4');
-                break;
-            default:
-                throw new Exception("Invalid panel type");
-        }
-    }
 
     public function reservationsAction() {
         $GLOBALS['menuContext'] = 6;
@@ -3498,6 +3445,53 @@ class AdminController extends Zend_Controller_Action {
         }
     }
 
+	private function tripAddTask(){
+		if($this->getRequest()->isPost()){
+			$errors = $this->validateTripData($_POST);
+			
+			if(count($errors)){
+				$validation_error_data = array();
+				foreach($errors as $key=>$value){
+					$validation_error_data[] = array('field'=>$key, 'message'=>$value);
+				}
+				self::jsonEcho(json_encode(array('attempt'=>'fail', 'error_code'=>'validation_error', 'description'=>'Field validation error', 'data'=>$validation_error_data)));
+			}
+		}
+	
+		//create trip now
+	
+		try{
+			$tblTrip = new Model_Trips();
+			$row = $tblTrip->fetchNew();
+			$row->title  = $_POST['t_name'];
+			$row->country_id = $_POST['trip_country'];
+			$row->min=$_POST['trip_min'];
+			$row->max=$_POST['trip_max'];
+			$row->start_city=$_POST['trip_scity'];
+			$row->end_city=$_POST['trip_ecity'];
+			$row->price=$_POST['trip_price'];
+			$row->created = date("Y-m-d H:i:s");
+			$row->updated = date("Y-m-d H:i:s");
+			$id = $row->save();
+			self::jsonEcho(json_encode(array('attempt'=>'success', 'error_code'=>'0', 'description'=>$id, 'data'=>$id)));
+		}catch(Exception $e){
+			self::jsonEcho(json_encode(array('attempt'=>'fail', 'error_code'=>'mysql_error', 'description'=>'MySQL Error', 'data'=>$e->getMessage())));
+		}
+	}
+	
+	private function validateTripData($postData){
+		$errors = array();
+		if(empty($postData['t_name']))$errors['t_name'] = 'This field is required';
+		if(empty($postData['trip_country']))$errors['trip_country'] = 'This field is required';
+		if(empty($postData['trip_scity']))$errors['trip_scity'] = 'This field is required';
+		if(empty($postData['trip_ecity']))$errors['trip_scity'] = 'This field is required';
+		if(empty($postData['trip_min']))$errors['trip_min'] = 'This field is required';
+		if(empty($postData['trip_max']))$errors['trip_min'] = 'This field is required';
+		if(empty($postData['trip_price']))$errors['trip_price'] = 'This field is required';
+		return $errors;
+	}
+
+
     private function tripsTask() {
         $page = $this->_getParam('page', 1);
         $this->view->searchText = $this->_getParam('q');
@@ -3590,6 +3584,7 @@ class AdminController extends Zend_Controller_Action {
         $this->view->errors = array();
         $countries = $this->places->getPlaces(2);
         $this->view->countries = $countries;
+		$this->view->cities = json_encode($this->trips->getCities($trip->id));
 
 
         if ($this->getRequest()->isPost()) {
@@ -3602,12 +3597,20 @@ class AdminController extends Zend_Controller_Action {
                 $objHighlight->text = @$_POST['hDescription'][$key];
                 $highlights[] = $objHighlight;
             }
+			
+			$selectedCity = array();
+			for($i=1; $i<=5; $i++){
+				$selectedCity[] = $_POST["trip_city$i"] ? (object)array('trip_id'=>$trip->id, 'city_id'=>$_POST["trip_city$i"]): (object)array('trip_id'=>$trip->id, 'city_id'=>0);
+			}
+			$this->view->cities = json_encode($selectedCity);
+			
             $this->view->highlights = $highlights;
             if (count($errors)) {
                 $this->view->errors = $errors;
                 $this->view->trip->title = $_POST['title'];
                 $this->view->trip->description = $_POST['description'];
                 $this->view->trip->days = $_POST['days'];
+                $this->view->trip->country_id = $_POST['trip_country'];
 
                 $this->render('trip1');
                 return;
@@ -3615,14 +3618,16 @@ class AdminController extends Zend_Controller_Action {
             $trip->title = $_POST['title'];
             $trip->description = $_POST['description'];
             $trip->days = $_POST['days'];
-            $trip->country_id = $_POST['country'];
+            $trip->country_id = $_POST['trip_country'];
             $trip->save();
+			
             if ($uploadedFileName = $this->saveTripPhoto($trip->id)) {
                 $trip->image = $uploadedFileName;
                 $trip->save();
             }
 
             $this->trips->saveHighlights($trip->id, $highlights);
+			$this->trips->saveCities($trip->id, $trip->country_id, $selectedCity );
             $_SESSION['alert'] = 'Your changes have been saved';
             $this->_redirect('/admin/trips/edit/1/' . $trip->id);
             //put success message
@@ -3664,7 +3669,7 @@ class AdminController extends Zend_Controller_Action {
         if (empty($postData['description']))
             $errors['description'] = 'Trip Description can not be blank';
 
-        if (empty($postData['country']))
+        if (empty($postData['trip_country']))
             $errors['country'] = 'Select Country';
 
         if (!(int) $postData['days'])
@@ -3832,26 +3837,6 @@ class AdminController extends Zend_Controller_Action {
         $this->render('trip4');
     }
 
-    public function ajaxAction() {
-        switch ($this->_getParam('task')) {
-            case 'country':
-                $countries = $this->places->getPlaces(2);
-                self::jsonEcho(json_encode(array('attempt' => 'success', 'error_code' => '0', 'description' => '', 'data' => $countries->toArray())));
-                break;
-            case 'city':
-                $countryId = $this->_getParam('page');
-                $cities = $this->places->getPlaces(3, $countryId);
-                self::jsonEcho(json_encode(array('attempt' => 'success', 'error_code' => '0', 'description' => '', 'data' => $cities->toArray())));
-                break;
-            case 'listingtype':
-                $listingTypes = $this->listings->getMainCategories(true);
-                self::jsonEcho(json_encode(array('attempt' => 'success', 'error_code' => '0', 'description' => '', 'data' => $listingTypes)));
-                break;
-            default:
-                self::jsonEcho(json_encode(array('attempt' => 'fail', 'error_code' => '404', 'description' => 'Invalid API call')));
-        }
-    }
-
     public function vendorsAction() {
         switch ($this->_getParam('task')) {
             case 'add':
@@ -3874,21 +3859,17 @@ class AdminController extends Zend_Controller_Action {
             }
 
             //create vendor here
+			$data = array();
+			$data['name'] = $_POST['c_name'];
+			$data['email'] = $_POST['c_email'];
+			$data['phone'] = $_POST['phone'];
+			$data['password'] = self::randomBytes(6);
+			$data['country_id'] = $_POST['country'];
+			$data['website'] = $_POST['website'];
+			$data['contact_name'] = $_POST['cnt_name'];
             try {
-                $tblVendor = new Model_Vendors();
-                $row = $tblVendor->fetchNew();
-                $row->name = $_POST['c_name'];
-                $row->email = $_POST['c_email'];
-                $row->contact_name = $_POST['cnt_name'];
-                $row->phone = $_POST['phone'];
-                $row->website = $_POST['website'];
-                $row->place_id = $_POST['country'];
-                $row->created = date("Y-m-d H:i:s");
-                $row->updated = date("Y-m-d H:i:s");
-                $id = $row->save();
-                //$_SESSION['alert'] = 'Partner created successfully';
+                $id = $this->accounts->signupVendor($data, true, true);
                 self::jsonEcho(json_encode(array('attempt' => 'success', 'error_code' => '0', 'description' => $id, 'data' => $id)));
-                //put success message
             } catch (Exception $e) {
                 self::jsonEcho(json_encode(array('attempt' => 'fail', 'error_code' => 'mysql_error', 'description' => 'MySQL Error', 'data' => $e->getMessage())));
             }
@@ -3907,6 +3888,12 @@ class AdminController extends Zend_Controller_Action {
             if (!$emailValidator->isValid($postData['c_email'])) {
                 $errors['c_email'] = 'Not a valid email';
             }
+			
+			$this->accounts = new WS_AccountService();
+			if(!$this->accounts->validateEmail(trim($postData['c_email']))){
+                $errors['c_email'] = 'Email already exists';
+			}
+			
         }
 
         if (empty($postData['cnt_name']))
@@ -3937,5 +3924,4 @@ class AdminController extends Zend_Controller_Action {
         echo $jsonString;
         exit;
     }
-
 }

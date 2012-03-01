@@ -56,7 +56,7 @@
 						<li <?php echo $this->listingContext=='activities' ? 'class="select"' : '';?>><a href="/admin/listings/activities">Activities</a></li>
 						<li <?php echo $this->listingContext=='hotels' ? 'class="select"' : '';?>><a href="/admin/listings/hotels">Hotels</a></li>
 						<li <?php echo $this->listingContext=='restaurants' ? 'class="select"' : '';?>><a href="/admin/listings/restaurants">Restaurants</a></li>
-						<li <?php echo $this->listingContext=='entertainments' ? 'class="select"' : '';?>><a href="/admin/listings/entertainment">Entertainment</a></li>
+						<li <?php echo $this->listingContext=='entertainments' ? 'class="select"' : '';?>><a href="/admin/listings/entertainments">Entertainments</a></li>
 						<li <?php echo $this->listingContext=='tourist' ? 'class="select"' : '';?>><a href="/admin/listings/tourist">Tourist Sights</a></li>
 					</ul>
 				</div><!--SUB_MENU-->
@@ -109,6 +109,18 @@
 			function searchSubmit(){
 				location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
 			}
+			$("#q").keypress(function(e) {
+				var keycode;
+				if (window.event) keycode = window.event.keyCode;
+				else if (e) keycode = e.which;
+				else return true;
+				if (keycode == 13) {
+				   location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
+				   return false;
+				}
+				else
+				   return true;
+			});
 		</script>
 		
 	</body>

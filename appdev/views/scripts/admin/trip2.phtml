@@ -19,7 +19,7 @@
 				});
 				$("#report_tabs").tabs();
 				$('.carrousel').accordion({
-					autoHeight: false
+					autoHeight: false 
 				});
 			});
 		</script>
@@ -31,7 +31,7 @@
 			<div class="w3_admin">
 				<div class="sub_menu">
 					<h2>Create. <span>New Trip.</span></h2>
-					<a href="#" class="back">Back to Trips</a>
+					<a href="/admin/trips/" class="back">Back to Trips</a>
 					
 				</div><!--SUB_MENU-->
             </div><!--W3-->
@@ -42,9 +42,8 @@
 							<ul>
 								<li><a href="<?php echo $this->url(array('page'=>1))?>">General Information</a></li>
 								<li class="current"><a href="<?php echo $this->url(array('page'=>2))?>">Trip Facts</a></li>
-								<li><a href="<?php echo $this->url(array('page'=>3))?>">Photos</a></li>
 								<li><a href="<?php echo $this->url(array('page'=>4))?>">Trip Details</a></li>
-								<li><a href="<?php echo $this->url(array('page'=>5))?>">Itinerary</a></li>
+								<li><a href="">Itinerary</a></li>
 							</ul>
 						</div>
 						<!-- closes left -->
