@@ -391,3 +391,12 @@ function move(id,spd){
         obj.style.top=(spd>0?0:max)+"px";
     }
 }
+
+$(function(){
+    $('.livechat').popupWindow({ 
+        height:500, 
+        width:400, 
+        top:50, 
+        left:50 
+    }); 
+})

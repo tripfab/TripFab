@@ -306,6 +306,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             )
         );
         $router->addRoute(
+            'chat',
+            new Zend_Controller_Router_Route(
+                '/chat/:action',
+                array(
+                    'controller' => 'chat',
+                    'action'     => 'index',
+                    'module'     => 'default',
+                )
+            )
+        );
+        $router->addRoute(
             'trips_country',
             new Zend_Controller_Router_Route(
                 '/:lang/trips/:country',

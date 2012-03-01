@@ -20,7 +20,8 @@ class WS_Controller_Plugin_Language
         if(isset($_SERVER['REDIRECT_URL'])) {
             if(strpos($_SERVER['REDIRECT_URL'], "ajax") === false &&
                     strpos($_SERVER['REDIRECT_URL'], "admin") === false &&
-                    strpos($_SERVER['REDIRECT_URL'], "phone") === false){
+                    strpos($_SERVER['REDIRECT_URL'], "phone") === false &&
+                    strpos($_SERVER['REDIRECT_URL'], "chat") === false){
                 
                 $finfo = pathinfo($_SERVER['REDIRECT_URL']);
                 if(isset($finfo['extension'])) {
