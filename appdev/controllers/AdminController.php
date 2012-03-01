@@ -3868,7 +3868,7 @@ class AdminController extends Zend_Controller_Action {
 			$data['website'] = $_POST['website'];
 			$data['contact_name'] = $_POST['cnt_name'];
             try {
-                $id = $this->accounts->signupVendor($data, false);
+                $id = $this->accounts->signupVendor($data, true, true);
                 self::jsonEcho(json_encode(array('attempt' => 'success', 'error_code' => '0', 'description' => $id, 'data' => $id)));
             } catch (Exception $e) {
                 self::jsonEcho(json_encode(array('attempt' => 'fail', 'error_code' => 'mysql_error', 'description' => 'MySQL Error', 'data' => $e->getMessage())));
@@ -3924,6 +3924,4 @@ class AdminController extends Zend_Controller_Action {
         echo $jsonString;
         exit;
     }
-	
-
 }
