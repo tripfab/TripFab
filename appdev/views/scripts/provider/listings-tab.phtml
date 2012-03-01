@@ -10,40 +10,7 @@
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <link type="text/css" rel="stylesheet" href="/js/jwysiwyg/jquery.wysiwyg.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
-    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
-	<script type="text/javascript" src="/js/jwysiwyg/jquery.wysiwyg.js"></script>
-    <script type="text/javascript" src="/js/jwysiwyg/controls/wysiwyg.link.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('select').jqTransSelect();
-			
-			$('textarea.wysiwyg').wysiwyg({
-				initialContent:'',
-				rmUnusedControls:true,
-				controls:{
-					bold:{ visible:true },
-					italic:{ visible:true },
-					underline:{ visible:true },
-					justifyLeft:{ visible:true },
-					justifyCenter:{ visible:true },
-					justifyRight:{ visible:true },
-					insertOrderedList:{ visible:true },
-					insertUnorderedList:{ visible:true },
-					createLink:{ visible:true },
-					h3:{ visible:true },
-					paragraph:{ visible:true },
-				}
-			});
-        });
-    </script>
-    <style type="text/css">
-	textarea.wysiwyg { width:730px; height:500px;}
-	</style>
+
 </head>
 <body>
 <div class="w1">
@@ -85,5 +52,39 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+<script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
+<script type="text/javascript" src="/js2/jquery.elastic.js"></script>
+<script type="text/javascript" src="/js2/common.js"></script>
+<script type="text/javascript" src="/js/jwysiwyg/jquery.wysiwyg.js"></script>
+<script type="text/javascript" src="/js/jwysiwyg/controls/wysiwyg.link.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('select').jqTransSelect();
+		
+		$('textarea.wysiwyg').wysiwyg({
+			initialContent:'',
+			rmUnusedControls:true,
+			controls:{
+				bold:{ visible:true },
+				italic:{ visible:true },
+				underline:{ visible:true },
+				justifyLeft:{ visible:true },
+				justifyCenter:{ visible:true },
+				justifyRight:{ visible:true },
+				insertOrderedList:{ visible:true },
+				insertUnorderedList:{ visible:true },
+				createLink:{ visible:true },
+				h3:{ visible:true },
+				paragraph:{ visible:true },
+			}
+		});
+    });
+</script>
+<style type="text/css">
+textarea.wysiwyg { width:730px; height:500px;}
+</style>
 </body>
 </html>

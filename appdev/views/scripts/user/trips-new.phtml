@@ -10,31 +10,6 @@
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <link type="text/css" rel="stylesheet" href="/css2/calendar/jquery-ui-1.8.16.custom.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript" src="/js2/index/index.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('input').ToggleInputValue();
-						
-			$('input.calendar1').datepicker({
-				minDate:new Date(),
-				onSelect:function(date){
-					$end = $('input.calendar2');
-					$end.datepicker('option','minDate', date);
-				},
-				dateFormat:'D M d yy',
-			});
-			
-			$('input.calendar2').datepicker({
-				minDate:new Date(),
-				dateFormat:'D M d yy',
-			});
-			
-			<?php if($this->error): ?>
-			showError("<?= $this->error ?>");
-			<?php endif ?>
-        });
-    </script>
 </head>
 <body>
 <div class="w1">
@@ -114,6 +89,31 @@
         </div><!-- closes wrapper -->
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
-</div><!-- closes w1 -->	
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript" src="/js2/index/index.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('input').ToggleInputValue();
+					
+		$('input.calendar1').datepicker({
+			minDate:new Date(),
+			onSelect:function(date){
+				$end = $('input.calendar2');
+				$end.datepicker('option','minDate', date);
+			},
+			dateFormat:'D M d yy',
+		});
+		
+		$('input.calendar2').datepicker({
+			minDate:new Date(),
+			dateFormat:'D M d yy',
+		});
+		
+		<?php if($this->error): ?>
+		showError("<?= $this->error ?>");
+		<?php endif ?>
+    });
+</script>
 </body>
 </html>

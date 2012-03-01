@@ -5,18 +5,7 @@
     <title>Let us bring you thousands of travelers for free | Tripfab</title>
     <link type="text/css" rel="stylesheet" href="/css4/all.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="http://tripfab.com/js2/jquery.js"></script>
-    <script type="text/javascript" src="/js4/scroll-startstop.events.jqueary.js"></script>
-    <script type="text/javascript">
-	$(function(){
-		$('.language a.current').click(function(){
-			$(this).toggleClass('active');
-			$('.language .select').toggleClass('show');
-			return false;
-		});
-		jQuery('#other-features ul').jcarousel();
-	});
-	</script>
+
 </head>
 <body class="landing">
 <div id="header-shadow">
@@ -314,5 +303,17 @@
         </div><!-- closes wrapper -->	
     </div><!-- closes footer-gradient -->					
 </div><!-- footer -->
+<script type="text/javascript" src="http://tripfab.com/js2/jquery.js"></script>
+<script type="text/javascript" src="/js4/scroll-startstop.events.jqueary.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.language a.current').click(function(){
+		$(this).toggleClass('active');
+		$('.language .select').toggleClass('show');
+		return false;
+	});
+	jQuery('#other-features ul').jcarousel();
+});
+</script>
 </body>
 </html>

@@ -10,66 +10,7 @@
     <link type="text/css" rel="stylesheet" href="/css2/lightboxes.css" />
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-	<script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript"> var neww = true; </script>
-    <script type="text/javascript" src="/js2/provider/listing-edit2.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-			$('a.lb').fancybox({
-				padding:0,
-				overlayColor:'#000',
-				centerOnScroll:1,
-				overlayOpacity:0.3
-			});
-			$('.lbox .btn-2, .lbox .btn-11').click(function(){
-				$(this).parents('form').submit();
-			});
-        });
-    </script>
-    <style type="text/css">
-	#mapcanvas {
-		width:435px;
-		height:250px;
-		background:#09C;
-		clear:both;
-		margin-top:15px;}
-	.listing-content .profile-items .item .inner-container > a {
-		display:none;}
-	.listing-content .profile-items .item:hover .inner-container > a {
-		display:block;}
-	.item .inner-form {
-		clear:both;
-		overflow:hidden;
-		padding-top:5px;}
-		.item .inner-form input.text {
-			float:left;
-			width:200px !important;
-			vertical-align:middle;}
-		.item .inner-form input.btn {
-			float:left;
-			vertical-align:middle;}
-		.item .inner-form .selects {
-			display:block;
-			clear:both;}
-		.hidden { display:none; }
-		.jqTransformSelectWrapper { width:150px !important }
-		.errors {
-			border:1px solid #F00 !important;
-			padding:5px !important;
-			margin-bottom:30px;}
-			.errors h4 {
-				text-align:left;
-				line-height:18px;
-				font-style:italic;
-				font-size:12px;
-				font-weight:normal !important;
-				color:#F00 !important;}
-		.w-m {
-			float:right;
-			width:404px;
-			display:none;}
-	</style>
+   
 </head>
 <body>
 <div class="w1">
@@ -290,6 +231,67 @@
         </div><!-- closes wrapper -->
     </div><!-- closes w2 -->
    <?= $this->partial('partials/footer.phtml'); ?>
-</div><!-- closes w1 -->	
+</div><!-- closes w1 -->
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript"> var neww = true; </script>
+<script type="text/javascript" src="/js2/provider/listing-edit2.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+		$('a.lb').fancybox({
+			padding:0,
+			overlayColor:'#000',
+			centerOnScroll:1,
+			overlayOpacity:0.3
+		});
+		$('.lbox .btn-2, .lbox .btn-11').click(function(){
+			$(this).parents('form').submit();
+		});
+    });
+</script>
+<style type="text/css">
+#mapcanvas {
+	width:435px;
+	height:250px;
+	background:#09C;
+	clear:both;
+	margin-top:15px;}
+.listing-content .profile-items .item .inner-container > a {
+	display:none;}
+.listing-content .profile-items .item:hover .inner-container > a {
+	display:block;}
+.item .inner-form {
+	clear:both;
+	overflow:hidden;
+	padding-top:5px;}
+	.item .inner-form input.text {
+		float:left;
+		width:200px !important;
+		vertical-align:middle;}
+	.item .inner-form input.btn {
+		float:left;
+		vertical-align:middle;}
+	.item .inner-form .selects {
+		display:block;
+		clear:both;}
+	.hidden { display:none; }
+	.jqTransformSelectWrapper { width:150px !important }
+	.errors {
+		border:1px solid #F00 !important;
+		padding:5px !important;
+		margin-bottom:30px;}
+		.errors h4 {
+			text-align:left;
+			line-height:18px;
+			font-style:italic;
+			font-size:12px;
+			font-weight:normal !important;
+			color:#F00 !important;}
+	.w-m {
+		float:right;
+		width:404px;
+		display:none;}
+	
+</style>
 </body>
 </html>

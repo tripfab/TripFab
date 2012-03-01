@@ -8,20 +8,7 @@
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-	<script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-			$tip = 10;
-			$('#addTip').click(function(){
-				$item = $('.hidden.tip.detail').html();
-				$item = $('<div class="item">'+$item+'</div>');
-				$('input',$item).attr('name','tips['+$tip+'][text]');
-				$('.hidden.tip.detail').before($item);
-				$tip++;
-				return false;
-			});
-        });
-    </script>
+
 </head>
 <body>
 <div class="w1">
@@ -72,5 +59,19 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+		$tip = 10;
+		$('#addTip').click(function(){
+			$item = $('.hidden.tip.detail').html();
+			$item = $('<div class="item">'+$item+'</div>');
+			$('input',$item).attr('name','tips['+$tip+'][text]');
+			$('.hidden.tip.detail').before($item);
+			$tip++;
+			return false;
+		});
+    });
+</script>
 </body>
 </html>

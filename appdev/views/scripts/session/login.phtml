@@ -9,59 +9,7 @@
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-			$('a.lb').fancybox({
-				padding:0,
-				overlayColor:'#ffffff',
-				centerOnScroll:1,
-				padding: 0,
-				overlayOpacity: 0.8,
-				showCloseButton: false
-			});
-			$('#forgot form').submit(function(){
-				$form = $(this);
-				$data = { email:$('input[name=resetemail]', $form).val() };
-				if($data.email == 'Enter your e-mail' || $data.email == '')
-					return false;
-					
-				$.ajax({
-					url:'/ajax/resetpassword',
-					type:'post',
-					data:$data,
-					success:function(response){
-						if(response.type == 'success'){
-							$.fancybox.close();
-							showAlert(response.message);
-						} else {
-							$.fancybox.close();
-							showError(response.message);
-						}
-					},
-					error:function(){
-						$.fancybox.close();
-						showError('Something went wrong. Please try again later');
-					}
-				});
-				
-				return false;
-			});
-			$('form input').focus(function() {
-				$(this).prev('label').addClass('hide');
-			});
-			$('form input').focusout(function() {
-				if (!$(this).val()) {
-					$(this).prev('label').removeClass('hide');
-				}
-			});
-        });
-    </script>
-    <style type="text/css">
-	.error { border:1px solid #F00; padding:5px; margin-bottom:10px; color:#F00; font-style:italic;}
-	.alert { border:1px solid #0C0; padding:5px; margin-bottom:10px; color:#0C0; font-style:italic;}
-	.hidden { display:none;}
-	</style>
+    
 </head>
 <body>
 <div class="w1">
@@ -137,5 +85,58 @@
         </div><!-- closes lb-forgot -->
     </div>
 </div>
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+		$('a.lb').fancybox({
+			padding:0,
+			overlayColor:'#ffffff',
+			centerOnScroll:1,
+			padding: 0,
+			overlayOpacity: 0.8,
+			showCloseButton: false
+		});
+		$('#forgot form').submit(function(){
+			$form = $(this);
+			$data = { email:$('input[name=resetemail]', $form).val() };
+			if($data.email == 'Enter your e-mail' || $data.email == '')
+				return false;
+				
+			$.ajax({
+				url:'/ajax/resetpassword',
+				type:'post',
+				data:$data,
+				success:function(response){
+					if(response.type == 'success'){
+						$.fancybox.close();
+						showAlert(response.message);
+					} else {
+						$.fancybox.close();
+						showError(response.message);
+					}
+				},
+				error:function(){
+					$.fancybox.close();
+					showError('Something went wrong. Please try again later');
+				}
+			});
+			
+			return false;
+		});
+		$('form input').focus(function() {
+			$(this).prev('label').addClass('hide');
+		});
+		$('form input').focusout(function() {
+			if (!$(this).val()) {
+				$(this).prev('label').removeClass('hide');
+			}
+		});
+    });
+</script>
+<style type="text/css">
+.error { border:1px solid #F00; padding:5px; margin-bottom:10px; color:#F00; font-style:italic;}
+.alert { border:1px solid #0C0; padding:5px; margin-bottom:10px; color:#0C0; font-style:italic;}
+.hidden { display:none;}
+</style>
 </body>
 </html>

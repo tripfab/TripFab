@@ -3,52 +3,53 @@
 <head>
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
     <title>Plan the perfect trip, in one place. | Tripfab.com</title>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript">
-	$(function(){
-		var $listings = <?= $this->listings ?>;
-		var $bounds   = <?= $this->bounds ?>;
-		
-		var latlng = new google.maps.LatLng(40,0);
-			
-		var myOptions = {
-		  mapTypeId: google.maps.MapTypeId.ROADMAP,
-		};
-		
-		var map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
-		
-		/**		
-		var marker = new google.maps.Marker({
-			position: new google.maps.LatLng(placemarks[0].Point.coordinates[1],placemarks[0].Point.coordinates[0]),
-			title:placemarks[0].Point.address,
-		});
-		marker.setMap(map);
-		**/
-		var marker = new Array($listings.length);
-		for(i in $listings){
-			marker[i] = new google.maps.Marker({
-				position: new google.maps.LatLng($listings[i].lat,$listings[i].lng),
-				title:$listings[i].title
-			});
-			marker[i].setMap(map);
-		}
-		
-		map.fitBounds(new google.maps.LatLngBounds(
-			new google.maps.LatLng($bounds[1],$bounds[3]),
-			new google.maps.LatLng($bounds[0],$bounds[2])
-		));
-	})	
-	</script>
-    <style>
-	#mapcanvas {
-		width:500px;
-		height:300px;
-		background:#CCC;}
-	</style>
+   
 </head>
 <body>
 	<div id="mapcanvas"></div>
 	<?= count(json_decode($this->listings)); ?>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var $listings = <?= $this->listings ?>;
+	var $bounds   = <?= $this->bounds ?>;
+	
+	var latlng = new google.maps.LatLng(40,0);
+		
+	var myOptions = {
+	  mapTypeId: google.maps.MapTypeId.ROADMAP,
+	};
+	
+	var map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
+	
+	/**		
+	var marker = new google.maps.Marker({
+		position: new google.maps.LatLng(placemarks[0].Point.coordinates[1],placemarks[0].Point.coordinates[0]),
+		title:placemarks[0].Point.address,
+	});
+	marker.setMap(map);
+	**/
+	var marker = new Array($listings.length);
+	for(i in $listings){
+		marker[i] = new google.maps.Marker({
+			position: new google.maps.LatLng($listings[i].lat,$listings[i].lng),
+			title:$listings[i].title
+		});
+		marker[i].setMap(map);
+	}
+	
+	map.fitBounds(new google.maps.LatLngBounds(
+		new google.maps.LatLng($bounds[1],$bounds[3]),
+		new google.maps.LatLng($bounds[0],$bounds[2])
+	));
+})	
+</script>
+<style>
+#mapcanvas {
+	width:500px;
+	height:300px;
+	background:#CCC;}
+</style>
 </body>
 </html>

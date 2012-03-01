@@ -10,78 +10,7 @@
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
 	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
-    <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript" src="/js2/cardcheck.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('a.lbc').fancybox({
-            	padding: 0,
-            	overlayColor: '#FFF',
-            	overlayOpacity: '0.7',
-				centerOnScroll:true
-            });
-			
-			$('a.delete_btn').click(function(){
-				$form = $(this).parents('form');
-				$form.submit();
-				return false;
-			});
-			
-			$('#user_account').submit(function(){
-				if($('.cnum', this).val() == '') {
-					showError('Credit Card cannot be empty');
-					return false;
-				} else if($('.ccode', this).val() == '') {
-					showError('Security Code cannot be empty');
-					return false;
-				} else if($('.cmonth', this).val() == '') {
-					showError('Please select the expiration month');
-					return false;
-				} else if($('.cyear', this).val() == '') {
-					showError('Please select the expiration year');
-					return false;
-				} else {
-					Stripe.setPublishableKey('pk_HkcJUP3pJLpO1G6AeHNKGmDHF9Ahh');
-					$data = {
-						number:    $('.cnum', this).val(),
-						cvc: 	   $('.ccode', this).val(),
-						exp_month: $('.cmonth', this).val(),
-						exp_year:  $('.cyear', this).val()
-					};
-					$('input, select', this).attr('disabled', 'disabled');
-					var amount = 200; //amount you want to charge in cents
-					Stripe.createToken($data, amount, stripeResponseHandler);
-					// prevent the form from submitting with the default action
-					return false;
-				}
-			});
-			
-			var creditCard = $('#user_account .cnum');
-			creditCard.cardcheck({
-				iconLocation: 'ul.cards',
-				iconDir:'/images/'
-			});
-        });
-		
-		function stripeResponseHandler(status, response) {
-			var $form = $("#user_account");
-			if (response.error) {
-				//show the errors on the form
-				$('input, select', $form).removeAttr('disabled');
-				showError(response.error.message);
-			} else {
-				// token contains id, last4, and card type
-				var token = response['id'];
-				
-				$('input, select', $form).removeAttr('disabled');
-				// insert the token into the form so it gets submitted to the server
-				$form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
-				// and submit
-				$form.get(0).submit();
-			}
-		}
-    </script>
+   
 </head>
 <body>
 <div class="w1 profile">
@@ -167,5 +96,77 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript" src="https://js.stripe.com/v1/"></script>
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript" src="/js2/cardcheck.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('a.lbc').fancybox({
+        	padding: 0,
+        	overlayColor: '#FFF',
+        	overlayOpacity: '0.7',
+			centerOnScroll:true
+        });
+		
+		$('a.delete_btn').click(function(){
+			$form = $(this).parents('form');
+			$form.submit();
+			return false;
+		});
+		
+		$('#user_account').submit(function(){
+			if($('.cnum', this).val() == '') {
+				showError('Credit Card cannot be empty');
+				return false;
+			} else if($('.ccode', this).val() == '') {
+				showError('Security Code cannot be empty');
+				return false;
+			} else if($('.cmonth', this).val() == '') {
+				showError('Please select the expiration month');
+				return false;
+			} else if($('.cyear', this).val() == '') {
+				showError('Please select the expiration year');
+				return false;
+			} else {
+				Stripe.setPublishableKey('pk_HkcJUP3pJLpO1G6AeHNKGmDHF9Ahh');
+				$data = {
+					number:    $('.cnum', this).val(),
+					cvc: 	   $('.ccode', this).val(),
+					exp_month: $('.cmonth', this).val(),
+					exp_year:  $('.cyear', this).val()
+				};
+				$('input, select', this).attr('disabled', 'disabled');
+				var amount = 200; //amount you want to charge in cents
+				Stripe.createToken($data, amount, stripeResponseHandler);
+				// prevent the form from submitting with the default action
+				return false;
+			}
+		});
+		
+		var creditCard = $('#user_account .cnum');
+		creditCard.cardcheck({
+			iconLocation: 'ul.cards',
+			iconDir:'/images/'
+		});
+    });
+	
+	function stripeResponseHandler(status, response) {
+		var $form = $("#user_account");
+		if (response.error) {
+			//show the errors on the form
+			$('input, select', $form).removeAttr('disabled');
+			showError(response.error.message);
+		} else {
+			// token contains id, last4, and card type
+			var token = response['id'];
+			
+			$('input, select', $form).removeAttr('disabled');
+			// insert the token into the form so it gets submitted to the server
+			$form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+			// and submit
+			$form.get(0).submit();
+		}
+	}
+</script>
 </body>
 </html>

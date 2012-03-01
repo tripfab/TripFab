@@ -5,17 +5,7 @@
     <title>FAQ's</title>
     <link type="text/css" rel="stylesheet" href="/css4/all.css" />	
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="http://tripfab.com/js2/jquery.js"></script>
-    <script type="text/javascript">
-    $(function(){
-        $('.language a.current').click(function(){
-            $(this).toggleClass('active');
-            $('.language .select').toggleClass('show');
-			return false;
-        });
-        $('.accordion').accordion();
-    });
-    </script>
+
 </head>
 <body class="home faq">
 <div id="container">
@@ -75,5 +65,16 @@
         </div><!-- closes footer-gradient -->					
     </div><!-- footer -->
 </div><!-- closes container -->
+<script type="text/javascript" src="http://tripfab.com/js2/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('.language a.current').click(function(){
+        $(this).toggleClass('active');
+        $('.language .select').toggleClass('show');
+		return false;
+    });
+    $('.accordion').accordion();
+});
+</script>
 </body>
 </html>

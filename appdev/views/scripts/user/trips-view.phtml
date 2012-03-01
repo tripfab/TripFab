@@ -9,25 +9,6 @@
     <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() { 
-            $('.slider').cycle({
-                fx:     'fade', 
-                speed:  'fast', 
-                timeout: 0,
-                next:   '.next', 
-                prev:   '.prev'
-            });
-            $('textarea').elastic();				
-            $('input').ToggleInputValue();
-            $('form select').jqTransSelect();
-        });
-    </script>
-    <style type="text/css">
-	.slide { width:100%; }
-	.slider { width:auto; }
-	</style>
 </head>
 <body>
 <div class="w1">
@@ -80,5 +61,24 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() { 
+        $('.slider').cycle({
+            fx:     'fade', 
+            speed:  'fast', 
+            timeout: 0,
+            next:   '.next', 
+            prev:   '.prev'
+        });
+        $('textarea').elastic();				
+        $('input').ToggleInputValue();
+        $('form select').jqTransSelect();
+    });
+</script>
+<style type="text/css">
+.slide { width:100%; }
+.slider { width:auto; }
+</style>
 </body>
 </html>

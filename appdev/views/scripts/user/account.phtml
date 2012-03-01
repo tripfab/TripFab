@@ -10,49 +10,7 @@
     <link type="text/css" rel="stylesheet" href="/css2/calendar/jquery-ui-1.8.16.custom.css" />
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-		$(document).ready(function() {
-			$('#file_upload').uploadify({
-				'uploader' 	: '/uploadify/uploadify.swf',
-				'script' 	: '/phpscripts/uploadUserPicture.php',
-				'cancelImg' : '/uploadify/cancel.png',
-				'folder' 	: '/uploads',
-				'buttonImg' : '/images2/file-1.png',
-				'height' 	: 27,
-				'width' 	: 92,
-				'auto' 		: true,
-				'fileExt'	: '*.jpg;*.gif;*.png',
-				'onError':function(e,a,c,d){
-					console.log(e);
-					console.log(a);
-					console.log(c);
-					console.log(d);
-				},
-				'onComplete':function(a,b,c,image){
-					console.log(a);
-					console.log(b);
-					console.log(c);
-					console.log(image);
-					if(image != 'error'){
-						$('img#userimage68').attr('width',68);
-						$('img#userimage68').attr('height',68);
-						$('img#userimage68').attr('src',image);
-					}
-				},
-				'scriptData':{
-					'userids':<?= $this->user->id ?>,
-					'formtoken':'<?= $this->user->token ?>',
-					'usertoken':'<?= md5($this->user->token.'change_picture') ?>',
-				},
-			});
-			
-			$('input.calendar').datepicker({
-                dateFormat: 'MM d, yy',
-                defaultDate:$(this).val(),
-            });
-		});
-    </script>
+    
 </head>
 <body>
 <div class="w1 profile">
@@ -201,6 +159,49 @@
         </div><!-- closes user-backend -->
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
-</div><!-- closes w1 -->	
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#file_upload').uploadify({
+			'uploader' 	: '/uploadify/uploadify.swf',
+			'script' 	: '/phpscripts/uploadUserPicture.php',
+			'cancelImg' : '/uploadify/cancel.png',
+			'folder' 	: '/uploads',
+			'buttonImg' : '/images2/file-1.png',
+			'height' 	: 27,
+			'width' 	: 92,
+			'auto' 		: true,
+			'fileExt'	: '*.jpg;*.gif;*.png',
+			'onError':function(e,a,c,d){
+				console.log(e);
+				console.log(a);
+				console.log(c);
+				console.log(d);
+			},
+			'onComplete':function(a,b,c,image){
+				console.log(a);
+				console.log(b);
+				console.log(c);
+				console.log(image);
+				if(image != 'error'){
+					$('img#userimage68').attr('width',68);
+					$('img#userimage68').attr('height',68);
+					$('img#userimage68').attr('src',image);
+				}
+			},
+			'scriptData':{
+				'userids':<?= $this->user->id ?>,
+				'formtoken':'<?= $this->user->token ?>',
+				'usertoken':'<?= md5($this->user->token.'change_picture') ?>',
+			},
+		});
+		
+		$('input.calendar').datepicker({
+            dateFormat: 'MM d, yy',
+            defaultDate:$(this).val(),
+        });
+	});
+</script>	
 </body>
 </html>

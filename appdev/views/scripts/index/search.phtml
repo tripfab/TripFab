@@ -10,94 +10,7 @@
 	<link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
 	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-	<script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
-    <script type="text/javascript" src="/js2/index.city.js"></script>
-    <script type="text/javascript">
-		$(document).ready(function() {
-			var $cycle = false;
-			$( ".more" ).click(function() {
-				$( ".advance" ).toggleClass('show');
-				if(!$cycle){
-					$('.cycle').cycle({
-						fx: 'scrollLeft',
-						pager: '.pager',
-						next:   '.prev', 
-						prev:   '.next',
-						timeout: null
-					});
-					$('.cycle2').cycle({
-						fx: 'scrollLeft',
-						pager: '.pager2',
-						next:   '.prev2', 
-						prev:   '.next2',
-						timeout: null
-					});
-					$cycle = true;
-				}
-				$( ".each ul li a" ).click(function() {
-					$(this).parents("li").toggleClass('selected');
-					return false
-				});
-				return false
-			});
-
-    		$('.cycle-places').cycle({
-    			fx: 'scrollLeft',
-    			pager: '.pager3',
-    			next:   '.left', 
-    		   	prev:   '.right',
-    		   	timeout: null
-    		});
-    		$(".places").tabs ();
-    		$('a.lbc').fancybox({
-				padding: 0,
-				overlayColor: '#FFF',
-				overlayOpacity: '0.7',
-				showCloseButton: 'false'
-			});
-			
-			$('#search_all .map .cont > a').click(function(){
-				$('#search_all .map .cont > a').removeClass('active');
-				$(this).addClass('active');
-				return false;
-			});
-		});
-    </script>
-    <style type="text/css">
-	#search_all .map .cont > a {
-    background: url("../images2/search-pin-off.png") no-repeat scroll center top transparent;
-    color: #FFFFFF;
-    display: block;
-    height: 14px;
-    padding-top: 30px;
-    position: absolute;
-    width: 44px;
-}#search_all .map .cont > a span {
-    -moz-border-radius: 20px 20px 20px 20px;
-    background-color: #707070;
-    display: block;
-    font: bold 11px/22px Helvetica;
-    height: 22px;
-    padding: 0 10px;
-    position: absolute;
-    text-align: center;
-    text-shadow: 0 1px 0 #4B4B4B;
-    white-space: nowrap;
-}
-	#search_all .map .listings { display:none; 
-    left: -32px;
-    position: absolute;
-    top: -30px;}
-	#search_all .map .soon {
-    display: none;
-    left: -32px;
-    position: absolute;
-    top: -30px;
-}
-	#search_all .map .active .listings { display:block;}
-	#search_all .map .active .soon { display:block;}
-	</style>
+	
 </head>
 <body>
 <div class="w1">
@@ -933,5 +846,93 @@
 			</div><!--BOT-->
 		</div><!--SEND_TO_FRIEND-->
 </div><!--HIDDEN-->
+<script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript" src="/js2/common.js"></script>
+    <script type="text/javascript" src="/js2/index.city.js"></script>
+    <script type="text/javascript">
+		$(document).ready(function() {
+			var $cycle = false;
+			$( ".more" ).click(function() {
+				$( ".advance" ).toggleClass('show');
+				if(!$cycle){
+					$('.cycle').cycle({
+						fx: 'scrollLeft',
+						pager: '.pager',
+						next:   '.prev', 
+						prev:   '.next',
+						timeout: null
+					});
+					$('.cycle2').cycle({
+						fx: 'scrollLeft',
+						pager: '.pager2',
+						next:   '.prev2', 
+						prev:   '.next2',
+						timeout: null
+					});
+					$cycle = true;
+				}
+				$( ".each ul li a" ).click(function() {
+					$(this).parents("li").toggleClass('selected');
+					return false
+				});
+				return false
+			});
+
+    		$('.cycle-places').cycle({
+    			fx: 'scrollLeft',
+    			pager: '.pager3',
+    			next:   '.left', 
+    		   	prev:   '.right',
+    		   	timeout: null
+    		});
+    		$(".places").tabs ();
+    		$('a.lbc').fancybox({
+				padding: 0,
+				overlayColor: '#FFF',
+				overlayOpacity: '0.7',
+				showCloseButton: 'false'
+			});
+			
+			$('#search_all .map .cont > a').click(function(){
+				$('#search_all .map .cont > a').removeClass('active');
+				$(this).addClass('active');
+				return false;
+			});
+		});
+    </script>
+    <style type="text/css">
+	#search_all .map .cont > a {
+    background: url("../images2/search-pin-off.png") no-repeat scroll center top transparent;
+    color: #FFFFFF;
+    display: block;
+    height: 14px;
+    padding-top: 30px;
+    position: absolute;
+    width: 44px;
+}#search_all .map .cont > a span {
+    -moz-border-radius: 20px 20px 20px 20px;
+    background-color: #707070;
+    display: block;
+    font: bold 11px/22px Helvetica;
+    height: 22px;
+    padding: 0 10px;
+    position: absolute;
+    text-align: center;
+    text-shadow: 0 1px 0 #4B4B4B;
+    white-space: nowrap;
+}
+	#search_all .map .listings { display:none; 
+    left: -32px;
+    position: absolute;
+    top: -30px;}
+	#search_all .map .soon {
+    display: none;
+    left: -32px;
+    position: absolute;
+    top: -30px;
+}
+	#search_all .map .active .listings { display:block;}
+	#search_all .map .active .soon { display:block;}
+	</style>
 </body>
 </html>

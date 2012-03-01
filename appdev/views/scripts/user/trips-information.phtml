@@ -10,24 +10,6 @@
     <link type="text/css" rel="stylesheet" href="/css2/calendar/jquery-ui-1.8.16.custom.css">
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('textarea').elastic();
-            $('form select').jqTransSelect();
-			$('input.calendar:eq(1)').datepicker({
-				minDate:new Date(),
-				dateFormat:'M d yy',
-				onSelect:function(date){
-					$('input.calendar:eq(0)').datepicker('option','minDate',date);
-				}
-			});
-			$('input.calendar:eq(0)').datepicker({
-				minDate:new Date($('input.calendar:eq(1)').val()),
-				dateFormat:'M d yy',
-			});
-        });
-    </script>
 </head>
 <body>
 <div class="w1">
@@ -127,5 +109,23 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('textarea').elastic();
+        $('form select').jqTransSelect();
+		$('input.calendar:eq(1)').datepicker({
+			minDate:new Date(),
+			dateFormat:'M d yy',
+			onSelect:function(date){
+				$('input.calendar:eq(0)').datepicker('option','minDate',date);
+			}
+		});
+		$('input.calendar:eq(0)').datepicker({
+			minDate:new Date($('input.calendar:eq(1)').val()),
+			dateFormat:'M d yy',
+		});
+    });
+</script>
 </body>
 </html>

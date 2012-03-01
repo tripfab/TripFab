@@ -38,7 +38,7 @@
 	background: url(../images2/g-32.png) repeat-x scroll 0 0 transparent;
 	height: 51px;
 	position: relative;
-	z-index: 100000;
+	z-index: 1000;
 }
 
 #header .logo {
@@ -134,7 +134,6 @@
 }
 
 #header .header-login {
-	background: url(../images2/sep-4.png) no-repeat 0 0;
 	padding-left: 16px;
 	float: right;
 	height: 51px;
@@ -290,6 +289,8 @@
 	line-height: 51px;
 	margin-right: 14px;
 	position: relative;
+	background: url(../images2/sep-4.png) no-repeat top right;
+	padding-right: 10px;
 }
 
 #header .links a img {
@@ -485,50 +486,59 @@
 
 /*- Footer Styles -----------------------------------------------------------*/
 
-.footer {
-	background: url(../images2/g-3.png) repeat-x #FFFFFF;
-	border-top: 1px solid #E8E8E8;
-	height: 54px;
-	padding: 28px 0;
-	color: #555555;
+
+#footer {
+	height: 88px;
+	background:url(../images2/home-sep5.png) no-repeat center top #2a2a2a;
+	margin-top: 30px;
+	width:100%;
 	position:absolute;
 	bottom:0;
-	width:100%;
-	font-size: 11px;
 }
-
-.footer .wrapper {
-	overflow: hidden;
+#footer .wrap {
+	position: relative;
+	width: 960px;
+	margin: 0 auto;
 }
-
-.footer p {
+#footer .flag {
+	background: url(../images2/home-flag.png) no-repeat;
+	width: 108px;
+	height: 3px;
+	display: block;
+	position: absolute;
+	top: -3px;
+	left: 427px ;
+}
+#footer p {
+	color: #c2c2c2;
+	width: 390px;
 	float: left;
-	overflow: hidden;
-	line-height: 30px;
+	background: url(../images2/home-logo2.png) no-repeat left top;
+	padding-left: 50px;
+	margin-top: 30px;
+	height: 50px;
+	font: normal 11px Helvetica;
 }
-
-.footer p img {
-	margin-right: 8px;
-	float: left;
+#footer p strong {
+	display: block;
+	font-size: 12px;
+	margin-bottom: 5px;
 }
-
-.footer ul {
+#footer ul {
 	float: right;
-	overflow: hidden;
-	list-style: none;
+	margin: 36px 0 0 0;
 }
-
-.footer ul li {
+#footer ul li {
 	float: left;
-	margin-left: 14px;
+	list-style: none;
+	margin-left: 15px;
 }
-
-.footer ul li a {
-	color: #555555;
+#footer ul li a {
+	color: #c2c2c2;
+	font: bold 11px Helvetica;
 }
-
-.footer ul li a:hover {
-	color: #959595;
+#footer ul li a:hover {
+	color: #ffffff;
 }
 
 /*- End of Footer Styles -----------------------------------------------------------*/
@@ -545,7 +555,8 @@
 	border-radius: 4px; 
 	-webkit-box-shadow: 0px 0px 2px 0px #EAEAEA;
 	-moz-box-shadow: 0px 0px 2px 0px #EAEAEA;
-	box-shadow: 0px 0px 2px 0px #EAEAEA; 
+	box-shadow: 0px 0px 2px 0px #EAEAEA;
+	behavior: url(/PIE.htc);
 }
 
 .intro {
@@ -1403,6 +1414,7 @@ ul.days li {
 	-webkit-box-shadow: 0px 0px 1px 1px #d7d7d7;
 	-moz-box-shadow: 0px 0px 1px 1px #d7d7d7;
 	box-shadow: 0px 0px 1px 1px #d7d7d7; 
+	behavior: url(/PIE.htc);
 }
 
 .filters .top {
@@ -1418,8 +1430,9 @@ ul.days li {
 	-moz-border-radius-topright: 4px;
 	-moz-border-radius-bottomright: 0px;
 	-moz-border-radius-bottomleft: 0px;
-	-webkit-border-radius: px 4px 0px 0px;
-	border-radius: px 4px 0px 0px; 
+	-webkit-border-radius: 0px 4px 0px 0px;
+	border-radius: 4px 4px 0px 0px;
+	behavior: url(/PIE.htc);
 }
 
 .filters .top span {
@@ -1474,6 +1487,7 @@ ul.days li {
 	-moz-border-radius-bottomleft: 4px;
 	-webkit-border-radius: 0px 0px 4px 4px;
 	border-radius: 0px 0px 4px 4px;
+	behavior: url(/PIE.htc);
 }
 
 .filters .bottom .slider-wrapper {
@@ -1535,6 +1549,7 @@ ul.days li {
 .wrapper.results .content {
 	float: left;
 	width: 771px;
+	
 }
 
 .search-item {
@@ -1629,6 +1644,7 @@ border-top: 1px solid #e3e3e3;
 	position: relative;
 	width: 115px;
 	margin-top: 26px;
+	behavior: url(/PIE.htc);
 }
 
 .search-item .meta > span {
@@ -1637,6 +1653,7 @@ border-top: 1px solid #e3e3e3;
 	font-weight: bold;
 	display: block;
 	margin-top: 15px;
+	text-shadow: 0px 1px 0px #ffffff;
 }
 
 .search-item .meta em {
@@ -1671,7 +1688,6 @@ border-top: 1px solid #e3e3e3;
 	-webkit-transform: rotate(390deg);
 	-o-transform: rotate(390deg);
 	transform: rotate(390deg);
-	writing-mode: tb-rl;
 	display: block;
 	margin-left: 37px;
 	margin-top: 19px;
@@ -1959,8 +1975,9 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
+	behavior: url(/PIE.htc);
 }
-.result .img-wrapper a {
+.result .img-wrapper a.img {
 	position: relative;
 	width: 225px;
 	height: 167px;
@@ -2160,6 +2177,7 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
+	behavior: url(/PIE.htc);
 }
 
 .listing-gallery .listing-ttl {
@@ -2172,7 +2190,8 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 	-moz-border-radius-bottomright: 0px;
 	-moz-border-radius-bottomleft: 0px;
 	-webkit-border-radius: 4px 4px 0px 0px;
-	border-radius: 4px 4px 0px 0px; 
+	border-radius: 4px 4px 0px 0px;
+	behavior: url(/PIE.htc);
 }
 
 .listing-gallery .listing-ttl .dd-2 {
@@ -2324,6 +2343,12 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 .listing-gallery .img-wrapper {
 	position: relative;
 	height: 368px;
+	display: none;
+}
+.listing-gallery .img-wrapper-w {
+	position: relative;
+	height: 368px;
+	background-color: #000;
 }
 
 .listing-gallery .img-wrapper.active {
@@ -2672,18 +2697,24 @@ ul.reviews li > div div.meta em.red {
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
+	behavior: url(/PIE.htc);
 }
 
 .right-sidebar .widget.book .ttl {
 	background-color: #E4E4E4;
 	border: 1px solid #FFFFFF;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 2px;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright: 4px;
+	-moz-border-radius-bottomright: 0px;
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-radius: 4px 4px 0px 0px;
+	border-radius: 4px 4px 0px 0px; 
 	height: 52px;
 	margin: 0;
 	overflow: hidden;
 	padding: 12px 25px;
 	border-bottom: none;
+	behavior: url(/PIE.htc);
 }
 
 .right-sidebar .widget.book .ttl > span {
@@ -2699,6 +2730,7 @@ ul.reviews li > div div.meta em.red {
 	margin-left: -25px;
 	text-align: center;
 	margin-top: 12px;
+	behavior: url(/PIE.htc);
 }
 
 .right-sidebar .widget.book .ttl > strong {
@@ -2994,8 +3026,13 @@ ul.reviews li > div div.meta em.red {
 	background-color: #303030;
 	list-style: none;
 	overflow: hidden;
-	border-bottom-right-radius: 2px;
-	border-bottom-left-radius: 2px;
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-topright: 0px;
+	-moz-border-radius-bottomright: 4px;
+	-moz-border-radius-bottomleft: 4px;
+	-webkit-border-radius: 0px 0px 4px 4px;
+	border-radius: 0px 0px 4px 4px;
+	behavior: url(/PIE.htc);
 	padding: 3px;
 }
 
@@ -3291,7 +3328,8 @@ ul.reviews li > div div.meta em.red {
 	-moz-border-radius-bottomright: 0px;
 	-moz-border-radius-bottomleft: 0px;
 	-webkit-border-radius: 4px 4px 0px 0px;
-	border-radius: 4px 4px 0px 0px; 
+	border-radius: 4px 4px 0px 0px;
+	behavior: url(/PIE.htc);
 }
 .header_checkout h2 {
 	font: bold 16px/20px Helvetica;
@@ -3346,6 +3384,9 @@ ul.reviews li > div div.meta em.red {
 	-moz-box-shadow: 0px 0px 2px 0px #e9e9e9;
 	box-shadow: 0px 0px 2px 0px #e9e9e9;
 	overflow: hidden;
+	behavior: url(/PIE.htc);
+	position: relative;
+	z-index: 0;
 }
 
 .checkout-item {
@@ -3699,7 +3740,8 @@ ul.reviews li > div div.meta em.red {
 	width: 290px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
-	border-radius: 4px; 
+	border-radius: 4px 4px 4px 4px;
+	behavior: url(/PIE.htc);
 }
 
 .checkout-wrapper .right .widget {
@@ -3711,7 +3753,8 @@ ul.reviews li > div div.meta em.red {
 	-moz-border-radius-bottomright: 0px;
 	-moz-border-radius-bottomleft: 0px;
 	-webkit-border-radius: 4px 4px 0px 0px;
-	border-radius: 4px 4px 0px 0px; 
+	border-radius: 4px 4px 0px 0px;
+	behavior: url(/PIE.htc);
 }
 
 .checkout-wrapper .right .widget .ttl {
@@ -3791,6 +3834,7 @@ ul.reviews li > div div.meta em.red {
 	color: #ffffff;
 	font-weight: bold;
 	overflow: hidden;
+	behavior: url(/PIE.htc);
 }
 .widget.summary .total .btn-1{
 	float: left;
@@ -3836,7 +3880,8 @@ ul.reviews li > div div.meta em.red {
     -moz-border-radius-bottomright: 4px;
     -moz-border-radius-bottomleft: 4px;
     -webkit-border-radius: 0px 0px 4px 4px;
-    border-radius: 0px 0px 4px 4px; 
+    border-radius: 0px 0px 4px 4px;
+    behavior: url(/PIE.htc);
 }
 
 .checkout-wrapper .bottom span {
@@ -4647,7 +4692,13 @@ ul.reviews li > div div.meta em.red {
 	padding:23px 20px 16px;
 	overflow: hidden;
 }
-
+.lb-dates .occ .btn-4 {
+	float: right;
+	height: 32px;
+	line-height: 32px;
+	width: 85px;
+	text-align: center;
+}
 .occ + .occ {
 	background: url(../images2/g-3.png) repeat-x #FFFFFF;
 	border-top: 1px solid #E8E8E8;
@@ -6113,7 +6164,9 @@ h2.title .back:hover,
 	margin-top: 11px;
 	position: relative;
 }
-
+.user-messages.no-over {
+	overflow: visible;
+} 
 .main-menu {
 	background-color: #cdcdcd;
 	border: 1px solid #b9b9b9;
@@ -6847,6 +6900,7 @@ h2.title .back:hover,
 	line-height: 45px;
 	padding: 0 21px;
 	text-align: center;
+	background-color: #FFF;
 }
 
 .trip-details {
@@ -7064,6 +7118,7 @@ h2.title .back:hover,
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
+	behavior: url(/PIE.htc);
 }
 
 
@@ -7183,6 +7238,7 @@ h2.title .back:hover,
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
+    behavior: url(/PIE.htc);
 }
 
 .activities-tabs .tab {
@@ -7222,6 +7278,7 @@ h2.title .back:hover,
     padding: 0 5px;
     text-align: center;
     width: 81px;
+    background: none !important;
 }
 
 .activities-tabs .tab ul li span {
@@ -7233,6 +7290,7 @@ h2.title .back:hover,
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px; 
+    behavior: url(/PIE.htc);
 }
 
 .activities-tabs .tab ul li img.corner {
@@ -7242,7 +7300,10 @@ h2.title .back:hover,
 	right: 11px;
 	top: 0;
 }
-
+.activities-tabs .tab ul li h2 {
+	height: 25px;
+	overflow: hidden;
+}
 .activities-tabs .tab .jcarousel-container .jcarousel-prev:hover {
 	background-position: 0 -94px;
 }
@@ -7272,6 +7333,7 @@ h2.title .back:hover,
 }
 
 .itinerary-items {
+	background-color: #FFF;
 	overflow: hidden;
 	padding: 0 21px 17px;
 }
@@ -7285,7 +7347,9 @@ h2.title .back:hover,
 	padding: 0 2px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
-	border-radius: 4px; 
+	border-radius: 4px;
+	padding-bottom: 10px;
+	behavior: url(/PIE.htc);
 }
 
 .itinerary-items .item.last {
@@ -7375,6 +7439,9 @@ h2.title .back:hover,
 	padding: 0 21px;
 	padding-top: 26px;
 	overflow: hidden;
+	position: relative;
+	z-index: 0;
+	
 }
 
 .itinerary-wrapper .bottom span {
@@ -7613,7 +7680,13 @@ h2.title .back:hover,
 .w3_itinerary {
 	background-color: #FFFFFF;
     border-bottom: 1px solid #E0E0E0;
-    height: 51px;	
+    height: 51px;
+    position: relative;
+    z-index: 0;
+}
+.w3_itinerary .wrapper {
+	position: relative;
+	z-index: 0;
 }
 .w3_itinerary h2 {
 	color: #303030;
@@ -9766,7 +9839,7 @@ h2.title .back:hover,
     position: absolute;
     right: 17px;
     top: 51px;
-    z-index: 10000;
+    z-index: 100000;
 }
 .reservations .control span.arrow {
     display: block;
@@ -9786,6 +9859,8 @@ h2.title .back:hover,
 	background-color: #FFF;
 	list-style: none;
 	padding: 5px 0;
+	behavior: url(/PIE.htc);
+	z-index: 100000;
 }
 .reservations .control ul li {
 	height: 23px;
@@ -9814,6 +9889,8 @@ h2.title .back:hover,
 	font: bold 11px/26px Helvetica;
 	height: 26px;
 	color: #303030;
+	z-index: 0;
+	position: relative;
 }
 .reservations .btn-10.edit {
 	padding: 0;
@@ -9839,6 +9916,8 @@ h2.title .back:hover,
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
+	behavior: url(/PIE.htc);
+	z-index: 0;
 }
 
 .reservation.in {
@@ -11291,7 +11370,7 @@ h2.title .back:hover,
 	position: fixed;
 	text-align: center;
 	width: 100%;
-	z-index: 100;
+	z-index: 10000000;
 	color: #FFFFFF;
 	font-size: 16px;
 	font-weight: bold;
@@ -11450,6 +11529,7 @@ h2.title .back:hover,
 	border-radius: 0px 4px 4px 4px; 
 	position: relative;
 	margin: 55px 0 20px;
+	behavior: url(PIE.htc);
 }
 .trip-itinerary  ul.menu {
 	overflow: hidden;
@@ -11483,9 +11563,16 @@ h2.title .back:hover,
 	margin: 15px;
 	position: relative;
 	overflow: hidden;
+	height: 476px;
+	width: 930px;
 }
 .trip-itinerary .overview .image img{
 	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 476px;
+	width: 930px;
 }
 .trip-itinerary .overview .image .info {
 	position: absolute;
@@ -11577,7 +11664,7 @@ h2.title .back:hover,
 }
 .trip-itinerary .hight-lights {
 	overflow: hidden;
-	padding: 20px 30px;
+	padding: 20px 0  20px 30px;
 	color: #303030;
 	font-size: 13px;
 	line-height: 20px;
@@ -11590,6 +11677,7 @@ h2.title .back:hover,
 	border-radius: 4px 4px 0px 0px; 
 	border: 1px solid #E7E7E7;
 	border-bottom: none;
+	behavior: (/PIE.htc);
 }
 .trip-itinerary .tabs-wrapper .
 .trip-itinerary .hight-lights h4 {
@@ -11775,6 +11863,7 @@ h2.title .back:hover,
 	-webkit-border-radius: 4px 4px 0px 0px;
 	border-radius: 4px 4px 0px 0px; 
 	border-bottom: none;
+	behavior: url(/PIE.htc)
 }
 
 .trip-itinerary .box.tabs-bottom ul {
@@ -11824,7 +11913,13 @@ h2.title .back:hover,
 }
 
 .trip-itinerary .box.tabs-bottom ul li:first-child a {
-	border-radius: 0 4px 0 0;
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-topright: 4px;
+	-moz-border-radius-bottomright: 0px;
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-radius: 0px 4px 0px 0px;
+	border-radius: 0px 4px 0px 0px; 
+
 }
 
 .trip-itinerary .box.tabs-bottom ul li a img {
@@ -11955,6 +12050,7 @@ h2.title .back:hover,
 	-moz-border-radius-bottomleft: 4px;
 	-webkit-border-radius: 0px 0px 4px 4px;
 	border-radius: 0px 0px 4px 4px;
+	behavior: url(/PIE.htc);
 }
 .trip-itinerary .result .btn-1 {
 	float: right;
@@ -15723,6 +15819,7 @@ h2.title .back:hover,
 	height: 172px;
 	margin-bottom: 20px;
 	padding-bottom: 20px;
+	behavior: url(/PIE.htc);
 }
 #all_trips .single .image {
 	background:url(../images2/trips-default.gif) no-repeat bottom center ;
@@ -16231,6 +16328,7 @@ h2.title .back:hover,
 	border-radius: 4px;
 	background: url(../images2/g_64.png) repeat-y #FFF;
 	position: relative;
+	behavior: url(/PIE.htc);
 }
 #search_result .left-sidebar {
 	margin-right: 0 !important;
@@ -16261,7 +16359,7 @@ h2.title .back:hover,
 	border-radius: 4px 0px 0px 0px;
 	padding-bottom: 5px;
 	margin-bottom: 10px;
-	behavior: url(PIE.htc);
+	behavior: url(/PIE.htc);
 }
 #search_result ul.cat-menu li {
 	border-top: 1px solid #303030;
@@ -16511,6 +16609,7 @@ h2.title .back:hover,
 	height: 30px;
 	background: url(../images2/btn-add.png) no-repeat top left;
 	text-indent: -99999px;
+	z-index: 1000;
 }
 #search_result .result .img-wrapper .been:hover {
 	background-position: bottom left;
@@ -16728,6 +16827,7 @@ h2.title .back:hover,
 	border-radius: 4px;
 	margin: 23px auto 18px;
 	position: relative;
+	behavior: url(/PIE.htc);
 }
 .checkout_headerB h2{
 	font: bold 16px/20px Helvetica;
@@ -16781,6 +16881,7 @@ h2.title .back:hover,
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 	float: left;
+	behavior: url(/PIE.htc);
 }
 #custom_checkout .left_block h3 {
 	font: bold 13px/50px Helvetica;
@@ -17007,6 +17108,7 @@ h2.title .back:hover,
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 	background-color: #FFF;
+	behavior: url(/PIE.htc);
 }
 #custom_checkout .right_block h5 {
 	font: bold 13px/50px Helvetica;
@@ -17021,7 +17123,7 @@ h2.title .back:hover,
 #custom_checkout .right_block ul li {
 	list-style: none;
 	height: 31px;
-	background: url('../images/bg.jpg') no-repeat left top;
+	background: url('../images2/bg.jpg') no-repeat left top;
 	position: relative;
 }
 #custom_checkout .right_block ul li:hover {
@@ -17050,6 +17152,8 @@ h2.title .back:hover,
 	background-color: #303030;
 	overflow:hidden;
 	padding: 10px 18px;
+	position: relative;
+	z-index: 0;
 }
 #custom_checkout .right_block .btn-1 {
 	float: left;
@@ -17875,6 +17979,8 @@ h2.title .back:hover,
 	height:52px;
 	margin:0 auto 30px;
 	padding-top:10px;
+	position: relative;
+	z-index: 0;
 }
 #errorpage .bottom .search input[type="text"] {
 	margin-left:55px;

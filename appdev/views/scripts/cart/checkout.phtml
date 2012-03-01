@@ -9,18 +9,7 @@
     <link type="text/css" rel="stylesheet" href="/css2/cart/checkout.css" />
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
-    <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript" src="/js2/cardcheck.min.js"></script>
-    <script type="text/javascript" src="/js2/cart/checkout.js"></script>
-    <script type="text/javascript">
-    	$(document).ready(function() {
-    		$('a.helptip').click(function() {
-    			$('.tip').toggleClass('hidden');
-    			return false
-    		});
-    	});
-   	</script>
+    
 </head>
 <body>
 <div class="w1">
@@ -212,6 +201,18 @@
         </div><!-- closes main -->
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
-</div><!-- closes w1 -->	
+</div><!-- closes w1 -->
+<script type="text/javascript" src="https://js.stripe.com/v1/"></script>
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript" src="/js2/cardcheck.min.js"></script>
+<script type="text/javascript" src="/js2/cart/checkout.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('a.helptip').click(function() {
+			$('.tip').toggleClass('hidden');
+			return false
+		});
+	});
+	</script>
 </body>
 </html>
