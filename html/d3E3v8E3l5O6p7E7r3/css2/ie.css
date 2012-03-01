@@ -191,11 +191,21 @@ padding: 0 5px;
 	z-index: 0;
 }
 
+.user-messages .lstng .right .preferences ul {
+	z-index: 1000;
+}
+.lstng .right .state {
+	z-index: 10;
+}
 
 
-
-
-
+.user-messages .lstng .right .preferences a span {
+	background:url("../images2/ico-121.png") no-repeat;
+	width: 33px;
+	height: 17px;
+	display: block;
+	margin: 7px 0 0 0px;
+}
 
 
 

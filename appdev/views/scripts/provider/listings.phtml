@@ -44,7 +44,7 @@
                             <?php endif ?>
 							<li class="edit"><a href="/provider/listings/edit/<?= $listing->id ?>" class="btn-10"><span>Edit Listing</span></a></li>
 							<li class="preferences">
-								<a href="" class="btn-10"><span><img src="/images2/cleardot.gif" /></span></a>
+								<a href="javascript:void(0);" class="btn-10"><span><img src="/images2/cleardot.gif" /></span></a>
 								<ul>
 									<li><a target="_blank" href="/provider/listings/preview/<?= $listing->id ?>">View Preview</a></li>
 									<li><a href="#listing_delete_<?= $listing->id ?>" class="lb">Delete Listing</a></li>
@@ -59,7 +59,7 @@
 			<?php else: ?>
             <div class="listings-main">
             	<div class="sub-ttl">
-            		<a href="#new_listing" class="lb btn-1">Create A New Listing</a>
+            		<a href=".lbox_listing" class="lb btn-1">Create A New Listing</a>
             		<?= $this->title ?>
             	</div><!-- closes sub-ttl -->
             </div>
@@ -92,7 +92,7 @@
     </div><!--LISTING-DELETE-->
     <?php endforeach ?>
     <div id="new_listing">
-    	<div class="lightbox_listing">
+    	<!--<div class="lightbox_listing">
             <h1>What kind of listing do you want to create?</h1>
             <ul class="listing">
                 <li class="select">
@@ -155,8 +155,77 @@
                         <input type="hidden" name="type" value="4" />
                     </form>
                 </li>
-            </ul><!--LISTING-->
+            </ul><!--LISTING--*>
+        </div><!--LIGHTBOX_LISTING--*>-->
+        <div class="lbox_listing">
+        	<h1>What kind of listing do you want to create?</h1>
+        	<ul class="listing">
+        		<li class="select">
+        			<form method="post" action="/en-US/provider/listings/new">
+	        			<a href="" onclick="$(this).parents('form').submit(); return false;">
+	        				<span><img src="/images2/ico-105.png" width="35" height="87" alt="" /></span>
+	        				<h2>Activity</h2>
+	        				<p>Fun activities that can done: sight seeing, boat tours, guided visits, etc.</p>
+	        			</a>
+	        			<input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+	        			<input type="hidden" name="vendortoken" value="<?= $this->vendor->token ?>" />
+	        			<input type="hidden" name="type" value="6" />
+	        		</form>
+        		</li>
+        		<li>
+        			<form method="post" action="/en-US/provider/listings/new">
+	        			<a href="" onclick="$(this).parents('form').submit(); return false;">
+	        				<span><img src="/images2/ico-106.png" width="35" height="87" alt="" /></span>
+	        				<h2>Hotel</h2>
+	        				<p>Types of rooms and accomodations available, amenities included, etc.</p>
+	        				<input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+	        				<input type="hidden" name="vendortoken" value="<?= $this->vendor->token ?>" />
+	        				<input type="hidden" name="type" value="5" />
+	        			</a>
+        			</form>
+        		</li>
+        		<li>
+        			<form method="post" action="/en-US/provider/listings/new">
+	        			<a href="" onclick="$(this).parents('form').submit(); return false;">
+	        				<span><img src="/images2/ico-107.png" width="35" height="87" alt="" /></span>
+	        				<h2>Restaurant</h2>
+	        				<p>Types of cuisine, specials and dining options available.</p>
+	        			</a>
+	        			<input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+	        			<input type="hidden" name="vendortoken" value="<?= $this->vendor->token ?>" />
+	        			<input type="hidden" name="type" value="2" />
+	        		</form>
+        		</li>
+        		<li>
+        			<form method="post" action="/en-US/provider/listings/new">
+	        			<a href="" onclick="$(this).parents('form').submit(); return false;">
+	        				<span><img src="/images2/ico-108.png" width="35" height="87" alt="" /></span>
+	        				<h2>Entertainment</h2>
+	        				<p>Shows, concerts, events and activities that visitors can experience.</p>
+	        			</a>
+	        			<input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+	        			<input type="hidden" name="vendortoken" value="<?= $this->vendor->token ?>" />
+	        			<input type="hidden" name="type" value="7" />
+        			</form>
+        		</li>
+        		<li>
+        			<form method="post" action="/en-US/provider/listings/new">
+	        			<a href="" onclick="$(this).parents('form').submit(); return false;">
+	        				<span><img src="/images2/ico-109.png" width="35" height="87" alt="" /></span>
+	        				<h2>Tourist Sight</h2>
+	        				<p>Impressive locations, sceneries and places that visitors will enjoy.</p>
+	        			</a>
+	        			<input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+	        			<input type="hidden" name="vendortoken" value="<?= $this->vendor->token ?>" />
+	        			<input type="hidden" name="type" value="4" />
+	        		</form>
+        		</li>
+        	</ul><!--LISTING-->
+        	<div class="create">
+        		<a class="btn-1" href="">Create Selected</a>
+        	</div><!--CREATE-->
         </div><!--LIGHTBOX_LISTING-->
+
     </div>
 </div>
 <script type="text/javascript" src="/js2/jquery.js"></script>
@@ -185,7 +254,7 @@
 					if(response.success == 1){
 						$msg = $('<div></div>');
 						$msg.addClass(response.status);
-						$msg.append('<span><a href="/provider/listings/activate/'+response.id+'">'+response.text+'</a></span>');
+						$msg.append('<div><a href="/provider/listings/activate/'+response.id+'"><span>'+response.text+'</span></a></div>');
 						$('span', $msg).addClass(response.missing);
 						$('.listing'+response.id+' .right > ul').before($msg);
 					}
