@@ -6,65 +6,7 @@
     <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-	<script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('input:not(.noclean)').ToggleInputValue();
-            $('form input').focus(function() {
-            	$(this).prev('label').addClass('hide');
-            });
-            $('form input').focusout(function() {
-            	if (!$(this).val()) {
-            		$(this).prev('label').removeClass('hide');
-            	}
-            });
-			
-			$('.sign-box form').validate({
-				rules: {
-					name:"required",
-					email:"required email",
-					password:"required",
-					password2:{
-						required:true,
-						equalTo:'#password'},
-					phone:"required",
-					website:"required url",
-					country_id:'required',
-				},
-				
-			}); 
-			
-			$('input[name=email]').blur(function(){$(this).val($.trim($(this).val()));});
-			$('input[name=website]').blur(function(){$(this).val($.trim($(this).val()));});
-        });
-		
-		function isEmpty(element){
-			return (element.value == element.title) ? false : (element.value == "") ? false : true;
-		}
-    </script>
-    <style type="text/css">
-	.error { border:1px solid #F00; padding:5px; margin-bottom:10px; color:#F00; font-style:italic;}
-	.hidden { display:none;}
-	label.error { 
-		right:0px !important;
-		bottom:0px !important;
-		line-height:14px !important;
-		font-size:12px !important;
-		top:auto !important;
-		left:auto !important;
-		height:auto !important;
-		padding:2px 4px !important;
-		margin-bottom:0px !important;
-		background:#F00 !important;
-		color:#fff !important;
-		font-weight:bold !important;
-		border:0 none !important;
-	    z-index: 100;}
-	.sign-box .content input.in-1 {
-		background-image:url(/images2/ico-200.png);}
-	.sign-box .content input.in-6 {
-		background-image:url(/images2/ico-201.png);}
-	</style>
+	
 </head>
 <body>
 <div class="w1">
@@ -167,6 +109,65 @@
         </div><!-- closes small-wrapper -->
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
-</div><!-- closes w1 -->	
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('input:not(.noclean)').ToggleInputValue();
+        $('form input').focus(function() {
+        	$(this).prev('label').addClass('hide');
+        });
+        $('form input').focusout(function() {
+        	if (!$(this).val()) {
+        		$(this).prev('label').removeClass('hide');
+        	}
+        });
+		
+		$('.sign-box form').validate({
+			rules: {
+				name:"required",
+				email:"required email",
+				password:"required",
+				password2:{
+					required:true,
+					equalTo:'#password'},
+				phone:"required",
+				website:"required url",
+				country_id:'required',
+			},
+			
+		}); 
+		
+		$('input[name=email]').blur(function(){$(this).val($.trim($(this).val()));});
+		$('input[name=website]').blur(function(){$(this).val($.trim($(this).val()));});
+    });
+	
+	function isEmpty(element){
+		return (element.value == element.title) ? false : (element.value == "") ? false : true;
+	}
+</script>
+<style type="text/css">
+.error { border:1px solid #F00; padding:5px; margin-bottom:10px; color:#F00; font-style:italic;}
+.hidden { display:none;}
+label.error { 
+	right:0px !important;
+	bottom:0px !important;
+	line-height:14px !important;
+	font-size:12px !important;
+	top:auto !important;
+	left:auto !important;
+	height:auto !important;
+	padding:2px 4px !important;
+	margin-bottom:0px !important;
+	background:#F00 !important;
+	color:#fff !important;
+	font-weight:bold !important;
+	border:0 none !important;
+    z-index: 100;}
+.sign-box .content input.in-1 {
+	background-image:url(/images2/ico-200.png);}
+.sign-box .content input.in-6 {
+	background-image:url(/images2/ico-201.png);}
+</style>	
 </body>
 </html>

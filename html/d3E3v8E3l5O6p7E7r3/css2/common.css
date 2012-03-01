@@ -1,5 +1,8 @@
 #citiesAutocompleteContainer {
-	height:0px;}
+	height:0px;
+	position: relative;
+	z-index: 10000000;
+	}
 #citiesAutocompleteContainer .ui-autocomplete { 
 	background:#fff; 
 	border:1px solid #D8D8D8; 

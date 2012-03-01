@@ -9,22 +9,7 @@
     <link rel="icon" type="image/png" href="/images3/favicon.png" />
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-		$('a.lbc').fancybox({
-			padding: 0,
-			overlayColor:'#FFF',
-			overlayOpacity:0.7
-		});
-		
-		$('a.delete_btn').click(function(){
-			$form = $(this).parents('form');
-			$form.submit();
-			return false;
-		});
-    });
-    </script>
+    
 </head>
 <body>
 <div class="w1 profile">
@@ -78,5 +63,21 @@
     </div><!--DELETE_CARD--> 
     <?php endforeach ?>
 </div><!--HIDDEN-->
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('a.lbc').fancybox({
+		padding: 0,
+		overlayColor:'#FFF',
+		overlayOpacity:0.7
+	});
+	
+	$('a.delete_btn').click(function(){
+		$form = $(this).parents('form');
+		$form.submit();
+		return false;
+	});
+});
+</script>
 </body>
 </html>

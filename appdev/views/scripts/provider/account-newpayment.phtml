@@ -8,16 +8,7 @@
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
     <link rel="icon" type="image/png" href="/images3/favicon.png" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-		$('a.lbc').fancybox({
-			padding: 0,
-			overlayColor:'#FFF',
-			overlayOpacity:0.7
-		});
-    });
-    </script>
+    
 </head>
 <body>
 <div class="w1 profile">
@@ -75,5 +66,15 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('a.lbc').fancybox({
+		padding: 0,
+		overlayColor:'#FFF',
+		overlayOpacity:0.7
+	});
+});
+</script>
 </body>
 </html>

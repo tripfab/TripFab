@@ -10,11 +10,9 @@
     <link type="text/css" rel="stylesheet" href="/css2/trips/country.css" />
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript" src="/js2/trips.country.js"></script>
-    <script type="text/javascript" src="/js2/trips/country.js"></script>
-    <style type="text/css">
-	</style>
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
+    
 </head>
 <body>
 <div class="w1">
@@ -64,5 +62,8 @@
 </div><!-- closes w1 -->	
 <input type="hidden" id="hddCountryId" name="hddCountryId" value="<?= $this->country->id ?>" />
 <div id="tripsAutocompleteContainerTop"></div>
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript" src="/js2/trips.country.js"></script>
+<script type="text/javascript" src="/js2/trips/country.js"></script>
 </body>
 </html>

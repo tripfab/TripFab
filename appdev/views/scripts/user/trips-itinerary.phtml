@@ -11,26 +11,7 @@
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
     <link type="text/css" rel="stylesheet" href="/css2/lightboxes.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript" src="/js2/user/trips.itinerary.js"></script>
-    <style type="text/css">
-	.jcarousel-clip.unhidden {
-		position:static !important;
-		overflow:visible !important;
-	}
-	.jcarousel-clip { min-height:100px;}
-	.ui-draggable-dragging {
-		z-index:10000;
-		padding:5px !important; }
-	.activities-tabs .tab ul li {
-		background:#303030;}
-	.itinerary-items .item.ui-state-default {
-		background:#e7e7e7;}
-	.itinerary-items .item.ui-state-hover {
-		background:#fbfbfb;}
-		.itinerary-items .item ul li img {
-			height:auto;}
-	</style>
+    
 </head>
 <body>
 <div class="w1">
@@ -46,7 +27,7 @@
         <a href="/user/trips">&larr; Back to My Future Trips</a>
     </div><!--title_itinerary-->
     <div class="w2">
-        <div class="wrapper user-messages user-trips">
+        <div class="wrapper user-messages user-trips no-over">
             <div class="itinerary-wrapper">
                 <div class="activities-tabs">
                     <ul>
@@ -177,5 +158,25 @@
         </form>
     </div>
 </div>
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript" src="/js2/user/trips.itinerary.js"></script>
+<style type="text/css">
+.jcarousel-clip.unhidden {
+	position:static !important;
+	overflow:visible !important;
+}
+.jcarousel-clip { min-height:100px;}
+.ui-draggable-dragging {
+	z-index:10000;
+	padding:5px !important; }
+.activities-tabs .tab ul li {
+	background:#303030;}
+.itinerary-items .item.ui-state-default {
+	background:#e7e7e7;}
+.itinerary-items .item.ui-state-hover {
+	background:#fbfbfb;}
+	.itinerary-items .item ul li img {
+		height:auto;}
+</style>
 </body>
 </html>

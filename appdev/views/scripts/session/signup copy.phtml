@@ -7,19 +7,7 @@
     <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('input:not(.noclean)').ToggleInputValue();
-        });
-    </script>
-    <style type="text/css">
-	.error { border:1px solid #F00; padding:5px; margin-bottom:10px; color:#F00; font-style:italic;}
-	.hidden { display:none;}
-	</style>
+    
 </head>
 <body>
 <div class="w1">
@@ -89,6 +77,19 @@
         </div><!-- closes small-wrapper -->
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
-</div><!-- closes w1 -->	
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+<script type="text/javascript" src="/js2/common.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('input:not(.noclean)').ToggleInputValue();
+    });
+</script>
+<style type="text/css">
+.error { border:1px solid #F00; padding:5px; margin-bottom:10px; color:#F00; font-style:italic;}
+.hidden { display:none;}
+</style>
 </body>
 </html>

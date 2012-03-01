@@ -23,6 +23,7 @@
         <?php endif ?>
         <?php endif ?>
     </div><!-- closes listing-ttl -->
+    <div class="img-wrapper-w">
     <?php if(count($this->pictures) > 0): ?>
     <?php foreach($this->pictures as $i => $pic): ?>
     <?php $class = ($i == 0) ? 'img-wrapper active' : 'img-wrapper'; ?>
@@ -37,6 +38,7 @@
     <p>The description goes here</p>
     </div>
     <?php endif ?>
+    </div>
     <ul>
         <?php if(count($this->pictures) > 0): ?>
         <?php for($i=0; $i<10;$i++): ?>

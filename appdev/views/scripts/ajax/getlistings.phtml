@@ -18,7 +18,7 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
 			<?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
 			<a href="#" class="been">Been there</a>
 			<?php endif ?>
-			<a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+			<a class="img" href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
 			<?= $this->thumbnail(array('width'=>'225', 'height'=>'167'), $list->image, '','225:167') ?>
 			<h4><?= $list->title ?></h4>
 			</a>

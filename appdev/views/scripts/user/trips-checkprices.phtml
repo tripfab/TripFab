@@ -10,25 +10,6 @@
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
     <link type="text/css" rel="stylesheet" href="/css2/calendar/jquery-ui-1.8.16.custom.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript" src="/js2/trips/checkprices.js"></script>
-    <script type="text/javascript">
-		$(document).ready(function() {
-			$('a.helptip').click(function() {
-				$('.tip').toggleClass('hidden');
-				return false
-			});
-    		$("#checkout_accordion").accordion({
-    			autoHeight: false,
-    			collapsible: true,
-				header:'.active'
-    		});
-		});
-    </script>
-    <style type="text/css">
-	#custom_checkout .details .item.last {
-		border-bottom:0px none;}
-	</style>
 </head>
 <body>
 <div class="w1">
@@ -312,5 +293,24 @@
     <?= $this->partial('partials/footer.phtml'); ?>
     <div id="citiesAutocompleteContainer"></div>
 </div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript" src="/js2/trips/checkprices.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('a.helptip').click(function() {
+			$('.tip').toggleClass('hidden');
+			return false
+		});
+		$("#checkout_accordion").accordion({
+			autoHeight: false,
+			collapsible: true,
+			header:'.active'
+		});
+	});
+</script>
+<style type="text/css">
+#custom_checkout .details .item.last {
+	border-bottom:0px none;}
+</style>
 </body>
 </html>

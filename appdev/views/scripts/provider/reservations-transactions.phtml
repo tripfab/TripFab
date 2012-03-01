@@ -7,22 +7,7 @@
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
     <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
-    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('textarea').elastic();				
-            $('input').ToggleInputValue();
-            $('form select').jqTransSelect();
-            $('#header .header-login a.user').click(function(){
-                $(this).next().toggleClass('show');
-                return false;
-            });
-        });
-    </script>
+
 </head>
 <body>
 <div class="w1">
@@ -181,5 +166,21 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/js2/jquery.input.value.js"></script>
+<script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
+<script type="text/javascript" src="/js2/jquery.elastic.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('textarea').elastic();				
+        $('input').ToggleInputValue();
+        $('form select').jqTransSelect();
+        $('#header .header-login a.user').click(function(){
+            $(this).next().toggleClass('show');
+            return false;
+        });
+    });
+</script>
 </body>
 </html>

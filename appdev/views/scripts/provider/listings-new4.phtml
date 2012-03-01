@@ -10,82 +10,7 @@
     <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-	<script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-			var i=1;
-			$('#newHour').click(function(){			
-				<?php if($this->listing->main_type == 5): ?>
-				var $item = $('<div class="item"><input tabindex="'+(i+1)+'" name="sch['+i+'][name]" value="Standard, Familiar...." type="text" /><h4><a href="" class="remove">Remove</a>Room Name</h4><span>Write a name for this room</span><div class="clear"></div></div>');
-				$('.item-wrppr .item:last').before($item);
-				$('input').ToggleInputValue();
-				i++;
-				<?php else: ?>
-				var $item = $('.prcng-item.hidden.ltt').html();
-				$item = $('<div class="prcng-item item">'+$item+'</div>');
-				$('input[name=name]', $item).attr('name','sch['+i+'][name]');
-				$('select[name=start_time]', $item).attr('name','sch['+i+'][start][time]');
-				$('select[name=start_hour]', $item).attr('name','sch['+i+'][start][hour]');
-				$('select[name=end_time]', $item).attr('name','sch['+i+'][end][time]');
-				$('select[name=end_hour]', $item).attr('name','sch['+i+'][end][hour]');
-				$('input[name=duration_lb]', $item).attr('name','sch['+i+'][duration_lb]');
-				$('select[name=duration]', $item).attr('name','sch['+i+'][duration]');
-				$('input[name=same]', $item).attr('name','sch['+i+'][same]');
-				$('input.sameday', $item).attr('id','sameday'+i);
-				$('label[for=sameday1]', $item).attr('for','sameday'+i);
-				$('.left-ttl span', $item).text(i+1);
-				$('.prcng-item.hidden:first').before($item);
-				i++;
-				<?php endif ?>
-				return false;
-			});
-			
-			$('a.remove').live('click', function(){
-				$item = $(this).parents('.item');
-				$item.fadeOut('fast', function(){
-					$item.remove();
-				});
-				i--;
-				return false;
-			});
-			
-			$('input.sameday').live('change', function(){
-				$li = $(this).parents('li');
-				if($(this).attr('checked') == 'checked') {
-					$('select, input:not(.sameday)', $li).attr('disabled', 'disabled');
-				} else {
-					$('select, input:not(.sameday)', $li).removeAttr('disabled');
-				}
-			});
-        });
-    </script>
-    <style type="text/css">
-	.hidden { display:none; }
-	.sign-box.vendor.first .item-wrppr {
-		background: none repeat scroll 0 0 transparent;
-		border: 0 none;
-	}
-	.sign-box.vendor.first .item-wrppr .item input[type="text"]  { 
-		width:350px;
-		vertical-align:middle;}
-	.sign-box.vendor.first .item-wrppr .item select {
-		border: 1px solid #CCCCCC;
-		float: right;
-		margin-left: 5px;
-		margin-top: 3px;
-		padding: 5px;}
-	.errors {
-		border:1px solid #F00;
-		padding:5px;
-		margin:30px;}
-		.errors p {
-			text-align:left;
-			line-height:18px;
-			font-style:italic;
-			font-size:12px;
-			font-weight:normal;
-			color:#F00 !important;}
-	</style>
+	
 </head>
 <body>
 <div class="w1">
@@ -764,6 +689,82 @@
         </div><!-- closes wrapper -->
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
-</div><!-- closes w1 -->	
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+		var i=1;
+		$('#newHour').click(function(){			
+			<?php if($this->listing->main_type == 5): ?>
+			var $item = $('<div class="item"><input tabindex="'+(i+1)+'" name="sch['+i+'][name]" value="Standard, Familiar...." type="text" /><h4><a href="" class="remove">Remove</a>Room Name</h4><span>Write a name for this room</span><div class="clear"></div></div>');
+			$('.item-wrppr .item:last').before($item);
+			$('input').ToggleInputValue();
+			i++;
+			<?php else: ?>
+			var $item = $('.prcng-item.hidden.ltt').html();
+			$item = $('<div class="prcng-item item">'+$item+'</div>');
+			$('input[name=name]', $item).attr('name','sch['+i+'][name]');
+			$('select[name=start_time]', $item).attr('name','sch['+i+'][start][time]');
+			$('select[name=start_hour]', $item).attr('name','sch['+i+'][start][hour]');
+			$('select[name=end_time]', $item).attr('name','sch['+i+'][end][time]');
+			$('select[name=end_hour]', $item).attr('name','sch['+i+'][end][hour]');
+			$('input[name=duration_lb]', $item).attr('name','sch['+i+'][duration_lb]');
+			$('select[name=duration]', $item).attr('name','sch['+i+'][duration]');
+			$('input[name=same]', $item).attr('name','sch['+i+'][same]');
+			$('input.sameday', $item).attr('id','sameday'+i);
+			$('label[for=sameday1]', $item).attr('for','sameday'+i);
+			$('.left-ttl span', $item).text(i+1);
+			$('.prcng-item.hidden:first').before($item);
+			i++;
+			<?php endif ?>
+			return false;
+		});
+		
+		$('a.remove').live('click', function(){
+			$item = $(this).parents('.item');
+			$item.fadeOut('fast', function(){
+				$item.remove();
+			});
+			i--;
+			return false;
+		});
+		
+		$('input.sameday').live('change', function(){
+			$li = $(this).parents('li');
+			if($(this).attr('checked') == 'checked') {
+				$('select, input:not(.sameday)', $li).attr('disabled', 'disabled');
+			} else {
+				$('select, input:not(.sameday)', $li).removeAttr('disabled');
+			}
+		});
+    });
+</script>
+<style type="text/css">
+.hidden { display:none; }
+.sign-box.vendor.first .item-wrppr {
+	background: none repeat scroll 0 0 transparent;
+	border: 0 none;
+}
+.sign-box.vendor.first .item-wrppr .item input[type="text"]  { 
+	width:350px;
+	vertical-align:middle;}
+.sign-box.vendor.first .item-wrppr .item select {
+	border: 1px solid #CCCCCC;
+	float: right;
+	margin-left: 5px;
+	margin-top: 3px;
+	padding: 5px;}
+.errors {
+	border:1px solid #F00;
+	padding:5px;
+	margin:30px;}
+	.errors p {
+		text-align:left;
+		line-height:18px;
+		font-style:italic;
+		font-size:12px;
+		font-weight:normal;
+		color:#F00 !important;}
+</style>
 </body>
 </html>

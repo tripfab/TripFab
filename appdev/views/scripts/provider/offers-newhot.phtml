@@ -7,56 +7,7 @@
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
     <link type="text/css" rel="stylesheet" href="/css2/calendar3/jquery-ui-1.8.16.custom.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-	$(function(){
-		
-		$price = $('input[name=price]');
-		$price.data('value',parseFloat($price.data('val')));
-		$price.keyup(function(){
-			$p = $(this).val();
-			$p = parseFloat($p);
-			$percentaje = (100 - (($p * 100) / $price.data('value')));
-			$('.percentageLabel').text($percentaje.toFixed(2)+'%');
-			$('.priceLabel').text('$'+$p);
-		});
-		
-		$('.datepicker1').datepicker({
-			minDate:new Date(),
-			dateFormat:'M dd, yy',
-			onSelect:function(date){
-				$('#startLabel').text(date);
-				$('.datepicker2').datepicker('option','minDate',new Date(date));
-			}
-		}).keyup(function(){
-			$('#startLabel').text($(this).val());
-		});
-		$('.datepicker2').datepicker({
-			dateFormat:'M dd, yy',
-			onSelect:function(date){
-				$('#endLabel').text(date);				
-			}
-		}).keyup(function(){
-			$('#endLabel').text($(this).val());
-		});
-		
-		$('select[name=people]').change(function(){
-			$val = $('select[name=people_ammount]').val() + ' ' + $('option:selected', this).text();
-			$('.travelersLabel').text($val);
-		});
-		$('select[name=people_ammount]').change(function(){
-			$val = $(this).val() + ' ' + $('select[name=people] option:selected').text();
-			$('.travelersLabel').text($val);
-		});
-		$('select[name=room]').change(function(){
-			$('#roomLabel').text($('option:selected',this).text());
-		});
-		$('.btn-12').click(function(){
-			window.location.href = '/provider/offers';
-			return false;
-		});
-	});
-	</script>
+   
 </head>
 <body>
 <div class="w1">
@@ -220,5 +171,55 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+	$price = $('input[name=price]');
+	$price.data('value',parseFloat($price.data('val')));
+	$price.keyup(function(){
+		$p = $(this).val();
+		$p = parseFloat($p);
+		$percentaje = (100 - (($p * 100) / $price.data('value')));
+		$('.percentageLabel').text($percentaje.toFixed(2)+'%');
+		$('.priceLabel').text('$'+$p);
+	});
+	
+	$('.datepicker1').datepicker({
+		minDate:new Date(),
+		dateFormat:'M dd, yy',
+		onSelect:function(date){
+			$('#startLabel').text(date);
+			$('.datepicker2').datepicker('option','minDate',new Date(date));
+		}
+	}).keyup(function(){
+		$('#startLabel').text($(this).val());
+	});
+	$('.datepicker2').datepicker({
+		dateFormat:'M dd, yy',
+		onSelect:function(date){
+			$('#endLabel').text(date);				
+		}
+	}).keyup(function(){
+		$('#endLabel').text($(this).val());
+	});
+	
+	$('select[name=people]').change(function(){
+		$val = $('select[name=people_ammount]').val() + ' ' + $('option:selected', this).text();
+		$('.travelersLabel').text($val);
+	});
+	$('select[name=people_ammount]').change(function(){
+		$val = $(this).val() + ' ' + $('select[name=people] option:selected').text();
+		$('.travelersLabel').text($val);
+	});
+	$('select[name=room]').change(function(){
+		$('#roomLabel').text($('option:selected',this).text());
+	});
+	$('.btn-12').click(function(){
+		window.location.href = '/provider/offers';
+		return false;
+	});
+});
+</script>
 </body>
 </html>

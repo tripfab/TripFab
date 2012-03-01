@@ -9,18 +9,7 @@
     <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('input').ToggleInputValue();
-            $('form select').jqTransSelect();
-            $('#header .header-login a.user').click(function(){
-                $(this).next().toggleClass('show');
-                return false;
-            });
-        });
-    </script>
-</head>
+   </head>
 <body>
 <div class="w1 profile">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
@@ -77,5 +66,17 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('input').ToggleInputValue();
+        $('form select').jqTransSelect();
+        $('#header .header-login a.user').click(function(){
+            $(this).next().toggleClass('show');
+            return false;
+        });
+    });
+</script>
+
 </body>
 </html>

@@ -43,14 +43,6 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus, textarea
 }
 /*END HEADER---------------------------------------------------------------*/
 /*RESULT PAGE--------------------------------------------------------------*/
-#search_result ul.cat-menu {
-	position: relative;
-	z-index: 0;
-}
-#search_result {
-	position: relative;
-	z-index: 0;
-}
 #search_result ul.cat-menu li a {
 	text-shadow: none;
 	fiter: dropshadow(none);
@@ -87,6 +79,13 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus, textarea
 .trip-itinerary .overview {
 	padding-bottom: 15px;
 }
+
+
+
+
+
+
+
 #browse_search .time-stamp-2 {
 	background: url(../images2/aw_02.png) no-repeat;
 	width: 74px;
@@ -109,53 +108,6 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus, textarea
 	padding-bottom: 0;
 }
 
-.w3_itinerary {
-	background-color: #FFFFFF;
-    border-bottom: 1px solid #E0E0E0;
-    height: 51px;
-    position: relative;
-    z-index: 0;
-}
-.w3_itinerary .wrapper {
-	position: relative;
-	z-index: 0;
-}
-#errorpage .bottom .search .btn-1 {
-padding: 0 5px;
-}
-
-.checkout-wrapper .bottom .btn-1 {
-	padding: 0 5px;
-}
-.checkout-wrapper .bottom  {
-	padding-bottom: 0;
-	margin-bottom: 0;
-}
-.checkout-wrapper .bottom {
-	margin-top: 20px;
-}
-
-
-
-
-
-.results-wrapper {
-	border-radius: 0px 4px 4px 0px;
-	behavior: url(/PIE.htc);
-}
-.trip-itinerary .overview .image .info h4 {
-	line-height: 40px;
-	top: 10px;
-}
-
-#header .header-login {
-	width: auto;
-}
-
-#all_trips .single {
-	position: relative;
-	z-index: 0;
-}
 
 
 
@@ -163,33 +115,26 @@ padding: 0 5px;
 
 
 
-.dd-2 > div + div {
-	position: relative;
-	z-index: 0;
-}
 
-.itinerary-wrapper {
-	position: relative;
-	z-index: 0;
-}
-.slider-controls {
-	position: relative;
-	z-index: 10000;
-}
-.slider-controls a {
-	z-index: 100;
-}
-.itinerary-items .item {
-	position: relative;
-	z-index: 1000;
-}
-.itinerary-items {
-	position: relative;
-	z-index: 100;
-}
-.itinerary-wrapper .slider {
-	z-index: 0;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

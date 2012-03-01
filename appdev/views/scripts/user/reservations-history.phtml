@@ -9,14 +9,6 @@
     <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('textarea').elastic();				
-            $('input').ToggleInputValue();
-            $('form select').jqTransSelect();
-        });
-    </script>
 </head>
 <body>
 <div class="w1">
@@ -66,5 +58,13 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('textarea').elastic();				
+        $('input').ToggleInputValue();
+        $('form select').jqTransSelect();
+    });
+</script>
 </body>
 </html>
