@@ -10,13 +10,23 @@ In this repo you will find three projects in one so be careful what file are you
 
 The three of them share the _/library_ folder where you can find usefull classes. _/library/WS/ contains the service layer classes pf the application, 
 
-### How to contribute
+## How to contribute
 
 First you need to be a freelance or inhouse developer hired by TripFab Ink and authorized by the application manager
 
 If you are one of them just clone the project and start commiting, pulling and pushing updates
+ 
+## How to install
 
-### How to install
+### Prerequicites
+
+1. Memcahced Server
+2. Memcached php extension
+3. Imagemagick for thumbnail generation (look at application.ini convert.path for the right path)
+4. SSL certificate (Can be a self signed cert). just update the apache config with right information
+5. MAMP, WAMP or any other LAMP stack server software
+
+### Installing
 
 Install it's supper easy
 
