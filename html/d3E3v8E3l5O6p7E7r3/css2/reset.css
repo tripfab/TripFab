@@ -91,6 +91,7 @@ input[type="text"], input[type="password"], textarea {
 	padding: 0 5px;
 	resize:none;
 	behavior: url(/PIE.htc);
+	background-color: #FFF; 
 }
 
 textarea {
@@ -333,9 +334,9 @@ body {
 	color: #616161;
 	font: bold 11px/30px Helvetica;
 	padding: 0 17px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
 	text-shadow: 0px 1px 0px #FFFFFF;
 	border: 1px solid #dbdbdb;
 	text-align: center;

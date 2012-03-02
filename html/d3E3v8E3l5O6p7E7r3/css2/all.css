@@ -8685,7 +8685,7 @@ h2.title .back:hover,
 .user-messages .lstng .right .preferences {
 	position:relative;
 }
-.user-messages .lstng .right .preferences:hover ul {
+.user-messages .lstng .right .preferences ul.show{
 	display:block;
 }
 
@@ -10008,8 +10008,8 @@ h2.title .back:hover,
 }
 .reservations .top a.btn-10 {
 	color: #464646;
-	font: bold 11px/26px Helvetica;
-	height: 26px;
+	font: bold 11px/30px Helvetica;
+	height: 30px;
 	color: #303030;
 	z-index: 0;
 	position: relative;
@@ -10040,6 +10040,7 @@ h2.title .back:hover,
 	border-radius: 4px;
 	behavior: url(/PIE.htc);
 	z-index: 0;
+	overflow: hidden;
 }
 
 .reservation.in {
@@ -10130,10 +10131,13 @@ h2.title .back:hover,
 	font-weight: bold;
 	line-height: 26px;
 	float: right;
-	margin-top: 12px;
+	margin-top: 6px;
 	margin-right: 10px;	
 }
-
+.reservation .top > a.btn-1 {
+	color: #FFF;
+	line-height: 30px;
+}
 .reservation .top > a.cncl {
 	border-right: 1px solid #e8e8e8;
 	padding-right: 15px;
@@ -13478,8 +13482,8 @@ h2.title .back:hover,
     margin: 5px 5px 0 0;
     padding-left: 10px;
     padding-right: 10px;
-    text-shadow: 0px 1px 0px #5C961F;
-    filter: dropshadow(color=#5C961F, offx=0, offy=1); 
+    text-shadow: none;
+    filter: none;
 }
 /*END VENDOR OFFERS-----------------------------------------*/
 /*VENDOR OFFERS ACTIVITY------------------------------------*/
@@ -13701,7 +13705,8 @@ h2.title .back:hover,
 	-webkit-border-radius: 0px 0px 4px 4px;
 	border-radius: 0px 0px 4px 4px;
 	list-style:none;
-        z-index:100;
+	behavior: url(PIE.htc);
+	z-index: 10000;
 }
 #header .wrapper .menu_admin li ul li {
 	margin:0;
@@ -18344,27 +18349,7 @@ h2.title .back:hover,
 }
 
 /*END-NEW-BROWSE-TRIPS-----------------------------------------------------*/
-/*LIGHTBOX-NEW-LISTING-----------------------------------------------------*/
-.NewListing {
-	width: 340px;
-}
-.NewListing form {
-	background-color: #FFF;
-}
-.NewListing .top {
-	padding-left: 20px;
-}
-.NewListing .mid {
-	padding: 0 0 20px 20px;
-	background-color: #FFF;
-}
-.NewListing .mid select {
-	display: block;
-	margin-top: 15px;
-	width: 300px;
-}
 
-/*END-LIGHTBOX-NEW-LISTING-------------------------------------------------*/
 
 
 

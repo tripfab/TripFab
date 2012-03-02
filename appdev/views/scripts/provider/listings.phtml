@@ -44,7 +44,7 @@
                             <?php endif ?>
 							<li class="edit"><a href="/provider/listings/edit/<?= $listing->id ?>" class="btn-10"><span>Edit Listing</span></a></li>
 							<li class="preferences">
-								<a href="javascript:void(0);" class="btn-10"><span><img src="/images2/cleardot.gif" /></span></a>
+								<a href="" class="btn-10"><span><img src="/images2/cleardot.gif" /></span></a>
 								<ul>
 									<li><a target="_blank" href="/provider/listings/preview/<?= $listing->id ?>">View Preview</a></li>
 									<li><a href="#listing_delete_<?= $listing->id ?>" class="lb">Delete Listing</a></li>
@@ -238,10 +238,14 @@
 			overlayOpacity:0.7,
 			showCloseButton:0,
 		});
+		$('.preferences .btn-10').click(function() {
+			$pref = $(this).parents('.preferences');
+			$('ul', $pref).toggleClass('show');
+			return false
+		});
 		$('.lbox .btn-2, .lbox .btn-11').click(function(){
 			$(this).parents('form').submit();
 		});
-		
 		$('.lstng.inactive').each(function(){
 			$this = $(this);
 			$ul	  = $('.right ul', this);

@@ -112,73 +112,31 @@
 			</div><!--GETREPORT-->
             
             <div id="new_listing">
-                <div class="lightbox_listing">
-                    <h1>What type of listing do you want to create?</h1>
-                    <ul class="listing">
-                        <li class="select">
-                            <form method="post" action="/admin/listings/new">
-                                <a href="" onclick="$(this).parents('form').submit(); return false;">
-                                    <span><img src="images2/ico-105.png" width="35" height="87" alt="" /></span>
-                                    <h2>Activity</h2>
-                                </a>
-                                <input type="hidden" name="vendor" value="777" />
-                                <input type="hidden" name="vendortoken" value="fe7633dd7825ee2180a56d843eb8c6a9" />
-                                <input type="hidden" name="type" value="6" />
-                            </form>
-                        </li>
-                        <li>
-        
-                            <form method="post" action="/admin/listings/new">
-                                <a href="" onclick="$(this).parents('form').submit(); return false;">
-                                    <span><img src="images2/ico-106.png" width="35" height="87" alt="" /></span>
-                                    <h2>Hotel</h2>
-                                </a>
-                                <input type="hidden" name="vendor" value="777" />
-                                <input type="hidden" name="vendortoken" value="fe7633dd7825ee2180a56d843eb8c6a9" />
-        
-                                <input type="hidden" name="type" value="5" />
-                            </form>
-                        </li>
-                        <li>
-                            <form method="post" action="/admin/listings/new">
-                                <a href="" onclick="$(this).parents('form').submit(); return false;">
-                                    <span><img src="images2/ico-107.png" width="35" height="87" alt="" /></span>
-                                    <h2>Restaurant</h2>
-                                </a>
-                                <input type="hidden" name="vendor" value="777" />
-                                <input type="hidden" name="vendortoken" value="fe7633dd7825ee2180a56d843eb8c6a9" />
-                                <input type="hidden" name="type" value="2" />
-                            </form>
-                        </li>
-                        <li>
-        
-                            <form method="post" action="/admin/listings/new">
-                                <a href="" onclick="$(this).parents('form').submit(); return false;">
-                                    <span><img src="images2/ico-108.png" width="35" height="87" alt="" /></span>
-                                    <h2>Entertainment</h2>
-                                </a>
-                                <input type="hidden" name="vendor" value="777" />
-                                <input type="hidden" name="vendortoken" value="fe7633dd7825ee2180a56d843eb8c6a9" />
-        
-                                <input type="hidden" name="type" value="7" />
-                            </form>
-                        </li>
-                        <li>
-                            <form method="post" action="/admin/listings/new">
-                                <a href="" onclick="$(this).parents('form').submit(); return false;">
-                                    <span><img src="images2/ico-109.png" width="35" height="87" alt="" /></span>
-                                    <h2>Tourist Sight</h2>
-                                </a>
-                                <input type="hidden" name="vendor" value="777" />
-                                <input type="hidden" name="vendortoken" value="fe7633dd7825ee2180a56d843eb8c6a9" />
-                                <input type="hidden" name="type" value="4" />
-                            </form>
-                        </li>
-                    </ul><!--LISTING-->
-                    <div class="bottom">
-                        <a href="" class="btn-1">Create Listing</a>
-                    </div><!--BOTTOM-->				
-                </div><!--LIGHTBOX_LISTING-->
+               <div class="lb NewListing">
+               	<div class="top">Create a New Listing</div><!--TOP-->
+               	<form action="">
+               		<fieldset>
+               			<div class="mid">
+               				<select>
+               					<option>Select a Listing Type</option>
+               				</select>
+               				<select>
+               					<option>Select a Country</option>
+               				</select>
+               				<select>
+               					<option>Select a City</option>
+               				</select>
+               				<select>
+               					<option>Select a Partner</option>
+               				</select>
+               			</div><!--MID-->
+               			<div class="bottom">
+               				<input type="submit" value="Create Listing" class="btn-1" />
+               				<input type="button" value="Cancel" class="btn-10" />
+               			</div><!--BOTTOM-->
+               		</fieldset>
+               	</form>
+               </div><!--NEWLISTING-->
             </div><!--NEW-LISTING-->
 		</div><!--HIDDEN-->
         
