@@ -20,7 +20,6 @@ $(document).ready(function() {
 		showOtherMonths: true,
 		minDate:new Date(),
 		onSelect:function(date){
-			console.log(date);
 			$('input[name=date]').val(date);
 		},
 	});

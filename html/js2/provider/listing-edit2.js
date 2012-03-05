@@ -112,7 +112,6 @@ $(function(){
 				$('input[name=address]').val(results[0].formatted_address);
 			} else {
 				$('input, textarea').removeAttr('disabled');
-				console.log(status);
 			}
 		});
 	});
@@ -151,7 +150,6 @@ $(function(){
 			} else {
 				// Enabling form back
 				$('input, textarea').removeAttr('disabled');
-				console.log(status);
 			}
 		});
 		return false;

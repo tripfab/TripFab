@@ -1,7 +1,4 @@
 $(document).ready(function() {
-	$('textarea').elastic();				
-	$('input').ToggleInputValue();
-	$('form select').jqTransSelect();
 	
 	$('img.star').click(function () {
 		$(this).toggleClass('enabled');

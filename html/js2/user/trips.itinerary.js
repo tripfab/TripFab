@@ -71,7 +71,6 @@ $(document).ready(function() {
             });
             $clip.addClass('unhidden');
             $fancybox = false;
-            console.log('drag start event');
         },
         stop:function(){
             $clip = $(this).parents('div.jcarousel-clip');
@@ -79,7 +78,6 @@ $(document).ready(function() {
             if(!$drop)
                 $fancybox = true;
 				
-            console.log('drag stop event');
         }
     });
 	
@@ -98,7 +96,6 @@ $(document).ready(function() {
         activeClass: "ui-state-default",
         hoverClass: "ui-state-hover",
         drop: function( event, ui ) {
-            console.log('drop start event');
             $drop	  = true;
             $fancybox = false;
             var values 	  = ui.draggable.data('values');
@@ -142,14 +139,12 @@ $(document).ready(function() {
                     });
                     updateSort('onDrop not stay');
                     $fancybox = true;
-                    console.log('drop stop event');
                     $drop	  = false;
                     $('#tripprice').text('$'+response);
                 },
                 error:function(){
                     alert('Something went wrong');
                     $fancybox = true;
-                    console.log('drop stop event');
                     $drop	  = false;
                 }
             });
@@ -161,7 +156,6 @@ $(document).ready(function() {
         activeClass: "ui-state-default",
         hoverClass: "ui-state-hover",
         drop: function( event, ui ) {
-            console.log('drop start event');
             $drop	  = true;
             $fancybox = false;
             var values 	  = ui.draggable.data('values');
@@ -205,14 +199,12 @@ $(document).ready(function() {
                     });
                     updateSort('onDrop not stay');
                     $fancybox = true;
-                    console.log('drop stop event');
                     $drop	  = false;
                     $('#tripprice').text('$'+response);
                 },
                 error:function(){
                     alert('Something went wrong');
                     $fancybox = true;
-                    console.log('drop stop event');
                     $drop	  = false;
                 }
             });
@@ -256,7 +248,6 @@ $(document).ready(function() {
                     $('a.delete', $li).remove();
                     $li.appendTo($ul);
                     $element.remove();
-                    console.log(values.class);
                     $li.draggable({
                         revert:'invalid',
                         start:function(){
