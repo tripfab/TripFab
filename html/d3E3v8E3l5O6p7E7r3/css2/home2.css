@@ -512,17 +512,18 @@
 
 
 
-.dd.login .dd-content {	
+.dd .dd-content {	
 	padding: 14px 18px;
 	overflow: hidden;
 }
 
-.dd.login .dd-content img {
+#wrapper-top .dd .dd-content img {
 	float: left;
 	margin-right: 18px;
+	position: static;
 }
 
-.dd.login .dd-content ul {
+#wrapper-top .dd .dd-content ul {
 	float: left;
 	list-style: none;
 	font-size: 11px;
@@ -530,15 +531,44 @@
 	line-height: 18px;
 }
 
-.dd.login .dd-content ul a {
+#wrapper-top .dd .dd-content ul a {
 	color: #303030;
 	font-size: 12px;
 	line-height: 20px;
+	text-shadow: none;
+	float: left;
 }
 
-.dd.login .dd-content ul a:hover, .dd.login .dd-footer a:hover {
+.dd .dd-content ul a:hover, .dd.login .dd-footer a:hover {
 	color: #60b5f7;
 	text-decoration: none;
+}
+#wrapper-top .dd .dd-footer .facebook {
+	overflow: hidden;
+}
+#wrapper-top .dd .dd-footer .facebook  a{
+	display: block;
+}
+#wrapper-top .dd .dd-footer a + a {
+    float: right;
+}
+#wrapper-top .dd .dd-footer a {
+    color: #303030;
+    float: left;
+    font-size: 12px;
+    line-height: 40px;
+    text-shadow: none;
+}
+#wrapper-top .dd .dd-content ul a:hover, #wrapper-top .dd .dd-footer a:hover {
+    color: #60B5F7;
+    text-decoration: none;
+}
+#wrapper-top .dd .dd-content ul a:hover, #wrapper-top .dd .dd-footer a:hover {
+    color: #60B5F7;
+    text-decoration: none;
+}
+#wrapper-top .dd .dd-footer a + a:hover {
+    color: #F26522;
 }
  .hidden {
  	display:none;

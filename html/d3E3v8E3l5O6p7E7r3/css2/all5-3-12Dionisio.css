@@ -2257,7 +2257,7 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 	padding: 10px;
 }
 .dd-2 > div select {
-	padding:3px 0;
+	height: 25px;
 	line-height: 25px;
 	width: 170px;
 }
@@ -2317,7 +2317,6 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 	background: url(../images2/map-shadow.png) no-repeat bottom center !important;
 	height: 16px;
 	width: 246px;
-	margin-bottom: 10px;
 }
 .listing-gallery > img {
 	display: block;
@@ -3189,7 +3188,7 @@ ul.reviews li > div div.meta em.red {
 .map-wrapper h4, .widget.book .hours h4 {
 	color: #303030;
 	font-size: 13px;
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 	line-height: 20px;
 	overflow: hidden;
 }
@@ -3781,12 +3780,12 @@ ul.reviews li > div div.meta em.red {
 	list-style: none;
 	background: url(../images2/g-3.png) repeat-x scroll 0 0 #FFFFFF;
 	border-top: 1px solid #E8E8E8;
-	padding: 8px 19px 0 19px;
+	padding: 6px 19px 0 19px;
 }
 
 .widget.summary ul li {
 	line-height: 20px;
-	padding: 9px 0;
+	padding: 10px 0;
 	border-bottom: 1px solid #e8e8e8;
 	color: #303030;
 	font-size: 12px;
@@ -3798,7 +3797,7 @@ ul.reviews li > div div.meta em.red {
 
 .widget.summary ul li strong {
 	display: block;
-	font:bold 12px/15px Helvetica;
+	font:bold 13px/15px Helvetica;
 	background: url(../images2/ico_140.png) no-repeat 0 0;
 	padding-left: 20px;
 }
@@ -3832,37 +3831,6 @@ ul.reviews li > div div.meta em.red {
 	float: right;
 	width: 40px;
 	text-align: right;
-}
-.widget.summary .pricing_det {
-	list-style: none;
-	background: url(../images2/g-3.png) repeat-x scroll 0 0 #FFF;
-	border-top: 1px solid #E8E8E8;
-	padding: 16px 19px 0 19px;
-}
-.widget.summary .pricing_det strong.charges {
-	display: block;
-	font: bold 12px/15px Helvetica;
-	background: url(../images2/ico_140.png) no-repeat 0 -233px;
-	padding-left: 20px;
-	margin-bottom: 6px;
-}
-.widget.summary .pricing_det dl {
-	overflow: hidden;
-	line-height: 20px;
-	padding-bottom: 5px;
-	color: #303030;
-	font-size: 12px;
-}
-.widget.summary .pricing_det  dl dt {
-	float: left;
-	width: 190px;
-	margin-bottom: 9px;
-}
-.widget.summary .pricing_det  dl dd {
-	float: right;
-	width: 40px;
-	text-align: right;
-	margin-bottom: 10px;
 }
 .widget.summary .total {
 	border-top: 1px solid #d0d0d0;
@@ -13824,7 +13792,6 @@ h2.title .back:hover,
 	position:relative;
 	height:58px;
 	margin-right:20px;
-	z-index: 1;
 }
 .w3_admin .sub_menu ul li a {
 	color:#60b5f7;
@@ -15258,43 +15225,6 @@ h2.title .back:hover,
 	border:none;
 }
 /*END LIGHTBOX SELECT LISTING-------------------------------------------- */
-/*LIGHTBOX NEW DIRECTION------------------------------------------------- */
-#new_direction {
-	box-shadow: 0 0px 4px #d4d4d4;
-	background-color:#FFF;
-	width:352px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px; 
-}
-#new_direction h2 {
-	background:url(../images2/g-54.gif) repeat-x;
-	height:45px;
-	font:bold 13px/45px Helvetica, Arial, sans-serif;
-	color:#fff;
-	padding-left:22px;
-}
-#new_direction select {
-	margin:20px 0 20px 22px;
-	width:315px;
-}
-#new_direction ul {
-	background:url(../images2/g-52.gif) repeat-x #f6f6f6;
-	overflow:hidden;
-	padding:20px 15px 14px 0;
-	margin:0 0 10px;
-}
-#new_direction ul li {
-	float:right;
-	list-style:none;
-	margin-left:12px;
-}
-#new_direction ul li a{
-	height:30px;
-	float: right;
-}
-
-/*END LIGHTBOX NEW DIRECTION-------------------------------------------- */
 /*LIGHTBOX COMPANY NEW MENBER-------------------------------------------- */
 #new_member .code {
 	width:67px;
@@ -16820,7 +16750,7 @@ h2.title .back:hover,
 	height: 30px;
 	background: url(../images2/btn-add.png) no-repeat top left;
 	text-indent: -99999px;
-	z-index: 100;
+	z-index: 1000;
 }
 #search_result .result .img-wrapper .been:hover {
 	background-position: bottom left;
