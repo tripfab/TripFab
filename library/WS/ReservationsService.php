@@ -325,6 +325,16 @@ class WS_ReservationsService {
         return $reservation;
     }
     
+    public function getTransaction($id)
+    {
+        $trans = new Zend_Db_Table('transactions');
+        $select = $trans->select();
+        $select->where('id = ?', $id);
+        $t = $trans->fetchRow($select);
+        
+        return $t;
+    }
+    
     public function details($id) {
         $db = Zend_Db_Table::getDefaultAdapter();
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
@@ -340,5 +350,3 @@ class WS_ReservationsService {
     }
     
 }
-
-?>

@@ -7,12 +7,17 @@ class AjaxController extends Zend_Controller_Action
     protected $pictures_db;
     protected $listings_db;
     protected $trips;
+    /**
+     *
+     * @var WS_ListingService
+     */
     protected $listings;
     protected $user;
     protected $accounts;
     protected $users;
     protected $reviewes;
     protected $vendors;
+    protected $reservations;
 
 
     public function init()
@@ -1759,5 +1764,51 @@ class AjaxController extends Zend_Controller_Action
         
         
         $this->view->images = $images;
+    }
+    
+    public function acceptreservationAction()
+    {
+        if(!$this->getRequest()->isPost())
+                throw new Exception('Wrong Request');
+        
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+
+        if($user->getRole() != 'provider')
+                throw new Exception('No access allowed');
+
+        $reservation  = $this->reservations->get($_POST['id']);
+        if($reservation->vendor_id != $user->getVendorId())
+                throw new Exception('No access allowed');
+        
+        $lising = $this->listings->getListing($reservation->listing_id);
+        
+        $transaction = $this->reservations->getTransaction($reservation->transaction_id);
+        $account = $this->users->getAccount($transaction->paywith);
+        
+        require "Stripe/Stripe.php";
+        
+        $keys = Zend_Registry::get('stripe');
+        Stripe::setApiKey($keys['secret_key']);
+
+        $charge = Stripe_Charge::create(array(
+            'amount'      => $transaction->ammount * 100,
+            'currency'    => 'usd',
+            'customer'    => $account->stripe_id,
+            'description' => $lising->title . ' Reservation'
+        ));
+        
+        $transaction->status = 1;
+        $transaction->charge_id = $charge->id;
+        
+        $transaction->save();
+        
+        $reservation->status_id = 2;
+        $reservation->save();
+        
+        echo 'success'; die;        
     }
 }

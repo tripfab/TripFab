@@ -363,7 +363,7 @@ class TripsController extends Zend_Controller_Action {
             
             $listings = $this->trips->getListingOf($trip->id, false);
             
-            $date = date('Y-m-d G:i:s', strtotime($_POST['date']));
+            $date = date('Y-m-d H:i:s', strtotime($_POST['date']));
             $adults = $_POST['adults'];
             $kids   = $_POST['kids'];
             $items  = array();

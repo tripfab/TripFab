@@ -62,6 +62,19 @@ class WS_UsersService {
         $this->user_pictures  = new Model_UserPictures();
     }
     
+    public function getAccount($id)
+    {
+        $accounts = new Zend_Db_Table('stripe_accounts');
+        $select = $accounts->select();
+        $select->where('id = ?', $id);
+        $result = $accounts->fetchRow($select);
+        
+        if(is_null($result))
+            throw new Exception();
+        
+        return $result;
+    }
+    
     public function getUserByUsername($username)
     {
         $select = $this->users_db->select();

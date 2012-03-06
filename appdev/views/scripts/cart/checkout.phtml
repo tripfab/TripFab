@@ -9,7 +9,6 @@
     <link type="text/css" rel="stylesheet" href="/css2/cart/checkout.css" />
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    
 </head>
 <body>
 <div class="w1">
@@ -129,79 +128,53 @@
                 
                 <div class="right">
                     <div class="widget summary">
+                    	<?php if($this->listing->main_type == 6): ?>
                         <div class="ttl">Activity Summary</div>
                         <ul>
-                            <li class="checkin"><strong>Activity Date</strong> Tue, February 21st 2012</li>
-                            <li class="time"><strong>Schedule</strong>3:00 pm - 6:00 pm</li>
+                            <li class="checkin"><strong>Activity Date</strong> <?= date('D, F jS, Y', strtotime($this->cartitem->checkin)) ?></li>
                             <li class="occupation"><strong>Occupation</strong>
                                 <dl>
                                     <dt>Adults</dt>
-                                    <dd>2</dd>
+                                    <dd><?= $this->cartitem->adults ?></dd>
+                                    <?php if($this->cartitem->kids > 0): ?>
                                     <dt>Children</dt>
-                                    <dd>3</dd>
+                                    <dd><?= $this->cartitem->kids ?></dd>
+                                    <?php endif ?>
                                 </dl>
                             </li>
                         </ul>
-                        <div class="total"> <a href="#" class="btn-1">Book Now</a>
+                        <div class="total"> <a href="#" class="booknow btn-1">Book Now</a>
                             <p>Grand Total <strong>$137.50</strong></p>
-                        </div>
-                        <!-- closes total --> 
-                    </div>
-                    <!-- closes widget --> 
-                </div>
-                <!-- closes right --> 
-                
-                <div class="right">
-                    <div class="widget summary">
-                        <div class="ttl">Trip Summary</div><!-- closes ttl -->
+                        </div><!-- closes total --> 
+                        <?php else: ?>
+                        <div class="ttl">Hotel Summary</div><!-- closes ttl -->
                         <ul>
-                            <li>Check in <span><?= date('D, F jS Y', strtotime($this->cartitem->checkin)) ?></span></li>
-                            <?php if($this->cartitem->checkout): ?>
-                            <li>Check out<span><?= date('D, F jS Y', strtotime($this->cartitem->checkout)) ?></span></li>
-                            <?php endif ?>
-                            <?php if($this->cartitem->nights > 0): ?>
-                            <li><?= $this->cartitem->nights ?> Nights</li>
-                            <?php endif ?>
-                            <li><?= $this->cartitem->adults ?> Adults</li>
-                            <?php if($this->cartitem->kids > 0): ?>
-                            <li><?= $this->cartitem->kids ?> Kids</li>
-                            <?php endif ?>
-                            <?php if($this->cartitem->rooms > 1): ?>
-                            <li><?= $this->cartitem->rooms ?> Rooms</li>
-                            <?php endif ?>
-                            <?php if($this->cartitem->rooms > 1): ?>
-                            <li>Maximun people per room: <?= $this->cartitem->max ?></li>
-                            <?php endif ?>
-                            <li>Charges
-                                <table cellpadding="0" cellspacing="0" border="0">
-                                    <tr>
-                                    	<td><?= $this->cartitem->rate_description ?></td>
-	                                    <td>$<?= $this->cartitem->rate ?></td></tr>
-                                    <?php if($this->cartitem->additional): ?>
-                                    <tr>
-                                    	<td><?= $this->cartitem->additional_description ?></td>
-                                    	<td>$<?= $this->cartitem->additional ?></td></tr>
+                            <li class="checkin"><strong>Check in</strong><?= date('D, F jS, Y', strtotime($this->cartitem->checkin)) ?></li>
+							<li class="checkout"><strong>Check out</strong><?= date('D, F jS, Y', strtotime($this->cartitem->checkout)) ?></li>
+                            <li class="occupation"><strong>Occupation</strong>
+                            	<dl>
+                            		<dt>Adults</dt>
+                                    <dd><?= $this->cartitem->adults ?></dd>
+                                    <?php if($this->cartitem->kids > 0): ?>
+                                    <dt>Children</dt>
+                                    <dd><?= $this->cartitem->kids ?></dd>
                                     <?php endif ?>
-                                    <tr>
-                                    	<td>Subtotal</td>
-                                    	<td>$<?= $this->cartitem->subtotal ?></td></tr>
-                                    <tr>
-                                    	<td>Taxes &amp; Fees</td>
-                                    	<td>$<?= $this->cartitem->taxes ?></td></tr>
-                                </table>
+                            	</dl>
                             </li>
                         </ul>
                         <div class="total">
-                            <strong>$<?= $this->cartitem->total ?></strong>
-                            Grand Total
+							<a href="#" class="btn-1 booknow">Book Now</a>
+                            <p>Grand Total <strong>$137.50</strong></p>
                         </div><!-- closes total -->
-                    </div><!-- closes widget -->
-                </div><!-- closes right -->
+                        <?php endif ?>
+                    </div><!-- closes widget --> 
+                </div><!-- closes right --> 
             </div><!-- closes checkout wrapper -->
         </div><!-- closes main -->
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript">PUBLIC_KEY = "<?= $this->pkey ?>"; </script>
 <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript" src="/js2/cardcheck.min.js"></script>
@@ -211,6 +184,11 @@
 		$('a.helptip').click(function() {
 			$('.tip').toggleClass('hidden');
 			return false
+		});
+		
+		$('.booknow').click(function(){
+			$('#checkout').submit();
+			return false;
 		});
 	});
 	</script>

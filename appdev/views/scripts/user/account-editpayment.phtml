@@ -96,6 +96,7 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript">PUBLIC_KEY = "<?= $this->pkey ?>"; </script>
 <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript" src="/js2/cardcheck.min.js"></script>
@@ -128,7 +129,7 @@
 				showError('Please select the expiration year');
 				return false;
 			} else {
-				Stripe.setPublishableKey('pk_HkcJUP3pJLpO1G6AeHNKGmDHF9Ahh');
+				Stripe.setPublishableKey(PUBLIC_KEY);
 				$data = {
 					number:    $('.cnum', this).val(),
 					cvc: 	   $('.ccode', this).val(),

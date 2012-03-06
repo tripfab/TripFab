@@ -1998,7 +1998,7 @@ class WS_ListingService {
         return $room;
     }
     
-    public function getHotelRooms($listing)
+    public function getHotelRooms($listing, $assoc = false)
     {
         $db = Zend_Db_Table::getDefaultAdapter();
         $select = $db->select();
@@ -2006,7 +2006,11 @@ class WS_ListingService {
         $select->join('rooms', 'listing_schedules.id = rooms.schedule_id');
         $select->where('listing_schedules.listing_id = ?', $listing);
         
-        $rooms = $db->fetchAll($select, array(), 5);
+        if(!$assoc) {
+            $rooms = $db->fetchAll($select, array(), 5);
+        } else {
+            $rooms = $db->fetchAssoc($select);
+        }
         return $rooms;
     }
     

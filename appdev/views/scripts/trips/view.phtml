@@ -28,7 +28,7 @@
                     <li><a href="/trips/itinerary/<?= $this->trip->id ?>">Itinerary</a></li>
                 </ul>
                 <div class="image">
-                    <img src="/images2/itinerary-img1.jpg" width="" height="" alt="" />
+                	<?= $this->thumbnail(array('width'=>930, 'height'=>476), $this->trip->image,'','930:746') ?>
                     <div class="info">
                         <h3><?= $this->trip->title ?></h3>
                         <span class="place"><?= $this->trip->country ?></span>

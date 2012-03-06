@@ -254,7 +254,7 @@
                                                 <input id="sch<?= $option->id ?>" class="noclean" name="option" value="<?= $option->id ?>" type="radio" />
                                                 <label for="sch<?= $option->id ?>"><?= $option->name ?></label>
                                                 <span><strong>$<?= $this->prices[$option->id]['price'] ?></strong> / night
-                                                <strong>Max <?= $this->prices[$option->id]['max'] ?> people</strong> per room</span>
+                                                <strong>Max <?= $this->rooms2[$option->name]['people'] ?> people</strong> per room</span>
                                             </li>
                                             <?php endforeach ?>
                                         </ul>

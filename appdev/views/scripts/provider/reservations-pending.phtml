@@ -35,6 +35,7 @@
                         <a href="" class="btn-1">Accept</a>
                         <a href="" class="btn-10">Reject</a>
                         <a href="#send_message_<?= $reserve->user_id ?>" class="sendMessage">Send Message to Veronica</a>
+                        <input type="hidden" value="<?= $reserve->id ?>" name="reservation" class="reservation" />
                     </div><!-- closes top -->
                     <div class="bottom">
                         <div class="ttl">
@@ -138,9 +139,17 @@
 		});
 		
 		$('.reservation .top a.btn-1').click(function(){
-			$parent = $(this).parents('.reservation');
-			$parent.fadeOut('slow');
-			showAlert('The Reservation has been accepted');
+			$parent  = $(this).parents('.reservation');
+			$reserve = $(this).siblings('input.reservation').val();
+			$.ajax({
+				url:'/ajax/acceptreservation',
+				type:'post',
+				data:{id:$reserve},
+				success:function(){
+					$parent.fadeOut('slow');
+					showAlert('The Reservation has been approved');
+				}
+			});
 			return false;
 		});
 		$('.reservation .top a.btn-4').click(function(){
