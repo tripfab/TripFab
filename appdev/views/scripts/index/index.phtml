@@ -48,15 +48,49 @@
         <?php if($this->user->role_id == 2): ?>
         <div id="header">
             <h1><a href="/"></a></h1>
-            <div class="signIn not">
-                <a href="/login" class="signinButton"><?= $this->user->name . " " . $this->user->lname ?></a>
+            <div class="signIn">
+                <a href="javascript:void(0);" class="signinButton yes"><?= $this->user->name . " " . $this->user->lname ?></a>
+                <div class="dd">
+                    <img src="/images2/arrow-12.png" alt="" class="arrow" />
+                    <div class="dd-content">
+                        <?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
+                        <?= $this->thumbnail(68,$image,'','1:1'); ?>
+                        <ul>
+                            <li><a href="/user/trips">Trips</a></li>
+                            <li><a href="/user/messages">Messages</a></li>
+                            <li><a href="/user/reservations">Reservations</a></li>
+                        </ul>
+                    </div><!-- closes dd-content -->
+                    <div class="dd-footer">
+                        <a href="/user">Account</a>
+                        <a href="/logout">Sign Out</a>
+                    </div><!-- closes dd-footer -->
+                </div><!-- closes dd -->
             </div>
         </div><!-- closes header-login -->    
         <?php else: ?>
         <div id="header">
             <h1><a href="/"></a></h1>
             <div class="signIn not">
-                <a href="/login" class="signinButton"><?= $this->user->name ?></a>
+                <a href="javascript:void(0);" class="signinButton yes"><?= $this->user->name ?></a>
+                <div class="dd">
+                    <img src="/images2/arrow-12.png" alt="" class="arrow" />
+                    <div class="dd-content">
+                        <?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
+                        <?= $this->thumbnail(68,$image,'','1:1'); ?>
+                        <ul>
+                            <li><a href="/provider/listings">Listings</a></li>
+                            <li><a href="/provider/messages">Messages</a></li>
+                            <li><a href="/provider/reservations">Reservations</a></li>
+                            <li><a href="/provider/reviews">Reviews</a></li>       
+                            <li><a href="/provider/offers">Offers</a></li>           
+                        </ul>
+                    </div><!-- closes dd-content -->
+                    <div class="dd-footer">
+                        <a href="/provider/account">Account</a>
+                        <a href="/logout">Sign Out</a>
+                    </div><!-- closes dd-footer -->
+                </div><!-- closes dd -->
             </div>
         </div><!-- closes header-login -->
         <?php endif ?>
@@ -134,7 +168,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $( ".signinButton.yes" ).click(function() {
-        $( ".dd.login" ).toggleClass('show');
+        $( ".dd" ).toggleClass('show');
         return false
     });
     $('a.lbc').fancybox({
