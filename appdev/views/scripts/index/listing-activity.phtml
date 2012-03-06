@@ -13,7 +13,6 @@
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
     <link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    
 </head>
 <body>
 <div class="w1">
@@ -24,8 +23,7 @@
                 <div class="box">
                     <?= $this->partial('partials/gallery.phtml', 
 					array('user'=>$this->user, 'listing' => $this->listing, 'city' => $this->city, 
-						  'country' => $this->country,'pictures' => $this->pictures,'trips'=>$this->trips)); ?>
-                    <?php //$this->partial('partials/tabs.phtml', array('listing' => $this->listing, 'tabs' => $this->tabs, 'faqs' => $this->faqs, 'map' => true)); ?>
+						  'country' => $this->country,'pictures' => $this->pictures,'trips'=>$this->trips, 'edit'=>false)); ?>
                 </div><!-- closes box -->
                 <div class="tabs-wrapper-2">
                     <ul>
@@ -56,7 +54,7 @@
                         </div><!-- closes tab-content -->
                         <?php else: ?>
                         <div class="tab-content">
-	                        <a href="/provider/listings/overview/<?= $this->listing->id ?>"><img src="/images2/empty-overview.gif" /></a>
+                        	<p>Not overview added</p>
                         </div>
                         <?php endif ?>
                         <div class="message">
@@ -66,24 +64,18 @@
                                 <?php foreach($this->options as $sch): ?>
                                 <p><?= date('g:i A', strtotime($sch->starting)) ?></p>
                                 <?php endforeach ?>
-                                <?php else: ?>
-                                <p><a style="color:#60B5F7" href="/provider/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
                                 <?php endif ?>
                             </div>
                             <div>
                                 <p><strong>Duration</strong></p>
                                 <?php if(count($this->options) > 0): ?>
                                 <p><?= $this->options[0]->duration . ' ' . $this->options[0]->duration_label ?></p>
-                                <?php else: ?>
-                                <p><a style="color:#60B5F7" href="/provider/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
                                 <?php endif ?>
                             </div>
                             <div>
                                 <p><strong>Departure Point</strong></p>
                                 <?php if($this->departure_city): ?>
                                 <p><?= $this->departure_city->title ?></p>
-                                <?php else: ?>
-                                <p><a style="color:#60B5F7" href="/provider/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
                                 <?php endif ?>
                             </div>
                             <div>
@@ -91,14 +83,10 @@
                                 <?php if($this->listing->return == $this->listing->departure): ?>
                                 <?php if($this->departure_city): ?>
                                 <p>Tour concludes at the original point of departure</p>
-                                <?php else: ?>
-                                <p><a style="color:#60B5F7" href="/provider/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
                                 <?php endif ?>
                                 <?php else: ?>
                                 <?php if($this->return_city): ?>
                                 <p><?= $this->return_city->title ?></p>
-                                <?php else: ?>
-                                <p><a style="color:#60B5F7" href="/provider/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
                                 <?php endif ?>
                                 <?php endif ?>
                             </div>
@@ -148,7 +136,7 @@
                         </div><!-- closes tab-content -->
                         <?php else: ?>
                         <div class="tab-content">
-	                        <a href="/provider/listings/details/<?= $this->listing->id ?>"><img src="/images2/empty-details.gif" /></a>
+                        	<p>No details added</p>
                         </div>
                         <?php endif ?>
                     </div><!-- closes tab -->
@@ -172,7 +160,7 @@
                         </div><!-- closes tab-content -->
                         <?php else: ?>
                         <div class="tab-content">
-                        	<a href="/provider/listings/tips/<?= $this->listing->id ?>"><img src="/images2/empty-tips.gif" /></a>
+                        	<p>No recommendations added</p>
                         </div>
                         <?php endif ?>
                     </div><!-- closes tab -->
@@ -193,7 +181,7 @@
                         </div><!-- closes tab-content -->
                         <?php else: ?>
                         <div class="tab-content">
-                        	<a href="/provider/listings/faqs/<?= $this->listing->id ?>"><img src="/images2/empty-faqs.gif" /></a>
+                        	<p>No FAQS added</p>
                         </div>
                         <?php endif ?>
                     </div><!-- closes tab -->
@@ -226,7 +214,7 @@
                         </div><!-- closes message -->
                         <?php else: ?>
                         <div class="tab-content">
-                        	<a href="/provider/listings/location/<?= $this->listing->id ?>"><img src="/images2/empty-getthere.gif" /></a>
+                        	<p>No directions added</p>
                         </div>
                         <?php endif ?>
                     </div><!-- closes tab -->
@@ -241,14 +229,12 @@
             	<form id="booking" method="post" action="/en-US/cart/add">
                     <div class="widget book">
                         <div class="ttl">
-                            <span>From only</span>
                             <?php if($this->listing->price > 0): ?>
+                            <span>From only</span>
                             <strong>$<?= $this->listing->price ?> <span>/ person</span></strong>
                             <?php else: ?>
-                            <div class="noprice">
-                            	<p>There isn't pricing info yet<br />
-                                <a href="/provider/listings/pricing/<?= $this->listing->id ?>">Set Pricing now</a></p>
-                            </div>
+                            <span>This is</span>
+                            <strong>Free</strong>
                             <?php endif ?>
                         </div><!-- closes ttl -->
                         <ul>

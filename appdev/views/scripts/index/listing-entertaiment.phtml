@@ -24,8 +24,7 @@
                 <div class="box">
                     <?= $this->partial('partials/gallery.phtml', 
 					array('user'=>$this->user, 'listing' => $this->listing, 'city' => $this->city, 
-						  'country' => $this->country,'pictures' => $this->pictures,'trips'=>$this->trips)); ?>
-                    <?php // $this->partial('partials/tabs.phtml',  array('listing' => $this->listing, 'tabs' => $this->tabs, 'faqs' => $this->faqs, 'map' => false)); ?>
+						  'country' => $this->country,'pictures' => $this->pictures,'trips'=>$this->trips, 'edit'=>false)); ?>
                 </div><!-- closes box -->
                 <div class="tabs-wrapper-2">
                     <ul>
@@ -63,7 +62,7 @@
                         </div><!-- closes tab-content -->
                         <?php else: ?>
                         <div class="tab-content">
-	                        <a href="/provider/listings/overview/<?= $this->listing->id ?>"><img src="/images2/empty-overview.gif" /></a>
+                        	<p>No overview added</p>
                         </div>
                         <?php endif ?>
                     </div><!-- closes tab -->
@@ -84,7 +83,7 @@
                         </div><!-- closes tab-content -->
                         <?php else: ?>
                         <div class="tab-content">
-                        	<a href="/provider/listings/faqs/<?= $this->listing->id ?>"><img src="/images2/empty-faqs.gif" /></a>
+                        	<p>No FAQS added</p>
                         </div>
                         <?php endif ?>
                     </div><!-- closes tab -->								
@@ -105,12 +104,18 @@
                         <h4>Location</h4>
                         <?php if(!is_null($this->listing->lat)): ?>
                         <div id="mapcanvas"></div>
+                        <div class="mapshadow"></div><!--SHADOW-->
                         <address>
                             <p><strong><?= $this->listing->title ?></strong></p>
                             <p><?= $this->listing->address ?></p>
                         </address>
                         <?php else: ?>
-                        <a href="/provider/listings/location/<?= $this->listing->id ?>"><img src="/images2/empty-map.jpg" /></a>
+                        <div id="mapcanvas"></div>
+                        <div class="mapshadow"></div><!--SHADOW-->
+                        <address>
+                            <p><strong><?= $this->listing->title ?></strong></p>
+                            <p>Not address added</p>
+                        </address>
                         <?php endif ?>
                     </div><!-- closes map-wrapper -->
                 </div><!-- closes widget -->

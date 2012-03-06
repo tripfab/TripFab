@@ -1811,4 +1811,9 @@ class AjaxController extends Zend_Controller_Action
         
         echo 'success'; die;        
     }
+    
+    public function cancelreservationAction()
+    {
+    
+    }
 }

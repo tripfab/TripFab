@@ -13,7 +13,6 @@
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
     <link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-
 </head>
 <body>
 <div class="w1">
@@ -25,7 +24,7 @@
                 <div class="box">
                     <?= $this->partial('partials/gallery.phtml', 
 					array('user'=>$this->user, 'listing' => $this->listing, 'city' => $this->city, 
-						  'country' => $this->country,'pictures' => $this->pictures,'trips'=>$this->trips)); ?>
+						  'country' => $this->country,'pictures' => $this->pictures,'trips'=>$this->trips, 'edit'=>false)); ?>
                     <?php // $this->partial('partials/tabs.phtml',  array('listing' => $this->listing, 'tabs' => $this->tabs, 'faqs' => $this->faqs, 'map' => true)); ?>
                 </div><!-- closes box -->
                 <div class="tabs-wrapper-2">
@@ -54,7 +53,7 @@
                         </div><!-- closes tab-content -->
                         <?php else: ?>
                         <div class="tab-content">
-	                        <a href="/provider/listings/overview/<?= $this->listing->id ?>"><img src="/images2/empty-overview.gif" /></a>
+                        	<p>No overview added</p>
                         </div>
                         <?php endif ?>
                         <div class="message">
@@ -62,24 +61,18 @@
                                 <p><strong>Check in</strong></p>
                                 <?php if(!empty($this->listing->checkin) and $this->listing->checkin != '00:00:00'): ?>
                                 <p><?= date('g:i A', strtotime($this->listing->checkin)) ?></p>
-                                <?php else: ?>
-                                <p><a style="color:#60B5F7" href="/provider/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
                                 <?php endif ?>
                             </div>
                             <div>
                                 <p><strong>Check out</strong></p>
                                 <?php if(!empty($this->listing->checkout) and $this->listing->checkout != '00:00:00'): ?>
                                 <p><?= date('g:i A', strtotime($this->listing->checkout)) ?></p>
-                                <?php else: ?>
-                                <p><a style="color:#60B5F7" href="/provider/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
                                 <?php endif ?>
                             </div>
                             <div>
                                 <p><strong>Room Types</strong></p>
                                 <?php if($this->rooms): ?>
                                 <p><?= count($this->rooms) ?></p>
-                                <?php else: ?>
-                                <p><a style="color:#60B5F7" href="/provider/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
                                 <?php endif ?>
                             </div>
                         </div><!-- closes message -->
@@ -121,7 +114,7 @@
                         </div><!-- closes tab-content -->
                         <?php else: ?>
                         <div class="tab-content">
-                            <a href="/provider/listings/details/<?= $this->listing->id ?>"><img src="/images2/empty-amanities.gif" /></a>
+                        	<p>No amenities added</p>
                         </div>
                         <?php endif ?>
                     </div><!-- closes tab -->
@@ -156,7 +149,7 @@
                         </div><!-- closes tab-content -->
                         <?php else: ?>
                         <div class="tab-content">
-                        	<a href="/provider/listings/rooms/<?= $this->listing->id ?>"><img src="/images2/empty-rooms.gif" /></a>
+                        	<p>No Room types added</p>
                         </div>                        
                         <?php endif ?>
                     </div><!-- closes tab -->
@@ -177,7 +170,7 @@
                         </div><!-- closes tab-content -->
                         <?php else: ?>
                         <div class="tab-content">
-                        	<a href="/provider/listings/faqs/<?= $this->listing->id ?>"><img src="/images2/empty-faqs.gif" /></a>
+                        	<p>No FAQS added</p>
                         </div>
                         <?php endif ?>
                     </div><!-- closes tab -->
@@ -210,7 +203,7 @@
                         </div><!-- closes message -->
                         <?php else: ?>
                         <div class="tab-content">
-                        	<a href="/provider/listings/location/<?= $this->listing->id ?>"><img src="/images2/empty-getthere.gif" /></a>
+                        	<p>No directions added</p>
                         </div>
                         <?php endif ?>
                     </div><!-- closes tab -->
@@ -230,10 +223,7 @@
                             <?php if($this->listing->price > 0): ?>
                             <strong>$<?= $this->listing->price ?> <span>/ person</span></strong>
                             <?php else: ?>
-                            <div class="noprice">
-                            	<p>There isn't pricing info yet<br />
-                                <a href="/provider/listings/pricing/<?= $this->listing->id ?>">Set Pricing now</a></p>
-                            </div>
+                            <strong>Free</strong>
                             <?php endif ?>
                         </div><!-- closes ttl -->
                         <ul>
