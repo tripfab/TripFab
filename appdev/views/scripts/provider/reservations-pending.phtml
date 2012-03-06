@@ -153,13 +153,13 @@
 			padding:0,
 			showCloseButton:0,
 			overlayColor:'#fff',
-			modal:1,
+			modal:1
 		});
 		$('.sendMessageForm').submit(function(){
 			$form = $(this);
 			$data = {
 				message:$('textarea[name=message]', $form).val(),
-				user:$('input[name=user]', $form).val(),
+				user:$('input[name=user]', $form).val()
 			};
 			if($data.message == ''){
 				showError('Enter a message');

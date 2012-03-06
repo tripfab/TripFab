@@ -90,6 +90,7 @@
                         <h4>Location</h4>
                         <?php if(!is_null($this->listing->lat)): ?>
                         <div id="mapcanvas"></div>
+                        <div class="mapshadow"></div><!--SHADOW-->
                         <address>
                             <p><strong><?= $this->listing->title ?></strong></p>
                             <p><?= $this->listing->address ?></p>

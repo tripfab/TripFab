@@ -19,7 +19,7 @@
             <?= $this->partial('partials/vendormainmenu.phtml', 
 			array('notifications'=> $this->pendingSettings,'active'=>'Password','parentActive'=>'Account')); ?>            
             <?php if(count($this->accounts) > 0): ?>
-            <h2 class="title">Bank Accounts <a href="/provider/account/payments/new" class="add">Add a New Account</a></h2>
+            <h2 class="title"><span class="cont">Bank Accounts</span> <a href="/provider/account/payments/new" class="add">Add a New Account</a></h2>
             <div id="b_accounts">
             	<?php foreach($this->accounts as $a): ?>
                 <div class="each"> 

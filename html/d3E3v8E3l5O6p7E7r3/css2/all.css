@@ -1709,7 +1709,7 @@ border-top: 1px solid #e3e3e3;
 	text-transform: uppercase;
 	font-weight: normal;
 	line-height: 21px;
-	background: url(../images2/ico_134.png) no-repeat 0 0;
+	background: url(../images2/ico_134.png) no-repeat 0 4px;
 	padding-left: 20px;
 }
 .sidebar .widget h2.categories {
@@ -2022,13 +2022,15 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 }
 
 .result .img-wrapper h4 {
-	background: url(../images2/t-8.png) repeat;
-	position: absolute;
-	bottom: 0;
-	color: #ffffff;
-	font-size: 13px;
-	line-height: 28px;
-	padding: 0 10px;
+	background: url("../images2/t-8.png") repeat scroll 0 0 transparent;
+    bottom: 0;
+    color: #FFFFFF;
+    display: table-cell;
+    font-size: 13px;
+    line-height: 17px;
+    padding: 5px 10px;
+    position: absolute;
+    vertical-align: middle;
 }
 
 .result .img-wrapper > img {
@@ -2183,7 +2185,7 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 .listing-gallery .listing-ttl {
 	background-color: #e4e4e4;
 	overflow: visible;
-	padding: 12px 20px 0;
+	padding: 10px 20px 10px;
 	position: relative;
 	-moz-border-radius-topleft: 4px;
 	-moz-border-radius-topright: 4px;
@@ -2254,7 +2256,11 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 	background-color: #FFFFFF;
 	padding: 10px;
 }
-
+.dd-2 > div select {
+	height: 25px;
+	line-height: 25px;
+	width: 170px;
+}
 .dd-2 > div + div {
 	background: url(../images2/g-3.png) repeat-x scroll 0 0 #FFFFFF;
 	border-top: 1px solid #E8E8E8;	
@@ -2294,6 +2300,8 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 	color: #303030;
 	font-size: 22px;
 	line-height: 29px;
+	text-shadow: px 1px 0px #ffffff;
+	filter: dropshadow(color=#ffffff, offx=, offy=1); 
 }
 
 .listing-gallery .listing-ttl > span {
@@ -2301,12 +2309,15 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 	color: #898989;
 	display: block;
 	font-size: 13px;
-	font-weight: bold;
 	line-height: 14px;
 	padding-left: 15px;
 	line-height: 23px;
 }
-
+.main.wrapper  .mapshadow{
+	background: url(../images2/map-shadow.png) no-repeat bottom center !important;
+	height: 16px;
+	width: 246px;
+}
 .listing-gallery > img {
 	display: block;
 }
@@ -3769,12 +3780,12 @@ ul.reviews li > div div.meta em.red {
 	list-style: none;
 	background: url(../images2/g-3.png) repeat-x scroll 0 0 #FFFFFF;
 	border-top: 1px solid #E8E8E8;
-	padding: 0 23px;
+	padding: 6px 19px 0 19px;
 }
 
 .widget.summary ul li {
 	line-height: 20px;
-	padding: 13px 0;
+	padding: 10px 0;
 	border-bottom: 1px solid #e8e8e8;
 	color: #303030;
 	font-size: 12px;
@@ -3792,7 +3803,7 @@ ul.reviews li > div div.meta em.red {
 }
 
 .widget.summary ul li.checkin strong{
-	background-position: 0 3px;
+	background-position: 0 1px;
 }
 .widget.summary ul li.checkout strong{
 	background-position: 0 -53px;
@@ -3823,7 +3834,7 @@ ul.reviews li > div div.meta em.red {
 }
 .widget.summary .total {
 	border-top: 1px solid #d0d0d0;
-	padding:10px 18px 10px;
+	padding:12px 19px 13px 19px;
 	background: url(../images2/g-12.png) repeat-x 0 0 #303030;
 	-moz-border-radius-topleft: 0px;
 	-moz-border-radius-topright: 0px;
@@ -3838,8 +3849,8 @@ ul.reviews li > div div.meta em.red {
 }
 .widget.summary .total .btn-1{
 	float: left;
-	font: bold 15px/40px Helvetica;
-    height: 40px;
+	font: bold 15px/42px Helvetica;
+    height: 39px;
     padding: 0 23px;
     margin-left: 0;
 }
@@ -8431,6 +8442,7 @@ h2.title .back:hover,
 	position:absolute;
 	top:10px;
 	right:0;
+	z-index: 1;
 }
 .lstng .right .state span {
 	display:block;
@@ -10040,7 +10052,6 @@ h2.title .back:hover,
 	border-radius: 4px;
 	behavior: url(/PIE.htc);
 	z-index: 0;
-	overflow: hidden;
 }
 
 .reservation.in {
@@ -10050,6 +10061,7 @@ h2.title .back:hover,
 .reservation .top {
 	padding: 15px 23px;
 	position: relative;
+
 }
 
 .reservation .top > img {
@@ -17533,8 +17545,8 @@ h2.title .back:hover,
 }
 #dialpad .middle > p {
 	background-color: #f5f5f5;
-	padding: 7px 10px 9px 22px;
-	font: bold 12px/15px Helvetica;
+	padding: 15px 10px 15px 22px;
+	font: bold 12px/16px Helvetica;
 	margin-bottom: 12px;
 }
 #dialpad .middle .number-display {

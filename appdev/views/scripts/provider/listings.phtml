@@ -236,7 +236,7 @@
 			overlayColor:'#fff',
 			centerOnScroll:1,
 			overlayOpacity:0.7,
-			showCloseButton:0,
+			showCloseButton:0
 		});
 		$('.preferences .btn-10').click(function() {
 			$pref = $(this).parents('.preferences');
@@ -262,7 +262,7 @@
 						$('span', $msg).addClass(response.missing);
 						$('.listing'+response.id+' .right > ul').before($msg);
 					}
-				},
+				}
 			});
 		});
 	});
