@@ -508,6 +508,38 @@
 .dd.login p.link a:hover {
 	color: #9BD2FC;
 }
+
+
+
+
+.dd.login .dd-content {	
+	padding: 14px 18px;
+	overflow: hidden;
+}
+
+.dd.login .dd-content img {
+	float: left;
+	margin-right: 18px;
+}
+
+.dd.login .dd-content ul {
+	float: left;
+	list-style: none;
+	font-size: 11px;
+	font-weight: bold;
+	line-height: 18px;
+}
+
+.dd.login .dd-content ul a {
+	color: #303030;
+	font-size: 12px;
+	line-height: 20px;
+}
+
+.dd.login .dd-content ul a:hover, .dd.login .dd-footer a:hover {
+	color: #60b5f7;
+	text-decoration: none;
+}
  .hidden {
  	display:none;
  }
