@@ -276,12 +276,14 @@
                 	<?php foreach($this->items  as $item): ?>
                     <?php if($item->available): ?>
                     <li><em></em><a href=""><?= $item->listing_title ?><span>$<?= $item->total ?></span></a></li>
+                    <?php elseif($item->available === false): ?>
+                    <li><em></em><a href=""><?= $item->listing_title ?><span>Not available</span></a></li>
                     <?php else: ?>
-                    <li><em></em><a href=""><?= $item->listing_title ?><span>Error</span></a></li>                    
+                    <li><em></em><a href=""><?= $item->listing_title ?><span>Not ready</span></a></li>                    
                     <?php endif ?>
                     <?php endforeach ?>
                     <?php foreach($this->items2  as $item): ?>
-                    <li><em></em><a href=""><?= $item->listing_title ?><span>Not charged</span></a></li>
+                    <li><em></em><a href=""><?= $item->listing_title ?><span>Free</span></a></li>
                     <?php endforeach ?>
                 </ul>
                 <div class="bottom"> <a href="" class="btn-1">Okay, continue</a>
