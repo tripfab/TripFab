@@ -538,9 +538,14 @@ class ProviderController extends Zend_Controller_Action
             $getthere = $this->listings->getLocationOf($listing->id);
             if($this->getRequest()->isPost()){
                 if($_POST['_task'] === md5('add_location')){
-                    $getthere->$_POST['location'] = ' ';
+					switch($_POST['location']){
+						case 'plane': $getthere->plane = ' '; break;
+						case 'car':   $getthere->car   = ' '; break;
+						case 'train': $getthere->train = ' '; break;
+						case 'boat':  $getthere->boat  = ' '; break;
+						case 'bus':   $getthere->bus   = ' '; break;
+					}
                     $getthere->save();
-                    setcookie('alert', 'Your changes have been saved');
                     $this->_redirect('provider/listings/location/'.$listing->id);
                 } else {
                     //echo '<pre>'; print_r($_POST); echo '</pre>'; die;
