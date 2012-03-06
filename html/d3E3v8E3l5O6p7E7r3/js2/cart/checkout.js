@@ -46,7 +46,7 @@ $(document).ready(function() {
                 showError('Please select the expiration year');
                 return false;
             } else {
-                Stripe.setPublishableKey('pk_2zRRbxtjPQAoqfkECkELiRf9dCz2U');  
+                Stripe.setPublishableKey(PUBLIC_KEY);
                 $data = {
                     number:    $('.cnum', this).val(),
                     cvc: 	   $('.ccode', this).val(),

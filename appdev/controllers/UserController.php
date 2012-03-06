@@ -384,6 +384,9 @@ class UserController extends Zend_Controller_Action
         
         $this->view->user = $this->user->getData();
         
+        $keys = Zend_Registry::get('stripe');
+        $this->view->pkey = $keys['public_key'];
+        
         return 'account-newpayment';
     }
     
@@ -429,6 +432,9 @@ class UserController extends Zend_Controller_Action
         
         $this->view->user    = $this->user->getData();
         $this->view->account = $account;
+        
+        $keys = Zend_Registry::get('stripe');
+        $this->view->pkey = $keys['public_key'];
         
         return 'account-editpayment';
     }
@@ -817,7 +823,7 @@ class UserController extends Zend_Controller_Action
         
         $user = $this->user->getData(true);
         
-        $date   = date('Y-m-d', strtotime($trip->start));
+        $date = date('Y-m-d', strtotime($trip->start));
 
         $cart = $this->cart->fetchNew();
         $cart->user_id  = $user->id;
@@ -860,9 +866,7 @@ class UserController extends Zend_Controller_Action
                             $data['capacity']);
                 
                 if($rowR->available) {
-                
                     $row = $this->cartitems->fetchNew();
-
                     $row->cart_id     = $cart->id;
                     $row->checkin     = date('Y-m-d', strtotime($rowR->checkin));
                     $row->listing_id  = $listing->id;
@@ -874,7 +878,7 @@ class UserController extends Zend_Controller_Action
                     $row->subtotal    = $rowR->subtotal;
                     $row->taxes       = $rowR->taxes;
                     $row->total       = $rowR->total;
-                    $row->created     = date('Y-m-d g:i:s');
+                    $row->created     = date('Y-m-d H:i:s');
                     $row->triplisting = $listing->triplisting_id;
 
                     $row->rate_description       = $rowR->rate_description;
@@ -883,8 +887,6 @@ class UserController extends Zend_Controller_Action
                     $row->save();
                     
                     $items[] = $row;
-                    
-                    
                 }
             }
             elseif($listing->main_type == 5)
@@ -897,14 +899,13 @@ class UserController extends Zend_Controller_Action
                             $listing, 
                             $data['adults'], 
                             $data['kids'], 
-                            date('Y-m-d', strtotime($data['checkin'])), 
+                            date('Y-m-d', strtotime($date)),
                             null, 
                             $trip->days, $data['option']);
                 
                 if($rowR->available) {
                 
                     $row = $this->cartitems->fetchNew();
-
                     $row->cart_id     = $cart->id;
                     $row->checkin     = date('Y-m-d', strtotime($rowR->checkin));
                     $row->checkout    = date('Y-m-d', strtotime($rowR->checkout));
@@ -919,7 +920,7 @@ class UserController extends Zend_Controller_Action
                     $row->subtotal    = $rowR->subtotal;
                     $row->taxes       = $rowR->taxes;
                     $row->total       = $rowR->total;
-                    $row->created     = date('Y-m-d g:i:s');
+                    $row->created     = date('Y-m-d H:i:s');
                     $row->triplisting = $listing->triplisting_id;
 
                     $row->rate_description       = $rowR->rate_description;

@@ -247,6 +247,7 @@ class IndexController extends Zend_Controller_Action
                 $getthere = $this->listings->getLocationOf($listing->id);
 
                 $rooms = $this->listings->getHotelRooms($listing->id);
+                $rooms2 = $this->listings->getHotelRooms($listing->id, true);
                 $amenities = $this->listings->getDefaultAmenities(true);
                 $beds = array();
                 foreach($rooms as $room){
@@ -267,11 +268,13 @@ class IndexController extends Zend_Controller_Action
 
                 $this->view->prices = $prices;
 
+                //var_dump($rooms2); die;
 
                 $this->view->overview = $overview;
                 $this->view->details  = $details;
                 $this->view->getthere = $getthere;
                 $this->view->rooms    = $rooms;
+                $this->view->rooms2   = $rooms2;
                 $this->view->beds     = $beds;
                 $this->view->room_amenities = $room_amenities;
                 $this->view->amenities = $amenities;

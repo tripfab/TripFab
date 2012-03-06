@@ -393,6 +393,9 @@ class CartController extends Zend_Controller_Action {
         if($cartitem->user_id != $this->user->getId())
                 $this->_redirect('/');
         
+        $keys = Zend_Registry::get('stripe');
+        $this->view->pkey = $keys['public_key'];
+        
         if($cartitem->type == 1)
         {
             $listing = $this->listings->getListing($cartitem->listing_id);
@@ -580,7 +583,7 @@ class CartController extends Zend_Controller_Action {
                         'status'    => 0,
                         'created'   => date('Y-m-d G:i:s'),
                         'updated'   => date('Y-m-d G:i:s'),
-                        'paywoth'   => $account->id,
+                        'paywith'   => $account->id,
                     );
 
                     $transaction = $this->transactions->fetchNew();
@@ -625,9 +628,10 @@ class CartController extends Zend_Controller_Action {
                             'ammount'   => $cartitem->total,
                             'date'      => date('Y-m-d G:i:s'),
                             'trip_id'   => $listing->id,
-                            'status'    => 0,
+                            'status'    => 1,
                             'created'   => date('Y-m-d G:i:s'),
-                            'updated'   => date('Y-m-d G:i:s')
+                            'updated'   => date('Y-m-d G:i:s'),
+                            'paywith'   => $account->id
                         );
 
                         $transaction = $this->transactions->fetchNew();
@@ -663,13 +667,13 @@ class CartController extends Zend_Controller_Action {
                                 'user_name' => $this->user->getName(),
                                 'method'    => $method,
                                 'ammount'   => $cartitem->total,
-                                'date'      => date('Y-m-d G:i:s'),
+                                'date'      => date('Y-m-d H:i:s'),
                                 'listing_id'=> $listing->id,
                                 'vendor_id' => $vendor->id,
                                 'status'    => 0,
-                                'created'   => date('Y-m-d G:i:s'),
-                                'updated'   => date('Y-m-d G:i:s'),
-                                'paywoth'   => $account->id,
+                                'created'   => date('Y-m-d H:i:s'),
+                                'updated'   => date('Y-m-d H:i:s'),
+                                'paywith'   => $account->id,
                             );
 
                             $transaction = $this->transactions->fetchNew();
@@ -693,10 +697,13 @@ class CartController extends Zend_Controller_Action {
                         }
                     }
                     
-                    $trip = $cartitem->listing_id;
+                    $trip = $this->trips->getItn($cartitem->listing_id, true);
+                    $trip->status = 2;
+                    $trip->save();
+                    
                     $cartitem->delete();
 
-                    $this->_redirect('cart/itninvoice/'.$trip);
+                    $this->_redirect('cart/itninvoice/'.$trip->id);
                 break;
             }
         }

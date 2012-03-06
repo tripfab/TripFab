@@ -123,20 +123,12 @@
                     <div class="widget summary">
                         <div class="ttl">Trip Summary</div>
                         <ul>
-                            <li class="checkin"><strong>Trip Starts</strong> Tue, February 21st 2012</li>
-                            <li class="checkout"><strong>Trips Ends</strong>Wed, February 22nd 2012</li>
-                            <li class="time"><strong>Trip Duration</strong> 9 Days</li>
-                            <li class="occupation"><strong>Travelers</strong>
-                                <dl>
-                                    <dt>Adults</dt>
-                                    <dd>2</dd>
-                                    <dt>Children</dt>
-                                    <dd>3</dd>
-                                </dl>
-                            </li>
+                            <li class="checkin"><strong>Trip Starts</strong> <?= date('D, F jS, Y', strtotime($this->trip->start)) ?></li>
+                            <li class="checkout"><strong>Trips Ends</strong><?= date('D, F jS, Y', strtotime($this->trip->end)) ?></li>
+                            <li class="time"><strong>Trip Duration</strong> <?= $this->trip->days ?> Days</li>
                         </ul>
-                        <div class="total"> <a href="#" class="btn-1">Book Now</a>
-                            <p>Grand Total <strong>$137.50</strong></p>
+                        <div class="total"> <a href="#" class="booknow btn-1">Book Now</a>
+                            <p>Grand Total <strong>$<?= $this->cartitem->total ?></strong></p>
                         </div><!-- closes total --> 
                     </div><!-- closes widget --> 
                 </div><!-- closes right --> 
@@ -145,17 +137,23 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript">PUBLIC_KEY = "<?= $this->pkey ?>"; </script>
 <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript" src="/js2/cardcheck.min.js"></script>
 <script type="text/javascript" src="/js2/cart/checkout.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
-	$('a.helptip').click(function() {
-		$('.tip').toggleClass('hidden');
-		return false
+	$(document).ready(function() {
+		$('a.helptip').click(function() {
+			$('.tip').toggleClass('hidden');
+			return false
+		});
+		
+		$('.booknow').click(function(){
+			$('#checkout').submit();
+			return false;
+		});
 	});
-});
 </script>
 </body>
 </html>
