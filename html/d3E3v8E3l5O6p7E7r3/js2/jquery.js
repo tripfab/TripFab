@@ -3664,7 +3664,7 @@ function showAlert($message) {
 	$('.big-message .wrapper span').text($message);
 	$('.big-message').slideDown('fast');
 	clearTimeout();
-	setTimeout('hideMessage()', 5000);
+	setTimeout('hideMessage()', 2000);
 }
 function hideMessage(){
 	$('.big-message').slideUp('fast');
@@ -3677,7 +3677,7 @@ function showError($message) {
 	$('.big-message .wrapper span').text($message);
 	$('.big-message').slideDown('fast');
 	clearTimeout();
-	setTimeout('hideMessage()', 5000);
+	setTimeout('hideMessage()', 2000);
 }
 
 $(function(){

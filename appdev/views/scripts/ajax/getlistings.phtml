@@ -1,3 +1,10 @@
+<?php $_classes = array(
+		2 => 'restaurant',
+		4 => 'sights',
+		5 => 'hotel',
+		6 => 'activity',
+		7 => 'entertaiment'
+) ?>
 <?php if(!is_null($this->city)): ?>
 <?php $url = $this->baseUrl() .'/'. $this->country->identifier .'/'. $this->city->identifier .'/filter';
 $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this->stars; ?>
@@ -28,7 +35,7 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
 		</div><!-- closes img-wrapper -->
 		<div class="meta">
 			<span class="location"><strong><?= $list->city ?></strong>, <?= $list->country ?></span> 
-			<span class="cat"><img src="/images2/cleardot.gif" alt="" /></span>
+			<span class="cat <?= $_classes[$list->main_type] ?>"><img src="/images2/cleardot.gif" alt="" /></span>
 		</div><!-- closes meta -->
 		<p class="listing_description"><?= substr($list->description, 0, 197) ?>...</p>
 		<?php if($list->price > 0): ?>
