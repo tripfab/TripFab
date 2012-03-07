@@ -132,7 +132,7 @@
                         	<strong class="charges">Pricing Details</strong>
                         	<dl>
 	                            <?php foreach($this->items  as $item): ?>
-                        		<dt>Tropical Bungee</dt>
+                        		<dt><?= $item->listing_name ?></dt>
                                 <?php if($item->total > 0): ?>
                         		<dd>$<?= $item->total ?></dd>
                                 <?php else: ?>

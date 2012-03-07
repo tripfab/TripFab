@@ -745,39 +745,81 @@ class UserController extends Zend_Controller_Action
         $items2 = array();
         $options = array();
         
-        foreach($listings as $listing){
+        $caculated = array();
+        
+        foreach($listings as $u => $listing){
             if($listing->main_type == 6 || $listing->main_type == 5){
-                $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
-                $checkin = date('Y-m-d', $checkin);
-                
-                $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
-                $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
-                
-                $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
-                $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
-                
-                $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $trip->days, $option, $capacity);
-                
-                $item->day = $listing->day;
-                $item->listing_city = $listing->city;
-                $item->listing_country = $listing->country;
-                
-                $items[] = $item;
-                
-                if($listing->main_type == 6){
+                if($listing->main_type == 5) {
+                    if(!@in_array($listing->triplisting_id, $caculated)) {
+                        $j = 2;
+                        for($i = $listing->day; $i <= $trip->days; $i++){
+                            $_diff = false; $found = false;
+                            foreach($listings as $list2) {
+                                if($list2->day == ($i+1) && $list2->main_type == 5) {
+                                    if($list2->listing_id == $listing->listing_id) {
+                                        $j++;
+                                        $caculated[] = $list2->triplisting_id;
+                                        $found = true;
+                                    } else {
+                                        $_diff = true;
+                                    } break;
+                                }
+                            }
+                            if($_diff) break;
+                            elseif(!$found and ($trip->days - 1) > $i) $j++;
+                        }
+                        
+                        $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                        $checkin = date('Y-m-d', $checkin);
+
+                        $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                        $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                        $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                        $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                        $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $j, $option, $capacity);
+
+                        $item->day = $listing->day;
+                        $item->listing_city = $listing->city;
+                        $item->listing_country = $listing->country;
+
+                        $items[] = $item;
+                        
+                        $options[$listing->id]['options'] = $this->listings->getHotelRooms($listing->id);
+
+                        $prices = $this->listings->getSchPrices($listing);
+                        $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+                        
+                        $caculated[] = $listing->id;
+                    }
+                } 
+                else {
+                    $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                    $checkin = date('Y-m-d', $checkin);
+
+                    $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                    $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                    $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                    $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                    $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $trip->days, $option, $capacity);
+
+                    $item->day = $listing->day;
+                    $item->listing_city = $listing->city;
+                    $item->listing_country = $listing->country;
+
+                    $items[] = $item;
+
                     $options[$listing->id]['options'] = $this->listings->getSchedulesOf($listing->id);
-                    
+
                     if(is_null($listing->min) or is_null($listing->max)){
                         $options[$listing->id]['capacity'] = $this->listings->getActivityTypes($listing->id);
 
                         $prices = $this->listings->getSchPrices($listing);
                         $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
                     }
-                } else {
-                    $options[$listing->id]['options'] = $this->listings->getHotelRooms($listing->id);
-                    
-                    $prices = $this->listings->getSchPrices($listing);
-                    $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
                 }
             }
         }
@@ -848,6 +890,8 @@ class UserController extends Zend_Controller_Action
 
         $items  = array();
         
+        $caculated = array();
+        
         foreach($listings as $listing){
             if($listing->main_type == 6){
                 $checkin   = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
@@ -891,45 +935,66 @@ class UserController extends Zend_Controller_Action
             }
             elseif($listing->main_type == 5)
             {
-                $checkin   = date('Y-m-d', strtotime($trip->start));
-                
-                $data = $_POST['bookings'][$listing->id];
-                
-                $rowR = $this->listings->getQuote(
-                            $listing, 
-                            $data['adults'], 
-                            $data['kids'], 
-                            date('Y-m-d', strtotime($date)),
-                            null, 
-                            $trip->days, $data['option']);
-                
-                if($rowR->available) {
-                
-                    $row = $this->cartitems->fetchNew();
-                    $row->cart_id     = $cart->id;
-                    $row->checkin     = date('Y-m-d', strtotime($rowR->checkin));
-                    $row->checkout    = date('Y-m-d', strtotime($rowR->checkout));
-                    $row->listing_id  = $listing->id;
-                    $row->option_id   = $rowR->option_id;
-                    $row->adults      = $rowR->adults;
-                    $row->kids        = $rowR->kids;
-                    $row->rate        = $rowR->rate;
-                    $row->additional  = $rowR->additional;
-                    $row->rooms       = $rowR->rooms;
-                    $row->nights      = $rowR->nights;
-                    $row->subtotal    = $rowR->subtotal;
-                    $row->taxes       = $rowR->taxes;
-                    $row->total       = $rowR->total;
-                    $row->created     = date('Y-m-d H:i:s');
-                    $row->triplisting = $listing->triplisting_id;
-
-                    $row->rate_description       = $rowR->rate_description;
-                    $row->additional_description = $rowR->additional_description;
-
-                    $row->save();
+                if(!@in_array($listing->triplisting_id, $caculated)) {
+                    $j = 2;
+                    for($i = $listing->day; $i <= $trip->days; $i++){
+                        $_diff = false; $found = false;
+                        foreach($listings as $list2) {
+                            if($list2->day == ($i+1) && $list2->main_type == 5) {
+                                if($list2->listing_id == $listing->listing_id) {
+                                    $j++;
+                                    $caculated[] = $list2->triplisting_id;
+                                    $found = true;
+                                } else {
+                                    $_diff = true;
+                                } break;
+                            }
+                        }
+                        if($_diff) break;
+                        elseif(!$found and ($trip->days - 1) > $i) $j++;
+                    }
                     
-                    $items[] = $row;
+                    $checkin   = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                    $checkin   = date('Y-m-d', $checkin);
                 
+                    $data = $_POST['bookings'][$listing->id];
+
+                    $rowR = $this->listings->getQuote(
+                                $listing, 
+                                $data['adults'], 
+                                $data['kids'], 
+                                $checkin,
+                                null, 
+                                $j, $data['option']);
+
+                    if($rowR->available) {
+
+                        $row = $this->cartitems->fetchNew();
+                        $row->cart_id     = $cart->id;
+                        $row->checkin     = date('Y-m-d', strtotime($rowR->checkin));
+                        $row->checkout    = date('Y-m-d', strtotime($rowR->checkout));
+                        $row->listing_id  = $listing->id;
+                        $row->option_id   = $rowR->option_id;
+                        $row->adults      = $rowR->adults;
+                        $row->kids        = $rowR->kids;
+                        $row->rate        = $rowR->rate;
+                        $row->additional  = $rowR->additional;
+                        $row->rooms       = $rowR->rooms;
+                        $row->nights      = $rowR->nights;
+                        $row->subtotal    = $rowR->subtotal;
+                        $row->taxes       = $rowR->taxes;
+                        $row->total       = $rowR->total;
+                        $row->created     = date('Y-m-d H:i:s');
+                        $row->triplisting = $listing->triplisting_id;
+
+                        $row->rate_description       = $rowR->rate_description;
+                        $row->additional_description = $rowR->additional_description;
+
+                        $row->save();
+
+                        $items[] = $row;
+
+                    }
                 }
             }
         }
