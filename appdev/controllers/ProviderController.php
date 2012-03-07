@@ -2417,6 +2417,9 @@ class ProviderController extends Zend_Controller_Action
         }
         $this->listings->updatePricesOf($listing, $data);
         
+        $listing->policy = $data['policy'];
+        $listing->save();
+        
         setcookie('alert', 'Your changes have been saved');
         if($data['s'] == 1){
             setcookie('season','active');
