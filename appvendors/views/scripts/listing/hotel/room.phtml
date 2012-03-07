@@ -101,11 +101,10 @@ label { float: left; padding: 5px 0; margin: 0;}
             <div class="item">
                 <div class="selects">
                     <select name="room[people]">
-                    	<option value="1">1 person</option>
-                        <?php for($i=2;$i<=12;$i++): ?>
+                    	<option value="0">Unknown</option>
+                        <?php for($i=1;$i<=12;$i++): ?>
                         <?php $selected = ($_POST['room']['people'] == $i) ? 'selected="selected"' : ''; ?>
-                        <?php $selected = (empty($selected) && $i == 2 && empty($_POST['room']['people'])) ? 'selected="selected"' : ''; ?>
-                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> people</option>
+                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> <?= ($i == 1) ? 'person' : 'people' ?></option>
     					<?php endfor ?>
                     </select>
                 </div> <!-- closes selects -->
@@ -115,10 +114,10 @@ label { float: left; padding: 5px 0; margin: 0;}
             <div class="item">
                 <div class="selects">
                     <select name="room[bedrooms]">
-                        <option value="1">1 bedroom</option>
-                        <?php for($i=2;$i<=12;$i++): ?>
+                        <option value="0">Unknown</option>
+                        <?php for($i=1;$i<=12;$i++): ?>
                         <?php $selected = ($_POST['room']['bedrooms'] == $i) ? 'selected="selected"' : ''; ?>
-                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> bedrooms</option>
+                        <option <?= $selected ?> value="<?= $i ?>"><?= ($i == 1) ? $i.' bedroom' : $i.' bedrooms' ?> </option>
     					<?php endfor ?>
                     </select>
                 </div><!-- closes selects -->
@@ -127,7 +126,7 @@ label { float: left; padding: 5px 0; margin: 0;}
             </div><!-- closes item -->
             <div class="item">
                 <div class="selects">
-                	<?php if(is_array($_POST['bed'])): ?>
+                	<?php if(isset($_POST['bed']) and is_array($_POST['bed'])): ?>
                 	<?php foreach($_POST['bed'] as $key => $bed): ?>
                 	<div class="bed">
                     	<a class="remove removeBed" href="">Delete</a>
@@ -152,7 +151,7 @@ label { float: left; padding: 5px 0; margin: 0;}
                     <?php endforeach ?>
                     <?php endif ?>
                     
-                    <?php if(is_array($_POST['beds'])): ?>
+                    <?php if(isset($_POST['beds']) and is_array($_POST['beds'])): ?>
                     <?php foreach($_POST['beds'] as $key => $bed): ?>
                 	<div class="bed">
                     	<a class="remove removeBed" href="">Delete</a>
@@ -202,9 +201,9 @@ label { float: left; padding: 5px 0; margin: 0;}
                     	<?php for($i=0;$i<count($this->amenities);$i=$i+2): ?>
                         <tr>
                         	<?php for($j=$i;($j<count($this->amenities)) and ($j<$i+2); $j++): ?>
-                            <?php if(is_array($_POST['amenities'])): ?>
+                            <?php if(isset($_POST['amenities']) and is_array($_POST['amenities'])): ?>
                             <?php $checked = (in_array($this->amenities[$j]->id, $_POST['amenities'])) ? 'checked="checked"' : ''; ?>
-                            <?php endif ?>
+                            <?php else: $checked =''; endif ?>
                             <td><input <?= $checked ?> name="amenities[<?= $this->amenities[$j]->id ?>]" 
                             value="<?= $this->amenities[$j]->id ?>" type="checkbox"/>                            
 							<?= $this->amenities[$j]->name ?></td>
@@ -298,11 +297,10 @@ label { float: left; padding: 5px 0; margin: 0;}
             <div class="item">
                 <div class="selects">
                     <select name="room[people]">
-                    	<option value="1">1 person</option>
-                        <?php for($i=2;$i<=12;$i++): ?>
+                    	<option value="0">Unknown</option>
+                        <?php for($i=1;$i<=12;$i++): ?>
                         <?php $selected = ($room->people == $i) ? 'selected="selected"' : ''; ?>
-                        <?php $selected = (empty($selected) && $i == 2 && empty($room->people)) ? 'selected="selected"' : ''; ?>
-                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> people</option>
+                        <option <?= $selected ?> value="<?= $i ?>"><?= ($i == 1) ? $i.' person' : $i.' people' ?></option>
     					<?php endfor ?>
                     </select>
                 </div> <!-- closes selects -->
@@ -312,10 +310,10 @@ label { float: left; padding: 5px 0; margin: 0;}
             <div class="item">
                 <div class="selects">
                     <select name="room[bedrooms]">
-                        <option value="1">1 bedroom</option>
-                        <?php for($i=2;$i<=12;$i++): ?>
+                        <option value="0">Unknown</option>
+                        <?php for($i=1;$i<=12;$i++): ?>
                         <?php $selected = ($room->bedrooms == $i) ? 'selected="selected"' : ''; ?>
-                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> bedrooms</option>
+                        <option <?= $selected ?> value="<?= $i ?>"><?= ($i == 1) ? $i.' bedroom' : $i.' bedrooms' ?></option>
     					<?php endfor ?>
                     </select>
                 </div><!-- closes selects -->
@@ -470,10 +468,9 @@ label { float: left; padding: 5px 0; margin: 0;}
             <div class="item">
                 <div class="selects">
                     <select name="room[people]">
-                    	<option value="1">1 person</option>
-                        <?php for($i=2;$i<=12;$i++): ?>
-                        <?php $selected = ($i == 2) ? 'selected="selected"' : '' ?>
-                        <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> people</option>
+                    	<option value="0">Unknown</option>
+                        <?php for($i=1;$i<=12;$i++): ?>
+                        <option value="<?= $i ?>"><?= ($i==1) ? $i.' person' : $i.' people' ?></option>
     					<?php endfor ?>
                     </select>
                 </div> <!-- closes selects -->
@@ -483,9 +480,9 @@ label { float: left; padding: 5px 0; margin: 0;}
             <div class="item">
                 <div class="selects">
                     <select name="room[beds]">
-                        <option value="1">1 bed</option>
-                        <?php for($i=2;$i<=20;$i++): ?>
-                        <option value="<?= $i ?>"><?= $i ?> beds</option>
+                        <option value="0">Unknown</option>
+                        <?php for($i=1;$i<=20;$i++): ?>
+                        <option value="<?= $i ?>"><?= ($i==1) ? $i.' bed' : $i.' beds' ?></option>
     					<?php endfor ?>
                     </select>
                 </div><!-- closes selects -->
@@ -494,20 +491,6 @@ label { float: left; padding: 5px 0; margin: 0;}
             </div><!-- closes item -->
             <div class="item">
                 <div class="selects">
-                	<div class="bed">
-                        <select name="beds[0][quantity]">
-                            <?php for($i=1;$i<=20;$i++): ?>
-                            <option value="<?= $i ?>"><?= $i ?></option>
-                            <?php endfor ?>
-                        </select>
-                        <select name="beds[0][type]">
-                            <option value="Single">Single</option>
-                            <option value="Double">Double</option>
-                            <option value="Queen">Queen</option>
-                            <option value="King">King</option>
-                        </select>
-                        <div class="clear"></div>
-                    </div>
                     <div class="bed new hidden">
                     	<a class="remove removeBed" href="">Delete</a>
                         <select name="quantity">

@@ -137,20 +137,28 @@
                             	<?php if(!empty($room->description)): ?>
                                 <li><?= $room->description ?></li>
                                 <?php endif ?>
+                                <?php if($room->nights > 0):?>
                                 <li>Minimum Stay: <?= $room->nights ?> <?= (count($room->nights) > 1) ? "nights" : 'night' ?>   </li>
+                                <?php endif ?>
+                                <?php if($room->people > 0): ?>
                                 <li>Maximum Accomodation: <?= $room->people ?> <?= (count($room->people) > 1) ? "people" : 'person' ?></li>
+                                <?php endif ?>
+                                <?php if($room->bedrooms > 0): ?>
                                 <li>
                                 	<?= $room->bedrooms ?> <?= (count($room->bedrooms) > 1) ? "Bedrooms" : 'Bedroom' ?>  
                                 </li>
+                                <?php endif ?>
                                 <?php foreach($this->beds[$room->id] as $bed): ?>
                                 <li><?= $bed->quantity ?> <?= $bed->type ?> <?= (count($room->quantity) > 1) ? "Beds" : 'Bed' ?></li>
                                 <?php endforeach ?>
+                                <?php if(count($this->room_amenities[$room->id]) > 0): ?>
                                 <li><b>Amenities</b>
                                 <ul>
                                 <?php foreach($this->room_amenities[$room->id] as $amm): ?>
                                 <li><?= $this->amenities[$amm]->name ?></li>
                                 <?php endforeach ?>
                                 </ul></li>
+                                <?php endif ?>
                             </ul>
                             <?php endforeach ?>
                         </div><!-- closes tab-content -->
