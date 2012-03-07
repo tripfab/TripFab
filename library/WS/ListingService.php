@@ -1134,6 +1134,7 @@ class WS_ListingService {
     {
         $select = $this->pictures_db->select();
         $select->where('listing_id = ?', $listing);
+        $select->order('main DESC');
         $select->limit(10,0);
         
         $pictures = $this->pictures_db->fetchAll($select);
