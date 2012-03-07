@@ -1487,14 +1487,21 @@ class AjaxController extends Zend_Controller_Action
                     $updatePrice = true;                
                 
                 if($_POST['time'] == 'stay'){
-                    $listing->day  = 1;
-                    $listing->time = $times[$_POST['time']];
+                    $listin2 = $triplistings->fetchNew();
+                    $listin3 = $listing->toArray();
+                    unset($listin3['id']);
+                    $listin2->setFromArray($listin3);
+                    
+                    $listin2->day  = $_POST['day'];
+                    $listin2->time = $times[$_POST['time']];
+                    
+                    $listin2->save();
                 } else {
                     $listing->day  = $_POST['day'];
                     $listing->time = $times[$_POST['time']];
+                    
+                    $listing->save();
                 }
-                
-                $listing->save();
                 
                 if($updatePrice){
                     $listings = new Model_Listings();
@@ -1581,16 +1588,20 @@ class AjaxController extends Zend_Controller_Action
                     'Night'     => 3,
                 );
                 
-                $listing->day = NULL;
-                $listing->time = NULL;
-                
-                $listing->save();
-                
                 $listings = new Model_Listings();
                 $list = $listings->fetchRow("id = {$listing->listing_id}");
                 
                 $trip->price = $trip->price - $list->price;
                 $trip->save();
+                
+                if($listing->time == 4) {
+                    $listing->delete();
+                } else {
+                    $listing->day = NULL;
+                    $listing->time = NULL;
+
+                    $listing->save();
+                }
                 
                 echo $trip->price; die;
             } else {

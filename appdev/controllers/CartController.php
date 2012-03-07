@@ -1068,11 +1068,9 @@ class CartController extends Zend_Controller_Action {
         ));
         $select->where('itinerary_listings.itinerary_id = ?', $id);
         $select->where('itinerary_listings.user_id = ?', $this->user->getId());
+        $select->where('itinerary_listings.day is not null');
+        $select->where('itinerary_listings.time is not null');
         $listings = $db->fetchAll($select, array(), 5);
-        
-        $select = $this->billing->select();
-        $select->where('user_id = ?', $this->user->getId());
-        $billing = $this->billing->fetchRow($select);
         
         $select = $db->select();
         $select->from('itinerary_listings');
@@ -1091,7 +1089,6 @@ class CartController extends Zend_Controller_Action {
         
         $this->view->user         = $this->user->getData();
         $this->view->trip         = $trip;
-        $this->view->billing      = $billing;
         $this->view->listings     = $listings;
         $this->view->reservations = $reservations;
         $this->view->transaction  = $transaction;

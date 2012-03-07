@@ -12,8 +12,7 @@ $(document).ready(function() {
     });
     
     $('.activities-tabs > ul > li').each(function(){
-        $class = '.tab > ul > .cat-'+$(this).attr('class');
-        $('> a > em',this).text('('+$($class).length+')');
+        $('em',this).text('('+$('ul li', $('a', this).attr('href')).length+')');
     });
 
     $fancybox = true;
@@ -73,6 +72,8 @@ $(document).ready(function() {
 
     $( ".tab ul li" ).draggable({
         revert: 'invalid',
+        helper: "clone",
+        cursor:'move',
         start:function(){
             $clip = $(this).parents('div.jcarousel-clip');
             $clip.css({
@@ -203,7 +204,7 @@ $(document).ready(function() {
 					
                     $empty.remove();
                     li.appendTo($dropable);
-                    ui.draggable.remove();
+                    //ui.draggable.remove();
 					
                     $( ".itinerary-items .item ul li" ).draggable({
                         revert: 'invalid'
@@ -233,9 +234,10 @@ $(document).ready(function() {
         }
     });
     
-    $('.itinerary-items .item a.delete').live('click', function(){
+    $('.itinerary-items .item:not(.stay) a.delete').live('click', function(){
         var $element = $(this).parents('li');
         var values   = $element.data('values');
+        console.log(values);
         $.ajax({
             url:'/ajax/removefromtrip',
             type:'post',
@@ -278,6 +280,8 @@ $(document).ready(function() {
                     
                     $li.draggable({
                         revert:'invalid',
+                        helper: "clone",
+                        cursor:'move',
                         start:function(){
                             $clip = $(this).parents('div.jcarousel-clip');
                             $clip.css({
@@ -291,6 +295,28 @@ $(document).ready(function() {
                             $clip.removeClass('unhidden');
                         }						
                     });
+                });
+                $('#tripprice').text('$'+response);
+            }
+        });		
+        return false;
+    });
+    
+    $('.itinerary-items .item.stay a.delete').live('click', function(){
+        var $element = $(this).parents('li');
+        var values   = $element.data('values');
+        console.log(values);
+        $.ajax({
+            url:'/ajax/removefromtrip',
+            type:'post',
+            data:{
+                listing : values.id,
+                trip    : values.trip
+            },
+            success:function(response){
+                $element.fadeOut('normal', function(){
+                    $element.remove();
+                    //console.log(values.clas);
                 });
                 $('#tripprice').text('$'+response);
             }
