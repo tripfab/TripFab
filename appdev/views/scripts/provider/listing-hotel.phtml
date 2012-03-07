@@ -91,7 +91,7 @@
 								if($this->details[$i]->type == 1) {$ok = false; $ok1 = false; }
 								if($this->details[$i]->type == 3) {$ok = false; $ok3 = false; }
 								$i++; } ?>
-						<?php if(!$ok): ?>
+						<?php if(!$ok or (count($this->listing_amenities) > 0)): ?>
                         <div class="tab-ttl">
                             Some details about the hotel
                         </div><!-- closes tab-ttl -->
