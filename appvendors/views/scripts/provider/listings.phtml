@@ -168,7 +168,7 @@
 			overlayColor:'#fff',
 			centerOnScroll:1,
 			overlayOpacity:0.7,
-			showCloseButton:0,
+			showCloseButton:0
 		});
 		$('.lbox .btn-2, .lbox .btn-11').click(function(){
 			$(this).parents('form').submit();
@@ -186,7 +186,7 @@
 					if(response.success == 1){
 						$msg = $('<div></div>');
 						$msg.addClass(response.status);
-						$msg.append('<span><a href="/provider/listings/activate/'+response.id+'">'+response.text+'</a></span>');
+						$msg.append('<div><a href="/provider/listings/activate/'+response.id+'"><span>'+response.text+'</span></a></div>');
 						$('span', $msg).addClass(response.missing);
 						$('.listing'+response.id+' .right > ul').before($msg);
 					}

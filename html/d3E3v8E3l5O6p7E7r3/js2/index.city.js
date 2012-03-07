@@ -55,10 +55,9 @@ $(function(){
                 href:'#newtrip',
                 padding:0,
                 overlayColor:'#fff',
-                showCloseButton:false,
-                modal:true,
-                centerOnScroll:true
+                centerOnScroll: true
             });
+      
         } else {
             $(this).next('input').addClass('hidden');
         }
