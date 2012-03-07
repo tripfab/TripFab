@@ -50,7 +50,11 @@
 										$this->thumbnail(65, $listing->image, '','1:1') :
 										$this->thumbnail(65, '/images/img-70.png', '','1:1'); ?>
                                 <h2><?= $listing->title ?></h2>
+                                <?php if($listing->price > 0): ?>
                                 <span>$<?= $listing->price ?></span>
+                                <?php else: ?>
+								<span><h2>Price Not charged</h2></span>
+                                <?php endif ?>
                             </li>
                             <?php endif ?>
                             <?php endforeach ?>
@@ -86,7 +90,11 @@
 												$this->thumbnail(45, $list->image, '','1:1') :
 												$this->thumbnail(45, '/images/img-70.png', '','1:1'); ?>
                                         <h2><?= $list->title ?></h2>
+										<?php if($list->price > 0): ?>
                                         <span>$<?= $list->price ?></span>
+                                        <?php else: ?>
+								<span><h2>Price Not charged</h2></span>                            
+                                        <?php endif ?>
                                         <a href="" class="delete">Delete</a>
                                     </li>
                                     <?php endforeach ?>
@@ -112,7 +120,11 @@
 												$this->thumbnail(45, $list->image, '','1:1') :
 												$this->thumbnail(45, '/images/img-70.png', '','1:1'); ?>
                                         <h2><?= $list->title ?></h2>
+										<?php if($list->price > 0): ?>
                                         <span>$<?= $list->price ?></span>
+                                        <?php else: ?>
+								<span><h2>Price Not charged</h2></span>
+                                        <?php endif ?>
                                         <a href="" class="delete">Delete</a>
                                     </li>
                                     <?php endforeach ?>
