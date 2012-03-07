@@ -7438,14 +7438,18 @@ h2.title .back:hover,
 }
 
 .itinerary-items .item ul li h2 {	
-	font-size: 12px;	
+	font-size: 12px;
 }
 
 .itinerary-items .item ul li span {
 	font-size: 14px;
 	font-weight: bold;
 }
-
+.itinerary-items .item ul li span h2 {	
+	font-size: 11px;
+	font-weight: normal;
+	color: #CCC;
+}
 .itinerary-items .item ul li a.delete {
 	background: url(../images2/ico-31.png) no-repeat;
 	display: block;
