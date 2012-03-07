@@ -130,16 +130,17 @@
                         </ul>
                         <div class="pricing_det">
                         	<strong class="charges">Pricing Details</strong>
-                        	<dl>
-	                            <?php foreach($this->items  as $item): ?>
+                        	
+	                        <?php foreach($this->items  as $item): ?>
+                            <dl>
                         		<dt><?= $item->listing_name ?></dt>
                                 <?php if($item->total > 0): ?>
                         		<dd>$<?= $item->total ?></dd>
                                 <?php else: ?>
-                                <dd>Free</dd>
+                                <dd>Not charged</dd>
                                 <?php endif ?>
-                                <?php endforeach ?>
                         	</dl>
+                            <?php endforeach ?>
                         </div><!--PRICING_DET-->
                         <div class="total"> <a href="#" class="booknow btn-1">Book Now</a>
                             <p>Grand Total <strong>$<?= $this->cartitem->total ?></strong></p>
