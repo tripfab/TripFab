@@ -124,19 +124,23 @@
                     <div class="widget summary">
                         <div class="ttl">Trip Summary</div>
                         <ul>
-                        	<?php foreach($this->items  as $item): ?>
-                            <li><strong><?= $item->listing_name ?></strong>
-                            <?php if($item->total > 0): ?>
-                            $<?= $item->total ?>
-                            <?php else: ?>
-                            Free
-                            <?php endif ?>
-                            </li>
-                            <?php endforeach ?>
                             <li class="checkin"><strong>Trip Starts</strong> <?= date('D, F jS, Y', strtotime($this->trip->start)) ?></li>
                             <li class="checkout"><strong>Trips Ends</strong><?= date('D, F jS, Y', strtotime($this->trip->end)) ?></li>
                             <li class="time"><strong>Trip Duration</strong> <?= $this->trip->days ?> Days</li>
                         </ul>
+                        <div class="pricing_det">
+                        	<strong class="charges">Pricing Details</strong>
+                        	<dl>
+	                            <?php foreach($this->items  as $item): ?>
+                        		<dt>Tropical Bungee</dt>
+                                <?php if($item->total > 0): ?>
+                        		<dd>$<?= $item->total ?></dd>
+                                <?php else: ?>
+                                <dd>Free</dd>
+                                <?php endif ?>
+                                <?php endforeach ?>
+                        	</dl>
+                        </div><!--PRICING_DET-->
                         <div class="total"> <a href="#" class="booknow btn-1">Book Now</a>
                             <p>Grand Total <strong>$<?= $this->cartitem->total ?></strong></p>
                         </div><!-- closes total --> 

@@ -43,6 +43,7 @@
                         <ul id="mycarousel-<?= $i ?>">
                         	<?php if(isset($this->favorites[$i]) and count($this->favorites[$i]) > 0): ?>
                         	<?php foreach($this->favorites[$i] as $listing): ?>
+                            <?php if(($listing->main_type != 5) or (is_null($listing->day) and is_null($listing->time))): ?>
                             <li data-id="<?= $listing->id ?>" data-city="<?= $listing->city_id ?>" data-class="<?= $class[$i] ?>"
                             data-country="<?= $listing->country_id ?>" data-type="<?= $i ?>" class="<?= $class[$i] ?>" data-trip="<?= $this->trip->id ?>">
                                 <?= ($listing->image) ? 
@@ -51,6 +52,7 @@
                                 <h2><?= $listing->title ?></h2>
                                 <span>$<?= $listing->price ?></span>
                             </li>
+                            <?php endif ?>
                             <?php endforeach ?>
                             <?php endif ?>
                         </ul>
@@ -103,7 +105,9 @@
                                 <ul>
                                     <?php if(count($this->days[$i+1]['stay']) > 0): ?>
                                     <?php foreach($this->days[$i+1]['stay'] as $list): ?>
-                                    <li>
+                                    <li data-id="<?= $list->id ?>" data-city="<?= $list->city_id ?>" data-class="<?= $class[5] ?>"
+		                            data-country="<?= $list->country_id ?>" data-type="<?= $list->main_type ?>" class="<?= $class[5] ?>" 
+                                    data-trip="<?= $this->trip->id ?>">
                                         <?= ($list->image) ? 
 												$this->thumbnail(45, $list->image, '','1:1') :
 												$this->thumbnail(45, '/images/img-70.png', '','1:1'); ?>
