@@ -2040,7 +2040,7 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 .img-wrapper .dd-2 {
 	position: absolute;
 	right: -11px;
-	top: 25px;
+	top: 29px;
 }
 
 .result p {
@@ -5531,6 +5531,7 @@ ul.reviews li > div div.meta em.red {
 .profile-items .item > span {
 	color: #303030;
 	font-size: 12px;
+	width: 485px;
 }
 
 .profile-items .item > span a {
@@ -7894,6 +7895,9 @@ h2.title .back:hover,
 	z-index: 10;
 	width: 409px;
 	margin-bottom: 20px;
+	width: 200px;
+	margin-left: 10px;
+	float: right;
 }
 
 .sign-box .content span {
@@ -8853,16 +8857,6 @@ h2.title .back:hover,
 .listing-content .left ul {
 	list-style: none;
 	margin-bottom: 17px;
-}
-.listing-content .left ul li {
-	color: #303030;
-	font-size: 13px;
-	font-weight: bold;
-	line-height: 30px;
-	display: block;
-	padding-left: 26px;
-	width: 154px;
-	text-decoration: none;
 }
 .listing-content .left ul li a {
 	color: #303030;
@@ -11105,6 +11099,7 @@ h2.title .back:hover,
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px; 
+	cursor: pointer;
 }
 
 .sign-box.vendor.first .item-wrppr .item input + .map-wrapper {
@@ -11371,6 +11366,7 @@ h2.title .back:hover,
 
 .sign-box.vendor .content.prcng .prcng-item.hl .right ul li select {
 	float: right;
+	width: 50px;
 }
 
 .sign-box.vendor .content.prcng .prcng-item.hl .right ul li label {
@@ -17109,16 +17105,17 @@ h2.title .back:hover,
 	behavior: url(/PIE.htc);
 }
 #custom_checkout .left_block h3 {
-	font: bold 13px/50px Helvetica;
+	font:normal 13px/50px Helvetica;
 	color: #303030;
 	text-indent: 20px;
 }
 #custom_checkout .header {
-	background: url(../images2/g-54.png) repeat-x 0 0 #FFF;
+	background-color: #FFF;
 	height: 60px;
 	position: relative;
 	padding: 15px 0 0 45px;
 	z-index: 10;
+	border-top: 1px solid #e8e8e8;
 }
 #custom_checkout .header > a {
 	background: url(../images2/arrow-31.png) 17px 31px no-repeat ;
@@ -17135,12 +17132,12 @@ h2.title .back:hover,
 	background:url(../images2/g_67.png) repeat-x 0 0 #f0f9ff;
 }
 #custom_checkout .header .descrip{
-	width: 340px;
+	width: 300px;
 	float: left;
 }
 #custom_checkout .header img {
 	float: left;
-	margin-right: 10px;
+	margin-right: 15px;
 }
 #custom_checkout .header h4 {
 	font: bold 13px/17px Helvetica;
@@ -17148,12 +17145,13 @@ h2.title .back:hover,
 }
 #custom_checkout .header .type {
 	display: block;
-	font: normal 12px/17px Helvetica;
+	font: normal 11px/17px Helvetica;
+	color: #5C5C5C;
 }
 #custom_checkout .header .descrip > p {
 	color: #303030;
 	font: normal 12px/14px Helvetica;
-	background: url(../images2/ico-3.png) no-repeat 57px 50%;
+	background: url(../images2/ico-3.png) no-repeat 61px 50%;
 	text-indent: 15px;
 }
 #custom_checkout .header .arrow {
@@ -17169,9 +17167,8 @@ h2.title .back:hover,
 	background-position: bottom left;
 }
 #custom_checkout .header .info {
-	position: absolute;
-	top: 23px;
-	right: 0;
+	width: 300px;
+	float: right;
 }
 #custom_checkout .header .info span{
     color: #FFF;
@@ -17204,7 +17201,7 @@ h2.title .back:hover,
 }
 #custom_checkout .header .info p {
 	color: #303030;
-	font: bold 11px/30px Helvetica;
+	font:normal 11px/30px Helvetica;
 	float: right;
 	margin-right: 10px;
 	text-align: right;
@@ -17339,17 +17336,18 @@ h2.title .back:hover,
 	font: bold 13px/50px Helvetica;
 	color: #303030;
 	text-indent: 20px;
-	background: url(../images2/g-54.png) repeat-x bottom left;
-	height: 65px;
+	background: url(../images2/g-54.png) repeat-x left 50px;
+	height: 61px;
 }
 #custom_checkout .right_block ul {
 	margin-top: 8px;
 }
 #custom_checkout .right_block ul li {
 	list-style: none;
-	height: 31px;
 	background: url('../images2/bg.jpg') no-repeat left top;
 	position: relative;
+	padding: 6px 0;
+	border-top: 1px solid #f7f7f7;
 }
 #custom_checkout .right_block ul li:hover {
 	background-color: #303030;
@@ -17359,26 +17357,44 @@ h2.title .back:hover,
 	color: #FFF;
 	display: block;
 	color: #303030;
-	font: normal 12px/31px Helvetica;
+	font: normal 12px/16px Helvetica;
 	padding-left: 20px;
+	overflow: hidden;
 }
 #custom_checkout .right_block ul li:hover a {
 	color: #FFF;
 	text-decoration: none;
 }
 #custom_checkout .right_block ul li a span {
-	position: absolute;
-	right: 10px;
-	top: 0;
+	float: right;
+	display: table-cell;
+	vertical-align: middle;
+	font: bold 12px/15px Helvetica;
+	padding-right: 20px;
+	width: 70px;
+	text-align: right;
+}
+#custom_checkout .right_block ul li a em {
+	font-style: normal;
+	padding-right: 10px;
 	display: block;
-	font: normal 12px/31px Helvetica;
+	float: left;
+	width: 157px;
+	padding-right: 20px;
 }
 #custom_checkout .right_block .bottom {
 	background-color: #303030;
 	overflow:hidden;
-	padding: 10px 18px;
+	padding: 12px 18px;
 	position: relative;
 	z-index: 0;
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-topright: 0px;
+	-moz-border-radius-bottomright: 4px;
+	-moz-border-radius-bottomleft: 4px;
+	-webkit-border-radius: 0px 0px 4px 4px;
+	border-radius: 0px 0px 4px 4px;
+	margin-top: 5px;
 }
 #custom_checkout .right_block .btn-1 {
 	float: left;
