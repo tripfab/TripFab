@@ -78,10 +78,9 @@
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('input').ToggleInputValue();
-		<?php if($this->successmessage): ?>
-		showAlert("Your changes have been saved");
-	    <?php endif ?>
+    <?php if($this->successmessage): ?>
+        showAlert("Your changes have been saved");
+    <?php endif ?>
     });
 </script>
 <style type="text/css">

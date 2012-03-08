@@ -104,7 +104,7 @@
 			overlayColor:'#000',
 			centerOnScroll:1,
 			overlayOpacity:0.3,
-			showCloseButton:0,
+			showCloseButton:0
 		});
 		$('input[name=starting]').each(function(){
 			$val = $(this).val();
@@ -113,14 +113,14 @@
 				defaultDate:$val,
 				onSelect:function(date){
 					$('input[name=ending]').datepicker('option','minDate', date);
-				},
+				}
 			});
 		});
 		$('input[name=ending]').each(function(){
 			$val = $(this).val();
 			$(this).datepicker({
 				dateFormat:'M dd, yy',
-				defaultDate:$(this).val(),
+				defaultDate:$(this).val()
 			});
 		});
 		

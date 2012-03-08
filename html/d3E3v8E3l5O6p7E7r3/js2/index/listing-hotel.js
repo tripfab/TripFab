@@ -26,32 +26,34 @@ $(document).ready(function() {
                 var $lng = $('#mapcanvas').data('lng');
 				
                 var $title = $('body').data('listing_title');
-				
+                
+                var latlng, myOptions, map, marker;
+                
                 if($lat != 'none' && $lng != 'none'){
-                    var latlng = new google.maps.LatLng($lat,$lng);
+                    latlng = new google.maps.LatLng($lat,$lng);
 					
-                    var myOptions = {
+                    myOptions = {
                         zoom: 12,
                         center: latlng,
-                        mapTypeId: google.maps.MapTypeId.ROADMAP,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
 					
-                    var map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
+                    map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
 					
-                    var marker = new google.maps.Marker({
+                    marker = new google.maps.Marker({
                         position: latlng,
-                        title:$title,
+                        title:$title
                     }); 
                     marker.setMap(map);
                 } else {
-                    var latlng = new google.maps.LatLng(40,0);
+                    latlng = new google.maps.LatLng(40,0);
 					
-                    var myOptions = {
+                    myOptions = {
                         zoom: 2,
                         center: latlng,
-                        mapTypeId: google.maps.MapTypeId.ROADMAP,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
-                    var map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
+                    map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
                 }
             }
         }
@@ -68,7 +70,7 @@ $(document).ready(function() {
     $('#datepicker').datepicker({ 
         showOtherMonths: true,
         beforeShowDay:function(date){
-            var date = $.datepicker.formatDate('mm-dd-yy', date);
+            date = $.datepicker.formatDate('mm-dd-yy', date);
             var result = ($.inArray(date,$disableddates) != -1) ? false : true;
             return [result];
         },
@@ -87,7 +89,7 @@ $(document).ready(function() {
     $('#datepicker-2').datepicker({
         showOtherMonths: true,
         beforeShowDay:function(date){
-            var date = $.datepicker.formatDate('mm-dd-yy', date);
+            date = $.datepicker.formatDate('mm-dd-yy', date);
             return ($.inArray(date,$disableddates) != -1) ? [false] : [true]; 
         },
         minDate:new Date(),
@@ -98,7 +100,7 @@ $(document).ready(function() {
             $('#checkoutlabel').text($date);
             $('#inputCheckout').val($date);
             refreshPrice();
-        },
+        }
     });
 	
     $('input[name=option]').click(refreshPrice);
@@ -138,7 +140,7 @@ function refreshPrice()
         kids	 : $('select[name=kids]').val(),
         id		 : $('body').data('listingid'),
         token	 : $('body').data('listingtoken'),
-        price	 : $('body').data('listingprice'),
+        price	 : $('body').data('listingprice')
     };
 	
     $.ajax({
@@ -167,7 +169,7 @@ $(function(){
                 overlayColor:'#fff',
                 showCloseButton:false,
                 modal:true,
-                centerOnScroll:true,
+                centerOnScroll:true
             });
         } else {
             $(this).next('input').addClass('hidden');
@@ -251,7 +253,7 @@ $(function(){
         $data = {
             listing:$('input[name=listing]', $form).val(),
             trip:$('select[name=trip]', $form).val(),
-            title:$('input[name=title]', $form).val(),
+            title:$('input[name=title]', $form).val()
         };
 		
         if($data.trip == '')
@@ -290,14 +292,14 @@ $(function(){
     $('a.lb').fancybox({
         padding:0,
         overlayColor:'#000',
-        centerOnScroll:1,
+        centerOnScroll:1
     });
 	
     $('#sendMessageForm').submit(function(){
         $form = $(this);
         $data = {
             message:$('textarea[name=message]', $form).val(),
-            vendor:$('input[name=vendor]', $form).val(),
+            vendor:$('input[name=vendor]', $form).val()
         };
         if($data.message == ''){
             alert('Enter a message');
@@ -371,7 +373,7 @@ $(function(){
         $vals = {
             checkin:$('input[name=checkin]', $(this)).val(),
             checkout:$('input[name=checkout]', $(this)).val(),
-            option:$('input[name=option]:checked', $(this)).val(),
+            option:$('input[name=option]:checked', $(this)).val()
         };
 		
         if($vals.checkin != '' && $vals.checkout != '' && $vals.option != undefined)
@@ -381,6 +383,7 @@ $(function(){
             showError('Please Fill out the form first');
             return false;
         }
+        return true;
     });
 	
     $('#ui-datepicker-div').wrap('<div id="calendarContainer"></div>');
@@ -465,7 +468,7 @@ $(document).ready(function() {
                 }
             },
             error:function(res){
-                console.log(res);
+                //console.log(res);
             }
         });
         

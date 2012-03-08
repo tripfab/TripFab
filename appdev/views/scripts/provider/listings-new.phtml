@@ -87,15 +87,12 @@
 </div><!-- closes w1 -->	
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('input').ToggleInputValue();
-        $('form select').jqTransSelect();
-		
-		$('a.box').click(function(){
-			$(this).parents('form').submit();
-			return false;
-		});
+$(document).ready(function() {		
+    $('a.box').click(function(){
+            $(this).parents('form').submit();
+            return false;
     });
+});
 </script>
 </body>
 </html

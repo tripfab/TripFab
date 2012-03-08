@@ -161,5 +161,4 @@ jQuery('#calendar').fullCalendar({
 
 $(window).load(function(){
 	var events = jQuery('#calendar').fullCalendar( 'clientEvents');
-	console.dir(events);
 });

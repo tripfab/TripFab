@@ -82,15 +82,12 @@ $(document).ready(function() {
             });
             $clip.addClass('unhidden');
             $fancybox = false;
-            //console.log('drag start event');
         },
         stop:function(){
             $clip = $(this).parents('div.jcarousel-clip');
             $clip.removeClass('unhidden');
             if(!$drop)
                 $fancybox = true;
-				
-            //console.log('drag stop event');
         }
     });
 	
@@ -108,7 +105,6 @@ $(document).ready(function() {
         activeClass: "ui-state-default",
         hoverClass: "ui-state-hover",
         drop: function( event, ui ) {
-            //console.log('drop event start');
             $drop	  = true;
             $fancybox     = false;
             var values 	  = ui.draggable.data('values');
@@ -155,15 +151,11 @@ $(document).ready(function() {
                     $fancybox = true;
                     $drop     = false;
                     $('#tripprice').text('$'+response);
-                    
-                    //console.log('drop event stop');
                 },
                 error:function(){
                     showError('Something went wrong');
                     $fancybox = true;
                     $drop     = false;
-                    
-                    //console.log('drop event stop');
                 }
             });
         }
@@ -174,7 +166,6 @@ $(document).ready(function() {
         activeClass: "ui-state-default",
         hoverClass: "ui-state-hover",
         drop: function( event, ui ) {
-            //console.log('drop event start hotels');
             $drop     = true;
             $fancybox = false;
             var values 	  = ui.draggable.data('values');
@@ -220,15 +211,11 @@ $(document).ready(function() {
                     $fancybox = true;
                     $drop     = false;
                     $('#tripprice').text('$'+response);
-                    
-                    //console.log('drop event stop hotels'); 
                 },
                 error:function(){
                     showError('Something went wrong');
                     $fancybox = true;
                     $drop     = false;
-                    
-                    //console.log('drop event stop hotels'); 
                 }
             });
         }
@@ -237,7 +224,6 @@ $(document).ready(function() {
     $('.itinerary-items .item:not(.stay) a.delete').live('click', function(){
         var $element = $(this).parents('li');
         var values   = $element.data('values');
-        console.log(values);
         $.ajax({
             url:'/ajax/removefromtrip',
             type:'post',
@@ -276,8 +262,6 @@ $(document).ready(function() {
                     
                     $element.remove();
                     
-                    //console.log(values.clas);
-                    
                     $li.draggable({
                         revert:'invalid',
                         helper: "clone",
@@ -305,7 +289,6 @@ $(document).ready(function() {
     $('.itinerary-items .item.stay a.delete').live('click', function(){
         var $element = $(this).parents('li');
         var values   = $element.data('values');
-        console.log(values);
         $.ajax({
             url:'/ajax/removefromtrip',
             type:'post',
@@ -316,7 +299,6 @@ $(document).ready(function() {
             success:function(response){
                 $element.fadeOut('normal', function(){
                     $element.remove();
-                    //console.log(values.clas);
                 });
                 $('#tripprice').text('$'+response);
             }

@@ -103,6 +103,8 @@ $(document).ready(function() {
                 $('.loading').text('Something went wrong');
             }
         });
+        
+        return false;
     });
     
     

@@ -19,32 +19,34 @@ $(document).ready(function() {
     var $lng = $('#mapcanvas').data('lng');
 	
     var $title = $('body').data('listing_title');
-	
+    
+    var latlng, myOptions, map, marker;
+    
     if($lat != 'none' && $lng != 'none'){
-        var latlng = new google.maps.LatLng($lat,$lng);
+        latlng = new google.maps.LatLng($lat,$lng);
 		
-        var myOptions = {
+        myOptions = {
             zoom: 12,
             center: latlng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 		
-        var map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
+        map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
 		
-        var marker = new google.maps.Marker({
+        marker = new google.maps.Marker({
             position: latlng,
-            title:$title,
+            title:$title
         }); 
         marker.setMap(map);
     } else {
-        var latlng = new google.maps.LatLng(40,0);
+        latlng = new google.maps.LatLng(40,0);
 		
-        var myOptions = {
+        myOptions = {
             zoom: 2,
             center: latlng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-        var map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
+        map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
     }		
 });
 
@@ -87,7 +89,7 @@ $(function(){
                 overlayColor:'#fff',
                 showCloseButton:false,
                 modal:true,
-                centerOnScroll:true,
+                centerOnScroll:true
             });
         } else {
             $(this).next('input').addClass('hidden');
@@ -171,7 +173,7 @@ $(function(){
         $data = {
             listing:$('input[name=listing]', $form).val(),
             trip:$('select[name=trip]', $form).val(),
-            title:$('input[name=title]', $form).val(),
+            title:$('input[name=title]', $form).val()
         };
 		
         if($data.trip == '')
