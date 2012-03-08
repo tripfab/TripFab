@@ -7166,6 +7166,7 @@ h2.title .back:hover,
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
+	overflow: hidden;
 	behavior: url(/PIE.htc);
 }
 
@@ -17425,7 +17426,7 @@ h2.title .back:hover,
 	border-top: 1px solid #f7f7f7;
 	vertical-align: middle;
 }
-#custom_checkout .right_block table tr:hover {
+#custom_checkout .right_block table tr:hover td{
 	background-color: #303030;
 }
 
@@ -17438,17 +17439,17 @@ h2.title .back:hover,
 	overflow: hidden;
 	padding-right: 10px;
 }
-#custom_checkout .right_block table tr:hover a,
-#custom_checkout .right_block table tr:hover span {
-	color: #FFF;
-	text-decoration: none;
-}
 #custom_checkout .right_block table tr span {
 	vertical-align: middle;
 	font: bold 12px/15px Helvetica;
 	padding-right: 20px;
 	width: 70px;
 	text-align: right;
+}
+#custom_checkout .right_block table tr:hover a,
+#custom_checkout .right_block table tr:hover span {
+	color: #FFF;
+	text-decoration: none;
 }
 #custom_checkout .right_block table tr a em {
 	font-style: normal;
@@ -17458,6 +17459,8 @@ h2.title .back:hover,
 	width: 157px;
 	padding-right: 20px;
 }
+.celdano {background: none;}
+.celdasi {background-color:#303030;}
 #custom_checkout .right_block .bottom {
 	background-color: #303030;
 	overflow:hidden;

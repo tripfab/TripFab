@@ -276,28 +276,28 @@
                 		<?php foreach($this->items as $item): ?>
                 		<?php if($item->avaible): ?>
                 		<tr>
-                			<td width="200"><a href="#"><em><?= $item->listing_title ?></em></a></td>
-                			<td width="75" valign="middle"><span>$<?= $item->total ?></span></td>
+                			<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><em><?= $item->listing_title ?></em></a></td>
+                			<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>$<?= $item->total ?></span></td>
                 		</tr>
                 		<?php elseif($item->available === false): ?>
                 		
                 		<tr>
-                			<td width="200"><a href="#"><em><?= $item->listing_title ?></em></a></td>
-                			<td width="75" valign="middle"><span>Not available</span></td>
+                			<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><em><?= $item->listing_title ?></em></a></td>
+                			<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not available</span></td>
                 		</tr>
                 		<?php else: ?>
                 		
                 		<tr>
-                			<td width="200"><a href="#"><?= $item->listing_title ?></a></td>
-                			<td width="75" valign="middle">Not ready</td>
+                			<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><?= $item->listing_title ?></a></td>
+                			<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not ready</span></td>
                 		</tr>
-                		<?php endif ?>
+                		<?php endif ?> 
                 		<?php endforeach ?>
                 		<?php foreach($this->items2 as $item): ?>
                 		
                 		<tr>
-                			<td width="200"><a href=""><em><?= $item->listing_title ?></em></a></td>
-                			<td width="75" valign="middle"><span>Not charged</span></td>
+                			<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href=""><em><?= $item->listing_title ?></em></a></td>
+                			<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not charged</span></td>
                 		</tr>
                 		<?php endforeach ?>
                 	</table>
