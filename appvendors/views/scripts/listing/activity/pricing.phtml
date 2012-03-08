@@ -8,11 +8,11 @@
             <?php if($this->help->act_pricing1 == 0): ?>
             <div class="desc">
                 <h3>What is the basic pricing?</h3>
-                <p>Some general details about the experience, listing name, contact information, categories and more.</p>
+                <p>Basic pricing is the shippest price you offer</p>
                 <a href="" rel="act_pricing1" class="remove">Remove</a>
             </div><!-- closes desc -->
             <?php endif ?>
-            <h2>With the Default Pricing the rates apply for all the unspecified dates.</h2>
+            <h2>With the Default Pricing the rates apply for dates that do not belong to any season.</h2>
             <?php $tab = 1 ?>
             <?php if((is_null($this->listing->min) and is_null($this->listing->max)) and (count($this->types) > 0)): ?>
             <?php foreach($this->types as $type): ?>
@@ -80,11 +80,11 @@
             <?php if($this->help->act_pricing2 == 0): ?>
             <div class="desc">
                 <h3>What is the seasonal pricing?</h3>
-                <p>Some general details about the experience, listing name, contact information, categories and more.</p>
+                <p>You can add seasons and assign different pricing to your activity and activity types depending on the season</p>
                 <a href="" rel="act_pricing2" class="remove">Remove</a>
             </div><!-- closes desc -->
             <?php endif ?>
-            <h2>With the Basic Pricing the rates apply for all the unspecified dates. <a href="#newSeasson" class="lb link-5">Add New Season</a></h2>
+            <h2>With the seasonal pricing rates apply just for the selected dates <a href="#newSeasson" class="lb link-5">Add New Season</a></h2>
             <div class="carrousel">
             	<?php $tab = 1 ?>
             	<?php foreach($this->seasons as $season): ?>
