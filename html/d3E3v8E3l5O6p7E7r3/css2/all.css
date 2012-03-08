@@ -2194,12 +2194,15 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 	-webkit-border-radius: 4px 4px 0px 0px;
 	border-radius: 4px 4px 0px 0px;
 	behavior: url(/PIE.htc);
+	z-index: 10;
 }
 
 .listing-gallery .listing-ttl .dd-2 {
 	position: absolute;
 	right: -4px;
 	top: 55px;
+	width: 210px;
+	z-index: 10000;  
 }
 
 .dd-2 {
@@ -2356,11 +2359,13 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 	position: relative;
 	height: 368px;
 	display: none;
+	z-index: 1;
 }
 .listing-gallery .img-wrapper-w {
 	position: relative;
 	height: 368px;
 	background-color: #000;
+	z-index: 1;
 }
 
 .listing-gallery .img-wrapper.active {
@@ -4450,7 +4455,8 @@ ul.reviews li > div div.meta em.red {
 	height: 324px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
-	border-radius: 4px; 
+	border-radius: 4px;
+	behavior: url(/PIE.htc);
 }
 
 .lb-recommendations .header {
@@ -14913,6 +14919,7 @@ h2.title .back:hover,
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px; 
+	behavior: url(/PIE.htc);
 }
 .lb .top {
 	background: url("../images2/g-13.png") repeat-x scroll 0 0 transparent;
@@ -17834,6 +17841,7 @@ h2.title .back:hover,
 	border-radius: 4px;
 	text-shadow: 0px 2px 0px #dc501f;
 	filter: dropshadow(color=#dc501f, offx=0, offy=2);
+	behavior: url(/PIE.htc);
 }
 #dialpad .middle .control .cancel:hover {
 	-webkit-box-shadow: 0px 1px 1px 0px #C5C5C5;

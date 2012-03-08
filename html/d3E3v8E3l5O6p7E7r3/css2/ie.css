@@ -1,7 +1,5 @@
 input[type="text"]:focus, input[type="password"]:focus, textarea:focus, textarea:hover, input[type="text"]:hover, input[type="password"]:hover {
-	border-color: #addeff!important;
-	box-shadow: none;	
-	behavior: url(/PIE.htc);
+	border-color: 1px solid #CCC;
 }
 /*HOME---------------------------------------------------------------------*/
 #newsletter input.btn-1 {
@@ -220,7 +218,7 @@ padding: 0 5px;
 h2.title span.cont {
 	display: block;
 	float:left;
-	width: 400px;
+	width: 400px; 
 }
 .reservations .top a.btn-10 {
 	z-index: 10;
@@ -233,12 +231,38 @@ h2.title span.cont {
 	top: 15px; 
 }
 
-.celdano {background: none;}
-.celdasi {background-color:#303030;}
+#dialpad .middle .control input {
+	position: relative;
+	z-index: 1;
+}
+.right-sidebar .widget.book .summary .btn-1 {
+	position: relative;
+	z-index: 1;
+}
+.right-sidebar .widget.talk > ul {
+	position: relative;
+	z-index: 1;
+}
+#dialpad .middle .control .cancel {
+	position: relative;
+	z-index: 1;
+}
+#dialpad .middle .numbers {
+	margin-bottom: 20px;
+}
+#start_call {
+	width: 281px;
+}
+#newtrip {
+	width: 340px;
+}
+#create_trip .bottom .btn-1,
+#create_trip .bottom .btn-10 {
+	position: relative;
+	z-index: 1; 
+}
 
-
-
-
-
-
-
+#create_trip .item input[type="text"] {
+	position: relative;
+	z-index: 1;
+}
