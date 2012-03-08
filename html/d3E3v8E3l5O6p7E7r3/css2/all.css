@@ -8765,10 +8765,86 @@ h2.title .back:hover,
 	-webkit-border-radius: 4px 4px 0px 0px;
 	border-radius: 4px 4px 0px 0px; 
 }
-
+.listing-wrapper .listing-ttl {
+	padding-bottom: 0;
+}
+.listing-wrapper .listing-ttl .control {
+	width: 255px;
+	float: right;
+	background: url(../images2/sp_01.png) no-repeat left 50%;
+	height: 73px;
+	position: relative;
+}
+.listing-wrapper .listing-ttl .control .link-4{
+	position: absolute;
+	top: 5px;
+	right: 0;
+}
+.listing-wrapper .listing-ttl .control .btn-1, 
+.listing-wrapper .listing-ttl .control .btn-10 {
+	float: right;
+	height: 30px;
+	display: block;
+	margin-top: 30px;
+}
+.listing-wrapper .listing-ttl .status {
+	float: left;
+	width: 550px;
+}
+.listing-wrapper .listing-ttl .status h2 {
+	overflow: hidden;
+}
+.listing-wrapper .listing-ttl .status h2 em {
+	font-style: normal;
+	display: block;
+	float: left;
+}
+.listing-wrapper .listing-ttl .status h2 span  {
+	padding: 0 4px;
+	text-align: center;
+	color: #FFF;
+	text-transform: uppercase;
+	font: bold 9px/13px Helvetica;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	height: 13px;
+	display: block;
+	float: left;
+	margin: 10px 0 0 5px;
+}
+.listing-wrapper .listing-ttl .status h2 span.inactive {
+	background-color: #f26522;
+}
+.listing-wrapper .listing-ttl .status h2 span.active {
+	background-color: #f7941d;
+}
+.listing-wrapper .listing-ttl .pending {
+	background: url(../images2/ico-117.png) no-repeat left 50%;
+	height: 14px;
+	padding-left: 25px;
+}
+.listing-wrapper .listing-ttl .pending a {
+	color: #60b5f7;
+}
+.listing-wrapper .listing-ttl .pending a:hover {
+	color: #9bd2fc;
+}
+.listing-wrapper .listing-ttl .ready {
+	background: url(../images2/ico-122.png) no-repeat left 50%;
+	height: 14px;
+	padding-left: 20px;
+}
+.listing-wrapper .listing-ttl .waiting {
+	background: url(../images2/icn_07.png) no-repeat left 50%;
+	height: 14px;
+	padding-left: 20px;
+}
 .listing-ttl img {
 	float: left;
 	margin-right: 15px;
+	background: url(../images2/sw-01.png) no-repeat bottom center;
+	padding-bottom: 4px;
 }
 
 .listing-ttl h2 {
@@ -8779,6 +8855,7 @@ h2.title .back:hover,
 .listing-ttl p {
 	font-size: 12px;
 	font-weight: bold;
+	float: left;
 }
 
 .listing-ttl p span.inactive {
