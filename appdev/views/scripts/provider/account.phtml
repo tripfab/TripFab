@@ -93,7 +93,7 @@
                             </div><!-- closes item -->
                             <div class="clear"></div>
                         </div><!-- closes item-wrppr -->
-                        <div class="item-wrppr">
+                        <div id="contacts" class="item-wrppr">
                             <div class="item-ttl">
                                 Staff Contacts
                             </div><!-- closes item ttl -->
@@ -258,6 +258,14 @@
 			overlayOpacity: 0.7,
 			showCloseButton: false,
 			centerOnScroll:1
+		});
+		
+		$('#contacts .remove').click(function(){
+			$item = $(this).parents('.item');
+			$item.fadeOut('normal', function(){
+				$item.remove();
+			});
+			return false;
 		});
     });
 </script>

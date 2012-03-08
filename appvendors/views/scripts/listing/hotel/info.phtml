@@ -329,7 +329,8 @@ input.schname { float:none !important; width:90px !important; }
 				Basic Information
 			</div><!-- closes item ttl -->
 			<div class="item first last">
-				<input placeholder="Hotel's name" type="text" class="noclean limitcc" name="title" rel="60" value="<?= $this->listing->title ?>" />
+            	<?php $title = ($this->listing->title == "Untitled Listing") ? '' : $this->listing->title; ?>
+				<input tabindex="1" placeholder="Hotel's name" type="text" class="noclean limitcc" name="title" rel="60" value="<?= $title ?>" />
 				<h4>Title</h4>
 				<span>Hotel name<br />
                 <span class="charsLeftInp"></span> Character Left</span>
