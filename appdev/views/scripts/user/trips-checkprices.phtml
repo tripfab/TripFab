@@ -272,20 +272,35 @@
             
             <div class="right_block">
                 <h5>Trip Details</h5>
-                <ul>
-                	<?php foreach($this->items  as $item): ?>
-                    <?php if($item->available): ?>
-                    <li><a href=""><em><?= $item->listing_title ?></em><span>$<?= $item->total ?></span></a></li>
-                    <?php elseif($item->available === false): ?>
-                    <li><a href=""><em><?= $item->listing_title ?></em><span>Not available</span></a></li>
-                    <?php else: ?>
-                    <li><a href=""><?= $item->listing_title ?><span>Not ready</span></a></li>                    
-                    <?php endif ?>
-                    <?php endforeach ?>
-                    <?php foreach($this->items2  as $item): ?>
-                    <li><a href=""><em><?= $item->listing_title ?></em><span>Not charged</span></a></li>
-                    <?php endforeach ?>
-                </ul>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                		<?php foreach($this->items as $item): ?>
+                		<?php if($item->avaible): ?>
+                		<tr>
+                			<td width="200"><a href="#"><em><?= $item->listing_title ?></em></a></td>
+                			<td width="75" valign="middle"><span>$<?= $item->total ?></span></td>
+                		</tr>
+                		<?php elseif($item->available === false): ?>
+                		
+                		<tr>
+                			<td width="200"><a href="#"><em><?= $item->listing_title ?></em></a></td>
+                			<td width="75" valign="middle"><span>Not available</span></td>
+                		</tr>
+                		<?php else: ?>
+                		
+                		<tr>
+                			<td width="200"><a href="#"><?= $item->listing_title ?></a></td>
+                			<td width="75" valign="middle">Not ready</td>
+                		</tr>
+                		<?php endif ?>
+                		<?php endforeach ?>
+                		<?php foreach($this->items2 as $item): ?>
+                		
+                		<tr>
+                			<td width="200"><a href=""><em><?= $item->listing_title ?></em></a></td>
+                			<td width="75" valign="middle"><span>Not charged</span></td>
+                		</tr>
+                		<?php endforeach ?>
+                	</table>
                 <div class="clear"></div>
                 <div class="bottom"> <a href="" class="btn-1">Okay, continue</a>
                     <p>Grand Total<strong>$<?= $this->bigtotal ?></strong></p>

@@ -17413,45 +17413,44 @@ h2.title .back:hover,
 	font: bold 13px/50px Helvetica;
 	color: #303030;
 	text-indent: 20px;
-	background: url(../images2/g-54.png) repeat-x left 50px;
-	height: 61px;
+	/*background: url(../images2/g-54.png) repeat-x left 50px;*/
+	height: 42px;
 }
-#custom_checkout .right_block ul {
+#custom_checkout .right_block table {
 	margin-top: 8px;
 }
-#custom_checkout .right_block ul li {
-	list-style: none;
-	background: url('../images2/bg.jpg') no-repeat left top;
-	position: relative;
+#custom_checkout .right_block table tr td	{
+	position: relative;  
 	padding: 6px 0;
 	border-top: 1px solid #f7f7f7;
+	vertical-align: middle;
 }
-#custom_checkout .right_block ul li:hover {
+#custom_checkout .right_block table tr:hover {
 	background-color: #303030;
 }
 
-#custom_checkout .right_block ul li a {
+#custom_checkout .right_block table tr a {
 	color: #FFF;
 	display: block;
 	color: #303030;
 	font: normal 12px/16px Helvetica;
 	padding-left: 20px;
 	overflow: hidden;
+	padding-right: 10px;
 }
-#custom_checkout .right_block ul li:hover a {
+#custom_checkout .right_block table tr:hover a,
+#custom_checkout .right_block table tr:hover span {
 	color: #FFF;
 	text-decoration: none;
 }
-#custom_checkout .right_block ul li a span {
-	float: right;
-	display: table-cell;
+#custom_checkout .right_block table tr span {
 	vertical-align: middle;
 	font: bold 12px/15px Helvetica;
 	padding-right: 20px;
 	width: 70px;
 	text-align: right;
 }
-#custom_checkout .right_block ul li a em {
+#custom_checkout .right_block table tr a em {
 	font-style: normal;
 	padding-right: 10px;
 	display: block;
