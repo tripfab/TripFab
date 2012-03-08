@@ -501,5 +501,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $convert = $this->getOption('convert');
         Zend_Registry::set('convert',$convert['path']);
     }
+    
+    protected function _initNewsletterDb()
+    {
+        $confing = $this->getOption('newslater');
+        $adapter = new Zend_Db_Adapter_Mysqli($confing);
+        Zend_Registry::set('newsletter_db', $adapter);
+    }
 }
 

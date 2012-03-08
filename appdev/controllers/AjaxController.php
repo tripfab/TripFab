@@ -1827,4 +1827,22 @@ class AjaxController extends Zend_Controller_Action
     {
     
     }
+    
+    public function newssignupAction()
+    {
+        if($this->getRequest()->isPost()){
+            $emails = new Zend_Db_Table(array(
+                'name' => 'emails',
+                'db'   => 'newsletter_db'
+            ));
+            
+            $email = $emails->fetchNew();
+            $email->email = $_POST['email'];
+            $email->date  = date('Y-m-d H:i:s');
+            $email->save();
+            
+            echo 1; die;
+        }
+        throw new Exception();
+    }
 }

@@ -132,17 +132,21 @@
     </div><!--WRAP-->
 </div><!--POPULAR-CITIES-->
 <div id="newsletter">
+	<?php if(!isset($_COOKIE['newsletter'])): ?>
     <div class="cont">
         <p>Find out when we will launch in your city. <strong>Sign up for our newsletter:</strong> </p>
         <form method="post" action="">
             <fieldset>
-                <input type="text" name="" value="Enter your e-mail here" />
-                <input type="submit" name="" value="Subscribe" class="btn-1" />
+                <input type="text" name="email" value="Enter your e-mail here" />
+                <input type="submit" value="Subscribe" class="btn-1" />
                 <div class="clear"></div>
             </fieldset>
         </form>
     </div><!--CONT-->
-    <div class="sent hidden"><strong>Thanks, we'll keep you posted.</strong> In the meantime, you can start creating your next trip in Costa Rica. <a href="/costa_rica/san_jose">Explore Listings</a></div><!--SENT-->
+    <div class="sent hidden"><strong>Thanks, we'll keep you posted.</strong> In the meantime, you can start creating your next trip in Costa Rica. <a href="/costa_rica/">Explore Listings</a></div><!--SENT-->
+    <?php else: ?>
+    <div class="sent"><strong>Thanks, we'll keep you posted.</strong> In the meantime, you can start creating your next trip in Costa Rica. <a href="/costa_rica/">Explore Listings</a></div><!--SENT-->    
+    <?php endif ?>
 </div><!--NEWSLETTER-->
 <div id="footer">
     <div class="wrap">
@@ -177,6 +181,27 @@ $(document).ready(function() {
         overlayOpacity: '0.7',
         centerOnScroll:1
     });
+	$('#newsletter form').submit(function(){
+		$email = $(this).find('input[name=email]').val();
+		if($email == "" || $email == "Enter your e-mail here") {
+			$email.focus();
+			return false;
+		}
+
+		$.ajax({
+			type: 'POST',
+			url: '/ajax/newssignup',
+			data: {email:$email},
+			success: function() {
+				$('#newsletter .cont').fadeOut('fast', function(){
+					$('#newsletter .sent').fadeIn('fast');
+				});
+				$.cookie('newsletter','1',{ expires: 365 })
+			}
+		});
+		
+		return false;
+	});
 });
 </script>
 <script type="text/javascript">
