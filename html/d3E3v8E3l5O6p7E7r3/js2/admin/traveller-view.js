@@ -1,9 +1,9 @@
 function panel(uid, tab, page){
-	
+	var url;
 	if(typeof page == 'undefined')
-		var url = '/ajax/traveller/?user='+ uid +'&page=' + tab;
+		url = '/ajax/traveller/?user='+ uid +'&page=' + tab;
 	else
-		var url = '/ajax/partner/?user='+ uid +'&page=' + tab;
+		url = '/ajax/partner/?user='+ uid +'&page=' + tab;
 
 	$("#nav1").removeClass('current');
 	$("#nav2").removeClass('current');

@@ -214,18 +214,9 @@
 			'auto' 		: true,
 			'fileExt'	: '*.jpg;*.gif;*.png',
 			'onError':function(e,a,c,d){
-				console.log('ERROR');
-				console.log(e);
-				console.log(a);
-				console.log(c);
-				console.log(d);
+				
 			},
 			'onComplete':function(a,b,c,image){
-				console.log('COMPLETE');
-				console.log(a);
-				console.log(b);
-				console.log(c);
-				console.log(image);
 				if(image != 'error'){
 					$('.picture img').attr('width',68);
 					$('.picture img').attr('height',68);
@@ -235,8 +226,8 @@
 			'scriptData':{
 				'userids':<?= $this->user->id ?>,
 				'formtoken':'<?= $this->user->token ?>',
-				'usertoken':'<?= md5($this->user->token.'change_picture') ?>',
-			},
+				'usertoken':'<?= md5($this->user->token.'change_picture') ?>'
+			}
         });
 		
 		$('#provider_form').validate({
@@ -249,7 +240,7 @@
 					return;
 				element.parents('.item').addClass('error');
 				element.after(error);
-			},
+			}
 		});
 		
 		$('a.f_b').fancybox({

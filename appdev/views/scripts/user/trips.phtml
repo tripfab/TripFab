@@ -161,14 +161,11 @@
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('textarea').elastic();				
-        $('input').ToggleInputValue();
-        $('form select').jqTransSelect();
 		$('a.lb').fancybox({
 			padding:0,
 			overlayColor:'#fff',
 			centerOnScroll:1,
-			showCloseButton:0,
+			showCloseButton:0
 		});
 		
 		$('a.delete_btn').click(function(){
@@ -186,12 +183,12 @@
 				$end = $(this).parents('.content').find('input.calendar2');
 				$end.datepicker('option','minDate', date);
 			},
-			dateFormat:'D M d yy',
+			dateFormat:'D M d yy'
 		});
 		
 		$('input.calendar2').datepicker({
 			minDate:new Date(),
-			dateFormat:'D M d yy',
+			dateFormat:'D M d yy'
 		});
 		
 		$('#ui-datepicker-div').wrap('<div id="calendarContainer"></div>');

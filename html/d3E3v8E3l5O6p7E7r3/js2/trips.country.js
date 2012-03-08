@@ -105,8 +105,6 @@ $(function(){
         $data.category = $a.data('category');
         $data.country  = $price.parents('.slider-wrapper').data('country');
         
-        //console.log($data);
-        
         refresh_price = false;
         
         if($ev.queryString == "") {

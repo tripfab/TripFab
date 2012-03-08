@@ -75,10 +75,7 @@ $(document).ready(function() {
     
     if(typeof $.address.parameter('error') != 'undefined') {
         showError($.address.parameter('error'));
-    }
-    
-    console.log();
-    
+    }    
 });
 
 function stripeResponseHandler(status, response) {

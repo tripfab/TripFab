@@ -174,16 +174,9 @@
 			'auto' 		: true,
 			'fileExt'	: '*.jpg;*.gif;*.png',
 			'onError':function(e,a,c,d){
-				console.log(e);
-				console.log(a);
-				console.log(c);
-				console.log(d);
+				
 			},
 			'onComplete':function(a,b,c,image){
-				console.log(a);
-				console.log(b);
-				console.log(c);
-				console.log(image);
 				if(image != 'error'){
 					$('img#userimage68').attr('width',68);
 					$('img#userimage68').attr('height',68);
@@ -193,14 +186,14 @@
 			'scriptData':{
 				'userids':<?= $this->user->id ?>,
 				'formtoken':'<?= $this->user->token ?>',
-				'usertoken':'<?= md5($this->user->token.'change_picture') ?>',
-			},
+				'usertoken':'<?= md5($this->user->token.'change_picture') ?>'
+			}
 		});
 		
 		$('input.calendar').datepicker({
-            dateFormat: 'MM d, yy',
-            defaultDate:$(this).val(),
-        });
+                    dateFormat: 'MM d, yy',
+                    defaultDate:$(this).val()
+                });
 	});
 </script>	
 </body>

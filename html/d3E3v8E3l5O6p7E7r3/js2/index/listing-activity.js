@@ -27,32 +27,34 @@ $(document).ready(function() {
                 var $lng = $('#mapcanvas').data('lng');
 				
                 var $title = $('body').data('listing_title');
-				
+		
+                var latlng, myOptions, map, marker;
+                
                 if($lat != 'none' && $lng != 'none'){
-                    var latlng = new google.maps.LatLng($lat,$lng);
+                    latlng = new google.maps.LatLng($lat,$lng);
 					
-                    var myOptions = {
+                    myOptions = {
                         zoom: 12,
                         center: latlng,
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
 					
-                    var map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
+                    map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
 					
-                    var marker = new google.maps.Marker({
+                    marker = new google.maps.Marker({
                         position: latlng,
                         title:$title
                     }); 
                     marker.setMap(map);
                 } else {
-                    var latlng = new google.maps.LatLng(40,0);
+                    latlng = new google.maps.LatLng(40,0);
 					
-                    var myOptions = {
+                    myOptions = {
                         zoom: 2,
                         center: latlng,
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
-                    var map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
+                    map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
                 }
             }
         }
@@ -70,7 +72,7 @@ $(document).ready(function() {
     $( "#datepicker").datepicker({
         showOtherMonths: true,
         beforeShowDay:function(date){
-            var date = $.datepicker.formatDate('mm-dd-yy', date);
+            date = $.datepicker.formatDate('mm-dd-yy', date);
             return ($.inArray(date,$disableddates) != -1) ? [false] : [true]; 
         },
         minDate:new Date(),
@@ -368,6 +370,7 @@ $(function(){
             showError('Please Fill out the form first');
             return false;
         }
+        return true;
     });
 	
     $('#ui-datepicker-div').wrap('<div id="calendarContainer"></div>');
@@ -452,7 +455,7 @@ $(document).ready(function() {
                 }
             },
             error:function(res){
-                console.log(res);
+                //console.log(res);
             }
         });
         

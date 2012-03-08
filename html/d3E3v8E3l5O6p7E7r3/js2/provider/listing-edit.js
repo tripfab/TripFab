@@ -129,12 +129,12 @@ $(function(){
 		},
 		error:function(){
 			$contact = {phone:'',website:'',email:''};
-		},
+		}
 	});
 	var $old_contact = {
 		phone:$('input[name=phone]').val(),
 		website:$('input[name=website]').val(),
-		email:$('input[name=email]').val(),
+		email:$('input[name=email]').val()
 	};
 	
 	$('input[name=contactEqual]').live('change',function(){
