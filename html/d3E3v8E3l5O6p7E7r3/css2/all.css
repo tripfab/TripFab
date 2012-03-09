@@ -2729,7 +2729,7 @@ ul.reviews li > div div.meta em.red {
 	height: 52px;
 	margin: 0;
 	overflow: hidden;
-	padding: 12px 25px;
+	padding: 12px 20px 12px 25px;
 	border-bottom: none;
 	behavior: url(/PIE.htc);
 }
@@ -2753,9 +2753,12 @@ ul.reviews li > div div.meta em.red {
 .right-sidebar .widget.book .ttl > strong {
 	color: #303030;
 	float: right;
-	font-size: 38px;
+	font-size: 37px;
 }
-
+.right-sidebar .widget.book .ttl > strong sup {
+	font: bold 23px/33px Helvetica;
+	vertical-align: top;
+}
 .right-sidebar .widget.book .ttl > strong span {
 	font-size: 16px;
 	font-weight: normal;
@@ -10925,39 +10928,45 @@ h2.title .back:hover,
 }
 
 .vendor-steps ul li {
-	background: url(../images2/arrow-26.png) no-repeat 100% 0;
+	background: url(../images2/step-normal.png) no-repeat top left;
 	float: left;
 	height: 39px;
-	padding: 12px 42px 12px 18px;
+	padding: 12px 42px 12px 9px;
 	line-height: 18px;
 	color: #898989;
 	font-size: 12px;
 	font-weight: bold;
+	width: 98px;
+	margin-left: -20px;
 }
 
 .vendor-steps ul li strong, .vendor-steps ul li span {
 	display: block;
+	padding-left: 20px;
 }
 
 .vendor-steps ul li strong {
 	font-size: 14px;
 }
 
-.vendor-steps ul li.active {
-	color: #FFFFFF;
-}
-
 .vendor-steps ul li.first {
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
+	margin: 0;
+	width: 109px;
+	padding: 12px 42px 12px 9px;
+	background: url(../images2/step-first.png) no-repeat left top;
 }
-
+.vendor-steps ul li.first.active {
+	background-position: bottom left;
+}
 .vendor-steps ul li.prev {
 	background: url(../images2/arrow-28.png) no-repeat 100% 0 #FFFFFF;
 }
 
 .vendor-steps ul li.active {
-	background: url(../images2/arrow-27.png) no-repeat 100% 0 #53a4e2;
+	background: url(../images2/step-normal.png) no-repeat bottom right;
+	color: #FFF;
 }
 
 .sign-box.vendor .ttl-2 {
