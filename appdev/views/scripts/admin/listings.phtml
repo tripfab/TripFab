@@ -14,7 +14,8 @@
             $('a.lbc').fancybox({
                 padding: 0,
                 overlayColor: '#FFF',
-                overlayOpacity: '0.7'
+                overlayOpacity: '0.7',
+                showCloseButton: 'false',
             });
 			
 			$('input[name=fdate]').each(function(){
@@ -65,7 +66,7 @@
 			<div class="all_listing">
 				<div class="search_list">
 					<form action="" onsubmit="return false">
-						<input type="text" placeholder="Search for listings" name="q" id="q" value="<?php echo $this->searchText?>" />
+						<input type="text" placeholder="Search Listings by Title" name="q" id="q" value="<?php echo $this->searchText?>" />
 						<input type="button" class="btn-1" value="Search" onclick="searchSubmit()" />
 					</form>
 					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
@@ -87,8 +88,8 @@
 							<td><?php echo $listing->type_name?></td>
 							<td><?php echo $listing->type_name?></td>
 							<td><?php echo $listing->status ? 'Active' : 'Deactive' ?></td>
-							<td><?php echo $listing->city_name?></td>
-							<td><?php echo $listing->country_name?></td>
+							<td><a href="<?php echo $this->url(array('ct'=>$listing->city_id));?>"><?php echo $listing->city_name?></a></td>
+							<td><a href="<?php echo $this->url(array('co'=>$listing->country_id));?>"><?php echo $listing->country_name?></a></td>
 							<td><a href="/admin/listings/edit/<?= $listing->id ?>" class="edit">Edit</a></td>
 						</tr>
                         <?php endforeach;?>
@@ -114,7 +115,7 @@
 				else if (e) keycode = e.which;
 				else return true;
 				if (keycode == 13) {
-				   location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
+				   searchSubmit();
 				   return false;
 				}
 				else

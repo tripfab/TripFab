@@ -38,7 +38,7 @@
 			<div class="all_listing">
 				<div class="search_list">
 					<form action="" onsubmit="return false">
-						<input type="text" placeholder="Search for listings" name="q" id="q" value="<?php echo $this->searchText?>" />
+						<input type="text" placeholder="Search Users by email" name="q" id="q" value="<?php echo $this->searchText?>" />
 						<input type="button" class="btn-1" value="Search" onclick="searchSubmit()" />
 					</form>
 					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
@@ -76,7 +76,75 @@
 		<!-- closes w1 -->
     	
 		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+		<div class="hidden">
+			<div id="new_partner" class="lb">
+            	<form name="partner-form" id="partner-form">
+				<div class="top"><h3>Create Partner Account</h3></div><!--TOP-->
+				<div class="cont">
+					<ul>
+						<li>
+                        	<label>Company Name</label>
+                            <input type="text" name="c_name" value="" />
+                        </li>
+                        <li> <div id="_c_name" class="errdiv" style="float:right; margin-right:30px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div></li>
+						<li><label>Company E-mail</label><input type="text" value="" name="c_email" /></li>
+                        <li> <div class="errdiv" id="_c_email" style="float:right; margin-right:30px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div></li>
+						<li><label>Contact Name</label><input type="text" value="" name="cnt_name"/></li>
+                        <li> <div class="errdiv" id="_cnt_name" style="float:right; margin-right:30px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div></li>
+						<li><label>Phone</label><input type="text" value="" class="code" name="phone"/><input type="text" value="" class="phone" /></li>
+                        <li> <div class="errdiv" id="_phone" style="float:right; margin-right:30px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div></li>
+						<li><label>Website</label><input type="text" value="" name="website" /></li>
+                        <li> <div class="errdiv" id="_website" style="float:right; margin-right:30px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div></li>
+						<li>
+							<label>Country</label>
+							<select name="country">
+                            <option value="">Select Country</option>
+							<?php foreach($this->countries as $country): ?>
+                                <option value="<?php echo $country->id?>"><?php echo $country->title?></option>
+							 <?php endforeach; ?>
+							</select>
+						</li>
+                         <li> <div class="errdiv" id="_country" style="float:right; margin-right:30px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div></li>
+
+					</ul>
+				</div><!--CONT-->
+				<div class="bottom">
+					<input type="button" id="c-vendor" class="btn-1" value="Create Account" onclick="/admin/users/venders/" />
+					<a class="btn-10" onclick="$.fancybox.close()">Cancel</a>
+				</div><!--BOTTOM-->
+				</form>
+            </div><!--NEW_PARTNER-->
+			
+		</div><!--HIDDEN-->
          <script>
+			$('#c-vendor').click(function(){
+				$('.errdiv').hide();
+				$.ajax({ 
+				   type: "POST", 
+				   url: "/admin/vendors/add", 
+				   data: $("#partner-form").serialize() ,
+				   success: function(json, status){
+					   if(json.attempt=='success'){
+							$.fancybox.close();
+							showAlert("Partner added successfully");
+						   return;
+					   }
+					   
+					   if(json.error_code == "validation_error"){
+							$.each(json.data, function(i,validationError){ 
+								$("#_" + validationError.field).show();
+								$("#_" + validationError.field).text(validationError.message);
+							});
+					   }
+				   }, 
+				   error:function(jqXHR, textStatus, errorThrown){ 
+						alert(textStatus);
+				   }
+				});
+			});
+	
+
+
 			function searchSubmit(){
 				location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
 			}
