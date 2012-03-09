@@ -7907,9 +7907,18 @@ h2.title .back:hover,
 	margin-bottom: 20px;
 	width: 200px;
 	margin-left: 10px;
+	float: left;
+}
+.sign-box .content .min,
+.sign-box .content .max {
+	width: 60px;
+}
+.sign-box .content #cities2 {
 	float: right;
 }
-
+.sign-box .content #country2 {
+	float: right;
+}
 .sign-box .content span {
 	position: relative;
 	display: block;
@@ -10931,18 +10940,18 @@ h2.title .back:hover,
 	background: url(../images2/step-normal.png) no-repeat top left;
 	float: left;
 	height: 39px;
-	padding: 12px 42px 12px 9px;
+	padding: 12px 0 12px 0;
 	line-height: 18px;
 	color: #898989;
 	font-size: 12px;
 	font-weight: bold;
-	width: 98px;
-	margin-left: -20px;
+	width: 150px;
+	margin-left: -20px; 
 }
 
 .vendor-steps ul li strong, .vendor-steps ul li span {
 	display: block;
-	padding-left: 20px;
+	text-indent: 30px;
 }
 
 .vendor-steps ul li strong {
@@ -10953,12 +10962,12 @@ h2.title .back:hover,
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
 	margin: 0;
-	width: 109px;
-	padding: 12px 42px 12px 9px;
-	background: url(../images2/step-first.png) no-repeat left top;
+	width: 119px;
+	padding: 12px 12px 12px 0;
+	background: url(../images2/step-first.png) no-repeat left bottom;
 }
 .vendor-steps ul li.first.active {
-	background-position: bottom left;
+	background-position: top left;
 }
 .vendor-steps ul li.prev {
 	background: url(../images2/arrow-28.png) no-repeat 100% 0 #FFFFFF;
@@ -11544,6 +11553,7 @@ h2.title .back:hover,
 .sign-box.vendor .content.prcng.hours .prcng-item .right ul li select {
 	float: right;
 	margin-left: 20px;
+	width: 77px;
 }
 
 .sign-box.vendor .content.prcng.hours .prcng-item .right ul li label{

@@ -130,13 +130,13 @@
                                         </div>
                                         <input name="price" value="0.00" type="text" class="short" />
                                         <label>Min</label>                                        
-                                        <select name="min">
+                                        <select name="min" class="min">
                                         <?php foreach($persons as $p): ?>
                                             <option value="<?= $p ?>"><?= $p ?></option>
                                         <?php endforeach ?>
                                         </select>
                                         <label>Max</label>
-                                        <select name="max">
+                                        <select name="max" class="max"> 
 										<?php foreach($persons as $p): ?>
                                         <?php if($p == 50): ?>
                                             <option selected="selected" value="<?= $p ?>"><?= $p ?></option>
