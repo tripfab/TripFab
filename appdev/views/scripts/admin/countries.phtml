@@ -18,7 +18,7 @@
                 padding: 0,
                 overlayColor: '#FFF',
                 overlayOpacity: '0.7',
-                showCloseButton: 'false'
+                showCloseButton: 'false',
             });
             $("#report_tabs").tabs();
         });
@@ -42,7 +42,7 @@
 			<div class="all_listing">
 				<div class="search_list">
 					<form action="" onsubmit="return false">
-						<input type="text" placeholder="Search for listings" name="q" id="q" value="<?php echo $this->searchText?>"/>
+						<input type="text" placeholder="Search places by Name" name="q" id="q" value="<?php echo $this->searchText?>"/>
 						<input type="button" class="btn-1" value="Search" onclick="searchSubmit()" />
 					</form>
 					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
@@ -99,7 +99,8 @@
 				   location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
 				   return false;
 				}
-				return true;
+				else
+				   return true;
 			});
 
 		</script>

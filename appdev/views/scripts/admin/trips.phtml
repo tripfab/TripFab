@@ -52,7 +52,7 @@
 			<div class="all_listing">
 				<div class="search_list">
 					<form action="" onsubmit="return false">
-						<input type="text" placeholder="Search for listings" name="q" id="q" value="<?php echo $this->searchText?>" />
+						<input type="text" placeholder="Search Trips by by Title" name="q" id="q" value="<?php echo $this->searchText?>" />
 						<input type="button" class="btn-1" value="Search" onclick="searchSubmit()" />
 					</form>
 					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
@@ -193,7 +193,7 @@
 			});
 			
 			function fillTripCountry(){
-				var url = "/admin/ajax/country/";
+				var url = "/ajax/places/?type=country";
 				$("#trip_country" ).children().remove();
 				$("#trip_country" ).append(new Option('Select Country', 0, true, true));
 				$.getJSON(url, function(fsdata) {
@@ -205,7 +205,7 @@
 			}
 			
 			function fillTripCity(countryId){
-				var url = "/admin/ajax/city/" + countryId;
+				var url = "/ajax/places/?type=city&c=" + countryId;
 				$("#trip_scity" ).children().remove();
 				$("#trip_ecity" ).children().remove();
 				$("#trip_scity" ).append(new Option('Start', 0, true, true));

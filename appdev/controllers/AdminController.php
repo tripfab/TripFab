@@ -229,7 +229,7 @@ class AdminController extends Zend_Controller_Action {
         $this->view->paramSort = (int) $this->_getParam('sort');
         $this->view->paramSequence = $this->_getParam('seq');
         $seq = $this->view->paramSequence == 'desc' ? ' desc' : '';
-        $this->view->searchText = $this->_getParam('q');
+		$this->view->searchText = $this->_getParam('q');
         $listingType = 0;
         $listingFields = array('title', 'type_name', 'type_name', 'status', 'city_name', 'country_name');
         switch ($this->_getParam('task')) {
@@ -273,6 +273,13 @@ class AdminController extends Zend_Controller_Action {
         if ($this->view->searchText) {
             $select->where("listings.title like '{$this->view->searchText}%'");
         }
+		
+		if($this->_getParam('co')){
+            $select->where("listings.country_id = " . $this->_getParam('co'));
+		}
+		if($this->_getParam('ct')){
+            $select->where("listings.city_id = " . $this->_getParam('ct'));
+		}
         $select->order(array_key_exists($this->view->paramSort, $listingFields) ? $listingFields[$this->view->paramSort] . "$seq" : $listingFields[0]);
         //$select->order('listings.loves DESC');
         $this->view->paramSort = $this->_getParam('sort');
@@ -3868,7 +3875,7 @@ class AdminController extends Zend_Controller_Action {
 			$data['website'] = $_POST['website'];
 			$data['contact_name'] = $_POST['cnt_name'];
             try {
-                $id = $this->accounts->signupVendor($data, true, true);
+                $id = $this->accounts->signupVendor($data, false);
                 self::jsonEcho(json_encode(array('attempt' => 'success', 'error_code' => '0', 'description' => $id, 'data' => $id)));
             } catch (Exception $e) {
                 self::jsonEcho(json_encode(array('attempt' => 'fail', 'error_code' => 'mysql_error', 'description' => 'MySQL Error', 'data' => $e->getMessage())));
@@ -3924,4 +3931,6 @@ class AdminController extends Zend_Controller_Action {
         echo $jsonString;
         exit;
     }
+	
+
 }
