@@ -404,7 +404,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     'page'       => 1,
                     'sort'       => 'default',
                     'seq'	 => 'default',
-                    'q'		 => null
+                    'q'		 => null,
+                    'co'         => null,
+                    'ct'         => null
                 )
             )
         );
