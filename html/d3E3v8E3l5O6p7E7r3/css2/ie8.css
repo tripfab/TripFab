@@ -11,9 +11,7 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus, textarea
 		    progid:DXImageTransform.Microsoft.DropShadow(OffX=0, OffY=1, Color=#000000);
 }
 #search-box {
-	border-color: #FFFFFF;
-	
-	padding-bottom: 0;
+	border-color: #FFFFFF; 
 }
 #search-box input[type="text"] {
 	text-shadow: none;
@@ -46,8 +44,12 @@ input[type="text"]:focus, input[type="password"]:focus, textarea:focus, textarea
 	z-index: 0;
 }
 #search_result {
-	position: relative;
-	z-index: 0;
+	position: relative !important;
+	z-index: 1 !important;
+}
+#search_result .content {
+	position: relative !important;
+	z-index: 1 !important;
 }
 #search_result ul.cat-menu li a {
 	text-shadow: none;

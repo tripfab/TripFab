@@ -212,6 +212,8 @@
 
 .header-login .dd.show {
 	display: block;
+	behavior: url(/PIE.htc);
+	z-index: 10000;
 }
 
 .header-login .dd img.arrow {
@@ -16920,6 +16922,7 @@ h2.title .back:hover,
 	right: 13px;
 	height: 25px;
 	line-height: 25px;
+	border: 1px solid #7AB130;
 }
 #search_result .result .img-wrapper h4 {
 	bottom: 4px;
@@ -17194,14 +17197,14 @@ h2.title .back:hover,
 }
 #checkout_accordion {
 	overflow: hidden;
+	border-bottom: 1px solid #e7e7e7;
+	margin-bottom: 15px;
 }
 #custom_checkout .left_block{
 	width: 648px;
-	border: 1px solid #e7e7e7;
 	-webkit-box-shadow: 0px #e7e7e7;
 	-moz-box-shadow: 0px #e7e7e7;
-	box-shadow: 0px #e7e7e7; 
-	background-color: #FFF;
+	box-shadow: 0px #e7e7e7;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
@@ -17219,7 +17222,9 @@ h2.title .back:hover,
 	position: relative;
 	padding: 15px 0 0 45px;
 	z-index: 10;
-	border-top: 1px solid #e8e8e8;
+	border-top: 1px solid #e7e7e7;
+	border-left: 1px solid #e7e7e7;
+	border-right: 1px solid #e7e7e7;
 }
 #custom_checkout .header > a {
 	background: url(../images2/arrow-31.png) 17px 31px no-repeat ;
@@ -17233,7 +17238,7 @@ h2.title .back:hover,
 	background: url(../images2/arrow-30.png) 17px 31px no-repeat ;
 }
 #custom_checkout .header:hover {
-	background:url(../images2/g_67.png) repeat-x 0 0 #f0f9ff;
+	background:url(../images2/g_67.png) repeat-x 0 -1px #f0f9ff;
 }
 #custom_checkout .header .descrip{
 	width: 300px;
@@ -17319,10 +17324,23 @@ h2.title .back:hover,
 	margin-top: 5px;
 	font-size: 11px;
 }
+#custom_checkout .terms {
+	background-color: #FFFFFF;
+    border: 1px solid #E7E7E7;
+    height: 45px;
+    padding: 25px 0 0 22px;
+    position: relative;
+    z-index: 10;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
 #custom_checkout .details {
 	background: url(../images2/g_66.png) repeat-x left bottom #f9f9f9;
 	position: relative;
 	border-top: 1px solid #e9e9e9;
+	border-left: 1px solid #e9e9e9;
+	border-right: 1px solid #e9e9e9;
 	z-index: 9;
 	padding: 0 0 10px;
 }

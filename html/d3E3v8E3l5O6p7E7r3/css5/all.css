@@ -11685,6 +11685,11 @@ ul.reviews li > div div.meta em.red {
 	padding-left:20px;
 	height:15px;
 	display:block;
+} 
+.all_listing .list_content td a.view:hover,
+.all_listing .list_content td a.edit:hover {
+	color: #9bd2fc;
+	text-decoration: none;
 }
 .all_listing .list_content td a.pay {
 	height:15px;
@@ -11697,6 +11702,78 @@ ul.reviews li > div div.meta em.red {
 .all_listing .list_content table td li{
 	list-style: none;
 	line-height: 16px;
+}
+
+.w1 .all_listing .display {
+	overflow: hidden;
+}
+.w1 .all_listing .display h3{
+	float: left;
+	font: bold 13px Helvetica;
+	color: #303030;	
+}
+.w1 .all_listing .display select {
+	float: right;
+	display: block;
+	margin-left: 20px;
+}
+.w1 .all_listing .display label {
+	display: block;
+	float: right;
+	font: bold 11px Helvetica;
+}
+.w1 .wrapper .review-ttl {
+	overflow: hidden;
+	padding-bottom: 20px;
+}
+.w1 .wrapper .review-ttl h3 {
+	color: #303030;
+	font: bold 13px Helvetica;
+	float: left;
+	width: 600px;
+}
+.w1 .wrapper .review-ttl a {
+	float: right;
+	display: block;
+	color: #60b5f7;
+}
+.w1 .wrapper .review-ttl a:hover {
+	color: #9bd2fc;
+	text-decoration: none;
+}
+.w1 .wrapper .review-cont{
+	background-color: #FFF;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	border: 1px solid #e7e7e7;
+	padding-top: 25px;
+}
+.w1 .wrapper .review-cont label{
+	font: 12px/15px Helvetica;
+	display: block;
+	float: left;
+	width: 225px;
+	margin-left: 25px;
+}
+.w1 .wrapper .review-cont label strong{
+	display: block;
+}
+.w1 .wrapper .review-cont textarea {
+	width: 674px;
+	height: 51px;
+	float: left;
+	margin-bottom: 50px;
+}
+.w1 .wrapper .review-cont .foot {
+	clear: both;
+	height: 60px;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+.w1 .wrapper .review-cont .foot .btn-1 {
+	margin-top: 15px;
+	border: 1px solid #7AB130;
 }
 /*END ADMIN LISTING-----------------------------------------*/
 /*ADMIN USER VIEW-------------------------------------------*/

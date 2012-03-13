@@ -209,14 +209,11 @@
                                 <strong>Cancellation</strong> 
                                 <a href="#" class="restriction">High Restrictions &rarr;</a> 
                             </div><!--ITEM-->
-                            <div class="item"> 
+                            <div class="last"> 
                                 <strong>Hotel Restrictions</strong> 
                                 <a href="#" class="restriction">Read Hotel Restrictions &rarr;</a> 
                             </div><!--ITEM-->
-                            <div class="last">
-                                <label><input type="checkbox" name="bookings[<?= $item->id ?>][terms]" value="1" class="termscheck" />
-                                I agree to the cancellation policy, hotel restrictions and <a href="#">terms of use.</a> </label>
-                            </div><!--LAST-->
+                            	
                         </div><!--DETAILS-->
                         <?php else: ?>
                         <div class="header inactive"> 
@@ -263,7 +260,11 @@
                             </div><!--LAST-->
                         </div><!--DETAILS-->
                         <?php endforeach ?>
-                    </div><!--CHECKOUT_ACCORDION--> 
+                    </div><!--CHECKOUT_ACCORDION-->
+                    <div class="terms">
+                    	<label><input type="checkbox" name="bookings[<?= $item->id ?>][terms]" value="1" class="termscheck" />
+                    	I agree to the cancellation policy, hotel restrictions and <a href="#">terms of use.</a></label>
+                    </div><!--TERMS-->
                     <input type="hidden" name="userid" value="<?= $this->user->id ?>" />
                     <input type="hidden" name="ids" value="<?= $this->trip->id ?>" />
                     <input type="hidden" name="token" value="<?= $this->trip->token ?>" />
