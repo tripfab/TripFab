@@ -32,14 +32,14 @@
     		<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
 			<div class="w3_admin">
 				<div class="sub_menu">
-					<h2>Payment Receipt Report </h2>
+					<h2>User Login Time by Date</h2>
 				</div><!--SUB_MENU-->
             </div><!--W3-->
 			<div class="all_listing">
 				<div class="search_list">
 					<ul class="get-report">
 						<li><a href="<?php echo $this->url(array('page' => 'pdf')); ?>" class="btn-10"><span class="pdf">Download .pdf</span></a></li>
-						<li><a href="" class="btn-10"><span class="excel">Download .xls</span></a></li>
+						<li><a href="<?php echo $this->url(array('page' => 'xls')); ?>" class="btn-10"><span class="excel">Download .xls</span></a></li>
 					</ul>
 					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
 				</div><!--SEARCH_LIST-->
