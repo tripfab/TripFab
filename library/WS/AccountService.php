@@ -5,11 +5,17 @@ class WS_AccountService {
     protected $users_db;
     protected $vendors_db;
     protected $user_log_db;
+    /**
+     *
+     * @var WS_PlacesService
+     */
+    protected $places;
     
     public function __construct() {
         $this->users_db   = new Model_Users();
         $this->vendors_db = new Model_Vendors();
         $this->user_log_db = new Model_UserLog();
+        $this->places = new WS_PlacesService();
     }
     public function validateEmail($email){
         
@@ -142,12 +148,19 @@ class WS_AccountService {
             $contact->created   = date('Y-m-d H:i:s');
             $contact->updated   = date('Y-m-d H:i:s');
             $contact->save();
+        } else {
+            $contact = new stdClass();
+            $contact->lname = "";
+            $contact->fname = "";
         }
         
         if($flag) {
-            $notifier = new WS_Notifier();
-            //$notifier->newSignup($user->email, $password, $user->name);
-            $notifier->newSignup('genna@tripfab.com', $password, $user->name);
+            $place = $this->places->getPlaceById($user->country_id);
+            $notifier = new WS_Notifier($user->id);
+            $notifier2 = new WS_Notifier();
+            
+            $notifier->newAccountRequest();
+            $notifier2->alertNewSignup($user, $password, $contact->fname.$contact->lname, $place, $vendor->website);
             if(!$new)
                 $this->login($user->email, $password);
         }
