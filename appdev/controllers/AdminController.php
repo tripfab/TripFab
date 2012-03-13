@@ -3262,6 +3262,11 @@ class AdminController extends Zend_Controller_Action {
                     $pdfMaker = new PdfMaker();
                     $pdfMaker->makeByHtml($titleFields, $db->fetchAll($select));
                 }
+				
+                if ($page == 'xls') {
+                	die("put excel data here");
+				}
+				
                 break;
             case 'f4':       // Payment Receipt Report
                 $this->view->title = "Payment Receipt Report";
@@ -3317,6 +3322,34 @@ class AdminController extends Zend_Controller_Action {
                     $pdfMaker = new PdfMaker();
                     $pdfMaker->makeByHtml($titleFields, $db->fetchAll($select));
                 }
+                if ($page == 'xls') {
+					$headers = array(array(
+							'Date', 
+							'Session ID',
+							'User',
+							'Log in Time',
+							'Log out Time',
+							'Total Time'
+						));
+					$fnRow = function($row) {
+						return array(
+							$row->date,
+							$row->session_id,
+							$row->name,
+							$row->login_time,
+							$row->logout_time,
+							$row->total
+						);
+					};
+					
+					require_once("TF/Export.php");
+					TF_Export::xlsFromData(
+						"log-reports.xls",
+						$headers,
+						$fnRow,
+						$db->fetchAll($select)
+					);
+				}
                 break;
             case 's2':       // Partner account change by user
                 $this->view->title = "User accont by date";
