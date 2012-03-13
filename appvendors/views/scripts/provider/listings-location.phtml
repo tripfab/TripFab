@@ -65,9 +65,9 @@
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
 <div class="hidden">
-	<div id="new_direction">
+	<div id="new_direction" class="lb">
 		<form action="" method="post">
-            <div class="top">Add a New Direction</div><!--TOP-->
+            <div class="top"><h2>Add a New Direction</h2></div><!--TOP-->
             <div class="content">
                 <select name="location">
                     <?php if(empty($this->location->plane)): ?>
@@ -84,8 +84,8 @@
                 </select>
             </div><!--CONTENT-->
             <div class="bottom">
+            	<a href="" class="btn-1">Add Direction</a>
                 <a href="" onclick="$.fancybox.close(); return false;" class="btn-10">Cancel</a>
-                <a href="" class="btn-1">Add Direction</a>
             </div><!--BOTTOM-->
             <input type="hidden" name="_task" value="<?= md5('add_location') ?>" />
             <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
