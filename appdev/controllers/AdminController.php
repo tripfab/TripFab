@@ -3232,7 +3232,7 @@ class AdminController extends Zend_Controller_Action {
                 break;
             case 'f2':   //	Transaction by Date
                 $this->view->title = "Transaction by date";
-                $this->render('reports2');
+                $this->render('reports2'); return;
                 break;
             case 'f3':       // Reservations by Date
                 $this->view->title = "Reservation by Date";
@@ -3264,7 +3264,65 @@ class AdminController extends Zend_Controller_Action {
                 }
 				
                 if ($page == 'xls') {
-                	die("put excel data here");
+					$headers = array(array(
+									'Date',
+									 'Reservation ID',
+									 'Traveler ID', 
+									 'Status',
+									 'Gross Amount', 
+									 'Fee',
+									 'Net Amount', 
+									 "Partner ID"
+									)
+								);
+					$fnRow = function($row) {
+						return array(
+							$row->date,
+							$row->code,
+							$row->user_id,
+							$row->status,
+							$row->gross_amount,
+							$row->fee,
+							$row->net_amount,
+							$row->partner_id,
+						);
+					};
+					
+					require_once("TF/Export.php");
+					TF_Export::xlsFromData(
+						"log-reports.xls",
+						$headers,
+						$fnRow,
+						$db->fetchAll($select)
+					);
+				}
+                if ($page == 'xls') {
+					$headers = array(array(
+							'Date', 
+							'Session ID',
+							'User',
+							'Log in Time',
+							'Log out Time',
+							'Total Time'
+						));
+					$fnRow = function($row) {
+						return array(
+							$row->date,
+							$row->session_id,
+							$row->name,
+							$row->login_time,
+							$row->logout_time,
+							$row->total
+						);
+					};
+					
+					require_once("TF/Export.php");
+					TF_Export::xlsFromData(
+						"log-reports.xls",
+						$headers,
+						$fnRow,
+						$db->fetchAll($select)
+					);
 				}
 				
                 break;
@@ -3296,6 +3354,40 @@ class AdminController extends Zend_Controller_Action {
                     $pdfMaker = new PdfMaker();
                     $pdfMaker->makeByHtml($titleFields, $db->fetchAll($select));
                 }
+                if ($page == 'xls') {
+					$headers = array(array(
+ 										'Date',
+										'Time', 
+										'Transaction ID', 
+										'Traveler ID', 
+										'Partner ID', 
+										'Method',  
+										'Card Number', 
+										'Status', 
+										'Amount'
+ 									));
+					$fnRow = function($row) {
+						return array(
+							$row->date,
+							$row->time,
+							$row->transaction_id,
+							$row->user_id,
+							$row->partner_id,
+							$row->method,
+							$row->card_number,
+							$row->status,
+							$row->ammount
+						);
+					};
+					
+					require_once("TF/Export.php");
+					TF_Export::xlsFromData(
+						"log-reports.xls",
+						$headers,
+						$fnRow,
+						$db->fetchAll($select)
+					);
+				}
                 break;
             case 's1':       // Partner account activity by date
                 $this->view->title = "Partner account activity by date";
@@ -3353,7 +3445,7 @@ class AdminController extends Zend_Controller_Action {
                 break;
             case 's2':       // Partner account change by user
                 $this->view->title = "User accont by date";
-                $this->render('reportss2');
+                $this->render('reportss2'); return;
                 //$select->where("transactions.status = 0" );	
                 break;
             case 's3':       // Partner pending information by account manager
@@ -3381,14 +3473,40 @@ class AdminController extends Zend_Controller_Action {
                     $pdfMaker = new PdfMaker();
                     $pdfMaker->makeByHtml($titleFields, $db->fetchAll($select));
                 }
+                if ($page == 'xls') {
+					$headers = array(array(
+							 'User',
+							 'Partner',
+							 'Listing',
+							 'Listing Email',
+							 'Pending Info'
+							 ));
+					$fnRow = function($row) {
+						return array(
+							$row->user_name,
+							$row->vender_id,
+							$row->title,
+							$row->email,
+							$row->pending_info,
+						);
+					};
+					
+					require_once("TF/Export.php");
+					TF_Export::xlsFromData(
+						"log-reports.xls",
+						$headers,
+						$fnRow,
+						$db->fetchAll($select)
+					);
+				}
                 break;
             case 's4':       // User Account by Date
                 $this->view->title = "Partner account change by user";
-                $this->render('reportss4');
+                $this->render('reportss4'); return;
                 break;
             case 's5':       // User log time by date
                 $this->view->title = "Partner activity by date";
-                $this->render('reportss5');
+                $this->render('reportss5'); return;
                 break;
             default:
                 $this->view->title = "Pending";
