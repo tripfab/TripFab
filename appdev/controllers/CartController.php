@@ -593,6 +593,9 @@ class CartController extends Zend_Controller_Action {
                     $reservation = $this->reservations->create($transaction, $cartitem, $listing);
 
                     $cartitem->delete();
+                    
+                    $notifier = new WS_Notifier($vendor->user_id);
+                    $notifier->newReservation($listing, $reservation);
 
                     $this->_redirect('cart/invoice/'.$reservation->id);
                 break;
@@ -687,7 +690,10 @@ class CartController extends Zend_Controller_Action {
                             $select->where('id = ?', $item->triplisting);
                             $itnlist = $itnlistings->fetchRow($select);
                             $itnlist->reservation_id = $reservation->id;
-                            $itnlist->save();
+                            $itnlist->save();                            
+
+                            $notifier = new WS_Notifier($vendor->user_id);
+                            $notifier->newReservation($listing, $reservation);
                             
                             $item->delete();
                         }
