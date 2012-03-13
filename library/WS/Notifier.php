@@ -113,10 +113,12 @@ class WS_Notifier extends Zend_Mail {
      *  reservation
      * 
      */
-    public function newReservation()
+    public function newReservation($listing, $reservation)
     {
         $this->setSubject('New Reservation');
         $this->addTo($this->user->email);
+        $this->_view->listing = $listing;
+        $this->_view->reservation = $reservation;
         $this->sendHTMLTemplate('reservation.phtml');
     }
     

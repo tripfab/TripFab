@@ -31,7 +31,7 @@
 																<td><img width="391" height="10" border="0" style="display:block;" alt="" src="http://tripfab.com/images/email/et_spacerBlue.png" /></td>
 															</tr>
 															<tr>
-																<td><font face="Helvetica, Arial, sans-serif" color="#303030" style="font-size:14px; "><b>Account Verification</b></font></td>
+																<td><font face="Helvetica, Arial, sans-serif" color="#303030" style="font-size:14px; "><b>Account Request</b></font></td>
 															</tr>
 															<tr>
 																<td><img width="391" height="10" border="0" style="display:block;" alt="" src="http://tripfab.com/images/email/et_spacerBlue.png" /></td>
@@ -49,7 +49,8 @@
 											<table width="600" border="0" cellpadding="0" cellspacing="0 ">
 												<tr>
 													<td width="25">&nbsp;</td>
-													<td width="550"><font face="Helvetica, Arial, sans-serif" color="#303030" style="font-size:12px; ">Hey Julian!</font></td>
+													<td width="550"><font face="Helvetica, Arial, sans-serif" color="#303030" style="font-size:12px; ">
+                                                    Hey Cristian!</font></td>
 													<td width="25">&nbsp;</td>
 												</tr>
 												<tr>
@@ -59,7 +60,11 @@
 												</tr>
 												<tr>
 													<td width="25">&nbsp;</td>
-													<td width="550"><font face="Helvetica, Arial, sans-serif" color="#303030" style="font-size:12px; line-height:16px">You are just one step away from joining Tripfab. To complete the sign-up process just click on the following link:</font>
+													<td width="550"><font face="Helvetica, Arial, sans-serif" color="#303030" 
+                                                    style="font-size:12px; line-height:16px">
+                                                    Congratulations! You just got a new reservation on your listing
+                                                    <?= $this->listing->title ?>. Please click the link to review it
+                                                    </font>
 													</td>
 													<td width="25">&nbsp;</td>
 												</tr>
@@ -71,9 +76,10 @@
 												<tr>
 													<td width="25">&nbsp;</td>
 													<td width="550">
-														<a href="#" title="go to the site" target="_new" style="text-decoration:none;">
+														<a href="https://<?= $_SERVER['HTTP_HOST'] ?>/en-US/reservations/pending" 
+                                                        title="go to the site" target="_new" style="text-decoration:none;">
 														<font face="Helvetica, Arial, sans-serif" color="#20a0ec" style="font-size:12px;  ">
-														http://www.tripfab.com/confirmemail.php?e=%40tripfab.com&c=338138368 </font></a>
+														https://<?= $_SERVER['HTTP_HOST'] ?>/en-US/reservations/pending</font></a>
 													</td>
 													<td width="25">&nbsp;</td>
 												</tr>
@@ -84,7 +90,11 @@
 												</tr>
 												<tr>
 													<td width="25">&nbsp;</td>
-													<td width="550"><font face="Helvetica, Arial, sans-serif" color="#303030" style="font-size:12px; line-height:16px ">Once confirmed, you will have complete access to Tripfab and future news will be send to this email address.</font>
+													<td width="550"><font face="Helvetica, Arial, sans-serif" color="#303030" 
+                                                    style="font-size:12px; line-height:16px">
+                                                    If you need any help in the process please do not hesitate to contact us at <br /><br />
+                                                    +1 123 456 7890 <em>(it's free)</em>
+                                                    </font>
 													</td>
 													<td width="25">&nbsp;</td>
 												</tr>
@@ -133,7 +143,6 @@
 								</table>
 							</td>
 						</tr>
-						<tr><td width="25"><unsubscribe style="text-decoration:none;"><font face="Helvetica, Arial, sans-serif" color="#ff7e00" style="font-size:11px; line-height:16px; text-decoration:none; ">unsubscribe</font></unsubscribe></td></tr>
 					</table>
 				</td>
 			</tr>
