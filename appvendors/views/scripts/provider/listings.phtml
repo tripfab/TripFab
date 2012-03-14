@@ -170,6 +170,11 @@
 			overlayOpacity:0.7,
 			showCloseButton:0
 		});
+		$('.preferences .btn-10').click(function() {
+			$pref = $(this).parents('.preferences');
+			$('ul', $pref).toggleClass('show');
+			return false
+		});
 		$('.lbox .btn-2, .lbox .btn-11').click(function(){
 			$(this).parents('form').submit();
 		});
