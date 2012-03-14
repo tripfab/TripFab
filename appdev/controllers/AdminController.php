@@ -2538,6 +2538,8 @@ class AdminController extends Zend_Controller_Action {
         $this->view->paramSequence = $this->_getParam('seq');
         $seq = $this->view->paramSequence == 'desc' ? ' desc' : '';
         $this->view->paramQuery = $this->_getParam('q');
+        $filterCountry = $this->_getParam('co');
+        $filterCity = $this->_getParam('ct');
 
         $regionsFields = array('regionName', 'countryTotal', 'cityTotal', 'hotelsTotal', 'activityTotal', 'restaurantTotal', 'entertainmentTotal', 'touristTotal');
         $countryFields = array('countryName', 'cityTotal', 'partnerTotal', 'hotelsTotal', 'activityTotal', 'restaurantTotal', 'entertainmentTotal', 'touristTotal');
@@ -2569,6 +2571,7 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->title = "Countries";
                 $template = 'countries';
                 $select->from(array('country' => 'places'), array('id', 'countryName' => 'title'))
+                        ->join(array('region' => 'places'), 'country.parent_id = region.id', array('region_name' => 'title', 'region_id'=>'id'))
                         ->join(array('city' => 'places'), 'city.parent_id = country.id', array('cityTotal' => 'COUNT(city.id)'))
                         ->joinleft('listings', 'city.id=listings.city_id', array('activityTotal' => 'COUNT(IF(listings.main_type=2, 1, NULL))', 'entertainmentTotal' => 'COUNT(IF(listings.main_type=3, 1, NULL))', 'touristTotal' => 'COUNT(IF(listings.main_type=4, 1, NULL))', 'restaurantTotal' => 'COUNT(IF(listings.main_type=5, 1, NULL))', 'hotelsTotal' => 'COUNT(IF(listings.main_type=6, 1, NULL))'))
                         //->joinleft('vendors', 'country.id=vendors.place_id', array('partnerTotal' => 'COUNT(vendors.id)'))
@@ -2578,6 +2581,10 @@ class AdminController extends Zend_Controller_Action {
 					$identifierCompatible = str_replace(' ', '_',$this->view->searchText);
                     $select->where("country.title like '{$this->view->searchText}%' or country.identifier like '{$identifierCompatible}%'");
                 }
+                
+				if ($filterCountry) {
+                    $select->where("region.id = ? ", $filterCountry);
+                }
                 $select->order(array_key_exists($this->view->paramSort, $countryFields) ? $countryFields[$this->view->paramSort] . "$seq" : $countryFields[0]);
 
                 break;
@@ -2586,13 +2593,17 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->title = "Cities";
                 $template = 'cities';
                 $select->from(array('city' => 'places'), array('id', 'cityName' => 'title'))
-                        ->join(array('country' => 'places'), 'city.parent_id = country.id', array('countryName' => 'title'))
+                        ->join(array('country' => 'places'), 'city.parent_id = country.id', array('countryName' => 'title', 'country_id'=>'id'))
                         ->joinleft('listings', 'city.id=listings.city_id', array('activityTotal' => 'COUNT(IF(listings.main_type=2, 1, NULL))', 'entertainmentTotal' => 'COUNT(IF(listings.main_type=3, 1, NULL))', 'touristTotal' => 'COUNT(IF(listings.main_type=4, 1, NULL))', 'restaurantTotal' => 'COUNT(IF(listings.main_type=5, 1, NULL))', 'hotelsTotal' => 'COUNT(IF(listings.main_type=6, 1, NULL))'))
                         ->where('city.type_id =3')
                         ->group('city.id');
                 if ($this->view->searchText) {
 					$identifierCompatible = str_replace(' ', '_',$this->view->searchText);
                     $select->where("city.title like '{$this->view->searchText}%' or city.identifier like '{$identifierCompatible}%'");
+                }
+
+                if ($filterCountry) {
+                    $select->where("country.id = ? ", $filterCountry);
                 }
                 $select->order(array_key_exists($this->view->paramSort, $cityFields) ? $cityFields[$this->view->paramSort] . "$seq" : $cityFields[0]);
 
