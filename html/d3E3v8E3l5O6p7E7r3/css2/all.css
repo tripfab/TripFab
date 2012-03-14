@@ -3499,6 +3499,18 @@ ul.reviews li > div div.meta em.red {
 	border-radius: 4px;
 	color: #FFF;
 	padding: 25px 25px 10px 25px;
+	-webkit-box-shadow: 0px 0px 4px 0px #606060;
+	-moz-box-shadow: 0px 0px 4px 0px #606060;
+	box-shadow: 0px 0px 4px 0px #606060;
+}
+.checkout-item .restricction_tip span {
+	display: block;
+	background: url(../images2/aw_tooltip.png) no-repeat 0 0;
+	width: 20px;
+	height: 11px;
+	position: absolute;
+	bottom: -11px;
+	left: 232px;
 }
 .checkout-item .restricction_tip strong {
 	font-size:13px ;
@@ -17239,6 +17251,15 @@ h2.title .back:hover,
 	font:normal 13px/50px Helvetica;
 	color: #303030;
 	text-indent: 20px;
+	background-color: #FFF;
+	border: 1px solid #E7E7E7;
+	border-bottom: none;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright: 4px;
+	-moz-border-radius-bottomright: 0px;
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-radius: 4px 4px 0px 0px;
+	border-radius: 4px 4px 0px 0px; 
 }
 #custom_checkout .header {
 	background-color: #FFF;
