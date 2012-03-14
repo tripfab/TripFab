@@ -51,25 +51,27 @@
 					<table width="100%" border="0">
 						<tr>
 							<th width="130"><a href="<?php echo $this->url(array('sort'=>0, 'seq'=>$this->paramSort == 0 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Country Name</a></th>
-							<th width="70"><a href="<?php echo $this->url(array('sort'=>1, 'seq'=>$this->paramSort == 1 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Cities</a></th>
+							<th width="70"><a href="<?php echo $this->url(array('sort'=>1, 'seq'=>$this->paramSort == 1 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Region</a></th>
+							<th width="70"><a href="<?php echo $this->url(array('sort'=>1, 'seq'=>$this->paramSort == 2 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Cities</a></th>
 							<th width="90"><a href="">Partners</a></th>
-							<th width="80"><a href="<?php echo $this->url(array('sort'=>3, 'seq'=>$this->paramSort == 3 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Hotels</a></th>
-							<th width="90"><a href="<?php echo $this->url(array('sort'=>4, 'seq'=>$this->paramSort == 4 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Activities</a></th>
-							<th width="105"><a href="<?php echo $this->url(array('sort'=>5, 'seq'=>$this->paramSort == 5 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Restaurants</a></th>
-							<th width="125"><a href="<?php echo $this->url(array('sort'=>6, 'seq'=>$this->paramSort == 6 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Entertainments</a></th>
-							<th width="105"><a href="<?php echo $this->url(array('sort'=>7, 'seq'=>$this->paramSort == 7 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Tourist Sighs</a></th>
+							<th width="80"><a href="<?php echo $this->url(array('sort'=>3, 'seq'=>$this->paramSort == 4 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Hotels</a></th>
+							<th width="90"><a href="<?php echo $this->url(array('sort'=>4, 'seq'=>$this->paramSort == 5 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Activities</a></th>
+							<th width="105"><a href="<?php echo $this->url(array('sort'=>5, 'seq'=>$this->paramSort == 6 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Restaurants</a></th>
+							<th width="125"><a href="<?php echo $this->url(array('sort'=>6, 'seq'=>$this->paramSort == 7 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Entertainments</a></th>
+							<th width="105"><a href="<?php echo $this->url(array('sort'=>7, 'seq'=>$this->paramSort == 8 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Tourist Sighs</a></th>
 							<th width="65" class="last">&nbsp;</th>
 						</tr>
 						<?php foreach($this->paginator as $key=>$listing):?>
 						<tr  <?php echo $key==0 ? 'class="first"' : ''?>>
 							<td><?php echo $listing->countryName?></td>
-							<td><?php echo $listing->cityTotal?></td>
+							<td><a href="<?php echo $this->url(array('q'=>'','co'=>$listing->region_id));?>"><?php echo $listing->region_name ?></a></td>
+							<td><a href="<?php echo $this->url(array('controller'=>'admin', 'action'=>'places', 'task'=>'cities','q'=>'','co'=>$listing->id)); ?>"><?php echo $listing->cityTotal?></td>
 							<td><?php echo @$listing->partnerTotal?></td>
-							<td><?php echo $listing->hotelsTotal?></td>
-							<td><?php echo $listing->activityTotal?></td>
-							<td><?php echo $listing->restaurantTotal?></td>
-							<td><?php echo $listing->entertainmentTotal?></td>
-							<td><?php echo $listing->touristTotal?></td>
+							<td><a href="<?php echo $this->url(array('controller'=>'admin', 'action'=>'listings', 'task'=>'hotels','q'=>'', 'ct'=>'', 'page'=>'default','co'=>$listing->id)); ?>"><?php echo $listing->hotelsTotal?></a></td>
+							<td><a href="<?php echo $this->url(array('controller'=>'admin', 'action'=>'listings', 'task'=>'activities','q'=>'', 'ct'=>'', 'page'=>'default','co'=>$listing->id)); ?>"><?php echo $listing->activityTotal?></a></td>
+							<td><a href="<?php echo $this->url(array('controller'=>'admin', 'action'=>'listings', 'task'=>'restaurants','q'=>'', 'ct'=>'', 'page'=>'default','co'=>$listing->id)); ?>"><?php echo $listing->restaurantTotal?></a></td>
+							<td><a href="<?php echo $this->url(array('controller'=>'admin', 'action'=>'listings', 'task'=>'entertainments','q'=>'', 'ct'=>'', 'page'=>'default','co'=>$listing->id)); ?>"><?php echo $listing->entertainmentTotal?></a></td>
+							<td><a href="<?php echo $this->url(array('controller'=>'admin', 'action'=>'listings', 'task'=>'tourist','q'=>'', 'ct'=>'', 'page'=>'default','co'=>$listing->id)); ?>"><?php echo $listing->touristTotal?></a></td>
 							<td><a href="/admin/places/edit/<?php echo $listing->id?>" class="edit">Edit</a></td>
 						</tr>
                         <?php endforeach;?>

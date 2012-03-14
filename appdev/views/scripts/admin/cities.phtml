@@ -63,12 +63,12 @@
 						<?php foreach($this->paginator as $key=>$listing):?>
 						<tr  <?php echo $key==0 ? 'class="first"' : ''?>>
 							<td><?php echo $listing->cityName?></td>
-							<td><?php echo $listing->countryName?></td>
-							<td><?php echo $listing->hotelsTotal?></td>
-							<td><?php echo $listing->activityTotal?></td>
-							<td><?php echo $listing->restaurantTotal?></td>
-							<td><?php echo $listing->entertainmentTotal?></td>
-							<td><?php echo $listing->touristTotal?></td>
+							<td><a href="<?php echo $this->url(array('q'=>'','co'=>$listing->country_id));?>"><?php echo $listing->countryName?></a></td>
+							<td><a href="<?php echo $this->url(array('controller'=>'admin', 'action'=>'listings', 'task'=>'hotels','q'=>'', 'ct'=>$listing->id, 'page'=>'default','co'=>'')); ?>"><?php echo $listing->hotelsTotal?></a></td>
+							<td><a href="<?php echo $this->url(array('controller'=>'admin', 'action'=>'listings', 'task'=>'activities','q'=>'', 'ct'=>$listing->id, 'page'=>'default','co'=>'')); ?>"><?php echo $listing->activityTotal?></a></td>
+							<td><a href="<?php echo $this->url(array('controller'=>'admin', 'action'=>'listings', 'task'=>'restaurants','q'=>'', 'ct'=>$listing->id, 'page'=>'default','co'=>'')); ?>"><?php echo $listing->restaurantTotal?></a></td>
+							<td><a href="<?php echo $this->url(array('controller'=>'admin', 'action'=>'listings', 'task'=>'entertainments','q'=>'', 'ct'=>$listing->id, 'page'=>'default','co'=>'')); ?>"><?php echo $listing->entertainmentTotal?></a></td>
+							<td><a href="<?php echo $this->url(array('controller'=>'admin', 'action'=>'listings', 'task'=>'tourist','q'=>'', 'ct'=>$listing->id, 'page'=>'default','co'=>'')); ?>"><?php echo $listing->touristTotal?></a></td>
 							<td><a href="/admin/places/edit/<?php echo $listing->id?>" class="edit">Edit</a></td>
 						</tr>
                         <?php endforeach;?>
