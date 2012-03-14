@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> : Reservations | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-messages">
+            <div class="review-ttl">
+                <h3>Horseback Riding Review</h3>
+                <a href="">&larr;Back to History</a>
+            </div><!--REVIEW-TTL-->
+            <div class="review-cont">
+                <form action="">
+                    <fieldset>
+                        <label><strong>Tell us about your experience</strong> Share with the world your review</label>
+                        <textarea cols="" rows="">Write your review...</textarea>
+                        <div class="foot">
+                            <input type="submit" class="btn-1" value="Save & Publish" />
+                        </div><!-- closes foot -->
+                    </fieldset>
+                </form>
+            </div><!--REVIEW-CONT-->
+        </div><!-- closes user-messages -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+		$('.reservation .top h2').click(function(){
+			$parent = $(this).parents('.reservation');
+			$('.bottom', $parent).slideToggle();
+		});
+    });
+</script>
+</body>
+</html>
