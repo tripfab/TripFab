@@ -119,7 +119,7 @@ $(document).ready(function() {
                 position:'fixed',
                 left:$left,
                 top:0
-            })
+            });            
         } else {
             $('.user-messages .right').css({
                 position:'static'
@@ -135,12 +135,14 @@ $(document).ready(function() {
         $right     = $('.user-messages .right');
         $top       = $(window).scrollTop();
         
-        $foot      = $('.footer').offset().top - 14;
+        $foot      = $('#footer').offset().top - 14;
         
         $sum = ($top + $maxheight);
         $diff = ($sum >= $foot) ? ($sum - $foot) + 8 : 0;
         
         $form = 144;
+        
+        //alert($('.user-messages').height());
         
         if($right.css('position') == 'fixed') {
             $height = $maxheight - 28 - $diff;
@@ -150,6 +152,11 @@ $(document).ready(function() {
             $('.conversation ul', $right).css({
                 height:$height - $form
             });
+            if($('.user-messages').height() < ($height + 100)) {
+                $('.user-messages').css({
+                    height:($height + 100)
+                });
+            }
         } else {
             $height = $maxheight - $putFixLimit - 28 + $top - $diff;
             $('.waiting, .conversation', $right).css({
@@ -158,6 +165,11 @@ $(document).ready(function() {
             $('.conversation ul', $right).css({
                 height:$height - $form
             });
+            if($('.user-messages').height() < ($height + 100)) {
+                $('.user-messages').css({
+                    height:($height + 100)
+                });
+            }
         }
     }
     

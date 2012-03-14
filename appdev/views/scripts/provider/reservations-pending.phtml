@@ -90,6 +90,7 @@
                             </tbody>
                         </table>
                     </div><!-- closes bottom -->
+                    <div class="clear"></div>
                 </div><!-- closes reservation -->
                 <?php endforeach ?>
             </div><!-- closes reservations -->
@@ -146,6 +147,9 @@
 				success:function(){
 					$parent.fadeOut('slow');
 					showAlert('The Reservation has been approved');
+				},
+				error:function(){
+					showError('Something went wrong, Please try again later');
 				}
 			});
 			return false;

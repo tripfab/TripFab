@@ -50,6 +50,7 @@ class WS_Notifier extends Zend_Mail {
         $this->setSubject('Signup Request');
         $this->addTo($this->user->email);
         $this->sendHTMLTemplate('account-request.phtml');
+        
     }
     
     
@@ -128,8 +129,11 @@ class WS_Notifier extends Zend_Mail {
      *  the mistake
      * 
      */
-    public function reservationCancelled()
+    public function reservationCancelled($listing, $client)
     {
+        $this->_view->client = $client;
+        $this->_view->listing = $listing;
+        
         $this->setSubject('Reservation Cancelled');
         $this->addTo($this->user->email);
         $this->sendHTMLTemplate('reservation-cancelled.phtml');

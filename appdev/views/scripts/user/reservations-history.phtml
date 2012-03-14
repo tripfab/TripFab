@@ -25,14 +25,14 @@
             <div class="list_content">
                 <table width="100%" border="0">
                     <tr>
-                        <th width="145"><a href="">Reservation Code</a></th>
-                        <th width="170"><a href="">Activity</a></th>
+                        <th width="120"><a href="">Reservation Code</a></th>
+                        <th width="125"><a href="">Activity</a></th>
                         <th width="80"><a href="">Kind</a></th>
                         <th width="130"><a href="">Partner</a></th>
-                        <th width="130"><a href="">Reservation Date</a></th>
-                        <th width="145"><a href="">Method</a></th>
-                        <th width="80"><a href="">Amount</a></th>
-                        <th width="65" class="last">&nbsp;</th>
+                        <th width="120"><a href="">Reservation Date</a></th>
+                        <th width="70"><a href="">Amount</a></th>
+						<th width="110">&nbsp;</th>
+                        <th width="110" class="last">&nbsp;</th>
                     </tr>
 					<?php foreach($this->reservations as $i => $reserve): ?>
                     <?php $class = ($i == 0) ? 'first' : '' ?>
@@ -42,9 +42,9 @@
                         <td><?= $reserve->listing_type ?></td>
                         <td><?= $reserve->vendor_name ?></td>
                         <td><?= date('d/m/Y', strtotime($reserve->created)) ?></td>
-                        <td><?= $reserve->method ?></td>
                         <td>$<?= $reserve->ammount ?></td>
                         <td><a href="/user/reservations/view/<?= $reserve->id ?>">Details</a></td>
+						<td><a href="/user/reservations/review/<?= $reserve->listing_id ?>" class="edit">Review</a></td>
                     </tr>
                     <?php endforeach ?>
                 </table>

@@ -7469,14 +7469,6 @@ ul.reviews li > div div.meta em.red {
 	width: 154px;
 	text-decoration: none;
 }
-.listing-content .left ul li {
-	color: #303030;
-	font-size: 13px;
-	font-weight: bold;
-	line-height: 30px;
-	display: block;
-	text-decoration: none;
-}
 
 .listing-content .left ul li a:hover {
 	color: #999999;
@@ -11419,12 +11411,11 @@ ul.reviews li > div div.meta em.red {
 	padding:0 0 0 30px;
 	margin:0;
 }
+#header .wrapper > .menu_admin > li.last:hover {
+	background:none;
+}
 #header .wrapper > .menu_admin > li:hover {
 	background:url(../images2/shadow-4.png) no-repeat bottom left;
-}
-#header .wrapper > .menu_admin > li.last:hover,
-#header .wrapper > .menu_admin > li.single:hover {
-	background:none;
 }
 #header .wrapper .menu_admin li ul {
 	display:none;
@@ -11494,9 +11485,6 @@ ul.reviews li > div div.meta em.red {
 }
 .w3_admin .sub_menu h2 span {
 	font-size:13px;
-}
-.w3_admin .sub_menu h2 em {
-	font: bold 15px Helvetica;
 }
 .w3_admin .sub_menu ul {
 	float:right;
@@ -11572,7 +11560,6 @@ ul.reviews li > div div.meta em.red {
 .w1 .all_listing .search_list {
 	overflow:hidden;
 	margin:10px 0;
-	padding-bottom: 5px;
 }
 .w1 .all_listing .pages {
 	float:right;
@@ -11656,9 +11643,9 @@ ul.reviews li > div div.meta em.red {
 	background:none #FFF;
 }
 .all_listing .list_content td {
-    color: #303030;
-    padding: 10px 2px 8px 8px;
-    vertical-align: top;
+    padding: 8px 2px 8px 8px;
+    vertical-align: middle;
+	color:#303030;
 }
 .all_listing .list_content tr.first {
     border-top: 1px solid #e8e8e8;
@@ -11670,28 +11657,25 @@ ul.reviews li > div div.meta em.red {
 .all_listing .list_content tr {
     border-bottom: 1px solid #e2f3ff;
 }
-.all_listing .list_content td a {
-	color: #60b5f7;
-	font:bold 11px/15px Helvetica, Arial, sans-serif;
-}
 .all_listing .list_content td a.edit {
 	background:url(../images2/ico-104.png) no-repeat center left;
 	padding-left:15px;
+	font:bold 11px/15px Helvetica, Arial, sans-serif;
+	color:#60b5f7;
 	height:15px;
 	display:block;
 }
 .all_listing .list_content td a.view {
 	background:url(../images2/ico-123.gif) no-repeat center left;
 	padding-left:20px;
+	font:bold 11px/15px Helvetica, Arial, sans-serif;
+	color:#60b5f7;
 	height:15px;
 	display:block;
-} 
-.all_listing .list_content td a.view:hover,
-.all_listing .list_content td a.edit:hover {
-	color: #9bd2fc;
-	text-decoration: none;
 }
 .all_listing .list_content td a.pay {
+	font:bold 11px/15px Helvetica, Arial, sans-serif;
+	color:#60b5f7;
 	height:15px;
 	display:block;
 }
@@ -11699,82 +11683,7 @@ ul.reviews li > div div.meta em.red {
 	padding-top:10px;
 	overflow:hidden;
 }
-.all_listing .list_content table td li{
-	list-style: none;
-	line-height: 16px;
-}
 
-.w1 .all_listing .display {
-	overflow: hidden;
-}
-.w1 .all_listing .display h3{
-	float: left;
-	font: bold 13px Helvetica;
-	color: #303030;	
-}
-.w1 .all_listing .display select {
-	float: right;
-	display: block;
-	margin-left: 20px;
-}
-.w1 .all_listing .display label {
-	display: block;
-	float: right;
-	font: bold 11px Helvetica;
-}
-.w1 .wrapper .review-ttl {
-	overflow: hidden;
-	padding-bottom: 20px;
-}
-.w1 .wrapper .review-ttl h3 {
-	color: #303030;
-	font: bold 13px Helvetica;
-	float: left;
-	width: 600px;
-}
-.w1 .wrapper .review-ttl a {
-	float: right;
-	display: block;
-	color: #60b5f7;
-}
-.w1 .wrapper .review-ttl a:hover {
-	color: #9bd2fc;
-	text-decoration: none;
-}
-.w1 .wrapper .review-cont{
-	background-color: #FFF;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	border: 1px solid #e7e7e7;
-	padding-top: 25px;
-}
-.w1 .wrapper .review-cont label{
-	font: 12px/15px Helvetica;
-	display: block;
-	float: left;
-	width: 225px;
-	margin-left: 25px;
-}
-.w1 .wrapper .review-cont label strong{
-	display: block;
-}
-.w1 .wrapper .review-cont textarea {
-	width: 674px;
-	height: 51px;
-	float: left;
-	margin-bottom: 50px;
-}
-.w1 .wrapper .review-cont .foot {
-	clear: both;
-	height: 60px;
-	padding-top: 0;
-	padding-bottom: 0;
-}
-.w1 .wrapper .review-cont .foot .btn-1 {
-	margin-top: 15px;
-	border: 1px solid #7AB130;
-}
 /*END ADMIN LISTING-----------------------------------------*/
 /*ADMIN USER VIEW-------------------------------------------*/
 .all_listing #user_view {
@@ -12043,6 +11952,8 @@ ul.reviews li > div div.meta em.red {
 }
 .carrousel-itm {
 	background:url(../images2/g-55.png) repeat-x #f7f7f7;
+	/*height:auto !important;
+	ARREGLAR NO SE PUEDE PONER QUITAR EL HEIGHT SINO NO HACE EL EASING */
 }
 #trips .pricing-tabs .tab .carrousel h3 img {
 	background: url(../images2/arrow-41.png) no-repeat !important;
@@ -12128,7 +12039,7 @@ ul.reviews li > div div.meta em.red {
 }
 #trips .search-listings .searh-box .btn-1 {
 	border:none;
-	width:118px;
+	width:124px;
 	height:36px;
 	font:bold 13px/36px Helvetica, Arial, sans-serif;
 	float:right;
@@ -12187,7 +12098,6 @@ ul.reviews li > div div.meta em.red {
 	margin-top:3px;
 }
 #trips .lstng-details .heading {
-	background:url(../images2/g-54.png) repeat-x right top;
 	position:relative;
 }
 #trips .lstng-details .heading .previous {
@@ -12243,7 +12153,7 @@ ul.reviews li > div div.meta em.red {
 }
 #trips .itinerary .single .star {
 	display:inline-block;
-	width:66px;
+	width:45px;
 	padding-right:10px;
 	margin-top:0;
 }
@@ -12283,6 +12193,22 @@ ul.reviews li > div div.meta em.red {
 	height:12px;
 	text-indent:-99999px;
 	display:inline-block;
+}
+#trips .itinerary .add-listing {
+	background-color:#f4faff;
+	height: 44px;
+	margin:10px 33px 0 0;
+}
+#trips .itinerary .add-listing a{
+	background:url(../images2/ico-32.png) no-repeat left 50%;
+	display: block;
+	float: right;
+	padding-left: 20px;
+	color: #60b5f7;
+	margin: 15px 20px 0 0;
+}
+#trips .itinerary .add-listing a:hover {
+	color: 9bd2fc;
 }
 #trips .itinerary .single > a.edit {
 	background: url(../images2/ico-104.png) no-repeat;
@@ -12501,220 +12427,10 @@ ul.reviews li > div div.meta em.red {
 	margin-right:20px;
 }
 /*END ADMIN CREATE CITY-------------------------------------*/
-/*ADMIN CLAIMS----------------------------------------------*/
-#claims {
-	margin-top: 20px;
-}
-#claims h3 {
-	height: 50px;
-	font: bold 13px/50px Helvetica;
-	color: #303030;
-	overflow: hidden;
-	padding:0 30px 0 40px;
-}
-#claims h3 a {
-	background: url("../images2/arrow-9.png") no-repeat scroll left 50% transparent;
-    color: #60B5F7;
-    float: right;
-    font-size: 11px;
-    padding-left: 15px;
-}
-#claims .case_details {
-	 background: url("../images2/g-54.png") repeat-x 0 0 ;
-	 padding:20px 0 30px 40px;
-	 overflow: hidden;
-}
-#claims .case-updates {
-	 background: url("../images2/g-54.png") repeat-x 0 0 ;
-	 padding:20px 30px 30px 40px;
-	 overflow: hidden;
-}
-#claims .case_details .item-info {
-	float: left;
-	width: 300px;	
-}
-#claims.all_listing .list_content tr,
-#claims.all_listing .list_content tr:hover,
-#claims.all_listing .list_content td {
-	border: none;
-	background: none !important;
-	padding: 0;
-	margin: 0;
-}
-#claims .list_content .item-info td {
-	padding: 3px 10px 3px 0;
-}
-#claims .list_content .item-info h4 {
-	margin-bottom: 5px;
-}
-#claims .case-updates h5 {
-	overflow: hidden;
-	height: 25px;
-	font-size: 13px;
-}
-#claims .case-updates h5 .add {
-	background: url(../images2/ico-32.png) no-repeat;
-	padding-left: 20px;
-	float: right;
-	color: #60B5F7;
-	font-size: 11px;
-}
-#claims.all_listing .list_content .case-updates tr {
-	border-top: 1px solid #e8e8e8;
-}
-#claims.all_listing .list_content .case-updates td {
-	padding: 20px 0 20px 0;
-}
-#claims.all_listing .list_content .case-updates td > strong {
-	display: block;
-}
-#claims.all_listing .list_content .case-updates td p {
-	font: 12px/20px Helvetica;
-}
-/*END ADMIN CLAIMS------------------------------------------*/
-
 /*END ADMIN-------------------------------------------------------------- */
-/*LIGHTBOX BASIC STYLES-------------------------------------*/
-.lb {
-	overflow: hidden;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px; 
-}
-.lb .top {
-	background: url("../images2/g-13.png") repeat-x scroll 0 0 transparent;
-    color: #FFFFFF;
-    font: bold 12px/44px Helvetica,Arial,sans-serif;
-    height: 44px;
-    -moz-border-radius-topleft: 5px;
-    -moz-border-radius-topright: 5px;
-    -moz-border-radius-bottomright: 0px;
-    -moz-border-radius-bottomleft: 0px;
-    -webkit-border-radius: 5px 5px 0px 0px;
-    border-radius: 5px 5px 0px 0px; 
-}
-.lb .bottom {
-	background: url("../images2/g-52.gif") repeat-x scroll 0 0 #F6F6F6;
-    height: 45px;
-    overflow: hidden;
-    padding: 15px 20px 0 0;
-    -moz-border-radius-topleft: 0px;
-    -moz-border-radius-topright: 0px;
-    -moz-border-radius-bottomright: 5px;
-    -moz-border-radius-bottomleft: 5px;
-    -webkit-border-radius: 0px 0px 5px 5px;
-    border-radius: 0px 0px 5px 5px;
-}
-.lb .bottom .btn-10,
-.lb .bottom .btn-1 {
-	float: right;
-	height: 30px;
-}
-/*END LIGHTBOX BASIC STYLES----------------------------------*/
-/*LIGHTBOX CASE CLOSE---------------------------------------*/
-#case_close .top {
-	text-indent: 20px;
-}
-#case_close .cont {
-	width: 340px;
-}
-#case_close .cont textarea {
-	width: 290px;
-	margin: 18px 0 18px 20px;
-}
-#case_close .cont label {
-	margin:0 0 10px 15px;
-	overflow: hidden;
-	display: block;
-}
-#case_close .cont label input{
-	float: left;
-	margin: 0 5px 5px 5px;
-}
-/*END LIGHTBOX CASE CLOSE-----------------------------------*/
-/*LIGHTBOX CASE UPDATE---------------------------------------*/
-#case_update .top {
-	text-indent: 20px;
-}
-#case_update .cont {
-	width: 340px;
-}
-#case_update .cont textarea {
-	width: 290px;
-	margin: 18px 0 18px 20px;
-}
 
-/*END LIGHTBOX CASE UPDATE-----------------------------------*/
-/*LIGHTBOX CASE OPEN CLAIM-----------------------------------*/
-#case_open .top {
-	text-indent: 20px;
-}
-#case_open .cont {
-	width: 340px;
-	padding: 10px 0;
-}
-#case_open .cont textarea {
-	width: 290px;
-	margin: 0 0 10px 20px;
-}
-#case_open .cont input {
-	width: 290px;
-	margin: 0 0 10px 20px;
-}
-#case_open .cont label {
-	margin:0 0 5px 20px;
-	overflow: hidden;
-	display: block;
-	font-weight: bold;
-}
-#case_open .cont label input{
-	float: left;
-	margin-right: 5px;
-}
-/*END LIGHTBOX CASE OPEN CLAIM-------------------------------*/
-/*LIGHTBOX NEW PARTNER---------------------------------------*/
-#new_partner {
-	width: 340px;
-}
-#new_partner .top {
-	padding-left: 20px;
-}
-#new_partner .cont {
-	padding: 20px 0;
-}
-#new_partner ul li{
-	list-style: none;
-	overflow: hidden;
-	margin-bottom: 7px;
-	padding-left: 20px;
-}
-#new_partner label {
-	width: 110px;
-	float: left;
-	height: 27px;
-	line-height: 27px;
-	font-weight: bold;
-}
-#new_partner input[type="text"] {
-	width: 172px;
-	float: left;
-}
-#new_partner input.code {
-	width: 50px;
-}
-#new_partner input.phone {
-	width: 100px;
-	margin-left: 10px;
-}
-#new_partner select {
-	width: 185px;
-	float: left;
-	margin-top: 6px;
-}
-#new_partner .btn-1 {
-	width: 100px;
-}
-/*END LIGHTBOX NEW PARTNER-----------------------------------*/
+
+
 /*LIGHTBOX LISTING------------------------------------------------------- */
 .lightbox_listing {
 	border-radius: 4px;
@@ -13018,7 +12734,7 @@ ul.reviews li > div div.meta em.red {
 #create_trip {
 	width:340px;
 	background-color: #FFF;
-	margin: 0 auto;
+	margin: 20px auto;
 	border-radius: 5px;
 	box-shadow: 0px 0px 5px #CCC;
 }
@@ -13134,7 +12850,7 @@ ul.reviews li > div div.meta em.red {
 #getReport {
 	width:523px;
 	background-color: #FFF;
-	margin:0 auto;
+	margin: 20px auto;
 	border-radius: 5px;
 	box-shadow: 0px 0px 5px #CCC;
 }
@@ -13175,14 +12891,10 @@ ul.reviews li > div div.meta em.red {
 	
 }
 #getReport #report_tabs ul li a:hover,
-#getReport #report_tabs ul li.ui-tabs-selected a,
-#getReport #report_tabs ul li.ui-state-active .active{
+#getReport #report_tabs ul li a.active {
 	text-decoration: none;
 	background-color: #FFF;
 	border-top: 3px solid #60b5f7;
-}
-.ui-tabs-hide {
-	display: none;
 }
 #getReport #report_tabs .item {
 	border-bottom: 1px solid #e8e8e8;
@@ -13195,7 +12907,7 @@ ul.reviews li > div div.meta em.red {
 	border-bottom: none;
 }
 #getReport #report_tabs .item label {
-	width: 180px;
+	width: 220px;
 	float: left;
 	font-weight: bold;
 }
@@ -13204,7 +12916,7 @@ ul.reviews li > div div.meta em.red {
 	width: 220px;
 }
 #getReport #report_tabs input[type="text"] {
-	width: 78px;
+	width: 91px;
 	margin-left: 15px;
 	float: right;
 }
@@ -13221,6 +12933,7 @@ ul.reviews li > div div.meta em.red {
 }
 #getReport .bottom .btn-1 {
 	height: 30px;
+	border: none;
 	float: right;
 	margin-left: 20px;
 	margin-right:10px ;
@@ -13232,45 +12945,7 @@ ul.reviews li > div div.meta em.red {
 	border: 1px solid #dbdbdb;
 	font-size:11px
 }
-#getReport #report_tabs .type {
-    margin-left: 25px;
-    overflow: hidden;
-    padding: 15px 0;
-    width: 470px;
-}
-#getReport #report_tabs .type label {
-	width: 120px;
-	display: inline-block;
-	float: left;
-	font-weight: bold;
-}
-#getReport #report_tabs .type select {
-	width: 335px;
-	float: right;
-}
-#getReport #report_tabs .filter {
-	background: url(../images2/g-54.png) repeat-x 0 10px;
-	height: 30px;
-}
-#getReport #report_tabs .filter span {
-
-	margin: 0 auto;
-	display: table;
-	font: normal 10px/30px Helvetica;
-	color: #898989;
-	text-transform: uppercase;
-	text-align: center;
-	background-color: #FFF;
-	padding:0 10px;
-}
-#getReport #report_tabs strong {
-	float: right;
-	display: block;
-	height: 30px;
-	line-height: 30px;
-	margin-left: 15px;
 	
-}
 /*END LIGHTBOX GET REPORT-----------------------------------*/
 /*LIGHTBOX EXPLORE ITINERARY--------------------------------*/
 #explore-itinerary {
@@ -13405,7 +13080,6 @@ ul.reviews li > div div.meta em.red {
     text-shadow: -1px 1px 1px #5C961F;
 }
 /*END LIGHTBOX EXPLORE ITINERARY----------------------------*/
-
 /*MY TRIPS----------------------------------------------------------------*/
 .welcome_trips {
 	background: url(../images2/img-78.png) no-repeat top center;
@@ -13926,27 +13600,8 @@ ul.reviews li > div div.meta em.red {
 }
 /*END MY TRIPS-------------------------------------------------------------*/
 
-/*LIGHTBOX-NEW-LISTING-----------------------------------------------------*/
-.NewListing {
-	width: 340px;
-}
-.NewListing form {
-	background-color: #FFF;
-}
-.NewListing .top {
-	padding-left: 20px;
-}
-.NewListing .mid {
-	padding: 0 0 20px 20px;
-	background-color: #FFF;
-}
-.NewListing .mid select {
-	display: block;
-	margin-top: 15px;
-	width: 300px;
-}
 
-/*END-LIGHTBOX-NEW-LISTING-------------------------------------------------*/
+
 
 
 

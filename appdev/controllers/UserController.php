@@ -1382,11 +1382,19 @@ class UserController extends Zend_Controller_Action
                 $this->viewReservationTask();
                 $template = 'reservations-view';
                 break;
+            case 'review':
+                $this->reviewReservationTask();
+                $template = 'reservations-review';
+                break;
             default:
                 throw new Exception('Page not found'); break;
         }
         
         $this->render($template);
+    }
+    
+    public function reviewReservationTask()
+    {
     }
     
     public function defaultReservationsTask()

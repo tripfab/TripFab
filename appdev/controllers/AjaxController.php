@@ -14,6 +14,11 @@ class AjaxController extends Zend_Controller_Action
     protected $listings;
     protected $user;
     protected $accounts;
+    
+    /**
+     *
+     * @var WS_UsersService
+     */
     protected $users;
     protected $reviewes;
     protected $vendors;
@@ -1825,7 +1830,35 @@ class AjaxController extends Zend_Controller_Action
     
     public function cancelreservationAction()
     {
-    
+        if(!$this->getRequest()->isPost())
+                throw new Exception('Wrong Request');
+        
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+
+        if($user->getRole() != 'user')
+                throw new Exception('No access allowed');
+
+        $reservation  = $this->reservations->get($_POST['id']);
+        if($reservation->user_id != $user->getId())
+                throw new Exception('No access allowed');
+        
+        $listing = $this->listings->getListing($reservation->listing_id);
+        
+        $vendor = $this->users->getVendor($reservation->vendor_id);
+        
+        $transaction = $this->reservations->getTransaction($reservation->transaction_id);
+        
+        $transaction->delete();
+        $reservation->delete();
+        
+        $notifier = new WS_Notifier($vendor->user_id);
+        $notifier->reservationCancelled($listing, $user->getData());
+        
+        echo 'success'; die;        
     }
     
     public function newssignupAction()
