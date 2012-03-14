@@ -204,4 +204,14 @@ class WS_UsersService {
 
         return $db->fetchRow($select);
     }
+    
+    public function getVendor($id)
+    {
+        $vendors = new Zend_Db_Table('vendors');
+        $select = $vendors->select();
+        $select->where('id = ?', $id);
+        $vendor = $vendors->fetchRow($select);
+        
+        return $vendor;
+    }
 }
