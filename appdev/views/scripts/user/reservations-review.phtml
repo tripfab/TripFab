@@ -17,6 +17,7 @@
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
     <div class="w2">
         <div class="wrapper user-messages">
+        	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Reservations','parentActive'=>'History')); ?>
             <div class="review-ttl">
                 <h3>Horseback Riding Review</h3>
                 <a href="">&larr;Back to History</a>
