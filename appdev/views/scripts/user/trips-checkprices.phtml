@@ -22,14 +22,14 @@
             <span class="place"><?= $this->country->title ?></span> 
             <span class="label"><em></em><?= $this->trip->days ?> <?= ($this->trip->days > 1) ? 'Days' : 'Day' ?> Trip</span> 
         </div><!--CHECKOUT_HEADERB-->
-        <div class="wrapper" id="custom_checkout">
+        <div class="wrapper" id="custom_checkout"> 
             <div class="left_block">
                 <h3>Check the availability for your trip and the listing options before continue with the checkout</h3>
                 <form method="post" action="" id="checkprices_form">
                     <div id="checkout_accordion">
                         <?php foreach($this->items as $item): ?>
                         <?php if($item->available || ($item->available === 0)): ?>
-                        <div class="header active"> 
+                        <div class="header active">
                             <span class="arrow"></span> 
                             <a href="#"></a>
                             <div class="descrip"> 

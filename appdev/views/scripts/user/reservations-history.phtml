@@ -19,8 +19,13 @@
         <div class="reserv_history">
         	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Reservations','parentActive'=>'History')); ?>
             <?php if(count($this->reservations) > 0): ?>
-        	<div class="subttl">
+        	<div class="subttl show">
         		<h4>You have <?= count($this->reservations) ?> hostoric reservations</h4>
+        		<label>Show
+        			<select>
+        				<option value="">This year</option>
+        			</select>
+        		</label>
         	</div><!-- closes subttl -->
             <div class="list_content">
                 <table width="100%" border="0">
@@ -43,7 +48,7 @@
                         <td><?= $reserve->vendor_name ?></td>
                         <td><?= date('d/m/Y', strtotime($reserve->created)) ?></td>
                         <td>$<?= $reserve->ammount ?></td>
-                        <td><a href="/user/reservations/view/<?= $reserve->id ?>">Details</a></td>
+                        <td><a href="/user/reservations/view/<?= $reserve->id ?>" class="view">Details</a></td>
 						<td><a href="/user/reservations/review/<?= $reserve->listing_id ?>" class="edit">Review</a></td>
                     </tr>
                     <?php endforeach ?>

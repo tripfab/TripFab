@@ -18636,7 +18636,64 @@ h2.title .back:hover,
 }
 
 /*END-NEW-BROWSE-TRIPS-----------------------------------------------------*/
-
+/*REVIEWS------------------------------------------------------------------*/
+.w1 .wrapper .review-cont {
+    background-color: #FFFFFF;
+    border: 1px solid #E7E7E7;
+    border-radius: 4px 4px 4px 4px;
+    padding-top: 25px;
+}
+.w1 .wrapper .review-cont label {
+    display: block;
+    float: left;
+    font: 12px/15px Helvetica;
+    margin-left: 25px;
+    width: 225px;
+}
+.w1 .wrapper .review-cont label strong {
+    display: block;
+}
+.w1 .wrapper .review-cont textarea {
+    float: left;
+    height: 51px;
+    margin-bottom: 50px;
+    width: 674px;
+}
+.w1 .wrapper .review-ttl {
+	overflow: hidden;
+	margin-bottom: 10px;
+	margin-top: 5px;
+}
+.w1 .wrapper .review-ttl h3 {
+	float: left;
+	display: inline-block;
+	font: bold 14px Helvetica;
+	color: #303030;
+}
+.w1 .wrapper .review-ttl a {
+	color: #60b5f7;
+	float: right;
+	display: block;
+	font-weight: bold;
+}
+.w1 .wrapper .review-ttl a:hover {
+	color: #9bd2fc;
+}
+.w1 .subttl.show {
+	position: relative;
+}
+.w1 .subttl.show label {
+	display: block;
+	position: absolute;
+	top: 5px;
+	right: 0;
+	font: bold 11px Helvetica;
+	color: #303030;
+}
+.w1 .subttl.show select{
+	margin-left: 10px;
+}
+/*END REVIEWS--------------------------------------------------------------*/
 
 
 
