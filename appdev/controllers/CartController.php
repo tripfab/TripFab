@@ -644,6 +644,11 @@ class CartController extends Zend_Controller_Action {
                         $reservation = $this->trips->createPurchase($transaction, $cartitem, $listing);
 
                         $cartitem->delete();
+                        
+                        $notifier = new WS_Notifier($this->user->getId());
+                        $notifier->tripPurchased($reservation, $listing);
+                            
+                        
 
                         $this->_redirect('/cart/tripinvoice/'.$reservation->id);
                     } catch(Exception $e) {

@@ -211,8 +211,10 @@ class WS_Notifier extends Zend_Mail {
      *  details of the trip
      * 
      */
-    public function tripPurchased()
+    public function tripPurchased($reservation, $trip)
     {
+        $this->_view->reservation = $reservation;
+        $this->_view->trip        = $trip;
         $this->setSubject('Preplaned Itinerary Purchase');
         $this->addTo($this->user->email);
         $this->sendHTMLTemplate('trip.phtml');
