@@ -291,7 +291,7 @@ $(function(){
 $(function(){
     $('a.lb').fancybox({
         padding:0,
-        overlayColor:'#000',
+        overlayColor:'#FFF',
         centerOnScroll:1
     });
 	

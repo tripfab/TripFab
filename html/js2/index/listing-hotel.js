@@ -205,8 +205,8 @@ $(function(){
 $(function(){
 	$('a.lb').fancybox({
 		padding:0,
-		overlayColor:'#000',
-		centerOnScroll:1,
+		overlayColor:'#FFF',
+		centerOnScroll:1
 	});
 	
 	$('#sendMessageForm').submit(function(){
