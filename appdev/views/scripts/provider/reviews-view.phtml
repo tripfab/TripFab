@@ -39,13 +39,13 @@
                     <div class="bottom">
                         <div class="right">
                             <a href="" class="reportAbuse">Report Abuse</a>
-                            <a href="" class="btn-1">Mark as Read</a>
-                            <a href="#send_message_<?= $review->user_id ?>" class="btn-4">Contact Client</a>
                         </div><!-- closes right -->
                     </div><!-- closes bottom -->
+                    <?php if($review->new == 1): ?>
                     <div class="timespan">
                         <span>New</span>
                     </div><!-- closes timespan -->
+                    <?php endif ?>
                 </div><!-- closes s-qa -->
                 <?php endforeach ?>			
             </div><!-- closes reviews-questions -->

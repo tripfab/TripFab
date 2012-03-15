@@ -349,4 +349,16 @@ class WS_ReservationsService {
         return $db->fetchRow($select);
     }
     
+    public function getUserReservation($user, $listing, $status)
+    {
+        $select = $this->reservations->select();
+        $select->where('user_id = ?', $user);
+        $select->where('listing_id = ?', $listing);
+        $select->where('status_id = ?', $status);
+        
+        $reservation = $this->reservations->fetchRow($select);
+        
+        return $reservation;
+    }
+    
 }

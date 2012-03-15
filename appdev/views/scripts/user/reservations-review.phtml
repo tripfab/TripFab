@@ -23,10 +23,10 @@
                 <a href="">&larr;Back to History</a>
             </div><!--REVIEW-TTL-->
             <div class="review-cont">
-                <form action="">
+                <form action="" method="post">
                     <fieldset>
                         <label><strong>Tell us about your experience</strong> Share with the world your review</label>
-                        <textarea cols="" rows="">Write your review...</textarea>
+                        <textarea cols="" name="text" rows="" placeholder="Write your review"><?= (is_null($this->review)) ? '' : $this->review->text ?></textarea>
                         <div class="foot">
                             <input type="submit" class="btn-1" value="Save & Publish" />
                         </div><!-- closes foot -->

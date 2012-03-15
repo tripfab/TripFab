@@ -5,10 +5,9 @@
     <li><a href="#tabs2-1">Reviews</a></li>
 </ul>
 <div id="tabs2-1" class="tab box">
-    <div class="ttl">No reviews</div>
+	<?php if(count($this->reviews) > 0): ?>
+    <div class="ttl"><?= (count($this->reviews) == 1) ? '1 Review' : count($this->reviews) . ' Reviews' ?></div>
     <ul class="reviews">
-    	<li><img src="/images2/empty-reviews.gif" /></li>
-    	<!--
         <?php foreach($this->reviews as $review): ?>
         <li>
             <?php if(!empty($review->user_image)): ?>
@@ -29,6 +28,11 @@
             </div>
         </li>
         <?php endforeach ?>
-        -->
     </ul>
+    <?php else: ?>
+    <div class="ttl">No reviews</div>
+    <ul class="reviews">
+    	<li><img src="/images2/empty-reviews.gif" /></li>
+    </ul>    
+    <?php endif ?>
 </div><!-- closes tab -->

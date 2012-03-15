@@ -1,9 +1,16 @@
 <?php
 
 class WS_ReviewsService {
-
-    public function __construct() {
-        
+    
+    /**
+     *
+     * @var Zend_Db_Table
+     */
+    protected $reviews;
+    
+    public function __construct() 
+    {
+        $this->reviews = new Zend_Db_Table('reviews');
     }
     
     public function getReviewsBy($user)
@@ -26,7 +33,6 @@ class WS_ReviewsService {
     
     public function getReviewsFor($listing)
     {
-        //$listing = 16;
         $db = Zend_Db_Table::getDefaultAdapter();
         $select = $db->select();
         $select->from('reviews');
@@ -36,7 +42,6 @@ class WS_ReviewsService {
             'user_image'=> 'image',
         ));
         $select->where('reviews.listing_id = ?', $listing);
-        $select->orWhere('reviews.listing_id = ?', 16);
         
         $reviews = $db->fetchAll($select, array(), Zend_Db::FETCH_OBJ);
         if(count($reviews) > 0)
@@ -45,4 +50,33 @@ class WS_ReviewsService {
         return array();
     }
     
+    public function getReview($user, $listing)
+    {
+        $select = $this->reviews->select();
+        $select->where('listing_id = ?', $listing);
+        $select->where('user_id = ?', $user);
+        $review = $this->reviews->fetchRow($select);
+        return $review;
+    }
+    
+    public function save($listing, $user, $text)
+    {
+        $review = $this->reviews->fetchNew();
+        $review->listing_id = $listing;
+        $review->user_id    = $user;
+        $review->title      = substr($text, 0, 10).'...';
+        $review->text       = $text;
+        $review->listing_id = $listing;
+        $review->created    = date('Y-m-d H:i:s');
+        $review->updated    = date('Y-m-d H:i:s');
+        
+        $review->save();
+        
+        return $review;
+    }
+    
+    public function markReviewsAsRead($listing)
+    {
+        $this->reviews->update(array('new'=>0), "listing_id = {$listing}");
+    }
 }

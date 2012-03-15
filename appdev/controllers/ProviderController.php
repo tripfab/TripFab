@@ -2900,7 +2900,7 @@ class ProviderController extends Zend_Controller_Action
     
     public function reviewsDefaultTask()
     {
-        $listings = $this->listings->getListingsOf($this->user->getVendorId());
+        $listings = $this->listings->getReviewedListings($this->user->getVendorId());
         $this->view->listings = $listings;
     }
     
@@ -2913,6 +2913,8 @@ class ProviderController extends Zend_Controller_Action
             $reviews = $service->getReviewsFor($listing->id);
             
             $this->view->reviews = $reviews;
+            
+            $service->markReviewsAsRead($listing->id);
         }
     }
     
