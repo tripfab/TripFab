@@ -1395,6 +1395,41 @@ class UserController extends Zend_Controller_Action
     
     public function reviewReservationTask()
     {
+        $id = $this->_getParam('id','default');
+        if($id == 'default') 
+            throw new Exception('Page not found');
+        
+        $listing = $this->listings->getListing($id);
+        $reservation = $this->reservations->getUserReservation($this->user->getId(), $listing->id, 3);
+        if(is_null($reservation)) 
+            throw new Exception('Page not found');
+        
+        $review = $this->reviews->getReview($this->user->getId(), $listing->id);
+        
+        $vendor = $this->users->getVendor($listing->vendor_id);
+        
+        if($this->getRequest()->isPost())
+        {
+            $text = $_POST['text'];
+            if(is_null($review)) {
+                $review = $this->reviews->save($listing->id, $this->user->getId(), $text);
+            } else {
+                $review->text    = $text;
+                $review->title   = substr($text, 0, 10).'...';
+                $review->updated = date('Y-m-d H:i:s');
+                $review->new     = 1;
+                
+                $review->save();
+            }
+            
+            $notifier = new WS_Notifier($vendor->user_id);
+            $notifier->newReview($listing, $this->user->getData());
+            
+            setcookie('alert', 'Your changes have been saved');
+            $this->_redirect('/user/reservations/history');
+        }
+        
+        $this->view->review = (!is_null($review)) ? $review : false;
     }
     
     public function defaultReservationsTask()

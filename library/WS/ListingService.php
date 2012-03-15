@@ -848,6 +848,24 @@ class WS_ListingService {
         return $listings;
     }
     
+    public function getReviewedListings($vendor)
+    {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $select = $db->select();
+        
+        $select->from('listings',array(
+            'identifier','status','title','created','id','image','description',
+            'country_id','city_id','main_type'));
+        $select->join('listing_types', 'listings.main_type = listing_types.id', array('listing_type'  => 'name'));
+        $select->join('reviews','listings.id = reviews.listing_id', array('review_id'=>'id'));
+        $select->where('vendor_id = ?', $vendor);
+        $select->order('created DESC');
+        $select->group('listings.id');
+        $listings = $db->fetchAll($select, array(), 5);
+        //var_dump($listings); die;
+        return $listings;
+    }
+    
     public function getListingsOf2($vendor, $status = 1)
     {
         $listings_db = new Zend_Db_Table('listings');

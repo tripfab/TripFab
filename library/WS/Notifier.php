@@ -145,9 +145,11 @@ class WS_Notifier extends Zend_Mail {
      *  hotel. We need to inform the partner about this new review
      * 
      */
-    public function newReview()
+    public function newReview($listing, $client)
     {
         $this->setSubject('New Review');
+        $this->_view->listing = $listing;
+        $this->_view->client = $client;
         $this->addTo($this->user->email);
         $this->sendHTMLTemplate('review.phtml');
     }
