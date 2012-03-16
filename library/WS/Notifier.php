@@ -226,8 +226,10 @@ class WS_Notifier extends Zend_Mail {
      *  about the good news
      * 
      */
-    public function reservationApproved()
+    public function reservationApproved($listing, $vendor)
     {
+        $this->_view->listing = $listing;
+        $this->_view->vendor  = $vendor;
         $this->setSubject('Reservation Approved');
         $this->addTo($this->user->email);
         $this->sendHTMLTemplate('reservation-approved.phtml');
@@ -256,7 +258,6 @@ class WS_Notifier extends Zend_Mail {
      */
     public function newMessage($from)
     {
-        $from = $this->users->get($from);
         $this->_view->from = $from;
         
         $this->setSubject('New message');

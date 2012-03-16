@@ -561,6 +561,9 @@ class AjaxController extends Zend_Controller_Action
                 $msg->created           = $con->created;
                 $msg->save();
                 
+                $notifier = new WS_Notifier($vendor->user_id);
+                $notifier->newMessage($user);
+                
                 $result['type'] = 'success';
                 $result['message'] = 'Your message to '.$vendor->name.' has been sent';
             } catch(Exception $e) {
@@ -585,29 +588,29 @@ class AjaxController extends Zend_Controller_Action
                 if(!$auth->hasIdentity())
                         throw new Exception ('You need to login before sending a message');
                 
-                $user = $auth->getIdentity();
-                if($user->role_id != 3)
+                $vendor = $auth->getIdentity();
+                if($vendor->role_id != 3)
                         throw new Exception ('You dont have anough permissions to contact vendors');
                 
                 $message = $_POST['message'];
                 if(empty($message))
                         throw new Exception('Message cannot be empty');
                 
-                $vendors = new Model_Users();
-                $select = $vendors->select();
+                $users = new Model_Users();
+                $select = $users->select();
                 $select->where('id = ?', $_POST['user']);
-                $vendor = $vendors->fetchRow($select);
-                if(is_null($vendor))
+                $user = $users->fetchRow($select);
+                if(is_null($user))
                         throw new Exception('User Not Found');
                 
                 $conversations = new Model_Conversations();
                 $con = $conversations->fetchNew();
-                $con->starter   = $user->id;
-                $con->sname     = $user->name;
-                $con->simage    = $user->image;
-                $con->wwith     = $vendor->id;
-                $con->wname     = $vendor->name;
-                $con->wimage    = $vendor->image;
+                $con->starter   = $vendor->id;
+                $con->sname     = $vendor->name;
+                $con->simage    = $vendor->image;
+                $con->wwith     = $user->id;
+                $con->wname     = $user->name;
+                $con->wimage    = $user->image;
                 $con->wnew      = 1;
                 $con->msgcount  = 1;
                 $con->created   = date('Y-m-d H:i:s');
@@ -617,14 +620,17 @@ class AjaxController extends Zend_Controller_Action
                 
                 $messages = new Model_Messages();
                 $msg = $messages->fetchNew();
-                $msg->user_id           = $user->id;
+                $msg->user_id           = $vendor->id;
                 $msg->conversation_id   = $con->id;
                 $msg->text              = $message;
                 $msg->created           = $con->created;
                 $msg->save();
                 
+                $notifier = new WS_Notifier($user->id);
+                $notifier->newMessage($vendor);
+                
                 $result['type'] = 'success';
-                $result['message'] = 'Your message to '.$vendor->name.' has been sent';
+                $result['message'] = 'Your message to '.$user->name.' has been sent';
             } catch(Exception $e) {
                 //throw $e;
                 $result['type'] = 'error';
@@ -1359,8 +1365,7 @@ class AjaxController extends Zend_Controller_Action
                     $conversation->updated  = date('Y-m-d G:i:s');
                     $conversation->msgcount = $conversation->msgcount + 1;
                     
-                    $conversation->save();
-                    
+                    $conversation->save();                    
                     
                     $messages = new Model_Messages();
                     $message  = $messages->fetchNew();
@@ -1371,6 +1376,9 @@ class AjaxController extends Zend_Controller_Action
                     $message->created         = date('Y-m-d G:i:s');
                     
                     $message->save();
+                    
+                    $notifier = new WS_Notifier($conversation->wwith);
+                    $notifier->newMessage($user);
                     
                     $_sender = $users->get($conversation->wwith);
                     $image   = $_sender->image;
@@ -1392,6 +1400,9 @@ class AjaxController extends Zend_Controller_Action
                     $message->created         = date('Y-m-d G:i:s');
                     
                     $message->save();
+                    
+                    $notifier = new WS_Notifier($conversation->starter);
+                    $notifier->newMessage($user);
                     
                     $_sender = $users->get($conversation->starter);
                     $image   = $_sender->image;
@@ -1798,7 +1809,10 @@ class AjaxController extends Zend_Controller_Action
 
         $reservation  = $this->reservations->get($_POST['id']);
         if($reservation->vendor_id != $user->getVendorId())
-                throw new Exception('No access allowed');
+                throw new Exception('Reservation not found');
+        
+        if($reservation->status_id != 1) 
+                throw new Exception('Reservation not found');
         
         $lising = $this->listings->getListing($reservation->listing_id);
         
@@ -1809,21 +1823,32 @@ class AjaxController extends Zend_Controller_Action
         
         $keys = Zend_Registry::get('stripe');
         Stripe::setApiKey($keys['secret_key']);
+        
+        try {
+            $charge = Stripe_Charge::create(array(
+                'amount'      => $transaction->ammount * 100,
+                'currency'    => 'usd',
+                'customer'    => $account->stripe_id,
+                'description' => $lising->title . ' Reservation'
+            ));
 
-        $charge = Stripe_Charge::create(array(
-            'amount'      => $transaction->ammount * 100,
-            'currency'    => 'usd',
-            'customer'    => $account->stripe_id,
-            'description' => $lising->title . ' Reservation'
-        ));
+            $transaction->status = 1;
+            $transaction->charge_id = $charge->id;
+
+            $transaction->save();
+
+            $reservation->status_id = 2;
+            $reservation->save();
+            
+            $notifier = new WS_Notifier($reservation->user_id);
+            $notifier->reservationApproved($lising, $user->getData());
+            
+        } catch(Exception $e) {
+
+            echo $e->getMessage();
+
+        }
         
-        $transaction->status = 1;
-        $transaction->charge_id = $charge->id;
-        
-        $transaction->save();
-        
-        $reservation->status_id = 2;
-        $reservation->save();
         
         echo 'success'; die;        
     }
@@ -1858,7 +1883,7 @@ class AjaxController extends Zend_Controller_Action
         $notifier = new WS_Notifier($vendor->user_id);
         $notifier->reservationCancelled($listing, $user->getData());
         
-        echo 'success'; die;        
+        echo 'success'; die;
     }
     
     public function newssignupAction()
