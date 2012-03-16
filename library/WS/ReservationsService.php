@@ -133,6 +133,10 @@ class WS_ReservationsService {
             'listing_name'=>'title',
             'listing_image'=>'image',
         ));
+        $select->join('users','reservations.user_id = users.id', array(
+            'user_name'         => 'name',
+            'user_image'        => 'image',
+        ));
         $select->join('listing_types','listings.main_type = listing_types.id',array('listing_type'=>'name'));
         $select->join('transactions','reservations.transaction_id = transactions.id',array('method'));
         $select->where('reservations.vendor_id = ?', $vendor);
