@@ -3614,6 +3614,7 @@ class AdminController extends Zend_Controller_Action {
         }
     }
 
+
 	private function tripAddTask(){
 		if($this->getRequest()->isPost()){
 			$errors = $this->validateTripData($_POST);
@@ -3739,7 +3740,11 @@ class AdminController extends Zend_Controller_Action {
                 break;
             case 5:
                 $this->view->title = "";
-                $template = 'trip4a';
+                $this->tripEditTask5($trip);
+                break;
+            case 6:
+                $this->view->title = "";
+                $this->tripEditTask6($trip);
                 break;
             default:
                 $this->view->title = "";
@@ -4005,7 +4010,68 @@ class AdminController extends Zend_Controller_Action {
 
         $this->render('trip4');
     }
+	
+    private function tripEditTask5($trip) {
+        $this->view->trip = $trip;
+		$items = $this->trips->getListingOf3($trip->id); 
+        $dayWise = array();
+		foreach($items as $item){
+			$dayWise[$item->day][] = $item;	
+		}
+		//echo "<pre>" ; print_r($dayWise); die;
+		$this->view->items = $dayWise;
+		$this->render('trip5');
 
+	}
+
+    private function tripEditTask6($trip) {
+        $this->view->trip = $trip;
+        $db = Zend_Db_Table::getDefaultAdapter();
+		
+		$db = Zend_Db_Table::getDefaultAdapter();
+	 	$db->setFetchMode(Zend_Db::FETCH_OBJ);
+		$result = $db->query("SELECT * FROM trip_listings WHERE id=2 ");
+        $this->view->itinerary= $result->fetchAll(); 
+        $countries = $this->places->getPlaces(2);
+        $this->view->countries = $countries;
+        $this->view->errors = array();
+
+		$selectedCity = array();
+		$selectedCity[] = @$_POST["trip_city1"] ? (object)array('trip_id'=>2, 'city_id'=>$_POST["trip_city1"]): (object)array('trip_id'=>2, 'city_id'=>0);
+	
+		$this->view->cities = json_encode($selectedCity);
+        if ($this->getRequest()->isPost()) {
+            $errors = $this->validateTrip3Data($_POST);
+	
+            if (count($errors)) {
+                $this->view->errors = $errors;
+                $this->view->title = $_POST['title'];
+                $this->view->description = $_POST['description'];
+                $this->view->days = $_POST['days'];
+
+                $this->render('trip4edit');
+                return;
+            }
+			
+            $title = $_POST['title'];
+            $description = $_POST['description'];
+            $days = $_POST['days'];
+            $duration = $_POST['duration'];
+            $start = $_POST['start'];
+            $end = $_POST['end'];
+            $image = $_POST['image'];
+			$lat=$_POST['lat'];
+            $lng = $_POST['lng'];
+			$this->trips->saveTrip_listings($title, $description, $days, $duration, $start, $end, $image, $lat, $lng );
+            $_SESSION['alert'] = 'Your changes have been saved';
+            $this->_redirect('/admin/trip4edit/');
+        }
+
+
+		$this->render('trip6');
+
+	}
+	
     public function vendorsAction() {
         switch ($this->_getParam('task')) {
             case 'add':
