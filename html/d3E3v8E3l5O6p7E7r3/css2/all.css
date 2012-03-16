@@ -4894,7 +4894,6 @@ ul.reviews li > div div.meta em.red {
 
 .lb-forgot {
 	width: 420px;
-	background-color: #FFFFFF;
 	z-index: 0;
 	position: relative;
 }
@@ -4919,6 +4918,7 @@ ul.reviews li > div div.meta em.red {
 	padding: 12px 29px 16px;
 	color: #898989;
 	font-size: 12px;
+	background-color: #FFF;
 }
 
 .lb-forgot .content input[type="text"] {
@@ -18063,9 +18063,9 @@ h2.title .back:hover,
 }
 #livechat .mid {
 	background-color:#FFF;
-	padding:0 0 135px;
+	padding:0 0 165px;
 	overflow-y:scroll;
-	margin: 70px 0 135px;
+	margin: 70px 0 165px !important;
 }
 
 #livechat .mid .message{
@@ -18087,7 +18087,7 @@ h2.title .back:hover,
 	float:left;
 	width:auto;
 	margin-left:65px;
-}
+} 
 #livechat .mid .text .title {
 	font:bold 12px/16px Helvetica, sans-serif;
 	color:#303030;
@@ -18105,7 +18105,7 @@ h2.title .back:hover,
 }
 #livechat.lb .bottom {
 	width:100%;
-	height:115px;
+	height:80px !important;
 	padding:10px 0 0 15px;
 	position:fixed;
 	bottom:0;
@@ -18119,7 +18119,10 @@ h2.title .back:hover,
 #livechat.lb .bottom textarea {
 	width:100%;
 	float:left;
-	height:80px;
+	height:50px !important;
+	margin-top: 5px;
+	padding-top: 7px;
+	font: normal 13px/20px Helvetica;
 }
 #livechat.lb .bottom .btn-1 {
 	font:bold 15px/34px Helvetica;
@@ -18127,14 +18130,17 @@ h2.title .back:hover,
 	width:87px;
 	position:absolute;
 	right:-112px;
-	top:0;
+	top:5px;
 }
 #livechat .welcome {
 	background: url(../images2/livechat-welcome.png) no-repeat 25px 50% #f5f5f5;
 	border-bottom:1px solid #e0e0e0;
 	height:63px;
 	margin-bottom: 10px;
-	
+}
+#livechat .welcome.off {
+	height: 48px;
+	font-size: 13px;
 }
 #livechat .welcome p {padding:15px 0 0 80px}
 #livechat .welcome p strong {

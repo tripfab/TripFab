@@ -17,7 +17,7 @@
         $('.mid').resizeHeight({
             head:'.top',
             foot:'.bottom',
-            minheight:200
+            minheight:90
         });
 		
 		listen();
@@ -131,9 +131,7 @@
         overflow:hidden;}
     #livechat .mid {
         padding: 0;
-        margin-bottom:135px;}
-	#livechat.lb .bottom {
-		height:50px;}
+        margin-bottom:165px !important;}
     </style>
 </head>
 <body style="background-color:#FFF;">
@@ -152,6 +150,12 @@
             <p><strong>Welcome to the Tripfab Live Chat</strong>
                 Please ask your question to our partner</p>
         </div><!--WELCOME-->
+        <div class="bottom">
+            <div class="container">
+                <textarea rows="2" cols="" style="height:auto"></textarea>
+                <input type="submit" name="Send" class="btn-1" value="Send" />
+            </div><!--CONTAINER-->
+        </div><!--BOTTOM-->
         <div class="hidden">
             <div class="userimage">
             	<?= $this->thumbnail(48, $this->user->image, '','1:1'); ?>
@@ -161,14 +165,26 @@
             </div>
         </div>
     </div><!--MID-->
+    
+    <?php else: ?>
+    <div class="mid">
+        <div class="welcome off">
+            <p>But you can still send them a direct message.</p>
+        </div><!--WELCOME-->
+        <div class="hidden">
+            <div class="userimage">
+            	<?= $this->thumbnail(48, $this->user->image, '','1:1'); ?>
+            </div>
+            <div class="vendorimage">
+            	<?= $this->thumbnail(48, $this->vendor->image, '','1:1'); ?>
+            </div>
+        </div>
     <div class="bottom">
         <div class="container">
             <textarea rows="2" cols="" style="height:auto"></textarea>
-            <input type="submit" name="Send" class="btn-1" />
+            <input type="submit" name="Send" class="btn-1" value="Send" />
         </div><!--CONTAINER-->
     </div><!--BOTTOM-->
-    <?php else: ?>
-    
     <?php endif ?>
 </div><!--LIVECHAT-->
 
