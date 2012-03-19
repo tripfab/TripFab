@@ -271,8 +271,9 @@ class WS_Notifier extends Zend_Mail {
      *  email with a link he can follow to enter the new password
      * 
      */
-    public function passwordReset()
+    public function passwordReset($url)
     {
+        $this->_view->url = $url;
         $this->setSubject('Password Reset');
         $this->addTo($this->user->email);
         $this->sendHTMLTemplate('password.phtml');
