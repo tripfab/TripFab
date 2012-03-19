@@ -724,6 +724,16 @@ class WS_TripsService {
 
         return $trip;
     }
+	
+	public function saveListing($data, $id=null){
+		
+		if($id){
+			$this->listings->update($data, "id=$id");
+		}
+		else{
+			$this->listings->insert($data);
+		}
+	}
 
 
 }

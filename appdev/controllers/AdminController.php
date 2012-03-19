@@ -4027,6 +4027,9 @@ class AdminController extends Zend_Controller_Action {
         
 		$countries = $this->places->getPlaces(2);
         $this->view->countries = $countries;
+		
+		$listingType = $this->listings->getMainTypes();
+		$this->view->listingTypes = $listingType;
 
 
         $this->view->errors = array();
@@ -4042,9 +4045,8 @@ class AdminController extends Zend_Controller_Action {
 		$this->view->lng = '';
 		$this->view->lat = '';
 	
-		$this->view->cities = json_encode($selectedCity);
         if ($this->getRequest()->isPost()) {
-            $errors = $this->validateTrip3Data($_POST);
+            $errors = $this->validateTrip6Data($_POST);
             if (count($errors)) {
                 $this->view->errors = $errors;
                 $this->view->title = $_POST['title'];
@@ -4062,20 +4064,25 @@ class AdminController extends Zend_Controller_Action {
                 return;
             }
 			
-            /*
-			$title = $_POST['title'];
-            $description = $_POST['description'];
-            $days = $_POST['days'];
-            $duration = $_POST['duration'];
-            $start = $_POST['start'];
-            $end = $_POST['end'];
-            $image = $_POST['image'];
-			$lat=$_POST['lat'];
-            $lng = $_POST['lng'];
-			$this->trips->saveTrip_listings($title, $description, $days, $duration, $start, $end, $image, $lat, $lng );
-			*/
+            $data = array();
+			$data['title'] = $_POST['title'];
+			$data['description'] = $_POST['description'];
+			$data['day'] = $_POST['day'];
+			$data['city_id'] = $_POST['city'];
+			$data['country_id'] = $_POST['country'];
+			$data['start'] = $_POST['start_hour'];
+			$data['end'] = $_POST['end_hour'];
+			$data['duration'] = $_POST['duration'];
+			$data['lng'] = $_POST['lng'];
+			$data['lat'] = $_POST['lat'];
+			
+			if(!$listing){
+				$data['itinerary_id'] = $trip->id;
+			}
+			$this->trips->saveListing($data, $listing);
+			
             $_SESSION['alert'] = 'Your changes have been saved';
-            $this->_redirect('/admin/trip5/');
+            $this->_redirect('/admin/trips/edit/5/' . $trip->id);
         }
 
 		if($listing){
@@ -4085,7 +4092,7 @@ class AdminController extends Zend_Controller_Action {
 			}
 			$this->view->title = $listing->title;
 			$this->view->description = $listing->description;
-			$this->view->days = $listing->day;
+			$this->view->day = $listing->day;
 			$this->view->type = $listing->main_type;
 			$this->view->country = $listing->country_id;
 			$this->view->city = $listing->city_id;
@@ -4098,6 +4105,37 @@ class AdminController extends Zend_Controller_Action {
 		}
 		$this->render('trip6');
 	}
+	
+	private function validateTrip6Data($postData) {
+        $errors = array();
+        if (empty($postData['title']))
+            $errors['title'] = 'Listing Title can not be blank';
+
+        if (empty($postData['description']))
+            $errors['description'] = 'Listing Description can not be blank';
+
+		if (!(int) $postData['country'])
+            $errors['country'] = 'Country can not be blank';
+
+		if (!(int) $postData['city'])
+            $errors['city'] = 'City can not be blank';
+        
+		if (!(int) $postData['day'])
+            $errors['day'] = 'Itinerary day can not be blank';
+        
+		if (!(int) $postData['duration'])
+            $errors['duration'] = 'Itinerary duration can not be blank';
+		
+
+		if (empty($postData['start_hour']))
+            $errors['start_hour'] = 'Starting hour can not be blank';
+		
+		if (empty($postData['end_hour']))
+            $errors['end_hour'] = 'Ending hour can not be blank';
+
+        return $errors;
+    }
+
 	
     public function vendorsAction() {
         switch ($this->_getParam('task')) {

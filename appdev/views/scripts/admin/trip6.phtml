@@ -40,7 +40,8 @@
 					<a href="#" class="back">Back to Trips</a>
 				</div><!--SUB_MENU-->
             </div><!--W3-->
-			<form id="tripEdit" name="tripEdit" method="POST" action="/admin/trip4edit/"/>
+       
+               <form name="f1" method="post" enctype="multipart/form-data">
 				<div id="trips" class="listing-wrapper wrapper">
 					<div class="listing-content">
 						<div class="left">
@@ -88,7 +89,9 @@
 											Select the type of listing 
 										</p>
 										<select name="activity">
-											<option selected="selected">Activity</option>
+											<?php foreach( $this->listingTypes as $listingType):?>
+                                            <option <?php echo $listingType->id == $this->type ? 'selected="selected"' : '';?> value="<?php echo $listingType->name?>"><?php echo $listingType->name?></option>
+                                            <?php endforeach;?>
 										</select>
 									</div><!---ITEM-->
 									
@@ -97,9 +100,9 @@
 											<strong>select country</strong>
 											 
 										</p>
-										<select id="trip_country"  name="trip_country">
+										<select id="country"  name="country">
 												<?php foreach($this->countries as $country):?>
-                                                <option <?php echo @$this->country_id == $country->id ? ' selected' : ''; ?> value="<?php echo @$country->id?>"><?php echo $country->title?></option>
+                                                <option <?php echo $this->country == $country->id ? ' selected="selected"' : ''; ?> value="<?php echo @$country->id?>"><?php echo $country->title?></option>
                                                 <?php endforeach;?>
 										</select>
 									</div><!---ITEM-->
@@ -119,8 +122,10 @@
 											<strong>Itinerary Day</strong>
 											Select the day of the activity 
 										</p>
-										<select name="days">
-                                       		<option><?php echo $this->day?></option>
+										<select name="day">
+                                       		<?php for($i=1; $i<10; $i++):?>
+                                            <option <?php echo $this->day == $i ? ' selected="selected"' : ''; ?>><?php echo $i?></option>
+                                            <?php endfor;?>
 										</select>
 									</div><!---ITEM-->
 									
@@ -129,8 +134,10 @@
 											<strong>Duration</strong>
 											Select how many days long
 										</p>
-										<select value="duration">
-											<option selected="selected" value="<?php echo $this->duration?>" ><?php echo @$this->duration?></option>
+										<select name="duration">
+                                       		<?php for($i=1; $i<10; $i++):?>
+                                            <option <?php echo $this->duration == $i ? ' selected="selected"' : ''; ?>><?php echo $i?></option>
+                                            <?php endfor;?>
 										</select>
 										
 									</div><!---ITEM-->
@@ -185,7 +192,7 @@
 													</dl>
 												</td>
 												<td class="picture" width="180">
-													<img src="<?php echo @$itineraries->image?>"  alt="" width="68" height="68">
+													<img src="<?php echo @$trip->image?>"  alt="" width="68" height="68">
 													<input type="file" name="image">
 												</td>
 											</tr>
@@ -220,7 +227,7 @@
 					</div>
 					<!-- closes listing-content -->
 				</div>
-					
+				</form>	
 			<div class="footer black">
 				<div class="wrapper">
 					<a href="" class="logo">Tripfab</a>
@@ -237,10 +244,9 @@
 			$('#end_hour').timepicker({
 				ampm: true
 			});
-			var selectedCities = <?php echo $this->cities ?>;
-			fillCityTrip($('#trip_country').val());
-			$('select#trip_country').change(function(){
-				fillCityTrip($('#trip_country').val());
+			fillCityTrip($('#country').val());
+			$('select#country').change(function(){
+				fillCityTrip($('#country').val());
 			});
 			
 			
@@ -253,8 +259,8 @@
 					$.each(fsdata.data, function(i,city){ 
 						
 						selected = false;
-						if(typeof selectedCities[0] != "undefined"){ selected = selectedCities[0].city_id == city.id ? true : false ;}
-						$("#city" ).append(new Option(city.title, city.id, true, selected));
+						//if(typeof selectedCities[0] != "undefined"){ selected = selectedCities[0].city_id == city.id ? true : false ;}
+						$("#city" ).append(new Option(city.title, city.id, true, false));
 						
 						
 					});
