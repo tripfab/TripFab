@@ -5,6 +5,8 @@
 		<title>Trips</title>
         <link type="text/css" rel="stylesheet" href="/css5/reset.css" />
         <link type="text/css" rel="stylesheet" href="/css5/all.css" />
+		<link rel="stylesheet" media="all" type="text/css" href="/css5/jquery-ui-1.8.16.custom.css" />
+    	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 		<script type="text/javascript" src="/js2/jquery.js"></script>
 		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
   		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css" />
@@ -13,6 +15,8 @@
   		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]--> 
 		<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js"></script>
     	<script type="text/javascript" src="/js2/admin/place-edit.js"></script>
+		<script type="text/javascript" src="/js2/jquery-ui-1.8.18.custom.min.js"></script>
+        <script type="text/javascript" src="/js2/jquery-ui-timepicker-addon.js"></script>
 			<script>
 				$(document).ready(function() {
 					$('a.lbc').fancybox({
@@ -76,7 +80,7 @@
 											<strong>Listing Name</strong>
 											Write the name of the listing
 										</p>
-										<input name="title" value="<?php echo @$itineraries->title ?>" class="name-in" type="text">
+										<input name="title" value="<?php echo $this->title ?>" class="name-in" type="text">
 									</div><!---ITEM-->
 									<div class="item">
 										<p class="descrip">
@@ -95,7 +99,7 @@
 										</p>
 										<select id="trip_country"  name="trip_country">
 												<?php foreach($this->countries as $country):?>
-                                                <option <?php echo @$itineraries->country_id == $country->id ? ' selected' : ''; ?> value="<?php echo @$country->id?>"><?php echo $country->title?></option>
+                                                <option <?php echo @$this->country_id == $country->id ? ' selected' : ''; ?> value="<?php echo @$country->id?>"><?php echo $country->title?></option>
                                                 <?php endforeach;?>
 										</select>
 									</div><!---ITEM-->
@@ -105,7 +109,7 @@
 											<strong>select city</strong>
 											 
 										</p>
-										<select  id="trip_city1"  name="trip_city1">
+										<select  id="city"  name="city">
 											<option selected="selected">City</option>
 										</select>
 									</div><!---ITEM-->
@@ -116,7 +120,7 @@
 											Select the day of the activity 
 										</p>
 										<select name="days">
-                                       		<option><?php echo @$itineraries->day?></option>
+                                       		<option><?php echo $this->day?></option>
 										</select>
 									</div><!---ITEM-->
 									
@@ -126,7 +130,7 @@
 											Select how many days long
 										</p>
 										<select value="duration">
-											<option selected="selected" value="<?php echo @$itineraries->duration?>" ><?php echo @$itineraries->duration?></option>
+											<option selected="selected" value="<?php echo $this->duration?>" ><?php echo @$this->duration?></option>
 										</select>
 										
 									</div><!---ITEM-->
@@ -136,12 +140,7 @@
 											<strong>Starting Hour</strong>
 											Select the hour activity starts
 										</p>
-										<select class="time" name="">
-											<option selected="selected">AM</option>
-										</select>
-										<select class="hour" name="start">
-											<option selected="selected"><?php echo @$itineraries->start?></option>
-										</select>
+										<input type="text" name="start_hour" id="start_hour" value="<?php echo $this->start_hour?>" />
 									</div><!---ITEM-->
 									
 									<div class="item">
@@ -149,12 +148,7 @@
 											<strong>Ending Hour</strong>
 											Select the hour activity ends
 										</p>
-										<select class="time">
-											<option selected="selected">AM</option>
-										</select>
-										<select class="hour" name="end">
-											<option selected="selected" ><?php echo @$itineraries->end ?></option>
-										</select>
+										<input type="text" name="end_hour" id="end_hour" value="<?php echo $this->end_hour?>" />
 									</div><!---ITEM-->
 									
 									<div class="item last">
@@ -168,7 +162,7 @@
 									<h3 class="item-ttl">Description</h3>
 									<div class="item">
 										<div class="description_l">
-											<textarea rows="" cols="" name="description"><?php echo @$itineraries->description ?></textarea>
+											<textarea rows="" cols="" name="description"><?php echo $this->description ?></textarea>
 										</div>
 									</div><!--ITEM-->
 								</div><!--BLOCK-->
@@ -201,13 +195,17 @@
 								<div class="block">
 									<div class="single last">
 										<p class="item-ttl">Map</p>
-										<input type="button" class="btn-10" value="Set Location" />
-										<input type="text" class="location" value="" />
+										<input type="button" class="btn-10" value="Set Location"  id="setLocation" />
+                                        <input type="text" class="location" value="" name="address" />
 										<div class="map">
-											<div class="map_holder">
-												<img src="/images2/map-result.gif" width="500" height="265" alt="" />
-
-											</div>
+                                            <div class="w-m">
+                                                <h5>Location Results</h5>
+                                                <ul id="maplocations">
+                                                </ul>
+                                            </div>
+											<div class="map_holder" id="mapcanvas"></div>
+                                        	<input type="hidden" name="lat" value="<? echo @$this->place->lat?>" />
+                                    		<input type="hidden" name="lng" value="<? echo @$this->place->lng ?>" />                
 										</div><!--MAP-->
 									</div><!--single-->								</div><!--BLOCK-->
 								
@@ -233,6 +231,12 @@
 		<!-- closes w1 -->
 
         <script>
+			$('#start_hour').timepicker({
+				ampm: true
+			});
+			$('#end_hour').timepicker({
+				ampm: true
+			});
 			var selectedCities = <?php echo $this->cities ?>;
 			fillCityTrip($('#trip_country').val());
 			$('select#trip_country').change(function(){
@@ -242,22 +246,21 @@
 			
 			function fillCityTrip(countryId){
 				var url = "/ajax/places/?type=city&c=" + countryId;
-				$("#trip_city1" ).children().remove();
-				$("#trip_city1" ).append(new Option('Select City', 0, true, true));
+				$("#city" ).children().remove();
+				$("#city" ).append(new Option('Select City', 0, true, true));
 				var selected = false;
 				$.getJSON(url, function(fsdata) {
 					$.each(fsdata.data, function(i,city){ 
 						
 						selected = false;
 						if(typeof selectedCities[0] != "undefined"){ selected = selectedCities[0].city_id == city.id ? true : false ;}
-						$("#trip_city1" ).append(new Option(city.title, city.id, true, selected));
+						$("#city" ).append(new Option(city.title, city.id, true, selected));
 						
 						
 					});
 				});	
 			}
 				
-		
 		</script>
 
 </body></html>

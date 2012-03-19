@@ -4026,34 +4026,47 @@ class AdminController extends Zend_Controller_Action {
 
     private function tripEditTask6($trip) {
         $this->view->trip = $trip;
-        $db = Zend_Db_Table::getDefaultAdapter();
-		
-		$db = Zend_Db_Table::getDefaultAdapter();
-	 	$db->setFetchMode(Zend_Db::FETCH_OBJ);
-		$result = $db->query("SELECT * FROM trip_listings WHERE id=2 ");
-        $this->view->itinerary= $result->fetchAll(); 
-        $countries = $this->places->getPlaces(2);
+		$listing = $this->_request->getParam('seq');
+        
+		$countries = $this->places->getPlaces(2);
         $this->view->countries = $countries;
-        $this->view->errors = array();
 
-		$selectedCity = array();
-		$selectedCity[] = @$_POST["trip_city1"] ? (object)array('trip_id'=>2, 'city_id'=>$_POST["trip_city1"]): (object)array('trip_id'=>2, 'city_id'=>0);
+
+        $this->view->errors = array();
+		$this->view->title = '';
+		$this->view->description = '';
+		$this->view->days = '';
+		$this->view->type = '';
+		$this->view->country ='';
+		$this->view->city = '';
+		$this->view->duration = '';
+		$this->view->start_hour = '';
+		$this->view->end_hour = '';
+		$this->view->lng = '';
+		$this->view->lat = '';
 	
 		$this->view->cities = json_encode($selectedCity);
         if ($this->getRequest()->isPost()) {
             $errors = $this->validateTrip3Data($_POST);
-	
             if (count($errors)) {
                 $this->view->errors = $errors;
                 $this->view->title = $_POST['title'];
                 $this->view->description = $_POST['description'];
                 $this->view->days = $_POST['days'];
-
-                $this->render('trip4edit');
+                $this->view->type = $_POST['type'];
+                $this->view->country = $_POST['country'];
+                $this->view->city = $_POST['city'];
+                $this->view->duration = $_POST['duration'];
+                $this->view->start_hour = $_POST['start_hour'];
+                $this->view->end_hour = $_POST['end_hour'];
+                $this->view->lng = $_POST['lng'];
+                $this->view->lat = $_POST['lat'];
+                $this->render('trip6');
                 return;
             }
 			
-            $title = $_POST['title'];
+            /*
+			$title = $_POST['title'];
             $description = $_POST['description'];
             $days = $_POST['days'];
             $duration = $_POST['duration'];
@@ -4063,13 +4076,30 @@ class AdminController extends Zend_Controller_Action {
 			$lat=$_POST['lat'];
             $lng = $_POST['lng'];
 			$this->trips->saveTrip_listings($title, $description, $days, $duration, $start, $end, $image, $lat, $lng );
+			*/
             $_SESSION['alert'] = 'Your changes have been saved';
-            $this->_redirect('/admin/trip4edit/');
+            $this->_redirect('/admin/trip5/');
         }
 
-
+		if($listing){
+			$listing = $this->trips->getTripListingById($listing);
+			if(!$listing){
+				throw new Exception("Error occured. Unable to load trip listing");	
+			}
+			$this->view->title = $listing->title;
+			$this->view->description = $listing->description;
+			$this->view->days = $listing->day;
+			$this->view->type = $listing->main_type;
+			$this->view->country = $listing->country_id;
+			$this->view->city = $listing->city_id;
+			$this->view->duration = $listing->duration;
+			$this->view->start_hour = $listing->start;
+			$this->view->end_hour = $listing->end;
+			$this->view->lng = $listing->lng;
+			$this->view->lat = $listing->lat;
+		
+		}
 		$this->render('trip6');
-
 	}
 	
     public function vendorsAction() {

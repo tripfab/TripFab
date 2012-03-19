@@ -713,5 +713,17 @@ class WS_TripsService {
         $table->delete('id = ' . $listing);
 		return true;
     }
+	
+	public function getTripListingById($id) {
+        $select = $this->listings->select();
+        $select->where('id = ?', $id);
+
+        $trip = $this->trips_db->fetchRow($select);
+        if (is_null($trip))
+            return;
+
+        return $trip;
+    }
+
 
 }
