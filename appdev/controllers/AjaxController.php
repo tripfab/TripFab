@@ -685,8 +685,8 @@ class AjaxController extends Zend_Controller_Action
                          . "If you did not request this change please ognore this message";
                         
                 
-                $notifier = new WS_Notifier();
-                $notifier->sendEmail($to, $subject, $message);                
+                $notifier = new WS_Notifier($user->id);
+                $notifier->passwordReset($url);
                 
                 $result['type'] = 'success';
                 $result['message'] = 'We have sent you confirmation message to the provided email address';
