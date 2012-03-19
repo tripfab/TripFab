@@ -3286,7 +3286,9 @@ class AdminController extends Zend_Controller_Action {
 									 "Partner ID"
 									)
 								);
-					$fnRow = function($row) {
+					
+                                        
+                                        $fnRow = create_function('$row','
 						return array(
 							$row->date,
 							$row->code,
@@ -3296,8 +3298,7 @@ class AdminController extends Zend_Controller_Action {
 							$row->fee,
 							$row->net_amount,
 							$row->partner_id,
-						);
-					};
+						);');
 					
 					require_once("TF/Export.php");
 					TF_Export::xlsFromData(
@@ -3316,7 +3317,7 @@ class AdminController extends Zend_Controller_Action {
 							'Log out Time',
 							'Total Time'
 						));
-					$fnRow = function($row) {
+					$fnRow = create_function('$row','
 						return array(
 							$row->date,
 							$row->session_id,
@@ -3324,8 +3325,7 @@ class AdminController extends Zend_Controller_Action {
 							$row->login_time,
 							$row->logout_time,
 							$row->total
-						);
-					};
+						);');
 					
 					require_once("TF/Export.php");
 					TF_Export::xlsFromData(
@@ -3377,7 +3377,7 @@ class AdminController extends Zend_Controller_Action {
 										'Status', 
 										'Amount'
  									));
-					$fnRow = function($row) {
+					$fnRow = create_function('$row','
 						return array(
 							$row->date,
 							$row->time,
@@ -3388,8 +3388,7 @@ class AdminController extends Zend_Controller_Action {
 							$row->card_number,
 							$row->status,
 							$row->ammount
-						);
-					};
+						);');
 					
 					require_once("TF/Export.php");
 					TF_Export::xlsFromData(
@@ -3434,7 +3433,7 @@ class AdminController extends Zend_Controller_Action {
 							'Log out Time',
 							'Total Time'
 						));
-					$fnRow = function($row) {
+					$fnRow = create_function('$row','
 						return array(
 							$row->date,
 							$row->session_id,
@@ -3442,8 +3441,7 @@ class AdminController extends Zend_Controller_Action {
 							$row->login_time,
 							$row->logout_time,
 							$row->total
-						);
-					};
+						);');
 					
 					require_once("TF/Export.php");
 					TF_Export::xlsFromData(
@@ -3492,15 +3490,14 @@ class AdminController extends Zend_Controller_Action {
 							 'Listing Email',
 							 'Pending Info'
 							 ));
-					$fnRow = function($row) {
+					$fnRow = create_function('$row','
 						return array(
 							$row->user_name,
 							$row->vender_id,
 							$row->title,
 							$row->email,
 							$row->pending_info,
-						);
-					};
+						);');
 					
 					require_once("TF/Export.php");
 					TF_Export::xlsFromData(
