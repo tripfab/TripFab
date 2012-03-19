@@ -1,6 +1,5 @@
 $(function(){
 	
-	
 	var $lat = $('input[name=lat]').val();
 	var $lng = $('input[name=lng]').val();
 	

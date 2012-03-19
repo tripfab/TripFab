@@ -248,6 +248,20 @@ class WS_TripsService {
 
         return $result;
     }
+	
+	public function getListingOf3($trip) {
+        $select = $this->DB->select();
+        $select->from('trip_listings')->
+        joinleft('places', 'trip_listings.city_id = places.id', array('city_id'=>'id', 'city' => 'title', 'cityurl' => 'identifier' )) ->
+        joinleft(array('places2' => 'places'), 'trip_listings.country_id = places2.id', array('country_id'=>'id', 'country' => 'title','countryurl' => 'identifier' ))->
+        joinleft('listing_types', 'trip_listings.main_type = listing_types.id', array('type_name'=>'name')) ->
+		where("trip_listings.itinerary_id = ?", $trip)->
+		order('trip_listings.day ASC')->
+		order('trip_listings.sort ASC');
+		$result = $this->DB->fetchAll($select, array(), Zend_Db::FETCH_OBJ);
+        return $result;
+	}
+	
 
     public function getItnListingOf($trip, $full = true, $exclude = false, $id = false, $checkout = false) {
         $select = $this->DB->select();
@@ -693,4 +707,23 @@ class WS_TripsService {
             $row->save();
         }
     }
+	
+	public function deleteListing($listing) {
+        $table = new Zend_Db_Table('trip_listings');
+        $table->delete('id = ' . $listing);
+		return true;
+    }
+	
+	public function getTripListingById($id) {
+        $select = $this->listings->select();
+        $select->where('id = ?', $id);
+
+        $trip = $this->trips_db->fetchRow($select);
+        if (is_null($trip))
+            return;
+
+        return $trip;
+    }
+
+
 }

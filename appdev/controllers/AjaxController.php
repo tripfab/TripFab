@@ -1903,4 +1903,19 @@ class AjaxController extends Zend_Controller_Action
         }
         throw new Exception();
     }
+	
+	public function tripitemAction(){
+       
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+        if($user->getRole() != 'admin')
+                throw new Exception('No access allowed');
+		
+		$this->trips->deleteListing(@$_GET['item']);
+        self::jsonEcho(json_encode(array('attempt' => 'success', 'error_code' => '0', 'description' => '', 'data' => '')));
+		
+	}
 }
