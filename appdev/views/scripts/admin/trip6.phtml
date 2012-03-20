@@ -90,7 +90,7 @@
 										</p>
 										<select name="activity">
 											<?php foreach( $this->listingTypes as $listingType):?>
-                                            <option <?php echo $listingType->id == $this->type ? 'selected="selected"' : '';?> value="<?php echo $listingType->name?>"><?php echo $listingType->name?></option>
+                                            <option <?php echo $listingType->id == $this->type ? 'selected="selected"' : '';?> value="<?php echo $listingType->id?>"><?php echo $listingType->name?></option>
                                             <?php endforeach;?>
 										</select>
 									</div><!---ITEM-->

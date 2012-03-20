@@ -4069,6 +4069,7 @@ class AdminController extends Zend_Controller_Action {
 			
             $data = array();
 			$data['title'] = $_POST['title'];
+			$data['main_type']=$_POST['activity'];
 			$data['description'] = $_POST['description'];
 			$data['day'] = $_POST['day'];
 			$data['city_id'] = $_POST['city'];
