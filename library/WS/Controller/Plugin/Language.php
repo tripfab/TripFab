@@ -29,7 +29,7 @@ class WS_Controller_Plugin_Language
                         $this->setLanguage($request); }
                     else {
                         if(!file_exists($_SERVER['REDIRECT_URL'])) {
-                            header('Location: http://tripfab.com'.$_SERVER['REDIRECT_URL']); exit; } }
+                            header('Location: https://tripfab.com'.$_SERVER['REDIRECT_URL']); exit; } }
                 } else {
                     $this->setLanguage($request);}
             }
