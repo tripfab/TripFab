@@ -45,14 +45,14 @@
 		clear:both;
 		overflow:hidden;
 		padding-top:5px;}
-		.item .inner-form input.text {
+	.item .inner-form input.text {
 			float:left;
 			width:200px !important;
 			vertical-align:middle;}
-		.item .inner-form input.btn {
+	.item .inner-form input.btn {
 			float:left;
 			vertical-align:middle;}
-		.item .inner-form .selects {
+	.item .inner-form .selects {
 			display:block;
 			clear:both;}
 		.hidden { display:none; }
@@ -76,7 +76,9 @@
     <div class="w3_admin">
         <div class="sub_menu">
             <h2>Editing. <span><?php echo $this->listing->title ?></span></h2>
-            <a href="#new_listing" class="btn-1 lbc">Create New</a>
+            <a href="#request_info" class="btn-10 lb">Request Info</a>
+            <a href="#activate" class="btn-10 act lb">Activate Listing</a>
+            <a href="#deactivate" class="btn-10 deact lb">Deactivate Listing</a>
         </div><!--SUB_MENU-->
     </div><!--W3-->
     <div class="w2">
@@ -90,102 +92,102 @@
                 <?php 	switch($this->listing->main_type):
 							case 2:
 								echo $this->partial('admin_listing/restaurant/info.phtml', array(
-										'errors' 	 => $this->errors,
-										'listing'	 => $this->listing,
-										'countries'	 => $this->countries,
-										'cities'	 => $this->cities,
-										'schedules'	 => $this->schedules,
-										'attributes' => $this->attributes,
-										'categories' => $this->categories,
-										'tags'		 => $this->tags,
-										'listing_types' => $this->listing_types,
-										'listing_tags'	=> $this->listing_tags,
-										'cities2'		=> $this->cities2,
-										'cities3'		=> $this->cities3,
-										'help' => $this->help,
-										'vendor' => $this->vendor,
-										'landscapes' => $this->landscapes,
-										'l_lands'	=> $this->l_lands,
+									'errors' 	 => $this->errors,
+									'listing'	 => $this->listing,
+									'countries'	 => $this->countries,
+									'cities'	 => $this->cities,
+									'schedules'	 => $this->schedules,
+									'attributes' => $this->attributes,
+									'categories' => $this->categories,
+									'tags'		 => $this->tags,
+									'listing_types' => $this->listing_types,
+									'listing_tags'	=> $this->listing_tags,
+									'cities2'		=> $this->cities2,
+									'cities3'		=> $this->cities3,
+									'help' => $this->help,
+									'vendor' => $this->vendor,
+									'landscapes' => $this->landscapes,
+									'l_lands'	=> $this->l_lands,
 								));
 								break;
 							case 4:
 								echo $this->partial('admin_listing/sight/info.phtml', array(
-										'errors' 	 => $this->errors,
-										'listing'	 => $this->listing,
-										'countries'	 => $this->countries,
-										'cities'	 => $this->cities,
-										'schedules'	 => $this->schedules,
-										'attributes' => $this->attributes,
-										'categories' => $this->categories,
-										'tags'		 => $this->tags,
-										'listing_types' => $this->listing_types,
-										'listing_tags'	=> $this->listing_tags,
-										'cities2'		=> $this->cities2,
-										'cities3'		=> $this->cities3,
-										'help' => $this->help,
-										'vendor' => $this->vendor,
-										'landscapes' => $this->landscapes,
-										'l_lands'	=> $this->l_lands,
+									'errors' 	 => $this->errors,
+									'listing'	 => $this->listing,
+									'countries'	 => $this->countries,
+									'cities'	 => $this->cities,
+									'schedules'	 => $this->schedules,
+									'attributes' => $this->attributes,
+									'categories' => $this->categories,
+									'tags'		 => $this->tags,
+									'listing_types' => $this->listing_types,
+									'listing_tags'	=> $this->listing_tags,
+									'cities2'		=> $this->cities2,
+									'cities3'		=> $this->cities3,
+									'help' => $this->help,
+									'vendor' => $this->vendor,
+									'landscapes' => $this->landscapes,
+									'l_lands'	=> $this->l_lands,
 								));
 								break;
 							case 5:
 								echo $this->partial('admin_listing/hotel/info.phtml', array(
-										'errors' 	 => $this->errors,
-										'listing'	 => $this->listing,
-										'countries'	 => $this->countries,
-										'cities'	 => $this->cities,
-										'schedules'	 => $this->schedules,
-										'attributes' => $this->attributes,
-										'categories' => $this->categories,
-										'tags'		 => $this->tags,
-										'listing_types' => $this->listing_types,
-										'listing_tags'	=> $this->listing_tags,
-										'cities2'		=> $this->cities2,
-										'cities3'		=> $this->cities3,
-										'help' => $this->help,
-										'vendor' => $this->vendor,
-										'landscapes' => $this->landscapes,
-										'l_lands'	=> $this->l_lands,
+									'errors' 	 => $this->errors,
+									'listing'	 => $this->listing,
+									'countries'	 => $this->countries,
+									'cities'	 => $this->cities,
+									'schedules'	 => $this->schedules,
+									'attributes' => $this->attributes,
+									'categories' => $this->categories,
+									'tags'		 => $this->tags,
+									'listing_types' => $this->listing_types,
+									'listing_tags'	=> $this->listing_tags,
+									'cities2'		=> $this->cities2,
+									'cities3'		=> $this->cities3,
+									'help' => $this->help,
+									'vendor' => $this->vendor,
+									'landscapes' => $this->landscapes,
+									'l_lands'	=> $this->l_lands,
 								));
 								break;
 							case 6:
 								echo $this->partial('admin_listing/activity/info.phtml', array(
-										'errors' 	 => $this->errors,
-										'listing'	 => $this->listing,
-										'countries'	 => $this->countries,
-										'cities'	 => $this->cities,
-										'schedules'	 => $this->schedules,
-										'attributes' => $this->attributes,
-										'categories' => $this->categories,
-										'tags'		 => $this->tags,
-										'listing_types' => $this->listing_types,
-										'listing_tags'	=> $this->listing_tags,
-										'cities2'		=> $this->cities2,
-										'cities3'		=> $this->cities3,
-										'help' => $this->help,
-										'vendor' => $this->vendor,
-										'landscapes' => $this->landscapes,
-										'l_lands'	=> $this->l_lands,
+									'errors' 	 => $this->errors,
+									'listing'	 => $this->listing,
+									'countries'	 => $this->countries,
+									'cities'	 => $this->cities,
+									'schedules'	 => $this->schedules,
+									'attributes' => $this->attributes,
+									'categories' => $this->categories,
+									'tags'		 => $this->tags,
+									'listing_types' => $this->listing_types,
+									'listing_tags'	=> $this->listing_tags,
+									'cities2'		=> $this->cities2,
+									'cities3'		=> $this->cities3,
+									'help' => $this->help,
+									'vendor' => $this->vendor,
+									'landscapes' => $this->landscapes,
+									'l_lands'	=> $this->l_lands,
 								));
 								break;
 							case 7:
 								echo $this->partial('admin_listing/entertaiment/info.phtml', array(
-										'errors' 	 => $this->errors,
-										'listing'	 => $this->listing,
-										'countries'	 => $this->countries,
-										'cities'	 => $this->cities,
-										'schedules'	 => $this->schedules,
-										'attributes' => $this->attributes,
-										'categories' => $this->categories,
-										'tags'		 => $this->tags,
-										'listing_types' => $this->listing_types,
-										'listing_tags'	=> $this->listing_tags,
-										'cities2'		=> $this->cities2,
-										'cities3'		=> $this->cities3,
-										'help' => $this->help,
-										'vendor' => $this->vendor,
-										'landscapes' => $this->landscapes,
-										'l_lands'	=> $this->l_lands,
+									'errors' 	 => $this->errors,
+									'listing'	 => $this->listing,
+									'countries'	 => $this->countries,
+									'cities'	 => $this->cities,
+									'schedules'	 => $this->schedules,
+									'attributes' => $this->attributes,
+									'categories' => $this->categories,
+									'tags'		 => $this->tags,
+									'listing_types' => $this->listing_types,
+									'listing_tags'	=> $this->listing_tags,
+									'cities2'		=> $this->cities2,
+									'cities3'		=> $this->cities3,
+									'help' => $this->help,
+									'vendor' => $this->vendor,
+									'landscapes' => $this->landscapes,
+									'l_lands'	=> $this->l_lands,
 								));
 								break;
 						endswitch ?>
@@ -195,6 +197,7 @@
         </div><!-- closes listing-wrapper -->
     </div><!-- closes w2 -->
 	<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+
 </div><!-- closes w1 -->
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript" src="/js2/provider/listing-edit.js"></script>
@@ -202,9 +205,9 @@
 	$(document).ready(function() {	
 		$('a.lb').fancybox({
 			padding:0,
-			overlayColor:'#000',
+			overlayColor:'#FFF',
 			centerOnScroll:1,
-			overlayOpacity:0.3
+			overlayOpacity:0.7
 		});
 		$('.lbox .btn-2, .lbox .btn-11').click(function(){
 			$(this).parents('form').submit();

@@ -1,6 +1,99 @@
-			<div class="footer black">
-				<div class="wrapper">
-					<a href="" class="logo">Tripfab</a>
-				</div><!--WRAPPER-->
-			</div>
-			<!-- closes footer -->
+<div class="footer black">
+	<div class="wrapper">
+		<a href="" class="logo">Tripfab</a>
+	</div><!--WRAPPER-->
+</div><!-- closes footer -->
+<div class="hidden">
+	<div class="lb" id="request_info">
+		<div class="top">Request Info <em>to</em> Hotel Punta Islita</div><!--TOP-->
+		<form method="post" action="">
+			<fieldset>
+				<div class="cont">
+					<input type="text" value="What’s pending?" />
+					<input type="text" value="What’s pending?" />
+					<input type="text" value="What’s pending?" />
+					<div class="removed">
+						<a href="" class="remove"></a>
+						<input type="text" value="What’s pending?" />
+						<div class="clear"></div>
+					</div><!--REMOVED-->
+					<a href="" class="add">Add another issue</a>
+					<div class="clear"></div>
+				</div><!--CONT-->
+				<div class="bottom">
+					<a href="" class="btn-1">Send Request</a>
+					<a href="" class="btn-10">Cancel</a>
+				</div><!--BOTTOM-->
+			</fieldset>
+		</form>
+	</div><!--REQUEST_INFO-->
+	
+	<div class="lb activation" id="activate">
+		<div class="top">Activate Listing </div><!--TOP-->
+		<form method="post" action="">
+			<fieldset>
+				<div class="cont">
+					<p>Are you sure activate Hotel Punta Islita?</p>
+				</div><!--CONT-->
+				<div class="bottom">
+					<a href="" class="btn-1">Desactivate</a>
+					<a href="" class="btn-10">Cancel</a>
+				</div><!--BOTTOM-->
+			</fieldset>
+		</form>
+	</div><!--ACTIVATE-->
+	
+	<div class="lb activation" id="deactivate">
+		<div class="top">Desactivate Listing </div><!--TOP-->
+		<form method="post" action="">
+			<fieldset>
+				<div class="cont">
+					<p>Are you sure desactivate Hotel Punta Islita?</p>
+				</div><!--CONT-->
+				<div class="bottom">
+					<a href="" class="btn-1">Desactivate</a>
+					<a href="" class="btn-10">Cancel</a>
+				</div><!--BOTTOM-->
+			</fieldset>
+		</form>
+	</div><!--ACTIVATE-->
+	
+	<div id="new_partner" class="lb">
+    	<form name="partner-form" id="partner-form">
+		<div class="top"><h3>Create Partner Account</h3></div><!--TOP-->
+		<div class="cont">
+			<ul>
+				<li>
+                	<label>Company Name</label>
+                    <input type="text" name="c_name" value="" />
+                </li>
+                <li> <div id="_c_name" class="errdiv" style="float:right; margin-right:30px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div></li>
+				<li><label>Company E-mail</label><input type="text" value="" name="c_email" /></li>
+                <li> <div class="errdiv" id="_c_email" style="float:right; margin-right:30px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div></li>
+				<li><label>Contact Name</label><input type="text" value="" name="cnt_name"/></li>
+                <li> <div class="errdiv" id="_cnt_name" style="float:right; margin-right:30px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div></li>
+				<li><label>Phone</label><input type="text" value="" class="code" name="phone"/><input type="text" value="" class="phone" /></li>
+                <li> <div class="errdiv" id="_phone" style="float:right; margin-right:30px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div></li>
+				<li><label>Website</label><input type="text" value="" name="website" /></li>
+                <li> <div class="errdiv" id="_website" style="float:right; margin-right:30px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div></li>
+				<li>
+					<label>Country</label>
+					<select name="country">
+                    <option value="">Select Country</option>
+					<?php foreach($this->countries as $country): ?>
+                        <option value="<?php echo $country->id?>"><?php echo $country->title?></option>
+					 <?php endforeach; ?>
+					</select>
+				</li>
+                 <li> <div class="errdiv" id="_country" style="float:right; margin-right:30px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div></li>
+
+			</ul>
+		</div><!--CONT-->
+		<div class="bottom">
+			<input type="button" id="c-vendor" class="btn-1" value="Create Account" onclick="/admin/users/venders/" />
+			<a class="btn-10" onclick="$.fancybox.close()">Cancel</a>
+		</div><!--BOTTOM-->
+		</form>
+    </div><!--NEW_PARTNER-->
+	
+</div><!--HIDDEN-->

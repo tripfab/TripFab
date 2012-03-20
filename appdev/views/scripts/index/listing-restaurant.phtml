@@ -188,20 +188,24 @@
 
 <div class="hidden">
 	<div id="send_message">
-        <form action="" id="sendMessageForm">
-            <div class="lb-forgot">
-                <div class="ttl">Send a message to <?= $this->vendor->name ?></div>
-                <div class="content">
-                    <textarea cols="30" name="message" rows="1"></textarea>
-                </div><!-- closes content -->
-                <div class="bottom">
-                    <input type="submit" class="btn-1" value="Send Message" />
-                    <span onclick="$.fancybox.close()" class="btn-4">Cancel</span>				
-                </div><!-- closes bottom -->
-            </div><!-- closes lb-forgot -->
-            <input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
-        </form>
-    </div>
+	    <form action="" id="sendMessageForm">
+	        <div class="lb-forgot">
+	            <div class="ttl">Send a message <em>to</em> <?= $this->vendor->name ?></div>
+	            <div class="intro_m">
+	            	<p><strong>Questions or concerns about the activity?</strong>
+	            		Please write a message and you’ll get an answer very soon.</p>
+	            </div><!--INTRO-->
+	            <div class="content">
+	                <textarea cols="30" name="message" rows="1"></textarea>
+	            </div><!-- closes content -->
+	            <div class="bottom">
+	                <input type="submit" class="btn-1" value="Send Message" />
+	                <span onclick="$.fancybox.close()" class="btn-10">Cancel</span>	
+	            </div><!-- closes bottom -->
+	        </div><!-- closes lb-forgot -->
+	        <input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+	    </form>
+	</div><!--SEND_MESSAGE-->
     
     <div id="live_chat">
     	<img src="/images2/chat.png" />
