@@ -188,7 +188,7 @@ class SessionController extends Zend_Controller_Action {
         $this->accounts = new WS_AccountService();
         if($this->accounts->validateEmail($_POST['email'])){
             $this->accounts->signup($_POST);
-            $this->_redirect('/');
+            $this->_redirect('/thanks');
         }
         
         $flashMessenger = $this->_helper->getHelper('FlashMessenger');
@@ -229,18 +229,20 @@ class SessionController extends Zend_Controller_Action {
 
         $this->accounts = new WS_AccountService();
         
+        $conf = Zend_Registry::get('facebook');
+        
         $facebook = new Fb_Facebook(array(
-            'appId' => '197692283624882',
-            'secret'=> 'e106317fb868e53208973867a190dbb2'
+            'appId' => $conf['id'],
+            'secret'=> $conf['secret'],
         ));
         
         $user = $facebook->getUser();
         
         if($user){
             $user_profile = $facebook->api('/me');
-            if($this->accounts->validateEmail($user_profile['email'])){
+            if($this->accounts->validateEmail($user_profile['email'], true)){
                 $this->accounts->signup($user_profile, true);
-                $this->_redirect('/');
+                $this->_redirect('/thanks');
             } else {
                 $this->accounts->login($user_profile, null, true);
                 $this->_redirect('/');
@@ -262,6 +264,54 @@ class SessionController extends Zend_Controller_Action {
     public function vendorsignupAction()
     {
         
+    }
+    
+    public function thanksAction()
+    {
+        
+    }
+    
+    public function confirmemailAction()
+    {
+        
+        $auth = Zend_Auth::getInstance();
+        if($auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $email = $this->_getParam('email','default');
+        if($email == 'default') 
+                throw new Exception('No email provided');
+        
+        $_token = $this->_getParam('token','default');
+        if($_token == 'default') 
+                throw new Exception('No token provided');
+        
+        $users = new Model_Users();
+        $select = $users->select();
+        $select->where('email = ?', $email);
+        $select->where('active = ?', 0);
+        $user = $users->fetchRow($select);
+        
+        if(is_null($user)) 
+                throw new Exception('User not found or already activated');
+        
+        $tokens = new Zend_Db_Table('activation_tokens');
+        $select = $tokens->select();
+        $select->where('user_id = ?', $user->id);
+        $select->where('token = ?', $_token);
+        $token = $tokens->fetchRow($select);
+        
+        if(is_null($token)) 
+                throw new Exception('Token not found');
+        
+        $user->active = 1;
+        $user->save();
+
+        $token->updated = date('Y-m-d H:i:s');
+        $token->save();
+
+        setcookie('alert','Your account has been activated');
+        $this->_redirect('/login');
     }
     
     private function _requireSSL()

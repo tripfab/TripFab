@@ -126,6 +126,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             )
         );
         $router->addRoute(
+            'thanks',
+            new Zend_Controller_Router_Route(
+                '/:lang/thanks',
+                array(
+                    'controller' => 'session',
+                    'action'     => 'thanks',
+                    'module'     => 'default',
+                    'lang'       => $lang
+                )
+            )
+        );
+        $router->addRoute(
             'city',
             new Zend_Controller_Router_Route(
                 '/:lang/:country/:city',
@@ -223,6 +235,21 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 )
             )
         );
+        $router->addRoute(
+            'confirmemail',
+            new Zend_Controller_Router_Route(
+                '/:lang/confirmemail/:email/:token/',
+                array(
+                    'controller' => 'session',
+                    'action'     => 'confirmemail',
+                    'module'     => 'default',
+                    'email'      => 'default',
+                    'token'      => 'default',
+                    'lang'       => $lang
+                )
+            )
+        );
+        
         $router->addRoute(
             'provider',
             new Zend_Controller_Router_Route(

@@ -50,7 +50,6 @@ class WS_Notifier extends Zend_Mail {
         $this->setSubject('Signup Request');
         $this->addTo($this->user->email);
         $this->sendHTMLTemplate('account-request.phtml');
-        
     }
     
     
@@ -186,9 +185,10 @@ class WS_Notifier extends Zend_Mail {
      *  email wih a link to verify the email 
      * 
      */
-    public function emailVerification()
+    public function emailVerification($token)
     {
-        $this->setSubject('Please Verufy your Email');
+        $this->_view->token = $token;
+        $this->setSubject('Welcome to Tripfab');
         $this->addTo($this->user->email);
         $this->sendHTMLTemplate('email.phtml');
     }
