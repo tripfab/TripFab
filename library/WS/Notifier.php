@@ -316,10 +316,14 @@ class WS_Notifier extends Zend_Mail {
      */
     public function sendHTMLTemplate($template, $encoding = Zend_Mime::ENCODING_QUOTEDPRINTABLE)
     {
-        $html = $this->_view->render($template);
-        $this->setBodyHtml($html);
-        $this->setEncodingOfHeaders($encoding);
-        $this->send();
+        try {
+            $html = $this->_view->render($template);
+            $this->setBodyHtml($html);
+            $this->setEncodingOfHeaders($encoding);
+            $this->send();
+        } catch(Exception $e) {
+            
+        }
     }
     
     /**

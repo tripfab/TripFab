@@ -50,7 +50,7 @@ $(document).ready(function() {
             });
             
             if(!$pass) {
-                showError('Please accept the terms of each listing');
+                showError('Please accept the terms');
                 return false;
             } else {
                 return true;

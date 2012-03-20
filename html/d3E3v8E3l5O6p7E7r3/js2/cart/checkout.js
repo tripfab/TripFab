@@ -23,6 +23,11 @@ $(document).ready(function() {
         iconLocation: 'ul.cards',
         iconDir:'/images/'
     });
+    
+    $('a.high-r').hover(function() {
+        $('.restricction_tip').toggleClass('hidden');
+        return false;
+    });
 
     $('#checkout').submit(function(){
         if($('input[name=account]:checked').val() == '') {
