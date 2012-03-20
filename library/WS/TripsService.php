@@ -715,11 +715,14 @@ class WS_TripsService {
     }
 	
 	public function getTripListingById($id) {
-        $select = $this->listings->select();
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = $db->select();
+        
+        $select->from('trip_listings',array('*', 'start_time'=>new Zend_Db_Expr("TIME_FORMAT(start, '%h:%i%p' )"), 'end_time'=>new Zend_Db_Expr("TIME_FORMAT(end, '%h:%i%p' )")));
         $select->where('id = ?', $id);
-
-        $trip = $this->trips_db->fetchRow($select);
-        if (is_null($trip))
+		$trip = $db->fetchRow($select);
+		if (is_null($trip))
             return;
 
         return $trip;

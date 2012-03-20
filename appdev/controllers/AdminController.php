@@ -4066,6 +4066,7 @@ class AdminController extends Zend_Controller_Action {
 			
             $data = array();
 			$data['title'] = $_POST['title'];
+			$data['main_type']=$_POST['activity'];
 			$data['description'] = $_POST['description'];
 			$data['day'] = $_POST['day'];
 			$data['city_id'] = $_POST['city'];
@@ -4097,8 +4098,8 @@ class AdminController extends Zend_Controller_Action {
 			$this->view->country = $listing->country_id;
 			$this->view->city = $listing->city_id;
 			$this->view->duration = $listing->duration;
-			$this->view->start_hour = $listing->start;
-			$this->view->end_hour = $listing->end;
+			$this->view->start_hour = $listing->start_time;
+			$this->view->end_hour = $listing->end_time;
 			$this->view->lng = $listing->lng;
 			$this->view->lat = $listing->lat;
 		
