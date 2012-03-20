@@ -510,5 +510,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $adapter = new Zend_Db_Adapter_Mysqli($confing);
         Zend_Registry::set('newsletter_db', $adapter);
     }
+    
+    protected function _initFacebook()
+    {
+        $config = $this->getOption('facebook');
+        Zend_Registry::set('facebook', $config);
+    }
 }
 
