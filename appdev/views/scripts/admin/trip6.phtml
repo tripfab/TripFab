@@ -211,8 +211,8 @@
                                                 </ul>
                                             </div>
 											<div class="map_holder" id="mapcanvas"></div>
-                                        	<input type="hidden" name="lat" value="<? echo @$this->place->lat?>" />
-                                    		<input type="hidden" name="lng" value="<? echo @$this->place->lng ?>" />                
+                                        	<input type="hidden" name="lat" value="<? echo @$this->lat?>" />
+                                    		<input type="hidden" name="lng" value="<? echo @$this->lng ?>" />                
 										</div><!--MAP-->
 									</div><!--single-->								</div><!--BLOCK-->
 								
@@ -244,6 +244,7 @@
 			$('#end_hour').timepicker({
 				ampm: true
 			});
+			var cityId = '<?php echo $this->city;?>';
 			fillCityTrip($('#country').val());
 			$('select#country').change(function(){
 				fillCityTrip($('#country').val());
@@ -257,10 +258,8 @@
 				var selected = false;
 				$.getJSON(url, function(fsdata) {
 					$.each(fsdata.data, function(i,city){ 
-						
-						selected = false;
-						//if(typeof selectedCities[0] != "undefined"){ selected = selectedCities[0].city_id == city.id ? true : false ;}
-						$("#city" ).append(new Option(city.title, city.id, true, false));
+						selected = cityId == city.id ? true : false ;
+						$("#city" ).append(new Option(city.title, city.id, true, selected));
 						
 						
 					});
