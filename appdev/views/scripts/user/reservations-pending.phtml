@@ -143,7 +143,7 @@
 			$parent = $(this).parents('.reservation');
 			$('.bottom', $parent).slideToggle();
 		});
-		$('.reservation .top a.btn-10').click(function(){
+		$('.reservation .top a.btn-10:not(.edit)').click(function(){
 			$parent  = $(this).parents('.reservation');
 			$reserve = $(this).siblings('input.reservation').val();
 			$.ajax({
