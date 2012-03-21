@@ -4009,14 +4009,29 @@ class AdminController extends Zend_Controller_Action {
     }
 	
     private function tripEditTask5($trip) {
+        if (@$_SESSION['alert']) {
+            $this->view->successMessage = "Your changes have been saved";
+            $_SESSION['alert'] = '';
+        }
         $this->view->trip = $trip;
+		$day = $this->_request->getParam('q');
+		$slide = 0;
 		$items = $this->trips->getListingOf3($trip->id); 
         $dayWise = array();
 		foreach($items as $item){
-			$dayWise[$item->day][] = $item;	
+			$dayWise[$item->day][] = $item;
+		}
+		
+		$i=0;
+		foreach($dayWise as $key=>$value){
+			if($key == $day){
+				$slide=$i;
+			}
+			$i++;
 		}
 		//echo "<pre>" ; print_r($dayWise); die;
 		$this->view->items = $dayWise;
+		$this->view->slide = $slide;
 		$this->render('trip5');
 
 	}
@@ -4024,6 +4039,7 @@ class AdminController extends Zend_Controller_Action {
     private function tripEditTask6($trip) {
         $this->view->trip = $trip;
 		$listing = $this->_request->getParam('seq');
+		$itineraryDay = $this->_request->getParam('q') ? $this->_request->getParam('q') : 1;
         
 		$countries = $this->places->getPlaces(2);
         $this->view->countries = $countries;
@@ -4044,6 +4060,9 @@ class AdminController extends Zend_Controller_Action {
 		$this->view->end_hour = '';
 		$this->view->lng = '';
 		$this->view->lat = '';
+		$this->view->image = '';
+		$this->view->featured = '';
+		$this->view->day = $itineraryDay;
 	
         if ($this->getRequest()->isPost()) {
             $errors = $this->validateTrip6Data($_POST);
@@ -4051,7 +4070,7 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->errors = $errors;
                 $this->view->title = $_POST['title'];
                 $this->view->description = $_POST['description'];
-                $this->view->days = $_POST['days'];
+                $this->view->day = $_POST['day'];
                 $this->view->type = $_POST['type'];
                 $this->view->country = $_POST['country'];
                 $this->view->city = $_POST['city'];
@@ -4060,30 +4079,40 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->end_hour = $_POST['end_hour'];
                 $this->view->lng = $_POST['lng'];
                 $this->view->lat = $_POST['lat'];
+				$this->view->featured = @$_POST['check'];
+				$this->view->image = $_POST['hdn_image'];
+				
                 $this->render('trip6');
                 return;
             }
-			
+			     
             $data = array();
 			$data['title'] = $_POST['title'];
-			$data['main_type']=$_POST['activity'];
+			$data['main_type']=$_POST['type'];
 			$data['description'] = $_POST['description'];
 			$data['day'] = $_POST['day'];
 			$data['city_id'] = $_POST['city'];
 			$data['country_id'] = $_POST['country'];
-			$data['start'] = $_POST['start_hour'];
-			$data['end'] = $_POST['end_hour'];
+			$data['start'] = $this->timeTo24HoursFormat($_POST['start_hour']);
+			$data['end'] = $this->timeTo24HoursFormat($_POST['end_hour']);
 			$data['duration'] = $_POST['duration'];
 			$data['lng'] = $_POST['lng'];
 			$data['lat'] = $_POST['lat'];
-			
+			$data['featured']=(int) $_POST['check'];
 			if(!$listing){
 				$data['itinerary_id'] = $trip->id;
 			}
-			$this->trips->saveListing($data, $listing);
+			$listingId = $this->trips->saveListing($data, $listing);
+			$imageName = $this->saveTripListingPhoto($trip->id, $listingId);
+			if($imageName){
+				$imageData = array('image'=>$imageName);
+				$listingId = $this->trips->saveListing($imageData, $listingId);
+			}
 			
             $_SESSION['alert'] = 'Your changes have been saved';
-            $this->_redirect('/admin/trips/edit/5/' . $trip->id);
+            //$this->_redirect('/admin/trips/edit/5/' . $trip->id);
+            $this->_redirect($this->view->url(array('page'=>5, 'q'=>$_POST['day'])));
+			
         }
 
 		if($listing){
@@ -4102,11 +4131,42 @@ class AdminController extends Zend_Controller_Action {
 			$this->view->end_hour = $listing->end_time;
 			$this->view->lng = $listing->lng;
 			$this->view->lat = $listing->lat;
-		
+			$this->view->image = $listing->image;
+			$this->view->featured = $listing->featured;
 		}
 		$this->render('trip6');
 	}
 	
+	private function saveTripListingPhoto($tripId, $listingId) {
+        if (!$_FILES['image']['name']) {
+            return false;
+        }
+
+        $mediaPath = $_SERVER['DOCUMENT_ROOT'] . "/images/trips";
+        if (!file_exists($mediaPath)) {
+            @mkdir($mediaPath, 0777);
+        }
+
+        $tripMediaPath = $mediaPath . '/' . $tripId;
+        if (!file_exists($tripMediaPath)) {
+            @mkdir($tripMediaPath, 0777);
+        }
+
+        $listingMediaPath = $tripMediaPath . '/listings';
+        if (!file_exists($listingMediaPath)) {
+            @mkdir($listingMediaPath, 0777);
+        }
+
+        $path_parts = pathinfo($_FILES['image']['name']);
+        $extension = $path_parts['extension'];
+        $targetPath = $listingMediaPath . '/' . $listingId . '.' . $extension;
+        $htmlFileName = '/images/trips/' . "/$tripId/listings/" . $listingId . '.' . $extension;
+
+        $tmp_name = $_FILES['image']['tmp_name'];
+        @move_uploaded_file($tmp_name, $targetPath);
+        return $htmlFileName;
+    }
+
 	private function validateTrip6Data($postData) {
         $errors = array();
         if (empty($postData['title']))
@@ -4210,6 +4270,31 @@ class AdminController extends Zend_Controller_Action {
             $errors['country'] = 'This field is required';
         return $errors;
     }
+	
+	public function timeTo24HoursFormat($time){
+		$ampm = strtolower(substr($time, -2, 2));
+		if(	$ampm != 'am' && $ampm !='pm'){
+			return $time;	
+		}
+		if(strlen($time)!=8){
+			return $time;	
+		}
+		
+		$hour = (int) substr($time, 0, 2);
+		$minut = substr($time, 3, 2);
+		
+		if($ampm == 'am'){
+			if($hour == 12){
+				$hour=0;
+			}
+			return str_pad($hour, 2, '0',STR_PAD_LEFT) . ':' . $minut;	
+		}
+		
+		if($hour != 12){
+			$hour += 12;
+		}
+		return str_pad($hour, 2, '0', STR_PAD_LEFT) . ':' . $minut;	
+	}
 
     static function urlDateToMySql($dateString) {
         $months = array('Jan' => '01', 'Feb' => '02', 'Mar' => '03', 'Apr' => '04', 'May' => '05', 'Jun' => '06', 'Jul' => '07', 'Aug' => '08', 'Sep' => '09', 'Oct' => '10', 'Nov' => '11', 'Dec' => '12');

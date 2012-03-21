@@ -719,7 +719,7 @@ class WS_TripsService {
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = $db->select();
         
-        $select->from('trip_listings',array('*', 'start_time'=>new Zend_Db_Expr("TIME_FORMAT(start, '%h:%i%p' )"), 'end_time'=>new Zend_Db_Expr("TIME_FORMAT(end, '%h:%i%p' )")));
+        $select->from('trip_listings',array('*', 'start_time'=>new Zend_Db_Expr("TIME_FORMAT(start, '%h:%i %p' )"), 'end_time'=>new Zend_Db_Expr("TIME_FORMAT(end, '%h:%i %p' )")));
         $select->where('id = ?', $id);
 		$trip = $db->fetchRow($select);
 		if (is_null($trip))
@@ -732,9 +732,10 @@ class WS_TripsService {
 		
 		if($id){
 			$this->listings->update($data, "id=$id");
+			return $id;
 		}
 		else{
-			$this->listings->insert($data);
+			return $this->listings->insert($data);
 		}
 	}
 

@@ -49,6 +49,11 @@
 						</div>
 						<!-- closes left -->
 						<div class="right">
+							<?php if($this->successMessage): ?>
+							<script type="text/javascript">
+                                showAlert("Your changes have been saved");
+                            </script>
+                            <?php endif ?>	
 							<div class="lstng-details">
 								<div class="heading">
 									<a href="" class="previous" id="slide_prev">Previous Day</a>
@@ -60,6 +65,7 @@
 								</div><!--HEADING-->
 								<div id="slider">
                                 <?php if(count($this->items)):?>
+                                	<?php $slide =0;?>
 									<?php foreach($this->items as $day=>$listings):?>
                                     <div class="itinerary" id="<?php echo $day?>">
                                         <?php foreach($listings as $listing):?>
@@ -74,7 +80,7 @@
                                         <?php endforeach;?>
                                        
                                         <div class="add-listing">
-                                            <a href="<?php echo $this->url(array('task'=>'edit','page'=>6, 'sort'=>$this->trip->id, 'seq'=>0))?>" class="btn">Add Listing</a>
+                                            <a href="<?php echo $this->url(array('task'=>'edit','page'=>6, 'sort'=>$this->trip->id, 'seq'=>0, 'q'=>$day))?>" class="btn">Add Listing</a>
                                         </div>
 	                                </div><!--ITINERARY-->
                                     <?php endforeach;?>
@@ -84,7 +90,7 @@
                                    		<center>No Listing added</center>
                                         </div>
                                         <div class="add-listing">
-                                            <a href="<?php echo $this->url(array('task'=>'edit','page'=>6, 'sort'=>$this->trip->id, 'seq'=>0))?>" class="btn">Add Listing</a>
+                                            <a href="<?php echo $this->url(array('task'=>'edit','page'=>6, 'sort'=>$this->trip->id, 'seq'=>0, 'q'=>$day))?>" class="btn">Add Listing</a>
                                         </div>
 	                                </div><!--ITINERARY-->
                                     
@@ -113,13 +119,15 @@
 		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
         
         <script>
+			var slide = <?php echo $this->slide?>;
 			$('#slider').cycle({
 				fx:     'scrollRight',
 				timeout: 0,
 				speed:  'fast',
 				next: '#slide_next',
 				prev: '#slide_prev',
-				after: onAfter 
+				after: onAfter, 
+				startingSlide: slide
 			});
 			function onAfter() { 
 				$('#day_title').html("<h3> Day " + this.id + "</h3>"); 
