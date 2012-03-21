@@ -11352,6 +11352,44 @@ ul.reviews li > div div.meta em.red {
 /*END VENDOR OFFERS------------------------------------------------------ */
 
 /*ADMIN------------------------------------------------------------------ */
+/*LIGHTBOX BASIC STYLES-------------------------------------*/
+.lb {
+	overflow: hidden;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px; 
+	behavior: url(/PIE.htc);
+}
+.lb .top {
+	background: url("../images2/g-13.png") repeat-x scroll 0 0 transparent;
+    color: #FFFFFF;
+    font: bold 12px/44px Helvetica,Arial,sans-serif;
+    height: 44px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 0px;
+    -moz-border-radius-bottomleft: 0px;
+    -webkit-border-radius: 5px 5px 0px 0px;
+    border-radius: 5px 5px 0px 0px; 
+}
+.lb .bottom {
+	background: url("../images2/g-52.gif") repeat-x scroll 0 0 #F6F6F6;
+    height: 45px;
+    overflow: hidden;
+    padding: 15px 20px 0 0;
+    -moz-border-radius-topleft: 0px;
+    -moz-border-radius-topright: 0px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -webkit-border-radius: 0px 0px 5px 5px;
+    border-radius: 0px 0px 5px 5px;
+}
+.lb .bottom .btn-10,
+.lb .bottom .btn-1 {
+	float: right;
+	height: 30px;
+}
+/*END LIGHTBOX BASIC STYLES----------------------------------*/
 /*ADMIN LISTING---------------------------------------------*/
 #listing_edit {
 	width: 962px;
@@ -11531,6 +11569,19 @@ ul.reviews li > div div.meta em.red {
 	display:block;
 	margin-top:13px;
 }
+.w3_admin .sub_menu .btn-10 {
+	float: right;
+	height: 30px;
+	margin:10px 0 0 10px;
+	display: block;
+	width: 118px;
+	padding-left:0 ;
+	padding-right:0 ;
+	background: url(../images2/btn-10.gif) repeat-x left bottom;
+}
+.w3_admin .sub_menu .btn-10.act {
+	color: #8dc63f;
+}
 .w1 .all_listing {
 	width:960px;
 	margin:0 auto;
@@ -11646,6 +11697,13 @@ ul.reviews li > div div.meta em.red {
     padding: 8px 2px 8px 8px;
     vertical-align: middle;
 	color:#303030;
+}
+.all_listing .list_content td a {
+	color: #60b5f7;
+}
+.all_listing .list_content td a:hover {
+	color: #9bd2fc;
+	text-decoration: none;
 }
 .all_listing .list_content tr.first {
     border-top: 1px solid #e8e8e8;

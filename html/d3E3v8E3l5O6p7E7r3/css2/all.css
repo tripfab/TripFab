@@ -487,7 +487,17 @@
 /*-----------------------------------------------------------------------------------------------*/
 
 /*- Footer Styles -----------------------------------------------------------*/
-
+.footer {
+    background: url("../images2/g-3.png") repeat-x scroll 0 0 #FFFFFF;
+    border-top: 1px solid #E8E8E8;
+    bottom: 0;
+    color: #555555;
+    font-size: 11px;
+    height: 54px;
+    padding: 28px 0;
+    position: absolute;
+    width: 100%;
+}
 
 #footer {
 	height: 88px;
@@ -8049,7 +8059,12 @@ h2.title .back:hover,
 	border-radius: 0px 0px 4px 4px;
 	behavior: url(/PIE.htc);
 }
-
+.listing-content .foot a {
+	color: #F26522;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 43px;
+}
 .sign-box .foot a {
 	color: #60b5f7;
 	font-size: 12px;
@@ -14004,6 +14019,22 @@ h2.title .back:hover,
 	display:block;
 	margin-top:13px;
 }
+.w3_admin .sub_menu .btn-10 {
+	float: right;
+	height: 30px;
+	margin:10px 0 0 10px;
+	display: block;
+	width: 118px;
+	padding-left:0 ;
+	padding-right:0 ;
+	background: url(../images2/btn-10.gif) repeat-x left bottom;
+}
+.w3_admin .sub_menu .btn-10.act {
+	color: #8dc63f;
+}
+.w3_admin .sub_menu .btn-10.deact {
+	color: #f26522;
+}
 .w1 .all_listing {
 	width:960px;
 	margin:0 auto;
@@ -14139,6 +14170,14 @@ h2.title .back:hover,
 	color: #60b5f7;
 	font:bold 11px/15px Helvetica, Arial, sans-serif;
 }
+.all_listing .list_content td a.activate {
+	color: #8dc63f;
+	font-size: 11px;
+}
+.all_listing .list_content td a.deactivate {
+	color: #f26522;
+	font-size: 11px;
+}
 .all_listing .list_content td a.edit {
 	background:url(../images2/ico-104.png) no-repeat center left;
 	padding-left:15px;
@@ -14234,6 +14273,29 @@ h2.title .back:hover,
     display: block;
     padding-bottom: 12px;
 }
+#user_view .block .bank-account {
+	margin: 0 auto;
+	border-bottom: 1px solid #e8e8e8;
+	width: 720px;
+	padding-bottom: 20px;
+	margin-bottom: 10px;
+}
+#user_view .block .bank-account img{
+	display: block;
+	float: left;
+	margin-right: 5px;
+}
+#user_view .block .bank-account span {
+	color: #303030;
+	font: normal 12px/31px Helvetica;
+}
+#user_view .block .bank-account td {
+	vertical-align: middle;
+}
+#user_view .block .bank-account .number {
+	font-weight: bold;
+}
+
 #user_view h3.title .back {
 	background:url(../images2/arrow-9.png) no-repeat left 50%;
 	padding-left:5px;
@@ -14303,6 +14365,13 @@ h2.title .back:hover,
 	color:#303030;
 	text-align:center;
 	padding:10px 20px;
+	background-color: #FFF;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright: 4px;
+	-moz-border-radius-bottomright: 0px;
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-radius: 4px 4px 0px 0px;
+	border-radius: 4px 4px 0px 0px;
 }
 .lightbox-2 .buttons {
 	background:url(../images2/g-52.gif) repeat-x #f6f6f6;
@@ -15068,6 +15137,67 @@ h2.title .back:hover,
 	margin-right: 5px;
 }
 /*END LIGHTBOX CASE OPEN CLAIM-------------------------------*/
+/*LIGHTBOX REQUEST-INFO--------------------------------------*/
+#request_info {
+	width: 500px;
+}
+#request_info .top {
+	padding-left: 40px;
+}
+#request_info .cont {
+	background-color: #FFF;
+	padding-top: 12px;
+}
+#request_info .cont input {
+	width: 408px;
+	display: block;
+	margin:0 0 10px 40px;
+}
+#request_info .cont .removed {
+	padding-left: 15px;
+}
+#request_info .cont .removed a {
+	float: left;
+	margin-top: 8px;
+}
+#request_info .cont .removed input {
+	display: block;
+	float: left;
+	margin-left: 10px;
+}
+#request_info .cont a.add {
+	float: right;
+	display: block;
+	background: url(../images2/ico-32.png) no-repeat top left;
+	color: #60b5f7;
+	margin: 0 40px 10px 0;
+	padding-left: 20px;
+}
+#request_info .cont a.add:hover {
+	color: #9bd2fc;
+}
+#request_info .bottom {
+	padding-right: 40px;
+}
+/*END LIGHTBOX REQUEST-INFO----------------------------------*/
+/*ACTIVATE-DEACTIVATE LISTING--------------------------------*/
+.lb.activation {
+	width: 340px;
+}
+.lb.activation .top {
+	padding-left: 20px;
+	font-size: 13px;
+}
+.lb.activation .cont {
+padding: 20px;
+background-color: #FFF;
+}
+.lb.activation .cont p {
+	color: #303030;
+	font: bold 15px/18px Helvetica;
+	text-align: center;
+}
+/*END ACTIVATE-DEACTIVATE LISTING----------------------------*/
 /*LIGHTBOX NEW PARTNER---------------------------------------*/
 #new_partner {
 	width: 340px;
@@ -15077,6 +15207,7 @@ h2.title .back:hover,
 }
 #new_partner .cont {
 	padding: 20px 0;
+	background-color: #FFF;
 }
 #new_partner ul li{
 	list-style: none;
@@ -18737,7 +18868,83 @@ h2.title .back:hover,
 	font-weight: normal;
 }
 /*END SEND MESSAGES LISTINGS-----------------------------------------------*/
-
+/*CHECK-EMAIL--------------------------------------------------------------*/
+#check_email {
+	margin-top: 20px;
+	margin-bottom: 60px;
+}
+#check_email .graphic {
+	background: url(../images2/welcome-in.png) no-repeat 0 0;
+	width: 924px;
+	height: 238px;
+	padding: 51px 0 0 36px;
+}
+#check_email .graphic h2 {
+	color: #003471;
+	font: bold 52px Helvetica;
+	text-shadow: 0px 1px 0px #fff;
+	filter: dropshadow(color=#fff, offx=0, offy=1);
+	margin-bottom: 5px;
+}
+#check_email .graphic h3 {
+	color: #0072bc;
+	font: bold 16px Helvetica;
+	text-shadow: 0px 1px 0px #fff;
+	filter: dropshadow(color=#fff, offx=0, offy=1);
+	margin-bottom: 66px;
+}
+#check_email .graphic h4 {
+	color: #252525;
+	font: bold 14px Helvetica;
+	margin-bottom: 11px;
+}
+#check_email .graphic p {
+	color: #252525;
+	font: normal 13px/20px Helvetica;
+	width: 605px;
+}
+#check_email .features {
+	overflow: hidden;
+	background: url(../images2/welcome_sep2.png) no-repeat bottom center;
+	padding:22px 0 34px;
+}
+#check_email .features h5 {
+	color: #303030;
+	text-align: center;
+	background: url(../images2/welcome_sep1.png) no-repeat center 50%;
+	font: bold 16px/35px Helvetica;
+	height: 35px;
+	margin-bottom: 19px;
+}
+#check_email .features .single {
+	width: 230px;
+	float: left;
+	padding:4px 0 0 66px;
+	background: url(../images2/welcome_icon.png) no-repeat 0 0;
+}
+#check_email .features .single h6 {
+	color: #303030;
+	font: bold 14px Helvetica;
+	margin-bottom: 7px;
+}
+#check_email .features .single p {
+	color: #303030;
+	font: normal 13px/20px Helvetica;
+}
+#check_email .features .single.discover {
+	background-position: 0 0;
+	margin-right: 49px;
+	width: 210px;
+}
+#check_email .features .single.create {
+	background-position: -372px 0;
+	margin-right: 47px;
+}
+#check_email .features .single.buy {
+	background-position: -746px 0;
+	width: 206px;
+}
+/*END CHECK-EMAIL----------------------------------------------------------*/
 
 
 
