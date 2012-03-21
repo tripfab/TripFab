@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<title>Trips</title>
+        <link type="text/css" rel="stylesheet" href="/css5/reset.css" />
+        <link type="text/css" rel="stylesheet" href="/css5/all.css" />
+		<script type="text/javascript" src="/js2/jquery.js"></script>
+		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+  		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css" />
+  		<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
+  		<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
+  		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]--> 
+		<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js"></script>
+    	<script type="text/javascript" src="/js2/jquery.cycle.all.js"></script>
+			<script>
+				$(document).ready(function() {
+					$('a.lbc').fancybox({
+						padding: 0,
+						overlayColor: '#FFF',
+						overlayOpacity: '0.7',
+						showCloseButton: 'false',
+					});
+            		$("#report_tabs").tabs();
+					
+				});
+			</script>
+	</head>
+	<body>
+		<div class="w1">
+    		<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
+			
+			<div class="w3_admin">
+				<div class="sub_menu">
+					<h2>Create. <span>New Trip.</span></h2>
+					<a href="#" class="back">Back to Trips</a>
+				</div><!--SUB_MENU-->
+            </div><!--W3-->
+				
+				<div id="trips" class="listing-wrapper wrapper">
+					<div class="listing-content">
+						<div class="left">
+							<ul>
+								<li><a href="<?php echo $this->url(array('page'=>1))?>">General Information</a></li>
+								<li><a href="<?php echo $this->url(array('page'=>2))?>">Trip Facts</a></li>
+								<li><a href="<?php echo $this->url(array('page'=>4))?>">Trip Details</a></li>
+								<li class="current"><a href="<?php echo $this->url(array('page'=>5))?>">Itinerary</a></li>
+							</ul>
+						</div>
+						<!-- closes left -->
+						<div class="right">
+							<div class="lstng-details">
+								<div class="heading">
+									<a href="" class="previous" id="slide_prev">Previous Day</a>
+									<div class="day">
+										<span id="day_title"><h3>Day 1</h3></span>
+										<p>City Tour in Santiago</p>
+									</div><!--DAY-->
+									<a href="" class="next" id="slide_next">Next Day</a>
+								</div><!--HEADING-->
+								<div id="slider">
+                                <?php if(count($this->items)):?>
+									<?php foreach($this->items as $day=>$listings):?>
+                                    <div class="itinerary" id="<?php echo $day?>">
+                                        <?php foreach($listings as $listing):?>
+                                        <div class="single" id="d<?php echo $listing->id?>">
+                                            <span class="star"><img src="<?php echo $listing->image?>" width="38" height="38" alt="" /></a></span>
+                                            <span class="name"><?php echo $listing->title?></span>
+                                            <span class="type"><?php echo $listing->type_name?></span>
+                                            <span class="time"><?php echo $listing->start == '00:00:00' ? 'N/A' : date("h:i A", strtotime($listing->start))?> - <?php echo $listing->end == '00:00:00' ? 'N/A' : date("h:i A", strtotime($listing->end))?></span>
+                                            <a href="javascript://" onclick="deleteItem(<?php echo $listing->id?>)" class="delete">Delete</a>
+                                            <a href="<?php echo $this->url(array('page'=>6, 'sort'=>$this->trip->id, 'seq'=>$listing->id))?>" class="edit">Edit Info</a>
+                                        </div><!--SINGLE-->
+                                        <?php endforeach;?>
+                                       
+                                        <div class="add-listing">
+                                            <a href="<?php echo $this->url(array('task'=>'edit','page'=>6, 'sort'=>$this->trip->id, 'seq'=>0))?>" class="btn">Add Listing</a>
+                                        </div>
+	                                </div><!--ITINERARY-->
+                                    <?php endforeach;?>
+                                <?php else:?>
+                                    <div class="itinerary" id="1">
+                                        <div class="single" id="d1">
+                                   		<center>No Listing added</center>
+                                        </div>
+                                        <div class="add-listing">
+                                            <a href="<?php echo $this->url(array('task'=>'edit','page'=>6, 'sort'=>$this->trip->id, 'seq'=>0))?>" class="btn">Add Listing</a>
+                                        </div>
+	                                </div><!--ITINERARY-->
+                                    
+								<?php endif;?>
+
+
+
+                                </div> <!-- slider-->
+                                
+							</div>
+							<!-- closes lstng-details -->
+							<div class="foot">
+								<input type="submit" class="btn-1" value="Save Changes" />
+								<a href="">Deactivate Listing</a>
+							</div>
+							<!-- closes foot -->
+						</div>
+						<!-- closes right -->
+					</div>
+					<!-- closes listing-content -->
+				</div>
+					
+			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+		</div>
+		<!-- closes w1 -->
+		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+        
+        <script>
+			$('#slider').cycle({
+				fx:     'scrollRight',
+				timeout: 0,
+				speed:  'fast',
+				next: '#slide_next',
+				prev: '#slide_prev',
+				after: onAfter 
+			});
+			function onAfter() { 
+				$('#day_title').html("<h3> Day " + this.id + "</h3>"); 
+			}
+			
+			function deleteItem(item){
+				var url;
+				url = '/ajax/tripitem/?item='+ item;
+		
+				$.getJSON(url, function(jsonData) {
+					if(jsonData.attempt == 'success'){
+						$("#d"+item).hide();
+					}
+				});
+			}
+		</script>
+	</body>
+</html>

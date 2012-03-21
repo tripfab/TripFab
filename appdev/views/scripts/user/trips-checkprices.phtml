@@ -277,7 +277,7 @@
                 <h5>Trip Details</h5>
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 		<?php foreach($this->items as $item): ?>
-                		<?php if($item->avaible): ?>
+                		<?php if($item->available): ?>
                 		<tr>
                 			<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><em><?= $item->listing_title ?></em></a></td>
                 			<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>$<?= $item->total ?></span></td>

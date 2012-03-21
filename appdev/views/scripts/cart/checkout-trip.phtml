@@ -104,6 +104,31 @@
                             </div><!-- closes payment-item -->                             
                         </div><!-- closes checkout-item -->
                         
+                        <div class="checkout-item">
+                            <div class="ttl"><span>3</span><strong>Policies &amp; Restriccions</strong></div>
+                            <div class="card-item longer"> <strong>Cancellation</strong> <a class="high-r" href="">High Restrictions &rarr;</a> </div>
+                            <div class="card-item longer"> <strong>Activity Restrictions</strong> <a href="">Read Activity Restrictions &rarr;</a> </div>
+                            <div class="card-item last">
+                                <input type="checkbox" name="terms" id="terms" value="1" />
+                                <label for="terms">I agree to the cancellation policy, activity restrictions and <a href="">terms of use</a>.</label>
+                            </div><!-- closes card-item -->
+                        
+                            <div class="restricction_tip hidden">
+                                <strong>50% refund up until 1 week prior to arrival, except fees</strong>
+                                <ul>
+                                    <li>• Cleaning fees are always refunded if the guest did not check in.</li>
+                                    <li>• The Tripfab service fee is non-refundable.</li>
+                                    <li>• If there is a complaint from either party, notice must be given to Tripfab 
+                                    • Resolution Center within 24 hours of check-in.</li>
+                                    <li>• Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                                    <li>• A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                                    e-mail from Tripfab Resolution Center.</li>
+                                </ul>
+                                <span></span>
+                            </div><!--RESTRICCTION_TIP-->
+                            <div class="clear"></div>
+                        </div><!-- closes checkout-item -->
+                        
                         <div class="bottom"> <span>Grand Total<strong>$<?= $this->cartitem->total ?></strong></span>
                             <input type="submit" class="btn-1 noclean" value="Book Trip" />
                         </div><!-- closes bottom -->
@@ -114,7 +139,6 @@
                         <input type="hidden" name="formids" value="<?= md5($this->user->token.'checkout') ?>" />
                         <input type="hidden" name="_task" value="<?= md5('purchase') ?>" />
                         <input type="hidden" name="ammount" value="<?= $this->cartitem->total ?>" />
-                        <input type="radio" style="display:none;" name="terms" value="1" checked="checked" />
                     </form>
                 </div><!-- closes left -->
                 

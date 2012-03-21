@@ -3286,7 +3286,9 @@ class AdminController extends Zend_Controller_Action {
 									 "Partner ID"
 									)
 								);
-					$fnRow = function($row) {
+					
+                                        
+                                        $fnRow = create_function('$row','
 						return array(
 							$row->date,
 							$row->code,
@@ -3296,8 +3298,7 @@ class AdminController extends Zend_Controller_Action {
 							$row->fee,
 							$row->net_amount,
 							$row->partner_id,
-						);
-					};
+						);');
 					
 					require_once("TF/Export.php");
 					TF_Export::xlsFromData(
@@ -3316,7 +3317,7 @@ class AdminController extends Zend_Controller_Action {
 							'Log out Time',
 							'Total Time'
 						));
-					$fnRow = function($row) {
+					$fnRow = create_function('$row','
 						return array(
 							$row->date,
 							$row->session_id,
@@ -3324,8 +3325,7 @@ class AdminController extends Zend_Controller_Action {
 							$row->login_time,
 							$row->logout_time,
 							$row->total
-						);
-					};
+						);');
 					
 					require_once("TF/Export.php");
 					TF_Export::xlsFromData(
@@ -3377,7 +3377,7 @@ class AdminController extends Zend_Controller_Action {
 										'Status', 
 										'Amount'
  									));
-					$fnRow = function($row) {
+					$fnRow = create_function('$row','
 						return array(
 							$row->date,
 							$row->time,
@@ -3388,8 +3388,7 @@ class AdminController extends Zend_Controller_Action {
 							$row->card_number,
 							$row->status,
 							$row->ammount
-						);
-					};
+						);');
 					
 					require_once("TF/Export.php");
 					TF_Export::xlsFromData(
@@ -3434,7 +3433,7 @@ class AdminController extends Zend_Controller_Action {
 							'Log out Time',
 							'Total Time'
 						));
-					$fnRow = function($row) {
+					$fnRow = create_function('$row','
 						return array(
 							$row->date,
 							$row->session_id,
@@ -3442,8 +3441,7 @@ class AdminController extends Zend_Controller_Action {
 							$row->login_time,
 							$row->logout_time,
 							$row->total
-						);
-					};
+						);');
 					
 					require_once("TF/Export.php");
 					TF_Export::xlsFromData(
@@ -3492,15 +3490,14 @@ class AdminController extends Zend_Controller_Action {
 							 'Listing Email',
 							 'Pending Info'
 							 ));
-					$fnRow = function($row) {
+					$fnRow = create_function('$row','
 						return array(
 							$row->user_name,
 							$row->vender_id,
 							$row->title,
 							$row->email,
 							$row->pending_info,
-						);
-					};
+						);');
 					
 					require_once("TF/Export.php");
 					TF_Export::xlsFromData(
@@ -3613,6 +3610,7 @@ class AdminController extends Zend_Controller_Action {
                 throw new Exception('Page not found');
         }
     }
+
 
 	private function tripAddTask(){
 		if($this->getRequest()->isPost()){
@@ -3739,7 +3737,11 @@ class AdminController extends Zend_Controller_Action {
                 break;
             case 5:
                 $this->view->title = "";
-                $template = 'trip4a';
+                $this->tripEditTask5($trip);
+                break;
+            case 6:
+                $this->view->title = "";
+                $this->tripEditTask6($trip);
                 break;
             default:
                 $this->view->title = "";
@@ -4005,7 +4007,137 @@ class AdminController extends Zend_Controller_Action {
 
         $this->render('trip4');
     }
+	
+    private function tripEditTask5($trip) {
+        $this->view->trip = $trip;
+		$items = $this->trips->getListingOf3($trip->id); 
+        $dayWise = array();
+		foreach($items as $item){
+			$dayWise[$item->day][] = $item;	
+		}
+		//echo "<pre>" ; print_r($dayWise); die;
+		$this->view->items = $dayWise;
+		$this->render('trip5');
 
+	}
+
+    private function tripEditTask6($trip) {
+        $this->view->trip = $trip;
+		$listing = $this->_request->getParam('seq');
+        
+		$countries = $this->places->getPlaces(2);
+        $this->view->countries = $countries;
+		
+		$listingType = $this->listings->getMainTypes();
+		$this->view->listingTypes = $listingType;
+
+
+        $this->view->errors = array();
+		$this->view->title = '';
+		$this->view->description = '';
+		$this->view->days = '';
+		$this->view->type = '';
+		$this->view->country ='';
+		$this->view->city = '';
+		$this->view->duration = '';
+		$this->view->start_hour = '';
+		$this->view->end_hour = '';
+		$this->view->lng = '';
+		$this->view->lat = '';
+	
+        if ($this->getRequest()->isPost()) {
+            $errors = $this->validateTrip6Data($_POST);
+            if (count($errors)) {
+                $this->view->errors = $errors;
+                $this->view->title = $_POST['title'];
+                $this->view->description = $_POST['description'];
+                $this->view->days = $_POST['days'];
+                $this->view->type = $_POST['type'];
+                $this->view->country = $_POST['country'];
+                $this->view->city = $_POST['city'];
+                $this->view->duration = $_POST['duration'];
+                $this->view->start_hour = $_POST['start_hour'];
+                $this->view->end_hour = $_POST['end_hour'];
+                $this->view->lng = $_POST['lng'];
+                $this->view->lat = $_POST['lat'];
+                $this->render('trip6');
+                return;
+            }
+			
+            $data = array();
+			$data['title'] = $_POST['title'];
+			$data['main_type']=$_POST['activity'];
+			$data['description'] = $_POST['description'];
+			$data['day'] = $_POST['day'];
+			$data['city_id'] = $_POST['city'];
+			$data['country_id'] = $_POST['country'];
+			$data['start'] = $_POST['start_hour'];
+			$data['end'] = $_POST['end_hour'];
+			$data['duration'] = $_POST['duration'];
+			$data['lng'] = $_POST['lng'];
+			$data['lat'] = $_POST['lat'];
+			
+			if(!$listing){
+				$data['itinerary_id'] = $trip->id;
+			}
+			$this->trips->saveListing($data, $listing);
+			
+            $_SESSION['alert'] = 'Your changes have been saved';
+            $this->_redirect('/admin/trips/edit/5/' . $trip->id);
+        }
+
+		if($listing){
+			$listing = $this->trips->getTripListingById($listing);
+			if(!$listing){
+				throw new Exception("Error occured. Unable to load trip listing");	
+			}
+			$this->view->title = $listing->title;
+			$this->view->description = $listing->description;
+			$this->view->day = $listing->day;
+			$this->view->type = $listing->main_type;
+			$this->view->country = $listing->country_id;
+			$this->view->city = $listing->city_id;
+			$this->view->duration = $listing->duration;
+			$this->view->start_hour = $listing->start_time;
+			$this->view->end_hour = $listing->end_time;
+			$this->view->lng = $listing->lng;
+			$this->view->lat = $listing->lat;
+		
+		}
+		$this->render('trip6');
+	}
+	
+	private function validateTrip6Data($postData) {
+        $errors = array();
+        if (empty($postData['title']))
+            $errors['title'] = 'Listing Title can not be blank';
+
+        if (empty($postData['description']))
+            $errors['description'] = 'Listing Description can not be blank';
+
+		if (!(int) $postData['country'])
+            $errors['country'] = 'Country can not be blank';
+
+		if (!(int) $postData['city'])
+            $errors['city'] = 'City can not be blank';
+        
+		if (!(int) $postData['day'])
+            $errors['day'] = 'Itinerary day can not be blank';
+        
+		if (!(int) $postData['duration'])
+            $errors['duration'] = 'Itinerary duration can not be blank';
+		
+
+		if (empty($postData['start_hour']))
+            $errors['start_hour'] = 'Starting hour can not be blank';
+		
+		if (empty($postData['end_hour']))
+            $errors['end_hour'] = 'Ending hour can not be blank';
+
+        return $errors;
+    }
+
+	
     public function vendorsAction() {
         switch ($this->_getParam('task')) {
             case 'add':

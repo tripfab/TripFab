@@ -50,7 +50,6 @@ class WS_Notifier extends Zend_Mail {
         $this->setSubject('Signup Request');
         $this->addTo($this->user->email);
         $this->sendHTMLTemplate('account-request.phtml');
-        
     }
     
     
@@ -186,9 +185,10 @@ class WS_Notifier extends Zend_Mail {
      *  email wih a link to verify the email 
      * 
      */
-    public function emailVerification()
+    public function emailVerification($token)
     {
-        $this->setSubject('Please Verufy your Email');
+        $this->_view->token = $token;
+        $this->setSubject('Welcome to Tripfab');
         $this->addTo($this->user->email);
         $this->sendHTMLTemplate('email.phtml');
     }
@@ -271,8 +271,9 @@ class WS_Notifier extends Zend_Mail {
      *  email with a link he can follow to enter the new password
      * 
      */
-    public function passwordReset()
+    public function passwordReset($url)
     {
+        $this->_view->url = $url;
         $this->setSubject('Password Reset');
         $this->addTo($this->user->email);
         $this->sendHTMLTemplate('password.phtml');
@@ -315,10 +316,14 @@ class WS_Notifier extends Zend_Mail {
      */
     public function sendHTMLTemplate($template, $encoding = Zend_Mime::ENCODING_QUOTEDPRINTABLE)
     {
-        $html = $this->_view->render($template);
-        $this->setBodyHtml($html);
-        $this->setEncodingOfHeaders($encoding);
-        $this->send();
+        try {
+            $html = $this->_view->render($template);
+            $this->setBodyHtml($html);
+            $this->setEncodingOfHeaders($encoding);
+            $this->send();
+        } catch(Exception $e) {
+            
+        }
     }
     
     /**

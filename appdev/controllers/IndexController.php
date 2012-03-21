@@ -412,16 +412,19 @@ class IndexController extends Zend_Controller_Action
         
         if($this->getRequest()->isPost()){
             if(!$caducated){
-                if($_POST['npassword'] == $_POST['rpassword']) {
+                if(($_POST['npassword'] == $_POST['rpassword']) and !empty($_POST['npassword'])) {
                     $user->password = md5($_POST['npassword']);
                     $user->save();
                     
                     $token->delete();
                     
+                    $notifier = new WS_Notifier($user->id);
+                    $notifier->passwordResetSuccess();
+                    
                     setcookie('alert','Your password has been change. Please Login');
                     $this->_redirect('/login');
                 } else {
-                    $this->view->error = "Password verification incorrect";                    
+                    $this->view->error = "Password verification incorrect";
                 }
             }
         }
