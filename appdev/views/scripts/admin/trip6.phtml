@@ -36,8 +36,8 @@
 			
 			<div class="w3_admin">
 				<div class="sub_menu">
-					<h2>Create. <span>New Trip.</span></h2>
-					<a href="#" class="back">Back to Trips</a>
+					<h2><?php echo $this->doWhat?>. <span>Itinerary Item.</span></h2>
+					<a href="<?php echo $this->url(array('page'=>5, 'q'=>$this->day)); ?>" class="back">Back to Itinerary</a>
 				</div><!--SUB_MENU-->
             </div><!--W3-->
        

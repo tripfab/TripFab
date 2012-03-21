@@ -32,8 +32,8 @@
 			
 			<div class="w3_admin">
 				<div class="sub_menu">
-					<h2>Create. <span>New Trip.</span></h2>
-					<a href="#" class="back">Back to Trips</a>
+					<h2>Manage. <span>Itinerary Items</span></h2>
+					<a href="/admin/trips/" class="back">Back to Trips</a>
 				</div><!--SUB_MENU-->
             </div><!--W3-->
 				
@@ -90,7 +90,7 @@
                                    		<center>No Listing added</center>
                                         </div>
                                         <div class="add-listing">
-                                            <a href="<?php echo $this->url(array('task'=>'edit','page'=>6, 'sort'=>$this->trip->id, 'seq'=>0, 'q'=>$day))?>" class="btn">Add Listing</a>
+                                            <a href="<?php echo $this->url(array('task'=>'edit','page'=>6, 'sort'=>$this->trip->id, 'seq'=>0, 'q'=>@$day))?>" class="btn">Add Listing</a>
                                         </div>
 	                                </div><!--ITINERARY-->
                                     

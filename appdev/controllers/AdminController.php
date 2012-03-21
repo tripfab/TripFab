@@ -4040,7 +4040,7 @@ class AdminController extends Zend_Controller_Action {
         $this->view->trip = $trip;
 		$listing = $this->_request->getParam('seq');
 		$itineraryDay = $this->_request->getParam('q') ? $this->_request->getParam('q') : 1;
-        
+        $this->view->doWhat = $listing ? "Edit" : "Create";
 		$countries = $this->places->getPlaces(2);
         $this->view->countries = $countries;
 		
@@ -4187,13 +4187,14 @@ class AdminController extends Zend_Controller_Action {
 		if (!(int) $postData['duration'])
             $errors['duration'] = 'Itinerary duration can not be blank';
 		
+		if($postData['type'] != 5){
 
-		if (empty($postData['start_hour']))
-            $errors['start_hour'] = 'Starting hour can not be blank';
-		
-		if (empty($postData['end_hour']))
-            $errors['end_hour'] = 'Ending hour can not be blank';
-
+			if (empty($postData['start_hour']))
+				$errors['start_hour'] = 'Starting hour can not be blank';
+			
+			if (empty($postData['end_hour']))
+				$errors['end_hour'] = 'Ending hour can not be blank';
+		}
         return $errors;
     }
 
