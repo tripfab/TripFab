@@ -1497,7 +1497,7 @@ class AdminController extends Zend_Controller_Action {
                 $listing = $this->listings->getListing($ids);
             }
             
-            $main_cat   = $this->listings->getCategory($listing->main_type);            
+            $main_cat   = $this->listings->getCategory($listing->main_type); 
             $categories = $this->listings->getSubCategoriesOf($main_cat->id);
             $tabs       = $this->listings->getTabsOf($listing->id);
             $attrs      = $this->listings->getAttributesOf($listing->id);

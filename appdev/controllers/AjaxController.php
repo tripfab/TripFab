@@ -1918,4 +1918,45 @@ class AjaxController extends Zend_Controller_Action
         self::jsonEcho(json_encode(array('attempt' => 'success', 'error_code' => '0', 'description' => '', 'data' => '')));
 		
 	}
+	
+	public function requestinfoAction(){
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+        if($user->getRole() != 'admin')
+                throw new Exception('No access allowed');
+		
+		// Listing ID is here inside  $_POST['listing_id']
+		// Get Request info as an array using $_POST['info']
+		
+		//$listing = $this->listings->getListing($_POST['listing_id']);
+        //$vendor = $this->users->getVendor($listing->vendor_id);
+
+        //$notifier = new WS_Notifier($vendor->user_id);
+		//$notifier->listingPendingInformation($_POST['info'])
+		echo "success";
+		die;
+	}
+	
+	public function listingstatusAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+        if($user->getRole() != 'admin')
+                throw new Exception('No access allowed');
+
+        $id = $_POST['id'];
+        $action = $_POST['act'];
+		$listing = $this->listings->getListing($id);
+		$listing->status = $action;
+		$listing->save();
+		echo "success";
+		die;
+    }
+
 }
