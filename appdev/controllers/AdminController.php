@@ -2932,7 +2932,7 @@ class AdminController extends Zend_Controller_Action {
             case 'partners':
                 $this->view->title = "Partners";
                 $template = 'partners';
-                $select->from(array('users'), array('id', 'name', 'email'))
+                $select->from(array('users'), array('id', 'name', 'email', 'active'))
                         ->join('vendors', 'users.id=vendors.user_id', array('vendorId' => 'id', 'partnerName' => 'name', 'partnerEmail' => 'email', 'listingsCount' => 'listings'))
                         ->joinleft(array('city' => 'places'), 'users.city_id=city.id', array('cityName' => 'title'))
                         ->joinleft(array('country' => 'places'), 'users.country_id=country.id', array('countryName' => 'title'))
@@ -2969,7 +2969,7 @@ class AdminController extends Zend_Controller_Action {
                 break;
             case 'partner':
                 $vendorId = $this->_getParam('sort');
-                $user = $this->vendors->getVendorById($vendorId);
+                $user = $this->vendors->getVendorDetailsById($vendorId);
                 $this->view->user = $user;
                 $this->render('partnerview');
                 break;

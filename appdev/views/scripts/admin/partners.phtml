@@ -64,11 +64,19 @@
 							<td>Karina Romaine</td>
 							<td><?php echo $listing->countryName?></td>
 							<td><?php echo $listing->listingsCount?></td>
-							<td><a href="#activate" class="activate lbc">Activate</a> <br/><a href="#deactivate" class="deactivate lbc">Deactivate</a></td>
+							<td>
+								
+                                <div id="d<?php echo $key?>" <?php echo $listing->active ? 'style="display:none"': '';?>>
+                                	<a href="#deactivate" class="deactivate lbc" onclick="initParam(<?php echo $listing->id?>, 0, <?php echo $key?>);">Deactivate</a>
+                                </div>
+                                <div id="a<?php echo $key?>" <?php echo $listing->active ? '' : 'style="display:none"';?>>
+                            		<a href="#activate" class="activate lbc" onclick="initParam(<?php echo $listing->id?>, 1, <?php echo $key?>);">Activate</a> 
+                                </div>
+                                </div>
+                            </td>
 							<td><a href="/admin/users/view/partner/<?php echo $listing->vendorId?>" class="view">View</a></td>
 						</tr>
                         <?php endforeach;?>
-						
 					</table>
 				</div><!--LIST-CONTENT-->
 				<div class="paging_bottom">
@@ -77,11 +85,72 @@
 			</div><!--ALL_LISTING-->
 					
 			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+
 		</div>
 		<!-- closes w1 -->
+        
+      <div class="hidden">
+	<div class="lb" id="request_info">
+    	<div class="lb activation" id="activate">
+		<div class="top">Activate Partner </div><!--TOP-->
+		<form method="post" action="">
+			<fieldset>
+				<div class="cont">
+					<p>Are you sure activate partner ?</p>
+				</div><!--CONT-->
+				<div class="bottom">
+					<a href="javascript://" class="btn-1" id="btn-activate-326">Activate</a>
+					<a href="javascript://" class="btn-10" id="btn-cancel-326">Cancel</a>
+				</div><!--BOTTOM-->
+			</fieldset>
+		</form>
+	</div><!--ACTIVATE-->
+	
+	<div class="lb activation" id="deactivate">
+		<div class="top">Desactivate Partner </div><!--TOP-->
+		<form method="post" action="">
+			<fieldset>
+				<div class="cont">
+					<p>Are you sure desactivate partner?</p>
+				</div><!--CONT-->
+				<div class="bottom">
+					<a href="javascript://" class="btn-1" id="btn-deactivate-327">Deactivate</a>
+					<a href="javascript://" class="btn-10" id="btn-cancel-327">Cancel</a>
+				</div><!--BOTTOM-->
+			</fieldset>
+		</form>
+	</div><!--ACTIVATE-->
+
+    
+	</div><!--HIDDEN-->
+    
+      
     	
 		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
          <script>
+			var userId=null;
+			var action = null;
+			var divNo = null;
+			function initParam(uid, act, d){
+				userId=uid;
+				action=act;
+				divNo =d;
+			}
+			$('#btn-activate-326').click(function(){
+				changeUserStatus();
+			});
+			$('#btn-deactivate-327').click(function(){
+				changeUserStatus();
+			});
+			
+			$('#btn-cancel-326').click(function(){
+				$.fancybox.close();
+			});
+			$('#btn-cancel-327').click(function(){
+				$.fancybox.close();
+			});
+
+
 			$('#c-vendor').click(function(){
 				$('.errdiv').hide();
 				$.ajax({ 
@@ -108,6 +177,34 @@
 				});
 			});
 	
+	
+	
+	function changeUserStatus(){
+		$.ajax({ 
+		   type: "POST", 
+		   url: "/ajax/usertatus/", 
+		   data: 'id=' + userId + '&act=' + action ,
+		   success: function(json, status){
+				$.fancybox.close();
+				if(json=="success"){
+					 showAlert("Partner has been updated successfully");
+					 if(action==1){
+						$("#d"+divNo).show(); 
+						$("#a"+divNo).hide(); 
+					 }
+					 else{
+						$("#d"+divNo).hide(); 
+						$("#a"+divNo).show(); 
+					 }
+				}
+		   }, 
+		   error:function(jqXHR, textStatus, errorThrown){ 
+				alert(textStatus);
+		   }
+		});
+	}
+
+
 
 
 			function searchSubmit(){

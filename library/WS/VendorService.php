@@ -23,7 +23,7 @@ class WS_VendorService {
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = $db->select();
         $select->from('vendors')
-                ->join(array('users'), 'vendors.user_id=users.id', array('userName' => 'name'))
+                ->join(array('users'), 'vendors.user_id=users.id', array('userName' => 'name','active'=>'active', 'user_id'=>'id'))
                 ->joinleft(array('city' => 'places'), 'users.city_id=city.id', array('cityName' => 'title'))
                 ->joinleft(array('country' => 'places'), 'users.country_id=country.id', array('countryName' => 'title'))
                 ->where('vendors.id = ?', $id);

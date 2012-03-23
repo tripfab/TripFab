@@ -1959,4 +1959,27 @@ class AjaxController extends Zend_Controller_Action
 		die;
     }
 
+	public function usertatusAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+        if($user->getRole() != 'admin')
+                throw new Exception('No access allowed');
+
+        $id = $_POST['id'];
+        $action = $_POST['act'];
+		$user = $this->users->get($id);
+		if($user){
+			$user->active = $action;
+			$user->save();
+			echo "success";
+		}
+		else{
+			echo "fail";
+		}
+		die;
+   }
 }
