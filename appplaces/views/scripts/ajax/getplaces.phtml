@@ -1,0 +1,4 @@
+<option value="">Select one</option>
+<?php foreach($this->places as $p): ?>
+<option value="<?= $p->id ?>" data-lat="<?= $p->lat ?>" data-lng="<?= $p->lng ?>"><?= $p->title ?></option>
+<?php endforeach ?>

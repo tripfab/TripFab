@@ -1,0 +1,4 @@
+<option value="0" selected="selected">Select One</option>
+<?php foreach($this->cats as $c): ?>
+<option value="<?= strtolower($c->name) ?>"><?= $c->name ?></option>
+<?php endforeach ?>

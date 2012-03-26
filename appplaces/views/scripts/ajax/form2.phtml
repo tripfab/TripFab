@@ -1,0 +1,267 @@
+<?php
+	$fq = json_decode($this->fqplace->fq_data);
+	$venue = $fq->response->venue;
+	$page  = json_decode($this->fqplace->fb_data);
+?>
+<pre>
+	<?php //var_dump($venue); var_dump($page); die; ?>
+</pre>
+<div class="loading">Loading...</div>
+<p><b><?= $venue->name ?></b></p>
+<form action="" method="" id="newlisting">
+<div class="photos item">
+    <span>Photos
+    <strong>Select Main</strong></span>
+    <div class="content">
+    	<?php $i = 0; ?>
+        <?php foreach($page->photos as $img): ?>
+        <div class="c">
+            <a href="#"><img src="<?= $img->url ?>" width="100" height="100" /></a>
+            <input type="radio" name="pics[main]" value="<?= $i ?>" />
+            <input type="checkbox" name="pics[<?= $i ?>][include]" value="<?= $img->url ?>" />
+        </div>
+        <?php $i++ ?>
+        <?php endforeach ?>
+    	<?php foreach($venue->photos->groups as $g): ?>
+        <?php foreach($g->items as $img): ?>
+        <div class="c">
+            <a href="#"><img src="<?= $img->url ?>" width="100" height="100" /></a>
+            <input type="radio" name="pics[main]" value="<?= $i ?>" />
+            <input type="checkbox" name="pics[<?= $i ?>][include]" value="<?= $img->url ?>" />
+        </div>
+        <?php $i++ ?>
+        <?php endforeach ?>
+        <?php endforeach ?>
+    </div>
+</div>
+<div class="cols">
+    <div class="col">
+        <div class="item">
+            <span>Category</span>
+            <div class="content">
+                <select name="main_type">
+                	<?php $selected = ($this->fqplace->type == 7) ? 'selected="selected"' : '' ?>
+                    <option <?= $selected ?> value="7">Entartainment</option>
+                	<?php $selected = ($this->fqplace->type == 2) ? 'selected="selected"' : '' ?>
+                    <option <?= $selected ?> value="2">Restaurant</option>
+                </select>
+            </div>
+        </div>
+        <div class="item">
+            <span>Title</span>
+            <div class="content">
+                <input type="text" name="title" value="<?= $venue->name ?>" />
+            </div>
+        </div>
+        <div class="item">
+            <span>Location
+            <strong>Specific address</strong></span>
+            <div class="content">
+                <textarea name="address"><?= (isset($venue->location->address)) ? $venue->location->address : '' ?></textarea>
+            </div>
+        </div>
+        <div class="item">
+            <span>Facebook</span>
+            <div class="content">
+                <input type="text" name="place[facebook]" value="<?= $page->link ?>" />
+            </div>
+        </div>
+        <div class="item">
+            <span>Twitter</span>
+            <div class="content">
+                <input type="text" name="place[twitter]" value="<?= (isset($venue->contact->twitter)) ? $venue->contact->twitter : '' ?>" />
+            </div>
+        </div>
+        <div class="item">
+            <span>Email</span>
+            <div class="content">
+            	<?php $email = (isset($venue->contact->email)) ? $venue->contact->email : '' ?>
+                <?php $email = (empty($email) and isset($page->email)) ? $page->email : $email ?>
+                <input type="text" name="email" value="<?= $email ?>" />
+            </div>
+        </div>
+        <div class="item">
+            <span>Website</span>
+            <div class="content">
+            	<?php $website = (isset($venue->contact->website)) ? $venue->contact->website : '' ?>
+                <?php $website = (empty($website) and isset($page->website)) ? $page->website : $website ?>
+                <input type="text" name="website" value="<?= $website ?>" />
+            </div>
+        </div>
+        <div class="item">
+            <span>Phone</span>
+            <div class="content">
+            	<?php $phone = (isset($venue->contact->phone)) ? $venue->contact->phone : '' ?>
+                <?php $phone = (empty($phone) and isset($page->phone)) ? $page->phone : $phone ?>
+                <input type="text" name="phone" value="<?= $phone ?>" />
+            </div>
+        </div>
+        <div class="item">
+            <span>Description</span>
+            <div class="content">
+                <?php $description = (isset($page->about)) ? $page->about : '' ?>            
+                <textarea name="description"><?= $description ?></textarea>
+            </div>
+        </div>
+        <div class="item">
+            <span>Information
+            <strong>Some information</strong></span>
+            <div class="content">
+                <?php $description = (isset($page->description)) ? $page->description : '' ?>    
+                <textarea name="place[info]"><?= $description ?></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="col right">
+        <div class="item">
+            <span>Subcategory</span>
+            <div class="content">
+                <select name="cat">
+                	<option value="">Select One</option>
+                	<?php foreach($this->subcategories as $s): ?>
+                    <option value="<?= $s->id ?>"><?= $s->name ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+        </div>
+        <div class="item hours">
+            <span>Hours</span>
+            <div class="content">
+                <div class="c">
+                    <span>Monday</span>
+                    <?php if(isset($page->hours->mon_1_open)): ?>
+                    <input type="text" name="sch[0][starting]" value="<?= $page->hours->mon_1_open ?>" />
+                    <input type="text" name="sch[0][ending]" value="<?= $page->hours->mon_1_close ?>" />
+                    <?php else: ?>
+                    <input type="text" name="sch[0][starting]" />
+                    <input type="text" name="sch[0][ending]" />
+                    <?php endif ?>
+                    <input type="hidden" name="sch[0][name]" value="Monday" />
+                </div>
+                <div class="c">
+                    <span>Tuesday</span>
+                    <?php if(isset($page->hours->tue_1_open)): ?>
+                    <input type="text" name="sch[1][starting]" value="<?= $page->hours->tue_1_open ?>" />
+                    <input type="text" name="sch[1][ending]" value="<?= $page->hours->tue_1_close ?>" />
+                    <?php else: ?>
+                    <input type="text" name="sch[1][starting]" />
+                    <input type="text" name="sch[1][ending]" />
+                    <?php endif ?>
+                    <input type="hidden" name="sch[1][name]" value="Tuesday" />
+                </div>
+                <div class="c">
+                    <span>Wednesday</span>
+                    <?php if(isset($page->hours->wed_1_open)): ?>
+                    <input type="text" name="sch[2][starting]" value="<?= $page->hours->wed_1_open ?>" />
+                    <input type="text" name="sch[2][ending]" value="<?= $page->hours->wed_1_close ?>" />
+                    <?php else: ?>
+                    <input type="text" name="sch[2][starting]" />
+                    <input type="text" name="sch[2][ending]" />
+                    <?php endif ?>
+                    <input type="hidden" name="sch[2][name]" value="Wednesday" />
+                </div>
+                <div class="c">
+                    <span>Thursday</span>
+                    <?php if(isset($page->hours->thu_1_open)): ?>
+                    <input type="text" name="sch[3][starting]" value="<?= $page->hours->thu_1_open ?>" />
+                    <input type="text" name="sch[3][ending]" value="<?= $page->hours->thu_1_close ?>" />
+                    <?php else: ?>
+                    <input type="text" name="sch[3][starting]" />
+                    <input type="text" name="sch[3][ending]" />
+                    <?php endif ?>
+                    <input type="hidden" name="sch[3][name]" value="Thursday" />
+                </div>
+                <div class="c">
+                    <span>Friday</span>
+                    <?php if(isset($page->hours->fri_1_open)): ?>
+                    <input type="text" name="sch[4][starting]" value="<?= $page->hours->fri_1_open ?>" />
+                    <input type="text" name="sch[4][ending]" value="<?= $page->hours->fri_1_close ?>" />
+                    <?php else: ?>
+                    <input type="text" name="sch[4][starting]" />
+                    <input type="text" name="sch[4][ending]" />
+                    <?php endif ?>
+                    <input type="hidden" name="sch[4][name]" value="Friday" />
+                </div>
+                <div class="c">
+                    <span>Saturday</span>
+                    <?php if(isset($page->hours->sat_1_open)): ?>
+                    <input type="text" name="sch[5][starting]" value="<?= $page->hours->sat_1_open ?>" />
+                    <input type="text" name="sch[5][ending]" value="<?= $page->hours->sat_1_close ?>" />
+                    <?php else: ?>
+                    <input type="text" name="sch[5][starting]" />
+                    <input type="text" name="sch[5][ending]" />
+                    <?php endif ?>
+                    <input type="hidden" name="sch[5][name]" value="Saturday" />
+                </div>
+                <div class="c">
+                    <span>Sunday</span>
+                    <?php if(isset($page->hours->sun_1_open)): ?>
+                    <input type="text" name="sch[6][starting]" value="<?= $page->hours->sun_1_open ?>" />
+                    <input type="text" name="sch[6][ending]" value="<?= $page->hours->sun_1_close ?>" />
+                    <?php else: ?>
+                    <input type="text" name="sch[6][starting]" />
+                    <input type="text" name="sch[6][ending]" />
+                    <?php endif ?>
+                    <input type="hidden" name="sch[6][name]" value="Sunday" />
+                </div>
+            </div>
+        </div>
+        <div class="cards item">
+            <span>Credit Cards</span>
+            <div class="content">
+                <div class="c">
+                	<?php $checked = (isset($page->payment_options->cash_only) and $page->payment_options->cash_only == 1) ? 'checked="checked"' : ''; ?>
+                    <input <?= $checked ?> type="checkbox" name="cards[0]" value="cash" />
+                    <label>Cash Only</label>
+                </div>
+                <div class="c">
+                	<?php $checked = (isset($page->payment_options->visa) and $page->payment_options->visa == 1) ? 'checked="checked"' : ''; ?>
+                    <input <?= $checked ?> type="checkbox" name="cards[1]" value="visa" />
+                    <label>Visa</label>
+                </div>
+                <div class="c">
+                	<?php $checked = (isset($page->payment_options->amex) and $page->payment_options->amex == 1) ? 'checked="checked"' : ''; ?>
+                    <input <?= $checked ?> type="checkbox" name="cards[2]" value="amex" />
+                    <label>American Express</label>
+                </div>
+                <div class="c">
+                	<?php $checked = (isset($page->payment_options->mastercard) and $page->payment_options->mastercard == 1) ? 'checked="checked"' : ''; ?>
+                    <input <?= $checked ?> type="checkbox" name="cards[3]" value="mastercard" />
+                    <label>Mastercard</label>
+                </div>
+                <div class="c">
+                	<?php $checked = (isset($page->payment_options->discover) and $page->payment_options->discover == 1) ? 'checked="checked"' : ''; ?>
+                    <input <?= $checked ?> type="checkbox" name="cards[4]" value="discover" />
+                    <label>Discover</label>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <span>Tips
+            <strong>Comments from people, one per line</strong></span>
+			<?php $info = "" ?>
+            <?php foreach($venue->tips->groups as $g): ?>
+                <?php foreach($g->items as $t): ?>
+                    <?php $info .= $t->text ."\n"; ?>
+                <?php endforeach ?>
+            <?php endforeach ?>
+            <div class="content">
+                <textarea name="place[tips]"><?= $info ?></textarea>
+            </div>
+        </div>
+        <div class="item">
+            <span>Tags
+            <strong>Like services, separated by ","</strong></span>
+            <div class="content">
+                <textarea name="place[tags]"><?= (isset($venue->tags[0])) ? $venue->tags[0] : '' ?></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" name="country_id" value="18" />
+<input type="hidden" name="city_id" value="<?= $this->fqplace->city ?>" />
+<input type="hidden" name="lat" value="<?= $venue->location->lat ?>" />
+<input type="hidden" name="lng" value="<?= $venue->location->lng ?>" />
+<input type="hidden" name="fqid" value="<?= $this->fqplace->id ?>" />
+<input type="submit" value="Save" />
+</form>

@@ -1,0 +1,17 @@
+<div class="loading">Loading...</div>
+<p><b><?= $this->fqplace->name ?></b> <br><br>
+<a target="_blank" href="https://google.com/search?q=%22<?= $this->fqplace->name ?>%22+<?= $this->city ?>,+costa+rica,+site:facebook.com">
+Google Search Results</a> <br><br>
+<a target="_blank" href="https://www.facebook.com/search/results.php?q=<?= $this->fqplace->name ?>&type=pages&init=quick&tas=0.2902761371806264">
+Facebook Search Results</a> <br><br>
+<form id="fbpage" action="" method="post">
+    <div class="item">
+        <span>Facebook Page</span>
+        <div class="content">
+            <input type="text" class="fbpage" name="page" />
+        </div>
+    </div>
+    <input type="button" class="trash" name="task" value="Trash"/>
+    <input type="button" class="continue" name="task" value="Next >>"/>
+    <input type="hidden" name="id" value="<?= $this->id ?>" />
+</form>

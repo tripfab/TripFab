@@ -1,0 +1,111 @@
+* { 
+	margin:0;
+	padding:0;
+}
+a {
+	color:#09C;
+	text-decoration:none;}
+body {
+	font-size:12px;
+	font-family:Arial, Helvetica, sans-serif;}
+.filter {
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	padding:5px;
+	background:#000;
+	height:20px;
+	line-height:20px;}
+	.filter select {
+		width:200px;}
+
+.results {
+	margin-top:31px;
+	position:absolute;
+	top:0;
+	bottom:0;
+	width:100%;}
+	.results .places {
+		position:absolute;
+		background:#DFF6FF;
+		width:300px;
+		top:0;
+		bottom:0;
+		overflow:hidden;
+		overflow-y:scroll;}
+		.results .places ul li a {
+			line-height:20px;
+			padding:0 5px;
+			display:block;}
+			.results .places ul li a:hover,
+			.results .places ul li a.active {
+				background:#fff;}
+	.results .form {
+		position:absolute;
+		margin-left:301px;
+		padding:10px;
+		top:0; bottom:0; left:0; right:0;
+		overflow:scroll;}
+	.results .form .loading {
+		position:absolute;
+		background:#FFC;
+		padding:5px 10px;
+		font-size:14px;
+		top:0px;
+		right:0px;
+		display:none;}
+	.results .form p {
+		margin-bottom:10px;}
+	.results .form .item {
+		overflow:hidden;
+		widows:100%;
+		margin-bottom:10px;
+		padding-bottom:10px;
+		border-bottom:1px solid #999;}
+		.results .form .item span {
+			float:left;
+			width:100px;
+			font-weight:bold;}
+			.results .form .item span strong {
+				display:block;
+				font-weight:normal;
+				color:#666;}
+		
+		.results .form .item .content {
+			float:left;
+			width:300px;
+			margin-left:20px;}
+			.results .form .item .content input[type=text],
+			.results .form .item .content textarea {
+				width:290px;}
+			.results .form .item .content textarea {
+				height:80px;}
+			
+		.results .form .item.photos .content {
+			width:800px;}
+			.results .form .item.photos .content .c {
+				float:left;
+				text-align:center;
+				margin-right:10px;}
+				.results .form .item.photos .content .c a {
+					display:block;
+					margin-bottom:10px;}
+		.results .form .item.hours .content .c {
+			overflow:hidden;
+			margin-bottom:5px;}
+			.results .form .item.hours .content .c input {
+				width:70px;}
+			.results .form .item.hours .content .c span {
+				float:none;
+				width:80px;
+				display:inline-block;}
+		.results .form .cols {
+			overflow:hidden;}
+			.results .form .cols .col {
+				float:left;
+				margin-right:20px;}
+				.results .form .cols .col.right {
+					margin-right:0px;}
+		
+			

@@ -1,0 +1,6 @@
+<ul>
+<?php foreach($this->results->data as $place): ?>
+	<li><a class="<?= $this->class ?>" href="http://facebook.com/<?= $place->id ?>"><?= $place->name ?></a></li>
+<?php endforeach ?>
+</ul>
+<p><a class="more" href="<?= $this->results->paging->next ?>">More..?</a></p>

@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</head>
+
+<body>
+<div class="filter">
+	<select name="city">
+    	<option value="0">Select City</option>
+    	<?php foreach($this->cities as $c): ?>
+        <option data-lng="<?= $c->lng ?>" data-lat="<?= $c->lat ?>" value="<?= $c->id ?>"><?= $c->title ?></option>
+        <?php endforeach ?>
+    </select>
+    <select name="type">
+    	<option value="0">Select Category</option>
+    	<option data-type="7" value="4d4b7104d754a06370d81259">Arte y entretenimiento</option>
+    	<option data-type="2" value="4d4b7105d754a06374d81259">Comida</option>
+    	<option data-type="7" value="4d4b7105d754a06376d81259">Local nocturno</option>
+    </select>
+    <select name="cat">
+    	<option value="">Select category first</option>
+    </select>
+</div>
+<div class="results">
+	<div class="places">
+    	<ul></ul>
+    </div>
+    <div class="form">
+		<div class="loading">Loading...</div>
+    </div>
+</div>
+
+
+<div id="fb-root"></div>
+</body>
+</html>
