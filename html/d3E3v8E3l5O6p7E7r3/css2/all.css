@@ -13984,6 +13984,13 @@ h2.title .back:hover,
     padding-left: 15px;
     font: bold 11px/51px Helvetica;
 }
+.w3_admin .sub_menu .pending_amount {
+	color: #303030;
+	font: bold 12px/51px Helvetica;
+	display: block;
+	float: right;
+	margin-right: 10px;
+}
 .w3_admin .sub_menu ul li {
 	float:left;
 	position:relative;
@@ -14201,6 +14208,15 @@ h2.title .back:hover,
 .all_listing .list_content table td li{
 	list-style: none;
 	line-height: 16px;
+}
+.all_listing .list_content td a.mark {
+	height: 21px;
+	width: 74px;
+	font: bold 10px/21px Helvetica;
+	display: block;
+	padding: 0;
+	color: #303030;
+	background: url("../images2/btn-10.gif") repeat-x scroll left bottom #FFFFFF;
 }
 /*END ADMIN LISTING-----------------------------------------*/
 /*ADMIN USER VIEW-------------------------------------------*/
@@ -14965,6 +14981,58 @@ h2.title .back:hover,
 	margin-right:20px;
 }
 /*END ADMIN CREATE CITY-------------------------------------*/
+/*ADMIN PAYMENTS DETAILS------------------------------------*/
+.detailsPayments {
+	background-color: #FFFFFF;
+    border: 1px solid #E7E7E7;
+    box-shadow: 0 0 2px #EAEAEA;
+    clear: both;
+    margin-top: 15px;
+    overflow: hidden;
+    width: 958px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px; 
+}
+.detailsPayments .ttl {
+	height: 32px;
+	background: url("../images2/g-54.png") repeat-x scroll left bottom ;
+	padding:0 0 20px 20px ;
+	margin-bottom: 20px;
+}
+.detailsPayments .ttl h4 {
+	font:bold 12px/32px Helvetica;
+	float: left;
+	width: 500px;
+}
+.detailsPayments .ttl a {
+	color: #60b5f7;
+	display: block;
+	float: right;
+	font:bold 11px/32px Helvetica;
+	padding-right: 20px;
+}
+.detailsPayments .pending_reservation {
+	width: 895px;
+	margin: 0 auto 15px;
+	border-bottom: 1px solid #f1f1f1;
+	padding-bottom: 15px;
+}
+.detailsPayments .pending_reservation .left {
+	width: 210px;
+	float: left;
+}
+.detailsPayments .pending_reservation .details {
+	float: left;
+	width: 300px;
+}
+.detailsPayments .pending_reservation td {
+	padding: 5px 0 5px 0;
+}
+.detailsPayments .pending_reservation td.res {
+	font-weight: bold;
+}
+/*END ADMIN PAYMENTS DETAILS--------------------------------*/
 /*ADMIN CLAIMS----------------------------------------------*/
 #claims {
 	margin-top: 20px;
@@ -15110,6 +15178,24 @@ h2.title .back:hover,
 }
 
 /*END LIGHTBOX CASE UPDATE-----------------------------------*/
+/*LIGHTBOX NEW LISTING---------------------------------------*/
+.NewListing .top{
+	padding-left: 20px;
+}
+.NewListing {
+	width: 338px;
+}
+.NewListing .mid{
+	padding-top: 10px;
+	background-color: #FFF;
+}
+.NewListing select{
+	width: 300px;
+	margin: 0 0 20px 20px;
+	padding: 5px 0;
+}
+
+/*END LIGHTBOX NEW LISTING-----------------------------------*/
 /*LIGHTBOX CASE OPEN CLAIM-----------------------------------*/
 #case_open .top {
 	text-indent: 20px;
@@ -15198,6 +15284,24 @@ background-color: #FFF;
 	text-align: center;
 }
 /*END ACTIVATE-DEACTIVATE LISTING----------------------------*/
+/*MARK AS PAID LIGHTBOX--------------------------------------*/
+.lb.mark_paid {
+	width: 340px;
+}
+.lb.mark_paid .top {
+	padding-left: 20px;
+	font-size: 13px;
+}
+.lb.mark_paid .cont {
+	padding: 20px;
+	background-color: #FFF;
+}
+.lb.mark_paid .cont p {
+	color: #303030;
+	font: bold 15px/18px Helvetica;
+	text-align: center;
+}
+/*END MARK AS PAID LIGHTBOX----------------------------------*/
 /*LIGHTBOX NEW PARTNER---------------------------------------*/
 #new_partner {
 	width: 340px;
