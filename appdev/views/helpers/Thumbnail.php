@@ -35,8 +35,14 @@ class Zend_View_Helper_Thumbnail {
         if (!file_exists($imagePath)) {
             $imagePath = APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3' . $imagePath;
             if (!file_exists($imagePath)) {
-                $imagePath = 'http://partners.tripfab.com' . $image;
-                //return $imagePath;
+                $purl = parse_url($image);
+                $finfo = pathinfo($image);
+                @$ext = $finfo['extension'];
+                if (isset($purl['scheme']) && ($purl['scheme'] == 'http' || $purl['scheme'] == 'https')):
+                    $imagePath = $image;
+                else:
+                    $imagePath = 'http://partners.tripfab.com' . $image;
+                endif;
             }
         }
 
@@ -51,20 +57,18 @@ class Zend_View_Helper_Thumbnail {
 
         $purl = parse_url($imagePath);
         $finfo = pathinfo($imagePath);
-        $ext = $finfo['extension'];
+        @$ext = $finfo['extension'];
 
         # check for remote image..
-        if (isset($purl['scheme']) && $purl['scheme'] == 'http'):
+        if (isset($purl['scheme']) && ($purl['scheme'] == 'http' || $purl['scheme'] == 'https')):
             # grab the image, and cache it so we have something to work with..
             list($filename) = explode('?', $finfo['basename']);
             $local_filepath = $remoteFolder . $filename;
             $download_image = true;
             if (file_exists($local_filepath)):
-                    $download_image = false;
+                $download_image = false;
             endif;
             if ($download_image == true):
-				if(file_exists($local_filepath))
-					unlink($local_filepath);
 				
                 $ch = curl_init($imagePath);
                 $fp = fopen($local_filepath, "w");
@@ -77,7 +81,7 @@ class Zend_View_Helper_Thumbnail {
                 fclose($fp);
             endif;
 			
-			$imagePath = $local_filepath;
+            $imagePath = $local_filepath;
         endif;
 
         if (file_exists($imagePath) == false):
@@ -95,8 +99,6 @@ class Zend_View_Helper_Thumbnail {
         endif;
 
         $filename = md5_file($imagePath);
-        
-        //return $w . ' x ' . $h;
         
         if (!empty($w) and !empty($h)):
             $newPath = $cacheFolder . $filename . '_w' . $w . '_h' . $h . (isset($opts['crop']) && $opts['crop'] == true ? "_cp" : "") . (isset($opts['scale']) && $opts['scale'] == true ? "_sc" : "") . '.' . $ext;
@@ -118,8 +120,6 @@ class Zend_View_Helper_Thumbnail {
                 $create = true;
             endif;
         endif;
-
-        //$create = true;
         
         if ($create == true):
             if (!empty($w) and !empty($h)):
@@ -148,9 +148,6 @@ class Zend_View_Helper_Thumbnail {
             else:
                 $cmd = $path_to_convert . " '" . $imagePath . "' -thumbnail " . (!empty($h) ? 'x' : '') . $w . "" . (isset($opts['maxOnly']) && $opts['maxOnly'] == true ? "\>" : "") . " -quality " . $quality . " " . $newPath;
             endif;
-            //echo $cmd;
-            //die;
-            //return $cmd;
             $c = exec($cmd);
         endif;
 
