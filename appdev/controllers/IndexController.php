@@ -179,11 +179,6 @@ class IndexController extends Zend_Controller_Action
         $city        = $this->places->getPlaceByIdf($city_idf, 3, $country->id);
         $listing     = $this->listings->getListingByIdf($listing_idf, $city->id, $country->id);
         
-        $faqs        = $this->listings->getFAQsOf($listing->id);
-        $vendor      = $this->vendors->getVendorById($listing->vendor_id);
-        
-        $attributes  = $this->listings->getAttributesOf($listing->id);
-        
         $pictures    = $this->listings->getPictures($listing->id);
         
         $trips = null;
@@ -220,6 +215,11 @@ class IndexController extends Zend_Controller_Action
                 $details = $this->listings->getDetails($listing->id);
 
                 $getthere = $this->listings->getLocationOf($listing->id);
+                
+                $faqs        = $this->listings->getFAQsOf($listing->id);
+                $vendor      = $this->vendors->getVendorById($listing->vendor_id);
+
+                $attributes  = $this->listings->getAttributesOf($listing->id);
 
                 $this->view->overview       = $overview;
                 $this->view->departure_city = $departure_city;
@@ -268,6 +268,10 @@ class IndexController extends Zend_Controller_Action
 
                 $this->view->prices = $prices;
 
+                $faqs        = $this->listings->getFAQsOf($listing->id);
+                $vendor      = $this->vendors->getVendorById($listing->vendor_id);
+
+                $attributes  = $this->listings->getAttributesOf($listing->id);
                 //var_dump($rooms2); die;
 
                 $this->view->overview = $overview;

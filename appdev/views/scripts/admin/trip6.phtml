@@ -36,8 +36,8 @@
 			
 			<div class="w3_admin">
 				<div class="sub_menu">
-					<h2>Create. <span>New Trip.</span></h2>
-					<a href="#" class="back">Back to Trips</a>
+					<h2><?php echo $this->doWhat?>. <span>Itinerary Item.</span></h2>
+					<a href="<?php echo $this->url(array('page'=>5, 'q'=>$this->day)); ?>" class="back">Back to Itinerary</a>
 				</div><!--SUB_MENU-->
             </div><!--W3-->
        
@@ -88,7 +88,7 @@
 											<strong>Listing Type</strong>
 											Select the type of listing 
 										</p>
-										<select name="activity">
+										<select name="type" id="type">
 											<?php foreach( $this->listingTypes as $listingType):?>
                                             <option <?php echo $listingType->id == $this->type ? 'selected="selected"' : '';?> value="<?php echo $listingType->id?>"><?php echo $listingType->name?></option>
                                             <?php endforeach;?>
@@ -142,25 +142,26 @@
 										
 									</div><!---ITEM-->
 									
-									<div class="item">
-										<p class="descrip">
-											<strong>Starting Hour</strong>
-											Select the hour activity starts
-										</p>
-										<input type="text" name="start_hour" id="start_hour" value="<?php echo $this->start_hour?>" />
-									</div><!---ITEM-->
-									
-									<div class="item">
-										<p class="descrip">
-											<strong>Ending Hour</strong>
-											Select the hour activity ends
-										</p>
-										<input type="text" name="end_hour" id="end_hour" value="<?php echo $this->end_hour?>" />
-									</div><!---ITEM-->
-									
+									<div id="field-wrapper">
+                                        <div class="item">
+                                            <p class="descrip">
+                                                <strong>Starting Hour</strong>
+                                                Select the hour activity starts
+                                            </p>
+                                            <input type="text" name="start_hour" id="start_hour" value="<?php echo $this->start_hour?>" />
+                                        </div><!---ITEM-->
+                                        
+                                        <div class="item">
+                                            <p class="descrip">
+                                                <strong>Ending Hour</strong>
+                                                Select the hour activity ends
+                                            </p>
+                                            <input type="text" name="end_hour" id="end_hour" value="<?php echo $this->end_hour?>" />
+                                        </div><!---ITEM-->
+                                    
+									</div>
 									<div class="item last">
-										<p class="descrip"><input value="" type="checkbox">Show this activity in the main page of the trip</p>
-										
+										<p class="descrip"><input <?php echo $this->featured ? 'checked="checked" "' : ''; ?> value="1" name="check" type="checkbox">Show this activity in the main page of the trip</p>
 									</div><!---ITEM-->
 									
 								</div><!--BLOCK-->
@@ -192,8 +193,9 @@
 													</dl>
 												</td>
 												<td class="picture" width="180">
-													<img src="<?php echo @$trip->image?>"  alt="" width="68" height="68">
-													<input type="file" name="image">
+													<img src="<?php echo $this->image?>"  alt="" width="68" height="68">
+													<input type="hidden" name="hdn_image" value="<?php echo $this->image?>" />
+                                                    <input type="file" name="image">
 												</td>
 											</tr>
 										</tbody></table>
@@ -246,10 +248,23 @@
 			});
 			var cityId = '<?php echo $this->city;?>';
 			fillCityTrip($('#country').val());
+			screenUpdate();
 			$('select#country').change(function(){
 				fillCityTrip($('#country').val());
 			});
 			
+			$('select#type').change(function(){
+				screenUpdate();
+			});
+			
+			function screenUpdate(){
+				if($('#type').val() == 5){
+					$("#field-wrapper").hide();
+				}
+				else{
+					$("#field-wrapper").show();
+				}
+			}
 			
 			function fillCityTrip(countryId){
 				var url = "/ajax/places/?type=city&c=" + countryId;

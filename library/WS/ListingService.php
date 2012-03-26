@@ -616,7 +616,7 @@ class WS_ListingService {
                     $select->where('listings.rate = ?', $_stars);
                 }}
 
-           $select->join('vendors','listings.vendor_id = vendors.id',array('vendor_name'=>'name'));
+           $select->joinLeft('vendors','listings.vendor_id = vendors.id',array('vendor_name'=>'name'));
            
            $select->join('places','listings.city_id = places.id', array(
                'city'=>'title',
