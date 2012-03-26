@@ -1,0 +1,59 @@
+<div class="hidden">
+	<div class="lb" id="request_info">
+		<div class="top">Request Info <em>to </em><?php echo $this->main_category->name?> <?php echo $this->listing->title?></div><!--TOP-->
+		<form method="post" action="" id="request-info">
+			<fieldset>
+            	<input type="hidden" name="listing_id" value="<?php echo $this->listing->id?>" />
+				<div class="cont" id="field-container-r325">
+					<input type="text" name="info[]" value="" placeholder="What's pending?" />
+					<input type="text" name="info[]" value="" placeholder="What's pending?" />
+					<input type="text" name="info[]" value="" placeholder="What's pending?" />
+					<div class="removed">
+						<a href="javascript://" class="remove" onclick="removeFormElement(this)"></a>
+						<input type="text" name="info[]" value="" placeholder="What's pending?" />
+						<div class="clear"></div>
+					</div><!--REMOVED-->
+				</div><!--CONT-->
+				<div class="cont">	
+                    <a href="javascript://" class="add" id="add-form-325">Add another issue</a>
+					<div class="clear"></div>
+                </div>
+				<div class="bottom">
+					<a href="javascript://" class="btn-1" id="btn-send-request">Send Request</a>
+					<a href="javascript://" class="btn-10" id="btn-cancel">Cancel</a>
+				</div><!--BOTTOM-->
+			</fieldset>
+		</form>
+	</div><!--REQUEST_INFO-->
+    
+    <div class="lb activation" id="activate">
+		<div class="top">Activate Listing </div><!--TOP-->
+		<form method="post" action="">
+			<fieldset>
+				<div class="cont">
+					<p>Are you sure activate <?php echo $this->main_category->name?> <?php echo $this->listing->title?>?</p>
+				</div><!--CONT-->
+				<div class="bottom">
+					<a href="javascript://" class="btn-1" id="btn-activate-326">Activate</a>
+					<a href="javascript://" class="btn-10" id="btn-cancel-326">Cancel</a>
+				</div><!--BOTTOM-->
+			</fieldset>
+		</form>
+	</div><!--ACTIVATE-->
+	
+	<div class="lb activation" id="deactivate">
+		<div class="top">Desactivate Listing </div><!--TOP-->
+		<form method="post" action="">
+			<fieldset>
+				<div class="cont">
+					<p>Are you sure desactivate <?php echo $this->main_category->name?> <?php echo $this->listing->title?>?</p>
+				</div><!--CONT-->
+				<div class="bottom">
+					<a href="javascript://" class="btn-1" id="btn-deactivate-327">Deactivate</a>
+					<a href="javascript://" class="btn-10" id="btn-cancel-327">Cancel</a>
+				</div><!--BOTTOM-->
+			</fieldset>
+		</form>
+	</div><!--ACTIVATE-->
+</div><!--HIDDEN-->
+<input type="hidden" id="listingId" value="<?= $this->listing->id ?>"/>

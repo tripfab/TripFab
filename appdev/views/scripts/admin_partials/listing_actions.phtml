@@ -1,0 +1,8 @@
+<a href="#request_info" class="btn-10 lb">Request Info</a>
+<?php if($this->active == 1): ?>
+<a href="#deactivate" class="btn-10 deact lb" id="deact-btn-342">Deactivate Listing</a>
+<a href="#activate" class="btn-10 act lb" style="display:none;" id="act-btn-342">Activate Listing</a>
+<?php elseif($this->active == 0): ?>
+<a href="#deactivate" class="btn-10 deact lb" style="display:none;" id="deact-btn-342">Deactivate Listing</a>
+<a href="#activate" class="btn-10 act lb" id="act-btn-342">Activate Listing</a>
+<?php endif ?>
