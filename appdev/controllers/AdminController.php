@@ -307,6 +307,9 @@ class AdminController extends Zend_Controller_Action {
             
             $this->view->listing  = $listing;
             $this->view->types    = $types;
+            
+            $main_cat = $this->listings->getCategory($listing->main_type);
+            $this->view->main_category = $main_cat;
         }
     }
     
@@ -372,6 +375,9 @@ class AdminController extends Zend_Controller_Action {
             $this->view->listing = $listing;
             $this->view->data    = $data;
             
+            $main_cat = $this->listings->getCategory($listing->main_type);
+            $this->view->main_category = $main_cat;
+            
         }
     }
     
@@ -421,6 +427,9 @@ class AdminController extends Zend_Controller_Action {
             }
             
             $this->view->listing  = $listing;
+            
+            $main_cat = $this->listings->getCategory($listing->main_type);
+            $this->view->main_category = $main_cat;
         }
     }
     
@@ -456,6 +465,9 @@ class AdminController extends Zend_Controller_Action {
             
             $this->view->specials = $specials;
             $this->view->listing  = $listing;
+            
+            $main_cat = $this->listings->getCategory($listing->main_type);
+            $this->view->main_category = $main_cat;
         }
     }
     
@@ -485,6 +497,9 @@ class AdminController extends Zend_Controller_Action {
             
             $this->view->rooms   = $rooms;
             $this->view->listing = $listing;
+            
+            $main_cat = $this->listings->getCategory($listing->main_type);
+            $this->view->main_category = $main_cat;
         }
     }
     
@@ -533,6 +548,9 @@ class AdminController extends Zend_Controller_Action {
             $this->view->amenities = $amenities;
             $this->view->data = $data;
             $this->view->listing = $listing;
+            
+            $main_cat = $this->listings->getCategory($listing->main_type);
+            $this->view->main_category = $main_cat;
         }
     }
     
@@ -565,6 +583,9 @@ class AdminController extends Zend_Controller_Action {
             
             $this->view->amenities = $amenities;
             $this->view->listing   = $listing;
+            
+            $main_cat = $this->listings->getCategory($listing->main_type);
+            $this->view->main_category = $main_cat;
         }
     }
     
@@ -609,6 +630,9 @@ class AdminController extends Zend_Controller_Action {
             
             $this->view->tips    = $tips;
             $this->view->listing = $listing;
+            
+            $main_cat = $this->listings->getCategory($listing->main_type);
+            $this->view->main_category = $main_cat;
         }
     }
     
@@ -697,6 +721,9 @@ class AdminController extends Zend_Controller_Action {
             
             $this->view->listing = $listing;
             $this->view->location = $getthere;
+            
+            $main_cat = $this->listings->getCategory($listing->main_type);
+            $this->view->main_category = $main_cat;
         }
     }
     
@@ -756,6 +783,9 @@ class AdminController extends Zend_Controller_Action {
             $this->view->overview = $overview;
             $this->view->listing = $listing;
             $this->view->details = $details;
+            
+            $main_cat = $this->listings->getCategory($listing->main_type);
+            $this->view->main_category = $main_cat;
         }
     }
     
@@ -768,6 +798,10 @@ class AdminController extends Zend_Controller_Action {
             $this->questions = new WS_PublicQuestionsService();
             
             $listing = $this->listings->getListing($ids);
+            
+            $main_cat = $this->listings->getCategory($listing->main_type);
+            $this->view->main_category = $main_cat;
+            
             $country = $this->places->getPlaceById($listing->country_id);
             if(!is_null($country))
                 $city = $this->places->getPlaceById($listing->city_id);
@@ -1000,6 +1034,9 @@ class AdminController extends Zend_Controller_Action {
         $ids = $this->_getParam('page','default');
         if($this->isValidId($ids)){    
             $listing = $this->listings->getListing($ids);
+            
+            $main_cat = $this->listings->getCategory($listing->main_type);
+            $this->view->main_category = $main_cat;
             
             $user = $this->user->getData();
             if(!empty($user->image))
@@ -1350,6 +1387,9 @@ class AdminController extends Zend_Controller_Action {
                     $schedules = $this->listings->getSchedulesOf($listing->id);
                     $this->view->schedules = $schedules;
                     $this->view->listing = $listing;
+            
+                    $main_cat = $this->listings->getCategory($listing->main_type);
+                    $this->view->main_category = $main_cat;
                 }
                 break;
             case 'step5':
@@ -1370,6 +1410,9 @@ class AdminController extends Zend_Controller_Action {
                         }
                     }
                     $this->view->listing = $listing;
+            
+                    $main_cat = $this->listings->getCategory($listing->main_type);
+                    $this->view->main_category = $main_cat;
                 }
                 break;
             case 'step6':
@@ -1431,6 +1474,9 @@ class AdminController extends Zend_Controller_Action {
                         }
                     }
                     $this->view->listing = $listing;
+            
+                    $main_cat = $this->listings->getCategory($listing->main_type);
+                    $this->view->main_category = $main_cat;
                 }
                 break;
             default: throw new Exception('Page not found'); break;
@@ -2073,6 +2119,9 @@ class AdminController extends Zend_Controller_Action {
             
             $this->view->listing = $listing;
             $this->view->details = $details;
+            
+            $main_cat = $this->listings->getCategory($listing->main_type);
+            $this->view->main_category = $main_cat;
         }
     }
     
@@ -2117,6 +2166,9 @@ class AdminController extends Zend_Controller_Action {
             $faqs = $this->listings->getFAQsOf($listing->id);
             $this->view->faqs    = $faqs;
             $this->view->listing = $listing;
+            
+            $main_cat = $this->listings->getCategory($listing->main_type);
+            $this->view->main_category = $main_cat;
         }
     }
     
@@ -2154,6 +2206,9 @@ class AdminController extends Zend_Controller_Action {
             $this->view->tab = $tab;
             $this->view->listing = $listing;
             
+            $main_cat = $this->listings->getCategory($listing->main_type);
+            $this->view->main_category = $main_cat;
+            
         }
     }
     
@@ -2188,6 +2243,9 @@ class AdminController extends Zend_Controller_Action {
             if($this->getRequest()->isPost())
                 $this->listingCalendarPostHandler($listing);
             
+            
+            $main_cat = $this->listings->getCategory($listing->main_type);
+            $this->view->main_category = $main_cat;
             
             $this->createCalendar($listing);
             
@@ -2330,6 +2388,9 @@ class AdminController extends Zend_Controller_Action {
             $this->view->season         = $season;
             $this->view->sch            = $sch;
             $this->view->persons        = $persons;
+            
+            $main_cat = $this->listings->getCategory($listing->main_type);
+            $this->view->main_category = $main_cat;
         }
     }
     

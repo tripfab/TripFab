@@ -13,17 +13,6 @@
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
     <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
     <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
-    <!--
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
-    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
-    <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-	<script type="text/javascript" src="/uploadify/swfobject.js"></script>
-    <script type="text/javascript" src="/uploadify/jquery.uploadify.v2.1.4.min.js"></script>
-    -->
     <style type="text/css">
 	#maplocations ul {
 		list-style:none;
@@ -76,9 +65,7 @@
     <div class="w3_admin">
         <div class="sub_menu">
             <h2>Editing. <span><?php echo $this->listing->title ?></span></h2>
-            <a href="#request_info" class="btn-10 lb">Request Info</a>
-            <a href="#activate" class="btn-10 act lb" id="act-btn-342" <?php echo $this->listing->status==1 ? 'style="display:none"' : '';?>>Activate Listing</a>
-            <a href="#deactivate" class="btn-10 deact lb" id="deact-btn-342" <?php echo $this->listing->status==0 ? 'style="display:none"' : '';?>>Deactivate Listing</a>
+            <?= $this->partial('admin_partials/listing_actions.phtml', array('active'=> $this->listing->status)); ?>
         </div><!--SUB_MENU-->
     </div><!--W3-->
     <div class="w2">
@@ -197,158 +184,12 @@
         </div><!-- closes listing-wrapper -->
     </div><!-- closes w2 -->
 	<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
-    
-    
-    <div class="hidden">
-	<div class="lb" id="request_info">
-		<div class="top">Request Info <em>to </em><?php echo $this->main_category->name?> <?php echo $this->listing->title?></div><!--TOP-->
-		<form method="post" action="" id="request-info">
-			<fieldset>
-            	<input type="hidden" name="listing_id" value="<?php echo $this->listing->id?>" />
-				<div class="cont" id="field-container-r325">
-					<input type="text" name="info[]" value="" placeholder="What's pending?" />
-					<input type="text" name="info[]" value="" placeholder="What's pending?" />
-					<input type="text" name="info[]" value="" placeholder="What's pending?" />
-					<div class="removed">
-						<a href="javascript://" class="remove" onclick="removeFormElement(this)"></a>
-						<input type="text" name="info[]" value="" placeholder="What's pending?" />
-						<div class="clear"></div>
-					</div><!--REMOVED-->
-				</div><!--CONT-->
-				<div class="cont">	
-                    <a href="javascript://" class="add" id="add-form-325">Add another issue</a>
-					<div class="clear"></div>
-                </div>
-				<div class="bottom">
-					<a href="javascript://" class="btn-1" id="btn-send-request">Send Request</a>
-					<a href="javascript://" class="btn-10" id="btn-cancel">Cancel</a>
-				</div><!--BOTTOM-->
-			</fieldset>
-		</form>
-	</div><!--REQUEST_INFO-->
-    
-    	<div class="lb activation" id="activate">
-		<div class="top">Activate Listing </div><!--TOP-->
-		<form method="post" action="">
-			<fieldset>
-				<div class="cont">
-					<p>Are you sure activate <?php echo $this->main_category->name?> <?php echo $this->listing->title?>?</p>
-				</div><!--CONT-->
-				<div class="bottom">
-					<a href="javascript://" class="btn-1" id="btn-activate-326">Activate</a>
-					<a href="javascript://" class="btn-10" id="btn-cancel-326">Cancel</a>
-				</div><!--BOTTOM-->
-			</fieldset>
-		</form>
-	</div><!--ACTIVATE-->
-	
-	<div class="lb activation" id="deactivate">
-		<div class="top">Desactivate Listing </div><!--TOP-->
-		<form method="post" action="">
-			<fieldset>
-				<div class="cont">
-					<p>Are you sure desactivate <?php echo $this->main_category->name?> <?php echo $this->listing->title?>?</p>
-				</div><!--CONT-->
-				<div class="bottom">
-					<a href="javascript://" class="btn-1" id="btn-deactivate-327">Deactivate</a>
-					<a href="javascript://" class="btn-10" id="btn-cancel-327">Cancel</a>
-				</div><!--BOTTOM-->
-			</fieldset>
-		</form>
-	</div><!--ACTIVATE-->
-
-    
-	</div><!--HIDDEN-->
-    
-    
-    
-
 </div><!-- closes w1 -->
+<?php echo $this->partial('admin_partials/listing_actions_lbs.phtml', array('listing'=>$this->listing, 'main_category' => $this->main_category)) ?>
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript" src="/js2/provider/listing-edit.js"></script>
+<script type="text/javascript" src="/js2/admin/listing-actions.js"></script>
 <script type="text/javascript">
-	var listingId = '<?php echo $this->listing->id?>';
-	$("#btn-send-request").click(function(){
-		$.ajax({ 
-		   type: "POST", 
-		   url: "/ajax/requestinfo/", 
-		   data: $("#request-info").serialize() ,
-		   success: function(json, status){
-				$.fancybox.close();
-				if(json=="success"){
-					 showAlert("Notification has been sent successfully");
-				}
-		   }, 
-		   error:function(jqXHR, textStatus, errorThrown){ 
-				alert(textStatus);
-		   }
-		});
-	});
-	
-	
-	$("#btn-cancel-327").click(function(){
-		$.fancybox.close();
-	});
-	
-	$("#btn-cancel-326").click(function(){
-		$.fancybox.close();
-	});
-	
-	$("#btn-cancel").click(function(){
-		$.fancybox.close();
-	});
-	$("#add-form-325").click(function(){
-		addFormElement();
-	});
-	
-	$("#btn-activate-326").click(function(){
-		changeListingStatus(listingId, 1);
-	});
-	
-	$("#btn-deactivate-327").click(function(){
-		changeListingStatus(listingId, 0);
-	});
-	
-	function changeListingStatus(listingId, action){
-		$.ajax({ 
-		   type: "POST", 
-		   url: "/ajax/listingstatus/", 
-		   data: 'id=' + listingId + '&act=' + action ,
-		   success: function(json, status){
-				$.fancybox.close();
-				if(json=="success"){
-					 showAlert("Listing has been updated successfully");
-					 if(action==1){
-						$("#act-btn-342").hide(); 
-						$("#deact-btn-342").show(); 
-					 }
-					 else{
-						$("#act-btn-342").show(); 
-						$("#deact-btn-342").hide(); 
-					 }
-				}
-		   }, 
-		   error:function(jqXHR, textStatus, errorThrown){ 
-				alert(textStatus);
-		   }
-		});
-	}
-	function removeFormElement(elm){
-		var d = document.getElementById('field-container-r325');
-		d.removeChild(elm.parentNode);
-	}
-	
-	function addFormElement(){
-		var html = '<div class="removed">';
-		html += '<a href="javascript://" class="remove" name="delete" onclick="removeFormElement(this)">remove</a>';
-		html += '<input type="text" name="info[]" value="" placeholder="What\'s pending?" />';
-		html += '<div class="clear"></div>';
-		html += '</div>';
-		
-		$('#field-container-r325').append(html);
-	}
-
-
 	$(document).ready(function() {	
 		$('a.lb').fancybox({
 			padding:0,

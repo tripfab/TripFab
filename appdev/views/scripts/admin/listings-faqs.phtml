@@ -13,6 +13,7 @@
     <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
     <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
 	<script type="text/javascript" src="/js2/jquery.js"></script>
+	<script type="text/javascript" src="/js2/admin/listing-actions.js"></script>	
     <script type="text/javascript">
         $(document).ready(function() {
 			
@@ -32,8 +33,7 @@
     <div class="w3_admin">
         <div class="sub_menu">
             <h2>Editing. <span><?php echo $this->listing->title ?></span></h2>
-            <a href="#new_listing" class="btn-10 lbc">Request Info</a>
-            <a href="" class="btn-10 act">Activate Listing</a>
+            <?= $this->partial('admin_partials/listing_actions.phtml', array('active'=> $this->listing->status)); ?>
         </div><!--SUB_MENU-->
     </div><!--W3-->
     <div class="w2">
@@ -56,5 +56,6 @@
     </div><!-- closes w2 -->
 	<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
 </div><!-- closes w1 -->
+<?php echo $this->partial('admin_partials/listing_actions_lbs.phtml', array('listing'=>$this->listing, 'main_category' => $this->main_category)) ?>
 </body>
 </html>
