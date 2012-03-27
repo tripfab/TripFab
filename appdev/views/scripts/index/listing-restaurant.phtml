@@ -28,7 +28,7 @@
                             <li class="first"><a href="/" class="home"></a></li>
                             <li><a href="/<?= $this->country->identifier ?>"><?= $this->country->title ?></a></li>
                             <li><a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>"><?= $this->city->title ?></a></li>
-                            <li class="last"><a href="<?= $this->country->identifier ?>/<?= $this->city->identifier ?>/#restaurants" 
+                            <li class="last"><a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>/#restaurants" 
                             class="active">Restaurants</a></li>
                         </ul>
                         <a href="" class="link1">&larr; Back to My Listings</a>
@@ -45,7 +45,7 @@
                         <div class="info">
                             <h2><?= $this->listing->title ?></h2>
                             <span class="location"><em></em><strong><?= $this->city->title ?>,</strong> <?= $this->country->title ?> 
-                            <img src="images6/flag<?= strtoupper($this->country->code) ?>.png" width="" height="" alt="" /></span>
+                            <img src="/images6/flag<?= strtoupper($this->country->code) ?>.png" width="" height="" alt="" /></span>
                             <a href="" class="btn-1"><span></span>Add to My Trips</a>
                             <div class="text">
                                 <ul class="rating">
