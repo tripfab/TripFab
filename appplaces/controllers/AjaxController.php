@@ -122,7 +122,7 @@ class AjaxController extends Zend_Controller_Action{
             $fq->save();
         }
         
-        if(is_null($fq->fb_page) and $fq->trashed != 1){
+        if(true){//is_null($fq->fb_page) and $fq->trashed != 1){
         
             $fqplace = json_decode($fq->fq_data);
 
@@ -156,7 +156,7 @@ class AjaxController extends Zend_Controller_Action{
                 $fq->fb_page = $this->_getParam('url');
 
                 $url = parse_url($this->_getParam('url'));
-                $url = split('/', $url['path']);
+                $url = preg_split('/', $url['path']);
                 $id = ($url[1] == 'pages') ? $url[3] : $url[1];
 
                 $client = new Zend_Http_Client('https://graph.facebook.com/'.$id);
@@ -285,6 +285,7 @@ class AjaxController extends Zend_Controller_Action{
             $place->created = date('Y-m-d H:i:s');
             $place->updated = date('Y-m-d H:i:s');
             $place->listing_id = $listing->id;
+			$place->fqid = $data['fqid'];
             
             $place->save();
         }        

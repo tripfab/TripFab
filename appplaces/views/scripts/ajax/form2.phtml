@@ -111,6 +111,27 @@
                 <textarea name="place[info]"><?= $description ?></textarea>
             </div>
         </div>
+        <div class="item">
+            <span>Specials
+            <strong>One per line</strong></span>
+            <div class="content">
+            	<?php $__services = array(
+					'breakfast' => 'Breakfast',
+					'lunch'     => 'Lunch',
+					'dinner'    => 'Dinner',
+					'coffee'    => 'Coffee Break',
+					'drinks'    => 'Drinks',
+				); ?>
+            	<?php $services = ''; ?>
+                <?php $_services = get_object_vars($page->restaurant_specialties) ?>
+            	<?php foreach($_services as $k => $v): ?>
+                	<?php if($v == 1): ?>
+	                	<?php $services .= $__services[$k]."\n"; ?>
+                    <?php endif ?>
+                <?php endforeach ?>
+                <textarea name="place[specials]"><?= $services ?></textarea>
+            </div>
+        </div>
     </div>
     <div class="col right">
         <div class="item">
@@ -251,9 +272,34 @@
         </div>
         <div class="item">
             <span>Tags
-            <strong>Like services, separated by ","</strong></span>
+            <strong>Like categories, separated by ","</strong></span>
             <div class="content">
                 <textarea name="place[tags]"><?= (isset($venue->tags[0])) ? $venue->tags[0] : '' ?></textarea>
+            </div>
+        </div>
+        <div class="item">
+            <span>Services
+            <strong>Like services, one per line</strong></span>
+            <div class="content">
+            	<?php $__services = array(
+					'reserve'  => 'Take reservations',
+					'walkins'  => 'No reservation needed',
+					'groups'   => 'Good for groups',
+					'kids'     => 'Good for kids',
+					'takeout'  => 'Able to take out',
+					'delivery' => 'Express service',
+					'catering' => 'Catering Service',
+					'waiter'   => 'Waiter Service',
+					'outdoor'  => 'Outdoor Tables'
+				); ?>
+            	<?php $services = ''; ?>
+                <?php $_services = get_object_vars($page->restaurant_services) ?>
+            	<?php foreach($_services as $k => $v): ?>
+                	<?php if($v == 1): ?>
+	                	<?php $services .= $__services[$k]."\n"; ?>
+                    <?php endif ?>
+                <?php endforeach ?>
+                <textarea name="place[services]"><?= $services ?></textarea>
             </div>
         </div>
     </div>
