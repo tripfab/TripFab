@@ -2,7 +2,7 @@
 
 class Zend_View_Helper_Thumbnail {
 
-    public function thumbnail($size, $image, $class='', $cropratio='1:1') {
+    public function thumbnail($size, $image, $class='', $cropratio='1:1', $id = null) {
         /*
           $result = "<img src='/images/image.php?%s' class='%s' width='%s' height='%s' />";
           $width  = (is_array($size)) ? $size['width'] : $size;
@@ -152,7 +152,8 @@ class Zend_View_Helper_Thumbnail {
         endif;
 
         # return cache file path
-        return '<img class="' . $class . '" src="' . str_replace(APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3', '', $newPath) . '" width="' . $opts['w'] . '" height="' . $opts['h'] . '" />';
+        $id = (is_null($id)) ? '' : 'id="'.$id.'"';
+        return '<img '.$id.' class="' . $class . '" src="' . str_replace(APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3', '', $newPath) . '" width="' . $opts['w'] . '" height="' . $opts['h'] . '" />';
     }
 
 }

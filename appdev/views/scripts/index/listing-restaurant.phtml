@@ -10,26 +10,9 @@
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="/js2/jquery.js"></script>
     <script type="text/javascript" src="/js2/index/listing-restaurant.js"></script>    
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('.imgs').cycle({
-				timeout: 0,
-				fx: 'scrollHorz',
-				prev: '.lf-arrow',
-				next: '.rg-arrow'
-			});
-			$( ".single a" ).click(function() {
-				$id = $(this).attr('href');
-				
-				$(".single a").removeClass('active')
-				$(this).addClass('active');
-		        $(".slideshow img" ).removeClass('show');
-		        $($id).addClass('show');
-				
-		        return false
-		    });
-		});
-	</script>
+    <style type="text/css">
+	#mapcanvas { width:285px;  height:136px; }
+	</style>   
 </head>
 <body class="bg_wh">
 <div id="wp_all">
@@ -106,13 +89,13 @@
                         <div class="map">
                             <div class="cont">
                                 <div class="map_canvas">
-                                	
+                                	<div id="mapcanvas"></div>
                                 </div><!--MAP_CANVAS-->
                             </div><!--CONT-->
                         </div><!--MAP-->
                         
                         <div class="location">
-                            <img src="images/map_<?= strtolower($this->country->code) ?>.png" class="country" width="45" height="43" alt="" />
+                            <img src="/images/map_<?= strtolower($this->country->code) ?>.png" class="country" width="45" height="43" alt="" />
                             <?php if(!empty($this->listing->address)): ?>
                             <p><strong>Location</strong> <?= $this->listing->address ?></p>
                             <?php else: ?>
@@ -172,13 +155,14 @@
                         <div class="amenities">
                             <div class="type first">
                             	<?php $services = explode("\n", $this->place->services) ?>
-                                <?php if(count($services) > 0): ?>
+                                <?php if(count($services) > 1): ?>
                                 <h4><span class="services"></span>Services</h4>
-                                <?php $limit = (((count($services) - (count($services) % 2)) / 2) + (count($services) % 2)); ?>
-                                <?php for($i=0;$i<count($services);$i=$i+$limit): ?>
+                                <?php $count = count($services) - 1; ?>
+                                <?php $limit = ((($count - ($count % 2)) / 2) + ($count % 2)); ?>
+                                <?php for($i=0;$i<$count;$i=$i+$limit): ?>
                                 <?php $class = ($i==0) ? 'first' : '' ?>
                                 <ul class="<?= $class ?>">
-                                	<?php for($j=$i;($j<($i+$limit)) and ($j < count($services)); $j++): ?>
+                                	<?php for($j=$i;($j<($i+$limit)) and ($j < $count); $j++): ?>
                                     <li><?= $services[$j] ?></li>
                                     <?php endfor ?>
                                 </ul>
@@ -194,13 +178,14 @@
                             
                             <div class="type">
                             	<?php $services = explode("\n", $this->place->specials) ?>
-                                <?php if(count($services) > 0): ?>
+                                <?php if(count($services) > 1): ?>
                                 <h4><span class="specialties"></span>Specialties</h4>
-                                <?php $limit = (((count($services) - (count($services) % 2)) / 2) + (count($services) % 2)); ?>
-                                <?php for($i=0;$i<count($services);$i=$i+$limit): ?>
+                                <?php $count = count($services) - 1; ?>
+                                <?php $limit = ((($count - ($count % 2)) / 2) + ($count % 2)); ?>
+                                <?php for($i=0;$i<$count;$i=$i+$limit): ?>
                                 <?php $class = ($i==0) ? 'first' : '' ?>
                                 <ul class="<?= $class ?>">
-                                	<?php for($j=$i;($j<($i+$limit)) and ($j < count($services)); $j++): ?>
+                                	<?php for($j=$i;($j<($i+$limit)) and ($j < $count); $j++): ?>
                                     <li><?= $services[$j] ?></li>
                                     <?php endfor ?>
                                 </ul>
@@ -218,7 +203,7 @@
                             	<?php $services = explode("\n", $this->place->tips) ?>
                                 <h4><span class="food"></span>Tips</h4>
                                 <ul class="large">
-                                	<?php if(count($services) > 0): ?>
+                                	<?php if(count($services) > 1): ?>
                                     <?php foreach($services as $s): ?>
                                     <li><?= $s ?></li>
                                     <?php endforeach ?>
@@ -231,13 +216,14 @@
                             
                             <div class="type">
                             	<?php $services = explode(",", $this->place->tags) ?>
-                                <?php if(count($services) > 0): ?>
+                                <?php if(count($services) > 1): ?>
                                 <h4><span class="services"></span>Tags</h4>
-                                <?php $limit = (((count($services) - (count($services) % 2)) / 2) + (count($services) % 2)); ?>
-                                <?php for($i=0;$i<count($services);$i=$i+$limit): ?>
+                                <?php $count = count($services) - 1; ?>
+                                <?php $limit = ((($count - ($count % 2)) / 2) + ($count % 2)); ?>
+                                <?php for($i=0;$i<$count;$i=$i+$limit): ?>
                                 <?php $class = ($i==0) ? 'first' : '' ?>
                                 <ul class="<?= $class ?>">
-                                	<?php for($j=$i;($j<($i+$limit)) and ($j < count($services)); $j++): ?>
+                                	<?php for($j=$i;($j<($i+$limit)) and ($j < $count); $j++): ?>
                                     <li><?= trim($services[$j]) ?></li>
                                     <?php endfor ?>
                                 </ul>
@@ -258,10 +244,28 @@
                             <span class="open"></span>
                             <span class="closed hidden"></span>
                         	<?php if(count($this->schedules) > 0): ?>
+                            <?php $schs = array(); $curr = 1; $last = 0;
+								
+								$schs[$last] = array('first' => $this->schedules[$last]);
+								
+								while(isset($this->schedules[$curr])){
+									if(($this->schedules[$last]->starting == $this->schedules[$curr]->starting) and
+									  ($this->schedules[$last]->ending == $this->schedules[$curr]->ending)){
+										$schs[$last]['last'] = $this->schedules[$curr]; $curr++;
+									} else {
+										$last = $curr; $schs[$last] = array('first' => $this->schedules[$last]); $curr++;
+									}
+								}
+							?>
                             <ul>
-                            	<?php foreach($this->schedules as $sch): ?>
-                                <li class="ttl"><?= $sch->name ?></li>
-                                <li><?= date('G:i a', strtotime($sch->starting)) ?> - <?= date('G:i a', strtotime($sch->ending)) ?></li>
+                            	<?php foreach($schs as $sch): ?>
+                                <?php if(isset($sch['last'])): ?>
+                                <li class="ttl"><?= substr($sch['first']->name, 0, 3) ?> - <?= substr($sch['last']->name, 0, 3) ?></li>
+                                <li><?= date('g:i a', strtotime($sch['first']->starting)) ?> - <?= date('g:i a', strtotime($sch['first']->ending)) ?></li>
+                                <?php else: ?>
+                                <li class="ttl"><?= $sch['first']->name ?></li>
+                                <li><?= date('g:i a', strtotime($sch['first']->starting)) ?> - <?= date('g:i a', strtotime($sch['first']->ending)) ?></li>
+                                <?php endif ?>
                                 <?php endforeach ?>                            
                             </ul>
                             <?php else: ?>
@@ -283,11 +287,15 @@
 	    <?= $this->partial('partials/footer.phtml'); ?>
     </div><!--WP_FOOTER-->
 </div><!--WRAPPER_ALL-->
+<input type="hidden" value="<?= ($this->listing->lat) ? $this->listing->lat : 'none' ?>" name="listlat" />
+<input type="hidden" value="<?= ($this->listing->lng) ? $this->listing->lng : 'none' ?>" name="listlng" />
+<input type="hidden" value="<?= $this->listing->title ?>" name="listtitle" />
+<input type="hidden" value="<?= $this->listing->id ?>" name="listingids" />
 </body>
 </html>
 
 
-<?php /** 
+<?php /**
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>

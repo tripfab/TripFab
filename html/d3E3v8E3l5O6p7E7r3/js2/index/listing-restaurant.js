@@ -381,6 +381,23 @@ $(document).ready(function() {
     });
 });
 
+$(function(){
+    $('.imgs').cycle({
+        timeout: 0,
+        fx: 'scrollHorz',
+        prev: '.lf-arrow',
+        next: '.rg-arrow'
+    });
+    $( ".single a" ).click(function() {
+        $id = $(this).attr('href');
+        $(".single a").removeClass('active')
+        $(this).addClass('active');
+        $(".slideshow img" ).removeClass('show');
+        $($id).addClass('show');
+        return false;
+    });
+});
+
 function move(id,spd){
     var obj=document.getElementById(id),max=-obj.offsetHeight+obj.parentNode.offsetHeight,top=parseInt(obj.style.top);
     if ((spd>0&&top<=0)||(spd<0&&top>=max)){
