@@ -1,0 +1,184 @@
+/*- CSS Reset -----------------------------------------------------------*/
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+nav ul, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
+a {
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}
+
+/* change colours to suit your needs */
+ins {
+	background-color: #ff9;
+	color: #000;
+	text-decoration: none;
+}
+
+/* change colours to suit your needs */
+mark {background-color: #ff9; color: #000; font-style: italic; font-weight: bold; }
+
+del {	text-decoration: line-through;}
+
+abbr[title], dfn[title] {border-bottom: 1px dotted; cursor: help;}
+
+table { border-collapse: collapse; border-spacing: 0;}
+
+/* change border colour to suit your needs */
+hr {display: block; height: 1px; border: 0; border-top: 1px solid #cccccc; margin: 1em 0; padding: 0; }
+
+input, select { vertical-align: middle; font-family: helvetica; }
+
+textarea {font-family: helvetica;}
+:focus { outline: 0;}
+
+input[type="text"], input[type="password"], textarea {
+	border: 1px solid #D8D8D8;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
+	color: #616161;
+	font-size: 12px;
+	height: 27px;
+	padding: 0 5px;
+	resize:none;
+	behavior: url(/PIE.htc);
+	background-color: #FFF; 
+}
+
+textarea {
+	height: auto;
+	padding: 5px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus, textarea:hover, input[type="text"]:hover, input[type="password"]:hover {
+	border-color: #addeff!important;
+	box-shadow: 0 0 5px #addeff!important;	
+	behavior: url(/PIE.htc);
+}
+
+input[type="text"]:disabled, input[type="password"]:disabled {
+	background-color: #f1f1f1;
+	box-shadow: none!important;
+	border-color: #f1f1f1!important;
+}
+
+/*- End of CSS Reset -----------------------------------------------------------*/
+
+/*- General Styles -----------------------------------------------------------*/
+
+html, body {  margin:0; padding:0; height:100%; }
+body {
+	background-color: #f3f3f3;
+	color: #000000;
+	font:12px Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+.wrapper {
+	width: 960px;
+	margin: 0 auto;
+}
+.clear {
+	clear: both;
+}
+.hidden {
+	display: none !important;
+}
+/*- End of General Styles -----------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------*/
+
+/*- Buttons Styles -----------------------------------------------------------*/
+
+.btn-1 {
+    background: url("../images2/btn-1.gif") repeat-x  0 0 #8dc73f;
+    border: 1px solid #7AB130;
+    color: #FFFFFF;
+    display: block;
+    font: bold 11px/30px Helvetica;
+    height: 30px;
+    margin-left: 10px;
+    text-align: center;
+	cursor: pointer;
+	padding: 0 8px;
+	-webkit-border-radius: 2px !important;
+	-moz-border-radius: 2px !important;
+	border-radius: 2px !important;
+	text-shadow: 0px 1px 0px #5C961F;
+	behavior: url(/PIE.htc);
+}
+
+.btn-1:hover {
+	-webkit-box-shadow: 0px 1px 1px 0px #C5C5C5;
+	-moz-box-shadow: 0px 1px 1px 0px #C5C5C5;
+	box-shadow: 0px 1px 1px 0px #C5C5C5;
+	text-decoration: none;
+}
+.btn-1:active {
+	-webkit-box-shadow: inset 0px 0px 3px 1px #6BA52D;
+	-moz-box-shadow: inset 0px 0px 3px 1px #6BA52D;
+	box-shadow: inset 0px 0px 3px 1px #6BA52D;
+}
+
+.btn-10 {
+	background: url(../images2/btn-10.gif) repeat-x bottom left #fff; 
+	height: 30px;
+	color: #616161;
+	font: bold 11px/30px Helvetica;
+	padding: 0 17px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	text-shadow: 0px 1px 0px #FFFFFF;
+	border: 1px solid #dbdbdb;
+	text-align: center;
+	behavior: url(/PIE.htc);
+}
+.btn-10:hover {
+	-webkit-box-shadow: 0px 1px 1px 0px #C5C5C5;
+	-moz-box-shadow: 0px 1px 1px 0px #C5C5C5;
+	box-shadow: 0px 1px 1px 0px #C5C5C5;
+	text-decoration: none;
+}
+.btn-10:active {
+	-webkit-box-shadow: inset 0px 0px 3px 1px #d2d2d2;
+	-moz-box-shadow: inset 0px 0px 3px 1px #d2d2d2;
+	box-shadow: inset 0px 0px 3px 1px #d2d2d2;
+}
+/*- End of Buttons Styles -----------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------*/
+
+/*- Links Styles -----------------------------------------------------------*/
+
+.link1 {
+	color: #60b5f7;
+}
+.link1:hover {
+	color: #9BD2FC;
+}
+
+/*- End of Links Styles -----------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------*/
