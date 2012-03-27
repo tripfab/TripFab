@@ -288,13 +288,23 @@ class IndexController extends Zend_Controller_Action
                 $this->view->key            = $keys['public_key'];
             break;
             case self::RESTAURANT    : 
-                $template = 'listing-restaurant';    
-                $overview = $this->listings->getOverviewOf2($listing->id);
-                $details  = $this->listings->getDetails($listing->id);
+                $template = 'listing-restaurant';
+                
+                $place = $this->listings->getPlaceInfo($listing->id);
+                $this->view->place = $place;
+                
+                $options = $this->listings->getSchedulesOf($listing->id);
+                $this->view->schedules = $options;
 
                 //var_dump($details->toArray()); die;
-
-                $this->view->overview = $overview;
+                $creditcards = array(
+                    'visa'             => '/images2/checkout-card1.png',
+                    'mastercard'       => '/images2/checkout-card2.png',
+                    'amex'             => '/images2/checkout-card3.png',
+                    'discover'         => '/images2/checkout-card5.png',
+                );
+                
+                $this->view->cards = $creditcards;
             break;
             case self::TOURIST_SIGHT : 
                 $template = 'listing-touristsight'; 
@@ -350,15 +360,15 @@ class IndexController extends Zend_Controller_Action
         }
         
         //var_dump($listing); die;
-        $this->view->region          = $region;
-        $this->view->country         = $country;
-        $this->view->city            = $city;
-        $this->view->listing         = $listing;
-        $this->view->faqs            = $faqs;
-        $this->view->vendor          = $vendor;
-        $this->view->attributes      = $attributes;
-        $this->view->pictures        = $pictures;
-        $this->view->trips           = $trips;
+        @$this->view->region          = $region;
+        @$this->view->country         = $country;
+        @$this->view->city            = $city;
+        @$this->view->listing         = $listing;
+        @$this->view->faqs            = $faqs;
+        @$this->view->vendor          = $vendor;
+        @$this->view->attributes      = $attributes;
+        @$this->view->pictures        = $pictures;
+        @$this->view->trips           = $trips;
         
         $places = $this->places->getPlaces(2);
         $this->view->countries = $places;

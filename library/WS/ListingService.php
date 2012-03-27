@@ -1096,6 +1096,16 @@ class WS_ListingService {
         return $schs;
     }
     
+    public function getPlaceInfo($listing)
+    {
+        $table = new Zend_Db_Table('listing_place');
+        $select = $table->select();
+        $select->where('listing_id = ?', $listing);
+        $row = $table->fetchRow($select);
+        
+        return $row;
+    }
+    
     public function getSeasonsOf($listing)
     {
         $select = $this->seasons_db->select();

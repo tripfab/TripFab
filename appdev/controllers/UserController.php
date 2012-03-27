@@ -20,7 +20,7 @@ class UserController extends Zend_Controller_Action
     
     /**
      *
-     * @var WS_MessagesService 
+     * @var WS_MessagesService
      */
     protected $messages;
     

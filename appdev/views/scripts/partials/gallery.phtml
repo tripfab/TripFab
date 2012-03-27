@@ -30,7 +30,7 @@
     <?php $class = ($i == 0) ? 'img-wrapper active' : 'img-wrapper'; ?>
     <div id="pic<?= $pic->id ?>" class="<?= $class ?>">
         <?= $this->thumbnail(array('width'=>650,'height'=>368), $pic->url,'','650:368'); ?>
-        <p><?= $pic->url ?></p>
+        <p><?= $pic->location ?></p>
     </div>
     <?php endforeach ?>
     <?php else: ?>
