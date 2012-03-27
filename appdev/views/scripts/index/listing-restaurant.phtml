@@ -55,7 +55,9 @@
                                     <li><a href="" class="nrml"></a></li>
                                     <li><a href="" class="nrml"></a></li>
                                 </ul>
+                                <?php if(!empty($this->listing->description)): ?>
                                 <p><?= $this->listing->description ?></p>
+                                <?php endif ?>
                                 <div class="clear"></div>
                             </div><!--TEXT-->
                             
@@ -94,16 +96,15 @@
                             </div><!--CONT-->
                         </div><!--MAP-->
                         
+                        <?php if(!empty($this->listing->address)): ?>
                         <div class="location">
                             <img src="/images6/map_<?= strtolower($this->country->code) ?>.png" class="country" width="45" height="43" alt="" />
-                            <?php if(!empty($this->listing->address)): ?>
                             <p><strong>Location</strong> <?= $this->listing->address ?></p>
-                            <?php else: ?>
-                            <p><strong>Location</strong> No address found</p>
-                            <?php endif ?>
                             <div class="clear"></div>
                         </div><!--LOCATION-->
+                        <?php endif ?>
                         
+                        <?php if(!empty($this->place->facebook) || !empty($this->place->twitter)): ?>
                         <div class="social">
                         	<?php if(!empty($this->place->facebook)): ?>
                             <a href="<?= $this->place->facebook ?>" class="fb"></a>
@@ -112,7 +113,9 @@
                             <?php endif ?>
                             <div class="clear"></div>
                         </div><!--SOCIAL-->
+                        <?php endif ?>
                         
+                        <?php if(!empty($this->listing->phone) || !empty($this->listing->email) || !empty($this->listing->website)): ?>
                         <div class="contact">
                         	<?php if(!empty($this->listing->phone)): ?>
                             <ul>
@@ -130,32 +133,33 @@
                                 <li><a href="<?= $this->listing->website ?>" target="_blank" class="link1"><?= $this->listing->website ?></a></li>
                             </ul>
                             <?php endif ?>
-                        </div><!--CONTACT-->                        
+                        </div><!--CONTACT--> 
+                        <?php endif ?>                      
                     </div><!--SIDEBAR-->
                     
                     <div class="content">
+						<?php $cards = explode(', ', $this->place->cards) ?>
+                        <?php if(count($cards) > 0): ?>
                         <div class="payment_optn">
                             <h3>Payment Options</h3>
                             <ul>                            	
-								<?php $cards = explode(', ', $this->place->cards) ?>
-                                <?php if(count($cards) > 0): ?>
                             	<?php foreach($cards as $card): ?>
                                 <li><img src="<?= $this->cards[$card] ?>" width="30" height="20" alt="" /></li>
                                 <?php endforeach ?>
-                                <?php else: ?>
-                                <li>Not Found</li>
-                                <?php endif ?> 
                             </ul>
                         </div><!--PAYMENT_OPTN-->
+                        <?php endif ?> 
                         
+                        <?php if(!empty($this->place->info))	: ?>
                         <div class="descrip">
                             <p><?= $this->place->info ?></p>
                         </div><!--DESCRIP-->
+                        <?php endif ?>
                         
                         <div class="amenities">
-                            <div class="type first">
-                            	<?php $services = explode("\n", $this->place->services) ?>
-                                <?php if(count($services) > 1): ?>
+							<?php $services = explode("\n", $this->place->services) ?>
+                            <?php if(count($services) > 1): ?>
+                            <div class="type">
                                 <h4><span class="services"></span>Services</h4>
                                 <?php $count = count($services) - 1; ?>
                                 <?php $limit = ((($count - ($count % 2)) / 2) + ($count % 2)); ?>
@@ -167,18 +171,13 @@
                                     <?php endfor ?>
                                 </ul>
                                 <?php endfor ?>
-                                <?php else: ?>
-                                <h4><span class="services"></span>Services</h4>
-                                <ul class="first">
-                                	<li>Not found</li>
-                                </ul>
-                                <?php endif ?>
                                 <div class="clear"></div>
                             </div><!--TYPE-->
+							<?php endif ?>
                             
+							<?php $services = explode("\n", $this->place->specials) ?>
+                            <?php if(count($services) > 1): ?>                        
                             <div class="type">
-                            	<?php $services = explode("\n", $this->place->specials) ?>
-                                <?php if(count($services) > 1): ?>
                                 <h4><span class="specialties"></span>Specialties</h4>
                                 <?php $count = count($services) - 1; ?>
                                 <?php $limit = ((($count - ($count % 2)) / 2) + ($count % 2)); ?>
@@ -190,33 +189,27 @@
                                     <?php endfor ?>
                                 </ul>
                                 <?php endfor ?>
-                                <?php else: ?>
-                                <h4><span class="specialties"></span>Specialties</h4>
-                                <ul class="first">
-                                	<li>Not found</li>
-                                </ul>
-                                <?php endif ?>
                                 <div class="clear"></div>
                             </div><!--TYPE-->
+							<?php endif ?>
+                        	
                             
+							<?php $services = explode("\n", $this->place->tips) ?>
+                            <?php if(count($services) > 1): ?>
                             <div class="type">
-                            	<?php $services = explode("\n", $this->place->tips) ?>
                                 <h4><span class="food"></span>Tips</h4>
                                 <ul class="large">
-                                	<?php if(count($services) > 1): ?>
                                     <?php foreach($services as $s): ?>
                                     <li><?= $s ?></li>
                                     <?php endforeach ?>
-                                    <?php else: ?>
-                                    <li>Not found</li>
-                                    <?php endif ?>
                                 </ul>
                                 <div class="clear"></div>
                             </div><!--TYPE-->
+                            <?php endif ?>
                             
+							<?php $services = explode(",", $this->place->tags) ?>
+                            <?php if(count($services) > 1): ?>
                             <div class="type">
-                            	<?php $services = explode(",", $this->place->tags) ?>
-                                <?php if(count($services) > 1): ?>
                                 <h4><span class="services"></span>Tags</h4>
                                 <?php $count = count($services) - 1; ?>
                                 <?php $limit = ((($count - ($count % 2)) / 2) + ($count % 2)); ?>
@@ -228,22 +221,17 @@
                                     <?php endfor ?>
                                 </ul>
                                 <?php endfor ?>
-                                <?php else: ?>
-                                <h4><span class="services"></span>Tags</h4>
-                                <ul class="first">
-                                	<li>Not found</li>
-                                </ul>
-                                <?php endif ?>
                                 <div class="clear"></div>
                             </div><!--TYPE-->
-                            
+							<?php endif ?>                        
                         </div><!--AMENITIES-->
                         
+                    
+                        <?php if(count($this->schedules) > 0): ?>
                         <div class="schedule">
                             <h5><span></span>Hours</h5>
                             <span class="open"></span>
                             <span class="closed hidden"></span>
-                        	<?php if(count($this->schedules) > 0): ?>
                             <?php $schs = array(); $curr = 1; $last = 0;
 								
 								$schs[$last] = array('first' => $this->schedules[$last]);
@@ -268,13 +256,8 @@
                                 <?php endif ?>
                                 <?php endforeach ?>                            
                             </ul>
-                            <?php else: ?>
-                            <ul>
-                            	<li class="ttl">No hours found</li>
-                                <li></li>
-                            </ul>
-                            <?php endif ?>
                         </div><!--SCHEDULE-->
+						<?php endif ?>
                         <div class="clear"></div>
                     </div><!--CONTENT-->
                     <div class="clear"></div>

@@ -229,12 +229,23 @@ class IndexController extends Zend_Controller_Action
                 $this->view->key            = $keys['public_key'];
             break;
             case self::ENTERTAIMENT  : 
-                $template = 'listing-entertaiment';  
-                $overview = $this->listings->getOverviewOf2($listing->id);
-                $details = $this->listings->getDetails($listing->id);
+                $template = 'listing-entertaiment';
 
-                $this->view->overview = $overview;
-                $this->view->details  = $details;
+                $place = $this->listings->getPlaceInfo($listing->id);
+                $this->view->place = $place;
+                
+                $options = $this->listings->getSchedulesOf($listing->id);
+                $this->view->schedules = $options;
+
+                //var_dump($details->toArray()); die;
+                $creditcards = array(
+                    'visa'             => '/images2/checkout-card1.png',
+                    'mastercard'       => '/images2/checkout-card2.png',
+                    'amex'             => '/images2/checkout-card3.png',
+                    'discover'         => '/images2/checkout-card5.png',
+                );
+                
+                $this->view->cards = $creditcards;
             break;
             case self::HOTEL: 
                 $keys = Zend_Registry::get('stripe');
