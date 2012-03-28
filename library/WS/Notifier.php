@@ -195,18 +195,6 @@ class WS_Notifier extends Zend_Mail {
     
     /**
      * 
-     *  The user just verify his email. So this is welcome email from us
-     * 
-     */
-    public function welcomeUser()
-    {
-        $this->setSubject('Welcome to Tripfab');
-        $this->addTo($this->user->email);
-        $this->sendHTMLTemplate('welcome.phtml');
-    }
-    
-    /**
-     * 
      *  The user has just purchased a Preplanned Trip. This email is for the 
      *  details of the trip
      * 

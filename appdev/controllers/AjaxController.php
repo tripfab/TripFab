@@ -1975,6 +1975,12 @@ class AjaxController extends Zend_Controller_Action
 		if($user){
 			$user->active = $action;
 			$user->save();
+                        
+                        if($action == 1 and $user->role_id == 3) {
+                            $notifier = new WS_Notifier($user->id);
+                            $notifier->welcomePartner();
+                        }
+                        
 			echo "success";
 		}
 		else{
