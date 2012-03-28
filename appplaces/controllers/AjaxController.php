@@ -156,8 +156,10 @@ class AjaxController extends Zend_Controller_Action{
                 $fq->fb_page = $this->_getParam('url');
 
                 $url = parse_url($this->_getParam('url'));
-                $url = preg_split('/', $url['path']);
+                $url = @split('/', $url['path']);
                 $id = ($url[1] == 'pages') ? $url[3] : $url[1];
+				
+				//echo $id; die;
 
                 $client = new Zend_Http_Client('https://graph.facebook.com/'.$id);
                 $client->setParameterGet('access_token', $this->_getParam('token'));
