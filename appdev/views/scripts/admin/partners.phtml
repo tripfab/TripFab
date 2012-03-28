@@ -67,10 +67,10 @@
 							<td>
 								
                                 <div id="d<?php echo $key?>" <?php echo $listing->active ? 'style="display:none"': '';?>>
-                                	<a href="#deactivate" class="deactivate lbc" onclick="initParam(<?php echo $listing->id?>, 0, <?php echo $key?>);">Deactivate</a>
+                                	<a href="#activate" class="deactivate lbc" onclick="initParam(<?php echo $listing->id?>, 1, <?php echo $key?>);">Deactivate</a>
                                 </div>
                                 <div id="a<?php echo $key?>" <?php echo $listing->active ? '' : 'style="display:none"';?>>
-                            		<a href="#activate" class="activate lbc" onclick="initParam(<?php echo $listing->id?>, 1, <?php echo $key?>);">Activate</a> 
+                            		<a href="#deactivate" class="activate lbc" onclick="initParam(<?php echo $listing->id?>, 0, <?php echo $key?>);">Activate</a> 
                                 </div>
                                 </div>
                             </td>
@@ -188,7 +188,7 @@
 				$.fancybox.close();
 				if(json=="success"){
 					 showAlert("Partner has been updated successfully");
-					 if(action==1){
+					 if(action==0){
 						$("#d"+divNo).show(); 
 						$("#a"+divNo).hide(); 
 					 }
