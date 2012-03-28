@@ -67,22 +67,27 @@
                                 <?php if(count($this->items)):?>
                                 	<?php $slide =0;?>
 									<?php foreach($this->items as $day=>$listings):?>
-                                    <div class="itinerary" id="<?php echo $day?>">
-                                        <?php foreach($listings as $listing):?>
-                                        <div class="single" id="d<?php echo $listing->id?>">
-                                            <span class="star"><img src="<?php echo $listing->image?>" width="38" height="38" alt="" /></a></span>
-                                            <span class="name"><?php echo $listing->title?></span>
-                                            <span class="type"><?php echo $listing->type_name?></span>
-                                            <span class="time"><?php echo $listing->start == '00:00:00' ? 'N/A' : date("h:i A", strtotime($listing->start))?> - <?php echo $listing->end == '00:00:00' ? 'N/A' : date("h:i A", strtotime($listing->end))?></span>
-                                            <a href="javascript://" onclick="deleteItem(<?php echo $listing->id?>)" class="delete">Delete</a>
-                                            <a href="<?php echo $this->url(array('page'=>6, 'sort'=>$this->trip->id, 'seq'=>$listing->id))?>" class="edit">Edit Info</a>
-                                        </div><!--SINGLE-->
-                                        <?php endforeach;?>
-                                       
+                                        <div class="itinerary" id="<?php echo $day?>">
+                                		<?php if(count($listings)):?>
+											<?php foreach($listings as $listing):?>
+                                            <div class="single" id="d<?php echo $listing->id?>">
+                                                <span class="star"><img src="<?php echo $listing->image?>" width="38" height="38" alt="" /></a></span>
+                                                <span class="name"><?php echo $listing->title?></span>
+                                                <span class="type"><?php echo $listing->type_name?></span>
+                                                <span class="time"><?php echo $listing->start == '00:00:00' ? 'N/A' : date("h:i A", strtotime($listing->start))?> - <?php echo $listing->end == '00:00:00' ? 'N/A' : date("h:i A", strtotime($listing->end))?></span>
+                                                <a href="javascript://" onclick="deleteItem(<?php echo $listing->id?>)" class="delete">Delete</a>
+                                                <a href="<?php echo $this->url(array('page'=>6, 'sort'=>$this->trip->id, 'seq'=>$listing->id))?>" class="edit">Edit Info</a>
+                                            </div><!--SINGLE-->
+                                            <?php endforeach;?>
+										<?php else:?>
+                                                <div class="single" id="d1">
+                                                <center>No listing added for this day</center>
+                                                </div>
+                                       	<?php endif;?>
                                         <div class="add-listing">
                                             <a href="<?php echo $this->url(array('task'=>'edit','page'=>6, 'sort'=>$this->trip->id, 'seq'=>0, 'q'=>$day))?>" class="btn">Add Listing</a>
                                         </div>
-	                                </div><!--ITINERARY-->
+	                                	</div><!--ITINERARY-->
                                     <?php endforeach;?>
                                 <?php else:?>
                                     <div class="itinerary" id="1">
