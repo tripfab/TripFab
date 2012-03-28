@@ -14311,14 +14311,83 @@ h2.title .back:hover,
 #user_view .block .bank-account .number {
 	font-weight: bold;
 }
-
+#user_view .block .bank-account .edit{
+	text-indent: 0;
+	width: auto;
+	font:bold 11px/14px Helvetica;
+	color: #303030;
+	background: url(../images2/ico-104.png) no-repeat center left;
+	padding-left: 15px;
+	height: 14px;
+}
+#user_view .block .bank-account .remove{
+	text-indent: 0;
+	width: auto;
+	padding-left: 20px;
+	color: #303030;
+	font:bold 11px/14px Helvetica;
+	height: 14px;
+	float: none;
+}
+#user_view .block a.add_accnt {
+	float: right;
+	display: block;
+	background: url(../images2/ico-32.png) no-repeat left 50%;
+	padding-left: 20px;
+	color: #60b5f7;
+	margin:0 36px 30px 0;
+}
+.w1 .all_listing #user_view form {
+	float: none;
+}
+#user_view .bank-single {
+	border-bottom: 1px solid #E8E8E8;
+	margin: 0 auto 13px;
+	padding-bottom: 13px;
+	width: 720px;
+}
+#user_view .bank-single .descrip {
+	float: left;
+	width: 400px;
+}
+#user_view .bank-single .descrip p strong {
+	display: block;
+}
+#user_view .bank-single .fields {
+	float: right;
+	width: 300px;
+}
+.w1 .all_listing .bank-single input[type="text"]{
+	width: 258px;
+	height: 34px;
+	background: none;
+	padding:0 5px 0 10px;
+	float: right;
+	color: #303030;
+	font: bold 12px/34px Helvetica;
+}
+.w1 .all_listing .bank-single select {
+	width: 273px;
+	padding: 3px 0;
+	float: right;
+}
+#user_view h3.title.bak {
+	text-indent: 0;
+	line-height: 56px;
+}
 #user_view h3.title .back {
 	background:url(../images2/arrow-9.png) no-repeat left 50%;
-	padding-left:5px;
+	padding-left:15px;
 	float:right;
 	color:#60b5f7;
 	margin-right: 20px;
 	font-size: 11px;
+	text-indent: 0;
+}
+#user_view h3.title .bnk {
+	display:block;
+	margin: 10px 0 0 25px;
+	float: left;
 }
 .all_listing .user-view .user-left {
 	width:170px;
