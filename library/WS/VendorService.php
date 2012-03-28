@@ -24,8 +24,8 @@ class WS_VendorService {
         $select = $db->select();
         $select->from('vendors')
                 ->join(array('users'), 'vendors.user_id=users.id', array('userName' => 'name','active'=>'active', 'user_id'=>'id'))
-                ->joinleft(array('city' => 'places'), 'users.city_id=city.id', array('cityName' => 'title'))
-                ->joinleft(array('country' => 'places'), 'users.country_id=country.id', array('countryName' => 'title'))
+                ->joinleft(array('city' => 'places'), 'users.city_id=city.id', array('city_id'=>'id','cityName' => 'title'))
+                ->joinleft(array('country' => 'places'), 'users.country_id=country.id', array('country_id'=>'id','countryName' => 'title'))
                 ->where('vendors.id = ?', $id);
 
         $vendor = $db->fetchRow($select);
@@ -48,6 +48,13 @@ class WS_VendorService {
         $offers = $db->fetchAll($select);
         return $offers;
     }
+	public function saveInfo($id,$name, $email, $contact_name, $date, $phone, $city, $country, $website, $user_id){
+		$vendor = new Model_Vendors();
+		$vendor->update(array("id"=>$id,"name"=>$name,"email"=>$email,"contact_name"=>$contact_name,"created"=>$date,"phone"=>$phone,"website"=>$website), $vendor->getAdapter()->quoteInto('id = ?', $id));
+		$user = new Model_Users();
+		$user->update(array("city_id"=>$city,"country_id"=>$country), $user->getAdapter()->quoteInto('id = ?', $user_id));
+	
+	}
 
 }
 

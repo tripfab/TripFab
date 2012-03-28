@@ -1116,7 +1116,6 @@ class AdminController extends Zend_Controller_Action {
             }            
         }
     }
-    
     public function listingsDesactivateTask()
     {
         $ids = $this->_getParam('page','default');
@@ -2989,7 +2988,7 @@ class AdminController extends Zend_Controller_Action {
                     $select->where("users.name like '{$this->view->searchText}%' or users.lname like '{$this->view->searchText}%' or users.email like '{$this->view->searchText}%'");
                 }
                 $select->order(array_key_exists($this->view->paramSort, $travellersFields) ? $travellersFields[$this->view->paramSort] . "$seq" : $travellersFields[0]);
-                break;
+                break; 	
             case 'partners':
                 $this->view->title = "Partners";
                 $template = 'partners';
@@ -3021,6 +3020,13 @@ class AdminController extends Zend_Controller_Action {
 
     private function userViewTask() {
         $userType = $this->_getParam('page');
+		
+        $this->view->successMessage = '';
+        if ($_SESSION['alert']) {
+            $this->view->successMessage = "Your changes have been saved";
+            $_SESSION['alert'] = '';
+        }
+		
         switch ($userType) {
             case 'traveller':
                 $userId = $this->_getParam('sort');
@@ -3032,8 +3038,27 @@ class AdminController extends Zend_Controller_Action {
                 $vendorId = $this->_getParam('sort');
                 $user = $this->vendors->getVendorDetailsById($vendorId);
                 $this->view->user = $user;
+				$countries = $this->places->getPlaces(2);
+				$this->view->countries = $countries;
+				$City = array();
+				$City[] = @$_POST["city"] ? (object)array('user_id'=>@$_POST['user_id'], 'city_id'=>@$_POST["city"]): (object)array('user_id'=>@$_POST['user_id'], 'city_id'=>0);
+
+				if ($this->getRequest()->isPost()) {
+					$name = $_POST['name'];
+					$email = $_POST['email'];
+					$contact_name = $_POST['contact_name'];
+					$date = $_POST['created'];
+					$phone = $_POST['phone'];
+					$city = $_POST['city'];
+					$country = $_POST['country'];
+					$website = $_POST['website'];
+					$user_id = $_POST['user_id'];
+					$this->vendors->saveInfo($vendorId, $name, $email, $contact_name, $date, $phone, $city, $country, $website, $user_id);
+					$_SESSION['alert'] = 'Your changes have been saved';
+			   }
                 $this->render('partnerview');
                 break;
+				
             default: throw new Exception("Invalid user type");
         }
     }
@@ -4079,9 +4104,23 @@ class AdminController extends Zend_Controller_Action {
 		$slide = 0;
 		$items = $this->trips->getListingOf3($trip->id); 
         $dayWise = array();
+		$maxDay=1;
+		foreach($items as $item){
+			if($maxDay > $item->day)
+				$maxDay = $item->day;
+		}
+		
 		foreach($items as $item){
 			$dayWise[$item->day][] = $item;
 		}
+
+		$tripDuration = max($maxDay, $trip->days);
+		for($i=1; $i<=$tripDuration; $i++){
+			if(!isset($dayWise[$i])){
+				$dayWise[$i] = array();
+			}
+		}
+		ksort($dayWise, SORT_NUMERIC);
 		
 		$i=0;
 		foreach($dayWise as $key=>$value){
@@ -4243,10 +4282,10 @@ class AdminController extends Zend_Controller_Action {
             $errors['city'] = 'City can not be blank';
         
 		if (!(int) $postData['day'])
-            $errors['day'] = 'Itinerary day can not be blank';
+            $errors['day'] = 'Itinerary day must be a positive number';
         
 		if (!(int) $postData['duration'])
-            $errors['duration'] = 'Itinerary duration can not be blank';
+            $errors['duration'] = 'Itinerary duration must be a positive number';
 		
 		if($postData['type'] != 5){
 

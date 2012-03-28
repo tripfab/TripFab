@@ -122,11 +122,7 @@
 											<strong>Itinerary Day</strong>
 											Select the day of the activity 
 										</p>
-										<select name="day">
-                                       		<?php for($i=1; $i<10; $i++):?>
-                                            <option <?php echo $this->day == $i ? ' selected="selected"' : ''; ?>><?php echo $i?></option>
-                                            <?php endfor;?>
-										</select>
+										<input name="day" value="<?php echo $this->day ?>" class="name-in" type="text">
 									</div><!---ITEM-->
 									
 									<div class="item">
@@ -134,11 +130,7 @@
 											<strong>Duration</strong>
 											Select how many days long
 										</p>
-										<select name="duration">
-                                       		<?php for($i=1; $i<10; $i++):?>
-                                            <option <?php echo $this->duration == $i ? ' selected="selected"' : ''; ?>><?php echo $i?></option>
-                                            <?php endfor;?>
-										</select>
+										<input name="duration" value="<?php echo $this->duration ?>" class="name-in" type="text">
 										
 									</div><!---ITEM-->
 									

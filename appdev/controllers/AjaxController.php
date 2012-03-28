@@ -1695,6 +1695,8 @@ class AjaxController extends Zend_Controller_Action
             case 1:
                 $user = $this->vendors->getVendorDetailsById($userId);
                 $this->view->user = $user;
+				$countries = $this->places->getPlaces(2);
+				$this->view->countries = $countries;
                 $this->render('admin/partnerview1');
                 break;
             case 2:
@@ -1716,6 +1718,12 @@ class AjaxController extends Zend_Controller_Action
                 throw new Exception("Invalid panel type");
         }
     }
+	
+	public function saveAction(){
+	$name=$_POST['name'];
+	echo($name);die;
+	
+	}
 
     static function jsonEcho($jsonString) {
         header("content-type:text/json");
