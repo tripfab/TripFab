@@ -86,10 +86,14 @@ class WS_Notifier extends Zend_Mail {
      *  pictures. We need to let the partner know about thouse issues
      * 
      */
-    public function listingPendingInformation()
+    public function listingPendingInformation($listing, $items)
     {
-        $this->setSubject('Listing Approval');
+        $this->_view->listing = $listing;
+        $this->_view->items   = $items;
+        
+        $this->setSubject('Listing Pending Information');
         $this->addTo($this->user->email);
+        $this->addBcc("cristian@tripfab.com");
         $this->sendHTMLTemplate('listing-pending.phtml');
     }
     
@@ -99,8 +103,10 @@ class WS_Notifier extends Zend_Mail {
      *  approved by tripfab.
      * 
      */
-    public function listingApproved()
+    public function listingApproved($listing)
     {
+        $this->_view->listing = $listing;
+        
         $this->setSubject('Listing Approved');
         $this->addTo($this->user->email);
         $this->sendHTMLTemplate('listing-approved.phtml');

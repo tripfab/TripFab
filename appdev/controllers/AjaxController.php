@@ -1931,11 +1931,12 @@ class AjaxController extends Zend_Controller_Action
 		// Listing ID is here inside  $_POST['listing_id']
 		// Get Request info as an array using $_POST['info']
 		
-		//$listing = $this->listings->getListing($_POST['listing_id']);
-        //$vendor = $this->users->getVendor($listing->vendor_id);
+                $listing = $this->listings->getListing($_POST['listing_id']);
+                $vendor = $this->users->getVendor($listing->vendor_id);
 
-        //$notifier = new WS_Notifier($vendor->user_id);
-		//$notifier->listingPendingInformation($_POST['info'])
+                $notifier = new WS_Notifier($vendor->user_id);
+		$notifier->listingPendingInformation($listing, $_POST['info']);
+                
 		echo "success";
 		die;
 	}
@@ -1952,11 +1953,17 @@ class AjaxController extends Zend_Controller_Action
 
         $id = $_POST['id'];
         $action = $_POST['act'];
-		$listing = $this->listings->getListing($id);
-		$listing->status = $action;
-		$listing->save();
-		echo "success";
-		die;
+        $listing = $this->listings->getListing($id);
+        $listing->status = $action;
+        $listing->save();
+        
+        $vendor = $this->users->getVendor($listing->vendor_id);
+        
+        if($action == 1) {
+            $notifier = new WS_Notifier($vendor->user_id);
+            $notifier->listingApproved($listing);
+        }
+        echo "success"; die;
     }
 
 	public function usertatusAction()
