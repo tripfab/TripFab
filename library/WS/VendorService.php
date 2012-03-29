@@ -3,9 +3,11 @@
 class WS_VendorService {
 
     protected $vendors;
+	protected $bankAccounts;
 
     public function __construct() {
         $this->vendors = new Model_Vendors();
+		$this->bankAccounts = new Model_BankAccounts();
     }
 
     public function getVendorById($ids) {
@@ -72,6 +74,30 @@ class WS_VendorService {
 		$bank_r['name']=$name;
 		$bank_r['country_id']=$country;
 		$db->insert("banks",$bank_r);
+	
+	}
+    
+	public function getVendorBankAccountById($id) {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = $db->select();
+        $select->from('bankaccounts')
+            ->where('bankaccounts.id = ?', $id);
+
+        $bank = $db->fetchRow($select);
+        if (is_null($bank))
+            throw new Exception();
+        return $bank;
+    }
+	
+	public function saveBankAccount($id, $data){
+		if($id){
+			$this->bankAccounts->update($data, $this->bankAccounts->getAdapter()->quoteInto('id = ?', $id));
+			return $id;
+		}
+		else{
+			return $this->bankAccounts->insert($data);
+		}
 	
 	}
 
