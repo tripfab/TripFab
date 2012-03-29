@@ -8428,15 +8428,30 @@ h2.title .back:hover,
 	line-height: 25px;
 	font-weight: bold;
 	font-size: 15px;
-	padding:0 0 11px 23px;
+	padding:0 0 0 23px;
 }
-
+.listings-main h3.sorting {
+	padding-top: 2px;
+	float: left;
+}
 .listings-main .sub-ttl a.btn-1 {
 	float: right;
 	font-size: 12px;
 	margin-right: 23px;
 }
-
+.listings-main .sub-ttl .sort {
+	float: right;
+	background: url(../images2/sep-8.png) no-repeat left top;
+	height: 40px;
+	padding:0 0 0 12px;
+	margin-right: 23px;
+}
+.listings-main .sub-ttl .sort label {
+	color: #464646;
+	font: normal 11px Helvetica;
+	display: inline-block;
+	margin-right: 5px;
+}
 .lstng {
 	background-color: #FFFFFF;
 	border: 1px solid #E7E7E7;
@@ -8608,6 +8623,43 @@ h2.title .back:hover,
 .lstng .right .approve span {
 	background: url(../images2/ico-122.png) no-repeat left 6px;
 	padding-left:24px;
+}
+.listings-main .bottom {
+	overflow: hidden;
+	padding-top: 10px;
+}
+.listings-main .bottom .results{
+	float: left;
+	width: 260px;
+	color: #636363;
+	font: normal 12px Helvetica;
+	text-shadow: 0px 1px 0px ##FFF;
+}
+.listings-main .bottom .paging {
+	overflow: hidden;
+	list-style: none;
+	float: right;
+}
+.listings-main .bottom .paging li {
+	float: left;
+	margin-left: 10px;
+}
+.listings-main .bottom .paging li.prev {
+	background: url(../images2/vendorsep10.png) no-repeat right 50%;
+	padding-right: 10px;
+}
+.listings-main .bottom .paging li.next {
+	background: url(../images2/vendorsep10.png) no-repeat left 50%;
+	padding-left: 10px;
+}
+.listings-main .bottom .paging li a {
+	color: #60b5f7;
+}
+.listings-main .bottom .paging li a:hover {
+	color: #3f9fea;
+}
+.listings-main .bottom .paging li a.active {
+	color: #898989;
 }
 /*LIGHTBOX LISTING------------------------------------------------------- */
 .lbox_listing {
@@ -19131,6 +19183,7 @@ h2.title .back:hover,
 	width: 206px;
 }
 /*END CHECK-EMAIL----------------------------------------------------------*/
+
 
 
 

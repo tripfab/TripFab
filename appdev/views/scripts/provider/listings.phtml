@@ -23,9 +23,14 @@
             <?php if(count($this->listings) > 0): ?>
             <div class="listings-main">
             	<div class="sub-ttl">
-            		<div class="sort"></div>
-            		<a href="#new_listing" class="lb btn-1">Create A New Listing</a>
-            		<?= $this->title ?>
+            		<div class="sort">
+            			<label>Sort:</label>
+            			<select>
+            				<option>Name</option>
+            			</select>
+            		</div>
+            		<a href="#new_listing" class="lb btn-1 sorting">Create A New Listing</a>
+            		<h3 class="sorting"><?= $this->title ?></h3>
             	</div><!-- closes sub-ttl -->
             	<?php $statuses = array('inactive', 'active'); ?>
             	<?php foreach($this->listings as $listing): ?>
@@ -57,6 +62,18 @@
 					<div class="clear"></div>
                 </div><!-- closes lstng -->
                 <?php endforeach ?>
+                <div class="bottom">
+                	<div class="results"><strong>20 - 30</strong> of 126 Listings</div><!--RESULTS-->
+                	<ul class="paging">
+                		<li class="prev"><a href="">Previous</a></li>
+                		<li><a href="">1</a></li>
+                		<li><a href="">2</a></li>
+                		<li><a href="" class="active">3</a></li>
+                		<li><a href="">4</a></li>
+                		<li><a href="">5</a></li>
+                		<li class="next"><a href="">Next</a></li>
+                	</ul>
+                </div><!--BOTTOM-->
             </div><!-- closes listings-main -->
 			<?php else: ?>
             <div class="listings-main">
