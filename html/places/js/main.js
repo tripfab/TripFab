@@ -81,7 +81,7 @@ function catChanged(){
         $ul.html('');
         for(i in res.response.venues) {
             $venue = res.response.venues[i];
-            $ul.append('<li><a href="'+$venue.id+'">'+$venue.name+'</a></li>');
+            $ul.append('<li><a href="'+$venue.id+'">'+$venue.name+' ('+$venue.stats.checkinsCount+')</a></li>');
             $('li a', $ul).click(function(){
                 $('li a', $ul).removeClass('active');
                 $(this).addClass('active');
@@ -151,6 +151,7 @@ function fqrequest(url, data, limit, success){
     }
     $.ajax({
         url:'https://api.foursquare.com/v2'+url,
+		dataType:'json',
         data:data,
         success:success
     });

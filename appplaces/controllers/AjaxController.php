@@ -122,7 +122,7 @@ class AjaxController extends Zend_Controller_Action{
             $fq->save();
         }
         
-        if(true){//is_null($fq->fb_page) and $fq->trashed != 1){
+        if(is_null($fq->fb_page) and $fq->trashed != 1){
         
             $fqplace = json_decode($fq->fq_data);
 
