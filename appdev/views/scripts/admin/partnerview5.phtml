@@ -62,7 +62,7 @@
                         
 							<div class="lstng-details" id="content">
 
-    <h3 class="title">Bank Accounts <a href="" class="back">Back to Partners</a></h3>
+    <h3 class="title">Bank Accounts <a href="/admin/users/partners" class="back">Back to Partners</a></h3>
 	<div class="block">
 	 <?php if(count($this->banks)): ?>
 		<?php foreach($this->banks as $bank):?>
@@ -78,7 +78,7 @@
 					<td class="number" width="190">
 						<?php echo $bank->number ?>
 					</td>
-					<td width="90"><a href="" class="edit">Edit Info</a></td>
+					<td width="90"><a href="<?php echo $this->url(array('seq'=>6, 'q'=>$bank->id));?>" class="edit">Edit Info</a></td>
 					<td width="120"><a href="#delete_listing" class="remove lb">Delete Account</a></td>
 				</tr>
 			</table>
@@ -91,7 +91,7 @@
        <?php endif;?>
 		
 		
-		<a href="/admin/users/view/bank/<?php echo @$this->user->id ?>/add/" class="add_accnt">Add an Account</a>
+		<a href="<?php echo $this->url(array('seq'=>6, 'q'=>0));?>" class="add_accnt">Add an Account</a>
 		
 											
 	</div><!--BLOCK-->

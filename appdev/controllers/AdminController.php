@@ -3036,9 +3036,25 @@ class AdminController extends Zend_Controller_Action {
 	
 	private function partnerViewTask($user){
         $vendorId = $this->_getParam('sort');
-		$page = $this->_getParam('seq');
+		$page = $this->_getParam('seq')=='default' ? 1: $this->_getParam('seq') ;
 		switch($page){
 			case 1:
+				
+				if ($this->getRequest()->isPost()) {
+					$name = $_POST['name'];
+					$email = $_POST['email'];
+					$contact_name = $_POST['contact_name'];
+					$date = $_POST['created'];
+					$phone = $_POST['phone'];
+					$city = $_POST['city'];
+					$country = $_POST['country'];
+					$website = $_POST['website'];
+					$user_id = $_POST['user_id'];
+					$this->vendors->saveInfo($vendorId, $name, $email, $contact_name, $date, $phone, $city, $country, $website, $user->user_id);
+					$_SESSION['alert'] = 'Your changes have been saved';
+			   		$user = $this->vendors->getVendorDetailsById($vendorId);
+			   }
+				
 				$countries = $this->places->getPlaces(2);
 				$this->view->countries = $countries;
 				$this->render('partnerview1');
@@ -3062,6 +3078,37 @@ class AdminController extends Zend_Controller_Action {
                 $banks = $this->vendors->getBanksBy($vendorId);
                 $this->view->banks = $banks;
 				$this->render('partnerview5');
+				break;
+			case 6:
+        		$this->view->banks = WS_BanksService::this()->getBanksBy();
+				$bankId = $this->_getParam('q');
+				$this->view->bankId = '';	
+				$this->view->holderName = '';	
+				$this->view->accountNumber = '';	
+				$this->view->legalId = '';	
+				
+				if ($this->getRequest()->isPost()) {
+					
+					$data['bank_id'] = $_POST['bank'];	
+					$data['legalid'] = $_POST['legal_id'];	
+					$data['holder'] = $_POST['holder_name'];	
+					$data['number'] = $_POST['ac_num'];	
+					if(!$bankId){
+						$data['vendor_id'] = $vendorId;	
+					}
+					$id = $this->vendors->saveBankAccount($bankId, $data);
+					$_SESSION['alert'] = 'Your changes have been saved';
+					$this->_redirect($this->view->url(array('q'=>$id)));
+			   }
+
+				if($bankId){
+					$bank = $this->vendors->getVendorBankAccountById($bankId);
+					$this->view->bankId = $bank->bank_id;	
+					$this->view->holderName = $bank->holder;	
+					$this->view->accountNumber = $bank->number;	
+					$this->view->legalId = $bank->legalid;	
+				}
+				$this->render('partnerview6');
 				break;
 		}
 	}
