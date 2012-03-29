@@ -23,6 +23,12 @@ class AjaxController extends Zend_Controller_Action
     protected $reviewes;
     protected $vendors;
     protected $reservations;
+    
+    /**
+     *
+     * @var WS_PlacesService
+     */
+    protected $places;
 
 
     public function init()
@@ -315,6 +321,7 @@ class AjaxController extends Zend_Controller_Action
             $parent_id = $_POST['parent_id'];
             $select = $this->places_db->select();
             $select->where('parent_id = ?', $parent_id);
+            $select->order('title ASC');
             $places = $this->places_db->fetchAll($select);
             if(!count($places))
                 $places = array();
@@ -2033,5 +2040,15 @@ class AjaxController extends Zend_Controller_Action
         $this->view->listings = $listings;
         $this->view->trip     = $this->_getParam('trip');
         $this->view->triplisting = $id;
+    }
+    
+    public function getvendorsoptionsAction(){
+        $vendors = new Zend_Db_Table('users');
+        $select = $vendors->select();
+        $select->where('city_id = ?', $this->_getParam('city'));
+        $select->where('role_id = ?', 3);
+        $select->order('name ASC');
+        $results = $vendors->fetchAll($select);
+        $this->view->results = $results;
     }
 }

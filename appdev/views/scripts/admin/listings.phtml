@@ -106,7 +106,7 @@
 		</div>
 		<!-- closes w1 -->
     	
-		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+		<?php echo $this->partial('admin_partials/report.phtml', array('main_categories'=>$this->main_categories, 'countries'=>$this->countries)); ?>
 		
         <script>
 			function searchSubmit(){

@@ -42,7 +42,7 @@ class AdminController extends Zend_Controller_Action {
     protected $accounts;
     /**
      *
-     * @var WS_UserService
+     * @var WS_UsersService
      */
     protected $users;
     /**
@@ -290,6 +290,9 @@ class AdminController extends Zend_Controller_Action {
         $paginator->setCurrentPageNumber($page);
         $this->view->paginator = $paginator;
         $this->view->numCount = $paginator->getTotalItemCount();
+        
+        $this->view->main_categories = $this->listings->getMainCategories();
+        $this->view->countries = $this->places->getPlaces(2);
     }
     
     public function listingTypesTask()
@@ -1132,32 +1135,22 @@ class AdminController extends Zend_Controller_Action {
     {
         $template = 'listings-new';
         
-        switch($this->_getParam('tab')){
-            case 'default':
-                $listings = $this->listings->countListings(null, $this->user->getVendorId());
-                $this->view->title = ($listings == 0) ? 'Create your first listing' : 'Create a new listing';
+        switch($this->_getParam('page','default')){
+            case '1':
                 if($this->getRequest()->isPost()){
-                    if($_POST['vendor'] != $this->user->getVendorId())
-                            throw new Exception('vendor_id');
-                    if($_POST['vendortoken'] != $this->user->getVendorToken())
-                            throw new Exception('tokne');
-                    $main_cat = $_POST['type'];
+                    
+                    $main_cat = $_POST['main_type'];
                     $main_cat = $this->listings->getCategory($main_cat);
                     if(is_null($main_cat))
                             throw new Exception('type');
 
-                    $vendor = $this->user->getVendorData();
-                    $user   = $this->user->getData();
+                    $vendor = $this->users->getVendorByUserId($_POST['vendor_id']);
                     
                     $listing = $this->listings->createNew();
                     $listing->title      = 'Untitled Listing';
-                    $listing->country_id = $user->country_id;
-                    if($listings > 0){
-                        $dft_listing = $this->listings->getDefaultListing($this->user->getVendorId());
-                        if(!is_null($dft_listing))
-                            $listing->city_id = $dft_listing->city_id;
-                    }
-                    $listing->vendor_id  = $this->user->getVendorId();
+                    $listing->country_id = $_POST['country_id'];
+                    $listing->city_id    = $_POST['city_id'];
+                    $listing->vendor_id  = $vendor->id;
                     $listing->main_type  = $main_cat->id;
                     $listing->created    = date('Y-m-d H:i:s');
                     $listing->updated    = date('Y-m-d H:i:s');
@@ -1167,7 +1160,7 @@ class AdminController extends Zend_Controller_Action {
                     $listing->website    = $vendor->website;
                     $listing->save();
 
-                    $listing->token     = md5($listing->id.$this->user->getVendorToken());
+                    $listing->token     = md5($listing->id.time().rand(0,100000));
                     $listing->save();
                     switch($listing->main_type){
                         case 2:
@@ -1193,11 +1186,7 @@ class AdminController extends Zend_Controller_Action {
                             break;
                     }
                     $listing->save();
-                    $counter = $this->listings->countListings(null, $this->user->getVendorId());
-                    if($counter > 1)
-                        $this->_redirect('/admin/listings/edit/'.$listing->id); 
-                    else
-                        $this->_redirect('/admin/listings/new/'.$listing->id.'/step2');
+                    $this->_redirect('/admin/listings/edit/'.$listing->id);
                 }
                 break;
             case 'step2':

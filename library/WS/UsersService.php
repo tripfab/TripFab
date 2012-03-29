@@ -214,4 +214,14 @@ class WS_UsersService {
         
         return $vendor;
     }
+    
+    public function getVendorByUserId($id)
+    {
+        $vendors = new Zend_Db_Table('vendors');
+        $select = $vendors->select();
+        $select->where('user_id = ?', $id);
+        $vendor = $vendors->fetchRow($select);
+        
+        return $vendor;
+    }
 }

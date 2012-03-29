@@ -114,25 +114,31 @@
             <div id="new_listing">
                <div class="lb NewListing">
                	<div class="top">Create a New Listing</div><!--TOP-->
-               	<form action="">
+               	<form action="/admin/listings/new" method="post">
                		<fieldset>
                			<div class="mid">
-               				<select>
-               					<option>Select a Listing Type</option>
+               				<select name="main_type">
+               					<option value="">Select a Listing Type</option>
+                                <?php foreach($this->main_categories as $cat): ?>
+                                <option value="<?= $cat->id ?>"><?= $cat->name ?></option>
+                                <?php endforeach ?>
                				</select>
-               				<select>
-               					<option>Select a Country</option>
+               				<select name="country_id">
+               					<option value="">Select a Country</option>
+                                <?php foreach($this->countries as $c): ?>
+                                <option value="<?= $c->id ?>"><?= $c->title ?></option>
+                                <?php endforeach ?>
                				</select>
-               				<select>
-               					<option>Select a City</option>
+               				<select name="city_id">
+               					<option value="">Select a City</option>
                				</select>
-               				<select>
-               					<option>Select a Partner</option>
+               				<select name="vendor_id">
+               					<option value="">Select a Partner</option>
                				</select>
                			</div><!--MID-->
                			<div class="bottom">
                				<input type="submit" value="Create Listing" class="btn-1" />
-               				<input type="button" value="Cancel" class="btn-10" />
+               				<input type="button" onclick="$.fancybox.close(); return false;" value="Cancel" class="btn-10" />
                			</div><!--BOTTOM-->
                		</fieldset>
                	</form>
@@ -297,6 +303,37 @@
 		$("#report_tabs").tabs();
 		$('#ui-datepicker-div').wrap('<div id="calendarContainer"></div>');
 
+	});
+	
+	$(function(){
+		$('#new_listing select[name=country_id]').change(function(){
+			$id = $(this).val();
+			if($id == "")
+				return;
+			
+			$.ajax({
+				url:'/ajax/getplacesoptions',
+				type:'post',
+				data:{parent_id:$id},
+				success:function(res){
+					$('#new_listing select[name=city_id]').html(res);
+				}
+			});
+		});
+		
+		$('#new_listing select[name=city_id]').change(function(){
+			$id = $(this).val();
+			if($id == "")
+				return;
+			
+			$.ajax({
+				url:'/ajax/getvendorsoptions',
+				data:{city:$id},
+				success:function(res){
+					$('#new_listing select[name=vendor_id]').html(res);
+				}
+			});
+		});
 	});
 	
    </script>
