@@ -2009,9 +2009,20 @@ class AjaxController extends Zend_Controller_Action
 		die;
    }
     
-    public function getrecomendationsAction(){
+    public function getrecomendationsAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
         
-        echo 'Hello World'; die;
+        $id = $this->_getParam('id', 'default');
+        if($id == "default")
+                throw new Exception('Listing not found');
         
+        $listings = $this->listings->getAlternativesTo($id);
+        
+        $this->view->listings = $listings;
+        $this->view->trip     = $this->_getParam('trip');
+        $this->view->triplisting = $id;
     }
 }

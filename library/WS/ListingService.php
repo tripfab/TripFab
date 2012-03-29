@@ -2181,4 +2181,54 @@ class WS_ListingService {
         $select->group("listings.id");	
         return $db->fetchAll($select);
     }
+    
+    public function getAlternativesTo($listing) {
+        $listing = $this->getListing($listing);
+        $cats    = $this->getListingTypesOf($listing->id);
+        
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        
+        $select = $db->select();
+        $select->from('listings');
+        $select->join('listing_listingtypes', 'listings.id = listing_listingtypes.listing_id');
+        $select->join('places', 'listings.country_id = places.id', array(
+            'country' => 'title',
+            'country_idf' => 'identifier'
+        ));
+        $select->join(array('places2'=>'places'), 'listings.city_id = places2.id', array(
+            'city' => 'title',
+            'city_idf' => 'identifier'
+        ));
+        
+        $select->where('listings.id <> ?', $listing->id);
+        $select->where('listings.city_id = ?', $listing->city_id);
+        $select->where('listings.main_type = ?', $listing->main_type);
+        if(count($cats) > 0) {
+            if(count($cats) > 1) {
+                foreach($cats as $i => $cat) {
+                    if($i == 0)
+                        $select->where('(listing_listingtypes.listingtype_id = ?', $cat->listingtype_id);
+                    elseif($i == (count($cats) - 1)) {
+                        $select->orWhere('listing_listingtypes.listingtype_id = ?)', $cat->listingtype_id);
+                    } else {
+                        $select->orWhere('listing_listingtypes.listingtype_id = ?', $cat->listingtype_id);
+                    }
+                }
+            } else {
+                $select->where('listing_listingtypes.listingtype_id = ?', $cats[0]->listingtype_id);
+            }
+        }
+        
+        $select->group('listing_listingtypes.listing_id');
+        $select->limit(10);
+        
+        //echo $select->assemble(); die;
+        
+        $listings = $db->fetchAll($select);
+        
+        
+        
+        return $listings;
+    }
 }

@@ -228,7 +228,7 @@
                             <div class="info">
                                 <span class="unavaible"><em></em>Not Available</span>
                                 <p class="recommendation"><?= $item->error ?> 
-                                <a href="/ajax/getrecomendations/<?= $item->id ?>" class="link-10 lb">See our recommendations</a></p>
+                                <a href="/ajax/getrecomendations/<?= $item->id ?>?trip=<?= $this->trip->id ?>&listing=<?= $item->triplistingid ?>" class="link-10 lb">See our recommendations</a></p>
                             </div><!--INFO-->
                         </div><!--HEADER-->
                         <?php endif ?>

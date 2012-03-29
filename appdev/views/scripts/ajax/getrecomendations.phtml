@@ -22,32 +22,32 @@
 				<a href="#" class="larrow"></a>
 				<a href="#" class="rarrow"></a>
 				<div class="cont">
+                	<?php foreach($this->listings as $list): ?>
 					<div class="slide">
-						<img src="images2/img-16.png" width="329" height="232" alt="" />
+                    	<?= $this->thumbnail(array('width'=>329,'height'=>232),$list->image,'','329:232'); ?>
 						<div class="info">
-							<h4>Tropical Bungee</h4>
-							<h5><img src="images2/ico_136.png" width="10" height="15" alt="" /><strong>Tamarindo,</strong> Costa Rica</h5>
-							<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden from the attentions of mass toutrism, it has nonetheless survived You can never. You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden from the attentions of mass toutrism.</p>
+                        <form action="" method="post">
+							<h4><?= $list->title ?></h4>
+							<h5><img src="/images2/ico_136.png" width="10" height="15" alt="" />
+                            <strong><?= $list->city ?></strong> <?= $list->country ?></h5>
+							<p><?= $list->description ?></p>
 							<div class="bot">
-								<span><sup>$</sup>79 <em>/ person</em></span>
+                            	<?php if($list->main_type == 5): ?>
+								<span><sup>$</sup><?= $list->price ?> <em>/ night</em></span>
+                                <?php else: ?>
+								<span><sup>$</sup><?= $list->price ?> <em>/ person</em></span>                                
+                                <?php endif ?>
 								<input type="submit" class="btn-1" value="Replace" />
-								<input type="submit" class="btn-10" value="Read More" />
+								<a href="/<?= $list->country_idf ?>/<?= $list->city_idf ?>/<?= $list->identifier ?>" class="btn-10">Read More</a>
 							</div><!--BOTTOM-->
+                            <input type="hidden" name="ids" value="<?= $this->trip ?>" />
+                            <input type="hidden" name="listing" value="<?= $list->listing_id ?>" />
+                            <input type="hidden" name="triplisting" value="<?= $this->triplisting ?>" />
+		                    <input type="hidden" name="_task" value="<?= md5('replace') ?>" class="replace" />
+                        </form>
 						</div><!--INFO-->
 					</div><!--SLIDE-->
-					<div class="slide">
-						<img src="images2/img-16.png" width="329" height="232" alt="" />
-						<div class="info"> 
-							<h4>Tropical Bungee</h4>
-							<h5><img src="images2/ico_136.png" width="10" height="15" alt="" /><strong>Tamarindo,</strong> Costa Rica</h5>
-							<p>You can never. You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden from the attentions of mass toutrism. You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden from the attentions of mass toutrism, it has nonetheless survived .</p>
-							<div class="bot">
-								<span><sup>$</sup>179 <em>/ person</em></span>
-								<input type="submit" class="btn-1" value="Replace" />
-								<input type="submit" class="btn-10" value="Read More" />
-							</div><!--BOTTOM-->
-						</div><!--INFO-->
-					</div><!--SLIDE-->
+                    <?php endforeach ?>
 				</div><!--CONT-->
 			</div><!--SLIDER-->
 		</div><!--MID-->
