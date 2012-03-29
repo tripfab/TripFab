@@ -3038,30 +3038,44 @@ class AdminController extends Zend_Controller_Action {
                 $vendorId = $this->_getParam('sort');
                 $user = $this->vendors->getVendorDetailsById($vendorId);
                 $this->view->user = $user;
-				$countries = $this->places->getPlaces(2);
-				$this->view->countries = $countries;
-				$City = array();
-				$City[] = @$_POST["city"] ? (object)array('user_id'=>@$_POST['user_id'], 'city_id'=>@$_POST["city"]): (object)array('user_id'=>@$_POST['user_id'], 'city_id'=>0);
-
-				if ($this->getRequest()->isPost()) {
-					$name = $_POST['name'];
-					$email = $_POST['email'];
-					$contact_name = $_POST['contact_name'];
-					$date = $_POST['created'];
-					$phone = $_POST['phone'];
-					$city = $_POST['city'];
-					$country = $_POST['country'];
-					$website = $_POST['website'];
-					$user_id = $_POST['user_id'];
-					$this->vendors->saveInfo($vendorId, $name, $email, $contact_name, $date, $phone, $city, $country, $website, $user_id);
-					$_SESSION['alert'] = 'Your changes have been saved';
-			   }
-                $this->render('partnerview');
+				$this->partnerViewTask($user);
                 break;
 				
             default: throw new Exception("Invalid user type");
         }
     }
+	
+	private function partnerViewTask($user){
+        $vendorId = $this->_getParam('sort');
+		$page = $this->_getParam('seq');
+		switch($page){
+			case 1:
+				$countries = $this->places->getPlaces(2);
+				$this->view->countries = $countries;
+				$this->render('partnerview1');
+				break;
+			case 2:
+                $listings = $this->listings->getVendorListings($vendorId);
+                $this->view->listings = $listings;
+				$this->render('partnerview2');
+				break;
+			case 3:
+                $reservations = $this->reservations->getHistory($vendorId);
+                $this->view->reservations = $reservations;
+				$this->render('partnerview3');
+				break;
+			case 4:
+                $offers = $this->vendors->getOffersBy($vendorId);
+                $this->view->offers = $offers;
+				$this->render('partnerview4');
+				break;
+			case 5:
+                $banks = $this->vendors->getBanksBy($vendorId);
+                $this->view->banks = $banks;
+				$this->render('partnerview5');
+				break;
+		}
+	}
 
     private function userDataTask() {
         $userType = $this->_getParam('page');

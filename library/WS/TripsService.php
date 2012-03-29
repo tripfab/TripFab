@@ -358,6 +358,19 @@ class WS_TripsService {
             return $result;
         }
     }
+    
+    public function replaceListing($trip, $old, $new)
+    {
+        $listings = new Zend_Db_Table('itinerary_listings');
+        $select = $listings->select();
+        $select->where('listing_id = ?', $old);
+        $select->where('itinerary_id = ?', $trip);
+        $listing = $listings->fetchAll($select);
+        foreach($listing as $l){
+            $l->listing_id = $new;
+            $l->save();
+        }
+    }
 
     public function deleteNullListings($trip) {
         $this->DB->delete('itinerary_listings', "day is null and itinerary_id = {$trip}");

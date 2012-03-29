@@ -709,11 +709,29 @@ class UserController extends Zend_Controller_Action
                 if($trip->token != $_POST['token'])
                         throw new Exception();
 
-                $listings = $this->trips->getItnListingOf($trip->id, false, 'null', true);
+                $listings = $this->trips->getItnListingOf($trip->id, false, 'null', true, true);
 
                 $bookings = $_POST['bookings'];
             } elseif($_POST['_task'] == md5('proceed')) {
                 $this->purchaseItinerary();
+            } elseif($_POST['_task'] == md5('replace')){
+                $trip = $this->trips->getItn($id);
+                
+                $this->trips->replaceListing($trip->id, $_POST['triplisting'], $_POST['listing']);
+                
+                $listings = $this->trips->getItnListingOf($trip->id, false, 'null', true, true);
+                
+                $bookings = array();
+            
+                foreach($listings as $list) {
+                    if($list->main_type == 6 || $list->main_type == 5){
+                        $bookings[$list->id] = array(
+                            'adults' => 1,
+                            'child'  => 0
+                        );
+                    }
+                }
+                
             } else {
                 throw new Exception('Form corrupted');
             }
@@ -722,7 +740,7 @@ class UserController extends Zend_Controller_Action
             $id  = $this->_getParam('id');
             $trip = $this->trips->getItn($id);
             
-            $listings = $this->trips->getItnListingOf($trip->id, false, 'null', true);
+            $listings = $this->trips->getItnListingOf($trip->id, false, 'null', true, true);
             
             $bookings = array();
             
@@ -783,6 +801,7 @@ class UserController extends Zend_Controller_Action
                         $item->day = $listing->day;
                         $item->listing_city = $listing->city;
                         $item->listing_country = $listing->country;
+                        $item->triplistingid = $listing->triplisting_id;
 
                         $items[] = $item;
                         
@@ -809,6 +828,7 @@ class UserController extends Zend_Controller_Action
                     $item->day = $listing->day;
                     $item->listing_city = $listing->city;
                     $item->listing_country = $listing->country;
+                    $item->triplistingid = $listing->triplisting_id;
 
                     $items[] = $item;
 

@@ -1,27 +1,33 @@
     <h3 class="title">Bank Accounts <a href="" class="back">Back to Partners</a></h3>
 	<div class="block">
-		<?php foreach($this->bank as $banks):?>
+	 <?php if(count($this->banks)): ?>
+		<?php foreach($this->banks as $bank):?>
 		<div class="bank-account">
 			<table width="100%" border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td width="240">
-						<img src="/images2/bank-bac.png" width="" height="" alt="" /><span><?php echo $banks->name?></span>
+						<img src="/images2/bank-bac.png" width="" height="" alt="" /><span><?php echo $bank->bank_name?></span>
 					</td>
 					<td width="110">
-						<?php echo $banks->holder ?>
+						<?php echo $bank->holder ?>
 					</td>
 					<td class="number" width="190">
-						<?php echo $banks->number ?>
+						<?php echo $bank->number ?>
 					</td>
 					<td width="90"><a href="" class="edit">Edit Info</a></td>
 					<td width="120"><a href="#delete_listing" class="remove lb">Delete Account</a></td>
 				</tr>
 			</table>
 		</div><!--BANK-ACCOUNT-->
-				<?php endforeach;?>
+		<?php endforeach;?>
+       <?php else:?>
+		<div class="bank-account">
+       	<center>No bank added </center>
+		</div><!--BANK-ACCOUNT-->
+       <?php endif;?>
 		
 		
-		<a href="/admin/users/view/bank/<?php echo $this->user->id ?>/add/" class="add_accnt">Add an Account</a>
+		<a href="/admin/users/view/bank/<?php echo @$this->user->id ?>/add/" class="add_accnt">Add an Account</a>
 		
 											
 	</div><!--BLOCK-->

@@ -24,7 +24,6 @@
 						showCloseButton: 'false'
 					});
             		$("#report_tabs").tabs();
-					panel(<?php echo $this->user->id?>, 1, 'partner');
 				});
 			</script>
 		</head>
@@ -45,11 +44,11 @@
 					<div class="listing-content">
 						<div class="left">
 							<ul>
-								<li id="nav1" class="current"><a href="javascript://" onclick="panel(<?php echo $this->user->id?>, 1, 'partner')">General Information</a></li>
-								<li id="nav2"><a href="javascript://" onclick="panel(<?php echo $this->user->id?>, 2,'partner')">Listings</a></li>
-								<li id="nav3"><a href="javascript://" onclick="panel(<?php echo $this->user->id?>, 3,'partner')">Reservations</a></li>
-								<li id="nav4"><a href="javascript://" onclick="panel(<?php echo $this->user->id?>, 4,'partner')">Offers</a></li>
-								<li id="nav5"><a href="javascript://" onclick="panel(<?php echo $this->user->id?>, 5,'partner')">Bank Accounts</a></li>
+								<li id="nav1"><a href="<?php echo $this->url(array('seq'=>1))?>">General Information</a></li>
+								<li id="nav2"><a href="<?php echo $this->url(array('seq'=>2))?>">Listings</a></li>
+								<li id="nav3"><a href="<?php echo $this->url(array('seq'=>3))?>">Reservations</a></li>
+								<li id="nav4" class="current"><a href="<?php echo $this->url(array('seq'=>4))?>">Offers</a></li>
+								<li id="nav5"><a href="<?php echo $this->url(array('seq'=>5))?>">Bank Accounts</a></li>
 							</ul>
 						</div><!-- closes left -->
 						<div class="right">
@@ -62,6 +61,57 @@
                             <?php endif ?>	
                         
 							<div class="lstng-details" id="content">
+<h3 class="title">Offers <a href="" class="back">Back to Partners</a></h3>
+<div class="block">
+<?php if(count($this->offers)): ?>
+	<?php foreach($this->offers as $offer) : ?>
+    <div class="single_trip">
+        <table width="360" border="0" class="info">
+            <tr>
+                <td width="180"><?php echo $offer->type_name?></td>
+                <td width="180"><?php echo $offer->type_name?></td>
+            </tr>
+            <tr>
+                <td width="180">Listing Code</td>
+                <td width="180"><?php echo $offer->listing_id?></td>
+            </tr>
+            <tr>
+                <td width="180">Traveler Name</td>
+                <td width="180">????</td>
+            </tr>
+            <tr>
+                <td width="180">Offers Starts</td>
+                <td width="180"><?php echo date('M d, Y', strtotime($offer->start))?></td>
+            </tr>
+            <tr>
+                <td width="180">Offers Ends</td>
+                <td width="180"><?php echo date('M d, Y', strtotime($offer->end))?></td>
+            </tr>
+            <tr>
+                <td width="180">People Requeriments</td>
+                <td width="180"><?php echo $offer->people_ammount?> <?php echo $offer->people?></td>
+            </tr>
+        </table>
+        <table width="360" border="0" class="info">
+            <tr>
+                <td width="180">Discount Percent</td>
+                <td width="180"><?php echo ($offer->regular / 100)* $offer->price; ?></td>
+            </tr>
+            <tr>
+                <td width="180">Regular Pricing</td>
+                <td width="180"><?php echo $offer->regular?></td>
+            </tr>
+            <tr>
+                <td width="180">Special Rate</td>
+                <td width="180">$<?php echo $offer->price?></td>
+            </tr>
+        </table>
+    </div><!--SINGLE_TRIP-->
+    <?php endforeach;?>
+<?php else: ?>
+	<center><h1>There is no offer in this account.</h1></center>
+<?php endif;?>
+</div><!--BLOCK-->
 
 							</div>
 							<!-- closes lstng-details -->
@@ -74,7 +124,8 @@
 			</div><!--ALL_LISTING-->
 					
 			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
-            
+ 			<?php echo $this->partial('admin_partials/partner.phtml', array('name'=>$this->user->name, 'userId'=>$this->user->user_id)); ?>
+           
             
             <div class="hidden">
             

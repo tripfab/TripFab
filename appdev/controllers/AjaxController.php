@@ -1689,6 +1689,15 @@ class AjaxController extends Zend_Controller_Action
     }
 
     public function partnerAction() {
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+
+        if($user->getRole() != 'admin')
+                throw new Exception('No access allowed');
+
         $userId = $_GET['user'];
         $panel = $_GET['page'];
         switch ($panel) {
@@ -1715,8 +1724,8 @@ class AjaxController extends Zend_Controller_Action
                 $this->render('admin/partnerview4');
                 break;
             case 5:
-                //$banks = $this->vendors->getBanksBy($userId);
-                //$this->view->offers = $offers;
+                $banks = $this->vendors->getBanksBy($userId);
+                $this->view->banks = $banks;
                 $this->render('admin/partnerview5');
                 break;
             default:
@@ -2008,4 +2017,21 @@ class AjaxController extends Zend_Controller_Action
 		}
 		die;
    }
+    
+    public function getrecomendationsAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $id = $this->_getParam('id', 'default');
+        if($id == "default")
+                throw new Exception('Listing not found');
+        
+        $listings = $this->listings->getAlternativesTo($id);
+        
+        $this->view->listings = $listings;
+        $this->view->trip     = $this->_getParam('trip');
+        $this->view->triplisting = $id;
+    }
 }
