@@ -2003,4 +2003,10 @@ class AjaxController extends Zend_Controller_Action
 		}
 		die;
    }
+    
+    public function getrecomendationsAction(){
+        
+        echo 'Hello World'; die;
+        
+    }
 }

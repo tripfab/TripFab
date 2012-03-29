@@ -228,7 +228,7 @@
                             <div class="info">
                                 <span class="unavaible"><em></em>Not Available</span>
                                 <p class="recommendation"><?= $item->error ?> 
-                                <a href="#recomendation_listing" class="link-10 lbc">See our recommendations</a></p>
+                                <a href="/ajax/getrecomendations/<?= $item->id ?>" class="link-10 lb">See our recommendations</a></p>
                             </div><!--INFO-->
                         </div><!--HEADER-->
                         <?php endif ?>
@@ -263,7 +263,7 @@
                     </div><!--CHECKOUT_ACCORDION-->
                     <div class="terms">
                     	<label><input type="checkbox" name="bookings[<?= $item->id ?>][terms]" value="1" class="termscheck" />
-                    	I agree to the cancellation policy, hotel restrictions and <a href="#">terms of use.</a></label>
+                    	I agree to the cancellation policy, hotel restrictions and <a target="_blank" href="/terms">terms of use.</a></label>
                     </div><!--TERMS-->
                     <input type="hidden" name="userid" value="<?= $this->user->id ?>" />
                     <input type="hidden" name="ids" value="<?= $this->trip->id ?>" />
@@ -312,7 +312,6 @@
         </div><!--CUSTOM_CHECKOUT--> 
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
-    <div id="citiesAutocompleteContainer"></div>
 </div><!-- closes w1 -->
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript" src="/js2/trips/checkprices.js"></script>

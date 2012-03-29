@@ -1835,6 +1835,9 @@ class WS_ListingService {
             $option = $this->getRoom($option);
         }
         
+        if($option->people == 0)
+            throw new Exception('This listing is missing information', 1);
+        
         $row->max = $option->people;
         
         $sch = $this->getSchedule($option->schedule_id);
