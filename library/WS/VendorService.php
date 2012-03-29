@@ -55,6 +55,26 @@ class WS_VendorService {
 		$user->update(array("city_id"=>$city,"country_id"=>$country), $user->getAdapter()->quoteInto('id = ?', $user_id));
 	
 	}
+	
+	public function getBanksBy($vendor){
+		$db = Zend_Db_Table::getDefaultAdapter();
+	 	$db->setFetchMode(Zend_Db::FETCH_OBJ);
+		$select = $db->select();
+		$select->from(array('bankaccounts'));
+        $select->join('banks', 'bankaccounts.bank_id = banks.id', array('bank_name' => 'name') );
+       	$select->join('places', 'banks.country_id = places.id', array('country' => 'title'));
+        $select->where('bankaccounts.vendor_id = ?', $vendor);
+		return $db->fetchAll($select);
+	}
+	
+	public function saveBanking($data){
+	    $db = Zend_Db_Table::getDefaultAdapter();
+		$bank_r['name']=$name;
+		$bank_r['country_id']=$country;
+		$db->insert("banks",$bank_r);
+	
+	}
+
 
 }
 

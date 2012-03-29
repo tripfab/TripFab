@@ -24,7 +24,6 @@
 						showCloseButton: 'false'
 					});
             		$("#report_tabs").tabs();
-					panel(<?php echo $this->user->id?>, 1, 'partner');
 				});
 			</script>
 		</head>
@@ -45,11 +44,11 @@
 					<div class="listing-content">
 						<div class="left">
 							<ul>
-								<li id="nav1" class="current"><a href="javascript://" onclick="panel(<?php echo $this->user->id?>, 1, 'partner')">General Information</a></li>
-								<li id="nav2"><a href="javascript://" onclick="panel(<?php echo $this->user->id?>, 2,'partner')">Listings</a></li>
-								<li id="nav3"><a href="javascript://" onclick="panel(<?php echo $this->user->id?>, 3,'partner')">Reservations</a></li>
-								<li id="nav4"><a href="javascript://" onclick="panel(<?php echo $this->user->id?>, 4,'partner')">Offers</a></li>
-								<li id="nav5"><a href="javascript://" onclick="panel(<?php echo $this->user->id?>, 5,'partner')">Bank Accounts</a></li>
+								<li id="nav1"><a href="<?php echo $this->url(array('seq'=>1))?>">General Information</a></li>
+								<li id="nav2" class="current"><a href="<?php echo $this->url(array('seq'=>2))?>">Listings</a></li>
+								<li id="nav3"><a href="<?php echo $this->url(array('seq'=>3))?>">Reservations</a></li>
+								<li id="nav4"><a href="<?php echo $this->url(array('seq'=>4))?>">Offers</a></li>
+								<li id="nav5"><a href="<?php echo $this->url(array('seq'=>5))?>">Bank Accounts</a></li>
 							</ul>
 						</div><!-- closes left -->
 						<div class="right">
@@ -63,6 +62,47 @@
                         
 							<div class="lstng-details" id="content">
 
+<h3 class="title">Listings <a href="" class="back">Back to Partners</a></h3>
+<div class="block">
+<?php if(count($this->listings)): ?>
+	<?php foreach($this->listings as $listing) : ?>
+    <div class="single_trip">
+        <table width="520" border="0" class="info">
+            <tr>
+                <td width="180"><?php echo $listing->type_name?></td>
+                <td width="340"><?php echo $listing->title?></td>
+            </tr>
+            <tr>
+                <td width="180">Activity Code</td>
+                <td width="340"><?php echo $listing->id?></td>
+            </tr>
+            <tr>
+                <td width="180">Locations</td>
+                <td width="340"><?php echo $listing->address?> <?php echo $listing->address ? ', ' : '' ?><?php echo $listing->country_name?></td>
+            </tr>
+            <tr>
+                <td width="180">Status</td>
+                <td width="340"><?php echo $listing->status==1 ? 'Active' : 'Inactive'?></td>
+            </tr>
+            <tr>
+                <td width="180">Reservations</td>
+                <td width="340"><?php echo $listing->reservationTotal?></td>
+            </tr>
+            <tr>
+                <td width="180"></td>
+                <td width="340"><a href="/admin/listings/edit/<?php echo $listing->id?>">Edit Listing</a></td>
+            </tr>
+        </table>
+    </div><!--SINGLE_TRIP-->
+    
+    <?php endforeach;?>
+<?php else: ?>
+	<center><h1>There is no listing in this account.</h1></center>
+<?php endif;?>
+</div><!--BLOCK-->
+
+
+
 							</div>
 							<!-- closes lstng-details -->
 						</div>
@@ -74,6 +114,7 @@
 			</div><!--ALL_LISTING-->
 					
 			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+			<?php echo $this->partial('admin_partials/partner.phtml', array('name'=>$this->user->name, 'userId'=>$this->user->user_id)); ?>
             
             
             <div class="hidden">
