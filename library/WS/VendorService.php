@@ -7,7 +7,7 @@ class WS_VendorService {
 
     public function __construct() {
         $this->vendors = new Model_Vendors();
-		$this->bankAccounts = new Model_BankAccounts();
+		$this->bankAccounts = new Zend_Db_Table('bankaccounts');
     }
 
     public function getVendorById($ids) {
