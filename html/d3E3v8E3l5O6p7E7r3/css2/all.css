@@ -9050,7 +9050,12 @@ h2.title .back:hover,
 .profile-items .main-ttl > a.link-4 {
 	float: right;
 }
-
+.main-ttl a.back_btn{
+	color: #60b5f7;
+	font: bold 12px Helvetica;
+	float: right;
+	display: inline-block;
+}
 .main-ttl {
 	line-height: normal;
 	font-size: 13px;
@@ -13907,15 +13912,15 @@ h2.title .back:hover,
 	top:51px;
 	left:15px;
 	padding:10px 0;
+	list-style:none;
+	z-index: 10000;
 	-moz-border-radius-topleft: 0px;
 	-moz-border-radius-topright: 0px;
 	-moz-border-radius-bottomright: 4px;
 	-moz-border-radius-bottomleft: 4px;
 	-webkit-border-radius: 0px 0px 4px 4px;
 	border-radius: 0px 0px 4px 4px;
-	list-style:none;
-	behavior: url(PIE.htc);
-	z-index: 10000;
+	behavior: url(/PIE.htc);
 }
 #header .wrapper .menu_admin li ul li {
 	margin:0;
@@ -13966,6 +13971,14 @@ h2.title .back:hover,
 	font:bold 21px/51px Helvetica, Arial, sans-serif;
 	display:block;
 	float:left;
+}
+.w3_admin .sub_menu h2 em.ed {
+	color: #898989;
+	font: italic 12px Helvetica;
+}
+.w3_admin .sub_menu h2 a.partner {
+	color: #60b5f7;
+	font: bold 12px Helvetica;
 }
 .w3_admin .sub_menu h2 span {
 	font-size:13px;
