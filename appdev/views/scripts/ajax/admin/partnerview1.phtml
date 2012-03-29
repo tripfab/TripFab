@@ -1,3 +1,6 @@
+<h3 class="title">General Information <a href="" class="back">Back to Partners</a></h3>
+<div class="block">
+
 <form id="general" name="general" method="POST" action="/admin/users/view/partner/<?php echo $this->user->id ?>">
 <div class="single_trip">
     <div class="image"><img src="<?php echo $this->user->image?>" width="134" height="134" alt="" /></div><!--IMAGE-->
@@ -49,6 +52,8 @@
 <input type="hidden" name="user_id" value="<?php echo $this->user->user_id ?>"/>
 <input class="btn-1" type="submit" onclick="/admin/users/view/partner/<?php echo $this->user->id ?>" value="Upadate"/>
 </form>
+</div><!--BLOCK-->
+
 <script>
 		var cityId = '<?php echo $this->city;?>';
 		fillCityTrip($('#country').val());

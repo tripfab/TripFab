@@ -1,3 +1,5 @@
+<h3 class="title">Reservations <a href="/admin/users/travellers" class="back">Back to Travelers</a></h3>
+<div class="block">
 <?php if(count($this->reservations)): ?>
 	<?php foreach($this->reservations as $reservation) : ?>
     
@@ -41,3 +43,4 @@
 <?php else: ?>
 	<center><h1>User haven't made any reservation yet</h1></center>
 <?php endif;?>
+</div><!--BLOCK-->
