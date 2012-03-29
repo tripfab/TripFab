@@ -1714,6 +1714,11 @@ class AjaxController extends Zend_Controller_Action
                 $this->view->offers = $offers;
                 $this->render('admin/partnerview4');
                 break;
+            case 5:
+                //$banks = $this->vendors->getBanksBy($userId);
+                //$this->view->offers = $offers;
+                $this->render('admin/partnerview5');
+                break;
             default:
                 throw new Exception("Invalid panel type");
         }

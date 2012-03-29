@@ -3945,9 +3945,15 @@ class AdminController extends Zend_Controller_Action {
         }
 
         foreach ($paragraphs as $key => $value) {
-            if (!isset($paras[$key])) {
+			if (!isset($paras[$key])) {
+                $paras[$key]= array();
+            }
+
+            /*
+			if (!isset($paras[$key])) {
                 $paras[$key][0] = array('text' => '', 'image' => '');
             }
+			*/
         }
 
         //echo "<pre>"; print_r($paras); die;
