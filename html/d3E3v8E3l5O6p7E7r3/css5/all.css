@@ -12054,6 +12054,40 @@ ul.reviews li > div div.meta em.red {
 #trips .carrousel-itm .profile-items td {
 	vertical-align:top;
 }
+#trips .carrousel-itm .remove-p {
+    float: left;
+    padding: 13px 0 10px;
+    width: 100%;
+}
+#trips .carrousel-itm .remove-p .remove {
+    color: #F26522;
+    font: bold 11px/14px Helvetica;
+    padding-left: 20px;
+    text-indent: 0;
+    width: auto;
+}
+#trips .carrousel-itm .remove-p .remove:hover {
+    text-decoration: none;
+}
+#trips .carrousel-itm .add-p {
+    background: url("../images2/new_sep.png") repeat-x scroll 0 0 #F7F7F7;
+    float: left;
+    padding: 13px 0 10px;
+    width: 100%;
+}
+#trips .carrousel-itm .add-p a {
+    background: url("../images2/ico-32.png") no-repeat scroll left 50% transparent;
+    color: #60B5F7;
+    float: right;
+    font: bold 11px/14px Helvetica;
+    height: 14px;
+    margin-right: 30px;
+    padding-left: 20px;
+}
+#trips .carrousel-itm .add-p a:hover {
+    color: #9BD2FC;
+    text-decoration: none;
+}
 #trips h3.title {
 	background:none;
 	font:bold 14px/50px Helvetica, Arial, sans-serif;
@@ -13676,6 +13710,16 @@ ul.reviews li > div div.meta em.red {
     overflow: hidden;
     padding-bottom: 20px;
     width: 550px;
+}
+.profile-items .item-wrppr.second {
+    float: right;
+    margin-right: 30px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 470px;
+}
+#trips .carrousel-itm .profile-items .item-wrppr.second .item {
+    padding-left: 0;
 }
 /*END MY TRIPS-------------------------------------------------------------*/
 

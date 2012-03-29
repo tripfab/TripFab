@@ -1,3 +1,5 @@
+<h3 class="title">Trips <a href="/admin/users/travellers" class="back">Back to Travelers</a></h3>
+<div class="block">
 <?php if(count($this->trips)): ?>
 	<?php foreach($this->trips as $trip) : ?>
     <div class="single_trip">
@@ -40,3 +42,4 @@
 <?php else: ?>
 	<center><h1>User haven't create any trip yet.</h1></center>
 <?php endif;?>
+</div><!--BLOCK-->

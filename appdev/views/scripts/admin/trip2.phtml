@@ -78,7 +78,10 @@
 										<div class="carrousel-itm">
 											<div class="profile-items">
 												
-                                                <?php foreach($this->paras[$key] as $para):?>
+                                                <?php if(count($this->paras[$key])):?>
+												<?php foreach($this->paras[$key] as $para):?>
+                                                <div id="extreem-outer">
+                                                <div id="sami-outer">
                                                 <div class="item-wrppr">
 													<div class="item first last">
 														<textarea cols="30" rows="1" name="t<?php echo $key?>[]"><?php echo $para['text'] ?></textarea>
@@ -89,15 +92,11 @@
 													<div class="clear"></div>			
 												</div>
 												<!-- closes item-wrppr -->
-												<div class="item-wrppr">
+												<div class="item-wrppr second">
 													<div class="item first last">
 														
-														<table width="100%" border="0">
+														<table width="470" border="1">
 															<tr>
-																<td width="245">
-																	<h4>Paragraph Picture</h4>
-																	<p>Upload a Picture for this paragraph</p>
-																</td>
 																<td width="270">
 																	<h4>Picture Requeriments</h4>
 																	<dl class="photo-limit">
@@ -118,14 +117,27 @@
 														</table>
 													</div>
 													<!-- closes item -->
+                                                    <div class="remove-p"><a href="javascript://" class="remove">Remove Paragraph</a></div>
 													<div class="clear"></div>
-												</div>
+                                                    </div>
 												<!-- closes item-wrppr -->
+
+												</div>
+                                                <!-- close sami-outer-->
+                                                <div class="clear"></div>
+												</div> <!-- closes extreem-outer-->
 												<?php endforeach;?>
-												
-												
+												<?php else:?>
+                                                	<div class="item-wrppr">
+                                                      <div style="text-align:center; width:100%; height:40px; margin-top:30px;">No paragraph added for this section</div>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                
+												<?php endif;?>
 											</div>
 											<!-- closes profile-items -->
+ 											<div class="add-p"><a class="add-para-l" href="javascript://" identifier="<?php echo $key?>">Add Paragraph</a></div>
+                                           
 										</div>
 										<!-- closes carrousel-itm -->
                                       <?php endforeach;?>
@@ -154,5 +166,74 @@
 		</div>
 		<!-- closes w1 -->
 		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+        
+        <script type="text/javascript">
+        	$('.remove').live('click',function(){
+				var dcontainer = $(this).parent("div:first").parent("div:first").parent("div:first").parent("div:first").parent("div:first");
+				var child = $(this).parent("div:first").parent("div:first").parent("div:first").parent("div:first").parent("div:first").children().length ;
+				$(this).parent("div:first").parent("div:first").parent("div:first").parent("div:first").remove();
+				if(child==1){
+					html = '<div class="item-wrppr">';
+					html += '<div style="text-align:center; width:100%; height:40px; margin-top:30px;">No paragraph added for this section</div>';
+                    html += '</div>';
+					html += '<div class="clear"></div>';
+					dcontainer.html(html);
+				}
+			});
+			
+        	$('.add-para-l').live('click',function(){
+				var identifier = $(this).attr("identifier");
+				
+		      	html ='                  <div id="extreem-outer">';
+			 	html +='							<div id="sami-outer">';
+				html +='						<div class="item-wrppr">';
+				html +='							<div class="item first last">';
+				html +='								<textarea cols="30" rows="1" name="t'+ identifier +'[]"></textarea>';
+				html +='								<h4><span>1</span>Paragraph</h4>';
+				html +='								<p>Write the first paragraph</p>';
+				html +='							</div>';
+				html +='							<!-- closes item -->';
+				html +='							<div class="clear"></div>			';
+				html +='						</div>';
+				html +='						<!-- closes item-wrppr -->';
+				html +='						<div class="item-wrppr second">';
+				html +='							<div class="item first last">';
+				html +='								<table width="470" border="1">';
+				html +='									<tr>';
+				html +='										<td width="270">';
+				html +='											<h4>Picture Requeriments</h4>';
+				html +='											<dl class="photo-limit">';
+				html +='												<dt>Upload limit</dt>';
+				html +='												<dd>10 photos per listing</dd>';
+				html +='												<dt>Photo Dimention</dt>';
+				html +='												<dd>640x425 pixels</dd>';
+				html +='												<dt>File size</dt>';
+				html +='												<dd>2MB or less</dd>';
+				html +='											</dl>';
+				html +='										</td>';
+				html +='										<td width="200">';
+				html +='											<img src="" width="68" height="68" alt="" />';
+				html +='											<input type="file" name="f'+ identifier +'[]" />';
+				html +='											<input type="hidden" name="h'+ identifier +'[]" value="" />';
+				html +='										</td>';
+				html +='									</tr>';
+				html +='								</table>';
+				html +='							</div>';
+				html +='							<!-- closes item -->';
+				html +='							<div class="remove-p"><a href="javascript://" class="remove">Remove Paragraph</a></div>';
+				html +='							<div class="clear"></div>';
+				html +='							</div>';
+				html +='						<!-- closes item-wrppr -->';
+				html +='						</div>';
+				html +='						<!-- close sami-outer-->';
+				html +='						<div class="clear"></div>';
+				html +='						</div> <!-- closes extreem-outer-->';
+		
+				if($(this).parent("div:first").parent("div:first").children("div:first").html().length < 600){
+					$(this).parent("div:first").parent("div:first").children("div:first").html('');	
+				}
+				$(this).parent("div:first").parent("div:first").children("div:first").append(html);
+			});
+        </script>
 	</body>
 </html>
