@@ -100,8 +100,11 @@ class WS_VendorService {
 		}
 	
 	}
-
-
+	
+	public function removeBankAccount($bank){
+		$this->bankAccounts->delete("id= $bank");
+		return true;
+	}
 }
 
 ?>

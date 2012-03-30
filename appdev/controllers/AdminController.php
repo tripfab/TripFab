@@ -3035,10 +3035,10 @@ class AdminController extends Zend_Controller_Action {
     }
 	
 	private function partnerViewTask($user){
-        $vendorId = $this->_getParam('sort');
+		$vendorId = $this->_getParam('sort');
 		$page = $this->_getParam('seq')=='default' ? 1: $this->_getParam('seq') ;
 		switch($page){
-			case 1:
+			case '1':
 				
 				if ($this->getRequest()->isPost()) {
 					$name = $_POST['name'];
@@ -3060,27 +3060,32 @@ class AdminController extends Zend_Controller_Action {
 				$this->view->countries = $countries;
 				$this->render('partnerview1');
 				break;
-			case 2:
+			case '2':
                 $listings = $this->listings->getVendorListings($vendorId);
                 $this->view->listings = $listings;
 				$this->render('partnerview2');
 				break;
-			case 3:
+			case '3':
                 $reservations = $this->reservations->getHistory($vendorId);
                 $this->view->reservations = $reservations;
 				$this->render('partnerview3');
 				break;
-			case 4:
+			case '4':
                 $offers = $this->vendors->getOffersBy($vendorId);
                 $this->view->offers = $offers;
 				$this->render('partnerview4');
 				break;
-			case 5:
+			case '5':
                 $banks = $this->vendors->getBanksBy($vendorId);
                 $this->view->banks = $banks;
 				$this->render('partnerview5');
 				break;
-			case 6:
+			case '5a':
+				$bankId = $this->_getParam('q');
+                $this->vendors->removeBankAccount($bankId);
+				$this->_redirect("/admin/users/view/partner/$vendorId/5");
+				break;
+			case '6':
         		$this->view->banks = WS_BanksService::this()->getBanksBy();
 				$bankId = $this->_getParam('q');
 				$this->view->bankId = '';	
@@ -3099,7 +3104,7 @@ class AdminController extends Zend_Controller_Action {
 					}
 					$id = $this->vendors->saveBankAccount($bankId, $data);
 					$_SESSION['alert'] = 'Your changes have been saved';
-					$this->_redirect($this->view->url(array('q'=>$id)));
+					$this->_redirect($this->view->url(array('seq'=>5)));
 			   }
 
 				if($bankId){
