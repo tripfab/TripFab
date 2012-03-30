@@ -76,7 +76,7 @@ class WS_Notifier extends Zend_Mail {
     {
         $this->setSubject('Welcome to Tripfab');
         $this->addTo($this->user->email);
-        $this->sendHTMLTemplate('welcome-partner.phtml');
+        //$this->sendHTMLTemplate('welcome-partner.phtml');
     }
     
     /**
@@ -109,7 +109,7 @@ class WS_Notifier extends Zend_Mail {
         
         $this->setSubject('Listing Approved');
         $this->addTo($this->user->email);
-        $this->sendHTMLTemplate('listing-approved.phtml');
+        //$this->sendHTMLTemplate('listing-approved.phtml');
     }
     
     /**
