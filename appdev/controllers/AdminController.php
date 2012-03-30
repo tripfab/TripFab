@@ -4204,7 +4204,7 @@ class AdminController extends Zend_Controller_Action {
 		$listingType = $this->listings->getMainTypes();
 		$this->view->listingTypes = $listingType;
 
-
+		$this->view->flexi_hour = false;
         $this->view->errors = array();
 		$this->view->title = '';
 		$this->view->description = '';
@@ -4215,6 +4215,7 @@ class AdminController extends Zend_Controller_Action {
 		$this->view->duration = '';
 		$this->view->start_hour = '';
 		$this->view->end_hour = '';
+		$this->view->timef = '';
 		$this->view->lng = '';
 		$this->view->lat = '';
 		$this->view->image = '';
@@ -4234,6 +4235,7 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->duration = $_POST['duration'];
                 $this->view->start_hour = $_POST['start_hour'];
                 $this->view->end_hour = $_POST['end_hour'];
+				$this->view->time_type = $_POST['time_type'];
                 $this->view->lng = $_POST['lng'];
                 $this->view->lat = $_POST['lat'];
 				$this->view->featured = @$_POST['check'];
@@ -4250,8 +4252,20 @@ class AdminController extends Zend_Controller_Action {
 			$data['day'] = $_POST['day'];
 			$data['city_id'] = $_POST['city'];
 			$data['country_id'] = $_POST['country'];
-			$data['start'] = $this->timeTo24HoursFormat($_POST['start_hour']);
-			$data['end'] = $this->timeTo24HoursFormat($_POST['end_hour']);
+			if($_POST['time_type'] == 'fixed'){
+				$data['start'] = $this->timeTo24HoursFormat($_POST['start_hour']);
+				$data['end'] = $this->timeTo24HoursFormat($_POST['end_hour']);
+			}
+			else{
+				$data['time'] = $_POST['flexi_time'];
+				$data['start'] = '00:00:00';
+				$data['end'] =  '00:00:00';
+			}
+			if($_POST['type'] == 5){
+				$data['start'] = '00:00:00';
+				$data['end'] =  '00:00:00';
+				$data['time'] = 4;
+			}
 			$data['duration'] = $_POST['duration'];
 			$data['lng'] = $_POST['lng'];
 			$data['lat'] = $_POST['lat'];
@@ -4286,10 +4300,15 @@ class AdminController extends Zend_Controller_Action {
 			$this->view->duration = $listing->duration;
 			$this->view->start_hour = $listing->start_time;
 			$this->view->end_hour = $listing->end_time;
+			$this->view->timef = $listing->time;
 			$this->view->lng = $listing->lng;
 			$this->view->lat = $listing->lat;
 			$this->view->image = $listing->image;
 			$this->view->featured = $listing->featured;
+			if(substr($listing->start, 0, 5)== '00:00' && substr($listing->end, 0, 5)== '00:00' ){
+				$this->view->flexi_hour = true;	
+				
+			}
 		}
 		$this->render('trip6');
 	}
@@ -4344,7 +4363,7 @@ class AdminController extends Zend_Controller_Action {
 		if (!(int) $postData['duration'])
             $errors['duration'] = 'Itinerary duration must be a positive number';
 		
-		if($postData['type'] != 5){
+		if($postData['type'] != 5 && $postData['time_type'] == 'fixed'){
 
 			if (empty($postData['start_hour']))
 				$errors['start_hour'] = 'Starting hour can not be blank';
