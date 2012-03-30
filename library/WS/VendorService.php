@@ -24,7 +24,7 @@ class WS_VendorService {
         $db = Zend_Db_Table::getDefaultAdapter();
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = $db->select();
-        $select->from('vendors')
+        $select->from('vendors', array('*', 'partner_since_date' => new Zend_Db_Expr("DATE_FORMAT(vendors.created,'%b %d, %Y')")))
                 ->join(array('users'), 'vendors.user_id=users.id', array('userName' => 'name','active'=>'active', 'user_id'=>'id'))
                 ->joinleft(array('city' => 'places'), 'users.city_id=city.id', array('city_id'=>'id','cityName' => 'title'))
                 ->joinleft(array('country' => 'places'), 'users.country_id=country.id', array('country_id'=>'id','countryName' => 'title'))
@@ -52,7 +52,7 @@ class WS_VendorService {
     }
 	public function saveInfo($id,$name, $email, $contact_name, $date, $phone, $city, $country, $website, $user_id){
 		$vendor = new Model_Vendors();
-		$vendor->update(array("id"=>$id,"name"=>$name,"email"=>$email,"contact_name"=>$contact_name,"created"=>$date,"phone"=>$phone,"website"=>$website), $vendor->getAdapter()->quoteInto('id = ?', $id));
+		$vendor->update(array("name"=>$name,"email"=>$email,"contact_name"=>$contact_name,"created"=>$date,"phone"=>$phone,"website"=>$website), $vendor->getAdapter()->quoteInto('id = ?', $id));
 		$user = new Model_Users();
 		$user->update(array("city_id"=>$city,"country_id"=>$country), $user->getAdapter()->quoteInto('id = ?', $user_id));
 	
@@ -100,8 +100,11 @@ class WS_VendorService {
 		}
 	
 	}
-
-
+	
+	public function removeBankAccount($bank){
+		$this->bankAccounts->delete("id= $bank");
+		return true;
+	}
 }
 
 ?>

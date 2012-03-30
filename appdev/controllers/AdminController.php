@@ -2607,7 +2607,7 @@ class AdminController extends Zend_Controller_Action {
                 $select->from(array('region' => 'places'), array('id', 'regionName' => 'title'))
                         ->joinleft(array('country' => 'places'), 'country.parent_id = region.id', array('countryTotal' => 'COUNT( DISTINCT country.id)'))
                         ->joinleft(array('city' => 'places'), 'city.parent_id = country.id', array('cityTotal' => 'COUNT(DISTINCT city.id)'))
-                        ->joinleft('listings', 'city.id=listings.city_id', array('activityTotal' => 'COUNT(IF(listings.main_type=2, 1, NULL))', 'entertainmentTotal' => 'COUNT(IF(listings.main_type=3, 1, NULL))', 'touristTotal' => 'COUNT(IF(listings.main_type=4, 1, NULL))', 'restaurantTotal' => 'COUNT(IF(listings.main_type=5, 1, NULL))', 'hotelsTotal' => 'COUNT(IF(listings.main_type=6, 1, NULL))'))
+                        ->joinleft('listings', 'city.id=listings.city_id', array('activityTotal' => 'COUNT(IF(listings.main_type=6, 1, NULL))', 'entertainmentTotal' => 'COUNT(IF(listings.main_type=7, 1, NULL))', 'touristTotal' => 'COUNT(IF(listings.main_type=4, 1, NULL))', 'restaurantTotal' => 'COUNT(IF(listings.main_type=2, 1, NULL))', 'hotelsTotal' => 'COUNT(IF(listings.main_type=5, 1, NULL))'))
                         ->where('region.parent_id IS NULL and region.type_id=1')
                         ->group('region.id');
                 if ($this->view->searchText) {
@@ -2622,7 +2622,7 @@ class AdminController extends Zend_Controller_Action {
                 $select->from(array('country' => 'places'), array('id', 'countryName' => 'title'))
                         ->join(array('region' => 'places'), 'country.parent_id = region.id', array('region_name' => 'title', 'region_id'=>'id'))
                         ->join(array('city' => 'places'), 'city.parent_id = country.id', array('cityTotal' => 'COUNT(city.id)'))
-                        ->joinleft('listings', 'city.id=listings.city_id', array('activityTotal' => 'COUNT(IF(listings.main_type=2, 1, NULL))', 'entertainmentTotal' => 'COUNT(IF(listings.main_type=3, 1, NULL))', 'touristTotal' => 'COUNT(IF(listings.main_type=4, 1, NULL))', 'restaurantTotal' => 'COUNT(IF(listings.main_type=5, 1, NULL))', 'hotelsTotal' => 'COUNT(IF(listings.main_type=6, 1, NULL))'))
+                        ->joinleft('listings', 'city.id=listings.city_id', array('activityTotal' => 'COUNT(IF(listings.main_type=6, 1, NULL))', 'entertainmentTotal' => 'COUNT(IF(listings.main_type=7, 1, NULL))', 'touristTotal' => 'COUNT(IF(listings.main_type=4, 1, NULL))', 'restaurantTotal' => 'COUNT(IF(listings.main_type=2, 1, NULL))', 'hotelsTotal' => 'COUNT(IF(listings.main_type=5, 1, NULL))'))
                         //->joinleft('vendors', 'country.id=vendors.place_id', array('partnerTotal' => 'COUNT(vendors.id)'))
 						->where('country.type_id =2')
                         ->group('country.id');
@@ -2643,7 +2643,7 @@ class AdminController extends Zend_Controller_Action {
                 $template = 'cities';
                 $select->from(array('city' => 'places'), array('id', 'cityName' => 'title'))
                         ->join(array('country' => 'places'), 'city.parent_id = country.id', array('countryName' => 'title', 'country_id'=>'id'))
-                        ->joinleft('listings', 'city.id=listings.city_id', array('activityTotal' => 'COUNT(IF(listings.main_type=2, 1, NULL))', 'entertainmentTotal' => 'COUNT(IF(listings.main_type=3, 1, NULL))', 'touristTotal' => 'COUNT(IF(listings.main_type=4, 1, NULL))', 'restaurantTotal' => 'COUNT(IF(listings.main_type=5, 1, NULL))', 'hotelsTotal' => 'COUNT(IF(listings.main_type=6, 1, NULL))'))
+                        ->joinleft('listings', 'city.id=listings.city_id', array('activityTotal' => 'COUNT(IF(listings.main_type=6, 1, NULL))', 'entertainmentTotal' => 'COUNT(IF(listings.main_type=7, 1, NULL))', 'touristTotal' => 'COUNT(IF(listings.main_type=4, 1, NULL))', 'restaurantTotal' => 'COUNT(IF(listings.main_type=2, 1, NULL))', 'hotelsTotal' => 'COUNT(IF(listings.main_type=5, 1, NULL))'))
                         ->where('city.type_id =3')
                         ->group('city.id');
                 if ($this->view->searchText) {
@@ -2982,7 +2982,7 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->title = "Partners";
                 $template = 'partners';
                 $select->from(array('users'), array('id', 'name', 'email', 'active'))
-                        ->join('vendors', 'users.id=vendors.user_id', array('vendorId' => 'id', 'partnerName' => 'name', 'partnerEmail' => 'email', 'listingsCount' => 'listings'))
+                        ->join('vendors', 'users.id=vendors.user_id', array('vendorId' => 'id', 'partnerName' => 'name', 'partnerEmail' => 'email', 'listingsCount' => 'listings', 'contact_name'))
                         ->joinleft(array('city' => 'places'), 'users.city_id=city.id', array('cityName' => 'title'))
                         ->joinleft(array('country' => 'places'), 'users.country_id=country.id', array('countryName' => 'title'))
                         ->joinleft('reservations', 'vendors.id=reservations.vendor_id', array('reservationTotal' => 'COUNT(reservations.id)'))
@@ -3011,7 +3011,7 @@ class AdminController extends Zend_Controller_Action {
         $userType = $this->_getParam('page');
 		
         $this->view->successMessage = '';
-        if ($_SESSION['alert']) {
+        if (@$_SESSION['alert']) {
             $this->view->successMessage = "Your changes have been saved";
             $_SESSION['alert'] = '';
         }
@@ -3035,16 +3035,16 @@ class AdminController extends Zend_Controller_Action {
     }
 	
 	private function partnerViewTask($user){
-        $vendorId = $this->_getParam('sort');
+		$vendorId = $this->_getParam('sort');
 		$page = $this->_getParam('seq')=='default' ? 1: $this->_getParam('seq') ;
 		switch($page){
-			case 1:
+			case '1':
 				
 				if ($this->getRequest()->isPost()) {
 					$name = $_POST['name'];
 					$email = $_POST['email'];
 					$contact_name = $_POST['contact_name'];
-					$date = $_POST['created'];
+					$date = self::urlDateToMySql($_POST['created']);
 					$phone = $_POST['phone'];
 					$city = $_POST['city'];
 					$country = $_POST['country'];
@@ -3053,33 +3053,39 @@ class AdminController extends Zend_Controller_Action {
 					$this->vendors->saveInfo($vendorId, $name, $email, $contact_name, $date, $phone, $city, $country, $website, $user->user_id);
 					$_SESSION['alert'] = 'Your changes have been saved';
 			   		$user = $this->vendors->getVendorDetailsById($vendorId);
+                	$this->view->user = $user;
 			   }
 				
 				$countries = $this->places->getPlaces(2);
 				$this->view->countries = $countries;
 				$this->render('partnerview1');
 				break;
-			case 2:
+			case '2':
                 $listings = $this->listings->getVendorListings($vendorId);
                 $this->view->listings = $listings;
 				$this->render('partnerview2');
 				break;
-			case 3:
+			case '3':
                 $reservations = $this->reservations->getHistory($vendorId);
                 $this->view->reservations = $reservations;
 				$this->render('partnerview3');
 				break;
-			case 4:
+			case '4':
                 $offers = $this->vendors->getOffersBy($vendorId);
                 $this->view->offers = $offers;
 				$this->render('partnerview4');
 				break;
-			case 5:
+			case '5':
                 $banks = $this->vendors->getBanksBy($vendorId);
                 $this->view->banks = $banks;
 				$this->render('partnerview5');
 				break;
-			case 6:
+			case '5a':
+				$bankId = $this->_getParam('q');
+                $this->vendors->removeBankAccount($bankId);
+				$this->_redirect("/admin/users/view/partner/$vendorId/5");
+				break;
+			case '6':
         		$this->view->banks = WS_BanksService::this()->getBanksBy();
 				$bankId = $this->_getParam('q');
 				$this->view->bankId = '';	
@@ -3098,7 +3104,7 @@ class AdminController extends Zend_Controller_Action {
 					}
 					$id = $this->vendors->saveBankAccount($bankId, $data);
 					$_SESSION['alert'] = 'Your changes have been saved';
-					$this->_redirect($this->view->url(array('q'=>$id)));
+					$this->_redirect($this->view->url(array('seq'=>5)));
 			   }
 
 				if($bankId){
@@ -4203,17 +4209,18 @@ class AdminController extends Zend_Controller_Action {
 		$listingType = $this->listings->getMainTypes();
 		$this->view->listingTypes = $listingType;
 
-
+		$this->view->flexi_hour = false;
         $this->view->errors = array();
 		$this->view->title = '';
 		$this->view->description = '';
-		$this->view->days = '';
+		$this->view->day = '';
 		$this->view->type = '';
 		$this->view->country ='';
 		$this->view->city = '';
 		$this->view->duration = '';
 		$this->view->start_hour = '';
 		$this->view->end_hour = '';
+		$this->view->timef = '';
 		$this->view->lng = '';
 		$this->view->lat = '';
 		$this->view->image = '';
@@ -4233,10 +4240,11 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->duration = $_POST['duration'];
                 $this->view->start_hour = $_POST['start_hour'];
                 $this->view->end_hour = $_POST['end_hour'];
+				$this->view->time_type = $_POST['time_type'];
                 $this->view->lng = $_POST['lng'];
                 $this->view->lat = $_POST['lat'];
 				$this->view->featured = @$_POST['check'];
-				$this->view->image = $_POST['hdn_image'];
+				$this->view->image = $_POST['image'];
 				
                 $this->render('trip6');
                 return;
@@ -4249,8 +4257,20 @@ class AdminController extends Zend_Controller_Action {
 			$data['day'] = $_POST['day'];
 			$data['city_id'] = $_POST['city'];
 			$data['country_id'] = $_POST['country'];
-			$data['start'] = $this->timeTo24HoursFormat($_POST['start_hour']);
-			$data['end'] = $this->timeTo24HoursFormat($_POST['end_hour']);
+			if($_POST['time_type'] == 'fixed'){
+				$data['start'] = $this->timeTo24HoursFormat($_POST['start_hour']);
+				$data['end'] = $this->timeTo24HoursFormat($_POST['end_hour']);
+			}
+			else{
+				$data['time'] = $_POST['flexi_time'];
+				$data['start'] = '00:00:00';
+				$data['end'] =  '00:00:00';
+			}
+			if($_POST['type'] == 5){
+				$data['start'] = '00:00:00';
+				$data['end'] =  '00:00:00';
+				$data['time'] = 4;
+			}
 			$data['duration'] = $_POST['duration'];
 			$data['lng'] = $_POST['lng'];
 			$data['lat'] = $_POST['lat'];
@@ -4285,10 +4305,15 @@ class AdminController extends Zend_Controller_Action {
 			$this->view->duration = $listing->duration;
 			$this->view->start_hour = $listing->start_time;
 			$this->view->end_hour = $listing->end_time;
+			$this->view->timef = $listing->time;
 			$this->view->lng = $listing->lng;
 			$this->view->lat = $listing->lat;
 			$this->view->image = $listing->image;
 			$this->view->featured = $listing->featured;
+			if(substr($listing->start, 0, 5)== '00:00' && substr($listing->end, 0, 5)== '00:00' ){
+				$this->view->flexi_hour = true;	
+				
+			}
 		}
 		$this->render('trip6');
 	}
@@ -4343,7 +4368,7 @@ class AdminController extends Zend_Controller_Action {
 		if (!(int) $postData['duration'])
             $errors['duration'] = 'Itinerary duration must be a positive number';
 		
-		if($postData['type'] != 5){
+		if($postData['type'] != 5 && $postData['time_type'] == 'fixed'){
 
 			if (empty($postData['start_hour']))
 				$errors['start_hour'] = 'Starting hour can not be blank';
@@ -4459,7 +4484,7 @@ class AdminController extends Zend_Controller_Action {
         if (!array_key_exists($monthName, $months)) {
             return false;
         }
-        return substr($dateString, 6, 4) . '-' . $months[$monthName] . '-' . substr($dateString, 3, 2);
+        return substr($dateString, 8, 4) . '-' . $months[$monthName] . '-' . substr($dateString, 4, 2);
     }
 
     static function jsonEcho($jsonString) {

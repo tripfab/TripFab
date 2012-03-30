@@ -82,7 +82,7 @@
         </tr>
         <tr>
             <td width="180">Partner Since</td>
-			<td width="340"><input type="text" name="created" value="<?php echo date('M d, Y', strtotime($this->user->created))?>" /></td>
+			<td width="340"><input type="text" name="created" id="created" value="<?php echo substr($this->user->created, 0, 4) =='0000' ? '' : date('M d, Y', strtotime($this->user->created))?>" /></td>
         </tr>
         <tr>            
             <td width="180">Country</td>
@@ -154,7 +154,7 @@
 
 
 <script>
-		var cityId = '<?php echo $this->city;?>';
+		var cityId = '<?php echo $this->user->city_id;?>';
 		fillCityTrip($('#country').val());
 		screenUpdate();
 		$('select#country').change(function(){
@@ -188,6 +188,16 @@
 				});
 			});	
 		}
+		
+		$(document).ready(function() {
+			$('input[name=created]').each(function(){
+				$val = $(this).val();
+				$(this).datepicker({
+					dateFormat:'M dd, yy',
+					defaultDate:$val,
+				});
+			});
+		})
 				
 		</script>
 
