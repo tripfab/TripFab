@@ -66,7 +66,7 @@ class Zend_View_Helper_Thumbnail {
             $local_filepath = $remoteFolder . $filename;
             $download_image = true;
             if (file_exists($local_filepath)):
-                $download_image = true;
+                $download_image = false;
             endif;
             if ($download_image == true):
 				
