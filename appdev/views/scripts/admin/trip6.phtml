@@ -123,8 +123,8 @@
 											Select the day of the activity 
 										</p>
 										<select  id="day"  name="day">
-											<?php for($i=1; $i<max(1,$this->trip->days); $i++):?>
-                                            <option <?php $this->day == $i ? 'selected="selected"' : '';?>><?php echo $i?></option>
+											<?php for($i=1; $i<=max(1,$this->trip->days); $i++):?>
+                                            <option <?php echo $this->day == $i ? 'selected="selected"' : '';?>><?php echo $i?></option>
                                             <?php endfor;?>
 										</select>
 									</div><!---ITEM-->
@@ -135,8 +135,8 @@
 											Select how many days long
 										</p>
 										<select  id="duration"  name="duration">
-											<?php for($i=1; $i<max(1,$this->trip->days); $i++):?>
-                                            <option <?php $this->duration == $i ? 'selected="selected"' : '';?>><?php echo $i?></option>
+											<?php for($i=1; $i<=max(1,$this->trip->days); $i++):?>
+                                            <option <?php echo $this->duration == $i ? 'selected="selected"' : '';?>><?php echo $i?></option>
                                             <?php endfor;?>
 										</select>
 										

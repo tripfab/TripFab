@@ -2607,7 +2607,7 @@ class AdminController extends Zend_Controller_Action {
                 $select->from(array('region' => 'places'), array('id', 'regionName' => 'title'))
                         ->joinleft(array('country' => 'places'), 'country.parent_id = region.id', array('countryTotal' => 'COUNT( DISTINCT country.id)'))
                         ->joinleft(array('city' => 'places'), 'city.parent_id = country.id', array('cityTotal' => 'COUNT(DISTINCT city.id)'))
-                        ->joinleft('listings', 'city.id=listings.city_id', array('activityTotal' => 'COUNT(IF(listings.main_type=2, 1, NULL))', 'entertainmentTotal' => 'COUNT(IF(listings.main_type=3, 1, NULL))', 'touristTotal' => 'COUNT(IF(listings.main_type=4, 1, NULL))', 'restaurantTotal' => 'COUNT(IF(listings.main_type=5, 1, NULL))', 'hotelsTotal' => 'COUNT(IF(listings.main_type=6, 1, NULL))'))
+                        ->joinleft('listings', 'city.id=listings.city_id', array('activityTotal' => 'COUNT(IF(listings.main_type=6, 1, NULL))', 'entertainmentTotal' => 'COUNT(IF(listings.main_type=7, 1, NULL))', 'touristTotal' => 'COUNT(IF(listings.main_type=4, 1, NULL))', 'restaurantTotal' => 'COUNT(IF(listings.main_type=2, 1, NULL))', 'hotelsTotal' => 'COUNT(IF(listings.main_type=5, 1, NULL))'))
                         ->where('region.parent_id IS NULL and region.type_id=1')
                         ->group('region.id');
                 if ($this->view->searchText) {
@@ -2622,7 +2622,7 @@ class AdminController extends Zend_Controller_Action {
                 $select->from(array('country' => 'places'), array('id', 'countryName' => 'title'))
                         ->join(array('region' => 'places'), 'country.parent_id = region.id', array('region_name' => 'title', 'region_id'=>'id'))
                         ->join(array('city' => 'places'), 'city.parent_id = country.id', array('cityTotal' => 'COUNT(city.id)'))
-                        ->joinleft('listings', 'city.id=listings.city_id', array('activityTotal' => 'COUNT(IF(listings.main_type=2, 1, NULL))', 'entertainmentTotal' => 'COUNT(IF(listings.main_type=3, 1, NULL))', 'touristTotal' => 'COUNT(IF(listings.main_type=4, 1, NULL))', 'restaurantTotal' => 'COUNT(IF(listings.main_type=5, 1, NULL))', 'hotelsTotal' => 'COUNT(IF(listings.main_type=6, 1, NULL))'))
+                        ->joinleft('listings', 'city.id=listings.city_id', array('activityTotal' => 'COUNT(IF(listings.main_type=6, 1, NULL))', 'entertainmentTotal' => 'COUNT(IF(listings.main_type=7, 1, NULL))', 'touristTotal' => 'COUNT(IF(listings.main_type=4, 1, NULL))', 'restaurantTotal' => 'COUNT(IF(listings.main_type=2, 1, NULL))', 'hotelsTotal' => 'COUNT(IF(listings.main_type=5, 1, NULL))'))
                         //->joinleft('vendors', 'country.id=vendors.place_id', array('partnerTotal' => 'COUNT(vendors.id)'))
 						->where('country.type_id =2')
                         ->group('country.id');
@@ -2643,7 +2643,7 @@ class AdminController extends Zend_Controller_Action {
                 $template = 'cities';
                 $select->from(array('city' => 'places'), array('id', 'cityName' => 'title'))
                         ->join(array('country' => 'places'), 'city.parent_id = country.id', array('countryName' => 'title', 'country_id'=>'id'))
-                        ->joinleft('listings', 'city.id=listings.city_id', array('activityTotal' => 'COUNT(IF(listings.main_type=2, 1, NULL))', 'entertainmentTotal' => 'COUNT(IF(listings.main_type=3, 1, NULL))', 'touristTotal' => 'COUNT(IF(listings.main_type=4, 1, NULL))', 'restaurantTotal' => 'COUNT(IF(listings.main_type=5, 1, NULL))', 'hotelsTotal' => 'COUNT(IF(listings.main_type=6, 1, NULL))'))
+                        ->joinleft('listings', 'city.id=listings.city_id', array('activityTotal' => 'COUNT(IF(listings.main_type=6, 1, NULL))', 'entertainmentTotal' => 'COUNT(IF(listings.main_type=7, 1, NULL))', 'touristTotal' => 'COUNT(IF(listings.main_type=4, 1, NULL))', 'restaurantTotal' => 'COUNT(IF(listings.main_type=2, 1, NULL))', 'hotelsTotal' => 'COUNT(IF(listings.main_type=5, 1, NULL))'))
                         ->where('city.type_id =3')
                         ->group('city.id');
                 if ($this->view->searchText) {
@@ -4213,7 +4213,7 @@ class AdminController extends Zend_Controller_Action {
         $this->view->errors = array();
 		$this->view->title = '';
 		$this->view->description = '';
-		$this->view->days = '';
+		$this->view->day = '';
 		$this->view->type = '';
 		$this->view->country ='';
 		$this->view->city = '';
@@ -4244,7 +4244,7 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->lng = $_POST['lng'];
                 $this->view->lat = $_POST['lat'];
 				$this->view->featured = @$_POST['check'];
-				$this->view->image = $_POST['hdn_image'];
+				$this->view->image = $_POST['image'];
 				
                 $this->render('trip6');
                 return;
