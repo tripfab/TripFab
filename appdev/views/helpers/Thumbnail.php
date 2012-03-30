@@ -121,6 +121,8 @@ class Zend_View_Helper_Thumbnail {
             endif;
         endif;
         
+        $create = true;
+        
         if ($create == true):
             if (!empty($w) and !empty($h)):
 
