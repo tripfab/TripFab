@@ -1524,11 +1524,11 @@ class WS_ListingService {
             $counter = array();
             foreach($cats as $cat){
                 if($cat->name == 'All'){
-                    $sql = "Select count(*) as c from listings where city_id = {$city}";
+                    $sql = "Select count(*) as c from listings where city_id = {$city} and status = 1";
                     $count = $db->fetchRow($sql);
                     $counter[$cat->id] = $count['c'];
                 } else {
-                    $sql = "Select count(*) as c from listings where city_id = {$city} and main_type = {$cat->id}";
+                    $sql = "Select count(*) as c from listings where city_id = {$city} and main_type = {$cat->id} and status = 1";
                     $count = $db->fetchRow($sql);
                     $counter[$cat->id] = $count['c'];
                 }
@@ -1537,7 +1537,7 @@ class WS_ListingService {
         } elseif(!is_null($vendor)){
             $db = Zend_Db_Table::getDefaultAdapter();
             
-            $sql     = "Select count(*) as c from listings where vendor_id = {$vendor}";
+            $sql     = "Select count(*) as c from listings where vendor_id = {$vendor} and status = 1";
             $count   = $db->fetchRow($sql);
             $counter = $count['c'];
             
@@ -1548,11 +1548,11 @@ class WS_ListingService {
             $counter = array();
             foreach($cats as $cat){
                 if($cat->name == 'All'){
-                    $sql = "Select count(*) as c from listings where country_id = {$country}";
+                    $sql = "Select count(*) as c from listings where country_id = {$country} and status = 1";
                     $count = $db->fetchRow($sql);
                     $counter[$cat->id] = $count['c'];
                 } else {
-                    $sql = "Select count(*) as c from listings where country_id = {$country} and main_type = {$cat->id}";
+                    $sql = "Select count(*) as c from listings where country_id = {$country} and main_type = {$cat->id} and status = 1";
                     $count = $db->fetchRow($sql);
                     $counter[$cat->id] = $count['c'];
                 }
