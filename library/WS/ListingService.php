@@ -571,12 +571,12 @@ class WS_ListingService {
         $args = func_get_args();
         $cacheId = "LS_getListings2_".md5(print_r($args, true));
         
-        if($this->use_cache || !$this->cache->test($cacheId)) {
+        if(true){//$this->use_cache || !$this->cache->test($cacheId)) {
             
             $db = Zend_Db_Table::getDefaultAdapter();
             $select = $db->select();
             $select->from('listings');
-            //$select->where('listings.status = ?', 1);
+            $select->where('listings.status = ?', 1);
             if(!is_null($place))
                 $select->where('listings.city_id = ?', $place);
             else
