@@ -122,7 +122,11 @@
 											<strong>Itinerary Day</strong>
 											Select the day of the activity 
 										</p>
-										<input name="day" value="<?php echo $this->day ?>" class="name-in" type="text">
+										<select  id="day"  name="day">
+											<?php for($i=1; $i<=max(1,$this->trip->days); $i++):?>
+                                            <option <?php echo $this->day == $i ? 'selected="selected"' : '';?>><?php echo $i?></option>
+                                            <?php endfor;?>
+										</select>
 									</div><!---ITEM-->
 									
 									<div class="item">
@@ -130,28 +134,38 @@
 											<strong>Duration</strong>
 											Select how many days long
 										</p>
-										<input name="duration" value="<?php echo $this->duration ?>" class="name-in" type="text">
+										<select  id="duration"  name="duration">
+											<?php for($i=1; $i<=max(1,$this->trip->days); $i++):?>
+                                            <option <?php echo $this->duration == $i ? 'selected="selected"' : '';?>><?php echo $i?></option>
+                                            <?php endfor;?>
+										</select>
 										
 									</div><!---ITEM-->
 									
 									<div id="field-wrapper">
                                         <div class="item">
                                             <p class="descrip">
-                                                <strong>Starting Hour</strong>
-                                                Select the hour activity starts
+                                                <input type="radio" name="time_type" id="fixed-radio" checked="checked" value="fixed"> <b>Fixed Hour</b>
                                             </p>
-                                            <input type="text" name="start_hour" id="start_hour" value="<?php echo $this->start_hour?>" />
-                                        </div><!---ITEM-->
-                                        
-                                        <div class="item">
-                                            <p class="descrip">
-                                                <strong>Ending Hour</strong>
-                                                Select the hour activity ends
-                                            </p>
-                                            <input type="text" name="end_hour" id="end_hour" value="<?php echo $this->end_hour?>" />
+                                            From: <input style="width:50px;" type="text" name="start_hour" id="start_hour" value="<?php echo $this->start_hour?>" />
+                                            To: <input style="width:50px;" type="text" name="end_hour" id="end_hour" value="<?php echo $this->end_hour?>" />
                                         </div><!---ITEM-->
                                     
+                                    
+                                    <div class="item">
+										<p class="descrip">
+											<input type="radio"  value="flexi" name="time_type" id="flexi-radio" <?php if($this->flexi_hour) echo 'checked="checked"';?>> <b>Flexible Hour</b>
+										</p>
+										<select  id="flexi_time" name="flexi_time" >
+                                            <option value="1" <?php echo $this->timef == 1 ? 'selected="selected"' : '';?>>Morning</option>
+                                            <option value="2" <?php echo $this->timef == 2 ? 'selected="selected"' : '';?>>Afternoon</option>
+                                            <option value="3" <?php echo $this->timef == 3 ? 'selected="selected"' : '';?>>Evening</option>
+										</select>
+										
+									</div><!---ITEM-->
+
 									</div>
+                                    
 									<div class="item last">
 										<p class="descrip"><input <?php echo $this->featured ? 'checked="checked" "' : ''; ?> value="1" name="check" type="checkbox">Show this activity in the main page of the trip</p>
 									</div><!---ITEM-->
@@ -232,6 +246,18 @@
 		<!-- closes w1 -->
 
         <script>
+			$('#fixed-radio').click(function(){
+				$("#flexi_time").attr("disabled", "disabled");				
+				$("#start_hour").attr("disabled", false);
+				$("#end_hour").attr("disabled", false);
+			});
+
+			$('#flexi-radio').click(function(){
+				$("#flexi_time").attr("disabled", false);				
+				$("#start_hour").attr("disabled", "disabled");
+				$("#end_hour").attr("disabled", "disabled");
+			});
+			
 			$('#start_hour').timepicker({
 				ampm: true
 			});
