@@ -2982,7 +2982,7 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->title = "Partners";
                 $template = 'partners';
                 $select->from(array('users'), array('id', 'name', 'email', 'active'))
-                        ->join('vendors', 'users.id=vendors.user_id', array('vendorId' => 'id', 'partnerName' => 'name', 'partnerEmail' => 'email', 'listingsCount' => 'listings'))
+                        ->join('vendors', 'users.id=vendors.user_id', array('vendorId' => 'id', 'partnerName' => 'name', 'partnerEmail' => 'email', 'listingsCount' => 'listings', 'contact_name'))
                         ->joinleft(array('city' => 'places'), 'users.city_id=city.id', array('cityName' => 'title'))
                         ->joinleft(array('country' => 'places'), 'users.country_id=country.id', array('countryName' => 'title'))
                         ->joinleft('reservations', 'vendors.id=reservations.vendor_id', array('reservationTotal' => 'COUNT(reservations.id)'))
@@ -3011,7 +3011,7 @@ class AdminController extends Zend_Controller_Action {
         $userType = $this->_getParam('page');
 		
         $this->view->successMessage = '';
-        if ($_SESSION['alert']) {
+        if (@$_SESSION['alert']) {
             $this->view->successMessage = "Your changes have been saved";
             $_SESSION['alert'] = '';
         }
@@ -3044,7 +3044,7 @@ class AdminController extends Zend_Controller_Action {
 					$name = $_POST['name'];
 					$email = $_POST['email'];
 					$contact_name = $_POST['contact_name'];
-					$date = $_POST['created'];
+					$date = self::urlDateToMySql($_POST['created']);
 					$phone = $_POST['phone'];
 					$city = $_POST['city'];
 					$country = $_POST['country'];
@@ -3053,6 +3053,7 @@ class AdminController extends Zend_Controller_Action {
 					$this->vendors->saveInfo($vendorId, $name, $email, $contact_name, $date, $phone, $city, $country, $website, $user->user_id);
 					$_SESSION['alert'] = 'Your changes have been saved';
 			   		$user = $this->vendors->getVendorDetailsById($vendorId);
+                	$this->view->user = $user;
 			   }
 				
 				$countries = $this->places->getPlaces(2);
@@ -4459,7 +4460,7 @@ class AdminController extends Zend_Controller_Action {
         if (!array_key_exists($monthName, $months)) {
             return false;
         }
-        return substr($dateString, 6, 4) . '-' . $months[$monthName] . '-' . substr($dateString, 3, 2);
+        return substr($dateString, 8, 4) . '-' . $months[$monthName] . '-' . substr($dateString, 4, 2);
     }
 
     static function jsonEcho($jsonString) {
