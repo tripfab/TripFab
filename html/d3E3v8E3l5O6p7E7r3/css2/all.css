@@ -14334,6 +14334,29 @@ h2.title .back:hover,
 	color: #303030;
 	font: 12px/22px Helvetica;
 }
+#user_view .block .add_listing {
+	background: url(../images2/ico-32.png) no-repeat left 50%;
+	display: block;
+	float: right;
+	margin:0 49px 20px 0;
+	color: #60b5f7;
+	font: bold 11px/14px Helvetica;
+	padding-left: 20px;
+	height: 14px;
+}
+#user_view .block .no_listing {
+	text-align: center;
+	color: #898989;
+	font: bold 13px/16px Helvetica;
+	margin-top: 38px;
+}
+#user_view .block .no_listing a {
+	color: #60b5f9;display: block;
+}
+#user_view .block .add_listing:hover,
+#user_view .block .no_listing a:hover{
+	color:#9BD2FC;
+}
 #user_view .block .info a {
 	color: #60b5f7;
 }
