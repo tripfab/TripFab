@@ -5,6 +5,7 @@ require_once 'Zend/Registry.php';
 require_once 'Zend/Db/Table.php';
 require_once 'Zend/Db/Table/Row.php';
 require_once 'Zend/Db/Adapter/Mysqli.php';
+require_once 'WS/Uploader/Service.php';
 
 
 class WS_Uploader {
@@ -156,28 +157,28 @@ class WS_Uploader {
     
     public function uploadListingPhotos()
     {
-        if($_POST)
-        {
             try
             {   
                 error_reporting(E_ALL);  
 				
-                $ids            = $_POST['userids'];
-                $token          = $_POST['formtoken'];
-                $form_id        = $_POST['usertoken'];
-                $listing_id     = $_POST['listings'];
-                $listing_token  = $_POST['listtoken'];
-                $vendor_id      = $_POST['vendorid'];
-
+                $ids            = $_GET['userids'];
+                $token          = $_GET['formtoken'];
+                $form_id        = $_GET['usertoken'];
+                $listing_id     = $_GET['listings'];
+                $listing_token  = $_GET['listtoken'];
+                $vendor_id      = $_GET['vendorid'];
+                
                 $dbAdapter = new Zend_Db_Adapter_Mysqli(array(
                     'host'      =>  'localhost',
-                    'username'  =>  'costar_admCoreTF',
-                    'password'  =>  'OgkX-JLV2L7i',
+                    //'username'  =>  'costar_admCoreTF',
+                    //'password'  =>  'OgkX-JLV2L7i',
+                    'username'  =>  'root',
+                    'password'  =>  'root',
                     'dbname'    =>  'costar_coreTF'
                 ));
 
                 Zend_Db_Table::setDefaultAdapter($dbAdapter);
-
+                
                 $users_db = new Zend_Db_Table('users');
 
                 $select = $users_db->select();
@@ -192,7 +193,7 @@ class WS_Uploader {
                 $vendors_db = new Zend_Db_Table('vendors');
                 $select = $vendors_db->select();
                 $select->where('id = ?', $vendor_id);
-                $select->where('user_id = ?', $user->id);
+                //$select->where('user_id = ?', $user->id);
                 $vendor = $vendors_db->fetchRow($select);
                 if(is_null($vendor))
                         throw new Exception();
@@ -212,49 +213,52 @@ class WS_Uploader {
                 $image->created     = date('Y-m-d H:i:s');
                 $image->updated     = $image->created;
                 $image->save();
-				
-				//var_dump($_FILES); die;
-				
-                $tempFile   = $_FILES['Filedata']['tmp_name'];
-                $publicPath = realpath(APPLICATION_PATH.'/../html');
-                $publicPath2= realpath(APPLICATION_PATH.'/../partners');
-                $targetPath = '/images/listings/'.$listing->id . '/';
+                
+                $publicPath  = realpath(APPLICATION_PATH.'/../html');
+                $publicPath2 = realpath(APPLICATION_PATH.'/../partners');
+                $targetPath  = '/images/listings/'.$listing->id . '/';
                 
                 $url        = $targetPath . $image->id . substr(md5($image->id), 5, 12) .'.jpg';
                 $targetFile = str_replace('//','/',$publicPath . $url);
-				
-				if(!is_dir(str_replace('//','/',$publicPath.$targetPath))){
-					mkdir(str_replace('//','/',$publicPath.$targetPath), 0777, true);
-				}
-                                if(!is_dir(str_replace('//','/',$publicPath2.$targetPath))){
-					mkdir(str_replace('//','/',$publicPath2.$targetPath), 0777, true);
-				}
-				move_uploaded_file($tempFile,$targetFile);
-                                exec("cp {$targetFile} {$publicPath2}{$targetPath}");
-				//copy($tempFile,$targetFile);
-
-                $image->url = $url;
                 
-                $defaults = array(
-                    '/images2/ico-97.png',
-                    '/images2/ico-98.png',
-                    '/images2/ico-99.png',
-                    '/images2/ico-100.png',
-                    '/images2/ico-101.png',
+                $allowedExtensions = array('jpg','jpeg','png','gif');
+                $sizeLimit = 2 * 1024 * 1024;
+                $paths = array(
+                    'public'=> $publicPath.$targetPath,
+                    'tagetfile' => $targetFile,
+                    'public2'    => $publicPath2.$targetPath
                 );
-                if(empty($listing->image) || $_POST['main'] == 1 || in_array($listing->image,$defaults)){
-                    $images_db->update(array('main'=>0), 'listing_id = '.$listing->id);
-                    $image->main = 1;
-                    $listing->image = $image->url;
-                    $listing->save();
+                
+                $uploader = new WS_Uploader_Service($allowedExtensions, $sizeLimit);
+                
+                $result = $uploader->handleUpload($paths);
+                
+                if(isset($result['success'])) {
+                    $image->url = $url;
+                
+                    $defaults = array(
+                        '/images2/ico-97.png',
+                        '/images2/ico-98.png',
+                        '/images2/ico-99.png',
+                        '/images2/ico-100.png',
+                        '/images2/ico-101.png',
+                    );
+                    if(empty($listing->image) || $_POST['main'] == 1 || in_array($listing->image,$defaults)){
+                        $images_db->update(array('main'=>0), 'listing_id = '.$listing->id);
+                        $image->main = 1;
+                        $listing->image = $image->url;
+                        $listing->save();
+                    }
+                    $image->save();
+                } else {
+                    $image->delete();
                 }
-                $image->save();
-                echo $image->url;
+                
+                echo htmlspecialchars(json_encode($result), ENT_NOQUOTES);
             } 
             catch(Exception $e)
             {
-                echo $e;
+                echo htmlspecialchars(json_encode(array('error'=>$e->getMessage())), ENT_NOQUOTES);
             }
-        }
     }
 }
