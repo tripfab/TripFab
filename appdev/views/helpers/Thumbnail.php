@@ -66,7 +66,7 @@ class Zend_View_Helper_Thumbnail {
             $local_filepath = $remoteFolder . $filename;
             $download_image = true;
             if (file_exists($local_filepath)):
-                $download_image = false;
+                $download_image = true;
             endif;
             if ($download_image == true):
 				
@@ -113,7 +113,7 @@ class Zend_View_Helper_Thumbnail {
         $create = true;
         
         if (file_exists($newPath) == true):
-            $create = false;
+            $create = true;
             $origFileTime = date("YmdHis", filemtime($imagePath));
             $newFileTime = date("YmdHis", filemtime($newPath));
             if ($newFileTime < $origFileTime):
@@ -121,6 +121,8 @@ class Zend_View_Helper_Thumbnail {
             endif;
         endif;
         
+		 $create = true;
+		
         if ($create == true):
             if (!empty($w) and !empty($h)):
 

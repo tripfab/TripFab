@@ -170,10 +170,10 @@ class WS_Uploader {
                 
                 $dbAdapter = new Zend_Db_Adapter_Mysqli(array(
                     'host'      =>  'localhost',
-                    //'username'  =>  'costar_admCoreTF',
-                    //'password'  =>  'OgkX-JLV2L7i',
-                    'username'  =>  'root',
-                    'password'  =>  'root',
+                    'username'  =>  'costar_admCoreTF',
+                    'password'  =>  'OgkX-JLV2L7i',
+                    //'username'  =>  'root',
+                    //'password'  =>  'root',
                     'dbname'    =>  'costar_coreTF'
                 ));
 
