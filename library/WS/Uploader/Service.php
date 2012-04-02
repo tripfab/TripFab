@@ -98,8 +98,8 @@ class WS_Uploader_Service {
             return array('error' => 'File has an invalid extension, it should be one of '. $these . '.');
         }
         
-        if ($this->file->save($paths['targetfile'])){
-            exec("cp {$paths['targetfile']} {$paths['public2']}");
+        if ($this->file->save($paths['tagetfile'])){
+            exec("cp {$paths['tagetfile']} {$paths['public2']}");
             return array('success'=>true);
         } else {
             return array('error'=> 'Could not save uploaded file.' .
