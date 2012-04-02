@@ -364,5 +364,35 @@ class WS_ReservationsService {
         
         return $reservation;
     }
+	
+	public function getPendingByDate($vendor, $date)
+    {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = $db->select();
+        $select->from('reservations');
+        $select->join('vendors','reservations.vendor_id = vendors.id',array(
+            'vendor_name'  =>'name'
+        ));
+        $select->join('listings','reservations.listing_id = listings.id',array(
+            'listing_name'=>'title',
+            'listing_image'=>'image',
+            'listing_idf'=>'identifier'
+        ));
+        $select->join('listing_types','listings.main_type = listing_types.id',array('listing_type'=>'name'));
+        $select->join('transactions','reservations.transaction_id = transactions.id',array('method'));
+        $select->join('users','reservations.user_id = users.id', array(
+            'user_name'         => 'name',
+            'user_image'        => 'image',
+        ));
+        $select->where('reservations.vendor_id = ?', $vendor);
+        $select->where('reservations.status_id = ?',1);
+		$select->where('reservations.created < ?' , $date);
+		$select->where('reservations.created >= DATE_SUB(reservations.created, INTERVAL 7 DAY)') ;
+        
+        $_reservs = $db->fetchAll($select);
+        return $_reservs;
+    }
+
     
 }
