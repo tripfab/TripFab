@@ -94,6 +94,51 @@
 		top: 12px;
 		width: 128px;
 		z-index:10000;}
+	
+	#file_upload3 { float:right;}
+	.qq-upload-button {
+		background:url(/images2/upload-btn.gif) top left no-repeat;
+		text-indent:-9999px;
+		width:124px;
+		height:34px;}
+		
+		#qqPhotoQueueUL {
+			float:right;
+			width:400px;
+			padding:10px;
+			list-style:none;}
+			#qqPhotoQueueUL li {
+				border-bottom:1px solid #CCC;
+				overflow:hidden;
+				padding-bottom:5px;
+				margin-bottom:5px;
+				line-height:18px;}
+				#qqPhotoQueueUL li.qq-upload-fail span.qq-upload-progress-range { 
+					background:#F00;}
+			#qqPhotoQueueUL li:last-child {
+				border:none;
+				padding-bottom:0;
+				margin-bottom:0;}
+				#qqPhotoQueueUL li span.qq-upload-progress {
+					float:left;
+					height:18px;
+					background:#CCC;
+					position:relative;
+					width:350px;
+					clear:none;}
+					#qqPhotoQueueUL li span.qq-upload-progress-range {
+						position:absolute;
+						top:0; left:0;
+						height:18px;
+						background:#7CCBFF;}
+				#qqPhotoQueueUL li span.qq-upload-size {
+					clear:none;
+					float:right;
+					widows:50px;}
+				#qqPhotoQueueUL li a.qq-upload-cancel {
+					display:none;}
+				#qqPhotoQueueUL li span.qq-upload-failed-text {
+					display:none;}
 </style>
 <form action="" method="post">
     <div class="photos">
@@ -110,10 +155,7 @@
         	<div class="text">
                 <strong>Photos</strong>
             </div>
-            <input style="float:right;" id="file_upload" name="file_upload" type="file" />
-            <?php if(count($this->pictures) >= 10): ?>
-            <a href="#" class="deny"></a>
-            <?php endif ?>
+            <a href="#" id="file_upload3"></a>
             <div class="clear"></div>
         </div>
         <div class="photo">        	
@@ -128,7 +170,7 @@
                 <a href="/images2/help/big-act-photos.png" class="tooltip3">
                 <img src="/images2/help/small-act-photos.png" /></a>
             </div>
-            <div id="photoQueue"></div>
+            <div id="qqPhotoQueue"><ul id="qqPhotoQueueUL"></ul></div>
             <div class="clear"></div>
         </div><!-- closes photo -->
         <?php if(count($this->pictures) > 0): ?>
@@ -150,7 +192,7 @@
         <div class="photo empty">
         	<img src="/images/empty-5.png" />
             <p>You don't have photos for this listing<br />
-            <input id="file_upload2" name="file_upload" type="file" />
+            <a href="#" class="uploadTrigger">Upload some pictures now</a>
             </p>
         </div>
         <?php endif ?>
