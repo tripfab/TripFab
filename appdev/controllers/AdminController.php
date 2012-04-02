@@ -3257,6 +3257,23 @@ class AdminController extends Zend_Controller_Action {
                 throw new Exception('Page not found');
         }
     }
+	
+	private function paymentsViewTask(){
+        $paymentType = $this->_getParam('page');
+		$vendorId = $this->_getParam('sort');
+		$date = $this->_getParam('seq');
+		
+		
+        switch ($paymentType) {
+            case 'pending':
+            case 'history':
+                $this->render('paymentview');
+				break;
+				
+            default: throw new Exception("Invalid payment type");
+        }
+		
+	}
 
     private function paymentsTask() {
         $page = $this->_getParam('page', 1);
@@ -3267,22 +3284,23 @@ class AdminController extends Zend_Controller_Action {
         $this->view->paramQuery = $this->_getParam('q');
         $this->view->renderContext = 'history';
 
-        $reservationFields = array('vendor_name', 'code', 'listing_name', 'user_name', 'date', 'total_transfered');
+        $reservationFields = array('vendor_name', 'vendor_id', 'reservation_count', 'due_date', 'paid_total');
 
 
         $db = Zend_Db_Table::getDefaultAdapter();
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = $db->select();
 
-        $select->from('transactions')
-                ->join('listings', 'transactions.listing_id = listings.id', array('listing_name' => 'title', 'listing_image' => 'image'))
-                ->join('listing_types', 'listings.main_type = listing_types.id', array('listing_type' => 'name'))
-                ->join('vendors', 'vendors.id=transactions.vendor_id', array('vendor_name' => 'name'));
-        if ($this->view->searchText) {
-            $select->where("transactions.code like '{$this->view->searchText}' or vendors.name like '{$this->view->searchText}%'");
+		
+		$select->from('reservations', array( 'paid_total'=>new Zend_Db_Expr('sum(ammount - (ammount* 0.075))'), 'reservation_count'=>new Zend_Db_Expr('count(1)'), 'due_date' => new Zend_Db_Expr('DATE_ADD(reservations.created, INTERVAL (9 - IF(DAYOFWEEK(reservations.created)=1, 8, DAYOFWEEK(reservations.created))) DAY)') ))
+                ->join('vendors', 'vendors.id=reservations.vendor_id', array('vendor_name' => 'name', 'vendor_id'=>'id'))
+				->group(array('vendors.id', 'due_date'));
+		
+		if ($this->view->searchText) {
+            $select->where("vendors.name like '{$this->view->searchText}' or vendors.id like '{$this->view->searchText}%'");
         }
         $select->order(array_key_exists($this->view->paramSort, $reservationFields) ? $reservationFields[$this->view->paramSort] . "$seq" : $reservationFields[0]);
-        switch ($this->_getParam('task')) {
+		switch ($this->_getParam('task')) {
             case 'all':
                 $this->view->title = "";
                 break;
