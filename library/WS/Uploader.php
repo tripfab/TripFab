@@ -224,9 +224,9 @@ class WS_Uploader {
                 $allowedExtensions = array('jpg','jpeg','png','gif');
                 $sizeLimit = 2 * 1024 * 1024;
                 $paths = array(
-                    'public'=> $publicPath.$targetPath,
+                    'public'    => $publicPath.$targetPath,
                     'tagetfile' => $targetFile,
-                    'public2'    => $publicPath2.$targetPath
+                    'public2'   => $publicPath2.$targetPath
                 );
                 
                 $uploader = new WS_Uploader_Service($allowedExtensions, $sizeLimit);

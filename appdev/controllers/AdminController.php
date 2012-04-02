@@ -3250,6 +3250,9 @@ class AdminController extends Zend_Controller_Action {
             case 'view':
                 $this->paymentsViewTask();
                 break;
+            case 'paid':
+                $this->paidTask();
+                break;
             case 'data':
                 $this->paymentsDataTask();
                 break;
@@ -3257,6 +3260,23 @@ class AdminController extends Zend_Controller_Action {
                 throw new Exception('Page not found');
         }
     }
+	
+	private function paymentsViewTask(){
+        $vendorId = $this->_getParam('page');
+		$date = $this->_getParam('sort');
+		$reservations = $this->reservations->getPendingByDate($vendorId, $date);
+		$this->view->reservations = $reservations;
+		$this->view->total = count($reservations);
+		$this->view->vendorName = $reservations[0]->vendor_name;
+		
+		$amount = 0;
+		foreach($reservations as $reservation){
+			$amount+=($reservation->ammount - $reservation->ammount* 0.075);
+		}
+		$this->view->amount = $amount;
+		$this->render('paymentview');
+		
+	}
 
     private function paymentsTask() {
         $page = $this->_getParam('page', 1);
@@ -3267,33 +3287,34 @@ class AdminController extends Zend_Controller_Action {
         $this->view->paramQuery = $this->_getParam('q');
         $this->view->renderContext = 'history';
 
-        $reservationFields = array('vendor_name', 'code', 'listing_name', 'user_name', 'date', 'total_transfered');
+        $reservationFields = array('vendor_name', 'vendor_id', 'reservation_count', 'due_date', 'paid_total');
 
 
         $db = Zend_Db_Table::getDefaultAdapter();
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = $db->select();
 
-        $select->from('transactions')
-                ->join('listings', 'transactions.listing_id = listings.id', array('listing_name' => 'title', 'listing_image' => 'image'))
-                ->join('listing_types', 'listings.main_type = listing_types.id', array('listing_type' => 'name'))
-                ->join('vendors', 'vendors.id=transactions.vendor_id', array('vendor_name' => 'name'));
-        if ($this->view->searchText) {
-            $select->where("transactions.code like '{$this->view->searchText}' or vendors.name like '{$this->view->searchText}%'");
+		
+		$select->from('reservations', array( 'paid_total'=>new Zend_Db_Expr('sum(ammount - (ammount* 0.075))'), 'reservation_count'=>new Zend_Db_Expr('count(1)'), 'due_date' => new Zend_Db_Expr('DATE_ADD(reservations.created, INTERVAL (9 - IF(DAYOFWEEK(reservations.created)=1, 8, DAYOFWEEK(reservations.created))) DAY)') ))
+                ->join('vendors', 'vendors.id=reservations.vendor_id', array('vendor_name' => 'name', 'vendor_id'=>'id'))
+				->group(array('vendors.id', 'due_date'));
+		
+		if ($this->view->searchText) {
+            $select->where("vendors.name like '{$this->view->searchText}' or vendors.id like '{$this->view->searchText}%'");
         }
         $select->order(array_key_exists($this->view->paramSort, $reservationFields) ? $reservationFields[$this->view->paramSort] . "$seq" : $reservationFields[0]);
-        switch ($this->_getParam('task')) {
+		switch ($this->_getParam('task')) {
             case 'all':
                 $this->view->title = "";
                 break;
             case 'pending':
                 $this->view->renderContext = 'pending';
                 $this->view->title = "Pending";
-                $select->where("transactions.status = 1");
+                $select->where("reservations.status_id=?", 1);
                 break;
             case 'history':
                 $this->view->title = "History";
-                $select->where("transactions.status = 0");
+                $select->where("reservations.status_id=?", 3);
                 break;
             default:
                 $this->view->title = "Pending";
