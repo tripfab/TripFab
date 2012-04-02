@@ -22,60 +22,62 @@
 <?php echo $this->partial('admin_partials/header.phtml', array()); ?>
 <div class="w3_admin">
 	<div class="sub_menu">
-		<h2>Quandong Hideaway. <span> Reservation Details</span></h2>
+		<h2><?php echo $this->vendorName?>. <span> Reservation Details</span></h2>
 		<a href="" class="btn-10">Mark as Paid</a>
-		<span class="pending_amount">Pending Payment: $750</span>
+		<span class="pending_amount">Pending Payment: $<?php echo $this->amount?></span>
 	</div><!--SUB_MENU-->
 </div>
 <!--W3-->
 <div class="all_listing">
 	<div class="detailsPayments">
 		<div class="ttl">
-			<h4>There are <?php echo  ?> reservations pending to pay</h4>
-			<a href="/admin/payments/"> &larr; Back to Payments</a>
+			<h4>There are <?php echo $this->total?> reservations pending to pay</h4>
+			<a href="javascript:history.back(1);"> &larr; Back to Payments</a>
 		</div><!--TTL-->
-		<?php foreach($this->reservation as $reservations):?>
+		<?php foreach($this->reservations as $reservation):?>
 		<div class="pending_reservation">
 			<div class="left">
-				Surfing Lessons
+            <?php echo $reservation->listing_name ?>
 			</div><!--LEFT-->
 			<div class="details">
 				<table cellpadding="0" width="300" border="0">
 					<tr>
 						<td>Type</td>
-						<td class="res"><?php echo $reservations->listing_type ?></td>
+						<td class="res"><?php echo $reservation->listing_type ?></td>
 					</tr>
 					<tr>
 						<td>Reserve Code</td>
-						<td class="res"><?php echo $reservations->code ?></td>
+						<td class="res"><?php echo $reservation->code ?></td>
 					</tr>
 					<tr>
 						<td>Traveler</td>
-						<td class="res"><?php echo $reservations->vendor_name ?></td>
+						<td class="res"><?php echo $reservation->vendor_name ?></td>
 					</tr>
 
 					<tr>
 						<td>Check in</td>
-						<td class="res"><?php echo $reservations->checkin ?></td>
+						<td class="res"><?php echo $reservation->checkin ?></td>
 					</tr>
 					<tr>
 						<td>Check out</td>
-						<td class="res"><?php echo $reservations->checkout ?></td>
+						<td class="res"><?php echo $reservation->checkout ?></td>
 					</tr>
 					<tr>
 						<td>Total</td>
-						<td class="res"><?php echo $reservations->code ?></td>
+						<td class="res">$<?php echo ($reservation->ammount - ($reservation->ammount * 0.075)) ?></td>
 					</tr>
 				</table>
-			</div><!--DETAILS-->
+				</div><!--DETAILS-->
 			<div class="clear"></div>
 		</div><!--PENDING_RESERVATION-->
-       <?php endforeach;?>
-<div class="footer black">
-	<div class="wrapper"> <a href="" class="logo">Tripfab</a> </div>
-	<!--WRAPPER--> 
+		<?php endforeach;?>
+	</div><!--DETAILSPAYMENTS-->
+	
 </div>
-<!-- closes footer -->
+<!--ALL_LISTING-->
+
+			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+		</div>
 
 </body>
 </html>

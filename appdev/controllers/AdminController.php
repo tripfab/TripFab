@@ -3250,6 +3250,9 @@ class AdminController extends Zend_Controller_Action {
             case 'view':
                 $this->paymentsViewTask();
                 break;
+            case 'paid':
+                $this->paidTask();
+                break;
             case 'data':
                 $this->paymentsDataTask();
                 break;
@@ -3259,19 +3262,19 @@ class AdminController extends Zend_Controller_Action {
     }
 	
 	private function paymentsViewTask(){
-        $paymentType = $this->_getParam('page');
-		$vendorId = $this->_getParam('sort');
-		$date = $this->_getParam('seq');
+        $vendorId = $this->_getParam('page');
+		$date = $this->_getParam('sort');
+		$reservations = $this->reservations->getPendingByDate($vendorId, $date);
+		$this->view->reservations = $reservations;
+		$this->view->total = count($reservations);
+		$this->view->vendorName = $reservations[0]->vendor_name;
 		
-		
-        switch ($paymentType) {
-            case 'pending':
-            case 'history':
-                $this->render('paymentview');
-				break;
-				
-            default: throw new Exception("Invalid payment type");
-        }
+		$amount = 0;
+		foreach($reservations as $reservation){
+			$amount+=($reservation->ammount - $reservation->ammount* 0.075);
+		}
+		$this->view->amount = $amount;
+		$this->render('paymentview');
 		
 	}
 
@@ -3307,11 +3310,11 @@ class AdminController extends Zend_Controller_Action {
             case 'pending':
                 $this->view->renderContext = 'pending';
                 $this->view->title = "Pending";
-                $select->where("transactions.status = 1");
+                $select->where("reservations.status_id=?", 1);
                 break;
             case 'history':
                 $this->view->title = "History";
-                $select->where("transactions.status = 0");
+                $select->where("reservations.status_id=?", 3);
                 break;
             default:
                 $this->view->title = "Pending";
