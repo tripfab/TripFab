@@ -2275,7 +2275,6 @@ class AdminController extends Zend_Controller_Action {
                 'num'   => date('j', $start_at),
                 'date'  => date('Y-m-d', $start_at)
             );
-            if($listing->main_type == 6){
                 $schedules = $this->listings->getSchedulesOf($listing->id);
                 
                 foreach($schedules as $sch){
@@ -2288,7 +2287,6 @@ class AdminController extends Zend_Controller_Action {
                     $arr[$sch->id]['class'] = $aux3;
                 }
                 //echo '<pre>'; var_dump($arr); echo '</pre>'; die;
-            }
             if(!in_array($arr, $days)){
                 $days[] = $arr;
             }
@@ -2296,10 +2294,9 @@ class AdminController extends Zend_Controller_Action {
             //echo $start_at.'<br>';
             //echo date('Y-m-d', $start_at).'<br>';
         }
-        if($listing->main_type == 6){
-            $schedules = $this->listings->getSchedulesOf($listing->id);
-            $this->view->schedules = $schedules;
-        }
+        
+        $schedules = $this->listings->getSchedulesOf($listing->id);
+        $this->view->schedules = $schedules;
         
         $this->view->prevmonth    = $p_months[$month];
         $this->view->prevmonth_lb = $labels[$p_months[$month]];

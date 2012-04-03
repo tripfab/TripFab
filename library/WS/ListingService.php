@@ -1429,11 +1429,9 @@ class WS_ListingService {
     }
     
     public function saveDayInCalendar($listing, $data)
-    {
-        
-        if($listing->main_type == 6){
-            
-            foreach($data['dates'] as $day) {        
+    {            
+        foreach($data['dates'] as $day) {
+            if(isset($data['sch'])){
                 foreach($data['sch'] as $sch => $data2){
                     $row = $this->getDayFromCalendar($listing->id, $day, $sch);
                     if(is_null($row)){
@@ -1453,33 +1451,18 @@ class WS_ListingService {
                         }
                     }
                 }
-                $row = $this->getDayFromCalendar($listing->id, $day);
-                if(is_null($row)){
-                    $row = $this->calendar->fetchNew();
-                    $row->listing_id = $listing->id;
-                    $row->day = $day;
-                }
-                if(!isset($data['state']))
-                    $row->delete();
-                else {
-                    $row->state = $data['state'];
-                    $row->save();
-                }
             }
-        } else {
-            foreach($data['dates'] as $day) {
-                $row = $this->getDayFromCalendar($listing->id, $day);
-                if(is_null($row)){
-                    $row = $this->calendar->fetchNew();
-                    $row->listing_id = $listing->id;
-                    $row->day = $day;
-                }
-                if(empty($data['state']))
-                    $row->delete();
-                else {
-                    $row->state = $data['state'];
-                    $row->save();
-                }
+            $row = $this->getDayFromCalendar($listing->id, $day);
+            if(is_null($row)){
+                $row = $this->calendar->fetchNew();
+                $row->listing_id = $listing->id;
+                $row->day = $day;
+            }
+            if(!isset($data['state']))
+                $row->delete();
+            else {
+                $row->state = $data['state'];
+                $row->save();
             }
         }
     }
