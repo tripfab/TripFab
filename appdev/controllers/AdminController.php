@@ -3944,6 +3944,7 @@ class AdminController extends Zend_Controller_Action {
             }
             $trip->title = $_POST['title'];
             $trip->description = $_POST['description'];
+			$trip->price = $_POST['price'];
             $trip->days = $_POST['days'];
             $trip->country_id = $_POST['trip_country'];
             $trip->save();
