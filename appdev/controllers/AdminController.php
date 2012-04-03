@@ -3202,6 +3202,10 @@ class AdminController extends Zend_Controller_Action {
     }
 
     public function paymentsAction() {
+        if (@$_SESSION['alert']) {
+            $this->view->successMessage = "Your changes have been saved";
+            $_SESSION['alert'] = '';
+        }
         $GLOBALS['menuContext'] = 5;
         $this->view->listingContext = $this->_getParam('task');
         $this->view->baseUrl = '/admin/payments/' . $this->_getParam('task') . '/1/default/default';
@@ -3234,19 +3238,29 @@ class AdminController extends Zend_Controller_Action {
 	private function paymentsPaidTask(){
         $vendorId = $this->_getParam('page');
 		$date = $this->_getParam('sort');
-		$reservations = $this->reservations->getPendingByDate($vendorId, $date);
-		$this->redirect("/admin/payments/pending");
+		$reservations = $this->reservations->markPaidByDate($vendorId, $date);
+		$_SESSION['alert'] = 'Your changes have been saved';
+		$this->_redirect("/admin/payments/pending");
 		
 	}
 	
 	private function paymentsViewTask(){
         $vendorId = $this->_getParam('page');
 		$date = $this->_getParam('sort');
-		$reservations = $this->reservations->getPendingByDate($vendorId, $date);
+		$this->view->mode = $this->_getParam('seq');
+		$this->view->date = $date;
+		$this->view->vendorName = '';
+		if($this->view->mode=='pending'){
+			$reservations = $this->reservations->getPendingByDate($vendorId, $date);
+		}
+		else{
+			$reservations = $this->reservations->getByPaidDate($vendorId, $date);
+		}
 		$this->view->reservations = $reservations;
 		$this->view->total = count($reservations);
-		$this->view->vendorName = $reservations[0]->vendor_name;
-		
+		if(count($reservations)){
+			$this->view->vendorName = $reservations[0]->vendor_name;
+		};
 		$amount = 0;
 		foreach($reservations as $reservation){
 			$amount+=($reservation->ammount - $reservation->ammount* 0.075);
@@ -3264,6 +3278,7 @@ class AdminController extends Zend_Controller_Action {
         $seq = $this->view->paramSequence == 'desc' ? ' desc' : '';
         $this->view->paramQuery = $this->_getParam('q');
         $this->view->renderContext = 'history';
+		$this->view->mode = $this->_getParam('task');
 
         $reservationFields = array('vendor_name', 'vendor_id', 'reservation_count', 'due_date', 'paid_total');
 
@@ -3273,32 +3288,31 @@ class AdminController extends Zend_Controller_Action {
         $select = $db->select();
 
 		
-		$select->from('reservations', array( 'paid_total'=>new Zend_Db_Expr('sum(ammount - (ammount* 0.075))'), 'reservation_count'=>new Zend_Db_Expr('count(1)'), 'due_date' => new Zend_Db_Expr('DATE_ADD(reservations.created, INTERVAL (9 - IF(DAYOFWEEK(reservations.created)=1, 8, DAYOFWEEK(reservations.created))) DAY)') ))
-                ->join('vendors', 'vendors.id=reservations.vendor_id', array('vendor_name' => 'name', 'vendor_id'=>'id'))
-				->group(array('vendors.id', 'due_date'));
+		$select->from('reservations', array( 'paid_date', 'paid_total'=>new Zend_Db_Expr('sum(ammount - (ammount* 0.075))'), 'reservation_count'=>new Zend_Db_Expr('count(1)'), 'due_date' => new Zend_Db_Expr('DATE_ADD(reservations.created, INTERVAL (9 - IF(DAYOFWEEK(reservations.created)=1, 8, DAYOFWEEK(reservations.created))) DAY)') ))
+                ->join('vendors', 'vendors.id=reservations.vendor_id', array('vendor_name' => 'name', 'vendor_id'=>'id'));
 		
-		if ($this->view->searchText) {
-            $select->where("vendors.name like '{$this->view->searchText}' or vendors.id like '{$this->view->searchText}%'");
-        }
-        $select->order(array_key_exists($this->view->paramSort, $reservationFields) ? $reservationFields[$this->view->paramSort] . "$seq" : $reservationFields[0]);
 		switch ($this->_getParam('task')) {
-            case 'all':
-                $this->view->title = "";
-                break;
             case 'pending':
                 $this->view->renderContext = 'pending';
                 $this->view->title = "Pending";
                 $select->where("reservations.status_id=?", 1);
+				$select->group(array('vendors.id', 'due_date'));
                 break;
+            case 'all':
             case 'history':
                 $this->view->title = "History";
-                $select->where("reservations.status_id=?", 3);
+                $select->where("reservations.status_id!=?", 1);
+				$select->group(array('vendors.id', 'paid_date'));
                 break;
             default:
                 $this->view->title = "Pending";
         }
 
-        $paginator = Zend_Paginator::factory($select);
+		if ($this->view->searchText) {
+            $select->where("vendors.name like '{$this->view->searchText}' or vendors.id like '{$this->view->searchText}%'");
+        }
+        $select->order(array_key_exists($this->view->paramSort, $reservationFields) ? $reservationFields[$this->view->paramSort] . "$seq" : $reservationFields[0]);
+		$paginator = Zend_Paginator::factory($select);
         $paginator->setItemCountPerPage(self::ITEMS_PER_PAGE);
         $paginator->setCurrentPageNumber($page);
         $this->view->paginator = $paginator;
