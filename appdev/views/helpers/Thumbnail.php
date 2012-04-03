@@ -113,7 +113,7 @@ class Zend_View_Helper_Thumbnail {
         $create = true;
         
         if (file_exists($newPath) == true):
-            $create = false;
+            $create = true;
             $origFileTime = date("YmdHis", filemtime($imagePath));
             $newFileTime = date("YmdHis", filemtime($newPath));
             if ($newFileTime < $origFileTime):
@@ -121,6 +121,7 @@ class Zend_View_Helper_Thumbnail {
             endif;
         endif;
         
+		
         if ($create == true):
             if (!empty($w) and !empty($h)):
 

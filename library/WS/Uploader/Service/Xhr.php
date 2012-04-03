@@ -18,14 +18,14 @@ class WS_Uploader_Service_Xhr {
      */
     public function save($path) {    
         $input = fopen("php://input", "r");
-        $temp = tmpfile();
+        $temp  = tmpfile();
         $realSize = stream_copy_to_stream($input, $temp);
         fclose($input);
         
         if ($realSize != $this->getSize()){            
             return false;
         }
-        
+        //var_dump($path); die;
         $target = fopen($path, "w");        
         fseek($temp, 0, SEEK_SET);
         stream_copy_to_stream($temp, $target);

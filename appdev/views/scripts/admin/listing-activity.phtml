@@ -37,10 +37,9 @@
 </head>
 <body>
 <div class="w1">
-    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>    
+    <?= $this->partial('admin_partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>    
     <div class="w2">
         <div class="main wrapper">
-        	<?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'All Listings','parentActive'=>'Listings')); ?>
             <div class="content-2">
                 <div class="box">
                     <?= $this->partial('partials/gallery.phtml', 
@@ -139,7 +138,7 @@
                         </div><!-- closes tab-ttl -->
                         <div class="tab-content">
                         	<?php if(!$ok1): ?>
-                            <h2>Inclusions</h2>
+                            <h2>Includes</h2>
                             <ul>
                             	<?php foreach($this->details as $detail): ?>
                                 <?php if($detail->type == 1): ?>
@@ -148,7 +147,7 @@
                                 <?php endforeach ?>
                             </ul>
                             <?php endif; if(!$ok2): ?>
-                            <h2>Exclusions</h2>
+                            <h2>Excludes</h2>
                             <ul>
                                 <?php foreach($this->details as $detail): ?>
                                 <?php if($detail->type == 2): ?>

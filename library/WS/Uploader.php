@@ -170,10 +170,10 @@ class WS_Uploader {
                 
                 $dbAdapter = new Zend_Db_Adapter_Mysqli(array(
                     'host'      =>  'localhost',
-                    //'username'  =>  'costar_admCoreTF',
-                    //'password'  =>  'OgkX-JLV2L7i',
-                    'username'  =>  'root',
-                    'password'  =>  'root',
+                    'username'  =>  'costar_admCoreTF',
+                    'password'  =>  'OgkX-JLV2L7i',
+                    //'username'  =>  'root',
+                    //'password'  =>  'root',
                     'dbname'    =>  'costar_coreTF'
                 ));
 
@@ -224,9 +224,9 @@ class WS_Uploader {
                 $allowedExtensions = array('jpg','jpeg','png','gif');
                 $sizeLimit = 2 * 1024 * 1024;
                 $paths = array(
-                    'public'=> $publicPath.$targetPath,
+                    'public'    => $publicPath.$targetPath,
                     'tagetfile' => $targetFile,
-                    'public2'    => $publicPath2.$targetPath
+                    'public2'   => $publicPath2.$targetPath
                 );
                 
                 $uploader = new WS_Uploader_Service($allowedExtensions, $sizeLimit);

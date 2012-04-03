@@ -4973,4 +4973,8 @@ $(function(){
 			$.cookie('error', null);
 		}
 	}
+        
+        $('.confirmDeleteListing').click(function(){
+            return confirm('Are you sure??? There is not undo');
+        });
 });

@@ -76,7 +76,7 @@ class AdminController extends Zend_Controller_Action {
                 $this->messages = new WS_MessagesService();
                 $this->reservations = new WS_ReservationsService();
                 $this->feeds = new WS_FeedsService();
-                $this->listings = new WS_ListingService();
+                $this->listings = new WS_ListingService(false);
                 $this->places = new WS_PlacesService();
                 $this->accounts = new WS_AccountService();
                 $this->users = new WS_UsersService();
@@ -173,7 +173,7 @@ class AdminController extends Zend_Controller_Action {
                 $template = 'listings-activate';
                 $this->render($template);
                 break;
-            case 'desactivate':
+            case 'delete':
                 $this->listingsDesactivateTask();
                 break;
             case 'preview':
@@ -736,16 +736,16 @@ class AdminController extends Zend_Controller_Action {
         if($this->isValidId($ids)){    
             $listing = $this->listings->getListing($ids);
             $overview = $this->listings->getOverviewOf($listing->id);
-            $details = $this->listings->getDetails($listing->id);
             
             if($this->getRequest()->isPost()){
+				
                 //echo '<pre>'; print_r($_POST); echo '</pre>'; die;
                 $overview->about   = $_POST['about'];
                 $overview->expect  = $_POST['expect'];
                 $overview->love    = $_POST['love'];
                 $overview->updated = date('Y-m-d H:i:s');
                 $overview->save();
-                
+				
                 if(!empty($_POST['about'])){
                     if(strlen($_POST['about']) > 200){
                         $listing->description = substr(str_replace("\n","",$_POST['about']), 0, 197).'...';
@@ -754,32 +754,6 @@ class AdminController extends Zend_Controller_Action {
                     }
                     $listing->save();
                 }
-                
-                foreach($details as $detail){
-                    if($detail->type != 4) {
-                        if(isset($_POST['detail'][$detail->id])){
-                            $detail->text = $_POST['detail'][$detail->id]['text'];
-                            $detail->save();
-                        } else $detail->delete();
-                    }
-                }
-                
-                $details_db = new Zend_Db_Table('listing_details');
-                foreach($_POST['details'] as $type => $ds){
-                    foreach($ds as $d){
-                        if(!empty($d['text'])) {
-                            $row = $details_db->fetchNew();
-                            $row->listing_id = $listing->id;
-                            $row->text       = $d['text'];
-                            $row->type       = $type;
-                            $row->created    = date('Y-m-d H:i:s');
-                            $row->updated    = date('Y-m-d H:i:s');
-
-                            $row->save();
-                        }
-                    }
-                }
-                $details = $this->listings->getDetails($listing->id);
                 setcookie('alert','Your changes have been saved');
                 $this->_redirect('/admin/listings/overview/'.$listing->id);
             }
@@ -1124,8 +1098,7 @@ class AdminController extends Zend_Controller_Action {
         $ids = $this->_getParam('page','default');
         if($this->isValidId($ids)){    
             $listing = $this->listings->getListing($ids);
-            $listing->status = 0;
-            $listing->save();
+            $listing->delete();
             
             $this->_redirect('/admin/listings');
         }
@@ -2275,7 +2248,6 @@ class AdminController extends Zend_Controller_Action {
                 'num'   => date('j', $start_at),
                 'date'  => date('Y-m-d', $start_at)
             );
-            if($listing->main_type == 6){
                 $schedules = $this->listings->getSchedulesOf($listing->id);
                 
                 foreach($schedules as $sch){
@@ -2288,7 +2260,6 @@ class AdminController extends Zend_Controller_Action {
                     $arr[$sch->id]['class'] = $aux3;
                 }
                 //echo '<pre>'; var_dump($arr); echo '</pre>'; die;
-            }
             if(!in_array($arr, $days)){
                 $days[] = $arr;
             }
@@ -2296,10 +2267,9 @@ class AdminController extends Zend_Controller_Action {
             //echo $start_at.'<br>';
             //echo date('Y-m-d', $start_at).'<br>';
         }
-        if($listing->main_type == 6){
-            $schedules = $this->listings->getSchedulesOf($listing->id);
-            $this->view->schedules = $schedules;
-        }
+        
+        $schedules = $this->listings->getSchedulesOf($listing->id);
+        $this->view->schedules = $schedules;
         
         $this->view->prevmonth    = $p_months[$month];
         $this->view->prevmonth_lb = $labels[$p_months[$month]];

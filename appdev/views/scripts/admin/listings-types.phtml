@@ -20,8 +20,9 @@
     <?= $this->partial('admin_partials/header.phtml', array()); ?>
     <div class="w3_admin">
         <div class="sub_menu">
-            <h2>Editing. <span><?php echo $this->listing->title ?></span></h2>
-            <?= $this->partial('admin_partials/listing_actions.phtml', array('active'=> $this->listing->status)); ?>
+            <h2>Editing. <span><?php echo $this->listing->title ?></span>
+            <em class="ed">by </em> <a href="/admin/users/view/partner/<?= $this->vendor->id ?>" class="partner"><?= $this->vendor->name ?></a></h2>
+            <?= $this->partial('admin_partials/listing_actions.phtml', array('active'=> $this->listing)); ?>
         </div><!--SUB_MENU-->
     </div><!--W3-->
     <div class="w2">
