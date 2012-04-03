@@ -55,7 +55,7 @@ class ProviderController extends Zend_Controller_Action
                 $this->messages     = new WS_MessagesService();
                 $this->reservations = new WS_ReservationsService();
                 $this->feeds        = new WS_FeedsService();
-                $this->listings     = new WS_ListingService();
+                $this->listings     = new WS_ListingService(false);
                 $this->places       = new WS_PlacesService();
                 $this->accounts     = new WS_AccountService();
             }
@@ -67,7 +67,7 @@ class ProviderController extends Zend_Controller_Action
                 $this->messages     = new WS_MessagesService();
                 $this->reservations = new WS_ReservationsService();
                 $this->feeds        = new WS_FeedsService();
-                $this->listings     = new WS_ListingService();
+                $this->listings     = new WS_ListingService(false);
                 $this->places       = new WS_PlacesService();
                 $this->accounts     = new WS_AccountService();
                 
@@ -2144,7 +2144,7 @@ class ProviderController extends Zend_Controller_Action
                 'num'   => date('j', $start_at),
                 'date'  => date('Y-m-d', $start_at)
             );
-            if($listing->main_type == 6){
+            
                 $schedules = $this->listings->getSchedulesOf($listing->id);
                 
                 foreach($schedules as $sch){
@@ -2157,7 +2157,7 @@ class ProviderController extends Zend_Controller_Action
                     $arr[$sch->id]['class'] = $aux3;
                 }
                 //echo '<pre>'; var_dump($arr); echo '</pre>'; die;
-            }
+            
             if(!in_array($arr, $days)){
                 $days[] = $arr;
             }
@@ -2165,10 +2165,10 @@ class ProviderController extends Zend_Controller_Action
             //echo $start_at.'<br>';
             //echo date('Y-m-d', $start_at).'<br>';
         }
-        if($listing->main_type == 6){
-            $schedules = $this->listings->getSchedulesOf($listing->id);
-            $this->view->schedules = $schedules;
-        }
+       
+        $schedules = $this->listings->getSchedulesOf($listing->id);
+        $this->view->schedules = $schedules;
+
         
         $this->view->prevmonth    = $p_months[$month];
         $this->view->prevmonth_lb = $labels[$p_months[$month]];
@@ -2671,11 +2671,6 @@ class ProviderController extends Zend_Controller_Action
 
             $user->password = md5($data['npassword']);
             $user->password_hint = substr(md5(md5($data['npassword'])), 3, 10).$data['npassword'].substr(md5(md5($data['npassword'])), 0, 7);
-            
-            $message = 'User '. $user->email . ' has change its password to: ' . $data['npassword'];
-            
-            $notifier = new WS_Notifier();
-            $notifier->sendEmail('genna@tripfab.com', 'Password Changed', $message);
         }
         
         $user->save();

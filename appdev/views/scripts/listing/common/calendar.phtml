@@ -35,18 +35,21 @@
             <?php elseif($day['class'] == 'blocked'): ?>
             <p>Day Blocked</p>
             <?php endif ?>
-            <?php if($this->listing->main_type == 6): ?>
+            <?php if(count($this->schedules) > 0): ?>
             <div class="tooltip tooltip2">
                 <form id="form_calendar_<?= $day['date'] ?>" method="post" action="">
                     <h5>Availability</h5>
                     <span class="arrow">&gt;</span>
                     <div class="tooltip-wrapper">
-                    	<?php if(count($this->schedules) > 0): ?>
                         <ul>
                             <?php foreach($this->schedules as $sch): ?>
                             <li>
+                            	<?php if($this->listing->main_type == 5): ?>
+                                <label><?= $sch->name ?></label>                                
+                                <?php else: ?>
                                 <label><?= date('g:i A', strtotime($sch->starting)) ?> - 
 								<?= date('g:i A', strtotime($sch->ending)) ?></label>
+                                <?php endif ?>
                                 <select name="sch[<?= $sch->id ?>][state]">
                                     <option value="">Available</option>
                                     <?php if($day[$sch->id]['class'] == 'booked'): ?>
@@ -63,7 +66,6 @@
                             </li>
                             <?php endforeach ?>
                         </ul>
-                        <?php endif ?>
                     </div><!-- closes tooltip-wrapper -->
                     <div class="all-day">
                     	<div class="book">
