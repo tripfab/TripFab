@@ -88,6 +88,9 @@ input[type="text"]:disabled, input[type="password"]:disabled {
 	border-color: #f1f1f1!important;
 }
 
+.ui-tabs-hide{
+	display: none;
+}
 /*- End of CSS Reset -----------------------------------------------------------*/
 
 /*- General Styles -----------------------------------------------------------*/
@@ -142,9 +145,40 @@ body {
 	-moz-box-shadow: inset 0px 0px 3px 1px #6BA52D;
 	box-shadow: inset 0px 0px 3px 1px #6BA52D;
 }
+.btn-2 {
+    background: url(../images6/btn-2.png) repeat-x  0 0 #a1a1a1;
+    border: 1px solid #979797;
+    color: #FFFFFF;
+    display: block;
+    font: bold 11px/30px Helvetica;
+    height: 30px;
+    text-align: center;
+	cursor: pointer;
+	padding: 0 8px;
+	-webkit-border-radius: 2px !important;
+	-moz-border-radius: 2px !important;
+	border-radius: 2px !important;
+	text-shadow: 0px 1px 0px #5C961F;
+	behavior: url(/PIE.htc);
+}
+
+.btn-2:hover {
+	border: 1px solid #808080;
+	-webkit-box-shadow: 0px 1px 1px 0px #a5a5a5;
+	-moz-box-shadow: 0px 1px 1px 0px #a5a5a5;
+	box-shadow: 0px 1px 1px 0px #a5a5a5;
+	text-decoration: none;
+}
+.btn-2:active {
+	border: 1px solid #9f9f9f;
+	-webkit-box-shadow: inset 0px 0px 3px 1px #8c8c8c;
+	-moz-box-shadow: inset 0px 0px 3px 1px #8c8c8c;
+	box-shadow: inset 0px 0px 3px 1px #8c8c8c;
+}
+
 
 .btn-10 {
-	background: url(../images2/btn-10.gif) repeat-x bottom left #fff; 
+	background: url(../images6/btn-10.gif) repeat-x bottom left #fff; 
 	height: 30px;
 	color: #616161;
 	font: bold 11px/30px Helvetica;
