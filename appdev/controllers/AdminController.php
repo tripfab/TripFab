@@ -173,7 +173,7 @@ class AdminController extends Zend_Controller_Action {
                 $template = 'listings-activate';
                 $this->render($template);
                 break;
-            case 'desactivate':
+            case 'delete':
                 $this->listingsDesactivateTask();
                 break;
             case 'preview':
@@ -1124,8 +1124,7 @@ class AdminController extends Zend_Controller_Action {
         $ids = $this->_getParam('page','default');
         if($this->isValidId($ids)){    
             $listing = $this->listings->getListing($ids);
-            $listing->status = 0;
-            $listing->save();
+            $listing->delete();
             
             $this->_redirect('/admin/listings');
         }

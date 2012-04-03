@@ -699,7 +699,7 @@ input.schname { float:none !important; width:90px !important; }
 	</div><!-- closes profile-items -->
 	<div class="foot">
 		<input type="submit" class="btn-1 noclean" value="Save Changes" />
-		<a href="/admin/listings/delete/<?= $this->listing->id ?>">Delete Listing</a>
+		<a class="confirmDeleteListing" href="/admin/listings/delete/<?= $this->listing->id ?>">Delete Listing</a>
 	</div><!-- closes foot -->
     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
@@ -1268,7 +1268,7 @@ input.schname { float:none !important; width:90px !important; }
 	</div><!-- closes profile-items -->
 	<div class="foot">
 		<input type="submit" class="btn-1 noclean" value="Save Changes" />
-		<a href="/admin/listings/desactivate/<?= $this->listing->id ?>">Delete Listing</a>
+		<a class="confirmDeleteListing" href="/admin/listings/delete/<?= $this->listing->id ?>">Delete Listing</a>
 	</div><!-- closes foot -->
     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
