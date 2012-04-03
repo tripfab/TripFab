@@ -138,7 +138,7 @@
                         </div><!-- closes tab-ttl -->
                         <div class="tab-content">
                         	<?php if(!$ok1): ?>
-                            <h2>Inclusions</h2>
+                            <h2>Includes</h2>
                             <ul>
                             	<?php foreach($this->details as $detail): ?>
                                 <?php if($detail->type == 1): ?>
@@ -147,7 +147,7 @@
                                 <?php endforeach ?>
                             </ul>
                             <?php endif; if(!$ok2): ?>
-                            <h2>Exclusions</h2>
+                            <h2>Excludes</h2>
                             <ul>
                                 <?php foreach($this->details as $detail): ?>
                                 <?php if($detail->type == 2): ?>
