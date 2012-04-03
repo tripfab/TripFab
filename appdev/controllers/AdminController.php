@@ -3251,7 +3251,7 @@ class AdminController extends Zend_Controller_Action {
                 $this->paymentsViewTask();
                 break;
             case 'paid':
-                $this->paidTask();
+                $this->PaymentsPaidTask();
                 break;
             case 'data':
                 $this->paymentsDataTask();
@@ -3260,6 +3260,14 @@ class AdminController extends Zend_Controller_Action {
                 throw new Exception('Page not found');
         }
     }
+	
+	private function paymentsPaidTask(){
+        $vendorId = $this->_getParam('page');
+		$date = $this->_getParam('sort');
+		$reservations = $this->reservations->getPendingByDate($vendorId, $date);
+		$this->redirect("/admin/payments/pending");
+		
+	}
 	
 	private function paymentsViewTask(){
         $vendorId = $this->_getParam('page');

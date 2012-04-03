@@ -393,6 +393,10 @@ class WS_ReservationsService {
         $_reservs = $db->fetchAll($select);
         return $_reservs;
     }
-
+	
+	public function markPaidByDate($vendor, $date){
+		$this->reservations->update(array('status_id'=>3), "vendor_id = $vendor and created < '$date' and created >= DATE_SUB(created, INTERVAL 7 DAY)");
+		return true;
+	}
     
 }
