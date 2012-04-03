@@ -510,3 +510,56 @@
 
 
 /*- END CONTENT WITHOUT BACKGROUND AND BORDER-----------------------------------*/
+
+
+
+
+
+
+
+/*LIGHTBOX BASIC STYLES-------------------------------------*/
+.lb {
+	overflow: hidden;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px; 
+	behavior: url(/PIE.htc);
+}
+.lb .top {
+	background: url("../images6/g-13.png") repeat-x scroll 0 0 transparent;
+    color: #FFFFFF;
+    font: bold 12px/44px Helvetica,Arial,sans-serif;
+    height: 44px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 0px;
+    -moz-border-radius-bottomleft: 0px;
+    -webkit-border-radius: 5px 5px 0px 0px;
+    border-radius: 5px 5px 0px 0px; 
+}
+.lb .bottom {
+	background: url("../images6/g-52.gif") repeat-x scroll 0 0 #F6F6F6;
+    height: 45px;
+    overflow: hidden;
+    padding: 15px 20px 0 0;
+    -moz-border-radius-topleft: 0px;
+    -moz-border-radius-topright: 0px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -webkit-border-radius: 0px 0px 5px 5px;
+    border-radius: 0px 0px 5px 5px;
+}
+.lb .bottom .btn-10,
+.lb .bottom .btn-1 {
+	float: right;
+	height: 30px;
+}
+.lgbox_img {
+	padding: 7px;
+	display: block;
+	background-color: #FFF;
+}
+/*END LIGHTBOX BASIC STYLES----------------------------------*/
+
+
+
