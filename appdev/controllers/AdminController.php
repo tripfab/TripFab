@@ -2926,7 +2926,7 @@ class AdminController extends Zend_Controller_Action {
         $this->view->countries = $this->places->getPlaces(2);
 
         $travellersFields = array('name', 'email', 'countryName', 'cityName', 'age', 'reservationTotal');
-        $partnersFields = array('partnerName', 'partnerEmail', 'countryName', 'listingsCount', 'reservationTotal');
+        $partnersFields = array('partnerName', 'partnerEmail', 'countryName', 'listings', 'reservationTotal');
 
 
         $db = Zend_Db_Table::getDefaultAdapter();
@@ -2943,6 +2943,7 @@ class AdminController extends Zend_Controller_Action {
                         ->joinleft(array('country' => 'places'), 'users.country_id=country.id', array('countryName' => 'title'))
                         ->joinleft('reservations', 'users.id=reservations.user_id', array('reservationTotal' => 'COUNT(reservations.user_id)'))
                         ->where('users.role_id = 2')
+                        ->orwhere('users.role_id = 1')
                         ->group('users.id');
                 if ($this->view->searchText) {
                     $select->where("users.name like '{$this->view->searchText}%' or users.lname like '{$this->view->searchText}%' or users.email like '{$this->view->searchText}%'");
@@ -2956,8 +2957,9 @@ class AdminController extends Zend_Controller_Action {
                         ->join('vendors', 'users.id=vendors.user_id', array('vendorId' => 'id', 'partnerName' => 'name', 'partnerEmail' => 'email', 'listingsCount' => 'listings', 'contact_name'))
                         ->joinleft(array('city' => 'places'), 'users.city_id=city.id', array('cityName' => 'title'))
                         ->joinleft(array('country' => 'places'), 'users.country_id=country.id', array('countryName' => 'title'))
-                        ->joinleft('reservations', 'vendors.id=reservations.vendor_id', array('reservationTotal' => 'COUNT(reservations.id)'))
-                        ->where('users.role_id = 3')
+                        ->joinleft('reservations', 'vendors.id=reservations.vendor_id', array('reservationTotal' => 'COUNT(reservations.user_id)'))
+                        ->joinleft('listings','vendors.id=listings.vendor_id',array('listings'=>'COUNT(listings.id)'))
+						->where('users.role_id = 3')
                         ->group('users.id');
                 if ($this->view->searchText) {
                     $select->where("vendors.name like '{$this->view->searchText}%' or vendors.email like '{$this->view->searchText}%'");
