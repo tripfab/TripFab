@@ -736,16 +736,16 @@ class AdminController extends Zend_Controller_Action {
         if($this->isValidId($ids)){    
             $listing = $this->listings->getListing($ids);
             $overview = $this->listings->getOverviewOf($listing->id);
-            $details = $this->listings->getDetails($listing->id);
             
             if($this->getRequest()->isPost()){
+				
                 //echo '<pre>'; print_r($_POST); echo '</pre>'; die;
                 $overview->about   = $_POST['about'];
                 $overview->expect  = $_POST['expect'];
                 $overview->love    = $_POST['love'];
                 $overview->updated = date('Y-m-d H:i:s');
                 $overview->save();
-                
+				
                 if(!empty($_POST['about'])){
                     if(strlen($_POST['about']) > 200){
                         $listing->description = substr(str_replace("\n","",$_POST['about']), 0, 197).'...';
@@ -754,32 +754,6 @@ class AdminController extends Zend_Controller_Action {
                     }
                     $listing->save();
                 }
-                
-                foreach($details as $detail){
-                    if($detail->type != 4) {
-                        if(isset($_POST['detail'][$detail->id])){
-                            $detail->text = $_POST['detail'][$detail->id]['text'];
-                            $detail->save();
-                        } else $detail->delete();
-                    }
-                }
-                
-                $details_db = new Zend_Db_Table('listing_details');
-                foreach($_POST['details'] as $type => $ds){
-                    foreach($ds as $d){
-                        if(!empty($d['text'])) {
-                            $row = $details_db->fetchNew();
-                            $row->listing_id = $listing->id;
-                            $row->text       = $d['text'];
-                            $row->type       = $type;
-                            $row->created    = date('Y-m-d H:i:s');
-                            $row->updated    = date('Y-m-d H:i:s');
-
-                            $row->save();
-                        }
-                    }
-                }
-                $details = $this->listings->getDetails($listing->id);
                 setcookie('alert','Your changes have been saved');
                 $this->_redirect('/admin/listings/overview/'.$listing->id);
             }
