@@ -1149,12 +1149,13 @@ class WS_ListingService {
     public function saveLandscapes($listing, $lands)
     {
         $table = new Zend_Db_Table('listing_landscapes');
-        $table->delete('listing_id = '.$listing);
+        $table->delete(array('listing_id'=>$listing));
         foreach($lands as $land){
             $row = $table->fetchNew();
             $row->landscape_id = $land;
             $row->listing_id   = $listing;
             $row->save();
+            
         }
     }
     
