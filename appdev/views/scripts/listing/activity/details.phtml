@@ -108,7 +108,7 @@
             </div>
         </div><!-- closes lstng-detail -->
         <div class="lstng-detail faq">
-            <strong>Non-Includes</strong>
+            <strong>Excludes</strong>
             <span>Write a detailed description</span><br />
             
             <?php $exist = false; ?>
@@ -128,41 +128,41 @@
             <?php if($exist): ?>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input tabindex="<?= $tab ?>" type="text" placeholder="Enter non-include text here" name="details[2][0][text]" value="" />
+                <input tabindex="<?= $tab ?>" type="text" placeholder="Enter exclude text here" name="details[2][0][text]" value="" />
                 <div class="clear"></div>
             </div>
             <?php $tab++ ?>
             <?php else: ?>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input tabindex="<?= $tab ?>" type="text" placeholder="Enter non-include text here" name="details[2][0][text]" value="" />
+                <input tabindex="<?= $tab ?>" type="text" placeholder="Enter exclude text here" name="details[2][0][text]" value="" />
                 <div class="clear"></div>
             </div>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input tabindex="<?= $tab++ ?>" type="text" placeholder="Enter non-include text here" name="details[2][1][text]" value="" />
+                <input tabindex="<?= $tab++ ?>" type="text" placeholder="Enter exclude text here" name="details[2][1][text]" value="" />
                 <div class="clear"></div>
             </div>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input tabindex="<?= $tab++ ?>" type="text" placeholder="Enter non-include text here" name="details[2][2][text]" value="" />
+                <input tabindex="<?= $tab++ ?>" type="text" placeholder="Enter exclude text here" name="details[2][2][text]" value="" />
                 <div class="clear"></div>
             </div>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input tabindex="<?= $tab++ ?>" type="text" placeholder="Enter non-include text here" name="details[2][3][text]" value="" />
+                <input tabindex="<?= $tab++ ?>" type="text" placeholder="Enter exclude text here" name="details[2][3][text]" value="" />
                 <div class="clear"></div>
             </div>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input tabindex="<?= $tab++ ?>" type="text" placeholder="Enter non-include text here" name="details[2][4][text]" value="" />
+                <input tabindex="<?= $tab++ ?>" type="text" placeholder="Enter exclude text here" name="details[2][4][text]" value="" />
                 <div class="clear"></div>
             </div>
             <?php endif ?>
             
             <div class="hidden noninclude detail">
             	<a href="" class="remove"></a>
-                <input type="text" placeholder="Enter non-include text here" name="text" value="" />
+                <input type="text" placeholder="Enter exclude text here" name="text" value="" />
                 <div class="clear"></div>
             </div>
             <a href="" id="addNonInclude" class="link-5">Add another item</a>
