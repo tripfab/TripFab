@@ -20,6 +20,7 @@ $(document).ready(function() {
                 $('.resultsholder').html(res);
                 refreshActions();
             }, error: function(){
+                $('.loading').hide();
                 showError('Something went wrong. Please try again later');
             }
         });
@@ -115,5 +116,7 @@ $(document).ready(function() {
             
             return false;
         });
+        
+        $('.loading').hide();
     }
 });
