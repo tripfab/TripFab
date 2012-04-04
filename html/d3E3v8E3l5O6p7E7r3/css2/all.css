@@ -9095,7 +9095,14 @@ h2.title .back:hover,
 	width: 154px;
 	text-decoration: none;
 }
-
+.listing-content .left a.steps {
+	color: #f26522;
+	font: bold 11px/34px Helvetica;
+	background: url(../images2/steps.png) repeat-x 0 0;
+	height: 34px;
+	padding-left: 26px;
+	display: block;
+}
 .listing-content .left ul li a:hover {
 	color: #999999;
 }
