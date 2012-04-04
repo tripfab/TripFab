@@ -66,7 +66,14 @@
 
 <form id="general" name="general" method="POST">
 <div class="single_trip">
-    <div class="image"><img src="<?php echo $this->user->image?>" width="134" height="134" alt="" /></div><!--IMAGE-->
+    <div style="float:right; text-align:center;">
+    <div class="image"><img src="<?php echo $this->partnerPhoto?>" width="134" height="134" alt="" id="vendor-photo" /></div><!--IMAGE-->
+    <div class="clear"></div>
+    <a style="color: #60B5F7;" href="javascript://" onclick="$('#fileToUpload').trigger('click');">Change Photo</a>
+    <div style="width:1px; overflow:hidden"><input type="file" name="fileToUpload" id="fileToUpload" onchange="uploadFile();"/></div>
+    <a href="#upload" id="upload_opener" class="lbc"></a>
+
+    </div>
     <table width="520" border="0" class="info">
         <tr>
             <td width="180">Company Name</td>
@@ -146,14 +153,33 @@
 		<div class="buttons">
 			<ul>
 				<li><a href="" class="btn-1">Reset</a></li>
-				<li><a href="" class="btn-10">Cancel</a></li>
+				<li><a href="" class="btn-10" id="c98">Cancel</a></li>
 			</ul>
 		</div><!--BUTTONS-->
 	</div><!--PASSWORD-RESET-->
 </div><!--HIDDEN--> 
 
+<div class="hidden">
+ <div class="lb activation" id="upload">
+    <div class="top">Partner Photo</div><!--TOP-->
+        <div class="cont" id="marquee">
+            <span>Uploading...</span> <div>15%</div>
+        </div><!--CONT-->
+        <div class="bottom">
+            <a href="javascript://" class="btn-1" id="uc33">Cancel</a>
+        </div><!--BOTTOM-->
+ </div><!--UPLOAD-->
+</div><!--HIDDEN--> 
 
 <script>
+		
+		$("#uc33").click(function(){
+			$.fancybox.close();
+		});
+		$("#c98").click(function(){
+			$.fancybox.close();
+		});
+
 		var cityId = '<?php echo $this->user->city_id;?>';
 		fillCityTrip($('#country').val());
 		screenUpdate();
@@ -199,7 +225,67 @@
 			});
 		})
 				
-		</script>
+
+	function fileSelected() {
+	  var file = document.getElementById('fileToUpload').files[0];
+	  if (file) {
+		var fileSize = 0;
+		if (file.size > 1024 * 1024)
+		  fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+		else
+		  fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
+			  
+		document.getElementById('invFileName').innerHTML = file.name + "(" + fileSize + ")";
+	  }
+	}
+	
+	function uploadFile() {
+	  $("#upload_opener").trigger('click');	
+
+	  var fd = new FormData();
+      fd.append("image", document.getElementById('fileToUpload').files[0]);	
+	  
+	  var xhr = new XMLHttpRequest();
+	  xhr.upload.addEventListener("progress", uploadProgress, false);
+	  xhr.addEventListener("load", uploadComplete, false);
+	  xhr.addEventListener("error", uploadFailed, false);
+	  xhr.addEventListener("abort", uploadCanceled, false);
+	  xhr.open("POST", "/admin/users/upload/partner/<?php echo $this->vendorId?>");
+	  xhr.send(fd);
+	}
+	
+	
+	function uploadProgress(evt) {
+	  if (evt.lengthComputable) {
+		var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+		$('#marquee').html(percentComplete.toString() + '%');
+	  }
+	}
+	
+	 function uploadComplete(evt) {
+        /* This event is raised when the server send back a response */
+		var response = JSON.parse(evt.target.responseText);
+		if(response.attempt=='success'){
+			d = new Date();
+			$("#vendor-photo").attr('src', response.desc + '?' + d.getTime());
+			$('#marquee').html('Image uploaded successfully');
+			$('#uc33').text('Close');
+
+		}
+		else{
+			$('#marquee').html('Unable to upload ');
+		}
+     }
+
+     function uploadFailed(evt) {
+		//document.getElementById('invFileName').innerHTML = 'There was an error attempting to upload the file.';
+     }
+
+     function uploadCanceled(evt) {
+		//document.getElementById('invFileName').innerHTML = 'Upload canceled';
+     }
+
+	</script>
 
 
 

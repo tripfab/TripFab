@@ -105,6 +105,11 @@ class WS_VendorService {
 		$this->bankAccounts->delete("id= $bank");
 		return true;
 	}
+	
+	public function save($id, $data){
+		return $this->vendors->update($data, $this->vendors->getAdapter()->quoteInto('id = ?', $id));
+	}
+
 }
 
 ?>

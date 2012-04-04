@@ -2911,6 +2911,9 @@ class AdminController extends Zend_Controller_Action {
             case 'data':
                 $this->userDataTask();
                 break;
+            case 'upload':
+                $this->userUploadTask();
+                break;
             default:
                 throw new Exception('Page not found');
         }
@@ -2980,6 +2983,47 @@ class AdminController extends Zend_Controller_Action {
         $this->render($template);
     }
 
+    private function userUploadTask() {
+        $userType = $this->_getParam('page');
+		
+        switch ($userType) {
+            case 'traveller':
+                break;
+            case 'partner':
+                $vendorId = $this->_getParam('sort');
+                $user = $this->vendors->getVendorDetailsById($vendorId);
+        
+				if (!$_FILES['image']['name']) {
+					self::jsonEcho(json_encode(array("attempt"=>"fail", "desc"=>"No files data was received")));
+				}
+		
+				$mediaPath = $_SERVER['DOCUMENT_ROOT'] . "/images/vendors";
+				if (!file_exists($mediaPath)) {
+					@mkdir($mediaPath, 0777);
+				}
+		
+				$path_parts = pathinfo($_FILES['image']['name']);
+				$extension = $path_parts['extension'];
+				$targetFileName = $vendorId . md5($vendorId). '.' . $extension;
+				$targetPath = $mediaPath . '/' . $targetFileName;
+				$htmlFileName = '/images/vendors/' . $targetFileName;
+		
+				$tmp_name = $_FILES['image']['tmp_name'];
+				if(move_uploaded_file($tmp_name, $targetPath)){
+					$this->vendors->save($vendorId, array('image'=>$htmlFileName));
+					self::jsonEcho(json_encode(array("attempt"=>"success", "desc"=>$htmlFileName)));
+				}
+				else{
+					self::jsonEcho(json_encode(array("attempt"=>"fail", "desc"=>"Unable to copy image")));
+				}
+                break;
+				
+            default: 
+				self::jsonEcho(json_encode(array("attempt"=>"fail", "desc"=>"Invalid user type")));
+        }
+    }
+
+
     private function userViewTask() {
         $userType = $this->_getParam('page');
 		
@@ -3031,6 +3075,8 @@ class AdminController extends Zend_Controller_Action {
 				
 				$countries = $this->places->getPlaces(2);
 				$this->view->countries = $countries;
+				$this->view->partnerPhoto = $user->image ? $user->image : '/images/default-profile.gif';
+				$this->view->vendorId = $vendorId;
 				$this->render('partnerview1');
 				break;
 			case '2':
