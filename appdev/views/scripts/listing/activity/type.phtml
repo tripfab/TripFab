@@ -124,7 +124,7 @@
                 <div class="selects">
                     <select tabindex="4" name="max">
                         <option value="1">1 person</option>
-                    	<?php for($i=2;$i<=50;$i++): ?>
+                    	<?php for($i=2;$i<=100;$i++): ?>
                         <?php $selected = ($i == $_POST['max']) ? 'selected="selected"' : '' ?>
                         <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> people</option>
                         <?php endfor ?>
@@ -311,7 +311,7 @@
                 <div class="selects">
                     <select tabindex="4" name="max">
                         <option value="1">1 person</option>
-                    	<?php for($i=2;$i<=50;$i++): ?>
+                    	<?php for($i=2;$i<=100;$i++): ?>
                         <?php $selected = ($i == $type->max) ? 'selected="selected"' : '' ?>
                         <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> people</option>
                         <?php endfor ?>
@@ -484,7 +484,7 @@
                 <div class="selects">
                     <select tabindex="4" name="max">
                         <option value="1">1 person</option>
-                    	<?php for($i=2;$i<=50;$i++): ?>
+                    	<?php for($i=2;$i<=100;$i++): ?>
                         <option value="<?= $i ?>"><?= $i ?> people</option>
                         <?php endfor ?>
                     </select>

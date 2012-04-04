@@ -149,7 +149,7 @@ input.schname { float:none !important; width:90px !important; }
                     <div class="selects">
                         <select tabindex="10" <?= $disabled ?> name="max">
                             <option value="1">1 person</option>
-                            <?php for($i=2; $i<=50; $i++): ?>
+                            <?php for($i=2; $i<=100; $i++): ?>
                             <?php $selected = ($i == $_POST['max']) ? 'selected="selected"' : ''; ?>
                             <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> people</option>
                             <?php endfor ?>
@@ -823,7 +823,7 @@ input.schname { float:none !important; width:90px !important; }
                     <div class="selects">
                         <select tabindex="9" <?= $disabled ?> name="max">
                             <option value="1">1 person</option>
-                            <?php for($i=2; $i<=50; $i++): ?>
+                            <?php for($i=2; $i<=100; $i++): ?>
                             <?php $selected = ($i == $this->listing->max) ? 'selected="selected"' : ''; ?>
                             <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> people</option>
                             <?php endfor ?>
