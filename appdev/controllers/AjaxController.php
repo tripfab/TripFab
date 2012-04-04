@@ -2051,4 +2051,48 @@ class AjaxController extends Zend_Controller_Action
         $results = $vendors->fetchAll($select);
         $this->view->results = $results;
     }
+    
+    public function getpartnerlistingsAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+        
+        $status = $this->_getParam('get','all');
+        $page   = $this->_getParam('page','1');
+        $sort   = $this->_getParam('sort','created');
+        $order  = $this->_getParam('order','');
+        
+        if($sort == 'created' and empty($order)) {
+            $order = 'DESC';
+        } elseif($sort == 'title' and empty($order)) {
+            $order = 'ASC';
+        }
+        
+        $this->view->selected = ($sort == 'created') ? (($order == 'DESC') ? 1 : 2) : (($order == 'ASC') ? 3 : 4);
+        
+        switch($status){
+            case 'all':
+                $listings = $this->listings->getListingsOf($user->getVendorId(), null, $page, $sort, $order);
+                $this->view->listings = $listings;
+                $this->view->title = "All Listings";
+                $this->view->count = $this->listings->countListingsOf($user->getVendorId());
+                break;
+            case 'active':
+                $listings = $this->listings->getListingsOf($user->getVendorId(), 1, $page, $sort, $order);
+                $this->view->listings = $listings;
+                $this->view->title = "Active Listings";
+                $this->view->count = $this->listings->countListingsOf($user->getVendorId(), 1);
+                break;
+            case 'inactive':
+                $listings = $this->listings->getListingsOf($user->getVendorId(), 0, $page, $sort, $order);
+                $this->view->listings = $listings;
+                $this->view->title = "Inactive Listings";
+                $this->view->count = $this->listings->countListingsOf($user->getVendorId(), 0);
+                break;
+            default: throw new Exception('Page not found');
+        }
+    }
 }

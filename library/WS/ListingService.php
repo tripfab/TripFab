@@ -826,7 +826,7 @@ class WS_ListingService {
         return $location;
     }
     
-    public function getListingsOf($vendor, $status = null)
+    public function getListingsOf($vendor, $status = null, $page = 1, $sort = 'created', $order = 'ASC')
     {
         $db = Zend_Db_Table::getDefaultAdapter();
         $select = $db->select();
@@ -841,11 +841,32 @@ class WS_ListingService {
         else
             $select->where('status <> ?', 3);
         
-        $select->order('created DESC');
+        $select->order($sort.' '.$order);
+        
+        $limit = 5;
+        $offset = ($limit * ($page - 1));
+        
+        $select->limit($limit, $offset);
         
         $listings = $db->fetchAll($select, array(), 5);
         //var_dump($listings); die;
         return $listings;
+    }
+    
+    public function countListingsOf($vendor, $status = null)
+    {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $select = $db->select();
+        $select->from('listings', array('total'=>'count(*)'));
+        $select->where('vendor_id = ?', $vendor);
+        if(is_null($status)) 
+            $select->where('status <> ?', 3);
+        else
+            $select->where('status = ?', $status);
+        
+        $count = $db->fetchRow($select, array(), 5);
+        
+        return $count->total;
     }
     
     public function getReviewedListings($vendor)
