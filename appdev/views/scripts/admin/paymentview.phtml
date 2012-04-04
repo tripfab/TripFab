@@ -23,15 +23,21 @@
 <div class="w3_admin">
 	<div class="sub_menu">
 		<h2><?php echo $this->vendorName?>. <span> Reservation Details</span></h2>
-		<a href="" class="btn-10">Mark as Paid</a>
-		<span class="pending_amount">Pending Payment: $<?php echo $this->amount?></span>
+		<?php if($this->mode == 'pending'):?>
+        	<a href="<?php echo $this->url(array('task'=>'paid'))?>" class="btn-10">Mark as Paid</a>
+        <?php endif;?>
+		<span class="pending_amount"><?php echo $this->mode=='pending'? 'Pending Payment': 'Paid Payment'?> $<?php echo $this->amount?></span>
 	</div><!--SUB_MENU-->
 </div>
 <!--W3-->
 <div class="all_listing">
 	<div class="detailsPayments">
 		<div class="ttl">
-			<h4>There are <?php echo $this->total?> reservations pending to pay</h4>
+			<?php if($this->mode=='pending'):?>
+            <h4>There are <?php echo $this->total?> reservations pending to pay</h4>
+            <?php else:?>
+             <h4>There are <?php echo $this->total?> reservations paid on <?php echo date('M d, Y', strtotime($this->date))?></h4>
+            <?php endif;?>
 			<a href="javascript:history.back(1);"> &larr; Back to Payments</a>
 		</div><!--TTL-->
 		<?php foreach($this->reservations as $reservation):?>
@@ -56,11 +62,11 @@
 
 					<tr>
 						<td>Check in</td>
-						<td class="res"><?php echo $reservation->checkin ?></td>
+						<td class="res"><?php echo date('M d, Y', strtotime($reservation->checkin)) ?></td>
 					</tr>
 					<tr>
 						<td>Check out</td>
-						<td class="res"><?php echo $reservation->checkout ?></td>
+						<td class="res"><?php echo date('M d, Y', strtotime($reservation->checkout)) ?></td>
 					</tr>
 					<tr>
 						<td>Total</td>

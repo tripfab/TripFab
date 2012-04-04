@@ -96,9 +96,9 @@
     </div><!--SINGLE_TRIP-->
     
     <?php endforeach;?>
-    <a href="#new_listing" class="add_listing lbc">Create Listing</a>
+    <a href="#new_listing2" class="add_listing lbc">Create Listing</a>
 <?php else: ?>
-	<div class="no_listing"><h1>There is no listing in this account.<a href="#new_listing" class="lbc">Create Listing Now</a></h1></div>
+	<div class="no_listing"><h1>There is no listing in this account.<a href="#new_listing2" class="lbc">Create Listing Now</a></h1></div>
 <?php endif;?>
 </div><!--BLOCK-->
 
@@ -157,7 +157,7 @@
             
 		</div>
 		<!-- closes w1 -->
-		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+		<?php echo $this->partial('admin_partials/report.phtml', array('user'=>$this->user)); ?>
 		
 <div class="hidden">
 	<div class="lightbox-2" id="password-reset">

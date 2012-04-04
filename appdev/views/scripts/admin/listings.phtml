@@ -78,8 +78,8 @@
 					<table width="100%" border="0">
 						<tr>
 							<th width="250"><a href="<?php echo $this->url(array('sort'=>0, 'seq'=>$this->paramSort == 0 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Listing Name</a></th>
-							<th width="110"><a href="<?php echo $this->url(array('sort'=>1, 'seq'=>$this->paramSort == 1 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Type</a></th>
-							<th width="120"><a href="<?php echo $this->url(array('sort'=>2, 'seq'=>$this->paramSort == 2 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Category</a></th>
+							<th width="110"><a href="<?php echo $this->url(array('sort'=>1, 'seq'=>$this->paramSort == 1 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Partner Name</a></th>
+							<th width="120"><a href="<?php echo $this->url(array('sort'=>2, 'seq'=>$this->paramSort == 2 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Type</a></th>
 							<th width="96"><a href="<?php echo $this->url(array('sort'=>3, 'seq'=>$this->paramSort == 3 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Status</a></th>
 							<th width="150"><a href="<?php echo $this->url(array('sort'=>4, 'seq'=>$this->paramSort == 4 && $this->paramSequence !='desc' ? 'desc':'default'));?>">City</a></th>
 							<th width="139"><a href="<?php echo $this->url(array('sort'=>5, 'seq'=>$this->paramSort == 5 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Country</a></th>
@@ -88,7 +88,7 @@
 						<?php foreach($this->paginator as $key=>$listing):?>
                         <tr <?php echo $key==0 ? 'class="first"' : ''?>>
 							<td><?php echo $listing->title?></td>
-							<td><?php echo $listing->type_name?></td>
+							<td><a href="/admin/users/view/partner/<?php echo $listing->vendor_id ?> "><?php echo $listing->vendor_name?></a></td>
 							<td><?php echo $listing->type_name?></td>
 							<td><?php echo $listing->status ? 'Active' : 'Deactive' ?></td>
 							<td><a href="<?php echo $this->url(array('ct'=>$listing->city_id, 'co'=>''));?>"><?php echo $listing->city_name?></a></td>

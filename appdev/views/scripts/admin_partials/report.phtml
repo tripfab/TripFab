@@ -144,6 +144,32 @@
                	</form>
                </div><!--NEWLISTING-->
             </div><!--NEW-LISTING-->
+            <div id="new_listing2">
+               <div class="lb NewListing">
+               	<div class="top">Create a New Listing</div><!--TOP-->
+                <?php $listings = new WS_ListingService(); ?>
+                <?php $this->main_categories = $listings->getMainCategories(); ?>
+               	<form action="/admin/listings/new" method="post">
+               		<fieldset>
+               			<div class="mid">
+               				<select name="main_type">
+               					<option value="">Select a Listing Type</option>
+                                <?php foreach($this->main_categories as $cat): ?>
+                                <option value="<?= $cat->id ?>"><?= $cat->name ?></option>
+                                <?php endforeach ?>
+               				</select>
+               			</div><!--MID-->
+               			<div class="bottom">
+               				<input type="submit" value="Create Listing" class="btn-1" />
+               				<input type="button" onclick="$.fancybox.close(); return false;" value="Cancel" class="btn-10" />
+               			</div><!--BOTTOM-->
+               		</fieldset>
+                    <input type="hidden" name="vendor_id" value="<?= $this->user->user_id ?>" />
+                    <input type="hidden" name="country_id" value="<?= $this->user->country_id ?>" />
+                    <input type="hidden" name="city_id" value="<?= $this->user->city_id ?>" />
+               	</form>
+               </div><!--NEWLISTING-->
+            </div><!--NEW-LISTING-->
 		</div><!--HIDDEN-->
         
    <script>

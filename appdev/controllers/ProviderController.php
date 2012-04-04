@@ -1382,25 +1382,6 @@ class ProviderController extends Zend_Controller_Action
                     break;
             }
         }
-        
-        switch($this->_getParam('task')){
-            case 'default':
-                $listings = $this->listings->getListingsOf($this->user->getVendorId());  
-                $this->view->listings = $listings;
-                $this->view->title = "All Listings";
-                break;
-            case 'active':
-                $listings = $this->listings->getListingsOf($this->user->getVendorId(), 1);
-                $this->view->listings = $listings;
-                $this->view->title = "Active Listings";
-                break;
-            case 'inactive':
-                $listings = $this->listings->getListingsOf($this->user->getVendorId(), 0);  
-                $this->view->listings = $listings;
-                $this->view->title = "Inactive Listings";
-                break;
-            default: throw new Exception('Page not found');
-        }
     }
     
     public function listingsEditTask()

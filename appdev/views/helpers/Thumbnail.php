@@ -97,7 +97,7 @@ class Zend_View_Helper_Thumbnail {
         if (isset($opts['h'])): 
             $h = $opts['h'];
         endif;
-
+        
         $filename = md5_file($imagePath);
         
         if (!empty($w) and !empty($h)):
