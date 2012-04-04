@@ -90,7 +90,7 @@
 							<td><?php echo $listing->title?></td>
 							<td><a href="/admin/users/view/partner/<?php echo $listing->vendor_id ?> "><?php echo $listing->vendor_name?></a></td>
 							<td><?php echo $listing->type_name?></td>
-							<td><?php echo $listing->status ? 'Active' : 'Deactive' ?></td>
+							<td><?php echo $listing->status ? 'Active' : 'Inactive' ?></td>
 							<td><a href="<?php echo $this->url(array('ct'=>$listing->city_id, 'co'=>''));?>"><?php echo $listing->city_name?></a></td>
 							<td><a href="<?php echo $this->url(array('co'=>$listing->country_id, 'ct'=>''));?>"><?php echo $listing->country_name?></a></td>
 							<td><a href="/admin/listings/edit/<?= $listing->id ?>" class="edit">Edit</a></td>
