@@ -2997,7 +2997,7 @@ class AdminController extends Zend_Controller_Action {
                 $vendorId = $this->_getParam('sort');
                 $user = $this->vendors->getVendorDetailsById($vendorId);
                 $this->view->user = $user;
-				$this->partnerViewTask($user);
+                $this->partnerViewTask($user);
                 break;
 				
             default: throw new Exception("Invalid user type");
