@@ -25,7 +25,7 @@ class WS_VendorService {
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = $db->select();
         $select->from('vendors', array('*', 'partner_since_date' => new Zend_Db_Expr("DATE_FORMAT(vendors.created,'%b %d, %Y')")))
-                ->join(array('users'), 'vendors.user_id=users.id', array('userName' => 'name','active'=>'active', 'user_id'=>'id'))
+                ->joinleft(array('users'), 'vendors.user_id=users.id', array('userName' => 'name','active'=>'active', 'user_id'=>'id'))
                 ->joinleft(array('city' => 'places'), 'users.city_id=city.id', array('city_id'=>'id','cityName' => 'title'))
                 ->joinleft(array('country' => 'places'), 'users.country_id=country.id', array('country_id'=>'id','countryName' => 'title'))
                 ->where('vendors.id = ?', $id);
