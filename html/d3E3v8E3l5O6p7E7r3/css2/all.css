@@ -8423,6 +8423,33 @@ h2.title .back:hover,
 
 /*- Vendor Listings Styles -----------------------------------------------------------*/
 
+.w2 .loading{
+	background: url(../images2/bgwh.png) repeat 0 0;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 51px;
+	left: 0;
+	z-index: 1000;
+	display: none;
+}
+.w2 .loading span {
+	display: block;
+	background-color: #303030;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	width: 150px;
+	height: 150px;
+	position: fixed;
+	left: 46%;
+    top: 200px;
+    z-index: 1000;
+}
+.w2 .loading img {
+	display: block;
+	padding: 9px 0 0 11px;
+}
 .listings-main .sub-ttl {
 	overflow: hidden;
 	line-height: 25px;
