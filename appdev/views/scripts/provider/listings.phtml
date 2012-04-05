@@ -19,14 +19,11 @@
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
     <div class="w2">
 	    <div class="loading">
-    		<span><img src="/images2/loading51.gif" width="128" height="128" alt="" /></span>
-		</div><!--LOADING-->
+	    	<span><img src="/images2/loading51.gif" width="50" height="50" alt="" />Loading...</span> 
+	    </div><!--LOADING-->
         <div class="wrapper user-messages">
 			<?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'All Listings','parentActive'=>'Listings')); ?>
             <div class="resultsholder">
-            	<div class="loading">
-                    <span><img src="/images2/loading51.gif" width="128" height="128" alt="" /></span>
-                </div><!--LOADING-->
             </div>
         </div><!-- closes user-messages -->
     </div><!-- closes w2 -->
