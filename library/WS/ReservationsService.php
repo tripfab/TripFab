@@ -17,9 +17,13 @@ class WS_ReservationsService {
      * @var Model_Reservations
      */
     protected $reservations;
+    protected $payments;
+    protected $paidReservations;
     
     public function __construct() {
         $this->reservations = new Model_Reservations();
+        $this->payments = new Model_Payments();
+        $this->paidReservations = new Model_PaidReservations();
     }
     public function countPending($vendor)
     {
@@ -414,19 +418,37 @@ class WS_ReservationsService {
             'user_name'         => 'name',
             'user_image'        => 'image',
         ));
+		$select->join('paid_reservations', 'paid_reservations.reservation_id=reservations.id', array());
+		$select->join('payments', 'payments.id=paid_reservations.payment_id', array());
+        $select->where('payments.created = ?', $date);
         $select->where('reservations.vendor_id = ?', $vendor);
         $select->where('reservations.status_id != ?',1);
-		$select->where('reservations.paid_date = ?' , $date);
-        
         $_reservs = $db->fetchAll($select);
         return $_reservs;
     }
 	
 
 	
-	public function markPaidByDate($vendor, $date){
-		$this->reservations->update(array('status_id'=>3), "vendor_id = $vendor and created < '$date' and created >= DATE_SUB(created, INTERVAL 7 DAY)");
-		return true;
+	public function markPaidByDate($vendor, $date, $userId){
+		$this->reservations->update(array('status_id'=>5), "vendor_id = $vendor and checkin < '$date' and checkin >= DATE_SUB(checkin, INTERVAL 7 DAY)");
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = $db->select();
+        $select->from('reservations', array('total'=>new Zend_Db_Expr('sum(ammount - ammount*0.075)')))
+		->where("vendor_id=?",$vendor)
+		->where("checkin<?",$date)
+		->where("checkin>=?",new Zend_Db_Expr('DATE_SUB(checkin, INTERVAL 7 DAY)'));
+		$row = $db->fetchRow($select);
+		$paymentId = $this->payments->insert(array('user_id'=>$userId, 'vendor_id'=>$vendor, 'amount'=>$row->total, 'created'=>date("Y-m-d h:i:s")));
+		
+		$select = $this->reservations->select();
+		$select->where("vendor_id=?",$vendor);
+		$select->where("checkin<?",$date);
+		$select->where("checkin>=?",new Zend_Db_Expr('DATE_SUB(checkin, INTERVAL 7 DAY)'));
+		$reservations = $this->reservations->fetchAll($select);
+		foreach($reservations as $reservation){
+			$this->paidReservations->insert(array('reservation_id'=>$reservation->id, 'payment_id'=>$paymentId));
+		}
 	}
-    
+	
 }
