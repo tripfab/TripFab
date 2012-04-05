@@ -8425,13 +8425,13 @@ h2.title .back:hover,
 
 .w2 .loading{
 	background: url(https://developer.tripfab.com/images2/bgwh.png) repeat 0 0;
-	position: absolute;
+	position: fixed;
 	width: 100%;
 	height: 100%;
-	top: 51px;
 	left: 0;
-	z-index: 1000;
+	z-index: 999;
 	display: none;
+	top: 0;
 }
 .w2 .loading span {
 	display: block;
@@ -8441,14 +8441,11 @@ h2.title .back:hover,
 	border-radius: 8px;
 	width: 245px;
 	height: 75px;
-	position: fixed;
-	left: 50%;
-	right: 50%;
-    top: 200px;
     z-index: 1000;
     color: #FFF;
     font: bold 27px/75px Helvetica;
     color: #FFF;
+    margin: 200px auto 0;
 }
 .w2 .loading img {
 	display: block;
