@@ -74,7 +74,7 @@
                                                 <span class="star"><img src="<?php echo $listing->image?>" width="38" height="38" alt="" /></a></span>
                                                 <span class="name"><?php echo $listing->title?></span>
                                                 <span class="type"><?php echo $listing->type_name?></span>
-                                                <span class="time"><?php echo $listing->start == '00:00:00' ? 'N/A' : date("h:i A", strtotime($listing->start))?> - <?php echo $listing->end == '00:00:00' ? 'N/A' : date("h:i A", strtotime($listing->end))?></span>
+                                                <span class="time"><?php echo $listing->start == '00:00:00' ? 'N/A' : @date("h:i A", strtotime($listing->start))?> - <?php echo $listing->end == '00:00:00' ? 'N/A' : @date("h:i A", strtotime($listing->end))?></span>
                                                 <a href="javascript://" onclick="deleteItem(<?php echo $listing->id?>)" class="delete">Delete</a>
                                                 <a href="<?php echo $this->url(array('page'=>6, 'sort'=>$this->trip->id, 'seq'=>$listing->id))?>" class="edit">Edit Info</a>
                                             </div><!--SINGLE-->
