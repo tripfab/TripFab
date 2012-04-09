@@ -38,6 +38,8 @@
 				<li><label>Website</label><input type="text" value="" name="website" /></li>
                 <li> <div class="errdiv" id="_website" style="float:right; margin-right:30px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div></li>
 				<li>
+                	<?php $places = new WS_PlacesService(); ?>
+                    <?php $this->countries = $places->getPlaces(2); ?>
 					<label>Country</label>
 					<select name="country">
                     <option value="">Select Country</option>

@@ -1,5 +1,897 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+	<meta content="noindex,nofollow" name="robots" />
+	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+	<title>Tripfab.com</title>
+	<link type="text/css" rel="stylesheet" href="/css6/reset.css" />
+	<link type="text/css" rel="stylesheet" href="/css6/common.css" />
+	<link type="text/css" rel="stylesheet" href="/css6/section1.css" />	
+	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+	<link type="text/css" rel="stylesheet" href="/css6/calendar.css" />
+    <script type="text/javascript" src="/js2/jquery.js"></script>
+	<script type="text/javascript">
+			$(document).ready(function() {
+				var aboveHeight = $('#header').outerHeight();
+				    $(window).scroll(function(){
+				        if ($(window).scrollTop() > aboveHeight){
+				            $('#lstng_header').addClass('fixed').css('top','0');
+				            $('#wp_content').css('padding-top', '72px');
+				        } 
+				        else {
+				            $('#lstng_header').removeClass('fixed');
+				            $('#wp_content').css('padding-top', '0');
+				        }
+				    });
+				$('.tabs').tabs({selected: 0});
+				$('.imgs').cycle({
+					timeout: 0,
+					fx: 'scrollHorz',
+					prev: '.lf-arrow',
+					next: '.rg-arrow'
+				});
+				$('.imgs2').cycle({
+					timeout: 0,
+					fx: 'fade',
+					prev: '.lfarrow',
+					next: '.rgarrow'
+				});
+				$('.imgs').hover(function() {
+					$('.imgs').css('height','455px');
+					return false
+				}, function() {
+					$('.imgs').css('height','65px');
+					return false
+				});
+				$('a.lbc').fancybox({
+					padding: 0,
+					overlayColor: '#FFF',
+					overlayOpacity: '0.7',
+					showCloseButton: 'false',
+					centerOnScroll: 'true',
+					titlePosition: 'inside'
+				});
+				$('#fancybox-title').addClass('tittle');
+				$('#fancybox-left-ico').addClass('lfarrow');
+				$('#fancybox-right-ico').addClass('rgarrow');
+				$('#calendar, #start, #end').datepicker({
+					dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+					showOtherMonths: true
+				});
+				$('.main').click(function() {
+					$('.addTrip.one').toggleClass('show');
+					return false
+				});
+				$('.side').click(function() {
+					$('.addTrip.two').toggleClass('show');
+					return false
+				});				
+				$('.addTrip select').live('change', function(){
+			        if($(this).val() == 'new'){
+			            //$(this).next('input').removeClass('hidden');
+			            $form = $(this).parents('form');
+			            $listing = $('input[name=listing]', $form).val();
+			            $('#newtrip form input[name=listing]').val($listing);
+			            $.fancybox({
+			                href:'#newtrip',
+			                padding:0,
+			                overlayColor:'#fff',
+			                centerOnScroll: true
+			            });
+			      
+			        } else {
+			            $(this).next('input').addClass('hidden');
+			        }
+			    });
+			    $('a.like').hover(function() {
+			    	$('.help').toggleClass('show');
+			    	return false
+			    });
+			    $('a.not').hover(function() {
+			    	$('.n-help').toggleClass('show');
+			    	return false
+			    });
+			});
+		</script>
+		
+		<script type="text/javascript">
+		$(document).ready(function(){
+		    img_ready($('img.background'));
+		});
+		
+		function img_ready($obj){
+		    resizeImg($obj);
+			$(window).resize(function() {
+			   resizeImg($obj);
+			});
+			$obj.fadeIn();
+		}
+		function resizeImg($bgImg) { 
+			var imgwidth = 1400;
+			var imgheight = 223;
+			
+			var winwidth = $(window).width();
+			var winheight = $(window).height();
+			
+			var winCenter = winwidth / 2;
+			var imgCenter = imgwidth / 2;
+			
+			var left = (winwidth > imgwidth) ? 0 : (winCenter - imgCenter);
+			
+			var width = (winwidth > imgwidth) ? winwidth : imgwidth;
+			
+			var height = (winwidth > imgwidth) ? ((imgheight * winwidth) / imgwidth) : height;
+			
+			var winCenter2 = imgheight / 2;
+			var imgCenter2 = height / 2;
+			
+			var top = (winwidth > imgwidth) ? (winCenter2 - imgCenter2) : 0;
+			
+			$bgImg.css('left',left);
+			$bgImg.css('width',width);
+			$bgImg.css('height',height);
+			$bgImg.css('top',top);
+		}
+		$(document).ready(function() {
+			$('#blur').imageblur();
+		});
+		</script>
+		
+	</script>
+	</head>
+	<body class="bg_hl">
+		<div id="wp_all">
+			<div id="wp_header">
+			    <?= $this->partial('partials/header-v2.phtml', array('user'=>$this->user,'full'=>true)); ?>
+				<div class="sub_header" id="lstng_header">
+					<div class="cont">
+                    	<?= $this->partial('partials/headerVendorInfo.phtml', array('vendor'=>$this->vendor)) ?>
+					</div><!--CONT-->
+				</div><!--SUB_HEADER-->
+			</div><!--WP_HEADER-->
+			<div id="wp_content">
+				<div id="cont_bl">
+					<div id="lstng_htl">
+						<div class="img_bg">
+							<div class="photo"><img src="http://farm4.static.flickr.com/3150/2538167224_0a6075dd18.jpg" id="blur" class="background" width="" height="" alt="" /></div><!--PHOTO-->
+							<div class="wrap">
+								<div  class="dscript">
+									<div class="inner">
+										<h3>Ocean Kayaking</h3>
+										<span class="location"><em></em>Guanacaste, Costa Rica</span>
+										<p>The green family-friendly Hotel del Pacífico is an oasis of peace in the heart of Jaco Beach Resort. We enjoy a great location only 150 meters from the pristine beaches...
+										</p>
+										<div class="price">
+											<em>From</em>
+											<sup>$</sup>
+											<span>129 <sub>per person</sub></span>
+										</div><!--PRICE-->
+										<div class="reviews">
+											<ul class="rating">
+												<li><a href="" class="slct"></a></li>
+												<li><a href="" class="slct"></a></li>
+												<li><a href="" class="slct"></a></li>
+												<li><a href="" class="nrml"></a></li>
+												<li><a href="" class="nrml"></a></li>
+											</ul>
+											<span>5 Reviews</span>
+										</div><!--REVIEWS-->
+									</div><!--INNER-->
+								</div><!--DSCRIPT-->
+								<div class="clear"></div>
+							</div><!--WRAP-->	
+						</div><!--IMAGE_BG-->
+						<div class="wrap">
+							<div class="cont">
+								<div class="container">
+									<a href="" class="btn-2 main"><span></span>Add to My Trips</a>
+									
+									<form method="post" class="addtotrip" action="/ajax/addtotrips">
+									    <div class="addTrip one">
+									        <img class="arrow" alt="" src="/images2/arrow-24.png">
+									        <div class="top">
+									            <select name="trip">
+									                <option value="">Select one of your trips</option>
+									                <option value="new">Create New Trip</option>
+									                <option disabled="disabled">------</option>
+									                <option value="48">Dionisillo Trip NO ME HAGAS CHECKOUT PORGFAVOR</option>
+									            </select>
+									            <input type="text" value="Trip Name" name="title" class="hidden">
+									        </div><!--TOP-->
+									        <div class="bot">
+									            <input type="submit" class="btn-1" value="Add">
+									            <a class="btn-10" href="">Cancel</a>
+									        </div><!--BOT-->
+									    </div><!-- closes dd-2 -->
+									    <input type="hidden" value="1359" name="listing">
+									</form>
+									
+									<div class="carousel">
+										<p><span></span>Photos & Video</p>
+										<a href="" class="lf-arrow"></a>
+										<div class="imgs">
+											<div class="single">
+												<ul>
+													<li>
+														<a rel="group1" title="Description goes here 1" class="lbc" href="#grande1"><img src="http://farm4.static.flickr.com/3150/2538167224_0a6075dd18.jpg" width="65" height="65" alt="" />
+														<span class="arrow"></span>
+														</a>
+														<div class="hover" href="">
+															<a href="#grande1" class="lbc">
+																<img src="http://farm4.static.flickr.com/3150/2538167224_0a6075dd18.jpg" width="391" height="254" alt="" />
+																<span>Description 1 goes here</span>
+															</a>
+														</div>
+													</li>
+													<li>
+														<a rel="group1" title="Description goes here 2" class="lbc"  href="#grande2"><img src="http://farm3.static.flickr.com/2093/2538168854_f75e408156_b.jpg" width="65" height="65" alt="" />
+														<span class="arrow"></span>
+														</a>
+														<div class="hover" href="">
+															<a href="#grande2" class="lbc">
+																<img id="img1" src="http://farm3.static.flickr.com/2093/2538168854_f75e408156_b.jpg" width="391" height="254" alt="" />
+																<span>Description 2 goes here</span>
+															</a>
+														</div>
+													</li>
+													<li>
+														<a rel="group1" title=" Description goes here 3" class="lbc"  href="#grande3"><img src="http://farm4.static.flickr.com/3211/2538163540_c2026243d2_b.jpg" width="65" height="65" alt="" />
+														<span class="arrow"></span>
+														</a>
+														<div class="hover" href="">
+															<a href="#grande3" class="lbc">
+																<img id="img1" src="http://farm4.static.flickr.com/3211/2538163540_c2026243d2_b.jpg" width="391" height="254" alt="" />
+																<span>Description 3 goes here</span>
+															</a>
+														</div>
+													</li>
+													<li>
+														<a  href="#img1"><img src="http://farm3.static.flickr.com/2315/2537343449_f933be8036_b.jpg" width="65" height="65" alt="" />
+														<span class="arrow"></span>
+														</a>
+														<div class="hover" href="">
+															<a href="">
+																<img src="http://farm3.static.flickr.com/2315/2537343449_f933be8036_b.jpg" width="391" height="254" alt="" />
+																<span>Description 4 goes here</span>
+															</a>
+														</div>
+													</li>
+													<li>
+														<a  href="#img1"><img src="http://farm2.static.flickr.com/1260/930424599_e75865c0d6_b.jpg" width="65" height="65" alt="" />
+														<span class="arrow"></span>
+														</a>
+														<div class="hover" href="">
+															<a href="">
+																<img src="http://farm2.static.flickr.com/1260/930424599_e75865c0d6_b.jpg" width="391" height="254" alt="" />
+																<span>Description 5 goes here</span>
+															</a>
+														</div>
+													</li>
+													<li>
+														<a  href="#img1"><img src="http://farm2.static.flickr.com/1116/1380178473_fc640e097a_b.jpg" width="65" height="65" alt="" />
+														<span class="arrow"></span>
+														</a>
+														<div class="hover" href="">
+															<a href="">
+																<img src="http://farm2.static.flickr.com/1116/1380178473_fc640e097a_b.jpg" width="391" height="254" alt="" />
+																<span>Description 6 goes here</span>
+															</a>
+														</div>
+													</li>
+												</ul>
+											</div>
+											<div class="single">
+												<ul>
+													<li>
+														<a  href="#img1"><img src="http://farm4.static.flickr.com/3150/2538167224_0a6075dd18.jpg" width="65" height="65" alt="" />
+														<span class="arrow"></span>
+														</a>
+														<div class="hover" href="">
+															<a href="">
+																<img src="http://farm4.static.flickr.com/3150/2538167224_0a6075dd18.jpg" width="391" height="254" alt="" />
+																<span>Description 1 goes here</span>
+															</a>
+														</div>
+													</li>													
+												</ul>
+											</div>
+										</div><!--IMGS-->
+										<a href="" class="rg-arrow"></a>
+									</div><!--CAROUSEL-->
+									
+									<div class="tabs">
+										<ul>
+											<li><a href="#description" class="ui-tabs-selected ui-state-active">Description</a></li>
+											<li><a href="#directions">How to Get There</a></li>
+										</ul>
+										<div class="description" id="description">
+											<div class="info">
+												<ul>
+													<li><span class="schedule"></span><strong>Schedule Details</strong>
+														<p>9:00 am</p>
+														<p>10:00 am</p>
+														<p>12:00 pm</p>
+													</li>
+													<li><span class="duration"></span><strong>Duration</strong> 2 hours</li>
+													<li><span class="depature"></span><strong>Departure Point</strong>
+														<p>Tamarindo,</p>
+														<p>Costa Rica</p>
+													</li>
+													<li><span class="return"></span><strong>Return details</strong> 
+														<p>Tour concludes at original point of departure</p>
+													</li>
+												</ul>
+											</div><!--INFO-->
+											<h4><span class="activity"></span>Ocean Kayaking</h4>
+											<p>Is learning how to surf on your to do list? Take the opportunity to pre-book your Oahu basic surf lesson. Learn surf techniques, safety rules and surf break etiquette under the guidance of certified lifeguards and surf instructors. With over an hour and a half of water time you will have the chance to try it all.
+											</p>
+											<p>With its white sand beaches, Big Bay is a surfers' paradise and is home to many local and international surfing competitions. All you need today is your swimming costume, a towel, hat, sunblock and don't forget your camera.</p>
+											
+											<h5>What to Expect</h5>
+											<p>Want to learn how to surf? Where could be better than Sydney, the heart of Australia's surfing culture. For a great, fun-filled introduction to surfing, take this full-day tour to a beach just 45 minutes south of Sydney, where you'll learn all the basics of board surfing from your fully qualified surf instructor.
+											</p>
+											
+											<h5>Things you'll love</h5>
+											<p>A team of expert instructors will cover basic aspects of surfing, from ocean safety and surf etiquette to paddling, pop-ups and wave-riding techniques. But perfection isn't necessary – follow the motto "the best surfer in the water is the one having the most fun," and you'll have a wonderful time, even if you don't master the sport in 90 minutes. Surf instructors are certified in CPR, first aid and lifesaving.</p>
+											
+											<div class="act_details">
+												<h4><span class="icon"></span>Activity Details</h4>
+												<div class="in">
+													<h5>Inclusions</h5>
+													<ul>
+														<li>One or two-hour surf lesson with a qualified instructor</li>
+														<li>Rashguard shirt (rental)</li>
+														<li>Surfboard equipment (rental)</li>
+														<li>Rubberized fins (rental)</li>
+														<li>Optional water shoes (rental)</li>
+														<li>Hotel pickup and drop-off for private and semi-private lesson participants staying in Waikiki hotels.</li>
+														<li>Stand up paddle lesson participants requesting hotel pickup and drop-off will be charged an additional \$10 per person on the day of lesson.</li>
+													</ul>
+												</div><!--IN-->
+												<div class="ex">
+													<h5>Inclusions</h5>
+													<ul>
+														<li>One or two-hour surf lesson with a qualified instructor</li>
+														<li>Rashguard shirt (rental)</li>
+														<li>Surfboard equipment (rental)</li>
+														<li>Rubberized fins (rental)</li>
+														<li>Optional water shoes (rental)</li>
+														<li>Hotel pickup and drop-off for private and semi-private lesson participants staying in Waikiki hotels.</li>
+														<li>Stand up paddle lesson participants requesting hotel pickup and drop-off will be charged an additional \$10 per person on the day of lesson.</li>
+													</ul>
+												</div><!--EX-->
+												<div class="clear"></div>
+											</div><!--AMENITIES-->
+											
+											<div class="policies">
+												<h5>Policies</h5>
+												<ul>
+													<li>Confirmation will be received at time of booking.</li>
+													<li>Children must be able to swim one lap unassisted across a 25-yard pool to partake in the surflessons.</li>
+													<li>All students must have parent sign a parental consent form.</li>
+													<li>Surfing while pregnant is highly discouraged.</li>
+													<li>Bring sunscreen, sweatshirt, swimsuit, towel, water, a light snack, hair ties and any other items you might need while at the beach.</li>
+													<li>Kids must be between the ages of 5 and 11.</li>
+												</ul>
+											</div><!--POLICIES-->
+											
+											<div class="tips">
+												<h4><span class="icon"></span>Tips & Recommendations</h4>
+												<ul>
+													<li>Make sure you are always on time for all pick ups.</li>
+													<li>While in San Jose avoid going too far away from your hotel and ask hotel staff for directions of where to go.</li>
+													<li>Do not go too far away from your your traveling group on your transfer stops.</li>
+													<li>Always wear sun screen, the sun is quite hot there.</li>
+													<li>Carry a little cash with you, some places give discounts if you pay cash.</li>
+													<li>Do not leave your items unnatended in any of the locations, specially at the beach.</li>
+													<li>If you need assistance at any time during your trip, ask your guide.</li>
+													<li>If you have any food allergies or specific food requirements make sure you inform the tour operator</li>
+													<li>Follow the instructions provided by your tour guide at all times</li>
+													<li>You need to know how to swim before taking the lessons</li>
+													<li>You need to wear the special suit at all times</li>
+													<li>Do not move away from the instructor, even if you have experience</li>
+													<li>You must be in good shape before entering the water</li>
+													<li>If you see someone needing help, get the instructor immediately</li>
+													<li>Remember to rerturn the suit and the surf table at the end of the lesson</li>
+													<li>Snacks will be provided at the beginning and at the end of the lessons</li>
+												</ul>
+											</div><!--TIPS-->
+											
+											
+										</div><!--DESCRIPTION-->
+										<!--ROOM_TYPES-->
+										
+										<div id="directions">
+											<div class="dflt">
+												<h4><span class="plane"></span>By Plane</h4>
+												<p>You can arrive to the Tamarindo airstrip from the two San José airports. Sansa and Nature Air are the only two commercial airlines flying here.</p>
+											</div><!--DFLT-->
+											
+											<div class="dflt">
+												<h4><span class="car"></span>By Car</h4>
+												<p>From San José take the number 1 road and drive 145km until Limonal. Turn left on road 18 and drive 50km until Mansión. Turn right on road 21 and drive 34km until Santa Cruz. From Santa Cruz, take road 160 to the West, drive 16km then turn right on road 155. Tamarindo is 18km away.</p>
+											</div><!--DFLT-->
+											
+											<div class="map">
+												<h4><span></span>Location</h4>
+												<p><strong>Ocean Kayaking</strong>
+												150 mts Oeste del Parque Central de Escazú
+												Escazu, Costa Rica</p>
+												<div class="map_canvas">
+													<div class="cont">
+														<img src="images6/map.png" width="638" height="354" alt="" />
+													</div><!--CONT-->
+													<span class="sw"></span>
+												</div><!--MAP_CANVAS-->
+											</div><!--MAP-->
+											
+										</div><!--DIRECTIONS-->
+									</div><!--TABS-->
+									
+									<div class="reviews">
+										<div class="ttl"><span></span>126 Reviews <a href="#writeReview" class="btn-10 lbc">Write Review</a></div><!--TTL-->
+										<div class="single">
+											<img src="images6/lstng_htl_img5.png" width="" height="" alt="" />
+											<div class="message">
+												<div class="subject">Beautiful Place <em>by</em> <span>Daniela</span></div>
+											
+												<div class="text">
+													<p>Consectetur adipiscing elit. Duis ullamcorper arcu id eros faucibus pulvinar. Duis pellen tesque molestie enim, a tincidunt lorem tristique ac. Donec ac justo quis odio molestie tristique. Integer id ante in nunc consequat imperdiet sed vel enim.
+													</p>
+													<div class="social">
+														<a href="" class="not"></a>
+														<a href="" class="like"></a>
+														<span class="pos">+4</span>
+														<span class="neg">-4</span>
+														<p>Did you find this review helpful?</p>
+														<span class="date">Apr 26, 2011</span>
+														<div class="clear"></div>												
+													</div><!--SOCIAL-->
+													<span class="help"><em></em>Helpful</span>
+													<span class="n-help"><em></em>Not Helpful</span>
+												</div><!--TEXT-->
+												
+											</div><!--MESSAGE-->
+											<div class="clear"></div>
+										</div><!--SINGLE-->
+										<div class="paging">
+											<span class="total">20 - 25 of 126 Reviews</span>
+											<ul>
+												<li class="prev"><a href="" class="" class="prev">Previous</a></li>
+												<li><a href="" class="">1</a></li>
+												<li><a class="active" href="" class="">2</a></li>
+												<li><a href="" class="">3</a></li>
+												<li class="next"><a href="" class="" class="next">Next</a></li>
+											</ul>
+										</div><!--PAGING-->
+									</div><!--REVIEWS-->
+									
+								</div><!--CONTAINER-->
+								
+								<div class="sidebar">
+									<!--<form action="">
+										<fieldset>-->
+											<div class="cont">
+												<h5>Select the Date <span></span></h5>
+												<div id="calendar">
+													
+												</div><!--CALENDAR-->
+												<h5>How many travelers?</h5>
+												<div class="selects activity">
+													<label class="rooms">
+														Adults
+														<select>
+															<option>1</option>
+														</select>
+													</label>
+													<label>
+														Children
+														<select>
+															<option>1</option>
+														</select>
+													</label>
+													<div class="clear"></div>
+												</div><!--SELECTS-->
+												<div class="price">
+													 <span><sup>$</sup>129 <sub>Subtotal</sub></span>
+												</div><!--PRICE-->
+												<a href="" class="btn-1">Book Now</a>
+												<div class="add">
+													<a href="" class="btn-2 side"><span></span>Add to My Trips</a>
+													
+													<form method="post" class="addtotrip" action="/ajax/addtotrips">
+													    <div class="addTrip two">
+													        <img class="arrow" alt="" src="/images2/arrow-24.png">
+													        <div class="top">
+													            <select name="trip">
+													                <option value="">Select one of your trips</option>
+													                <option value="new">Create New Trip</option>
+													                <option disabled="disabled">------</option>
+													                <option value="48">Dionisillo Trip NO ME HAGAS CHECKOUT PORGFAVOR</option>
+													            </select>
+													            <input type="text" value="Trip Name" name="title" class="hidden">
+													        </div><!--TOP-->
+													        <div class="bot">
+													            <input type="submit" class="btn-1" value="Add">
+													            <a class="btn-10" href="">Cancel</a>
+													        </div><!--BOT-->
+													    </div><!-- closes dd-2 -->
+													    <input type="hidden" value="1359" name="listing">
+													</form>
+													
+													<em>or you can</em>
+													<div class="clear"></div>
+												</div><!--ADD-->
+											</div><!--CONT-->
+										<!--</fieldset>
+									</form>-->
+								</div><!--SIDEBAR-->
+								<div class="clear"></div>
+								
+								
+							</div><!--CONT-->
+						</div><!--WRAP-->
+						
+						
+						
+					</div><!--LSTNG_HTL-->
+				
+				</div><!--CONT_BL-->
+			</div><!--WP_CONTENT-->
+			<div id="wp_footer">
+				<div id="footer"></div><!--FOOTER-->
+			</div><!--WP_FOOTER-->
+			<div class="hidden">
+				<img id="grande1" class="lgbox_img" src="http://farm2.static.flickr.com/1116/1380178473_fc640e097a_b.jpg" width="678" height="464" alt="" />
+				<img id="grande2" class="lgbox_img" src="http://farm2.static.flickr.com/1260/930424599_e75865c0d6_b.jpg" width="678" height="464" alt="" />
+				<img id="grande3" class="lgbox_img" src="http://farm3.static.flickr.com/2315/2537343449_f933be8036_b.jpg" width="678" height="464" alt="" />
+				
+			
+				<div id="send_message">
+				    <form action="" id="sendMessageForm">
+				        <div class="ttl">Send a message <em>to</em> Hotel Presidente </div>
+				        <div class="intro_m">
+				        	<p><strong>Questions or concerns about the activity?</strong>
+				        		Please write a message and you'll get an answer very soon.</p>
+				        </div><!--INTRO-->
+				        <div class="content">
+				            <textarea cols="30" name="message" rows="1"></textarea>
+				        </div><!-- closes content -->
+				        <div class="bottom">
+				            <input type="submit" class="btn-1" value="Send Message" />
+				            <span onclick="$.fancybox.close()" class="btn-10">Cancel</span>	
+				        </div><!-- closes bottom -->
+				        <input type="hidden" name="vendor" value="593" />
+				    </form>
+				</div><!--SEND_MESSAGE-->
+				
+			    <div id="live_chat">
+			    	<img src="/images2/chat.png" />
+			    </div><!--LIVE_CHAT-->
+			    
+			    <div id="start_call">
+			    	<div id="dialpad" class="lb">
+			            <div class="top">Dial your phone number</div><!--TOP-->
+			            <div class="middle">
+			                <p>We'll connect you with the vendor in few minutes. Directly.</p>
+			                <div class="number-display">
+			                    <a href="#" class="flag"><img src="/images2/flags/us.png" width="16" height="16" alt="" /></a>
+			                    <div class="all_flags">
+			                        <a href="#" class="up" onMouseover="move('container',10)" onMouseout="clearTimeout(move.to)"></a>
+			                        <a href="#" class="down" onMouseover="move('container',-10)" onMouseout="clearTimeout(move.to)"></a>
+			                        <div class="holder">
+			                            <div id="container" style="position:absolute;width:282px;left:0;top:0">
+			                                <p>ALL COUNTRIES</p>
+			                                 <a href="#" data-code="355"><img src="/images2/flags/al.png" width="16" height="16" alt="" /> Albania <strong>(+355)</strong></a>
+			                                 <a href="#" data-code="213"><img src="/images2/flags/dz.png" width="16" height="16" alt="" />Algeria <strong>(+213)</strong></a>
+			                                 <a href="#" data-code="376"><img src="/images2/flags/ad.png" width="16" height="16" alt="" />Andorra <strong>(+376)</strong></a>
+			                                 <a href="#" data-code="244"><img src="/images2/flags/ao.png" width="16" height="16" alt="" />Angola <strong>(+244)</strong></a>
+			                                 <a href="#" data-code="264"><img src="/images2/flags/ai.png" width="16" height="16" alt="" />Anguilla <strong>(+264)</strong></a>
+			                                 <a href="#" data-code="268"><img src="/images2/flags/ag.png" width="16" height="16" alt="" />Antigua and Barbuda <strong>(+268)</strong></a>
+			                                 <a href="#" data-code="54"><img src="/images2/flags/ar.png" width="16" height="16" alt="" />Argentina <strong>(+54)</strong></a>
+			                                 <a href="#" data-code="374"><img src="/images2/flags/am.png" width="16" height="16" alt="" />Armenia <strong>(+374)</strong></a>
+			                                 <a href="#" data-code="297"><img src="/images2/flags/aw.png" width="16" height="16" alt="" />Aruba <strong>(+297)</strong></a>
+			                                 <a href="#" data-code="61"><img src="/images2/flags/au.png" width="16" height="16" alt="" />Australia <strong>(+61)</strong></a>
+			                                 <a href="#" data-code="43"><img src="/images2/flags/at.png" width="16" height="16" alt="" />Austria <strong>(+43)</strong></a>
+			                                 <a href="#" data-code="994"><img src="/images2/flags/az.png" width="16" height="16" alt="" />Azerbaijan <strong>(+994)</strong></a>
+			                                 <a href="#" data-code="242"><img src="/images2/flags/bs.png" width="16" height="16" alt="" />Bahamas <strong>(+242)</strong></a>
+			                                 <a href="#" data-code="973"><img src="/images2/flags/bh.png" width="16" height="16" alt="" />Bahrain <strong>(+973)</strong></a>
+			                                 <a href="#" data-code="880"><img src="/images2/flags/bd.png" width="16" height="16" alt="" />Bangladesh <strong>(+880)</strong></a>
+			                                 <a href="#" data-code="246"><img src="/images2/flags/bb.png" width="16" height="16" alt="" />Barbados <strong>(+246)</strong></a>
+			                                 <a href="#" data-code="375"><img src="/images2/flags/by.png" width="16" height="16" alt="" />Belarus <strong>(+375)</strong></a>
+			                                 <a href="#" data-code="32"><img src="/images2/flags/be.png" width="16" height="16" alt="" />Belgium <strong>(+32)</strong></a>
+			                                 <a href="#" data-code="501"><img src="/images2/flags/bz.png" width="16" height="16" alt="" />Belize <strong>(+501)</strong></a>
+			                                 <a href="#" data-code="229"><img src="/images2/flags/bj.png" width="16" height="16" alt="" />Benin <strong>(+229)</strong></a>
+			                                 <a href="#" data-code="975"><img src="/images2/flags/bt.png" width="16" height="16" alt="" />Bhutan <strong>(+975)</strong></a>
+			                                 <a href="#" data-code="591"><img src="/images2/flags/bo.png" width="16" height="16" alt="" />Bolivia <strong>(+591)</strong></a>
+			                                 <a href="#" data-code="387"><img src="/images2/flags/ba.png" width="16" height="16" alt="" />Bosnia and Herzegovina <strong>(+387)</strong></a>
+			                                 <a href="#" data-code="267"><img src="/images2/flags/bw.png" width="16" height="16" alt="" />Botswana <strong>(+267)</strong></a>
+			                                 <a href="#" data-code="55"><img src="/images2/flags/br.png" width="16" height="16" alt="" />Brazil <strong>(+55)</strong></a>
+			                                 <a href="#" data-code="284"><img src="/images2/flags/vg.png" width="16" height="16" alt="" />British Virgin Islands <strong>(+284)</strong></a>
+			                                 <a href="#" data-code="673"><img src="/images2/flags/bn.png" width="16" height="16" alt="" />Brunei Darussalam <strong>(+673)</strong></a>
+			                                 <a href="#" data-code="359"><img src="/images2/flags/bg.png" width="16" height="16" alt="" />Bulgaria <strong>(+359)</strong></a>
+			                                 <a href="#" data-code="226"><img src="/images2/flags/bf.png" width="16" height="16" alt="" />Burkina Faso <strong>(+226)</strong></a>
+			                                 <a href="#" data-code="257"><img src="/images2/flags/bi.png" width="16" height="16" alt="" />Burundi <strong>(+257)</strong></a>
+			                                 <a href="#" data-code="855"><img src="/images2/flags/kh.png" width="16" height="16" alt="" />Cambodia <strong>(+855)</strong></a>
+			                                 <a href="#" data-code="237"><img src="/images2/flags/cm.png" width="16" height="16" alt="" />Cameroon <strong>(+237)</strong></a>
+			                                 <a href="#" data-code="1"><img src="/images2/flags/ca.png" width="16" height="16" alt="" />Canada <strong>(+1)</strong></a>
+			                                 <a href="#" data-code="238"><img src="/images2/flags/cv.png" width="16" height="16" alt="" />Cape Verde <strong>(+238)</strong></a>
+			                                 <a href="#" data-code="345"><img src="/images2/flags/ky.png" width="16" height="16" alt="" />Cayman Islands <strong>(+345)</strong></a>
+			                                 <a href="#" data-code="236"><img src="/images2/flags/cf.png" width="16" height="16" alt="" />Central African Republic <strong>(+236)</strong></a>
+			                                 <a href="#" data-code="235"><img src="/images2/flags/td.png" width="16" height="16" alt="" />Chad <strong>(+235)</strong></a>
+			                                 <a href="#" data-code="56"><img src="/images2/flags/cl.png" width="16" height="16" alt="" />Chile <strong>(+56)</strong></a>
+			                                 <a href="#" data-code="86"><img src="/images2/flags/cn.png" width="16" height="16" alt="" />China <strong>(+86)</strong></a>
+			                                 <a href="#" data-code="57"><img src="/images2/flags/co.png" width="16" height="16" alt="" />Colombia <strong>(+57)</strong></a>
+			                                 <a href="#" data-code="269"><img src="/images2/flags/km.png" width="16" height="16" alt="" />Comoros <strong>(+269)</strong></a>
+			                                 <a href="#" data-code="506"><img src="/images2/flags/cr.png" width="16" height="16" alt="" />Costa Rica <strong>(+506)</strong></a>
+			                                 <a href="#" data-code="225"><img src="/images2/flags/ci.png" width="16" height="16" alt="" />Cote d'Ivoire <strong>(+225)</strong></a>
+			                                 <a href="#" data-code="385"><img src="/images2/flags/hr.png" width="16" height="16" alt="" />Croatia <strong>(+385)</strong></a>
+			                                 <a href="#" data-code="53"><img src="/images2/flags/cu.png" width="16" height="16" alt="" />Cuba <strong>(+53)</strong></a>
+			                                 <a href="#" data-code="357"><img src="/images2/flags/cy.png" width="16" height="16" alt="" />Cyprus <strong>(+357)</strong></a>
+			                                 <a href="#" data-code="357"><img src="/images2/flags/cy.png" width="16" height="16" alt="" />Cyprus <strong>(+357)</strong></a>
+			                                 <a href="#" data-code="420"><img src="/images2/flags/cz.png" width="16" height="16" alt="" />Czech Republic <strong>(+420)</strong></a>
+			                                 <a href="#" data-code="243"><img src="/images2/flags/cd.png" width="16" height="16" alt="" />Democratic Republic of the Congo <strong>(+243)</strong></a>
+			                                 <a href="#" data-code="45"><img src="/images2/flags/dk.png" width="16" height="16" alt="" />Denmark <strong>(+45)</strong></a>
+			                                 <a href="#" data-code="253"><img src="/images2/flags/dj.png" width="16" height="16" alt="" />Djibouti <strong>(+253)</strong></a>
+			                                 <a href="#" data-code="767"><img src="/images2/flags/dm.png" width="16" height="16" alt="" />Dominica <strong>(+767)</strong></a>
+			                                 <a href="#" data-code="809"><img src="/images2/flags/do.png" width="16" height="16" alt="" />Dominican Republic <strong>(+809)</strong></a>
+			                                 <a href="#" data-code="593"><img src="/images2/flags/ec.png" width="16" height="16" alt="" />Ecuador <strong>(+593)</strong></a>
+			                                 <a href="#" data-code="20"><img src="/images2/flags/eg.png" width="16" height="16" alt="" />Egypt <strong>(+20)</strong></a>
+			                                 <a href="#" data-code="503"><img src="/images2/flags/sv.png" width="16" height="16" alt="" />El Salvador <strong>(+503)</strong></a>
+			                                 <a href="#" data-code="240"><img src="/images2/flags/gq.png" width="16" height="16" alt="" />Equatorial Guinea <strong>(+240)</strong></a>
+			                                 <a href="#" data-code="291"><img src="/images2/flags/er.png" width="16" height="16" alt="" />Eritrea <strong>(+291)</strong></a>
+			                                 <a href="#" data-code="372"><img src="/images2/flags/ee.png" width="16" height="16" alt="" />Estonia <strong>(+372)</strong></a>
+			                                 <a href="#" data-code="251"><img src="/images2/flags/et.png" width="16" height="16" alt="" />Ethiopia <strong>(+251)</strong></a>
+			                                 <a href="#" data-code="679"><img src="/images2/flags/fj.png" width="16" height="16" alt="" />Fiji <strong>(+679)</strong></a>
+			                                 <a href="#" data-code="358"><img src="/images2/flags/fi.png" width="16" height="16" alt="" />Finland <strong>(+358)</strong></a>
+			                                 <a href="#" data-code="33"><img src="/images2/flags/fr.png" width="16" height="16" alt="" />France <strong>(+33)</strong></a>
+			                                 <a href="#" data-code="594"><img src="/images2/flags/gf.png" width="16" height="16" alt="" />French Guiana <strong>(+594)</strong></a>
+			                                 <a href="#" data-code="241"><img src="/images2/flags/ga.png" width="16" height="16" alt="" />Gabon <strong>(+241)</strong></a>
+			                                 <a href="#" data-code="220"><img src="/images2/flags/gm.png" width="16" height="16" alt="" />Gambia <strong>(+220)</strong></a>
+			                                 <a href="#" data-code="995"><img src="/images2/flags/ge.png" width="16" height="16" alt="" />Georgia <strong>(+995)</strong></a>
+			                                 <a href="#" data-code="49"><img src="/images2/flags/de.png" width="16" height="16" alt="" />Germany <strong>(+49)</strong></a>
+			                                 <a href="#" data-code="233"><img src="/images2/flags/gh.png" width="16" height="16" alt="" />Ghana <strong>(+233)</strong></a>
+			                                 <a href="#" data-code="30"><img src="/images2/flags/gr.png" width="16" height="16" alt="" />Greece <strong>(+30)</strong></a>
+			                                 <a href="#" data-code="473"><img src="/images2/flags/gd.png" width="16" height="16" alt="" />Grenada <strong>(+473)</strong></a>
+			                                 <a href="#" data-code="502"><img src="/images2/flags/gt.png" width="16" height="16" alt="" />Guatemala <strong>(+502)</strong></a>
+			                                 <a href="#" data-code="224"><img src="/images2/flags/gn.png" width="16" height="16" alt="" />Guinea <strong>(+224)</strong></a>
+			                                 <a href="#" data-code="245"><img src="/images2/flags/gw.png" width="16" height="16" alt="" />Guinea-Bissau <strong>(+245)</strong></a>
+			                                 <a href="#" data-code="594"><img src="/images2/flags/gy.png" width="16" height="16" alt="" />Guyana <strong>(+594)</strong></a>
+			                                 <a href="#" data-code="509"><img src="/images2/flags/ht.png" width="16" height="16" alt="" />Haiti <strong>(+509)</strong></a>
+			                                 <a href="#" data-code="504"><img src="/images2/flags/hn.png" width="16" height="16" alt="" />Honduras <strong>(+504)</strong></a>
+			                                 <a href="#" data-code="852"><img src="/images2/flags/hk.png" width="16" height="16" alt="" />Hong Kong <strong>(+852)</strong></a>
+			                                 <a href="#" data-code="36"><img src="/images2/flags/hu.png" width="16" height="16" alt="" />Hungary <strong>(+36)</strong></a>
+			                                 <a href="#" data-code="354"><img src="/images2/flags/is.png" width="16" height="16" alt="" />Iceland <strong>(+354)</strong></a>
+			                                 <a href="#" data-code="93"><img src="/images2/flags/af.png" width="16" height="16" alt="" />india <strong>(+93)</strong></a>
+			                                 <a href="#" data-code="91"><img src="/images2/flags/in.png" width="16" height="16" alt="" />India <strong>(+91)</strong></a>
+			                                 <a href="#" data-code="62"><img src="/images2/flags/id.png" width="16" height="16" alt="" />Indonesia <strong>(+62)</strong></a>
+			                                 <a href="#" data-code="98"><img src="/images2/flags/ir.png" width="16" height="16" alt="" />Iran <strong>(+98)</strong></a>
+			                                 <a href="#" data-code="964"><img src="/images2/flags/iq.png" width="16" height="16" alt="" />Iraq <strong>(+964)</strong></a>
+			                                 <a href="#" data-code="353"><img src="/images2/flags/ie.png" width="16" height="16" alt="" />Ireland <strong>(+353)</strong></a>
+			                                 <a href="#" data-code="972"><img src="/images2/flags/il.png" width="16" height="16" alt="" />Israel <strong>(+972)</strong></a>
+			                                 <a href="#" data-code="39"><img src="/images2/flags/it.png" width="16" height="16" alt="" />Italy <strong>(+39)</strong></a>
+			                                 <a href="#" data-code="876"><img src="/images2/flags/jm.png" width="16" height="16" alt="" />Jamaica <strong>(+876)</strong></a>
+			                                 <a href="#" data-code="81"><img src="/images2/flags/jp.png" width="16" height="16" alt="" />Japan <strong>(+81)</strong></a>
+			                                 <a href="#" data-code="962"><img src="/images2/flags/jo.png" width="16" height="16" alt="" />Jordan <strong>(+962)</strong></a>
+			                                 <a href="#" data-code="7"><img src="/images2/flags/kz.png" width="16" height="16" alt="" />Kazakhstan <strong>(+7)</strong></a>
+			                                 <a href="#" data-code="254"><img src="/images2/flags/ke.png" width="16" height="16" alt="" />Kenya <strong>(+254)</strong></a>
+			                                 <a href="#" data-code="686"><img src="/images2/flags/ki.png" width="16" height="16" alt="" />Kiribati <strong>(+686)</strong></a>
+			                                 <a href="#" data-code="965"><img src="/images2/flags/kw.png" width="16" height="16" alt="" />Kuwait <strong>(+965)</strong></a>
+			                                 <a href="#" data-code="996"><img src="/images2/flags/kg.png" width="16" height="16" alt="" />Kyrgyzstan <strong>(+996)</strong></a>
+			                                 <a href="#" data-code="856"><img src="/images2/flags/la.png" width="16" height="16" alt="" />Laos <strong>(+856)</strong></a>
+			                                 <a href="#" data-code="371"><img src="/images2/flags/lv.png" width="16" height="16" alt="" />Latvia <strong>(+371)</strong></a>
+			                                 <a href="#" data-code="961"><img src="/images2/flags/lb.png" width="16" height="16" alt="" />Lebanon <strong>(+961)</strong></a>
+			                                 <a href="#" data-code="266"><img src="/images2/flags/ls.png" width="16" height="16" alt="" />Lesotho <strong>(+266)</strong></a>
+			                                 <a href="#" data-code="231"><img src="/images2/flags/lr.png" width="16" height="16" alt="" />Liberia <strong>(+231)</strong></a>
+			                                 <a href="#" data-code="218"><img src="/images2/flags/ly.png" width="16" height="16" alt="" />Libya <strong>(+218)</strong></a>
+			                                 <a href="#" data-code="423"><img src="/images2/flags/li.png" width="16" height="16" alt="" />Liechtenstein <strong>(+423)</strong></a>
+			                                 <a href="#" data-code="370"><img src="/images2/flags/lt.png" width="16" height="16" alt="" />Lithuania <strong>(+370)</strong></a>
+			                                 <a href="#" data-code="352"><img src="/images2/flags/lu.png" width="16" height="16" alt="" />Luxembourg <strong>(+352)</strong></a>
+			                                 <a href="#" data-code="853"><img src="/images2/flags/mo.png" width="16" height="16" alt="" />Macau <strong>(+853)</strong></a>
+			                                 <a href="#" data-code="389"><img src="/images2/flags/mk.png" width="16" height="16" alt="" />Macedonia <strong>(+389)</strong></a>
+			                                 <a href="#" data-code="261"><img src="/images2/flags/mg.png" width="16" height="16" alt="" />Madagascar <strong>(+261)</strong></a>
+			                                 <a href="#" data-code="265"><img src="/images2/flags/mw.png" width="16" height="16" alt="" />Malawi <strong>(+265)</strong></a>
+			                                 <a href="#" data-code="60"><img src="/images2/flags/my.png" width="16" height="16" alt="" />Malaysia <strong>(+60)</strong></a>
+			                                 <a href="#" data-code="960"><img src="/images2/flags/mv.png" width="16" height="16" alt="" />Maldives <strong>(+960)</strong></a>
+			                                 <a href="#" data-code="223"><img src="/images2/flags/ml.png" width="16" height="16" alt="" />Mali <strong>(+223)</strong></a>
+			                                 <a href="#" data-code="356"><img src="/images2/flags/mt.png" width="16" height="16" alt="" />Malta <strong>(+356)</strong></a>
+			                                 <a href="#" data-code="692"><img src="/images2/flags/mh.png" width="16" height="16" alt="" />Marshall Islands <strong>(+692)</strong></a>
+			                                 <a href="#" data-code="222"><img src="/images2/flags/mr.png" width="16" height="16" alt="" />Mauritania <strong>(+222)</strong></a>
+			                                 <a href="#" data-code="230"><img src="/images2/flags/mu.png" width="16" height="16" alt="" />Mauritius <strong>(+230)</strong></a>
+			                                 <a href="#" data-code="52"><img src="/images2/flags/mx.png" width="16" height="16" alt="" />Mexico <strong>(+52)</strong></a>
+			                                 <a href="#" data-code="691"><img src="/images2/flags/fm.png" width="16" height="16" alt="" />Micronesia <strong>(+691)</strong></a>
+			                                 <a href="#" data-code="373"><img src="/images2/flags/md.png" width="16" height="16" alt="" />Moldova <strong>(+373)</strong></a>
+			                                 <a href="#" data-code="976"><img src="/images2/flags/mn.png" width="16" height="16" alt="" />Mongolia <strong>(+976)</strong></a>
+			                                 <a href="#" data-code="382"><img src="/images2/flags/me.png" width="16" height="16" alt="" />Montenegro <strong>(+382)</strong></a>
+			                                 <a href="#" data-code="664"><img src="/images2/flags/ms.png" width="16" height="16" alt="" />Montserrat <strong>(+664)</strong></a>
+			                                 <a href="#" data-code="212"><img src="/images2/flags/ma.png" width="16" height="16" alt="" />Morocco <strong>(+212)</strong></a>
+			                                 <a href="#" data-code="258"><img src="/images2/flags/mz.png" width="16" height="16" alt="" />Mozambique <strong>(+258)</strong></a>
+			                                 <a href="#" data-code="95"><img src="/images2/flags/mm.png" width="16" height="16" alt="" />Myanmar <strong>(+95)</strong></a>
+			                                 <a href="#" data-code="264"><img src="/images2/flags/na.png" width="16" height="16" alt="" />Namibia <strong>(+264)</strong></a>
+			                                 <a href="#" data-code="674"><img src="/images2/flags/nr.png" width="16" height="16" alt="" />Nauru <strong>(+674)</strong></a>
+			                                 <a href="#" data-code="977"><img src="/images2/flags/np.png" width="16" height="16" alt="" />Nepal <strong>(+977)</strong></a>
+			                                 <a href="#" data-code="31"><img src="/images2/flags/nl.png" width="16" height="16" alt="" />Netherlands <strong>(+31)</strong></a>
+			                                 <a href="#" data-code="64"><img src="/images2/flags/nz.png" width="16" height="16" alt="" />New Zealand <strong>(+64)</strong></a>
+			                                 <a href="#" data-code="505"><img src="/images2/flags/ni.png" width="16" height="16" alt="" />Nicaragua <strong>(+505)</strong></a>
+			                                 <a href="#" data-code="227"><img src="/images2/flags/ne.png" width="16" height="16" alt="" />Niger <strong>(+227)</strong></a>
+			                                 <a href="#" data-code="234"><img src="/images2/flags/ng.png" width="16" height="16" alt="" />Nigeria <strong>(+234)</strong></a>
+			                                 <a href="#" data-code="850"><img src="/images2/flags/kp.png" width="16" height="16" alt="" />North Korea <strong>(+850)</strong></a>
+			                                 <a href="#" data-code="47"><img src="/images2/flags/no.png" width="16" height="16" alt="" />Norway <strong>(+47)</strong></a>
+			                                 <a href="#" data-code="968"><img src="/images2/flags/om.png" width="16" height="16" alt="" />Oman <strong>(+968)</strong></a>
+			                                 <a href="#" data-code="92"><img src="/images2/flags/pk.png" width="16" height="16" alt="" />Pakistan <strong>(+92)</strong></a>
+			                                 <a href="#" data-code="680"><img src="/images2/flags/pw.png" width="16" height="16" alt="" />Palau <strong>(+680)</strong></a>
+			                                 <a href="#" data-code="507"><img src="/images2/flags/pa.png" width="16" height="16" alt="" />Panama <strong>(+507)</strong></a>
+			                                 <a href="#" data-code="675"><img src="/images2/flags/pg.png" width="16" height="16" alt="" />Papua New Guinea <strong>(+675)</strong></a>
+			                                 <a href="#" data-code="595"><img src="/images2/flags/pr.png" width="16" height="16" alt="" />Paraguay <strong>(+595)</strong></a>
+			                                 <a href="#" data-code="51"><img src="/images2/flags/pe.png" width="16" height="16" alt="" />Peru <strong>(+51)</strong></a>
+			                                 <a href="#" data-code="63"><img src="/images2/flags/ph.png" width="16" height="16" alt="" />Philippines <strong>(+63)</strong></a>
+			                                 <a href="#" data-code="48"><img src="/images2/flags/pl.png" width="16" height="16" alt="" />Poland <strong>(+48)</strong></a>
+			                                 <a href="#" data-code="351"><img src="/images2/flags/pt.png" width="16" height="16" alt="" />Portugal <strong>(+351)</strong></a>
+			                                 <a href="#" data-code="974"><img src="/images2/flags/qa.png" width="16" height="16" alt="" />Qatar <strong>(+974)</strong></a>
+			                                 <a href="#" data-code="242"><img src="/images2/flags/cg.png" width="16" height="16" alt="" />Republic of the Congo <strong>(+242)</strong></a>
+			                                 <a href="#" data-code="40"><img src="/images2/flags/ro.png" width="16" height="16" alt="" />Romania <strong>(+40)</strong></a>
+			                                 <a href="#" data-code="7"><img src="/images2/flags/ru.png" width="16" height="16" alt="" />Russia <strong>(+7)</strong></a>
+			                                 <a href="#" data-code="250"><img src="/images2/flags/rw.png" width="16" height="16" alt="" />Rwanda <strong>(+250)</strong></a>
+			                                 <a href="#" data-code="590"><img src="/images2/flags/bl.png" width="16" height="16" alt="" />Saint Bartholemy <strong>(+590)</strong></a>
+			                                 <a href="#" data-code="869"><img src="/images2/flags/kn.png" width="16" height="16" alt="" />Saint Kitts and Nevis <strong>(+869)</strong></a>
+			                                 <a href="#" data-code="758"><img src="/images2/flags/lc.png" width="16" height="16" alt="" />Saint Lucia <strong>(+758)</strong></a>
+			                                 <a href="#" data-code="590"><img src="/images2/flags/mf.png" width="16" height="16" alt="" />Saint Martin <strong>(+590)</strong></a>
+			                                 <a href="#" data-code="784"><img src="/images2/flags/vc.png" width="16" height="16" alt="" />Saint Vincent and the Grenadines <strong>(+784)</strong></a>
+			                                 <a href="#" data-code="685"><img src="/images2/flags/ws.png" width="16" height="16" alt="" />Samoa <strong>(+685)</strong></a>
+			                                 <a href="#" data-code="378"><img src="/images2/flags/sm.png" width="16" height="16" alt="" />San Marino <strong>(+378)</strong></a>
+			                                 <a href="#" data-code="239"><img src="/images2/flags/st.png" width="16" height="16" alt="" />Sao Tome and Principe <strong>(+239)</strong></a>
+			                                 <a href="#" data-code="966"><img src="/images2/flags/sa.png" width="16" height="16" alt="" />Saudi Arabia <strong>(+966)</strong></a>
+			                                 <a href="#" data-code="221"><img src="/images2/flags/sn.png" width="16" height="16" alt="" />Senegal <strong>(+221)</strong></a>
+			                                 <a href="#" data-code="381"><img src="/images2/flags/rs.png" width="16" height="16" alt="" />Serbia <strong>(+381)</strong></a>
+			                                 <a href="#" data-code="248"><img src="/images2/flags/sc.png" width="16" height="16" alt="" />Seychelles <strong>(+248)</strong></a>
+			                                 <a href="#" data-code="232"><img src="/images2/flags/sl.png" width="16" height="16" alt="" />Sierra Leone <strong>(+232)</strong></a>
+			                                 <a href="#" data-code="65"><img src="/images2/flags/sg.png" width="16" height="16" alt="" />Singapore  <strong>(+65)</strong></a>
+			                                 <a href="#" data-code="421"><img src="/images2/flags/sk.png" width="16" height="16" alt="" />Slovakia <strong>(+421)</strong></a>
+			                                 <a href="#" data-code="386"><img src="/images2/flags/si.png" width="16" height="16" alt="" />Slovenia <strong>(+386)</strong></a>
+			                                 <a href="#" data-code="677"><img src="/images2/flags/sb.png" width="16" height="16" alt="" />Solomon Islands <strong>(+677)</strong></a>
+			                                 <a href="#" data-code="252"><img src="/images2/flags/so.png" width="16" height="16" alt="" />Somalia <strong>(+252)</strong></a>
+			                                 <a href="#" data-code="27"><img src="/images2/flags/za.png" width="16" height="16" alt="" />South Africa <strong>(+27)</strong></a>
+			                                 <a href="#" data-code="82"><img src="/images2/flags/kr.png" width="16" height="16" alt="" />South Korea <strong>(+82)</strong></a>
+			                                 <a href="#" data-code="211"><img src="/images2/flags/ss.png" width="16" height="16" alt="" />South Sudan <strong>(+211)</strong></a>
+			                                 <a href="#" data-code="34"><img src="/images2/flags/es.png" width="16" height="16" alt="" />Spain <strong>(+34)</strong></a>
+			                                 <a href="#" data-code="94"><img src="/images2/flags/lk.png" width="16" height="16" alt="" />Sri Lanka <strong>(+94)</strong></a>
+			                                 <a href="#" data-code="249"><img src="/images2/flags/sd.png" width="16" height="16" alt="" />Sudan <strong>(+249)</strong></a>
+			                                 <a href="#" data-code="597"><img src="/images2/flags/sr.png" width="16" height="16" alt="" />Suriname <strong>(+597)</strong></a>
+			                                 <a href="#" data-code="268"><img src="/images2/flags/sz.png" width="16" height="16" alt="" />Swaziland <strong>(+268)</strong></a>
+			                                 <a href="#" data-code="46"><img src="/images2/flags/se.png" width="16" height="16" alt="" />Sweden <strong>(+46)</strong></a>
+			                                 <a href="#" data-code="41"><img src="/images2/flags/ch.png" width="16" height="16" alt="" />Switzerland <strong>(+41)</strong></a>
+			                                 <a href="#" data-code="963"><img src="/images2/flags/sy.png" width="16" height="16" alt="" />Syria <strong>(+963)</strong></a>
+			                                 <a href="#" data-code="886"><img src="/images2/flags/tw.png" width="16" height="16" alt="" />Taiwan <strong>(+886)</strong></a>
+			                                 <a href="#" data-code="992"><img src="/images2/flags/tj.png" width="16" height="16" alt="" />Tajikistan <strong>(+992)</strong></a>
+			                                 <a href="#" data-code="255"><img src="/images2/flags/tz.png" width="16" height="16" alt="" />Tanzania <strong>(+255)</strong></a>
+			                                 <a href="#" data-code="66"><img src="/images2/flags/th.png" width="16" height="16" alt="" />Thailand <strong>(+66)</strong></a>
+			                                 <a href="#" data-code="670"><img src="/images2/flags/tl.png" width="16" height="16" alt="" />Timor-Leste <strong>(+670)</strong></a>
+			                                 <a href="#" data-code="228"><img src="/images2/flags/tg.png" width="16" height="16" alt="" />Togo <strong>(+228)</strong></a>
+			                                 <a href="#" data-code="676"><img src="/images2/flags/to.png" width="16" height="16" alt="" />Tonga <strong>(+676)</strong></a>
+			                                 <a href="#" data-code="868"><img src="/images2/flags/tt.png" width="16" height="16" alt="" />Trinidad & Tobago <strong>(+868)</strong></a>
+			                                 <a href="#" data-code="216"><img src="/images2/flags/tn.png" width="16" height="16" alt="" />Tunisia <strong>(+216)</strong></a>
+			                                 <a href="#" data-code="90"><img src="/images2/flags/tr.png" width="16" height="16" alt="" />Turkey <strong>(+90)</strong></a>
+			                                 <a href="#" data-code="993"><img src="/images2/flags/tm.png" width="16" height="16" alt="" />Turkmenistan <strong>(+993)</strong></a>
+			                                 <a href="#" data-code="649"><img src="/images2/flags/tc.png" width="16" height="16" alt="" />Turks and Caicos Islands <strong>(+649)</strong></a>
+			                                 <a href="#" data-code="688"><img src="/images2/flags/tv.png" width="16" height="16" alt="" />Tuvalu <strong>(+688)</strong></a>
+			                                 <a href="#" data-code="256"><img src="/images2/flags/ug.png" width="16" height="16" alt="" />Uganda <strong>(+256)</strong></a>
+			                                 <a href="#" data-code="380"><img src="/images2/flags/ua.png" width="16" height="16" alt="" />Ukraine <strong>(+380)</strong></a>
+			                                 <a href="#" data-code="971"><img src="/images2/flags/ae.png" width="16" height="16" alt="" />United Arab Emirates <strong>(+971)</strong></a>
+			                                 <a href="#" data-code="44"><img src="/images2/flags/gb.png" width="16" height="16" alt="" />United Kingdom <strong>(+44)</strong></a>
+			                                 <a href="#" data-code="1"><img src="/images2/flags/us.png" width="16" height="16" alt="" />United States <strong>(+1)</strong></a>
+			                                 <a href="#" data-code="340"><img src="/images2/flags/vi.png" width="16" height="16" alt="" />United States Virgin Islands <strong>(+340)</strong></a>
+			                                 <a href="#" data-code="598"><img src="/images2/flags/uy.png" width="16" height="16" alt="" />Uruguay <strong>(+598)</strong></a>
+			                                 <a href="#" data-code="998"><img src="/images2/flags/uz.png" width="16" height="16" alt="" />Uzbekistan <strong>(+998)</strong></a>
+			                                 <a href="#" data-code="678"><img src="/images2/flags/vu.png" width="16" height="16" alt="" />Vanuatu <strong>(+678)</strong></a>
+			                                 <a href="#" data-code="39"><img src="/images2/flags/va.png" width="16" height="16" alt="" />Vatican City <strong>(+39)</strong></a>
+			                                 <a href="#" data-code="58"><img src="/images2/flags/ve.png" width="16" height="16" alt="" />Venezuela <strong>(+58)</strong></a>
+			                                 <a href="#" data-code="84"><img src="/images2/flags/vn.png" width="16" height="16" alt="" />Vietnam <strong>(+84)</strong></a>
+			                                 <a href="#" data-code="967"><img src="/images2/flags/ye.png" width="16" height="16" alt="" />Yemen <strong>(+967)</strong></a>
+			                                 <a href="#" data-code="260"><img src="/images2/flags/zm.png" width="16" height="16" alt="" />Zambia <strong>(+260)</strong></a>
+			                                 <a href="#" data-code="263"><img src="/images2/flags/zw.png" width="16" height="16" alt="" />Zimbabwe <strong>(+263)</strong></a>
+			                            </div><!--CONTAINER-->
+			                        </div><!--HOLDER-->
+			                    </div><!--ALL_FLAGS-->
+			                    <input type="text" name="number" value="" />
+			                    <input type="hidden" name="code" value="1" />
+			                    <a href="" class="close"></a>
+			                    <div class="clear"></div>
+			                </div><!--NUMBER-DISPLAY-->
+			                <div class="numbers">
+			                    <a data-num="1" href="">1</a>
+			                    <a data-num="2" href="">2<span>ABC</span></a>
+			                    <a data-num="3" href="">3<span>DEF</span></a>
+			                    <a data-num="4" href="">4<span>GHI</span></a>
+			                    <a data-num="5" href="">5<span>JKL</span></a>
+			                    <a data-num="6" href="">6<span>MNO</span></a>
+			                    <a data-num="7" href="">7<span>PQRS</span></a>
+			                    <a data-num="8" href="">8<span>TUV</span></a>
+			                    <a data-num="9" href="">9<span>WXYZ</span></a>
+			                    <a data-num="*" href="">*</a>
+			                    <a data-num="0" href="">0</a>
+			                    <a data-num="#" href="">#</a>
+			                </div><!--NUMBERS-->
+			                <div class="control">
+			                    <input type="button" name="start" class="btn-1" value="Start Call" />
+			                    <input type="button" name="Cancel"  class="cancel" value="Cancel" />
+			                </div><!--CONTROL-->
+			            </div><!--MIDDLE-->
+			        </div><!--DIALPAD-->
+			    </div><!--START_CALL-->
+
+				<div id="newtrip">
+					<div id="create_trip">
+						<form action="">
+				            <div class="top">
+				                <h3>Create a New Trip</h3>
+				                <p>Complete the information below to start your next trip</p>
+				            </div><!--TOP-->
+				            <div class="cont">
+				                <fieldset>
+				                    <div class="item">
+				                        <label class="trip">Trip Name</label>
+				                        <input type="text" name="title" value="" />
+				                    </div><!--ITEM-->
+				                    <div class="item">
+				                        <label class="dates">Trip Dates</label>
+				                        <input id="start" class="start" type="text" name="start" value="Starting Date" />
+				                        <input id="end" class="end"type="text" name="end" value="Ending Date" />
+				                        <label class="check">
+				                            <input type="checkbox" class="nodatesyet"/>
+				                            I don't know the travel dates yet
+				                        </label>
+				                    </div><!--ITEM-->
+				                </fieldset>
+				            </div><!--CONT-->
+				            <div class="bottom">
+				                <input type="submit" class="btn-1 noclean" value="Create Trip" />
+				                <input type="button" onclick="$.fancybox.close(); return false;" class="btn-10 noclean" value="Cancel" />
+				            </div><!--BOTTOM-->
+				            <input type="hidden" name="trip" value="new" />
+				            <input type="hidden" name="listing" value="" />
+				        </form>
+					</div><!--CREATE_TRIP-->
+				</div><!--NEWTRIP-->
+				
+				<div id="writeReview" class="lb">
+					<div class="top">Write Review <em>to</em> Surfing Lessons </div><!--TOP-->
+					<div class="cont">
+						<form method="post" action="">
+							<label>Title</label>
+							<input type="text" name="" value="Write a nice title for your review..." />
+							<label>Review</label>
+							<textarea rows="" cols="">Write about your experience...</textarea>
+							<div class="reviews">
+								<label>Rate your experience</label>
+								<ul class="rating">
+									<li><a href="" class="slct"></a></li>
+									<li><a href="" class="slct"></a></li>
+									<li><a href="" class="slct"></a></li>
+									<li><a href="" class="nrml"></a></li>
+									<li><a href="" class="nrml"></a></li>
+								</ul>
+								<div class="clear"></div>
+							</div><!--REVIEWS-->
+						</form>
+					</div><!--CONT-->
+					<div class="bot">
+						<input class="btn-1" type="submit" name="" value="Send Review" />
+						<a href="" class="btn-10">Cancel</a>
+					</div><!--BOT-->
+				</div><!--WRITEREVIEW-->
+			</div><!--HIDDEN-->
+		</div><!--WRAPPER_ALL-->
+	</body>
+</html>
+
+
+
+<?php /**
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
@@ -481,4 +1373,4 @@
 		margin-right:5px;}
 </style>
 </body>
-</html>
+</html> */ ?>
