@@ -3287,7 +3287,7 @@ class AdminController extends Zend_Controller_Action {
 	private function paymentsPaidTask(){
         $vendorId = $this->_getParam('page');
 		$date = $this->_getParam('sort');
-		$reservations = $this->reservations->markPaidByDate($vendorId, $date);
+		$reservations = $this->reservations->markPaidByDate($vendorId, $date, $this->user->getId());
 		$_SESSION['alert'] = 'Your changes have been saved';
 		$this->_redirect("/admin/payments/pending");
 		
@@ -3337,21 +3337,28 @@ class AdminController extends Zend_Controller_Action {
         $select = $db->select();
 
 		
-		$select->from('reservations', array( 'paid_date', 'paid_total'=>new Zend_Db_Expr('sum(ammount - (ammount* 0.075))'), 'reservation_count'=>new Zend_Db_Expr('count(1)'), 'due_date' => new Zend_Db_Expr('DATE_ADD(reservations.created, INTERVAL (9 - IF(DAYOFWEEK(reservations.created)=1, 8, DAYOFWEEK(reservations.created))) DAY)') ))
-                ->join('vendors', 'vendors.id=reservations.vendor_id', array('vendor_name' => 'name', 'vendor_id'=>'id'));
 		
 		switch ($this->_getParam('task')) {
             case 'pending':
-                $this->view->renderContext = 'pending';
+                $template = 'payments';
+				$this->view->renderContext = 'pending';
                 $this->view->title = "Pending";
+				$select->from('reservations', array( 'paid_total'=>new Zend_Db_Expr('sum(ammount - (ammount* 0.075))'), 'reservation_count'=>new Zend_Db_Expr('count(1)'), 'due_date' => new Zend_Db_Expr('DATE_ADD(reservations.checkin, INTERVAL (9 - IF(DAYOFWEEK(reservations.checkin)=1, 8, DAYOFWEEK(reservations.checkin))) DAY)') ))
+						->join('vendors', 'vendors.id=reservations.vendor_id', array('vendor_name' => 'name', 'vendor_id'=>'id'));
                 $select->where("reservations.status_id=?", 1);
 				$select->group(array('vendors.id', 'due_date'));
                 break;
             case 'all':
+            case 'paid':
             case 'history':
-                $this->view->title = "History";
-                $select->where("reservations.status_id!=?", 1);
-				$select->group(array('vendors.id', 'paid_date'));
+                $template = 'payments-paid';
+                $this->view->title = "Paid";
+				$select->from('reservations', array( 'paid_total'=>new Zend_Db_Expr('sum(ammount - (ammount* 0.075))'), 'reservation_count'=>new Zend_Db_Expr('count(1)'), 'due_date' => new Zend_Db_Expr('DATE_ADD(reservations.checkin, INTERVAL (9 - IF(DAYOFWEEK(reservations.checkin)=1, 8, DAYOFWEEK(reservations.checkin))) DAY)') ))
+						->join('vendors', 'vendors.id=reservations.vendor_id', array('vendor_name' => 'name', 'vendor_id'=>'id'))
+						->join('paid_reservations', 'paid_reservations.reservation_id=reservations.id', array())
+						->join('payments', 'payments.id=paid_reservations.payment_id', array('paid_date'=>'created'));
+                $select->where("reservations.status_id=?", 5);
+				$select->group(array('vendors.id', 'payments.created'));
                 break;
             default:
                 $this->view->title = "Pending";
@@ -3366,7 +3373,7 @@ class AdminController extends Zend_Controller_Action {
         $paginator->setCurrentPageNumber($page);
         $this->view->paginator = $paginator;
         $this->view->numCount = $paginator->getTotalItemCount();
-        $this->render('payments');
+        $this->render($template);
     }
 
     public function reportsAction() {
