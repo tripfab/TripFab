@@ -77,19 +77,19 @@
     <table width="520" border="0" class="info">
         <tr>
             <td width="180">Company Name</td>
-			<td width="340"><input type="text"  name="name" value="<?php echo $this->user->name?>" /></td>
+			<td width="340"><input type="text" class="noclean"  name="name" value="<?php echo $this->user->name?>" /></td>
         </tr>
         <tr>
             <td width="180">E-mail</td>
-			<td width="340"><input type="text" name="email" value="<?php echo $this->user->email?>" /></td>
+			<td width="340"><input type="text" class="noclean" name="email" value="<?php echo $this->user->email?>" /></td>
         </tr>
         <tr>
             <td width="180">Contact Name</td>
-			<td width="340"><input type="text" name="contact_name" value="<?php echo $this->user->contact_name?>" /></td>
+			<td width="340"><input type="text" class="noclean" name="contact_name" value="<?php echo $this->user->contact_name?>" /></td>
         </tr>
         <tr>
             <td width="180">Partner Since</td>
-			<td width="340"><input type="text" name="created" id="created" value="<?php echo substr($this->user->created, 0, 4) =='0000' ? '' : date('M d, Y', strtotime($this->user->created))?>" /></td>
+			<td width="340"><input type="text" class="noclean" name="created" id="created" value="<?php echo substr($this->user->created, 0, 4) =='0000' ? '' : date('M d, Y', strtotime($this->user->created))?>" /></td>
         </tr>
         <tr>            
             <td width="180">Country</td>
@@ -111,11 +111,11 @@
         </tr>
         <tr>
             <td width="180">Phone</td>
-			<td width="340"><input type="text" name="phone" value="<?php echo $this->user->phone?>" /></td>
+			<td width="340"><input type="text" class="noclean" name="phone" value="<?php echo $this->user->phone?>" /></td>
         </tr>
         <tr>
             <td width="180">Website</td>
-			<td width="340"><input type="text" name="website" value="<?php echo $this->user->website?>" /></td>
+			<td width="340"><input type="text" class="noclean" name="website" value="<?php echo $this->user->website?>" /></td>
         </tr>
     </table>
 </div><!--SINGLE_TRIP-->
