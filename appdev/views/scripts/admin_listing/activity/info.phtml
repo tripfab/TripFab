@@ -705,6 +705,7 @@ input.schname { float:none !important; width:90px !important; }
     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
     <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'edit-listing') ?>" />
     <input type="hidden" name="_task" value="<?= md5('edit_listing') ?>" />
+    <input type="hidden" name="partner" value="<?= $this->listing->vendor_id ?>" />
 </form>
 <?php else: ?>
 <form action="" method="post">
@@ -1274,5 +1275,6 @@ input.schname { float:none !important; width:90px !important; }
     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
     <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'edit-listing') ?>" />
     <input type="hidden" name="_task" value="<?= md5('edit_listing') ?>" />
+    <input type="hidden" name="partner" value="<?= $this->listing->vendor_id ?>" />
 </form>
 <?php endif ?>

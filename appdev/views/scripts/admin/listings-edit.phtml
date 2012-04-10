@@ -65,8 +65,11 @@
     <div class="w3_admin">
         <div class="sub_menu">
             <h2>
+            	<?php if($this->listing->status == 1): ?>
             	<span class="lstngActv">Active</span>
-            	<span class="lstngInct hidden">Inactive</span>
+                <?php else: ?>
+            	<span class="lstngInct">Inactive</span>
+                <?php endif ?>
             	Editing. <span>Editing. <span><?php echo $this->listing->title ?></span>
 	            <em class="ed">by </em> 
 	            <a href="/admin/users/view/partner/<?= $this->vendor->id ?>" class="partner"><?= $this->vendor->name ?></a>

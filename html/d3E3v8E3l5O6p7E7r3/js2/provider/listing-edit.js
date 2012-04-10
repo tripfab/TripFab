@@ -121,9 +121,12 @@ $(function(){
 	});
 	
 	var $contact;
+        var $partner = $('input[name=partner]').val();
+        
 	$.ajax({
 		url:'/ajax/getcontact',
 		type:'get',
+                data:{provider:$partner},
 		success:function(result){
 			$contact = result;
 		},

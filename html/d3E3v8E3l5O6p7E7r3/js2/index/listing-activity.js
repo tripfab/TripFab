@@ -18,8 +18,12 @@ $(document).ready(function() {
     $('body').data('listingid', $('input[name=listingids]').val());
     $('body').data('listingtoken', $('input[name=listingstoken]').val());
     $('body').data('listingprice', $('input[name=listingprice]').val());
+    
+    console.log('good');
+    
+    //$('.tabs').tabs({selected: 0});
 	
-    $('.tabs-wrapper-2, .reviews-wrapper').tabs({
+    $('.tabs').tabs({
         selected:0,
         show:function(a,b){
             if(b.tab.text == 'How to Get There'){

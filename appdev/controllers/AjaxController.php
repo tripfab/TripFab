@@ -255,6 +255,16 @@ class AjaxController extends Zend_Controller_Action
                 
                 header('Content-type:text/json');
                 echo json_encode($result); die;
+            } elseif($user->getRole() == 'admin') {
+                $vendor = $this->users->getVendor($this->_getParam('provider'));
+                $result = array(
+                    'phone' => $vendor->phone,
+                    'email' => $vendor->email,
+                    'website' => $vendor->website
+                );
+                
+                header('Content-type:text/json');
+                echo json_encode($result); die;
             }
             throw new Exception();
         }
