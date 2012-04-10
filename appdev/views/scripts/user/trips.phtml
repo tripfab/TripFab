@@ -102,7 +102,9 @@
         <?php endforeach ?>
     </div><!-- ALL_TRIPS -->
     <?php else: ?>
-    
+    	<div class="no_trips">
+    		<div class="icon">You are not planning any trip yet</div>
+    	</div><!--NO_TRIPS-->
     <?php endif ?>
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
