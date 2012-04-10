@@ -87,7 +87,7 @@
                                                 <?php if($key != 0):?>
                                                 	<a href="javascript://" class="remove" onclick="removeElement(this, 'inclusion')">remove</a>
                                                 <?php endif; ?>
-                                                <textarea cols="" rows="" name="inclusion[]"><?php echo $include->text ?></textarea>
+                                                <textarea cols="" rows="" name="inclusion[]" class="noclean"><?php echo $include->text ?></textarea>
                                                 <input type="hidden" name="iid[]" value="<?php echo @$include->id ?>"/>
                                                 <div class="clear"></div>
                                                 </div>
@@ -113,7 +113,7 @@
 												<?php if($key != 0):?>
                                                 	<a href="javascript://" class="remove" name="delete" onclick="removeElement(this, 'exclusion')">remove</a>
                                                 <?php endif; ?>
-												<textarea cols="" rows="" name="exclusion[]"><?php echo $exclude->text ?></textarea>
+												<textarea cols="" rows="" name="exclusion[]" class="noclean"><?php echo $exclude->text ?></textarea>
                                                 <input type="hidden" name="eid[]" value="<?php echo $exclude->id ?>"/>
 												<div class="clear"></div>
                                                 </div>
@@ -155,11 +155,11 @@
 			var html = '<div>';
 			html += '<a href="javascript://" class="remove" name="delete" onclick="removeElement(this, \'' + divName + '\')">remove</a>';
 			if(inclusion){
-				html += '<textarea cols="" rows="" name="inclusion[]"></textarea>';
+				html += '<textarea cols="" rows="" name="inclusion[]"  class="noclean"></textarea>';
 				html += '<input type="hidden" name="iid[]" value="0"/>';
 			}
 			else{
-				html += '<textarea cols="" rows="" name="exclusion[]"></textarea>';
+				html += '<textarea cols="" rows="" name="exclusion[]"  class="noclean"></textarea>';
 				html += '<input type="hidden" name="eid[]" value="0"/>';
 			}
 			html += '<div class="clear"></div>';
