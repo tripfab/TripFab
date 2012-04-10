@@ -1099,9 +1099,10 @@ class AdminController extends Zend_Controller_Action {
         $ids = $this->_getParam('page','default');
         if($this->isValidId($ids)){    
             $listing = $this->listings->getListing($ids);
+            $vendor  = $this->users->getVendor($listing->vendor_id);
             $listing->delete();
             
-            $this->_redirect('/admin/listings');
+            $this->_redirect('/admin/users/view/partner/'.$vendor->id.'/2');
         }
     }
     
