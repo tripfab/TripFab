@@ -516,7 +516,59 @@
 
 
 
-
+/*TOP BAR MESSAGE STATUS -----------------------------------*/
+.empty-container {
+	background-color: #FFFFFF;
+	border: 1px solid #E7E7E7;
+	text-align: center;
+	padding: 100px 0;
+	color: #cccccc;
+	font-size: 25px;
+	font-weight: bold;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
+}
+.empty-container a.btn-1 {
+	display: inline;
+	font-size: 13px;
+	padding: 5px 10px;
+}
+.big-message {
+	height: 63px;
+	line-height: 61px;
+	position: fixed;
+	text-align: center;
+	width: 100%;
+	z-index: 10000000;
+	color: #FFFFFF;
+	font-size: 16px;
+	font-weight: bold;
+	display: none;
+}
+.big-message.green {
+	background: url(https://developer.tripfab.com/images2/g-30.png) repeat-x scroll 0 0 transparent;
+	text-shadow: 0 1px 0 #7fb440;
+}
+.big-message.red {
+	background: url(https://developer.tripfab.com/images2/g-31.png) repeat-x scroll 0 0 transparent;
+	text-shadow: 0 1px 0 #d94812;
+}
+.big-message.green img {
+	background: url(https://developer.tripfab.com/images2/ico-52.png) no-repeat scroll 0 0 transparent;
+	height: 22px;
+	margin-right: 10px;
+	vertical-align: middle;
+	width: 20px;
+}
+.big-message.red img {
+	background: url(https://developer.tripfab.com/images2/ico-69.png) no-repeat scroll 0 0 transparent;
+	height: 18px;
+	margin-right: 10px;
+	vertical-align: middle;
+	width: 19px;
+}
+/*END TOP BAR MESSAGE STATUS -------------------------------*/
 /*LIGHTBOX BASIC STYLES-------------------------------------*/
 .lb {
 	overflow: hidden;
@@ -560,5 +612,65 @@
 	background-color: #FFF;
 }
 /*END LIGHTBOX BASIC STYLES----------------------------------*/
-
-
+/*FIRST TIME TOOLTIPS----------------------------------------*/
+.firstime_tip{
+	width: 281px;
+	height:150px;
+	background-color: #FFF;
+	display: block;
+	position: absolute;
+	-webkit-box-shadow: 0px 0px 3px 1px #8c8c8c;
+	-moz-box-shadow: 0px 0px 3px 1px #8c8c8c;
+	box-shadow: 0px 0px 3px 1px #8c8c8c;
+	z-index: 999;
+	behavior: url(/PIE.htc);
+}
+.firstime_tip > img.arrow {
+    position: absolute;
+    right: 136px;
+    top: -7px; 
+}
+.firstime_tip .cont {
+	padding: 20px 0 0 15px;
+}
+.firstime_tip .cont img {
+	float: left;
+	margin-right: 15px;
+}
+.firstime_tip .cont p {
+	font: 11px/16px Helvetica;
+	color: #303030;
+}
+.firstime_tip .cont p strong {
+	display: block;
+	font-weight: bold;
+}
+.firstime_tip .bot {
+	background: url(https://developer.tripfab.com/images6/lstng_htl_sh2.png) repeat-x 0 0;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 43px;
+	width: 100%;
+}
+.firstime_tip .bot label {
+	color: #303030;
+	font: bold 11px/21px Helvetica;
+	display: block;
+	margin: 10px 0 0 15px;
+	height: 20px;
+}
+.firstime_tip .bot label input {
+	margin:0 5px 0 0;
+	vertical-align: middle;
+}
+.firstime_tip .bot .btn-1 {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	width: 56px;
+	padding: 0;
+	height: 24px;
+	font: bold 11px/24px Helvetica;
+}
+/*END FIRST TIME TOOLTIPS------------------------------------*/
