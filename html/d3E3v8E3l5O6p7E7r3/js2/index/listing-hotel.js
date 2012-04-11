@@ -19,7 +19,7 @@ $(document).ready(function() {
     $('body').data('listingtoken', $('input[name=listingstoken]').val());
     $('body').data('listingprice', $('input[name=listingprice]').val());
 	
-    $('.tabs-wrapper-2, .reviews-wrapper').tabs({
+    $('.tabs').tabs({
         show:function(a,b){
             if(b.tab.text == 'How to Get There'){
                 var $lat = $('#mapcanvas').data('lat');

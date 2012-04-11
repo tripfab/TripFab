@@ -1,6 +1,618 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
+	<meta content="noindex,nofollow" name="robots" />
+	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+	<title>Tripfab.com</title>
+	<link type="text/css" rel="stylesheet" href="/css6/reset.css" />
+	<link type="text/css" rel="stylesheet" href="/css6/common.css" />
+	<link type="text/css" rel="stylesheet" href="/css6/section1.css" />
+	<link type="text/css" rel="stylesheet" href="/css6/calendar.css" />	
+	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+</head>
+<body class="bg_hl">
+<div id="wp_all">
+    <div id="wp_header">
+        <?= $this->partial('partials/header-v2.phtml', array('user'=>$this->user,'full'=>true)); ?>
+        <div class="sub_header" id="lstng_header">
+            <div class="cont">
+                <?= $this->partial('partials/headerVendorInfo.phtml', array('vendor'=>$this->vendor, 'user'=> $this->user)) ?>
+            </div><!--CONT-->
+        </div><!--SUB_HEADER-->
+    </div><!--WP_HEADER-->
+    <div id="wp_content">
+        <div id="cont_bl">
+            <div id="lstng_htl">
+                <div class="img_bg">
+                    <div class="photo"><?= $this->blur($this->listing->image) ?></div><!--PHOTO-->
+                    <div class="wrap">
+                        <div class="dscript">
+                            <div class="inner">
+                                <h3><?= $this->listing->title ?></h3>
+                                <span class="location"><em></em><?= $this->city->title ?>, <?= $this->country->title ?></span>
+                                <p><?= $this->listing->description ?>...</p>
+                                <div class="price">
+                                    <em>From</em>
+                                    <sup>$</sup>
+                                    <span><?= $this->listing->price ?> <sub>per night</sub></span>
+                                </div><!--PRICE-->
+                                <!--
+                                <div class="reviews">
+                                    <ul class="rating">
+                                        <li><a href="" class="slct"></a></li>
+                                        <li><a href="" class="slct"></a></li>
+                                        <li><a href="" class="slct"></a></li>
+                                        <li><a href="" class="nrml"></a></li>
+                                        <li><a href="" class="nrml"></a></li>
+                                    </ul>
+                                    <span>5 Reviews</span>
+                                </div>--><!--REVIEWS-->
+                            </div><!--INNER-->
+                        </div><!--DSCRIPT-->
+                        <div class="clear"></div>
+                    </div><!--WRAP-->	
+                </div><!--IMAGE_BG-->
+                <div class="wrap">
+                    <div class="cont">
+                        <div class="container">
+                        	<?= $this->partial('partials/addtomytrip.phtml', array(
+									'user' => $this->user,
+									'trips' => $this->trips,
+									'listing' => $this->listing,
+									'class'	=> 'main',
+									'class2' => 'one'
+							)) ?>
+                            <div class="carousel">
+                                <p><span></span>Photos & Video</p>
+                                <a href="" class="lf-arrow"></a>
+                                <div class="imgs">
+                                    <?php for($i=0;$i<=count($this->pictures);$i=$i+6): ?>
+                                    <div class="single">
+                                        <ul>
+                                            <?php for($j=$i;($j<($i+6)) and ($j<count($this->pictures));$j++): ?>
+                                            <?php $pic = $this->pictures[$j] ?>
+                                            <li>
+                                                <a rel="group1" title="<?= $pic->location ?>" class="lbc" href="#grande<?= $j ?>">
+                                                <?= $this->thumbnail(65,$pic->url,'','1:1') ?><span class="arrow"></span></a>
+                                                <div class="hover">
+                                                    <a href="#grande<?= $j ?>" class="lbc">
+                                                    <?= $this->thumbnail(array('width'=>391,'height'=>254),$pic->url,'','391:254') ?>
+                                                    <span><?= $pic->location ?></span></a>
+                                                </div>
+                                            </li>
+                                            <?php endfor ?>
+                                        </ul>
+                                    </div>
+                                    <?php endfor ?>
+                                </div><!--IMGS-->
+                                <a href="" class="rg-arrow"></a>
+                            </div><!--CAROUSEL-->
+                            <div class="hidden">
+                                <?php for($i=0;$i<count($this->pictures);$i++): ?>
+                                <?= $this->image($this->pictures[$i]->url, 'lgbox_img','grande'.$i) ?>
+                                <?php endfor ?>
+                            </div>
+                            <div class="tabs">
+                                <ul>
+                                    <li><a href="#description" class="ui-tabs-selected ui-state-active">Description</a></li>
+                                    <li><a href="#room_types">Room Types</a></li>
+                                    <li><a href="#directions">How to Get There</a></li>
+                                </ul>
+                                <div class="description" id="description">
+                                    <div class="info">
+                                        <ul>
+                                            <li><span class="cat"></span><strong>Category</strong> Beach Resort</li>
+                                            <li><span class="ck_in"></span><strong>Check In</strong> :00 pm</li>
+                                            <li><span class="ck_out"></span><strong>Check Out</strong> :00 am</li>
+                                        </ul>
+                                    </div><!--INFO-->
+                                    <h4><span class="hotel"></span>Hotel Punta Islita</h4>
+                                    <p>Is learning how to surf on your to do list? Take the opportunity to pre-book your Oahu basic surf lesson. Learn surf techniques, safety rules and surf break etiquette under the guidance of certified lifeguards and surf instructors. With over an hour and a half of water time you will have the chance to try it all.
+                                    </p>
+                                    <p>With its white sand beaches, Big Bay is a surfers' paradise and is home to many local and international surfing competitions. All you need today is your swimming costume, a towel, hat, sunblock and don't forget your camera.</p>
+                                    
+                                    <h5>What to Expect</h5>
+                                    <p>Want to learn how to surf? Where could be better than Sydney, the heart of Australia's surfing culture. For a great, fun-filled introduction to surfing, take this full-day tour to a beach just 45 minutes south of Sydney, where you'll learn all the basics of board surfing from your fully qualified surf instructor.
+                                    </p>
+                                    
+                                    <h5>Things you'll love</h5>
+                                    <p>A team of expert instructors will cover basic aspects of surfing, from ocean safety and surf etiquette to paddling, pop-ups and wave-riding techniques. But perfection isn't necessary – follow the motto "the best surfer in the water is the one having the most fun," and you'll have a wonderful time, even if you don't master the sport in 90 minutes. Surf instructors are certified in CPR, first aid and lifesaving.</p>
+                                    
+                                    <div class="amenities">
+                                        <h4><span class="icon"></span>Amenities</h4>
+                                        <ul>
+                                            <li>One or two-hour surf lesson with a qualified instructor</li>
+                                            <li>Rashguard shirt (rental)</li>
+                                            <li>Surfboard equipment (rental)</li>
+                                            <li>Rubberized fins (rental)</li>
+                                            <li>Optional water shoes (rental)</li>
+                                            <li>Hotel pickup and drop-off for private and semi-private lesson participants staying in Waikiki hotels.</li>
+                                            <li>Stand up paddle lesson participants requesting hotel pickup and drop-off will be charged an additional \$10 per person on the day of lesson.</li>
+                                        </ul>
+                                    </div><!--AMENITIES-->
+                                    
+                                    <div class="policies">
+                                        <h5>Policies</h5>
+                                        <ul>
+                                            <li>Confirmation will be received at time of booking.</li>
+                                            <li>Children must be able to swim one lap unassisted across a 25-yard pool to partake in the surflessons.</li>
+                                            <li>All students must have parent sign a parental consent form.</li>
+                                            <li>Surfing while pregnant is highly discouraged.</li>
+                                            <li>Bring sunscreen, sweatshirt, swimsuit, towel, water, a light snack, hair ties and any other items you might need while at the beach.</li>
+                                            <li>Kids must be between the ages of 5 and 11.</li>
+                                        </ul>
+                                    </div><!--POLICIES-->
+                                    
+                                    <div class="tips">
+                                        <h4><span class="icon"></span>Tips & Recommendations</h4>
+                                        <ul>
+                                            <li>Make sure you are always on time for all pick ups.</li>
+                                            <li>While in San Jose avoid going too far away from your hotel and ask hotel staff for directions of where to go.</li>
+                                            <li>Do not go too far away from your your traveling group on your transfer stops.</li>
+                                            <li>Always wear sun screen, the sun is quite hot there.</li>
+                                            <li>Carry a little cash with you, some places give discounts if you pay cash.</li>
+                                            <li>Do not leave your items unnatended in any of the locations, specially at the beach.</li>
+                                            <li>If you need assistance at any time during your trip, ask your guide.</li>
+                                            <li>If you have any food allergies or specific food requirements make sure you inform the tour operator</li>
+                                        </ul>
+                                    </div><!--TIPS-->
+                                    
+                                    
+                                </div><!--DESCRIPTION-->
+                                <div class="room_types" id="room_types">
+                                    <div class="single">
+                                        <h4>Garden View Junior Suite</h4>
+                                        <img src="images6/lstng_htl_img1.png" width="" height="" alt="" />
+                                        <ul>
+                                            <li>Daily continental breakfast is included.</li>
+                                            <li>Garden View Junior Suites are 620 square feet and feature a kitchenette.</li>
+                                            <li>Maximum Occupancy: 2 (Rates are quoted for 2 people.)</li>
+                                            <li>Bed Type: 1 King</li>
+                                            <li>Children Policy: Children are permitted at no additional cost using existing bedding within maximum</li>
+                                            <li>Handicap-Accessible: No</li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div><!--SINGLE-->
+                                    
+                                    <div class="single">
+                                        <h4>Ocean Front Junior Suite</h4>
+                                        <img src="images6/lstng_htl_img3.png" width="" height="" alt="" />
+                                        <ul>
+                                            <li>Daily breakfast is included in the Jetsetter rate.</li>
+                                            <li>Junior Suites are 400 square feet and feature a separate sitting area and views of the garden and pool.</li>
+                                            <li>Maximum Occupancy: 4 (Rates quoted are for 2 people. There is a cost to add an additional guest to this room; see policies below.)</li>
+                                            <li>Bed Type: 1 King</li>
+                                            <li>Children Policy: Children 12 and under are permitted at noadditional cost using existing bedding.</li>
+                                            <li>Additional Adult Policy: Up to 2 adults 13 and over are permitted inaddition to the double occupancy for a fee of $30 per person, pernight, using a roll-away or Twin bed.</li>
+                                            <li>Handicap-Accessible: Limited quantities. After booking, please indicate any requests in the Special Instructions field on the page immediately following purchase; call 877-JSET-USA for any additional questions.</li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div><!--SINGLE-->
+                                    
+                                    <div class="single">
+                                        <h4>Garden View Junior Suite</h4>
+                                        <img src="images6/lstng_htl_img4.png" width="" height="" alt="" />
+                                        <ul>
+                                            <li>Daily continental breakfast is included.</li>
+                                            <li>Garden View Junior Suites are 620 square feet and feature a kitchenette.</li>
+                                            <li>Maximum Occupancy: 2 (Rates are quoted for 2 people.)</li>
+                                            <li>Bed Type: 1 King</li>
+                                            <li>Children Policy: Children are permitted at no additional cost using existing bedding within maximum</li>
+                                            <li>Handicap-Accessible: No</li>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div><!--SINGLE-->
+                                    
+                                </div><!--ROOM_TYPES-->
+                                
+                                <div id="directions">
+                                    <?php if(!empty($this->getthere->plane)): ?>
+                                    <div class="dflt">
+                                        <h4><span class="plane"></span>By Plane</h4>
+                                        <p><?= stripslashes(nl2br($this->getthere->plane)) ?></p>
+                                    </div><!--DFLT-->
+                                    <?php endif; if(!empty($this->getthere->car)): ?>
+                                    <div class="dflt">
+                                        <h4><span class="plane"></span>By Car</h4>
+                                        <p><?= stripslashes(nl2br($this->getthere->car)) ?></p>
+                                    </div><!--DFLT-->
+                                    <?php endif; if(!empty($this->getthere->bus)): ?>
+                                    <div class="dflt">
+                                        <h4><span class="plane"></span>By Bus</h4>
+                                        <p><?= stripslashes(nl2br($this->getthere->bus)) ?></p>
+                                    </div><!--DFLT-->
+                                    <?php endif; if(!empty($this->getthere->train)): ?>
+                                    <div class="dflt">
+                                        <h4><span class="plane"></span>By Train</h4>
+                                        <p><?= stripslashes(nl2br($this->getthere->train)) ?></p>
+                                    </div><!--DFLT-->
+                                    <?php endif; if(!empty($this->getthere->boat)): ?>
+                                    <div class="dflt">
+                                        <h4><span class="plane"></span>By Boat</h4>
+                                        <p><?= stripslashes(nl2br($this->getthere->boat)) ?></p>
+                                    </div><!--DFLT-->
+                                    <?php endif ?>
+                                    
+                                    <div class="map">
+                                        <h4><span></span>Location</h4>
+                                        <p><strong><?= $this->listing->title ?></strong>
+                                        <?= $this->listing->address ?></p>
+                                        <div class="map_canvas">
+                                            <div class="cont">
+                                                <div id="mapcanvas"></div>
+                                            </div><!--CONT-->
+                                            <span class="sw"></span>
+                                        </div><!--MAP_CANVAS-->
+                                    </div><!--MAP-->
+                                </div><!--DIRECTIONS-->
+                            </div><!--TABS-->
+                            
+                            <div class="reviews">
+                            	<?php if(count($this->reviews) > 0): ?>
+                                <div class="ttl"><span></span><?= count($this->reviews) ?> Reviews 
+                                <!--<a href="#writeReview" class="btn-10 lbc">Write Review</a>--></div><!--TTL-->
+                                <?php foreach($this->reviews as $rev): ?>
+                                <div class="single">
+	                                <?php if(!empty($rev->user_image)): ?>
+                                	<?= $this->thumbnail(58,$review->user_image, '', '1:1') ?>
+	                                <?php else: ?>
+	                                <?= $this->thumbnail(58,'/images/default-profile.gif','', '1:1') ?>                                    
+                                    <?php endif ?>
+                                    <div class="message">
+                                        <div class="subject"><?= $rev->title ?> <em>by</em> <span><?= $rev->user_name ?></span></div>                                        <div class="text">
+                                            <p><?= stripslashes(nl2br($rev->text)) ?></p>
+                                            <!--
+                                            <div class="social">
+                                                <a href="" class="not"></a>
+                                                <a href="" class="like"></a>
+                                                <span class="pos">+4</span>
+                                                <span class="neg">-4</span>
+                                                <p>Did you find this review helpful?</p>
+                                                <span class="date">Apr 26, 2011</span>
+                                                <div class="clear"></div>												
+                                            </div>--> <!--SOCIAL-->
+                                            <span class="help"><em></em>Helpful</span>
+                                            <span class="n-help"><em></em>Not Helpful</span>
+                                        </div><!--TEXT-->
+                                        
+                                    </div><!--MESSAGE-->
+                                    <div class="clear"></div>
+                                </div><!--SINGLE-->
+                                <?php endforeach ?>
+                                <!--
+                                <div class="paging">
+                                    <span class="total">20 - 25 of 126 Reviews</span>
+                                    <ul>
+                                        <li class="prev"><a href="" class="" class="prev">Previous</a></li>
+                                        <li><a href="" class="">1</a></li>
+                                        <li><a class="active" href="" class="">2</a></li>
+                                        <li><a href="" class="">3</a></li>
+                                        <li class="next"><a href="" class="" class="next">Next</a></li>
+                                    </ul>
+                                </div>--><!--PAGING-->
+                                <?php else: ?>
+                                <?php // Agregue los reviews aqui ?>
+                                <?php endif ?>
+                            </div><!--REVIEWS-->
+                            
+                        </div><!--CONTAINER-->
+                        
+                        <div class="sidebar">
+                            <!--<form action="">
+                                <fieldset>-->
+                                    <div class="cont">
+                                        <h5>Select the Dates <span></span></h5>
+                                        <div class="dates">
+                                            <div class="check">
+                                                <label>Check In</label>
+                                                <input id="checkIn" type="text" name="" value="" />
+                                            </div><!--CHECK-->
+                                            <div class="check">
+                                                <label>Check Out</label>
+                                                <input id="checkOut" type="text" name="" value="" />
+                                            </div><!--CHECK-->
+                                        </div><!--DATES-->
+                                        <h5>Select the Room Details</h5>
+                                        <div class="type">
+                                            <label for="room1"><input type="radio" id="room1" name="roomType" value="Deluxe Room" />Deluxe Room</label>
+                                            <label for="room2"><input type="radio" id="room2" name="roomType" value="Superior Premium Room" />Superior Premium Room
+                                            </label>
+                                            <label for="room3"><input type="radio" id="room3" name="roomType" value="Bedroom Villa" />3 Bedroom Villa	</label>
+                                        </div><!--TYPE-->
+                                        <div class="selects">
+                                            <label class="rooms">
+                                                Rooms
+                                                <select>
+                                                    <option>1</option>
+                                                </select>
+                                            </label>
+                                            <label>
+                                                Guests
+                                                <select>
+                                                    <option>1</option>
+                                                </select>
+                                            </label>
+                                            <div class="clear"></div>
+                                        </div><!--SELECTS-->
+                                        <div class="price">
+                                             <span><sup>$</sup>129 <sub>Subtotal</sub></span>
+                                        </div><!--PRICE-->
+                                        <a href="" class="btn-1">Book Now</a>
+                                        <div class="add">
+											<?= $this->partial('partials/addtomytrip.phtml', array(
+                                                    'user' => $this->user,
+                                                    'trips' => $this->trips,
+                                                    'listing' => $this->listing,
+													'class'	=> 'side',
+													'class2' => 'two'
+                                            )) ?>
+                                            <em>or you can</em>
+                                            <div class="clear"></div>
+                                        </div><!--ADD-->
+                                    </div><!--CONT-->
+                                <!--</fieldset>
+                            </form>-->
+                        </div><!--SIDEBAR-->
+                        <div class="clear"></div>
+                    </div><!--CONT-->
+                </div><!--WRAP-->
+            </div><!--LSTNG_HTL-->
+        </div><!--CONT_BL-->
+    </div><!--WP_CONTENT-->
+    <div id="wp_footer">
+	    <?= $this->partial('partials/footer.phtml'); ?>  
+    </div><!--WP_FOOTER-->
+    <div class="hidden">
+        <div id="send_message">
+            <form action="" id="sendMessageForm">
+                <div class="lb-forgot">
+                    <div class="ttl">Send a message <em>to</em> <?= $this->vendor->name ?></div>
+                    <div class="intro_m">
+                        <p><strong>Questions or concerns about the activity?</strong>
+                            Please write a message and you'll get an answer very soon.</p>
+                    </div><!--INTRO-->
+                    <div class="content">
+                        <textarea cols="30" name="message" rows="1"></textarea>
+                    </div><!-- closes content -->
+                    <div class="bottom">
+                        <input type="submit" class="btn-1" value="Send Message" />
+                        <span onclick="$.fancybox.close()" class="btn-10">Cancel</span>	
+                    </div><!-- closes bottom -->
+                </div><!-- closes lb-forgot -->
+                <input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+            </form>
+        </div>
+        <div id="live_chat">
+            <img src="/images2/chat.png" />
+        </div>
+        <div id="start_call">
+            <div id="dialpad" class="lb">
+                <div class="top">Dial your phone number</div><!--TOP-->
+                <div class="middle">
+                    <p>We'll connect you with the vendor in few minutes. Directly.</p>
+                    <div class="number-display">
+                        <a href="#" class="flag"><img src="/images2/flags/us.png" width="16" height="16" alt="" /></a>
+                        <div class="all_flags">
+                            <a href="#" class="up" onMouseover="move('container',10)" onMouseout="clearTimeout(move.to)"></a>
+                            <a href="#" class="down" onMouseover="move('container',-10)" onMouseout="clearTimeout(move.to)"></a>
+                            <div class="holder">
+                                <div id="container" style="position:absolute;width:282px;left:0;top:0">
+                                    <p>ALL COUNTRIES</p>
+                                    <?php foreach($this->countries as $c): ?>
+                                    <a href="#" data-code="<?= $c->phone ?>"><img src="/images2/flags/<?= strtolower($c->code) ?>.png" width="16" height="16" alt="" />
+                                    <?= $c->title ?> <strong>(+<?= $c->phone ?>)</strong></a>
+                                    <?php endforeach ?> 
+                                </div><!--CONTAINER-->
+                            </div><!--HOLDER-->
+                        </div><!--ALL_FLAGS-->
+                        <input type="text" name="number" value="" />
+                        <input type="hidden" name="code" value="1" />
+                        <a href="" class="close"></a>
+                        <div class="clear"></div>
+                    </div><!--NUMBER-DISPLAY-->
+                    <div class="numbers">
+                        <a data-num="1" href="">1</a>
+                        <a data-num="2" href="">2<span>ABC</span></a>
+                        <a data-num="3" href="">3<span>DEF</span></a>
+                        <a data-num="4" href="">4<span>GHI</span></a>
+                        <a data-num="5" href="">5<span>JKL</span></a>
+                        <a data-num="6" href="">6<span>MNO</span></a>
+                        <a data-num="7" href="">7<span>PQRS</span></a>
+                        <a data-num="8" href="">8<span>TUV</span></a>
+                        <a data-num="9" href="">9<span>WXYZ</span></a>
+                        <a data-num="*" href="">*</a>
+                        <a data-num="0" href="">0</a>
+                        <a data-num="#" href="">#</a>
+                    </div><!--NUMBERS-->
+                    <div class="control">
+                        <input type="button" name="start" class="btn-1" value="Start Call" />
+                        <input type="button" name="Cancel"  class="cancel" value="Cancel" />
+                    </div><!--CONTROL-->
+                </div><!--MIDDLE-->
+            </div><!--DIALPAD-->
+        </div>
+        <div id="newtrip">
+            <div id="create_trip">
+                <form action="">
+                    <div class="top">
+                        <h3>Create a New Trip</h3>
+                        <p>Complete the information below to start your next trip</p>
+                    </div><!--TOP-->
+                    <div class="cont">
+                        <fieldset>
+                            <div class="item">
+                                <label class="trip">Trip Name</label>
+                                <input type="text" name="title" value="" />
+                            </div><!--ITEM-->
+                            <div class="item">
+                                <label class="dates">Trip Dates</label>
+                                <input class="start" type="text" name="start" value="Starting Date" />
+                                <input class="end"type="text" name="end" value="Ending Date" />
+                                <label class="check">
+                                    <input type="checkbox" class="nodatesyet"/>
+                                    I don't know the travel dates yet
+                                </label>
+                            </div><!--ITEM-->
+                            <div class="item last">
+                                    <input type="checkbox" checked="checked" />
+                                    <p>I want to receive special offers from vendors near
+                                        of the places I'll visit in this trip</p>
+                            </div><!--ITEM-->
+                        </fieldset>
+                    </div><!--CONT-->
+                    <div class="bottom">
+                        <input type="submit" class="btn-1 noclean" value="Create Trip" />
+                        <input type="button" onclick="$.fancybox.close(); return false;" class="btn-10 noclean" value="Cancel" />
+                    </div><!--BOTTOM-->
+                    <input type="hidden" name="trip" value="new" />
+                    <input type="hidden" name="listing" value="" />
+                </form>
+            </div><!--CREATE_TRIP-->
+        </div>
+    </div>
+</div><!--WRAPPER_ALL-->
+<input type="hidden" value="<?= ($this->listing->lat) ? $this->listing->lat : 'none' ?>" name="listlat" />
+<input type="hidden" value="<?= ($this->listing->lng) ? $this->listing->lng : 'none' ?>" name="listlng" />
+<input type="hidden" value="<?= $this->listing->title ?>" name="listtitle" />
+<input type="hidden" value="<?php foreach($this->disabledDates as $d): ?><?= $d ?>,<?php endforeach ?>" name="diableddates" />
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript" src="/js2/jquery.popupWindow.js"></script>
+<script type="text/javascript" src="/js2/index/listing-hotel.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        var aboveHeight = $('#header').outerHeight();
+            $(window).scroll(function(){
+                if ($(window).scrollTop() > aboveHeight){
+                    $('#lstng_header').addClass('fixed').css('top','0');
+                    $('#wp_content').css('padding-top', '72px');
+                } 
+                else {
+                    $('#lstng_header').removeClass('fixed');
+                    $('#wp_content').css('padding-top', '0');
+                }
+            });
+        $('.imgs').cycle({
+            timeout: 0,
+            fx: 'scrollHorz',
+            prev: '.lf-arrow',
+            next: '.rg-arrow'
+        });
+        $('.imgs2').cycle({
+            timeout: 0,
+            fx: 'fade',
+            prev: '.lfarrow',
+            next: '.rgarrow'
+        });
+        $('.imgs').hover(function() {
+            $('.imgs').css('height','455px');
+            return false
+        }, function() {
+            $('.imgs').css('height','65px');
+            return false
+        });
+        $('a.lbc').fancybox({
+            padding: 0,
+            overlayColor: '#FFF',
+            overlayOpacity: '0.7',
+            showCloseButton: 'false',
+            centerOnScroll: 'true',
+            titlePosition: 'inside'
+        });
+        $('#fancybox-title').addClass('tittle');
+        $('#fancybox-left-ico').addClass('lfarrow');
+        $('#fancybox-right-ico').addClass('rgarrow');
+        $('#checkIn, #checkOut, #end, #start').datepicker({
+            dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+            showOtherMonths: true
+        });
+        $('.main').click(function() {
+            $('.addTrip.one').toggleClass('show');
+            return false
+        });
+        $('.side').click(function() {
+            $('.addTrip.two').toggleClass('show');
+            return false
+        });
+        $('.addTrip select').live('change', function(){
+            if($(this).val() == 'new'){
+                //$(this).next('input').removeClass('hidden');
+                $form = $(this).parents('form');
+                $listing = $('input[name=listing]', $form).val();
+                $('#newtrip form input[name=listing]').val($listing);
+                $.fancybox({
+                    href:'#newtrip',
+                    padding:0,
+                    overlayColor:'#fff',
+                    centerOnScroll: true
+                });
+          
+            } else {
+                $(this).next('input').addClass('hidden');
+            }
+        });
+		$('a.like').hover(function() {
+			$('.help').toggleClass('show');
+			return false
+		});
+		$('a.not').hover(function() {
+			$('.n-help').toggleClass('show');
+			return false
+		});
+    });
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    img_ready($('img.background'));
+});
+
+function img_ready($obj){
+    resizeImg($obj);
+    $(window).resize(function() {
+       resizeImg($obj);
+    });
+    $obj.fadeIn();
+}
+function resizeImg($bgImg) { 
+    var imgwidth  = 1400;
+    var imgheight = 223;
+    
+    var winwidth  = $(window).width();
+    var winheight = $(window).height();
+    
+    var winCenter = winwidth / 2;
+    var imgCenter = imgwidth / 2;
+    
+    var left = (winwidth > imgwidth) ? 0 : (winCenter - imgCenter);
+    
+    var width = (winwidth > imgwidth) ? winwidth : imgwidth;
+    
+    var height = (winwidth > imgwidth) ? ((imgheight * winwidth) / imgwidth) : height;
+    
+    var winCenter2 = imgheight / 2;
+    var imgCenter2 = height / 2;
+    
+    var top = (winwidth > imgwidth) ? (winCenter2 - imgCenter2) : 0;
+    
+    $bgImg.css('left',left);
+    $bgImg.css('width',width);
+    $bgImg.css('height',height);
+    $bgImg.css('top',top);
+}
+</script>
+<style type="text/css">
+#mapcanvas {
+	width:638px;
+	height:354px;}
+</style>
+</body>
+</html>
+<?php /**
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
     <title><?= $this->listing->title ?> - <?= $this->city->title ?>, <?= $this->country->title ?> | Tripfab.com</title>
@@ -440,3 +1052,4 @@
 </style>
 </body>
 </html>
+*/ ?>
