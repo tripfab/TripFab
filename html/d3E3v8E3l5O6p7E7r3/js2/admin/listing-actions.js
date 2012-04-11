@@ -89,5 +89,15 @@ $(function(){
 
         $('#field-container-r325').append(html);
     }
+    
+    $.ajax({
+        url:'/ajax/activate2',
+        type:'post',
+        data:{listing:listingId},
+        dataType:'json',
+        success:function(res){
+            $('#pendingSteps').text(res.text);
+        }
+    });
 
 });

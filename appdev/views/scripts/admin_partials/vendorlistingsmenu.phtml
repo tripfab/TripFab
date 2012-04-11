@@ -168,4 +168,4 @@ switch($this->type){
     <li class="<?= $class ?>"><a href="<?= $item['url'] ?>"><?= $item['label'] ?></a></li>
     <?php endforeach ?>
 </ul>
-<a href="" class="steps">8 Steps Remaining</a>
+<a href="/admin/listings/activate/<?= $this->id ?>" id="pendingSteps" class="steps"></a>
