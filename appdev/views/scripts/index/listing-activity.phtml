@@ -55,27 +55,13 @@
                 <div class="wrap">
                     <div class="cont">
                         <div class="container">
-                            <a href="" class="btn-2 main"><span></span>Add to My Trips</a>
-                            <form method="post" class="addtotrip" action="/ajax/addtotrips">
-                                <div class="addTrip one">
-                                    <img class="arrow" alt="" src="/images2/arrow-24.png">
-                                    <div class="top">
-                                        <select name="trip">
-                                            <option value="">Select one of your trips</option>
-                                            <option value="new">Create New Trip</option>
-                                            <option disabled="disabled">------</option>
-                                            <option value="48">Dionisillo Trip NO ME HAGAS CHECKOUT PORGFAVOR</option>
-                                        </select>
-                                        <input type="text" value="Trip Name" name="title" class="hidden">
-                                    </div><!--TOP-->
-                                    <div class="bot">
-                                        <input type="submit" class="btn-1" value="Add">
-                                        <a class="btn-10" href="">Cancel</a>
-                                    </div><!--BOT-->
-                                </div><!-- closes dd-2 -->
-                                <input type="hidden" value="1359" name="listing">
-                            </form>
-                            
+                        	<?= $this->partial('partials/addtomytrip.phtml', array(
+									'user' => $this->user,
+									'trips' => $this->trips,
+									'listing' => $this->listing,
+									'class'	=> 'main',
+									'class2' => 'one'
+							)) ?>
                             <div class="carousel">
                                 <p><span></span>Photos & Video</p>
                                 <a href="" class="lf-arrow"></a>
@@ -319,59 +305,65 @@
                                 <?php // Agregue los reviews aqui ?>
                                 <?php endif ?>
                             </div><!--REVIEWS-->
-                            
                         </div><!--CONTAINER-->
-                        
                         <div class="sidebar">
+                            <span class="arrow"></span>
                             <!--<form action="">
                                 <fieldset>-->
                                     <div class="cont">
-                                        <h5>Select the Date <span></span></h5>
-                                        <div id="calendar">
+                                        <div id="accordion">
+                                            <h5 class="first"><span class="i_date"></span>Select the Date</h5>
+                                            <div id="calendar">
+                                                <span class="line"></span>
+                                            </div><!--CALENDAR-->
                                             
-                                        </div><!--CALENDAR-->
-                                        <h5>How many travelers?</h5>
-                                        <div class="selects activity">
-                                            <label class="rooms">
-                                                Adults
-                                                <select>
-                                                    <option>1</option>
-                                                </select>
-                                            </label>
-                                            <label>
-                                                Children
-                                                <select>
-                                                    <option>1</option>
-                                                </select>
-                                            </label>
-                                            <div class="clear"></div>
-                                        </div><!--SELECTS-->
-                                        <div class="price">
-                                             <span><sup>$</sup>129 <sub>Subtotal</sub></span>
-                                        </div><!--PRICE-->
+                                            <h5><span class="i_type"></span>Choose an Activity Type</h5>
+                                            <div class="type">
+                                                <span class="line"></span>
+                                                <label for="activityType1"><input type="radio" value="" name="type" id="activityType1">Spa Treatment 01 </label>
+                                                <label for="activityType2"><input type="radio" value="" name="type" id="activityType2">Spa Treatment 02 </label>
+                                                <label for="activityType3"><input type="radio" value="" name="type" id="activityType3">Spa Treatment 03	</label>
+                                                <label for="activityType4"><input type="radio" value="" name="type" id="activityType4">Spa Treatment 04	</label>
+                                            </div><!--TYPE-->
+                                            
+                                            <h5><span class="i_sched"></span>Select a Schedule</h5>
+                                            <div class="type">
+                                                <span class="line"></span>
+                                                <label for="schedule1"><input type="radio" value="" name="schedule" id="schedule1">8:00 am - 11:00 am </label>
+                                                <label for="schedule2"><input type="radio" value="" name="schedule" id="schedule2">3:00 pm - 6:00 pm </label>
+                                                <label for="schedule3"><input type="radio" value="" name="schedule" id="schedule3">9:00 pm - 12:00 pm </label>
+                                            </div><!--TYPE-->
+                                            
+                                            <h5><span class="i_user"></span>How many travelers?</h5>
+                                            <div class="selects activity">
+                                                <span class="line"></span>
+                                                <label class="rooms">
+                                                    Adults
+                                                    <select>
+                                                        <option>1</option>
+                                                    </select>
+                                                </label>
+                                                <label>
+                                                    Children
+                                                    <select>
+                                                        <option>1</option>
+                                                    </select>
+                                                </label>
+                                                <div class="clear"></div>
+                                            </div><!--SELECTS-->
+                                            <div class="price">
+                                                 <span><sup>$</sup>129 <sub>Subtotal</sub></span>
+                                            </div><!--PRICE-->
+                                        </div><!--ACCORDION-->
                                         <a href="" class="btn-1">Book Now</a>
                                         <div class="add">
-                                            <a href="" class="btn-2 side"><span></span>Add to My Trips</a>
-                                            
-                                            <form method="post" class="addtotrip" action="/ajax/addtotrips">
-                                                <div class="addTrip two">
-                                                    <img class="arrow" alt="" src="/images2/arrow-24.png">
-                                                    <div class="top">
-                                                        <select name="trip">
-                                                            <option value="">Select one of your trips</option>
-                                                            <option value="new">Create New Trip</option>
-                                                            <option disabled="disabled">------</option>
-                                                            <option value="48">Dionisillo Trip NO ME HAGAS CHECKOUT PORGFAVOR</option>
-                                                        </select>
-                                                        <input type="text" value="Trip Name" name="title" class="hidden">
-                                                    </div><!--TOP-->
-                                                    <div class="bot">
-                                                        <input type="submit" class="btn-1" value="Add">
-                                                        <a class="btn-10" href="">Cancel</a>
-                                                    </div><!--BOT-->
-                                                </div><!-- closes dd-2 -->
-                                                <input type="hidden" value="1359" name="listing">
-                                            </form>
+											<?= $this->partial('partials/addtomytrip.phtml', array(
+                                                    'user' => $this->user,
+                                                    'trips' => $this->trips,
+                                                    'listing' => $this->listing,
+													'class'	=> 'side',
+													'class2' => 'two'
+                                            )) ?>
                                             <em>or you can</em>
                                             <div class="clear"></div>
                                         </div><!--ADD-->

@@ -1,0 +1,26 @@
+<?php if(!is_null($this->user) and $this->user->role_id = 2): ?>
+<a href="" class="btn-2 <?= $this->class ?>"><span></span>Add to My Trips</a>
+<form method="post" class="addtotrip" action="/ajax/addtotrips">
+    <div class="addTrip <?= $this->class2 ?>">
+        <img class="arrow" alt="" src="/images2/arrow-24.png">
+        <div class="top">
+            <select name="trip">
+                <option value="">Select one of your trips</option>
+                <option value="new">Create New Trip</option>
+                <option disabled="disabled">------</option>
+                <?php foreach($this->trips as $trip): ?>
+                <option value="<?= $trip->id ?>"><?= $trip->title ?></option>
+                <?php endforeach ?>
+            </select>
+            <input class="hidden" name="title" type="text" value="Trip Name" />
+        </div><!--TOP-->
+        <div class="bot">
+            <input type="submit" class="btn-1" value="Add">
+            <a class="btn-10" href="">Cancel</a>
+        </div><!--BOT-->
+    </div><!-- closes dd-2 -->
+    <input type="hidden" value="<?= $this->listing->id ?>" name="listing">
+</form>
+<?php else: ?>
+<a href="/login" class="btn-2"><span></span>Add to My Trips</a>
+<?php endif ?>
