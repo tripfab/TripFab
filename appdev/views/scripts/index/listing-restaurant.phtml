@@ -31,7 +31,8 @@
                             <li class="last"><a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>/#restaurants" 
                             class="active">Restaurants</a></li>
                         </ul>
-                        <a href="" class="link1">&larr; Back to My Listings</a>
+                        <a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>/#restaurants" 
+                        class="link1">&larr; Back to Results</a>
                         <div class="clear"></div>
                     </div><!--CNTRL-->
                     
@@ -87,7 +88,6 @@
                 </div><!--TOP-->
                 <div class="container">
                     <div class="sidebar">
-                    
                         <div class="map">
                             <div class="cont">
                                 <div class="map_canvas">
@@ -95,7 +95,6 @@
                                 </div><!--MAP_CANVAS-->
                             </div><!--CONT-->
                         </div><!--MAP-->
-                        
                         <?php if(!empty($this->listing->address)): ?>
                         <div class="location">
                             <img src="/images6/map_<?= strtolower($this->country->code) ?>.png" class="country" width="45" height="43" alt="" />
