@@ -723,6 +723,25 @@
 	top: 5px;
 	left: -5px;
 }
+#lstng_header .img_logo .upload {
+	background-color: #FFF;
+	height: 93px;
+    width: 113px;
+}
+#lstng_header .img_logo .upload span {
+	display: block;
+	background: url(https://developer.tripfab.com/images6/lstng_htl.png) no-repeat -723px 12px #FFF;
+	width: 49px;
+	height: 44px;
+	margin: 0 auto 4px;
+	padding-top: 20px;
+}
+#lstng_header .img_logo .upload a {
+	display: block;
+	font: bold 13px Helvetica;
+	text-align: center;
+	height: 80px;
+}
 #lstng_header .ttl {
 	float: left;
 	margin:21px 0 0 133px;
@@ -980,6 +999,7 @@
 	-webkit-box-shadow: 0px 0px 2px 1px #c9c9c9;
 	-moz-box-shadow: 0px 0px 2px 1px #c9c9c9;
 	box-shadow: 0px 0px 2px 1px #c9c9c9;
+	behavior: url(/PIE.htc);
 }
 #lstng_htl .tabs > ul > li.ui-state-active a {
 	color: #303030;
@@ -1007,7 +1027,7 @@
 }
 #lstng_htl .tabs p {
 	color: #303030;
-	font: normal 13px/18px Helvetica;
+	font: normal 14px/18px Helvetica;
 	padding-bottom: 18px;
 }
 #lstng_htl .tabs .info {
@@ -1368,6 +1388,7 @@
 	width: 310px;
 	float: right;
 	position: relative;
+	z-index: 10;
 }
 #lstng_htl .sidebar .cont {
 	position: absolute;
@@ -1375,7 +1396,7 @@
 	right: 0;
 	width: 292px;
 	background-color: #f1f1f1;
-	min-height: 508px;
+	z-index: 10;
 	-webkit-box-shadow: 0px 0px 3px 0px #a1a1a1;
 	-moz-box-shadow: 0px 0px 3px 0px #a1a1a1;
 	box-shadow: 0px 0px 3px 0px #a1a1a1;
@@ -1384,24 +1405,75 @@
 	-moz-border-radius-bottomright: 3px;
 	-moz-border-radius-bottomleft: 3px;
 	-webkit-border-radius: 0px 0px 3px 3px;
-	border-radius: 0px 0px 3px 3px; 
+	border-radius: 0px 0px 3px 3px;
+	behavior: url(/PIE.htc);
+}
+#lstng_htl .sidebar .cont .line{
+	display: block;
+	border-top: 1px solid #e8e8e8;
+	width: 250px;
+	margin: 0 auto 10px;
+}
+#lstng_htl .sidebar .cont h5.first {
+	background: none #FFF;
 }
 #lstng_htl .sidebar .cont h5 {
-	color: #464646;
-	font: 16px/49px Helvetica;
+	background: url(https://developer.tripfab.com/images6/lstng_htl_sh2.png) repeat-x 0 0 #FFF;
+	color: #898989;
+	font: 15px/49px Helvetica;
 	height: 44px;
 	position: relative;
-	text-indent: 27px;
+	cursor: pointer;
 }
-#lstng_htl .sidebar .cont h5 span {
+#lstng_htl .sidebar .cont h5:hover {
+	color: #898989;
+}
+#lstng_htl .sidebar .cont h5.ui-state-active {
+	color: #464646;
+}
+#lstng_htl .sidebar span.arrow {
+	background: url("https://developer.tripfab.com/images6/lstng_htl.png") no-repeat scroll -72px -136px ;
+    display: block;
+    height: 23px;
+    left: 9px;
+    position: absolute;
+    top: -54px;
+    width: 9px;
+    z-index: 100;
+}
+#lstng_htl .sidebar h5 > span{
+	background: url("https://developer.tripfab.com/images6/lstng_htl.png") no-repeat 0 0;
 	display: block;
-	background: url(https://developer.tripfab.com/images6/lstng_htl.png) no-repeat -72px -136px;
-	width: 9px;
-	height: 23px;
-	position: absolute;
-	top: 20px;
-	left: -9px;
+	width: 22px;
+	height: 22px;
+	float: left;
+	margin: 15px 4px 0 28px;
 }
+#lstng_htl .sidebar .i_date {
+	background-position: -706px -242px;
+}
+#lstng_htl .sidebar .ui-state-active .i_date {
+	background-position: -706px -274px;
+}
+#lstng_htl .sidebar .i_type {
+	background-position: -744px -242px;
+}
+#lstng_htl .sidebar .ui-state-active .i_type {
+	background-position: -744px -274px;
+}
+#lstng_htl .sidebar .i_sched {
+	background-position: -776px -242px;
+}
+#lstng_htl .sidebar .ui-state-active .i_sched {
+	background-position: -776px -274px;
+}
+#lstng_htl .sidebar .i_user {
+	background-position: -809px -242px;
+}
+#lstng_htl .sidebar .ui-state-active .i_user {
+	background-position: -809px -274px;
+}
+
 #lstng_htl .sidebar #calendar {
 	background-color: #FFF;
 }
@@ -1428,22 +1500,26 @@
 	color: #303030;
 	display: block;
 }
-#lstng_htl .sidebar .roomType {
+#lstng_htl .sidebar #accordion > div {
+	padding-top: 0 !important;
+}
+#lstng_htl .sidebar .type {
 	background-color: #FFF;
 	padding: 8px 0 5px 7px;
 }
-#lstng_htl .sidebar .roomType label {
+#lstng_htl .sidebar .type label {
 	display: block;
-	width: 270px;
+	width: 273px;
 	height: 29px;
 	font: normal 12px/29px Helvetica;
 	color: #464646;
+	margin-left: 3px;
 }
-#lstng_htl .sidebar .roomType label:hover {
+#lstng_htl .sidebar .type label:hover {
 	background-color: #f1f9ff;
 }
-#lstng_htl .sidebar .roomType input[type="radio"] {
-	margin: 0 10px 0 20px;
+#lstng_htl .sidebar .type input[type="radio"] {
+	margin: 0 10px 0 18px;
 }
 #lstng_htl .sidebar .selects {
 	background-color: #FFF;
@@ -1564,35 +1640,42 @@
 #lstng_htl .carousel {
 	position: relative;
 }
-#lstng_htl .carousel > a {
+#lstng_htl .carousel .jcarousel-prev,
+#lstng_htl .carousel .jcarousel-next {
 	background: url(https://developer.tripfab.com/images6/arrows.png) no-repeat;
 	display: block;
 	height: 25px;
 	width: 13px;
 	position: absolute;
-	top: 65px;
+	top: 40px;
+	cursor: pointer;
 }
-#lstng_htl .carousel .lf-arrow {
+#lstng_htl .carousel .jcarousel-prev{
 	background-position: -6px -6px;
 	left: 0;
 }
-#lstng_htl .carousel .lf-arrow:hover{
+#lstng_htl .carousel .jcarousel-prev:hover{
 	background-position: -36px -6px;
 }
-#lstng_htl .carousel .rg-arrow {
+#lstng_htl .carousel .jcarousel-next {
 	background-position: -70px -6px;
-	right: 0;
+	right: -50px;
 }
-#lstng_htl .carousel .rg-arrow:hover{
+#lstng_htl .carousel .jcarousel-next:hover{
 	background-position: -97px -6px;
 }
-#lstng_htl .carousel .imgs{
-	width: 420px;
+#lstng_htl .carousel .jcarousel-clip {
+	width: 384px !important;
 	margin-left: 25px;
 	height: 65px;
-	overflow: visible;
+	overflow: hidden;
+}
+#lstng_htl .carousel .imgs{
+	width: 384px !important;
+	height: 65px;
 }
 #lstng_htl .carousel .imgs a {
+	background:#000;
 	display: block;
 	float: left;
 	background-color: #000;
@@ -1601,9 +1684,9 @@
 	position: relative;
 	overflow: hidden;
 }
-#lstng_htl .carousel .single {
-	width: 393px;
-	height: 65px;
+#lstng_htl .carousel .bigImages {
+	position: absolute;
+	top:31px;
 }
 #lstng_htl .carousel .single ul > li > a > img {
 	background-color: #000;
@@ -1616,12 +1699,16 @@
 }
 #lstng_htl .carousel ul {
 	position: relative;
+	overflow: visible !important;
 }
 #lstng_htl .carousel ul li {
 	float: left;
+	height: 65px;
+	width: 64px;
+	background: url(https://developer.tripfab.com/images6/lstng_htl.png) -649px 0 no-repeat;
 }
 #lstng_htl .carousel .single ul li a img:hover .hover img{
-opacity: 1;
+	opacity: 1;
 }
 #lstng_htl .carousel ul li .arrow {
 	display: none;
@@ -1648,16 +1735,19 @@ opacity: 1;
 	top: 65px;
 	left: 10px;
 	z-index: 15;
-	display: none;
+	display: block;
+	behavior: url(/PIE.htc);
 }
 #lstng_htl .carousel ul li:hover .hover {
 	display: block;
+	behavior: url(/PIE.htc);
 }
 #lstng_htl .carousel .hover a{
 	display: block;
 	width: 391px;
 	height: 245px;
 	position: relative;
+	overflow: hidden;
 }
 #lstng_htl .carousel .hover span {
 	position: absolute;
@@ -1670,6 +1760,11 @@ opacity: 1;
 	width: 100%;
 	margin-bottom: 0;
 	padding-left: 10px;
+}
+#lstng_htl .wrap .firstime_tip {
+	top: 0;
+	right: -77px;
+	top: 92px;
 }
 .lb.lstng_ht {
 	width: 678px;
@@ -1715,9 +1810,31 @@ opacity: 1;
 	text-indent: 20px;
 }
 .fancybox-title-inside {
-	padding-bottom: 0!important;
+	padding-bottom: 0 !important;
 }
-
+#lstng_htl .cont .container .empty {
+	height: 180px;
+	padding-top: 83px;
+	text-align: center;
+}
+#lstng_htl .cont .container .empty span {
+	display: block;
+	margin: 0 auto 10px;
+	width: 50px;
+	height: 48px;
+	background: url(https://developer.tripfab.com/images6/lstng_htl.png) no-repeat;
+	padding-bottom: 0;
+}
+#lstng_htl .cont .container .empty .car {
+	background-position: -793px 0;
+}
+#lstng_htl .cont .container .empty .location {
+	background-position: -793px -57px;
+}
+#lstng_htl .cont .container .empty .reviews {
+	background-position: -793px -122px;
+	
+}
 /*- END LISTING HOTELS --------------------------------------------*/
 /*-	LISTING TOURIST SIGHTS ----------------------------------------*/
 .bg_ts {
