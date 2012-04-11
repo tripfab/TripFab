@@ -92,7 +92,7 @@ class AdminController extends Zend_Controller_Action {
             $this->view->user = $this->user->getData();
             $this->view->help = $this->listings->getHelpSettings($this->user->getId());
             
-            $nonEditTasks = array('type','new','all','activities','hotels','restaurants','entertainments','tourist');
+            $nonEditTasks = array('room','type','new','all','activities','hotels','restaurants','entertainments','tourist');
             if($this->_getParam('action') == 'listings'){
                 if(!in_array($this->_getParam('task'),$nonEditTasks)){
                     $this->view->vendor = $this->listings->getVendorOfListing($this->_getParam('page'));
@@ -322,7 +322,7 @@ class AdminController extends Zend_Controller_Action {
         $ids = $this->_getParam('page','default');
         if($this->isValidId($ids)){
             $type = $this->listings->getActivityType($ids);
-            $listing = $this->listings->getListing($type->listing_id, $this->user->getVendorId());
+            $listing = $this->listings->getListing($type->listing_id);
             $tips = $this->listings->getActivityTypeTips($type->id);
             
             $data = array(
@@ -378,6 +378,7 @@ class AdminController extends Zend_Controller_Action {
             
             $this->view->listing = $listing;
             $this->view->data    = $data;
+            $this->view->vendor = $this->listings->getVendorOfListing($listing->id);
             
             $main_cat = $this->listings->getCategory($listing->main_type);
             $this->view->main_category = $main_cat;
@@ -512,7 +513,7 @@ class AdminController extends Zend_Controller_Action {
         $ids = $this->_getParam('page','default');
         if($this->isValidId($ids)){
             $sch     = $this->listings->getSchedule($ids);
-            $listing = $this->listings->getListing($sch->listing_id, $this->user->getVendorId());
+            $listing = $this->listings->getListing($sch->listing_id);
             
             if($this->getRequest()->isPost()){
                 //echo '<pre>'; var_dump($_POST); echo '</pre>'; die;
@@ -552,6 +553,7 @@ class AdminController extends Zend_Controller_Action {
             $this->view->amenities = $amenities;
             $this->view->data = $data;
             $this->view->listing = $listing;
+            $this->view->vendor = $this->listings->getVendorOfListing($listing->id);
             
             $main_cat = $this->listings->getCategory($listing->main_type);
             $this->view->main_category = $main_cat;
@@ -2522,6 +2524,9 @@ class AdminController extends Zend_Controller_Action {
             //var_dump($data); die;
         }
         $this->listings->updatePricesOf($listing, $data);
+        
+        $listing->policy = $data['policy'];
+        $listing->save();
         
         setcookie('alert', 'Your changes have been saved');
         if($data['s'] == 1){

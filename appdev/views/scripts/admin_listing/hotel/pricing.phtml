@@ -95,12 +95,15 @@
         <div class="right">
             <strong>Cancellation Policy</strong><br />
             <span>Choose the cancellation policy you want</span>
-            <select>
-                <option>Flexible</option>
-                <option>Moderate</option>
-                <option>Strict</option>
+            <select name="policy">
+            	<?php $selected = ($this->listing->policy == 1) ? 'selected="selected"' : ''; ?>
+                <option <?= $selected ?> value="1">Low</option>
+            	<?php $selected = ($this->listing->policy == 2) ? 'selected="selected"' : ''; ?>
+                <option <?= $selected ?> value="2">Medium</option>
+            	<?php $selected = ($this->listing->policy == 3) ? 'selected="selected"' : ''; ?>
+                <option <?= $selected ?> value="3">High</option>
             </select>
-            <a href="/admin/cancellation-policies/hotels" class="learn">Learn More</a>									
+            <a href="/admin/cancellation-policies/hotels" target="_blank" class="learn">Learn More</a>									
         </div><!-- closes right -->
     </div><!-- closes pricing-itm -->
     <div class="foot">

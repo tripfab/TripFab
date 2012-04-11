@@ -214,6 +214,173 @@ class AjaxController extends Zend_Controller_Action
         }
     }
     
+    public function activate2Action()
+    {
+        if($this->getRequest()->isPost()){
+            $auth = Zend_Auth::getInstance();
+            if($auth->hasIdentity()){
+                $this->user = new WS_User($auth->getIdentity());
+                $validate = array(
+                    'profile' => array(
+                        'url' => '/provider/account',
+                        'label' => 'Set company picture/logo',
+                        'description' => 'Add your company\'s logo, so people can recognize you',
+                        'done'  => false,
+                    ),
+                    'title' => array(
+                        'url' => '/provider/listings/edit/',
+                        'label' => 'Listing Title',
+                        'desription' => 'Change the listing title or Assign one',
+                        'done' => false,
+                    ),
+                    'description' => array(
+                        'url' => '/provider/listings/overview/',
+                        'label' => 'Listing Description',
+                        'desription' => 'Add a listing short description',
+                        'done' => false,
+                    ),
+                    'country' => array(
+                        'url' => '/provider/listings/location/',
+                        'label' => 'Listing Country',
+                        'desription' => 'Assign a country to the listing',
+                        'done' => false,
+                    ),
+                    'city' => array(
+                        'url' => '/provider/listings/location/',
+                        'label' => 'Listing City',
+                        'desription' => 'Assign a city to the listing',
+                        'done' => false,
+                    ),
+                    'location' => array(
+                        'url' => '/provider/listings/location/',
+                        'label' => 'Listing Map',
+                        'desription' => 'Localize your listing in the map',
+                        'done' => false,
+                    ),
+                    'photos' => array(
+                        'url' => '/provider/listings/photos/',
+                        'label' => 'Listing Photos',
+                        'desription' => 'Add photos to the listing',
+                        'done' => false,
+                    ),
+                    'overview' => array(
+                        'url' => '/provider/listings/overview/',
+                        'label' => 'Listing Overview',
+                        'desription' => 'Add the Overview Information',
+                        'done' => false,
+                    ),
+                );
+
+
+                $ids = $_POST['listing'];
+
+                $listing = $this->listings->getListing($ids);
+                
+                if($listing->status == 1) {
+                    $response = array(
+                        'success' => 1,
+                        'status'  => 'active',
+                        'text'    => '',
+                        'missing' => '',
+                        'id'      => $listing->id,
+                    );
+                    
+                    header('Content-type: application/json');
+                    echo json_encode($response); die;
+                }
+
+                $user = $this->users->getVendor($listing->vendor_id);
+                if(!empty($user->image))
+                        $validate['profile']['done'] = true;
+                if($listing->title != "Untitle Listing" and !empty($listing->title))
+                        $validate['title']['done'] = true;
+                if($listing->description != "")
+                        $validate['description']['done'] = true;
+                if($listing->country_id != 0)
+                        $validate['country']['done'] = true;
+                if($listing->city_id != 0)
+                        $validate['city']['done'] = true;
+                if(!is_null($listing->lat))
+                        $validate['location']['done'] = true;
+
+                $photos = $this->listings->getPictures($listing->id);
+                if(count($photos) > 0)
+                        $validate['photos']['done'] = true;
+
+                $overview = $this->listings->getOverviewOf($listing->id);
+                if(!empty($overview->about))
+                        $validate['overview']['done'] = true;
+
+                switch($listing->main_type)
+                {
+                    case 5:
+                        $validate['price'] = array(
+                            'url' => '/provider/listings/pricing/',
+                            'label' => 'Listing Pricing',
+                            'desription' => 'Add the listing pricing',
+                            'done' => false,
+                        );
+                        $validate['options'] = array(
+                            'url' => '/provider/listings/rooms/',
+                            'label' => 'Listing Rooms',
+                            'desription' => 'Add at leaat one room type',
+                            'done' => false,
+                        );
+
+                        $price = $this->listings->getBasicPrice($listing->id);
+                        if(!is_null($price) and $price->price != 0)
+                                $validate['price']['done'] = true;
+
+                        $schedules = $this->listings->getSchedulesOf($listing->id);
+                        if(count($schedules) > 0)
+                                $validate['options']['done'] = true;
+
+                        break;
+                    case 6:
+                        $validate['price'] = array(
+                            'url' => '/provider/listings/pricing/',
+                            'label' => 'Listing Pricing',
+                            'desription' => 'Add the listing pricing',
+                            'done' => false,
+                        );
+                        $price = $this->listings->getBasicPrice($listing->id);
+                        if(!is_null($price) and $price->price != 0)
+                                $validate['price']['done'] = true;                    
+
+                        break;
+                    default: break;
+                }
+
+                $errors = array();
+                foreach($validate as $val){
+                    if(!$val['done'])
+                        $errors[] = 1;
+                }
+
+                if(count($errors) > 0){
+                    $response = array(
+                        'success' => 1,
+                        'status'  => 'warning',
+                        'text'    => count($errors).' step(s) remaining',
+                        'missing' => 'missing',
+                        'id'      => $listing->id,
+                    );
+                }
+                else {
+                    $response = array(
+                        'success' => 1,
+                        'status'  => 'approve',
+                        'text'    => 'This listing is ready',
+                        'missing' => '',
+                        'id'      => $listing->id,
+                    );
+                }
+                header('Content-type: application/json');
+                echo json_encode($response); die;
+            }
+        }
+    }
+    
     public function sendrequestAction()
     {
         if($this->getRequest()->isPost())
