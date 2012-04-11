@@ -264,7 +264,7 @@ class AdminController extends Zend_Controller_Action {
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = $db->select();
         $select->from('listings', array('*'));
-		$select->join('vendors','listings.vendor_id = vendors.id',array("vendor_id"=>id,"vendor_name"=>"name"));
+		$select->joinleft('vendors','listings.vendor_id = vendors.id',array("vendor_id"=>"id","vendor_name"=>"name"));
         $select->join('listing_types', 'listings.main_type = listing_types.id', array("type_name" => "name"));
         $select->join('places', 'listings.city_id = places.id', array("city_name" => "title"));
         $select->join(array('country' => 'places'), 'country.id = listings.country_id', array("country_name" => "title"));
