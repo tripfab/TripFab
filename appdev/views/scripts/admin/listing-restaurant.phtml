@@ -60,7 +60,7 @@
                         </div><!-- closes tab-content -->
                         <?php else: ?>
                         <div class="tab-content">
-	                        <a href="/provider/listings/overview/<?= $this->listing->id ?>"><img src="/images2/empty-overview.gif" /></a>
+	                        <a href="/admin/listings/overview/<?= $this->listing->id ?>"><img src="/images2/empty-overview.gif" /></a>
                         </div>
                         <?php endif ?>
 	                </div><!-- closes tab -->
@@ -103,7 +103,7 @@
 	                    </div><!-- closes tab-content -->
                         <?php else: ?>
                         <div class="tab-content">
-                        	<a href="/provider/listings/specialities/<?= $this->listing->id ?>"><img src="/images2/empty-specials.gif" /></a>
+                        	<a href="/admin/listings/specialities/<?= $this->listing->id ?>"><img src="/images2/empty-specials.gif" /></a>
                         </div>
                         <?php endif ?>
 	                </div><!-- closes tab -->
@@ -124,7 +124,7 @@
                         </div><!-- closes tab-content -->
                         <?php else: ?>
                         <div class="tab-content">
-                        	<a href="/provider/listings/faqs/<?= $this->listing->id ?>"><img src="/images2/empty-faqs.gif" /></a>
+                        	<a href="/admin/listings/faqs/<?= $this->listing->id ?>"><img src="/images2/empty-faqs.gif" /></a>
                         </div>
                         <?php endif ?>
 	                </div><!-- closes tab -->
@@ -150,7 +150,7 @@
                             <p><?= $this->listing->address ?></p>
                         </address>
                         <?php else: ?>
-                        <a href="/provider/listings/location/<?= $this->listing->id ?>"><img src="/images2/empty-map.jpg" /></a>
+                        <a href="/admin/listings/location/<?= $this->listing->id ?>"><img src="/images2/empty-map.jpg" /></a>
                         <?php endif ?>
                     </div><!-- closes map-wrapper -->
                     <div class="hours">
@@ -175,7 +175,7 @@
                         <?php else: ?>
                         <div class="nohours">
                         	<p>There is no information about the hours<br />
-                            <a href="/provider/listings/edit/<?= $this->listing->id ?>">Set the schedule now</a>
+                            <a href="/admin/listings/edit/<?= $this->listing->id ?>">Set the schedule now</a>
                         </div>
                         <?php endif ?>
                     </div><!-- closes hours -->

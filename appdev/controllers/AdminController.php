@@ -1456,7 +1456,7 @@ class AdminController extends Zend_Controller_Action {
         {
             switch($_POST['_task']){
                 case md5('delete_listing'):
-                    $listing = $this->listings->getListing($_POST['ids'], $this->user->getVendorId());
+                    $listing = $this->listings->getListing($_POST['ids']);
                     $listing->status = 3;
                     $listing->save();
                     
@@ -1478,7 +1478,7 @@ class AdminController extends Zend_Controller_Action {
         
         switch($this->_getParam('task')){
             case 'default':
-                $listings = $this->listings->getListingsOf($this->user->getVendorId());  
+                $listings = $this->listings->getListingsOf($this->user->getVendorId());
                 $this->view->listings = $listings;
                 $this->view->title = "All Listings";
                 break;
@@ -1488,7 +1488,7 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->title = "Active Listings";
                 break;
             case 'inactive':
-                $listings = $this->listings->getListingsOf($this->user->getVendorId(), 0);  
+                $listings = $this->listings->getListingsOf($this->user->getVendorId(), 0);
                 $this->view->listings = $listings;
                 $this->view->title = "Inactive Listings";
                 break;
