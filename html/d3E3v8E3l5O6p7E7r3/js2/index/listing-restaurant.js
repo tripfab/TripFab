@@ -382,6 +382,15 @@ $(document).ready(function() {
 });
 
 $(function(){
+    
+    $('#tooltipHelpList').submit(function(){
+        if($('input[type=checkbox]', this).is(':checked')) {
+            $.cookie('tooltipHelpList','yes',{expires:365,path:'/'});
+        }
+        $('.firstime_tip').fadeOut();
+        return false;        
+    });
+    
     $('.imgs').cycle({
         timeout: 0,
         fx: 'scrollHorz',

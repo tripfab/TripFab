@@ -39,9 +39,17 @@ $(function(){
 });
 
 $(function(){
-    $('.result .img-wrapper .been').live('click', function(){
+    $('.result .img-wrapper .been:not(.not)').live('click', function(){
         $('.dd-2').removeClass('show');
         $(this).parent().find('.dd-2').toggleClass('show');
+        return false;
+    });
+    
+    $('#tooltipHelpSearch').live('submit',function(){
+        if($('input[type=checkbox]', this).is(':checked')) {
+            $.cookie('tooltipHelpSearch','yes',{expires:365,path:'/'});
+        }
+        $('.firstime_tip').fadeOut();
         return false;
     });
 	
