@@ -62,6 +62,25 @@
 									'class'	=> 'main',
 									'class2' => 'one'
 							)) ?>
+							
+							<div class="firstime_tip">
+								<img class="arrow" src="https://developer.tripfab.com/images6/arrow-24.png" class="arrow" alt="">
+								<div class="cont">
+									<img src="https://developer.tripfab.com/images6/stamp.png" width="75" height="75" alt="" />
+									<p><strong>Planning a Trip?</strong>
+										Ey! If you’re planning a trip you can create you own customize trip, add things to do there and book it when you’re ready to travel.
+									</p>
+								</div><!--CONT-->
+								<div class="bot">
+									<form action="post">
+										<fieldset>
+											<label><input type="checkbox" name="" value="" />Don’t show again</label>
+											<input type="submit" value="Okay" class="btn-1" />
+										</fieldset>
+									</form>
+								</div><!--BOT-->
+							</div><!--FIRSTIME_TIP-->
+							
                             <div class="carousel">
                                 <p><span></span>Photos & Video</p>
                                 <a href="" class="lf-arrow"></a>
@@ -88,7 +107,7 @@
                                     </div>
                                     <?php endforeach ?>
 								</div><!--BIGIMAGES-->
-                                <a href="" class="rg-arrow"></a>
+								
                             </div><!--CAROUSEL-->
                             <div class="hidden">
                                 <?php for($i=0;$i<count($this->pictures);$i++): ?>
@@ -434,7 +453,7 @@
                                     <?php foreach($this->countries as $c): ?>
                                     <a href="#" data-code="<?= $c->phone ?>"><img src="/images2/flags/<?= strtolower($c->code) ?>.png" width="16" height="16" alt="" />
                                     <?= $c->title ?> <strong>(+<?= $c->phone ?>)</strong></a>
-                                    <?php endforeach ?> 
+                                    <?php endforeach ?>
                                 </div><!--CONTAINER-->
                             </div><!--HOLDER-->
                         </div><!--ALL_FLAGS-->
@@ -655,7 +674,7 @@
 		$('#fancybox-left-ico').addClass('lfarrow');
 		$('#fancybox-right-ico').addClass('rgarrow');
 		$('#calendar, #start, #end').datepicker({
-			dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+			dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
 			showOtherMonths: true
 		});
 		$('.main').click(function() {

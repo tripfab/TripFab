@@ -869,6 +869,8 @@
 	color: #FFF;
 	font: normal 26px Helvetica;
 	margin-bottom: 10px;
+	height: 27px;
+	overflow: hidden;
 }
 #lstng_htl .dscript .location {
 	font: normal 12px/12px Helvetica;
@@ -1423,7 +1425,6 @@
 	font: 15px/49px Helvetica;
 	height: 44px;
 	position: relative;
-	cursor: pointer;
 }
 #lstng_htl .sidebar .cont h5:hover {
 	color: #898989;
@@ -1448,6 +1449,9 @@
 	height: 22px;
 	float: left;
 	margin: 15px 4px 0 28px;
+}
+#lstng_htl .sidebar .i_room {
+	background-position: -672px -242px;
 }
 #lstng_htl .sidebar .i_date {
 	background-position: -706px -242px;
@@ -1663,6 +1667,10 @@
 }
 #lstng_htl .carousel .jcarousel-next:hover{
 	background-position: -97px -6px;
+}
+#lstng_htl .carousel .jcarousel-next-disabled ,
+#lstng_htl .carousel .jcarousel-prev-disabled {
+	visibility:hidden ;
 }
 #lstng_htl .carousel .jcarousel-clip {
 	width: 384px !important;
