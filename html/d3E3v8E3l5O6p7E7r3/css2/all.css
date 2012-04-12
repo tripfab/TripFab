@@ -3664,6 +3664,39 @@ ul.reviews li > div div.meta em.red {
 	top: 15px;
 	left: -6px;
 }
+.payment-item .new-card .item.required {
+	padding: 1px 0;
+	height: 68px;
+	overflow: visible !important;
+}
+.payment-item .new-card .item.required > div{
+	background-color: #FFF1EA;
+    height: 68px;
+    left: -33px;
+    padding-left: 33px;
+    position: absolute;
+    width: 100%;
+}
+.payment-item .new-card .item.required .alert {
+	color: #f26522;
+	font: normal 12px/16px Helvetica;
+	background: url(https://developer.tripfab.com/images2/alert.png) no-repeat left 50%;
+	padding-left: 22px;
+	height: 16px;
+	display: block;
+	margin-bottom: 5px;
+}
+.payment-item .new-card .item.required p {
+	padding-top:10px;
+}
+.payment-item .new-card .item.required select {
+	margin: 39px 10px 0 20px;
+}
+.payment-item .new-card .item.required input {
+	margin: 29px 10px 0 0;
+	border: 1px solid #f26522;
+}
+
 
 .payment-item .new-card input[type="text"] {
 	width: 240px;
@@ -17857,6 +17890,8 @@ background-color: #FFF;
 #custom_checkout .header h4 {
 	font: bold 13px/17px Helvetica;
 	color: #303030;
+	height: 17px;
+	overflow: hidden;
 }
 #custom_checkout .header .type {
 	display: block;
