@@ -122,7 +122,7 @@ class AjaxController extends Zend_Controller_Action{
             $fq->save();
         }
         
-        if(is_null($fq->fb_page) and $fq->trashed != 1){
+        if($fq->added != 1 and $fq->trashed != 1){
         
             $fqplace = json_decode($fq->fq_data);
 
@@ -167,6 +167,10 @@ class AjaxController extends Zend_Controller_Action{
                 $response = $client->request();
 
                 $body = json_decode($response->getBody());
+                
+                if(isset($body->error)) {
+                    echo 'Error: '. $body->error->message; die;
+                }
 
                 $client = new Zend_Http_Client('https://graph.facebook.com/'.$id.'/albums');
                 $client->setParameterGet('access_token', $this->_getParam('token'));
@@ -174,6 +178,10 @@ class AjaxController extends Zend_Controller_Action{
                 $response = $client->request();
 
                 $albums = json_decode($response->getBody());
+                
+                if(isset($albums->error)) {
+                    echo 'Error: '. $albums->error->message; die;
+                }
 
                 $photos = array();
 
@@ -184,13 +192,17 @@ class AjaxController extends Zend_Controller_Action{
                     $response = $client->request();
 
                     $pics = json_decode($response->getBody());
+                    
+                    if(!isset($pics->error)) {
 
-                    foreach($pics->data as $pic) {
-                        $_pic = new stdClass();
-                        $_pic->thumb = $pic->picture;
-                        $_pic->url = $pic->source;
+                        foreach($pics->data as $pic) {
+                            $_pic = new stdClass();
+                            $_pic->thumb = $pic->picture;
+                            $_pic->url = $pic->source;
 
-                        $photos[] = $_pic;
+                            $photos[] = $_pic;
+                        }
+
                     }
                 }
 
@@ -287,9 +299,17 @@ class AjaxController extends Zend_Controller_Action{
             $place->created = date('Y-m-d H:i:s');
             $place->updated = date('Y-m-d H:i:s');
             $place->listing_id = $listing->id;
-			$place->fqid = $data['fqid'];
+            $place->fqid = $data['fqid'];
             
             $place->save();
+            
+            $fqs = new Zend_Db_Table('fq');
+            $select = $fqs->select();
+            $select->where('id = ?', $data['fqid']);
+            $fq = $fqs->fetchRow($select);
+            
+            $fq->added = 1;
+            $fq->save();
         }        
     }
 }

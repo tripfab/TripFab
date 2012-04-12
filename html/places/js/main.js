@@ -153,7 +153,11 @@ function fqrequest(url, data, limit, success){
         url:'https://api.foursquare.com/v2'+url,
 		dataType:'json',
         data:data,
-        success:success
+        success:success,
+        error:function(res){
+            alert('Something went wrong with Foursquare');
+            console.log(res);
+        }
     });
 }
 
@@ -177,6 +181,9 @@ window.fbAsyncInit = function() {
                 if (!response.authResponse) {
                     alert('You need to enable this application on facebook in order to used');
                     $token = null;
+                } else {
+                    $token = response.authResponse.accessToken;
+                    console.log($token);
                 }
             });
         }
