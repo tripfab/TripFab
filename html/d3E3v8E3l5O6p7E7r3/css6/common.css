@@ -615,7 +615,6 @@
 /*FIRST TIME TOOLTIPS----------------------------------------*/
 .firstime_tip{
 	width: 281px;
-	height:150px;
 	background-color: #FFF;
 	display: block;
 	position: absolute;
@@ -631,11 +630,16 @@
     top: -7px; 
 }
 .firstime_tip .cont {
-	padding: 20px 0 0 15px;
+	padding: 20px 10px 5px 15px;
+	overflow: hidden;
 }
 .firstime_tip .cont img {
 	float: left;
 	margin-right: 15px;
+}
+.firstime_tip .cont p {
+	float: left;
+	width: 160px;
 }
 .firstime_tip .cont p {
 	font: 11px/16px Helvetica;
@@ -647,9 +651,7 @@
 }
 .firstime_tip .bot {
 	background: url(https://developer.tripfab.com/images6/lstng_htl_sh2.png) repeat-x 0 0;
-	position: absolute;
-	bottom: 0;
-	left: 0;
+	position: relative;
 	height: 43px;
 	width: 100%;
 }

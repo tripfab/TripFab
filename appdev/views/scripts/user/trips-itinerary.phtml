@@ -41,6 +41,25 @@
                     <?php $class = array('','cat-activity','cat-entertainment','cat-sight','cat-restaurant','cat-hotel'); ?>
                     <?php for($i=1; $i<=5; $i++): ?>
                     <div class="tab" id="tab-<?= $i ?>">
+                    
+                    	<div class="firstime_tip">
+                    		<img class="arrow" src="/images6/tooltiparrow.png" class="arrow" alt="">
+                    		<div class="cont">
+                    			<img src="https://developer.tripfab.com/images6/tooltipimg2.png" width="75" height="75" alt="" />
+                    			<p><strong>Customize your Trip</strong>
+                    				Drag and drop the activities, hotels, restaurants, tourist sights and entertainments you want to add to this trip.
+                    			</p>
+                    		</div><!--CONT-->
+                    		<div class="bot">
+                    			<form action="post">
+                    				<fieldset>
+                    					<label><input type="checkbox" name="" value="" />Don’t show again</label>
+                    					<input type="submit" value="Okay" class="btn-1" />
+                    				</fieldset>
+                    			</form>
+                    		</div><!--BOT-->
+                    	</div><!--FIRSTIME_TIP-->
+                    	
                         <ul id="mycarousel-<?= $i ?>">
                         	<?php if(isset($this->favorites[$i]) and count($this->favorites[$i]) > 0): ?>
                         	<?php foreach($this->favorites[$i] as $listing): ?>
@@ -69,6 +88,7 @@
                     <a href="" class="prev">Previous Day</a>
                 </div><!-- closes -->
                 <div class="slider">
+                	
                 	<?php for($i=0; $i<$this->trip->days; $i++): ?>
                     <div class="slide">
                         <div class="hdr">

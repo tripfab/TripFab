@@ -7436,7 +7436,15 @@ h2.title .back:hover,
 	width: 39px;
 	cursor: pointer;
 }
-
+.activities-tabs .tab .firstime_tip {
+	left: 167px;
+    top: 20px;
+}
+.activities-tabs .tab .firstime_tip  > img.arrow {
+	left: -6px;
+    position: absolute;
+    top: 62px;
+}
 .itinerary-items {
 	background-color: #FFF;
 	overflow: hidden;
@@ -7834,6 +7842,7 @@ h2.title .back:hover,
 	font: bold 11px Helvetica;
 	float: right;
 }
+
 /*- End of Trips Styles -----------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------*/
 
