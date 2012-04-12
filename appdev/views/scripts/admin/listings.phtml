@@ -41,6 +41,10 @@
 			});
             $("#report_tabs").tabs();
 			$('#ui-datepicker-div').wrap('<div id="calendarContainer"></div>');
+			
+			$('.delete').click(function(){
+				return confirm('Are you sure?');
+			});
 
         });
     </script>
@@ -95,7 +99,7 @@
 							<td><a href="<?php echo $this->url(array('ct'=>$listing->city_id, 'co'=>''));?>"><?php echo $listing->city_name?></a></td>
 							<td><a href="<?php echo $this->url(array('co'=>$listing->country_id, 'ct'=>''));?>"><?php echo $listing->country_name?></a></td>
 							<td><a href="/admin/listings/edit/<?= $listing->id ?>" class="edit">Edit</a></td>
-							<td><a href="/admin/listings/edit/<?= $listing->id ?>" class="delete">Delete</a></td>
+							<td><a href="/admin/listings/delete/<?= $listing->id ?>" class="delete">Delete</a></td>
 						</tr>
                         <?php endforeach;?>
 					</table>
