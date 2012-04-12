@@ -41,7 +41,7 @@
                     <?php $class = array('','cat-activity','cat-entertainment','cat-sight','cat-restaurant','cat-hotel'); ?>
                     <?php for($i=1; $i<=5; $i++): ?>
                     <div class="tab" id="tab-<?= $i ?>">
-                    
+                    	<?php if(!isset($_COOKIE['tooltipHelpItn'])): ?>
                     	<div class="firstime_tip">
                     		<img class="arrow" src="/images6/tooltiparrow.png" class="arrow" alt="">
                     		<div class="cont">
@@ -51,15 +51,15 @@
                     			</p>
                     		</div><!--CONT-->
                     		<div class="bot">
-                    			<form action="post">
+                    			<form action="post" id="tooltipHelpItn">
                     				<fieldset>
-                    					<label><input type="checkbox" name="" value="" />Don’t show again</label>
+                    					<label><input checked="checked" type="checkbox" name="" value="" />Don’t show again</label>
                     					<input type="submit" value="Okay" class="btn-1" />
                     				</fieldset>
                     			</form>
                     		</div><!--BOT-->
                     	</div><!--FIRSTIME_TIP-->
-                    	
+                    	<?php endif ?>
                         <ul id="mycarousel-<?= $i ?>">
                         	<?php if(isset($this->favorites[$i]) and count($this->favorites[$i]) > 0): ?>
                         	<?php foreach($this->favorites[$i] as $listing): ?>

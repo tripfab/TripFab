@@ -4476,12 +4476,12 @@ class AdminController extends Zend_Controller_Action {
                 }
                 self::jsonEcho(json_encode(array('attempt' => 'fail', 'error_code' => 'validation_error', 'description' => 'Field validation error', 'data' => $validation_error_data)));
             }
-
+			
             //create vendor here
 			$data = array();
 			$data['name'] = $_POST['c_name'];
 			$data['email'] = $_POST['c_email'];
-			$data['phone'] = $_POST['phone'];
+			$data['phone'] = $_POST['phone'] . ' ' . $_POST['phone1'];
 			$data['password'] = self::randomBytes(6);
 			$data['country_id'] = $_POST['country'];
 			$data['website'] = $_POST['website'];

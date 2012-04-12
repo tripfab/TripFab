@@ -63,8 +63,9 @@
 									'class2' => 'one'
 							)) ?>
 							
+                            <?php if(!isset($_COOKIE['tooltipHelpList'])): ?>
 							<div class="firstime_tip">
-								<img class="arrow" src="https://developer.tripfab.com/images6/arrow-24.png" class="arrow" alt="">
+								<img class="arrow" src="https://developer.tripfab.com/images6/arrow-24.png" alt="" />
 								<div class="cont">
 									<img src="https://developer.tripfab.com/images6/stamp.png" width="75" height="75" alt="" />
 									<p><strong>Planning a Trip?</strong>
@@ -72,14 +73,15 @@
 									</p>
 								</div><!--CONT-->
 								<div class="bot">
-									<form action="post">
+									<form action="post" id="tooltipHelpList">
 										<fieldset>
-											<label><input type="checkbox" name="" value="" />Don’t show again</label>
+											<label><input checked="checked" type="checkbox" name="" value="" />Don’t show again</label>
 											<input type="submit" value="Okay" class="btn-1" />
 										</fieldset>
 									</form>
 								</div><!--BOT-->
 							</div><!--FIRSTIME_TIP-->
+                            <?php endif ?>
 							
                             <div class="carousel">
                                 <p><span></span>Photos & Video</p>

@@ -395,6 +395,13 @@ class IndexController extends Zend_Controller_Action
         
     }
     
+    public function mytripsAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if($auth->hasIdentity())
+                $this->_redirect('/user/trips');
+    }
+    
     public function resetAction()
     {
         $auth = Zend_Auth::getInstance();
