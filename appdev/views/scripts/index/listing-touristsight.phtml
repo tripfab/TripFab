@@ -11,52 +11,7 @@
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js"></script>
-    <script type="text/javascript" src="/js2/index/listing-restaurant.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.imgs').cycle({
-                timeout: 0,
-                fx: 'scrollHorz',
-                prev: '.lf-arrow',
-                next: '.rg-arrow'
-            });
-            $( ".single a" ).click(function() {
-                $id = $(this).attr('href');
-                $(".single a").removeClass('active');
-                $(this).addClass('active');
-                $(".slideshow img" ).removeClass('show');
-                $($id).addClass('show');
-                return false
-            });
-            $(".info a.btn-1").click(function() {
-            	$(".addTrip.one").fadeIn('show');
-            	return false
-            });
-            $(".addTrip a.btn-10").click(function() {
-            	$(".addTrip.one").fadeOut('show');
-            	return false
-            });
-            $('.addTrip select').live('change', function(){
-		        if($(this).val() == 'new'){
-		            //$(this).next('input').removeClass('hidden');
-		            $form = $(this).parents('form');
-		            $listing = $('input[name=listing]', $form).val();
-		            $('#newtrip form input[name=listing]').val($listing);
-		            $.fancybox({
-		                href:'#newtrip',
-		                padding:0,
-		                overlayColor:'#fff',
-		                centerOnScroll: true
-		            });
-		      
-		        } else {
-		            $(this).next('input').addClass('hidden');
-		        }
-		    });
-            
-        });
-    </script>
+    <script type="text/javascript" src="/js2/index/listing-touristsight.js"></script>
     <style type="text/css"> #mapcanvas { width:285px;  height:171px; }</style>   
 </head>
 <body class="bg_ts">
@@ -92,11 +47,16 @@
                             <h2><?= $this->listing->title ?></h2>
                             <span class="location"><em></em><strong><?= $this->city->title ?>,</strong> <?= $this->country->title ?>
                             <img src="/images6/flag<?= strtoupper($this->country->code) ?>.png" width="" height="" alt="" /></span>
-                            <a href="" class="btn-1"><span></span>Add to My Trips</a>
-                            
+							<?= $this->partial('partials/addtomytrip.phtml', array(
+                                    'user' => $this->user,
+                                    'trips' => $this->trips,
+                                    'listing' => $this->listing,
+                                    'class'	=> 'btn-1',
+                                    'class2' => 'one'
+                            )) ?>
                             <?php if(!isset($_COOKIE['tooltipHelpList'])): ?>
                             <div class="firstime_tip">
-                            	<img class="arrow" src="https://developer.tripfab.com/images6/arrow-24.png" class="arrow" alt="">
+                            	<img src="https://developer.tripfab.com/images6/arrow-24.png" class="arrow" alt="">
                             	<div class="cont">
                             		<img src="https://developer.tripfab.com/images6/stamp.png" width="75" height="75" alt="" />
                             		<p><strong>Planning a Trip?</strong>
@@ -114,25 +74,6 @@
                             </div><!--FIRSTIME_TIP-->
                             <?php endif ?>
                             
-                            <form method="post" class="addtotrip" action="/ajax/addtotrips">
-                                <div class="addTrip one">
-                                    <img class="arrow" alt="" src="/images2/arrow-24.png">
-                                    <div class="top">
-                                        <select name="trip">
-                                            <option value="">Select one of your trips</option>
-                                            <option value="new">Create New Trip</option>
-                                            <option disabled="disabled">------</option>
-                                            <option value="48">Dionisillo Trip NO ME HAGAS CHECKOUT PORGFAVOR</option>
-                                        </select>
-                                        <input type="text" value="Trip Name" name="title" class="hidden">
-                                    </div><!--TOP-->
-                                    <div class="bot">
-                                        <input type="submit" class="btn-1" value="Add">
-                                        <a class="btn-10" href="">Cancel</a>
-                                    </div><!--BOT-->
-                                </div><!-- closes dd-2 -->
-                                <input type="hidden" value="1359" name="listing">
-                            </form>
                             <div class="text">
                                 <ul class="rating">
                                     <li><a href="" class="slct"></a></li>

@@ -153,12 +153,14 @@ function refreshPrice()
 }
 
 $(function(){
-    $('.listing-gallery .listing-ttl .been').live('click', function(){
-        $(this).parent().find('.dd-2').toggleClass('show');
+    $('.addToTripBtn').live('click', function(){
+        $('.addTrip').removeClass('show');
+        $form = $(this).next('form');
+        $('.addTrip', $form).toggleClass('show');
         return false;
     });
 	
-    $('.dd-2 select').live('change', function(){
+    $('.addTrip select').live('change', function(){
         if($(this).val() == 'new'){
             $form = $(this).parents('form');
             $listing = $('input[name=listing]', $form).val();
@@ -218,14 +220,14 @@ $(function(){
                 if(response.type == 'success'){
                     $.fancybox.close();
                     $('input, select').removeAttr('disabled');
-                    $('.dd-2').removeClass('show');
+                    $('.addTrip').removeClass('show');
                     showAlert(response.message);
                 } else if(response.type == 'newtrip'){
                     $.fancybox.close();
                     $('input, select').removeAttr('disabled');
-                    $('.dd-2').removeClass('show');
+                    $('.addTrip').removeClass('show');
                     showAlert(response.message);
-                    $('.dd-2 select').append('<option value="'+response.tripid+'">'+response.triptitle+'</option>');
+                    $('.addTrip select').append('<option value="'+response.tripid+'">'+response.triptitle+'</option>');
                 } else {
                     $.fancybox.close();
                     $('input, select').removeAttr('disabled');
@@ -241,9 +243,8 @@ $(function(){
         return false;
     });
 	
-    $('.addtotrip .btn-4').live('click', function(){
-        $(this).parents('.dd-2').removeClass('show');
-        $('.addtotrip input[type=text]').addClass('hidden');
+    $('.addtotrip .btn-10').live('click', function(){
+        $(this).parents('.addTrip').removeClass('show');
         $('.addtotrip select option:first').attr('selected','selected');
         return false;
     });
@@ -267,13 +268,13 @@ $(function(){
             success:function(response){
                 if(response.type == 'success'){
                     $('input, select').removeAttr('disabled');
-                    $('.dd-2').removeClass('show');
+                    $('.addTrip').removeClass('show');
                     showAlert(response.message);
                 } else if(response.type == 'newtrip'){
                     $('input, select').removeAttr('disabled');
-                    $('.dd-2').removeClass('show');
+                    $('.addTrip').removeClass('show');
                     showAlert(response.message);
-                    $('.dd-2 select').append('<option value="'+response.tripid+'">'+response.triptitle+'</option>');
+                    $('.addTrip select').append('<option value="'+response.tripid+'">'+response.triptitle+'</option>');
                 } else {
                     $('input, select').removeAttr('disabled');
                     showError(response.message);
@@ -504,4 +505,103 @@ $(function(){
         top:50, 
         left:50 
     }); 
-})
+});
+
+var shown = false;
+		
+$(function(){
+    $('#lstng_htl .carousel ul li').hover(function(){
+        $('.bigImages .hover').hide();
+        $($('a',this).data('tip')).show();
+        $('.bigImages').fadeIn('fast');
+        shown=true;
+    }, function(){
+        shown=false;
+    });
+			
+    $('.bigImages').hover(function(){
+        shown=true;
+    }, function(){
+        shown=false;
+    });
+			
+    setInterval('hideTooltip()', 100);
+});
+		
+function hideTooltip() {
+    if(!shown) {
+        $('.bigImages').fadeOut('fast', function(){
+            $('.bigImages .hover').hide();
+        });
+    }
+}
+
+ $(document).ready(function() {
+    var aboveHeight = $('#header').outerHeight();
+    $(window).scroll(function(){
+        if ($(window).scrollTop() > aboveHeight){
+            $('#lstng_header').addClass('fixed').css('top','0');
+            $('#wp_content').css('padding-top', '72px');
+        } 
+        else {
+            $('#lstng_header').removeClass('fixed');
+            $('#wp_content').css('padding-top', '0');
+        }
+    });
+    $(".imgs").jcarousel({
+        scroll: 1
+    });
+    $('a.lbc').fancybox({
+        padding: 0,
+        overlayColor: '#FFF',
+        overlayOpacity: '0.7',
+        showCloseButton: 'false',
+        centerOnScroll: 'true',
+        titlePosition: 'inside'
+    });
+    $('#fancybox-title').addClass('tittle');
+    $('#fancybox-left-ico').addClass('lfarrow');
+    $('#fancybox-right-ico').addClass('rgarrow');
+    $('#checkIn, #checkOut, #end, #start').datepicker({
+        dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+        showOtherMonths: true
+    });
+});
+
+$(document).ready(function(){
+    img_ready($('img.background'));
+});
+
+function img_ready($obj){
+    resizeImg($obj);
+    $(window).resize(function() {
+       resizeImg($obj);
+    });
+    $obj.fadeIn();
+}
+function resizeImg($bgImg) { 
+    var imgwidth  = 1400;
+    var imgheight = 223;
+    
+    var winwidth  = $(window).width();
+    var winheight = $(window).height();
+    
+    var winCenter = winwidth / 2;
+    var imgCenter = imgwidth / 2;
+    
+    var left = (winwidth > imgwidth) ? 0 : (winCenter - imgCenter);
+    
+    var width = (winwidth > imgwidth) ? winwidth : imgwidth;
+    
+    var height = (winwidth > imgwidth) ? ((imgheight * winwidth) / imgwidth) : height;
+    
+    var winCenter2 = imgheight / 2;
+    var imgCenter2 = height / 2;
+    
+    var top = (winwidth > imgwidth) ? (winCenter2 - imgCenter2) : 0;
+    
+    $bgImg.css('left',left);
+    $bgImg.css('width',width);
+    $bgImg.css('height',height);
+    $bgImg.css('top',top);
+}
