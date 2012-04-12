@@ -379,6 +379,14 @@ $(document).ready(function() {
         
         return false;
     });
+    
+    $('#tooltipHelpList').submit(function(){
+        if($('input[type=checkbox]', this).is(':checked')) {
+            $.cookie('tooltipHelpList','yes',{expires:365,path:'/'});
+        }
+        $('.firstime_tip').fadeOut();
+        return false;        
+    });
 });
 
 function move(id,spd){

@@ -477,7 +477,7 @@ $(document).ready(function() {
     
     $('#tooltipHelpList').submit(function(){
         if($('input[type=checkbox]', this).is(':checked')) {
-            $.cookie('tooltipHelpList','yes',{expires:365});
+            $.cookie('tooltipHelpList','yes',{expires:365,path:'/'});
         }
         $('.firstime_tip').fadeOut();
         return false;        
