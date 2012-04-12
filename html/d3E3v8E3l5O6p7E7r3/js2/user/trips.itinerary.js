@@ -337,4 +337,12 @@ $(document).ready(function() {
         start:1,
         wrap:'both'
     });	
+    
+    $('#tooltipHelpItn').submit(function(){
+        if($('input[type=checkbox]', this).is(':checked')) {
+            $.cookie('tooltipHelpItn','yes',{expires:365});
+        }
+        $('.firstime_tip').fadeOut();
+        return false;
+    });
 });
