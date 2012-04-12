@@ -15,6 +15,23 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
 <h3>There are <strong><?= $this->listing_count ?> <?= $this->categ ?> in <?= $this->country->title ?></strong></h3>
 <?php endif ?>
 <div class="results-wrapper">
+<div class="firstime_tip">
+	<img class="arrow" src="https://developer.tripfab.com/images6/arrow-24.png" class="arrow" alt="">
+	<div class="cont">
+		<img src="https://developer.tripfab.com/images6/stamp.png" width="75" height="75" alt="" />
+		<p><strong>Planning a Trip?</strong>
+			Ey! If you’re planning a trip you can create you own customize trip, add things to do there and book it when you’re ready to travel.
+		</p>
+	</div><!--CONT-->
+	<div class="bot">
+		<form action="post">
+			<fieldset>
+				<label><input type="checkbox" name="" value="" />Don’t show again</label>
+				<input type="submit" value="Okay" class="btn-1" />
+			</fieldset>
+		</form>
+	</div><!--BOT-->
+</div><!--FIRSTIME_TIP-->
 <div class="loading"><div class="load">Loading...</div></div>
 <?php if(count($this->listings) > 0): ?>
 <?php foreach($this->listings as $i => $list): ?>	
@@ -50,4 +67,6 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
 <p>No Listings Found</p>
 <div class="clear"></div>
 <?php endif ?>
+
+
 </div><!-- closes results-wrapper -->

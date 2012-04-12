@@ -1956,6 +1956,21 @@
     top: inherit;
     width: auto;
 }
+#sight.lstng_dflt .firstime_tip,
+#restaurant.lstng_dflt .firstime_tip {
+	right: -23px;
+	top: 51px;
+}
+#sight.lstng_dflt .firstime_tip .bot .btn-1,
+#restaurant.lstng_dflt .firstime_tip .bot .btn-1 {
+	font: bold 11px/24px Helvetica;
+	height: 24px;
+	padding: 0;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	width: 56px;
+}
 /*-	END LISTING TOURIST SIGHTS ------------------------------------*/
 /*LIGHTBOX CREATE NEW TRIP*/
 #create_trip {
@@ -2264,6 +2279,7 @@
 #src_rslt.fixed {
 	position: fixed;
 }
+/*Search Result Sidebar---------------------------*/
 #src_rslt .sidebar{
 	width: 188px;
 	float: left;
@@ -2271,88 +2287,267 @@
 #src_rslt .sidebar.fixed {
 	position: fixed;
 }
-#src_rslt .sidebar .cont {
-	background-color: #1c1c1c;
+ul.cat-menu {
+    list-style: none outside none;
 }
-#src_rslt .sidebar .cont > ul {
-	padding-top: 3px;
+ul.cat-menu li {
+    margin-bottom: 5px;
 }
-#src_rslt .sidebar .cont > ul > li {
-	background: url(https://developer.tripfab.com/images6/src_result-sep1.png) repeat-x left bottom;
+ul.cat-menu li a {
+    background: url("https://developer.tripfab.com/images2/g-7.png") repeat-y scroll 0 0 transparent;
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
+    color: #303030;
+    display: block;
+    font-size: 13px;
+    line-height: 32px;
+    padding: 0 10px;
+    width: 178px;
+}
+ul.cat-menu li a:hover, ul.cat-menu li.active a {
+    background: url("https://developer.tripfab.com/images2/t-6.png") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    font-weight: bold;
+    text-decoration: none;
+}
+ul.cat-menu li a img {
+    margin-right: 4px;
+    vertical-align: middle;
+    width: 19px;
+}
+ul.cat-menu li.item-1 a img {
+    background: url("https://developer.tripfab.com/images2/ico-7.png") no-repeat scroll 0 0 transparent;
+    height: 15px;
+}
+ul.cat-menu li.item-1 a:hover img, ul.cat-menu li.item-1.active a img {
+    background-position: 0 -15px;
+}
+ul.cat-menu li.item-2 a img {
+    background: url("https://developer.tripfab.com/images2/ico-8.png") no-repeat scroll 0 0 transparent;
+    height: 15px;
+}
+ul.cat-menu li.item-2 a:hover img, ul.cat-menu li.item-2.active a img {
+    background-position: 0 -15px;
+}
+ul.cat-menu li.item-3 a img {
+    background: url("https://developer.tripfab.com/images2/ico-9.png") no-repeat scroll 0 0 transparent;
+    height: 13px;
+}
+ul.cat-menu li.item-3 a:hover img, ul.cat-menu li.item-3.active a img {
+    background-position: 0 -13px;
+}
+ul.cat-menu li.item-4 a img {
+    background: url("https://developer.tripfab.com/images2/ico-10.png") no-repeat scroll 0 0 transparent;
+    height: 15px;
+}
+ul.cat-menu li.item-4 a:hover img, ul.cat-menu li.item-4.active a img {
+    background-position: 0 -15px;
+}
+ul.cat-menu li.item-5 a img {
+    background: url("https://developer.tripfab.com/images2/ico-11.png") no-repeat scroll 0 0 transparent;
+    height: 14px;
+}
+ul.cat-menu li.item-5 a:hover img, ul.cat-menu li.item-5.active a img {
+    background-position: 0 -14px;
+}
+ul.cat-menu li.item-6 a img {
+    background: url("https://developer.tripfab.com/images2/ico-12.png") no-repeat scroll 0 0 transparent;
+    height: 15px;
+}
+ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
+    background-position: 0 -15px;
+}
+#src_rslt ul.cat-menu {
+	background-color:#303030;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright: 0px;
+	-moz-border-radius-bottomright: 0px;
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-radius: 4px 0px 0px 0px;
+	border-radius: 4px 0px 0px 0px;
+	padding-bottom: 5px;
+	margin-bottom: 10px;
 	position: relative;
+	z-index: 101;
+	behavior: url(/PIE.htc);
 }
-#src_rslt .sidebar .cont > ul > li > a{
-	color: #FFF;
-	font: bold 12px/38px Helvetica;
-	background: url(https://developer.tripfab.com/images6/src_result-icons.png) no-repeat;
-	padding-left: 40px;
-	height: 38px;
+#src_rslt ul.cat-menu li {
+	border-top: 1px solid #303030;
+	border-bottom: 1px solid #303030;
+	clear: both;
+}
+#src_rslt ul.cat-menu li:hover {
+	background-color: #3c3c3c;
+	border-top: 1px solid #454545;
+	border-bottom: 1px solid #252525;
+}
+#src_rslt ul.cat-menu li.active a{
+	background: url(https://developer.tripfab.com/images2/arrow_53.png) no-repeat;
+	width: 180px;
+	overflow: hidden;
+}
+#src_rslt ul.cat-menu li a {
+	background: none;
+	color: #ebebeb;
+	font-size: 12px;
+	font-weight: bold;
+	overflow: hidden;
+	text-shadow: 0px 1px 0px #242424;
+	filter: dropshadow(color=#242424, offx=0, offy=1);
+}
+#src_rslt ul.cat-menu li em {
+	float: left;
+	font-style: normal;
 	display: block;
-	width: 130px;
 }
-#src_rslt .sidebar .cont > ul > li > a.hotels {
-	background-position:  -93px 11px;
+#src_rslt ul.cat-menu li span {
+	display: block;
+	float: right;
+	padding-right: 10px;
 }
-#src_rslt .sidebar .cont > ul > li > a.hotels:hover {
-	background-position: -93px -275px;
+#src_rslt ul.cat-menu li img {
+	background-image: url(https://developer.tripfab.com/images2/ico_135.png);
+	background-repeat: no-repeat;
+	background-position:0 0 ;
+	float: left;
+	margin-top: 9px;
+}
+#src_rslt ul.cat-menu li:hover img {
+	background-position:-41px  0;
+}
+#src_rslt ul.cat-menu li.active img {
+	background-position:-82px  0 ;
+}
+#src_rslt ul.cat-menu li.item-2 img {
+	background-position:0 -37px;
+}
+#src_rslt ul.cat-menu li.item-2:hover img {
+	background-position:-41px -37px;
+}
+#src_rslt ul.cat-menu li.item-2.active img {
+	background-position:-82px -37px;
 }
 
-#src_rslt .sidebar .cont > ul > li > a.activities {
-	background-position:  -93px -45px;
+#src_rslt ul.cat-menu li.item-3 img {
+	background-position:0 -76px;
 }
-#src_rslt .sidebar .cont > ul > li > a.activities:hover {
-	background-position: -93px -331px;
+#src_rslt ul.cat-menu li.item-3:hover img {
+	background-position:-41px -76px;
 }
-#src_rslt .sidebar .cont > ul > li > a.restaurants {
-	background-position:  -93px -103px;
+#src_rslt ul.cat-menu li.item-3.active img {
+	background-position:-82px -76px;
 }
-#src_rslt .sidebar .cont > ul > li > a.restaurants:hover {
-	background-position:  -93px -389px;
+
+#src_rslt ul.cat-menu li.item-4 img {
+	background-position:0 -113px;
 }
-#src_rslt .sidebar .cont > ul > li > a.entertaiment {
-	background-position:  -93px -161px;
+#src_rslt ul.cat-menu li.item-4:hover img {
+	background-position:-41px -113px;
 }
-#src_rslt .sidebar .cont > ul > li > a.entertaiment:hover {
-	background-position:  -93px -447px;
+#src_rslt ul.cat-menu li.item-4.active img {
+	background-position:-82px -113px;
 }
-#src_rslt .sidebar .cont > ul > li > a.sights {
-	background-position:  -93px -217px;
+
+#src_rslt ul.cat-menu li.item-5 img {
+	background-position:0 -150px;
 }
-#src_rslt .sidebar .cont > ul > li > a.sights:hover {
-	background-position:  -93px -503px;
+#src_rslt ul.cat-menu li.item-5:hover img {
+	background-position:-41px -150px;
 }
-#src_rslt .sidebar .cont ul ul {
-	padding: 7px 15px 0;
-	background: url(https://developer.tripfab.com/images6/src_result-sep1.png) repeat-x left top #202020;
-	display: none;
+#src_rslt ul.cat-menu li.item-5.active img {
+	background-position:-82px -150px;
 }
-#src_rslt .sidebar .cont ul ul li {
-	background: url(https://developer.tripfab.com/images6/src_result-sep1.png) repeat-x left bottom;
-	height: 30px;
-	padding: 0 10px 0 12px;
+
+#src_rslt ul.cat-menu li.item-6 img {
+	background-position:0 -187px;
 }
-#src_rslt .sidebar .cont ul ul li:hover {
-	background-color: #272727;
+#src_rslt ul.cat-menu li.item-6:hover img {
+	background-position:-41px -187px;
 }
-#src_rslt .sidebar .cont ul ul li:hover a {
-	color: #60b5f7;
+#src_rslt ul.cat-menu li.item-6.active img {
+	background-position:-82px -187px;
 }
-#src_rslt .sidebar .cont ul ul li a{
-	color: #a4a4a4;
-	font: normal 11px/30px Helvetica;
-}
-#src_rslt .sidebar .cont .show_more {
-	text-align: center;
+#src_rslt .widget.destinations {
 	display: block;
 }
-#src_rslt .sidebar .cont > ul > li > .count {
-	position: absolute;
-	top: 13px;
-	right: 12px;
-	color: #898989;
-	text-shadow: 0px 1px 0px #000;
-	font-size: 11px;
+#src_rslt .sidebar .widget {
+	margin: 0;
+	padding: 0;
+	background: url(https://developer.tripfab.com/images2/g-52.gif) repeat-x #f8f8f8;
+	border: none;
+	padding:30px 0 20px 15px;
+	margin-right: 1px;
+	overflow: hidden;
+	width: 175px !important;
 }
+#src_rslt .sidebar .widget .scroll-pane {
+	height: 173px !important;
+}
+#src_rslt .sidebar .widget.slider .bg{
+	margin-left: 10px;
+    width: 132px;
+    background: url(https://developer.tripfab.com/images2/slider-dot.png) repeat-x bottom left;
+    padding-bottom: 15px;
+}
+#src_rslt .sidebar h3.filter {
+	background: url(https://developer.tripfab.com/images2/sep-9.png) repeat-x 0 6px;
+	margin-bottom: 10px;
+}
+#src_rslt .sidebar h3.filter span {
+	display: block;
+	text-align: center;
+	background-color: #f8f8f8;
+	text-transform: uppercase;
+	font: normal 10px/14px Helvetica;
+	color: #707070;
+	width: 120px;
+	margin: 0 auto;
+}
+#src_rslt .sidebar .travelers{
+	padding:0 0 10px 20px;
+	overflow: hidden;
+}
+#src_rslt .sidebar .travelers label {
+	display: block;
+	background: url(https://developer.tripfab.com/images2/ico_134.png) no-repeat left 50%;
+	padding-left: 20px;
+	height: 22px;
+	font: 11px/22px Helvetica;
+	color: #464646;
+	float: left;
+}
+#src_rslt .sidebar .travelers select{
+	float: right;
+	margin:3px 13px 0 0;
+}
+#src_rslt .sidebar p a{
+	background-color: #60B5F7;
+    color: #FFFFFF !important;
+    font-size: 9px;
+    padding: 0 5px;
+    text-transform: uppercase;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    margin-left: 22px;
+}
+#src_rslt .sidebar p a:hover {
+	background-color: #9ED3FD;
+	text-decoration: none;
+}
+#src_rslt .sidebar h4.location img {
+	background: url(https://developer.tripfab.com/images2/ico-15.png) no-repeat;
+}
+#src_rslt .sidebar h4 img {
+	background: url(https://developer.tripfab.com/images2/ico_134.png) no-repeat;
+}
+#src_rslt .sidebar h4.landscapes img {
+	background-position:0 -119px
+}
+#src_rslt .sidebar h4.categories img {
+	background-position:0 -90px;
+}
+/*End Search Result Sidebar-----------------------*/
 #src_rslt .content .sort {
 	background-color:#f3f3f3;
 	border-top: 1px solid #efefef;
@@ -2392,9 +2587,6 @@
 #src_rslt .content {
 	width: 770px;
 	float: right;
-	background-color: #1C1C1C;
-    margin-left: -10000px;
-    padding-left: 10000px;
 	margin-bottom: 40px;
 }
 #src_rslt .listings {

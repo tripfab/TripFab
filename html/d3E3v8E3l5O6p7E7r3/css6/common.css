@@ -638,12 +638,10 @@
 	margin-right: 15px;
 }
 .firstime_tip .cont p {
-	float: left;
-	width: 160px;
-}
-.firstime_tip .cont p {
 	font: 11px/16px Helvetica;
 	color: #303030;
+	float: left;
+	width: 160px;
 }
 .firstime_tip .cont p strong {
 	display: block;
@@ -651,15 +649,16 @@
 }
 .firstime_tip .bot {
 	background: url(https://developer.tripfab.com/images6/lstng_htl_sh2.png) repeat-x 0 0;
-	position: relative;
 	height: 43px;
 	width: 100%;
+	overflow: hidden;
+	position: relative;
 }
 .firstime_tip .bot label {
 	color: #303030;
 	font: bold 11px/21px Helvetica;
 	display: block;
-	margin: 10px 0 0 15px;
+	padding: 10px 0 0 15px;
 	height: 20px;
 }
 .firstime_tip .bot label input {
