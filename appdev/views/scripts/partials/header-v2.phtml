@@ -8,7 +8,11 @@
         <ul>
             <li><a href="/">Search</a></li>
             <li><a href="/trips/costa_rica">Browse Itineraries</a></li>
+            <?php if(!$this->user): ?>
+            <li><a href="/mytrips">My Trips</a></li>
+            <?php else: ?>
             <li><a href="/user/trips">My Trips</a></li>
+            <?php endif ?>
         </ul>
         <div class="header-search">
             <form method="post" action="">

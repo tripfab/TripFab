@@ -138,6 +138,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             )
         );
         $router->addRoute(
+            'mytrips',
+            new Zend_Controller_Router_Route(
+                '/:lang/mytrips',
+                array(
+                    'controller' => 'index',
+                    'action'     => 'mytrips',
+                    'module'     => 'default',
+                    'lang'       => $lang
+                )
+            )
+        );
+        $router->addRoute(
             'city',
             new Zend_Controller_Router_Route(
                 '/:lang/:country/:city',

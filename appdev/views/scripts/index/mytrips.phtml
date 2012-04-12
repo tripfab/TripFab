@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title>vendor profile</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript">
+        $(function() {
+              $('#trips_tabs').tabs({selected: 0});
+        });
+    </script>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+            <div id="my_trips">
+                <div class="cont">
+                    <span class="map_right"></span>
+                    <div class="welcome_trips">
+                        <h2>Welcome to your trips</h2>
+                        <p>Create your dreamed trip, manage their itineraries as you want, and receive amazing offers from our partners.</p>
+                        <div class="button"><a href="/signup" class="btn-1"><span>Get Started Now!</span></a><em>It's Free</em></div>
+                        <div class="sign_in">Already an Tripfab member? <a href="/login" class="link1">Sign In Now</a></div><!--SIGN_IN-->
+                    </div><!-- WELCOME_TRIPS -->
+                    <div id="trips_tabs">
+                        <ul>
+                            <li><a href="#tabs-1"><span class="one"></span>Create your<br />Custom Trips</a></a></li>
+                            <li><a href="#tabs-2"><span class="two"></span>Add Hotels and <br />Things to Do</a></li>
+                            <li><a href="#tabs-3"><span class="three"></span>Manage Your<br /> Itineraries</a></li>
+                            <li><a href="#tabs-4"><span class="four"></span>Book Your Trip <br /> in One Place</a></li>
+                            <li><a href="#tabs-5"><span class="five"></span>Rake in the <br />Savings</a></li>
+                        </ul>
+                        <div id="tabs-1">
+                            <div class="content">
+                                <h3>
+                                    <span class="one"></span>
+                                    LOOKING FOR AMAZING DEALS?
+                                    <strong>Create your custom trip</strong>
+                                </h3>
+                                <div class="single">
+                                    <span class="pic left"><img src="https://developer.tripfab.com/images2/my_trips_img1.png" width="173" height="100" alt="" /></span>
+                                    <p>Explore all of the places to stay, things to do and sights to see in major cities and hotspots all over the world. Just type in a place and you'll be introduced to a world of possibilities. When you see something you like, add it to your itinerary.</p>
+                                    <div class="clear"></div>
+                                </div><!--SINGLE--> 
+                                <div class="single">
+                                    <span class="pic right"><img src="https://developer.tripfab.com/images2/my_trips_img2.png" width="173" height="100" alt="" /></span>
+                                    <p>From there, you can decide exactly which day and what time you want to do all of the things you've added. Want to stay at your favorite hotel Monday and Tuesday, but try somewhere new the rest of the week? No problem. With Tripfab, it's easy to organize and plan the vacation of your dreams.</p>
+                                    <div class="clear"></div>
+                                </div><!--SINGLE-->
+                            </div><!--CONTENT-->
+                            <div class="side">
+                                <li>
+                                    <span class="s-one"></span>
+                                    <h4>View Past Trips</h4>
+                                    <p>Revisit past trips for ideas on what you want to do in the future. If you enjoyed scuba diving in Costa Rica, maybe it's time to try it out in Mexico.</p>
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span class="s-two"></span>
+                                    <h4>Travel more, spend less</h4>
+                                    <p>You'll always have a dedicated Tripfab staff member at your fingertips to help you plan trips and find the best deals.</p>
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span class="s-three"></span>
+                                    <h4>Manage your trip till make it perfect</h4>
+                                    <p>You can cancel your membership at any time, and at no cost. There are no obligations, and no penalties.</p>
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span class="s-four"></span>
+                                    <h4>Save and easy booking process</h4>
+                                    <p>Tripfab is available in many different languages, so take your pick.</p>
+                                    <div class="clear"></div>
+                                </li>
+                            </div><!--SIDE-->
+                            <div class="clear"></div>
+                        </div><!--TABS-1-->
+                        <div id="tabs-2">
+                            <div class="content">
+                                <h3>
+                                    <span class="two"></span>
+                                    LOOKING FOR AMAZING DEALS?
+                                    <strong>Add Hotels and Things to Do</strong>
+                                </h3>
+                                <div class="single">
+                                    <span class="pic left"><img src="https://developer.tripfab.com/images2/my_trips_img3.png" width="173" height="100" alt="" /></span>
+                                    <p>Any activity you can imagine is just a click away on Tripfab. From adrenaline pumping pastimes like waterfall rappelling, ATV tours and bungee jumping to more tranquil activities like horseback riding, mineral springs and trips to the spa, we offer something for everyone.</p>
+                                    <div class="clear"></div>
+                                </div><!--SINGLE--> 
+                                <div class="single">
+                                    <span class="pic right"><img src="https://developer.tripfab.com/images2/my_trips_img4.png" width="173" height="100" alt="" /></span>
+                                    <p>You can sort activities by type, place and price range to find just what you are looking for. Not sure what to choose? Read the ratings left by Tripfab users who have actually done it. </p>
+                                    <div class="clear"></div>
+                                </div><!--SINGLE-->
+                            </div><!--CONTENT-->
+                            <div class="side">
+                                <li>
+                                    <span class="s-one"></span>
+                                    <h4>View Past Trips</h4>
+                                    <p>Revisit past trips for ideas on what you want to do in the future. If you enjoyed scuba diving in Costa Rica, maybe it's time to try it out in Mexico.</p>
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span class="s-two"></span>
+                                    <h4>Travel more, spend less</h4>
+                                    <p>You'll always have a dedicated Tripfab staff member at your fingertips to help you plan trips and find the best deals.</p>
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span class="s-three"></span>
+                                    <h4>Manage your trip till make it perfect</h4>
+                                    <p>You can cancel your membership at any time, and at no cost. There are no obligations, and no penalties.</p>
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span class="s-four"></span>
+                                    <h4>Save and easy booking process</h4>
+                                    <p>Tripfab is available in many different languages, so take your pick.</p>
+                                    <div class="clear"></div>
+                                </li>
+                            </div><!--SIDE-->
+                            <div class="clear"></div>
+                        </div><!--TABS-2-->
+                        <div id="tabs-3">
+                            <div class="content">
+                                <h3>
+                                    <span class="three"></span>
+                                    LOOKING FOR AMAZING DEALS?
+                                    <strong>Manage Your Itineraries</strong>
+                                </h3>
+                                <div class="single">
+                                    <span class="pic left"><img src="https://developer.tripfab.com/images2/my_trips_img5.png" width="173" height="100" alt="" /></span>
+                                    <p>Here you can view, tweak and modify your custom made trips. Add or subtract the number of people, change the times of departure or alter the dates if need be. You can book last minute or well in advance – rest assured you can always have as many trips as you want going at one time. </p>
+                                    <div class="clear"></div>
+                                </div><!--SINGLE--> 
+                                <div class="single">
+                                    <span class="pic right"><img src="https://developer.tripfab.com/images2/my_trips_img6.png" width="173" height="100" alt="" /></span>
+                                    <p>Once you've got all your hotels, activities, restaurants exactly where you want them, check out is a breeze. Various methods of payment are available for maximum ease and convenience. With one simple click – viola! – your trip is planned, organized and paid for. </p>
+                                    <div class="clear"></div>
+                                </div><!--SINGLE-->
+                                
+                            </div><!--CONTENT-->
+                            <div class="side">
+                                <li>
+                                    <span class="s-one"></span>
+                                    <h4>View Past Trips</h4>
+                                    <p>Revisit past trips for ideas on what you want to do in the future. If you enjoyed scuba diving in Costa Rica, maybe it's time to try it out in Mexico.</p>
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span class="s-two"></span>
+                                    <h4>Travel more, spend less</h4>
+                                    <p>You'll always have a dedicated Tripfab staff member at your fingertips to help you plan trips and find the best deals.</p>
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span class="s-three"></span>
+                                    <h4>Manage your trip till make it perfect</h4>
+                                    <p>You can cancel your membership at any time, and at no cost. There are no obligations, and no penalties.</p>
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span class="s-four"></span>
+                                    <h4>Save and easy booking process</h4>
+                                    <p>Tripfab is available in many different languages, so take your pick.</p>
+                                    <div class="clear"></div>
+                                </li>
+                            </div><!--SIDE-->
+                            <div class="clear"></div>
+                        </div><!--TABS-3-->
+                        <div id="tabs-4">
+                            <div class="content">
+                                <h3>
+                                    <span class="four"></span>
+                                    LOOKING FOR AMAZING DEALS?
+                                    <strong>Book Your Trip in One Place</strong>
+                                </h3>
+                                <div class="single">
+                                    <span class="pic left"><img src="https://developer.tripfab.com/images2/my_trips_img7.jpg" width="173" height="100" alt="" /></span>
+                                    <p>With Tripfab, you don't have to contact each and every hotel on your itinerary individually. We make trip planning easy by doing it for you. Just figure out when and where you want to go, and we take care of the rest. Just like that.</p>
+                                    <div class="clear"></div>
+                                </div><!--SINGLE--> 
+                                <div class="single">
+                                    <span class="pic right"><img src="https://developer.tripfab.com/images2/my_trips_img8.jpg" width="173" height="100" alt="" /></span>
+                                    <p>With detailed photos and descriptions of hotels, activities, places to see and restaurant options, you'll have all the information you need to plan the perfect vacation – right at your fingertips. Just add, click and go.</p>
+                                    <div class="clear"></div>
+                                </div><!--SINGLE-->
+                                
+                            </div><!--CONTENT-->
+                            <div class="side">
+                                <li>
+                                    <span class="s-one"></span>
+                                    <h4>View Past Trips</h4>
+                                    <p>Revisit past trips for ideas on what you want to do in the future. If you enjoyed scuba diving in Costa Rica, maybe it's time to try it out in Mexico.</p>
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span class="s-two"></span>
+                                    <h4>Travel more, spend less</h4>
+                                    <p>You'll always have a dedicated Tripfab staff member at your fingertips to help you plan trips and find the best deals.</p>
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span class="s-three"></span>
+                                    <h4>Manage your trip till make it perfect</h4>
+                                    <p>You can cancel your membership at any time, and at no cost. There are no obligations, and no penalties.</p>
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span class="s-four"></span>
+                                    <h4>Save and easy booking process</h4>
+                                    <p>Tripfab is available in many different languages, so take your pick.</p>
+                                    <div class="clear"></div>
+                                </li>
+                            </div><!--SIDE-->
+                            <div class="clear"></div>
+                        </div><!--TABS-4-->
+                        <div id="tabs-5">
+                            <div class="content">
+                                <h3>
+                                    <span class="five"></span>
+                                    LOOKING FOR AMAZING DEALS?
+                                    <strong>Rake in the Savings</strong>
+                                </h3>
+                                <div class="single">
+                                    <span class="pic left"><img src="https://developer.tripfab.com/images2/my_trips_img9.jpg" width="173" height="100" alt="" /></span>
+                                    <p>With Tripfab, hotels and tour operators offer the best prices on the internet. By booking your entire trip at once – directly through the company without any meddling middlemen – you'll save loads of money on everything from tours to accommodations. </p>
+                                    <div class="clear"></div>
+                                </div><!--SINGLE--> 
+                                <div class="single">
+                                    <span class="pic right"><img src="https://developer.tripfab.com/images2/my_trips_img10.jpg" width="173" height="100" alt="" /></span>
+                                    <p>Not only will you be saving money, but you'll cut out that extra step of visiting a million different websites for answers to specific questions or concerns. You can effortlessly contact any hotel or tour operator via email, instant message or online phone call – all through Tripfab, and all for free.</p>
+                                    <div class="clear"></div>
+                                </div><!--SINGLE-->
+                            </div><!--CONTENT-->
+                            <div class="side">
+                                <li>
+                                    <span class="s-one"></span>
+                                    <h4>View Past Trips</h4>
+                                    <p>Revisit past trips for ideas on what you want to do in the future. If you enjoyed scuba diving in Costa Rica, maybe it's time to try it out in Mexico.</p>
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span class="s-two"></span>
+                                    <h4>Travel more, spend less</h4>
+                                    <p>You'll always have a dedicated Tripfab staff member at your fingertips to help you plan trips and find the best deals.</p>
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span class="s-three"></span>
+                                    <h4>Manage your trip till make it perfect</h4>
+                                    <p>You can cancel your membership at any time, and at no cost. There are no obligations, and no penalties.</p>
+                                    <div class="clear"></div>
+                                </li>
+                                <li>
+                                    <span class="s-four"></span>
+                                    <h4>Save and easy booking process</h4>
+                                    <p>Tripfab is available in many different languages, so take your pick.</p>
+                                    <div class="clear"></div>
+                                </li>
+                            </div><!--SIDE-->
+                            <div class="clear"></div>
+                        </div><!--TABS-5-->
+                    </div><!--TRIPS_TABS-->
+                    <div class="bot">
+                        <h5>Tripfab is the easiest way to create custom trips</h5>
+                        <p>Start to plan your next trip with us, you'll love how trips work on Tripfab</p>
+                    </div><!--BOT-->
+                </div><!--CONT-->
+                <div class="mid_banner">
+                    <h4>Are you ready to start your next trip with Tripfab?</h4>
+                    <a href="/login" class="sign-in">Sign In Now</a>
+                    <em>or</em>
+                    <a href="/signup" class="btn-1">Register Free</a>
+                </div><!--MID_BANNER-->
+            </div><!-- closes MY TRIPS-->						
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->	
+</body>
+</html>
