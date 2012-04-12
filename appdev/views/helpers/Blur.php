@@ -1,12 +1,5 @@
 <?php
 
-define('MEMORY_TO_ALLOCATE', '100M');
-define('DEFAULT_QUALITY',    100);
-define('CURRENT_DIR',        dirname(__FILE__));
-define('CACHE_DIR_NAME',     '/imagecache/');
-define('CACHE_DIR',          CURRENT_DIR . CACHE_DIR_NAME);
-define('DOCUMENT_ROOT',      $_SERVER['DOCUMENT_ROOT']);
-
 class Zend_View_Helper_Blur {
     
     public function blur($image){
