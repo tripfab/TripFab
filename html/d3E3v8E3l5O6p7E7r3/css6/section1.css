@@ -1872,7 +1872,7 @@
 #sight.lstng_dflt .top {
 	height: 266px;
 }
-.lstng_dflt .container .sidebar .map {
+#sight.lstng_dflt .container .sidebar .map {
 	height: 199px;
 }
 #sight.lstng_dflt .container .map .cont {
@@ -1936,6 +1936,25 @@
 #sight.lstng_dflt .single p {
 	float: left;
 	width: 460px;
+}
+#sight.lstng_dflt .addTrip,
+#restaurant.lstng_dflt .addTrip {
+	position: absolute;
+	right: -43px;
+    top: 51px;
+}
+#sight.lstng_dflt .addTrip .top,
+#restaurant.lstng_dflt .addTrip .top{
+	height: auto;
+}
+#sight.lstng_dflt .addTrip .bot .btn-1,
+#restaurant.lstng_dflt .addTrip .bot .btn-1 {
+	font-size: inherit;
+    padding: 0 17px;
+    position: inherit;
+    right: inherit;
+    top: inherit;
+    width: auto;
 }
 /*-	END LISTING TOURIST SIGHTS ------------------------------------*/
 /*LIGHTBOX CREATE NEW TRIP*/

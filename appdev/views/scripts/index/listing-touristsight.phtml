@@ -7,8 +7,11 @@
     <link type="text/css" rel="stylesheet" href="/css6/reset.css" />
     <link type="text/css" rel="stylesheet" href="/css6/common.css" />
     <link type="text/css" rel="stylesheet" href="/css6/section1.css" />
+    <link type="text/css" rel="stylesheet" href="/css6/calendar.css" />	
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js"></script>
     <script type="text/javascript" src="/js2/index/listing-restaurant.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -26,11 +29,35 @@
                 $($id).addClass('show');
                 return false
             });
+            $(".info a.btn-1").click(function() {
+            	$(".addTrip.one").fadeIn('show');
+            	return false
+            });
+            $(".addTrip a.btn-10").click(function() {
+            	$(".addTrip.one").fadeOut('show');
+            	return false
+            });
+            $('.addTrip select').live('change', function(){
+		        if($(this).val() == 'new'){
+		            //$(this).next('input').removeClass('hidden');
+		            $form = $(this).parents('form');
+		            $listing = $('input[name=listing]', $form).val();
+		            $('#newtrip form input[name=listing]').val($listing);
+		            $.fancybox({
+		                href:'#newtrip',
+		                padding:0,
+		                overlayColor:'#fff',
+		                centerOnScroll: true
+		            });
+		      
+		        } else {
+		            $(this).next('input').addClass('hidden');
+		        }
+		    });
+            
         });
     </script>
-    <style type="text/css">
-	#mapcanvas { width:285px;  height:171px; }
-	</style>   
+    <style type="text/css"> #mapcanvas { width:285px;  height:171px; }</style>   
 </head>
 <body class="bg_ts">
 <div id="wp_all">
@@ -66,6 +93,25 @@
                             <span class="location"><em></em><strong><?= $this->city->title ?>,</strong> <?= $this->country->title ?>
                             <img src="/images6/flag<?= strtoupper($this->country->code) ?>.png" width="" height="" alt="" /></span>
                             <a href="" class="btn-1"><span></span>Add to My Trips</a>
+                            <form method="post" class="addtotrip" action="/ajax/addtotrips">
+                                <div class="addTrip one">
+                                    <img class="arrow" alt="" src="/images2/arrow-24.png">
+                                    <div class="top">
+                                        <select name="trip">
+                                            <option value="">Select one of your trips</option>
+                                            <option value="new">Create New Trip</option>
+                                            <option disabled="disabled">------</option>
+                                            <option value="48">Dionisillo Trip NO ME HAGAS CHECKOUT PORGFAVOR</option>
+                                        </select>
+                                        <input type="text" value="Trip Name" name="title" class="hidden">
+                                    </div><!--TOP-->
+                                    <div class="bot">
+                                        <input type="submit" class="btn-1" value="Add">
+                                        <a class="btn-10" href="">Cancel</a>
+                                    </div><!--BOT-->
+                                </div><!-- closes dd-2 -->
+                                <input type="hidden" value="1359" name="listing">
+                            </form>
                             <div class="text">
                                 <ul class="rating">
                                     <li><a href="" class="slct"></a></li>
@@ -176,6 +222,41 @@
 <input type="hidden" value="<?= ($this->listing->lng) ? $this->listing->lng : 'none' ?>" name="listlng" />
 <input type="hidden" value="<?= $this->listing->title ?>" name="listtitle" />
 <input type="hidden" value="<?= $this->listing->id ?>" name="listingids" />
+<div class="hidden">
+	<div id="newtrip">
+		<div id="create_trip">
+			<form action="">
+				<div class="top">
+					<h3>Create a New Trip</h3>
+					<p>Complete the information below to start your next trip</p>
+				</div><!--TOP-->
+				<div class="cont">
+					<fieldset>
+						<div class="item">
+							<label class="trip">Trip Name</label>
+							<input type="text" name="title" value="" />
+						</div><!--ITEM-->
+						<div class="item">
+							<label class="dates">Trip Dates</label>
+							<input id="start" class="start" type="text" name="start" value="Starting Date" />
+							<input id="end" class="end"type="text" name="end" value="Ending Date" />
+							<label class="check">
+								<input type="checkbox" class="nodatesyet"/>
+								I don't know the travel dates yet
+							</label>
+						</div><!--ITEM-->
+					</fieldset>
+				</div><!--CONT-->
+				<div class="bottom">
+					<input type="submit" class="btn-1 noclean" value="Create Trip" />
+					<input type="button" onclick="$.fancybox.close(); return false;" class="btn-10 noclean" value="Cancel" />
+				</div><!--BOTTOM-->
+				<input type="hidden" name="trip" value="new" />
+				<input type="hidden" name="listing" value="" />
+			</form>
+		</div><!--CREATE_TRIP-->
+	</div><!--NEWTRIP-->
+</div><!--HIDDEN-->
 </body>
 </html>
 
