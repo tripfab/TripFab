@@ -126,7 +126,7 @@ class WS_AccountService {
         
         $user = $this->users_db->fetchNew();
         
-        $user->name       = $data['name'];
+        $user->name       = $data['contact_name'];
         $user->email      = trim($data['email']);
         $user->phone      = $data['phone'];
         $password         = $data['password'];
@@ -141,15 +141,16 @@ class WS_AccountService {
         
         $vendor = $this->vendors_db->fetchNew();
         
-        $vendor->name     = $data['name'];
-        $vendor->website  = $data['website'];
-        $vendor->phone    = $user->phone;
-        $vendor->email    = $user->email;
-        $vendor->user_id  = $user->id;
-        $vendor->token    = md5('vendor'.$data['email'].time());
-        $vendor->created  = date('Y-m-d H:i:s');
-        $vendor->updated  = date('Y-m-d H:i:s');
-        $vendor->place_id = $user->country_id;
+        $vendor->name     		= $data['name'];
+        $vendor->website  		= $data['website'];
+        $vendor->phone   		= $user->phone;
+        $vendor->email    		= $user->email;
+		$vendor->contact_name	= $data['contact_name'];
+        $vendor->user_id  		= $user->id;
+        $vendor->token    		= md5('vendor'.$data['email'].time());
+        $vendor->created  		= date('Y-m-d H:i:s');
+        $vendor->updated  		= date('Y-m-d H:i:s');
+        $vendor->place_id 		= $user->country_id;
         
         $vendor->save();
         

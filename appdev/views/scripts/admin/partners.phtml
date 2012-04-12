@@ -159,8 +159,9 @@
 				   data: $("#partner-form").serialize() ,
 				   success: function(json, status){
 					   if(json.attempt=='success'){
+							showAlert("Partner added successfully. Redirecting...");
 							$.fancybox.close();
-							showAlert("Partner added successfully");
+							location.href = "/admin/users/view/partner/" + json.data +"/2";
 						   return;
 					   }
 					   
