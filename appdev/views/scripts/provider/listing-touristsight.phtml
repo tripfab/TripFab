@@ -3,6 +3,237 @@
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title>Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css6/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css" />
+    <link type="text/css" rel="stylesheet" href="/css6/section1.css" />
+    <link type="text/css" rel="stylesheet" href="/css6/calendar.css" />	
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript" src="/js2/index/listing-touristsight.js"></script>
+    <style type="text/css"> #mapcanvas { width:285px;  height:171px; }</style>   
+</head>
+<body class="bg_ts">
+<div id="wp_all">
+    <div id="wp_header">
+		<?= $this->partial('partials/header-v2.phtml', array('user'=>$this->user,'full'=>true)); ?>
+    </div><!--WP_HEADER-->
+    <div id="wp_content">
+        <div id="cont_bl">
+            <div class="lstng_dflt" id="sight">
+                <div class="top">
+                    <div class="cntrl">
+                        <ul class="breadcrump">
+                            <li class="first"><a href="/" class="home"></a></li>
+                            <li><a href="/<?= $this->country->identifier ?>"><?= $this->country->title ?></a></li>
+                            <li><a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>"><?= $this->city->title ?></a></li>
+                            <li class="last"><a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>/#/tourist-sights"
+                            class="active">Tourist Sights</a></li>
+                        </ul>
+                        <a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>/#/tourist-sights" 
+                        class="link1">&larr; Back to Results</a>
+                        <div class="clear"></div>
+                    </div><!--CNTRL-->
+                    
+                    <div class="description">
+                        <div class="slideshow">
+                        	<?php foreach($this->pictures as $i=>$pic): ?>
+                            <?php $class = ($i == 0) ? 'show' : '' ?>
+                            <?= $this->thumbnail(array('width'=>298,'height'=>212), $pic->url, $class, '298:212', 'img'.$i) ?>
+                            <?php endforeach ?>
+                        </div><!--SLIDESHOW-->
+                        <div class="info">
+                            <h2><?= $this->listing->title ?></h2>
+                            <span class="location"><em></em><strong><?= $this->city->title ?>,</strong> <?= $this->country->title ?>
+                            <img src="/images6/flag<?= strtoupper($this->country->code) ?>.png" width="" height="" alt="" /></span>
+							<?= $this->partial('partials/addtomytrip.phtml', array(
+                                    'user' => $this->user,
+                                    'trips' => $this->trips,
+                                    'listing' => $this->listing,
+                                    'class'	=> 'btn-1',
+                                    'class2' => 'one'
+                            )) ?>
+                            <?php if(!isset($_COOKIE['tooltipHelpList'])): ?>
+                            <div class="firstime_tip">
+                            	<img src="https://developer.tripfab.com/images6/arrow-24.png" class="arrow" alt="">
+                            	<div class="cont">
+                            		<img src="https://developer.tripfab.com/images6/stamp.png" width="75" height="75" alt="" />
+                            		<p><strong>Planning a Trip?</strong>
+                            			Ey! If you're planning a trip you can create you own customize trip, add things to do there and book it when you're ready to travel.
+                            		</p>
+                            	</div><!--CONT-->
+                            	<div class="bot">
+                            		<form action="post" id="tooltipHelpList">
+                            			<fieldset>
+                            				<label><input checked="checked" type="checkbox" name="" value="" />Don't show again</label>
+                            				<input type="submit" value="Okay" class="btn-1" />
+                            			</fieldset>
+                            		</form>
+                            	</div><!--BOT-->
+                            </div><!--FIRSTIME_TIP-->
+                            <?php endif ?>
+                            
+                            <div class="text">
+                                <ul class="rating">
+                                	<!--
+                                    <li><a href="" class="slct"></a></li>
+                                    <li><a href="" class="slct"></a></li>
+                                    <li><a href="" class="slct"></a></li>
+                                    <li><a href="" class="nrml"></a></li>
+                                    <li><a href="" class="nrml"></a></li>
+                                    -->
+                                </ul>
+                                <div class="clear"></div>
+                            </div><!--TEXT-->
+                            <div class="photos">
+                                <a href="" class="lf-arrow"></a>
+                                <div class="imgs">
+                                	<?php for($i=0; $i<count($this->pictures); $i=$i+10): ?>
+                                    <div class="single">
+                                    	<?php for($j=$i;$j<($i+10); $j++):?>
+                                        <?php if(isset($this->pictures[$j])): ?>
+                                        <?php $pic = $this->pictures[$j] ?>
+                                        <?php $class = ($j == 0) ? 'active' : '' ?>
+                                        <a class="<?= $class ?>" href="#img<?= $j ?>"><?= $this->thumbnail(65, $pic->url, '', '1:1') ?></a>
+                                        <?php else: ?>
+                                        <img src="/images2/empty-small-photo.png" width="65" height="65" />
+                                        <?php endif ?>
+                                        <?php endfor ?>
+                                    </div>
+                                    <?php endfor ?>
+                                </div><!--IMGS-->
+                                <a href="" class="rg-arrow"></a>
+                            </div><!--PHOTOS-->
+                        </div><!--INFO-->
+                        <div class="clear"></div>
+                    </div><!--DESCRIPTION-->
+                </div><!--TOP-->
+                <div class="container">
+                    <div class="sidebar">
+                        <div class="map">
+                            <div class="cont">
+                                <div class="map_canvas">
+                                	<div id="mapcanvas"></div>                                
+                                </div><!--MAP_CANVAS-->
+                            </div><!--CONT-->
+                        </div><!--MAP-->
+                        <?php if(!empty($this->listing->address)): ?>
+                        <div class="location">
+                            <img src="/images6/map_<?= strtolower($this->country->code) ?>.png" class="country" width="45" height="43" alt="" />
+                            <p><strong>Location</strong> <?= $this->listing->address ?></p>
+                            <div class="clear"></div>
+                        </div><!--LOCATION-->
+                        <?php endif ?>
+                    </div><!--SIDEBAR-->
+                    
+                    <div class="content">
+                        <div class="descrip">
+                            <h3>Description</h3>
+							<?php if(!empty($this->overview->about)): ?>
+                            <p>About the spot</p>
+                            <p><?= stripslashes(nl2br($this->overview->about)) ?></p>
+                            <?php endif; if(!empty($this->overview->expect)): ?>
+                            <p>What to expect</p>
+                            <p><?= stripslashes(nl2br($this->overview->expect)) ?></p>
+                            <?php endif; if(!empty($this->overview->love)): ?>
+                            <p>Things you'll love</p>
+                            <p><?= stripslashes(nl2br($this->overview->love)) ?></p>
+                            <?php endif ?>
+                        </div><!--DESCRIP-->
+                        
+                        <?php if(!empty($this->getthere->plane) or
+								 !empty($this->getthere->car) or
+								 !empty($this->getthere->bus) or
+								 !empty($this->getthere->train) or
+								 !empty($this->getthere->boat)): ?>
+                        <div class="direcctions">
+                            <h3>How to get there</h3>
+							<?php if(!empty($this->getthere->plane)): ?>
+                            <div class="single">
+                                <h4><span class="plane"></span>By Plane</h4>
+                                <p><?= stripslashes(nl2br($this->getthere->plane)) ?></p>
+                            </div><!--DFLT-->
+                            <?php endif; if(!empty($this->getthere->car)): ?>
+                            <div class="single">
+                                <h4><span class="car"></span>By Car</h4>
+                                <p><?= stripslashes(nl2br($this->getthere->car)) ?></p>
+                            </div><!--DFLT-->
+                            <?php endif; if(!empty($this->getthere->bus)): ?>
+                            <div class="single">
+                                <h4><span class="bus"></span>By Bus</h4>
+                                <p><?= stripslashes(nl2br($this->getthere->bus)) ?></p>
+                            </div><!--DFLT-->
+                            <?php endif; if(!empty($this->getthere->train)): ?>
+                            <div class="single">
+                                <h4><span class="train"></span>By Train</h4>
+                                <p><?= stripslashes(nl2br($this->getthere->train)) ?></p>
+                            </div><!--DFLT-->
+                            <?php endif; if(!empty($this->getthere->boat)): ?>
+                            <div class="single">
+                                <h4><span class="boat"></span>By Boat</h4>
+                                <p><?= stripslashes(nl2br($this->getthere->boat)) ?></p>
+                            </div><!--DFLT-->
+                            <?php endif ?>
+                        </div><!--DIRECCTIONS-->
+                        <?php endif ?>
+                        <div class="clear"></div>
+                    </div><!--CONTENT-->
+                    <div class="clear"></div>
+                </div><!--CONTAINER-->
+            </div><!--LSTNG_DFLT-->
+        </div><!--CONT_BL-->
+    </div><!--WP_CONTENT-->
+    <div id="wp_footer">
+		<?= $this->partial('partials/footer.phtml'); ?>
+    </div><!--WP_FOOTER-->
+</div><!--WRAPPER_ALL-->
+<input type="hidden" value="<?= ($this->listing->lat) ? $this->listing->lat : 'none' ?>" name="listlat" />
+<input type="hidden" value="<?= ($this->listing->lng) ? $this->listing->lng : 'none' ?>" name="listlng" />
+<input type="hidden" value="<?= $this->listing->title ?>" name="listtitle" />
+<input type="hidden" value="<?= $this->listing->id ?>" name="listingids" />
+<div class="hidden">
+	<div id="newtrip">
+		<div id="create_trip">
+			<form action="">
+				<div class="top">
+					<h3>Create a New Trip</h3>
+					<p>Complete the information below to start your next trip</p>
+				</div><!--TOP-->
+				<div class="cont">
+					<fieldset>
+						<div class="item">
+							<label class="trip">Trip Name</label>
+							<input type="text" name="title" value="" />
+						</div><!--ITEM-->
+						<div class="item">
+							<label class="dates">Trip Dates</label>
+							<input id="start" class="start" type="text" name="start" value="Starting Date" />
+							<input id="end" class="end"type="text" name="end" value="Ending Date" />
+							<label class="check">
+								<input type="checkbox" class="nodatesyet"/>
+								I don't know the travel dates yet
+							</label>
+						</div><!--ITEM-->
+					</fieldset>
+				</div><!--CONT-->
+				<div class="bottom">
+					<input type="submit" class="btn-1 noclean" value="Create Trip" />
+					<input type="button" onclick="$.fancybox.close(); return false;" class="btn-10 noclean" value="Cancel" />
+				</div><!--BOTTOM-->
+				<input type="hidden" name="trip" value="new" />
+				<input type="hidden" name="listing" value="" />
+			</form>
+		</div><!--CREATE_TRIP-->
+	</div><!--NEWTRIP-->
+</div><!--HIDDEN-->
+</body>
+</html>
+<?php /**<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
     <title><?= $this->listing->title ?> - <?= $this->city->title ?>, <?= $this->country->title ?> | Tripfab.com</title>
     <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
@@ -114,3 +345,4 @@
 <style type="text/css">#mapcanvas { width:246px;  height:175px; }</style>
 </body>
 </html>
+*/ ?>
