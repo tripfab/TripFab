@@ -76,6 +76,7 @@ $(document).ready(function() {
             var aux = new Date(date), aux2 = new Date(aux.getTime() + 86400000);
             var $date = $.datepicker.formatDate('M d, yy', new Date(date));
             $("#checkOut").datepicker('option','minDate',new Date(aux2));
+            $('#checkIn').val($date);
             refreshPrice();
         }
     });
@@ -89,6 +90,8 @@ $(document).ready(function() {
         minDate:new Date(),
         maxDate:'+1y',
         onSelect:function(date, inst){
+            var $date = $.datepicker.formatDate('M d, yy', new Date(date));
+            $('#checkIn').val($date);
             refreshPrice();
         }
     });
