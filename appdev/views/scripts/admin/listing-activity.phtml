@@ -1,6 +1,627 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
+	<meta content="noindex,nofollow" name="robots" />
+	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+	<title>Tripfab.com</title>
+	<link type="text/css" rel="stylesheet" href="/css6/reset.css" />
+	<link type="text/css" rel="stylesheet" href="/css6/common.css" />
+	<link type="text/css" rel="stylesheet" href="/css6/section1.css" />	
+	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+	<link type="text/css" rel="stylesheet" href="/css6/calendar.css" />
+</head>
+<body class="bg_hl">
+<div id="wp_all">
+    <div id="wp_header">
+        <?= $this->partial('partials/header-v2.phtml', array('user'=>$this->user,'full'=>true)); ?>
+        <div class="sub_header" id="lstng_header">
+            <div class="cont">
+                <?= $this->partial('partials/headerVendorInfo.phtml', array('vendor'=>$this->vendor, 'user'=> $this->user)) ?>
+            </div><!--CONT-->
+        </div><!--SUB_HEADER-->
+    </div><!--WP_HEADER-->
+    <div id="wp_content">
+        <div id="cont_bl">
+            <div id="lstng_htl">
+                <div class="img_bg">
+                    <div class="photo"><?= $this->blur($this->listing->image) ?></div><!--PHOTO-->
+                    <div class="wrap">
+                        <div  class="dscript">
+                            <div class="inner">
+                                <h3><?= $this->listing->title ?></h3>
+                                <span class="location"><em></em><?= $this->city->title ?>, <?= $this->country->title ?></span>
+                                <p><?= $this->listing->description ?>...</p>
+                                <div class="price">
+                                    <em>From</em>
+                                    <sup>$</sup>
+                                    <span><?= $this->listing->price ?> <sub>per person</sub></span>
+                                </div><!--PRICE-->
+                                <!--
+                                <div class="reviews">
+                                    <ul class="rating">
+                                        <li><a href="" class="slct"></a></li>
+                                        <li><a href="" class="slct"></a></li>
+                                        <li><a href="" class="slct"></a></li>
+                                        <li><a href="" class="nrml"></a></li>
+                                        <li><a href="" class="nrml"></a></li>
+                                    </ul>
+                                    <span>5 Reviews</span>
+                                </div>--><!--REVIEWS-->
+                            </div><!--INNER-->
+                        </div><!--DSCRIPT-->
+                        <div class="clear"></div>
+                    </div><!--WRAP-->	
+                </div><!--IMAGE_BG-->
+                <div class="wrap">
+                    <div class="cont">
+                        <div class="container">
+                        	<?= $this->partial('partials/addtomytrip.phtml', array(
+									'user' => $this->user,
+									'trips' => $this->trips,
+									'listing' => $this->listing,
+									'class'	=> 'main',
+									'class2' => 'one'
+							)) ?>
+                            <?php if(!isset($_COOKIE['tooltipHelpList'])): ?>
+							<div class="firstime_tip">
+								<img class="arrow" src="https://developer.tripfab.com/images6/arrow-24.png" alt="" />
+								<div class="cont">
+									<img src="https://developer.tripfab.com/images6/stamp.png" width="75" height="75" alt="" />
+									<p><strong>Planning a Trip?</strong>
+										Ey! If you're planning a trip you can create you own customize trip, add things to do there and book it when you're ready to travel.
+									</p>
+								</div><!--CONT-->
+								<div class="bot">
+									<form action="post" id="tooltipHelpList">
+										<fieldset>
+											<label><input checked="checked" type="checkbox" name="" value="" />Don't show again</label>
+											<input type="submit" value="Okay" class="btn-1" />
+										</fieldset>
+									</form>
+								</div><!--BOT-->
+							</div><!--FIRSTIME_TIP-->
+                            <?php endif ?>
+							
+                            <div class="carousel">
+                                <p><span></span>Photos & Video</p>
+                                <a href="" class="lf-arrow"></a>
+                                <div class="imgs">
+									<ul>
+	                                <?php for($i=0;$i<=count($this->pictures);$i=$i+6): ?>
+										<?php for($j=$i;($j<($i+6)) and ($j<count($this->pictures));$j++): ?>
+										<?php $pic = $this->pictures[$j] ?>
+										<li>
+											<a rel="group1" title="<?= $pic->location ?>" class="lbc" href="#grande<?= $j ?>" data-tip="#small<?= $j ?>">
+											<?= $this->thumbnail(65,$pic->url,'','1:1') ?><span class="arrow"></span></a>
+										</li>
+										<?php endfor ?>                            
+	                                <?php endfor ?>
+									</ul>
+	                            </div><!--IMGS-->
+								<div class="bigImages">
+                                	<?php foreach($this->pictures as $j => $pic): ?>
+                                	<div class="hover" id="small<?= $j ?>">
+                                        <a href="#grande<?= $j ?>" class="lbc">
+                                        <?= $this->thumbnail(array('width'=>391,'height'=>254),$pic->url,'','391:254') ?>
+                                        <span><?= $pic->location ?></span></a>
+                                    </div>
+                                    <?php endforeach ?>
+								</div><!--BIGIMAGES-->
+                            </div><!--CAROUSEL-->
+                            <div class="hidden">
+                                <?php for($i=0;$i<count($this->pictures);$i++): ?>
+                                <?= $this->image($this->pictures[$i]->url, 'lgbox_img','grande'.$i) ?>
+                                <?php endfor ?>
+                            </div>
+                            
+                            <div class="tabs">
+                                <ul>
+                                    <li><a href="#description" class="ui-tabs-selected ui-state-active">Description</a></li>
+                                    <li><a href="#directions">How to Get There</a></li>
+                                </ul>
+                                <div class="description" id="description">
+                                    <div class="info">
+                                        <ul>
+                                            <li><span class="schedule"></span><strong>Schedule Details</strong>
+                                                <?php if(count($this->options) > 0): ?>
+                                                <?php foreach($this->options as $sch): ?>
+                                                <p><?= date('G:i a', strtotime($sch->starting)) ?></p>
+                                                <?php endforeach ?>
+                                                <?php else: ?>
+                                                <p>Flexible</p>
+                                                <?php endif ?>
+                                            </li>
+                                            <?php if(count($this->options) > 0): ?>
+                                            <li><span class="duration"></span><strong>Duration</strong> 
+                                            <?= $this->options[0]->duration . ' ' . $this->options[0]->duration_label ?></li>
+                                            <?php endif ?>
+                                            <?php if(!is_null($this->departure_city)): ?>
+                                            <li><span class="depature"></span><strong>Departure Point</strong>
+                                                <p><?= $this->departure_city->title ?>,</p>
+                                                <p><?= $this->country->title ?></p>
+                                            </li>
+                                            <?php endif ?>
+                                            <?php if($this->listing->return == $this->listing->departure): ?>
+                                            <li><span class="return"></span><strong>Return details</strong> 
+                                                <p>Tour concludes at the original point of departure</p>
+                                            </li>
+                                            <?php elseif(!is_null($this->return_city)): ?>
+                                            <li><span class="return"></span><strong>Return details</strong> 
+                                                <p><?= $this->return_city->title ?>,</p>
+                                                <p><?= $this->country->title ?></p>
+                                            </li>
+                                            <?php endif ?>
+                                        </ul>
+                                    </div><!--INFO-->
+                                    <h4><span class="activity"></span><?= $this->listing->title ?></h4>
+                                    <?php if(!empty($this->overview->about)): ?>
+                                    <p><?= nl2br($this->overview->about) ?></p>
+                                    <?php endif; if(!empty($this->oveview->expect)): ?>
+                                    <h5>What to Expect</h5>
+                                    <p><?= nl2br($this->overview->expect) ?></p>
+                                    <?php endif; if(!empty($this->overview->love)): ?>
+                                    <h5>Things you'll love</h5>
+                                    <p><?= nl2br($this->overview->expect) ?></p>
+                                    <?php endif ?>
+            
+                                    <?php $ok = true; $i=0; $limit = count($this->details) ?>
+                                    <?php $ok1 = true; $ok2 = true; ?>
+                                    <?php while($i<$limit) { 
+                                            if($this->details[$i]->type == 1) {$ok = false; $ok1 = false;}
+                                            if($this->details[$i]->type == 2) {$ok = false; $ok2 = false;}
+                                            $i++; } ?>
+                                    <?php if(!$ok): ?>
+                                    <div class="act_details">
+                                        <h4><span class="icon"></span>Activity Details</h4>
+                                        <?php if(!$ok1): ?>
+                                        <div class="in">
+                                            <h5>Includes</h5>
+                                            <ul>
+                                                <?php foreach($this->details as $detail): ?>
+                                                <?php if($detail->type == 1): ?>
+                                                <li><?= stripslashes($detail->text) ?></li>
+                                                <?php endif ?>
+                                                <?php endforeach ?>
+                                            </ul>
+                                        </div><!--IN-->
+                                        <?php endif ?>
+                                        <?php if(!$ok2): ?>
+                                        <div class="ex">
+                                            <h5>Excludes</h5>
+                                            <ul>
+                                                <?php foreach($this->details as $detail): ?>
+                                                <?php if($detail->type == 2): ?>
+                                                <li><?= stripslashes($detail->text) ?></li>
+                                                <?php endif ?>
+                                                <?php endforeach ?>
+                                            </ul>
+                                        </div><!--IN-->
+                                        <?php endif ?>
+                                        <div class="clear"></div>
+                                    </div><!--AMENITIES-->
+                                    <?php endif ?>
+                                    
+                                    <?php $ok = true; $i=0; $limit = count($this->details) ?>
+                                    <?php while($i<$limit) { if($this->details[$i]->type == 3) {$ok = false; } $i++; } ?>
+                                    <?php if(!$ok): ?>
+                                    <div class="policies">
+                                        <h5>Policies</h5>
+                                        <ul>
+                                            <?php foreach($this->details as $detail): ?>
+                                            <?php if($detail->type == 3): ?>
+                                            <li><?= stripslashes($detail->text) ?></li>
+                                            <?php endif ?>
+                                            <?php endforeach ?>
+                                        </ul>
+                                    </div><!--POLICIES-->
+                                    <?php endif ?>
+                                    
+                                    <?php $ok = true; $i=0; $limit = count($this->details) ?>
+                                    <?php while($ok and $i<$limit) { 
+                                            if($this->details[$i]->type == 4) $ok = false;
+                                            $i++; } ?>
+                                    <?php if(!$ok): ?>											
+                                    <div class="tips">
+                                        <h4><span class="icon"></span>Tips & Recommendations</h4>
+                                        <ul>
+                                            <?php foreach($this->details as $detail): ?>
+                                            <?php if($detail->type == 4): ?>
+                                            <li><?= stripslashes($detail->text) ?></li>
+                                            <?php endif ?>
+                                            <?php endforeach ?>
+                                        </ul>
+                                    </div><!--TIPS-->
+                                    <?php endif ?>
+                                    
+                                    
+                                </div><!--DESCRIPTION-->
+                                <!--ROOM_TYPES-->
+                                
+                                <div id="directions">
+                                    <?php if(!empty($this->getthere->plane)): ?>
+                                    <div class="dflt">
+                                        <h4><span class="plane"></span>By Plane</h4>
+                                        <p><?= stripslashes(nl2br($this->getthere->plane)) ?></p>
+                                    </div><!--DFLT-->
+                                    <?php endif; if(!empty($this->getthere->car)): ?>
+                                    <div class="dflt">
+                                        <h4><span class="plane"></span>By Car</h4>
+                                        <p><?= stripslashes(nl2br($this->getthere->car)) ?></p>
+                                    </div><!--DFLT-->
+                                    <?php endif; if(!empty($this->getthere->bus)): ?>
+                                    <div class="dflt">
+                                        <h4><span class="plane"></span>By Bus</h4>
+                                        <p><?= stripslashes(nl2br($this->getthere->bus)) ?></p>
+                                    </div><!--DFLT-->
+                                    <?php endif; if(!empty($this->getthere->train)): ?>
+                                    <div class="dflt">
+                                        <h4><span class="plane"></span>By Train</h4>
+                                        <p><?= stripslashes(nl2br($this->getthere->train)) ?></p>
+                                    </div><!--DFLT-->
+                                    <?php endif; if(!empty($this->getthere->boat)): ?>
+                                    <div class="dflt">
+                                        <h4><span class="plane"></span>By Boat</h4>
+                                        <p><?= stripslashes(nl2br($this->getthere->boat)) ?></p>
+                                    </div><!--DFLT-->
+                                    <?php endif ?>
+                                    
+                                    <div class="map">
+                                        <h4><span></span>Location</h4>
+                                        <p><strong><?= $this->listing->title ?></strong>
+                                        <?= $this->listing->address ?></p>
+                                        <div class="map_canvas">
+                                            <div class="cont">
+                                                <div id="mapcanvas"></div>
+                                            </div><!--CONT-->
+                                            <span class="sw"></span>
+                                        </div><!--MAP_CANVAS-->
+                                    </div><!--MAP-->
+                                </div><!--DIRECTIONS-->
+                            </div><!--TABS-->
+                            
+                            <div class="reviews">
+                            	<?php if(count($this->reviews) > 0): ?>
+                                <div class="ttl"><span></span><?= count($this->reviews) ?> Reviews 
+                                <!--<a href="#writeReview" class="btn-10 lbc">Write Review</a>--></div><!--TTL-->
+                                <?php foreach($this->reviews as $rev): ?>
+                                <div class="single">
+	                                <?php if(!empty($rev->user_image)): ?>
+                                	<?= $this->thumbnail(58,$review->user_image, '', '1:1') ?>
+	                                <?php else: ?>
+	                                <?= $this->thumbnail(58,'/images/default-profile.gif','', '1:1') ?>                                    
+                                    <?php endif ?>
+                                    <div class="message">
+                                        <div class="subject"><?= $rev->title ?> <em>by</em> <span><?= $rev->user_name ?></span></div>                                        <div class="text">
+                                            <p><?= stripslashes(nl2br($rev->text)) ?></p>
+                                            <!--
+                                            <div class="social">
+                                                <a href="" class="not"></a>
+                                                <a href="" class="like"></a>
+                                                <span class="pos">+4</span>
+                                                <span class="neg">-4</span>
+                                                <p>Did you find this review helpful?</p>
+                                                <span class="date">Apr 26, 2011</span>
+                                                <div class="clear"></div>												
+                                            </div>--> <!--SOCIAL-->
+                                            <span class="help"><em></em>Helpful</span>
+                                            <span class="n-help"><em></em>Not Helpful</span>
+                                        </div><!--TEXT-->
+                                        
+                                    </div><!--MESSAGE-->
+                                    <div class="clear"></div>
+                                </div><!--SINGLE-->
+                                <?php endforeach ?>
+                                <!--
+                                <div class="paging">
+                                    <span class="total">20 - 25 of 126 Reviews</span>
+                                    <ul>
+                                        <li class="prev"><a href="" class="" class="prev">Previous</a></li>
+                                        <li><a href="" class="">1</a></li>
+                                        <li><a class="active" href="" class="">2</a></li>
+                                        <li><a href="" class="">3</a></li>
+                                        <li class="next"><a href="" class="" class="next">Next</a></li>
+                                    </ul>
+                                </div>--><!--PAGING-->
+                                <?php else: ?>
+                                <?php // Agregue los reviews aqui ?>
+                                <?php endif ?>
+                            </div><!--REVIEWS-->
+                        </div><!--CONTAINER-->
+                        <div class="sidebar">
+							<span class="arrow"></span>                            
+                            <div class="cont">
+                                <form id="booking" method="post" action="/en-US/cart/add">
+                                    <div id="accordion">
+                                        <h5 class="first"><span class="i_date"></span>Select the Date</h5>
+                                        <div id="calendar">
+                                            <span class="line"></span>
+                                        </div><!--CALENDAR-->
+                                        <?php if((is_null($this->listing->min) or is_null($this->listing->max)) and count($this->capacities) > 0): ?>
+                                        <h5><span class="i_type"></span>Choose an Activity Type</h5>
+                                        <div class="type">
+                                            <span class="line"></span>
+                                            <?php foreach($this->capacities as $option): ?>
+                                            <label for="activityType<?= $option->id ?>">
+                                            <input class="noclean" type="radio" value="<?= $option->id ?>" 
+                                            name="capacity" id="activityType<?= $option->id ?>">
+                                            <?= $option->name ?> (<?= $option->min ?> - <?= $option->max ?>) / 
+                                            $<?= $this->prices[$option->id]['price'] ?></label>
+                                            <?php endforeach ?>
+                                        </div><!--TYPE-->
+                                        <?php else: ?>
+                                        <h5><span class="i_type"></span>Choose an Activity Type</h5>
+                                        <div class="type">
+                                            <span class="line"></span>
+                                            <label for="activityType0">
+                                            <input checked="checked" class="noclean" type="radio" 
+                                            value="single" name="capacity" id="activityType0">
+                                            Single Capacity (<?= $this->listing->min ?> - <?= $this->listing->max ?>) / 
+                                            $<?= $this->listing->price ?></label>
+                                        </div><!--TYPE-->
+                                        <?php endif ?>
+                                        
+                                        <?php if(count($this->options) > 0): ?>
+                                        <h5><span class="i_sched"></span>Select a Schedule</h5>
+                                        <div class="type">
+                                            <span class="line"></span>
+                                            <?php foreach($this->options as $option): ?>
+                                            <label for="schedule<?= $option->id ?>">
+                                            <input class="noclean" type="radio" value="<?= $option->id ?>" 
+                                            name="option" id="schedule<?= $option->id ?>">
+                                            <?= date('h:i a',strtotime($option->starting)) ?> - 
+                                            <?= date('h:i a',strtotime($option->ending)) ?> </label>
+                                            <?php endforeach ?>
+                                        </div><!--TYPE-->
+                                        <?php else: ?>
+                                        <h5><span class="i_sched"></span>Select a Schedule</h5>
+                                        <div class="type">
+                                            <span class="line"></span>
+                                            <label for="schedule0">
+                                            <input class="noclean" type="radio" value="flex" name="option" id="schedule0">Flexible</label>
+                                        </div><!--TYPE-->
+                                        <?php endif ?>
+                                        
+                                        <h5><span class="i_user"></span>How many travelers?</h5>
+                                        <div class="selects activity">
+                                            <span class="line"></span>
+                                            <label class="rooms">
+                                                Adults
+                                                <select class="ocp adt"  name="adults">
+                                                    <?php for($i=1; $i<=12; $i++): ?>
+                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <?php endfor ?>
+                                                </select>
+                                            </label>
+                                            <label>
+                                                Children
+                                                <select class="ocp kid" name="kids">
+                                                    <option value="0">0</option>
+                                                    <?php for($i=1; $i<=12; $i++): ?>
+                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <?php endfor ?>
+                                                </select>
+                                            </label>
+                                            <div class="clear"></div>
+                                        </div><!--SELECTS-->
+                                        <div class="price">
+                                             <span><sup>$</sup>
+                                             <abbr id="sumaryPrice"><?= $this->listing->price ?></abbr> 
+                                             <sub>Subtotal</sub></span>
+                                        </div><!--PRICE-->
+                                    </div><!--ACCORDION-->
+                                    <input type="submit" value="Book Now!" class="btn-1 noclean" />
+                                    <?php foreach($this->form_fields as $name => $value): ?>
+                                    <input type="hidden" name="<?= $name ?>" value="<?= $value ?>" />
+                                    <?php endforeach ?>
+                                    <input type="hidden" name="checkin" id="inputCheckin" value="" />
+                                </form>
+                                <div class="add">
+                                    <?= $this->partial('partials/addtomytrip.phtml', array(
+                                            'user' => $this->user,
+                                            'trips' => $this->trips,
+                                            'listing' => $this->listing,
+                                            'class'	=> 'side',
+                                            'class2' => 'two'
+                                    )) ?>
+                                    <em>or you can</em>
+                                    <div class="clear"></div>
+                                </div><!--ADD-->
+                            </div><!--CONT-->
+						</div><!--SIDEBAR-->
+                        <div class="clear"></div>
+                    </div><!--CONT-->
+                </div><!--WRAP-->
+            </div><!--LSTNG_HTL-->
+        </div><!--CONT_BL-->
+    </div><!--WP_CONTENT-->
+    <div id="wp_footer">
+	    <?= $this->partial('partials/footer.phtml'); ?>   
+    </div> 
+    <div class="hidden">
+        <div id="send_message">
+            <form action="" id="sendMessageForm">
+                <div class="lb-forgot">
+                    <div class="ttl">Send a message <em>to</em> <?= $this->vendor->name ?></div>
+                    <div class="intro_m">
+                        <p><strong>Questions or concerns about the activity?</strong>
+                            Please write a message and you'll get an answer very soon.</p>
+                    </div><!--INTRO-->
+                    <div class="content">
+                        <textarea cols="30" name="message" rows="1"></textarea>
+                    </div><!-- closes content -->
+                    <div class="bottom">
+                        <input type="submit" class="btn-1" value="Send Message" />
+                        <span onclick="$.fancybox.close()" class="btn-10">Cancel</span>	
+                    </div><!-- closes bottom -->
+                </div><!-- closes lb-forgot -->
+                <input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+            </form>
+        </div><!--SEND_MESSAGE-->
+        <div id="start_call">
+            <div id="dialpad" class="lb">
+                <div class="top">Dial your phone number</div><!--TOP-->
+                <div class="middle">
+                    <p>We'll connect you with the vendor in few minutes. Directly.</p>
+                    <div class="number-display">
+                        <a href="#" class="flag"><img src="/images2/flags/us.png" width="16" height="16" alt="" /></a>
+                        <div class="all_flags">
+                            <a href="#" class="up" onMouseover="move('container',10)" onMouseout="clearTimeout(move.to)"></a>
+                            <a href="#" class="down" onMouseover="move('container',-10)" onMouseout="clearTimeout(move.to)"></a>
+                            <div class="holder">
+                                <div id="container" style="position:absolute;width:282px;left:0;top:0">
+                                    <p>ALL COUNTRIES</p>
+                                    <?php foreach($this->countries as $c): ?>
+                                    <a href="#" data-code="<?= $c->phone ?>"><img src="/images2/flags/<?= strtolower($c->code) ?>.png" width="16" height="16" alt="" />
+                                    <?= $c->title ?> <strong>(+<?= $c->phone ?>)</strong></a>
+                                    <?php endforeach ?>
+                                </div><!--CONTAINER-->
+                            </div><!--HOLDER-->
+                        </div><!--ALL_FLAGS-->
+                        <input type="text" name="number" value="" />
+                        <input type="hidden" name="code" value="1" />
+                        <a href="" class="close"></a>
+                        <div class="clear"></div>
+                    </div><!--NUMBER-DISPLAY-->
+                    <div class="numbers">
+                        <a data-num="1" href="">1</a>
+                        <a data-num="2" href="">2<span>ABC</span></a>
+                        <a data-num="3" href="">3<span>DEF</span></a>
+                        <a data-num="4" href="">4<span>GHI</span></a>
+                        <a data-num="5" href="">5<span>JKL</span></a>
+                        <a data-num="6" href="">6<span>MNO</span></a>
+                        <a data-num="7" href="">7<span>PQRS</span></a>
+                        <a data-num="8" href="">8<span>TUV</span></a>
+                        <a data-num="9" href="">9<span>WXYZ</span></a>
+                        <a data-num="*" href="">*</a>
+                        <a data-num="0" href="">0</a>
+                        <a data-num="#" href="">#</a>
+                    </div><!--NUMBERS-->
+                    <div class="control">
+                        <input type="button" name="start" class="btn-1" value="Start Call" />
+                        <input type="button" name="Cancel"  class="cancel" value="Cancel" />
+                    </div><!--CONTROL-->
+                </div><!--MIDDLE-->
+            </div><!--DIALPAD-->
+        </div>
+        <div id="newtrip">
+            <div id="create_trip">
+                <form action="">
+                    <div class="top">
+                        <h3>Create a New Trip</h3>
+                        <p>Complete the information below to start your next trip</p>
+                    </div><!--TOP-->
+                    <div class="cont">
+                        <fieldset>
+                            <div class="item">
+                                <label class="trip">Trip Name</label>
+                                <input type="text" name="title" value="" />
+                            </div><!--ITEM-->
+                            <div class="item">
+                                <label class="dates">Trip Dates</label>
+                                <input class="start" type="text" name="start" value="Starting Date" />
+                                <input class="end"type="text" name="end" value="Ending Date" />
+                                <label class="check">
+                                    <input type="checkbox" class="nodatesyet"/>
+                                    I don't know the travel dates yet
+                                </label>
+                            </div><!--ITEM-->
+                            <div class="item last">
+                                    <input type="checkbox" checked="checked" />
+                                    <p>I want to receive special offers from vendors near
+                                        of the places I'll visit in this trip</p>
+                            </div><!--ITEM-->
+                        </fieldset>
+                    </div><!--CONT-->
+                    <div class="bottom">
+                        <input type="submit" class="btn-1 noclean" value="Create Trip" />
+                        <input type="button" onclick="$.fancybox.close(); return false;" class="btn-10 noclean" value="Cancel" />
+                    </div><!--BOTTOM-->
+                    <input type="hidden" name="trip" value="new" />
+                    <input type="hidden" name="listing" value="" />
+                </form>
+            </div><!--CREATE_TRIP-->
+        </div>
+        
+        <div id="newtrip">
+            <div id="create_trip">
+                <form action="">
+                    <div class="top">
+                        <h3>Create a New Trip</h3>
+                        <p>Complete the information below to start your next trip</p>
+                    </div><!--TOP-->
+                    <div class="cont">
+                        <fieldset>
+                            <div class="item">
+                                <label class="trip">Trip Name</label>
+                                <input type="text" name="title" value="" />
+                            </div><!--ITEM-->
+                            <div class="item">
+                                <label class="dates">Trip Dates</label>
+                                <input id="start" class="start" type="text" name="start" value="Starting Date" />
+                                <input id="end" class="end"type="text" name="end" value="Ending Date" />
+                                <label class="check">
+                                    <input type="checkbox" class="nodatesyet"/>
+                                    I don't know the travel dates yet
+                                </label>
+                            </div><!--ITEM-->
+                        </fieldset>
+                    </div><!--CONT-->
+                    <div class="bottom">
+                        <input type="submit" class="btn-1 noclean" value="Create Trip" />
+                        <input type="button" onclick="$.fancybox.close(); return false;" class="btn-10 noclean" value="Cancel" />
+                    </div><!--BOTTOM-->
+                    <input type="hidden" name="trip" value="new" />
+                    <input type="hidden" name="listing" value="" />
+                </form>
+            </div><!--CREATE_TRIP-->
+        </div><!--NEWTRIP-->
+        
+        <div id="writeReview" class="lb">
+            <div class="top">Write Review <em>to</em> Surfing Lessons </div><!--TOP-->
+            <div class="cont">
+                <form method="post" action="">
+                    <label>Title</label>
+                    <input type="text" name="" value="Write a nice title for your review..." />
+                    <label>Review</label>
+                    <textarea rows="" cols="">Write about your experience...</textarea>
+                    <div class="reviews">
+                        <label>Rate your experience</label>
+                        <ul class="rating">
+                            <li><a href="" class="slct"></a></li>
+                            <li><a href="" class="slct"></a></li>
+                            <li><a href="" class="slct"></a></li>
+                            <li><a href="" class="nrml"></a></li>
+                            <li><a href="" class="nrml"></a></li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div><!--REVIEWS-->
+                </form>
+            </div><!--CONT-->
+            <div class="bot">
+                <input class="btn-1" type="submit" name="" value="Send Review" />
+                <a href="" class="btn-10">Cancel</a>
+            </div><!--BOT-->
+        </div><!--WRITEREVIEW-->
+    </div><!--HIDDEN-->
+</div><!--WRAPPER_ALL-->
+<input type="hidden" value="<?= ($this->listing->lat) ? $this->listing->lat : 'none' ?>" name="listlat" />
+<input type="hidden" value="<?= ($this->listing->lng) ? $this->listing->lng : 'none' ?>" name="listlng" />
+<input type="hidden" value="<?= $this->listing->title ?>" name="listtitle" />
+<input type="hidden" value="<?php foreach($this->disabledDates as $d): ?><?= $d ?>,<?php endforeach ?>" name="diableddates" />
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript" src="/js2/jquery.popupWindow.js"></script>
+<script type="text/javascript" src="/js2/index/listing-activity.js"></script>
+<style type="text/css">
+#mapcanvas {
+	width:638px;
+	height:354px;}
+</style>
+</body>
+</html>
+<?php /**<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
     <title><?= $this->listing->title ?> - <?= $this->city->title ?>, <?= $this->country->title ?> | Tripfab.com</title>
@@ -363,4 +984,4 @@
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript" src="/js2/index/listing-activity.js"></script>
 </body>
-</html>
+</html>*/ ?>
