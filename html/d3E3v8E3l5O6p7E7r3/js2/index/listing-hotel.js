@@ -59,16 +59,12 @@ $(document).ready(function() {
         }
     });
     $('textarea').elastic();
-    //$('select').jqTransSelect();
-    $('li#acordion').accordion({ 
-        autoHeight: false,
-        animated:false
-    });
 	
     var $disableddates = $('body').data('disableddates');
 	 
-    $('#datepicker').datepicker({ 
+    $('#checkIn').datepicker({ 
         showOtherMonths: true,
+        dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
         beforeShowDay:function(date){
             date = $.datepicker.formatDate('mm-dd-yy', date);
             var result = ($.inArray(date,$disableddates) != -1) ? false : true;
@@ -79,15 +75,13 @@ $(document).ready(function() {
         onSelect:function(date, inst){
             var aux = new Date(date), aux2 = new Date(aux.getTime() + 86400000);
             var $date = $.datepicker.formatDate('M d, yy', new Date(date));
-            $( "#datepicker-2" ).datepicker('option','minDate',new Date(aux2));
-            $('li#acordion').accordion('activate',1);
-            $('#checkinlabel').text($date);
-            $('#inputCheckin').val($date);
+            $("#checkOut").datepicker('option','minDate',new Date(aux2));
             refreshPrice();
         }
     });
-    $('#datepicker-2').datepicker({
+    $('#checkOut').datepicker({
         showOtherMonths: true,
+        dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
         beforeShowDay:function(date){
             date = $.datepicker.formatDate('mm-dd-yy', date);
             return ($.inArray(date,$disableddates) != -1) ? [false] : [true]; 
@@ -95,10 +89,6 @@ $(document).ready(function() {
         minDate:new Date(),
         maxDate:'+1y',
         onSelect:function(date, inst){
-            var $date = $.datepicker.formatDate('M d, yy', new Date(date));
-            $('li#acordion').accordion('activate',2);
-            $('#checkoutlabel').text($date);
-            $('#inputCheckout').val($date);
             refreshPrice();
         }
     });
@@ -133,12 +123,12 @@ $(function(){
 function refreshPrice()
 {
     var $data = {
-        checkin	 : $('#inputCheckin').val(),
-        checkout : $('#inputCheckout').val(),
+        checkin	 : $('#checkIn').val(),
+        checkout : $('#checkOut').val(),
         option	 : $('input[name=option]:checked').val(),
         adults	 : $('select[name=adults]').val(),
         kids	 : $('select[name=kids]').val(),
-        id		 : $('body').data('listingid'),
+        id       : $('body').data('listingid'),
         token	 : $('body').data('listingtoken'),
         price	 : $('body').data('listingprice')
     };
@@ -147,7 +137,7 @@ function refreshPrice()
         url:'/ajax/getquote',
         data:$data,
         success:function(price){
-            $('.summary span strong').text(price);
+            $('#sumaryPrice').text(price);
         }
     }); 
 }
@@ -562,10 +552,6 @@ function hideTooltip() {
     $('#fancybox-title').addClass('tittle');
     $('#fancybox-left-ico').addClass('lfarrow');
     $('#fancybox-right-ico').addClass('rgarrow');
-    $('#checkIn, #checkOut, #end, #start').datepicker({
-        dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-        showOtherMonths: true
-    });
 });
 
 $(document).ready(function(){
