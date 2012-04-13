@@ -16,7 +16,7 @@
         <?= $this->partial('partials/header-v2.phtml', array('user'=>$this->user,'full'=>true)); ?>
         <div class="sub_header" id="lstng_header">
             <div class="cont">
-                <?= $this->partial('partials/headerVendorInfo.phtml', array('vendor'=>$this->vendor, 'user'=> $this->user)) ?>
+                <?= $this->partial('admin_partials/headerVendorInfo.phtml', array('vendor'=>$this->vendor, 'user'=> $this->user)) ?>
             </div><!--CONT-->
         </div><!--SUB_HEADER-->
     </div><!--WP_HEADER-->
@@ -24,18 +24,46 @@
         <div id="cont_bl">
             <div id="lstng_htl">
                 <div class="img_bg">
+                	<?php if(strpos($this->listing->image, 'ico-') === false): ?>
                     <div class="photo"><?= $this->blur($this->listing->image) ?></div><!--PHOTO-->
+                    <?php else: ?>
+                    <div class="photo"></div><!--PHOTO-->                    
+                    <?php endif ?>
                     <div class="wrap">
                         <div  class="dscript">
                             <div class="inner">
                                 <h3><?= $this->listing->title ?></h3>
-                                <span class="location"><em></em><?= $this->city->title ?>, <?= $this->country->title ?></span>
+                                <?php if(!is_null($this->city) or !is_null($this->country)): ?>
+                                <span class="location"><em></em>
+                                <?php if(!is_null($this->city->title)): ?>
+								<?= $this->city->title ?>, 
+                                <?php endif; if(!is_null($this->country->title)): ?>
+								<?= $this->country->title ?>
+                                <a href="/admin/listings/location/<?= $this->listing->id ?>" class="link1">Edit location</a></span>
+                                <?php endif ?>
+                                <?php else: ?>
+								<span class="location"><em></em>Unknown Location. 
+                                <a href="/admin/listings/location/<?= $this->listing->id ?>" class="link1">Set location</a></span>
+								<?php endif ?>
+                                <?php if(!empty($this->listing->description)): ?>
                                 <p><?= $this->listing->description ?>...</p>
+                                <?php else: ?>
+                                <p>No description yet.</p>
+                                <?php endif ?>
+                                <?php if($this->listing->price != 0): ?>
                                 <div class="price">
                                     <em>From</em>
                                     <sup>$</sup>
                                     <span><?= $this->listing->price ?> <sub>per person</sub></span>
                                 </div><!--PRICE-->
+                                <?php else: ?>
+                                <div class="price">
+                                    <p class="notSet">
+                                        No price set yet<br/>
+                                        <a href="/admin/listings/price/<?= $this->listing->id ?>" class="link1">Set pricing now</a>
+                                    </p>
+                                </div><!--PRICE-->
+                                <?php endif ?>
                                 <!--
                                 <div class="reviews">
                                     <ul class="rating">
@@ -81,22 +109,23 @@
 								</div><!--BOT-->
 							</div><!--FIRSTIME_TIP-->
                             <?php endif ?>
-							
+                            
                             <div class="carousel">
                                 <p><span></span>Photos & Video</p>
                                 <a href="" class="lf-arrow"></a>
                                 <div class="imgs">
+                                	<?php if(count($this->pictures) > 0): ?>
 									<ul>
-	                                <?php for($i=0;$i<=count($this->pictures);$i=$i+6): ?>
-										<?php for($j=$i;($j<($i+6)) and ($j<count($this->pictures));$j++): ?>
-										<?php $pic = $this->pictures[$j] ?>
+                                    <?php foreach($this->pictures as $j=>$pic): ?>
 										<li>
 											<a rel="group1" title="<?= $pic->location ?>" class="lbc" href="#grande<?= $j ?>" data-tip="#small<?= $j ?>">
 											<?= $this->thumbnail(65,$pic->url,'','1:1') ?><span class="arrow"></span></a>
 										</li>
-										<?php endfor ?>                            
-	                                <?php endfor ?>
+	                                <?php endforeach ?>
 									</ul>
+                                    <?php else: ?>
+                                    <ul><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+                                    <?php endif ?>
 	                            </div><!--IMGS-->
 								<div class="bigImages">
                                 	<?php foreach($this->pictures as $j => $pic): ?>
@@ -154,16 +183,27 @@
                                         </ul>
                                     </div><!--INFO-->
                                     <h4><span class="activity"></span><?= $this->listing->title ?></h4>
+                                    <?php $ok = true ?>
                                     <?php if(!empty($this->overview->about)): ?>
+                                    <?php $ok = false ?>
                                     <p><?= nl2br($this->overview->about) ?></p>
                                     <?php endif; if(!empty($this->oveview->expect)): ?>
+                                    <?php $ok = false ?>
                                     <h5>What to Expect</h5>
                                     <p><?= nl2br($this->overview->expect) ?></p>
                                     <?php endif; if(!empty($this->overview->love)): ?>
+                                    <?php $ok = false ?>
                                     <h5>Things you'll love</h5>
                                     <p><?= nl2br($this->overview->expect) ?></p>
                                     <?php endif ?>
-            
+                                    
+                                    <?php if($ok): ?>
+                                    <div class="empty">
+                                        <p>There are no description yet. 
+                                        <a href="/admin/listings/overview/<?= $this->listing->id ?>" class="link1">Edit now</a></p>
+                                    </div><!--EMPTY-->
+                                    <?php endif ?>
+
                                     <?php $ok = true; $i=0; $limit = count($this->details) ?>
                                     <?php $ok1 = true; $ok2 = true; ?>
                                     <?php while($i<$limit) { 
@@ -199,6 +239,25 @@
                                         <?php endif ?>
                                         <div class="clear"></div>
                                     </div><!--AMENITIES-->
+                                    <?php else: ?>
+                                    <div class="act_details">
+                                        <h4><span class="icon"></span>Activity Details</h4>
+                                        <div class="in">
+                                            <h5>Inclusions</h5>
+                                            <div class="empty">
+                                                <p>There are no includes yet. 
+                                                <a href="/admin/listings/details/<?= $this->listing->id ?>" class="link1">Edit now</a></p>
+                                            </div><!--EMPTY-->
+                                        </div><!--IN-->
+                                        <div class="ex">
+                                            <h5>Excludes</h5>
+                                            <div class="empty ">
+                                                <p>There are no excludes yet. 
+                                                <a href="/admin/listings/details/<?= $this->listing->id ?>" class="link1">Edit now</a></p>
+                                            </div><!--EMPTY-->
+                                        </div><!--EX-->
+                                        <div class="clear"></div>
+                                    </div><!--AMENITIES-->
                                     <?php endif ?>
                                     
                                     <?php $ok = true; $i=0; $limit = count($this->details) ?>
@@ -213,6 +272,14 @@
                                             <?php endif ?>
                                             <?php endforeach ?>
                                         </ul>
+                                    </div><!--POLICIES-->
+                                    <?php else: ?>
+                                    <div class="policies">
+                                        <h5>Policies</h5>
+                                        <div class="empty ">
+                                            <p>There is no policies yet. 
+                                            <a href="/admin/listings/details/<?= $this->listing->id ?>" class="link1">Edit now</a></p>
+                                        </div><!--EMPTY-->
                                     </div><!--POLICIES-->
                                     <?php endif ?>
                                     
@@ -231,40 +298,61 @@
                                             <?php endforeach ?>
                                         </ul>
                                     </div><!--TIPS-->
+                                    <?php else: ?>
+                                    <div class="tips">
+                                        <h4><span class="icon"></span>Tips & Recommendations</h4>
+                                        <div class="empty line">
+                                            <p>There are no tips yet. 
+                                            <a href="/admin/listings/tips/<?= $this->listing->id ?>" class="link1">Edit now</a></p>
+                                        </div><!--EMPTY-->
+                                    </div><!--TIPS-->
                                     <?php endif ?>
-                                    
-                                    
-                                </div><!--DESCRIPTION-->
-                                <!--ROOM_TYPES-->
-                                
+                                </div><!--DESCRIPTION-->                                
                                 <div id="directions">
+                                	<?php $ok = true ?>
                                     <?php if(!empty($this->getthere->plane)): ?>
+                                    <?php $ok = false; ?>
                                     <div class="dflt">
                                         <h4><span class="plane"></span>By Plane</h4>
                                         <p><?= stripslashes(nl2br($this->getthere->plane)) ?></p>
                                     </div><!--DFLT-->
                                     <?php endif; if(!empty($this->getthere->car)): ?>
+                                    <?php $ok = false; ?>
                                     <div class="dflt">
                                         <h4><span class="plane"></span>By Car</h4>
                                         <p><?= stripslashes(nl2br($this->getthere->car)) ?></p>
                                     </div><!--DFLT-->
                                     <?php endif; if(!empty($this->getthere->bus)): ?>
+                                    <?php $ok = false; ?>
                                     <div class="dflt">
                                         <h4><span class="plane"></span>By Bus</h4>
                                         <p><?= stripslashes(nl2br($this->getthere->bus)) ?></p>
                                     </div><!--DFLT-->
                                     <?php endif; if(!empty($this->getthere->train)): ?>
+                                    <?php $ok = false; ?>
                                     <div class="dflt">
                                         <h4><span class="plane"></span>By Train</h4>
                                         <p><?= stripslashes(nl2br($this->getthere->train)) ?></p>
                                     </div><!--DFLT-->
                                     <?php endif; if(!empty($this->getthere->boat)): ?>
+                                    <?php $ok = false; ?>
                                     <div class="dflt">
                                         <h4><span class="plane"></span>By Boat</h4>
                                         <p><?= stripslashes(nl2br($this->getthere->boat)) ?></p>
                                     </div><!--DFLT-->
                                     <?php endif ?>
                                     
+                                    <?php if($ok): ?>
+                                    <div class="dflt">
+                                        <div class="empty">
+                                            <span class="car"></span>
+                                            <p>There is not info about how to get there. 
+                                            <a href="/admin/listings/location/<?= $this->listing->id ?>" class="link1">Edit now</a></p>
+                                        </div><!--EMPTY-->
+                                    </div><!--DFLT-->
+                                    <?php endif ?>
+                                    
+                                    <?php if(!empty($this->listing->address)): ?>
                                     <div class="map">
                                         <h4><span></span>Location</h4>
                                         <p><strong><?= $this->listing->title ?></strong>
@@ -276,11 +364,20 @@
                                             <span class="sw"></span>
                                         </div><!--MAP_CANVAS-->
                                     </div><!--MAP-->
+                                    <?php else: ?>
+                                    <div class="dflt">
+                                        <div class="empty">
+                                            <span class="location"></span>
+                                            <p>Unknown Location. 
+                                            <a href="/admin/listings/location/<?= $this->listing->id ?>" class="link1">Set location now</a></p>
+                                        </div><!--EMPTY-->
+                                    </div><!--DFLT-->
+                                    <?php endif ?>
                                 </div><!--DIRECTIONS-->
                             </div><!--TABS-->
                             
+                            <?php if(count($this->reviews) > 0): ?>
                             <div class="reviews">
-                            	<?php if(count($this->reviews) > 0): ?>
                                 <div class="ttl"><span></span><?= count($this->reviews) ?> Reviews 
                                 <!--<a href="#writeReview" class="btn-10 lbc">Write Review</a>--></div><!--TTL-->
                                 <?php foreach($this->reviews as $rev): ?>
@@ -322,10 +419,15 @@
                                         <li class="next"><a href="" class="" class="next">Next</a></li>
                                     </ul>
                                 </div>--><!--PAGING-->
-                                <?php else: ?>
-                                <?php // Agregue los reviews aqui ?>
-                                <?php endif ?>
                             </div><!--REVIEWS-->
+							<?php else: ?>
+                            <div class="empty_reviews">
+                                <div class="empty">
+                                    <span class="reviews"></span>
+                                    <p>This listing doesn't have reviews yet.</p>
+                                </div><!--EMPTY-->
+                            </div>			
+                            <?php endif ?>
                         </div><!--CONTAINER-->
                         <div class="sidebar">
 							<span class="arrow"></span>                            
@@ -619,369 +721,3 @@
 </style>
 </body>
 </html>
-<?php /**<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns='http://www.w3.org/1999/xhtml'>
-<head>
-    <meta content="noindex,nofollow" name="robots" />
-    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->listing->title ?> - <?= $this->city->title ?>, <?= $this->country->title ?> | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/jquery-ui-1.8.16.custom.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/index/listing-activity.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
-    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
-    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
-    <style type="text/css">
-	.noprice {
-		float:right;
-		font-size:12px;
-		color:#898989;
-		line-height:15px;
-		text-align:center;
-		margin-top:10px;}
-		.noprice p {
-			font-size:12px;
-			line-height:15px;
-			display:inline;
-			float:none;}
-		.noprice a {
-			color:#60b5f7;
-			font-size:12px;
-			line-height:15px;
-			display:inline;
-			float:none;}
-	</style>
-</head>
-<body>
-<div class="w1">
-    <?= $this->partial('admin_partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>    
-    <div class="w2">
-        <div class="main wrapper">
-            <div class="content-2">
-                <div class="box">
-                    <?= $this->partial('partials/gallery.phtml', 
-					array('user'=>$this->user, 'listing' => $this->listing, 'city' => $this->city, 
-						  'country' => $this->country,'pictures' => $this->pictures,'trips'=>$this->trips)); ?>
-                    <?php //$this->partial('partials/tabs.phtml', array('listing' => $this->listing, 'tabs' => $this->tabs, 'faqs' => $this->faqs, 'map' => true)); ?>
-                </div><!-- closes box -->
-                <div class="tabs-wrapper-2">
-                    <ul>
-                        <li><a href="#tabs-1">Overview</a></li>
-                        <li><a href="#tabs-2">Details</a></li>
-                        <li><a href="#tabs-3">Tips</a></li>
-                        <li><a href="#tabs-4">FAQ's</a></li>
-                        <li><a href="#tabs-5">How to Get There</a></li>
-                    </ul>
-                    <div class="tab" id="tabs-1">
-                    	<?php if(!empty($this->overview->about) or
-									!empty($this->overview->about) or
-									!empty($this->overview->about)): ?>
-                        <div class="tab-ttl">About <?= $this->listing->title ?></div>
-                        <div class="tab-content">
-                        	<?php if(!empty($this->overview->about)): ?>
-                        	<h2>About the activity</h2>
-                        	<p><?= stripslashes(nl2br($this->overview->about)) ?></p>
-                            <?php endif ?>
-                            <?php if(!empty($this->overview->expect)): ?>
-                            <h2>What to expect</h2>
-                            <p><?= stripslashes(nl2br($this->overview->expect)) ?></p>
-                            <?php endif ?>
-                            <?php if(!empty($this->overview->love)): ?>
-                            <h2>Things you'll love</h2>
-                            <p><?= stripslashes(nl2br($this->overview->love)) ?></p>
-                            <?php endif ?>
-                        </div><!-- closes tab-content -->
-                        <?php else: ?>
-                        <div class="tab-content">
-	                        <a href="/admin/listings/overview/<?= $this->listing->id ?>"><img src="/images2/empty-overview.gif" /></a>
-                        </div>
-                        <?php endif ?>
-                        <div class="message">
-                            <div>
-                                <p><strong>Schedule Details</strong></p>
-                                <?php if(count($this->options) > 0): ?>
-                                <?php foreach($this->options as $sch): ?>
-                                <p><?= date('g:i A', strtotime($sch->starting)) ?></p>
-                                <?php endforeach ?>
-                                <?php else: ?>
-                                <p><a style="color:#60B5F7" href="/admin/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
-                                <?php endif ?>
-                            </div>
-                            <div>
-                                <p><strong>Duration</strong></p>
-                                <?php if(count($this->options) > 0): ?>
-                                <p><?= $this->options[0]->duration . ' ' . $this->options[0]->duration_label ?></p>
-                                <?php else: ?>
-                                <p><a style="color:#60B5F7" href="/admin/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
-                                <?php endif ?>
-                            </div>
-                            <div>
-                                <p><strong>Departure Point</strong></p>
-                                <?php if($this->departure_city): ?>
-                                <p><?= $this->departure_city->title ?></p>
-                                <?php else: ?>
-                                <p><a style="color:#60B5F7" href="/admin/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
-                                <?php endif ?>
-                            </div>
-                            <div>
-                                <p><strong>Return Point</strong></p>
-                                <?php if($this->listing->return == $this->listing->departure): ?>
-                                <?php if($this->departure_city): ?>
-                                <p>Tour concludes at the original point of departure</p>
-                                <?php else: ?>
-                                <p><a style="color:#60B5F7" href="/admin/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
-                                <?php endif ?>
-                                <?php else: ?>
-                                <?php if($this->return_city): ?>
-                                <p><?= $this->return_city->title ?></p>
-                                <?php else: ?>
-                                <p><a style="color:#60B5F7" href="/admin/listings/edit/<?= $this->listing->id ?>">Add now</a></p>
-                                <?php endif ?>
-                                <?php endif ?>
-                            </div>
-                        </div><!-- closes message -->
-                    </div><!-- closes tab -->
-                    <div class="tab" id="tabs-2">
-                    	<?php $ok = true; $i=0; $limit = count($this->details) ?>
-                        <?php $ok1 = true; $ok2 = true; $ok3 = true; ?>
-                        <?php while($i<$limit) { 
-								if($this->details[$i]->type == 1) {$ok = false; $ok1 = false;}
-								if($this->details[$i]->type == 2) {$ok = false; $ok2 = false;}
-								if($this->details[$i]->type == 3) {$ok = false; $ok3 = false;}
-								$i++; } ?>
-						<?php if(!$ok): ?>
-                        <div class="tab-ttl">
-                            Some details you must to know
-                        </div><!-- closes tab-ttl -->
-                        <div class="tab-content">
-                        	<?php if(!$ok1): ?>
-                            <h2>Includes</h2>
-                            <ul>
-                            	<?php foreach($this->details as $detail): ?>
-                                <?php if($detail->type == 1): ?>
-                                <li><?= stripslashes($detail->text) ?></li>
-                                <?php endif ?>
-                                <?php endforeach ?>
-                            </ul>
-                            <?php endif; if(!$ok2): ?>
-                            <h2>Excludes</h2>
-                            <ul>
-                                <?php foreach($this->details as $detail): ?>
-                                <?php if($detail->type == 2): ?>
-                                <li><?= stripslashes($detail->text) ?></li>
-                                <?php endif ?>
-                                <?php endforeach ?>
-                            </ul>
-                            <?php endif; if(!$ok3): ?>
-                            <h2>Policies</h2>
-                            <ul>
-                                <?php foreach($this->details as $detail): ?>
-                                <?php if($detail->type == 3): ?>
-                                <li><?= stripslashes($detail->text) ?></li>
-                                <?php endif ?>
-                                <?php endforeach ?>
-                            </ul>
-                            <?php endif ?>
-                        </div><!-- closes tab-content -->
-                        <?php else: ?>
-                        <div class="tab-content">
-	                        <a href="/admin/listings/details/<?= $this->listing->id ?>"><img src="/images2/empty-details.gif" /></a>
-                        </div>
-                        <?php endif ?>
-                    </div><!-- closes tab -->
-                    <div class="tab" id="tabs-3">
-                    	<?php $ok = true; $i=0; $limit = count($this->details) ?>
-                        <?php while($ok and $i<$limit) { 
-								if($this->details[$i]->type == 4) $ok = false;
-								$i++; } ?>
-						<?php if(!$ok): ?>
-                        <div class="tab-ttl">
-                            Some recommendations before take the trip
-                        </div><!-- closes tab-ttl -->
-                        <div class="tab-content tips">
-                            <ul>
-                            	<?php foreach($this->details as $detail): ?>
-                                <?php if($detail->type == 4): ?>
-                                <li><?= stripslashes($detail->text) ?></li>
-                                <?php endif ?>
-                                <?php endforeach ?>
-                            </ul>
-                        </div><!-- closes tab-content -->
-                        <?php else: ?>
-                        <div class="tab-content">
-                        	<a href="/admin/listings/tips/<?= $this->listing->id ?>"><img src="/images2/empty-tips.gif" /></a>
-                        </div>
-                        <?php endif ?>
-                    </div><!-- closes tab -->
-                    <div class="tab" id="tabs-4">
-                    	<?php if(count($this->faqs) > 0): ?>
-                        <div class="tab-ttl">
-                            Frequently Asked Questions
-                        </div><!-- closes tab-ttl -->
-                        <div class="tab-content faqs">
-                            <ul>
-                            	<?php foreach($this->faqs as $faq): ?>
-                                <li>
-                                    <strong><?= stripslashes(nl2br($faq->question)) ?></strong><br />
-                                    <?= stripslashes(nl2br($faq->answer)) ?>
-                                </li>
-                                <?php endforeach ?>
-                            </ul>
-                        </div><!-- closes tab-content -->
-                        <?php else: ?>
-                        <div class="tab-content">
-                        	<a href="/admin/listings/faqs/<?= $this->listing->id ?>"><img src="/images2/empty-faqs.gif" /></a>
-                        </div>
-                        <?php endif ?>
-                    </div><!-- closes tab -->
-                    <div class="tab" id="tabs-5">
-                    	<?php if(!empty($this->getthere->plane) or
-									!empty($this->getthere->car) or
-									!empty($this->getthere->train) or
-									!is_null($this->listing->lat)): ?>
-                        <div class="tab-ttl">
-                            How to get there
-                        </div><!-- closes tab-ttl -->
-                        <div class="tab-content there">
-                        	<?php if(!empty($this->getthere->plane)): ?>
-                            <h2>By plane</h2>
-                            <p><?= stripslashes(nl2br($this->getthere->plane)) ?></p>
-                            <?php endif; if(!empty($this->getthere->car)): ?>
-                            <h2>By car</h2>
-                            <p><?= stripslashes(nl2br($this->getthere->car)) ?></p>
-                            <?php endif; if(!empty($this->getthere->train)): ?>
-                            <h2>By train</h2>
-                            <p><?= stripslashes(nl2br($this->getthere->train)) ?></p>
-                            <?php endif; ?>
-                            <div id="mapcanvas"></div>
-                        </div><!-- closes tab-content -->
-                        <div class="message">
-                            <address>
-                                <p><strong>Detailed Address</strong></p>
-                                <p><?= $this->listing->address ?></p>
-                            </address>
-                        </div><!-- closes message -->
-                        <?php else: ?>
-                        <div class="tab-content">
-                        	<a href="/admin/listings/location/<?= $this->listing->id ?>"><img src="/images2/empty-getthere.gif" /></a>
-                        </div>
-                        <?php endif ?>
-                    </div><!-- closes tab -->
-                </div><!-- closes tabs-wrapper -->
-                <div class="reviews-wrapper">
-                    <?= $this->partial('partials/reviews.phtml', 
-					array('reviews' => $this->reviews, 'questions' => $this->questions, 'answer_allow' => false,
-						  'user'=>$this->user, 'listing' => $this->listing->id)); ?>
-                </div><!-- closes reviews-wrapper -->
-            </div><!-- closes content-2 -->
-            <div class="right-sidebar">
-            	<form id="booking" method="post" action="">
-                    <div class="widget book">
-                        <div class="ttl">
-                            <span>From only</span>
-                            <?php if($this->listing->price > 0): ?>
-                            <strong>$<?= $this->listing->price ?> <span>/ person</span></strong>
-                            <?php else: ?>
-                            <div class="noprice">
-                            	<p>There isn't pricing info yet<br />
-                                <a href="/admin/listings/pricing/<?= $this->listing->id ?>">Set Pricing now</a></p>
-                            </div>
-                            <?php endif ?>
-                        </div><!-- closes ttl -->
-                        <ul>
-                            <li id="acordion">                            
-                                <a href=""><span>Select the date</span><img src="/images2/arrow-7.png" alt="" class="arrow" />
-                                <strong id="checkinlabel"></strong></a>
-                                <div id="datepicker" class="datepicker"></div>
-                                <a href=""><span>Occupation</span><img src="/images2/arrow-7.png" alt="" class="arrow" /></a>
-                                <div class="occupation">
-                                	<div class="room-types">
-	                                	<strong>Choose a schedule</strong>
-                                        <ul>
-											<?php foreach($this->options as $option): ?>
-                                            <li>
-                                                <input id="sch<?= $option->id ?>" name="option" value="<?= $option->id ?>" type="radio" />
-                                                <label for="sch<?= $option->id ?>"><?= $option->name ?></label>
-                                                <span>From: <strong><?= date('h:i a',strtotime($option->starting)) ?></strong>
-                                                To: <strong><?= date('h:i a',strtotime($option->ending)) ?></strong></span>
-                                            </li>
-                                            <?php endforeach ?>
-                                        </ul>
-                                    </div>
-                                    <p>
-                                        <label>Adults</label>
-                                        <select class="ocp adt"  name="adults">
-                                            <?php for($i=1; $i<=12; $i++): ?>
-                                            <option value="<?= $i ?>"><?= $i ?></option>
-                                            <?php endfor ?>
-                                        </select>
-                                    </p>
-                                    <p>
-                                        <label>Kids</label>
-                                        <select class="ocp kid" name="kids">
-                                            <option value="0">0</option>
-                                            <?php for($i=1; $i<=12; $i++): ?>
-                                            <option value="<?= $i ?>"><?= $i ?></option>
-                                            <?php endfor ?>
-                                        </select>
-                                    </p>
-                                    <div class="clear"></div>
-                                </div><!-- closes ocupation -->
-                            </li>
-                        </ul>
-                        <div class="summary">
-                            <span>Subtotal <strong>$<?= $this->listing->price ?></strong></span>
-                            <input type="submit" value="Book Now!" class="btn-1" />
-                        </div><!-- closes summary -->
-                	</div><!-- closes widget -->
-                	<?php foreach($this->form_fields as $name => $value): ?>
-                    <input type="hidden" name="<?= $name ?>" value="<?= $value ?>" />
-                    <?php endforeach ?>
-                    <input type="hidden" name="checkin" id="inputCheckin" value="" />
-                </form>
-                <div class="widget talk">
-                    <?= $this->partial('partials/talk.phtml',array('vendor'=>$this->vendor,'user' => $this->user)); ?>
-                </div><!-- closes widget -->
-            </div><!-- closes right-sidebar -->
-        </div><!-- closes main -->
-    </div><!-- closes w2 -->
-    <?= $this->partial('partials/footer.phtml'); ?>
-</div><!-- closes w1 -->	
-<div id="citiesAutocompleteContainer"></div>
-<input type="hidden" value="<?= ($this->listing->lat) ? $this->listing->lat : 'none' ?>" name="listlat" />
-<input type="hidden" value="<?= ($this->listing->lng) ? $this->listing->lng : 'none' ?>" name="listlng" />
-<input type="hidden" value="<?= $this->listing->title ?>" name="listtitle" />
-<input type="hidden" value="<?php foreach($this->disabledDates as $d): ?><?= $d ?>,<?php endforeach ?>" name="diableddates" />
-
-<div class="hidden">
-	<div id="send_message">
-        <form action="" id="sendMessageForm">
-            <div class="lb-forgot">
-                <div class="ttl">Send a message to <?= $this->vendor->name ?></div>
-                <div class="content">
-                    <textarea cols="30" name="message" rows="1"></textarea>
-                </div><!-- closes content -->
-                <div class="bottom">
-                    <input type="submit" class="btn-1" value="Send Message" />
-                    <span onclick="$.fancybox.close()" class="btn-4">Cancel</span>				
-                </div><!-- closes bottom -->
-            </div><!-- closes lb-forgot -->
-            <input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
-        </form>
-    </div>
-    <div id="live_chat">
-    	<img src="/images2/chat.png" />
-    </div>
-    <div id="start_call">
-    	<img src="/images2/phone.png" />
-    </div>
-</div>
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript" src="/js2/jquery.js"></script>
-<script type="text/javascript" src="/js2/index/listing-activity.js"></script>
-</body>
-</html>*/ ?>
