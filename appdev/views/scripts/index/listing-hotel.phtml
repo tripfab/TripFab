@@ -355,8 +355,6 @@
                                     <?php foreach($this->form_fields as $name => $value): ?>
                                     <input type="hidden" name="<?= $name ?>" value="<?= $value ?>" />
                                     <?php endforeach ?>
-                                    <input type="hidden" name="checkin" id="inputCheckin" value="" />
-                                    <input type="hidden" name="checkout" id="inputCheckout" value="" />
                                 </form>
                                 <div class="add">
                                     <?= $this->partial('partials/addtomytrip.phtml', array(
