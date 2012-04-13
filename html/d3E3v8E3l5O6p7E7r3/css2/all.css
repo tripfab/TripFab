@@ -15373,9 +15373,217 @@ h2.title .back:hover,
 }
 /*END ADMIN CLAIMS------------------------------------------*/
 
-/*ADMIN CREATE PLACES------------------------------------------*/
+/*ADMIN CREATE PLACES---------------------------------------*/
+#places.listing-content {
+	background: none #FFF;
+	padding:0 0 20px ;
+}
+#places .filter {
+	height: 54px;
+	padding-top: 20px;
+	overflow: hidden;
+}
+#places .filter label {
+	font: bold 13px Helvetica;
+	color: #303030;
+	display: block;
+	float: left;
+	margin: 10px 20px 0 30px;
+	width: 145px;
+}
+#places .filter select {
+	display: block;
+	float: left;
+	margin: 10px 15px 0 0;
+	width: 190px;
+}
+#places .slideshow{
+	width: 912px;
+	height: 492px;
+	background-color:#f6f6f6;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0px 0px 2px 1px #a9a9a9;
+	-moz-box-shadow: inset 0px 0px 2px 1px #a9a9a9;
+	box-shadow: inset 0px 0px 2px 1px #a9a9a9;
+	margin: 0 auto;
+}
+#places .first-step,
+#places .no-results {
+	text-align: center;
+	color: #898989;
+	font: bold 18px Helvetica;
+	padding-top: 166px;
+	text-shadow: 0px 1px 0px #FFF;
+}
+#places .first-step span,
+#places .no-results span{
+	background: url(https://developer.tripfab.com/images6/create-restaurant.png) no-repeat -67px -9px;
+	display: block;
+	width: 45px;
+	height: 43px;
+	margin: 0 auto 15px;
+}
+#places .no-results span{
+	background-position:-9px -9px;
+}
+#places .rstl {
+	background: url(https://developer.tripfab.com/images6/create-restaurant_sp.png) no-repeat center 32px;
+	height: 30px;
+	padding-top: 25px;
+}
+#places .rstl span {
+	display: block;
+	margin: 0 auto;
+	background-color: #f6f6f6;
+	text-align: center;
+	color: #898989;
+	font: bold 12px Helvetica;
+	width: 120px;
+}
+#places .cont {
+	height: 410px;
+	overflow: hidden;
+	width: 912px;
+}
+#places .cont ul {
+	width: 270px;
+	float: left;
+	margin-left: 25px;
+}
+#places .cont ul li {
+	background: none;
+	position: relative;
+	list-style: none;
+}
+#places .cont ul li a {
+	display: block;
+	width: 255px;
+	padding: 5px 5px 5px 10px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	color: #303030;
+	font: normal 13px Helvetica;
+	text-shadow: 0px 1px 0px #FFF;
+}
+#places .cont ul li a span {
+	color: #898989;
+	font: bold 11px Helvetica;
+}
+#places .cont ul li a:hover {
+	background-color: #e5e5e5;
+}
+#places .cont ul li a.active {
+	background-color: #a9d9fb;
+	color: #FFF;
+	text-shadow: 0px 1px 0px #71b3eb
+}
+#places .cont ul li a.active em{
+	background: url(https://developer.tripfab.com/images6/create-restaurant.png) no-repeat -208px -22px;
+	width:16px;
+	height: 16px;
+	display: block;
+	position: absolute;
+	right: 10px;
+	top:4px;
+}
+#places .cont ul li a.active span {
+	text-shadow: 0px 1px 0px #71b3eb;
+	color: #FFF;
+}
+#places .bottom {
+	margin: 10px auto 20px;
+    width: 912px;
+}
+#places .bottom h3 {
+	border-bottom: 1px solid #ebebeb;
+	font: bold 13px/35px Helvetica;
+	color: #303030;
+	height: 35px;
+	margin-bottom: 15px;
+}
+#places .bottom .explore {
+	float: left;
+	width: 304px;
+	border-right: 1px solid #ebebeb;
+	padding-bottom: 10px;
+}
+#places .bottom .explore h4 {
+	color: #303030;
+	font: normal 12px/15px Helvetica;
+	margin-bottom: 10px;
+	height: 15px;
+}
+#places .bottom .explore h4 span {
+	background: url(https://developer.tripfab.com/images6/create-restaurant.png) no-repeat -129px -22px;
+	display: block;
+	width: 16px;
+	height: 15px;
+	float: left;
+	margin-right: 10px;
+}
+#places .bottom .explore a {
+	display: block;
+	color: #60B5f7;
+	width: 148px;
+	font: bold 11px/25px Helvetica;
+}
+#places .bottom .explore a span{
+	background: url(https://developer.tripfab.com/images6/create-restaurant.png) no-repeat;
+	display: block;
+	float: left;
+	width: 24px;
+	height: 25px;
+	margin-right: 10px;
+}
+#places .bottom .explore .fb {
+	float: left;
+}
+#places .bottom .explore .fb span {
+	background-position: -374px -17px;
+}
+#places .bottom .explore .gl {
+	float: right;
+}
+#places .bottom .explore .gl span {
+	background-position: -420px -17px;
+}
+#places .bottom .fb_add {
+	float: right;
+	width: 578px;
+	position: relative;
+}
+#places .bottom .fb_add label{
+	color: #303030;
+	font: normal 12px/16px Helvetica;
+	display: block;
+	height: 16px;
+	margin-bottom: 10px;
+}
+#places .bottom .fb_add label span {
+	display: block;
+	background: url(https://developer.tripfab.com/images6/create-restaurant.png) no-repeat -170px -22px;
+	width: 16px;
+	height: 16px;
+	margin-right: 10px;
+	float: left;
+}
+#places .bottom .fb_add input[type="text"] {
+	border-radius: 0;
+	border-color: #a7b9c5;
+	width: 420px;
+	height: 33px;
+	font: normal 12px/33px Helvetica;
+}
+#places .bottom .fb_add .btn-1 {
+	position: absolute;
+	right: 0;
+	top: 27px;
+}
 
-/*END ADMIN CREATE PLACES--------------------------------------*/
+/*END ADMIN CREATE PLACES-----------------------------------*/
 
 /*END ADMIN-------------------------------------------------------------- */
 /*LIGHTBOX BASIC STYLES-------------------------------------*/
