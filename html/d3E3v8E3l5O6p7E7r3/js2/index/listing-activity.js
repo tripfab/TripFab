@@ -66,14 +66,16 @@ $(document).ready(function() {
     $('textarea').elastic();
     //$('select').jqTransSelect();
 	
-    $('li#acordion').accordion({ 
+    $("#accordion").accordion({
         autoHeight: false,
-        animated:false
+        collapsible: true,
+        icons: false
     });
 	
     var $disableddates = $('body').data('disableddates');
-	
-    $( "#datepicker").datepicker({
+    
+    $( "#calendar").datepicker({
+        dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
         showOtherMonths: true,
         beforeShowDay:function(date){
             date = $.datepicker.formatDate('mm-dd-yy', date);
@@ -84,15 +86,20 @@ $(document).ready(function() {
         onSelect:function(date, inst){
             var aux = new Date(date), aux2 = new Date(aux.getTime() + 86400000);
             var $date = $.datepicker.formatDate('M d, yy', new Date(date));
-            $('li#acordion').accordion('activate',1);
-            $('#checkinlabel').text($date);
+            $('#accordion').accordion('activate',1);
             $('#inputCheckin').val($date);
             refreshPrice();
         }
     });
 	
-    $('input[name=option]').click(refreshPrice);
-    $('input[name=capacity]').click(refreshPrice);
+    $('input[name=option]').click(function(){
+        $('#accordion').accordion('activate',3);
+        refreshPrice();
+    });
+    $('input[name=capacity]').click(function(){
+        $('#accordion').accordion('activate',2);
+        refreshPrice();
+    });
     $('select[name=kids]').change(refreshPrice);
     $('select[name=adults]').change(refreshPrice);
 });
@@ -136,7 +143,7 @@ function refreshPrice()
         url:'/ajax/getquote',
         data:$data,
         success:function(price){
-            $('.summary span strong').text(price);
+            $('#sumaryPrice').text(price);
         }
     });
 }
@@ -560,16 +567,6 @@ $(document).ready(function() {
     $('#fancybox-title').addClass('tittle');
     $('#fancybox-left-ico').addClass('lfarrow');
     $('#fancybox-right-ico').addClass('rgarrow');
-    $('#calendar, #start, #end').datepicker({
-        dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-        showOtherMonths: true
-    });
-		
-    $("#accordion").accordion({
-        autoHeight: false,
-        collapsible: true,
-        icons: false
-    });
 });
 
 $(document).ready(function(){

@@ -62,7 +62,6 @@
 									'class'	=> 'main',
 									'class2' => 'one'
 							)) ?>
-							
                             <?php if(!isset($_COOKIE['tooltipHelpList'])): ?>
 							<div class="firstime_tip">
 								<img class="arrow" src="https://developer.tripfab.com/images6/arrow-24.png" alt="" />
@@ -99,7 +98,6 @@
 	                                <?php endfor ?>
 									</ul>
 	                            </div><!--IMGS-->
-                                                
 								<div class="bigImages">
                                 	<?php foreach($this->pictures as $j => $pic): ?>
                                 	<div class="hover" id="small<?= $j ?>">
@@ -109,7 +107,6 @@
                                     </div>
                                     <?php endforeach ?>
 								</div><!--BIGIMAGES-->
-								
                             </div><!--CAROUSEL-->
                             <div class="hidden">
                                 <?php for($i=0;$i<count($this->pictures);$i++): ?>
@@ -331,69 +328,105 @@
                             </div><!--REVIEWS-->
                         </div><!--CONTAINER-->
                         <div class="sidebar">
-							<span class="arrow"></span>
-							<!--<form action="">
-								<fieldset>-->
-									<div class="cont">
-										<div id="accordion">
-											<h5 class="first"><span class="i_date"></span>Select the Date</h5>
-											<div id="calendar">
-												<span class="line"></span>
-											</div><!--CALENDAR-->
-											
-											<h5><span class="i_type"></span>Choose an Activity Type</h5>
-											<div class="type">
-												<span class="line"></span>
-												<label for="activityType1"><input type="radio" value="" name="type" id="activityType1">Spa Treatment 01 </label>
-												<label for="activityType2"><input type="radio" value="" name="type" id="activityType2">Spa Treatment 02 </label>
-												<label for="activityType3"><input type="radio" value="" name="type" id="activityType3">Spa Treatment 03	</label>
-												<label for="activityType4"><input type="radio" value="" name="type" id="activityType4">Spa Treatment 04	</label>
-											</div><!--TYPE-->
-											
-											<h5><span class="i_sched"></span>Select a Schedule</h5>
-											<div class="type">
-												<span class="line"></span>
-												<label for="schedule1"><input type="radio" value="" name="schedule" id="schedule1">8:00 am - 11:00 am </label>
-												<label for="schedule2"><input type="radio" value="" name="schedule" id="schedule2">3:00 pm - 6:00 pm </label>
-												<label for="schedule3"><input type="radio" value="" name="schedule" id="schedule3">9:00 pm - 12:00 pm </label>
-											</div><!--TYPE-->
-											
-											<h5><span class="i_user"></span>How many travelers?</h5>
-											<div class="selects activity">
-												<span class="line"></span>
-												<label class="rooms">
-													Adults
-													<select>
-														<option>1</option>
-													</select>
-												</label>
-												<label>
-													Children
-													<select>
-														<option>1</option>
-													</select>
-												</label>
-												<div class="clear"></div>
-											</div><!--SELECTS-->
-											<div class="price">
-												 <span><sup>$</sup>129 <sub>Subtotal</sub></span>
-											</div><!--PRICE-->
-										</div><!--ACCORDION-->
-										<a href="" class="btn-1">Book Now</a>
-										<div class="add">
-											<?= $this->partial('partials/addtomytrip.phtml', array(
-                                                    'user' => $this->user,
-                                                    'trips' => $this->trips,
-                                                    'listing' => $this->listing,
-                                                    'class'	=> 'side',
-                                                    'class2' => 'two'
-                                            )) ?>
-											<em>or you can</em>
-											<div class="clear"></div>
-										</div><!--ADD-->
-									</div><!--CONT-->
-								<!--</fieldset>
-							</form>-->
+							<span class="arrow"></span>                            
+                            <div class="cont">
+                                <form id="booking" method="post" action="/en-US/cart/add">
+                                    <div id="accordion">
+                                        <h5 class="first"><span class="i_date"></span>Select the Date</h5>
+                                        <div id="calendar">
+                                            <span class="line"></span>
+                                        </div><!--CALENDAR-->
+                                        <?php if((is_null($this->listing->min) or is_null($this->listing->max)) and count($this->capacities) > 0): ?>
+                                        <h5><span class="i_type"></span>Choose an Activity Type</h5>
+                                        <div class="type">
+                                            <span class="line"></span>
+                                            <?php foreach($this->capacities as $option): ?>
+                                            <label for="activityType<?= $option->id ?>">
+                                            <input class="noclean" type="radio" value="<?= $option->id ?>" 
+                                            name="capacity" id="activityType<?= $option->id ?>">
+                                            <?= $option->name ?> (<?= $option->min ?> - <?= $option->max ?>) / 
+                                            $<?= $this->prices[$option->id]['price'] ?></label>
+                                            <?php endforeach ?>
+                                        </div><!--TYPE-->
+                                        <?php else: ?>
+                                        <h5><span class="i_type"></span>Choose an Activity Type</h5>
+                                        <div class="type">
+                                            <span class="line"></span>
+                                            <label for="activityType0">
+                                            <input checked="checked" class="noclean" type="radio" 
+                                            value="single" name="capacity" id="activityType0">
+                                            Single Capacity (<?= $this->listing->min ?> - <?= $this->listing->max ?>) / 
+                                            $<?= $this->listing->price ?></label>
+                                        </div><!--TYPE-->
+                                        <?php endif ?>
+                                        
+                                        <?php if(count($this->options) > 0): ?>
+                                        <h5><span class="i_sched"></span>Select a Schedule</h5>
+                                        <div class="type">
+                                            <span class="line"></span>
+                                            <?php foreach($this->options as $option): ?>
+                                            <label for="schedule<?= $option->id ?>">
+                                            <input class="noclean" type="radio" value="<?= $option->id ?>" 
+                                            name="option" id="schedule<?= $option->id ?>">
+                                            <?= date('h:i a',strtotime($option->starting)) ?> - 
+                                            <?= date('h:i a',strtotime($option->ending)) ?> </label>
+                                            <?php endforeach ?>
+                                        </div><!--TYPE-->
+                                        <?php else: ?>
+                                        <h5><span class="i_sched"></span>Select a Schedule</h5>
+                                        <div class="type">
+                                            <span class="line"></span>
+                                            <label for="schedule0">
+                                            <input class="noclean" type="radio" value="flex" name="option" id="schedule0">Flexible</label>
+                                        </div><!--TYPE-->
+                                        <?php endif ?>
+                                        
+                                        <h5><span class="i_user"></span>How many travelers?</h5>
+                                        <div class="selects activity">
+                                            <span class="line"></span>
+                                            <label class="rooms">
+                                                Adults
+                                                <select class="ocp adt"  name="adults">
+                                                    <?php for($i=1; $i<=12; $i++): ?>
+                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <?php endfor ?>
+                                                </select>
+                                            </label>
+                                            <label>
+                                                Children
+                                                <select class="ocp kid" name="kids">
+                                                    <option value="0">0</option>
+                                                    <?php for($i=1; $i<=12; $i++): ?>
+                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <?php endfor ?>
+                                                </select>
+                                            </label>
+                                            <div class="clear"></div>
+                                        </div><!--SELECTS-->
+                                        <div class="price">
+                                             <span><sup>$</sup>
+                                             <abbr id="sumaryPrice"><?= $this->listing->price ?></abbr> 
+                                             <sub>Subtotal</sub></span>
+                                        </div><!--PRICE-->
+                                    </div><!--ACCORDION-->
+                                    <input type="submit" value="Book Now!" class="btn-1 noclean" />
+                                    <?php foreach($this->form_fields as $name => $value): ?>
+                                    <input type="hidden" name="<?= $name ?>" value="<?= $value ?>" />
+                                    <?php endforeach ?>
+                                    <input type="hidden" name="checkin" id="inputCheckin" value="" />
+                                </form>
+                                <div class="add">
+                                    <?= $this->partial('partials/addtomytrip.phtml', array(
+                                            'user' => $this->user,
+                                            'trips' => $this->trips,
+                                            'listing' => $this->listing,
+                                            'class'	=> 'side',
+                                            'class2' => 'two'
+                                    )) ?>
+                                    <em>or you can</em>
+                                    <div class="clear"></div>
+                                </div><!--ADD-->
+                            </div><!--CONT-->
 						</div><!--SIDEBAR-->
                         <div class="clear"></div>
                     </div><!--CONT-->
@@ -586,206 +619,3 @@
 </style>
 </body>
 </html>
-
-
-
-<?php /**
-
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns='http://www.w3.org/1999/xhtml'>
-<head>
-    <meta content="noindex,nofollow" name="robots" />
-    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->listing->title ?> - <?= $this->city->title ?>, <?= $this->country->title ?> | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/jquery-ui-1.8.16.custom.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/index/listing-activity.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css" />
-    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
-    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
-</head>
-<body>
-<div class="w1">
-    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>
-    <div class="w2">
-        <div class="main wrapper">
-            <div class="content-2">
-                <div class="box">
-                    <?= $this->partial('partials/gallery.phtml', 
-					array('user'=>$this->user, 'listing' => $this->listing, 'city' => $this->city, 
-						  'country' => $this->country,'pictures' => $this->pictures,'trips'=>$this->trips, 'edit'=>false)); ?>
-                </div><!-- closes box -->
-                <div class="tabs-wrapper-2">
-                    <ul>
-                        <li><a href="#tabs-1">Overview</a></li>
-                        <li><a href="#tabs-2">Details</a></li>
-                        <li><a href="#tabs-3">Tips</a></li>
-                        <li><a href="#tabs-4">FAQ's</a></li>
-                        <li><a href="#tabs-5">How to Get There</a></li>
-                    </ul>
-                    <div class="tab" id="tabs-5">
-                    	<?php if(!empty($this->getthere->plane) or
-									!empty($this->getthere->car) or
-									!empty($this->getthere->train) or
-									!is_null($this->listing->lat)): ?>
-                        <div class="tab-ttl">
-                            How to get there
-                        </div><!-- closes tab-ttl -->
-                        <?php else: ?>
-                        <div class="tab-content">
-                        	<p>No directions added</p>
-                        </div>
-                        <?php endif ?>
-                    </div><!-- closes tab -->
-                </div><!-- closes tabs-wrapper -->
-                <div class="reviews-wrapper">
-                    <?= $this->partial('partials/reviews.phtml', 
-					array('reviews' => $this->reviews, 'questions' => $this->questions, 'answer_allow' => false,
-						  'user'=>$this->user, 'listing' => $this->listing->id)); ?>
-                </div><!-- closes reviews-wrapper -->
-            </div><!-- closes content-2 -->
-            <div class="right-sidebar">
-            	<form id="booking" method="post" action="/en-US/cart/add">
-                    <div class="widget book">
-                        <div class="ttl">
-                            <?php if($this->listing->price > 0): ?>
-                            <span>From only</span>
-                            <strong>$<?= $this->listing->price ?><span>/ person</span></strong>
-                            <?php else: ?>
-                            <span>This is</span>
-                            <strong>Free</strong>
-                            <?php endif ?>
-                        </div><!-- closes ttl -->
-                        <ul>
-                            <li id="acordion">                            
-                                <a href=""><span>Select the date</span><img src="/images2/arrow-7.png" alt="" class="arrow" />
-                                <strong id="checkinlabel"></strong></a>
-                                <div id="datepicker" class="datepicker"></div>
-                                <a href=""><span>Occupation</span><img src="/images2/arrow-7.png" alt="" class="arrow" /></a>
-                                <div class="occupation">
-                                	<?php if(count($this->options) > 0): ?>
-                                	<div class="room-types">
-	                                	<strong>Choose a schedule</strong>
-                                        <ul>
-											<?php foreach($this->options as $option): ?>
-                                            <li>
-                                                <input class="noclean" id="sch<?= $option->id ?>" name="option" value="<?= $option->id ?>" type="radio" />
-                                                <label for="sch<?= $option->id ?>"><?= $option->name ?></label>
-                                                <span>From: <strong><?= date('h:i a',strtotime($option->starting)) ?></strong>
-                                                To: <strong><?= date('h:i a',strtotime($option->ending)) ?></strong></span>
-                                            </li>
-                                            <?php endforeach ?>
-                                        </ul>
-                                    </div>
-                                    <?php else: ?>
-                                    <div class="room-types">
-                                    	<strong>Choose a schedule</strong>
-                                        <ul>
-                                            <li>
-                                                <input class="noclean" name="option" value="flex" checked="checked" type="radio" />
-                                                <label>Flexible Schedule</label>
-                                                <span>You choose the hour</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <?php endif ?>
-                                    <?php if((is_null($this->listing->min) or is_null($this->listing->max)) and count($this->capacities) > 0): ?>
-                                    <div class="room-types">
-                                    	<strong>Capacity types</strong>
-                                        <ul>
-                                        	<?php foreach($this->capacities as $option): ?>
-                                            <li>
-                                                <input class="noclean" id="cap<?= $option->id ?>" name="capacity" value="<?= $option->id ?>" type="radio" />
-                                                <label for="cap<?= $option->id ?>"><?= $option->name ?></label>
-                                                <span>Min: <?= $option->min ?> Max: <?= $option->max ?>
-                                                <strong>$<?= $this->prices[$option->id]['price'] ?> / person</strong>
-                                                </span>
-                                            </li>
-                                            <?php endforeach ?>
-                                        </ul>
-                                    </div>
-                                    <?php else: ?>
-                                    <div class="room-types">
-                                    	<strong>Capacity types</strong>
-                                        <ul>
-                                            <li>
-                                                <input class="noclean" name="capacity" value="single" checked="checked" type="radio" />
-                                                <label>Single Capacity</label>
-                                                <span>Min: <?= $this->listing->min ?> Max: <?= $this->listing->max ?> 
-                                                <strong>$<?= $this->listing->price ?> / person</strong></span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <?php endif ?>
-                                    <p>
-                                        <label>Adults</label>
-                                        <select class="ocp adt"  name="adults">
-                                            <?php for($i=1; $i<=12; $i++): ?>
-                                            <option value="<?= $i ?>"><?= $i ?></option>
-                                            <?php endfor ?>
-                                        </select>
-                                    </p>
-                                    <p>
-                                        <label>Kids</label>
-                                        <select class="ocp kid" name="kids">
-                                            <option value="0">0</option>
-                                            <?php for($i=1; $i<=12; $i++): ?>
-                                            <option value="<?= $i ?>"><?= $i ?></option>
-                                            <?php endfor ?>
-                                        </select>
-                                    </p>
-                                    <div class="clear"></div>
-                                </div><!-- closes ocupation -->
-                            </li>
-                        </ul>
-                        <div class="summary">
-                            <span>Subtotal <strong>$<?= $this->listing->price ?></strong></span>
-                            <input type="submit" value="Book Now!" class="btn-1 noclean" />
-                        </div><!-- closes summary -->
-                	</div><!-- closes widget -->
-                	<?php foreach($this->form_fields as $name => $value): ?>
-                    <input type="hidden" name="<?= $name ?>" value="<?= $value ?>" />
-                    <?php endforeach ?>
-                    <input type="hidden" name="checkin" id="inputCheckin" value="" />
-                </form>
-                <div class="widget talk">
-                    <?= $this->partial('partials/talk.phtml',array('vendor'=>$this->vendor,'user' => $this->user)); ?>
-                </div><!-- closes widget -->
-            </div><!-- closes right-sidebar -->
-        </div><!-- closes main -->
-    </div><!-- closes w2 -->
-</div><!-- closes w1 -->	
-<div id="citiesAutocompleteContainer"></div>
-
-<style type="text/css">
-.noprice {
-	float:right;
-	font-size:12px;
-	color:#898989;
-	line-height:15px;
-	text-align:center;
-	margin-top:10px;}
-	.noprice p {
-		font-size:12px;
-		line-height:15px;
-		display:inline;
-		float:none;}
-	.noprice a {
-		color:#60b5f7;
-		font-size:12px;
-		line-height:15px;
-		display:inline;
-		float:none;}
-	.number-display .all_flags a strong {
-		float:right;
-		margin-right:5px;}
-</style>
-</body>
-</html> */ ?>

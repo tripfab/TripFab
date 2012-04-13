@@ -22,7 +22,7 @@
                 		<h2><?= $this->listing->title ?></h2>
                 		<p><strong><?= $this->city->title ?></strong>, <?= $this->country->title ?></p>
                 		<span class="label"><?= $this->types[$this->listing->main_type]['name'] ?><em></em></span>
-                        <?= $this->thumbnail(array('width'=>650,'height'=>138), $this->trip->listing, '', '650:138') ?>
+                        <?= $this->thumbnail(array('width'=>650,'height'=>138), $this->listing->image, '', '650:138') ?>
                 	</div><!--HEADER_CHECKOUT-->
                     <form id="checkout" action="/en-US/cart/charge" method="post">
                         <div class="checkout-item first">
