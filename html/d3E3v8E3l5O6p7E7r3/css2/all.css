@@ -15373,7 +15373,7 @@ h2.title .back:hover,
 }
 /*END ADMIN CLAIMS------------------------------------------*/
 
-/*ADMIN CREATE PLACES---------------------------------------*/
+/*ADMIN CREATE PLACES------------------------------------------*/
 #places.listing-content {
 	background: none #FFF;
 	padding:0 0 20px ;
@@ -15582,8 +15582,38 @@ h2.title .back:hover,
 	right: 0;
 	top: 27px;
 }
+#places .paging{
+	position: relative;
+	float:left;
+  	width:100%;
+	overflow: hidden;
+}
+#places .paging .inner{
+	position: relative;
+	left: 50%;
+	float: left;
+	clear: left;
+	text-align: center;
+}
+#places .paging .inner a{
+	position: relative;
+	right: 50%;
+	float: left;
+	background: url(https://developer.tripfab.com/images6/create-restaurant.png) no-repeat -321px -26px;
+	width: 9px;
+	height: 9px;
+	display: block;
+	text-indent: -99999px;
+	margin-right: 10px;
+} 
+#places .paging .inner a:hover {
+	background-position: -347px -26px;
+}
+#places .paging .inner a.activeSlide {
+	background-position: -334px -26px;
+}
 
-/*END ADMIN CREATE PLACES-----------------------------------*/
+/*END ADMIN CREATE PLACES--------------------------------------*/
 
 /*END ADMIN-------------------------------------------------------------- */
 /*LIGHTBOX BASIC STYLES-------------------------------------*/
