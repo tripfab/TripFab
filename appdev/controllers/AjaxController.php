@@ -2272,4 +2272,12 @@ class AjaxController extends Zend_Controller_Action
             default: throw new Exception('Page not found');
         }
     }
+    
+    public function restrictionsAction()
+    {
+        $id = $this->_getParam('id');
+        $details = $this->listings->getDetails($id);
+        
+        $this->view->details = $details;
+    }
 }
