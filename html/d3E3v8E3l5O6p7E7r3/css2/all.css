@@ -15376,7 +15376,6 @@ h2.title .back:hover,
 /*ADMIN CREATE PLACES------------------------------------------*/
 #places.listing-content {
 	background: none #FFF;
-	padding:0 0 20px ;
 }
 #places .filter {
 	height: 54px;
@@ -15496,6 +15495,7 @@ h2.title .back:hover,
 #places .bottom {
 	margin: 10px auto 20px;
     width: 912px;
+    overflow: hidden;
 }
 #places .bottom h3 {
 	border-bottom: 1px solid #ebebeb;
@@ -15612,7 +15612,149 @@ h2.title .back:hover,
 #places .paging .inner a.activeSlide {
 	background-position: -334px -26px;
 }
-
+#places .bottom .added{
+	padding: 10px 0 0;
+	text-align: center;
+	color: #303030;
+	font: normal 13px Helvetica;
+}
+#places .bottom .added h4 {
+	font: bold 15px Helvetica;
+	margin-bottom: 10px;
+}
+#places .bottom .added span{
+	width: 32px;
+	height: 30px;
+	display: block;
+	background: url(https://developer.tripfab.com/images6/create-restaurant.png) no-repeat -256px -15px;	
+	margin: 0 auto 10px;
+}
+#edit_places .facebook {
+	background-color: #e7f4fd;
+}
+#edit_places .item h4 {
+	float: left;
+	width: 220px;
+}
+#edit_places .profile-items .item > h4 span {
+	display: block;
+	font: normal 12px Helvetica;
+	margin-top: 5px;
+}
+#edit_places select.category {
+	width: 170px;
+	float: left;
+	margin:10px 0 0;
+}
+#edit_places .item input[type="text"] {
+	float: left;
+}
+#edit_places .item textarea {
+	width: 347px;
+	min-height: 55px;
+	float: left;
+}
+#edit_places .schedule {
+	float: left;
+}
+#edit_places .schedule label {
+	display: block;
+	margin-bottom:4px;
+	font: 12px/29px Helvetica;
+	overflow: hidden;
+}
+#edit_places .schedule strong {
+	float: left;
+	display: block;
+	margin-right:10px;
+	width: 93px;
+}
+#edit_places .schedule input{
+	width: 76px;
+	height: 29px;
+	font: normal 12px/29px Helvetica;
+	display: block;
+	float: left;
+	margin-right:15px;
+}
+#edit_places .schedule span {
+	display: block;
+	float: left;
+	margin-right:15px;
+}
+#edit_places ul {
+	float: left;
+	list-style: none;
+}
+#edit_places ul li {
+	margin-bottom: 3px;
+	height: 22px;
+	line-height: 20px;
+}
+#edit_places ul input {
+	margin: 4px 10px 0 0;
+	float: left;
+}
+#edit_places .facebook {
+	background: none #e7f4fd;
+}
+#edit_places .facebook .url {
+	float: right;
+	width: 585px;
+	overflow: hidden;
+}
+#edit_places .facebook .url input[type="text"] {
+	width: 468px;
+	float: left;
+	border-color: #a7b9c5;
+	border-radius: 0;
+	height: 30px;
+	font: normal 12px/30px Helvetica;
+} 
+#edit_places .facebook .url .btn-1 {
+	float: left;
+	margin-left: 10px;
+}
+#edit_places .photos h3 {
+	font: bold 12px Helvetica;
+	margin-bottom: 20px;
+}
+#edit_places .photos .pic {
+	width: 107px;
+	height: 107px;
+	background-color: #e7e7e7;
+	overflow: hidden;
+}
+#edit_places .photos ul {
+	overflow: hidden;
+	float: none;
+}
+#edit_places .photos li {
+	width: 107px;
+	float: left;
+	margin-right:17px ;
+	height: 140px;
+	font-size: 11px;
+}
+#edit_places .photos label {
+	display: block;
+	width: 54px;
+	height: 20px;
+	border-right: 1px solid #e1e1e1;
+	float: left;
+}
+#edit_places .photos span {
+	display: block;
+	float: right;
+	width: 45px;
+		text-align: right;
+}
+#edit_places .photos ul input[type="radio"] {
+	margin-right: 2px;
+}
+#edit_places .left ul {
+	float: none;
+}
 /*END ADMIN CREATE PLACES--------------------------------------*/
 
 /*END ADMIN-------------------------------------------------------------- */
