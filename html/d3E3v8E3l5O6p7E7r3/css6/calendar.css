@@ -3,8 +3,9 @@
 .ui-datepicker .ui-datepicker-prev-hover, .ui-datepicker .ui-datepicker-next-hover { top: 1px; }
 .ui-datepicker .ui-datepicker-prev { left:0px; }
 .ui-datepicker .ui-datepicker-next { right:0; }
-.ui-datepicker .ui-datepicker-title { margin: 0 2.3em; text-align: center; color: #464646; 
-font: bold 15px Helvetica; }
+.ui-datepicker-unselectable span {background-color: #e1e1e1; text-shadow: 0 0 1px 0 #FFF; color: #6f6f6f !important; width: 26px; padding: 0 !important; height: 26px; font-weight:normal !important ;text-shadow: 0px 1px 0px #FFF;	                         
+}
+.ui-datepicker .ui-datepicker-title { margin: 0 2.3em; text-align: center; color: #464646; font: bold 15px Helvetica; }
 .ui-datepicker .ui-datepicker-title select { font-size:1em; margin:1px 0; }
 .ui-datepicker select.ui-datepicker-month-year {width: 100%;}
 .ui-datepicker select.ui-datepicker-month, 
@@ -84,12 +85,15 @@ font: bold 15px Helvetica; }
 #calendar a.ui-state-default {
     background-color: #a9d9fb;
     color: #FFF;
-    font: bold 12px/27px Helvetica;
+    font: normal 12px/27px Helvetica;
     width: 30px;
     height: 27px;
     padding: 0;
     text-align: center;
     text-shadow: 0px 1px 0px #85c0e9;
+}
+#calendar .ui-datepicker-unselectable span {
+	width: 30px;
 }
 #calendar a.ui-state-default:hover {
     background-color: #303030;
@@ -175,16 +179,16 @@ font: bold 15px Helvetica; }
 #ui-datepicker-div a.ui-state-default {
     background-color: #a9d9fb;
     color: #FFF;
-    font:bold 12px/26px Helvetica;
+    font: 12px/26px Helvetica;
     width: 26px;
     height: 26px;
     padding: 0;
     text-align: center;
-    text-shadow: 0px 1px 0px #c3c3c3;
+    text-shadow: 0 1px 0 #7bbce9;
 }
 #ui-datepicker-div .ui-datepicker-other-month span {
-    background-color: #f1f1f1;
-    color: #acacac;
+    background-color: #d2eafc;
+    color: #60B5f7 !important;
     font:normal 12px/27px Helvetica;
     width: 26px;
     height: 26px;
@@ -195,6 +199,7 @@ font: bold 15px Helvetica; }
 #ui-datepicker-div a.ui-state-default:hover {
     background-color: #303030;
     color: #FFFFFF;
+    text-shadow: 0 1px 0 #000;
 }
 #ui-datepicker-div .ui-datepicker-other-month a, #ui-datepicker-div .ui-datepicker-other-month span {
     color: #ACACAC;
@@ -204,4 +209,5 @@ font: bold 15px Helvetica; }
 #ui-datepicker-div a.ui-state-highlight{
 	background-color: #60b5f7;
 	color: #FFF;
+	font-weight: bold;
 }
