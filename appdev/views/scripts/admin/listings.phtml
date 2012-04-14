@@ -87,7 +87,6 @@
 							<th width="96"><a href="<?php echo $this->url(array('sort'=>3, 'seq'=>$this->paramSort == 3 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Status</a></th>
 							<th width="150"><a href="<?php echo $this->url(array('sort'=>4, 'seq'=>$this->paramSort == 4 && $this->paramSequence !='desc' ? 'desc':'default'));?>">City</a></th>
 							<th width="139"><a href="<?php echo $this->url(array('sort'=>5, 'seq'=>$this->paramSort == 5 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Country</a></th>
-							<th width="67">&nbsp;</th>
 							<th width="67" class="last">&nbsp;</th>
 						</tr>
 						<?php foreach($this->paginator as $key=>$listing):?>
@@ -98,8 +97,16 @@
 							<td><?php echo $listing->status ? 'Active' : 'Inactive' ?></td>
 							<td><a href="<?php echo $this->url(array('ct'=>$listing->city_id, 'co'=>''));?>"><?php echo $listing->city_name?></a></td>
 							<td><a href="<?php echo $this->url(array('co'=>$listing->country_id, 'ct'=>''));?>"><?php echo $listing->country_name?></a></td>
-							<td><a href="/admin/listings/edit/<?= $listing->id ?>" class="edit">Edit</a></td>
-							<td><a href="/admin/listings/delete/<?= $listing->id ?>" class="delete">Delete</a></td>
+<!--							<td><a href="/admin/listings/edit/<?= $listing->id ?>" class="edit">Edit</a></td>-->
+							<td class="drp_dn">
+								<a href="" class="btn-10"><span>Actions</span></a>
+								<ul>
+									<li class="arrow"></li>
+									<li><a hhref="/admin/listings/edit/<?= $listing->id ?>">Edit Listing</a></li>
+									<li><a target="_blank" href="/provider/listings/preview/1933">View Preview</a></li>
+									<li><a href="#listing_delete_1933" class="lb">Delete Listing</a></li>
+								</ul> 
+							</td>
 						</tr>
                         <?php endforeach;?>
 					</table>
@@ -113,7 +120,15 @@
 		<!-- closes w1 -->
     	
 		<?php echo $this->partial('admin_partials/report.phtml', array('main_categories'=>$this->main_categories, 'countries'=>$this->countries)); ?>
-		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('.drp_dn .btn-10').click(function() {
+		            $pref = $(this).parents('.drp_dn');
+		            $('ul', $pref).toggleClass('show');
+		            return false
+		        });
+			});
+		</script>
         <script>
 			function searchSubmit(){
 				location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
