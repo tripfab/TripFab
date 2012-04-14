@@ -105,12 +105,61 @@
                         
                         <div class="checkout-item">
                             <div class="ttl"><span>3</span><strong>Policies &amp; Restriccions</strong></div>
-                            <div class="card-item longer"> <strong>Cancellation</strong> <a href="">High Restrictions &rarr;</a> </div>
-                            <div class="card-item longer"> <strong>Activity Restrictions</strong> <a href="">Read Activity Restrictions &rarr;</a> </div>
+							<?php switch($this->listing->policy): case 1: ?>
+                            <div class="card-item longer"> <strong>Cancellation</strong> <a class="high-r" href="">Low Restrictions &rarr;</a> </div>
+							<?php break; case 2: ?>
+                            <div class="card-item longer"> <strong>Cancellation</strong> <a class="high-r" href="">Medium Restrictions &rarr;</a> </div>
+                            <?php break; case 3: ?>
+                            <div class="card-item longer"> <strong>Cancellation</strong> <a class="high-r" href="">High Restrictions &rarr;</a> </div>
+                            <?php endswitch ?>
+                            <div class="card-item longer"> <strong>Activity Restrictions</strong> 
+                            <a href="/ajax/restrictions/<?= $this->listing->id ?>" class="lb">Read Activity Restrictions &rarr;</a> </div>
                             <div class="card-item last">
                                 <input type="checkbox" name="terms" id="terms" value="1" />
                                 <label for="terms">I agree to the cancellation policy, activity restrictions and <a href="">terms of use</a>.</label>
                             </div><!-- closes card-item -->
+                            <?php switch($this->listing->policy): case 1: ?>
+                            <div class="restricction_tip hidden">
+                                <strong>Full refund 1 day prior to arrival, except fees</strong>
+                                <ul>
+                                    <li>• The Tripfab service fee is refundable.</li>
+                                    <li>• If there is a complaint from either party, notice must be given to Tripfab 
+                                    Resolution Center within 24 hours of the tour activity.</li>
+                                    <li>• Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                                    <li>• Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                                    <li>•A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                                    e-mail from Tripfab Resolution Center.</li>
+                                </ul>
+                                <span></span>
+                            </div><!--RESTRICCTION_TIP-->
+							<?php break; case 2: ?>
+                            <div class="restricction_tip hidden">
+                                <strong>Full refund 3 days prior to arrival, except fees</strong>
+                                <ul>
+                                    <li>• The Tripfab service fee is refundable.</li></li>
+                                    <li>• If there is a complaint from either party, notice must be given to 
+                                    Tripfab Resolution Center within 24 hours of check-in.</li>
+                                    <li>• Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                                    <li>• A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                                    e-mail from Tripfab Resolution Center.</li>
+                                </ul>
+                                <span></span>
+                            </div><!--RESTRICCTION_TIP-->                            
+							<?php break; case 3: ?>
+                            <div class="restricction_tip hidden">
+                                <strong>50% refund up until 1 week prior to arrival, except fees</strong>
+                                <ul>
+                                    <li>• Cleaning fees are always refunded if the guest did not check in.</li>
+                                    <li>• The Tripfab service fee is non-refundable.</li>
+                                    <li>• If there is a complaint from either party, notice must be given to Tripfab 
+                                    Resolution Center within 24 hours of check-in.</li>
+                                    <li>• Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                                    <li>• A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                                    e-mail from Tripfab Resolution Center.</li>
+                                </ul>
+                                <span></span>
+                            </div><!--RESTRICCTION_TIP-->                            
+                            <?php endswitch ?>
                             <div class="clear"></div>
                         </div><!-- closes checkout-item -->
                         <div class="bottom"> <span>Grand Total<strong>$<?= $this->cartitem->total ?></strong></span>
