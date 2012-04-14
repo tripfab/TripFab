@@ -1,3 +1,4 @@
+@import url("https://developer.tripfab.com/version2/css6/quickie.css");
 /*- Sign Up Styles -----------------------------------------------------------*/
 
 #sign-up {
@@ -14394,6 +14395,90 @@ h2.title .back:hover,
 	color: #303030;
 	background: url("https://developer.tripfab.com/images2/btn-10.gif") repeat-x scroll left bottom #FFFFFF;
 }
+
+.all_listing .list_content td.drp_dn a {
+	width:92px;
+	height: 18px;
+	padding: 0;
+	display: block;
+	margin-right: 10px;
+}
+.all_listing .list_content td.drp_dn span {
+	background:url("https://developer.tripfab.com/images2/admin-actions.png") no-repeat 0 3px transparent;
+	display: inline-block;
+	width: 80px;
+	height: 18px;
+	font: bold 11px/18px Helvetica;
+	color: #303030;
+}
+.all_listing .list_content td.drp_dn ul {
+	display:none;
+	position:absolute;
+	background-color:#FFF;
+	box-shadow:0 0 6px #acacac;
+	top:30px;
+	right:5px;
+	width:110px;
+	padding:8px 0;
+	z-index:1000;
+	behavior: url(/PIE.htc);
+}
+.all_listing .list_content td.drp_dn ul li {
+	width:110px;
+	height:23px;
+}
+.all_listing .list_content td.drp_dn ul li:hover {
+	background-color:#5ab2e5;
+}
+.all_listing .list_content td.drp_dn ul li a {
+	font:bold 11px/23px Helvetica, Arial, sans-serif;
+	text-indent:10px;
+	display:block;
+	color:#303030;
+	text-shadow:-1px 1px #FFF;
+}
+.all_listing .list_content td.drp_dn ul li:hover a{
+	text-decoration:none;
+	text-shadow:-1px 1px #2573b4;
+	color:#FFF;
+}
+.all_listing .list_content td.drp_dn {
+	position:relative;
+	display: block;
+}
+.all_listing .list_content td.drp_dn ul.show{
+	display:block;
+}
+.all_listing .list_content td.drp_dn ul li.arrow {
+background: url("https://developer.tripfab.com/images6/src_map_aw1.png") no-repeat 0 0;
+	top: -6px;
+    display: block;
+    height: 8px;
+    right: 5px;
+    position: absolute;
+    width: 21px;
+    z-index: 100;
+}
+.listing-content .room_upload {
+	width: 360px;
+	float: right;
+	overflow: hidden;
+}
+.listing-content .room_upload .btn-1 {
+	float: right;
+}
+.listing-content .room_upload .holder {
+	float: left;
+	width: 68px;
+	height: 77px;
+	background: url(https://developer.tripfab.com/images2/upload_room.png) no-repeat 0 0;
+}
+.listing-content .room_upload .inner {
+	width: 68px;
+	height: 67px;
+	overflow: hidden;
+}
+
 /*END ADMIN LISTING-----------------------------------------*/
 /*ADMIN USER VIEW-------------------------------------------*/
 .all_listing #user_view {
