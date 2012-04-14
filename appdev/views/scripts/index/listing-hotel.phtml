@@ -106,6 +106,7 @@
                                         <a href="#grande<?= $j ?>" class="lbc">
                                         <?= $this->thumbnail(array('width'=>391,'height'=>254),$pic->url,'','391:254') ?>
                                         <span><?= $pic->location ?></span></a>
+                                        <a href="#grande<?= $j ?>" class="view lbc"><em></em>See Full Size</a>
                                     </div>
                                     <?php endforeach ?>
                                 </div><!--BIGIMAGES-->
@@ -495,10 +496,6 @@
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript" src="/js2/jquery.popupWindow.js"></script>
 <script type="text/javascript" src="/js2/index/listing-hotel.js"></script>
-<style type="text/css">
-#mapcanvas {
-	width:638px;
-	height:354px;}
-</style>
+<style type="text/css"> #mapcanvas {width:638px; height:354px;}</style>
 </body>
 </html>

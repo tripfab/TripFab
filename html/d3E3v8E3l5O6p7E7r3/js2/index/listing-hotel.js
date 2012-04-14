@@ -497,9 +497,13 @@ $(function(){
 });
 
 var shown = false;
+var activeli = null;
 		
 $(function(){
     $('#lstng_htl .carousel ul li').hover(function(){
+		$('#lstng_htl .carousel ul li').removeClass('active');
+		activeli = $(this);
+		activeli.addClass('active');
         $('.bigImages .hover').hide();
         $($('a',this).data('tip')).show();
         $('.bigImages').fadeIn('fast');
@@ -522,6 +526,8 @@ function hideTooltip() {
         $('.bigImages').fadeOut('fast', function(){
             $('.bigImages .hover').hide();
         });
+		activeli.removeClass('active');
+		activeli = null;
     }
 }
 
