@@ -114,7 +114,7 @@
 					 empty($_POST['boat'])): ?>
 			<div class="direction">
                 <div class="cont">
-                    <p>There is no any direction yet</p>
+                    <p>There are no directions yet</p>
                 </div><!--CONT-->
                 <a href="#new_direction" class="add_direc">Add a New Direction</a>
             </div><!--DIRECTION-->
@@ -147,7 +147,7 @@
                     <textarea placeholder="Nice description about to how to get to your place by boat" cols="" class="noclean limitcc" rel="1000" name="boat" rows="1"><?= stripslashes(trim($_POST['boat'])) ?></textarea>
                     <?php endif; if(!empty($_POST['bus'])): ?>
                     <div class="top">
-                        <strong>By Boat</strong>
+                        <strong>By Bus</strong>
                         <a href="" class="delete">Remove</a>
                     </div><!--TOP-->
                     <textarea placeholder="Nice description about to how to get to your place by bus" cols="" class="noclean limitcc" rel="1000" name="bus" rows="1"><?= stripslashes(trim($_POST['bus'])) ?></textarea>
