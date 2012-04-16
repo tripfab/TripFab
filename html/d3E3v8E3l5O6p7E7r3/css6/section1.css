@@ -1146,9 +1146,9 @@
 #lstng_htl .tabs .dflt .car {
 	background: url(https://developer.tripfab.com/images6/lstng_htl.png) no-repeat -408px -127px;
 }
-#lstng_htl .tabs .map span {
+/*#lstng_htl .tabs .map span {
 	background: url(https://developer.tripfab.com/images6/lstng_htl.png) no-repeat -468px -127px;
-}
+}*/
 #lstng_htl .tabs .map p {
 	width: 	263px;
 }
@@ -1168,9 +1168,10 @@
 }
 #lstng_htl .tabs .single img {
 	float: left;
+	margin-right: 30px;
 }
 #lstng_htl .tabs .single ul {
-	float: right;
+	float: left;
 	width: 390px;
 	list-style: disc;
 }
@@ -1592,10 +1593,11 @@
     right: -48px;
     vertical-align: middle;
 }
-#lstng_htl .sidebar .cont > .btn-1 {
+#lstng_htl .sidebar form > .btn-1 {
 	margin:0 15px;
 	height: 39px;
 	font: bold 14px/39px Helvetica;
+	width: 262px;
 }
 #lstng_htl .sidebar em {
 	color: #898989;
@@ -1705,15 +1707,16 @@
 	position: absolute;
 	top:31px;
 }
-#lstng_htl .carousel .single ul > li > a > img {
+#lstng_htl .carousel ul > li > a > img {
 	background-color: #000;
 	opacity: 0.5;
 	display: block;
 	float: left;
 }
-#lstng_htl .carousel .single ul > li > a > img:hover {
+#lstng_htl .carousel ul li.active img {
 	opacity: 1;
 }
+
 #lstng_htl .carousel ul {
 	position: relative;
 	overflow: visible !important;
@@ -1724,6 +1727,7 @@
 	width: 64px;
 	background: url(https://developer.tripfab.com/images6/lstng_htl.png) -649px 0 no-repeat;
 }
+#lstng_htl .carousel ul li
 #lstng_htl .carousel .single ul li a img:hover .hover img{
 	opacity: 1;
 }
@@ -1737,7 +1741,7 @@
 	bottom: -1px;
 	z-index: 100;
 }
-#lstng_htl .carousel ul li:hover .arrow {
+#lstng_htl .carousel ul li.active .arrow {
 	display: block;
 }
 #lstng_htl .carousel .hover {
@@ -1777,6 +1781,30 @@
 	width: 100%;
 	margin-bottom: 0;
 	padding-left: 10px;
+}
+#lstng_htl .carousel a.view {
+	display: block;
+	position: absolute;
+	top: 103px;
+	left: 120px;
+	background: url("https://developer.tripfab.com/images6/src_result-shw2.png") repeat;
+	width: 153px;
+	height: 40px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	color: #FFF;
+	font: bold 15px/40px Helvetica;
+	text-align: right;
+	padding-right: 20px;
+}
+#lstng_htl .carousel a.view em {
+	display: block;
+	background: url(https://developer.tripfab.com/images6/lstng_htl.png) no-repeat -795px -192px;
+	width: 37px;
+	height: 25px;
+	float: left;
+	margin:7px 0 1px 15px;
 }
 #lstng_htl .wrap .firstime_tip {
 	top: 0;
