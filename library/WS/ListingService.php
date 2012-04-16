@@ -2120,7 +2120,9 @@ class WS_ListingService {
     public function getDefaultAmenities($assoc = false)
     {
         $db = new Zend_Db_Table('amenities');
-        $result = $db->fetchAll();
+        $select = $db->select();
+        $select->order('name ASC');
+        $result = $db->fetchAll($select);
         if(!$assoc)
             return $result;
         
@@ -2134,7 +2136,9 @@ class WS_ListingService {
     public function getDefaultGenAmenities($assoc = false)
     {
         $db = new Zend_Db_Table('gen_amenities');
-        $result = $db->fetchAll();
+        $select = $db->select();
+        $select->order('name ASC');
+        $result = $db->fetchAll($select);
         if(!$assoc)
             return $result;
         
