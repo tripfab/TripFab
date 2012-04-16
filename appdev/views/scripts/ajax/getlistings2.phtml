@@ -1,0 +1,40 @@
+<?php $_classes = array(
+		2 => 'restaurant',
+		4 => 'sights',
+		5 => 'hotel',
+		6 => 'activity',
+		7 => 'entertaiment'
+) ?>
+<?php if(count($this->listings) > 0): ?>
+<?php foreach($this->listings as $i => $list): ?>	
+<?php $class = ((($i+1) % 3) == 0) ? 'last' : '' ?>
+<div class="result <?= $class ?>">
+	<div class="holder">
+		<div class="img-wrapper">
+			<?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
+			<a href="#" class="been">Been there</a>
+            <?php else: ?>
+            <a href="/login" class="been not">Been there</a>
+			<?php endif ?>
+			<a class="img" href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+			<?= $this->thumbnail(array('width'=>'225', 'height'=>'167'), $list->image, '','225:167') ?>
+			<h4><?= $list->title ?></h4>
+			</a>
+			<?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
+			<?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
+			<?php endif ?>
+		</div><!-- closes img-wrapper -->
+		<div class="meta">
+			<span class="location"><strong><?= $list->city ?></strong>, <?= $list->country ?></span> 
+			<span class="cat <?= $_classes[$list->main_type] ?>"><img src="/images2/cleardot.gif" alt="" /></span>
+		</div><!-- closes meta -->
+		<p class="listing_description"><?= substr($list->description, 0, 197) ?>...</p>
+		<?php if($list->price > 0): ?>
+		<strong class="price">$<?= $list->price ?><em> / person</em></strong>
+		<?php endif ?>
+		<a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>" class="btn-1">View Listing</a>
+	</div>
+</div><!-- closes result -->
+<?php endforeach ?>
+<div class="clear"></div>
+<?php endif ?>

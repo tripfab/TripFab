@@ -131,8 +131,8 @@
                             <?php endforeach ?>
                             <div class="item last stay" data-time="stay" data-day="<?= $i+1 ?>" data-date="<?= date('F jS, Y', $daytime) ?>">
                                 <h4>Stay</h4>
-                                <ul>
-                                    <?php if(count($this->days[$i+1]['stay']) > 0): ?>
+								<?php if(count($this->days[$i+1]['stay']) > 0): ?>
+                                <ul data-hashotel="1">
                                     <?php foreach($this->days[$i+1]['stay'] as $list): ?>
                                     <li data-id="<?= $list->id ?>" data-city="<?= $list->city_id ?>" data-class="<?= $class[5] ?>"
 		                            data-country="<?= $list->country_id ?>" data-type="<?= $list->main_type ?>" class="<?= $class[5] ?>" 
@@ -149,13 +149,15 @@
                                         <a href="" class="delete">Delete</a>
                                     </li>
                                     <?php endforeach ?>
-                                    <?php else: ?>
+                                </ul>
+								<?php else: ?>
+                                <ul>
                                     <li class="empty">
                                         <img src="/images2/arrow-17.png" alt="" />
                                         Drop here the places you want to stay this day
                                     </li>
-                                    <?php endif ?>
                                 </ul>
+								<?php endif ?>
                             </div><!-- closes item -->
                         </div><!-- closes itinerary-items -->
                     </div><!-- closes slide -->
