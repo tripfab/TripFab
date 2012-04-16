@@ -1283,6 +1283,7 @@ class AjaxController extends Zend_Controller_Action
         $stars    = $this->_getParam('stars', 'all');
         $pricemax = $this->_getParam('pricemax', 3000);
         $pricemin = $this->_getParam('pricemin', 0);
+        $page = $this->_getParam('page', 1);
         
         $images = array(
             'all' => 'All-Small-0',
@@ -1328,15 +1329,120 @@ class AjaxController extends Zend_Controller_Action
         $this->view->categ = ($cat == 'all') ? 'things to do' : $category->name; 
         
         if(!is_null($city))
-            $ls_count = $this->listings->countListings($city->id);
+            $ls_count = $this->listings->countListings($city);
+        else
+            $ls_count = $this->listings->countListings(null, null, $country->id);
+        
+        if(!is_null($city)) {
+            $listings = $this->listings->getListings2($city, $cat, $subcat, $sort, $stars, $pricemin, $pricemax, null, $page);
+            $this->view->listing_count = $this->listings->getListingsCount($city, $cat, $subcat, $sort, $stars, $pricemin, $pricemax, null, $page);
+        }
+        else {
+            $listings = $this->listings->getListings2(null, $cat, $subcat, $sort, $stars, $pricemin, $pricemax, $country->id,$page);
+            $this->view->listing_count = $this->listings->getListingsCount(null, $cat, $subcat, $sort, $stars, $pricemin, $pricemax, $country->id,$page);
+        }
+        
+        //var_dump($this->view->listing_count); die;
+        
+        $this->view->class  = 'landscape-1';
+        $this->view->cat    = $cat;
+        $this->view->subcat = $subcat;
+        $this->view->sort   = $sort;
+        $this->view->stars  = $stars;
+        
+        $this->view->countries = $countries;
+        
+        $this->view->region  = $region;
+        $this->view->country = $country;
+        $this->view->city    = $city;
+        
+        $this->view->categories    = $categories;
+        $this->view->sortOptions   = $sortOptions;
+        $this->view->subcategories = $subcategories;
+        $this->view->ls_count      = $ls_count;
+        
+        $this->view->listings = $listings;
+    }
+    
+    public function getlistings2Action()
+    {
+        $auth = Zend_Auth::getInstance();
+        if($auth->hasIdentity()){
+            $user = $auth->getIdentity();
+            if($user->role_id == 2){
+                $trips = $this->trips->getFutureTripsBy($user->id, true);
+                $this->view->user  = $user;
+                $this->view->trips = $trips; 
+            }
+         
+        }
+        
+        $cat      = $this->_getParam('category', 'activities');
+        $subcat   = $this->_getParam('cats', 'all');
+        $sort     = $this->_getParam('sort', 'newest');
+        $stars    = $this->_getParam('stars', 'all');
+        $pricemax = $this->_getParam('pricemax', 3000);
+        $pricemin = $this->_getParam('pricemin', 0);
+        $page = $this->_getParam('page', 1);
+        
+        $images = array(
+            'all' => 'All-Small-0',
+            'activities' => 'All-Activities-0',
+            'entertaiment' => 'Entertainment-Small-0',
+            'tourist-sights' => 'Sights-Small-0',
+            'restaurants' => 'Restaurant-Small-0',
+            'hotels' => 'Hotels-Small-0'
+        );
+        
+        $this->view->image = $images[$cat];
+        
+        $countries   = $this->places->getPlaces(2);
+        
+        $country_idf = $this->getRequest()->getParam('country');
+        $city_idf    = $this->getRequest()->getParam('city');
+        $country     = $this->places->getPlaceByIdf($country_idf);
+        $region      = $this->places->getPlaceById($country->parent_id);
+        
+        $city = null;
+        if($city_idf != 'default')
+            $city = $this->places->getPlaceByIdf($city_idf, 3, $country->id);
+        
+        $categories  = $this->listings->getMainCategories(true);
+        
+        $sortOptions = array(
+            'newest' => 'Newest',
+            'popular' => 'Most Popular',
+            'name' => 'Name',
+            'free' => 'Free',
+            'lowest' => 'Lowest Price',
+            'highest' => 'Highest Price',
+            'rating' => 'Rating' 
+        );
+        
+        $subcategories = null;
+        $category = null;
+        if($cat != 'all'){
+            $category = $this->listings->getCategoryByIdf($cat);
+            $subcategories = $this->listings->getSubCategoriesOf($category->id);
+        }
+        
+        $this->view->categ = ($cat == 'all') ? 'things to do' : $category->name; 
+        
+        if(!is_null($city))
+            $ls_count = $this->listings->countListings($city);
         else
             $ls_count = $this->listings->countListings(null, null, $country->id);
         
         if(!is_null($city)) 
-            $listings = $this->listings->getListings2($city->id, $cat, $subcat, $sort, $stars, $pricemin, $pricemax);
+            $listings = $this->listings->getListings2($city, $cat, $subcat, $sort, $stars, $pricemin, $pricemax, null, $page);
         else
-            $listings = $this->listings->getListings2(null, $cat, $subcat, $sort, $stars, $pricemin, $pricemax, $country->id);
+            $listings = $this->listings->getListings2(null, $cat, $subcat, $sort, $stars, $pricemin, $pricemax, $country->id,$page);
         
+        
+        if(count($listings) == 0){
+            echo ''; die;
+        }
+            
         $this->view->listing_count = count($listings);
         //var_dump($this->view->listing_count); die;
         
@@ -1358,6 +1464,8 @@ class AjaxController extends Zend_Controller_Action
         $this->view->ls_count      = $ls_count;
         
         $this->view->listings = $listings;
+        
+        //echo 'asd'; die;
     }
     
     public function gettripsAction()
