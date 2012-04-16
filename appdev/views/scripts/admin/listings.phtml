@@ -102,9 +102,9 @@
 								<a href="" class="btn-10"><span>Actions</span></a>
 								<ul>
 									<li class="arrow"></li>
-									<li><a hhref="/admin/listings/edit/<?= $listing->id ?>">Edit Listing</a></li>
-									<li><a target="_blank" href="/provider/listings/preview/1933">View Preview</a></li>
-									<li><a href="#listing_delete_1933" class="lb">Delete Listing</a></li>
+									<li><a href="/admin/listings/edit/<?= $listing->id ?>">Edit Listing</a></li>
+									<li><a target="_blank" href="/admin/listings/preview/<?= $listing->id ?>">View Preview</a></li>
+									<li><a href="/admin/listings/delete/<?= $listing->id ?>" class="delete">Delete Listing</a></li>
 								</ul> 
 							</td>
 						</tr>
