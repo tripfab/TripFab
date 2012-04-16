@@ -973,7 +973,7 @@
 	position: absolute;
 	top: 57px;
 	right: 0;
-	z-index: 100;
+	z-index: 10;
 	font-size: 13px;
     padding: 0;
     width: 132px;
@@ -1450,7 +1450,7 @@
     position: absolute;
     top: -54px;
     width: 9px;
-    z-index: 100;
+    z-index: 11;
 }
 #lstng_htl .sidebar h5 > span{
 	background: url("https://developer.tripfab.com/images6/lstng_htl.png") no-repeat 0 0;
@@ -1521,15 +1521,79 @@
 	background-color: #FFF;
 	padding: 8px 0 5px 7px;
 }
-#lstng_htl .sidebar .type label {
+#lstng_htl .sidebar .type .details {
+	position: relative;
+}
+#lstng_htl .sidebar .details > .room_tip {
+	display: none;
+	background-color: #303030;
+	color: #FFF;
+	padding: 10px 20px 20px;
+	min-height: 200px;
+	width: 350px;
+	position: absolute;
+	top: -74px;
+	left: -380px;
+	z-index: 100;
+	-webkit-box-shadow: 0px 0px 3px 2px #a9a9a9;
+	-moz-box-shadow: 0px 0px 3px 2px #a9a9a9;
+	box-shadow: 0px 0px 3px 2px #a9a9a9; 
+	behavior: url(/PIE.htc);
+}
+#lstng_htl .sidebar div.details:hover > .room_tip {
+	display: block;
+}
+#lstng_htl .sidebar .room_tip .rw {
+	display: block;
+	background: url(https://developer.tripfab.com/images6/lstng_htl.png) no-repeat -210px -72px;
+	width: 6px;
+	height: 16px;
+	position: absolute;
+	right: -6px;
+	top: 82px;
+}
+#lstng_htl .sidebar .room_tip h6 {
+	font: bold 13px/30px Helvetica;
+	height: 30px;
+	border-bottom: 1px solid #1a1a1a;
+}
+#lstng_htl .sidebar .room_tip .text {
+	border-top: 1px solid #404040;
+	font: normal 11px/16px Helvetica;
+	padding-top: 10px;
+}
+#lstng_htl .sidebar .room_tip p{
+	margin-bottom: 15px;
+}
+#lstng_htl .sidebar .room_tip li{
+	margin-bottom: 10px;
+	font: normal 11px Helvetica
+}
+#lstng_htl .sidebar .room_tip a.details {
+	display: block;
+	background-color: #60b5f7;
+	font: bold 11px/26px Helvetica;
+	height: 26px;
+	padding: 0 10px;
+	color: #FFF;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+#lstng_htl .sidebar .room_tip a.details:hover {
+	background-color: #9BD2FC;
+}
+
+#lstng_htl .sidebar .details > label {
 	display: block;
 	width: 273px;
 	height: 29px;
 	font: normal 12px/29px Helvetica;
 	color: #464646;
 	margin-left: 3px;
+	position: relative;
 }
-#lstng_htl .sidebar .type label:hover {
+#lstng_htl .sidebar .details:hover > label {
 	background-color: #f1f9ff;
 }
 #lstng_htl .sidebar .type input[type="radio"] {
@@ -1564,34 +1628,59 @@
 }
 
 #lstng_htl .sidebar .price {
-	background: url(https://developer.tripfab.com/images6/lstng_htl.png) no-repeat 0 -310px;
-	height: 88px;
-	position: relative;
-	font: bold 40px Helvetica;
-	text-align: center;
+	background: url("https://developer.tripfab.com/images6/lstng_htl.png") no-repeat scroll 0 -310px transparent;
+    font: bold 40px Helvetica;
+    height: 88px;
+    text-align: center;
+    position: relative;
+}
+#lstng_htl .sidebar .price > div {
+	position: absolute;
+	float: left;
+	bottom: 0;
+	overflow: hidden;
+	width: 100%;
 }
 #lstng_htl .sidebar .price span {
-	bottom: 0;
+	/*bottom: 0;*/
     color: #303030;
     display: block;
-    left: 114px;
-    position: absolute;
+    /*left: 114px;
+    position: absolute;*/
+    position: relative;
     text-align: center;
+    clear: left;
+    float: left;
+    left: 50%;
+}
+#lstng_htl .sidebar .price abbr {
+	right: 33%;
+	position: relative;
+	display: block;
+	float: left;
 }
 #lstng_htl .sidebar .price sup{
 	font-size: 18px;
-    left: -12px;
+    /*left: -12px;
     position: absolute;
-    top: 0;
+    top: 0;*/
+    right: 33%;
+    position: relative;
+    display: block;
+    float: left;
     vertical-align: top;
 }
 #lstng_htl .sidebar .price sub{
-	bottom: 19px;
+/*	bottom: 19px;*/
     font-size: 12px;
     font-weight: normal;
-    position: absolute;
-    right: -48px;
+   /* position: absolute;
+    right: -48px;*/
     vertical-align: middle;
+    right: 33%;
+    position: relative;
+    display: block;
+    float: left;
 }
 #lstng_htl .sidebar form > .btn-1 {
 	margin:0 15px;
