@@ -575,10 +575,6 @@
                         </div><!--DETAILS-->
                         <?php endforeach ?>
                     </div><!--CHECKOUT_ACCORDION-->
-                    <div class="terms">
-                    	<label><input type="checkbox" name="bookings[<?= $item->id ?>][terms]" value="1" class="termscheck" />
-                    	I agree to the cancellation policy, hotel restrictions and <a target="_blank" href="/terms">terms of use.</a></label>
-                    </div><!--TERMS-->
                     <input type="hidden" name="userid" value="<?= $this->user->id ?>" />
                     <input type="hidden" name="ids" value="<?= $this->trip->id ?>" />
                     <input type="hidden" name="token" value="<?= $this->trip->token ?>" />
@@ -588,40 +584,49 @@
             </div><!--LEFT_BLOCK-->
             
             <div class="right_block">
-                <h5>Trip Details</h5>
-                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                		<?php foreach($this->items as $item): ?>
-                		<?php if($item->available): ?>
-                		<tr>
-                			<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><em><?= $item->listing_title ?></em></a></td>
-                			<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>$<?= $item->total ?></span></td>
-                		</tr>
-                		<?php elseif($item->available === false): ?>
-                		
-                		<tr>
-                			<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><em><?= $item->listing_title ?></em></a></td>
-                			<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not available</span></td>
-                		</tr>
-                		<?php else: ?>
-                		
-                		<tr>
-                			<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><?= $item->listing_title ?></a></td>
-                			<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not ready</span></td>
-                		</tr>
-                		<?php endif ?> 
-                		<?php endforeach ?>
-                		<?php foreach($this->items2 as $item): ?>
-                		
-                		<tr>
-                			<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href=""><em><?= $item->listing_title ?></em></a></td>
-                			<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not charged</span></td>
-                		</tr>
-                		<?php endforeach ?>
-                	</table>
-                <div class="clear"></div>
+                <div class="inf">
+                	<h5>Trip Details</h5>
+                	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                			<?php foreach($this->items as $item): ?>
+                			<?php if($item->available): ?>
+                			<tr>
+                				<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><em><?= $item->listing_title ?></em></a></td>
+                				<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>$<?= $item->total ?></span></td>
+                			</tr>
+                			<?php elseif($item->available === false): ?>
+                			
+                			<tr>
+                				<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><em><?= $item->listing_title ?></em></a></td>
+                				<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not available</span></td>
+                			</tr>
+                			<?php else: ?>
+                			
+                			<tr>
+                				<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><?= $item->listing_title ?></a></td>
+                				<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not ready</span></td>
+                			</tr>
+                			<?php endif ?> 
+                			<?php endforeach ?>
+                			<?php foreach($this->items2 as $item): ?>
+                			
+                			<tr>
+                				<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href=""><em><?= $item->listing_title ?></em></a></td>
+                				<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not charged</span></td>
+                			</tr>
+                			<?php endforeach ?>
+                		</table>
+                	<div class="clear"></div>
+                </div>
+                
+                <div class="terms">
+                	<label><input type="checkbox" name="bookings[<?= $item->id ?>][terms]" value="1" class="termscheck" />
+                	<span>I agree to the cancellation policy, hotel restrictions and <a target="_blank" href="/terms">terms of use.</a></span></label>
+                </div><!--TERMS-->	
+                
                 <div class="bottom"> <a href="" class="btn-1">Okay, continue</a>
                     <p>Grand Total<strong>$<?= $this->bigtotal ?></strong></p>
                 </div><!--BOTTOM--> 
+                
             </div><!--RIGHT_BLOCK--> 
         </div><!--CUSTOM_CHECKOUT--> 
     </div><!-- closes w2 -->

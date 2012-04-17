@@ -18437,13 +18437,19 @@ background-color: #FFF;
 #custom_checkout .terms {
 	background-color: #FFFFFF;
     border: 1px solid #E7E7E7;
-    height: 45px;
-    padding: 25px 0 0 22px;
+    padding: 12px 0 12px 12px;
     position: relative;
     z-index: 10;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
+    margin-bottom: 10px;
+}
+#custom_checkout .terms input {
+	display: block;
+	float: left;
+	margin-right: 10px;
+	margin-top: 0;
 }
 #custom_checkout .terms a {
 	color: #60b5f7;
@@ -18559,6 +18565,8 @@ background-color: #FFF;
 #custom_checkout .right_block {
 	float: right;
 	width: 290px;
+}
+#custom_checkout .right_block .inf {
 	border: 1px solid #e7e7e7;
 	-webkit-box-shadow: 0px #e7e7e7;
 	-moz-box-shadow: 0px #e7e7e7;
@@ -18569,6 +18577,8 @@ background-color: #FFF;
 	border-radius: 4px;
 	background-color: #FFF;
 	behavior: url(/PIE.htc);
+	margin-bottom: 10px;
+	padding-bottom: 10px;
 }
 #custom_checkout .right_block h5 {
 	font: bold 13px/50px Helvetica;
@@ -18589,7 +18599,6 @@ background-color: #FFF;
 #custom_checkout .right_block table tr:hover td{
 	background-color: #303030;
 }
-
 #custom_checkout .right_block table tr a {
 	color: #FFF;
 	display: block;
@@ -18627,12 +18636,9 @@ background-color: #FFF;
 	padding: 12px 18px;
 	position: relative;
 	z-index: 0;
-	-moz-border-radius-topleft: 0px;
-	-moz-border-radius-topright: 0px;
-	-moz-border-radius-bottomright: 4px;
-	-moz-border-radius-bottomleft: 4px;
-	-webkit-border-radius: 0px 0px 4px 4px;
-	border-radius: 0px 0px 4px 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 	margin-top: 5px;
 }
 #custom_checkout .right_block .btn-1 {
@@ -18749,32 +18755,32 @@ background-color: #FFF;
 	color:#303030
 }
 
-#cancel_policy {
+.cancel_policy {
 	width:960px;
 }
-#cancel_policy .top {
+.cancel_policy .top {
 	height:42px;
 	font:bold 13px/42px Helvetica, sans-serif;
 	color:#FFF;
 	padding-left:20px
 }
-#cancel_policy .mid {
+.cancel_policy .mid {
 	padding:20px;
 	background-color: #FFF;
 }
-#cancel_policy .mid h3 {
+.cancel_policy .mid h3 {
 	font-size: 13px;
 	margin-bottom: 15px;
 } 
-#cancel_policy .mid ul {
+.cancel_policy .mid ul {
 	padding-bottom: 29px;
 }
-#cancel_policy .mid ul li {
+.cancel_policy .mid ul li {
 	list-style:none;
 	font:normal 12px/16px Helvetica, sans-serif;
 	color:#303030
 }
-#cancel_policy .mid .inner {
+.cancel_policy .mid .inner {
 	background-color: #f3f3f3;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -18783,23 +18789,23 @@ background-color: #FFF;
 	-moz-box-shadow: inset 0px 0px 3px 2px #b4b4b4;
 	box-shadow: inset 0px 0px 3px 2px #b4b4b4;
 }
-#cancel_policy .mid .inner img {
+.cancel_policy .mid .inner img {
 	padding: 16px 0 16px 33px;
 }
-#cancel_policy .mid .specs {
+.cancel_policy .mid .specs {
 	padding-left: 10px;
 	background: url(https://developer.tripfab.com/images2/cancellations_policyg.png) repeat-x 0 0;
 }
-#cancel_policy .mid .column {
+.cancel_policy .mid .column {
 	width: 300px;
 	float: left;
 	background: url(https://developer.tripfab.com/images2/cancellations_policy.png) no-repeat right bottom;
 	height: 124px;
 }
-#cancel_policy .mid .column.last {
+.cancel_policy .mid .column.last {
 	background: none;
 }
-#cancel_policy .mid .column p {
+.cancel_policy .mid .column p {
 	padding:20px 20px 0;
 	color: #303030;
 	font: 12px/18px Helvetica;
@@ -19573,7 +19579,6 @@ h2.title .back:hover,
 	border-radius: 4px;
 	margin-bottom: 10px;
 	border: 1px solid #e7e7e7;
-	margin-top:36px;
 }
 #terms_use .title {
 	background:url(https://developer.tripfab.com/images2/g-54.png) repeat-x left bottom;
@@ -19592,47 +19597,42 @@ h2.title .back:hover,
 	font:bold 11px/55px Helvetica, sans-serif;
 }
 #terms_use .accordion {
-	padding:0 15px 20px;
-}
-#terms_use .accordion h3{
-	font:bold 13px/37px Helvetica, sans-serif;
-	height:37px;
-	border-bottom:1px solid #ededed;
-}
-#terms_use .accordion h3.ui-state-active {
-	border:none;
+	padding:0 0 20px;
 }
 #terms_use .accordion h3 a {
 	color:#303030;
 	display:block;
-	padding:0 15px;
+	padding:0 30px;
 }
 #terms_use .accordion h3 span {
-	background:url(https://developer.tripfab.com/images2/terms-icon1.png) no-repeat 0 0;
-	background-position:left top;
+	background:url(https://developer.tripfab.com/images2/terms_of_use.png) no-repeat 0 0;
 	display:block;
-	height:16px;
-	width:16px;
+	height:15px;
+	width:40px;
 	float:right;
-	margin:12px 14px 0;
+	margin:23px 14px 0;
 }
 #terms_use .accordion h3 .ui-icon-triangle-1-e {
-	background-position:left top;
+	background-position:0 -63px;
+}
+#terms_use .accordion h3.ui-state-hover .ui-icon-triangle-1-e {
+	background-position: 0 0;
 }
 #terms_use .accordion h3 .ui-icon-triangle-1-s {
-	background-position:left bottom;
+	background-position:-62px -63px;
+}
+#terms_use .accordion h3.ui-state-hover .ui-icon-triangle-1-s {
+	background-position: -62px 0;
 }
 #terms_use .accordion .single {
-	border-bottom:1px solid #ededed;
-	padding:0 15px;
-}
-#terms_use .accordion h3 a:hover {
-	background-color:#f0f8ff;
-}
+	padding:0 30px;
+}	
 #terms_use .accordion .single p {
-	font:normal 13px/18px Helvetica, sans-serif;
+	font:normal 11px/18px Helvetica, sans-serif;
 	color:#303030;
-	padding-bottom:30px;
+	padding-bottom: 10px;
+	width: 492px;
+	float: left;
 }
 #terms_use .accordion h4 {
 	margin-bottom:10px;
@@ -19642,10 +19642,79 @@ h2.title .back:hover,
 	padding-bottom:10px
 }
 #terms_use .accordion ul li {
-	font:13px/15px Helvetica;
+	font:11px/18px Helvetica;
 	margin-bottom:5px;
 	margin-left:15px;
 }
+#terms_use .accordion .abbr {
+	float: right;
+	width: 320px;
+}
+#terms_use .accordion .abbr h4 {
+	font: bold 11px Helvetica;
+	color: #898989;
+	margin-bottom: 20px;
+}
+#terms_use .accordion .abbr h5 {
+	font: normal 23px/32px Helvetica;
+	color: #303030;
+	margin-bottom: 20px;
+}
+
+
+.terms_header {
+	width: 960px;
+	margin: 20px auto 15px;
+	overflow: hidden;
+	position: relative;
+}
+.terms_header a {
+	display: block;
+	margin-right: 10px;
+	color: #303030;
+	font: bold 15px/30px Helvetica;
+	padding: 0 15px;
+	float: left;
+	text-align: center;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+.terms_header a:hover, .terms_header a.active {
+	color: #FFF;
+	background-color: #303030;
+	-webkit-box-shadow: inset 0px 0px 3px 2px #000;
+	-moz-box-shadow: inset 0px 0px 3px 2px #000;
+	box-shadow: inset 0px 0px 3px 2px #000;
+}
+.terms_header .date {
+	position: absolute;
+	top: 10px;
+	right: 0;
+	color: #636363;
+	font: normal 11px Helvetica;
+}
+#terms_use .head {
+	padding: 55px 0;
+	font: normal 15px/22px Helvetica;
+	color: #303030;
+	padding-left: 220px;
+	width: 580px;
+}
+#terms_use .accordion h3 {
+	border-top: 1px solid #EDEDED;
+    font: bold 12px/53px Helvetica,sans-serif;
+    height: 53px;
+}
+#terms_use .accordion .text {
+	float: left;
+	width: 492px;
+}
+
+
+
+
+
 /*END TERMS OF USE---------------------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------*/
 /*NEW-PASSWORD-------------------------------------------------------------*/
