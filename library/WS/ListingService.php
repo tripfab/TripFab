@@ -2107,6 +2107,7 @@ class WS_ListingService {
         $cart->listing_max   = $listing->max;
         $cart->listing_price = $listing->price;
         $cart->id            = $listing->id;
+        $cart->policy        = $listing->policy;
         
         return $cart;
     }

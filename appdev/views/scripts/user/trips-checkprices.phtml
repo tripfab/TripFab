@@ -27,7 +27,7 @@
                 <h3>Check the availability for your trip and the listing options before continue with the checkout</h3>
                 <form method="post" action="" id="checkprices_form">
                     <div id="checkout_accordion">
-                        <?php foreach($this->items as $item): ?>
+                        <?php foreach($this->items as $kkk => $item): ?>
                         <?php if($item->available || ($item->available === 0)): ?>
                         <div class="header active">
                             <span class="arrow"></span> 
@@ -209,33 +209,33 @@
                             <?php switch($this->listing->policy): case 1: ?>
                              <div class="item"> 
                                 <strong>Cancellation</strong> 
-                                <a href="#cancel_policy" class="high-r lb restriction">Low Restrictions &rarr;</a> 
+                                <a href="#cancel_policy_<?= $kkk ?>" class="high-r lb restriction">Low Restrictions &rarr;</a> 
                             </div><!--ITEM-->
 							<?php break; case 2: ?>
                              <div class="item"> 
                                 <strong>Cancellation</strong> 
-                                <a href="#cancel_policy" class="high-r lb restriction">Medium Restrictions &rarr;</a> 
+                                <a href="#cancel_policy_<?= $kkk ?>" class="high-r lb restriction">Medium Restrictions &rarr;</a> 
                             </div><!--ITEM-->
                             <?php break; case 3: ?>
                              <div class="item"> 
                                 <strong>Cancellation</strong> 
-                                <a href="#cancel_policy" class="high-r lb restriction">High Restrictions &rarr;</a> 
+                                <a href="#cancel_policy_<?= $kkk ?>" class="high-r lb restriction">High Restrictions &rarr;</a> 
                             </div><!--ITEM-->
                             <?php endswitch ?>
                             <?php if($this->listing->main_type == 6): ?>
                             <div class="last"> 
                                 <strong>Hotel Restrictions</strong> 
-                                <a href="/ajax/restrictions/<?= $this->listing->id ?>" class="lb restriction">Read Hotel Restrictions &rarr;</a> 
+                                <a href="/ajax/restrictions/<?= $item->id ?>" class="lb restriction">Read Hotel Restrictions &rarr;</a> 
                             </div><!--ITEM-->
                             <?php else: ?>
                             <div class="last"> 
                                 <strong>Activity Restrictions</strong> 
-                                <a href="/ajax/restrictions/<?= $this->listing->id ?>" class="lb restriction">Read Hotel Restrictions &rarr;</a> 
+                                <a href="/ajax/restrictions/<?= $item->id ?>" class="lb restriction">Read Hotel Restrictions &rarr;</a> 
                             </div><!--ITEM-->
                             <?php endif ?>
-                            <?php switch($this->listing->policy): case 1: ?>
-                            <?php if($this->listing->main_type == 5): ?>
-                            <div class="restricction_tip hidden">
+                            <?php switch($item->policy): case 1: ?>
+                            <?php if($item->listing_type == 5): ?>
+                            <div class="restricction_tip_<?= $kkk ?> hidden">
                                 <strong>Full refund 1 day prior to arrival, except fees</strong>
                                 <ul>
                                 	<li>• Cleaning fees are always refunded if the guest did not check in</li>
@@ -284,7 +284,7 @@
                            		</div><!--CANCEL_POLICY-->
                             </div>
                             <?php else: ?>
-                            <div class="restricction_tip hidden">
+                            <div class="restricction_tip_<?= $kkk ?> hidden">
                                 <strong>Full refund 1 day prior to arrival, except fees</strong>
                                 <ul>
                                     <li>• The Tripfab service fee is refundable.</li>
@@ -332,8 +332,8 @@
                             </div>                            
                             <?php endif ?>
 							<?php break; case 2: ?>
-                            <?php if($this->listing->main_type == 5): ?>
-                            <div class="restricction_tip hidden">
+                            <?php if($item->listing_type == 5): ?>
+                            <div class="restricction_tip_<?= $kkk ?> hidden">
                                 <strong>Full refund 3 days prior to arrival, except fees</strong>
                                 <ul>
                                 	<li>• Cleaning fees are always refunded if the guest did not check in.
@@ -381,7 +381,7 @@
                            		</div><!--CANCEL_POLICY-->
                             </div>
                             <?php else: ?>
-                            <div class="restricction_tip hidden">
+                            <div class="restricction_tip_<?= $kkk ?> hidden">
                                 <strong>Full refund 3 days prior to arrival, except fees</strong>
                                 <ul>
                                     <li>• The Tripfab service fee is refundable.</li></li>
@@ -429,8 +429,8 @@
                             </div>
                             <?php endif ?>
 							<?php break; default: ?>
-                            <?php if($this->listing->main_type == 5): ?>
-                            <div class="restricction_tip hidden">
+                            <?php if($item->listing_type == 5): ?>
+                            <div class="restricction_tip_<?= $kkk ?> hidden">
                                 <strong>50% refund up until 1 week prior to arrival, except fees</strong>
                                 <ul>
                                     <li>• Cleaning fees are always refunded if the guest did not check in.</li>
@@ -478,7 +478,7 @@
                            		</div><!--CANCEL_POLICY-->
                             </div>                    
                             <?php else: ?>
-                            <div class="restricction_tip hidden">
+                            <div class="restricction_tip_<?= $kkk ?> hidden">
                                 <strong>50% refund up until 1 week prior to arrival, except fees</strong>
                                 <ul>
                                     <li>• Cleaning fees are always refunded if the guest did not arrive to the meeting point.</li>
