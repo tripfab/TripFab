@@ -2298,7 +2298,11 @@ class AdminController extends Zend_Controller_Action {
         
         $this->listings->saveDayInCalendar($listing, $data);
         setcookie('alert', 'Your changes have been saved');
-        $this->_redirect('/admin/listings/calendar/'.$listing->id);
+        
+        $month = $this->_getParam('month', date('m'));
+        $year = $this->_getParam('year', date('Y'));
+        
+        $this->_redirect('/admin/listings/calendar/'.$listing->id.'?month='.$month.'&year='.$year);
     }
     
     public function listingsPricingTask()
