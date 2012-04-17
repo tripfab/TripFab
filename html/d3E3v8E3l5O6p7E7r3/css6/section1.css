@@ -708,7 +708,7 @@
 	height: 72px;
 	background-color: #f3f3f3;
 	width:100%;
-	z-index: 1000;
+	z-index: 9999;
 	-webkit-box-shadow: 0px 2px 4px 0px #303030;
 	-moz-box-shadow: 0px 2px 4px 0px #303030;
 	box-shadow: 0px 2px 4px 0px #303030;
@@ -898,7 +898,7 @@
 #lstng_htl .dscript p {
 	color: #FFF;
 	font: normal 12px/18px Helvetica;
-	height: 40px;
+	height: 39px;
 	overflow: hidden;
 }
 #lstng_htl .dscript .price{
@@ -1592,6 +1592,7 @@
 	color: #464646;
 	margin-left: 3px;
 	position: relative;
+	overflow: hidden;
 }
 #lstng_htl .sidebar .details:hover > label {
 	background-color: #f1f9ff;
@@ -1642,11 +1643,8 @@
 	width: 100%;
 }
 #lstng_htl .sidebar .price span {
-	/*bottom: 0;*/
     color: #303030;
     display: block;
-    /*left: 114px;
-    position: absolute;*/
     position: relative;
     text-align: center;
     clear: left;
@@ -1661,9 +1659,6 @@
 }
 #lstng_htl .sidebar .price sup{
 	font-size: 18px;
-    /*left: -12px;
-    position: absolute;
-    top: 0;*/
     right: 33%;
     position: relative;
     display: block;
@@ -1671,11 +1666,8 @@
     vertical-align: top;
 }
 #lstng_htl .sidebar .price sub{
-/*	bottom: 19px;*/
     font-size: 12px;
     font-weight: normal;
-   /* position: absolute;
-    right: -48px;*/
     vertical-align: middle;
     right: 33%;
     position: relative;

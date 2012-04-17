@@ -443,22 +443,26 @@
                                         <div class="type">
                                             <span class="line"></span>
                                             <?php foreach($this->capacities as $option): ?>
-                                            <label for="activityType<?= $option->id ?>">
-                                            <input class="noclean" type="radio" value="<?= $option->id ?>" 
-                                            name="capacity" id="activityType<?= $option->id ?>">
-                                            <?= $option->name ?> (<?= $option->min ?> - <?= $option->max ?>) / 
-                                            $<?= $this->prices[$option->id]['price'] ?></label>
+                                            <div class="details">
+                                            	<label for="activityType<?= $option->id ?>">
+                                            	<input class="noclean" type="radio" value="<?= $option->id ?>" 
+                                            	name="capacity" id="activityType<?= $option->id ?>">
+                                            	<?= $option->name ?> (<?= $option->min ?> - <?= $option->max ?>) / 
+                                            	$<?= $this->prices[$option->id]['price'] ?></label>
+                                            </div>
                                             <?php endforeach ?>
                                         </div><!--TYPE-->
                                         <?php else: ?>
                                         <h5><span class="i_type"></span>Choose an Activity Type</h5>
                                         <div class="type">
                                             <span class="line"></span>
-                                            <label for="activityType0">
-                                            <input checked="checked" class="noclean" type="radio" 
-                                            value="single" name="capacity" id="activityType0">
-                                            Single Capacity (<?= $this->listing->min ?> - <?= $this->listing->max ?>) / 
-                                            $<?= $this->listing->price ?></label>
+                                            <div class="details">
+                                            	<label for="activityType0">
+                                            	<input checked="checked" class="noclean" type="radio" 
+                                            	value="single" name="capacity" id="activityType0">
+                                            	Single Capacity (<?= $this->listing->min ?> - <?= $this->listing->max ?>) / 
+                                            	$<?= $this->listing->price ?></label>
+                                            </div>
                                         </div><!--TYPE-->
                                         <?php endif ?>
                                         
@@ -467,11 +471,13 @@
                                         <div class="type">
                                             <span class="line"></span>
                                             <?php foreach($this->options as $option): ?>
-                                            <label for="schedule<?= $option->id ?>">
-                                            <input class="noclean" type="radio" value="<?= $option->id ?>" 
-                                            name="option" id="schedule<?= $option->id ?>">
-                                            <?= date('h:i a',strtotime($option->starting)) ?> - 
-                                            <?= date('h:i a',strtotime($option->ending)) ?> </label>
+                                            <div class="details">
+                                            	label for="schedule<?= $option->id ?>">
+                                            	<input class="noclean" type="radio" value="<?= $option->id ?>" 
+                                            	name="option" id="schedule<?= $option->id ?>">
+                                            	<?= date('h:i a',strtotime($option->starting)) ?> - 
+                                            	<?= date('h:i a',strtotime($option->ending)) ?> </label>
+                                            </div>
                                             <?php endforeach ?>
                                         </div><!--TYPE-->
                                         <?php else: ?>
@@ -506,9 +512,11 @@
                                             <div class="clear"></div>
                                         </div><!--SELECTS-->
                                         <div class="price">
-                                             <span><sup>$</sup>
-                                             <abbr id="sumaryPrice"><?= $this->listing->price ?></abbr> 
-                                             <sub>Subtotal</sub></span>
+                                             <div>
+                                             	<span><sup>$</sup>
+                                             	<abbr id="sumaryPrice"><?= $this->listing->price ?></abbr> 
+                                             	<sub>Subtotal</sub></span>
+                                             </div>
                                         </div><!--PRICE-->
                                     </div><!--ACCORDION-->
                                     <input type="submit" value="Book Now!" class="btn-1 noclean" />

@@ -413,10 +413,27 @@
                                     <h5><span class="i_room"></span>Select the Room Details</h5>
                                     <div class="type">
                                         <?php foreach($this->options as $option): ?>
-                                        <label for="room<?= $option->id ?>"><input type="radio" id="room<?= $option->id ?>" 
-                                        name="option" value="<?= $option->id ?>" />
-                                        <?= $option->name ?> (<?= $this->rooms2[$option->name]['people'] ?>/room) 
-                                        $<?= $this->prices[$option->id]['price'] ?> </label>
+	                                        <div class="details">
+	                                        	<label for="room<?= $option->id ?>"><input type="radio" id="room<?= $option->id ?>" 
+	                                        	name="option" value="<?= $option->id ?>" />
+	                                        	<?= $option->name ?> (<?= $this->rooms2[$option->name]['people'] ?>/room) 
+	                                        	$<?= $this->prices[$option->id]['price'] ?> </label>
+	                                        	
+	                                        	<div class="room_tip">
+	                                        		<span class="rw"></span>
+	                                        		<h6>Superior Premium Room</h6>
+	                                        		<div class="text">
+	                                        			<p>Spanish for "Golden View," Vista de Oro lives up to its name: Climb the private staircase to reach this luxury suite, where the entire Central Valley skyline unfolds before your eyes. The suite features a living area furnished in antiques, a luxurious king-sized bed, and an in-room Jacuzzi.</p>
+	                                        		</div><!--TEXT-->
+	                                        		<ul>
+	                                        			<li><strong>Minimum Stay:</strong> 1 night</li>
+	                                        			<li><strong>Maximum Accomodation:</strong> 2 person</li>
+	                                        			<li>1 Single Bed</li>
+	                                        		</ul>
+	                                        		<a href="" class="details">Room Details &rarr;</a>
+	                                        	</div><!--ROOM_TIP-->
+	                                        	
+	                                        </div>
                                         <?php endforeach ?>
                                     </div><!--TYPE-->
                                     <div class="selects">
@@ -440,9 +457,11 @@
                                         <div class="clear"></div>
                                     </div><!--SELECTS-->
                                     <div class="price">
-                                         <span><sup>$</sup>
-                                         <abbr id="sumaryPrice"><?= $this->listing->price ?></abbr> 
-                                         <sub>Subtotal</sub></span>
+                                         <div>
+                                         	<span><sup>$</sup>
+                                         	<abbr id="sumaryPrice"><?= $this->listing->price ?></abbr> 
+                                         	<sub>Subtotal</sub></span>
+                                         </div>
                                     </div><!--PRICE-->
                                     <input type="submit" value="Book Now!" class="btn-1 noclean" />
                                     <?php foreach($this->form_fields as $name => $value): ?>
