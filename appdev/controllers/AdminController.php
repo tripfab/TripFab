@@ -3075,6 +3075,9 @@ class AdminController extends Zend_Controller_Action {
 					$user_id = $_POST['user_id'];
 					$this->vendors->saveInfo($vendorId, $name, $email, $contact_name, $date, $phone, $city, $country, $website, $user->user_id);
 					$_SESSION['alert'] = 'Your changes have been saved';
+                                        
+                                        $this->_redirect('/admin/users/view/partner/'.$vendorId);
+                                        
 			   		$user = $this->vendors->getVendorDetailsById($vendorId);
                 	$this->view->user = $user;
 			   }
