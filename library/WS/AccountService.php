@@ -55,7 +55,7 @@ class WS_AccountService {
     public function signup($data, $fb = false){
         $user = $this->users_db->fetchNew();
         if($fb){
-            if($this->validateEmail($email)) {
+            if($this->validateEmail($data['email'])) {
                 $user->name     = $data['name'];
                 $user->email    = $data['email'];
                 $user->gender   = ucfirst($data['gender']);
@@ -73,7 +73,7 @@ class WS_AccountService {
                 $user = $this->getUser($data['email']);
             }            
         } else {
-            if($this->validateEmail($email)) {
+            if($this->validateEmail($data['email'])) {
                 $user->name       = $data['name'];
                 $user->lname      = $data['lname'];
                 $user->email      = $data['email'];
