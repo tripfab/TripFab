@@ -38,7 +38,7 @@ $(document).ready(function() {
     
     $form.submit(function(){
         if($proceed) {
-            $terms = $('.termscheck', this);
+            $terms = $('.termscheck');
             $pass  = true;
             $terms.each(function(){
                 if($pass) {
