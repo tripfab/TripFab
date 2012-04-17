@@ -1,6 +1,6 @@
 <div class="img_logo">
     <?php if(!empty($this->vendor->image)): ?>
-	<?= $this->thumbnail(array('width'=>114,'height'=>94), $this->vendor->image, '', '114:94'); ?>
+    <?= $this->logo($this->vendor->image, '114:94') ?>
     <?php else: ?>
     <div class="upload">
         <a href="/provider/account" class="link1"><span></span>Upload Logo</a>
