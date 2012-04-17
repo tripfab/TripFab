@@ -55,131 +55,59 @@
                                             </ul>
                                         </div><!--TTL-->
                                         <div class="item">
-                                            <p><strong>Cardholder Name</strong> No dashes or spaces</p>
-                                            <input type="text" value="" class="cname" autocomplete="off" />
+                                        	<div>
+                                                <p><strong>Cardholder Name</strong> No dashes or spaces</p>
+                                                <input type="text" value="" class="cname" autocomplete="off" />
+                                            </div>
                                         </div><!--ITEM-->
                                         <div class="item">
-                                            <p><strong>Credit Card Number</strong> As it appears on the credit card</p>
-                                            <input type="text" value="" id="credit-card" class="cnum" autocomplete="off" />
+                                        	<div>
+                                                <p><strong>Credit Card Number</strong> As it appears on the credit card</p>
+                                                <input type="text" value="" id="credit-card" class="cnum" autocomplete="off" />
+                                            </div>
                                         </div><!--ITEM-->
                                         <div class="item">
-                                            <p><strong>Expiration Date</strong> Only month and year required</p>
-                                            <select class="cmonth">
-                                                <option value="">--</option>
-                                                <option value="01">Jan (01)</option>
-                                                <option value="02">Feb (02)</option>
-                                                <option value="03">Mar (03)</option>
-                                                <option value="04">Avr (04)</option>
-                                                <option value="05">May (05)</option>
-                                                <option value="06">Jun (06)</option>
-                                                <option value="07">Jul (07)</option>
-                                                <option value="08">Aug (08)</option>
-                                                <option value="09">Sep (09)</option>
-                                                <option value="10">Oct (10)</option>
-                                                <option value="11">Nov (11)</option>
-                                                <option value="12">Dec (12)</option>
-                                            </select>
-                                            <select class="cyear">
-                                                <option value="">----</option>
-                                                <option value="2011">2011</option>
-                                                <option value="2012">2012</option>
-                                                <option value="2013">2013</option>
-                                                <option value="2014">2014</option>
-                                                <option value="2015">2015</option>
-                                                <option value="2016">2016</option>
-                                                <option value="2017">2017</option>
-                                                <option value="2018">2018</option>
-                                                <option value="2019">2019</option>
-                                                <option value="2020">2020</option>
-                                                <option value="2021">2021</option>
-                                            </select>
+                                        	<div>
+                                                <p><strong>Expiration Date</strong> Only month and year required</p>
+                                                <select class="cmonth">
+                                                    <option value="">--</option>
+                                                    <option value="01">Jan (01)</option>
+                                                    <option value="02">Feb (02)</option>
+                                                    <option value="03">Mar (03)</option>
+                                                    <option value="04">Avr (04)</option>
+                                                    <option value="05">May (05)</option>
+                                                    <option value="06">Jun (06)</option>
+                                                    <option value="07">Jul (07)</option>
+                                                    <option value="08">Aug (08)</option>
+                                                    <option value="09">Sep (09)</option>
+                                                    <option value="10">Oct (10)</option>
+                                                    <option value="11">Nov (11)</option>
+                                                    <option value="12">Dec (12)</option>
+                                                </select>
+                                                <select class="cyear">
+                                                    <option value="">----</option>
+                                                    <option value="2011">2011</option>
+                                                    <option value="2012">2012</option>
+                                                    <option value="2013">2013</option>
+                                                    <option value="2014">2014</option>
+                                                    <option value="2015">2015</option>
+                                                    <option value="2016">2016</option>
+                                                    <option value="2017">2017</option>
+                                                    <option value="2018">2018</option>
+                                                    <option value="2019">2019</option>
+                                                    <option value="2020">2020</option>
+                                                    <option value="2021">2021</option>
+                                                </select>
+                                            </div>
                                         </div><!--ITEM-->                                        
                                         <div class="item last">
-                                            <p><strong>Security Code</strong><a href="#" class="helptip">What is this?</a></p>
-                                            <p class="tip hidden"><span></span>The 3 or 4 digit value printed on the card or signature strip</p>
-                                            <input maxlength="4" type="text" class="ccode sscode" />
-                                            <div class="clear"></div>
+                                        	<div>
+                                                <p><strong>Security Code</strong><a href="#" class="helptip">What is this?</a></p>
+                                                <p class="tip hidden"><span></span>The 3 or 4 digit value printed on the card or signature strip</p>
+                                                <input maxlength="4" type="text" class="ccode sscode" />
+                                                <div class="clear"></div>
+                                            </div>
                                         </div><!--ITEM--> 
-                                    </div><!--CONT--> 
-                                </div><!--NEW-CARD--> 
-                                
-                                
-                                
-                                <div class="new-card">
-                                	<?php $checked = (count($this->accounts) == 0) ? 'checked="checked"' : '' ?>
-                                    <input name="account" type="radio" value="new" <?= $checked ?> />
-                                    <div class="cont">
-                                        <div class="ttl-select">
-                                            <label for="new-card">Enter a New Credit Card</label>
-                                            <ul class="cards">
-                                            </ul>
-                                        </div><!--TTL-->
-                                        <div class="item required">
-                                            <div>
-                                            	<p>
-                                            		<span class="alert">The Cardholder Name is wrong</span>
-                                            		<strong>Cardholder Name</strong> No dashes or spaces
-                                            	</p>
-                                            	<input type="text" value="" class="cname" autocomplete="off" />
-                                            </div>
-                                        </div><!--ITEM-->
-                                        <div class="item required">
-                                        	<div>
-	                                            <p>
-	                                            	<span class="alert">The Credit Card Number required</span>
-	                                            	<strong>Credit Card Number</strong> As it appears on the credit card
-	                                            </p>
-	                                            <input type="text" value="" id="credit-card" class="cnum" autocomplete="off" />
-                                            </div>
-                                        </div><!--ITEM-->
-                                        <div class="item required">
-                                        	<div>
-	                                            <p>
-	                                            	<span class="alert">The Expiration Date is required</span>
-	                                            	<strong>Expiration Date</strong> Only month and year required
-	                                            </p>
-	                                            <select class="cmonth">
-	                                                <option value="">--</option>
-	                                                <option value="01">Jan (01)</option>
-	                                                <option value="02">Feb (02)</option>
-	                                                <option value="03">Mar (03)</option>
-	                                                <option value="04">Avr (04)</option>
-	                                                <option value="05">May (05)</option>
-	                                                <option value="06">Jun (06)</option>
-	                                                <option value="07">Jul (07)</option>
-	                                                <option value="08">Aug (08)</option>
-	                                                <option value="09">Sep (09)</option>
-	                                                <option value="10">Oct (10)</option>
-	                                                <option value="11">Nov (11)</option>
-	                                                <option value="12">Dec (12)</option>
-	                                            </select>
-	                                            <select class="cyear">
-	                                                <option value="">----</option>
-	                                                <option value="2011">2011</option>
-	                                                <option value="2012">2012</option>
-	                                                <option value="2013">2013</option>
-	                                                <option value="2014">2014</option>
-	                                                <option value="2015">2015</option>
-	                                                <option value="2016">2016</option>
-	                                                <option value="2017">2017</option>
-	                                                <option value="2018">2018</option>
-	                                                <option value="2019">2019</option>
-	                                                <option value="2020">2020</option>
-	                                                <option value="2021">2021</option>
-	                                            </select>
-                                            </div>
-                                        </div><!--ITEM-->                                        
-                                        <div class="item last required">
-                                        	<div>
-	                                            <p>
-		                                            <span class="alert">The Security Code is wrong</span>
-		                                            <strong>Security Code</strong><a href="#" class="helptip">What is this?</a>
-		                                        </p>
-	                                            <p class="tip hidden"><span></span>The 3 or 4 digit value printed on the card or signature strip</p>
-	                                            <input maxlength="4" type="text" class="ccode sscode" />
-	                                            <div class="clear"></div>
-                                            </div>
-                                        </div><!--ITEM-->
                                     </div><!--CONT--> 
                                 </div><!--NEW-CARD--> 
                             </div><!-- closes payment-item -->                             
