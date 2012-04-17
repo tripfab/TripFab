@@ -206,7 +206,7 @@
                             </div>
                             <?php endif ?>
                             
-                            <?php switch($this->listing->policy): case 1: ?>
+                            <?php switch($item->policy): case 1: ?>
                              <div class="item"> 
                                 <strong>Cancellation</strong> 
                                 <a href="#cancel_policy_<?= $kkk ?>" class="high-r lb restriction">Low Restrictions &rarr;</a> 
@@ -216,13 +216,13 @@
                                 <strong>Cancellation</strong> 
                                 <a href="#cancel_policy_<?= $kkk ?>" class="high-r lb restriction">Medium Restrictions &rarr;</a> 
                             </div><!--ITEM-->
-                            <?php break; case 3: ?>
+                            <?php break; default: ?>
                              <div class="item"> 
                                 <strong>Cancellation</strong> 
                                 <a href="#cancel_policy_<?= $kkk ?>" class="high-r lb restriction">High Restrictions &rarr;</a> 
                             </div><!--ITEM-->
                             <?php endswitch ?>
-                            <?php if($this->listing->main_type == 6): ?>
+                            <?php if($item->listing_type == 6): ?>
                             <div class="last"> 
                                 <strong>Hotel Restrictions</strong> 
                                 <a href="/ajax/restrictions/<?= $item->id ?>" class="lb restriction">Read Hotel Restrictions &rarr;</a> 
@@ -249,7 +249,7 @@
                                 <span></span>
                             </div><!--RESTRICCTION_TIP-->
                             <div class="hidden">
-                            	<div id="cancel_policy" class="lb">
+                            	<div id="cancel_policy_<?= $kkk ?>" class="lb">
                                 	<div class="top">Low Restrictions Cancellation Policy</div>
                                     <div class="mid">
                                         <h3>Full refund 1 day prior to arrival, except fees</h3>
@@ -297,7 +297,7 @@
                                 <span></span>
                             </div><!--RESTRICCTION_TIP-->
                             <div class="hidden">
-                            	<div id="cancel_policy" class="lb">
+                            	<div id="cancel_policy_<?= $kkk ?>" class="lb">
                                 	<div class="top">Low Restrictions Cancellation Policy</div>
                                     <div class="mid">
                                         <h3>Full refund 1 day prior to arrival, except fees</h3>
@@ -347,7 +347,7 @@
                                 <span></span>
                             </div><!--RESTRICCTION_TIP-->  
                             <div class="hidden">
-                            	<div id="cancel_policy" class="lb">
+                            	<div id="cancel_policy_<?= $kkk ?>" class="lb">
                                 	<div class="top">Medium Restrictions Cancellation Policy</div>
                                     <div class="mid">
                                         <h3>Full refund 3 days prior to arrival, except fees</h3>
@@ -394,7 +394,7 @@
                                 <span></span>
                             </div><!--RESTRICCTION_TIP-->  
                             <div class="hidden">
-                            	<div id="cancel_policy" class="lb">
+                            	<div id="cancel_policy_<?= $kkk ?>" class="lb">
                                 	<div class="top">Medium Restrictions Cancellation Policy</div>
                                     <div class="mid">
                                         <h3>Full refund 3 days prior to arrival, except fees</h3>
@@ -444,7 +444,7 @@
                                 <span></span>
                             </div><!--RESTRICCTION_TIP-->    
                             <div class="hidden">
-                            	<div id="cancel_policy" class="lb">
+                            	<div id="cancel_policy_<?= $kkk ?>" class="lb">
                                 	<div class="top">High Restrictions Cancellation Policy</div>
                                     <div class="mid">
                                         <h3>50% refund up until 1 week prior to arrival, except fees</h3>
@@ -492,7 +492,7 @@
                                 <span></span>
                             </div><!--RESTRICCTION_TIP-->    
                             <div class="hidden">
-                            	<div id="cancel_policy" class="lb">
+                            	<div id="cancel_policy_<?= $kkk ?>" class="lb">
                                 	<div class="top">High Restrictions Cancellation Policy</div>
                                     <div class="mid">
                                         <h3>50% refund up until 1 week prior to arrival, except fees</h3>
