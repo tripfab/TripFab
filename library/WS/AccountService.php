@@ -2,6 +2,10 @@
 
 class WS_AccountService {
  
+    /**
+     *
+     * @var Zend_Db_Table
+     */
     protected $users_db;
     protected $vendors_db;
     protected $user_log_db;
@@ -51,69 +55,52 @@ class WS_AccountService {
     public function signup($data, $fb = false){
         $user = $this->users_db->fetchNew();
         if($fb){
-            $user->name     = $data['name'];
-            $user->email    = $data['email'];
-            $user->gender   = ucfirst($data['gender']);
-            $password       = substr(md5($data['email']), 5, 14);
-            $user->password = md5($password);
-            $user->password_hint = substr(md5(md5($password)), 3, 10).$password.substr(md5(md5($password)), 0, 7);
-            $user->role_id  = 2;
-            $user->token    = md5($data['email'].time());
-            $user->created  = date('Y-m-d H:i:s');
-            $user->updated  = date('Y-m-d H:i:s');
-            $user->complete = 30;
-            $user->active   = 0;
-            $user->save();
-            
-            $activations = new Zend_Db_Table('activation_tokens');
-            $token = $activations->fetchNew();
-            $token->user_id = $user->id;
-            $token->token   = hash('sha256',$user->email.time().rand(0,1000000));
-            $token->created = date('Y-m-d H:i:s');
-            $token->updated = date('Y-m-d H:i:s');
-            $token->save();
-            
-            $notifier = new WS_Notifier($user->id);
-            $notifier->emailVerification($token);
-            
-            //$notifier = new WS_Notifier();
-            //$notifier->newSignup($user->email, $password, $user->name);
-            
-            //$this->login($user->email, $password);
-            
-            
+            if($this->validateEmail($email)) {
+                $user->name     = $data['name'];
+                $user->email    = $data['email'];
+                $user->gender   = ucfirst($data['gender']);
+                $password       = substr(md5($data['email']), 5, 14);
+                $user->password = md5($password);
+                $user->password_hint = substr(md5(md5($password)), 3, 10).$password.substr(md5(md5($password)), 0, 7);
+                $user->role_id  = 2;
+                $user->token    = md5($data['email'].time());
+                $user->created  = date('Y-m-d H:i:s');
+                $user->updated  = date('Y-m-d H:i:s');
+                $user->complete = 30;
+                $user->active   = 0;
+                $user->save();
+            } else {
+                $user = $this->getUser($data['email']);
+            }            
         } else {
-            $user->name       = $data['name'];
-            $user->lname      = $data['lname'];
-            $user->email      = $data['email'];
-            $password         = $data['password'];
-            $user->password   = md5($password);
-            $user->password_hint = substr(md5(md5($password)), 3, 10).$password.substr(md5(md5($password)), 0, 7);
-            $user->role_id    = 2;
-            $user->token      = md5($data['email'].time());
-            $user->created    = date('Y-m-d H:i:s');
-            $user->updated    = date('Y-m-d H:i:s');
-            $user->country_id = $data['country_id'];
-            $user->active     = 0;
-            $user->save();
-            
-            $activations = new Zend_Db_Table('activation_tokens');
-            $token = $activations->fetchNew();
-            $token->user_id = $user->id;
-            $token->token   = hash('sha256',$user->email.time().rand(0,1000000));
-            $token->created = date('Y-m-d H:i:s');
-            $token->updated = date('Y-m-d H:i:s');
-            $token->save();
-            
-            $notifier = new WS_Notifier($user->id);
-            $notifier->emailVerification($token);
-            
-            //$notifier = new WS_Notifier();
-            //$notifier->newSignup($user->email, $password, $user->name);
-            
-            //$this->login($user->email, $password);
+            if($this->validateEmail($email)) {
+                $user->name       = $data['name'];
+                $user->lname      = $data['lname'];
+                $user->email      = $data['email'];
+                $password         = $data['password'];
+                $user->password   = md5($password);
+                $user->password_hint = substr(md5(md5($password)), 3, 10).$password.substr(md5(md5($password)), 0, 7);
+                $user->role_id    = 2;
+                $user->token      = md5($data['email'].time());
+                $user->created    = date('Y-m-d H:i:s');
+                $user->updated    = date('Y-m-d H:i:s');
+                $user->country_id = $data['country_id'];
+                $user->active     = 0;
+                $user->save();
+            } else {
+                $user = $this->getUser($data['email']);
+            }
         }
-        //var_dump($data); die;
+        $activations = new Zend_Db_Table('activation_tokens');
+        $token = $activations->fetchNew();
+        $token->user_id = $user->id;
+        $token->token   = hash('sha256',$user->email.time().rand(0,1000000));
+        $token->created = date('Y-m-d H:i:s');
+        $token->updated = date('Y-m-d H:i:s');
+        $token->save();
+
+        $notifier = new WS_Notifier($user->id);
+        $notifier->emailVerification($token);
     }
     
     public function signupVendor($data, $flag = true, $new = false)
@@ -261,5 +248,14 @@ class WS_AccountService {
             );
             $this->user_log_db->insert($data);
         }
+    }
+    
+    public function getUser($email)
+    {
+        $select = $this->users_db->select();
+        $select->where('email = ?', $email);
+        $user = $this->users_db->fetchRow($select);
+        
+        return $user;
     }
 }
