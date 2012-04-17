@@ -641,9 +641,9 @@
 			collapsible: true,
 			header:'.active'
 		});
-		$('a.helptip').click(function() {
+		$('a.high-r').hover(function() {
 			$parent = $(this).parents('.details');
-			$('.tip', $parent).toggleClass('hidden');
+			$('.restricction_tip', $parent).toggleClass('hidden');
 			return false;
 		});
 	});
