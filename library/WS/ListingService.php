@@ -2201,10 +2201,17 @@ class WS_ListingService {
         
         if(!$assoc) {
             $rooms = $db->fetchAll($select, array(), 5);
-        } else {
-            $rooms = $db->fetchAssoc($select);
+            return $rooms;
         }
-        return $rooms;
+        
+        $rooms = $db->fetchAll($select);
+        $rooms2 = array();
+        foreach($rooms as $room) {
+            $rooms2[$room['schedule_id']] = $room;
+        }
+        
+        return $rooms2;
+            
     }
     
     public function getBeds($room)

@@ -324,24 +324,31 @@
 	                                        <div class="details">
                                         		<label for="room<?= $option->id ?>">
 													<input type="radio" id="room<?= $option->id ?>" name="option" value="<?= $option->id ?>" />
-													<?= $option->name ?> (<?= $this->rooms2[$option->name]['people'] ?>/room) 
+													<?= $option->name ?> (<?= $this->rooms2[$option->id]['people'] ?>/room) 
 													$<?= $this->prices[$option->id]['price'] ?> 
 												</label>
 
 												<div class="room_tip">
 													<span class="rw"></span>
-													<h6>Superior Premium Room</h6>
+													<h6><?= $option->name ?></h6>
 													<div class="text">
-														<p>Spanish for "Golden View," Vista de Oro lives up to its name: Climb the private staircase to reach this luxury suite, where the entire Central Valley skyline unfolds before your eyes. The suite features a living area furnished in antiques, a luxurious king-sized bed, and an in-room Jacuzzi.</p>
+														<p><?= $this->rooms2[$option->id]['description'] ?></p>
 													</div><!--TEXT-->
 													<ul>
-														<li><strong>Minimum Stay:</strong> 1 night</li>
-														<li><strong>Maximum Accommodation:</strong> 2 person</li>
-														<li>1 Single Bed</li>
+                                                    	<?php if($this->rooms2[$option->id]['nights'] > 0): ?>
+														<li><strong>Minimum Stay:</strong> 
+                                                        <?= count($this->rooms2[$option->id]['nights'] > 1) ? 
+														$this->rooms2[$option->id]['nights'] . ' nights' :
+														$this->rooms2[$option->id]['nights'] . ' night' ?></li>
+                                                        <?php endif ?>
+                                                        <?php if($this->rooms2[$option->id]['people'] > 0): ?>
+														<li><strong>Maximum Accommodation:</strong> 
+                                                        <?= count($this->rooms2[$option->id]['people'] > 1) ? 
+														$this->rooms2[$option->id]['people'] . ' people' :
+														$this->rooms2[$option->id]['people'] . ' person' ?></li>
+                                                        <?php endif ?>
 													</ul>
-													<a href="" class="details">Room Details &rarr;</a>
-												</div><!--ROOM_TIP-->
-												
+												</div><!--ROOM_TIP-->												
                                         	</div><!--DETAILS-->
                                         <?php endforeach ?>
                                     </div><!--TYPE-->

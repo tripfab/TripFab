@@ -413,10 +413,34 @@
                                     <h5><span class="i_room"></span>Select the Room Details</h5>
                                     <div class="type">
                                         <?php foreach($this->options as $option): ?>
-                                        <label for="room<?= $option->id ?>"><input type="radio" id="room<?= $option->id ?>" 
-                                        name="option" value="<?= $option->id ?>" />
-                                        <?= $option->name ?> (<?= $this->rooms2[$option->name]['people'] ?>/room) 
-                                        $<?= $this->prices[$option->id]['price'] ?> </label>
+	                                        <div class="details">
+	                                        	<label for="room<?= $option->id ?>"><input type="radio" id="room<?= $option->id ?>" 
+	                                        	name="option" value="<?= $option->id ?>" />
+	                                        	<?= $option->name ?> (<?= $this->rooms2[$option->id]['people'] ?>/room) 
+	                                        	$<?= $this->prices[$option->id]['price'] ?> </label>
+
+												<div class="room_tip">
+													<span class="rw"></span>
+													<h6><?= $option->name ?></h6>
+													<div class="text">
+														<p><?= $this->rooms2[$option->id]['description'] ?></p>
+													</div><!--TEXT-->
+													<ul>
+                                                    	<?php if($this->rooms2[$option->id]['nights'] > 0): ?>
+														<li><strong>Minimum Stay:</strong> 
+                                                        <?= count($this->rooms2[$option->id]['nights'] > 1) ? 
+														$this->rooms2[$option->id]['nights'] . ' nights' :
+														$this->rooms2[$option->id]['nights'] . ' night' ?></li>
+                                                        <?php endif ?>
+                                                        <?php if($this->rooms2[$option->id]['people'] > 0): ?>
+														<li><strong>Maximum Accommodation:</strong> 
+                                                        <?= count($this->rooms2[$option->id]['people'] > 1) ? 
+														$this->rooms2[$option->id]['people'] . ' people' :
+														$this->rooms2[$option->id]['people'] . ' person' ?></li>
+                                                        <?php endif ?>
+													</ul>
+												</div><!--ROOM_TIP-->
+	                                        </div>
                                         <?php endforeach ?>
                                     </div><!--TYPE-->
                                     <div class="selects">
