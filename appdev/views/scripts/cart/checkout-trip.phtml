@@ -106,8 +106,7 @@
                         
                         <div class="checkout-item">
                             <div class="ttl"><span>3</span><strong>Policies &amp; Restriccions</strong></div>
-                            <div class="card-item longer"> <strong>Cancellation</strong> <a class="high-r" href="">High Restrictions &rarr;</a> </div>
-                            <div class="card-item longer"> <strong>Activity Restrictions</strong> <a href="">Read Activity Restrictions &rarr;</a> </div>
+                            <div class="card-item longer"> <strong>Cancellation</strong> <a class="high-r lb" href="#cancel_policy">High Restrictions &rarr;</a> </div>
                             <div class="card-item last">
                                 <input type="checkbox" name="terms" id="terms" value="1" />
                                 <label for="terms">I agree to the cancellation policy, activity restrictions and <a href="">terms of use</a>.</label>
@@ -119,13 +118,47 @@
                                     <li>• Cleaning fees are always refunded if the guest did not check in.</li>
                                     <li>• The Tripfab service fee is non-refundable.</li>
                                     <li>• If there is a complaint from either party, notice must be given to Tripfab 
-                                    • Resolution Center within 24 hours of check-in.</li>
+                                    Resolution Center within 24 hours of check-in.</li>
                                     <li>• Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
                                     <li>• A reservation is not officially canceled until the guest receives a cancellation confirmation 
                                     e-mail from Tripfab Resolution Center.</li>
                                 </ul>
                                 <span></span>
-                            </div><!--RESTRICCTION_TIP-->
+                            </div><!--RESTRICCTION_TIP-->    
+                            <div class="hidden">
+                            	<div id="cancel_policy" class="cancel_policy lb">
+                                	<div class="top">High Restrictions Cancellation Policy</div>
+                                    <div class="mid">
+                                        <h3>50% refund up until 1 week prior to arrival, except fees</h3>
+                                        <ul>
+                                            <li>Cleaning fees are always refunded if the guest did not check in.</li>
+                                            <li>The Tripfab service fee is non-refundable.</li>
+                                            <li>If there is a complaint from either party, notice must be given to Tripfab 
+                                            Resolution Center within 24 hours of check-in.</li>
+                                            <li>Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                                            <li>A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                                            e-mail from Tripfab Resolution Center.</li>
+                                        </ul>
+                                        <div class="inner">
+                                            <img src="https://developer.tripfab.com/images2/img-67-hotel.png" width="    " height="" alt="" />
+                                            <div class="specs">
+                                                <div class="column">
+                                                    <p>Must be made seven full days prior to listing's local check in time (or 2:00 PM 
+                                                    if not specified) on the day of check in, otherwise no refund. For example, 
+                                                    if check-in is on Friday, cancel by Friday of the previous</p>
+                                                </div><!--COLUMN-->
+                                                <div class="column">
+                                                    <p>If the guest cancels less than 7 days in advance, the nights not spent are not refunded.</p>
+                                                </div><!--COLUMN-->
+                                                <div class="column last">
+                                                    <p>If the guest arrives and decides to leave early, the nights not spent are not refunded.</p>
+                                                </div><!--COLUMN-->
+                                                <div class="clear"></div>
+                                            </div><!--SPECS-->
+                                        </div><!--INNER-->
+                                    </div><!--MID-->
+                           		</div><!--CANCEL_POLICY-->
+                            </div> 
                             <div class="clear"></div>
                         </div><!-- closes checkout-item -->
                         
@@ -185,6 +218,13 @@
 		$('.booknow').click(function(){
 			$('#checkout').submit();
 			return false;
+		});
+		
+		$('a.lb').fancybox({
+			padding: 0,
+			overlayColor: '#FFF',
+			overlayOpacity: '0.7',
+			showCloseButton:false
 		});
 	});
 </script>
