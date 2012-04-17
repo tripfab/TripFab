@@ -205,15 +205,329 @@
                                 </div>
                             </div>
                             <?php endif ?>
-                            <div class="item"> 
+                            
+                            <?php switch($this->listing->policy): case 1: ?>
+                             <div class="item"> 
                                 <strong>Cancellation</strong> 
-                                <a href="#" class="restriction">High Restrictions &rarr;</a> 
+                                <a href="#cancel_policy" class="high-r lb restriction">Low Restrictions &rarr;</a> 
                             </div><!--ITEM-->
+							<?php break; case 2: ?>
+                             <div class="item"> 
+                                <strong>Cancellation</strong> 
+                                <a href="#cancel_policy" class="high-r lb restriction">Medium Restrictions &rarr;</a> 
+                            </div><!--ITEM-->
+                            <?php break; case 3: ?>
+                             <div class="item"> 
+                                <strong>Cancellation</strong> 
+                                <a href="#cancel_policy" class="high-r lb restriction">High Restrictions &rarr;</a> 
+                            </div><!--ITEM-->
+                            <?php endswitch ?>
+                            <?php if($this->listing->main_type == 6): ?>
                             <div class="last"> 
                                 <strong>Hotel Restrictions</strong> 
-                                <a href="#" class="restriction">Read Hotel Restrictions &rarr;</a> 
+                                <a href="/ajax/restrictions/<?= $this->listing->id ?>" class="lb restriction">Read Hotel Restrictions &rarr;</a> 
                             </div><!--ITEM-->
-                            	
+                            <?php else: ?>
+                            <div class="last"> 
+                                <strong>Activity Restrictions</strong> 
+                                <a href="/ajax/restrictions/<?= $this->listing->id ?>" class="lb restriction">Read Hotel Restrictions &rarr;</a> 
+                            </div><!--ITEM-->
+                            <?php endif ?>
+                            <?php switch($this->listing->policy): case 1: ?>
+                            <?php if($this->listing->main_type == 5): ?>
+                            <div class="restricction_tip hidden">
+                                <strong>Full refund 1 day prior to arrival, except fees</strong>
+                                <ul>
+                                	<li>• Cleaning fees are always refunded if the guest did not check in</li>
+                                    <li>• The Tripfab service fee is refundable.</li>
+                                    <li>• If there is a complaint from either party, notice must be given to Tripfab 
+                                    Resolution Center within 24 hours of check-in</li>
+                                    <li>• Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                                    <li>• A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                                    e-mail from Tripfab Resolution Center.</li>
+                                </ul>
+                                <span></span>
+                            </div><!--RESTRICCTION_TIP-->
+                            <div class="hidden">
+                            	<div id="cancel_policy" class="lb">
+                                	<div class="top">Low Restrictions Cancellation Policy</div>
+                                    <div class="mid">
+                                        <h3>Full refund 1 day prior to arrival, except fees</h3>
+                                        <ul>
+                                            <li>Cleaning fees are always refunded if the guest did not check in</li>
+                                            <li>The Tripfab service fee is refundable.</li>
+                                            <li>If there is a complaint from either party, notice must be given to Tripfab 
+                                            Resolution Center within 24 hours of check-in</li>
+                                            <li>Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                                            <li>A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                                            e-mail from Tripfab Resolution Center.</li>
+                                        </ul>
+                                        <div class="inner">
+                                            <img src="https://developer.tripfab.com/images2/img-65-hotel.png" alt="" />
+                                            <div class="specs">
+                                                <div class="column">
+                                                    <p>Must be made a full 24 hours prior to listing's local check in time (or 2:00 PM 
+                                                    if not specified) on the day of check in. For example, if check-in is on Friday, 
+                                                    cancel by Thursday of that week before check in time.</p>
+                                                </div><!--COLUMN-->
+                                                <div class="column">
+                                                    <p>If the guest cancels less than 24 hours before check-in, the first night is non-refundable.</p>
+                                                </div><!--COLUMN-->
+                                                <div class="column last">
+                                                    <p>If the guest arrives and decides to leave early, the nights not spent 24 hours after 
+                                                    the official cancellation are 100% refunded.</p>
+                                                </div><!--COLUMN-->
+                                                <div class="clear"></div>
+                                            </div><!--SPECS-->
+                                        </div><!--INNER-->
+                                    </div><!--MID-->
+                           		</div><!--CANCEL_POLICY-->
+                            </div>
+                            <?php else: ?>
+                            <div class="restricction_tip hidden">
+                                <strong>Full refund 1 day prior to arrival, except fees</strong>
+                                <ul>
+                                    <li>• The Tripfab service fee is refundable.</li>
+                                    <li>• If there is a complaint from either party, notice must be given to Tripfab 
+                                    Resolution Center within 24 hours of the tour activity.</li>
+                                    <li>• Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                                    <li>• A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                                    e-mail from Tripfab Resolution Center.</li>
+                                </ul>
+                                <span></span>
+                            </div><!--RESTRICCTION_TIP-->
+                            <div class="hidden">
+                            	<div id="cancel_policy" class="lb">
+                                	<div class="top">Low Restrictions Cancellation Policy</div>
+                                    <div class="mid">
+                                        <h3>Full refund 1 day prior to arrival, except fees</h3>
+                                        <ul>
+                                            <li>The Tripfab service fee is refundable.</li>
+                                            <li>If there is a complaint from either party, notice must be given to Tripfab 
+                                            Resolution Center within 24 hours of the tour activity.</li>
+                                            <li>Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                                            <li>A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                                            e-mail from Tripfab Resolution Center.</li>
+                                        </ul>
+                                        <div class="inner">
+                                            <img src="https://developer.tripfab.com/images2/img-65.png" width="    " height="" alt="" />
+                                            <div class="specs">
+                                                <div class="column">
+                                                    <p>Must be made 24 hours prior to listing's local arriving time on the day when the tour begins,
+                                                    otherwise no refund. For example, if the tour starts on Friday at 9:00 AM, the cancellation 
+                                                    must be requested before 9:00 AM of the Thursday before.</p>
+                                                </div><!--COLUMN-->
+                                                <div class="column">
+                                                    <p>If the guest cancels less than 24 hours before the tour starts, the tour cost is not refunded.</p>
+                                                </div><!--COLUMN-->
+                                                <div class="column last">
+                                                    <p>If the visitor arrives and decides to leave early, or not take the tour, the cost of the 
+                                                    tour is 100% refunded.</p>
+                                                </div><!--COLUMN-->
+                                                <div class="clear"></div>
+                                            </div><!--SPECS-->
+                                        </div><!--INNER-->
+                                    </div><!--MID-->
+                           		</div><!--CANCEL_POLICY-->
+                            </div>                            
+                            <?php endif ?>
+							<?php break; case 2: ?>
+                            <?php if($this->listing->main_type == 5): ?>
+                            <div class="restricction_tip hidden">
+                                <strong>Full refund 3 days prior to arrival, except fees</strong>
+                                <ul>
+                                	<li>• Cleaning fees are always refunded if the guest did not check in.
+                                    <li>• The Tripfab service fee is refundable.</li></li>
+                                    <li>• If there is a complaint from either party, notice must be given to 
+                                    Tripfab Resolution Center within 24 hours of check-in.</li>
+                                    <li>• Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                                    <li>• A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                                    e-mail from Tripfab Resolution Center.</li>
+                                </ul>
+                                <span></span>
+                            </div><!--RESTRICCTION_TIP-->  
+                            <div class="hidden">
+                            	<div id="cancel_policy" class="lb">
+                                	<div class="top">Medium Restrictions Cancellation Policy</div>
+                                    <div class="mid">
+                                        <h3>Full refund 3 days prior to arrival, except fees</h3>
+                                        <ul>
+                                            <li>Cleaning fees are always refunded if the guest did not check in.
+                                            <li>The Tripfab service fee is refundable.</li></li>
+                                            <li>If there is a complaint from either party, notice must be given to 
+                                            Tripfab Resolution Center within 24 hours of check-in.</li>
+                                            <li>Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                                            <li>A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                                            e-mail from Tripfab Resolution Center.</li>
+                                        </ul>
+                                        <div class="inner">
+                                            <img src="https://developer.tripfab.com/images2/img-66-hotel.png" width="    " height="" alt="" />
+                                            <div class="specs">
+                                                <div class="column">
+                                                    <p>Must be made three full days prior to listing's local check in time (or 2:00 PM if not specified) on the day of check in. For example, if check-in is on Friday, cancel by the previous Tuesday before check in time.</p>
+                                                </div><!--COLUMN-->
+                                                <div class="column">
+                                                    <p>If the guest cancels less than 3 days in advance, the first night is 
+                                                    non-refundable but the remaining nights will be 50% refunded.</p>
+                                                </div><!--COLUMN-->
+                                                <div class="column last">
+                                                    <p>If the guest arrives and decides to leave early, the nights not spent 24 hours 
+                                                    after the cancellation occurs are 50% refunded.</p>
+                                                </div><!--COLUMN-->
+                                                <div class="clear"></div>
+                                            </div><!--SPECS-->
+                                        </div><!--INNER-->
+                                    </div><!--MID-->
+                           		</div><!--CANCEL_POLICY-->
+                            </div>
+                            <?php else: ?>
+                            <div class="restricction_tip hidden">
+                                <strong>Full refund 3 days prior to arrival, except fees</strong>
+                                <ul>
+                                    <li>• The Tripfab service fee is refundable.</li></li>
+                                    <li>• If there is a complaint from either party, notice must be given to 
+                                    Tripfab Resolution Center within 24 hours of the tour activity</li>
+                                    <li>• Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                                    <li>• A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                                    e-mail from Tripfab Resolution Center.</li>
+                                </ul>
+                                <span></span>
+                            </div><!--RESTRICCTION_TIP-->  
+                            <div class="hidden">
+                            	<div id="cancel_policy" class="lb">
+                                	<div class="top">Medium Restrictions Cancellation Policy</div>
+                                    <div class="mid">
+                                        <h3>Full refund 3 days prior to arrival, except fees</h3>
+                                        <ul>
+                                            <li>The Tripfab service fee is refundable.</li></li>
+                                            <li>If there is a complaint from either party, notice must be given to 
+                                            Tripfab Resolution Center within 24 hours of the tour activity</li>
+                                            <li>Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                                            <li>A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                                            e-mail from Tripfab Resolution Center.</li>
+                                        </ul>
+                                        <div class="inner">
+                                            <img src="https://developer.tripfab.com/images2/img-66.png" />
+                                            <div class="specs">
+                                                <div class="column">
+                                                    <p>Must be made three full days prior to listing's local arriving time on the day when the 
+                                                    tour begins, otherwise no refund. For example, if the tour starts on Friday at 9:00 AM, the
+                                                    cancellation must be requested before 9:00 AM of the previous Tuesday.</p>
+                                                </div><!--COLUMN-->
+                                                <div class="column">
+                                                    <p>If the visitor cancels less than 3 days in advance, 50% of the tour cost will be refunded.</p>
+                                                </div><!--COLUMN-->
+                                                <div class="column last">
+                                                    <p>If the visitor arrives and decides to leave early, or not take the tour, the cost of the 
+                                                    tour is 50% refunded.</p>
+                                                </div><!--COLUMN-->
+                                                <div class="clear"></div>
+                                            </div><!--SPECS-->
+                                        </div><!--INNER-->
+                                    </div><!--MID-->
+                           		</div><!--CANCEL_POLICY-->
+                            </div>
+                            <?php endif ?>
+							<?php break; default: ?>
+                            <?php if($this->listing->main_type == 5): ?>
+                            <div class="restricction_tip hidden">
+                                <strong>50% refund up until 1 week prior to arrival, except fees</strong>
+                                <ul>
+                                    <li>• Cleaning fees are always refunded if the guest did not check in.</li>
+                                    <li>• The Tripfab service fee is non-refundable.</li>
+                                    <li>• If there is a complaint from either party, notice must be given to Tripfab 
+                                    Resolution Center within 24 hours of check-in.</li>
+                                    <li>• Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                                    <li>• A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                                    e-mail from Tripfab Resolution Center.</li>
+                                </ul>
+                                <span></span>
+                            </div><!--RESTRICCTION_TIP-->    
+                            <div class="hidden">
+                            	<div id="cancel_policy" class="lb">
+                                	<div class="top">High Restrictions Cancellation Policy</div>
+                                    <div class="mid">
+                                        <h3>50% refund up until 1 week prior to arrival, except fees</h3>
+                                        <ul>
+                                            <li>Cleaning fees are always refunded if the guest did not check in.</li>
+                                            <li>The Tripfab service fee is non-refundable.</li>
+                                            <li>If there is a complaint from either party, notice must be given to Tripfab 
+                                            Resolution Center within 24 hours of check-in.</li>
+                                            <li>Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                                            <li>A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                                            e-mail from Tripfab Resolution Center.</li>
+                                        </ul>
+                                        <div class="inner">
+                                            <img src="https://developer.tripfab.com/images2/img-67-hotel.png" width="    " height="" alt="" />
+                                            <div class="specs">
+                                                <div class="column">
+                                                    <p>Must be made seven full days prior to listing's local check in time (or 2:00 PM 
+                                                    if not specified) on the day of check in, otherwise no refund. For example, 
+                                                    if check-in is on Friday, cancel by Friday of the previous</p>
+                                                </div><!--COLUMN-->
+                                                <div class="column">
+                                                    <p>If the guest cancels less than 7 days in advance, the nights not spent are not refunded.</p>
+                                                </div><!--COLUMN-->
+                                                <div class="column last">
+                                                    <p>If the guest arrives and decides to leave early, the nights not spent are not refunded.</p>
+                                                </div><!--COLUMN-->
+                                                <div class="clear"></div>
+                                            </div><!--SPECS-->
+                                        </div><!--INNER-->
+                                    </div><!--MID-->
+                           		</div><!--CANCEL_POLICY-->
+                            </div>                    
+                            <?php else: ?>
+                            <div class="restricction_tip hidden">
+                                <strong>50% refund up until 1 week prior to arrival, except fees</strong>
+                                <ul>
+                                    <li>• Cleaning fees are always refunded if the guest did not arrive to the meeting point.</li>
+                                    <li>• The Tripfab service fee is non-refundable.</li>
+                                    <li>• If there is a complaint from either party, notice must be given to Tripfab 
+                                    Resolution Center within 24 hours of check-in.</li>
+                                    <li>• Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                                    <li>• A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                                    e-mail from Tripfab Resolution Center.</li>
+                                </ul>
+                                <span></span>
+                            </div><!--RESTRICCTION_TIP-->    
+                            <div class="hidden">
+                            	<div id="cancel_policy" class="lb">
+                                	<div class="top">High Restrictions Cancellation Policy</div>
+                                    <div class="mid">
+                                        <h3>50% refund up until 1 week prior to arrival, except fees</h3>
+                                        <ul>
+                                            <li>Cleaning fees are always refunded if the guest did not arrive to the meeting point.</li>
+                                            <li>The Tripfab service fee is non-refundable.</li>
+                                            <li>If there is a complaint from either party, notice must be given to Tripfab 
+                                            Resolution Center within 24 hours of check-in.</li>
+                                            <li>Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                                            <li>A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                                            e-mail from Tripfab Resolution Center.</li>
+                                        </ul>
+                                        <div class="inner">
+                                            <img src="https://developer.tripfab.com/images2/img-67.png" width="    " height="" alt="" />
+                                            <div class="specs">
+                                                <div class="column">
+                                                    <p>Must be made seven full days prior to listing's local arriving time on the day when the 
+                                                    tour begins, otherwise no refund. For example, if the tour starts on Friday at 9:00 AM, the 
+                                                    ancellation must be requested before 9:00 AM of the previous Friday.</p>
+                                                </div><!--COLUMN-->
+                                                <div class="column">
+                                                    <p>If the visitor cancels less than 7 days in advance, the cost of the tour is not refunded.</p>
+                                                </div><!--COLUMN-->
+                                                <div class="column last">
+                                                    <p>If the visitor arrives and decides to leave early, or not take the tour, the cost of the 
+                                                    tour is not refunded.</p>
+                                                </div><!--COLUMN-->
+                                                <div class="clear"></div>
+                                            </div><!--SPECS-->
+                                        </div><!--INNER-->
+                                    </div><!--MID-->
+                           		</div><!--CANCEL_POLICY-->
+                            </div>           
+                            <?php endif ?>    
+                            <?php endswitch ?>
                         </div><!--DETAILS-->
                         <?php else: ?>
                         <div class="header inactive"> 

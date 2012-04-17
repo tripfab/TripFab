@@ -10,7 +10,6 @@
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    
 </head>
 <body>
 <div class="w1">
@@ -183,12 +182,8 @@
                                         </div><!--ITEM-->
                                     </div><!--CONT--> 
                                 </div><!--NEW-CARD--> 
-                                
-                                
-                                
                             </div><!-- closes payment-item -->                             
                         </div><!-- closes checkout-item -->
-                        
                         <div class="bottom"> <span>Grand Total<strong>$<?= $this->cartitem->total ?></strong></span>
                             <input type="submit" class="btn-1 noclean" value="Book Trip" />
                         </div><!-- closes bottom -->
@@ -236,13 +231,11 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
-
 <script type="text/javascript">PUBLIC_KEY = "<?= $this->pkey ?>"; </script>
 <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript" src="/js2/cardcheck.min.js"></script>
 <script type="text/javascript" src="/js2/cart/checkout.js"></script>
-<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js"></script>	
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('a.helptip').click(function() {
