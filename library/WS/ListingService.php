@@ -1126,6 +1126,34 @@ class WS_ListingService {
                 $amenity->amenity_id = $_amenity;
                 $amenity->save();
             }
+            
+            if(isset($_FILES['image']['name']) and !empty($_FILES['image']['name'])) {
+                $public = APPLICATION_PATH.'/../html';
+                $public2 = APPLICATION_PATH.'/../html/d3E3v8E3l5O6p7E7r3';
+                $folder = '/images/rooms/'.$listing->id.'/';
+                $image = $room->id.substr(md5($room->id),3,10).'.jpg';
+                $targetFile = $public.$folder.$image;
+                $targetFile2 = $public2.$folder.$image;
+
+                if(file_exists($targetFile)) 
+                    unlink($targetFile);
+
+                if(!is_dir($public.$folder))
+                    mkdir($public.$folder);
+
+                if(move_uploaded_file($_FILES['image']['tmp_name'], $targetFile) === true) {
+                    if(file_exists($targetFile2)) 
+                        unlink($targetFile2);
+
+                    if(!is_dir($public2.$folder))
+                        mkdir($public2.$folder);
+
+                    exec("cp {$targetFile} {$targetFile2}");
+
+                    $room->image = $folder.$image;
+                    $room->save();
+                }
+            }
         } else {
             $sch = $this->schedules_db->fetchNew();
             $sch->listing_id = $listing->id;
@@ -1156,7 +1184,9 @@ class WS_ListingService {
         $select = $rooms->select();
         $select->where('id = ?', $data['roomid']);
         $room  = $rooms->fetchRow($select);
+        
         $room->setFromArray($data['room']);
+        
         $room->updated = date('Y-m-d H:i:s');
         $room->save();
         
@@ -1190,6 +1220,34 @@ class WS_ListingService {
             $amenity->room_id = $room->id;
             $amenity->amenity_id = $_amenity;
             $amenity->save();
+        }
+        
+        if(isset($_FILES['image']['name']) and !empty($_FILES['image']['name'])) {
+            $public = APPLICATION_PATH.'/../html';
+            $public2 = APPLICATION_PATH.'/../html/d3E3v8E3l5O6p7E7r3';
+            $folder = '/images/rooms/'.$listing.'/';
+            $image = $room->id.substr(md5($room->id),3,10).'.jpg';
+            $targetFile = $public.$folder.$image;
+            $targetFile2 = $public2.$folder.$image;
+            
+            if(file_exists($targetFile)) 
+                unlink($targetFile);
+            
+            if(!is_dir($public.$folder))
+                mkdir($public.$folder);
+            
+            if(move_uploaded_file($_FILES['image']['tmp_name'], $targetFile) === true) {
+                if(file_exists($targetFile2)) 
+                    unlink($targetFile2);
+            
+                if(!is_dir($public2.$folder))
+                    mkdir($public2.$folder);
+                
+                exec("cp {$targetFile} {$targetFile2}");
+                
+                $room->image = $folder.$image;
+                $room->save();
+            }
         }
     }
     

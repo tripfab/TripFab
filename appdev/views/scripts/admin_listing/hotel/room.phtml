@@ -40,7 +40,7 @@ label { float: left; padding: 5px 0; margin: 0;}
 </style>
 <?php if($_POST): ?>
 <?php $sch = $this->data['sch'];$room = $this->data['room'];$beds = $this->data['beds'];$ammm = $this->data['ammm']; ?>
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     <div class="profile-items rooms">
     	<?php if($this->errors): ?>
         <div class="error">
@@ -79,6 +79,21 @@ label { float: left; padding: 5px 0; margin: 0;}
                     <img src="/images2/help/small-hot-rooms-description.png" /></a>
                 </div>
             </div><!-- closes item -->
+            
+            <div class="item last">
+            
+              	<div class="room_upload">
+              		<div class="holder">
+              			<div class="inner">
+              				<img src="/cache/50a3bdb9641fec9f8967ffe30fdca596_w114_h94_cp.jpg" width="68" height="68" alt="" />
+              			</div><!--INNER-->
+              		</div><!--HOLDER-->
+              		<input type="file" name="image" value="" />
+              	</div><!--INFO-->
+                  <h4>Room Picture</h4>
+                  <span>Upload a room picture</span>
+                  
+              </div><!-- closes item -->
             <div class="clear"></div>									
         </div><!-- closes item-wrppr -->
         <div class="item-wrppr">
@@ -236,7 +251,7 @@ label { float: left; padding: 5px 0; margin: 0;}
 <?php else: ?>
 <?php if($this->data): ?>
 <?php $sch = $this->data['sch'];$room = $this->data['room'];$beds = $this->data['beds'];$ammm = $this->data['ammm']; ?>
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     <div class="profile-items rooms">
     	<?php if($this->errors): ?>
         <div class="error">
@@ -281,10 +296,12 @@ label { float: left; padding: 5px 0; margin: 0;}
               	<div class="room_upload">
               		<div class="holder">
               			<div class="inner">
-              				<img src="/cache/50a3bdb9641fec9f8967ffe30fdca596_w114_h94_cp.jpg" width="68" height="68" alt="" />
+                        	<?php if(!empty($room->image)): ?>
+                            <?= $this->thumbnail('68',$room->image,'','1:1'); ?>
+                            <?php endif ?>
               			</div><!--INNER-->
               		</div><!--HOLDER-->
-              		<input type="submit" class="btn-1" name="" value="Choose File" />
+              		<input type="file" name="image" value="" />
               	</div><!--INFO-->
                   <h4>Room Picture</h4>
                   <span>Upload a room picture</span>
@@ -423,7 +440,7 @@ label { float: left; padding: 5px 0; margin: 0;}
 
 
 
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     <div class="profile-items rooms">
     	<?php if($this->errors): ?>
         <div class="error">
@@ -464,20 +481,15 @@ label { float: left; padding: 5px 0; margin: 0;}
             </div><!-- closes item -->
             
             <div class="item last">
-            
-              	<div class="room_upload">
-              		<div class="holder">
-              			<div class="inner">
-              				<img src="/cache/50a3bdb9641fec9f8967ffe30fdca596_w114_h94_cp.jpg" width="68" height="68" alt="" />
-              			</div><!--INNER-->
-              		</div><!--HOLDER-->
-              		<input type="submit" class="btn-1" name="" value="Choose File" />
-              	</div><!--INFO-->
-                  <h4>Room Picture</h4>
-                  <span>Upload a room picture</span>
-                  
-              </div><!-- closes item -->
-            
+                <div class="room_upload">
+                    <div class="holder">
+                    	<div class="inner"></div><!--INNER-->
+                    </div><!--HOLDER-->
+                    <input type="file" name="image" value="" />
+                </div><!--INFO-->
+                <h4>Room Picture</h4>
+                <span>Upload a room picture</span>            
+            </div><!-- closes item -->
             <div class="clear"></div>									
         </div><!-- closes item-wrppr -->
         <div class="item-wrppr">

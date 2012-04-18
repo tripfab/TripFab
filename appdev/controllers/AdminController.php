@@ -61,13 +61,10 @@ class AdminController extends Zend_Controller_Action {
      */
     protected $vendors;
 
-
-
     public function init() {
         $auth = Zend_Auth::getInstance();
         if (!$auth->hasIdentity()) {
-            if ($this->_getParam('action') != 'signup')
-                $this->_redirect('login');
+            $this->_redirect('/en-US/login?b='.$_SERVER['REQUEST_URI']);
         } else {
             $this->user = new WS_User($auth->getStorage()->read());
             if ($this->user->getRole() != 'admin') {
@@ -837,6 +834,8 @@ class AdminController extends Zend_Controller_Action {
                     $getthere = $this->listings->getLocationOf($listing->id);
                     
                     $rooms = $this->listings->getHotelRooms($listing->id);
+                    $rooms2 = $this->listings->getHotelRooms($listing->id, true);
+                    
                     $amenities = $this->listings->getDefaultAmenities(true);
                     $beds = array();
                     foreach($rooms as $room){
@@ -854,6 +853,7 @@ class AdminController extends Zend_Controller_Action {
                     $this->view->details  = $details;
                     $this->view->getthere = $getthere;
                     $this->view->rooms    = $rooms;
+                    $this->view->rooms2   = $rooms2;
                     $this->view->beds     = $beds;
                     $this->view->room_amenities = $room_amenities;
                     $this->view->amenities = $amenities;

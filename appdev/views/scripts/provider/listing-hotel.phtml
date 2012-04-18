@@ -239,7 +239,9 @@
                                 	<?php foreach($this->rooms as $room): ?>
                                     <div class="single">
                                         <h4><?= $room->name ?></h4>
-                                        <!--<img src="images6/lstng_htl_img1.png" width="" height="" alt="" />-->
+                                        <?php if(!empty($room->image)): ?>
+                                        <?= $this->thumbnail(array('width'=>220,'height'=>136), $room->image, '','220:136'); ?>
+                                        <?php endif ?>
                                         <ul>
 											<?php if(!empty($room->description)): ?>
                                             <li><?= $room->description ?></li>
@@ -439,7 +441,7 @@
 														$this->rooms2[$option->id]['people'] . ' person' ?></li>
                                                         <?php endif ?>
 													</ul>
-												</div><!--ROOM_TIP-->
+												</div><!--ROOM_TIP-->		
 	                                        </div>
                                         <?php endforeach ?>
                                     </div><!--TYPE-->
