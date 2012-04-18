@@ -99,6 +99,9 @@ class WS_Uploader_Service {
         }
         
         if ($this->file->save($paths['tagetfile'])){
+            $file = str_replace($paths['public'],'/',$paths['tagetfile']);
+            if(file_exists($paths['public2'].$file))
+                unlink($paths['public2'].$file);
             exec("cp {$paths['tagetfile']} {$paths['public2']}");
             return array('success'=>true);
         } else {
