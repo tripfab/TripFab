@@ -25,7 +25,10 @@ class WS_Uploader_Service_Xhr {
         if ($realSize != $this->getSize()){            
             return false;
         }
-        //var_dump($path); die;
+        //var_dump($path); die; 
+        if(file_exists($path)) 
+            unlink($path);
+        
         $target = fopen($path, "w");        
         fseek($temp, 0, SEEK_SET);
         stream_copy_to_stream($temp, $target);
