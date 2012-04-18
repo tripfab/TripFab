@@ -12,6 +12,37 @@
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
     <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
     <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
+    <style type="text/css">
+	#file_upload3 .qq-upload-button {
+		width:92px;
+		height:27px;
+		background:url(/images2/file-1.png);
+		text-indent:-9999px;
+		float:right;}
+	#qqPhotoQueue li {
+		clear:both;
+		list-style:none;}
+		#qqPhotoQueue li .qq-upload-file {
+			display:none;}
+		#qqPhotoQueue li .qq-upload-progress {
+			height:15px;
+			background:#eee;
+			width:100%;
+			display:block;
+			position:relative;}
+			#qqPhotoQueue li .qq-upload-progress .qq-upload-progress-range {
+				position:absolute;
+				top:0; left:0;
+				height:15px;
+				background:#9CF;}
+		#qqPhotoQueue li.qq-upload-fail .qq-upload-progress {
+			background:#F00;}
+		#qqPhotoQueue li .qq-upload-size {
+			display:none !important;}
+		#qqPhotoQueue li .qq-upload-failed-text {
+			display:none;}
+			
+	</style>
 </head>
 <body>
 <div class="w1 profile">
@@ -86,7 +117,9 @@
                                 <div class="picture">
                                 	<?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
                                 	<?= $this->thumbnail(68,$image,'','1:1'); ?>
-                                    <input type="file" name="file_upload" id="file_upload"/>
+                                    <div id="file_upload3"></div>
+                                    <div id="qqPhotoQueue">
+                                    </div>
                                 </div>
                                 <h4>Picture Requirements</h4>
                                 <span>Should be square, preferably 100x100 pixels, <br />and in JPEG, GIF, or PNG format.</span>
@@ -164,6 +197,7 @@
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		/**
 		$('#file_upload').uploadify({
 			'uploader' 	: '/uploadify/uploadify.swf',
 			'script' 	: '/phpscripts/uploadUserPicture.php',
@@ -192,9 +226,41 @@
 		});
 		
 		$('input.calendar').datepicker({
-                    dateFormat: 'MM d, yy',
-                    defaultDate:$(this).val()
-                });
+			dateFormat: 'MM d, yy',
+			defaultDate:$(this).val()
+		});
+		*/	
+		
+		var uploader = new qq.FileUploader({
+			element: document.getElementById('file_upload3'),
+			listElement:document.getElementById('qqPhotoQueue'),
+			action: '/phpscripts/uploadUserPicture.php',
+			multiple:false,  
+			fileTemplate: '<li>' +
+							  '<span class="qq-upload-file"></span>' +
+							  '<span class="qq-upload-progress"><span class="qq-upload-progress-range"></span></span>' +
+							  '<span class="qq-upload-size"></span>' +
+							  '<span class="qq-upload-spinner"></span>' +
+							  '<a class="qq-upload-cancel" href="#">Cancel</a>' +
+							  '<span class="qq-upload-failed-text">Failed</span>' +
+						  '</li>',    
+			params:{
+				'userids':<?= $this->user->id ?>,
+				'formtoken':'<?= $this->user->token ?>',
+				'usertoken':'<?= md5($this->user->token.'change_picture') ?>'		
+			},
+			allowedExtensions:['jpg', 'jpeg', 'png', 'gif'],
+			sizeLimit:2097152,
+			onProgress: function(id, fileName, loaded, total){
+				var _w = loaded * 100 / total; _w = _w + "%";
+				$('#qqPhotoQueueUL li:eq('+id+') .qq-upload-progress-range').css({
+					width:_w
+				});
+			},
+			showMessage:function(err) {
+				showError(err);
+			}
+		}); 
 	});
 </script>	
 </body>
