@@ -197,40 +197,7 @@
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		/**
-		$('#file_upload').uploadify({
-			'uploader' 	: '/uploadify/uploadify.swf',
-			'script' 	: '/phpscripts/uploadUserPicture.php',
-			'cancelImg' : '/uploadify/cancel.png',
-			'folder' 	: '/uploads',
-			'buttonImg' : '/images2/file-1.png',
-			'height' 	: 27,
-			'width' 	: 92,
-			'auto' 		: true,
-			'fileExt'	: '*.jpg;*.gif;*.png',
-			'onError':function(e,a,c,d){
-				
-			},
-			'onComplete':function(a,b,c,image){
-				if(image != 'error'){
-					$('img#userimage68').attr('width',68);
-					$('img#userimage68').attr('height',68);
-					$('img#userimage68').attr('src',image);
-				}
-			},
-			'scriptData':{
-				'userids':<?= $this->user->id ?>,
-				'formtoken':'<?= $this->user->token ?>',
-				'usertoken':'<?= md5($this->user->token.'change_picture') ?>'
-			}
-		});
-		
-		$('input.calendar').datepicker({
-			dateFormat: 'MM d, yy',
-			defaultDate:$(this).val()
-		});
-		*/	
-		
+	
 		var uploader = new qq.FileUploader({
 			element: document.getElementById('file_upload3'),
 			listElement:document.getElementById('qqPhotoQueue'),
