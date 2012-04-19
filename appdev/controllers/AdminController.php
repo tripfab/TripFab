@@ -2616,7 +2616,7 @@ class AdminController extends Zend_Controller_Action {
                         ->joinleft(array('country' => 'places'), 'country.parent_id = region.id', array('countryTotal' => 'COUNT( DISTINCT country.id)'))
                         ->joinleft(array('city' => 'places'), 'city.parent_id = country.id', array('cityTotal' => 'COUNT(DISTINCT city.id)'))
                         ->joinleft('listings', 'city.id=listings.city_id', array('activityTotal' => 'COUNT(IF(listings.main_type=6, 1, NULL))', 'entertainmentTotal' => 'COUNT(IF(listings.main_type=7, 1, NULL))', 'touristTotal' => 'COUNT(IF(listings.main_type=4, 1, NULL))', 'restaurantTotal' => 'COUNT(IF(listings.main_type=2, 1, NULL))', 'hotelsTotal' => 'COUNT(IF(listings.main_type=5, 1, NULL))'))
-                        ->where('region.parent_id IS NULL and region.type_id=1')
+                        ->where('region.type_id=1')
                         ->group('region.id');
                 if ($this->view->searchText) {
 					$identifierCompatible = str_replace(' ', '_',$this->view->searchText);
@@ -2629,7 +2629,7 @@ class AdminController extends Zend_Controller_Action {
                 $template = 'countries';
                 $select->from(array('country' => 'places'), array('id', 'countryName' => 'title'))
                         ->join(array('region' => 'places'), 'country.parent_id = region.id', array('region_name' => 'title', 'region_id'=>'id'))
-                        ->join(array('city' => 'places'), 'city.parent_id = country.id', array('cityTotal' => 'COUNT(city.id)'))
+                        ->joinleft(array('city' => 'places'), 'city.parent_id = country.id', array('cityTotal' => 'COUNT(city.id)'))
                         ->joinleft('listings', 'city.id=listings.city_id', array('activityTotal' => 'COUNT(IF(listings.main_type=6, 1, NULL))', 'entertainmentTotal' => 'COUNT(IF(listings.main_type=7, 1, NULL))', 'touristTotal' => 'COUNT(IF(listings.main_type=4, 1, NULL))', 'restaurantTotal' => 'COUNT(IF(listings.main_type=2, 1, NULL))', 'hotelsTotal' => 'COUNT(IF(listings.main_type=5, 1, NULL))'))
                         //->joinleft('vendors', 'country.id=vendors.place_id', array('partnerTotal' => 'COUNT(vendors.id)'))
 						->where('country.type_id =2')
@@ -2668,7 +2668,6 @@ class AdminController extends Zend_Controller_Action {
             default:
                 $this->view->title = "Cities";
         }
-
 
         $paginator = Zend_Paginator::factory($select);
         $paginator->setItemCountPerPage(self::ITEMS_PER_PAGE);
