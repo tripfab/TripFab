@@ -166,14 +166,14 @@
                                     <?php if(!empty($this->overview->about)): ?>
                                     <?php $ok = false; ?>
                                     <p><?= nl2br($this->overview->about) ?></p>
-                                    <?php endif; if(!empty($this->oveview->expect)): ?>
+                                    <?php endif; if(!empty($this->overview->expect)): ?>
                                     <?php $ok = false; ?>
                                     <h5>What to Expect</h5>
                                     <p><?= nl2br($this->overview->expect) ?></p>
                                     <?php endif; if(!empty($this->overview->love)): ?>
                                     <?php $ok = false; ?>
                                     <h5>Things you'll love</h5>
-                                    <p><?= nl2br($this->overview->expect) ?></p>
+                                    <p><?= nl2br($this->overview->love) ?></p>
                                     <?php endif ?>
                                     
                                     <?php if($ok): ?>
@@ -182,7 +182,6 @@
                                         <a href="/admin/listings/overview/<?= $this->listing->id ?>" class="link1">Edit now</a></p>
                                     </div><!--EMPTY-->
                                     <?php endif ?>
-                                    
                                     
 									<?php $ok = true; $i=0; $limit = count($this->details) ?>
                                     <?php $ok1 = true; $ok3 = true; ?>
