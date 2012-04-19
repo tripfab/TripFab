@@ -104,7 +104,7 @@ label { float: left; padding: 5px 0; margin: 0;}
                 <div class="selects">
                     <select name="room[nights]">
                         <option value="1">1 night</option>
-                        <?php for($i=2;$i<=5;$i++): ?>
+                        <?php for($i=2;$i<=10;$i++): ?>
                         <?php $selected = ($_POST['room']['nights'] == $i) ? 'selected="selected"' : ''; ?>
                         <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> nights</option>
     					<?php endfor ?>
@@ -117,7 +117,7 @@ label { float: left; padding: 5px 0; margin: 0;}
                 <div class="selects">
                     <select name="room[people]">
                     	<option value="0">Unknown</option>
-                        <?php for($i=1;$i<=12;$i++): ?>
+                        <?php for($i=1;$i<=20;$i++): ?>
                         <?php $selected = ($_POST['room']['people'] == $i) ? 'selected="selected"' : ''; ?>
                         <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> <?= ($i == 1) ? 'person' : 'people' ?></option>
     					<?php endfor ?>
@@ -317,7 +317,7 @@ label { float: left; padding: 5px 0; margin: 0;}
                 <div class="selects">
                     <select name="room[nights]">
                         <option value="1">1 night</option>
-                        <?php for($i=2;$i<=5;$i++): ?>
+                        <?php for($i=2;$i<=10;$i++): ?>
                         <?php $selected = ($room->nights == $i) ? 'selected="selected"' : ''; ?>
                         <option <?= $selected ?> value="<?= $i ?>"><?= $i ?> nights</option>
     					<?php endfor ?>
@@ -330,7 +330,7 @@ label { float: left; padding: 5px 0; margin: 0;}
                 <div class="selects">
                     <select name="room[people]">
                     	<option value="0">Unknown</option>
-                        <?php for($i=1;$i<=12;$i++): ?>
+                        <?php for($i=1;$i<=20;$i++): ?>
                         <?php $selected = ($room->people == $i) ? 'selected="selected"' : ''; ?>
                         <option <?= $selected ?> value="<?= $i ?>"><?= ($i == 1) ? $i.' person' : $i.' people' ?></option>
     					<?php endfor ?>
@@ -500,7 +500,7 @@ label { float: left; padding: 5px 0; margin: 0;}
                 <div class="selects">
                     <select name="room[nights]">
                         <option value="1">1 night</option>
-                        <?php for($i=2;$i<=5;$i++): ?>
+                        <?php for($i=2;$i<=10;$i++): ?>
                         <option value="<?= $i ?>"><?= $i ?> nights</option>
     					<?php endfor ?>
                     </select>
@@ -512,7 +512,7 @@ label { float: left; padding: 5px 0; margin: 0;}
                 <div class="selects">
                     <select name="room[people]">
                     	<option value="0">Unknown</option>
-                        <?php for($i=1;$i<=12;$i++): ?>
+                        <?php for($i=1;$i<=20;$i++): ?>
                         <option value="<?= $i ?>"><?= ($i==1) ? $i.' person' : $i.' people' ?></option>
     					<?php endfor ?>
                     </select>
