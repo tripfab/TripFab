@@ -216,6 +216,11 @@ class AdminController extends Zend_Controller_Action {
                 $template = 'listings-newtype';
                 $this->render($template);
                 break;
+            case 'addplaces':
+                $this->listingAddPlacesTask();
+                $template = 'listings-addplaces';
+                $this->render($template);
+                break;                
             default:
                 throw new Exception('Page not found');
         }
@@ -1120,6 +1125,9 @@ class AdminController extends Zend_Controller_Action {
                     $main_cat = $this->listings->getCategory($main_cat);
                     if(is_null($main_cat))
                             throw new Exception('type');
+                    
+                    if($main_cat->id == 7 or $main_cat->id == 2)
+                        $this->_redirect('admin/listings/addplaces');
 
                     $vendor = $this->users->getVendorByUserId($_POST['vendor_id']);
                     
@@ -2538,6 +2546,25 @@ class AdminController extends Zend_Controller_Action {
         }
         $this->_redirect('/admin/listings/pricing/'.$listing->id);
     }
+    
+    public function listingAddPlacesTask()
+    {
+        $places = new Zend_Db_Table('places');
+        $select = $places->select();
+        $select->where('parent_id = 18');
+        $select->order('title ASC');
+        
+        $regions = $places->fetchAll($select);
+        
+        $this->view->cities = $regions;
+    }
+    
+    
+    
+    
+    
+    
+    
 
     public function placesAction() {
         $GLOBALS['menuContext'] = 3;

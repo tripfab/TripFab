@@ -2,6 +2,10 @@
 
 class AjaxController extends Zend_Controller_Action
 {
+    
+    const CLIENT_ID     = 'UAZO1NP00B4BHVHJGONXBEKHMARCCDXUCIBRYIKVXJIYDWQU';
+    const CLIENT_SECRET = 'C5DMAZR3H4PKNSYD4DHGVV0HV2HWBU2R3EW2FHXZPKI0PIRX';
+    
     protected $places_db;
     protected $landscapes_db;
     protected $pictures_db;
@@ -2387,5 +2391,51 @@ class AjaxController extends Zend_Controller_Action
         $details = $this->listings->getDetails($id);
         
         $this->view->details = $details;
+    }
+    
+    public function getadminplacesAction(){
+        $places = $this->fqrequest('/venues/search', array(
+            'll'         => $this->_getParam('center'),
+            'intent'     =>'browse',
+            'radius'     => 4000,
+            'categoryId' => $this->_getParam('cat')
+        ));
+        
+        $places = $places->response->venues;
+        
+        $fqplaces = new Zend_Db_Table('fq');
+        foreach($places as $place) {
+            $select = $fqplaces->select();
+            $select->where('fq_id = ?', $place->id);
+            $fq = $fqplaces->fetchRow($select);
+            if(!is_null($fq)) {
+                if($fq->added) {
+                    $place->done = true;
+                } else {
+                    $place->done = false;
+                }
+            } else {
+                $place->done = false;
+            }
+        }
+        
+        $this->view->places = $places;
+    }
+    
+    private function fqrequest($url, $data) {
+        $data['client_id'] = self::CLIENT_ID;
+        $data['client_secret'] = self::CLIENT_SECRET;
+        $data['v'] = '20120321';
+        
+        $url = 'https://api.foursquare.com/v2'.$url;
+        
+        $client = new Zend_Http_Client($url);
+        foreach($data as $param => $value) {
+            $client->setParameterGet($param, $value);
+        }
+        
+        $response = $client->request();
+        
+        return json_decode($response->getBody());
     }
 }
