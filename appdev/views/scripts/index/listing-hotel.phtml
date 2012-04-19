@@ -15,6 +15,18 @@
     <div id="wp_header">
         <?= $this->partial('partials/header-v2.phtml', array('user'=>$this->user,'full'=>true)); ?>
         <div class="sub_header" id="lstng_header">
+        	<div class="cntrl">
+        	    <ul class="breadcrump">
+        	        <li class="first"><a href="/" class="home"></a></li>
+        	        <li><a href="/costa_rica">Costa Rica</a></li>
+        	        <li><a href="/costa_rica/alajuela">Alajuela</a></li>
+        	        <li class="last"><a href="/costa_rica/alajuela/#/tourist-sights"
+        	        class="active">Tourist Sights</a></li>
+        	    </ul>
+        	    <a href="/costa_rica/alajuela/#/tourist-sights" 
+        	    class="link1">&larr; Back to Results</a>
+        	    <div class="clear"></div>
+        	</div><!--CNTRL-->
             <div class="cont">
                 <?= $this->partial('partials/headerVendorInfo.phtml', array('vendor'=>$this->vendor, 'user'=> $this->user)) ?>
             </div><!--CONT-->
