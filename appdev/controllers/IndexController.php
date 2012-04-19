@@ -135,7 +135,7 @@ class IndexController extends Zend_Controller_Action
         }
         
         if(!is_null($city)) 
-            $ls_count = $this->listings->countListings($city->id);
+            $ls_count = $this->listings->countListings($city);
         else
             $ls_count = $this->listings->countListings(null, null, $country->id);
         
@@ -393,6 +393,13 @@ class IndexController extends Zend_Controller_Action
     public function termsAction()
     {
         
+    }
+    
+    public function mytripsAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if($auth->hasIdentity())
+                $this->_redirect('/user/trips');
     }
     
     public function resetAction()

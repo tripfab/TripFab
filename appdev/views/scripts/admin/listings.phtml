@@ -41,6 +41,10 @@
 			});
             $("#report_tabs").tabs();
 			$('#ui-datepicker-div').wrap('<div id="calendarContainer"></div>');
+			
+			$('.delete').click(function(){
+				return confirm('Are you sure?');
+			});
 
         });
     </script>
@@ -93,7 +97,16 @@
 							<td><?php echo $listing->status ? 'Active' : 'Inactive' ?></td>
 							<td><a href="<?php echo $this->url(array('ct'=>$listing->city_id, 'co'=>''));?>"><?php echo $listing->city_name?></a></td>
 							<td><a href="<?php echo $this->url(array('co'=>$listing->country_id, 'ct'=>''));?>"><?php echo $listing->country_name?></a></td>
-							<td><a href="/admin/listings/edit/<?= $listing->id ?>" class="edit">Edit</a></td>
+<!--							<td><a href="/admin/listings/edit/<?= $listing->id ?>" class="edit">Edit</a></td>-->
+							<td class="drp_dn">
+								<a href="" class="btn-10"><span>Actions</span></a>
+								<ul>
+									<li class="arrow"></li>
+									<li><a href="/admin/listings/edit/<?= $listing->id ?>">Edit Listing</a></li>
+									<li><a target="_blank" href="/admin/listings/preview/<?= $listing->id ?>">View Preview</a></li>
+									<li><a href="/admin/listings/delete/<?= $listing->id ?>" class="delete">Delete Listing</a></li>
+								</ul> 
+							</td>
 						</tr>
                         <?php endforeach;?>
 					</table>
@@ -107,7 +120,15 @@
 		<!-- closes w1 -->
     	
 		<?php echo $this->partial('admin_partials/report.phtml', array('main_categories'=>$this->main_categories, 'countries'=>$this->countries)); ?>
-		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('.drp_dn .btn-10').click(function() {
+		            $pref = $(this).parents('.drp_dn');
+		            $('ul', $pref).toggleClass('show');
+		            return false
+		        });
+			});
+		</script>
         <script>
 			function searchSubmit(){
 				location.href="<?php echo $this->baseUrl?>/" + $("#q").val();

@@ -37,20 +37,60 @@ $(document).ready(function() {
             showError('Please accept the terms and conditions');
             return false;
         } else if($('input[name=account]:checked').val() == 'new') { 
-            
-            if($('.cnum', this).val() == '') {
-                showError('Credit Card cannot be empty');
-                return false;
-            } else if($('.ccode', this).val() == '') {
-                showError('Security Code cannot be empty');
-                return false;
-            } else if($('.cmonth', this).val() == '') {
-                showError('Please select the expiration month');
-                return false;
-            } else if($('.cyear', this).val() == '') {
-                showError('Please select the expiration year');
-                return false;
+            $continue = true;
+            if($('.cname', this).val() == '') {
+				$item = $('.cname',this).parents('.item');
+				$item.addClass('required');
+				$('p span.alert', $item).remove();
+				$('p strong',$item).before('<span class="alert">Card Holder cannot be empty</span>');
+				$continue = false;
             } else {
+				$item = $('.cname',this).parents('.item');
+				$item.removeClass('required');
+				$('p span.alert', $item).remove();
+			}
+			
+            if($('.cnum', this).val() == '') {
+				$item = $('.cnum',this).parents('.item');
+				$item.addClass('required');
+				$('p span.alert', $item).remove();
+				$('p strong',$item).before('<span class="alert">Credit Card cannot be empty</span>');
+				$continue = false;
+            } else {
+				$item = $('.cnum',this).parents('.item');
+				$item.removeClass('required');
+				$('p span.alert', $item).remove();
+			}
+			
+			
+            if(($('.cmonth', this).val() == '') || ($('.cyear', this).val() == '')) {
+				$item = $('.cmonth',this).parents('.item');
+				$item.addClass('required');
+				$('p span.alert', $item).remove();
+				$('p strong',$item).before('<span class="alert">Incorrect expiration date</span>');
+				$continue = false;
+            } else {
+				$item = $('.cmonth',this).parents('.item');
+				$item.removeClass('required');
+				$('p span.alert', $item).remove();
+			}
+			
+			
+            if($('.ccode', this).val() == '') {
+				$item = $('.ccode',this).parents('.item');
+				$item.addClass('required');
+				$('p span.alert', $item).remove();
+				$('p strong',$item).before('<span class="alert">Security Code cannot be empty</span>')
+				$continue = false;
+            } else {
+				$item = $('.ccode',this).parents('.item');
+				$item.removeClass('required');
+				$('p span.alert', $item).remove();
+			}
+			
+			console.log($continue);
+			
+			if($continue) {
                 Stripe.setPublishableKey(PUBLIC_KEY);
                 $data = {
                     number:    $('.cnum', this).val(),
@@ -63,7 +103,9 @@ $(document).ready(function() {
                 Stripe.createToken($data, amount, stripeResponseHandler);
                 // prevent the form from submitting with the default action
                 return false;
-            }
+            } else {
+				return false;
+			}
         } else 
             return true;
     });

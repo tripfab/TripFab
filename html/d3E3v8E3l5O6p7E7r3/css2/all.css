@@ -1,3 +1,4 @@
+@import url("https://developer.tripfab.com/version2/css6/quickie.css");
 /*- Sign Up Styles -----------------------------------------------------------*/
 
 #sign-up {
@@ -1997,7 +1998,10 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 .results-wrapper {
 	padding: 10px 0 50px 10px;
 }
-
+.results-wrapper .firstime_tip {
+	top: 48px;
+	left: 100px;
+}
 .result {
 	float: left;
 	margin-bottom: 10px;
@@ -3661,6 +3665,39 @@ ul.reviews li > div div.meta em.red {
 	top: 15px;
 	left: -6px;
 }
+.payment-item .new-card .item.required {
+	padding: 1px 0;
+	height: 68px;
+	overflow: visible !important;
+}
+.payment-item .new-card .item.required > div{
+	background-color: #FFF1EA;
+    height: 68px;
+    left: -33px;
+    padding-left: 33px;
+    position: absolute;
+    width: 100%;
+}
+.payment-item .new-card .item.required .alert {
+	color: #f26522;
+	font: normal 12px/16px Helvetica;
+	background: url(https://developer.tripfab.com/images2/alert.png) no-repeat left 50%;
+	padding-left: 22px;
+	height: 16px;
+	display: block;
+	margin-bottom: 5px;
+}
+.payment-item .new-card .item.required p {
+	padding-top:10px;
+}
+.payment-item .new-card .item.required select {
+	margin: 39px 10px 0 20px;
+}
+.payment-item .new-card .item.required input {
+	margin: 29px 10px 0 0;
+	border: 1px solid #f26522;
+}
+
 
 .payment-item .new-card input[type="text"] {
 	width: 240px;
@@ -14335,6 +14372,12 @@ h2.title .back:hover,
 	height:15px;
 	display:block;
 }
+.all_listing .list_content td a.delete {
+	background: url(https://developer.tripfab.com/images2/ico-31.png) no-repeat left 50%;
+	padding-left: 20px;
+	height: 15px;
+	display: block;
+}
 .all_listing .paging_bottom {
 	padding-top:10px;
 	overflow:hidden;
@@ -14352,6 +14395,90 @@ h2.title .back:hover,
 	color: #303030;
 	background: url("https://developer.tripfab.com/images2/btn-10.gif") repeat-x scroll left bottom #FFFFFF;
 }
+
+.all_listing .list_content td.drp_dn a {
+	width:92px;
+	height: 18px;
+	padding: 0;
+	display: block;
+	margin-right: 10px;
+}
+.all_listing .list_content td.drp_dn span {
+	background:url("https://developer.tripfab.com/images2/admin-actions.png") no-repeat 0 3px transparent;
+	display: inline-block;
+	width: 80px;
+	height: 18px;
+	font: bold 11px/18px Helvetica;
+	color: #303030;
+}
+.all_listing .list_content td.drp_dn ul {
+	display:none;
+	position:absolute;
+	background-color:#FFF;
+	box-shadow:0 0 6px #acacac;
+	top:30px;
+	right:5px;
+	width:110px;
+	padding:8px 0;
+	z-index:1000;
+	behavior: url(/PIE.htc);
+}
+.all_listing .list_content td.drp_dn ul li {
+	width:110px;
+	height:23px;
+}
+.all_listing .list_content td.drp_dn ul li:hover {
+	background-color:#5ab2e5;
+}
+.all_listing .list_content td.drp_dn ul li a {
+	font:bold 11px/23px Helvetica, Arial, sans-serif;
+	text-indent:10px;
+	display:block;
+	color:#303030;
+	text-shadow:-1px 1px #FFF;
+}
+.all_listing .list_content td.drp_dn ul li:hover a{
+	text-decoration:none;
+	text-shadow:-1px 1px #2573b4;
+	color:#FFF;
+}
+.all_listing .list_content td.drp_dn {
+	position:relative;
+	display: block;
+}
+.all_listing .list_content td.drp_dn ul.show{
+	display:block;
+}
+.all_listing .list_content td.drp_dn ul li.arrow {
+background: url("https://developer.tripfab.com/images6/src_map_aw1.png") no-repeat 0 0;
+	top: -6px;
+    display: block;
+    height: 8px;
+    right: 5px;
+    position: absolute;
+    width: 21px;
+    z-index: 100;
+}
+.listing-content .room_upload {
+	width: 360px;
+	float: right;
+	overflow: hidden;
+}
+.listing-content .room_upload .btn-1 {
+	float: right;
+}
+.listing-content .room_upload .holder {
+	float: left;
+	width: 68px;
+	height: 77px;
+	background: url(https://developer.tripfab.com/images2/upload_room.png) no-repeat 0 0;
+}
+.listing-content .room_upload .inner {
+	width: 68px;
+	height: 67px;
+	overflow: hidden;
+}
+
 /*END ADMIN LISTING-----------------------------------------*/
 /*ADMIN USER VIEW-------------------------------------------*/
 .all_listing #user_view {
@@ -15330,6 +15457,390 @@ h2.title .back:hover,
 	font: 12px/20px Helvetica;
 }
 /*END ADMIN CLAIMS------------------------------------------*/
+
+/*ADMIN CREATE PLACES------------------------------------------*/
+#places.listing-content {
+	background: none #FFF;
+}
+#places .filter {
+	height: 54px;
+	padding-top: 20px;
+	overflow: hidden;
+}
+#places .filter label {
+	font: bold 13px Helvetica;
+	color: #303030;
+	display: block;
+	float: left;
+	margin: 10px 20px 0 30px;
+	width: 145px;
+}
+#places .filter select {
+	display: block;
+	float: left;
+	margin: 10px 15px 0 0;
+	width: 190px;
+}
+#places .slideshow{
+	width: 912px;
+	height: 492px;
+	background-color:#f6f6f6;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0px 0px 2px 1px #a9a9a9;
+	-moz-box-shadow: inset 0px 0px 2px 1px #a9a9a9;
+	box-shadow: inset 0px 0px 2px 1px #a9a9a9;
+	margin: 0 auto;
+}
+#places .first-step,
+#places .no-results {
+	text-align: center;
+	color: #898989;
+	font: bold 18px Helvetica;
+	padding-top: 166px;
+	text-shadow: 0px 1px 0px #FFF;
+}
+#places .first-step span,
+#places .no-results span{
+	background: url(https://developer.tripfab.com/images6/create-restaurant.png) no-repeat -67px -9px;
+	display: block;
+	width: 45px;
+	height: 43px;
+	margin: 0 auto 15px;
+}
+#places .no-results span{
+	background-position:-9px -9px;
+}
+#places .rstl {
+	background: url(https://developer.tripfab.com/images6/create-restaurant_sp.png) no-repeat center 32px;
+	height: 30px;
+	padding-top: 25px;
+}
+#places .rstl span {
+	display: block;
+	margin: 0 auto;
+	background-color: #f6f6f6;
+	text-align: center;
+	color: #898989;
+	font: bold 12px Helvetica;
+	width: 120px;
+}
+#places .cont {
+	height: 410px;
+	overflow: hidden;
+	width: 912px;
+}
+#places .cont ul {
+	width: 270px;
+	float: left;
+	margin-left: 25px;
+}
+#places .cont ul li {
+	background: none;
+	position: relative;
+	list-style: none;
+}
+#places .cont ul li a {
+	display: block;
+	width: 255px;
+	padding: 5px 5px 5px 10px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	color: #303030;
+	font: normal 13px Helvetica;
+	text-shadow: 0px 1px 0px #FFF;
+}
+#places .cont ul li a span {
+	color: #898989;
+	font: bold 11px Helvetica;
+}
+#places .cont ul li a:hover {
+	background-color: #e5e5e5;
+}
+#places .cont ul li a.active {
+	background-color: #a9d9fb;
+	color: #FFF;
+	text-shadow: 0px 1px 0px #71b3eb
+}
+#places .cont ul li a.active em{
+	background: url(https://developer.tripfab.com/images6/create-restaurant.png) no-repeat -208px -22px;
+	width:16px;
+	height: 16px;
+	display: block;
+	position: absolute;
+	right: 10px;
+	top:4px;
+}
+#places .cont ul li a.active span {
+	text-shadow: 0px 1px 0px #71b3eb;
+	color: #FFF;
+}
+#places .bottom {
+	margin: 10px auto 20px;
+    width: 912px;
+    overflow: hidden;
+}
+#places .bottom h3 {
+	border-bottom: 1px solid #ebebeb;
+	font: bold 13px/35px Helvetica;
+	color: #303030;
+	height: 35px;
+	margin-bottom: 15px;
+}
+#places .bottom .explore {
+	float: left;
+	width: 304px;
+	border-right: 1px solid #ebebeb;
+	padding-bottom: 10px;
+}
+#places .bottom .explore h4 {
+	color: #303030;
+	font: normal 12px/15px Helvetica;
+	margin-bottom: 10px;
+	height: 15px;
+}
+#places .bottom .explore h4 span {
+	background: url(https://developer.tripfab.com/images6/create-restaurant.png) no-repeat -129px -22px;
+	display: block;
+	width: 16px;
+	height: 15px;
+	float: left;
+	margin-right: 10px;
+}
+#places .bottom .explore a {
+	display: block;
+	color: #60B5f7;
+	width: 148px;
+	font: bold 11px/25px Helvetica;
+}
+#places .bottom .explore a span{
+	background: url(https://developer.tripfab.com/images6/create-restaurant.png) no-repeat;
+	display: block;
+	float: left;
+	width: 24px;
+	height: 25px;
+	margin-right: 10px;
+}
+#places .bottom .explore .fb {
+	float: left;
+}
+#places .bottom .explore .fb span {
+	background-position: -374px -17px;
+}
+#places .bottom .explore .gl {
+	float: right;
+}
+#places .bottom .explore .gl span {
+	background-position: -420px -17px;
+}
+#places .bottom .fb_add {
+	float: right;
+	width: 578px;
+	position: relative;
+}
+#places .bottom .fb_add label{
+	color: #303030;
+	font: normal 12px/16px Helvetica;
+	display: block;
+	height: 16px;
+	margin-bottom: 10px;
+}
+#places .bottom .fb_add label span {
+	display: block;
+	background: url(https://developer.tripfab.com/images6/create-restaurant.png) no-repeat -170px -22px;
+	width: 16px;
+	height: 16px;
+	margin-right: 10px;
+	float: left;
+}
+#places .bottom .fb_add input[type="text"] {
+	border-radius: 0;
+	border-color: #a7b9c5;
+	width: 420px;
+	height: 33px;
+	font: normal 12px/33px Helvetica;
+}
+#places .bottom .fb_add .btn-1 {
+	position: absolute;
+	right: 0;
+	top: 27px;
+}
+#places .paging{
+	position: relative;
+	float:left;
+  	width:100%;
+	overflow: hidden;
+}
+#places .paging .inner{
+	position: relative;
+	left: 50%;
+	float: left;
+	clear: left;
+	text-align: center;
+}
+#places .paging .inner a{
+	position: relative;
+	right: 50%;
+	float: left;
+	background: url(https://developer.tripfab.com/images6/create-restaurant.png) no-repeat -321px -26px;
+	width: 9px;
+	height: 9px;
+	display: block;
+	text-indent: -99999px;
+	margin-right: 10px;
+} 
+#places .paging .inner a:hover {
+	background-position: -347px -26px;
+}
+#places .paging .inner a.activeSlide {
+	background-position: -334px -26px;
+}
+#places .bottom .added{
+	padding: 10px 0 0;
+	text-align: center;
+	color: #303030;
+	font: normal 13px Helvetica;
+}
+#places .bottom .added h4 {
+	font: bold 15px Helvetica;
+	margin-bottom: 10px;
+}
+#places .bottom .added span{
+	width: 32px;
+	height: 30px;
+	display: block;
+	background: url(https://developer.tripfab.com/images6/create-restaurant.png) no-repeat -256px -15px;	
+	margin: 0 auto 10px;
+}
+#edit_places .facebook {
+	background-color: #e7f4fd;
+}
+#edit_places .item h4 {
+	float: left;
+	width: 220px;
+}
+#edit_places .profile-items .item > h4 span {
+	display: block;
+	font: normal 12px Helvetica;
+	margin-top: 5px;
+}
+#edit_places select.category {
+	width: 170px;
+	float: left;
+	margin:10px 0 0;
+}
+#edit_places .item input[type="text"] {
+	float: left;
+}
+#edit_places .item textarea {
+	width: 347px;
+	min-height: 55px;
+	float: left;
+}
+#edit_places .schedule {
+	float: left;
+}
+#edit_places .schedule label {
+	display: block;
+	margin-bottom:4px;
+	font: 12px/29px Helvetica;
+	overflow: hidden;
+}
+#edit_places .schedule strong {
+	float: left;
+	display: block;
+	margin-right:10px;
+	width: 93px;
+}
+#edit_places .schedule input{
+	width: 76px;
+	height: 29px;
+	font: normal 12px/29px Helvetica;
+	display: block;
+	float: left;
+	margin-right:15px;
+}
+#edit_places .schedule span {
+	display: block;
+	float: left;
+	margin-right:15px;
+}
+#edit_places ul {
+	float: left;
+	list-style: none;
+}
+#edit_places ul li {
+	margin-bottom: 3px;
+	height: 22px;
+	line-height: 20px;
+}
+#edit_places ul input {
+	margin: 4px 10px 0 0;
+	float: left;
+}
+#edit_places .facebook {
+	background: none #e7f4fd;
+}
+#edit_places .facebook .url {
+	float: right;
+	width: 585px;
+	overflow: hidden;
+}
+#edit_places .facebook .url input[type="text"] {
+	width: 468px;
+	float: left;
+	border-color: #a7b9c5;
+	border-radius: 0;
+	height: 30px;
+	font: normal 12px/30px Helvetica;
+} 
+#edit_places .facebook .url .btn-1 {
+	float: left;
+	margin-left: 10px;
+}
+#edit_places .photos h3 {
+	font: bold 12px Helvetica;
+	margin-bottom: 20px;
+}
+#edit_places .photos .pic {
+	width: 107px;
+	height: 107px;
+	background-color: #e7e7e7;
+	overflow: hidden;
+}
+#edit_places .photos ul {
+	overflow: hidden;
+	float: none;
+}
+#edit_places .photos li {
+	width: 107px;
+	float: left;
+	margin-right:17px ;
+	height: 140px;
+	font-size: 11px;
+}
+#edit_places .photos label {
+	display: block;
+	width: 54px;
+	height: 20px;
+	border-right: 1px solid #e1e1e1;
+	float: left;
+}
+#edit_places .photos span {
+	display: block;
+	float: right;
+	width: 45px;
+		text-align: right;
+}
+#edit_places .photos ul input[type="radio"] {
+	margin-right: 2px;
+}
+#edit_places .left ul {
+	float: none;
+}
+/*END ADMIN CREATE PLACES--------------------------------------*/
 
 /*END ADMIN-------------------------------------------------------------- */
 /*LIGHTBOX BASIC STYLES-------------------------------------*/
@@ -17848,6 +18359,8 @@ background-color: #FFF;
 #custom_checkout .header h4 {
 	font: bold 13px/17px Helvetica;
 	color: #303030;
+	height: 17px;
+	overflow: hidden;
 }
 #custom_checkout .header .type {
 	display: block;
@@ -17924,13 +18437,19 @@ background-color: #FFF;
 #custom_checkout .terms {
 	background-color: #FFFFFF;
     border: 1px solid #E7E7E7;
-    height: 45px;
-    padding: 25px 0 0 22px;
+    padding: 12px 0 12px 12px;
     position: relative;
     z-index: 10;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
+    margin-bottom: 10px;
+}
+#custom_checkout .terms input {
+	display: block;
+	float: left;
+	margin-right: 10px;
+	margin-top: 0;
 }
 #custom_checkout .terms a {
 	color: #60b5f7;
@@ -18046,6 +18565,8 @@ background-color: #FFF;
 #custom_checkout .right_block {
 	float: right;
 	width: 290px;
+}
+#custom_checkout .right_block .inf {
 	border: 1px solid #e7e7e7;
 	-webkit-box-shadow: 0px #e7e7e7;
 	-moz-box-shadow: 0px #e7e7e7;
@@ -18056,6 +18577,8 @@ background-color: #FFF;
 	border-radius: 4px;
 	background-color: #FFF;
 	behavior: url(/PIE.htc);
+	margin-bottom: 10px;
+	padding-bottom: 10px;
 }
 #custom_checkout .right_block h5 {
 	font: bold 13px/50px Helvetica;
@@ -18076,7 +18599,6 @@ background-color: #FFF;
 #custom_checkout .right_block table tr:hover td{
 	background-color: #303030;
 }
-
 #custom_checkout .right_block table tr a {
 	color: #FFF;
 	display: block;
@@ -18114,12 +18636,9 @@ background-color: #FFF;
 	padding: 12px 18px;
 	position: relative;
 	z-index: 0;
-	-moz-border-radius-topleft: 0px;
-	-moz-border-radius-topright: 0px;
-	-moz-border-radius-bottomright: 4px;
-	-moz-border-radius-bottomleft: 4px;
-	-webkit-border-radius: 0px 0px 4px 4px;
-	border-radius: 0px 0px 4px 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 	margin-top: 5px;
 }
 #custom_checkout .right_block .btn-1 {
@@ -18184,7 +18703,8 @@ background-color: #FFF;
 	border-radius: 4px; 
 }
 
-#restrictions .inner .tops, #restrictions .inner .bottoms {
+#restrictions .inner .tops, 
+#restrictions .inner .bottoms {
 	padding: 20px 0;
 }
 
@@ -18214,6 +18734,7 @@ background-color: #FFF;
 #custom_checkout .header.inactive > a{
 	display:none;
 }
+
 #all-restrictions {
 	width:580px;
 }
@@ -18225,12 +18746,69 @@ background-color: #FFF;
 }
 #all-restrictions .mid {
 	padding:20px 35px;
+	background-color: #FFF;
 } 
 #all-restrictions .mid ul li {
-	list-style:disc;
+	list-style:none;
 	font:normal 12px/15px Helvetica, sans-serif;
 	margin-bottom:13px;
 	color:#303030
+}
+
+.cancel_policy {
+	width:960px;
+}
+.cancel_policy .top {
+	height:42px;
+	font:bold 13px/42px Helvetica, sans-serif;
+	color:#FFF;
+	padding-left:20px
+}
+.cancel_policy .mid {
+	padding:20px;
+	background-color: #FFF;
+}
+.cancel_policy .mid h3 {
+	font-size: 13px;
+	margin-bottom: 15px;
+} 
+.cancel_policy .mid ul {
+	padding-bottom: 29px;
+}
+.cancel_policy .mid ul li {
+	list-style:none;
+	font:normal 12px/16px Helvetica, sans-serif;
+	color:#303030
+}
+.cancel_policy .mid .inner {
+	background-color: #f3f3f3;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: inset 0px 0px 3px 2px #b4b4b4;
+	-moz-box-shadow: inset 0px 0px 3px 2px #b4b4b4;
+	box-shadow: inset 0px 0px 3px 2px #b4b4b4;
+}
+.cancel_policy .mid .inner img {
+	padding: 16px 0 16px 33px;
+}
+.cancel_policy .mid .specs {
+	padding-left: 10px;
+	background: url(https://developer.tripfab.com/images2/cancellations_policyg.png) repeat-x 0 0;
+}
+.cancel_policy .mid .column {
+	width: 300px;
+	float: left;
+	background: url(https://developer.tripfab.com/images2/cancellations_policy.png) no-repeat right bottom;
+	height: 124px;
+}
+.cancel_policy .mid .column.last {
+	background: none;
+}
+.cancel_policy .mid .column p {
+	padding:20px 20px 0;
+	color: #303030;
+	font: 12px/18px Helvetica;
 }
 /*LIGHTBOX RECOMEMDATION LISTING-------------------------------------------*/
 #recomendation_listing {
@@ -19001,7 +19579,6 @@ h2.title .back:hover,
 	border-radius: 4px;
 	margin-bottom: 10px;
 	border: 1px solid #e7e7e7;
-	margin-top:36px;
 }
 #terms_use .title {
 	background:url(https://developer.tripfab.com/images2/g-54.png) repeat-x left bottom;
@@ -19020,47 +19597,42 @@ h2.title .back:hover,
 	font:bold 11px/55px Helvetica, sans-serif;
 }
 #terms_use .accordion {
-	padding:0 15px 20px;
-}
-#terms_use .accordion h3{
-	font:bold 13px/37px Helvetica, sans-serif;
-	height:37px;
-	border-bottom:1px solid #ededed;
-}
-#terms_use .accordion h3.ui-state-active {
-	border:none;
+	padding:0 0 20px;
 }
 #terms_use .accordion h3 a {
 	color:#303030;
 	display:block;
-	padding:0 15px;
+	padding:0 30px;
 }
 #terms_use .accordion h3 span {
-	background:url(https://developer.tripfab.com/images2/terms-icon1.png) no-repeat 0 0;
-	background-position:left top;
+	background:url(https://developer.tripfab.com/images2/terms_of_use.png) no-repeat 0 0;
 	display:block;
-	height:16px;
-	width:16px;
+	height:15px;
+	width:40px;
 	float:right;
-	margin:12px 14px 0;
+	margin:23px 14px 0;
 }
 #terms_use .accordion h3 .ui-icon-triangle-1-e {
-	background-position:left top;
+	background-position:0 -63px;
+}
+#terms_use .accordion h3.ui-state-hover .ui-icon-triangle-1-e {
+	background-position: 0 0;
 }
 #terms_use .accordion h3 .ui-icon-triangle-1-s {
-	background-position:left bottom;
+	background-position:-62px -63px;
+}
+#terms_use .accordion h3.ui-state-hover .ui-icon-triangle-1-s {
+	background-position: -62px 0;
 }
 #terms_use .accordion .single {
-	border-bottom:1px solid #ededed;
-	padding:0 15px;
-}
-#terms_use .accordion h3 a:hover {
-	background-color:#f0f8ff;
-}
+	padding:0 30px;
+}	
 #terms_use .accordion .single p {
-	font:normal 13px/18px Helvetica, sans-serif;
+	font:normal 11px/18px Helvetica, sans-serif;
 	color:#303030;
-	padding-bottom:30px;
+	padding-bottom: 10px;
+	width: 492px;
+	float: left;
 }
 #terms_use .accordion h4 {
 	margin-bottom:10px;
@@ -19070,10 +19642,79 @@ h2.title .back:hover,
 	padding-bottom:10px
 }
 #terms_use .accordion ul li {
-	font:13px/15px Helvetica;
+	font:11px/18px Helvetica;
 	margin-bottom:5px;
 	margin-left:15px;
 }
+#terms_use .accordion .abbr {
+	float: right;
+	width: 320px;
+}
+#terms_use .accordion .abbr h4 {
+	font: bold 11px Helvetica;
+	color: #898989;
+	margin-bottom: 20px;
+}
+#terms_use .accordion .abbr h5 {
+	font: normal 23px/32px Helvetica;
+	color: #303030;
+	margin-bottom: 20px;
+}
+
+
+.terms_header {
+	width: 960px;
+	margin: 20px auto 15px;
+	overflow: hidden;
+	position: relative;
+}
+.terms_header a {
+	display: block;
+	margin-right: 10px;
+	color: #303030;
+	font: bold 15px/30px Helvetica;
+	padding: 0 15px;
+	float: left;
+	text-align: center;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+.terms_header a:hover, .terms_header a.active {
+	color: #FFF;
+	background-color: #303030;
+	-webkit-box-shadow: inset 0px 0px 3px 2px #000;
+	-moz-box-shadow: inset 0px 0px 3px 2px #000;
+	box-shadow: inset 0px 0px 3px 2px #000;
+}
+.terms_header .date {
+	position: absolute;
+	top: 10px;
+	right: 0;
+	color: #636363;
+	font: normal 11px Helvetica;
+}
+#terms_use .head {
+	padding: 55px 0;
+	font: normal 15px/22px Helvetica;
+	color: #303030;
+	padding-left: 220px;
+	width: 580px;
+}
+#terms_use .accordion h3 {
+	border-top: 1px solid #EDEDED;
+    font: bold 12px/53px Helvetica,sans-serif;
+    height: 53px;
+}
+#terms_use .accordion .text {
+	float: left;
+	width: 492px;
+}
+
+
+
+
+
 /*END TERMS OF USE---------------------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------*/
 /*NEW-PASSWORD-------------------------------------------------------------*/

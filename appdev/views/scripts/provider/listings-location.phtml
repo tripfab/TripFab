@@ -2,7 +2,7 @@
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->listing->title ?> : Location | Tripfab.com</title>
+    <title><?= $this->listing->title ?> - Location | Tripfab.com</title>
     <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
@@ -47,7 +47,7 @@
             <div class="content">
                 <select name="location">
                     <?php if(empty($this->location->plane)): ?>
-                    <option value="train">By Plane</option>
+                    <option value="plane">By Plane</option>
                     <?php endif; if(empty($this->location->car)): ?>
                     <option value="car">By Car</option>
                     <?php endif; if(empty($this->location->train)): ?>

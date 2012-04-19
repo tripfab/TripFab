@@ -39,9 +39,17 @@ $(function(){
 });
 
 $(function(){
-    $('.result .img-wrapper .been').live('click', function(){
+    $('.result .img-wrapper .been:not(.not)').live('click', function(){
         $('.dd-2').removeClass('show');
         $(this).parent().find('.dd-2').toggleClass('show');
+        return false;
+    });
+    
+    $('#tooltipHelpSearch').live('submit',function(){
+        if($('input[type=checkbox]', this).is(':checked')) {
+            $.cookie('tooltipHelpSearch','yes',{expires:365,path:'/'});
+        }
+        $('.firstime_tip').fadeOut();
         return false;
     });
 	
@@ -180,6 +188,13 @@ $(function(){
 $(function(){
     var ajax = false;
     var refresh_price = true;
+    var page = 1;
+    
+    var globalData;
+    
+    var ajax2 = false;
+    var proceed = true;
+    
     $.address.change(function($ev){
         // Get main category from the url
         //console.dir($ev);
@@ -232,7 +247,12 @@ $(function(){
         $('.results-wrapper .loading').show();
         $('input[type=checkbox]', $widget).attr('disabled','1');
         $('#slider-4').slider('disable');
-		
+        
+        globalData = $data;
+        
+        proceed = true;
+        page = 1;
+        
         ajax = $.ajax({
             url:'/ajax/getlistings',
             data:$data,
@@ -245,6 +265,8 @@ $(function(){
                 $('ul.cat-menu li.active').removeClass('active');
                 $a.parents('li').addClass('active');
                 $('#search_result .content').html(results);
+                
+                //loadMore($data);
             },
             error:function(){
                 $('.results-wrapper .loading').hide();
@@ -308,6 +330,7 @@ $(function(){
     });
 	
     $('ul.cat-menu li a').live('click', function(){
+        
         if($(this).parents('li').hasClass('active'))
             return false;
 		
@@ -315,8 +338,43 @@ $(function(){
 		
         $widget = $('.widget[rel="'+$(this).attr('href')+'"]');
         $('input[type=checkbox]',$widget).removeAttr('checked');
-		
+        
+        $('ul.cat-menu li.active').renoveClass('active');
+        $(this).parents('li').addClass('active');
+        
         document.location.hash = $(this).attr('href');
         return false;
     });
+    
+    $(window).scroll(function(){
+        $top = $('#footer').offset();
+        $top = $top.top - 1500;
+        
+        $wtop = $(window).scrollTop();
+        
+        if($wtop > $top)
+            loadMore(globalData);
+    });
+    
+    function loadMore($data){
+        if(proceed) {
+            if(!ajax2) {
+                page++;
+                console.log(page);
+                $data.page = page;
+                ajax2 = $.ajax({
+                    url:'/ajax/getlistings2',
+                    data:$data,
+                    success:function(results){
+                        if(results != "") {
+                            $('#search_result .content .results-wrapper').append(results);
+                        } else {
+                            proceed = false;
+                        }
+                        ajax2 = false;
+                    }
+                });
+            }
+        }
+    }
 });

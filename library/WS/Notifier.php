@@ -48,7 +48,8 @@ class WS_Notifier extends Zend_Mail {
     public function newAccountRequest()
     {
         $this->setSubject('Signup Request');
-        $this->addTo($this->user->email);
+        //$this->addTo($this->user->email);
+        $this->addTo('cristian@tripfab.com');
         $this->sendHTMLTemplate('account-request.phtml');
     }
     
@@ -75,7 +76,8 @@ class WS_Notifier extends Zend_Mail {
     public function welcomePartner()
     {
         $this->setSubject('Welcome to Tripfab');
-        $this->addTo($this->user->email);
+        ////$this->addTo($this->user->email);
+        $this->addTo('cristian@tripfab.com');
         //$this->sendHTMLTemplate('welcome-partner.phtml');
     }
     
@@ -92,8 +94,9 @@ class WS_Notifier extends Zend_Mail {
         $this->_view->items   = $items;
         
         $this->setSubject('Listing Pending Information');
-        $this->addTo($this->user->email);
-        $this->addBcc("cristian@tripfab.com");
+        ////$this->addTo($this->user->email);
+        $this->addTo('cristian@tripfab.com');
+        //$this->addBcc("cristian@tripfab.com");
         $this->sendHTMLTemplate('listing-pending.phtml');
     }
     
@@ -108,7 +111,8 @@ class WS_Notifier extends Zend_Mail {
         $this->_view->listing = $listing;
         
         $this->setSubject('Listing Approved');
-        $this->addTo($this->user->email);
+        ////$this->addTo($this->user->email);
+        $this->addTo('cristian@tripfab.com');
         //$this->sendHTMLTemplate('listing-approved.phtml');
     }
     
@@ -122,7 +126,8 @@ class WS_Notifier extends Zend_Mail {
     public function newReservation($listing, $reservation)
     {
         $this->setSubject('New Reservation');
-        $this->addTo($this->user->email);
+        ////$this->addTo($this->user->email);
+        $this->addTo('cristian@tripfab.com');
         $this->_view->listing = $listing;
         $this->_view->reservation = $reservation;
         $this->sendHTMLTemplate('reservation.phtml');
@@ -140,7 +145,8 @@ class WS_Notifier extends Zend_Mail {
         $this->_view->listing = $listing;
         
         $this->setSubject('Reservation Cancelled');
-        $this->addTo($this->user->email);
+        ////$this->addTo($this->user->email);
+        $this->addTo('cristian@tripfab.com');
         $this->sendHTMLTemplate('reservation-cancelled.phtml');
     }
     
@@ -155,7 +161,8 @@ class WS_Notifier extends Zend_Mail {
         $this->setSubject('New Review');
         $this->_view->listing = $listing;
         $this->_view->client = $client;
-        $this->addTo($this->user->email);
+        ////$this->addTo($this->user->email);
+        $this->addTo('cristian@tripfab.com');
         $this->sendHTMLTemplate('review.phtml');
     }
     
@@ -168,7 +175,8 @@ class WS_Notifier extends Zend_Mail {
     public function withdrawRequestReceived()
     {
         $this->setSubject('Withdrwal Request Received');
-        $this->addTo($this->user->email);
+        ////$this->addTo($this->user->email);
+        $this->addTo('cristian@tripfab.com');
         $this->sendHTMLTemplate('withdraw-request.phtml');
     }
     
@@ -181,7 +189,8 @@ class WS_Notifier extends Zend_Mail {
     public function withdrawRequestCompleted()
     {
         $this->setSubject('Withdrawal Completed');
-        $this->addTo($this->user->email);
+        ////$this->addTo($this->user->email);
+        $this->addTo('cristian@tripfab.com');
         $this->sendHTMLTemplate('withdraw-completed.phtml');
     }
     
@@ -195,7 +204,8 @@ class WS_Notifier extends Zend_Mail {
     {
         $this->_view->token = $token;
         $this->setSubject('Welcome to Tripfab');
-        $this->addTo($this->user->email);
+        ////$this->addTo($this->user->email);
+        $this->addTo('cristian@tripfab.com');
         $this->sendHTMLTemplate('email.phtml');
     }
     
@@ -210,7 +220,8 @@ class WS_Notifier extends Zend_Mail {
         $this->_view->reservation = $reservation;
         $this->_view->trip        = $trip;
         $this->setSubject('Preplaned Itinerary Purchase');
-        $this->addTo($this->user->email);
+        ////$this->addTo($this->user->email);
+        $this->addTo('cristian@tripfab.com');
         $this->sendHTMLTemplate('trip.phtml');
     }
     
@@ -225,7 +236,8 @@ class WS_Notifier extends Zend_Mail {
         $this->_view->listing = $listing;
         $this->_view->vendor  = $vendor;
         $this->setSubject('Reservation Approved');
-        $this->addTo($this->user->email);
+        ////$this->addTo($this->user->email);
+        $this->addTo('cristian@tripfab.com');
         $this->sendHTMLTemplate('reservation-approved.phtml');
     }
     
@@ -239,7 +251,8 @@ class WS_Notifier extends Zend_Mail {
     public function writeReview()
     {
         $this->setSubject('Hey! How was the trip?');
-        $this->addTo($this->user->email);
+        ////$this->addTo($this->user->email);
+        $this->addTo('cristian@tripfab.com');
         $this->sendHTMLTemplate('write-review.phtml');
     }
     
@@ -255,7 +268,8 @@ class WS_Notifier extends Zend_Mail {
         $this->_view->from = $from;
         
         $this->setSubject('New message');
-        $this->addTo($this->user->email);
+        ////$this->addTo($this->user->email);
+        $this->addTo('cristian@tripfab.com');
         $this->sendHTMLTemplate('new-message.phtml');
     }
     
@@ -269,7 +283,8 @@ class WS_Notifier extends Zend_Mail {
     {
         $this->_view->url = $url;
         $this->setSubject('Password Reset');
-        $this->addTo($this->user->email);
+        ////$this->addTo($this->user->email);
+        $this->addTo('cristian@tripfab.com');
         $this->sendHTMLTemplate('password.phtml');
     }
     
@@ -282,7 +297,8 @@ class WS_Notifier extends Zend_Mail {
     public function passwordResetSuccess()
     {
         $this->setSubject('Your new password');
-        $this->addTo($this->user->email);
+        ////$this->addTo($this->user->email);
+        $this->addTo('cristian@tripfab.com');
         $this->sendHTMLTemplate('password-reset.phtml');
     }
     

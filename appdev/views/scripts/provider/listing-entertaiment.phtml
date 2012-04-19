@@ -1,157 +1,447 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-    <meta content="noindex,nofollow" name="robots" />
-    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->listing->title ?> - <?= $this->city->title ?>, <?= $this->country->title ?> | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/jquery-ui-1.8.16.custom.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/index/listing-activity.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
-    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
-    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
+	<meta content="noindex,nofollow" name="robots" />
+	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->listing->title ?> - <?= $this->user->name ?> | Tripfab.com</title>
+	<link type="text/css" rel="stylesheet" href="/css6/reset.css" />
+	<link type="text/css" rel="stylesheet" href="/css6/common.css" />
+	<link type="text/css" rel="stylesheet" href="/css6/section1.css" />
+	<link type="text/css" rel="stylesheet" href="/css6/calendar.css" />	
+	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript" src="/js2/index/listing-entertaiment.js"></script>  
+    <style type="text/css">
+	#mapcanvas { width:285px;  height:136px; }
+	</style>   
 </head>
-<body>
-<div class="w1">
-    <?= $this->partial('partials/header.phtml', 
-	array('user'=>$this->user,'full'=>true)); ?>
-    <div class="w2">
-        <div class="main wrapper">
-        	<?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'All Listings','parentActive'=>'Listings')); ?>
-            <div class="content-2">
-                <div class="box">
-                    <?= $this->partial('partials/gallery.phtml', 
-					array('user'=>$this->user, 'listing' => $this->listing, 'city' => $this->city, 
-						  'country' => $this->country,'pictures' => $this->pictures,'trips'=>$this->trips)); ?>
-                    <?php // $this->partial('partials/tabs.phtml',  array('listing' => $this->listing, 'tabs' => $this->tabs, 'faqs' => $this->faqs, 'map' => false)); ?>
-                </div><!-- closes box -->
-                <div class="tabs-wrapper-2">
-                    <ul>
-                        <li><a href="#tabs-1">Overview</a></li>
-                        <li><a href="#tabs-2">FAQ's</a></li>
-                    </ul>
-                    <div class="tab" id="tabs-1">
-                    	<?php if(!empty($this->overview->about) or
-									!empty($this->overview->about) or
-									!empty($this->overview->about)): ?>
-                        <div class="tab-ttl">About <?= $this->listing->title ?></div>
-                        <div class="tab-content">
-                        	<?php if(!empty($this->overview->about)): ?>
-                        	<h2>About the spot</h2>
-                        	<p><?= stripslashes(nl2br($this->overview->about)) ?></p>
+<body class="bg_wh">
+<div id="wp_all">
+    <div id="wp_header">
+	    <?= $this->partial('partials/header-v2.phtml', array('user'=>$this->user,'full'=>true)); ?>    
+    </div><!--WP_HEADER-->
+    <div id="wp_content">
+        <div id="cont_bl">
+            <div class="lstng_dflt" id="restaurant">
+                <div class="top">
+                    <div class="cntrl">
+                        <ul class="breadcrump">
+                            <li class="first"><a href="/" class="home"></a></li>
+                            <li><a href="/<?= $this->country->identifier ?>"><?= $this->country->title ?></a></li>
+                            <li><a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>"><?= $this->city->title ?></a></li>
+                            <li class="last"><a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>/#entertainment" 
+                            class="active">Entertainment</a></li>
+                        </ul>
+                        <a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>/#entertainment" 
+                        class="link1">&larr; Back to My Listings</a>
+                        <div class="clear"></div>
+                    </div><!--CNTRL-->
+                    
+                    <div class="description">
+                        <div class="slideshow">
+                        <?php if(count($this->pictures) > 0): ?>
+                        	<?php foreach($this->pictures as $i=>$pic): ?>
+                            <?php $class = ($i == 0) ? 'show' : '' ?>
+                            <?= $this->thumbnail(array('width'=>298,'height'=>212), $pic->url, $class, '298:212', 'img'.$i) ?>
+                            <?php endforeach ?>
+						<?php else: ?>
+                            <div class="empty">
+                                <span class="icon"></span>
+                                There is no any picture yet
+                                <a href="/provider/listings/photos/<?= $this->listing->id ?>" class="link1">Add photos now</a>
+                            </div><!--EMPTY-->
+                        <?php endif ?>
+                        </div><!--SLIDESHOW-->
+                        <div class="info">
+                            <h2><?= $this->listing->title ?> <a href="/provider/listings/edit/<?= $this->listing->id ?>" class="link1">Edit Name</a></h2>
+                            <?php if(!is_null($this->city) or !is_null($this->country)): ?>
+                            <span class="location"><em></em><strong><?= $this->city->title ?>,</strong> <?= $this->country->title ?> 
+                            <img src="/images6/flag<?= strtoupper($this->country->code) ?>.png" width="" height="" alt="" /></span>
+                            <?php else: ?>
+							<span class="location"><em></em><strong>Unknown Location. </strong>
+                            <a href="/provider/listings/edit/<?= $this->listing->id ?>" class="link1">Set location</a> </span>
                             <?php endif ?>
-                            <?php if(!empty($this->overview->expect)): ?>
-                            <h2>What to expect</h2>
-                            <p><?= stripslashes(nl2br($this->overview->expect)) ?></p>
+							<?= $this->partial('partials/addtomytrip.phtml', array(
+                                    'user' => $this->user,
+                                    'trips' => $this->trips,
+                                    'listing' => $this->listing,
+                                    'class'	=> 'btn-1',
+                                    'class2' => 'one'
+                            )) ?>
+                            <?php if(!isset($_COOKIE['tooltipHelpList'])): ?>
+                            <div class="firstime_tip">
+                            	<img src="https://developer.tripfab.com/images6/arrow-24.png" class="arrow" alt="">
+                            	<div class="cont">
+                            		<img src="https://developer.tripfab.com/images6/stamp.png" width="75" height="75" alt="" />
+                            		<p><strong>Planning a Trip?</strong>
+                            			Ey! If you're planning a trip you can create you own customize trip, add things to do there and book it when you're ready to travel.
+                            		</p>
+                            	</div><!--CONT-->
+                            	<div class="bot">
+                            		<form action="post" id="tooltipHelpList">
+                            			<fieldset>
+                            				<label><input checked="checked" type="checkbox" name="" value="" />Don't show again</label>
+                            				<input type="submit" value="Okay" class="btn-1" />
+                            			</fieldset>
+                            		</form>
+                            	</div><!--BOT-->
+                            </div><!--FIRSTIME_TIP-->
                             <?php endif ?>
-                            <?php if(!empty($this->overview->love)): ?>
-                            <h2>Things you'll love</h2>
-                            <p><?= stripslashes(nl2br($this->overview->love)) ?></p>
-                            <?php endif ?>
-                            <h2>Polices</h2>
-                            <ul>
-                            	<?php foreach($this->details as $detail): ?>
-                                <?php if($detail->type == 3): ?>
-                                <li><?= stripslashes($detail->text) ?></li>
+                            
+                            <div class="text">
+                                <ul class="rating">
+                                <!--
+                                    <li><a href="" class="slct"></a></li>
+                                    <li><a href="" class="slct"></a></li>
+                                    <li><a href="" class="slct"></a></li>
+                                    <li><a href="" class="nrml"></a></li>
+                                    <li><a href="" class="nrml"></a></li>
+                                -->
+                                </ul>
+                                <?php if(!empty($this->listing->description)): ?>
+                                <p><?= $this->listing->description ?></p>
+                                <?php else: ?>
+								<p>No description yet</p>
                                 <?php endif ?>
-                                <?php endforeach ?>
-                            </ul>
-                        </div><!-- closes tab-content -->
+                                <div class="clear"></div>
+                            </div><!--TEXT-->
+                            
+                            <div class="photos">
+                                <a href="" class="lf-arrow"></a>
+                                <?php if(count($this->pictures) > 0): ?>
+                                <div class="imgs">
+                                	<?php for($i=0; $i<count($this->pictures); $i=$i+10): ?>
+                                    <div class="single">
+                                    	<?php for($j=$i;$j<($i+10); $j++):?>
+                                        <?php if(isset($this->pictures[$j])): ?>
+                                        <?php $pic = $this->pictures[$j] ?>
+                                        <?php $class = ($j == 0) ? 'active' : '' ?>
+                                        <a class="<?= $class ?>" href="#img<?= $j ?>"><?= $this->thumbnail(65, $pic->url, '', '1:1') ?></a>
+                                        <?php else: ?>
+                                        <img src="/images2/empty-small-photo.png" width="65" height="65" />
+                                        <?php endif ?>
+                                        <?php endfor ?>
+                                    </div>
+                                    <?php endfor ?>
+                                </div><!--IMGS-->
+                                <?php else: ?>
+                                <div class="imgs">
+                                    <div class="single">
+                                        <ul><li></li><li></li><li></li><li></li><li></li>
+                                        <li></li><li></li><li></li><li></li></ul>
+                                    </div>
+                                </div><!--IMGS-->
+                                <?php endif ?>
+                                <a href="" class="rg-arrow"></a>
+                            </div><!--PHOTOS-->
+                        </div><!--INFO-->
+                        <div class="clear"></div>
+                    </div><!--DESCRIPTION-->
+                    
+                </div><!--TOP-->
+                <div class="container">
+                    <div class="sidebar">
+                    	<?php if(!is_null($this->listing->lat)): ?>
+                        <div class="map">
+                            <div class="cont">
+                                <div class="map_canvas">
+                                	<div id="mapcanvas"></div>
+                                </div><!--MAP_CANVAS-->
+                            </div><!--CONT-->
+                        </div><!--MAP-->
+                        <div class="location">
+                            <img src="/images6/map_<?= strtolower($this->country->code) ?>.png" class="country" width="45" height="43" alt="" />
+                            <p><strong>Location</strong> <?= $this->listing->address ?></p>
+                            <div class="clear"></div>
+                        </div><!--LOCATION-->
                         <?php else: ?>
-                        <div class="tab-content">
-	                        <a href="/provider/listings/overview/<?= $this->listing->id ?>"><img src="/images2/empty-overview.gif" /></a>
-                        </div>
+                        <div class="map">
+                            <div class="cont">
+                                <div class="map_canvas">
+                                    <div class="empty">
+                                        <span class="icon"></span>
+                                        Unknown Location
+                                        <a href="/provider/listings/location/<?= $this->listing->id ?>" class="link1">Set location now</a>
+                                    </div>
+                                </div><!--MAP_CANVAS-->
+                            </div><!--CONT-->
+                        </div><!--MAP-->                        
                         <?php endif ?>
-                    </div><!-- closes tab -->
-                    <div class="tab" id="tabs-2">
-                        <?php if(count($this->faqs) > 0): ?>
-                        <div class="tab-ttl">
-                            Frequently Asked Questions
-                        </div><!-- closes tab-ttl -->
-                        <div class="tab-content faqs">
+                        
+                        <?php if(!empty($this->place->facebook) || !empty($this->place->twitter)): ?>
+                        <div class="social">
+                        	<?php if(!empty($this->place->facebook)): ?>
+                            <a href="<?= $this->place->facebook ?>" class="fb" target="_blank"></a>
+                            <?php else: ?>
+                            <a href="/provider/listings/edit/<?= $this->listing->id ?>" class="fb">Add Facebook Account</a>
+                            <?php endif; if(!empty($this->place->twitter)): ?>
+                            <a href="<?= $this->place->twitter ?>" class="tw" target="_blank"></a>
+                            <?php else: ?>
+                            <a href="/provider/listings/edit/<?= $this->listing->id ?>" class="tw">Add Twitter Account</a>
+                            <?php endif ?>
+                            <div class="clear"></div>
+                        </div><!--SOCIAL-->
+                        <?php else: ?>
+                        <div class="social empty">
+                            <a href="/provider/listings/edit/<?= $this->listing->id ?>" class="fb">Add Facebook Account</a>
+                            <a href="/provider/listings/edit/<?= $this->listing->id ?>" class="tw">Add Twitter Account</a>
+                            <div class="clear"></div>
+                        </div><!--SOCIAL-->
+                        <?php endif ?>
+                        
+                        <?php if(!empty($this->listing->phone) || !empty($this->listing->email) || !empty($this->listing->website)): ?>
+                        <div class="contact">
+                        	<?php if(!empty($this->listing->phone)): ?>
                             <ul>
-                            	<?php foreach($this->faqs as $faq): ?>
-                                <li>
-                                    <strong><?= stripslashes(nl2br($faq->question)) ?></strong><br />
-                                    <?= stripslashes(nl2br($faq->answer)) ?>
-                                </li>
+                                <li><strong>Phone</strong></li>
+                                <li><?= $this->listing->phone ?></li>
+                            </ul>
+                            <?php else: ?>
+                            <ul>
+                                <li><strong>Phone</strong></li>
+                                <li><a href="/provider/listings/edit/<?= $this->listing->id ?>" class="link1">Add phone number</a></li>
+                            </ul>
+                            <?php endif; if(!empty($this->listing->email)): ?>
+                            <ul>
+                                <li><strong>E-mail</strong></li>
+                                <li><?= $this->listing->email ?></li>
+                            </ul>
+                            <?php else: ?>
+                            <ul>
+                                <li><strong>E-mail</strong></li>
+                                <li><a href="/provider/listings/edit/<?= $this->listing->id ?>" class="link1">Add e-mail</a></li>
+                            </ul>
+                            <?php endif; if(!empty($this->listing->website)): ?>
+                            <ul>
+                                <li><strong>Website</strong></li>
+                                <li><a href="<?= $this->listing->website ?>" target="_blank" class="link1"><?= $this->listing->website ?></a></li>
+                            </ul>
+                            <?php else: ?>
+                            <ul>
+                                <li><strong>Website</strong></li>
+                                <li><a href="/provider/listings/edit/<?= $this->listing->id ?>" class="link1">Add website</a></li>
+                            </ul>
+                            <?php endif ?>
+                        </div><!--CONTACT--> 
+                        <?php endif ?>                       
+                    </div><!--SIDEBAR-->
+                    
+                    <div class="content">
+						<?php $cards = explode(', ', $this->place->cards) ?>
+                        <?php if(count($cards) > 1): ?>
+                        <div class="payment_optn">
+                            <h3>Payment Options</h3>
+                            <ul>                            	
+                            	<?php foreach($cards as $card): ?>
+                                <li><img src="<?= $this->cards[$card] ?>" width="30" height="20" alt="" /></li>
                                 <?php endforeach ?>
                             </ul>
-                        </div><!-- closes tab-content -->
+                        </div><!--PAYMENT_OPTN-->
                         <?php else: ?>
-                        <div class="tab-content">
-                        	<a href="/provider/listings/faqs/<?= $this->listing->id ?>"><img src="/images2/empty-faqs.gif" /></a>
-                        </div>
+                        <div class="payment_optn">
+                            <h3>Payment Options <a href="/provider/listings/edit/<?= $this->listing->id ?>" class="link1">Add now</a></h3>
+                        </div><!--PAYMENT_OPTN-->
+                        <?php endif ?> 
+                        
+                        <?php if(!empty($this->place->info))	: ?>
+                        <div class="descrip">
+                            <p><?= $this->place->info ?></p>
+                        </div><!--DESCRIP-->
                         <?php endif ?>
-                    </div><!-- closes tab -->								
-                </div><!-- closes tabs-wrapper -->                
-                <div class="reviews-wrapper">
-                    <?= $this->partial('partials/reviews.phtml', 
-					array('reviews' => $this->reviews, 'questions' => $this->questions, 'answer_allow' => false,
-						  'user'=>$this->user, 'listing' => $this->listing->id)); ?>
-                </div><!-- closes reviews-wrapper -->
-            </div><!-- closes content-2 -->
-            
-            <div class="right-sidebar">
-                <div class="widget book">
-                    <div class="ttl">
-                        <span>Entertainment</span>
-                    </div><!-- closes ttl -->
-                    <div class="map-wrapper">
-                        <h4>Location</h4>
-                        <?php if(!is_null($this->listing->lat)): ?>
-                        <div id="mapcanvas"></div>
-                        <address>
-                            <p><strong><?= $this->listing->title ?></strong></p>
-                            <p><?= $this->listing->address ?></p>
-                        </address>
+                        
+                        <div class="amenities">
+							<?php $services = explode("\n", $this->place->services) ?>
+                            <?php if(count($services) > 1): ?>
+                            <div class="type first">
+                                <h4><span class="services"></span>Services</h4>
+                                <?php $count = count($services) - 1; ?>
+                                <?php $limit = ((($count - ($count % 2)) / 2) + ($count % 2)); ?>
+                                <?php for($i=0;$i<$count;$i=$i+$limit): ?>
+                                <?php $class = ($i==0) ? 'first' : '' ?>
+                                <ul class="<?= $class ?>">
+                                	<?php for($j=$i;($j<($i+$limit)) and ($j < $count); $j++): ?>
+                                    <li><?= $services[$j] ?></li>
+                                    <?php endfor ?>
+                                </ul>
+                                <?php endfor ?>
+                                <div class="clear"></div>
+                            </div><!--TYPE-->
+                            <?php else: ?>
+                            <div class="type first">
+                                <h4><span class="services"></span>Services</h4>
+                                <ul class="first">
+                                    <li>No Information. <a href="/provider/listings/edit/<?= $this->listing->id ?>" class="link1">Add now</a></li>
+                                </ul>
+                                <div class="clear"></div>
+                            </div><!--TYPE-->
+							<?php endif ?>
+                            
+							<?php $services = explode("\n", $this->place->specials) ?>
+                            <?php if(count($services) > 1): ?>                        
+                            <div class="type">
+                                <h4><span class="specialties"></span>Specialties</h4>
+                                <?php $count = count($services) - 1; ?>
+                                <?php $limit = ((($count - ($count % 2)) / 2) + ($count % 2)); ?>
+                                <?php for($i=0;$i<$count;$i=$i+$limit): ?>
+                                <?php $class = ($i==0) ? 'first' : '' ?>
+                                <ul class="<?= $class ?>">
+                                	<?php for($j=$i;($j<($i+$limit)) and ($j < $count); $j++): ?>
+                                    <li><?= $services[$j] ?></li>
+                                    <?php endfor ?>
+                                </ul>
+                                <?php endfor ?>
+                                <div class="clear"></div>
+                            </div><!--TYPE-->
+                            <?php else: ?>
+                            <div class="type">
+                                <h4><span class="specialties"></span>Specialties</h4>
+                                <ul class="first">
+                                    <li>No Information. <a href="/provider/listings/edit/<?= $this->listing->id ?>" class="link1">Add now</a></li>
+                                </ul>
+                                <div class="clear"></div>
+                            </div><!--TYPE-->
+							<?php endif ?>
+                        	
+                            
+							<?php $services = explode("\n", $this->place->tips) ?>
+                            <?php if(count($services) > 1): ?>
+                            <div class="type">
+                                <h4><span class="food"></span>Tips</h4>
+                                <ul class="large">
+                                    <?php foreach($services as $s): ?>
+                                    <li><?= $s ?></li>
+                                    <?php endforeach ?>
+                                </ul>
+                                <div class="clear"></div>
+                            </div><!--TYPE-->
+                            <?php else: ?>
+                            <div class="type">
+                                <h4><span class="food"></span>Tips</h4>
+                                <ul class="first">
+                                    <li>No Information. <a href="/provider/listings/edit/<?= $this->listing->id ?>" class="link1">Add now</a></li>
+                                </ul>
+                                <div class="clear"></div>
+                            </div><!--TYPE-->
+                            <?php endif ?>
+                            
+							<?php $services = explode(",", $this->place->tags) ?>
+                            <?php if(count($services) > 1): ?>
+                            <div class="type">
+                                <h4><span class="services"></span>Tags</h4>
+                                <?php $count = count($services) - 1; ?>
+                                <?php $limit = ((($count - ($count % 2)) / 2) + ($count % 2)); ?>
+                                <?php for($i=0;$i<$count;$i=$i+$limit): ?>
+                                <?php $class = ($i==0) ? 'first' : '' ?>
+                                <ul class="<?= $class ?>">
+                                	<?php for($j=$i;($j<($i+$limit)) and ($j < $count); $j++): ?>
+                                    <li><?= trim($services[$j]) ?></li>
+                                    <?php endfor ?>
+                                </ul>
+                                <?php endfor ?>
+                                <div class="clear"></div>
+                            </div><!--TYPE-->
+                            <?php else: ?>
+                            <div class="type">
+                                <h4><span class="specialties"></span>Tags</h4>
+                                <ul class="first">
+                                    <li>No Information. <a href="/provider/listings/edit/<?= $this->listing->id ?>" class="link1">Add now</a></li>
+                                </ul>
+                                <div class="clear"></div>
+                            </div><!--TYPE-->
+							<?php endif ?>                        
+                        </div><!--AMENITIES-->
+                        
+                    
+                        <?php if(count($this->schedules) > 0): ?>
+                        <div class="schedule">
+                            <h5><span></span>Hours</h5>
+                            <span class="open"></span>
+                            <span class="closed hidden"></span>
+                            <?php $schs = array(); $curr = 1; $last = 0;
+								
+								$schs[$last] = array('first' => $this->schedules[$last]);
+								
+								while(isset($this->schedules[$curr])){
+									if(($this->schedules[$last]->starting == $this->schedules[$curr]->starting) and
+									  ($this->schedules[$last]->ending == $this->schedules[$curr]->ending)){
+										$schs[$last]['last'] = $this->schedules[$curr]; $curr++;
+									} else {
+										$last = $curr; $schs[$last] = array('first' => $this->schedules[$last]); $curr++;
+									}
+								}
+							?>
+                            <ul>
+                            	<?php foreach($schs as $sch): ?>
+                                <?php if(isset($sch['last'])): ?>
+                                <li class="ttl"><?= substr($sch['first']->name, 0, 3) ?> - <?= substr($sch['last']->name, 0, 3) ?></li>
+                                <li><?= date('g:i a', strtotime($sch['first']->starting)) ?> - <?= date('g:i a', strtotime($sch['first']->ending)) ?></li>
+                                <?php else: ?>
+                                <li class="ttl"><?= $sch['first']->name ?></li>
+                                <li><?= date('g:i a', strtotime($sch['first']->starting)) ?> - <?= date('g:i a', strtotime($sch['first']->ending)) ?></li>
+                                <?php endif ?>
+                                <?php endforeach ?>                            
+                            </ul>
+                        </div><!--SCHEDULE-->
                         <?php else: ?>
-                        <a href="/provider/listings/location/<?= $this->listing->id ?>"><img src="/images2/empty-map.jpg" /></a>
-                        <?php endif ?>
-                    </div><!-- closes map-wrapper -->
-                </div><!-- closes widget -->
-                <div class="widget talk">
-                    <?= $this->partial('partials/talk.phtml',array('vendor'=>$this->vendor,'user' => $this->user)); ?>
-                </div><!-- closes widget -->
-            </div><!-- closes right-sidebar -->
-        </div><!-- closes main -->
-    </div><!-- closes w2 -->
-    <?= $this->partial('partials/footer.phtml'); ?>
-</div><!-- closes w1 -->	
-<div id="citiesAutocompleteContainer"></div>
+                        <div class="schedule">
+                            <h5><span></span>Hours</h5>
+                            <div class="empty">
+                                No Information yet.
+                                <a href="/provider/listings/edit/<?= $this->listing->id ?>" class="link1">Edit schedule</a>
+                            </div><!--EMPTY-->
+                        </div><!--SCHEDULE-->
+						<?php endif ?>
+                        <div class="clear"></div>
+                    </div><!--CONTENT-->
+                    <div class="clear"></div>
+                </div><!--CONTAINER-->
+            </div><!--LSTNG_DFLT-->
+        
+        </div><!--CONT_BL-->
+    </div><!--WP_CONTENT-->
+    <div id="wp_footer">
+	    <?= $this->partial('partials/footer.phtml'); ?>
+    </div><!--WP_FOOTER-->
+</div><!--WRAPPER_ALL-->
 <input type="hidden" value="<?= ($this->listing->lat) ? $this->listing->lat : 'none' ?>" name="listlat" />
 <input type="hidden" value="<?= ($this->listing->lng) ? $this->listing->lng : 'none' ?>" name="listlng" />
 <input type="hidden" value="<?= $this->listing->title ?>" name="listtitle" />
-
+<input type="hidden" value="<?= $this->listing->id ?>" name="listingids" />
 <div class="hidden">
-	<div id="send_message">
-        <form action="" id="sendMessageForm">
-            <div class="lb-forgot">
-                <div class="ttl">Send a message to <?= $this->vendor->name ?></div>
-                <div class="content">
-                    <textarea cols="30" name="message" rows="1"></textarea>
-                </div><!-- closes content -->
-                <div class="bottom">
-                    <input type="submit" class="btn-1" value="Send Message" />
-                    <span onclick="$.fancybox.close()" class="btn-4">Cancel</span>				
-                </div><!-- closes bottom -->
-            </div><!-- closes lb-forgot -->
-            <input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
-        </form>
-    </div>
-    <div id="live_chat">
-    	<img src="/images2/chat.png" />
-    </div>
-    <div id="start_call">
-    	<img src="/images2/phone.png" />
+	<div id="newtrip">
+		<div id="create_trip">
+			<form action="">
+	            <div class="top">
+	                <h3>Create a New Trip</h3>
+	                <p>Complete the information below to start your next trip</p>
+	            </div><!--TOP-->
+	            <div class="cont">
+	                <fieldset>
+	                    <div class="item">
+	                        <label class="trip">Trip Name</label>
+	                        <input type="text" name="title" value="" />
+	                    </div><!--ITEM-->
+	                    <div class="item">
+	                        <label class="dates">Trip Dates</label>
+	                        <input class="start" type="text" name="start" value="Starting Date" />
+	                        <input class="end"type="text" name="end" value="Ending Date" />
+	                        <label class="check">
+	                            <input type="checkbox" class="nodatesyet"/>
+	                            I don't know the travel dates yet
+	                        </label>
+	                    </div><!--ITEM-->
+	                </fieldset>
+	            </div><!--CONT-->
+	            <div class="bottom">
+	                <input type="submit" class="btn-1 noclean" value="Create Trip" />
+	                <input type="button" onclick="$.fancybox.close(); return false;" class="btn-10 noclean" value="Cancel" />
+	            </div><!--BOTTOM-->
+	            <input type="hidden" name="trip" value="new" />
+	            <input type="hidden" name="listing" value="" />
+	        </form>
+		</div><!--CREATE_TRIP-->
     </div>
 </div>
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript" src="/js2/jquery.js"></script>
-<script type="text/javascript" src="/js2/index/listing-entertaiment.js"></script>
-<style type="text/css">#mapcanvas { width:246px;  height:175px; }</style>
 </body>
 </html>

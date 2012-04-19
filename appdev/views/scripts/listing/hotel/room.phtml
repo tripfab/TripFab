@@ -40,7 +40,7 @@ label { float: left; padding: 5px 0; margin: 0;}
 </style>
 <?php if($_POST): ?>
 <?php $sch = $this->data['sch'];$room = $this->data['room'];$beds = $this->data['beds'];$ammm = $this->data['ammm']; ?>
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     <div class="profile-items rooms">
     	<?php if($this->errors): ?>
         <div class="error">
@@ -79,6 +79,21 @@ label { float: left; padding: 5px 0; margin: 0;}
                     <img src="/images2/help/small-hot-rooms-description.png" /></a>
                 </div>
             </div><!-- closes item -->
+            
+            <div class="item last">
+            
+              	<div class="room_upload">
+              		<div class="holder">
+              			<div class="inner">
+              				<img src="/cache/50a3bdb9641fec9f8967ffe30fdca596_w114_h94_cp.jpg" width="68" height="68" alt="" />
+              			</div><!--INNER-->
+              		</div><!--HOLDER-->
+              		<input type="file" name="image" value="" />
+              	</div><!--INFO-->
+                  <h4>Room Picture</h4>
+                  <span>Upload a room picture</span>
+                  
+              </div><!-- closes item -->
             <div class="clear"></div>									
         </div><!-- closes item-wrppr -->
         <div class="item-wrppr">
@@ -108,7 +123,7 @@ label { float: left; padding: 5px 0; margin: 0;}
     					<?php endfor ?>
                     </select>
                 </div> <!-- closes selects -->
-                <h4>Maximum Accomodations</h4>
+                <h4>Maximum Accommodations</h4>
                 <span>Maximum number of people per room</span>
             </div><!-- closes item -->
             <div class="item">
@@ -236,7 +251,7 @@ label { float: left; padding: 5px 0; margin: 0;}
 <?php else: ?>
 <?php if($this->data): ?>
 <?php $sch = $this->data['sch'];$room = $this->data['room'];$beds = $this->data['beds'];$ammm = $this->data['ammm']; ?>
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     <div class="profile-items rooms">
     	<?php if($this->errors): ?>
         <div class="error">
@@ -265,7 +280,7 @@ label { float: left; padding: 5px 0; margin: 0;}
                     <img src="/images2/help/small-hot-rooms-name.png" /></a>
                 </div>
             </div><!-- closes item -->
-            <div class="item last">
+            <div class="item">
                 <textarea cols="30" placeholder="Write a nice description about this room" class="noclean" name="room[description]" rows="1"><?= $room->description ?></textarea>
                 <h4>Description</h4>
                 <span>Write a brief description about the room</span>
@@ -275,6 +290,23 @@ label { float: left; padding: 5px 0; margin: 0;}
                     <img src="/images2/help/small-hot-rooms-description.png" /></a>
                 </div>
             </div><!-- closes item -->
+            
+            <div class="item last">
+            
+              	<div class="room_upload">
+              		<div class="holder">
+              			<div class="inner">
+                        	<?php if(!empty($room->image)): ?>
+                            <?= $this->thumbnail('68',$room->image,'','1:1'); ?>
+                            <?php endif ?>
+              			</div><!--INNER-->
+              		</div><!--HOLDER-->
+              		<input type="file" name="image" value="" />
+              	</div><!--INFO-->
+                  <h4>Room Picture</h4>
+                  <span>Upload a room picture</span>
+                  
+              </div><!-- closes item -->
             <div class="clear"></div>									
         </div><!-- closes item-wrppr -->
         <div class="item-wrppr">
@@ -304,7 +336,7 @@ label { float: left; padding: 5px 0; margin: 0;}
     					<?php endfor ?>
                     </select>
                 </div> <!-- closes selects -->
-                <h4>Maximum Accomodations</h4>
+                <h4>Maximum Accommodations</h4>
                 <span>Maximum number of people per room</span>
             </div><!-- closes item -->
             <div class="item">
@@ -408,7 +440,7 @@ label { float: left; padding: 5px 0; margin: 0;}
 
 
 
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     <div class="profile-items rooms">
     	<?php if($this->errors): ?>
         <div class="error">
@@ -437,7 +469,7 @@ label { float: left; padding: 5px 0; margin: 0;}
                     <img src="/images2/help/small-hot-rooms-name.png" /></a>
                 </div>
             </div><!-- closes item -->
-            <div class="item last">
+            <div class="item">
                 <textarea placeholder="Write a nice description about this room" cols="30" name="room[description]" rows="1"></textarea>
                 <h4>Description</h4>
                 <span>Write a brief description about the room</span>
@@ -446,6 +478,17 @@ label { float: left; padding: 5px 0; margin: 0;}
                     <a href="/images2/help/big-hot-rooms-description.png" class="tooltip3">
                     <img src="/images2/help/small-hot-rooms-description.png" /></a>
                 </div>
+            </div><!-- closes item -->
+            
+            <div class="item last">
+                <div class="room_upload">
+                    <div class="holder">
+                    	<div class="inner"></div><!--INNER-->
+                    </div><!--HOLDER-->
+                    <input type="file" name="image" value="" />
+                </div><!--INFO-->
+                <h4>Room Picture</h4>
+                <span>Upload a room picture</span>            
             </div><!-- closes item -->
             <div class="clear"></div>									
         </div><!-- closes item-wrppr -->
@@ -474,7 +517,7 @@ label { float: left; padding: 5px 0; margin: 0;}
     					<?php endfor ?>
                     </select>
                 </div> <!-- closes selects -->
-                <h4>Maximum Accomodations</h4>
+                <h4>Maximum Accommodations</h4>
                 <span>Maximum number of people per room</span>
             </div><!-- closes item -->
             <div class="item">

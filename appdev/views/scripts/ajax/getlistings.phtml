@@ -15,6 +15,27 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
 <h3>There are <strong><?= $this->listing_count ?> <?= $this->categ ?> in <?= $this->country->title ?></strong></h3>
 <?php endif ?>
 <div class="results-wrapper">
+<?php if(count($this->listings) > 0): ?>
+<?php if(!isset($_COOKIE['tooltipHelpSearch'])): ?>
+<div class="firstime_tip">
+	<img class="arrow" src="https://developer.tripfab.com/images6/arrow-24.png" alt="">
+	<div class="cont">
+		<img src="https://developer.tripfab.com/images6/stamp.png" width="75" height="75" alt="" />
+		<p><strong>Planning a Trip?</strong>
+			Ey! If you’re planning a trip you can create you own customize trip, add things to do there and book it when you’re ready to travel.
+		</p>
+	</div><!--CONT-->
+	<div class="bot">
+		<form action="post" id="tooltipHelpSearch">
+			<fieldset>
+				<label><input checked="checked" type="checkbox" name="" value="" />Don’t show again</label>
+				<input type="submit" value="Okay" class="btn-1" />
+			</fieldset>
+		</form>
+	</div><!--BOT-->
+</div><!--FIRSTIME_TIP-->
+<?php endif ?>
+<?php endif ?>
 <div class="loading"><div class="load">Loading...</div></div>
 <?php if(count($this->listings) > 0): ?>
 <?php foreach($this->listings as $i => $list): ?>	
@@ -24,6 +45,8 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
 		<div class="img-wrapper">
 			<?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
 			<a href="#" class="been">Been there</a>
+            <?php else: ?>
+            <a href="/login" class="been not">Been there</a>
 			<?php endif ?>
 			<a class="img" href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
 			<?= $this->thumbnail(array('width'=>'225', 'height'=>'167'), $list->image, '','225:167') ?>
@@ -51,3 +74,4 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
 <div class="clear"></div>
 <?php endif ?>
 </div><!-- closes results-wrapper -->
+<div class="loading2"></div>

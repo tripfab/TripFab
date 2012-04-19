@@ -73,12 +73,14 @@ $(function(){
 });
 
 $(function(){
-    $('.listing-gallery .listing-ttl .been').live('click', function(){
-        $(this).parent().find('.dd-2').toggleClass('show'); 
+    $('.addToTripBtn').live('click', function(){
+        $('.addTrip').removeClass('show');
+        $form = $(this).next('form');
+        $('.addTrip', $form).toggleClass('show');
         return false;
     });
 	
-    $('.dd-2 select').live('change', function(){
+    $('.addTrip select').live('change', function(){
         if($(this).val() == 'new'){
             $form = $(this).parents('form');
             $listing = $('input[name=listing]', $form).val();
@@ -138,14 +140,14 @@ $(function(){
                 if(response.type == 'success'){
                     $.fancybox.close();
                     $('input, select').removeAttr('disabled');
-                    $('.dd-2').removeClass('show');
+                    $('.addTrip').removeClass('show');
                     showAlert(response.message);
                 } else if(response.type == 'newtrip'){
                     $.fancybox.close();
                     $('input, select').removeAttr('disabled');
-                    $('.dd-2').removeClass('show');
+                    $('.addTrip').removeClass('show');
                     showAlert(response.message);
-                    $('.dd-2 select').append('<option value="'+response.tripid+'">'+response.triptitle+'</option>');
+                    $('.addTrip select').append('<option value="'+response.tripid+'">'+response.triptitle+'</option>');
                 } else {
                     $.fancybox.close();
                     $('input, select').removeAttr('disabled');
@@ -161,12 +163,11 @@ $(function(){
         return false;
     });
 	
-    $('.addtotrip .btn-4').live('click', function(){
-        $(this).parents('.dd-2').removeClass('show');
-        $('.addtotrip input[type=text]').addClass('hidden');
+    $('.addtotrip .btn-10').live('click', function(){
+        $(this).parents('.addTrip').removeClass('show');
         $('.addtotrip select option:first').attr('selected','selected');
         return false;
-    }); 
+    });
 	
     $('.addtotrip').live('submit', function(){
         $form = $(this);
@@ -187,13 +188,13 @@ $(function(){
             success:function(response){
                 if(response.type == 'success'){
                     $('input, select').removeAttr('disabled');
-                    $('.dd-2').removeClass('show');
+                    $('.addTrip').removeClass('show');
                     showAlert(response.message);
                 } else if(response.type == 'newtrip'){
                     $('input, select').removeAttr('disabled');
-                    $('.dd-2').removeClass('show');
+                    $('.addTrip').removeClass('show');
                     showAlert(response.message);
-                    $('.dd-2 select').append('<option value="'+response.tripid+'">'+response.triptitle+'</option>');
+                    $('.addTrip select').append('<option value="'+response.tripid+'">'+response.triptitle+'</option>');
                 } else {
                     $('input, select').removeAttr('disabled');
                     showError(response.message);
@@ -379,6 +380,14 @@ $(document).ready(function() {
         
         return false;
     });
+    
+    $('#tooltipHelpList').submit(function(){
+        if($('input[type=checkbox]', this).is(':checked')) {
+            $.cookie('tooltipHelpList','yes',{expires:365,path:'/'});
+        }
+        $('.firstime_tip').fadeOut();
+        return false;        
+    });
 });
 
 function move(id,spd){
@@ -393,12 +402,3 @@ function move(id,spd){
         obj.style.top=(spd>0?0:max)+"px";
     }
 }
-
-$(function(){
-    $('.livechat').popupWindow({ 
-        height:500, 
-        width:400, 
-        top:50, 
-        left:50 
-    }); 
-})

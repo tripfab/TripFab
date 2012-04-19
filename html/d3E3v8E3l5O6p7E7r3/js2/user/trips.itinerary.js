@@ -168,10 +168,15 @@ $(document).ready(function() {
         drop: function( event, ui ) {
             $drop     = true;
             $fancybox = false;
-            var values 	  = ui.draggable.data('values');
+            var values 	  = ui.draggable.data('values');                
             var li    	  = $("<li></li>");
             var $dropable = $(this).find('ul');
             var daytimevalues = $(this).data('values');
+            
+            if($dropable.data('hashotel') == "1") {
+                showError('There is one hotel for this night');
+                return;
+            }
 			
             var $data = {
                 trip    : values.trip,
@@ -188,6 +193,9 @@ $(document).ready(function() {
                 data:$data,
                 type:'post',
                 success:function(response){
+                    
+                    ui.draggable.data('hashotel', 1);
+                    
                     li.data('values',values);
                     li.addClass(values.clas);
                     li.html(ui.draggable.html());
@@ -196,6 +204,8 @@ $(document).ready(function() {
                     $empty.remove();
                     li.appendTo($dropable);
                     //ui.draggable.remove();
+                    
+                    $dropable.data('hashotel', "1");
 					
                     $( ".itinerary-items .item ul li" ).draggable({
                         revert: 'invalid'
@@ -288,6 +298,7 @@ $(document).ready(function() {
     
     $('.itinerary-items .item.stay a.delete').live('click', function(){
         var $element = $(this).parents('li');
+        var $dropable = $element.parents('ul');
         var values   = $element.data('values');
         $.ajax({
             url:'/ajax/removefromtrip',
@@ -297,6 +308,7 @@ $(document).ready(function() {
                 trip    : values.trip
             },
             success:function(response){
+                $dropable.data('hashotel',"0");
                 $element.fadeOut('normal', function(){
                     $element.remove();
                 });
@@ -337,4 +349,12 @@ $(document).ready(function() {
         start:1,
         wrap:'both'
     });	
+    
+    $('#tooltipHelpItn').submit(function(){
+        if($('input[type=checkbox]', this).is(':checked')) {
+            $.cookie('tooltipHelpItn','yes',{expires:365});
+        }
+        $('.firstime_tip').fadeOut();
+        return false;
+    });
 });

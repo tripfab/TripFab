@@ -16,6 +16,9 @@ class WS_Uploader_Service_Files {
      * @return boolean TRUE on success
      */
     public function save($path) {
+        if(file_exists($path)) 
+            unlink($path);
+        
         if(!move_uploaded_file($_FILES['qqfile']['tmp_name'], $path)){
             return false;
         }

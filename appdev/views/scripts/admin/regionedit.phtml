@@ -2,7 +2,11 @@
 <html xmlns='http://www.w3.org/1999/xhtml'>
 	<head>
 		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-	<title>vendor messages</title>
+        <?php if(!empty($this->place->title)): ?>
+		<title><?= $this->place->title ?> - Admin | Tripfab.com</title>
+        <?php else: ?>
+		<title>Untitled Region - Admin | Tripfab.com</title>
+        <?php endif ?>
         <link type="text/css" rel="stylesheet" href="/css5/reset.css" />
         <link type="text/css" rel="stylesheet" href="/css5/all.css" />
 		<script type="text/javascript" src="/js2/jquery.js"></script>

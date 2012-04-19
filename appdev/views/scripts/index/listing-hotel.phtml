@@ -3,7 +3,7 @@
 <head>
 	<meta content="noindex,nofollow" name="robots" />
 	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-	<title>Tripfab.com</title>
+    <title><?= $this->listing->title ?>, <?= $this->city->title ?>, <?= $this->country->title ?> | Tripfab.com</title>
 	<link type="text/css" rel="stylesheet" href="/css6/reset.css" />
 	<link type="text/css" rel="stylesheet" href="/css6/common.css" />
 	<link type="text/css" rel="stylesheet" href="/css6/section1.css" />
@@ -63,8 +63,9 @@
 									'class2' => 'one'
 							)) ?>
 							
+                            <?php if(!isset($_COOKIE['tooltipHelpList'])): ?>
 							<div class="firstime_tip">
-								<img class="arrow" src="https://developer.tripfab.com/images6/arrow-24.png" class="arrow" alt="">
+								<img class="arrow" src="https://developer.tripfab.com/images6/arrow-24.png" alt="">
 								<div class="cont">
 									<img src="https://developer.tripfab.com/images6/stamp.png" width="75" height="75" alt="" />
 									<p><strong>Planning a Trip?</strong>
@@ -72,14 +73,15 @@
 									</p>
 								</div><!--CONT-->
 								<div class="bot">
-									<form action="post">
+									<form action="post" id="tooltipHelpList">
 										<fieldset>
-											<label><input type="checkbox" name="" value="" />Don’t show again</label>
+											<label><input checked="checked" type="checkbox" name="" value="" />Don’t show again</label>
 											<input type="submit" value="Okay" class="btn-1" />
 										</fieldset>
 									</form>
 								</div><!--BOT-->
 							</div><!--FIRSTIME_TIP-->
+                            <?php endif ?>
 							
                             <div class="carousel">
                                 <p><span></span>Photos & Video</p>
@@ -87,14 +89,13 @@
                                 <div class="imgs">
                                 	<ul>
                                     <?php for($i=0;$i<=count($this->pictures);$i=$i+6): ?>
-                                            <?php for($j=$i;($j<($i+6)) and ($j<count($this->pictures));$j++): ?>
-                                            <?php $pic = $this->pictures[$j] ?>
-                                            <li>
-                                                <a rel="group1" title="<?= $pic->location ?>" class="lbc" href="#grande<?= $j ?>" data-tip="#small<?= $j ?>">
-                                                <?= $this->thumbnail(65,$pic->url,'','1:1') ?><span class="arrow"></span></a>
-                                            </li>
-                                            <?php endfor ?>
-                                        
+										<?php for($j=$i;($j<($i+6)) and ($j<count($this->pictures));$j++): ?>
+                                        <?php $pic = $this->pictures[$j] ?>
+                                        <li>
+                                            <a rel="group1" title="<?= $pic->location ?>" class="lbc" href="#grande<?= $j ?>" data-tip="#small<?= $j ?>">
+                                            <?= $this->thumbnail(65,$pic->url,'','1:1') ?><span class="arrow"></span></a>
+                                        </li>
+                                        <?php endfor ?>
                                     <?php endfor ?>
                                     </ul>	
                                 </div><!--IMGS-->
@@ -105,6 +106,7 @@
                                         <a href="#grande<?= $j ?>" class="lbc">
                                         <?= $this->thumbnail(array('width'=>391,'height'=>254),$pic->url,'','391:254') ?>
                                         <span><?= $pic->location ?></span></a>
+                                        <a href="#grande<?= $j ?>" class="view lbc"><em></em>See Full Size</a>
                                     </div>
                                     <?php endforeach ?>
                                 </div><!--BIGIMAGES-->
@@ -124,108 +126,95 @@
                                 <div class="description" id="description">
                                     <div class="info">
                                         <ul>
-                                            <li><span class="cat"></span><strong>Category</strong> Beach Resort</li>
-                                            <li><span class="ck_in"></span><strong>Check In</strong> :00 pm</li>
-                                            <li><span class="ck_out"></span><strong>Check Out</strong> :00 am</li>
+                                			<?php if(!empty($this->listing->checkin) and $this->listing->checkin != '00:00:00'): ?>
+                                            <li><span class="ck_in"></span><strong>Check In</strong> 
+											<?= date('g:i a', strtotime($this->listing->checkin)) ?></li>
+                                            <?php endif ?>
+                                			<?php if(!empty($this->listing->checkout) and $this->listing->checkout != '00:00:00'): ?>
+                                            <li><span class="ck_out"></span><strong>Check Out</strong> 
+											<?= date('g:i a', strtotime($this->listing->checkout)) ?></li>
+                                            <?php endif ?>
                                         </ul>
                                     </div><!--INFO-->
-                                    <h4><span class="hotel"></span>Hotel Punta Islita</h4>
-                                    <p>Is learning how to surf on your to do list? Take the opportunity to pre-book your Oahu basic surf lesson. Learn surf techniques, safety rules and surf break etiquette under the guidance of certified lifeguards and surf instructors. With over an hour and a half of water time you will have the chance to try it all.
-                                    </p>
-                                    <p>With its white sand beaches, Big Bay is a surfers' paradise and is home to many local and international surfing competitions. All you need today is your swimming costume, a towel, hat, sunblock and don't forget your camera.</p>
-                                    
+                                    <h4><span class="hotel"></span><?= $this->listing->title ?></h4>
+                                    <?php if(!empty($this->overview->about)): ?>
+                                    <p><?= nl2br($this->overview->about) ?></p>
+                                    <?php endif; if(!empty($this->oveview->expect)): ?>
                                     <h5>What to Expect</h5>
-                                    <p>Want to learn how to surf? Where could be better than Sydney, the heart of Australia's surfing culture. For a great, fun-filled introduction to surfing, take this full-day tour to a beach just 45 minutes south of Sydney, where you'll learn all the basics of board surfing from your fully qualified surf instructor.
-                                    </p>
-                                    
+                                    <p><?= nl2br($this->overview->expect) ?></p>
+                                    <?php endif; if(!empty($this->overview->love)): ?>
                                     <h5>Things you'll love</h5>
-                                    <p>A team of expert instructors will cover basic aspects of surfing, from ocean safety and surf etiquette to paddling, pop-ups and wave-riding techniques. But perfection isn't necessary – follow the motto "the best surfer in the water is the one having the most fun," and you'll have a wonderful time, even if you don't master the sport in 90 minutes. Surf instructors are certified in CPR, first aid and lifesaving.</p>
-                                    
+                                    <p><?= nl2br($this->overview->expect) ?></p>
+                                    <?php endif ?>
+									<?php $ok = true; $i=0; $limit = count($this->details) ?>
+                                    <?php $ok1 = true; $ok3 = true; ?>
+                                    <?php while($i<$limit) { 
+                                            if($this->details[$i]->type == 1) {$ok = false; $ok1 = false; }
+                                            if($this->details[$i]->type == 3) {$ok = false; $ok3 = false; }
+                                            $i++; } ?>
+                                    <?php if(!$ok1 or (count($this->listing_amenities) > 0)): ?>
                                     <div class="amenities">
                                         <h4><span class="icon"></span>Amenities</h4>
                                         <ul>
-                                            <li>One or two-hour surf lesson with a qualified instructor</li>
-                                            <li>Rashguard shirt (rental)</li>
-                                            <li>Surfboard equipment (rental)</li>
-                                            <li>Rubberized fins (rental)</li>
-                                            <li>Optional water shoes (rental)</li>
-                                            <li>Hotel pickup and drop-off for private and semi-private lesson participants staying in Waikiki hotels.</li>
-                                            <li>Stand up paddle lesson participants requesting hotel pickup and drop-off will be charged an additional \$10 per person on the day of lesson.</li>
+                                            <?php foreach($this->listing_amenities  as $amm): ?>
+                                            <li><?= $this->def_amenities[$amm]->name ?></li>
+                                            <?php endforeach ?>
+                                            <?php foreach($this->details as $detail): ?>
+                                            <?php if($detail->type == 1): ?>
+                                            <li><?= stripslashes($detail->text) ?></li>
+                                            <?php endif ?>
+                                            <?php endforeach ?>
                                         </ul>
                                     </div><!--AMENITIES-->
-                                    
+                                    <?php endif ?>
+                                    <?php if(!$ok3): ?>
                                     <div class="policies">
                                         <h5>Policies</h5>
                                         <ul>
-                                            <li>Confirmation will be received at time of booking.</li>
-                                            <li>Children must be able to swim one lap unassisted across a 25-yard pool to partake in the surflessons.</li>
-                                            <li>All students must have parent sign a parental consent form.</li>
-                                            <li>Surfing while pregnant is highly discouraged.</li>
-                                            <li>Bring sunscreen, sweatshirt, swimsuit, towel, water, a light snack, hair ties and any other items you might need while at the beach.</li>
-                                            <li>Kids must be between the ages of 5 and 11.</li>
+											<?php foreach($this->details as $detail): ?>
+                                            <?php if($detail->type == 3): ?>
+                                            <li><?= stripslashes($detail->text) ?></li>
+                                            <?php endif ?>
+                                            <?php endforeach ?>
                                         </ul>
                                     </div><!--POLICIES-->
-                                    
-                                    <div class="tips">
-                                        <h4><span class="icon"></span>Tips & Recommendations</h4>
-                                        <ul>
-                                            <li>Make sure you are always on time for all pick ups.</li>
-                                            <li>While in San Jose avoid going too far away from your hotel and ask hotel staff for directions of where to go.</li>
-                                            <li>Do not go too far away from your your traveling group on your transfer stops.</li>
-                                            <li>Always wear sun screen, the sun is quite hot there.</li>
-                                            <li>Carry a little cash with you, some places give discounts if you pay cash.</li>
-                                            <li>Do not leave your items unnatended in any of the locations, specially at the beach.</li>
-                                            <li>If you need assistance at any time during your trip, ask your guide.</li>
-                                            <li>If you have any food allergies or specific food requirements make sure you inform the tour operator</li>
-                                        </ul>
-                                    </div><!--TIPS-->
-                                    
-                                    
+                                    <?php endif ?>
                                 </div><!--DESCRIPTION-->
                                 <div class="room_types" id="room_types">
+                                	<?php foreach($this->rooms as $room): ?>
                                     <div class="single">
-                                        <h4>Garden View Junior Suite</h4>
-                                        <img src="images6/lstng_htl_img1.png" width="" height="" alt="" />
+                                        <h4><?= $room->name ?></h4>
+                                        <?php if(!empty($room->image)): ?>
+                                        <?= $this->thumbnail(array('width'=>220,'height'=>136), $room->image, '','220:136'); ?>
+                                        <?php endif ?>
                                         <ul>
-                                            <li>Daily continental breakfast is included.</li>
-                                            <li>Garden View Junior Suites are 620 square feet and feature a kitchenette.</li>
-                                            <li>Maximum Occupancy: 2 (Rates are quoted for 2 people.)</li>
-                                            <li>Bed Type: 1 King</li>
-                                            <li>Children Policy: Children are permitted at no additional cost using existing bedding within maximum</li>
-                                            <li>Handicap-Accessible: No</li>
+											<?php if(!empty($room->description)): ?>
+                                            <li><?= $room->description ?></li>
+                                            <?php endif ?>
+                                            <?php if($room->nights > 0):?>
+                                            <li>Minimum Stay: <?= $room->nights ?> <?= (count($room->nights) > 1) ? "nights" : 'night' ?>   </li>
+                                            <?php endif ?>
+                                            <?php if($room->people > 0): ?>
+                                            <li>Maximum Accommodation: <?= $room->people ?> <?= (count($room->people) > 1) ? "people" : 'person' ?></li>
+                                            <?php endif ?>
+                                            <?php if($room->bedrooms > 0): ?>
+                                            <li>
+                                                <?= $room->bedrooms ?> <?= (count($room->bedrooms) > 1) ? "Bedrooms" : 'Bedroom' ?>  
+                                            </li>
+                                            <?php endif ?>
+                                            <?php foreach($this->beds[$room->id] as $bed): ?>
+                                            <li><?= $bed->quantity ?> <?= $bed->type ?> <?= (count($room->quantity) > 1) ? "Beds" : 'Bed' ?></li>
+                                            <?php endforeach ?>
+                                            <?php if(count($this->room_amenities[$room->id]) > 0): ?>
+                                            <li><b>Amenities</b>
+                                            <?php foreach($this->room_amenities[$room->id] as $amm): ?>
+                                            <br /><?= $this->amenities[$amm]->name ?>
+                                            <?php endforeach ?></li>
+                                            <?php endif ?>
                                         </ul>
                                         <div class="clear"></div>
                                     </div><!--SINGLE-->
-                                    
-                                    <div class="single">
-                                        <h4>Ocean Front Junior Suite</h4>
-                                        <img src="images6/lstng_htl_img3.png" width="" height="" alt="" />
-                                        <ul>
-                                            <li>Daily breakfast is included in the Jetsetter rate.</li>
-                                            <li>Junior Suites are 400 square feet and feature a separate sitting area and views of the garden and pool.</li>
-                                            <li>Maximum Occupancy: 4 (Rates quoted are for 2 people. There is a cost to add an additional guest to this room; see policies below.)</li>
-                                            <li>Bed Type: 1 King</li>
-                                            <li>Children Policy: Children 12 and under are permitted at noadditional cost using existing bedding.</li>
-                                            <li>Additional Adult Policy: Up to 2 adults 13 and over are permitted inaddition to the double occupancy for a fee of $30 per person, pernight, using a roll-away or Twin bed.</li>
-                                            <li>Handicap-Accessible: Limited quantities. After booking, please indicate any requests in the Special Instructions field on the page immediately following purchase; call 877-JSET-USA for any additional questions.</li>
-                                        </ul>
-                                        <div class="clear"></div>
-                                    </div><!--SINGLE-->
-                                    
-                                    <div class="single">
-                                        <h4>Garden View Junior Suite</h4>
-                                        <img src="images6/lstng_htl_img4.png" width="" height="" alt="" />
-                                        <ul>
-                                            <li>Daily continental breakfast is included.</li>
-                                            <li>Garden View Junior Suites are 620 square feet and feature a kitchenette.</li>
-                                            <li>Maximum Occupancy: 2 (Rates are quoted for 2 people.)</li>
-                                            <li>Bed Type: 1 King</li>
-                                            <li>Children Policy: Children are permitted at no additional cost using existing bedding within maximum</li>
-                                            <li>Handicap-Accessible: No</li>
-                                        </ul>
-                                        <div class="clear"></div>
-                                    </div><!--SINGLE-->
-                                    
+                                    <?php endforeach ?>
                                 </div><!--ROOM_TYPES-->
                                 
                                 <div id="directions">
@@ -236,22 +225,22 @@
                                     </div><!--DFLT-->
                                     <?php endif; if(!empty($this->getthere->car)): ?>
                                     <div class="dflt">
-                                        <h4><span class="plane"></span>By Car</h4>
+                                        <h4><span class="car"></span>By Car</h4>
                                         <p><?= stripslashes(nl2br($this->getthere->car)) ?></p>
                                     </div><!--DFLT-->
                                     <?php endif; if(!empty($this->getthere->bus)): ?>
                                     <div class="dflt">
-                                        <h4><span class="plane"></span>By Bus</h4>
+                                        <h4><span class="bus"></span>By Bus</h4>
                                         <p><?= stripslashes(nl2br($this->getthere->bus)) ?></p>
                                     </div><!--DFLT-->
                                     <?php endif; if(!empty($this->getthere->train)): ?>
                                     <div class="dflt">
-                                        <h4><span class="plane"></span>By Train</h4>
+                                        <h4><span class="train"></span>By Train</h4>
                                         <p><?= stripslashes(nl2br($this->getthere->train)) ?></p>
                                     </div><!--DFLT-->
                                     <?php endif; if(!empty($this->getthere->boat)): ?>
                                     <div class="dflt">
-                                        <h4><span class="plane"></span>By Boat</h4>
+                                        <h4><span class="boat"></span>By Boat</h4>
                                         <p><?= stripslashes(nl2br($this->getthere->boat)) ?></p>
                                     </div><!--DFLT-->
                                     <?php endif ?>
@@ -297,7 +286,6 @@
                                             <span class="help"><em></em>Helpful</span>
                                             <span class="n-help"><em></em>Not Helpful</span>
                                         </div><!--TEXT-->
-                                        
                                     </div><!--MESSAGE-->
                                     <div class="clear"></div>
                                 </div><!--SINGLE-->
@@ -317,64 +305,99 @@
                                 <?php // Agregue los reviews aqui ?>
                                 <?php endif ?>
                             </div><!--REVIEWS-->
-                            
                         </div><!--CONTAINER-->
-                        
                         <div class="sidebar">
-                            <!--<form action="">
-                                <fieldset>-->
-                                    <div class="cont">
-                                        <h5>Select the Dates <span class="i_date"></span></h5>
-                                        <div class="dates">
-                                            <div class="check">
-                                                <label>Check In</label>
-                                                <input id="checkIn" type="text" name="" value="" />
-                                            </div><!--CHECK-->
-                                            <div class="check">
-                                                <label>Check Out</label>
-                                                <input id="checkOut" type="text" name="" value="" />
-                                            </div><!--CHECK-->
-                                        </div><!--DATES-->
-                                        <h5><span class="i_room"></span>Select the Room Details</h5>
-                                        <div class="type">
-                                            <label for="room1"><input type="radio" id="room1" name="roomType" value="Deluxe Room" />Deluxe Room</label>
-                                            <label for="room2"><input type="radio" id="room2" name="roomType" value="Superior Premium Room" />Superior Premium Room
-                                            </label>
-                                            <label for="room3"><input type="radio" id="room3" name="roomType" value="Bedroom Villa" />3 Bedroom Villa	</label>
-                                        </div><!--TYPE-->
-                                        <div class="selects">
-                                            <label class="rooms">
-                                                Rooms
-                                                <select>
-                                                    <option>1</option>
-                                                </select>
-                                            </label>
-                                            <label>
-                                                Guests
-                                                <select>
-                                                    <option>1</option>
-                                                </select>
-                                            </label>
-                                            <div class="clear"></div>
-                                        </div><!--SELECTS-->
-                                        <div class="price">
-                                             <span><sup>$</sup>129 <sub>Subtotal</sub></span>
-                                        </div><!--PRICE-->
-                                        <a href="" class="btn-1">Book Now</a>
-                                        <div class="add">
-											<?= $this->partial('partials/addtomytrip.phtml', array(
-                                                    'user' => $this->user,
-                                                    'trips' => $this->trips,
-                                                    'listing' => $this->listing,
-													'class'	=> 'side',
-													'class2' => 'two'
-                                            )) ?>
-                                            <em>or you can</em>
-                                            <div class="clear"></div>
-                                        </div><!--ADD-->
-                                    </div><!--CONT-->
-                                <!--</fieldset>
-                            </form>-->
+                            <div class="cont">
+	                        	<form id="booking" method="post" action="/en-US/<?= $this->form_action ?>">
+                                    <h5>Select the Dates <span class="i_date"></span></h5>
+                                    <div class="dates">
+                                        <div class="check">
+                                            <label>Check In</label>
+                                            <input id="checkIn" type="text" name="checkin" value="" />
+                                        </div><!--CHECK-->
+                                        <div class="check">
+                                            <label>Check Out</label>
+                                            <input id="checkOut" type="text" name="checkout" value="" />
+                                        </div><!--CHECK-->
+                                    </div><!--DATES-->
+                                    <h5><span class="i_room"></span>Select the Room Details</h5>
+                                    <div class="type">
+                                        <?php foreach($this->options as $option): ?>
+	                                        <div class="details">
+                                        		<label for="room<?= $option->id ?>">
+													<input type="radio" id="room<?= $option->id ?>" name="option" value="<?= $option->id ?>" />
+													<?= $option->name ?> (<?= $this->rooms2[$option->id]['people'] ?>/room) 
+													$<?= $this->prices[$option->id]['price'] ?> 
+												</label>
+
+												<div class="room_tip">
+													<span class="rw"></span>
+													<h6><?= $option->name ?></h6>
+													<div class="text">
+														<p><?= $this->rooms2[$option->id]['description'] ?></p>
+													</div><!--TEXT-->
+													<ul>
+                                                    	<?php if($this->rooms2[$option->id]['nights'] > 0): ?>
+														<li><strong>Minimum Stay:</strong> 
+                                                        <?= count($this->rooms2[$option->id]['nights'] > 1) ? 
+														$this->rooms2[$option->id]['nights'] . ' nights' :
+														$this->rooms2[$option->id]['nights'] . ' night' ?></li>
+                                                        <?php endif ?>
+                                                        <?php if($this->rooms2[$option->id]['people'] > 0): ?>
+														<li><strong>Maximum Accommodation:</strong> 
+                                                        <?= count($this->rooms2[$option->id]['people'] > 1) ? 
+														$this->rooms2[$option->id]['people'] . ' people' :
+														$this->rooms2[$option->id]['people'] . ' person' ?></li>
+                                                        <?php endif ?>
+													</ul>
+												</div><!--ROOM_TIP-->												
+                                        	</div><!--DETAILS-->
+                                        <?php endforeach ?>
+                                    </div><!--TYPE-->
+                                    <div class="selects">
+                                        <label class="rooms">
+                                            Adults
+                                            <select class="ocp adt"  name="adults">
+                                                <?php for($i=1; $i<=12; $i++): ?>
+                                                <option value="<?= $i ?>"><?= $i ?></option>
+                                                <?php endfor ?>
+                                            </select>
+                                        </label>
+                                        <label>
+                                            Kids
+                                            <select class="ocp kid" name="kids">
+                                                <option value="0">0</option>
+                                                <?php for($i=1; $i<=12; $i++): ?>
+                                                <option value="<?= $i ?>"><?= $i ?></option>
+                                                <?php endfor ?>
+                                            </select>
+                                        </label>
+                                        <div class="clear"></div>
+                                    </div><!--SELECTS-->
+                                    <div class="price">
+                                         <div>
+                                         	<span><sup>$</sup>
+                                         	<abbr id="sumaryPrice"><?= $this->listing->price ?></abbr> 
+                                         	<sub>Subtotal</sub></span>
+                                         </div>
+                                    </div><!--PRICE-->
+                                    <input type="submit" value="Book Now!" class="btn-1 noclean" />
+                                    <?php foreach($this->form_fields as $name => $value): ?>
+                                    <input type="hidden" name="<?= $name ?>" value="<?= $value ?>" />
+                                    <?php endforeach ?>
+                                </form>
+                                <div class="add">
+                                    <?= $this->partial('partials/addtomytrip.phtml', array(
+                                            'user' => $this->user,
+                                            'trips' => $this->trips,
+                                            'listing' => $this->listing,
+                                            'class'	=> 'side',
+                                            'class2' => 'two'
+                                    )) ?>
+                                    <em>or you can</em>
+                                    <div class="clear"></div>
+                                </div><!--ADD-->
+                            </div><!--CONT-->
                         </div><!--SIDEBAR-->
                         <div class="clear"></div>
                     </div><!--CONT-->
@@ -502,610 +525,6 @@
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript" src="/js2/jquery.popupWindow.js"></script>
 <script type="text/javascript" src="/js2/index/listing-hotel.js"></script>
-<script type="text/javascript">
-/*!
- * jCarousel - Riding carousels with jQuery
- *   http://sorgalla.com/jcarousel/
- *
- * Copyright (c) 2006 Jan Sorgalla (http://sorgalla.com)
- * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
- * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
- *
- * Built on top of the jQuery library
- *   http://jquery.com
- *
- * Inspired by the "Carousel Component" by Bill Scott
- *   http://billwscott.com/carousel/
- */
-
-(function(g){var q={vertical:!1,rtl:!1,start:1,offset:1,size:null,scroll:3,visible:null,animation:"normal",easing:"swing",auto:0,wrap:null,initCallback:null,setupCallback:null,reloadCallback:null,itemLoadCallback:null,itemFirstInCallback:null,itemFirstOutCallback:null,itemLastInCallback:null,itemLastOutCallback:null,itemVisibleInCallback:null,itemVisibleOutCallback:null,animationStepCallback:null,buttonNextHTML:"<div></div>",buttonPrevHTML:"<div></div>",buttonNextEvent:"click",buttonPrevEvent:"click", buttonNextCallback:null,buttonPrevCallback:null,itemFallbackDimension:null},m=!1;g(window).bind("load.jcarousel",function(){m=!0});g.jcarousel=function(a,c){this.options=g.extend({},q,c||{});this.autoStopped=this.locked=!1;this.buttonPrevState=this.buttonNextState=this.buttonPrev=this.buttonNext=this.list=this.clip=this.container=null;if(!c||c.rtl===void 0)this.options.rtl=(g(a).attr("dir")||g("html").attr("dir")||"").toLowerCase()=="rtl";this.wh=!this.options.vertical?"width":"height";this.lt=!this.options.vertical? this.options.rtl?"right":"left":"top";for(var b="",d=a.className.split(" "),f=0;f<d.length;f++)if(d[f].indexOf("jcarousel-skin")!=-1){g(a).removeClass(d[f]);b=d[f];break}a.nodeName.toUpperCase()=="UL"||a.nodeName.toUpperCase()=="OL"?(this.list=g(a),this.clip=this.list.parents(".jcarousel-clip"),this.container=this.list.parents(".jcarousel-container")):(this.container=g(a),this.list=this.container.find("ul,ol").eq(0),this.clip=this.container.find(".jcarousel-clip"));if(this.clip.size()===0)this.clip= this.list.wrap("<div></div>").parent();if(this.container.size()===0)this.container=this.clip.wrap("<div></div>").parent();b!==""&&this.container.parent()[0].className.indexOf("jcarousel-skin")==-1&&this.container.wrap('<div class=" '+b+'"></div>');this.buttonPrev=g(".jcarousel-prev",this.container);if(this.buttonPrev.size()===0&&this.options.buttonPrevHTML!==null)this.buttonPrev=g(this.options.buttonPrevHTML).appendTo(this.container);this.buttonPrev.addClass(this.className("jcarousel-prev"));this.buttonNext= g(".jcarousel-next",this.container);if(this.buttonNext.size()===0&&this.options.buttonNextHTML!==null)this.buttonNext=g(this.options.buttonNextHTML).appendTo(this.container);this.buttonNext.addClass(this.className("jcarousel-next"));this.clip.addClass(this.className("jcarousel-clip")).css({position:"relative"});this.list.addClass(this.className("jcarousel-list")).css({overflow:"hidden",position:"relative",top:0,margin:0,padding:0}).css(this.options.rtl?"right":"left",0);this.container.addClass(this.className("jcarousel-container")).css({position:"relative"}); !this.options.vertical&&this.options.rtl&&this.container.addClass("jcarousel-direction-rtl").attr("dir","rtl");var j=this.options.visible!==null?Math.ceil(this.clipping()/this.options.visible):null,b=this.list.children("li"),e=this;if(b.size()>0){var h=0,i=this.options.offset;b.each(function(){e.format(this,i++);h+=e.dimension(this,j)});this.list.css(this.wh,h+100+"px");if(!c||c.size===void 0)this.options.size=b.size()}this.container.css("display","block");this.buttonNext.css("display","block");this.buttonPrev.css("display", "block");this.funcNext=function(){e.next()};this.funcPrev=function(){e.prev()};this.funcResize=function(){e.resizeTimer&&clearTimeout(e.resizeTimer);e.resizeTimer=setTimeout(function(){e.reload()},100)};this.options.initCallback!==null&&this.options.initCallback(this,"init");!m&&g.browser.safari?(this.buttons(!1,!1),g(window).bind("load.jcarousel",function(){e.setup()})):this.setup()};var f=g.jcarousel;f.fn=f.prototype={jcarousel:"0.2.8"};f.fn.extend=f.extend=g.extend;f.fn.extend({setup:function(){this.prevLast= this.prevFirst=this.last=this.first=null;this.animating=!1;this.tail=this.resizeTimer=this.timer=null;this.inTail=!1;if(!this.locked){this.list.css(this.lt,this.pos(this.options.offset)+"px");var a=this.pos(this.options.start,!0);this.prevFirst=this.prevLast=null;this.animate(a,!1);g(window).unbind("resize.jcarousel",this.funcResize).bind("resize.jcarousel",this.funcResize);this.options.setupCallback!==null&&this.options.setupCallback(this)}},reset:function(){this.list.empty();this.list.css(this.lt, "0px");this.list.css(this.wh,"10px");this.options.initCallback!==null&&this.options.initCallback(this,"reset");this.setup()},reload:function(){this.tail!==null&&this.inTail&&this.list.css(this.lt,f.intval(this.list.css(this.lt))+this.tail);this.tail=null;this.inTail=!1;this.options.reloadCallback!==null&&this.options.reloadCallback(this);if(this.options.visible!==null){var a=this,c=Math.ceil(this.clipping()/this.options.visible),b=0,d=0;this.list.children("li").each(function(f){b+=a.dimension(this, c);f+1<a.first&&(d=b)});this.list.css(this.wh,b+"px");this.list.css(this.lt,-d+"px")}this.scroll(this.first,!1)},lock:function(){this.locked=!0;this.buttons()},unlock:function(){this.locked=!1;this.buttons()},size:function(a){if(a!==void 0)this.options.size=a,this.locked||this.buttons();return this.options.size},has:function(a,c){if(c===void 0||!c)c=a;if(this.options.size!==null&&c>this.options.size)c=this.options.size;for(var b=a;b<=c;b++){var d=this.get(b);if(!d.length||d.hasClass("jcarousel-item-placeholder"))return!1}return!0}, get:function(a){return g(">.jcarousel-item-"+a,this.list)},add:function(a,c){var b=this.get(a),d=0,p=g(c);if(b.length===0)for(var j,e=f.intval(a),b=this.create(a);;){if(j=this.get(--e),e<=0||j.length){e<=0?this.list.prepend(b):j.after(b);break}}else d=this.dimension(b);p.get(0).nodeName.toUpperCase()=="LI"?(b.replaceWith(p),b=p):b.empty().append(c);this.format(b.removeClass(this.className("jcarousel-item-placeholder")),a);p=this.options.visible!==null?Math.ceil(this.clipping()/this.options.visible): null;d=this.dimension(b,p)-d;a>0&&a<this.first&&this.list.css(this.lt,f.intval(this.list.css(this.lt))-d+"px");this.list.css(this.wh,f.intval(this.list.css(this.wh))+d+"px");return b},remove:function(a){var c=this.get(a);if(c.length&&!(a>=this.first&&a<=this.last)){var b=this.dimension(c);a<this.first&&this.list.css(this.lt,f.intval(this.list.css(this.lt))+b+"px");c.remove();this.list.css(this.wh,f.intval(this.list.css(this.wh))-b+"px")}},next:function(){this.tail!==null&&!this.inTail?this.scrollTail(!1): this.scroll((this.options.wrap=="both"||this.options.wrap=="last")&&this.options.size!==null&&this.last==this.options.size?1:this.first+this.options.scroll)},prev:function(){this.tail!==null&&this.inTail?this.scrollTail(!0):this.scroll((this.options.wrap=="both"||this.options.wrap=="first")&&this.options.size!==null&&this.first==1?this.options.size:this.first-this.options.scroll)},scrollTail:function(a){if(!this.locked&&!this.animating&&this.tail){this.pauseAuto();var c=f.intval(this.list.css(this.lt)), c=!a?c-this.tail:c+this.tail;this.inTail=!a;this.prevFirst=this.first;this.prevLast=this.last;this.animate(c)}},scroll:function(a,c){!this.locked&&!this.animating&&(this.pauseAuto(),this.animate(this.pos(a),c))},pos:function(a,c){var b=f.intval(this.list.css(this.lt));if(this.locked||this.animating)return b;this.options.wrap!="circular"&&(a=a<1?1:this.options.size&&a>this.options.size?this.options.size:a);for(var d=this.first>a,g=this.options.wrap!="circular"&&this.first<=1?1:this.first,j=d?this.get(g): this.get(this.last),e=d?g:g-1,h=null,i=0,k=!1,l=0;d?--e>=a:++e<a;){h=this.get(e);k=!h.length;if(h.length===0&&(h=this.create(e).addClass(this.className("jcarousel-item-placeholder")),j[d?"before":"after"](h),this.first!==null&&this.options.wrap=="circular"&&this.options.size!==null&&(e<=0||e>this.options.size)))j=this.get(this.index(e)),j.length&&(h=this.add(e,j.clone(!0)));j=h;l=this.dimension(h);k&&(i+=l);if(this.first!==null&&(this.options.wrap=="circular"||e>=1&&(this.options.size===null||e<= this.options.size)))b=d?b+l:b-l}for(var g=this.clipping(),m=[],o=0,n=0,j=this.get(a-1),e=a;++o;){h=this.get(e);k=!h.length;if(h.length===0){h=this.create(e).addClass(this.className("jcarousel-item-placeholder"));if(j.length===0)this.list.prepend(h);else j[d?"before":"after"](h);if(this.first!==null&&this.options.wrap=="circular"&&this.options.size!==null&&(e<=0||e>this.options.size))j=this.get(this.index(e)),j.length&&(h=this.add(e,j.clone(!0)))}j=h;l=this.dimension(h);if(l===0)throw Error("jCarousel: No width/height set for items. This will cause an infinite loop. Aborting..."); this.options.wrap!="circular"&&this.options.size!==null&&e>this.options.size?m.push(h):k&&(i+=l);n+=l;if(n>=g)break;e++}for(h=0;h<m.length;h++)m[h].remove();i>0&&(this.list.css(this.wh,this.dimension(this.list)+i+"px"),d&&(b-=i,this.list.css(this.lt,f.intval(this.list.css(this.lt))-i+"px")));i=a+o-1;if(this.options.wrap!="circular"&&this.options.size&&i>this.options.size)i=this.options.size;if(e>i){o=0;e=i;for(n=0;++o;){h=this.get(e--);if(!h.length)break;n+=this.dimension(h);if(n>=g)break}}e=i-o+ 1;this.options.wrap!="circular"&&e<1&&(e=1);if(this.inTail&&d)b+=this.tail,this.inTail=!1;this.tail=null;if(this.options.wrap!="circular"&&i==this.options.size&&i-o+1>=1&&(d=f.intval(this.get(i).css(!this.options.vertical?"marginRight":"marginBottom")),n-d>g))this.tail=n-g-d;if(c&&a===this.options.size&&this.tail)b-=this.tail,this.inTail=!0;for(;a-- >e;)b+=this.dimension(this.get(a));this.prevFirst=this.first;this.prevLast=this.last;this.first=e;this.last=i;return b},animate:function(a,c){if(!this.locked&& !this.animating){this.animating=!0;var b=this,d=function(){b.animating=!1;a===0&&b.list.css(b.lt,0);!b.autoStopped&&(b.options.wrap=="circular"||b.options.wrap=="both"||b.options.wrap=="last"||b.options.size===null||b.last<b.options.size||b.last==b.options.size&&b.tail!==null&&!b.inTail)&&b.startAuto();b.buttons();b.notify("onAfterAnimation");if(b.options.wrap=="circular"&&b.options.size!==null)for(var c=b.prevFirst;c<=b.prevLast;c++)c!==null&&!(c>=b.first&&c<=b.last)&&(c<1||c>b.options.size)&&b.remove(c)}; this.notify("onBeforeAnimation");if(!this.options.animation||c===!1)this.list.css(this.lt,a+"px"),d();else{var f=!this.options.vertical?this.options.rtl?{right:a}:{left:a}:{top:a},d={duration:this.options.animation,easing:this.options.easing,complete:d};if(g.isFunction(this.options.animationStepCallback))d.step=this.options.animationStepCallback;this.list.animate(f,d)}}},startAuto:function(a){if(a!==void 0)this.options.auto=a;if(this.options.auto===0)return this.stopAuto();if(this.timer===null){this.autoStopped= !1;var c=this;this.timer=window.setTimeout(function(){c.next()},this.options.auto*1E3)}},stopAuto:function(){this.pauseAuto();this.autoStopped=!0},pauseAuto:function(){if(this.timer!==null)window.clearTimeout(this.timer),this.timer=null},buttons:function(a,c){if(a==null&&(a=!this.locked&&this.options.size!==0&&(this.options.wrap&&this.options.wrap!="first"||this.options.size===null||this.last<this.options.size),!this.locked&&(!this.options.wrap||this.options.wrap=="first")&&this.options.size!==null&& this.last>=this.options.size))a=this.tail!==null&&!this.inTail;if(c==null&&(c=!this.locked&&this.options.size!==0&&(this.options.wrap&&this.options.wrap!="last"||this.first>1),!this.locked&&(!this.options.wrap||this.options.wrap=="last")&&this.options.size!==null&&this.first==1))c=this.tail!==null&&this.inTail;var b=this;this.buttonNext.size()>0?(this.buttonNext.unbind(this.options.buttonNextEvent+".jcarousel",this.funcNext),a&&this.buttonNext.bind(this.options.buttonNextEvent+".jcarousel",this.funcNext), this.buttonNext[a?"removeClass":"addClass"](this.className("jcarousel-next-disabled")).attr("disabled",a?!1:!0),this.options.buttonNextCallback!==null&&this.buttonNext.data("jcarouselstate")!=a&&this.buttonNext.each(function(){b.options.buttonNextCallback(b,this,a)}).data("jcarouselstate",a)):this.options.buttonNextCallback!==null&&this.buttonNextState!=a&&this.options.buttonNextCallback(b,null,a);this.buttonPrev.size()>0?(this.buttonPrev.unbind(this.options.buttonPrevEvent+".jcarousel",this.funcPrev), c&&this.buttonPrev.bind(this.options.buttonPrevEvent+".jcarousel",this.funcPrev),this.buttonPrev[c?"removeClass":"addClass"](this.className("jcarousel-prev-disabled")).attr("disabled",c?!1:!0),this.options.buttonPrevCallback!==null&&this.buttonPrev.data("jcarouselstate")!=c&&this.buttonPrev.each(function(){b.options.buttonPrevCallback(b,this,c)}).data("jcarouselstate",c)):this.options.buttonPrevCallback!==null&&this.buttonPrevState!=c&&this.options.buttonPrevCallback(b,null,c);this.buttonNextState= a;this.buttonPrevState=c},notify:function(a){var c=this.prevFirst===null?"init":this.prevFirst<this.first?"next":"prev";this.callback("itemLoadCallback",a,c);this.prevFirst!==this.first&&(this.callback("itemFirstInCallback",a,c,this.first),this.callback("itemFirstOutCallback",a,c,this.prevFirst));this.prevLast!==this.last&&(this.callback("itemLastInCallback",a,c,this.last),this.callback("itemLastOutCallback",a,c,this.prevLast));this.callback("itemVisibleInCallback",a,c,this.first,this.last,this.prevFirst, this.prevLast);this.callback("itemVisibleOutCallback",a,c,this.prevFirst,this.prevLast,this.first,this.last)},callback:function(a,c,b,d,f,j,e){if(!(this.options[a]==null||typeof this.options[a]!="object"&&c!="onAfterAnimation")){var h=typeof this.options[a]=="object"?this.options[a][c]:this.options[a];if(g.isFunction(h)){var i=this;if(d===void 0)h(i,b,c);else if(f===void 0)this.get(d).each(function(){h(i,this,d,b,c)});else for(var a=function(a){i.get(a).each(function(){h(i,this,a,b,c)})},k=d;k<=f;k++)k!== null&&!(k>=j&&k<=e)&&a(k)}}},create:function(a){return this.format("<li></li>",a)},format:function(a,c){for(var a=g(a),b=a.get(0).className.split(" "),d=0;d<b.length;d++)b[d].indexOf("jcarousel-")!=-1&&a.removeClass(b[d]);a.addClass(this.className("jcarousel-item")).addClass(this.className("jcarousel-item-"+c)).css({"float":this.options.rtl?"right":"left","list-style":"none"}).attr("jcarouselindex",c);return a},className:function(a){return a+" "+a+(!this.options.vertical?"-horizontal":"-vertical")}, dimension:function(a,c){var b=g(a);if(c==null)return!this.options.vertical?b.outerWidth(!0)||f.intval(this.options.itemFallbackDimension):b.outerHeight(!0)||f.intval(this.options.itemFallbackDimension);else{var d=!this.options.vertical?c-f.intval(b.css("marginLeft"))-f.intval(b.css("marginRight")):c-f.intval(b.css("marginTop"))-f.intval(b.css("marginBottom"));g(b).css(this.wh,d+"px");return this.dimension(b)}},clipping:function(){return!this.options.vertical?this.clip[0].offsetWidth-f.intval(this.clip.css("borderLeftWidth"))- f.intval(this.clip.css("borderRightWidth")):this.clip[0].offsetHeight-f.intval(this.clip.css("borderTopWidth"))-f.intval(this.clip.css("borderBottomWidth"))},index:function(a,c){if(c==null)c=this.options.size;return Math.round(((a-1)/c-Math.floor((a-1)/c))*c)+1}});f.extend({defaults:function(a){return g.extend(q,a||{})},intval:function(a){a=parseInt(a,10);return isNaN(a)?0:a},windowLoaded:function(){m=!0}});g.fn.jcarousel=function(a){if(typeof a=="string"){var c=g(this).data("jcarousel"),b=Array.prototype.slice.call(arguments, 1);return c[a].apply(c,b)}else return this.each(function(){var b=g(this).data("jcarousel");b?(a&&g.extend(b.options,a),b.reload()):g(this).data("jcarousel",new f(this,a))})}})(jQuery);
-
-</script>
-<script>
-		var shown = false;
-		
-		$(function(){
-			$('#lstng_htl .carousel ul li').hover(function(){
-				$('.bigImages .hover').hide();
-				$($('a',this).data('tip')).show();
-				$('.bigImages').fadeIn('fast');
-				shown=true;
-			}, function(){
-				shown=false;
-			});
-			
-			$('.bigImages').hover(function(){
-				shown=true;
-			}, function(){
-				shown=false;
-			});
-			
-			setInterval('hideTooltip()', 100);
-		});
-		
-		function hideTooltip() {
-			if(!shown) {
-				$('.bigImages').fadeOut('fast', function(){
-					$('.bigImages .hover').hide();
-				});
-			}
-		}
-	</script>
-<script type="text/javascript">
-
-    $(document).ready(function() {
-        var aboveHeight = $('#header').outerHeight();
-            $(window).scroll(function(){
-                if ($(window).scrollTop() > aboveHeight){
-                    $('#lstng_header').addClass('fixed').css('top','0');
-                    $('#wp_content').css('padding-top', '72px');
-                } 
-                else {
-                    $('#lstng_header').removeClass('fixed');
-                    $('#wp_content').css('padding-top', '0');
-                }
-            });
-        $(".imgs").jcarousel({
-        	scroll: 1
-        });
-        $('a.lbc').fancybox({
-            padding: 0,
-            overlayColor: '#FFF',
-            overlayOpacity: '0.7',
-            showCloseButton: 'false',
-            centerOnScroll: 'true',
-            titlePosition: 'inside'
-        });
-        $('#fancybox-title').addClass('tittle');
-        $('#fancybox-left-ico').addClass('lfarrow');
-        $('#fancybox-right-ico').addClass('rgarrow');
-        $('#checkIn, #checkOut, #end, #start').datepicker({
-            dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-            showOtherMonths: true
-        });
-        $('.main').click(function() {
-            $('.addTrip.one').toggleClass('show');
-            return false
-        });
-        $('.side').click(function() {
-            $('.addTrip.two').toggleClass('show');
-            return false
-        });
-        $('.addTrip select').live('change', function(){
-            if($(this).val() == 'new'){
-                //$(this).next('input').removeClass('hidden');
-                $form = $(this).parents('form');
-                $listing = $('input[name=listing]', $form).val();
-                $('#newtrip form input[name=listing]').val($listing);
-                $.fancybox({
-                    href:'#newtrip',
-                    padding:0,
-                    overlayColor:'#fff',
-                    centerOnScroll: true
-                });
-          
-            } else {
-                $(this).next('input').addClass('hidden');
-            }
-        });
-		$('a.like').hover(function() {
-			$('.help').toggleClass('show');
-			return false
-		});
-		$('a.not').hover(function() {
-			$('.n-help').toggleClass('show');
-			return false
-		});
-    });
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){
-    img_ready($('img.background'));
-});
-
-function img_ready($obj){
-    resizeImg($obj);
-    $(window).resize(function() {
-       resizeImg($obj);
-    });
-    $obj.fadeIn();
-}
-function resizeImg($bgImg) { 
-    var imgwidth  = 1400;
-    var imgheight = 223;
-    
-    var winwidth  = $(window).width();
-    var winheight = $(window).height();
-    
-    var winCenter = winwidth / 2;
-    var imgCenter = imgwidth / 2;
-    
-    var left = (winwidth > imgwidth) ? 0 : (winCenter - imgCenter);
-    
-    var width = (winwidth > imgwidth) ? winwidth : imgwidth;
-    
-    var height = (winwidth > imgwidth) ? ((imgheight * winwidth) / imgwidth) : height;
-    
-    var winCenter2 = imgheight / 2;
-    var imgCenter2 = height / 2;
-    
-    var top = (winwidth > imgwidth) ? (winCenter2 - imgCenter2) : 0;
-    
-    $bgImg.css('left',left);
-    $bgImg.css('width',width);
-    $bgImg.css('height',height);
-    $bgImg.css('top',top);
-}
-</script>
-<style type="text/css">
-#mapcanvas {
-	width:638px;
-	height:354px;}
-</style>
+<style type="text/css"> #mapcanvas {width:638px; height:354px;}</style>
 </body>
 </html>
-<?php /**
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns='http://www.w3.org/1999/xhtml'>
-<head>
-    <meta content="noindex,nofollow" name="robots" />
-    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->listing->title ?> - <?= $this->city->title ?>, <?= $this->country->title ?> | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/jquery-ui-1.8.16.custom.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/index/listing-activity.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css" />
-    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
-    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
-</head>
-<body>
-<div class="w1">
-	<?= $this->partial('partials/header.phtml', 
-	array('user'=>$this->user,'full'=>true)); ?>
-    <div class="w2">
-        <div class="main wrapper">
-            <div class="content-2">
-                <div class="box">
-                    <?= $this->partial('partials/gallery.phtml', 
-					array('user'=>$this->user, 'listing' => $this->listing, 'city' => $this->city, 
-						  'country' => $this->country,'pictures' => $this->pictures,'trips'=>$this->trips, 'edit'=>false)); ?>
-                    <?php // $this->partial('partials/tabs.phtml',  array('listing' => $this->listing, 'tabs' => $this->tabs, 'faqs' => $this->faqs, 'map' => true)); ?>
-                </div><!-- closes box -->
-                <div class="tabs-wrapper-2">
-                    <ul>
-                        <li><a href="#tabs-1">Overview</a></li>
-                        <li><a href="#tabs-2">Amenities</a></li>
-                        <li><a href="#tabs-3">Rooms</a></li>
-                        <li><a href="#tabs-4">FAQ's</a></li>
-                        <li><a href="#tabs-5">How to Get There</a></li>
-                    </ul>
-                    <div class="tab" id="tabs-1">
-                    	<?php if(!empty($this->overview->about) or
-									!empty($this->overview->about) or
-									!empty($this->overview->about)): ?>
-                        <div class="tab-ttl">About your stay</div>
-                        <div class="tab-content">
-                        	<?php if(!empty($this->overview->about)): ?>
-                        	<p><?= stripslashes(nl2br($this->overview->about)) ?></p>
-                            <?php endif; if(!empty($this->overview->expect)): ?>
-                            <h2>What to expect</h2>
-                            <p><?= stripslashes(nl2br($this->overview->expect)) ?></p>
-                            <?php endif; if(!empty($this->overview->love)): ?>
-                            <h2>Things you'll love</h2>
-                            <p><?= stripslashes(nl2br($this->overview->love)) ?></p>
-                            <?php endif ?>
-                        </div><!-- closes tab-content -->
-                        <?php else: ?>
-                        <div class="tab-content">
-                        	<p>No overview added</p>
-                        </div>
-                        <?php endif ?>
-                        <div class="message">
-                            <div>
-                                <p><strong>Check in</strong></p>
-                                <?php if(!empty($this->listing->checkin) and $this->listing->checkin != '00:00:00'): ?>
-                                <p><?= date('g:i A', strtotime($this->listing->checkin)) ?></p>
-                                <?php endif ?>
-                            </div>
-                            <div>
-                                <p><strong>Check out</strong></p>
-                                <?php if(!empty($this->listing->checkout) and $this->listing->checkout != '00:00:00'): ?>
-                                <p><?= date('g:i A', strtotime($this->listing->checkout)) ?></p>
-                                <?php endif ?>
-                            </div>
-                            <div>
-                                <p><strong>Room Types</strong></p>
-                                <?php if($this->rooms): ?>
-                                <p><?= count($this->rooms) ?></p>
-                                <?php endif ?>
-                            </div>
-                        </div><!-- closes message -->
-                    </div><!-- closes tab -->
-                    <div class="tab" id="tabs-2">
-                    	<?php $ok = true; $i=0; $limit = count($this->details) ?>
-                        <?php $ok1 = true; $ok3 = true; ?>
-                        <?php while($i<$limit) { 
-								if($this->details[$i]->type == 1) {$ok = false; $ok1 = false; }
-								if($this->details[$i]->type == 3) {$ok = false; $ok3 = false; }
-								$i++; } ?>
-						<?php if(!$ok or (count($this->listing_amenities) > 0)): ?>
-                        <div class="tab-ttl">
-                            Some details about the hotel
-                        </div><!-- closes tab-ttl -->
-                        <div class="tab-content">
-                        	<?PHP if(!$ok1 or (count($this->listing_amenities) > 0)): ?>
-                            <h2>Hotel Amenities</h2>
-                            <ul>
-                            	<?php foreach($this->listing_amenities  as $amm): ?>
-                                <li><?= $this->def_amenities[$amm]->name ?></li>
-                                <?php endforeach ?>
-                                <?php foreach($this->details as $detail): ?>
-                                <?php if($detail->type == 1): ?>
-                                <li><?= stripslashes($detail->text) ?></li>
-                                <?php endif ?>
-                                <?php endforeach ?>
-                            </ul>
-                            <?php endif; if(!$ok3): ?>
-                            <h2>Policies</h2>
-                            <ul>
-                                <?php foreach($this->details as $detail): ?>
-                                <?php if($detail->type == 3): ?>
-                                <li><?= stripslashes($detail->text) ?></li>
-                                <?php endif ?>
-                                <?php endforeach ?>
-                            </ul>
-                            <?php endif ?>
-                        </div><!-- closes tab-content -->
-                        <?php else: ?>
-                        <div class="tab-content">
-                        	<p>No amenities added</p>
-                        </div>
-                        <?php endif ?>
-                    </div><!-- closes tab -->
-                    <div class="tab" id="tabs-3">
-                    	<?php if(count($this->rooms) > 0): ?>
-                        <div class="tab-ttl">
-                            Our Room Types
-                        </div><!-- closes tab-ttl -->
-                        <div class="tab-content">
-                        	<?php foreach($this->rooms as $room): ?>
-                            <h2><?= $room->name ?></h2>
-                            <ul>
-                            	<?php if(!empty($room->description)): ?>
-                                <li><?= $room->description ?></li>
-                                <?php endif ?>
-                                <?php if($room->nights > 0):?>
-                                <li>Minimum Stay: <?= $room->nights ?> <?= (count($room->nights) > 1) ? "nights" : 'night' ?>   </li>
-                                <?php endif ?>
-                                <?php if($room->people > 0): ?>
-                                <li>Maximum Accomodation: <?= $room->people ?> <?= (count($room->people) > 1) ? "people" : 'person' ?></li>
-                                <?php endif ?>
-                                <?php if($room->bedrooms > 0): ?>
-                                <li>
-                                	<?= $room->bedrooms ?> <?= (count($room->bedrooms) > 1) ? "Bedrooms" : 'Bedroom' ?>  
-                                </li>
-                                <?php endif ?>
-                                <?php foreach($this->beds[$room->id] as $bed): ?>
-                                <li><?= $bed->quantity ?> <?= $bed->type ?> <?= (count($room->quantity) > 1) ? "Beds" : 'Bed' ?></li>
-                                <?php endforeach ?>
-                                <?php if(count($this->room_amenities[$room->id]) > 0): ?>
-                                <li><b>Amenities</b>
-                                <ul>
-                                <?php foreach($this->room_amenities[$room->id] as $amm): ?>
-                                <li><?= $this->amenities[$amm]->name ?></li>
-                                <?php endforeach ?>
-                                </ul></li>
-                                <?php endif ?>
-                            </ul>
-                            <?php endforeach ?>
-                        </div><!-- closes tab-content -->
-                        <?php else: ?>
-                        <div class="tab-content">
-                        	<p>No Room types added</p>
-                        </div>                        
-                        <?php endif ?>
-                    </div><!-- closes tab -->
-                    <div class="tab" id="tabs-4">
-                        <?php if(count($this->faqs) > 0): ?>
-                        <div class="tab-ttl">
-                            Frequently Asked Questions
-                        </div><!-- closes tab-ttl -->
-                        <div class="tab-content faqs">
-                            <ul>
-                            	<?php foreach($this->faqs as $faq): ?>
-                                <li>
-                                    <strong><?= stripslashes(nl2br($faq->question)) ?></strong><br />
-                                    <?= stripslashes(nl2br($faq->answer)) ?>
-                                </li>
-                                <?php endforeach ?>
-                            </ul>
-                        </div><!-- closes tab-content -->
-                        <?php else: ?>
-                        <div class="tab-content">
-                        	<p>No FAQS added</p>
-                        </div>
-                        <?php endif ?>
-                    </div><!-- closes tab -->
-                    <div class="tab" id="tabs-5">
-                        <?php if(!empty($this->getthere->plane) or
-									!empty($this->getthere->car) or
-									!empty($this->getthere->train) or
-									!is_null($this->listing->lat)): ?>
-                        <div class="tab-ttl">
-                            How to get there
-                        </div><!-- closes tab-ttl -->
-                        <div class="tab-content there">	
-                        	<?php if(!empty($this->getthere->plane)): ?>
-                            <h2>By plane</h2>
-                            <p><?= stripslashes(nl2br($this->getthere->plane)) ?></p>
-                            <?php endif; if(!empty($this->getthere->car)): ?>
-                            <h2>By car</h2>
-                            <p><?= stripslashes(nl2br($this->getthere->car)) ?></p>
-                            <?php endif; if(!empty($this->getthere->train)): ?>
-                            <h2>By train</h2>
-                            <p><?= stripslashes(nl2br($this->getthere->train)) ?></p>
-                            <?php endif; ?>
-                            <div id="mapcanvas"></div>
-                           
-                        </div><!-- closes tab-content -->
-                        <div class="message">
-                            <address>
-                                <p><strong>Detailed Address</strong></p>
-                                <p><?= $this->listing->address ?></p>
-                            </address>
-                        </div><!-- closes message -->
-                        <?php else: ?>
-                        <div class="tab-content">
-                        	<p>No directions added</p>
-                        </div>
-                        <?php endif ?>
-                    </div><!-- closes tab -->
-                </div><!-- closes tabs-wrapper -->	                
-                <div class="reviews-wrapper">
-                    <?= $this->partial('partials/reviews.phtml', 
-					array('reviews' => $this->reviews, 'questions' => $this->questions, 'answer_allow' => false,
-						  'user'=>$this->user, 'listing' => $this->listing->id)); ?>
-                </div><!-- closes reviews-wrapper -->
-            </div><!-- closes content-2 -->
-            
-            <div class="right-sidebar">               
-                <form id="booking" method="post" action="/en-US/<?= $this->form_action ?>">
-                    <div class="widget book">
-                        <div class="ttl">
-                            <span>From only</span>
-                            <?php if($this->listing->price > 0): ?>
-                            <strong><sup>$</sup><?= $this->listing->price ?><span>/ person</span></strong>
-                            <?php else: ?>
-                            <strong>Free</strong>
-                            <?php endif ?>
-                        </div><!-- closes ttl -->
-                        <ul>
-                            <li id="acordion">                            
-                                <a href=""><span>Select the date</span><img src="/images/arrow-46.png" alt="" class="arrow" />
-                                <strong id="checkinlabel"></strong></a>
-                                <div id="datepicker" class="datepicker"></div>
-                                <a href=""><span>Checkout</span><img src="/images/arrow-46.png" alt="" class="arrow" />
-                                <strong id="checkoutlabel"></strong></a>
-	                            <div id="datepicker-2" class="datepicker"></div>
-                                <a href=""><span>Occupation</span><img src="/images/arrow-46.png" alt="" class="arrow" /></a>
-                                <div class="occupation">
-                                	<div class="room-types">
-                                        <strong>Choose a room type</strong>
-                                        <ul>
-											<?php foreach($this->options as $option): ?>
-                                            <li>
-                                                <input id="sch<?= $option->id ?>" class="noclean" name="option" value="<?= $option->id ?>" type="radio" />
-                                                <label for="sch<?= $option->id ?>"><?= $option->name ?></label>
-                                                <span><strong>$<?= $this->prices[$option->id]['price'] ?></strong> / night
-                                                <strong>Max <?= $this->rooms2[$option->name]['people'] ?> people</strong> per room</span>
-                                            </li>
-                                            <?php endforeach ?>
-                                        </ul>
-                                    </div><!-- closes room-types -->
-                                    <p>
-                                        <label>Adults</label>
-                                        <select class="ocp adt"  name="adults">
-                                            <?php for($i=1; $i<=12; $i++): ?>
-                                            <option value="<?= $i ?>"><?= $i ?></option>
-                                            <?php endfor ?>
-                                        </select>
-                                    </p>
-                                    <p>
-                                        <label>Kids</label>
-                                        <select class="ocp kid" name="kids">
-                                            <option value="0">0</option>
-                                            <?php for($i=1; $i<=12; $i++): ?>
-                                            <option value="<?= $i ?>"><?= $i ?></option>
-                                            <?php endfor ?>
-                                        </select>
-                                    </p>
-                                    <div class="clear"></div>
-                                </div><!-- closes ocupation -->
-                            </li>
-                        </ul>
-                        <div class="summary">
-                            <span>Subtotal <strong id="Subtotal">$<?= $this->listing->price ?></strong></span>
-                            <input type="submit" value="Book Now!" class="btn-1 noclean" />
-                        </div><!-- closes summary -->
-                	</div><!-- closes widget -->
-                	<?php foreach($this->form_fields as $name => $value): ?>
-                    <input type="hidden" name="<?= $name ?>" value="<?= $value ?>" />
-                    <?php endforeach ?>
-                    <input type="hidden" name="checkin" id="inputCheckin" value="" />
-                    <input type="hidden" name="checkout" id="inputCheckout" value="" />
-                </form>
-                <div class="widget talk">
-                    <?= $this->partial('partials/talk.phtml', array('vendor'=>$this->vendor,'user' => $this->user)); ?>
-                </div><!-- closes widget -->
-            </div><!-- closes right-sidebar -->
-        </div><!-- closes main -->
-    </div><!-- closes w2 -->
-    <?= $this->partial('partials/footer.phtml'); ?>
-</div><!-- closes w1 -->
-<div id="citiesAutocompleteContainer"></div>
-<input type="hidden" value="<?= ($this->listing->lat) ? $this->listing->lat : 'none' ?>" name="listlat" />
-<input type="hidden" value="<?= ($this->listing->lng) ? $this->listing->lng : 'none' ?>" name="listlng" />
-<input type="hidden" value="<?= $this->listing->title ?>" name="listtitle" />
-<input type="hidden" value="<?php foreach($this->disabledDates as $d): ?><?= $d ?>,<?php endforeach ?>" name="diableddates" />
-
-<div class="hidden">
-	<div id="send_message">
-        <form action="" id="sendMessageForm">
-            <div class="lb-forgot">
-                <div class="ttl">Send a message <em>to</em> <?= $this->vendor->name ?></div>
-                <div class="intro_m">
-                	<p><strong>Questions or concerns about the activity?</strong>
-                		Please write a message and you’ll get an answer very soon.</p>
-                </div><!--INTRO-->
-                <div class="content">
-                    <textarea cols="30" name="message" rows="1"></textarea>
-                </div><!-- closes content -->
-                <div class="bottom">
-                    <input type="submit" class="btn-1" value="Send Message" />
-                    <span onclick="$.fancybox.close()" class="btn-10">Cancel</span>	
-                </div><!-- closes bottom -->
-            </div><!-- closes lb-forgot -->
-            <input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
-        </form>
-    </div>
-    <div id="live_chat">
-    	<img src="/images2/chat.png" />
-    </div>
-    <div id="start_call">
-    	<div id="dialpad" class="lb">
-            <div class="top">Dial your phone number</div><!--TOP-->
-            <div class="middle">
-                <p>We'll connect you with the vendor in few minutes. Directly.</p>
-                <div class="number-display">
-                    <a href="#" class="flag"><img src="/images2/flags/us.png" width="16" height="16" alt="" /></a>
-                    <div class="all_flags">
-                        <a href="#" class="up" onMouseover="move('container',10)" onMouseout="clearTimeout(move.to)"></a>
-                        <a href="#" class="down" onMouseover="move('container',-10)" onMouseout="clearTimeout(move.to)"></a>
-                        <div class="holder">
-                            <div id="container" style="position:absolute;width:282px;left:0;top:0">
-                                <p>ALL COUNTRIES</p>
-                                <?php foreach($this->countries as $c): ?>
-                                <a href="#" data-code="<?= $c->phone ?>"><img src="/images2/flags/<?= strtolower($c->code) ?>.png" width="16" height="16" alt="" />
-                                <?= $c->title ?> <strong>(+<?= $c->phone ?>)</strong></a>
-                                <?php endforeach ?> 
-                            </div><!--CONTAINER-->
-                        </div><!--HOLDER-->
-                    </div><!--ALL_FLAGS-->
-                    <input type="text" name="number" value="" />
-                    <input type="hidden" name="code" value="1" />
-                    <a href="" class="close"></a>
-                    <div class="clear"></div>
-                </div><!--NUMBER-DISPLAY-->
-                <div class="numbers">
-                    <a data-num="1" href="">1</a>
-                    <a data-num="2" href="">2<span>ABC</span></a>
-                    <a data-num="3" href="">3<span>DEF</span></a>
-                    <a data-num="4" href="">4<span>GHI</span></a>
-                    <a data-num="5" href="">5<span>JKL</span></a>
-                    <a data-num="6" href="">6<span>MNO</span></a>
-                    <a data-num="7" href="">7<span>PQRS</span></a>
-                    <a data-num="8" href="">8<span>TUV</span></a>
-                    <a data-num="9" href="">9<span>WXYZ</span></a>
-                    <a data-num="*" href="">*</a>
-                    <a data-num="0" href="">0</a>
-                    <a data-num="#" href="">#</a>
-                </div><!--NUMBERS-->
-                <div class="control">
-                    <input type="button" name="start" class="btn-1" value="Start Call" />
-                    <input type="button" name="Cancel"  class="cancel" value="Cancel" />
-                </div><!--CONTROL-->
-            </div><!--MIDDLE-->
-        </div><!--DIALPAD-->
-    </div>
-    <div id="newtrip">
-    	<div id="create_trip">
-			<form action="">
-                <div class="top">
-                    <h3>Create a New Trip</h3>
-                    <p>Complete the information below to start your next trip</p>
-                </div><!--TOP-->
-                <div class="cont">
-                    <fieldset>
-                        <div class="item">
-                            <label class="trip">Trip Name</label>
-                            <input type="text" name="title" value="" />
-                        </div><!--ITEM-->
-                        <div class="item">
-                            <label class="dates">Trip Dates</label>
-                            <input class="start" type="text" name="start" value="Starting Date" />
-                            <input class="end"type="text" name="end" value="Ending Date" />
-                            <label class="check">
-                                <input type="checkbox" class="nodatesyet"/>
-                                I don't know the travel dates yet
-                            </label>
-                        </div><!--ITEM-->
-                        <div class="item last">
-                                <input type="checkbox" checked="checked" />
-                                <p>I want to receive special offers from vendors near
-                                    of the places I'll visit in this trip</p>
-                        </div><!--ITEM-->
-                    </fieldset>
-                </div><!--CONT-->
-                <div class="bottom">
-                    <input type="submit" class="btn-1 noclean" value="Create Trip" />
-                    <input type="button" onclick="$.fancybox.close(); return false;" class="btn-10 noclean" value="Cancel" />
-                </div><!--BOTTOM-->
-                <input type="hidden" name="trip" value="new" />
-                <input type="hidden" name="listing" value="" />
-            </form>
-		</div><!--CREATE_TRIP-->
-    </div>
-</div>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript" src="/js2/jquery.js"></script>
-<script type="text/javascript" src="/js2/jquery.popupWindow.js"></script>
-<script type="text/javascript" src="/js2/index/listing-hotel.js"></script>
-<style type="text/css">
-.noprice {
-	float:right;
-	font-size:12px;
-	color:#898989;
-	line-height:15px;
-	text-align:center;
-	margin-top:10px;}
-	.noprice p {
-		font-size:12px;
-		line-height:15px;
-		display:inline;
-		float:none;}
-	.noprice a {
-		color:#60b5f7;
-		font-size:12px;
-		line-height:15px;
-		display:inline;
-		float:none;}
-</style>
-</body>
-</html>
-*/ ?>

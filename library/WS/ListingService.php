@@ -566,7 +566,7 @@ class WS_ListingService {
         return $lists;
     }
     
-    public function getListings2($place, $cat, $subcat, $sort, $stars, $pricemin = 0, $pricemax = 3000, $country = null)
+    public function getListings2($place, $cat, $subcat, $sort, $stars, $pricemin = 0, $pricemax = 3000, $country = null, $page = 1)
     {
         $args = func_get_args();
         $cacheId = "LS_getListings2_".md5(print_r($args, true));
@@ -577,10 +577,123 @@ class WS_ListingService {
             $select = $db->select();
             $select->from('listings');
             $select->where('listings.status = ?', 1);
-            if(!is_null($place))
-                $select->where('listings.city_id = ?', $place);
-            else
+            if(!is_null($place)) {
+                //$select->where('listings.city_id = ?', $place);
+                $r = 25 / 111;
+                $latmin = $place->lat - $r;
+                $latmax = $place->lat + $r;
+
+                $lngmin = $place->lng - $r;
+                $lngmax = $place->lng + $r; 
+                
+                $select->where("((listings.lat >= ?", $latmin);
+                $select->where("listings.lat <= ?", $latmax);
+                $select->where("listings.lng >= ?", $lngmin);
+                $select->where("listings.lng <= ?)", $lngmax);
+                
+                $select->orWhere('city_id = ?)', $place->id);
+            }
+            else {
                 $select->where('listings.country_id = ?', $country);
+            }
+            if($cat != 'all'){
+                $_cat = $this->getCategoryByIdf($cat);
+                $select->where('listings.main_type = ?', $_cat->id);}
+            if($subcat != 'all'){
+                $select->join('listing_listingtypes', 'listing_listingtypes.listing_id = listings.id' ,array('subcat' => 'listingtype_id'));
+                if(count($subcat) == 1) {
+                    $select->where('listing_listingtypes.listingtype_id = ?', reset($subcat));
+                } else {
+                    $i = 0;
+                    foreach($subcat as $sc) {
+                        if($i === 0) $select->where('(listing_listingtypes.listingtype_id = ?', $sc);
+                        elseif($i === (count($subcat) - 1)) $select->orWhere('listing_listingtypes.listingtype_id = ?)', $sc);
+                        else $select->orWhere('listing_listingtypes.listingtype_id = ?', $sc);
+                        $i++;}
+                }
+            }
+            //echo $select->assemble(); die;
+            if($sort != 'newest'){
+                switch($sort){
+                    case 'popular': $select->order('listings.views DESC'); break;
+                    case 'name'   : $select->order('listings.title ASC'); break;
+                    case 'free'   : $select->where('listings.price = ?',0); break;
+                    case 'rating' : $select->order('listings.loves DESC');break;
+                    case 'lowest' : $select->where('listings.price <> ?',0);
+                        $select->order('listings.price ASC'); break;
+                    case 'highest': $select->where('listings.price <> ?',0);
+                        $select->order('listings.price DESC'); break;
+                    default: break;
+                }}
+            if($stars != 'all'){
+                $_stars = (int) str_replace('-stars','',$stars);
+                if(is_int($_stars) && $_stars > 0 && $_stars < 6){
+                    $select->where('listings.rate = ?', $_stars);
+                }}
+
+           $select->joinLeft('vendors','listings.vendor_id = vendors.id',array('vendor_name'=>'name'));
+           
+           $select->join('places','listings.city_id = places.id', array(
+               'city'=>'title',
+               'cityidf'=>'identifier'
+           ));
+           $select->join(array('places2'=>'places'),'listings.country_id = places2.id', array(
+               'country'=>'title',
+               'countryidf'=>'identifier'
+           ));
+           //print $select->assemble(); //die;
+
+           $count = 15;
+           $offset = $count * ($page - 1);
+           $select->limit($count, $offset);
+
+           $select->where('listings.price >= ?', $pricemin);
+           $select->where('listings.price <= ?', $pricemax);
+           
+           $select->group('listings.id');
+           
+           //echo $select->assemble(); die;
+           
+           $listings = $db->fetchAll($select, array(), Zend_Db::FETCH_OBJ);
+           
+           if($this->use_cache)
+               $this->cache->save($listings, $cacheId, array(), 86400);
+       } else {
+           $listings = $this->cache->load($cacheId);
+       }
+       return $listings;
+    }
+    
+    public  function getListingsCount($place, $cat, $subcat, $sort, $stars, $pricemin = 0, $pricemax = 3000, $country = null, $page = 1)
+    {
+        $args = func_get_args();
+        $cacheId = "LS_getListings2_".md5(print_r($args, true));
+        
+        if(true){//$this->use_cache || !$this->cache->test($cacheId)) {
+            
+            $db = Zend_Db_Table::getDefaultAdapter();
+            $select = $db->select();
+            $select->from('listings');
+            $select->where('listings.status = ?', 1);
+            if(!is_null($place)) {
+                //$select->where('listings.city_id = ?', $place);
+                $r = 25 / 111;
+                $latmin = $place->lat - $r;
+                $latmax = $place->lat + $r;
+
+                $lngmin = $place->lng - $r;
+                $lngmax = $place->lng + $r; 
+                
+                $select->where("((listings.lat >= ?", $latmin);
+                $select->where("listings.lat <= ?", $latmax);
+                $select->where("listings.lng >= ?", $lngmin);
+                $select->where("listings.lng <= ?)", $lngmax);
+                
+                $select->orWhere('city_id = ?)', $place->id);
+            }
+            else {
+                $select->where('listings.country_id = ?', $country);
+            }
             if($cat != 'all'){
                 $_cat = $this->getCategoryByIdf($cat);
                 $select->where('listings.main_type = ?', $_cat->id);}
@@ -629,12 +742,15 @@ class WS_ListingService {
            //print $select->assemble(); //die;
 
            //$count = 9;
-           //$select->limit($count);
+           //$offset = $count * ($page - 1);
+           //$select->limit($count, $offset);
 
            $select->where('listings.price >= ?', $pricemin);
            $select->where('listings.price <= ?', $pricemax);
            
            $select->group('listings.id');
+           
+           //echo $select->assemble(); die;
            
            $listings = $db->fetchAll($select, array(), Zend_Db::FETCH_OBJ);
            
@@ -643,9 +759,10 @@ class WS_ListingService {
        } else {
            $listings = $this->cache->load($cacheId);
        }
-       return $listings;
+       return count($listings);
     }
-    
+
+
     public function getListingByIdf($idf, $city, $country)
     {
         $args = func_get_args();
@@ -1009,6 +1126,34 @@ class WS_ListingService {
                 $amenity->amenity_id = $_amenity;
                 $amenity->save();
             }
+            
+            if(isset($_FILES['image']['name']) and !empty($_FILES['image']['name'])) {
+                $public = APPLICATION_PATH.'/../html';
+                $public2 = APPLICATION_PATH.'/../html/d3E3v8E3l5O6p7E7r3';
+                $folder = '/images/rooms/'.$listing->id.'/';
+                $image = $room->id.substr(md5($room->id),3,10).'.jpg';
+                $targetFile = $public.$folder.$image;
+                $targetFile2 = $public2.$folder.$image;
+
+                if(file_exists($targetFile)) 
+                    unlink($targetFile);
+
+                if(!is_dir($public.$folder))
+                    mkdir($public.$folder);
+
+                if(move_uploaded_file($_FILES['image']['tmp_name'], $targetFile) === true) {
+                    if(file_exists($targetFile2)) 
+                        unlink($targetFile2);
+
+                    if(!is_dir($public2.$folder))
+                        mkdir($public2.$folder);
+
+                    exec("cp {$targetFile} {$targetFile2}");
+
+                    $room->image = $folder.$image;
+                    $room->save();
+                }
+            }
         } else {
             $sch = $this->schedules_db->fetchNew();
             $sch->listing_id = $listing->id;
@@ -1039,7 +1184,9 @@ class WS_ListingService {
         $select = $rooms->select();
         $select->where('id = ?', $data['roomid']);
         $room  = $rooms->fetchRow($select);
+        
         $room->setFromArray($data['room']);
+        
         $room->updated = date('Y-m-d H:i:s');
         $room->save();
         
@@ -1073,6 +1220,34 @@ class WS_ListingService {
             $amenity->room_id = $room->id;
             $amenity->amenity_id = $_amenity;
             $amenity->save();
+        }
+        
+        if(isset($_FILES['image']['name']) and !empty($_FILES['image']['name'])) {
+            $public = APPLICATION_PATH.'/../html';
+            $public2 = APPLICATION_PATH.'/../html/d3E3v8E3l5O6p7E7r3';
+            $folder = '/images/rooms/'.$listing.'/';
+            $image = $room->id.substr(md5($room->id),3,10).'.jpg';
+            $targetFile = $public.$folder.$image;
+            $targetFile2 = $public2.$folder.$image;
+            
+            if(file_exists($targetFile)) 
+                unlink($targetFile);
+            
+            if(!is_dir($public.$folder))
+                mkdir($public.$folder);
+            
+            if(move_uploaded_file($_FILES['image']['tmp_name'], $targetFile) === true) {
+                if(file_exists($targetFile2)) 
+                    unlink($targetFile2);
+            
+                if(!is_dir($public2.$folder))
+                    mkdir($public2.$folder);
+                
+                exec("cp {$targetFile} {$targetFile2}");
+                
+                $room->image = $folder.$image;
+                $room->save();
+            }
         }
     }
     
@@ -1526,15 +1701,49 @@ class WS_ListingService {
         if(!is_null($city)){
             $db = Zend_Db_Table::getDefaultAdapter();
             $cats = $this->getMainCategories();
+            
+            $r = 25 / 111;
+            $latmin = $city->lat - $r;
+            $latmax = $city->lat + $r;
+
+            $lngmin = $city->lng - $r;
+            $lngmax = $city->lng + $r;            
+            
             $counter = array();
             foreach($cats as $cat){
                 if($cat->name == 'All'){
-                    $sql = "Select count(*) as c from listings where city_id = {$city} and status = 1";
-                    $count = $db->fetchRow($sql);
+                    $select = $db->select();
+                    $select->from('listings', array('c'=>'count(*)'));
+
+                    $select->where("((lat >= ?", $latmin);
+                    $select->where("lat <= ?", $latmax);
+                    $select->where("lng >= ?", $lngmin);
+                    $select->where("lng <= ?)", $lngmax);
+                    
+                    $select->orWhere('city_id = ?)', $city->id);
+                    
+                    $select->where('status = 1');
+                    
+                    $count = $db->fetchRow($select);
                     $counter[$cat->id] = $count['c'];
+                    
+                    //var_dump($select->assemble()); die;
                 } else {
-                    $sql = "Select count(*) as c from listings where city_id = {$city} and main_type = {$cat->id} and status = 1";
-                    $count = $db->fetchRow($sql);
+                    $select = $db->select();
+                    $select->from('listings', array('c'=>'count(*)'));
+
+                    $select->where("((lat >= ?", $latmin);
+                    $select->where("lat <= ?", $latmax);
+                    $select->where("lng >= ?", $lngmin);
+                    $select->where("lng <= ?)", $lngmax);
+                    
+                    $select->orWhere('city_id = ?)', $city->id);
+                    
+                    $select->where('main_type = ?', $cat->id);
+                    
+                    $select->where('status = 1');
+
+                    $count = $db->fetchRow($select);
                     $counter[$cat->id] = $count['c'];
                 }
             }
@@ -1956,6 +2165,7 @@ class WS_ListingService {
         $cart->listing_max   = $listing->max;
         $cart->listing_price = $listing->price;
         $cart->id            = $listing->id;
+        $cart->policy        = $listing->policy;
         
         return $cart;
     }
@@ -1969,7 +2179,9 @@ class WS_ListingService {
     public function getDefaultAmenities($assoc = false)
     {
         $db = new Zend_Db_Table('amenities');
-        $result = $db->fetchAll();
+        $select = $db->select();
+        $select->order('name ASC');
+        $result = $db->fetchAll($select);
         if(!$assoc)
             return $result;
         
@@ -1983,7 +2195,9 @@ class WS_ListingService {
     public function getDefaultGenAmenities($assoc = false)
     {
         $db = new Zend_Db_Table('gen_amenities');
-        $result = $db->fetchAll();
+        $select = $db->select();
+        $select->order('name ASC');
+        $result = $db->fetchAll($select);
         if(!$assoc)
             return $result;
         
@@ -2045,10 +2259,17 @@ class WS_ListingService {
         
         if(!$assoc) {
             $rooms = $db->fetchAll($select, array(), 5);
-        } else {
-            $rooms = $db->fetchAssoc($select);
+            return $rooms;
         }
-        return $rooms;
+        
+        $rooms = $db->fetchAll($select);
+        $rooms2 = array();
+        foreach($rooms as $room) {
+            $rooms2[$room['schedule_id']] = $room;
+        }
+        
+        return $rooms2;
+            
     }
     
     public function getBeds($room)

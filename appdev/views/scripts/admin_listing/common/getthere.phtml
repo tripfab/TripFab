@@ -114,7 +114,7 @@
 					 empty($_POST['boat'])): ?>
 			<div class="direction">
                 <div class="cont">
-                    <p>There is no any direction yet</p>
+                    <p>There are no directions yet</p>
                 </div><!--CONT-->
                 <a href="#new_direction" class="add_direc">Add a New Direction</a>
             </div><!--DIRECTION-->
@@ -126,31 +126,31 @@
                         <strong>By Plane</strong>
                         <a href="" class="delete">Remove</a>
                     </div><!--TOP-->
-                    <textarea placeholder="Nice description about to how to get to your place by plane" cols="" class="noclean limitcc" rel="1000" name="plane" rows="1"><?= stripslashes($_POST['plane']) ?></textarea>
+                    <textarea placeholder="Nice description about to how to get to your place by plane" cols="" class="noclean limitcc" rel="1000" name="plane" rows="1"><?= stripslashes(trim($_POST['plane'])) ?></textarea>
                     <?php endif; if(!empty($_POST['car'])): ?>
                     <div class="top">
                         <strong>By Car</strong>
                         <a href="" class="delete">Remove</a>
                     </div><!--TOP-->
-                    <textarea placeholder="Nice description about to how to get to your place by car" cols="" class="noclean limitcc" rel="1000" name="car" rows="1"><?= stripslashes($_POST['car']) ?></textarea>
+                    <textarea placeholder="Nice description about to how to get to your place by car" cols="" class="noclean limitcc" rel="1000" name="car" rows="1"><?= stripslashes(trim($_POST['car'])) ?></textarea>
                     <?php endif; if(!empty($_POST['train'])): ?>
                     <div class="top">
                         <strong>By Train</strong>
                         <a href="" class="delete">Remove</a>
                     </div><!--TOP-->
-                    <textarea placeholder="Nice description about to how to get to your place by train" cols="" class="noclean limitcc" rel="1000" name="train" rows="1"><?= stripslashes($_POST['train']) ?></textarea>
+                    <textarea placeholder="Nice description about to how to get to your place by train" cols="" class="noclean limitcc" rel="1000" name="train" rows="1"><?= stripslashes(trim($_POST['train'])) ?></textarea>
                     <?php endif; if(!empty($_POST['boat'])): ?>
                     <div class="top">
                         <strong>By Boat</strong>
                         <a href="" class="delete">Remove</a>
                     </div><!--TOP-->
-                    <textarea placeholder="Nice description about to how to get to your place by boat" cols="" class="noclean limitcc" rel="1000" name="boat" rows="1"><?= stripslashes($_POST['boat']) ?></textarea>
+                    <textarea placeholder="Nice description about to how to get to your place by boat" cols="" class="noclean limitcc" rel="1000" name="boat" rows="1"><?= stripslashes(trim($_POST['boat'])) ?></textarea>
                     <?php endif; if(!empty($_POST['bus'])): ?>
                     <div class="top">
-                        <strong>By Boat</strong>
+                        <strong>By Bus</strong>
                         <a href="" class="delete">Remove</a>
                     </div><!--TOP-->
-                    <textarea placeholder="Nice description about to how to get to your place by bus" cols="" class="noclean limitcc" rel="1000" name="boat" rows="1"><?= stripslashes($_POST['bus']) ?></textarea>
+                    <textarea placeholder="Nice description about to how to get to your place by bus" cols="" class="noclean limitcc" rel="1000" name="bus" rows="1"><?= stripslashes(trim($_POST['bus'])) ?></textarea>
                     <?php endif; ?>
                 </div><!--CONT-->
                 <a href="#new_direction" class="add_direc">Add a New Direction</a>
@@ -265,31 +265,31 @@
                         <strong>By Plane</strong>
                         <a href="" class="delete">Remove</a>
                     </div><!--TOP-->
-                    <textarea placeholder="Nice description about to how to get to your place by plane" cols="" class="noclean limitcc" rel="1000" name="plane" rows="1"><?= stripslashes($this->location->plane) ?></textarea>
+                    <textarea placeholder="Nice description about to how to get to your place by plane" cols="" class="noclean limitcc" rel="1000" name="plane" rows="1"><?= stripslashes(trim($this->location->plane)) ?></textarea>
                     <?php endif; if(!empty($this->location->car)): ?>
                     <div class="top">
                         <strong>By Car</strong>
                         <a href="" class="delete">Remove</a>
                     </div><!--TOP-->
-                    <textarea placeholder="Nice description about to how to get to your place by car" cols="" class="noclean limitcc" rel="1000" name="car" rows="1"><?= stripslashes($this->location->car) ?></textarea>
+                    <textarea placeholder="Nice description about to how to get to your place by car" cols="" class="noclean limitcc" rel="1000" name="car" rows="1"><?= stripslashes(trim($this->location->car)) ?></textarea>
                     <?php endif; if(!empty($this->location->train)): ?>
                     <div class="top">
                         <strong>By Train</strong>
                         <a href="" class="delete">Remove</a>
                     </div><!--TOP-->
-                    <textarea placeholder="Nice description about to how to get to your place by train" cols="" class="noclean limitcc" rel="1000" name="train" rows="1"><?= stripslashes($this->location->train) ?></textarea>
+                    <textarea placeholder="Nice description about to how to get to your place by train" cols="" class="noclean limitcc" rel="1000" name="train" rows="1"><?= stripslashes(trim($this->location->train)) ?></textarea>
                     <?php endif; if(!empty($this->location->boat)): ?>
                     <div class="top">
                         <strong>By Boat</strong>
                         <a href="" class="delete">Remove</a>
                     </div><!--TOP-->
-                    <textarea placeholder="Nice description about to how to get to your place by boat" cols="" class="noclean limitcc" rel="1000" name="boat" rows="1"><?= stripslashes($this->location->boat) ?></textarea>
+                    <textarea placeholder="Nice description about to how to get to your place by boat" cols="" class="noclean limitcc" rel="1000" name="boat" rows="1"><?= stripslashes(trim($this->location->boat)) ?></textarea>
                     <?php endif; if(!empty($this->location->bus)): ?>
                     <div class="top">
                         <strong>By Bus</strong>
                         <a href="" class="delete">Remove</a>
                     </div><!--TOP-->
-                    <textarea placeholder="Nice description about to how to get to your place by bus" cols="" class="noclean limitcc" rel="1000" name="boat" rows="1"><?= stripslashes($this->location->bus) ?></textarea>
+                    <textarea placeholder="Nice description about to how to get to your place by bus" cols="" class="noclean limitcc" rel="1000" name="bus" rows="1"><?= stripslashes(trim($this->location->bus)) ?></textarea>
                     <?php endif; ?>
                 </div><!--CONT-->
                 <a href="#new_direction" class="add_direc">Add a New Direction</a>

@@ -59,6 +59,37 @@ class CrontasksController extends Zend_Controller_Action
 
         echo '------------------------ <br><br>';
     }
+	
+	public function assignimageAction()
+	{
+		$_listings = new Zend_Db_Table('listings');
+		$select = $_listings->select();
+		$select->where('main_type = ?', 2);
+		$select->orWhere('main_type = ?', 7);
+		
+		$listings = $_listings->fetchAll($select);
+		
+		$photos = new Zend_Db_Table('listing_pictures');
+		
+		foreach($listings as $list) {
+			if(empty($list->image)) {
+				$select = $photos->select();
+				$select->where('listing_id = ?', $list->id);
+				$photo = $photos->fetchRow($select);
+				if(!is_null($photo)) {
+					$list->image = $photo->url;
+					$list->save();
+					
+					echo $list->image.'<br>';
+				} else {
+					$list->status = 0;
+					$list->save();
+				}
+			}
+		}
+		
+		die;
+	}
     
     /**
     public function createimagesAction()
