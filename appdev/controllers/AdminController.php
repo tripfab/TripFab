@@ -2589,7 +2589,7 @@ class AdminController extends Zend_Controller_Action {
                         ->joinleft(array('country' => 'places'), 'country.parent_id = region.id', array('countryTotal' => 'COUNT( DISTINCT country.id)'))
                         ->joinleft(array('city' => 'places'), 'city.parent_id = country.id', array('cityTotal' => 'COUNT(DISTINCT city.id)'))
                         ->joinleft('listings', 'city.id=listings.city_id', array('activityTotal' => 'COUNT(IF(listings.main_type=6, 1, NULL))', 'entertainmentTotal' => 'COUNT(IF(listings.main_type=7, 1, NULL))', 'touristTotal' => 'COUNT(IF(listings.main_type=4, 1, NULL))', 'restaurantTotal' => 'COUNT(IF(listings.main_type=2, 1, NULL))', 'hotelsTotal' => 'COUNT(IF(listings.main_type=5, 1, NULL))'))
-                        ->where('region.parent_id IS NULL and region.type_id=1')
+                        ->where('region.type_id=1')
                         ->group('region.id');
                 if ($this->view->searchText) {
 					$identifierCompatible = str_replace(' ', '_',$this->view->searchText);
