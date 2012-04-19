@@ -11,9 +11,8 @@
   		<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
   		<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
   		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]--> 
-		<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js"></script>
     	<script type="text/javascript" src="/js2/admin/traveller-view.js"></script>
-			<script>
+			<script type="text/javascript">
 				$(document).ready(function() {
 					$('a.lbc').fancybox({
 						padding: 0,
@@ -34,7 +33,7 @@
 			<div class="w3_admin">
 				<div class="sub_menu">
 					<h2>Create. <span>New Trip.</span></h2>
-					
+					<a class="btn-10" href="" target="_blank">Trip Preview</a>						
 				</div><!--SUB_MENU-->
             </div><!--W3-->
 				
@@ -44,12 +43,12 @@
 							<ul>
 								<li><a href="<?php echo $this->url(array('page'=>1))?>">General Information</a></li>
 								<li><a href="<?php echo $this->url(array('page'=>2))?>">Trip Facts</a></li>
+								<li><a href="<?php echo $this->url(array('page'=>3))?>">Photos</a></li>
 								<li class="current"><a href="<?php echo $this->url(array('page'=>4))?>">Trip Details</a></li>
 								<li><a href="<?php echo $this->url(array('page'=>5))?>">Itinerary</a></li>
 							</ul>
 						</div>
 						<!-- closes left -->
-                            <form name="f1" method="post" enctype="multipart/form-data">
 						<div class="right">
 							<?php if($this->successMessage): ?>
 							<script type="text/javascript">
@@ -70,8 +69,10 @@
                             
                             
                             <form name="f1" method="post" enctype="multipart/form-data">
-							<div class="lstng-details">
-								<h3 class="title">Inclusions <a href="/admin/trips/" class="back">Back to Trips</a></h3>
+							<div class="profile-items">
+								<div class="item-wrppr">
+									<h3>Inclusions <a href="/admin/trips" class="back">Back to Trips</a></h3>									
+								</div>
 								<div class="lstng-detail faq">
 									<table width="100%" border="0">
 										<tr>

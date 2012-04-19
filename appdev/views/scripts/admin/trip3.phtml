@@ -4,16 +4,15 @@
 		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
 		<title><?= $this->trip->title ?> - Admin | Tripfab.com</title>
         <link type="text/css" rel="stylesheet" href="/css5/reset.css" />
-        <link type="text/css" rel="stylesheet" href="/css5/all.css" />
+        <link type="text/css" rel="stylesheet" href="/css2/all.css" />
 		<script type="text/javascript" src="/js2/jquery.js"></script>
 		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
   		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css" />
   		<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
   		<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
-  		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
-		<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js"></script>
+  		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]--> 
     	<script type="text/javascript" src="/js2/admin/traveller-view.js"></script>
-			<script>
+			<script type="text/javascript">
 				$(document).ready(function() {
 					$('a.lbc').fancybox({
 						padding: 0,
@@ -21,8 +20,8 @@
 						overlayOpacity: '0.7',
 						showCloseButton: 'false',
 					});
-					
             		$("#report_tabs").tabs();
+					
 					panel(<?php echo $this->user->id?>, 1, 'partner');
 				});
 			</script>
@@ -34,8 +33,7 @@
 			<div class="w3_admin">
 				<div class="sub_menu">
 					<h2>Create. <span>New Trip.</span></h2>
-					<a href="#" class="back">Back to Trips</a>
-					
+					<a class="btn-10" href="" target="_blank">Trip Preview</a>						
 				</div><!--SUB_MENU-->
             </div><!--W3-->
 				
@@ -45,345 +43,124 @@
 							<ul>
 								<li><a href="<?php echo $this->url(array('page'=>1))?>">General Information</a></li>
 								<li><a href="<?php echo $this->url(array('page'=>2))?>">Trip Facts</a></li>
-								<li class="current" ><a href="<?php echo $this->url(array('page'=>4))?>">Trip Details</a></li>
+								<li class="current"><a href="<?php echo $this->url(array('page'=>3))?>">Photos</a></li>
+								<li><a href="<?php echo $this->url(array('page'=>4))?>">Trip Details</a></li>
 								<li><a href="<?php echo $this->url(array('page'=>5))?>">Itinerary</a></li>
 							</ul>
 						</div>
 						<!-- closes left -->
 						<div class="right">
-							<div class="lstng-details">
-								<h3 class="title">Inclusions</h3>
-								<div class="lstng-detail faq">
-									<table width="100%" border="0">
-										<tr>
-											<td width="150">
-												<strong>Inclusions</strong>
-												<span>Write the inclusions<br /> around the whole trip</span>
-											</td>
-											<td width="590">
-												<textarea cols="" rows="" class="noclean"></textarea>
-												<div class="clear"></div>
-												<textarea cols="" rows="" class="noclean"></textarea>
-												<div class="clear"></div>
-												<textarea cols="" rows="" class="noclean"></textarea>
-												<div class="clear"></div>
-												<a href="" class="remove">remove</a>
-												<input type="text" class="noclean" value="Write a inclusion here" />
-												<div class="clear"></div>
-												<a href="" class="remove">remove</a>
-												<input type="text" class="noclean" value="Write a inclusion here" />
-												<div class="clear"></div>
-												<a href="" class="link-5">Add a new inclusion</a>
-											</td>
-										</tr>
-									</table>
-								</div>
-								<!-- closes lstng-detail -->
-								<div class="lstng-detail faq last">								
-									<table width="100%" border="0">
-										<tr>
-											<td width="150">
-												<strong>Exclusions</strong>
-												<span>Write the exclusions<br /> around the whole trip</span>
-											</td>
-											<td width="590">
-												<textarea cols="" rows="" class="noclean"></textarea>
-												<div class="clear"></div>
-												<textarea cols="" rows="" class="noclean"></textarea>
-												<div class="clear"></div>
-												<textarea cols="" rows="" class="noclean"></textarea>
-												<div class="clear"></div>
-												<a href="" class="remove">remove</a>
-												<input type="text" class="noclean" value="Write a inclusion here" />
-												<div class="clear"></div>
-												<a href="" class="remove">remove</a>
-												<input type="text" class="noclean" value="Write a inclusion here" />
-												<div class="clear"></div>
-												<a href="" class="link-5">Add a new inclusion</a>
-											</td>
-										</tr>
-									</table>
-								</div>
-								<!-- closes lstng-detail -->
-							</div>
-							<!-- closes lstng-details -->
-							<div class="foot">
-								<input type="submit" class="btn-1" value="Save Changes" />
-								<a href="">Deactivate Listing</a>
-							</div>
-							<!-- closes foot -->
+							<?php if($this->successMessage): ?>
+							<script type="text/javascript">
+                                showAlert("Your changes have been saved");
+                            </script>
+                            <?php endif ?>	
+            
+                            <?php if(count($this->errors)) : ?>
+                            <center>
+                            <div style="border:1px solid red; margin-left:22px; margin-right:22px; margin-bottom:10px;">
+                                <?php foreach($this->errors as $error):?>
+                                    <p><?php echo $error;?></p>
+                                <?php endforeach;?>
+                            </div>
+                            </center>
+                            <?php endif;?>
+
+                            
+                            
+                            <form name="f1" method="post" enctype="multipart/form-data">
+                                <div class="profile-items">
+                                    <div class="item-wrppr">
+                                        <h3>Photos <a href="/admin/trips" class="back">Back to Trips</a></h3>								
+                                    </div>
+                                    <!-- closes item-wrppr -->
+                                    <div class="item-wrppr">
+                                        <h4 class="photo_tittle">Picture Requirements</h4>
+                                        <dl class="photo-limit two">
+                                            <dt>Photo Dimention</dt>
+                                            <dd>640x425 pixels</dd>
+                                            <dt>File size</dt>
+                                            <dd>2MB or less</dd>
+                                        </dl>
+                                    </div>
+                                    <!-- closes item -->
+                                    
+                                    <div class="item-wrppr">
+                                        <div class="pht">
+                                            <div class="image">
+                                                <img width="132" height="98" src="https://developer.tripfab.com/images6/home_pic1.jpg" alt="" />
+                                            </div><!--IMAGE-->
+                                            
+                                            <div class="info">
+                                                <strong>Photo Description</strong>
+                                                <input type="text" name="" value="" />
+                                                <a href="" class="remove">Remove Picture</a>
+                                            </div><!--INFO-->
+                                            
+                                        </div><!--PHOTO-->
+                                    </div><!-- closes item-wrppr -->
+                                    
+                                    <div class="item-wrppr">
+                                        <div class="pht">
+                                            <div class="image">
+                                                <img width="132" height="98" src="https://developer.tripfab.com/images6/home_pic1.jpg" alt="" />
+                                            </div><!--IMAGE-->
+                                            
+                                            <div class="info">
+                                                <strong>Photo Description</strong>
+                                                <input type="text" name="" value="" />
+                                                <a href="" class="remove">Remove Picture</a>
+                                            </div><!--INFO-->
+                                            
+                                        </div><!--PHOTO-->
+                                    </div><!-- closes item-wrppr -->
+                                                                
+                                    
+                                    
+                                    
+                
+                                    <div class="foot">
+                                        <input type="submit" class="btn-1" value="Save Changes" />
+                                        <a href="">Delete Trip</a>
+                                    </div>
+                                    <!-- closes foot -->
+                                </div>
+                                <!-- closes profile-items -->
+							</form>
 						</div>
 						<!-- closes right -->
 					</div>
 					<!-- closes listing-content -->
 				</div>
 					
-			<div class="footer black">
-				<div class="wrapper">
-					<a href="" class="logo">Tripfab</a>
-				</div><!--WRAPPER-->
-			</div>
-			<!-- closes footer -->
+			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
 		</div>
 		<!-- closes w1 -->
-		<div class="hidden">
-				<div id="getReport">
-						<div class="top">
-							<h3>Get a Report</h3>
-						</div><!--TOP-->
-						<div class="cont">
-							<div id="report_tabs">
-								<ul>
-									<li><a href="#report-1" class="active">Sales Reports</a></li>
-									<li><a href="#report-2">Finance Reports</a></li>
-								</ul>
-								<div id="report-1">
-									A
-									<div class="type">
-										<label>Select an Report</label>
-										<select>
-											<option>User Log Time by Date</option>
-										</select>
-									</div>
-									<div class="filter">
-										<span>Filter results</span>
-									</div><!--FILTER-->
-									<div class="item">
-										<label>Select Dates</label>
-										<input type="text" value="" />
-										<strong>to</strong>
-										<input type="text" value="" />
-									</div><!--ITEM-->
-									
-									<div class="item last">
-										<label>Select an User</label>
-										<select>
-											<option>Karina Romaine</option>
-										</select>
-									</div><!--ITEM-->
-									
-									<div class="hidden">B
-										<div class="type">
-											<label>Select an Report</label>
-											<select>
-												<option>User account access by date</option>
-											</select>
-										</div>
-										<div class="filter">
-											<span>Filter results</span>
-										</div><!--FILTER-->
-										<div class="item">
-											<label>Select Dates</label>
-											<input type="text" value="" />
-											<strong>to</strong>
-											<input type="text" value="" />
-										</div><!--ITEM-->
-										
-										<div class="item last">
-											<label>Select an User</label>
-											<select>
-												<option>Karina Romaine</option>
-											</select>
-										</div><!--ITEM-->
-										
-										C
-										<div class="type">
-											<label>Select an Report</label>
-											<select>
-												<option>Partner pending information by account manager</option>
-											</select>
-										</div>
-										<div class="filter">
-											<span>Filter results</span>
-										</div><!--FILTER-->
-										<div class="item">
-											<label>Select an User</label>
-											<select>
-												<option>Karina Romaine</option>
-											</select>
-										</div><!--ITEM-->
-										
-										<div class="item">
-											<label>Select Partner</label>
-											<select>
-												<option>Rafting Panama Tours</option>
-											</select>
-										</div><!--ITEM-->
-										
-										<div class="item last">
-											<label>Select Listing</label>
-											<select>
-												<option>Rafting Somewhere</option>
-											</select>
-										</div><!--ITEM-->
-										
-										
-										D
-										<div class="type">
-											<label>Select an Report</label>
-											<select>
-												<option>Partner account changes by user</option>
-											</select>
-										</div>
-										<div class="filter">
-											<span>Filter results</span>
-										</div><!--FILTER-->
-										<div class="item">
-											<label>Select an User</label>
-											<select>
-												<option>Karina Romaine</option>
-											</select>
-										</div><!--ITEM-->
-										
-										<div class="item">
-											<label>Select Partner</label>
-											<select>
-												<option>Rafting Panama Tours</option>
-											</select>
-										</div><!--ITEM-->
-										
-										<div class="item last">
-											<label>Select Listing</label>
-											<select>
-												<option>Rafting Somewhere</option>
-											</select>
-										</div><!--ITEM-->
-										
-										E
-										<div class="type">
-											<label>Select an Report</label>
-											<select>
-												<option>Partner account activity by date</option>
-											</select>
-										</div>
-										<div class="filter">
-											<span>Filter results</span>
-										</div><!--FILTER-->
-										<div class="item">
-											<label>Select Dates</label>
-											<input type="text" value="" />
-											<strong>to</strong>
-											<input type="text" value="" />
-										</div><!--ITEM-->
-										
-										<div class="item">
-											<label>Select Partner</label>
-											<select>
-												<option>Hotel Boca</option>
-											</select>
-										</div><!--ITEM-->
-										
-										<div class="item last">
-											<label>Select Listing</label>
-											<select>
-												<option>Hotel Boca</option>
-											</select>
-										</div><!--ITEM--></div>
-									
-								</div><!--REPORT-1-->
-								<div id="report-2">
-									A
-									<div class="type">
-										<label>Select an Report</label>
-										<select>
-											<option>Payment Receipt Report</option>
-										</select>
-									</div>
-									<div class="filter">
-										<span>Filter results</span>
-									</div><!--FILTER-->
-									<div class="item">
-										<label>Select Dates</label>
-										<input type="text" value="" />
-										<strong>to</strong>
-										<input type="text" value="" />
-									</div><!--ITEM-->
-									
-									<div class="item">
-										<label>Payment Method</label>
-										<select>
-											<option>All Methods</option>
-										</select>
-									</div><!--ITEM-->
-									
-									<div class="item last">
-										<label>Status</label>
-										<select>
-											<option>Completed</option>
-										</select>
-									</div><!--ITEM-->
-									
-									
-									<div class="hidden">B
-										<div class="type">
-											<label>Select an Report</label>
-											<select>
-												<option>Reservations by Date</option>
-											</select>
-										</div>
-										<div class="filter">
-											<span>Filter results</span>
-										</div><!--FILTER-->
-										
-										<div class="item">
-											<label>Select Dates</label>
-											<input type="text" value="" />
-											<strong>to</strong>
-											<input type="text" value="" />
-										</div><!--ITEM-->
-										
-										<div class="item last">
-											<label>Reservation Status</label>
-											<select>
-												<option>All Status</option>
-											</select>
-										</div><!--ITEM-->
-										
-										C
-										<div class="type">
-											<label>Select an Report</label>
-											<select>
-												<option>Transactions by Date</option>
-											</select>
-										</div>
-										<div class="filter">
-											<span>Filter results</span>
-										</div><!--FILTER-->
-										
-										<div class="item last">
-											<label>Select Dates</label>
-											<input type="text" value="" />
-											<strong>to</strong>
-											<input type="text" value="" />
-										</div><!--ITEM-->
-										
-										D
-										<div class="type">
-											<label>Select an Report</label>
-											<select>
-												<option>Partner Balance by Date</option>
-											</select>
-										</div>
-										<div class="filter">
-											<span>Filter results</span>
-										</div><!--FILTER-->
-										
-										<div class="item last">
-											<label>Select Dates</label>
-											<input type="text" value="" />
-											<strong>to</strong>
-											<input type="text" value="" />
-										</div><!--ITEM--></div>
-									
-								</div><!--REPORT-1-->
-							</div><!--TABS-->
-						</div><!--CONT-->
-						
-						<div class="bottom">
-							<input type="button" class="btn-1" value="Get Report" />
-							<input type="button" class="btn-10" value="Cancel" />
-						</div><!--BOTTOM-->
-					</div><!--GETREPORT-->
-			</div><!--HIDDEN-->
+		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+        
+        <script>
+		function removeElement(elm, divName){
+			var d = document.getElementById(divName);
+  			d.removeChild(elm.parentNode);
+		}
+		
+		function addElement(divName, inclusion){
+			var d = document.getElementById(divName);
+			var html = '<div>';
+			html += '<a href="javascript://" class="remove" name="delete" onclick="removeElement(this, \'' + divName + '\')">remove</a>';
+			if(inclusion){
+				html += '<textarea cols="" rows="" name="inclusion[]"  class="noclean"></textarea>';
+				html += '<input type="hidden" name="iid[]" value="0"/>';
+			}
+			else{
+				html += '<textarea cols="" rows="" name="exclusion[]"  class="noclean"></textarea>';
+				html += '<input type="hidden" name="eid[]" value="0"/>';
+			}
+			html += '<div class="clear"></div>';
+			html += '</div>';
+			
+			$('#'+ divName).append(html);
+		}
+		</script>
 	</body>
 </html>

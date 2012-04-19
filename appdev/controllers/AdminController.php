@@ -3979,7 +3979,7 @@ class AdminController extends Zend_Controller_Action {
                 break;
             case 3:
                 $this->view->title = "";
-                $template = 'trip3';
+                $this->tripEditTask3($trip);
                 break;
             case 4:
                 $this->view->title = "";
@@ -4191,6 +4191,11 @@ class AdminController extends Zend_Controller_Action {
             $key .= $chars[mt_rand(0, count($chars) - 1)];
         }
         return $key;
+    }
+    
+    private function tripEditTask3($trip)
+    {
+        $this->render('trip3');
     }
 
     private function tripEditTask4($trip) {
