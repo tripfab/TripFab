@@ -70,10 +70,16 @@ class WS_Uploader_Service {
         }
         
         if (!is_writable($paths['public'])){
-            return array('error' => "Server error. Upload directory isn't writable.");
+			chmod($paths['public'], 0777);
+			if (!is_writable($paths['public'])){
+	            return array('error' => "Server error. Upload directory isn't writable.");
+			}
         }
         if (!is_writable($paths['public2'])){
-            return array('error' => "Server error. Upload directory isn't writable.");
+			chmod($paths['public2'], 0777);
+			if (!is_writable($paths['public2'])){
+	            return array('error' => "Server error. Upload directory isn't writable.");
+			}
         }
         
         if (!$this->file){
