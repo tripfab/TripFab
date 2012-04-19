@@ -1910,7 +1910,7 @@ class AdminController extends Zend_Controller_Action {
             }
             
             if(isset($data['contactEqual'])){
-                $vendor = $this->user->getVendorData();
+                $vendor = $this->users->getVendor($listing->vendor_id);
                 $listing->phone   = $vendor->phone;
                 $listing->email   = $vendor->email;
                 $listing->website = $vendor->website;
