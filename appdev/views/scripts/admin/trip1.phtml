@@ -4,7 +4,7 @@
 		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
 		<title><?= $this->trip->title ?> - Admin | Tripfab.com</title>
         <link type="text/css" rel="stylesheet" href="/css5/reset.css" />
-        <link type="text/css" rel="stylesheet" href="/css5/all.css" />
+        <link type="text/css" rel="stylesheet" href="/css2/all.css" />
 		<script type="text/javascript" src="/js2/jquery.js"></script>
 		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
   		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css" />
@@ -33,8 +33,7 @@
 			<div class="w3_admin">
 				<div class="sub_menu">
 					<h2>Create. <span>New Trip.</span></h2>
-					<a href="/admin/trips" class="back">Back to Trips</a>
-					
+					<a class="btn-10" href="" target="_blank">Trip Preview</a>		
 				</div><!--SUB_MENU-->
             </div><!--W3-->
 				
@@ -71,7 +70,7 @@
                             <form name="f1" method="post" enctype="multipart/form-data">
 							<div class="profile-items">
 								<div class="item-wrppr">
-									<h3>General Information</h3>									
+									<h3>General Information <a href="/admin/trips" class="back">Back to Trips</a></h3>								
 								</div>
 								<!-- closes item-wrppr -->
 								<div class="item-wrppr">
@@ -85,13 +84,13 @@
 										<span>Your trip name</span>
 									</div>
 									<!-- closes item -->
-									<div class="item last">
+									<div class="item">
 										<textarea class="noclean" cols="30" rows="1" name="description"><?php echo $this->trip->description?></textarea>
 										<h4>Trip Description</h4>
 										<span>Write a nice description for your trip</span>
 									</div>
 									<!-- closes item -->
-                                    <div class="item">
+                                    <div class="item last">
 										<input type="text" class="noclean" name="price" value="<?php echo $this->trip->price?>" />
 										<h4>Price</h4>
 										<span>Price for trip</span>
@@ -113,8 +112,6 @@
 										</div>
 										<h4>Picture Requirements</h4>
 										<dl class="photo-limit">
-											<dt>Upload limit</dt>
-											<dd>10 photos per listing</dd>
 											<dt>Photo Dimention</dt>
 											<dd>640x425 pixels</dd>
 											<dt>File size</dt>
@@ -132,7 +129,13 @@
 									<!-- closes item ttl -->
 									<div class="item first">
 										<div class="selects">
-                                        	<input type="text" class="noclean" name="days" value="<?php echo $this->trip->days?>"/>
+                                        	<!--<input type="text" class="noclean" name="days" value="<?php echo $this->trip->days?>"/>-->
+                                        	<select class="days">
+                                        		<option>7 Days</option>
+                                        	</select>
+                                        	<select class="days"> 
+                                        		<option>6 Nights</option>
+                                        	</select>
 										</div>
 										<!-- closes selects -->
 										<h4>Duration (No. of days)</h4>

@@ -77,6 +77,15 @@
 							<td><?php echo $listing->category_name?></td>
 							<td><?php echo $listing->country_name?></td>
 							<td><a href="/admin/trips/edit/1/<?php echo $listing->id?>" class="edit">Edit</a></td>
+							<td class="drp_dn">
+								<a href="" class="btn-10"><span>Actions</span></a>
+								<ul>
+									<li class="arrow"></li>
+									<li><a href="/admin/trips/edit/1/<?php echo $listing->id?>">Edit Listing</a></li>
+									<li><a target="_blank" href="/admin/listings/preview/923">View Preview</a></li>
+									<li><a href="/admin/listings/delete/923" class="delete">Delete Listing</a></li>
+								</ul> 
+							</td>
 						</tr>
                         <?php endforeach;?>
 					</table>

@@ -14436,6 +14436,7 @@ h2.title .back:hover,
 	display:block;
 	color:#303030;
 	text-shadow:-1px 1px #FFF;
+	background: none;
 }
 .all_listing .list_content td.drp_dn ul li:hover a{
 	text-decoration:none;
@@ -14828,6 +14829,9 @@ background: url("https://developer.tripfab.com/images6/src_map_aw1.png") no-repe
 	width:65px;
 	margin-right:20px;
 }
+#trips .first .selects select.days {
+	width: 100px;
+}
 #trips .photo-limit {
 	overflow:hidden;
 	width:240px;
@@ -14864,6 +14868,14 @@ background: url("https://developer.tripfab.com/images6/src_map_aw1.png") no-repe
 #trips .profile-items .item-wrppr input[type=text] {
 	margin-bottom:15px;
 }
+#trips .profile-items .item-wrppr h3 .back {
+	background: url("../images2/arrow-9.png") no-repeat scroll left 50% transparent;
+    color: #60B5F7;
+    float: right;
+    font: bold 11px/15px Helvetica;
+    padding-left: 15px;
+}
+
 #trips .listing-content {
 	border: 1px solid #E8E8E8;
 }
@@ -15057,9 +15069,12 @@ background: url("https://developer.tripfab.com/images6/src_map_aw1.png") no-repe
 #trips .lstng-details .heading .day p a {
 	color:#60b5f7
 }
+#trips .lstng-details #slider {
+	width: 100% !important;
+} 
 #trips .itinerary {
 	overflow: hidden;
-	padding:20px 0 20px 20px;
+	padding:20px 33px 20px 20px;
 	background:url(https://developer.tripfab.com/images2/g-54.png) repeat-x right top;
 }
 #trips .itinerary .single {
@@ -15198,7 +15213,22 @@ background: url("https://developer.tripfab.com/images6/src_map_aw1.png") no-repe
 	display:block;
 	height:15px;
 }
-
+#trips .itinerary .add-listing {
+	background-color:#f4faff;
+	height: 44px;
+	margin:0 0 0 0;
+}
+#trips .itinerary .add-listing a{
+	background:url(../images2/ico-32.png) no-repeat left 50%;
+	display: block;
+	float: right;
+	padding-left: 20px;
+	color: #60b5f7;
+	margin: 15px 20px 0 0;
+}
+#trips .itinerary .add-listing a:hover {
+	color: #9bd2fc;
+}
 /*END ADMIN TRIPS NEW---------------------------------------*/
 /*ADMIN CREATE CITY-----------------------------------------*/
 
