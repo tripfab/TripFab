@@ -15229,6 +15229,96 @@ background: url("https://developer.tripfab.com/images6/src_map_aw1.png") no-repe
 #trips .itinerary .add-listing a:hover {
 	color: #9bd2fc;
 }
+.profile-items .item-wrppr .item-ttl h4 span {
+	display: block;
+	font-weight: normal;
+}
+.profile-items .item-wrppr .facts-item {
+	width: 510px;
+	float: right;
+}
+.profile-items .item-wrppr .facts-item textarea {
+	width: 470px;
+	height: 93px;
+	float: right;
+}
+.profile-items .item-wrppr .facts-item input[type="text"] {
+	width: 470px;
+	height: 31px;
+	float: right;
+}
+.profile-items .item-wrppr .facts-item .rmv {
+	overflow: hidden;
+	width: 520px;
+	float: right;
+	height:39px;
+}
+.profile-items .item-wrppr .facts-item .rmv input {
+	float: right;
+}
+.profile-items .item-wrppr .facts-item .rmv a {
+	float: right;
+	margin: 10px 9px 0 0;
+}
+#trips .add-p {
+    float: left;
+    padding: 13px 0 0;
+    width: 100%;
+}
+#trips .add-p a {
+	background: url("https://developer.tripfab.com/images2/ico-32.png") no-repeat scroll left 50% transparent;
+    color: #60B5F7;
+    float: right;
+    font: bold 11px/14px Helvetica;
+    height: 14px;
+    margin-right: 0;
+    padding-left: 20px;
+}
+#trips h3.title .back {
+	background: url("https://developer.tripfab.com/images2/arrow-9.png") no-repeat scroll left 50% transparent;
+    color: #60B5F7;
+    display: block;
+    float: right;
+    font: bold 11px/50px Helvetica;
+    margin-right: 20px;
+}
+#trips .photo_tittle{
+	float: left;
+	width: auto;
+	line-height: 20px;
+	margin-right: 100px;
+}
+.profile-items .item-wrppr .pht {
+}
+.profile-items .item-wrppr .pht .image {
+	background: url(https://developer.tripfab.com/images2/shadow23.png) no-repeat center bottom;
+	width: 132px;
+	padding-bottom: 7px;
+	float: left;
+	margin-right: 20px;
+}
+.profile-items .item-wrppr .info {
+	width: 570px;
+	float: left;
+	margin-top: 15px;
+}
+.profile-items .item-wrppr .info input {
+	display: block;
+	width: 570px;
+	height: 35px;
+	border-radius: 0;
+	margin: 5px 0 8px 0 !important;
+}
+.profile-items .item-wrppr .info .remove {
+	text-indent: 0;
+	float: none;
+	display: block;
+	color: #f26522;
+	font: bold 11px/14px Helvetica;
+	padding-left: 20px;
+	width: auto;
+}
+
 /*END ADMIN TRIPS NEW---------------------------------------*/
 /*ADMIN CREATE CITY-----------------------------------------*/
 
