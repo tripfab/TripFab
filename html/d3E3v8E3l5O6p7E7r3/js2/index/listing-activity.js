@@ -539,11 +539,12 @@ function hideTooltip() {
 }
 
 $(document).ready(function() {
-    var aboveHeight = $('#header').outerHeight();
+    var Cntrl = 31;
+    var aboveHeight = Cntrl + $("#header").outerHeight();
     $(window).scroll(function(){
         if ($(window).scrollTop() > aboveHeight){
-            $('#lstng_header').addClass('fixed').css('top','0');
-            $('#wp_content').css('padding-top', '72px');
+            $('#lstng_header').addClass('fixed').css('top','-23');
+            $('#wp_content').css('padding-top', '107px');
         } 
         else {
             $('#lstng_header').removeClass('fixed');
