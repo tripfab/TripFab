@@ -18,12 +18,11 @@
         	<div class="cntrl">
         	    <ul class="breadcrump">
         	        <li class="first"><a href="/" class="home"></a></li>
-        	        <li><a href="/costa_rica">Costa Rica</a></li>
-        	        <li><a href="/costa_rica/alajuela">Alajuela</a></li>
-        	        <li class="last"><a href="/costa_rica/alajuela/#/tourist-sights"
-        	        class="active">Tourist Sights</a></li>
+        	        <li><a href="/<?= $this->country->identifier ?>"><?= $this->country->title ?></a></li>
+        	        <li><a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>"><?= $this->city->title ?></a></li>
+        	        <li class="last"><a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>/#/hotels" class="active">Hotels</a></li>
         	    </ul>
-        	    <a href="/costa_rica/alajuela/#/tourist-sights" 
+        	    <a href="/costa_rica/alajuela/#/hotels" 
         	    class="link1">&larr; Back to Results</a>
         	    <div class="clear"></div>
         	</div><!--CNTRL-->
@@ -151,12 +150,12 @@
                                     <h4><span class="hotel"></span><?= $this->listing->title ?></h4>
                                     <?php if(!empty($this->overview->about)): ?>
                                     <p><?= nl2br($this->overview->about) ?></p>
-                                    <?php endif; if(!empty($this->overview->expect)): ?>
+                                    <?php endif; if(!empty($this->oveview->expect)): ?>
                                     <h5>What to Expect</h5>
                                     <p><?= nl2br($this->overview->expect) ?></p>
                                     <?php endif; if(!empty($this->overview->love)): ?>
                                     <h5>Things you'll love</h5>
-                                    <p><?= nl2br($this->overview->love) ?></p>
+                                    <p><?= nl2br($this->overview->expect) ?></p>
                                     <?php endif ?>
 									<?php $ok = true; $i=0; $limit = count($this->details) ?>
                                     <?php $ok1 = true; $ok3 = true; ?>
@@ -325,11 +324,11 @@
                                     <div class="dates">
                                         <div class="check">
                                             <label>Check In</label>
-                                            <input id="checkIn" type="text" name="checkin" value="" />
+                                            <input id="checkIn" type="text" name="checkin" value="dd/mm/yyyy" />
                                         </div><!--CHECK-->
                                         <div class="check">
                                             <label>Check Out</label>
-                                            <input id="checkOut" type="text" name="checkout" value="" />
+                                            <input id="checkOut" type="text" name="checkout" value="dd/mm/yyyy" />
                                         </div><!--CHECK-->
                                     </div><!--DATES-->
                                     <h5><span class="i_room"></span>Select the Room Details</h5>

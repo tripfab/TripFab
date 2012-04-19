@@ -15,6 +15,17 @@
     <div id="wp_header">
         <?= $this->partial('partials/header-v2.phtml', array('user'=>$this->user,'full'=>true)); ?>
         <div class="sub_header" id="lstng_header">
+        	<div class="cntrl">
+        	    <ul class="breadcrump">
+        	        <li class="first"><a href="/" class="home"></a></li>
+        	        <li><a href="/<?= $this->country->identifier ?>"><?= $this->country->title ?></a></li>
+        	        <li><a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>"><?= $this->city->title ?></a></li>
+        	        <li class="last"><a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>/#/activities"
+        	        class="active">Activities</a></li>
+        	    </ul>
+        	    <a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>/#/activities" class="link1">&larr; Back to Results</a>
+        	    <div class="clear"></div>
+        	</div><!--CNTRL-->
             <div class="cont">
                 <?= $this->partial('partials/headerVendorInfo.phtml', array('vendor'=>$this->vendor, 'user'=> $this->user)) ?>
             </div><!--CONT-->
