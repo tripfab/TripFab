@@ -506,7 +506,7 @@ $(function(){
 		activeli.addClass('active');
         $('.bigImages .hover').hide();
         $($('a',this).data('tip')).show();
-        $('.bigImages').fadeIn('fast');
+        $('.bigImages').show();
         shown=true;
     }, function(){
         shown=false;
@@ -523,7 +523,7 @@ $(function(){
 		
 function hideTooltip() {
     if(!shown) {
-        $('.bigImages').fadeOut('fast', function(){
+        $('.bigImages').hide('fast', function(){
             $('.bigImages .hover').hide();
         });
 		activeli.removeClass('active');

@@ -69,7 +69,8 @@ $(document).ready(function() {
     $("#accordion").accordion({
         autoHeight: false,
         collapsible: true,
-        icons: false
+        icons: false,
+        animated: 'bounceslide'
     });
 	
     var $disableddates = $('body').data('disableddates');
@@ -515,7 +516,7 @@ $(function(){
     $('#lstng_htl .carousel ul li').hover(function(){
         $('.bigImages .hover').hide();
         $($('a',this).data('tip')).show();
-        $('.bigImages').fadeIn('fast');
+        $('.bigImages').show();
         shown=true;
     }, function(){
         shown=false;
@@ -532,7 +533,7 @@ $(function(){
 
 function hideTooltip() {
     if(!shown) {
-        $('.bigImages').fadeOut('fast', function(){
+        $('.bigImages').hide('slow', function(){
             $('.bigImages .hover').hide();
         });
     }
