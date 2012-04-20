@@ -4195,6 +4195,33 @@ class AdminController extends Zend_Controller_Action {
     
     private function tripEditTask3($trip)
     {
+        $photos = new Zend_Db_Table('trip_photos');
+        
+        if($this->getRequest()->isPost()) {
+            switch ($this->_getParam('task')) {
+                case md5('delete_picture'):
+                    $photos->delete("id = {$_POST['img_id']}");
+                    break;
+                case md5('edit_picture'):
+                    $data = $_POST;
+                    foreach($data['pic'] as $pic_id => $pic){
+                        $select = $photos->select();
+                        $select->where('id = ?', $pic_id);
+                        $img = $photos->fetchRow($select);
+                        $img->description = $pic['description'];
+                        $img->save();
+                    }
+                    break;
+            }
+        }
+        $select = $photos->select();
+        $select->where('trip_id = ?', $trip->id);
+        $pictures = $photos->fetchAll($select);
+        
+        $this->view->pictures = $pictures;
+        
+        
+        $this->view->trip = $trip;
         $this->render('trip3');
     }
 
