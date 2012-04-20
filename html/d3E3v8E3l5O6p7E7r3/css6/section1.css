@@ -1065,7 +1065,7 @@
 	color: #60b5f7;
 }
 #lstng_htl .tabs h4 {
-	font: normal 21px/29px Helvetica;
+	font: normal 21px/25px Helvetica;
 	color: #303030;
 	padding-bottom: 18px;
 }
@@ -1092,7 +1092,7 @@
 	padding: 20px 10px 0;
 	background-color: #f6f6f6;
 	float: right;
-	margin:0 0 10px 8px;
+	margin:0 0 10px 12px;
 }
 #lstng_htl .tabs .info li {
 	margin-bottom: 22px;
@@ -1192,7 +1192,7 @@
 #lstng_htl .tabs .dflt .car {
 	background: url(https://developer.tripfab.com/images6/lstng_htl.png) no-repeat -408px -127px;
 }
-#lstng_htl .tabs .map span {
+#lstng_htl .tabs .map h4 > span {
 	background: url(https://developer.tripfab.com/images6/lstng_htl.png) no-repeat -468px -127px;
 }
 #lstng_htl .tabs .map p {
@@ -1469,8 +1469,10 @@
 #lstng_htl .sidebar .cont .line{
 	display: block;
 	border-top: 1px solid #e8e8e8;
-	width: 250px;
-	margin: 0 auto 10px;
+	width: 247px;
+	position: absolute;
+	top: 0;
+	left: 20px;
 }
 #lstng_htl .sidebar .cont h5.first {
 	background: none #FFF;
@@ -1541,6 +1543,7 @@
 	height: 82px;
 	background-color: #FFF;
 	padding-left: 26px;
+	position: relative;
 }
 #lstng_htl .sidebar .dates .check {
 	width: 110px;
@@ -1561,11 +1564,13 @@
 	display: block;
 }
 #lstng_htl .sidebar #accordion > div {
-	padding-top: 0 !important;
+	padding-top: 5px !important;
+	position: relative;
 }
 #lstng_htl .sidebar .type {
 	background-color: #FFF;
 	padding: 8px 0 5px 7px;
+	position: relative;
 }
 #lstng_htl .sidebar .type .details {
 	position: relative;
@@ -1630,7 +1635,8 @@
 	background-color: #9BD2FC;
 }
 
-#lstng_htl .sidebar .details > label {
+#lstng_htl .sidebar .details > label,
+#lstng_htl .sidebar .type > label {
 	display: block;
 	width: 273px;
 	height: 29px;
@@ -1640,7 +1646,8 @@
 	position: relative;
 	overflow: hidden;
 }
-#lstng_htl .sidebar .details:hover > label {
+#lstng_htl .sidebar .details:hover > label,
+#lstng_htl .sidebar .type:hover > label {
 	background-color: #f1f9ff;
 }
 #lstng_htl .sidebar .type input[type="radio"] {
@@ -1648,22 +1655,23 @@
 }
 #lstng_htl .sidebar .selects {
 	background-color: #FFF;
-	padding-left: 28px;
+	padding-left: 20px;
 }
 #lstng_htl .sidebar .selects label{
-	border-top: 1px solid #e2e2e2;
-	width: 120px;
-	display: block;
-	float: left;
-	height: 31px;
-	padding-top: 14px;
-	padding-left: 10px;
-	color: #464646;
-	font: normal 13px Helvetica;
+	border-top: 1px solid #E2E2E2;
+    color: #464646;
+    display: block;
+    float: left;
+    font: 13px Helvetica;
+    height: 31px;
+    padding-left: 10px;
+    padding-top: 14px;
+    width: 110px;
 }
 #lstng_htl .sidebar .selects .rooms {
-	border-right: 1px solid #e2e2e2;
-	padding-left: 0;
+	border-right: 1px solid #E2E2E2;
+    padding-left: 10px;
+    width: 116px;
 }
 #lstng_htl .sidebar .selects select {
 	width: 50px;
