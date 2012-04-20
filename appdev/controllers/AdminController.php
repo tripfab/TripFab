@@ -4198,11 +4198,14 @@ class AdminController extends Zend_Controller_Action {
         $photos = new Zend_Db_Table('trip_photos');
         
         if($this->getRequest()->isPost()) {
-            switch ($this->_getParam('task')) {
+            switch ($this->_getParam('_task')) {
                 case md5('delete_picture'):
                     $photos->delete("id = {$_POST['img_id']}");
+                    setcookie('alert','Your changes have been saved');
+                    $this->_redirect('/admin/trips/edit/3/'.$trip->id);
                     break;
                 case md5('edit_picture'):
+                    //var_dump($_POST); die;
                     $data = $_POST;
                     foreach($data['pic'] as $pic_id => $pic){
                         $select = $photos->select();
@@ -4211,6 +4214,8 @@ class AdminController extends Zend_Controller_Action {
                         $img->description = $pic['description'];
                         $img->save();
                     }
+                    setcookie('alert','Your changes have been saved');
+                    $this->_redirect('/admin/trips/edit/3/'.$trip->id);
                     break;
             }
         }

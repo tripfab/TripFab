@@ -1,36 +1,50 @@
 <?php
 
 require_once 'Zend/Auth.php';
+
 require_once 'Zend/Registry.php';
+
 require_once 'Zend/Db/Table.php';
+
 require_once 'Zend/Db/Table/Row.php';
+
 require_once 'Zend/Db/Adapter/Mysqli.php';
+
 require_once 'WS/Uploader/Service.php';
 
 
 class WS_Uploader {
     
-    public function __construct() {}
+    /**
+     *
+     * @var Zend_Db_Adapter_Mysqli
+     */
+    protected $adapter;
     
-    public function upload(){
-        try
-        {
-            error_reporting(E_ALL);  
-
-            $ids = $_GET['userids'];
-            $token = $_GET['formtoken'];
-            $form_id = $_GET['usertoken'];
-
-            $dbAdapter = new Zend_Db_Adapter_Mysqli(array(
+    public function __construct($config = null) 
+    {
+        if(null === $config) {
+            $config = array(
                 'host'      =>  'localhost',
                 'username'  =>  'costar_admCoreTF',
                 'password'  =>  'OgkX-JLV2L7i',
                 //'username'  =>  'root',
                 //'password'  =>  'root',
-                'dbname'    =>  'costar_coreTF'
-            ));
-
-            Zend_Db_Table::setDefaultAdapter($dbAdapter);
+                'dbname'    =>  'costar_coreTF'                
+            );
+        }
+        
+        $this->adapter = new Zend_Db_Adapter_Mysqli($config);
+        
+        Zend_Db_Table::setDefaultAdapter($this->adapter);
+    }
+    
+    public function upload(){
+        try
+        {
+            $ids = $_GET['userids'];
+            $token = $_GET['formtoken'];
+            $form_id = $_GET['usertoken'];
             
             $users_db = new Zend_Db_Table('users');
 
@@ -77,101 +91,16 @@ class WS_Uploader {
         }        
     }
     
-    public function uploadPhoto()
-    {
-        if($_POST)
-        {
-            try
-            {   
-                $ids = $_POST['userids'];
-                $token = $_POST['formtoken'];
-                $form_id = $_POST['usertoken'];
-                $aid = $_POST['album'];
-
-                $dbAdapter = new Zend_Db_Adapter_Mysqli(array(
-                    'host'      =>  'localhost',
-                    'username'  =>  'costar_admCoreTF',
-                    'password'  =>  'OgkX-JLV2L7i',
-                    'dbname'    =>  'costar_coreTF'
-                ));
-                Zend_Db_Table::setDefaultAdapter($dbAdapter);
-
-                $users_db = new Zend_Db_Table('users');
-
-                $select = $users_db->select();
-                $select->where('id = ?', $ids);
-                $user = $users_db->fetchRow($select);
-
-                if($token != $user->token)
-                        throw new Exception();
-                if($form_id != md5($user->token.'upload_photos'))
-                        throw new Exception();
-                
-                $albums_db = new Zend_Db_Table('user_albums');
-                $select = $albums_db->select();
-                $select->where('id = ?', $aid);
-                $select->where('user_id = ?', $user->id);
-                $album = $albums_db->fetchRow($select);
-                if(is_null($album))
-                        throw new Exception();
-                
-                $pictures_db = new Zend_Db_Table('user_pictures');
-                $picture = $pictures_db->fetchNew();
-                $picture->user_id = $user->id;
-                $picture->album_id = $album->id;
-                $picture->created = date('Y-m-d g:i:s');
-                $picture->updated = date('Y-m-d g:i:s');
-                $picture->save();
-                
-                $tempFile   = $_FILES['Filedata']['tmp_name'];
-                $publicPath = realpath(APPLICATION_PATH.'/../html');
-                $targetPath = '/images/users/albums/'.$album->id;
-                $url        = $targetPath .'/'. $user->id.substr(md5($picture->id), 3, 11) .$album->id . '.jpg';
-                $targetFile = str_replace('//','/',$publicPath.$url);
-                
-                mkdir(str_replace('//','/',$publicPath.$targetPath), 0755, true);
-                move_uploaded_file($tempFile,$targetFile);
-                
-                $picture->url = $url;
-
-                if(empty($album->image)){
-                    $album->image = $picture->url;
-                }
-                $album->photos = $album->photos + 1;
-                $album->save();
-                $picture->save();
-                echo $picture->url;
-            } 
-            catch(Exception $e)
-            {
-                echo $e;
-            }
-        }
-    }
-    
     public function uploadListingPhotos()
     {
         try
-        {   
-            error_reporting(E_ALL);  
-
+        {
             $ids            = $_GET['userids'];
             $token          = $_GET['formtoken'];
             $form_id        = $_GET['usertoken'];
             $listing_id     = $_GET['listings'];
             $listing_token  = $_GET['listtoken'];
             $vendor_id      = $_GET['vendorid'];
-
-            $dbAdapter = new Zend_Db_Adapter_Mysqli(array(
-                'host'      =>  'localhost',
-                'username'  =>  'costar_admCoreTF',
-                'password'  =>  'OgkX-JLV2L7i',
-                //'username'  =>  'root',
-                //'password'  =>  'root',
-                'dbname'    =>  'costar_coreTF'
-            ));
-
-            Zend_Db_Table::setDefaultAdapter($dbAdapter);
 
             $users_db = new Zend_Db_Table('users');
 
@@ -259,21 +188,9 @@ class WS_Uploader {
     public function uploadTripPhotos()
     {
         try
-        {   
-            error_reporting(E_ALL);  
+        {
 
             $listing_id     = $_GET['listings'];
-
-            $dbAdapter = new Zend_Db_Adapter_Mysqli(array(
-                'host'      =>  'localhost',
-                //'username'  =>  'costar_admCoreTF',
-                //'password'  =>  'OgkX-JLV2L7i',
-                'username'  =>  'root',
-                'password'  =>  'root',
-                'dbname'    =>  'costar_coreTF'
-            ));
-
-            Zend_Db_Table::setDefaultAdapter($dbAdapter);
 
             $listings_db = new Zend_Db_Table('trips');
             $select = $listings_db->select();

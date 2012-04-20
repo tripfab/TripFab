@@ -105,7 +105,7 @@
                 </center>
                 <?php endif;?>
 
-                <form name="f1" method="post" enctype="multipart/form-data">
+                <form action="" method="post">
                     <div class="profile-items">
                         <div class="item-wrppr">
                             <h3>Photos <a href="/admin/trips" class="back">Back to Trips</a></h3>								
@@ -132,7 +132,7 @@
                                     <strong>Photo Description</strong>
                                     <input class="noclean" placeholder="Add a nice description of this photo" type="text" 
                                     name="pic[<?= $pic->id ?>][description]" value="<?= $pic->description ?>" />
-		                            <a href="#img_delete_<?= $pic->id ?>" class="lbs remove">Remove Picture</a>
+		                            <a href="#img_delete_<?= $pic->id ?>" class="lbc remove">Remove Picture</a>
                                 </div><!--INFO-->
                             </div><!--PHOTO-->
                         </div><!-- closes item-wrppr -->
