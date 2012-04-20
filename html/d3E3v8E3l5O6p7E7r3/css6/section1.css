@@ -249,41 +249,41 @@
 .lstng_dflt .top {
 	height: 316px;
 }
-.lstng_dflt .top .cntrl {
+.lstng_dflt .cntrl {
 	height: 18px;
 	border-bottom: 1px solid #ebebeb;
 	padding-top: 22px;
 }
-.lstng_dflt .top .cntrl .breadcrump {
+.lstng_dflt .cntrl .breadcrump {
 	float: left;
 }
-.lstng_dflt .top .cntrl .breadcrump li {
+.lstng_dflt .cntrl .breadcrump li {
 	float: left;
 	background: url(https://developer.tripfab.com/images6/slash.png) no-repeat right 50%;
 	padding-left: 12px;
 	padding-right: 16px;
 	font: normal 11px Helvetica;
 }
-.lstng_dflt .top .cntrl .breadcrump li a {
+.lstng_dflt .cntrl .breadcrump li a {
 	color: #959595;
 }
-.lstng_dflt .top .cntrl .breadcrump li a:hover {
+.lstng_dflt .cntrl .breadcrump li a:hover {
 	color: #60b5f7;
 }
-.lstng_dflt .top .cntrl .breadcrump li a.active {
+.lstng_dflt .cntrl .breadcrump li a.active {
 	color: #60b5f7;
 }
-.lstng_dflt .top .cntrl .breadcrump .home {
+.lstng_dflt .cntrl .breadcrump .home {
 	display: block;
 	background: url(https://developer.tripfab.com/images6/icons-llt.png) no-repeat -346px -5px;
 	width: 14px;
 	height: 11px;
 }
-.lstng_dflt .top .cntrl .breadcrump .first {
+.lstng_dflt .cntrl .breadcrump .first {
 	padding-left: 0;
 	padding-right: 14px;
 }
-.lstng_dflt .top .cntrl .breadcrump li.last {
+.lstng_dflt .cntrl .breadcrump li.last {
 	background: none;
 }
 .lstng_dflt .top .cntrl .link1 { 
@@ -705,10 +705,10 @@
 	background-color: #FFF;
 }
 #lstng_header {
-	height: 72px;
+	height: 107px;
 	background-color: #f3f3f3;
 	width:100%;
-	z-index: 9999;
+	z-index: 1000;
 	-webkit-box-shadow: 0px 2px 4px 0px #303030;
 	-moz-box-shadow: 0px 2px 4px 0px #303030;
 	box-shadow: 0px 2px 4px 0px #303030;
@@ -716,13 +716,59 @@
 }
 #lstng_header.fixed {
 	position: fixed;
+	top: -31px;
 }
 #lstng_header .cont {
 	width: 960px;
 	margin: 0 auto;
 	position: relative;
 	z-index: 100;
-} 
+	top: 5px;
+}
+#lstng_header .cntrl {
+	height: 18px;
+	border-bottom: 1px solid #ebebeb;
+	padding-top: 12px;
+	width: 960px;
+	margin: 0 auto;
+}
+#lstng_header .cntrl .breadcrump {
+	float: left;
+}
+#lstng_header .cntrl .breadcrump li {
+	float: left;
+	background: url(https://developer.tripfab.com/images6/slash.png) no-repeat right 50%;
+	padding-left: 12px;
+	padding-right: 16px;
+	font: normal 11px Helvetica;
+}
+#lstng_header .cntrl .breadcrump li a {
+	color: #959595;
+}
+#lstng_header .cntrl .breadcrump li a:hover {
+	color: #60b5f7;
+}
+#lstng_header .cntrl .breadcrump li a.active {
+	color: #60b5f7;
+}
+#lstng_header .cntrl .breadcrump .home {
+	display: block;
+	background: url(https://developer.tripfab.com/images6/icons-llt.png) no-repeat -346px -5px;
+	width: 14px;
+	height: 11px;
+}
+#lstng_header .cntrl .breadcrump .first {
+	padding-left: 0;
+	padding-right: 14px;
+}
+#lstng_header .cntrl .breadcrump li.last {
+	background: none;
+}
+#lstng_header .cntrl .link1 {
+    display: block;
+    float: right;
+    font-size: 11px;
+}
 #lstng_header .img_logo {
 	width: 118px;
 	height: 98px;
@@ -784,15 +830,15 @@
 	display: block;
 	color: #303030;
 }
-#lstng_header ul {
+#lstng_header .cont ul {
 	float: right;
 	margin-top: 20px;
 }
-#lstng_header ul li {
+#lstng_header .cont ul li {
 	float: right;
 	margin-left: 32px;
 }
-#lstng_header ul li a {
+#lstng_header .cont ul li a {
 	background: url(https://developer.tripfab.com/images6/lstng_htl.png) no-repeat 0 0;
 	display: block;
 	width: 60px;
@@ -801,34 +847,34 @@
 	color: #303030;
 	font: bold 11px Helvetica;
 }
-#lstng_header ul li a:hover {
+#lstng_header .cont ul li a:hover {
 	color: #60b5f7;
 }
-#lstng_header ul li a.msj {
+#lstng_header .cont ul li a.msj {
 	background-position: -261px 0;
 }
-#lstng_header ul li a.msj:hover {
+#lstng_header .cont ul li a.msj:hover {
 	background-position: -261px -45px;
 }
-#lstng_header ul li a.msj:active {
+#lstng_header .cont ul li a.msj:active {
 	background-position: -261px -88px;
 }
-#lstng_header ul li a.chat {
+#lstng_header .cont ul li a.chat {
 	background-position: -363px 0;
 }
-#lstng_header ul li a.chat:hover {
+#lstng_header .cont ul li a.chat:hover {
 	background-position: -364px -45px;
 }
-#lstng_header ul li a.chat:active {
+#lstng_header .cont ul li a.chat:active {
 	background-position: -363px -89px;
 }
-#lstng_header ul li a.phone {
+#lstng_header .cont ul li a.phone {
 	background-position: -455px 0;
 }
-#lstng_header ul li a.phone:hover {
+#lstng_header .cont ul li a.phone:hover {
 	background-position: -455px -45px;
 }
-#lstng_header ul li a.phone:active {
+#lstng_header .cont ul li a.phone:active {
 	background-position: -455px -89px;
 }
 #lstng_htl {
@@ -1038,7 +1084,7 @@
 }
 #lstng_htl .tabs p {
 	color: #303030;
-	font: normal 14px/18px Helvetica;
+	font: normal 13px/18px Helvetica;
 	padding-bottom: 18px;
 }
 #lstng_htl .tabs .info {
