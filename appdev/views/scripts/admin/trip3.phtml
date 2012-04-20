@@ -1,167 +1,230 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
-	<head>
-		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-		<title><?= $this->trip->title ?> - Admin | Tripfab.com</title>
-        <link type="text/css" rel="stylesheet" href="/css5/reset.css" />
-        <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-		<script type="text/javascript" src="/js2/jquery.js"></script>
-		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
-  		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css" />
-  		<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
-  		<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
-  		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]--> 
-    	<script type="text/javascript" src="/js2/admin/traveller-view.js"></script>
-			<script type="text/javascript">
-				$(document).ready(function() {
-					$('a.lbc').fancybox({
-						padding: 0,
-						overlayColor: '#FFF',
-						overlayOpacity: '0.7',
-						showCloseButton: 'false',
-					});
-            		$("#report_tabs").tabs();
-					
-					panel(<?php echo $this->user->id?>, 1, 'partner');
-				});
-			</script>
-		</head>
-		<body>
-			<div class="w1">
-    		<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
-			
-			<div class="w3_admin">
-				<div class="sub_menu">
-					<h2>Create. <span>New Trip.</span></h2>
-					<a class="btn-10" href="" target="_blank">Trip Preview</a>						
-				</div><!--SUB_MENU-->
-            </div><!--W3-->
-				
-				<div id="trips" class="listing-wrapper wrapper">
-					<div class="listing-content">
-						<div class="left">
-							<ul>
-								<li><a href="<?php echo $this->url(array('page'=>1))?>">General Information</a></li>
-								<li><a href="<?php echo $this->url(array('page'=>2))?>">Trip Facts</a></li>
-								<li class="current"><a href="<?php echo $this->url(array('page'=>3))?>">Photos</a></li>
-								<li><a href="<?php echo $this->url(array('page'=>4))?>">Trip Details</a></li>
-								<li><a href="<?php echo $this->url(array('page'=>5))?>">Itinerary</a></li>
-							</ul>
-						</div>
-						<!-- closes left -->
-						<div class="right">
-							<?php if($this->successMessage): ?>
-							<script type="text/javascript">
-                                showAlert("Your changes have been saved");
-                            </script>
-                            <?php endif ?>	
-            
-                            <?php if(count($this->errors)) : ?>
-                            <center>
-                            <div style="border:1px solid red; margin-left:22px; margin-right:22px; margin-bottom:10px;">
-                                <?php foreach($this->errors as $error):?>
-                                    <p><?php echo $error;?></p>
-                                <?php endforeach;?>
-                            </div>
-                            </center>
-                            <?php endif;?>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->trip->title ?> - Admin | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css5/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]--> 
+	<script type="text/javascript" src="/js2/jquery.js"></script>
+    <script type="text/javascript" src="/js2/admin/traveller-view.js"></script>
+    <style type="text/css">
+		#file_upload3 { float:right;}
+		.qq-upload-button {
+			-moz-border-radius: 4px 4px 4px 4px;
+			background: url("../images2/btn-1.gif") repeat-x 0 0 #8DC73F;
+			border: 1px solid #7AB130;
+			color: white;
+			cursor: pointer;
+			display: block;
+			font: bold 11px/30px Helvetica;
+			height: 30px;
+			margin-left: 10px;
+			text-align: center;
+			padding: 0 8px;
+			text-shadow: 0px 1px 0px #5C961F;
+			filter: dropshadow(color=#5C961F, offx=0, offy=1);}		
+		#qqPhotoQueueUL {
+			float:right;
+			width:400px;
+			padding:10px;
+			list-style:none;}
+			#qqPhotoQueueUL li {
+				border-bottom:1px solid #CCC;
+				overflow:hidden;
+				padding-bottom:5px;
+				margin-bottom:5px;
+				line-height:18px;}
+				#qqPhotoQueueUL li.qq-upload-fail span.qq-upload-progress-range { 
+					background:#F00;}
+			#qqPhotoQueueUL li:last-child {
+				border:none;
+				padding-bottom:0;
+				margin-bottom:0;}
+				#qqPhotoQueueUL li span.qq-upload-progress {
+					float:left;
+					height:18px;
+					background:#CCC;
+					position:relative;
+					width:350px;
+					clear:none;}
+					#qqPhotoQueueUL li span.qq-upload-progress-range {
+						position:absolute;
+						top:0; left:0;
+						height:18px;
+						background:#7CCBFF;}
+				#qqPhotoQueueUL li span.qq-upload-size {
+					clear:none;
+					float:right;
+					widows:50px;}
+				#qqPhotoQueueUL li a.qq-upload-cancel {
+					display:none;}
+				#qqPhotoQueueUL li span.qq-upload-failed-text {
+					display:none;}
+	</style>
+</head>
+<body>
+<div class="w1">
+    <?php echo $this->partial('admin_partials/header.phtml', array()); ?>    
+    <div class="w3_admin">
+        <div class="sub_menu">
+            <h2>Create. <span>New Trip.</span></h2>
+            <a class="btn-10" href="" target="_blank">Trip Preview</a>						
+        </div><!--SUB_MENU-->
+    </div><!--W3-->
 
-                            
-                            
-                            <form name="f1" method="post" enctype="multipart/form-data">
-                                <div class="profile-items">
-                                    <div class="item-wrppr">
-                                        <h3>Photos <a href="/admin/trips" class="back">Back to Trips</a></h3>								
-                                    </div>
-                                    <!-- closes item-wrppr -->
-                                    <div class="item-wrppr">
-                                        <h4 class="photo_tittle">Picture Requirements</h4>
-                                        <dl class="photo-limit two">
-                                            <dt>Photo Dimention</dt>
-                                            <dd>640x425 pixels</dd>
-                                            <dt>File size</dt>
-                                            <dd>2MB or less</dd>
-                                        </dl>
-                                        <a href="" class="btn-1">Upload Photos</a>
-                                    </div>
-                                    <!-- closes item -->
-                                    
-                                    <div class="item-wrppr">
-                                        <div class="pht">
-                                            <div class="image">
-                                                <img width="132" height="98" src="https://developer.tripfab.com/images6/home_pic1.jpg" alt="" />
-                                            </div><!--IMAGE-->
-                                            
-                                            <div class="info">
-                                                <strong>Photo Description</strong>
-                                                <input type="text" name="" value="" />
-                                                <a href="" class="remove">Remove Picture</a>
-                                            </div><!--INFO-->
-                                            
-                                        </div><!--PHOTO-->
-                                    </div><!-- closes item-wrppr -->
-                                    
-                                    <div class="item-wrppr">
-                                        <div class="pht">
-                                            <div class="image">
-                                                <img width="132" height="98" src="https://developer.tripfab.com/images6/home_pic1.jpg" alt="" />
-                                            </div><!--IMAGE-->
-                                            
-                                            <div class="info">
-                                                <strong>Photo Description</strong>
-                                                <input type="text" name="" value="" />
-                                                <a href="" class="remove">Remove Picture</a>
-                                            </div><!--INFO-->
-                                            
-                                        </div><!--PHOTO-->
-                                    </div><!-- closes item-wrppr -->
-                                                                
-                                    
-                                    
-                                    
-                
-                                    <div class="foot">
-                                        <input type="submit" class="btn-1" value="Save Changes" />
-                                        <a href="">Delete Trip</a>
-                                    </div>
-                                    <!-- closes foot -->
-                                </div>
-                                <!-- closes profile-items -->
-							</form>
-						</div>
-						<!-- closes right -->
-					</div>
-					<!-- closes listing-content -->
-				</div>
-					
-			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
-		</div>
-		<!-- closes w1 -->
-		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
-        
-        <script>
-		function removeElement(elm, divName){
-			var d = document.getElementById(divName);
-  			d.removeChild(elm.parentNode);
-		}
+    <div id="trips" class="listing-wrapper wrapper">
+        <div class="listing-content">
+            <div class="left">
+                <ul>
+                    <li><a href="<?php echo $this->url(array('page'=>1))?>">General Information</a></li>
+                    <li><a href="<?php echo $this->url(array('page'=>2))?>">Trip Facts</a></li>
+                    <li class="current"><a href="<?php echo $this->url(array('page'=>3))?>">Photos</a></li>
+                    <li><a href="<?php echo $this->url(array('page'=>4))?>">Trip Details</a></li>
+                    <li><a href="<?php echo $this->url(array('page'=>5))?>">Itinerary</a></li>
+                </ul>
+            </div><!-- closes left -->
+            <div class="right">
+                <?php if($this->successMessage): ?>
+                <script type="text/javascript">
+                    showAlert("Your changes have been saved");
+                </script>
+                <?php endif ?>	
+
+                <?php if(count($this->errors)) : ?>
+                <center>
+                    <div style="border:1px solid red; margin-left:22px; margin-right:22px; margin-bottom:10px;">
+                        <?php foreach($this->errors as $error):?>
+                            <p><?php echo $error;?></p>
+                        <?php endforeach;?>
+                    </div>
+                </center>
+                <?php endif;?>
+
+                <form name="f1" method="post" enctype="multipart/form-data">
+                    <div class="profile-items">
+                        <div class="item-wrppr">
+                            <h3>Photos <a href="/admin/trips" class="back">Back to Trips</a></h3>								
+                        </div><!-- closes item-wrppr -->
+                        <div class="item-wrppr">
+                            <h4 class="photo_tittle">Picture Requirements</h4>
+                            <dl class="photo-limit two">
+                                <dt>Photo Dimention</dt>
+                                <dd>640x425 pixels</dd>
+                                <dt>File size</dt>
+                                <dd>2MB or less</dd>
+                            </dl>
+            				<div id="file_upload3"></div>
+				            <div id="qqPhotoQueue"><ul id="qqPhotoQueueUL"></ul></div>
+                        </div><!-- closes item --> 
+						<?php if(count($this->pictures) > 0): ?>
+						<?php foreach($this->pictures as $pic): ?>            
+                        <div class="item-wrppr">
+                            <div class="pht">
+                                <div class="image">
+                            		<?= $this->thumbnail(array('width'=>133,'height'=>92), $pic->url, '','133:92') ?>
+                                </div><!--IMAGE-->
+                                <div class="info">
+                                    <strong>Photo Description</strong>
+                                    <input class="noclean" placeholder="Add a nice description of this photo" type="text" 
+                                    name="pic[<?= $pic->id ?>][description]" value="<?= $pic->description ?>" />
+		                            <a href="#img_delete_<?= $pic->id ?>" class="lbs remove">Remove Picture</a>
+                                </div><!--INFO-->
+                            </div><!--PHOTO-->
+                        </div><!-- closes item-wrppr -->
+                        <?php endforeach ?>
+                        <?php else: ?>
+                        <div class="photo empty">
+                            <img src="/images/empty-5.png" />
+                            <p>You don't have photos for this listing<br />
+                            <a href="#" class="uploadTrigger">Upload some pictures now</a>
+                            </p>
+                        </div>
+                        <?php endif ?>      
+                        <div class="foot">
+                            <input type="submit" class="btn-1 noclean" value="Save Changes" />
+                            <a href="">Delete Trip</a>
+                        </div><!-- closes foot -->
+                    </div><!-- closes profile-items -->
+                    <input type="hidden" name="ids" value="<?= $this->trip->id ?>" />
+                    <input type="hidden" name="_task" value="<?= md5('edit_picture') ?>" />
+                </form>
+            </div><!-- closes right -->
+        </div><!-- closes listing-content -->
+    </div>  
+    <?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+</div><!-- closes w1 -->
+<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+<div class="hidden">
+	<?php foreach($this->pictures as $img): ?>
+    <div id="img_delete_<?= $img->id ?>" class="lb-forgot">
+        <form action="" method="post" id="form_picture_delete_<?= $img->id ?>">
+            <div class="ttl">Delete Picture</div>
+            <div class="content">
+                <p>Are you sure you want to delete this picture?</p>
+            </div><!-- closes content -->
+            <div class="bottom">
+                <input type="submit" class="btn-1 noclean" value="Delete" />
+                <span class="btn-4" onclick="$.fancybox.close()">Cancel</span>				
+            </div><!-- closes bottom -->
+            <input type="hidden" name="ids" value="<?= $this->trip->id ?>" />
+            <input type="hidden" name="img_id" value="<?= $img->id ?>" />
+            <input type="hidden" name="_task" value="<?= md5('delete_picture') ?>" />
+        </form>
+    </div><!-- closes lb-forgot -->
+    <?php endforeach ?>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('a.lbc').fancybox({
+			padding: 0,
+			overlayColor: '#FFF',
+			overlayOpacity: '0.7',
+			showCloseButton: 'false',
+		});
 		
-		function addElement(divName, inclusion){
-			var d = document.getElementById(divName);
-			var html = '<div>';
-			html += '<a href="javascript://" class="remove" name="delete" onclick="removeElement(this, \'' + divName + '\')">remove</a>';
-			if(inclusion){
-				html += '<textarea cols="" rows="" name="inclusion[]"  class="noclean"></textarea>';
-				html += '<input type="hidden" name="iid[]" value="0"/>';
+		var uploader = new qq.FileUploader({
+			element: document.getElementById('file_upload3'),
+			action: '/phpscripts/uploadTripPhotos.php',
+			multiple:true,
+			fileTemplate: '<li>' +
+							  '<span class="qq-upload-file"></span>' +
+							  '<span class="qq-upload-progress"><span class="qq-upload-progress-range"></span></span>' +
+							  '<span class="qq-upload-size"></span>' +
+							  '<span class="qq-upload-spinner"></span>' +
+							  '<a class="qq-upload-cancel" href="#">Cancel</a>' +
+							  '<span class="qq-upload-failed-text">Failed</span>' +
+						  '</li>',    
+			params:{
+				'listings':<?= $this->trip->id ?>,
+			},
+			allowedExtensions:['jpg', 'jpeg', 'png', 'gif'],
+			sizeLimit:2097152,
+			listElement:document.getElementById('qqPhotoQueueUL'),
+			onProgress: function(id, fileName, loaded, total){
+				var _w = loaded * 100 / total; _w = _w + "%";
+				$('#qqPhotoQueueUL li:eq('+id+') .qq-upload-progress-range').css({
+					width:_w
+				});
+			},
+			showMessage:function(err) {
+				showError(err);
 			}
-			else{
-				html += '<textarea cols="" rows="" name="exclusion[]"  class="noclean"></textarea>';
-				html += '<input type="hidden" name="eid[]" value="0"/>';
-			}
-			html += '<div class="clear"></div>';
-			html += '</div>';
-			
-			$('#'+ divName).append(html);
-		}
-		</script>
-	</body>
+		}); 
+		
+		$('.uploadTrigger').click(function(){
+			$('#file_upload3 input').click();
+			return false;
+		});
+		$('a.deny').click(function(){
+			showError('You have upload 10 images already');
+			return false;
+		});
+	});
+</script>
+</body>
 </html>

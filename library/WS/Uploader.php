@@ -255,4 +255,71 @@ class WS_Uploader {
             echo htmlspecialchars(json_encode(array('error'=>$e->getMessage())), ENT_NOQUOTES);
         }
     }
+    
+    public function uploadTripPhotos()
+    {
+        try
+        {   
+            error_reporting(E_ALL);  
+
+            $listing_id     = $_GET['listings'];
+
+            $dbAdapter = new Zend_Db_Adapter_Mysqli(array(
+                'host'      =>  'localhost',
+                //'username'  =>  'costar_admCoreTF',
+                //'password'  =>  'OgkX-JLV2L7i',
+                'username'  =>  'root',
+                'password'  =>  'root',
+                'dbname'    =>  'costar_coreTF'
+            ));
+
+            Zend_Db_Table::setDefaultAdapter($dbAdapter);
+
+            $listings_db = new Zend_Db_Table('trips');
+            $select = $listings_db->select();
+            $select->where('id = ?', $listing_id);
+            $listing = $listings_db->fetchRow($select);
+            if(is_null($listing))
+                    throw new Exception();
+
+            $images_db = new Zend_Db_Table('trip_photos');
+            $image = $images_db->fetchNew();
+            $image->trip_id  = $listing->id;
+            $image->created     = date('Y-m-d H:i:s');
+            $image->updated     = $image->created;
+            $image->save();
+
+            $publicPath  = realpath(APPLICATION_PATH.'/../html');
+            $publicPath2 = realpath(APPLICATION_PATH.'/../html/d3E3v8E3l5O6p7E7r3');
+            $targetPath  = '/images/trips/'.$listing->id . '/';
+
+            $url        = $targetPath . $image->id . substr(md5($image->id), 5, 12) .'.jpg';
+            $targetFile = str_replace('//','/',$publicPath . $url);
+
+            $allowedExtensions = array('jpg','jpeg','png','gif');
+            $sizeLimit = 2 * 1024 * 1024;
+            $paths = array(
+                'public'    => $publicPath.$targetPath,
+                'tagetfile' => $targetFile,
+                'public2'   => $publicPath2.$targetPath
+            );
+
+            $uploader = new WS_Uploader_Service($allowedExtensions, $sizeLimit);
+
+            $result = $uploader->handleUpload($paths);
+
+            if(isset($result['success'])) {
+                $image->url = $url;
+                $image->save();
+            } else {
+                $image->delete();
+            }
+
+            echo htmlspecialchars(json_encode($result), ENT_NOQUOTES);
+        } 
+        catch(Exception $e)
+        {
+            echo htmlspecialchars(json_encode(array('error'=>$e->getMessage())), ENT_NOQUOTES);
+        }
+    }
 }
