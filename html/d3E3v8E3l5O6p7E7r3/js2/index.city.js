@@ -264,7 +264,15 @@ $(function(){
 				
                 $('ul.cat-menu li.active').removeClass('active');
                 $a.parents('li').addClass('active');
+                
                 $('#search_result .content').html(results);
+                
+                $("img.lazy").lazyload({ 
+                    effect : "fadeIn",
+                    load:function(){
+                        $(this).removeClass('lazy');
+                    }
+                });
                 
                 //loadMore($data);
             },
@@ -368,6 +376,12 @@ $(function(){
                     success:function(results){
                         if(results != "") {
                             $('#search_result .content .results-wrapper').append(results);
+                            $("img.lazy").lazyload({ 
+                                effect : "fadeIn",
+                                load:function(){
+                                    $(this).removeClass('lazy');
+                                }
+                            });
                         } else {
                             proceed = false;
                         }
