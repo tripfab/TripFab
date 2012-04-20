@@ -1492,13 +1492,14 @@ class WS_ListingService {
         $row->kids              = (isset($info['kids'])) ? $info['kids'] : $info['price'];
         $row->additional        = $info['additional'];
         if(!is_null($schedule) and !is_null($season)){
-            $row->additional_after  = $info['additional_after'];
+            if($info['additional'] > 0)
+                $row->additional_after  = $info['additional_after'];
             //var_dump($info);
         }
         else {
-            if(isset($data['additional_after']))
+            if(isset($data['additional_after']) and $data['aditional'] > 0)
                 $row->additional_after  = $data['additional_after'];
-            else
+            elseif($info['additional'] > 0)
                 $row->additional_after  = $info['additional_after'];
         }
         $row->day               = $day;

@@ -1,3 +1,14 @@
+<?php $def_additional = 0;
+foreach($this->sch as $season) {
+	if($def_additional != 0) 
+		break;
+    foreach($season as $sch) {
+	    if($def_additional != 0) 
+			break;
+        if(!empty($sch['additional_after'])){
+        	$def_additional = $sch['additional_after']; 
+			break;
+}}}?>
 <form action="" method="post" id="form_pricing">
 	<div class="pricing-tabs">
         <ul>
@@ -27,13 +38,22 @@
                     ? $this->sch[0][$sch->id]['additional'] : "0.00" ?>"/>
                     <label>Per night for each guest after</label>
                     <select name="sch[0][<?= $sch->id ?>][additional_after]">
+                    	<option value="0">--</option>
                         <?php foreach($this->persons as $i): ?>
+                        <?php if(!isset($this->sch[0][$sch->id]['additional_after']) || $this->sch[0][$sch->id]['additional_after'] == 0): ?>
+                        <?php if($def_additional == $i): ?>
+                        <option selected="selected" value="<?= $i ?>"><?= $i ?></option>
+                        <?php else: ?>
+                        <option value="<?= $i ?>"><?= $i ?></option>
+                        <?php endif ?>						
+						<?php else: ?>
                         <?php if($this->sch[0][$sch->id]['additional_after'] == $i): ?>
                         <option selected="selected" value="<?= $i ?>"><?= $i ?></option>
                         <?php elseif($i == 2): ?>
                         <option selected="selected" value="<?= $i ?>"><?= $i ?></option>
                         <?php else: ?>
                         <option value="<?= $i ?>"><?= $i ?></option>
+                        <?php endif ?>
                         <?php endif ?>
                         <?php endforeach ?>
                     </select>
@@ -75,13 +95,23 @@
                             ? $this->season[$season->id][$sch->id]['additional'] : "0.00" ?>"/>
                             <label>Per night for each guest after</label>
                             <select name="sch[<?= $season->id ?>][<?= $sch->id ?>][additional_after]">
+		                    	<option value="0">--</option>
                                 <?php foreach($this->persons as $i): ?>
+                                <?php if(!isset($this->season[$season->id][$sch->id]['additional_after']) || 
+								$this->season[$season->id][$sch->id]['additional_after'] == 0): ?>
+								<?php if($def_additional == $i): ?>
+                                <option selected="selected" value="<?= $i ?>"><?= $i ?></option>
+                                <?php else: ?>
+                                <option value="<?= $i ?>"><?= $i ?></option>
+                                <?php endif ?>						
+                                <?php else: ?>
                                 <?php if($this->season[$season->id][$sch->id]['additional_after'] == $i): ?>
                                 <option selected="selected" value="<?= $i ?>"><?= $i ?></option>
                                 <?php elseif($i == 2): ?>
                                 <option selected="selected" value="<?= $i ?>"><?= $i ?></option>
                                 <?php else: ?>
                                 <option value="<?= $i ?>"><?= $i ?></option>
+                                <?php endif ?>
                                 <?php endif ?>
                                 <?php endforeach ?>
                             </select>
