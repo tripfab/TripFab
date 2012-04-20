@@ -168,9 +168,20 @@ class AjaxController extends Zend_Controller_Action
                         if(!is_null($price) and $price->price != 0)
                                 $validate['price']['done'] = true;
 
-                        $schedules = $this->listings->getSchedulesOf($listing->id);
-                        if(count($schedules) > 0)
+                        $rooms = $this->listings->getHotelRooms($listing->id);
+                        $done = true;
+                        if(count($rooms) > 0) {
+                            foreach($rooms as $room) {
+                                if($room->people == 0 and $done) {
+                                    $done = false;
+                                }
+                            }
+                            if($done) {
                                 $validate['options']['done'] = true;
+                            } else {
+                                $validate['options']['desription'] = 'Some of the roooms do not have the maximun of people allowed on the room';
+                            }
+                        }
 
                         break;
                     case 6:
@@ -180,9 +191,35 @@ class AjaxController extends Zend_Controller_Action
                             'desription' => 'Add the listing pricing',
                             'done' => false,
                         );
+                        $validate['capacity'] = array(
+                            'url' => '/admin/listings/edit/',
+                            'label' => 'Activity Capacity',
+                            'description' => 'Define the activity maximun and minimun capacity required',
+                            'done' => false
+                        );
                         $price = $this->listings->getBasicPrice($listing->id);
                         if(!is_null($price) and $price->price != 0)
-                                $validate['price']['done'] = true;                    
+                                $validate['price']['done'] = true;  
+                        
+                        if(!is_null($listing->min) and !is_null($listing->max)) {
+                            $validate['capacity']['done'] = true;
+                        } else {
+                            $capacities = $this->listings->getActivityTypes($listing->id);
+                            $done=true;
+                            if(count($capacities) > 0) {
+                                foreach($capacities as $c) {
+                                    if(($c->min == 0 or $c->max ==0) and $done) {
+                                        $done = false;
+                                    }
+                                }
+                                if($done) {
+                                    $validate['capacity']['done'] = true;
+                                } else {
+                                    $validate['capacity']['description'] = 'Some of the Activity Types do not have a minimun or maximun capacity defined';
+                                    $validate['capacity']['url'] = 'admin/listings/types/';
+                                }
+                            }
+                        }
 
                         break;
                     default: break;
@@ -335,9 +372,20 @@ class AjaxController extends Zend_Controller_Action
                         if(!is_null($price) and $price->price != 0)
                                 $validate['price']['done'] = true;
 
-                        $schedules = $this->listings->getSchedulesOf($listing->id);
-                        if(count($schedules) > 0)
+                        $rooms = $this->listings->getHotelRooms($listing->id);
+                        $done = true;
+                        if(count($rooms) > 0) {
+                            foreach($rooms as $room) {
+                                if($room->people == 0 and $done) {
+                                    $done = false;
+                                }
+                            }
+                            if($done) {
                                 $validate['options']['done'] = true;
+                            } else {
+                                $validate['options']['desription'] = 'Some of the roooms do not have the maximun of people allowed on the room';
+                            }
+                        }
 
                         break;
                     case 6:
@@ -347,10 +395,35 @@ class AjaxController extends Zend_Controller_Action
                             'desription' => 'Add the listing pricing',
                             'done' => false,
                         );
+                        $validate['capacity'] = array(
+                            'url' => '/admin/listings/edit/',
+                            'label' => 'Activity Capacity',
+                            'description' => 'Define the activity maximun and minimun capacity required',
+                            'done' => false
+                        );
                         $price = $this->listings->getBasicPrice($listing->id);
                         if(!is_null($price) and $price->price != 0)
-                                $validate['price']['done'] = true;                    
-
+                                $validate['price']['done'] = true;  
+                        
+                        if(!is_null($listing->min) and !is_null($listing->max)) {
+                            $validate['capacity']['done'] = true;
+                        } else {
+                            $capacities = $this->listings->getActivityTypes($listing->id);
+                            $done=true;
+                            if(count($capacities) > 0) {
+                                foreach($capacities as $c) {
+                                    if(($c->min == 0 or $c->max ==0) and $done) {
+                                        $done = false;
+                                    }
+                                }
+                                if($done) {
+                                    $validate['capacity']['done'] = true;
+                                } else {
+                                    $validate['capacity']['description'] = 'Some of the Activity Types do not have a minimun or maximun capacity defined';
+                                    $validate['capacity']['url'] = 'admin/listings/types/';
+                                }
+                            }
+                        }
                         break;
                     default: break;
                 }
