@@ -3856,8 +3856,30 @@ class AdminController extends Zend_Controller_Action {
             case 'data':
                 $this->tripDataTask();
                 break;
+            case 'delete':
+                $this->tripDeleteTask();
+                break;
             default:
                 throw new Exception('Page not found');
+        }
+    }
+    
+    private function tripDeleteTask()
+    {
+        $tripId = (int) $this->_getParam('page');
+        
+        if (!$tripId) {
+            $this->_redirect('/admin/trips');
+        }
+        
+        try {    
+            $trip = $this->trips->getTripById($tripId);
+            $title = $trip->title;
+            $trip->delete();
+            setcookie('alert', 'Trip "'.$title.'" has been deleted');
+            $this->_redirect('/admin/trips');
+        } catch (Exception $e) {
+            $this->_redirect('/admin/trips');
         }
     }
 
