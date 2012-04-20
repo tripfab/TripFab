@@ -3,7 +3,7 @@
 	background: url(https://developer.tripfab.com/images6/gr-h.gif) repeat-x 0 0;
 	height: 51px;
 	position: relative;
-	z-index: 1001;
+	z-index: 1000;
 }
 #wp_header #header .cont{
 	width: 960px;
@@ -386,8 +386,6 @@
 .header-login .dd.login input.in-3 {
 	background: url(https://developer.tripfab.com/images6/ico-37.png) no-repeat scroll 97% 50% transparent;
 }
-
-
 .big-message {
 	height: 63px;
 	line-height: 61px;
@@ -427,6 +425,61 @@
 	width: 19px;
 }
 
+
+
+#citiesAutocompleteContainer {
+	height:0px;
+	position: relative;
+	z-index: 10000000;
+	}
+#citiesAutocompleteContainer .ui-autocomplete { 
+	background:#fff; 
+	border:1px solid #D8D8D8; 
+	border-top:none; 
+	box-shadow: 0 0 10px #000000; 
+	width:198px !important;
+	list-style:none; 
+	max-height:200px; 
+	overflow-y:auto; 
+	z-index:100 !important;
+	height:auto !important;}
+#citiesAutocompleteContainer .ui-autocomplete li a {
+	display:block;
+	line-height:20px;
+	font-size: 12px;
+	color:#464646;
+	font-weight:normal;
+	padding: 0 20px 0 10px;
+	text-shadow:none;}
+#citiesAutocompleteContainer .ui-autocomplete li a.ui-state-hover {
+	background: url(https://developer.tripfab.com/images2/arrow-25.png) no-repeat 98% 50% #60b6e8;
+	color: #FFFFFF;
+	text-decoration:none;}
+#citiesAutocompleteContainer2 {
+	height:0px;}
+#citiesAutocompleteContainer2 .ui-autocomplete { 
+	max-height: 240px;
+	width:546px !important;
+	background:#fff; 
+	border:1px solid #E8E7E7; 
+	border-radius: 2px;
+	box-shadow: 0 0 10px #000000; 
+	border-top:none; 
+	list-style:none; 
+	overflow-y:auto; 
+	z-index:100 !important;
+	height:auto !important;}
+#citiesAutocompleteContainer2 .ui-autocomplete li a { 
+	line-height:24px;
+	color:#464646;
+	padding-left:10px;
+	font-weight:bold;
+	display:block;
+	font-size: 14px;}
+#citiesAutocompleteContainer2 .ui-autocomplete li a.ui-state-hover { 
+	background: url(https://developer.tripfab.com/images2/arrow-25.png) no-repeat 98% 50% #60b6e8;
+	color: #FFFFFF;
+	text-decoration:none;}
 /*- END HEADER STYLES-----------------------------------------------------------*/
 
 /*- FOOTER STYLES---------------------------------------------------------------*/
