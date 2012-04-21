@@ -17913,6 +17913,75 @@ background-color: #FFF;
 	text-align: center;
 	font: bold 20px Helvetica;
 }
+
+
+#all_trips .notification {
+	margin-bottom: 20px;
+	background-color: #ffffdb;
+	width: 960px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	border: 1px solid #e4e4ae;
+	overflow: hidden;
+}
+#all_trips .notification span {
+	display: block;
+	margin: 14px 11px 0 17px;
+	background: url(https://developer.tripfab.com/images6/myalltrips_icon.png) no-repeat 0 0;
+	width: 32px;
+	height: 32px;
+	float: left;
+}
+#all_trips .notification .end {
+	background-position: left top;
+}
+#all_trips .notification .soon {
+	background-position: left bottom;
+}
+#all_trips .notification h2 {
+	color: #f68e56;
+	font: bold 13px Helvetica;
+	margin-bottom: 4px;
+}
+#all_trips .notification .text {
+	float: left;
+	padding: 13px 0 10px 0;
+	width: 784px;
+}
+#all_trips .notification .text p {
+	color: #303030;
+	font: normal 13px/17px Helvetica;
+}
+#all_trips .notification .btn-10 {
+	float: right;
+	display: block;
+	height: 30px;
+	margin: 15px 15px 0 0;
+}
+#all_trips .single .info .data dd.ended {
+	color: #f26522;
+}
+#redefineDates {
+	width: 291px;
+}
+#redefineDates .top {
+	text-indent: 20px;
+	font: bold 15px/44px Helvetica;
+}
+#redefineDates .cont{
+	background-color: #FFF;
+}
+#redefineDates .cont p {
+	background-color: #f3f3f3;
+	font: bold 13px/40px Helvetica;
+	height: 40px;
+	text-indent: 20px;
+}
+#redefineDates .bottom .btn-1 {
+	margin-right: 10px;
+}
+
 /*END MY TRIPS-------------------------------------------------------------*/
 
 /*SEARCH RESULTS COLLECTION------------------------------------------------*/
