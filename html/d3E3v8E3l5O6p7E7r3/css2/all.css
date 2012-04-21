@@ -12013,6 +12013,7 @@ h2.title .back:hover,
 	position: absolute;
 	top: -41px;
 	left: -1px;
+	width: 100%;
 }
 .trip-itinerary ul.menu li {
 	float: left;
@@ -12035,6 +12036,15 @@ h2.title .back:hover,
 	border-top: 4px solid #60b5f7;
 	background-color: #FFF;
 	color: #303030;
+}
+.trip-itinerary ul.menu li.back {
+	float: right;
+}
+.trip-itinerary ul.menu li.back a {
+	color: #60b5f7;
+	font: bold 11px/32px Helvetica;
+	text-align: right;
+	padding-right: 0;
 }
 .trip-itinerary .overview .image {
 	margin: 15px;
@@ -12078,13 +12088,13 @@ h2.title .back:hover,
 }
 .trip-itinerary .overview .image .info .duration{
 	display: inline-block;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
 	background-color: #60b5f7;
 	height: 16px;
-	padding: 0 10px;
-	font: bold 11px/16px Helvetica;
+	padding: 0 5px;
+	font: bold 11px/17px Helvetica;
 	color: #FFF;
 	text-transform: uppercase;
 }
@@ -12156,7 +12166,6 @@ h2.title .back:hover,
 	border-bottom: none;
 	behavior: (/PIE.htc);
 }
-.trip-itinerary .tabs-wrapper .
 .trip-itinerary .hight-lights h4 {
 	color: #000000;
 	font-size: 16px;
@@ -12203,7 +12212,6 @@ h2.title .back:hover,
 	padding: 20px 50px;
 	position: relative;
 	box-shadow: none;
-	height: 445px !important;
 }
 .trip-itinerary .tabs-wrapper .tab > div {
 	height: 445px !important;
@@ -12478,6 +12486,7 @@ h2.title .back:hover,
 .trip-itinerary .compare .inner {
 	background: url("https://developer.tripfab.com/images2/itinerary-icon2.png") no-repeat scroll 50% 50% ;
 	overflow: hidden;
+	min-height: 256px;
 }
 .trip-itinerary .compare ul {
 	list-style: none;
@@ -12631,7 +12640,7 @@ h2.title .back:hover,
 }
 .trip-itinerary .box .content .heading{
 	border-bottom: 1px solid #e9e9e9;
-	height: 50px;
+	height: 55px;
 	font: bold 20px/65px Helvetica;
 	margin-bottom: 20px;
 }
@@ -12704,6 +12713,12 @@ h2.title .back:hover,
 }
 .trip-itinerary .box .side h5 .trip {
 	background-position: -185px -8px;
+}
+.trip-itinerary .box .side h5 .nightlife {
+	background-position: -219px -8px;
+}
+.trip-itinerary .box .side h5 .shopping {
+	background-position: -247px -8px;
 }
 .trip-itinerary .box .side p {
 	color: #464646;
@@ -12928,7 +12943,130 @@ h2.title .back:hover,
 .days-cycle, .days-cycle .day {
 	width: 100%!important;
 }
-
+.trip-itinerary .overview .image{
+	background-color: #ebebeb;
+}
+.trip-itinerary .overview .image .empty {
+	width: 250px;
+	background: url(https://developer.tripfab.com/images2/browse_trips_empty1.png) no-repeat top center;
+	margin: 150px auto 0;
+	height: 118px;
+	font: normal 14px/20px Helvetica;
+	color: #303030;
+	position: relative;
+	text-align: center;
+}
+.trip-itinerary .overview .image .empty p {
+	padding-top: 72px;
+}
+.trip-itinerary .overview .image .empty a {
+	color: #60b5f7;
+	font-weight: bold;
+	display: block;
+}
+.trip-itinerary .overview .image .info h3 a {
+	color: #60b5f7;
+	font-size: 15px;
+}
+.trip-itinerary .overview .image .info .place a {
+	color: #60b5f7;
+	font-size: 13px;
+}
+.trip-itinerary .overview .image .info .duration a {
+	color: #FFF;
+}
+.trip-itinerary .overview .image .info .no-set {
+	bottom: 17px;
+	font: 13px/16px Helvetica;
+	position: absolute;
+	right: 20px;
+	text-align: right;
+}
+.trip-itinerary .overview .image .info .no-set a {
+	 color:#60b5f7;
+	 font-weight: bold;
+	 display: block;
+}
+.trip-itinerary .facts p a {
+	color:#60b5f7;
+	font-weight: bold;
+}
+.trip-itinerary .hight-lights > div p.empty {
+	padding: 60px 0;
+	text-align: center;
+}
+.trip-itinerary .hight-lights > div p a {
+	color:#60b5f7;
+	font-weight: bold;
+}
+.trip-itinerary .tabs-wrapper .tab p.empty {
+	text-align: center;
+	font-size: 13px;
+	padding: 116px 0 80px;
+}
+.trip-itinerary .tabs-wrapper .tab p.empty a {
+	color:#60b5f7;
+	font-weight: bold;
+}
+.trip-itinerary .box .slideshow .cont ul.empty li {
+	background: url(https://developer.tripfab.com/images2/browse_trips_upload.png) no-repeat -1px 0;
+}
+.trip-itinerary .box .slideshow .cont ul.empty li:hover a {
+	background: none;
+}
+.trip-itinerary .box .content p.empty {
+	padding-bottom: 0;
+}
+.trip-itinerary .box .content p.empty a{
+	color: #60B5F7;
+	font-weight: bold;
+}
+.trip-itinerary .box .side p a{
+	color: #60B5F7;
+	font-weight: bold;
+}
+.trip-itinerary .compare .left p.empty {
+	padding: 88px 0 0 30px;
+	font: normal 14px Helvetica;
+}
+.trip-itinerary .compare .right p.empty {
+	padding: 88px 30px 0 0;
+	font: normal 14px Helvetica;
+	text-align: right;
+}
+.trip-itinerary .compare p.empty a {
+	color: #60b5f7;
+	font-weight: bold;
+}
+.trip-itinerary .box .side.empty {
+	min-height: 0;
+	background-position:left bottom;
+}
+.trip-itinerary .result p.empty{
+	background: url("https://developer.tripfab.com/images2/itinerary-sep2.png") no-repeat scroll right 50% transparent;
+    color: #FFFFFF;
+    float: right;
+    font: 13px/16px Helvetica;
+    margin: 16px 20px 0 0;
+    padding-right: 21px;
+    text-align: right;
+}
+.trip-itinerary .result p.empty a {
+	color: #60b5f7;
+	font-weight: bold;
+	display: block;
+}
+.box.days .day .day-ttl h2 a {
+	color: #60b5f7;
+}
+.box.days .day .day-section p.empty {
+	text-align: center;
+	font: normal 14px Helvetica;
+	padding: 142px 0;
+}
+.box.days .day .day-section p.empty a {
+	color: #60b5f7;
+}
 /*- End of Trip Itinerary Styles -----------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------*/
 
