@@ -20120,18 +20120,30 @@ h2.title .back:hover,
 	float: left;
 	background: url("https://developer.tripfab.com/images2/ico_127.gif") no-repeat scroll 0 17px;
 	padding-left: 20px;
-}1.w3.browseTrips h2 a {
+}
+.w3.browseTrips .wrapper {
+	position: relative;
+}
+.w3.browseTrips h2 a {
 	color: #60b5f7;
 	font: bold 12px/51px Helvetica;
 }
 .w3.browseTrips h2 a:hover {
 	color:#9BD2FC;
 }
+.w3.browseTrips h3 {
+	font: bold 20px/51px Helvetica;
+	color: #303030;
+	width: 600px;
+	float: left;
+}
 .w3.browseTrips .btn-1 {
-	float: right;
+	position: absolute;
+	top: 10px;
+	right: 0;
 	display: block;
-	padding: 0 10px;
-	margin-top: 10px;
+	font-size: 14px;
+	width: 113px;
 }
 
 /*END-NEW-BROWSE-TRIPS-----------------------------------------------------*/
