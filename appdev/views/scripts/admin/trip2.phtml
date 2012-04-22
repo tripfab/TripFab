@@ -34,7 +34,7 @@
 			<div class="w3_admin">
 				<div class="sub_menu">
 					<h2>Create. <span>New Trip.</span></h2>
-					<a href="/admin/trips/" class="back">Back to Trips</a>
+					<a class="btn-10" href="/admin/trips/preview/<?php echo $this->trip->id?>" target="_blank">Trip Preview</a>		
 					
 				</div><!--SUB_MENU-->
             </div><!--W3-->
@@ -59,103 +59,72 @@
                             </script>
                             <?php endif ?>	
             
-                            <?php if(count($this->errors)) : ?>
-                            <center>
-                            <div style="border:1px solid red; margin-left:22px; margin-right:22px; margin-bottom:10px;">
-                                <?php foreach($this->errors as $error):?>
-                                    <p><?php echo $error;?></p>
-                                <?php endforeach;?>
-                            </div>
-                            </center>
-                            <?php endif;?>
-
-
-                        	<form name="f1" method="post" enctype="multipart/form-data">
-							<div class="pricing-tabs">
-								<div id="tabs-2" class="tab">
-									<div class="carrousel">
-									<?php foreach($this->paragraphs as $key=>$paragraph):?>
-                                        <h3><img src="/images/cleardot.gif" alt="" /><?php echo $paragraph?></h3>
-										<div class="carrousel-itm">
-											<div class="profile-items">
-												
-                                                <?php if(count($this->paras[$key])):?>
-												<?php foreach($this->paras[$key] as $para):?>
-                                                <div id="extreem-outer">
-                                                <div id="sami-outer">
-                                                <div class="item-wrppr">
-													<div class="item first last">
-														<textarea cols="30" class="noclean" rows="1" name="t<?php echo $key?>[]"><?php echo $para['text'] ?></textarea>
-															<h4><span>1</span>Paragraph</h4>
-														<p>Write the first paragraph</p>
-													</div>
-													<!-- closes item -->
-													<div class="clear"></div>			
-												</div>
-												<!-- closes item-wrppr -->
-												<div class="item-wrppr second">
-													<div class="item first last">
-														
-														<table width="470" border="1">
-															<tr>
-																<td width="270">
-																	<h4>Picture Requeriments</h4>
-																	<dl class="photo-limit">
-																		<dt>Upload limit</dt>
-																		<dd>10 photos per listing</dd>
-																		<dt>Photo Dimention</dt>
-																		<dd>640x425 pixels</dd>
-																		<dt>File size</dt>
-																		<dd>2MB or less</dd>
-																	</dl>
-																</td>
-																<td width="200">
-																	<img src="<?php echo $para['image'] ?>" width="68" height="68" alt="" />
-																	<input type="file" name="f<?php echo $key?>[]" />
-																	<input type="hidden" name="h<?php echo $key?>[]" value="<?php echo $para['image'] ?>" />
-																</td>
-															</tr>
-														</table>
-													</div>
-													<!-- closes item -->
-                                                    <div class="remove-p"><a href="javascript://" class="remove">Remove Paragraph</a></div>
-													<div class="clear"></div>
-                                                    </div>
-												<!-- closes item-wrppr -->
-
-												</div>
-                                                <!-- close sami-outer-->
-                                                <div class="clear"></div>
-												</div> <!-- closes extreem-outer-->
-												<?php endforeach;?>
-												<?php else:?>
-                                                	<div class="item-wrppr">
-                                                      <div style="text-align:center; width:100%; height:40px; margin-top:30px;">No paragraph added for this section</div>
-                                                    </div>
-                                                    <div class="clear"></div>
-                                                
-												<?php endif;?>
-											</div>
-											<!-- closes profile-items -->
- 											<div class="add-p"><a class="add-para-l" href="javascript://" identifier="<?php echo $key?>">Add Paragraph</a></div>
-                                           
-										</div>
-										<!-- closes carrousel-itm -->
-                                      <?php endforeach;?>
-                                        
-									
-									</div>
-									<!-- closes carrousel -->
+                            <form name="f1" method="post">
+							<div class="profile-items">
+								<div class="item-wrppr">
+									<h3>Trip Facts <a href="http://developer.tripfab.com/admin/trips" class="back">Back to Trips</a></h3>								
 								</div>
-								<!-- closes tab -->
+								<!-- closes item-wrppr -->
+								
+                                <?php foreach($this->facts as $fact): ?>
+                                  <?php if($fact['multi']):?>
+                                    <div class="item-wrppr">
+                                        <div class="item-ttl">
+                                            <h4><?php echo $fact['title']?><span>Write the first paragraph</span></h4>
+                                        </div><!-- closes item ttl -->									
+                                        <div class="facts-item" id="d<?php echo $fact['id']?>">
+                                            <?php $totalItems = count($fact['facts']); $ctr = 1;?>
+                                            <?php foreach($fact['facts'] as $item):?>
+                                                <?php  if($ctr++ > 3):?>
+                                            		<div class="rmv"><input type="text" name="fact[<?php echo $fact['id']?>][]" value="<?php echo $item->text?>"/><a href="javascript://" class="remove"></a></div>
+                                                <?php else:?>
+                                                    <input type="text" name="fact[<?php echo $fact['id']?>][]" value="<?php echo $item->text?>"/>
+												<?php endif;?>
+                                            <?php endforeach;?>
+                                            <?php for(; $ctr<5; $ctr++):?> 
+                                                <?php  if($ctr > 3):?>
+                                            		<div class="rmv"><input type="text" name="fact[<?php echo $fact['id']?>][]" placeholder="Write an item"/><a href="javascript://" class="remove"></a></div>
+                                                <?php else:?>
+                                                    <input type="text" name="fact[<?php echo $fact['id']?>][]" placeholder="Write an item"/>
+												<?php endif;?>
+                                           <?php endfor;?>
+                                        </div><!--FACTS-ITEM-->
+                                        <div class="add-p">
+                                        <a class="add-para-l" identifier="<?php echo $fact['id']?>" href="javascript://">Write New item</a>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <!-- closes item-wrppr -->
+                                    
+                                  <?php else :?>
+                                    <div class="item-wrppr">
+                                        <div class="item-ttl">
+                                            <h4><?php echo $fact['title']?> <span>Write the first paragraph</span></h4>
+                                        </div><!-- closes item ttl -->									
+                                        <div class="facts-item">
+                                            <textarea cols="" rows="" name="fact[<?php echo $fact['id']?>][]"><?php echo @$fact['facts'][0]->text?></textarea>
+                                        </div><!--FACTS-ITEM-->
+    
+                                        <div class="clear"></div>									
+                                    </div>
+                                    <!-- closes item-wrppr -->
+                                    
+                                   <?php endif;?>
+								<?php endforeach;?>
+								
+                                <div class="foot">
+								<input type="submit" class="btn-1" value="Save Changes">
+								<a href="">Delete Trip</a>
+                                </div>
+                                <!-- closes foot -->
+
+                                
+                                
+                                
 							</div>
-							<!-- closes pricing-tabs -->							
-							<div class="foot">
-								<input type="submit" class="btn-1" value="Save Changes" />
-								<a href="">Deactivate Listing</a>
-							</div>
-							<!-- closes foot -->
+                            <!-- close profile-items -->
 							</form>
+
                         </div>
 						<!-- closes right -->
 					</div>
@@ -170,70 +139,13 @@
         
         <script type="text/javascript">
         	$('.remove').live('click',function(){
-				var dcontainer = $(this).parent("div:first").parent("div:first").parent("div:first").parent("div:first").parent("div:first");
-				var child = $(this).parent("div:first").parent("div:first").parent("div:first").parent("div:first").parent("div:first").children().length ;
-				$(this).parent("div:first").parent("div:first").parent("div:first").parent("div:first").remove();
-				if(child==1){
-					html = '<div class="item-wrppr">';
-					html += '<div style="text-align:center; width:100%; height:40px; margin-top:30px;">No paragraph added for this section</div>';
-                    html += '</div>';
-					html += '<div class="clear"></div>';
-					dcontainer.html(html);
-				}
+				$(this).parent("div:first").remove();
 			});
 			
         	$('.add-para-l').live('click',function(){
 				var identifier = $(this).attr("identifier");
-				
-		      	html ='                  <div id="extreem-outer">';
-			 	html +='							<div id="sami-outer">';
-				html +='						<div class="item-wrppr">';
-				html +='							<div class="item first last">';
-				html +='								<textarea class="noclean" cols="30" rows="1" name="t'+ identifier +'[]"></textarea>';
-				html +='								<h4><span>1</span>Paragraph</h4>';
-				html +='								<p>Write the first paragraph</p>';
-				html +='							</div>';
-				html +='							<!-- closes item -->';
-				html +='							<div class="clear"></div>			';
-				html +='						</div>';
-				html +='						<!-- closes item-wrppr -->';
-				html +='						<div class="item-wrppr second">';
-				html +='							<div class="item first last">';
-				html +='								<table width="470" border="1">';
-				html +='									<tr>';
-				html +='										<td width="270">';
-				html +='											<h4>Picture Requeriments</h4>';
-				html +='											<dl class="photo-limit">';
-				html +='												<dt>Upload limit</dt>';
-				html +='												<dd>10 photos per listing</dd>';
-				html +='												<dt>Photo Dimention</dt>';
-				html +='												<dd>640x425 pixels</dd>';
-				html +='												<dt>File size</dt>';
-				html +='												<dd>2MB or less</dd>';
-				html +='											</dl>';
-				html +='										</td>';
-				html +='										<td width="200">';
-				html +='											<img src="" width="68" height="68" alt="" />';
-				html +='											<input type="file" name="f'+ identifier +'[]" />';
-				html +='											<input type="hidden" name="h'+ identifier +'[]" value="" />';
-				html +='										</td>';
-				html +='									</tr>';
-				html +='								</table>';
-				html +='							</div>';
-				html +='							<!-- closes item -->';
-				html +='							<div class="remove-p"><a href="javascript://" class="remove">Remove Paragraph</a></div>';
-				html +='							<div class="clear"></div>';
-				html +='							</div>';
-				html +='						<!-- closes item-wrppr -->';
-				html +='						</div>';
-				html +='						<!-- close sami-outer-->';
-				html +='						<div class="clear"></div>';
-				html +='						</div> <!-- closes extreem-outer-->';
-		
-				if($(this).parent("div:first").parent("div:first").children("div:first").html().length < 600){
-					$(this).parent("div:first").parent("div:first").children("div:first").html('');	
-				}
-				$(this).parent("div:first").parent("div:first").children("div:first").append(html);
+		      	html ='  <div class="rmv"><input type="text" name="fact[' + identifier + '][]" placeholder="Write an item"/><a href="javascript://" class="remove"></a></div>';
+				$("#d" + identifier).append(html);
 			});
         </script>
 	</body>

@@ -4162,46 +4162,17 @@ class AdminController extends Zend_Controller_Action {
 
     private function tripEditTask2($trip) {
         $this->view->trip = $trip;
-        $facts = $this->trips->getfacts($trip->id);
-        $paragraphs = array(1 => 'The Culture', 'The Environment', 'Knowledge', 'Things you\'ll love', 'When to take this trip', 'Tips & Recommendations');
-        $paras = array();
-        foreach ($facts as $fact) {
-            $paras[$fact->type][] = array('text' => $fact->text, 'image' => $fact->image);
-        }
-
-        foreach ($paragraphs as $key => $value) {
-			if (!isset($paras[$key])) {
-                $paras[$key]= array();
-            }
-
-            /*
-			if (!isset($paras[$key])) {
-                $paras[$key][0] = array('text' => '', 'image' => '');
-            }
-			*/
-        }
-
-        //echo "<pre>"; print_r($paras); die;
-        $this->view->errors = array();
-        $this->view->paragraphs = $paragraphs;
-        $this->view->paras = $paras;
+        $facts = $this->trips->getfacts1($trip->id);
+		//print_r($_POST); die;
+        $this->view->facts = $facts;
         if ($this->getRequest()->isPost()) {
-            $errors = $this->validateTrip2Data($_POST);
-
-            if (count($errors)) {
-                $this->render('trip2');
-                return;
-            }
 
             $this->trips->deleteFacts($trip->id);
-            foreach ($paragraphs as $key => $value) {
-                foreach ($_POST["t$key"] as $innerKey => $text) {
-                    if ($_FILES["f$key"]['name'][$innerKey]) {
-                        $uploadedFileName = $this->saveTripFactPhoto($trip->id, $_FILES["f$key"], $innerKey);
-                    } else {
-                        $uploadedFileName = @$_POST["h$key"][$innerKey];
-                    }
-                    $this->trips->saveFacts($trip->id, $key, $text, $uploadedFileName);
+		    foreach ($_POST['fact'] as $key => $facts) {
+                foreach ($facts as  $text) {
+                    if(!empty($text)){
+						$this->trips->saveFacts($trip->id, $key, $text);
+					}
                 }
             }
 

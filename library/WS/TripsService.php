@@ -609,6 +609,41 @@ class WS_TripsService {
         return $facts;
     }
 
+    public function getFacts1($trip) {
+        $select = $this->DB->select();
+        $this->DB->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select->from('trip_facttypes', array('*'))->order('sequence asc');
+        $factsTypes = $this->DB->fetchAll($select);
+		
+		
+        $select1 = $this->DB->select();
+        $this->DB->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select1->from('trip_facts', array('*'));
+        $select1->where('trip_id = ?', $trip);
+		$select1->order('id');
+        $facts = $this->DB->fetchAll($select1);
+		
+		$factsDetails = array();
+		foreach($factsTypes as $factType){
+			$factsByType = array();
+			foreach($facts as $fact){
+				if($fact->type == $factType->id){
+					$factsByType[] = $fact;
+				}
+			}
+			$factDetails[] = array(
+				'title'=>$factType->title, 
+				'multi'=>$factType->multi, 
+				'id'=>$factType->id, 
+				'sequence'=>$factType->sequence, 
+				'facts'=>$factsByType
+			);
+		}
+		
+		
+        return $factDetails;
+    }
+
     public function deleteFacts($trip) {
         $table = new Zend_Db_Table('trip_facts');
         $table->delete('trip_id = ' . $trip);
@@ -651,7 +686,6 @@ class WS_TripsService {
         $row = $table->fetchNew();
         $row->trip_id = $trip;
         $row->type = $type;
-        $row->image = $imageName;
         $row->text = $text;
         $row->created = date("Y-m-d H:i:s");
         $row->updated = date("Y-m-d H:i:s");
