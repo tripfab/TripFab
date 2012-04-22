@@ -4091,6 +4091,7 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->trip->title = $_POST['title'];
                 $this->view->trip->description = $_POST['description'];
                 $this->view->trip->days = $_POST['days'];
+                $this->view->trip->nights = $_POST['nights'];
                 $this->view->trip->country_id = $_POST['trip_country'];
 
                 $this->render('trip1');
@@ -4100,6 +4101,7 @@ class AdminController extends Zend_Controller_Action {
             $trip->description = $_POST['description'];
 			$trip->price = $_POST['price'];
             $trip->days = $_POST['days'];
+            $trip->nights = $_POST['nights'];
             $trip->country_id = $_POST['trip_country'];
             $trip->save();
 			
@@ -4154,9 +4156,11 @@ class AdminController extends Zend_Controller_Action {
         if (empty($postData['trip_country']))
             $errors['country'] = 'Select Country';
 
-        if (!(int) $postData['days'])
-            $errors['days'] = 'Trip Duration can not be blank';
+        if (!$postData['days'])
+            $errors['days'] = 'Number of days can not be blank';
 
+        if (!$postData['nights'])
+            $errors['nights'] = 'Number of nights can not be blank';
         return $errors;
     }
 
