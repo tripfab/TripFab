@@ -785,6 +785,16 @@ class WS_TripsService {
 			return $this->listings->insert($data);
 		}
 	}
+	
+	public function getDays($trip) {
+        $select = $this->DB->select();
+        $this->DB->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select->from('trip_days', array('*'));
+        $select->where('trip_id = ?', $trip);
+        $days = $this->DB->fetchAll($select);
+        return $days;
+    }
+
 
 
 }

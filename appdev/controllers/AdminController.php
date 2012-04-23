@@ -4344,10 +4344,27 @@ class AdminController extends Zend_Controller_Action {
         }
         $this->view->trip = $trip;
 		$day = $this->_request->getParam('q');
+		$maxDay=1;
+		
+		
+		
+		$tripDays = $this->trips->getDays($trip->id);
+		$tripDayWise = array();
+		foreach($tripDays as $tDay){
+			$tripDayWise[$tDay->day] = $tDay->title;
+		}
+
+		$tripDuration = max($maxDay, $trip->days);
+		for($i=1; $i<=$tripDuration; $i++){
+			if(!isset($tripDayWise[$i])){
+				$tripDayWise[$i] ='';
+			}
+		}
+		ksort($tripDayWise, SORT_NUMERIC);
+		
 		$slide = 0;
 		$items = $this->trips->getListingOf3($trip->id); 
         $dayWise = array();
-		$maxDay=1;
 		foreach($items as $item){
 			if($maxDay > $item->day)
 				$maxDay = $item->day;
@@ -4374,6 +4391,7 @@ class AdminController extends Zend_Controller_Action {
 		}
 		//echo "<pre>" ; print_r($dayWise); die;
 		$this->view->items = $dayWise;
+		$this->view->tripDays = $tripDayWise;
 		$this->view->slide = $slide;
 		$this->render('trip5');
 

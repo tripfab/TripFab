@@ -2310,6 +2310,28 @@ class AjaxController extends Zend_Controller_Action
 		
 	}
 	
+	public function ttitleAction(){
+       
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+        if($user->getRole() != 'admin')
+                throw new Exception('No access allowed');
+		
+		$db = Zend_Db_Table::getDefaultAdapter();
+		$tripId = $_POST['trip'];
+		$day = $_POST['day'];
+		$title = addslashes($_POST['text']);
+		$sql = "INSERT INTO trip_days (trip_id, day, title) VALUES ($tripId, $day, '$title') ON DUPLICATE KEY UPDATE title='$title'";
+		$db->query($sql);
+
+        self::jsonEcho(json_encode(array('attempt' => 'success', 'error_code' => '0', 'description' => '', 'data' => '')));
+		
+	}
+
+
 	public function requestinfoAction(){
         $auth = Zend_Auth::getInstance();
         if(!$auth->hasIdentity())
