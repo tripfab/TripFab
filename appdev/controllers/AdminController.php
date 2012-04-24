@@ -1023,7 +1023,7 @@ class AdminController extends Zend_Controller_Action {
             $main_cat = $this->listings->getCategory($listing->main_type);
             $this->view->main_category = $main_cat;
             
-            $user = $this->user->getData();
+            $user = $this->users->getVendor($listing->vendor_id);
             if(!empty($user->image))
                     $validate['profile']['done'] = true;
             if($listing->title != "Untitle Listing" and !empty($listing->title))
@@ -1065,9 +1065,20 @@ class AdminController extends Zend_Controller_Action {
                     if(!is_null($price) and $price->price != 0)
                             $validate['price']['done'] = true;
                     
-                    $schedules = $this->listings->getSchedulesOf($listing->id);
-                    if(count($schedules) > 0)
+                    $rooms = $this->listings->getHotelRooms($listing->id);
+                    $done = true;
+                    if(count($rooms) > 0) {
+                        foreach($rooms as $room) {
+                            if($room->people == 0 and $done) {
+                                $done = false;
+                            }
+                        }
+                        if($done) {
                             $validate['options']['done'] = true;
+                        } else {
+                            $validate['options']['desription'] = 'Some of the roooms do not have the maximun of people allowed on the room';
+                        }
+                    }
                     
                     break;
                 case 6:
@@ -1077,9 +1088,36 @@ class AdminController extends Zend_Controller_Action {
                         'desription' => 'Add the listing pricing',
                         'done' => false,
                     );
+                    $validate['capacity'] = array(
+                        'url' => '/admin/listings/edit/',
+                        'label' => 'Activity Capacity',
+                        'description' => 'Define the activity maximun and minimun capacity required',
+                        'done' => false
+                    );
+                    
                     $price = $this->listings->getBasicPrice($listing->id);
                     if(!is_null($price) and $price->price != 0)
-                            $validate['price']['done'] = true;                    
+                            $validate['price']['done'] = true;
+                    
+                    if(!is_null($listing->min) and !is_null($listing->max)) {
+                        $validate['capacity']['done'] = true;
+                    } else {
+                        $capacities = $this->listings->getActivityTypes($listing->id);
+                        $done=true;
+                        if(count($capacities) > 0) {
+                            foreach($capacities as $c) {
+                                if(($c->min == 0 or $c->max ==0) and $done) {
+                                    $done = false;
+                                }
+                            }
+                            if($done) {
+                                $validate['capacity']['done'] = true;
+                            } else {
+                                $validate['capacity']['description'] = 'Some of the Activity Types do not have a minimun or maximun capacity defined';
+                                $validate['capacity']['url'] = 'admin/listings/types/';
+                            }
+                        }
+                    }
                     
                     break;
                 default: break;
@@ -4053,6 +4091,7 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->trip->title = $_POST['title'];
                 $this->view->trip->description = $_POST['description'];
                 $this->view->trip->days = $_POST['days'];
+                $this->view->trip->nights = $_POST['nights'];
                 $this->view->trip->country_id = $_POST['trip_country'];
 
                 $this->render('trip1');
@@ -4062,6 +4101,7 @@ class AdminController extends Zend_Controller_Action {
             $trip->description = $_POST['description'];
 			$trip->price = $_POST['price'];
             $trip->days = $_POST['days'];
+            $trip->nights = $_POST['nights'];
             $trip->country_id = $_POST['trip_country'];
             $trip->save();
 			
@@ -4116,54 +4156,27 @@ class AdminController extends Zend_Controller_Action {
         if (empty($postData['trip_country']))
             $errors['country'] = 'Select Country';
 
-        if (!(int) $postData['days'])
-            $errors['days'] = 'Trip Duration can not be blank';
+        if (!$postData['days'])
+            $errors['days'] = 'Number of days can not be blank';
 
+        if (!$postData['nights'])
+            $errors['nights'] = 'Number of nights can not be blank';
         return $errors;
     }
 
     private function tripEditTask2($trip) {
         $this->view->trip = $trip;
-        $facts = $this->trips->getfacts($trip->id);
-        $paragraphs = array(1 => 'The Culture', 'The Environment', 'Knowledge', 'Things you\'ll love', 'When to take this trip', 'Tips & Recommendations');
-        $paras = array();
-        foreach ($facts as $fact) {
-            $paras[$fact->type][] = array('text' => $fact->text, 'image' => $fact->image);
-        }
-
-        foreach ($paragraphs as $key => $value) {
-			if (!isset($paras[$key])) {
-                $paras[$key]= array();
-            }
-
-            /*
-			if (!isset($paras[$key])) {
-                $paras[$key][0] = array('text' => '', 'image' => '');
-            }
-			*/
-        }
-
-        //echo "<pre>"; print_r($paras); die;
-        $this->view->errors = array();
-        $this->view->paragraphs = $paragraphs;
-        $this->view->paras = $paras;
+        $facts = $this->trips->getfacts1($trip->id);
+		//print_r($_POST); die;
+        $this->view->facts = $facts;
         if ($this->getRequest()->isPost()) {
-            $errors = $this->validateTrip2Data($_POST);
-
-            if (count($errors)) {
-                $this->render('trip2');
-                return;
-            }
 
             $this->trips->deleteFacts($trip->id);
-            foreach ($paragraphs as $key => $value) {
-                foreach ($_POST["t$key"] as $innerKey => $text) {
-                    if ($_FILES["f$key"]['name'][$innerKey]) {
-                        $uploadedFileName = $this->saveTripFactPhoto($trip->id, $_FILES["f$key"], $innerKey);
-                    } else {
-                        $uploadedFileName = @$_POST["h$key"][$innerKey];
-                    }
-                    $this->trips->saveFacts($trip->id, $key, $text, $uploadedFileName);
+		    foreach ($_POST['fact'] as $key => $facts) {
+                foreach ($facts as  $text) {
+                    if(!empty($text)){
+						$this->trips->saveFacts($trip->id, $key, $text);
+					}
                 }
             }
 
@@ -4331,10 +4344,27 @@ class AdminController extends Zend_Controller_Action {
         }
         $this->view->trip = $trip;
 		$day = $this->_request->getParam('q');
+		$maxDay=1;
+		
+		
+		
+		$tripDays = $this->trips->getDays($trip->id);
+		$tripDayWise = array();
+		foreach($tripDays as $tDay){
+			$tripDayWise[$tDay->day] = $tDay->title;
+		}
+
+		$tripDuration = max($maxDay, $trip->days);
+		for($i=1; $i<=$tripDuration; $i++){
+			if(!isset($tripDayWise[$i])){
+				$tripDayWise[$i] ='';
+			}
+		}
+		ksort($tripDayWise, SORT_NUMERIC);
+		
 		$slide = 0;
 		$items = $this->trips->getListingOf3($trip->id); 
         $dayWise = array();
-		$maxDay=1;
 		foreach($items as $item){
 			if($maxDay > $item->day)
 				$maxDay = $item->day;
@@ -4361,6 +4391,7 @@ class AdminController extends Zend_Controller_Action {
 		}
 		//echo "<pre>" ; print_r($dayWise); die;
 		$this->view->items = $dayWise;
+		$this->view->tripDays = $tripDayWise;
 		$this->view->slide = $slide;
 		$this->render('trip5');
 

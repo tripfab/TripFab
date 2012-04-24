@@ -48,7 +48,6 @@ class ChatController extends Zend_Controller_Action {
         $vendor = $this->users->get($this->_getParam('provider','default'));
         //unset($this->session->chat); die;
         if(!isset($this->session->chat)){
-            
             if(is_null($vendor) or $vendor->role_id != '3')
                 throw new Exception('Page not found vendor null or not vedor');
             
@@ -86,6 +85,35 @@ class ChatController extends Zend_Controller_Action {
                             $this->view->online = true;
                         }
                         break;
+                    case 'gmail':
+                        $operators = $this->getOperators('gmail');
+                        $operator  = null;
+                        foreach($operators as $opt) {
+                            if(!$this->existsConversation($vendor->id, $opt->id) and is_null($operator)) {
+                                $operator = $opt;
+                            }
+                        }
+                        if(is_null($operator)) {
+                            $this->view->online = false;
+                        } else {
+                            $this->chat = new Chat_Client_Yahoo(array(
+                                'user' => $user->id,
+                                'provider' => $vendor->id,
+                                'operator' => $operator->id
+                            ), $vendorEmail->email);
+                            
+                            $chat = new stdClass();
+                            $chat->user     = $user->id;
+                            $chat->partner  = $vendor->id;
+                            $chat->service  = 'gmail';
+                            $chat->email    = $vendorEmail->email;
+                            $chat->conv     = $this->chat->getConversationId();
+
+                            $this->session->chat = $chat;
+                            
+                            $this->view->online = true;
+                        }
+                        break;
                     default:
                         $this->view->online = false;
                 }
@@ -101,6 +129,13 @@ class ChatController extends Zend_Controller_Action {
             switch($chat->service){
                 case 'yahoo':
                     $this->chat = new Chat_Client_Yahoo(
+                            $chat->conv, $chat->email);
+
+                    $this->view->online = true;
+                break;
+            
+                case 'gmail':
+                    $this->chat = new Chat_Client_Gtalk(
                             $chat->conv, $chat->email);
 
                     $this->view->online = true;
@@ -137,9 +172,17 @@ class ChatController extends Zend_Controller_Action {
             echo 'Your session has expired. Please reload the page'; die;
         }
         
+        
         switch($chat->service){
             case 'yahoo':
                 $this->chat = new Chat_Client_Yahoo(
+                        $chat->conv, $chat->email);
+                
+                echo $this->chat->listen(); die;
+            break;
+        
+            case 'gmail':
+                $this->chat = new Chat_Client_Gtalk(
                         $chat->conv, $chat->email);
                 
                 echo $this->chat->listen(); die;
@@ -181,6 +224,13 @@ class ChatController extends Zend_Controller_Action {
                 echo $this->chat->send($this->_getParam('message')); die;
             break;
         
+            case 'gmail':
+                $this->chat = new Chat_Client_Gtalk(
+                        $chat->conv, $chat->email);
+                
+                echo $this->chat->send($this->_getParam('message')); die;
+            break;
+        
             default:
                 unset($this->session->chat);
                 echo 'Your session has expired. Please reload the page'; die;
@@ -212,6 +262,19 @@ class ChatController extends Zend_Controller_Action {
         switch($chat->service){
             case 'yahoo':
                 $this->chat = new Chat_Client_Yahoo(
+                        $chat->conv, $chat->email);
+                
+                $messages = $this->chat->read();
+                $response = array();
+                foreach($messages as $msg) {
+                    $response[] = $msg->message;
+                }
+                header('Content-type: application/json');
+                echo json_encode($response); die;
+            break;
+            
+            case 'gmail':
+                $this->chat = new Chat_Client_Gtalk(
                         $chat->conv, $chat->email);
                 
                 $messages = $this->chat->read();
