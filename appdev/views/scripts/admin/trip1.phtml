@@ -127,11 +127,15 @@
 									<div class="item first">
 										<div class="selects">
                                         	<!--<input type="text" class="noclean" name="days" value="<?php echo $this->trip->days?>"/>-->
-                                        	<select class="days">
-                                        		<option>7 Days</option>
+                                        	<select class="days" name="days">
+                                        		<?php for($i=1; $i<20; $i++):?>
+                                                	<option value="<?php echo $i?>" <?php echo $this->trip->days== $i ? 'selected="selected"' : ''?>><?php echo $i?> <?php echo $i== 1 ? 'Day' : 'Days'?></option>
+                                                <?php endfor;?>
                                         	</select>
-                                        	<select class="days"> 
-                                        		<option>6 Nights</option>
+                                        	<select class="days" name="nights"> 
+                                        		<?php for($i=1; $i<20; $i++):?>
+                                                	<option value="<?php echo $i?>" <?php echo $this->trip->nights== $i ? 'selected="selected"' : ''?>><?php echo $i?> <?php echo $i== 1 ? 'Night' : 'Nights'?></option>
+                                                <?php endfor;?>
                                         	</select>
 										</div>
 										<!-- closes selects -->
