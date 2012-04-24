@@ -6,167 +6,115 @@
     <div class="wrapper">
         <h1 class="logo"><a href="/">Tripfab</a></h1>
         <ul>
-            <li><a href="/">Search</a></li>
-            <li><a href="/trips/costa_rica">Browse Itineraries</a></li>
+            <li><a href="/"><span>Home</span></a></li>
+            <li><a href="/trips/costa_rica"><span>Browse Itineraries</span></a></li>
             <?php if(!$this->user): ?>
-            <li><a href="/mytrips">My Trips</a></li>
+            <li><a href="/mytrips"><span>My Trips</span></a></li>
             <?php else: ?>
-            <li><a href="/user/trips">My Trips</a></li>
+            <li><a href="/user/trips"><span>My Trips</span></a></li>
             <?php endif ?>
         </ul>
-        <div class="header-search">
-            <form method="post" action="">
-                <fieldset>
-                    <input id="citiesSearch" type="text" value="Search Places"/>
-                </fieldset>
-            </form>
-        </div><!-- closes header-search -->
-		<?php if(!$this->user): ?>
-        <div class="header-login">
-        	<a href="" class="user"><em>Have an account?</em> Sign in<img src="/images/cleardot.gif" alt="" /></a>
-            <div class="dd login">
-                <img src="/images2/arrow-12.png" alt="" class="arrow" />
-                <div class="dd-content">
-                <form action="https://<?= $_SERVER['HTTP_HOST'] ?>/en-US/login" method="post">
-                    <input type="text" value="E-Mail" class="in-2" name="email" />
-                    <input type="password" value="******"  name="password" class="in-3" />
-                    <div class="clear"></div>
-                    <label class="lb-rem"><input name="remember" value="1" type="checkbox" />Remember me</label>
-                    <input type="submit" class="btn-1" value="Sign In" />
-                </form>
-                </div><!-- closes dd-content -->
-                <div class="dd-footer">
-                    <a href="/login">Forgot password?</a>
-                </div><!-- closes dd-footer -->
-                <div class="facebook">
-                    <a href="/signup/facebook"><img src="/images2/img-58.png" alt="" /></a>
-                </div><!-- closes facebook -->
-            </div><!-- closes dd -->
-            <a href="/signup" class="btn-1">Sign Up Free!</a>
-        </div><!-- closes header-login -->
-        <?php else: ?>
-        <?php if($this->user->role_id == 2): ?>
-        <div class="header-login">
-            <a href="/user/account" class="user"><?= $this->user->name . " " . $this->user->lname ?><img src="/images2/cleardot.gif" alt="" /></a>
-            <div class="dd">
-                <img src="/images2/arrow-12.png" alt="" class="arrow" />
-                <div class="dd-content">
-                    <?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
-                    <?= $this->thumbnail(68,$image,'','1:1'); ?>
-                    <ul>
-                        <li><a href="/user/trips">Trips</a></li>
-                        <li><a href="/user/messages">Messages</a></li>
-                        <li><a href="/user/reservations">Reservations</a></li>
-                    </ul>
-                </div><!-- closes dd-content -->
-                <div class="dd-footer">
-                    <a href="/user">Account</a>
-                    <a href="/logout">Sign Out</a>
-                </div><!-- closes dd-footer -->
-            </div><!-- closes dd -->
-            
-            <div class="links">
-                <a href="/user/trips" title="Trips" class="trips"><img src="/images2/cleardot.gif" alt="" /></a>
-                <!--<a href="/user/messages" title="Messages" class="messages"><img src="/images2/cleardot.gif" alt="" /></a>-->
-                <div class="dd messages">
-                    <img src="/images2/arrow-12.png" alt="" class="arrow" />
-                    <div class="ttl">
-                        Messages
-                    </div><!-- closes ttl -->
-                    <div class="content">
-                        <ul>
-                            <li class="new">
-                                <a href="">
-                                    <img src="/images2/img-27.png" alt="" />
-                                    <strong>Linna Pratts</strong>
-                                    Hi!
-                                    <span>4 hours ago</span>
-                                </a>										
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="/images2/img-27.png" alt="" />
-                                    <strong>Linna Pratts</strong>
-                                    Hey! I have some questions about...
-                                    <span>4 hours ago</span>
-                                </a>										
-                            </li>
-                            <li>
-                                <a href="">
-                                    <img src="/images2/img-27.png" alt="" />
-                                    <strong>Linna Pratts</strong>
-                                    Hi
-                                    <span>4 hours ago</span>
-                                </a>										
-                            </li>
-                        </ul>
-                    </div><!-- closes content -->
-                    <div class="dd-footer">
-                        <a href="/user/messages">See all messages</a>
-                    </div><!-- closes dd-footer -->
-                </div><!-- closes dd -->
-            </div><!-- closes links -->
-            
-        </div><!-- closes header-login -->
-
-        <?php else: ?>
-        <div class="header-login">
-            <a href="/provider/account" class="user"><?= $this->user->name ?><img src="/images2/cleardot.gif" alt="" /></a>
-            <div class="dd">
-                <img src="/images2/arrow-12.png" alt="" class="arrow" />
-                <div class="dd-content">
-                    <?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
-                    <?= $this->thumbnail(68,$image,'','1:1'); ?>
-                    <ul>
-                        <li><a href="/provider/listings">Listings</a></li>
-                        <li><a href="/provider/messages">Messages</a></li>
-                        <li><a href="/provider/reservations">Reservations</a></li>
-                        <li><a href="/provider/reviews">Reviews</a></li>       
-                        <li><a href="/provider/offers">Offers</a></li>           
-                    </ul>
-                </div><!-- closes dd-content -->
-                <div class="dd-footer">
-                    <a href="/provider/account">Account</a>
-                    <a href="/logout">Sign Out</a>
-                </div><!-- closes dd-footer -->
-            </div><!-- closes dd -->
-            
-            
-            <div class="links">
-                <a href="/provider/listings" title="Listings" class="listings"><img src="/images2/cleardot.gif" alt="" /></a>
-                <!--<a href="/provider/messages" title="Messages" class="messages"><img src="/images2/cleardot.gif" alt="" /></a>-->
-                <div class="dd messages">
-                    <img src="/images2/arrow-12.png" alt="" class="arrow" />
-                    <div class="ttl">Messages</div>
-                    <div class="content">
-                        <ul>
-                            <li class="new">
-                                <a href=""><img src="/images2/img-27.png" alt="" />
-                                <strong>Linna Pratts</strong>Hi!
-                                <span>4 hours ago</span></a>										
-                            </li>
-                            <li>
-                                <a href=""><img src="/images2/img-27.png" alt="" />
-                                <strong>Linna Pratts</strong>Hey! I have some questions about...
-                                <span>4 hours ago</span></a>										
-                            </li>
-                            <li>
-                                <a href=""><img src="/images2/img-27.png" alt="" />
-                                <strong>Linna Pratts</strong>Hi
-                                <span>4 hours ago</span></a>										
-                            </li>
-                        </ul>
-                    </div><!-- closes content -->
-                    <div class="dd-footer">
-                        <a href="">See all messages</a>
-                    </div><!-- closes dd-footer -->
-                </div><!-- closes dd -->
-            </div><!-- closes links -->
-            
-            
-        </div><!-- closes header-login -->
-
-        <?php endif ?>
-        <?php endif ?>
-    </div><!-- closes wrapper -->			
+        
+        <div class="rg">
+        	<div class="log">
+        				
+        		<?php if(!$this->user): ?>
+        		<div class="btn"><a href="" class="btn-1">Sign Up</a></div>
+        		<div class="sign_in">
+        			Have an Account? <a href="" id="sign-in">Sign In<span class="aw"></span></a>
+        		</div><!--SIGN_IN-->
+        		
+        		<div class="login">
+        			<span class="arrow"></span>
+        			<form method="post" action="https://<?= $_SERVER['HTTP_HOST'] ?>/en-US/login">
+        				<input class="email" type="text" name="email" value="eMail" />
+        				<input class="pass" type="password" name="password" value="******" />
+        				<div class="bttns">
+        					<label for="remenber"><input type="checkbox" id="remenber" name="remenber" value="" />Remember me</label>
+        					<input type="submit" class="btn-1" value="Sign In" />
+        				</div><!--BTTNS-->
+        				<div class="actions">
+        					<a href="/login" class="link1">Forgot Password?</a>
+        					<a href="/signup" class="link1 create">Create a TripFab Account</a>
+        					<div class="clear"></div>
+        				</div><!--ACTIONS-->
+        				<div class="fb">
+        					<a href="/signup/facebook">Sign In with Facebook</a>
+        				</div><!--FB-->
+        			</form>
+        		</div><!--LOGIN-->
+        		
+        		<?php else: ?>
+        		<?php if($this->user->role_id == 2): ?>
+        		
+        		<div class="sign_in">
+        			<?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
+        			<?= $this->thumbnail(25,$image,'','1:1'); ?>
+        			<a href="/user/account" id="logged_in"><?= $this->user->name . " " . $this->user->lname ?><span class="aw"></span></a>
+        		</div><!--SIGN_IN-->
+        		
+        		<div class="user-menu">
+        			<span class="arrow"></span>
+        			<div class="main">
+        				<?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
+        				<?= $this->thumbnail(68,$image,'','1:1'); ?>
+        				<ul>
+        					<li><a href="/user/trips">My Trips</a></li>
+        					<li><a href="/user/messages">Messages</a></li>
+        					<li><a href="/user/reservations">Reservations</a></li>
+        				</ul>
+        				<div class="clear"></div>
+        			</div><!--MAIN-->
+        			<div class="bot">
+        				<a href="/user" class="account">Account</a>
+        				<a href="/logout" class="sign_out">Sign Out</a>
+        			</div><!--BOT-->
+        		</div><!--USER-MENU-->
+        		
+        		<?php else: ?>
+        		
+        		
+        		<div class="sign_in">
+        			<?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
+        			<?= $this->thumbnail(25,$image,'','1:1'); ?>
+        			<a href="/provider/account" id="logged_in"><?= $this->user->name ?><span class="aw"></span></a>
+        		</div><!--SIGN_IN-->
+        		
+        		<div class="user-menu">
+        			<span class="arrow"></span>
+        			<div class="main">
+        				<?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
+        				<?= $this->thumbnail(68,$image,'','1:1'); ?>
+        				<ul>
+        					<li><a href="/provider/listings">Listings</a></li>
+        					<li><a href="/provider/messages">Messages</a></li>
+        					<li><a href="/provider/reservations">Reservations</a></li>
+        					<li><a href="/provider/reviews">Reviews</a></li>	   
+        					<li><a href="/provider/offers">Offers</a></li>
+        				</ul>
+        				<div class="clear"></div>
+        			</div><!--MAIN-->
+        			<div class="bot">
+        				<a href="/user" class="account">Account</a>
+        				<a href="/logout" class="sign_out">Sign Out</a>
+        			</div><!--BOT-->
+        		</div><!--USER-MENU-->
+        	
+        	
+        	<?php endif ?>
+        	<?php endif ?>
+        	</div><!--LOG-->
+        	
+        	<div class="top_search">
+        		<form method="post" action="">
+        			<fieldset>
+        				<input id="citiesSearch" type="text" value="Search Places"/>
+        			</fieldset>
+        		</form>
+        	</div><!--TOP_SEARCH-->
+        	
+        </div><!--RG-->
+        <div class="clear"></div>
+    </div><!-- WRAPPER -->
+    <div class="overlay"></div>	
 </div><!-- closes header -->

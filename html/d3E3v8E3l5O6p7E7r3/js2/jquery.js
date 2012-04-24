@@ -4904,7 +4904,7 @@ function replaceAll( text, busca, reemplaza ){
 }
 $(function(){
 	$('input:not(.noclean),textarea:not(.noclean)').ToggleInputValue();
-	if($('.header-search').html() != null){
+	if($('.top_search').html() != null){
 		$.ajax({
 			url:'/ajax/getsearchtags',
 			success:function(tags){
@@ -4923,7 +4923,7 @@ $(function(){
 			}
 		});
 	}
-	
+	//	OLD HEADER 
 	$('#header .header-login a.user').click(function(){
 		$(this).next().toggleClass('show');
 		return false;
@@ -4937,6 +4937,20 @@ $(function(){
 	$('#header .header-login.not a.user').click(function(){
 		$(this).next().toggleClass('show');
 		return false;
+	});
+
+	$("#sign-in").click(function() {
+	 	$(".login, .overlay").toggleClass('show');
+	     return false
+	});
+	 
+	$("#logged_in").click(function() {
+	 	$(".user-menu, .overlay").toggleClass('show');
+	     return false
+	});
+	$(".overlay" ).click(function() {
+	    $(".overlay, .login, .user-menu").removeClass('show');
+	    return false
 	});
 });
 

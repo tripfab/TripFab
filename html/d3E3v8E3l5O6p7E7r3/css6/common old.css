@@ -1,342 +1,391 @@
 /*- HEADER STYLES---------------------------------------------------------------*/
-#header {
-	height: 62px;
-	background: url(https://developer.tripfab.com/images6/header.png) repeat-x 0 0;
+#wp_header #header {
+	background: url(https://developer.tripfab.com/images6/gr-h.gif) repeat-x 0 0;
+	height: 51px;
 	position: relative;
-	z-index: 999;
+	z-index: 1000;
 }
-#header .wrapper {
-	position: relative;
-	z-index: 10;
+#wp_header #header .cont{
+	width: 960px;
+	margin: 0 auto;
 }
-#header h1{
+#header .logo {
 	float: left;
-	width: 102px;
-	padding-top: 15px;
-	margin-right: 24px;
+	margin-top: 8px;
 }
-#header > .wrapper > ul {
-	height: 62px;
-	list-style: none;
-}
-#header > .wrapper > ul >li {
-	float: left;
-}
-#header > .wrapper > ul > li > a {
-	display: block;
-	height: 62px;
-	float: left;
-	padding:0 0 0 16px;
-}
-#header > .wrapper > ul > li > a > span {
-	display: block;
-	height: 62px;
-	text-align: center;
-	color: #ACACAC;
-	float: left;
-	padding: 0 20px 0 4px;
-	font: bold 12px/66px Helvetica;
-	text-shadow: 0px 1px 0px #000;
-}
-#header > .wrapper > ul > li:hover a span {
-	color: #FFF;
-}
-#header > .wrapper > ul > li a.active {
-	background: url(https://developer.tripfab.com/images6/header_hover.png) no-repeat left -1px;
-}
-#header > .wrapper > ul > li a.active span {
-	background: url(https://developer.tripfab.com/images6/header_hover.png) no-repeat right -63px;
-}
-#header h1 a {
+#header .logo a {
 	background: url(https://developer.tripfab.com/images6/logo.png) no-repeat 0 0;
 	display: block;
-	width: 102px;
 	height: 34px;
 	text-indent: -9999px;
+	width: 102px;
 }
-#header .rg {
-	position: absolute;
-	height: 62px;
-	width: 480px;
-	top: 0;
-	right: 0;
-}
-#header .log {
-	float: right;
-	height: 62px;
-	background: url(https://developer.tripfab.com/images6/header.png) repeat-x 0 -124px;
-}
-#header .log .btn {
-	float: right;
-	background: url(https://developer.tripfab.com/images6/header_icons.png) repeat-x 0 -260px;
-	height: 62px;
-	width: 86px;
-}
-#header .log .btn a {
-	height: 24px;
-	font: bold 11px/24px Helvetica;
-	margin: 17px 0 0 13px;
+#header .cont > ul {
 	float: left;
+	overflow: hidden;
+	list-style: none;
+	margin-left: 34px;
 }
-#header .log .btn a:hover {
-	-webkit-box-shadow: 0px 1px 0px 1px #000;
-	-moz-box-shadow: 0px 1px 0px 1px #000;
-	box-shadow: 0px 1px 0px 1px #000; 
-}
-#header .log .sign_in{
-	padding:0 10px 0 12px;
-	color: #FFF;
-	font: normal 11px/62px Helvetica;
-	float: right;
-}
-#header .log .sign_in a {
-    display: inline-block;
-    color: #FFF;
-    font-weight: bold;
-    text-shadow: 0px 1px 0px #000;
-}
-#header .log .sign_in a .aw {
-	background: url("https://developer.tripfab.com/images6/header_icons.png") no-repeat -148px 0;
-	display: inline-block;
-	width: 9px;
-	height: 5px;
-	margin: 0 3px 2px 5px;
-}
-#header .log .sign_in img {
+#header .cont > ul li {
 	float: left;
+	margin-right: 34px;
+}
+#header .cont > ul li a {
+	color: #CCCCCC;
 	display: block;
-	margin: 18px 9px 0 0;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
-	-webkit-box-shadow: 0px 1px 1px 0px #0a0a0a;
-	-moz-box-shadow: 0px 1px 1px 0px #0a0a0a;
-	box-shadow: 0px 1px 1px 0px #0a0a0a; 
+	font-weight: bold;
+	height: 51px;
+	line-height: 51px;
+	text-shadow: -1px 1px 0 #000000;
 }
-#header .login {
-	position: absolute;
-	top: 48px;
-	right: 30px;
-	width: 235px;
-	min-height: 206px;
-	display: none;
-	z-index: 10000;
-	background-color: #FFF;
-	padding: 15px 15px 0 15px;
-	-webkit-box-shadow: 0px 0px 4px 2px #545454;
-	-moz-box-shadow: 0px 0px 4px 2px #545454;
-	box-shadow: 0px 0px 4px 2px #545454;
-	z-index: 10000;
+#header .cont > ul li a:hover {	
+	text-decoration: none;
+	color: #FFFFFF;
 }
-#header .login.show {
-	display: block;
+#header .cont > ul li a:active {
+	padding-top: 1px;
+	height: 50px;
 }
-
-#header .login .arrow {
-	display: block;
-	background: url(https://developer.tripfab.com/images6/header_icons.png) no-repeat;
-	width: 15px;
-	height:5px;
-	position: absolute;
-	top: -5px;
-	right: 64px;
+#header ul li.active a {
+	background: url(https://developer.tripfab.com/images6/t-36.png) no-repeat 50% 100%;
 }
-#header .login input[type="text"],
-#header .login input[type="password"] {
-	width: 187px;
-	height: 28px;
-	font: normal 13px/30px Helvetica;
-	color: #898989;
-	padding: 2px 35px 0 10px;
-	background: url(https://developer.tripfab.com/images6/header_icons.png) no-repeat;
-	margin-bottom: 8px;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
+#header ul li.active a:hover {
+	color: #555555;
+}
+#header .header-search {
+	float: left;
+	height: 51px;
+}
+#header .header-search input {
+	background: #656565 url(https://developer.tripfab.com/images6/ico-1.png) no-repeat 100% 50%;
+	border: 1px solid #000000;
+	height: 25px;
+	width: 168px;
+	padding: 0 25px 0 5px;
+	color: #d7d7d7;
+	margin-top: 11px;
+	font: normal 12px/25px Helvetica;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
+	-webkit-box-shadow: 0px 1px 0px 0px #474747;
+	-moz-box-shadow: 0px 1px 0px 0px #474747;
+	box-shadow: 0px 1px 0px 0px #474747;
 	behavior: url(/PIE.htc);
 }
-#header .login input[type="text"] { background-position:-72px -53px;}
-#header .login input[type="password"] { background-position: -72px -95px;}
-
-#header .login .bttns {
-	position: relative;
-	height: 30px;
-	margin: 5px 0 13px;
+#header .header-search input:hover {
+	border-color: #000000!important;
+	background-color: #777777!important;
+	color: #FFFFFF!important;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
+	behavior: url(/PIE.htc);
 }
-#header .login .bttns label {
-	height: 30px;
-	font: normal 11px/30px Helvetica;
-	color: #303030;
+#header .header-search input:focus {
+	border-color: #000000!important;
+	background-color: #FFFFFF!important;
+	color: #333333!important;
+	box-shadow: 0 0 5px #addeff!important;
 }
-#header .login .bttns label input {
-	float: left;
-	margin: 8px 5px 0 0;
-}
-#header .login .bttns .btn-1 {
-	font: bold 11px/30px Helvetica;
-	height: 30px;
-	position: absolute;
-	right: 0;
-	top: 0;
-	padding: 0 15px;
-}
-#header .login .actions {
-	font-size: 11px;
-}
-#header .login .actions a {
-	display: block;
-	float: left;
-}
-#header .login .actions a.create {
+#header .header-login {
+	padding-left: 16px;
 	float: right;
+	height: 51px;
+	position: relative;
+	z-index: 100000;
 }
-#header .login .fb {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	background: url(https://developer.tripfab.com/images6/header_g1.png) repeat-x 0 0;
-	height: 54px;
-	width: 100%;
-}
-#header .login .fb a {
-	display: block;
-	background: url(https://developer.tripfab.com/images6/header_icons.png) repeat-x 0 -138px;
-	width: 242px;
-	height: 34px;
-	text-indent: -9999px;
-	margin: 10px auto;
-}
-#header .login .fb a:hover{
-	background: url(https://developer.tripfab.com/images6/header_icons.png) repeat-x 0 -175px;
-}
-#header .login .fb a:active{
-	background: url(https://developer.tripfab.com/images6/header_icons.png) repeat-x 0 -213px;
-}
-#header .user-menu {
-	display: none;
-	width: 215px;
-	background-color: #FFF;
-	position: absolute;
-	top: 52px;
-	right: -13px;
-	-webkit-box-shadow: 0px 0px 4px 2px #303030;
-	-moz-box-shadow: 0px 0px 4px 2px #303030;
-	box-shadow: 0px 0px 4px 2px #303030;
-	z-index:999 ;
-}
-.overlay{
-	background: transparent;
-	display: none;
-    height: 100%;
-    left: 0;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: -5;
-}
-.overlay.show {
-	display: block;
-}
-#header .user-menu.show {
-	display: block;
-}
-#header .user-menu .arrow {
-	background: url("https://developer.tripfab.com/images6/header_icons.png") no-repeat scroll 0 0 transparent;
-	display: block;
-	height: 5px;
-	position: absolute;
-	right: 22px;
-	top: -5px;
-	width: 15px;
-}
-#header .user-menu .main {
-	padding: 13px 10px 10px 15px;
-}
-#header .user-menu .main img {
-	float: left;
-	display: block;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
-	margin-right: 18px;
-}
-#header .user-menu .main ul {
-	float: left;
-	margin-top: 5px;
-}
-#header .user-menu .main ul li {
-	margin-bottom: 5px;
-}
-#header .user-menu .main ul li a{
+#header .header-login > a {
+	float: right;
 	color: #303030;
-	font: bold 12px Helvetica;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 25px;
 }
-#header .user-menu .main ul li a:hover {
-	color: #9BD2FC;
+#header .header-login a.user {
+	color: #CCCCCC;
+	display: block;
+	font-weight: bold;
+	height: 51px;
+	line-height: 51px;
+	text-shadow: -1px 1px 0 #000000;
 }
-#header .user-menu .bot {
-	width: 185px;
-	background: url(https://developer.tripfab.com/images6/header_g1.png) repeat-x left bottom;
-	height: 24px;
-	padding: 10px 15px 0;
+#header .header-login a em {
+	font-weight: normal;
+	font-style: normal;
+}
+#header .header-login a.user img {
+	background:  url(https://developer.tripfab.com/images6/arrow-35.png) no-repeat 0 -6px;
+	vertical-align: middle;
+	height: 6px;
+	width: 9px;
+	margin-left: 5px;
+}
+#header .header-login a.user:hover {
+	text-decoration: none;
+	color: #FFFFFF;	
+}
+#header .header-login a.user:active {
+	padding-top: 1px;
+	height: 50px;
+}
+#header .header-login a.user:hover img {
+	background-position: 0 0px;
+}
+#header .header-login a.btn-1 {
+	color: #FFFFFF;
+	margin-right: 14px;
+	margin-top: 12px;
+	height: 25px;
+	line-height: 25px;
+}
+#header .header-login a.btn-1:hover {
+	-webkit-box-shadow: 0px 1px 1px 0px #000;
+	-moz-box-shadow: 0px 1px 1px 0px #000;
+	box-shadow: 0px 1px 1px 0px #000;
+	text-decoration: none;
+}
+.header-login .dd {
+	background-color: #FFFFFF;
+	border: 1px solid #CDCDCD;
+	box-shadow: 0 0 15px #000000;
+	position: absolute;
+	display: none;
+	right: -28px;
+	top: 42px;
+	width: 234px;
+	z-index: 100000;
+}
+.header-login .dd.show {
+	display: block;
+	behavior: url(/PIE.htc);
+	z-index: 10000;
+}
+.header-login .dd img.arrow {
+	position: absolute;
+	right: 25px;
+	top: -7px;
+}
+.header-login .dd-ttl {
+	padding: 0 18px;
+	line-height: 33px;
+	color: #303030;
+	font-size: 12px;
+	font-weight: bold;
+}
+.header-login .dd-content {	
+	padding: 14px 18px;
 	overflow: hidden;
 }
-#header .user-menu .bot a {
-	color: #303030;
-	display: block;
-	font: bold 12px Helvetica;
-}
-#header .user-menu .bot .account {
+.header-login .dd-content img {
 	float: left;
+	margin-right: 18px;
 }
-#header .user-menu .bot .account:hover {
-	color: #9bd2fc;
-}
-#header .user-menu .bot .sign_out {
-	float: right;
-}
-#header .user-menu .bot .sign_out:hover {
-	color: #F26522;
-}
-#header .top_search {
-	float: right;
-}
-#header .top_search input[type="text"] {
-	background: url(https://developer.tripfab.com/images6/header_icons.png) repeat-x -106px -10px #393939;
-	color: #D7D7D7;
-    display: block;
-    font: 12px/27px Helvetica;
-    height: 25px;
-    margin: 16px 12px 0 0;
-    padding: 2px 25px 0 7px;
-    width: 165px;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
-	border: 1px solid #181818;
-	-webkit-box-shadow:0 1px 0px 0px #2d2d2d;
-	-moz-box-shadow:0 1px 0px 0px #2d2d2d;
-	box-shadow:0 1px 0px 0px #2d2d2d;
-}
-#header .top_search input[type="text"]:hover{
-	border-color: #181818 !important;
-    box-shadow:none !important;
-    background-color: #464646;
-    -webkit-box-shadow:0 1px 0px 0px #2d2d2d !important;
-    -moz-box-shadow:0 1px 0px 0px #2d2d2d !important;
-    box-shadow:0 1px 0px 0px #2d2d2d !important;
-}
-
-#header .top_search input[type="text"]:focus {
-	border-color: #addeff !important;
-	background-color: #FFF;
-	color: #303030;
+.header-login .dd-content ul {
+	float: left;
+	list-style: none;
+	font-size: 11px;
 	font-weight: bold;
-	-webkit-box-shadow:0 0px 5px 0px #addeff !important;
-	-moz-box-shadow:0 0px 5px 0px #addeff !important;
-	box-shadow:0 0px 5px 0px #addeff !important;
+	line-height: 18px;
+}
+.header-login .dd-content ul a {
+	color: #303030;
+	font-size: 12px;
+	line-height: 20px;
+}
+.header-login .dd-content ul a:hover, .header-login .dd-footer a:hover {
+	color: #60b5f7;
+	text-decoration: none;
+}
+.header-login .dd-footer {
+	background: url(https://developer.tripfab.com/images6/g-3.png) repeat-x scroll 0 0 #FFFFFF;
+	border-top: 1px solid #E8E8E8;
+	line-height: 40px;
+	text-align: right;
+	font-weight: bold;
+	font-size: 11px;
+	padding: 0 18px;
+	overflow: hidden;
+}
+.header-login .dd-footer a {
+	color: #303030;
+	font-size: 12px;
+	line-height: 20px;
+	float: left;
+	line-height: 40px;
+}
+.header-login .dd-footer a + a {
+	float: right;
+}
+.header-login .dd-footer a + a:hover {
+	color: #f26522;
+}
+#header .links {
+	float: right;
+	line-height: 51px;
+	margin-right: 14px;
+	position: relative;
+	background: url(https://developer.tripfab.com/images6/sep-4.png) no-repeat top right;
+	padding-right: 10px;
+}
+#header .links a img {
+	vertical-align: middle;
+}
+#header .links > a {
+	margin-left: 14px;
+}
+#header .links a.messages img {
+	background: url(https://developer.tripfab.com/images6/ico-88.png) no-repeat 0 0;
+	height: 16px;
+	width: 16px;
+}
+#header .links a.messages.new img {
+	background-position: 0 -16px;
+}
+#header .links a.messages.active img {
+	background-position: 0 -32px;
+}
+#header .links a.trips img {
+	background: url(https://developer.tripfab.com/images6/ico-89.png) no-repeat 0 0;
+	height: 15px;
+	width: 14px;
+}
+#header .links a.listings img {
+	background: url(https://developer.tripfab.com/images6/ico-90.png) no-repeat 0 0;
+	height: 15px;
+	width: 16px;
+}
+#header .links a.listings:hover img {
+	background-position: 0 -15px;
+}
+#header .links .dd {
+	background-color: #FFFFFF;
+	border: 1px solid #CDCDCD;
+	box-shadow: 0 0 15px #000000;
+	color: #303030;
+	font-size: 11px;
+	line-height: normal;
+	position: absolute;
+	display: none;
+	top: 42px;
+	width: 287px;
+	z-index: 1000;
+}
+#header .links .dd.show {
+	display: block;
+}
+#header .links .dd .ttl {
+	font-weight: bold;
+	line-height: 34px;
+	padding: 0 13px;
+	border-bottom: 1px solid #e8e8e8;
+}
+#header .links .dd.messages {
+	right: -113px;
+}
+#header .links .dd.messages ul {
+	list-style: none;
+}
+#header .links .dd.messages ul li {
+	font-weight: bold;
+	border-bottom: 1px solid #e8e8e8;
+}
+#header .links .dd.messages ul li:last-child {
+	border-bottom: none;
+}
+#header .links .dd.messages ul li a {
+	padding: 6px 13px;
+	display: block;
+	overflow: hidden;
+	color: #303030;
+}
+#header .links .dd.messages ul li a:hover {
+	text-decoration: none;
+	background-color: #58b1e4;
+	color: #FFFFFF;
+}
+#header .links .dd.messages ul li.new a {
+	background-color: #e8f5fd;
+}
+#header .links .dd.messages ul li.new:hover a {
+	color: #303030;
+}
+#header .links .dd.messages ul li a img {
+	height: 40px;
+	width: 40px;
+	float: left;
+	margin-right: 15px;
+}
+#header .links .dd.messages ul li a strong {
+	font-size: 12px;
+	display: block;
+}
+#header .links .dd.messages ul li a span {
+	display: block;
+	font-size: 10px;
+}
+#header .links .dd .dd-footer {
+	background: url(https://developer.tripfab.com/images6/g-3.png) repeat-x scroll 0 0 #FFFFFF;
+	border-top: 1px solid #E8E8E8;
+	text-align: center;
+	line-height: 34px;
+}
+#header .links .dd .dd-footer a {
+	color: #60b5f7;
+	font-size: 12px;
+	font-weight: bold;
+}
+#header .links .dd img.arrow {
+	position: absolute;
+	right: 112px;
+	top: -7px;
 }
 
+.header-login .dd.login input[type="text"],
+.header-login .dd.login input[type="password"] {
+	width: 161px;
+	margin-bottom: 10px;
+	padding-right: 30px;
+	height: 27px;
+	line-height: 27px;
+}
+
+.header-login .dd.login .dd-footer {
+	text-align: center;
+}
+.header-login .dd.login .dd-footer a {
+	color: #60b5f7;
+	font-size: 11px;
+	font-weight: normal;
+	float: none;
+}
+.header-login .dd.login .dd-footer a:hover {
+	text-decoration: underline;
+}
+.header-login .dd.login .facebook {
+	text-align: center;
+	line-height: 40px;
+}
+.header-login .dd.login label {
+	color: #616161;
+	font-size: 11px;
+	line-height: 25px;
+}
+.header-login .dd.login .lb-rem {
+	float: left;
+	display: block;
+}
+.header-login .dd.login input[type="submit"] {
+	float: right;
+	height: 25px;
+	font: 12px/25px Helvetica;
+}
+.header-login .dd.login input.in-2 {
+	background: url(https://developer.tripfab.com/images6/ico-36.png) no-repeat scroll 97% 50% transparent;
+}
+.header-login .dd.login input.in-3 {
+	background: url(https://developer.tripfab.com/images6/ico-37.png) no-repeat scroll 97% 50% transparent;
+}
 .big-message {
 	height: 63px;
 	line-height: 61px;
