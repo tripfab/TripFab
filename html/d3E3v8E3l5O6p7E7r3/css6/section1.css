@@ -336,6 +336,7 @@
 	overflow: hidden;
 	float: left;
 	width: 103px;
+	display: none;
 }
 .lstng_dflt .top .rating li {
 	float: left;
@@ -584,7 +585,7 @@
 }
 .lstng_dflt .amenities .type {
 	border-top: 1px solid #ececec;
-	padding: 14px 0 0px;
+	padding: 14px 0 5px;
 }
 .lstng_dflt .amenities .type.first {
 	padding: 20px 0 3px;
@@ -1447,11 +1448,11 @@
 	float: right;
 	position: relative;
 	z-index: 10;
+	padding-bottom: 50px;
 }
 #lstng_htl .sidebar .cont {
-	position: absolute;
-	top: -73px;
-	right: 0;
+	margin-top: -73px;
+	float: right;
 	width: 292px;
 	background-color: #f1f1f1;
 	z-index: 10;
@@ -1580,7 +1581,6 @@
 	background-color: #303030;
 	color: #FFF;
 	padding: 10px 20px 20px;
-	min-height: 200px;
 	width: 350px;
 	position: absolute;
 	top: -74px;
@@ -1604,8 +1604,8 @@
 	top: 82px;
 }
 #lstng_htl .sidebar .room_tip h6 {
-	font: bold 13px/30px Helvetica;
-	height: 30px;
+	font: bold 13px/18px Helvetica;
+	padding: 8px 0;
 	border-bottom: 1px solid #1a1a1a;
 }
 #lstng_htl .sidebar .room_tip .text {
@@ -1635,23 +1635,41 @@
 	background-color: #9BD2FC;
 }
 
-#lstng_htl .sidebar .details > label,
-#lstng_htl .sidebar .type > label {
+#lstng_htl .sidebar .details tr,
+#lstng_htl .sidebar .type tr {
 	display: block;
 	width: 273px;
-	height: 29px;
-	font: normal 12px/29px Helvetica;
-	color: #464646;
+	padding: 6px 0;
 	margin-left: 3px;
 	position: relative;
 	overflow: hidden;
+	margin-bottom: 2px;
 }
-#lstng_htl .sidebar .details:hover > label,
-#lstng_htl .sidebar .type:hover > label {
+#lstng_htl .sidebar .details:hover tr,
+#lstng_htl .sidebar .type tr:hover {
 	background-color: #f1f9ff;
+}
+#lstng_htl .sidebar .details td,
+#lstng_htl .sidebar .type td {
+	vertical-align: middle;
 }
 #lstng_htl .sidebar .type input[type="radio"] {
 	margin: 0 10px 0 18px;
+	display: table-cell;
+	vertical-align: middle;
+	float: left;
+}
+#lstng_htl .sidebar .type label {
+	width: 180px;
+	font: normal 12px/14px Helvetica;
+	color: #464646;
+}
+#lstng_htl .sidebar .type em {
+	display:block;
+	font: bold 11px Helvetica;
+	color: #303030;
+	float: right;
+	padding-right: 15px;
 }
 #lstng_htl .sidebar .selects {
 	background-color: #FFF;
@@ -1706,7 +1724,7 @@
     left: 50%;
 }
 #lstng_htl .sidebar .price abbr {
-	right: 33%;
+	right: 30%;
 	position: relative;
 	display: block;
 	float: left;
@@ -1722,7 +1740,7 @@
 #lstng_htl .sidebar .price sub{
     font-size: 12px;
     font-weight: normal;
-    vertical-align: middle;
+    margin: 12px 0 0 5px;
     right: 33%;
     position: relative;
     display: block;
@@ -1734,7 +1752,7 @@
 	font: bold 14px/39px Helvetica;
 	width: 262px;
 }
-#lstng_htl .sidebar em {
+#lstng_htl .sidebar .add em {
 	color: #898989;
 	font: italic 13px/20px;
 	float: left;
@@ -2029,7 +2047,7 @@
 /*- END LISTING HOTELS --------------------------------------------*/
 /*-	LISTING TOURIST SIGHTS ----------------------------------------*/
 .bg_ts {
-    background: url("https://developer.tripfab.com/images6/lst_bgTS.png") repeat-x scroll 0 54px #FFFFFF;
+    background: url("https://developer.tripfab.com/images6/lst_bgTS.png") repeat-x scroll 0 62px #FFFFFF;
 }
 #sight.lstng_dflt .top .description .slideshow {
 	width: 298px;
@@ -2039,6 +2057,7 @@
 	border: none;
 	padding-top: 4px;
 	margin: 0 0 24px;
+	visibility: hidden;
 }
 #sight.lstng_dflt .top .description {
 	padding-top: 25px;
