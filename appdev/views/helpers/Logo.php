@@ -56,10 +56,10 @@ class Zend_View_Helper_Logo {
         if (file_exists($imagePath) == false):
             $imagePath = $_SERVER['DOCUMENT_ROOT'] . $imagePath;
             if (file_exists($imagePath) == false):
-                return '<img src="' . $imagePath . '" width="114" height="94" />';
+                return '<img src="' . $imagePath . '" width="109" height="89" />';
             endif;
         else:
-            return '<img src="' . str_replace(APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3', '', $imagePath) . '"  width="114" height="94" />';
+            return '<img src="' . str_replace(APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3', '', $imagePath) . '"  width="109" height="89" />';
         endif;
         
     }
