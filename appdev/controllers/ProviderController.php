@@ -1,4 +1,4 @@
-ac<?php
+<?php
 
 
 class ProviderController extends Zend_Controller_Action
