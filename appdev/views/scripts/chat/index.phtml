@@ -21,7 +21,7 @@
         });
 		
 		listen();
-		
+                setInterval('read()', 2000);
 		$userimage = $('.userimage img').attr('src');
 		$vendorimage = $('.vendorimage img').attr('src');
 		
@@ -57,7 +57,7 @@
 			url:'/chat/read',
 			data:{provider:<?= $this->vendor->id ?>},
 			success:function(response){
-				listen();
+				//listen();
 				for(i in response) {
 					$lastMsg = $('.message:last');
 					if($lastMsg.html() != null) {
@@ -83,6 +83,8 @@
 						$('.title', $msg).after('<div class="single-message first">'+response[i]+'</div>');
 					}
 				}
+                                
+                                $("#livechat .mid").prop({ scrollTop: $("#livechat .mid").prop("scrollHeight")});
 			},
 			error:function(response){
 				listen();
@@ -123,6 +125,8 @@
 		} else {
 			$('.title', $msg).after('<div class="single-message first">'+$message+'</div>');
 		}
+                                
+                $("#livechat .mid").prop({ scrollTop: $("#livechat .mid").prop("scrollHeight")});
 	}
     </script>
     <?php endif ?>

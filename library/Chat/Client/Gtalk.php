@@ -1,6 +1,6 @@
 <?php
 
-require "Chat/Helpers/XMPPHP/xmpp.php";
+require "Chat/Helpers/XMPPHP/XMPP.php";
 
 class Chat_Client_Gtalk 
         extends Chat_Client {
@@ -12,7 +12,7 @@ class Chat_Client_Gtalk
     
     /**
      * 
-     * @var YMSG
+     * @var XMPPHP_XMPP
      */
     protected $service;
     
@@ -122,9 +122,15 @@ class Chat_Client_Gtalk
         
         $_msgs = 0;
         
+        $last = '';
+        $last2 = '';
+        
+        $proceed = true;
+        $read = true;
+        
         while (!$this->service->disconnected) {
             $this->service->presence($status = "Live Support Team 1");
-            $payloads = $this->service->processUntil('message');
+            $payloads = $this->service->processUntil(array('message', 'presence', 'end_stream', 'session_start'));
             foreach ($payloads as $event) {
                 $pl = $event[1];
                 switch ($event[0]) {
@@ -133,31 +139,56 @@ class Chat_Client_Gtalk
                             //print "Subject: {$pl['subject']}\n";
                         
                         
-                        var_dump($event);
-                        //$this->save($pl['body']);
-                        $_msgs++;
+                        if(!is_null($pl['body'])) {
 
-                        if ($pl['body'] == 'quit')
-                            $this->service->disconnect();
-                        if ($pl['body'] == 'break')
-                            $this->service->send("</end>");
-                        
-                        $this->conversation->updated = date('Y-m-d H:i:s');
-                        $this->conversation->save();
-
-                        return $_msgs;
+                            if ($pl['body'] == 'quit')
+                                $this->service->disconnect();
+                            elseif ($pl['body'] == 'break')
+                                $this->service->send("</end>");
+                            elseif($proceed && ($last != $pl['body'])) {
+                                $proceed = false;
+                                $last = $pl['body'];
+                                //$this->save($pl['body']);
+                                var_dump($pl);
+                                return;
+                                $this->conversation->updated = date('Y-m-d H:i:s');
+                                $this->conversation->save();
+                            }
+                        }
                         break;
                 }
+            }
+            
+            $proceed = true;
+            
+            if($read) {
+                $messages = new Zend_Db_Table(self::MTABLE);
+                $select = $messages->select();
+                $select->where('conversation = ?', $this->conversation->id);
+                $select->where('readed = ?', 0);
+                $select->where('sender = ?', $this->user);
+
+                $news = $messages->fetchAll($select);
+
+                if(count($news) > 0) {
+                    $read = false;
+                    foreach($news as $new) {
+                        if($new != $last2){
+                            $last2 = false;
+                            $this->service->message($this->vendorEmail, $new->message);
+                            $new->readed = 1;
+                            $new->save();
+                        }
+                    }
+                }
+                
+                $read = true;
             }
         }
     }
     
-    public function send($message)
+    protected function sendMsgs()
     {
-        parent::send($message);
-        if(!$this->connected) 
-            $this->_connect();
         
-        $this->service->message($this->vendorEmail, $message);
     }
 }

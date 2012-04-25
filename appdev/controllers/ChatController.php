@@ -36,7 +36,6 @@ class ChatController extends Zend_Controller_Action {
         $auth = Zend_Auth::getInstance();
         if(!$auth->hasIdentity())
                 $this->_redirect('/login');
-        
         $this->users   = new WS_UsersService();
         $this->user    = new WS_User($auth->getIdentity());
         $this->session = new Zend_Session_Namespace('Chat');
