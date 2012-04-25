@@ -1,5 +1,5 @@
-<?php $total = 25; //(count($this->cities) > 40) ? 40 : count($this->cities) ?>
-<?php $items = 5; //($total == 40) ? 8 : ((($total % 5) == 0) ? ($total / 5) : ((($total % 4) == 0) ? ($total / 4) : ((($total - ($total % 4)) / 4))))  ?> 
+<?php $total = 42; //(count($this->cities) > 40) ? 40 : count($this->cities) ?>
+<?php $items = 7; //($total == 40) ? 8 : ((($total % 5) == 0) ? ($total / 5) : ((($total % 4) == 0) ? ($total / 4) : ((($total - ($total % 4)) / 4))))  ?> 
 <?php for($i=0; $i<$total; $i=$i+$items): ?>
 <ul>
 	<?php for($j=$i; (($j < $total) and ($j < ($i + $items))); $j++): ?>
