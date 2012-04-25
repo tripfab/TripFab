@@ -298,6 +298,7 @@
 #header .user-menu .main ul {
 	float: left;
 	margin-top: 5px;
+	list-style: none;
 }
 #header .user-menu .main ul li {
 	margin-bottom: 5px;
@@ -14240,7 +14241,7 @@ h2.title .back:hover,
 }
 #header .wrapper > .menu_admin > li {
 	position:relative;
-	padding:0 0 0 0;
+	padding:0 0 0 30px;
 	margin:0;
 	float: left;
 }
