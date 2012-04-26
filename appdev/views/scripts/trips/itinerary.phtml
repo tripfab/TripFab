@@ -32,6 +32,7 @@
                 <a href="" class="prev">Previous Day</a>
                 <a href="" class="next">Next Day</a>
                 <div class="days-cycle">
+                	<?php $times = array('Stay','Morning','Afternoon','Night','Stay') ?>
                 	<?php for($i=1;$i<=count($this->listingsbyday);$i++): ?>
                     <div class="day">
                         <div class="day-ttl">
@@ -48,12 +49,17 @@
                                     <?= $this->thumbnail(array('width'=>267,'height'=>168), $listing->image, '', '267:168') ?>
                                 </div><!-- closes left -->
                                 <div class="right">
-                                    <strong>8:00 AM - 9:00 AM</strong>
+                                	<?php if($listing->start != '00:00:00'): ?>
+                                    <strong><?= date('g:i A',strtotime($listing->start)) ?> - <?= date('g:i A',strtotime($listing->end)) ?></strong>
+                                    <?php else: ?>
+                                    <strong><?= $times[$listing->time] ?></strong>
+                                    <?php endif ?>
                                     <h4><?= $listing->title ?></h4>
                                     <ul>
-                                        <li>Vivamus luctus tellus tristique purus iaculis non ornare erat ultrices. Morbi eros quam, imperdiet nec laoreet eget.</li>
-                                        <li>Aliquam non mi sapien, pharetra viverra orci.</li>
-                                        <li>Vivamus luctus tellus tristique purus iaculis non ornare erat ultrices. Morbi eros quam, imperdiet nec laoreet eget, condimentum id sapien. Aliquam non mi sapien, pharetra viverra orci.</li>
+                                    	<?php $desc = explode("\n",$listing->description) ?>
+                                        <?php foreach($desc as $d): ?>
+                                        <li><?= $d ?></li>
+                                        <?php endforeach ?>
                                     </ul>
                                 </div><!-- closes right -->
                             </div><!-- closes day-item -->
