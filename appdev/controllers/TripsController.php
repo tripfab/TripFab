@@ -141,47 +141,20 @@ class TripsController extends Zend_Controller_Action {
         $trip_highlights = $this->trips->getHighlights($trip->id);
         $trip_facts      = $this->trips->getFacts($trip->id);
         $trip_includes   = $this->trips->getIncludes($trip->id); 
+        $cities          = $this->trips->getCities($trip->id);
+        $info            = $this->trips->getInfo($trip->id);
+        $pictures        = $this->trips->getPictures($trip->id);
         
         $this->view->trip       = $trip;
         $this->view->highlights = $trip_highlights;
         $this->view->facts      = $trip_facts;
         $this->view->includes   = $trip_includes;
+        $this->view->cities     = $cities;        
+        $this->view->info       = $info;
+        $this->view->pictures   = $pictures;
 
-        $listings = $this->trips->getListingOf($trip->id, false);
+        $listings = $this->trips->getListingOf3($trip->id, false);
         $this->view->listings = $listings;
-        
-        $images = array();
-        foreach($listings as $list){
-            if(!empty($list->image)){
-                if(!in_array($list->image, $images))
-                    $images[] = $list->image;
-            }
-        }
-        
-        $labels = array('','Morning','Afternoon', 'Night');
-        $times = array();
-        $days  = array();
-        $results = array();
-        foreach($listings as $day){
-          if(!in_array($day->day, $days)){
-            $days[] = $day->day;
-            $times[$day->day] = array();
-            foreach($listings as $time){
-              if($time->day == $day->day){
-                if(!in_array($time->time, $times[$day->day])){
-                  $times[$day->day][] = $time->time;
-                  $results[$day->day][$labels[$time->time]] = array();
-                  foreach($listings as $listing){
-                    if(($listing->day == $day->day) and ($listing->time == $time->time)){
-                      $results[$day->day][$labels[$time->time]][] = $listing;
-        }}}}}}}
-        
-        $this->view->listingsbyday = $results;
-        
-        //var_dump($results); die; 
-        
-        
-        $this->view->images = $images;
     }
     
     public function itineraryAction()
@@ -189,20 +162,12 @@ class TripsController extends Zend_Controller_Action {
         $trip = $this->_getTrip();
         $this->view->trip = $trip;
 
-        $listings = $this->trips->getListingOf($trip->id, false);
+        $listings = $this->trips->getListingOf3($trip->id, false);
         $this->view->listings = $listings;
         
-        $images = array();
-        foreach($listings as $list){
-            if(!empty($list->image)){
-                if(!in_array($list->image, $images))
-                    $images[] = $list->image;
-            }
-        }
-        
-        $labels = array('','Morning','Afternoon', 'Night');
-        $times = array();
-        $days  = array();
+        $labels  = array('Stay','Morning','Afternoon', 'Night','Stay');
+        $times   = array();
+        $days    = array();
         $results = array();
         foreach($listings as $day){
           if(!in_array($day->day, $days)){
@@ -211,19 +176,28 @@ class TripsController extends Zend_Controller_Action {
             foreach($listings as $time){
               if($time->day == $day->day){
                 if(!in_array($time->time, $times[$day->day])){
+                  if(is_null($time->time)) {
+                    $start = explode(':', $time->start); $start = $start[0];
+                    if($start >= 05 and $start <= 11) $time->time = 1;
+                    if($start >= 12 and $start <= 18) $time->time = 2;
+                    if($start >= 18 and $start <= 04) $time->time = 3;
+                  }
                   $times[$day->day][] = $time->time;
                   $results[$day->day][$labels[$time->time]] = array();
                   foreach($listings as $listing){
+                    if(is_null($time->time)) {
+                      $start = explode(':', $listing->start); $start = $start[0];
+                      if($start >= 05 and $start <= 11) $listing->time = 1;
+                      if($start >= 12 and $start <= 18) $listing->time = 2;
+                      if($start >= 18 and $start <= 04) $listing->time = 3;
+                    }
                     if(($listing->day == $day->day) and ($listing->time == $time->time)){
                       $results[$day->day][$labels[$time->time]][] = $listing;
         }}}}}}}
         
         $this->view->listingsbyday = $results;
         
-        //var_dump($results); die; 
-        
-        
-        $this->view->images = $images;
+        //var_dump($results); die;
     }
     
     public function newAction()

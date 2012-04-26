@@ -249,7 +249,7 @@ class WS_TripsService {
         return $result;
     }
 	
-	public function getListingOf3($trip) {
+    public function getListingOf3($trip) {
         $select = $this->DB->select();
         $select->from('trip_listings')->
         joinleft('places', 'trip_listings.city_id = places.id', array('city_id'=>'id', 'city' => 'title', 'cityurl' => 'identifier' )) ->
@@ -260,7 +260,7 @@ class WS_TripsService {
 		order('trip_listings.sort ASC');
 		$result = $this->DB->fetchAll($select, array(), Zend_Db::FETCH_OBJ);
         return $result;
-	}
+    }
 	
 
     public function getItnListingOf($trip, $full = true, $exclude = false, $id = false, $checkout = false) {
@@ -510,7 +510,7 @@ class WS_TripsService {
         $select->join('places', 'trips.country_id = places.id', array('country' => 'title'));
         $select->join(array('places2' => 'places'), 'trips.start_city = places2.id', array('start_city_name' => 'title'));
         $select->join(array('places3' => 'places'), 'trips.end_city = places3.id', array('end_city_name' => 'title'));
-        $select->join('trip_categories', 'trips.category_id = trip_categories.id', array('category' => 'name'));
+        $select->joinLeft('trip_categories', 'trips.category_id = trip_categories.id', array('category' => 'name'));
         $select->where('trips.country_id = ?', $country);
         if ($category != 'all')
             $select->where('trips.category_id = ?', $category);
@@ -734,7 +734,8 @@ class WS_TripsService {
         $select = $this->DB->select();
         $this->DB->setFetchMode(Zend_Db::FETCH_OBJ);
         $select->from('trip_cities', array('*'));
-        $select->where('trip_id = ?', $trip);
+        $select->join('places','trip_cities.city_id = places.id', array('title'));
+        $select->where('trip_cities.trip_id = ?', $trip);
         $select->order('id');
         $cities = $this->DB->fetchAll($select);
         return $cities;
@@ -755,7 +756,7 @@ class WS_TripsService {
         }
     }
 	
-	public function deleteListing($listing) {
+    public function deleteListing($listing) {
         $table = new Zend_Db_Table('trip_listings');
         $table->delete('id = ' . $listing);
 		return true;
@@ -793,6 +794,58 @@ class WS_TripsService {
         $select->where('trip_id = ?', $trip);
         $days = $this->DB->fetchAll($select);
         return $days;
+    }
+    
+    public function getPictures($trip)
+    {
+        $photos = new Zend_Db_Table('trip_photos');
+        $select = $photos->select();
+        $select->where('trip_id = ?', $trip);
+        return $photos->fetchAll($select);
+    }
+    
+    public function getInfo($trip)
+    {
+        $facts = $this->getFacts($trip);
+        $info  = array();
+        foreach($facts as $f){
+            switch($f->type){
+                case 1:
+                    $info['culture'] = $f->text;
+                break;
+                case 2:
+                    if(!is_array($info['facts']))
+                        $info['facts'] = array();
+                    $info['facts'][] = $f->text;
+                break;
+                case 3:
+                    $info['envirnment'] = $f->text;
+                break;
+                case 4:
+                    $info['wildlife'] = $f->text;
+                break;
+                case 5:
+                    if(!is_array($info['love']))
+                        $info['love'] = array();
+                    $info['love'][] = $f->text;;
+                break;
+                case 6:
+                    $info['season'] = $f->text;
+                break;
+                case 7:
+                    if(!is_array($info['tips']))
+                        $info['tips'] = array();
+                    $info['tips'][] = $f->text;;
+                break;
+                case 8:
+                    $info['shopping'] = $f->text;;
+                break;
+                case 9:
+                    $info['nightlife'] = $f->text;
+                break;
+            }
+        }
+        return $info;
     }
 
 
