@@ -3894,6 +3894,12 @@ class AdminController extends Zend_Controller_Action {
             case 'data':
                 $this->tripDataTask();
                 break;
+            case 'preview':
+                $this->tripPreviewTask();
+                break;
+            case 'itinerary':
+                $this->tripItineraryTask();
+                break;
             case 'delete':
                 $this->tripDeleteTask();
                 break;
@@ -4118,6 +4124,106 @@ class AdminController extends Zend_Controller_Action {
         }
 
         $this->render('trip1');
+    }
+    
+    private function tripPreviewTask()
+    {
+        $trip            = $this->_getTrip();
+        $trip_highlights = $this->trips->getHighlights($trip->id);
+        $trip_facts      = $this->trips->getFacts($trip->id);
+        $trip_includes   = $this->trips->getIncludes($trip->id); 
+        $cities          = $this->trips->getCities($trip->id);
+        $info            = $this->trips->getInfo($trip->id);
+        $pictures        = $this->trips->getPictures($trip->id);
+        
+        $this->view->trip       = $trip;
+        $this->view->highlights = $trip_highlights;
+        $this->view->facts      = $trip_facts;
+        $this->view->includes   = $trip_includes;
+        $this->view->cities     = $cities;        
+        $this->view->info       = $info;
+        $this->view->pictures   = $pictures;
+
+        $listings = $this->trips->getListingOf3($trip->id, false);
+        $this->view->listings = $listings;
+        
+        $this->render('trippreview');
+    }
+    
+    private function tripItineraryTask()
+    {
+        $trip = $this->_getTrip();
+        $this->view->trip = $trip;
+
+        $listings = $this->trips->getListingOf3($trip->id, false);
+        $this->view->listings = $listings;
+        
+        $labels  = array('Stay','Morning','Afternoon', 'Night','Stay');
+        $times   = array();
+        $days    = array();
+        $results = array();
+        foreach($listings as $day){
+          if(!in_array($day->day, $days)){
+            $days[] = $day->day;
+            $times[$day->day] = array();
+            foreach($listings as $time){
+              if($time->day == $day->day){
+                if(!in_array($time->time, $times[$day->day])){
+                  if(is_null($time->time)) {
+                    $start = explode(':', $time->start); $start = $start[0];
+                    if($start >= 05 and $start <= 11) $time->time = 1;
+                    if($start >= 12 and $start <= 18) $time->time = 2;
+                    if($start >= 18 and $start <= 04) $time->time = 3;
+                  }
+                  $times[$day->day][] = $time->time;
+                  $results[$day->day][$labels[$time->time]] = array();
+                  foreach($listings as $listing){
+                    if(is_null($time->time)) {
+                      $start = explode(':', $listing->start); $start = $start[0];
+                      if($start >= 05 and $start <= 11) $listing->time = 1;
+                      if($start >= 12 and $start <= 18) $listing->time = 2;
+                      if($start >= 18 and $start <= 04) $listing->time = 3;
+                    }
+                    if(($listing->day == $day->day) and ($listing->time == $time->time)){
+                      $results[$day->day][$labels[$time->time]][] = $listing;
+        }}}}}}}
+        
+        $this->view->listingsbyday = $results;
+        
+        $this->render('tripitinerary');
+        
+        //var_dump($results); die;
+    }
+    
+    private function _getId($var = 'page')
+    {
+        $id = $this->_getParam($var);
+        if(!$this->_isValidId($id))
+                $this->_redirect('trips');
+        
+        return $id;
+    }
+    
+    private function _getTrip($var = 'page', $user = false)
+    {
+        $id = $this->_getId($var);
+        $trip = $this->trips->get($id);
+        if($user){
+            if($trip->user_id != $this->user->getId()){
+                throw new Exception();
+        }}
+        return $trip;
+    }
+    
+    private function _isValidId($var)
+    {
+        $id = (int) $var;
+        if(!is_int($id))
+            return false;
+        if($id<=0)
+            return false;
+        
+        return true;
     }
 
     private function saveTripPhoto($tripId) {
