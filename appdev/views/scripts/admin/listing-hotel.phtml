@@ -97,7 +97,7 @@
 									'user' => $this->user,
 									'trips' => $this->trips,
 									'listing' => $this->listing,
-									'class'	=> 'main',
+									'class'	=> 'btn-2',
 									'class2' => 'one'
 							)) ?>
 							
@@ -413,23 +413,34 @@
 	                        	<form id="booking" method="post" action="/en-US/<?= $this->form_action ?>">
                                     <h5>Select the Dates <span class="i_date"></span></h5>
                                     <div class="dates">
+                                    	<span class="line"></span>
                                         <div class="check">
                                             <label>Check In</label>
-                                            <input id="checkIn" type="text" name="checkin" value="" />
+                                            <input id="checkIn" type="text" name="checkin" value="dd/mm/yyyy" />
                                         </div><!--CHECK-->
                                         <div class="check">
                                             <label>Check Out</label>
-                                            <input id="checkOut" type="text" name="checkout" value="" />
+                                            <input id="checkOut" type="text" name="checkout" value="dd/mm/yyyy" />
                                         </div><!--CHECK-->
                                     </div><!--DATES-->
                                     <h5><span class="i_room"></span>Select the Room Details</h5>
                                     <div class="type">
+                                    	<span class="line"></span>
                                         <?php foreach($this->options as $option): ?>
 	                                        <div class="details">
-	                                        	<label for="room<?= $option->id ?>"><input type="radio" id="room<?= $option->id ?>" 
-	                                        	name="option" value="<?= $option->id ?>" />
-	                                        	<?= $option->name ?> (<?= $this->rooms2[$option->id]['people'] ?>/room) 
-	                                        	$<?= $this->prices[$option->id]['price'] ?> </label>
+	                                        
+	                                        	<table width="262">
+	                                        		<tr>
+	                                        			<td width="32"><input type="radio" id="room<?= $option->id ?>" name="option" value="<?= $option->id ?>" /></td>
+	                                        			<td width="175"><label for="room<?= $option->id ?>"><?= $option->name ?> (<?= $this->rooms2[$option->id]['people'] ?>/room)</label></td>
+	                                        			<td width="55"><em>$<?= $this->prices[$option->id]['price'] ?> </em></td>
+	                                        		</tr>
+	                                        	</table>
+                                        		<!--<label for="room<?= $option->id ?>">
+													<input type="radio" id="room<?= $option->id ?>" name="option" value="<?= $option->id ?>" />
+													<span><?= $option->name ?> (<?= $this->rooms2[$option->id]['people'] ?>/room)</span> 
+													<em>$<?= $this->prices[$option->id]['price'] ?> </em>
+												</label>-->
 
 												<div class="room_tip">
 													<span class="rw"></span>
@@ -451,8 +462,8 @@
 														$this->rooms2[$option->id]['people'] . ' person' ?></li>
                                                         <?php endif ?>
 													</ul>
-												</div><!--ROOM_TIP-->		
-	                                        </div>
+												</div><!--ROOM_TIP-->												
+                                        	</div><!--DETAILS-->
                                         <?php endforeach ?>
                                     </div><!--TYPE-->
                                     <div class="selects">
@@ -492,7 +503,7 @@
                                             'user' => $this->user,
                                             'trips' => $this->trips,
                                             'listing' => $this->listing,
-                                            'class'	=> 'side',
+                                            'class'	=> 'btn-2',
                                             'class2' => 'two'
                                     )) ?>
                                     <em>or you can</em>
