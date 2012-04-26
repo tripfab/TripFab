@@ -11852,6 +11852,7 @@ h2.title .back:hover,
 	background-color: #FFFFFF;
 	border: 1px solid #E7E7E7;
 	box-shadow: 0 0 2px #EAEAEA;
+	clear: both;
 }
 
 .trip-itinerary .box.main-image {
@@ -12083,7 +12084,7 @@ h2.title .back:hover,
 }
 
 .trip-itinerary .tabs-wrapper {
-	background: url(https://developer.tripfab.com/images2/g-3.png) repeat-x scroll 0 0 #FFFFFF;
+	background:url("https://developer.tripfab.com/images2/itinerary-g1.png") repeat-x scroll left 74px transparent;
 	border: 1px solid #E8E8E8;
 	overflow: hidden;
 	margin-bottom: 20px;
@@ -12093,6 +12094,8 @@ h2.title .back:hover,
 	-moz-border-radius-bottomleft: 4px;
 	-webkit-border-radius: 0px 0px 4px 4px;
 	border-radius: 0px 0px 4px 4px; 
+	float:left;
+	width:100%;
 }
 
 .trip-itinerary .tabs-wrapper .tab {
@@ -12107,21 +12110,22 @@ h2.title .back:hover,
 }
 .trip-itinerary .tabs-wrapper > ul {
 	background: url(https://developer.tripfab.com/images2/itinerary-g1.png) repeat-x left 73px;
-	overflow: hidden;
-	float: none;
+	float: left;
+	clear: left;
+	left: 50%;
 	height: 93px;
-	position: static;
-	padding-left: 150px;
+	position: relative;
 }
 .trip-itinerary .tabs-wrapper > ul li {
 	float: left;
 	position: relative;
-	background: url(https://developer.tripfab.com/images2/itinerary-sep1.png) no-repeat right top;
+	background: url(https://developer.tripfab.com/images2/itinerary-sep1.png) no-repeat right top #FFF;
 	margin: 0;
 	height: 73px;
 	width: 130px;
 	text-align: center;
-	left: 0;
+	right: 50%;
+
 }
 .trip-itinerary .tabs-wrapper > ul li a {
 	height: 73px;
