@@ -42,44 +42,18 @@
     	</div><!-- closes desc -->
         <?php endif ?>
     	<div class="main-ttl">
-    		<p><strong>Sight Overview</strong></p>    		
+    		<p><strong>Description</strong></p>    		
     	</div><!-- closes main-ttl -->								
         <div class="lstng-detail">
             <textarea placeholder="Write a nice overview about this sight" class="noclean" name="about" cols="30" rows="1"><?= stripslashes($this->overview->about) ?></textarea>
             <strong>About the sight</strong>
             <span>Write a detail description</span>
             <!--<span class="counter">500</span>-->
-            <div class="help">
-                <a href="/images2/help/big-sig-overview-about.png" class="eye">help</a>
-                <a href="/images2/help/big-sig-overview-about.png" class="tooltip3">
-                <img src="/images2/help/small-sig-overview-about.png" /></a>
-            </div>
+            
             <div class="clear"></div>
         </div><!-- closes lstng-detail -->
-        <div class="lstng-detail">
-            <textarea placeholder="Write a nice description about things people will love" class="noclean" name="love" cols="30" rows="1"><?= stripslashes($this->overview->love) ?></textarea>
-            <strong>Why do you love it?</strong>
-            <span>Write about things people will love about it</span>
-            <!--<span class="counter">500</span>-->
-            <div class="help">
-                <a href="/images2/help/big-sig-overview-why.png" class="eye">help</a>
-                <a href="/images2/help/big-sig-overview-why.png" class="tooltip3">
-                <img src="/images2/help/small-sig-overview-why.png" /></a>
-            </div>
-            <div class="clear"></div>
-        </div><!-- closes lstng-detail -->
-        <div class="lstng-detail">
-            <textarea placeholder="Write a nice description about what to expect" class="noclean" name="expect" cols="30" rows="1"><?= stripslashes($this->overview->expect) ?></textarea>
-            <strong>When can you enjoy it?</strong>
-            <span>Tell us what the traveler can expect</span>
-            <!--<span class="counter">500</span>-->
-            <div class="help">
-                <a href="/images2/help/big-sig-overview-when.png" class="eye">help</a>
-                <a href="/images2/help/big-sig-overview-when.png" class="tooltip3">
-                <img src="/images2/help/small-sig-overview-when.png" /></a>
-            </div>
-            <div class="clear"></div>
-        </div><!-- closes lstng-detail -->
+        
+        
     </div><!-- closes lstng-details -->
     <div class="foot">
         <input type="submit" class="btn-1 noclean" value="Save Changes" />
