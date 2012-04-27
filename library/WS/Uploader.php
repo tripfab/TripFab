@@ -110,20 +110,23 @@ class WS_Uploader {
                     throw new Exception();
             if($form_id != md5($user->token.'upload_listing_pictures'))
                     throw new Exception();
-
-            $vendors_db = new Zend_Db_Table('vendors');
-            $select = $vendors_db->select();
-            $select->where('id = ?', $vendor_id);
-            //$select->where('user_id = ?', $user->id);
-            $vendor = $vendors_db->fetchRow($select);
-            if(is_null($vendor))
-                    throw new Exception();
+            if(!is_null($vendor_id)){
+                $vendors_db = new Zend_Db_Table('vendors');
+                $select = $vendors_db->select();
+                $select->where('id = ?', $vendor_id);
+                //$select->where('user_id = ?', $user->id);
+                $vendor = $vendors_db->fetchRow($select);
+                if(is_null($vendor))
+                        throw new Exception();
+            }
 
             $listings_db = new Zend_Db_Table('listings');
             $select = $listings_db->select();
             $select->where('id = ?', $listing_id);
             $select->where('token = ?', $listing_token);
-            $select->where('vendor_id = ?', $vendor->id);
+            if(!is_null($vendor_id)){
+                $select->where('vendor_id = ?', $vendor->id);
+            }
             $listing = $listings_db->fetchRow($select);
             if(is_null($listing))
                     throw new Exception();
