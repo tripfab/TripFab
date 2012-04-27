@@ -833,9 +833,6 @@ padding: 34px 59px;
 .trip-types .jcarousel-next-disabled, .trip-types .jcarousel-next-disabled:hover {
 	background-position: 0 -49px!important;
 }
-#tabs-4 {
-	position: relative;
-}
 #tabs-4 .select_nearest {
 	position: absolute;
 	right: 57px;
@@ -12105,9 +12102,9 @@ h2.title .back:hover,
 	position: relative;
 	box-shadow: none;
 }
-.trip-itinerary .tabs-wrapper .tab > div {
+/*.trip-itinerary .tabs-wrapper .tab > div {
 	height: 445px !important;
-}
+}*/
 .trip-itinerary .tabs-wrapper > ul {
 	background: url(https://developer.tripfab.com/images2/itinerary-g1.png) repeat-x left 73px;
 	float: left;
@@ -12805,7 +12802,7 @@ h2.title .back:hover,
 	font-size: 14px;
 	font-weight: bold;
 	line-height: 49px;
-	z-index: 10;
+	z-index: 20;
 }
 
 .box.days > a:hover {
