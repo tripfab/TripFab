@@ -54,7 +54,7 @@ $(function(){
     $('.listing-gallery ul li a').click(function(){
         if($(this).hasClass('active'))
             return false;
-		alert("Hello");
+		
         $('.listing-gallery ul li.active').removeClass('active');
         $(this).parent().addClass('active');
 		

@@ -51,17 +51,13 @@ $(document).ready(function() {
 });
 
 $(function(){
-    $('.listing-gallery ul li a').click(function(){
-        if($(this).hasClass('active'))
-            return false;
-		
-        $('.listing-gallery ul li.active').removeClass('active');
-        $(this).parent().addClass('active');
-		
-        $('.listing-gallery .img-wrapper.active').removeClass('active');
-        $($(this).attr('href'), '.listing-gallery').addClass('active');
-		
-        return false;
+    $(".single a").click(function() {
+    	$id = $(this).attr('href');
+    	$(".single a").removeClass('active');
+    	$(this).addClass('active');
+    	$(".slideshow img" ).removeClass('show');
+    	$($id).addClass('show');
+    	return false
     });
 });
 
