@@ -791,7 +791,6 @@ class AdminController extends Zend_Controller_Action {
             $template    = 'listing';
 
             $faqs        = $this->listings->getFAQsOf($listing->id);
-            $vendor      = $this->vendors->getVendorById($listing->vendor_id);
 
             $attributes  = $this->listings->getAttributesOf($listing->id);
 
@@ -815,11 +814,14 @@ class AdminController extends Zend_Controller_Action {
                     
                     $getthere = $this->listings->getLocationOf($listing->id);
                     
+                    $vendor   = $this->vendors->getVendorById($listing->vendor_id);
+                    
                     $this->view->overview       = $overview;
                     $this->view->departure_city = $departure_city;
                     $this->view->return_city    = $return_city;
                     $this->view->details        = $details;
                     $this->view->getthere       = $getthere;
+                    $this->view->vendor         = $vendor;
                     break;
                 case 7  : 
                     $template = 'listing-entertaiment';  
@@ -854,6 +856,8 @@ class AdminController extends Zend_Controller_Action {
                     $listing_amenities = $this->listings->getGenAmenities($listing->id);
                     $def_amenities     = $this->listings->getDefaultGenAmenities(true);
                     
+                    $vendor   = $this->vendors->getVendorById($listing->vendor_id);
+                    
                     $this->view->overview = $overview;
                     $this->view->details  = $details;
                     $this->view->getthere = $getthere;
@@ -862,6 +866,7 @@ class AdminController extends Zend_Controller_Action {
                     $this->view->beds     = $beds;
                     $this->view->room_amenities = $room_amenities;
                     $this->view->amenities = $amenities;
+                    $this->view->vendor    = $vendor;
                     
                     $this->view->def_amenities = $def_amenities;
                     $this->view->listing_amenities = $listing_amenities;
@@ -948,7 +953,6 @@ class AdminController extends Zend_Controller_Action {
             $this->view->city            = $city;
             $this->view->listing         = $listing;
             $this->view->faqs            = $faqs;
-            $this->view->vendor          = $vendor;
             $this->view->attributes      = $attributes;
             $this->view->prices          = $prices;
             $this->view->pictures        = $pictures;
@@ -1166,22 +1170,36 @@ class AdminController extends Zend_Controller_Action {
                     
                     if($main_cat->id == 7 or $main_cat->id == 2)
                         $this->_redirect('admin/listings/addplaces');
-
-                    $vendor = $this->users->getVendorByUserId($_POST['vendor_id']);
                     
-                    $listing = $this->listings->createNew();
-                    $listing->title      = 'Untitled Listing';
-                    $listing->country_id = $_POST['country_id'];
-                    $listing->city_id    = $_POST['city_id'];
-                    $listing->vendor_id  = $vendor->id;
-                    $listing->main_type  = $main_cat->id;
-                    $listing->created    = date('Y-m-d H:i:s');
-                    $listing->updated    = date('Y-m-d H:i:s');
-                    $listing->status     = 0;
-                    $listing->phone      = $vendor->phone;
-                    $listing->email      = $vendor->email;
-                    $listing->website    = $vendor->website;
-                    $listing->save();
+                    if($main_cat->id != 4) {
+                        $vendor = $this->users->getVendorByUserId($_POST['vendor_id']);
+                        $listing = $this->listings->createNew();
+                        $listing->title      = 'Untitled Listing';
+                        $listing->country_id = $_POST['country_id'];
+                        $listing->city_id    = $_POST['city_id'];
+                        $listing->vendor_id  = $vendor->id;
+                        $listing->main_type  = $main_cat->id;
+                        $listing->created    = date('Y-m-d H:i:s');
+                        $listing->updated    = date('Y-m-d H:i:s');
+                        $listing->status     = 0;
+                        $listing->phone      = $vendor->phone;
+                        $listing->email      = $vendor->email;
+                        $listing->website    = $vendor->website;
+                        $listing->save();
+                    } else {
+                        $listing = $this->listings->createNew();
+                        $listing->title      = 'Untitled Listing';
+                        $listing->country_id = $_POST['country_id'];
+                        $listing->city_id    = $_POST['city_id'];
+                        $listing->vendor_id  = 0;
+                        $listing->main_type  = $main_cat->id;
+                        $listing->created    = date('Y-m-d H:i:s');
+                        $listing->updated    = date('Y-m-d H:i:s');
+                        $listing->status     = 0;
+                        $listing->save();
+                    }
+                    
+                    
 
                     $listing->token     = md5($listing->id.time().rand(0,100000));
                     $listing->save();
