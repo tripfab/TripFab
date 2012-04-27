@@ -59,7 +59,11 @@ class Zend_View_Helper_Image {
                 return '<img src="' . $imagePath . '" class="'.$class.'" id="'.$id.'"/>';
             endif;
         else:
-            return '<img src="' . str_replace(APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3', '', $imagePath) . '" class="'.$class.'" id="'.$id.'"/>';
+            $size = getimagesize($imagePath);
+            if($size[0] > 900) {
+                $width = 'width="900"';
+            }
+            return '<img '.$width.' src="' . str_replace(APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3', '', $imagePath) . '" class="'.$class.'" id="'.$id.'"/>';
         endif;
         
     }

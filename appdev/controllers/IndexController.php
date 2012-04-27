@@ -395,6 +395,11 @@ class IndexController extends Zend_Controller_Action
         
     }
     
+    public function policiesAction()
+    {
+        
+    }
+    
     public function mytripsAction()
     {
         $auth = Zend_Auth::getInstance();
