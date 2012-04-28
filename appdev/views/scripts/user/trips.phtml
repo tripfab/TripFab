@@ -8,7 +8,7 @@
     <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <link type="text/css" rel="stylesheet" href="/css2/lightboxes.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css" />
+    <link type="text/css" rel="stylesheet" href="/css6/calendar.css" />
 	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
 </head>
@@ -28,6 +28,25 @@
     <?php if(count($this->trips) > 0): ?>
     <div id="all_trips">
     	<?php foreach($this->trips as $trip): ?>
+    	
+    	<div class="notification end-1">
+			<span class="end"></span>
+			<div class="text">
+				<h2>Karina, You have a missed trip</h2>
+				<p>'Weekend with my family in Costa Rica' was never reserved according to date's you established previously, however, you can always change the dates</p>
+			</div><!--TEXT-->
+			<a href="" class="btn-10">Okay!</a>
+		</div><!--NOTIFICATION-->
+		
+		<div class="notification soon-1">
+			<span class="soon"></span>
+			<div class="text">
+				<h2>Karina, one of your trip is around the corner</h2>
+				<p>'Weekend with my Family in Costa Rica' starts in <strong>5 days</strong>, we suggest you rush to book to guarantee availability</p>
+			</div><!--TEXT-->
+			<a href="" class="btn-10">Okay!</a>
+		</div><!--NOTIFICATION-->
+		
         <div class="single">
             <div class="image">
                 <div class="slideshow">
@@ -100,6 +119,62 @@
             </div><!--INFO-->
         </div><!--single-->
         <?php endforeach ?>
+        <div class="single">
+        	<div class="image">
+        		<div class="slideshow">
+        			<img src="https://developer.tripfab.com/images2/img-79.jpg" width="134" height="134" alt="" />
+        			<img src="https://developer.tripfab.com/images2/img-80.jpg" width="134" height="134" alt="" />
+        			<img src="https://developer.tripfab.com/images2/img-81.jpg" width="134" height="134" alt="" />
+        			<img src="https://developer.tripfab.com/images2/img-82.jpg" width="134" height="134" alt="" />
+        		</div><!--SLIDESHOW-->
+        		
+        	</div><!--image-->
+        	<div class="info">
+        		<div class="title">
+        			<h3><a href=""><span class="icon"></span>Trip ESTATICO DE PRUEBA PARA VER FECHAS</a></h3>
+        			<span class="days_left"> 1000 Days Trip</span>
+        		</div><!--TITLE-->
+        		<div class="description">
+        			<div class="data">
+        				<dl>
+        					<dt>Travel Start</dt>
+        					<dd class="ended">Apr 26, 2011</dd>
+        					<dt>Travel Ends</dt>
+        					<dd class="ended">Apr 26, 2011</dd>
+        				</dl>
+        			</div><!--DATA-->
+        			<div class="data last">
+        				<dl>
+        					<dt>Travelers</dt>
+        					<dd>4 People</dd>
+        					<dt>Travel Ends</dt>
+        					<dd>1 Child</dd>
+        				</dl>
+        			</div><!--DATA-->
+        			<div class="listings">
+        				<ul>
+        					<li><span><img src="https://developer.tripfab.com/images2/ico_128.png" width="18" height="30" alt="" /></span>0<em><span>activities</span></em></li>
+        					<li><span><img src="https://developer.tripfab.com/images2/ico_129.png" width="18" height="30" alt="" /></span>20<em class="hotels"><span>Hotels</span></em></li>
+        					<li><span><img src="https://developer.tripfab.com/images2/ico_130.png" width="18" height="30" alt="" /></span>20<em class="restaurants"><span>Restaurants</span></em></li>
+        					<li class="not-active"><span><img src="https://developer.tripfab.com/images2/ico_131.png" width="18" height="30" alt="" /></span>0<em class="entertaiment"><span>ENTERTAINMENT</span></em></li>
+        					<li class="last"><span><img src="https://developer.tripfab.com/images2/ico_132.png" width="18" height="30" alt="" /></span>20<em><span>TOURIST SIGHTS</span></em></li>
+        				</ul>
+        				<div class="clear"></div>
+        			</div><!--LISTINGS-->
+        			<div class="clear"></div>
+        		</div><!--DESCRIPTION-->
+        		<div class="summary">
+        			<div class="price">
+        				<em>Trip Estimate</em><h4> $2,725 / person</h4>
+        			</div><!--PRICE-->
+        			<div class="controls">
+        				<a href="#redefineDates" class="btn-1 lbc">Redefine Dates</a>
+        				<a href="" class="btn-10">Delete Trip</a>
+        				<span><em>20</em>Pending Offers</span>
+        			</div><!--CONTROLS-->
+        		</div><!--SUMMARY-->
+        	</div><!--INFO-->
+        </div><!--single-->
     </div><!-- ALL_TRIPS -->
     <?php else: ?>
     	<div class="no_trips">
@@ -158,16 +233,43 @@
         </form>
     </div>
     <?php endif ?>
-    <?php endforeach ?>
+    <?php endforeach ?>        
+    <div class="redefineDates lb" id="redefineDates">
+		<div class="top">Redefine Travel Date</div>
+		<div class="cont">
+			<p>When do you want to start your trip?</p>
+			<div id="calendar">
+			
+			</div><!--CALENDAR-->
+			<div class="bottom">
+				<input type="submit" class="btn-1" name="" value="Update Dates" />
+				<a href="$.fancyboxClose" class="btn-10">Cancel</a>
+			</div><!--BOTTOM-->
+		</div><!--CONT-->	
+	</div><!--REDEFINEDATES-->
 </div>
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-		$('a.lb').fancybox({
+		$('a.lbc').fancybox({
 			padding:0,
 			overlayColor:'#fff',
 			centerOnScroll:1,
 			showCloseButton:0
+		});
+		
+		$('.notification.end-1 .btn-10').click(function() {
+			$('.notification.end-1').fadeOut('slow');
+			return false
+		})
+		$('.notification.soon-1 .btn-10').click(function() {
+			$('.notification.soon-1').fadeOut('slow');
+			return false
+		});
+		
+		$('#calendar').datepicker({
+			dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+			showOtherMonths: true
 		});
 		
 		$('a.delete_btn').click(function(){
