@@ -2,7 +2,7 @@
 <?php if($this->active->status == 1): ?>
 <a href="#deactivate" class="btn-10 act lb" id="deact-btn-342">Active Listing</a>
 <a href="#activate" class="btn-10 deact lb" style="display:none;" id="act-btn-342">Inactive Listing</a>
-<?php elseif($this->active->status == 0): ?>
+<?php else: ?>
 <a href="#request_info" class="btn-10 lb">Request Info</a>
 <a href="#activate" class="btn-10 deact lb" id="act-btn-342">Inactive Listing</a>
 <a href="#deactivate" class="btn-10 act lb" style="display:none;" id="deact-btn-342">Active Listing</a>
