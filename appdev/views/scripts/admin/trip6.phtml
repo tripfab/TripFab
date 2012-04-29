@@ -101,16 +101,18 @@
 											 
 										</p>
 										<select id="country"  name="country">
-												<?php foreach($this->countries as $country):?>
-                                                <option <?php echo $this->country == $country->id ? ' selected="selected"' : ''; ?> value="<?php echo @$country->id?>"><?php echo $country->title?></option>
-                                                <?php endforeach;?>
+										<?php foreach($this->countries as $country):?>
+                                        <?php if(!empty($this->country) and $this->country == $country->id) $selected = 'selected="selected"'; 
+                                        elseif(empty($this->country) and $this->trip->country_id == $country->id) $selected = 'selected="selected"';
+                                        else $selected = ''; ?>
+                                        <option <?= $selected ?> value="<?php echo $country->id ?>"><?php echo $country->title?></option>
+                                        <?php endforeach;?>
 										</select>
 									</div><!---ITEM-->
 									
 									<div class="item">
 										<p class="descrip">
 											<strong>select city</strong>
-											 
 										</p>
 										<select  id="city"  name="city">
 											<option selected="selected">City</option>
