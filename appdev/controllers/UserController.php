@@ -1084,6 +1084,24 @@ class UserController extends Zend_Controller_Action
             $listingCounter[$trip->id] = $this->trips->countListings($trip->id);
         }
         
+        $missed = array();
+        $missedIds = array();
+        $showProximity = false;
+        foreach($trips as $trip) {
+            $start = strtotime($trip->start);
+            if($start <= time()) {
+                $missed[] = $trip;
+                $missedIds[$trip->id] = 'yes';
+            } elseif(($start - time()) <= 1296000) {
+                $showProximity = true;
+            }
+        }
+        
+        $this->view->missed = $missed;
+        $this->view->missedIds = $missedIds;
+        
+        $this->view->showProximity = $showProximity;
+        
         $this->view->listingCounter = $listingCounter;
         $this->view->trips     = $trips;
         $this->view->pastTrips = $pastTrips;
