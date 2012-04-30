@@ -65,7 +65,7 @@ $(document).ready(function() {
     });
     
     var aux = true;
-    
+    $('#datepicker').wrap('<div id="calendar" class="trips"></div>');
     $( "#datepicker" ).datepicker({ 
         beforeShowDay:function(date){
             if(aux)
