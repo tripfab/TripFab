@@ -206,6 +206,7 @@
     <?php endforeach ?>
 </div>
 <script type="text/javascript" src="/js2/jquery.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
 		$('a.lbc').fancybox({
@@ -226,6 +227,8 @@
 		
 		$('.calendar').datepicker({
 			dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+			minDate:new Date(),
+			maxDate:'+1y'
 		});
 		
 		$('a.delete_btn').click(function(){
@@ -262,5 +265,6 @@
 		<?php endif ?>
     });
 </script>
+<script type="text/javascript" src="/js2/index/listing-hotel.js"></script>
 </body>
 </html>

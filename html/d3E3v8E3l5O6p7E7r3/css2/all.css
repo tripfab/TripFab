@@ -12020,7 +12020,7 @@ h2.title .back:hover,
 	width: 470px;
 	float: right;
 	background: url(https://developer.tripfab.com/images2/itinerary-sep1.png) no-repeat left 20px;
-	padding-left: 10px;
+	padding:0 0 20px 10px;
 }
 .trip-itinerary .facts .cities ul {
 	float: left;
@@ -17863,26 +17863,29 @@ background-color: #FFF;
 #all_trips .single .info .data dd.ended {
 	color: #f26522;
 }
-#redefineDates {
+.redefineDates {
 	width: 291px;
 }
-#redefineDates .top {
+.redefineDates .top {
 	text-indent: 20px;
 	font: bold 15px/44px Helvetica;
 }
-#redefineDates .cont{
+.redefineDates .cont{
 	background-color: #FFF;
 }
-#redefineDates .cont p {
+.redefineDates .cont p {
 	background-color: #f3f3f3;
 	font: bold 13px/40px Helvetica;
 	height: 40px;
 	text-indent: 20px;
 }
-#redefineDates .bottom .btn-1 {
+.redefineDates .bottom .btn-1 {
 	margin-right: 10px;
 }
-
+.redefineDates #calendar .ui-datepicker .ui-datepicker-next, 
+.redefineDates #calendar .ui-datepicker .ui-datepicker-prev {
+	top: 11px;
+}
 /*END MY TRIPS-------------------------------------------------------------*/
 
 /*SEARCH RESULTS COLLECTION------------------------------------------------*/
