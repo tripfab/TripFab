@@ -2405,7 +2405,8 @@ class WS_ListingService {
         $select->joinleft(array('country'=>'places'), 'country.id = listings.country_id', array("country_name"=>"title"));
         $select->joinleft('reservations', 'reservations.listing_id = listings.id', array("reservationTotal"=>"count(reservations.listing_id)"));
         $select->where("listings.vendor_id=?", $vendor);
-        $select->group("listings.id");	
+        $select->group("listings.id");
+        $select->order("listings.title asc");
         return $db->fetchAll($select);
     }
     
