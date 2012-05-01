@@ -186,6 +186,10 @@
 #header .login .actions a {
 	display: block;
 	float: left;
+	color: #60B5F7;
+}
+#header .login .actions a:hover {
+	color: #9BD2FC;
 }
 #header .login .actions a.create {
 	float: right;
@@ -223,6 +227,7 @@
 	-moz-box-shadow: 0px 0px 4px 2px #303030;
 	box-shadow: 0px 0px 4px 2px #303030;
 	z-index:999 ;
+	behavior: url(/PIE.htc);
 }
 .overlay{
 	background: transparent;
@@ -259,6 +264,7 @@
 	-moz-border-radius: 2px;
 	border-radius: 2px;
 	margin-right: 18px;
+	behavior: url(/PIE.htc);
 }
 #header .user-menu .main ul {
 	float: left;
@@ -300,6 +306,8 @@
 }
 #header .top_search {
 	float: right;
+	width: 200px;
+	margin-right: 12px;
 }
 #header .top_search input[type="text"] {
 	background: url(https://developer.tripfab.com/images6/header_icons.png) repeat-x -106px -10px #393939;
@@ -307,7 +315,7 @@
     display: block;
     font: 12px/27px Helvetica;
     height: 25px;
-    margin: 16px 12px 0 0;
+    margin: 16px 0 0 0;
     padding: 2px 25px 0 7px;
     width: 165px;
 	-webkit-border-radius: 2px;
@@ -317,6 +325,7 @@
 	-webkit-box-shadow:0 1px 0px 0px #2d2d2d;
 	-moz-box-shadow:0 1px 0px 0px #2d2d2d;
 	box-shadow:0 1px 0px 0px #2d2d2d;
+	behavior: url(/PIE.htc);
 }
 #header .top_search input[type="text"]:hover{
 	border-color: #181818 !important;
@@ -325,6 +334,7 @@
     -webkit-box-shadow:0 1px 0px 0px #2d2d2d !important;
     -moz-box-shadow:0 1px 0px 0px #2d2d2d !important;
     box-shadow:0 1px 0px 0px #2d2d2d !important;
+    behavior: url(/PIE.htc);
 }
 
 #header .top_search input[type="text"]:focus {
@@ -335,6 +345,7 @@
 	-webkit-box-shadow:0 0px 5px 0px #addeff !important;
 	-moz-box-shadow:0 0px 5px 0px #addeff !important;
 	box-shadow:0 0px 5px 0px #addeff !important;
+	behavior: url(/PIE.htc);
 }
 
 .big-message {
