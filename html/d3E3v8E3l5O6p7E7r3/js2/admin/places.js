@@ -1,5 +1,13 @@
 var $main_cats;
+
+var $appid = '191328617648352';
+//var $appid = '370449162976552';
+
+var $token;
+
 $(document).ready(function(){
+    
+    $('select, input').attr('disabled','disabled');
     
     // Get foursquare categories
     fqrequest('/venues/categories', {}, false, function(response){
@@ -33,7 +41,8 @@ $(document).ready(function(){
             url:'/ajax/getadminplaces',
             data: {
                 cat:$cat,
-                center:$center
+                center:$center,
+                city:$cit
             },
             success:function(html){
                 $('.slideshow').html(html);
@@ -48,13 +57,83 @@ $(document).ready(function(){
     });
     
     $('.slideshow .cont .single ul li a').live('click', function(){
-        if($(this).hasClass('done')) 
+        
+        if($(this).hasClass('done') || $(this).hasClass('active'))
             return false;
+        
+        console.log('asd');
         
         $('.slideshow .cont ul li a').removeClass('active');
         $(this).addClass('active');
+        
+        $fb = $(this).data('facebook');
+        $gl = $(this).data('google');
+        
+        $('.bottom .explore a.fb').attr('href',$fb);
+        $('.bottom .explore a.gl').attr('href',$gl);
+        
         return false;
-    });    
+    });
+    
+    $('#placeFacebookPage').submit(function(){
+        $('input, select').attr('disabled','disabled');
+        $url = $('input[name=url]',this).val();
+        if($url == "") {
+            $('input, select').removeAttr('disabled');
+            return false;
+        }
+        
+        $id = $('.slideshow .cont .single ul li a.active').attr('href');
+        if(typeof $id == "undefined") {
+            $('input, select').removeAttr('disabled');
+            return false;                
+        } if($id == "") {
+            $('input, select').removeAttr('disabled');
+            return false;
+        } if($token == null){
+            alert('Missing Facebook Token');
+            $('input, select').removeAttr('disabled');
+            return false;
+        }
+        
+        $.ajax({
+            url:'/ajax/saveplace',
+            data:{
+                id:$id,
+                url:$url,
+                city:$('select[name=city] option:selected').val(),
+                token:$token
+            },
+            dataType:'json',
+            success:function(res) {
+                if(res.status == "success"){
+                    $('#placeAdded a').attr('href','/admin/listings/edit/'+res.id);
+                    $.fancybox({
+                        href:'#placeAdded',
+                        overlayColor:'#fff'
+                    });
+                    $('input, select').removeAttr('disabled');
+                    $('#placeFacebookPage input:text').val("");
+                    $('.slideshow .cont .single ul li a.active').addClass('done');
+                    $('.slideshow .cont .single ul li a.active').removeClass('active');
+                } else {
+                    alert(res.error);
+                    $('input, select').removeAttr('disabled');
+                }
+            },
+            error:function(res){
+                alert('Something went wrong');
+                $('input, select').removeAttr('disabled');
+            }
+        });
+        
+        return false;
+    });
+    
+    $('#placeAdded a').click(function(){
+        $.fancybox.close();
+        return true;
+    });
 });
 
 function getSubCatsOf($id)
@@ -85,3 +164,45 @@ function fqrequest(url, data, limit, success){
         }
     });
 }
+
+
+// Load the SDK Asynchronously
+(function(d){
+    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+    if (d.getElementById(id)) {
+        return;
+    }
+    js = d.createElement('script');
+    js.id = id;
+    js.async = true;
+    js.src = "//connect.facebook.net/en_US/all.js";
+    ref.parentNode.insertBefore(js, ref);
+}(document));
+
+window.fbAsyncInit = function() {
+    FB.init({
+        appId      : $appid, // App ID
+        channelUrl : '//tripfab.com/places/channel.html', // Channel File
+        status     : true, // check login status
+        cookie     : true, // enable cookies to allow the server to access the session
+        xfbml      : true  // parse XFBML
+    });
+    
+    FB.getLoginStatus(function(response) {
+        console.log(response);
+        if (response.status === 'connected') {
+            $token = response.authResponse.accessToken;
+            $('select, input').removeAttr('disabled');
+        } else {
+            FB.login(function(response) {
+                if (!response.authResponse) {
+                    alert('You need to enable this application on facebook in order to used');
+                    $token = null;
+                } else {
+                    $token = response.authResponse.accessToken;
+                    $('select, input').removeAttr('disabled');
+                }
+            });
+        }
+    });
+};

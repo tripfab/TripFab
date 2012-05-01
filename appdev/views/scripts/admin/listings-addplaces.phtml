@@ -5,10 +5,7 @@
     <title>vendor messages</title>
     <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css6/quickie.css" />
-    <link type="text/css" rel="stylesheet" href="html/jqtransform/jqtransform.css" />
-    <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript" src="/js2/admin/places.js"></script>
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
     <style type="text/css">
 	#places .cont ul li a.done {
 		background-color:#FC9;
@@ -29,63 +26,69 @@
         </div><!--SUB_MENU-->
     </div><!--W3-->
         
-        <div id="trips" class="listing-wrapper wrapper">
-            <div class="listing-content" id="places">
-                <div class="filter">
-                    <form action="" id="searchplacesform">
-                        <fieldset>
-                            <label>Search Places</label>
-                            <select name="city" class="city">
-                                <option value="0">Select City</option>
-                                <?php foreach($this->cities as $c): ?>
-                                <option data-lng="<?= $c->lng ?>" data-lat="<?= $c->lat ?>" value="<?= $c->id ?>"><?= $c->title ?></option>
-                                <?php endforeach ?>
-                            </select>
-                            <select name="type" class="category">
-                                <option value="0">Select Category</option>
-                                <option data-type="7" value="4d4b7104d754a06370d81259">Arte y entretenimiento</option>
-                                <option data-type="2" value="4d4b7105d754a06374d81259">Comida</option>
-                                <option data-type="7" value="4d4b7105d754a06376d81259">Local nocturno</option>
-                            </select>
-                            <select name="cat" class="subcategory">
-                                <option value="">Select category first</option>
-                            </select>
-                            <input class="btn-1 no-clean" type="submit" name="" value="Search Restaurants" />
-                        </fieldset>
-                    </form>
-                </div><!--filter-->
-                <div class="slideshow">
-                    <div class="first-step">
-                        <span></span>
-                        First, define the search options to get the results
-                    </div><!--FIRST-STEP-->
-                </div><!--SLIDESHOW-->
-                
-                <div class="bottom">
-                	<H3>Bar Saprissa</H3>
-                    <div class="explore">
-                        <h4><span></span>Explore some search results</h4>
-                        <a href="" class="fb" target="_blank"><span></span>Facebook Results</a>
-                        <a href="" class="gl" target="_blank"><span></span>Google Results</a>
-                        <div class="clear"></div>
-                    </div><!--EXPLORE-->
-                    <div class="fb_add">
-                        <form id="placeFacebookPage">
-                            <label><span></span>Facebook URL</label>
-                            <input type="text" name="" value="" />
-                            <input type="submit" value="Create Selected" class="btn-1" />
-                        </form>
-                    </div><!--FB_ADD-->
-                </div><!--BOTTOM-->
-            </div><!-- closes listing-content -->
-        </div><!-- closes listing-wrapper -->
+    <div id="trips" class="listing-wrapper wrapper">
+        <div class="listing-content" id="places">
+            <div class="filter">
+                <form action="" id="searchplacesform">
+                    <fieldset>
+                        <label>Search Places</label>
+                        <select name="city" class="city">
+                            <option value="0">Select City</option>
+                            <?php foreach($this->cities as $c): ?>
+                            <option data-lng="<?= $c->lng ?>" data-lat="<?= $c->lat ?>" value="<?= $c->id ?>"><?= $c->title ?></option>
+                            <?php endforeach ?>
+                        </select>
+                        <select name="type" class="category">
+                            <option value="0">Select Category</option>
+                            <option data-type="7" value="4d4b7104d754a06370d81259">Arte y entretenimiento</option>
+                            <option data-type="2" value="4d4b7105d754a06374d81259">Comida</option>
+                            <option data-type="7" value="4d4b7105d754a06376d81259">Local nocturno</option>
+                        </select>
+                        <select name="cat" class="subcategory">
+                            <option value="">Select category first</option>
+                        </select>
+                        <input class="btn-1 no-clean" type="submit" name="" value="Search Restaurants" />
+                    </fieldset>
+                </form>
+            </div><!--filter-->
+            <div class="slideshow">
+                <div class="first-step">
+                    <span></span>
+                    First, define the search options to get the results
+                </div><!--FIRST-STEP-->
+            </div><!--SLIDESHOW-->
             
+            <div class="bottom">
+                <H3>Bar Saprissa</H3>
+                <div class="explore">
+                    <h4><span></span>Explore some search results</h4>
+                    <a href="" class="fb" target="_blank"><span></span>Facebook Results</a>
+                    <a href="" class="gl" target="_blank"><span></span>Google Results</a>
+                    <div class="clear"></div>
+                </div><!--EXPLORE-->
+                <div class="fb_add">
+                    <form id="placeFacebookPage">
+                        <label><span></span>Facebook URL</label>
+                        <input type="text" name="url" value="" />
+                        <input type="submit" value="Create Selected" class="btn-1" />
+                    </form>
+                </div><!--FB_ADD-->
+            </div><!--BOTTOM-->
+        </div><!-- closes listing-content -->
+    </div><!-- closes listing-wrapper -->
+
     <div class="footer black">
         <div class="wrapper">
             <a href="" class="logo">Tripfab</a>
         </div><!--WRAPPER-->
     </div><!-- closes footer -->
+</div><!-- closes w1 -->
+<div class="hidden">
+	<div id="placeAdded">
+    	<p>The place has been added. <a href="/admin/listings/" target="_blank">Click here to edit it</a></p>
+    </div>
 </div>
-<!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript" src="/js2/admin/places.js"></script>
 </body>
 </html>

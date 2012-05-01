@@ -43,8 +43,7 @@ input.schname { float:none !important; width:90px !important; }
         	<h3>What is the General Information?</h3>
         	<p>Some general details about the experience, listing name, contact information, categories and more.</p>
         	<a href="" rel="hot_info" class="remove">Remove</a>
-        </div>
-        <!-- closes desc -->
+        </div><!-- closes desc -->
         <?php endif ?>
     	<?php if($this->errors): ?>
         <div class="errors">
@@ -53,10 +52,12 @@ input.schname { float:none !important; width:90px !important; }
             <?php endforeach ?>
         </div><!-- closes item -->
         <?php endif ?>
+        
         <div class="main-ttl">
         	<p><strong>General information about your hotel</strong> <a href="/admin/users/view/partner/<?= $this->vendor->id ?>/2" class="back_btn">&larr; Back to Listings</a></p>
         </div>
         <!-- closes main-ttl -->
+
 		<div class="item-wrppr">
 			<div class="item-ttl">
 				Basic Information
