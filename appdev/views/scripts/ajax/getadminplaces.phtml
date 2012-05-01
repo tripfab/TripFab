@@ -10,7 +10,9 @@
             <li><a class="done" href="<?= $place->id ?>">
 			<?= $place->name ?> <span>(<?= $place->stats->checkinsCount ?>)</span><em></em></a></li>
             <?php else: ?>
-            <li><a href="<?= $place->id ?>" data-google="" data-facebook="">
+            <li><a href="<?= $place->id ?>" 
+            data-google="https://google.com/search?q=%22<?= $place->name ?>%22+<?= $this->city ?>,+costa+rica,+site:facebook.com" 
+            data-facebook="https://www.facebook.com/search/results.php?q=<?= $place->name ?>&type=pages&init=quick&tas=0.2902761371806264">
 			<?= $place->name ?> <span>(<?= $place->stats->checkinsCount ?>)</span><em></em></a></li>
             <?php endif ?>
             <?php endfor ?>
