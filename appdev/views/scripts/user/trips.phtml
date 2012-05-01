@@ -126,8 +126,19 @@
                     </div><!--CONTROLS-->
                 </div><!--SUMMARY-->
             </div><!--INFO-->
+            <?php if(isset($this->missedIds[$trip->id])): ?>
+            	<div class="missed">
+            		<h3>The dates for '<?= $trip->title ?>' have passed.</h3>
+            		<h4>Don’t worry, you can set a new travel date</h4>
+            		<div class="actions">
+            			<a href="#redefineDates_<?= $trip->id ?>" class="btn-1 lbc">Redefine Dates</a>
+            			<a href="#delete_trip_<?= $trip->id ?>" class="btn-10 lbc">Delete Trip</a>
+            		</div><!--ACTIONS-->
+            	</div><!--MISSED-->
+            <?php endif ?>
         </div><!--single-->
         <?php endforeach ?>
+                
     </div><!-- ALL_TRIPS -->
     <?php else: ?>
     	<div class="no_trips">
