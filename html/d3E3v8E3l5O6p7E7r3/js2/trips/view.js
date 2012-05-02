@@ -119,5 +119,24 @@ $(document).ready(function() {
             $('select[name=kids]').append('<option value="'+i+'">'+i+'</option>');
 		
     });
-	
+    var days = 3;
+    var lastDay = $('.selected');
+    
+    for (var especial = 0; especial < days; especial++) {
+    	if (especial = 0 ) {
+    		lastDay = lastDay.next();
+    	}else {
+    		lastDay.addClass('selected');
+    		lastDay = lastDay.next();
+    	}
+    }
+    
 });
+
+
+
+
+
+
+
+
