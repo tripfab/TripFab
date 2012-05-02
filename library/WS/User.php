@@ -422,4 +422,16 @@ class WS_User {
         
         return $result;
     }
+    
+    public function getIMsConfig()
+    {
+        $ims = new Zend_Db_Table('livechat_accounts');
+        $select = $ims->select();
+        $select->where('user_id = ?', $this->user->id);
+        $result = $ims->fetchRow($select);
+        
+        //var_dump($result->toArray()); die;
+        
+        return $result;
+    }
 }

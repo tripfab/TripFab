@@ -156,9 +156,14 @@
 									to talk with your clients
 								</p>
 								<ul>
-									<li><a class="btn-13 f_b" href="#lb_yahoo"><span class="yahoo">Connect with your Yahoo Account</span></a></li>
-									<li><a class="btn-13 f_b" href="#lb_msn"><span class="msn">Connect with your MSN Account</span></a></li>
-									<li><a class="btn-13 f_b" href="#lb_gtalk"><span class="gtalk">Connect with your GTalk Account</span></a></li>
+                                	<?php $msg = (!is_null($this->ims) and $this->ims->service == "yahoo") ?
+											'Update your Yahoo Account' :
+											'Connect with your Yahoo Account'; ?>
+									<li><a class="btn-13 f_b" href="#lb_yahoo"><span class="yahoo"><?= $msg ?></span></a></li>
+                                    <?php $msg = (!is_null($this->ims) and $this->ims->service == "gmail") ?
+											'Update your Google Talk Account' :
+											'Connect with your Google Talk Account'; ?>
+									<li><a class="btn-13 f_b" href="#lb_gtalk"><span class="gtalk"><?= $msg ?></span></a></li>
 								</ul>
 							</div><!--ITEM_DESCR-->
 						</div><!-- closes item-wrppr -->
@@ -265,47 +270,40 @@
     
     <div class="lb_connect" id="lb_yahoo">
 		<h2>Connect your Yahoo Account</h2>
-		<form action="">
+		<form action="" method="post">
 			<label>e-Mail</label>
-			<input class="yahoo" type="text" value="" />
-			<label>Password</label>
-			<input type="password" value="" />
+            <?php if(!is_null($this->ims) and $this->ims->service == 'yahoo'): ?>
+			<input class="yahoo" type="text" value="<?= $this->ims->email ?>" />
+            <?php else: ?>
+			<input class="yahoo" type="text" value="" />            
+            <?php endif ?>
 			<ul>
-				<li><input type="button" class="btn-1" value="Connect" /></li>
-				<li><input type="button" class="btn-13" value="Cancel" /></li>
+				<li><input type="submit" class="btn-1" value="Connect" /></li>
+				<li><input type="button" class="btn-13" onclick="$.fancybox.close();" value="Cancel" /></li>
 			</ul>
-		</form>
-	</div><!--L_CONNECT-->
-	<div class="lb_connect" id="lb_msn">
-		<h2>Connect your Yahoo Account</h2>
-		<form action="">
-			<label>e-Mail</label>
-			<input class="msn" type="text" value="" />
-			<label>Password</label>
-			<input type="password" value="" />
-			<ul>
-				<li><input type="button" class="btn-1" value="Connect" /></li>
-				<li><input type="button" class="btn-13" value="Cancel" /></li>
-			</ul>
+            <input type="hidden" name="service" value="yahoo" />
+            <input type="hidden" name="id" value="<?= (!is_null($this->ims)) ? $this->ims->id : 'new' ?>" />
+            <input type="hidden" name="_task" value="<?= md5('update_im') ?>" />
 		</form>
 	</div><!--L_CONNECT-->
 	<div class="lb_connect" id="lb_gtalk">
-		<h2>Connect your Yahoo Account</h2>
-		<form action="">
+		<h2>Connect your Google Talk Account</h2>
+		<form action="" method="post">
 			<label>e-Mail</label>
-			<input class="gtalk" type="text" value="" />
-			<label>Password</label>
-			<input type="password" value="" />
+            <?php if(!is_null($this->ims) and $this->ims->service == 'gmail'): ?>
+			<input class="gtalk" name="email" type="text" value="<?= $this->ims->email ?>" />
+            <?php else: ?>
+			<input class="gtalk" name="email" type="text" value="" />            
+            <?php endif ?>
 			<ul>
-				<li><input type="button" class="btn-1" value="Connect" /></li>
-				<li><input type="button" class="btn-13" value="Cancel" /></li>
+				<li><input type="submit" class="btn-1" value="Connect" /></li>
+				<li><input type="button" class="btn-13" onclick="$.fancybox.close();" value="Cancel" /></li>
 			</ul>
+            <input type="hidden" name="service" value="gmail" />
+            <input type="hidden" name="id" value="<?= (!is_null($this->ims)) ? $this->ims->id : 'new' ?>" />
+            <input type="hidden" name="_task" value="<?= md5('update_im') ?>" />
 		</form>
 	</div><!--L_CONNECT-->
-    
-    
-    
-    
 </div><!--HIDDEN-->
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript">

@@ -2568,6 +2568,13 @@ class ProviderController extends Zend_Controller_Action
                         setcookie('alert','Your changes have been saved');
                         $this->_redirect('/provider/account');
                         break;
+                    case md5('update_im'):
+                        $data = $_POST;
+                        //var_dump($data); die;
+                        $this->accountUpdetaIMPostHandler($data);
+                        setcookie('alert','Your changes have been saved');
+                        $this->_redirect('/provider/account');                        
+                        break;
                     default:
                         $this->accountDefaultPostHandler();
                         setcookie('alert','Your changes have been saved');
@@ -2581,6 +2588,8 @@ class ProviderController extends Zend_Controller_Action
         $this->view->user = $this->user->getData(true);
         $this->view->vendor = $this->user->getVendorData(true);
         $this->view->contacts = $this->user->getContacts();
+        
+        $this->view->ims = $this->user->getIMsConfig();
         
         $countries = $this->places->getPlaces(2);
         $this->view->countries = $countries;
@@ -2646,6 +2655,29 @@ class ProviderController extends Zend_Controller_Action
             throw new Exception('vids From Corrupted');
         if($data['user_token'] != $this->user->getToken())
             throw new Exception('user_token From Corrupted');
+    }
+    
+    private function accountUpdetaIMPostHandler($data)
+    {
+        $invite = false;
+        if($data['id'] == 'new') {
+            $accounts = new Zend_Db_Table('livechat_accounts');
+            $account = $accounts->fetchNew();
+            $account->user_id = $this->user->getId();
+            $account->email   = $data['email'];
+            $account->service = $data['service'];
+            $account->save();
+            
+            $invite = true;
+        } else {
+            $account = $this->user->getIMsConfig();
+            if($account->email != $data['email']) {
+                $invite = true;
+                $account->email = $data['email'];
+                $account->service = $data['service'];
+                $account->save();
+            }
+        }
     }
     
     public function accountPasswordTask()
