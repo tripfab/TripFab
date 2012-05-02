@@ -1673,7 +1673,10 @@ class AjaxController extends Zend_Controller_Action
                 $adults   = $_GET['adults'];
                 $kids     = $_GET['kids'];
                 $checkin  = $_GET['checkin'];
-                if($listing->main_type == 5)
+                if($checkin == 'dd/mm/yyyy') {
+                    $checkin = date('Y-m-d');
+                }
+                if($listing->main_type == 5 and $_GET['checkout'] != 'dd/mm/yyyy')
                     $checkout = $_GET['checkout'];
                 else
                     $checkout = null;
@@ -1684,12 +1687,17 @@ class AjaxController extends Zend_Controller_Action
                     $capacity = $_GET['capacity'];
                 else
                     $capacity = null;
-
-                $quote  = $listings->getQuote(
-                             $listing, $adults, $kids, $checkin, $checkout, null, $option, $capacity);
+                
+                if(is_null($checkout)) {
+                    $quote  = $listings->getQuote(
+                                $listing, $adults, $kids, $checkin, null, 2, $option, $capacity);
+                } else {
+                    $quote  = $listings->getQuote(
+                                $listing, $adults, $kids, $checkin, $checkout, null, $option, $capacity);
+                }
                 
                 if($quote->available)
-                    echo '$'.$quote->subtotal;
+                    echo $quote->subtotal;
                 else
                     throw new Exception($quote->error, 1);
                 die;
