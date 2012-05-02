@@ -2475,13 +2475,21 @@ class WS_ListingService {
     
     public function getRandom($type, $count = 5)
     {
-        $select = $this->listings->select();
-        $select->where('status = ?',1);
-        $select->where('main_type = ?',$type);
-        $select->limit($count);
-        $select->order('rand()');
+        $args = func_get_args();
+        $cacheId = "LS_getRandom_".md5(print_r($args,true));
         
-        $listings = $this->listings->fetchAll($select);
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+            $select = $this->listings->select();
+            $select->where('status = ?',1);
+            $select->where('main_type = ?',$type);
+            $select->limit($count);
+            $select->order('rand()');
+        
+            $listings = $this->listings->fetchAll($select);
+        }
+        else {
+            $listings = $this->cache->load($cacheId);
+        }
         return $listings;
     }
 }

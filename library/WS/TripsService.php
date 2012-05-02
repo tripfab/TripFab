@@ -850,11 +850,18 @@ class WS_TripsService {
 
     public function getRamdom($count = 5)
     {
-        $select = $this->trips_db->select();
-        $select->limit($count);
-        $select->order('rand()');
+        $args = func_get_args();
+        $cacheId = "TS_getRandom_".md5(print_r($args,true));
         
-        $trips = $this->trips_db->fetchAll($select);
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+            $select = $this->trips_db->select();
+            $select->limit($count);
+            $select->order('rand()');
+
+            $trips = $this->trips_db->fetchAll($select);
+        } else {
+            $trips = $this->cache->load($cacheId);
+        }
         
         return $trips;
     }
