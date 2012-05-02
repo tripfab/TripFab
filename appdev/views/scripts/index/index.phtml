@@ -86,7 +86,7 @@
 							<div class="cont">
                             	<?php foreach($this->hotels as $h): ?>
 								<div class="one">
-                                	<?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260'); ?>
+                                	<a href="<?= $h->id ?>"><?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260'); ?></a>
 									<h5><?= $h->title ?></h5>
 									<span class="meta"><strong><em></em>Nicoya Peninsula,</strong> Costa Rica</span>
 									<div class="price">
@@ -99,7 +99,7 @@
 										<div class="clear"></div>
 									</div><!--PRICE-->
 								</div><!--ONE-->
-                                <?php endforeach ?>								
+                                <?php endforeach ?>				
 							</div><!--CONT-->
 						</div><!--SLIDESHOW-->
 					</div><!--HOTELS-->
@@ -135,7 +135,7 @@
 							<div class="cont">
                             	<?php foreach($this->trips as $h): ?>
 								<div class="one">
-                                	<?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260'); ?>
+                                	<a href="/trips/view/<?= $h->id ?>"><?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260'); ?></a>
 									<h5><?= $h->title ?></h5>
 									<span class="meta"><strong><em></em></strong>Costa Rica</span>
 									<div class="price">
@@ -171,7 +171,7 @@
                     	<?php for($j=$i;(($j<count($this->userTrips)) and $j<($i+3));$j++): ?>
                         <?php $trip = $this->userTrips[$j]; ?>
 						<div class="single">
-                            <?= $this->thumbnail(array('width'=>109,'height'=>88),$trip->image,'','109:88'); ?>
+                            <a href="/trips/view/<?= $trip->id ?>"><?= $this->thumbnail(array('width'=>109,'height'=>88),$trip->image,'','109:88'); ?></a>
 							<div class="info">
 								<h6><?= $trip->title ?></h6>
 								<span class="meta"><em></em><?= $trip->days ?> Days Trip</span>
