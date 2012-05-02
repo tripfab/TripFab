@@ -158,14 +158,16 @@
 			}
 			
 			function deleteItem(item){
-				var url;
-				url = '/ajax/tripitem/?item='+ item;
-		
-				$.getJSON(url, function(jsonData) {
-					if(jsonData.attempt == 'success'){
-						$("#d"+item).hide();
-					}
-				});
+				if(confirm('Are you sure you want to delete this listing')) {
+					var url;
+					url = '/ajax/tripitem/?item='+ item;
+			
+					$.getJSON(url, function(jsonData) {
+						if(jsonData.attempt == 'success'){
+							$("#d"+item).hide();
+						}
+					});
+				}
 			}
 			
 			
