@@ -2459,4 +2459,13 @@ class WS_ListingService {
         
         return $listings;
     }
+    
+    public function getFQ($fqid) {
+        $fqs = new Zend_Db_Table('fq');
+        $select = $fqs->select();
+        $select->where('id = ?', $fqid);
+        $fq = $fqs->fetchRow($select);
+        
+        return $fq;
+    }
 }

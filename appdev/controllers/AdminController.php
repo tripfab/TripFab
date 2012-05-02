@@ -124,8 +124,6 @@ class AdminController extends Zend_Controller_Action {
                 break;
             case 'edit':
                 $this->listingsEditTask();
-                $template = 'listings-edit';
-                $this->render($template);
                 break;
             case 'faqs':
                 $this->listingsFAQsTask();
@@ -144,8 +142,6 @@ class AdminController extends Zend_Controller_Action {
                 break;
             case 'photos':
                 $this->listingsPhotosTask();
-                $template = 'listings-photos';
-                $this->render($template);
                 break;
             case 'pricing':
                 $this->listingsPricingTask();
@@ -824,12 +820,21 @@ class AdminController extends Zend_Controller_Action {
                     $this->view->vendor         = $vendor;
                     break;
                 case 7  : 
-                    $template = 'listing-entertaiment';  
-                    $overview = $this->listings->getOverviewOf2($listing->id);
-                    $details = $this->listings->getDetails($listing->id);
-                    
-                    $this->view->overview = $overview;
-                    $this->view->details  = $details;
+                    $template = 'listing-entertaiment';  $place = $this->listings->getPlaceInfo($listing->id);
+                    $this->view->place = $place;
+
+                    $options = $this->listings->getSchedulesOf($listing->id);
+                    $this->view->schedules = $options;
+
+                    //var_dump($details->toArray()); die;
+                    $creditcards = array(
+                        'visa'             => '/images2/checkout-card1.png',
+                        'mastercard'       => '/images2/checkout-card2.png',
+                        'amex'             => '/images2/checkout-card3.png',
+                        'discover'         => '/images2/checkout-card5.png',
+                    );
+
+                    $this->view->cards = $creditcards;
                     break;
                 case 5: 
                     $template = 'listing-hotel';         
@@ -875,10 +880,23 @@ class AdminController extends Zend_Controller_Action {
                     
                     break;
                 case 2: 
-                    $template = 'listing-restaurant';    
-                    $overview = $this->listings->getOverviewOf2($listing->id);
-                    
-                    $this->view->overview = $overview;
+                    $template = 'listing-restaurant';  
+                
+                    $place = $this->listings->getPlaceInfo($listing->id);
+                    $this->view->place = $place;
+
+                    $options = $this->listings->getSchedulesOf($listing->id);
+                    $this->view->schedules = $options;
+
+                    //var_dump($details->toArray()); die;
+                    $creditcards = array(
+                        'visa'             => '/images2/checkout-card1.png',
+                        'mastercard'       => '/images2/checkout-card2.png',
+                        'amex'             => '/images2/checkout-card3.png',
+                        'discover'         => '/images2/checkout-card5.png',
+                    );
+
+                    $this->view->cards = $creditcards;
                     break;
                 case 4: 
                     $template = 'listing-touristsight'; 
@@ -1572,66 +1590,112 @@ class AdminController extends Zend_Controller_Action {
                 $listing = $this->listings->getListing($ids);
             }
             
-            $main_cat   = $this->listings->getCategory($listing->main_type); 
-            $categories = $this->listings->getSubCategoriesOf($main_cat->id);
-            $tabs       = $this->listings->getTabsOf($listing->id);
-            $attrs      = $this->listings->getAttributesOf($listing->id);
-            $tags       = $this->listings->getTagsFor($main_cat);
-            $countries  = $this->places->getPlaces(2);
-            
-            $cities2 = array();
-            $cities3 = array();
-            
-            if($this->getRequest()->isPost()){
-                if(!empty($_POST['departure_country_id']))
-                    $cities2 = $this->places->getPlaces (3, $_POST['departure_country_id']);
-                if(!empty($_POST['return_country_id']))
-                    $cities3 = $this->places->getPlaces (3, $_POST['return_country_id']);
+            if($listing->main_type == 2 or $listing->main_type == 7) {
+                
+                $place = $this->listings->getPlaceInfo($listing->id);
+                $this->view->place = $place;
+                
+                $options = $this->listings->getSchedulesOf($listing->id);
+                $this->view->schedules = $options;
+
+                //var_dump($details->toArray()); die;
+                $creditcards = array(
+                    'visa'             => '/images2/checkout-card1.png',
+                    'mastercard'       => '/images2/checkout-card2.png',
+                    'amex'             => '/images2/checkout-card3.png',
+                    'discover'         => '/images2/checkout-card5.png',
+                );
+                
+                $rest_categories = $this->listings->getSubCategoriesOf(2);
+                $ent_categories = $this->listings->getSubCategoriesOf(7);
+                
+                $this->view->rest_categories = $rest_categories;
+                $this->view->ent_categories  = $ent_categories;
+                
+                $this->view->cards = $creditcards;
+                $this->view->listing = $listing;
+                
+                $this->view->fq = $this->listings->getFQ($place->fqid);
+                
+                $_listing_types = $this->listings->getListingTypesOf($listing->id);
+                $l_types = array();
+                foreach($_listing_types as $lt)
+                    $l_types[] = $lt->listingtype_id;
+                
+                $this->view->listing_types  = $l_types;
+                
+                //var_dump($this->view->fq); die;
+                
+                
+                $template = 'listings-editplace';
+                $this->render($template);                
+                
             } else {
-                if($listing->country_id != 0)
-                    $cities  = $this->places->getPlaces(3, $listing->country_id);
-                if($listing->departure_country_id != 0)
-                    $cities2 = $this->places->getPlaces (3, $listing->departure_country_id);
-                if($listing->return_country_id != 0)
-                    $cities3 = $this->places->getPlaces (3, $listing->return_country_id);
+
+                $main_cat   = $this->listings->getCategory($listing->main_type); 
+                $categories = $this->listings->getSubCategoriesOf($main_cat->id);
+                $tabs       = $this->listings->getTabsOf($listing->id);
+                $attrs      = $this->listings->getAttributesOf($listing->id);
+                $tags       = $this->listings->getTagsFor($main_cat);
+                $countries  = $this->places->getPlaces(2);
+
+                $cities2 = array();
+                $cities3 = array();
+
+                if($this->getRequest()->isPost()){
+                    if(!empty($_POST['departure_country_id']))
+                        $cities2 = $this->places->getPlaces (3, $_POST['departure_country_id']);
+                    if(!empty($_POST['return_country_id']))
+                        $cities3 = $this->places->getPlaces (3, $_POST['return_country_id']);
+                } else {
+                    if($listing->country_id != 0)
+                        $cities  = $this->places->getPlaces(3, $listing->country_id);
+                    if($listing->departure_country_id != 0)
+                        $cities2 = $this->places->getPlaces (3, $listing->departure_country_id);
+                    if($listing->return_country_id != 0)
+                        $cities3 = $this->places->getPlaces (3, $listing->return_country_id);
+                }
+
+                $schedules  = $this->listings->getSchedulesOf($listing->id);
+                if($listing->main_type == 2 and count($schedules) == 0)
+                        $schedules = $this->listings->createSchedules($listing);
+
+                $landscapes = $this->listings->getDefaultLandscapes();
+                $listing_lands = $this->listings->getLandscapesOf($listing->id);
+                $l_lands = array();
+                foreach($listing_lands as $ls)
+                    $l_lands[] = $ls->landscape_id;
+
+
+                $_listing_types = $this->listings->getListingTypesOf($listing->id);
+                $l_types = array();
+                foreach($_listing_types as $lt)
+                    $l_types[] = $lt->listingtype_id;
+
+                $_tags = $this->listings->getTagsOf($listing->id);
+                $l_tags = array();
+                foreach($_tags as $t)
+                    $l_tags[] = $t->tag_id;
+
+                $this->view->listing        = $listing;
+                $this->view->main_category  = $main_cat;
+                $this->view->categories     = $categories;
+                $this->view->listing_types  = $l_types;
+                $this->view->tabs           = $tabs;
+                $this->view->attributes     = $attrs;
+                $this->view->tags           = $tags;
+                $this->view->listing_tags   = $l_tags;
+                $this->view->countries      = $countries;
+                $this->view->cities         = $cities;
+                $this->view->cities2        = $cities2;
+                $this->view->cities3        = $cities3;
+                $this->view->schedules      = $schedules;
+                $this->view->landscapes     = $landscapes;
+                $this->view->l_lands        = $l_lands;
+                
+                $template = 'listings-edit';
+                $this->render($template);
             }
-            
-            $schedules  = $this->listings->getSchedulesOf($listing->id);
-            if($listing->main_type == 2 and count($schedules) == 0)
-                    $schedules = $this->listings->createSchedules($listing);
-            
-            $landscapes = $this->listings->getDefaultLandscapes();
-            $listing_lands = $this->listings->getLandscapesOf($listing->id);
-            $l_lands = array();
-            foreach($listing_lands as $ls)
-                $l_lands[] = $ls->landscape_id;
-            
-            
-            $_listing_types = $this->listings->getListingTypesOf($listing->id);
-            $l_types = array();
-            foreach($_listing_types as $lt)
-                $l_types[] = $lt->listingtype_id;
-            
-            $_tags = $this->listings->getTagsOf($listing->id);
-            $l_tags = array();
-            foreach($_tags as $t)
-                $l_tags[] = $t->tag_id;
-            
-            $this->view->listing        = $listing;
-            $this->view->main_category  = $main_cat;
-            $this->view->categories     = $categories;
-            $this->view->listing_types  = $l_types;
-            $this->view->tabs           = $tabs;
-            $this->view->attributes     = $attrs;
-            $this->view->tags           = $tags;
-            $this->view->listing_tags   = $l_tags;
-            $this->view->countries      = $countries;
-            $this->view->cities         = $cities;
-            $this->view->cities2        = $cities2;
-            $this->view->cities3        = $cities3;
-            $this->view->schedules      = $schedules;
-            $this->view->landscapes     = $landscapes;
-            $this->view->l_lands        = $l_lands;
         }
     }
     
@@ -1834,156 +1898,212 @@ class AdminController extends Zend_Controller_Action {
             }
         }
         
-        if(count($data['types']) == 0)
-            $errors[] = 'Select at least one category';
-        
-        if(empty($data['identifier']))
-            $data['identifier'] = $data['title'];
-        
+        if($listing->main_type != 2 and $listing->main_type != 7) {
+            if(count($data['types']) == 0)
+                $errors[] = 'Select at least one category';
+            if(empty($data['identifier']))
+                $data['identifier'] = $data['title'];
+        }
         
         if(count($errors) > 0){
             $this->view->errors = $errors;
         } else {
-            
-            //echo '<pre>'; print_r($data); echo '</pre>'; die;
-            
-            $listing->title = $data['title'];
-            
-            /**
-            if($data['country_id'] != $listing->country_id){
-                $db = Zend_Db_Table::getDefaultAdapter();
-                $db->query('Update places set listings = listings - 1 where id = '.$listing->country_id);
-                $db->query('Update places set listings = listings + 1 where id = '.$data['country_id']);
-                $listing->country_id = $data['country_id'];
-
-            }
-            if($data['city_id'] != $listing->city_id){
-                $db = Zend_Db_Table::getDefaultAdapter();
-                $db->query('Update places set listings = listings - 1 where id = '.$listing->city_id);
-                $db->query('Update places set listings = listings + 1 where id = '.$data['city_id']);
-                $listing->city_id    = $data['city_id'];
-            }
-             * 
-             */
-
-            $this->listings->saveTypes($listing->id, $data['types']);
-            $this->listings->saveTags($listing->id, $data['tags']);
-            $this->listings->saveLandscapes($listing->id, $data['lands']);
-
-            /**
-            $listing->address = $data['address'];
-            $listing->lat = $data['lat'];
-            $listing->lng = $data['lng'];
-             * 
-             */
-            if($listing->main_type == 6) {
-                $listing->departure = $data['departure'];
-                $listing->departure_country_id = $data['departure_country_id'];
+            if($listing->main_type == 2 or $listing->main_type == 7) {
+                //echo '<pre>'; print_r($data); echo '</pre>'; die;
                 
-                $listing->min = (isset($data['min'])) ? $data['min'] : null;
-                $listing->max = (isset($data['max'])) ? $data['max'] : null;
+                $listing->title       = $data['title'];
+                $listing->main_type   = $data['main_type'];
+                $listing->description = $data['description'];
+                $listing->address     = $data['address'];
+                $listing->phone       = $data['phone'];
+                $listing->email       = $data['email'];
+                $listing->website     = $data['website'];
+                $listing->updated     = date('Y-m-d H:i:s');
                 
-                $listing->kids = $data['kids'];
-                $listing->kid_age_max = $data['kid_age_max'];
-                $listing->kid_age_min = 1;
-
-                if(!isset($data['returnEqual']) or $data['returnEqual'] != 1){
-                    $listing->return = $data['return'];
-                    $listing->return_country_id = $data['return_country_id'];
-                } else {
-                    $listing->return = $data['departure'];
-                    $listing->return_country_id = $data['departure_country_id'];
+                if($listing->status != 1) {
+                    $listing->identifier  = str_replace(' ','_',strtolower($data['title']));
                 }
+                $listing->save();
+                
+                $place  = $this->listings->getPlaceInfo($listing->id);
+                $place->setFromArray($data['place']);
+                if(isset($data['card'])) {
+                    $cards = array_keys($data['card']);
+                    $cards = implode(', ',$cards);
+                    $place->cards = $cards;
+                }
+                $place->updated     = date('Y-m-d H:i:s');
+                $place->save();
                 
                 $schedules = $this->listings->getSchedulesOf($listing->id);
-                if($data['schedules'] == 'custom') {
-                    foreach($schedules as $sch){
-                        if(isset($data['schs'][$sch->id])){
-                            $data2 = $data['schs'][$sch->id];
-                            if(!empty($data2['name']))
-                                $sch->name = $data2['name'];
-
-                            $starting = $data2['start_hour'].':00 '.$data2['start_time'];
-                            $ending   = $data2['end_hour'].':00 '.$data2['end_time'];
-
-                            $starting = date('H:i:s',strtotime($starting));
-                            $ending   = date('H:i:s',strtotime($ending));
-
-                            $sch->starting   = $starting;
-                            $sch->ending     = $ending;
-                            if(isset($data2['duration']))
-                                $sch->duration   = $data2['duration'];
-                            else 
-                                $sch->duration   = 1;
-                            $sch->duration_label = 'days';
-
-                            $sch->save();
-                        } else 
-                            $sch->delete();
-                    }
-
-                    foreach($data['sch'] as $data2){
-                        if(!empty($data2['name']))
-                            $this->listings->addScheduleTo($listing, $data2);
-                    }
-                } 
-                else {
-                    foreach($schedules as $sch) {
-                        $sch->delete();
-                    }
-                }
-            } elseif($listing->main_type == 2) {
-                $schedules = $this->listings->getSchedulesOf($listing->id);
+                
                 foreach($schedules as $sch){
-                    if(isset($data['schs'][$sch->id])){
+                    if(isset($data['sch'][$sch->id])){
                         $data2 = $data['schs'][$sch->id];
-                        if(!empty($data2['name']))
-                            $sch->name = $data2['name'];
 
-                        $starting = $data2['start_hour'] .':'.$data2['start_min'] .':00 '.$data2['start_time'];
-                        $ending   = $data2['end_hour']   .':'.$data2['end_min']   .':00 '.$data2['end_time'];
+                        $sch->name = $data2['name'];
+
+                        $starting = $data2['starting'];
+                        $ending   = $data2['ending'];
 
                         $starting = date('H:i:s',strtotime($starting));
                         $ending   = date('H:i:s',strtotime($ending));
 
                         $sch->starting   = $starting;
                         $sch->ending     = $ending;
-                        //$sch->duration   = $data2['duration'];
-                        //$sch->duration_label = $data2['duration_lb'];  
+                        if(isset($data2['duration']))
+                            $sch->duration   = $data2['duration'];
+                        else 
+                            $sch->duration   = 1;
+                        $sch->duration_label = 'days';
 
-                        $sch->save(); 
+                        $sch->save();
+                    } else 
+                        $sch->delete();
+                }
+                
+                $this->listings->saveTypes($listing->id, array($data['types']));
+            } else {
+                $listing->title = $data['title'];
+
+                /**
+                if($data['country_id'] != $listing->country_id){
+                    $db = Zend_Db_Table::getDefaultAdapter();
+                    $db->query('Update places set listings = listings - 1 where id = '.$listing->country_id);
+                    $db->query('Update places set listings = listings + 1 where id = '.$data['country_id']);
+                    $listing->country_id = $data['country_id'];
+
+                }
+                if($data['city_id'] != $listing->city_id){
+                    $db = Zend_Db_Table::getDefaultAdapter();
+                    $db->query('Update places set listings = listings - 1 where id = '.$listing->city_id);
+                    $db->query('Update places set listings = listings + 1 where id = '.$data['city_id']);
+                    $listing->city_id    = $data['city_id'];
+                }
+                * 
+                */
+
+                $this->listings->saveTypes($listing->id, $data['types']);
+                $this->listings->saveTags($listing->id, $data['tags']);
+                $this->listings->saveLandscapes($listing->id, $data['lands']);
+
+                /**
+                $listing->address = $data['address'];
+                $listing->lat = $data['lat'];
+                $listing->lng = $data['lng'];
+                * 
+                */
+                if($listing->main_type == 6) {
+                    $listing->departure = $data['departure'];
+                    $listing->departure_country_id = $data['departure_country_id'];
+
+                    $listing->min = (isset($data['min'])) ? $data['min'] : null;
+                    $listing->max = (isset($data['max'])) ? $data['max'] : null;
+
+                    $listing->kids = $data['kids'];
+                    $listing->kid_age_max = $data['kid_age_max'];
+                    $listing->kid_age_min = 1;
+
+                    if(!isset($data['returnEqual']) or $data['returnEqual'] != 1){
+                        $listing->return = $data['return'];
+                        $listing->return_country_id = $data['return_country_id'];
                     } else {
-                        //var_dump($data); die;
-                        if(isset($data['close'][$sch->id])){
-                            $sch->starting   = '00:00:00';
-                            $sch->ending     = '00:00:00';
-                            $sch->save(); 
-                        } else {
+                        $listing->return = $data['departure'];
+                        $listing->return_country_id = $data['departure_country_id'];
+                    }
+
+                    $schedules = $this->listings->getSchedulesOf($listing->id);
+                    if($data['schedules'] == 'custom') {
+                        foreach($schedules as $sch){
+                            if(isset($data['schs'][$sch->id])){
+                                $data2 = $data['schs'][$sch->id];
+                                if(!empty($data2['name']))
+                                    $sch->name = $data2['name'];
+
+                                $starting = $data2['start_hour'].':00 '.$data2['start_time'];
+                                $ending   = $data2['end_hour'].':00 '.$data2['end_time'];
+
+                                $starting = date('H:i:s',strtotime($starting));
+                                $ending   = date('H:i:s',strtotime($ending));
+
+                                $sch->starting   = $starting;
+                                $sch->ending     = $ending;
+                                if(isset($data2['duration']))
+                                    $sch->duration   = $data2['duration'];
+                                else 
+                                    $sch->duration   = 1;
+                                $sch->duration_label = 'days';
+
+                                $sch->save();
+                            } else 
+                                $sch->delete();
+                        }
+
+                        foreach($data['sch'] as $data2){
+                            if(!empty($data2['name']))
+                                $this->listings->addScheduleTo($listing, $data2);
+                        }
+                    } 
+                    else {
+                        foreach($schedules as $sch) {
                             $sch->delete();
                         }
                     }
+                } elseif($listing->main_type == 2) {
+                    $schedules = $this->listings->getSchedulesOf($listing->id);
+                    foreach($schedules as $sch){
+                        if(isset($data['schs'][$sch->id])){
+                            $data2 = $data['schs'][$sch->id];
+                            if(!empty($data2['name']))
+                                $sch->name = $data2['name'];
+
+                            $starting = $data2['start_hour'] .':'.$data2['start_min'] .':00 '.$data2['start_time'];
+                            $ending   = $data2['end_hour']   .':'.$data2['end_min']   .':00 '.$data2['end_time'];
+
+                            $starting = date('H:i:s',strtotime($starting));
+                            $ending   = date('H:i:s',strtotime($ending));
+
+                            $sch->starting   = $starting;
+                            $sch->ending     = $ending;
+                            //$sch->duration   = $data2['duration'];
+                            //$sch->duration_label = $data2['duration_lb'];  
+
+                            $sch->save(); 
+                        } else {
+                            //var_dump($data); die;
+                            if(isset($data['close'][$sch->id])){
+                                $sch->starting   = '00:00:00';
+                                $sch->ending     = '00:00:00';
+                                $sch->save(); 
+                            } else {
+                                $sch->delete();
+                            }
+                        }
+                    }
                 }
-            }
-            
-            if(isset($data['contactEqual'])){
-                $vendor = $this->users->getVendor($listing->vendor_id);
-                $listing->phone   = $vendor->phone;
-                $listing->email   = $vendor->email;
-                $listing->website = $vendor->website;
-            } else {
-                $listing->phone   = $data['phone'];
-                $listing->email   = $data['email'];
-                $listing->website = $data['website'];
-            }
-            
-            if($listing->main_type == 5){
-                $listing->checkin = date('H:i:s', strtotime($data['checkin_hour'].' '.$data['checkin_time']));
-                $listing->checkout = date('H:i:s', strtotime($data['checkout_hour'].' '.$data['checkout_time']));
-            }
 
-            $listing->identifier = str_replace(' ','_',strtolower($data['identifier']));
+                if(isset($data['contactEqual'])){
+                    $vendor = $this->users->getVendor($listing->vendor_id);
+                    $listing->phone   = $vendor->phone;
+                    $listing->email   = $vendor->email;
+                    $listing->website = $vendor->website;
+                } else {
+                    $listing->phone   = $data['phone'];
+                    $listing->email   = $data['email'];
+                    $listing->website = $data['website'];
+                }
 
-            $listing->save();
+                if($listing->main_type == 5){
+                    $listing->checkin = date('H:i:s', strtotime($data['checkin_hour'].' '.$data['checkin_time']));
+                    $listing->checkout = date('H:i:s', strtotime($data['checkout_hour'].' '.$data['checkout_time']));
+                }
+                
+                if($listing->status != 1) {
+                    $listing->identifier = str_replace(' ','_',strtolower($data['identifier']));
+                }
+
+                $listing->save();
+            }
             
             setcookie('alert','Your changes have been saved');
             
@@ -2017,6 +2137,19 @@ class AdminController extends Zend_Controller_Action {
             $pictures = $this->listings->getPictures($listing->id);
             $this->view->main_category  = $main_cat;
             $this->view->pictures       = $pictures;
+            
+            if($listing->main_type == 2 or $listing->main_type == 7) {
+                $place = $this->listings->getPlaceInfo($listing->id);
+                $fq = $this->listings->getFQ($place->fqid);
+                
+                $this->view->fq = $fq;
+                
+                $template = 'listings-photosplaces';
+                $this->render($template);
+            } else {
+                $template = 'listings-photos';
+                $this->render($template);
+            }
         }
     }
     
@@ -2043,24 +2176,49 @@ class AdminController extends Zend_Controller_Action {
         if($data['listing_token'] != $listing->token)
             throw new Exception('Listing Token Violated');
         
-        foreach($data['pic'] as $pic_id => $pic){
-            $img = $this->listings->getPhoto($listing->id, $pic_id);
-            if(is_null($img))
-                throw new Exception('Img not found');
-
-            if($data['main'] == $img->id){
-                $db = Zend_Db_Table::getDefaultAdapter();
-                $db->query('Update listing_pictures set main = 0 where listing_id = '.$listing->id);
-                $img->main = 1;
-                $listing->image = $img->url;
-                $listing->save();
+        if($listing->main_type == 7 or $listing->main_type == 2) {
+            $pictures = new Zend_Db_Table('listing_pictures');
+            $pictures->delete(array('listing_id'=> $listing->id));
+            if(count($data['pics'])>0) {
+                $main = (isset($data['pics']['main'])) ? $data['pics']['main'] : false;
+                unset($data['pics']['main']);
+                if($main === false) {
+                    $kwys = array_keys($data['pics']);
+                    $main = $kwys[0];
+                }
+                foreach($data['pics'] as $i => $pic) {
+                    $picture = $pictures->fetchNew();
+                    $picture->listing_id = $listing->id;
+                    $picture->url = $pic['include'];
+                    if($main == $i) {
+                        $picture->main = 1;
+                        $listing->image = $picture->url;
+                        $listing->save();
+                    }
+                    $picture->created = date('Y-m-d H:i:s');
+                    $picture->updated = date('Y-m-d H:i:s');
+                    $picture->save();
+                }
             }
             
-            $img->location = $pic['location'];
-            $img->save();
+        } else {
+            foreach($data['pic'] as $pic_id => $pic){
+                $img = $this->listings->getPhoto($listing->id, $pic_id);
+                if(is_null($img))
+                    throw new Exception('Img not found');
+
+                if($data['main'] == $img->id){
+                    $db = Zend_Db_Table::getDefaultAdapter();
+                    $db->query('Update listing_pictures set main = 0 where listing_id = '.$listing->id);
+                    $img->main = 1;
+                    $listing->image = $img->url;
+                    $listing->save();
+                }
+
+                $img->location = $pic['location'];
+                $img->save();
+            }
         }
-        
-        $this->view->activephoto = $img->id;
         setcookie('alert','Your changes have been saved');
         $this->_redirect('/admin/listings/photos/'.$listing->id);
     }
