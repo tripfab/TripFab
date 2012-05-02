@@ -562,9 +562,10 @@ $(document).ready(function() {
         padding: 0,
         overlayColor: '#FFF',
         overlayOpacity: '0.7',
-        showCloseButton: 'false',
-        centerOnScroll: 'true',
-        titlePosition: 'inside'
+        showCloseButton: false,
+        centerOnScroll: true,
+        titlePosition: 'inside',
+        showNavArrows: true
     });
     $('#fancybox-title').addClass('tittle');
     $('#fancybox-left-ico').addClass('lfarrow');
