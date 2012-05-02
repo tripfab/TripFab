@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->listing->title ?> : Photos - Admin | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/css2/lightboxes.css" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
+    <style type="text/css">
+    #maplocations ul {
+        list-style:none;
+        margin-top:10px;
+        background:#FFC;
+    }
+    #maplocations ul li {
+        margin-bottom:5px;
+    }
+    #mapcanvas {
+        width:356px;
+        height:207px;
+        background:#09C;
+        clear:both;
+        margin-top:35px;
+    }
+    .listing-content .profile-items .item .inner-container > a {
+        display:none;
+    }
+    .listing-content .profile-items .item:hover .inner-container > a {
+        display:block;
+    }
+    .item .inner-form {
+        clear:both;
+        overflow:hidden;
+        padding-top:5px;
+    }
+    .item .inner-form input.text {
+        float:left;
+        width:200px !important;
+        vertical-align:middle;
+    }
+    .item .inner-form input.btn {
+        float:left;
+        vertical-align:middle;
+    }
+    .item .inner-form .selects {
+        display:block;
+        clear:both;
+    }
+    .hidden {
+        display:none;
+    }
+    .errors {
+        border:1px solid #F00;
+        margin:20px 0 0;
+        padding:5px;
+    }
+    .errors p {
+        color:#F00;
+        font-weight:normal;
+        font-style:italic;
+    }
+    input.error {
+        border:1px solid #F00 !important;
+    }
+    label.error {
+        display:none !important;
+    }
+    </style>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('admin_partials/header.phtml', array()); ?>
+    <div class="w3_admin">
+        <div class="sub_menu">
+            <h2>
+            	<?php if($this->listing->status == 1): ?>
+            	<span class="lstngActv">Active</span>
+                <?php else: ?>
+            	<span class="lstngInct">Inactive</span>
+                <?php endif ?>
+            	Editing. <span>Editing. <span><?php echo $this->listing->title ?></span>
+	            <em class="ed">by </em> 
+	            <a href="/admin/users/view/partner/<?= $this->vendor->id ?>" class="partner"><?= $this->vendor->name ?></a>
+	        </h2>           
+            <?= $this->partial('admin_partials/listing_actions.phtml', array('active'=> $this->listing)); ?>
+        </div><!--SUB_MENU-->
+    </div><!--W3-->
+    <div class="w2">
+        <div class="listing-wrapper wrapper" id="edit_places">
+            <div class="listing-content show">
+                <div class="left">
+                    <?= $this->partial('admin_partials/vendorlistingsmenu.phtml', array('active'=>'Photos', 'id' => $this->listing->id, 
+									   'type'=>$this->listing->main_type)) ?>
+                </div><!-- closes left -->
+                <div class="right">
+					<?= $this->partial('admin_listing/restaurant/photos.phtml', array(
+							'pictures' => $this->pictures,
+							'listing'  => $this->listing,
+							'help' => $this->help,
+							'fq'   => $this->fq
+					)) ?>
+                </div>
+                <div class="clear"></div>
+            </div><!-- closes listing-content --> 
+        </div><!-- closes listing-wrapper --> 
+    </div><!-- closes w2 -->
+	<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js"></script> 
+<script type="text/javascript" src="/js2/provider/listing-edit.js"></script> 
+<script type="text/javascript" src="/js2/admin/listing-actions.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("img.lazy").lazyload();
+});
+</script>
+</body>
+</html>

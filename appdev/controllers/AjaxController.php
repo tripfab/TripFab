@@ -2810,4 +2810,253 @@ class AjaxController extends Zend_Controller_Action
         header('Content-type: application/json');
         echo json_encode($result); die;
     }
+    
+    public function updateplaceAction(){
+        $result = array();
+        try {
+            
+            $id = $_GET['id'];
+            $type = 2;
+
+            $fqs = new Zend_Db_Table('fq');
+            $select = $fqs->select();
+            $select->where('id = ?',$id);
+            $fq = $fqs->fetchRow($select);
+            if(is_null($fq)) 
+                throw new Exception('Foursquare place info not found');
+            
+            $fq->fb_page = $_GET['url'];
+
+            $url = parse_url($this->_getParam('url'));
+            $url = @split('/', $url['path']);
+            $id = ($url[1] == 'pages') ? $url[3] : $url[1];
+
+                            //echo $id; die;
+
+            $client = new Zend_Http_Client('https://graph.facebook.com/'.$id);
+            $client->setParameterGet('access_token', $_GET['token']);
+
+            $response = $client->request();
+
+            $body = json_decode($response->getBody());
+
+            if(isset($body->error)) 
+                throw new Exception($body->error->message);
+            
+            $client = new Zend_Http_Client('https://graph.facebook.com/'.$id.'/albums');
+            $client->setParameterGet('access_token', $_GET['token']);
+
+            $response = $client->request();
+
+            $albums = json_decode($response->getBody());
+
+            if(isset($albums->error)) 
+                throw new Exception($albums->error->message);
+
+            $photos = array();
+
+            foreach($albums->data as $alb) {
+                $client = new Zend_Http_Client('https://graph.facebook.com/'.$alb->id.'/photos');
+                $client->setParameterGet('access_token', $_GET['token']);
+
+                $response = $client->request();
+
+                $pics = json_decode($response->getBody());
+
+                if(!isset($pics->error)) {
+
+                    foreach($pics->data as $pic) {
+                        $_pic = new stdClass();
+                        $_pic->thumb = $pic->picture;
+                        $_pic->url = $pic->source;
+
+                        $photos[] = $_pic;
+                    }
+
+                }
+            }
+
+            $body->photos = $photos;
+
+            $fq->fb_data = json_encode($body);
+            $fq->save();
+            
+            $__fq = json_decode($fq->fq_data);
+            $venue = $__fq->response->venue;
+            $page  = json_decode($fq->fb_data);
+            
+            //var_dump($fq->fq_data); die;
+            
+            $data = array(
+                'country_id'=>18,
+                'city_id'=>$fq->city,
+                'main_type'=>$type,
+                'title'=>$venue->name,
+                'description' => (isset($page->about)) ? $page->about : '',
+                'address'=>(isset($venue->location->address)) ? $venue->location->address : '',
+                'lat'=>$venue->location->lat,
+                'lng'=>$venue->location->lng,
+                'phone'=>(isset($venue->contact->phone)) ? $venue->contact->phone : (isset($page->phone) ? $page->phone : ''),
+                'email'=>(isset($venue->contact->email)) ? $venue->contact->email : (isset($page->email) ? $page->email : ''),
+                'website'=>(isset($venue->contact->website)) ? $venue->contact->website : (isset($page->website) ? $page->website : ''),
+                'sch'=>array(
+                    0 => array(
+                        'starting' => $page->hours->mon_1_open,
+                        'ending'   => $page->hours->mon_1_close,
+                        'name'     => 'Monday'
+                    ),
+                    1 => array(
+                        'starting' => $page->hours->tue_1_open,
+                        'ending'   => $page->hours->tue_1_close,
+                        'name'     => 'Tuesday'
+                    ),
+                    2 => array(
+                        'starting' => $page->hours->wed_1_open,
+                        'ending'   => $page->hours->wed_1_close,
+                        'name'     => 'Wednesday'
+                    ),
+                    3 => array(
+                        'starting' => $page->hours->thu_1_open,
+                        'ending'   => $page->hours->thu_1_close,
+                        'name'     => 'Thursday'
+                    ),
+                    4 => array(
+                        'starting' => $page->hours->fri_1_open,
+                        'ending'   => $page->hours->fri_1_close,
+                        'name'     => 'Friday'
+                    ),
+                    5 => array(
+                        'starting' => $page->hours->sat_1_open,
+                        'ending'   => $page->hours->sat_1_close,
+                        'name'     => 'Saturday'
+                    ),
+                    6 => array(
+                        'starting' => $page->hours->sun_1_open,
+                        'ending'   => $page->hours->sun_1_close,
+                        'name'     => 'Sunday'
+                    ),
+                ),
+                'place' => array(
+                    'facebook' => $page->link,
+                    'twitter' => (isset($venue->contact->twitter)) ? $venue->contact->twitter : '',
+                    'info' => (isset($page->description)) ? $page->description : '',
+                    'specials',
+                    'tips',
+                    'tags' => (isset($venue->tags[0])) ? $venue->tags[0] : '',
+                    'services'
+                ),
+                'fqid'
+            );
+            
+            $data['cards'] = array();
+            if(isset($page->payment_options->cash_only) and $page->payment_options->cash_only == 1)
+                $data['cards'][] = 'cash';
+            if(isset($page->payment_options->visa) and $page->payment_options->visa == 1)
+                $data['cards'][] = 'visa';
+            if(isset($page->payment_options->amex) and $page->payment_options->amex == 1)
+                $data['cards'][] = 'amex';
+            if(isset($page->payment_options->mastercard) and $page->payment_options->mastercard == 1)
+                $data['cards'][] = 'mastercard';
+            if(isset($page->payment_options->discover) and $page->payment_options->discover == 1)
+                $data['cards'][] = 'discover';
+            
+            $services = '';
+            $__services = array(
+                'breakfast' => 'Breakfast',
+                'lunch'     => 'Lunch',
+                'dinner'    => 'Dinner',
+                'coffee'    => 'Coffee Break',
+                'drinks'    => 'Drinks',
+            );
+            $_services = get_object_vars($page->restaurant_specialties);
+            foreach($_services as $k => $v)
+                if($v == 1)
+                    $services .= $__services[$k]."\n";
+
+            $data['place']['specials'] = $services;
+            
+            $info = "";
+            foreach($venue->tips->groups as $g)
+                foreach($g->items as $t)
+                    $info .= $t->text ."\n";
+            
+            $data['place']['tips'] = $info;
+            
+            $services = '';
+            $__services = array(
+                'reserve'  => 'Take reservations',
+                'walkins'  => 'No reservation needed',
+                'groups'   => 'Good for groups',
+                'kids'     => 'Good for kids',
+                'takeout'  => 'Able to take out',
+                'delivery' => 'Express service',
+                'catering' => 'Catering Service',
+                'waiter'   => 'Waiter Service',
+                'outdoor'  => 'Outdoor Tables'
+            );
+            $_services = get_object_vars($page->restaurant_services);
+            foreach($_services as $k => $v)
+                if($v == 1)
+                    $services .= $__services[$k]."\n";
+                
+            $data['place']['services'] = $services;
+            
+            $listing = $this->listings->getListing($_GET['listing']);
+            
+            $listing->title       = $data['title'];
+            $listing->description = $data['description'];
+            $listing->identifier  = str_replace(' ','_',strtolower($data['title']));
+            $listing->address     = $data['address'];
+            $listing->lat         = $data['lat'];
+            $listing->lng         = $data['lng'];
+            $listing->status      = 0;
+            $listing->phone       = $data['phone'];
+            $listing->email       = $data['email'];
+            $listing->website     = $data['website'];
+            $listing->updated     = date('Y-m-d H:i:s');
+            $listing->save();
+            
+            $schedules = new Zend_Db_Table('listing_schedules');
+            $schedules->delete(array('listing_id' =>$listing->id));
+            foreach($data['sch'] as $sch){
+                if(!empty($sch['starting'])) {
+                    $schedule = $schedules->fetchNew();
+                    $schedule->listing_id = $listing->id;
+                    $schedule->name = $sch['name'];
+                    $schedule->starting = $sch['starting'];
+                    $schedule->ending = $sch['ending'];
+                    $schedule->save();
+                }
+            }
+            
+            $cards = implode(', ', $data['cards']);
+            if(is_null($cards)) $cards = '';
+            
+            $place  = $this->listings->getPlaceInfo($listing->id);
+            $place->setFromArray($data['place']);
+            
+            $place->cards = $cards;
+            $place->updated = date('Y-m-d H:i:s');
+            $place->fqid = $fq->id;
+            
+            $place->save();
+            
+            $fq->added = 1;
+            $fq->save();
+            
+            $result = array(
+                'status' => 'success',
+                'id'     => $listing->id
+            );
+            
+        } catch(Exception $e) {
+            $result = array(
+                'status' => 'error',
+                'error'  => $e->getMessage()
+            );
+        }
+        
+        header('Content-type: application/json');
+        echo json_encode($result); die;
+    }
 }

@@ -1,0 +1,54 @@
+<?php
+	$fq = json_decode($this->fq->fq_data);
+	$venue = $fq->response->venue;
+	$page  = json_decode($this->fq->fb_data);
+	$ppp = array();
+	foreach($this->pictures as $pic) {
+		$ppp[] = $pic->url;
+	}
+?>
+<form action="" method="post">
+    <div class="profile-items">
+        <div class="main-ttl">
+            <p><strong>Photos</strong> <a href="/admin/listings" class="back_btn">&larr; Back to Listings</a></p>
+        </div><!-- closes main-ttl -->
+        <div class="item-wrppr">
+            <div class="photos">
+                <h3>Select the pictures you want to add to the listing page</h3>
+                <ul>
+					<?php $i = 0; ?>
+                    <?php foreach($page->photos as $img): ?>
+                    <li>
+                        <div class="pic"><img class="lazy" src="" data-original="<?= $img->url ?>" width="107" height="107" /></div>
+                        <?php $ch = (in_array($img->url, $ppp)) ? 'checked="checked"' : ''; ?>
+                        <label><input <?= $ch ?> type="checkbox" name="pics[<?= $i ?>][include]" value="<?= $img->url ?>" />Add</label>
+                        <?php $ch = ($img->url == $this->listing->image) ? 'checked="checked"' : ''; ?>
+                        <span><input <?= $ch ?> type="radio" name="pics[main]" value="<?= $i ?>" />Main</span>
+                    </li>
+                    <?php $i++ ?>
+                    <?php endforeach ?>
+                    <?php foreach($venue->photos->groups as $g): ?>
+                    <?php foreach($g->items as $img): ?>
+                    <li>
+                        <div class="pic"><img class="lazy" src="" data-original="<?= $img->url ?>" width="107" height="107" /></div>
+                        <?php $ch = (in_array($img->url, $ppp)) ? 'checked="checked"' : ''; ?>
+                        <label><input <?= $ch ?> type="checkbox" name="pics[<?= $i ?>][include]" value="<?= $img->url ?>" />Add</label>
+                        <?php $ch = ($img->url == $this->listing->image) ? 'checked="checked"' : ''; ?>
+                        <span><input <?= $ch ?> type="radio" name="pics[main]" value="<?= $i ?>" />Main</span>
+                    </li>
+                    <?php $i++ ?>
+                    <?php endforeach ?>
+                    <?php endforeach ?>
+                </ul>
+            </div><!--PHOTOS-->
+        </div>
+    </div><!-- closes profile-items -->
+    <div class="foot">
+        <input type="submit" class="btn-1 noclean" value="Save Changes" />
+        <a class="confirmDeleteListing" href="/admin/listings/delete/923">Delete Listing</a> 
+    </div><!-- closes foot -->
+	<input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token.'edit_picture') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_picture') ?>" />
+</form>
