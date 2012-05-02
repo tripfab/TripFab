@@ -12,6 +12,18 @@
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
     <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
     <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
+    <style type="text/css">
+	.checkout-item .restricction_tip {					
+		right: -170px !important;
+		top: -215px !important;
+		z-index:20 !important;
+	}
+	#custom_checkout .details .item {
+		overflow:visible !important;
+	}
+	#checkout_accordion {
+		overflow:visible !important;}
+	</style>
 </head>
 <body>
 <div class="w1">
@@ -72,19 +84,23 @@
                                         <?php endfor ?>
                                     </select>
                                 </div><!--EDIT--> 
+                                <div class="clear"></div>
                             </div><!--ITEM-->
                             <?php if($item->listing_type == 5): ?>
                             <div class="item"> 
                                 <strong>Check In</strong>
                                 <div class="edit"><?= date('L, F jS, Y', strtotime($item->checkin)) ?></div>
+                                <div class="clear"></div>
                             </div><!--ITEM-->
                             <div class="item"> 
                                 <strong>Check Out</strong>
                                 <div class="edit"><?= date('L, F jS, Y', strtotime($item->checkout)) ?></div><!--EDIT--> 
+                                <div class="clear"></div>
                             </div><!--ITEM-->
                             <div class="item"> 
                                 <strong>Rooms</strong>
                                 <div class="edit"><?= $item->rooms ?></div><!--EDIT--> 
+                                <div class="clear"></div>
                             </div><!--ITEM-->
                             <?php if(isset($this->options[$item->id]['options']) && 
                                     (count($this->options[$item->id]['options'] > 0))): ?>
@@ -104,6 +120,7 @@
                                     </div><!--SINGLE-->
                                     <?php endforeach ?>
                                 </div><!--ROOM-TYPE--> 
+                                <div class="clear"></div>
                             </div><!--ITEM-->
                             <?php endif ?>
                             <?php else: ?>
@@ -156,6 +173,7 @@
                                     </div><!--SINGLE-->
                                     <?php endif ?>
                                 </div><!--ROOM-TYPE--> 
+                                <div class="clear"></div>
                             </div><!--ITEM-->
                             <div class="item"> 
                                 <strong>Schedule</strong>
@@ -175,6 +193,7 @@
                                     <input type="hidden" name="bookings[<?= $item->id ?>][option]" value="flex" />
                                 </div>
                                 <?php endif ?>
+                                <div class="clear"></div>
                             </div><!--ITEM-->
                             <?php endif ?>
                             <?php if($item->available): ?>
@@ -183,6 +202,7 @@
                                 <div class="edit">
                                     $<?= $item->rate ?>, <?= $item->rate_description ?>
                                 </div>
+                                <div class="clear"></div>
                             </div>
                             <?php if(isset($item->additional) and $item->additional > 0): ?>
                             <div class="item">
@@ -190,6 +210,7 @@
                                 <div class="edit">
                                     $<?= $item->additional ?>, <?= $item->additional_description ?>
                                 </div>
+                                <div class="clear"></div>
                             </div>                        
                             <?php endif ?>
                             <div class="item">
@@ -197,12 +218,14 @@
                                 <div class="edit">
                                 	$<?= $item->taxes ?>
                                 </div>
+                                <div class="clear"></div>
                             </div>
                             <div class="item">
                             	<strong>Total</strong>
                                 <div class="edit">
                                 	$<?= $item->total ?>
                                 </div>
+                                <div class="clear"></div>
                             </div>
                             <?php endif ?>
                             
@@ -307,6 +330,7 @@
                                     </div><!--CANCEL_POLICY-->
                                 </div>                            
                                 <?php endif ?>
+                                <div class="clear"></div>
                             </div><!--ITEM-->
 							<?php break; case 2: ?>
                              <div class="checkout-item item"> 
@@ -408,6 +432,7 @@
                                     </div><!--CANCEL_POLICY-->
                                 </div>
                                 <?php endif ?>
+                                <div class="clear"></div>
                             </div><!--ITEM-->
                             <?php break; default: ?>
                              <div class="checkout-item item"> 
@@ -510,10 +535,11 @@
                                         </div><!--MID-->
                                     </div><!--CANCEL_POLICY-->
                                 </div>           
-                                <?php endif ?>    
+                                <?php endif ?>  
+                                <div class="clear"></div>  
                             </div><!--ITEM-->
                             <?php endswitch ?>
-                            <?php if($item->listing_type == 6): ?>
+                            <?php if($item->listing_type == 5): ?>
                             <div class="last"> 
                                 <strong>Hotel Restrictions</strong> 
                                 <a href="/ajax/restrictions/<?= $item->id ?>" class="lb restriction">Read Hotel Restrictions &rarr;</a> 
@@ -521,7 +547,7 @@
                             <?php else: ?>
                             <div class="last"> 
                                 <strong>Activity Restrictions</strong> 
-                                <a href="/ajax/restrictions/<?= $item->id ?>" class="lb restriction">Read Hotel Restrictions &rarr;</a> 
+                                <a href="/ajax/restrictions/<?= $item->id ?>" class="lb restriction">Read Activity Restrictions &rarr;</a> 
                             </div><!--ITEM-->
                             <?php endif ?>
                         </div><!--DETAILS-->
