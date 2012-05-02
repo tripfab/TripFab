@@ -126,7 +126,7 @@
                     </div><!--CONTROLS-->
                 </div><!--SUMMARY-->
             </div><!--INFO-->
-            <?php if(isset($this->missedIds[$trip->id])): ?>
+            <?php if(isset($this->missedIds[$trip->id]) and !($trip->start == '0000-00-00' && $trip->end == '0000-00-00')): ?>
             	<div class="missed">
             		<h3>The dates for '<?= $trip->title ?>' have passed.</h3>
             		<h4>Don’t worry, you can set a new travel date</h4>
@@ -202,7 +202,7 @@
             <div class="top">Redefine Travel Date</div>
             <div class="cont">
                 <p>When do you want to start your trip?</p>
-                <div class="calendar" id="calendar"></div>
+                <div class="calendar"></div>
                 <div class="bottom">
                     <input type="submit" class="btn-1" name="" value="Update Dates" />
                     <a onclick="$.fancybox.close()" class="btn-10">Cancel</a>
@@ -211,6 +211,7 @@
             <input type="hidden" name="ids" value="<?= $trip->id ?>" />
             <input type="hidden" name="token" value="<?= $trip->token ?>" />
             <input type="hidden" name="_task" value="<?= md5('update_dates') ?>" />
+            <input type="hidden" name="date" value="<?= date('Y-m-d') ?>" />
         </form>
 	</div><!--REDEFINEDATES-->    
     <?php endif ?>
@@ -239,7 +240,11 @@
 		$('.calendar').datepicker({
 			dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
 			minDate:new Date(),
-			maxDate:'+1y'
+			maxDate:'+1y',
+			onSelect:function(date){
+				$('input[name=date]').val(date);
+				console.log(date);
+			}
 		});
 		
 		$('a.delete_btn').click(function(){

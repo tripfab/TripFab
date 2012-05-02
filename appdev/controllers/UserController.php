@@ -1157,6 +1157,30 @@ class UserController extends Zend_Controller_Action
                 
                 $this->_redirect('/user/trips/itinerary/'.$trip->id);
                 break;
+            case md5('update_dates'):
+                $trip = $this->trips->getItn($_POST['ids'], true);
+                if($trip->token != $_POST['token'])
+                    throw new Exception('Form Corrupted');
+                if($trip->user_id != $this->user->getId())
+                    throw new Exception("The trip you're trying to delete isn't yours");
+                if(empty($_POST['date']))
+                    throw new Exception('Please select the dates');
+                
+                $start = date('Y-m-d', strtotime($_POST['date']));
+                $days = $trip->days;
+                $checkout = strtotime($start);
+                $checkout = $checkout + (86400 * ($days - 1));
+                
+                $end = date('Y-m-d', $checkout);
+                    
+                $trip->start = date('Y-m-d', strtotime($start));
+                $trip->end   = date('Y-m-d', strtotime($end));
+                
+                $trip->save();
+                
+                setcookie('alert','Your changes have been saved');
+                $this->_redirect('/user/trips/');
+                break;
             default:
                 throw new Exception('Form Corrupted');
                 break;
