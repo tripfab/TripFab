@@ -347,12 +347,15 @@
                                             <span class="line"></span>
                                         </div><!--CALENDAR-->
                                         
+                                        
+										<?php if(count($this->capacities) > 1): ?>
                                         <h5><span class="i_type"></span>Choose an Activity Type</h5>
                                         <div class="type">
                                             <span class="line"></span>
                                             <div class="details">
 	                                            <table>
-	                                            	<?php if((is_null($this->listing->min) or is_null($this->listing->max)) and count($this->capacities) > 0): ?>
+	                                            	<?php if((is_null($this->listing->min) or is_null($this->listing->max)) and 
+													count($this->capacities) > 0): ?>
 	                                            	<?php foreach($this->capacities as $option): ?>
 	                                            	<tr>
 	                                            		<td>
@@ -380,36 +383,52 @@
 	                                            </table>
 	                                    	</div><!--DETAILS-->
                                         </div><!--TYPE-->
+                                        <?php else: ?>
+                                        <?php if(count($this->capacities) > 0): ?>
+                                        <input type="radio" checked="checked" class="hidden" name="capacity" value="<?= $this->capacities[0]->id ?>" />
+                                        <?php else: ?>
+                                        <input type="radio" checked="checked" class="hidden" name="capacity" value="single" />
+                                        <?php endif ?>
+                                        <?php endif ?>
                                         
                                         
+                                        <?php if(count($this->options) > 1): ?>
                                         <h5><span class="i_sched"></span>Select a Schedule</h5>
                                         <div class="type">
                                             <span class="line"></span>
-                                            	<table width="262">
-                                            		<?php if(count($this->options) > 0): ?>
-                                            		<?php foreach($this->options as $option): ?>
-                                            		<tr>
-                                            			<td width="32"><input class="noclean" type="radio" value="<?= $option->id ?>" name="option" id="schedule<?= $option->id ?>" /></td>
-                                            			<td width="230">
-	                                            			<label for="schedule<?= $option->id ?>">
-	                                            				<?= date('h:i a',strtotime($option->starting)) ?> - 
-	                                            				<?= date('h:i a',strtotime($option->ending)) ?> 
-	                                            			</label>
-                                            			</td>
-                                            		</tr>
-                                            		<?php endforeach ?>
-                                            		<?php else: ?>
-                                            		<tr>
-                                            			<td><input class="noclean" type="radio" value="flex" name="option" id="schedule0"></td>
-                                            			<td><label>Flexible</label></td>
-                                            		</tr>
-                                            		<?php endif ?>
-                                            	</table>
+                                            <table width="262">
+                                                <?php if(count($this->options) > 0): ?>
+                                                <?php foreach($this->options as $option): ?>
+                                                <tr>
+                                                    <td width="32"><input class="noclean" type="radio" value="<?= $option->id ?>" name="option" id="schedule<?= $option->id ?>" /></td>
+                                                    <td width="230">
+                                                        <label for="schedule<?= $option->id ?>">
+                                                            <?= date('h:i a',strtotime($option->starting)) ?> - 
+                                                            <?= date('h:i a',strtotime($option->ending)) ?> 
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                <?php endforeach ?>
+                                                <?php else: ?>
+                                                <tr>
+                                                    <td><input class="noclean" type="radio" value="flex" name="option" id="schedule0"></td>
+                                                    <td><label>Flexible</label></td>
+                                                </tr>
+                                                <?php endif ?>
+                                            </table>
                                         </div><!--TYPE-->
+                                        <?php else: ?>
+										<?php if(count($this->options) > 0): ?>
+                                        <input class="hidden" type="radio" value="<?= $this->options[0]->id ?>" name="option"/>
+                                        <?php else: ?>
+                                        <input class="hidden" type="radio" value="flex" name="option"/>
+                                        <?php endif ?>                                        
+                                        <?php endif ?>
                                         
                                         <h5><span class="i_user"></span>How many travelers?</h5>
                                         <div class="selects activity">
                                             <span class="line"></span>
+                                            <?php if(count($this->capacities) > 1): ?>
                                             <label class="rooms">
                                                 Adults
                                                 <select class="ocp adt"  name="adults">
@@ -427,6 +446,66 @@
                                                     <?php endfor ?>
                                                 </select>
                                             </label>
+                                            <?php else: ?>
+	                                        <?php if(count($this->capacities) > 0): ?>
+                                            <?php $option = $this->capacities[0] ?>
+                                            <label class="rooms">
+                                                Adults
+                                                <select class="ocp adt"  name="adults">
+                                                    <?php for($i=$option->min; $i<=$option->max; $i++): ?>
+                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <?php endfor ?>
+                                                </select>
+                                            </label>
+                                            <label>
+                                                Children
+                                                <select class="ocp kid" name="kids">
+                                                    <option value="0">0</option>
+                                                    <?php for($i=1; $i<=$option->max; $i++): ?>
+                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <?php endfor ?>
+                                                </select>
+                                            </label>
+                                            <?php else: ?>
+                                            <?php if(!is_null($this->listing->max) and !is_null($this->listing->min)): ?>
+                                            <label class="rooms">
+                                                Adults
+                                                <select class="ocp adt"  name="adults">
+                                                    <?php for($i=$this->listing->min; $i<=$this->listing->max; $i++): ?>
+                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <?php endfor ?>
+                                                </select>
+                                            </label>
+                                            <label>
+                                                Children
+                                                <select class="ocp kid" name="kids">
+                                                    <option value="0">0</option>
+                                                    <?php for($i=1; $i<=$this->listing->max; $i++): ?>
+                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <?php endfor ?>
+                                                </select>
+                                            </label>
+                                            <?php else: ?>
+                                            <label class="rooms">
+                                                Adults
+                                                <select class="ocp adt"  name="adults">
+                                                    <?php for($i=1; $i<=12; $i++): ?>
+                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <?php endfor ?>
+                                                </select>
+                                            </label>
+                                            <label>
+                                                Children
+                                                <select class="ocp kid" name="kids">
+                                                    <option value="0">0</option>
+                                                    <?php for($i=1; $i<=12; $i++): ?>
+                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <?php endfor ?>
+                                                </select>
+                                            </label>
+                                            <?php endif ?>                                            
+                                            <?php endif ?>
+                                            <?php endif ?>
                                             <div class="clear"></div>
                                         </div><!--SELECTS-->
                                         <div class="price">
