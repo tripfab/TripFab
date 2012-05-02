@@ -2009,10 +2009,14 @@ class WS_ListingService {
         if(is_null($checkout)){
             $checkout = strtotime($checkin);
             $checkout = $checkout + (86400 * ($days - 1));
+            
+            
         } else {
             $checkout = strtotime($checkout);
         }
-        $checkout = date('Y-m-d G:i:s', $checkout);
+        $checkout = date('Y-m-d', $checkout);
+        
+        
         
         if(is_null($days)){
             $fday = strtotime($checkin);
