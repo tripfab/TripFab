@@ -384,11 +384,7 @@
 	                                    	</div><!--DETAILS-->
                                         </div><!--TYPE-->
                                         <?php else: ?>
-                                        <?php if(count($this->capacities) > 0): ?>
-                                        <input type="radio" checked="checked" class="hidden" name="capacity" value="<?= $this->capacities[0]->id ?>" />
-                                        <?php else: ?>
-                                        <input type="radio" checked="checked" class="hidden" name="capacity" value="single" />
-                                        <?php endif ?>
+                                        <?php $hiddenCapacity = true; ?>
                                         <?php endif ?>
                                         
                                         
@@ -418,11 +414,7 @@
                                             </table>
                                         </div><!--TYPE-->
                                         <?php else: ?>
-										<?php if(count($this->options) > 0): ?>
-                                        <input class="hidden" type="radio" value="<?= $this->options[0]->id ?>" name="option"/>
-                                        <?php else: ?>
-                                        <input class="hidden" type="radio" value="flex" name="option"/>
-                                        <?php endif ?>                                        
+                                        <?php $hiddenSchedules = true; ?>                               
                                         <?php endif ?>
                                         
                                         <h5><span class="i_user"></span>How many travelers?</h5>
@@ -521,6 +513,20 @@
                                     <input type="hidden" name="<?= $name ?>" value="<?= $value ?>" />
                                     <?php endforeach ?>
                                     <input type="hidden" name="checkin" id="inputCheckin" value="" />
+                                    <?php if($hiddenCapacity === true): ?>                                    
+									<?php if(count($this->capacities) > 0): ?>
+                                    <input type="radio" checked="checked" class="hidden" name="capacity" value="<?= $this->capacities[0]->id ?>" />
+                                    <?php else: ?>
+                                    <input type="radio" checked="checked" class="hidden" name="capacity" value="single" />
+                                    <?php endif ?>
+                                    <?php endif ?>
+                                    <?php if($hiddenSchedules === true): ?>                                
+									<?php if(count($this->options) > 0): ?>
+                                    <input class="hidden" type="radio" value="<?= $this->options[0]->id ?>" name="option"/>
+                                    <?php else: ?>
+                                    <input class="hidden" type="radio" value="flex" name="option"/>
+                                    <?php endif ?>         
+                                    <?php endif ?>
                                 </form>
                                 <div class="add">
                                     <?= $this->partial('partials/addtomytrip.phtml', array(
