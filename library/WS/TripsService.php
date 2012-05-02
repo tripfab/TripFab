@@ -848,6 +848,15 @@ class WS_TripsService {
         return $info;
     }
 
-
+    public function getRamdom($count = 5)
+    {
+        $select = $this->trips_db->select();
+        $select->limit($count);
+        $select->order('rand()');
+        
+        $trips = $this->trips_db->fetchAll($select);
+        
+        return $trips;
+    }
 
 }

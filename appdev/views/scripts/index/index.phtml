@@ -2,7 +2,6 @@
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <script type="text/javascript">var NREUMQ=NREUMQ||[];NREUMQ.push(["mark","firstbyte",new Date().getTime()]);</script>
     <title>Plan the perfect trip, in one place | Tripfab.com</title>
     <link type="text/css"  rel="stylesheet" href="/css6/reset.css" />
     <link type="text/css"  rel="stylesheet" href="/css6/home2.css" />
@@ -85,13 +84,14 @@
 							<a href="" class="rgarrow"></a>
 							<a href="" class="lfarrow"></a>
 							<div class="cont">
+                            	<?php foreach($this->hotels as $h): ?>
 								<div class="one">
-									<img src="https://developer.tripfab.com/images6/home_pic1.jpg" width="563" height="260" alt="" />
-									<h5>Hotel Punta Islita</h5>
+                                	<?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260'); ?>
+									<h5><?= $h->title ?></h5>
 									<span class="meta"><strong><em></em>Nicoya Peninsula,</strong> Costa Rica</span>
 									<div class="price">
 										<div>
-											<span>75</span>
+											<span><?= $h->price ?></span>
 											<sup>$</sup>
 											<div class="clear"></div>
 										</div>
@@ -99,22 +99,7 @@
 										<div class="clear"></div>
 									</div><!--PRICE-->
 								</div><!--ONE-->
-								
-								<div class="one">
-									<img src="https://developer.tripfab.com/images6/home_pic1.jpg" width="563" height="260" alt="" />
-									<h5>Hotel Punta Islita</h5>
-									<span class="meta"><strong><em></em>Nicoya Peninsula,</strong> Costa Rica</span>
-									<div class="price">
-										<div>
-											<sup>$</sup>
-											<span>75</span>
-											<div class="clear"></div>
-										</div>
-										<sub>Per Night</sub>
-										<div class="clear"></div>
-									</div><!--PRICE-->
-								</div><!--ONE-->
-								
+                                <?php endforeach ?>								
 							</div><!--CONT-->
 						</div><!--SLIDESHOW-->
 					</div><!--HOTELS-->
@@ -123,31 +108,22 @@
 						<div class="slideshow">
 							<a href="" class="rgarrow"></a>
 							<a href="" class="lfarrow"></a>
-							<div class="cont">
+							<div class="cont"><?php foreach($this->activities as $h): ?>
 								<div class="one">
-									<img src="https://developer.tripfab.com/images6/home_pic1.jpg" width="563" height="260" alt="" />
-									<h5>Hotel Punta Islita</h5>
+                                	<?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260'); ?>
+									<h5><?= $h->title ?></h5>
 									<span class="meta"><strong><em></em>Nicoya Peninsula,</strong> Costa Rica</span>
 									<div class="price">
-										<sup>$</sup>
-										<span>75</span>
-										<sub>Per Night</sub>
+										<div>
+											<span><?= $h->price ?></span>
+											<sup>$</sup>
+											<div class="clear"></div>
+										</div>
+										<sub>Per Person</sub>
 										<div class="clear"></div>
 									</div><!--PRICE-->
 								</div><!--ONE-->
-								
-								<div class="one">
-									<img src="https://developer.tripfab.com/images6/home_pic1.jpg" width="563" height="260" alt="" />
-									<h5>Hotel Punta Islita</h5>
-									<span class="meta"><strong><em></em>Nicoya Peninsula,</strong> Costa Rica</span>
-									<div class="price">
-										<sup>$</sup>
-										<span>75</span>
-										<sub>Per Night</sub>
-										<div class="clear"></div>
-									</div><!--PRICE-->
-								</div><!--ONE-->
-								
+                                <?php endforeach ?>								
 							</div><!--CONT-->
 						</div><!--SLIDESHOW-->
 					</div><!--ACTIVTIY-->
@@ -157,30 +133,22 @@
 							<a href="" class="rgarrow"></a>
 							<a href="" class="lfarrow"></a>
 							<div class="cont">
+                            	<?php foreach($this->trips as $h): ?>
 								<div class="one">
-									<img src="https://developer.tripfab.com/images6/home_pic1.jpg" width="563" height="260" alt="" />
-									<h5>Hotel Punta Islita</h5>
-									<span class="meta"><strong><em></em>Nicoya Peninsula,</strong> Costa Rica</span>
+                                	<?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260'); ?>
+									<h5><?= $h->title ?></h5>
+									<span class="meta"><strong><em></em></strong>Costa Rica</span>
 									<div class="price">
-										<sup>$</sup>
-										<span>75</span>
-										<sub>Per Night</sub>
+										<div>
+											<span><?= $h->price ?></span>
+											<sup>$</sup>
+											<div class="clear"></div>
+										</div>
+										<sub>Per Person</sub>
 										<div class="clear"></div>
 									</div><!--PRICE-->
 								</div><!--ONE-->
-								
-								<div class="one">
-									<img src="https://developer.tripfab.com/images6/home_pic1.jpg" width="563" height="260" alt="" />
-									<h5>Hotel Punta Islita</h5>
-									<span class="meta"><strong><em></em>Nicoya Peninsula,</strong> Costa Rica</span>
-									<div class="price">
-										<sup>$</sup>
-										<span>75</span>
-										<sub>Per Night</sub>
-										<div class="clear"></div>
-									</div><!--PRICE-->
-								</div><!--ONE-->
-								
+                                <?php endforeach ?>
 							</div><!--CONT-->
 						</div><!--SLIDESHOW-->
 					</div><!--ITINERARY-->
@@ -188,111 +156,39 @@
 				</div><!--TABS-->
 			</div><!--FEATURED-->
 			<div class="side">
-				<h5><span></span>Your Trips</h5>
+            	<?php if(!is_null($this->user) and $this->user->role_id == 2): ?>
+				<h5><span></span>Your trips</h5>
+                <?php else: ?>
+                <h5><span></span>Itineraries</h5>
+                <?php endif ?>
 				<div class="paging">
-					<p>1 of 3 <span>of 5</span></p>
 					<div><a href="" class="prev"></a></div>
 					<a href="" class="next"></a>
-				
 				</div><!--PAGING-->
 				<div class="cont">
+                	<?php for($i=0;$i<count($this->userTrips);$i=$i+3): ?>
 					<div class="slides">
-					
+                    	<?php for($j=$i;(($j<count($this->userTrips)) and $j<($i+3));$j++): ?>
+                        <?php $trip = $this->userTrips[$j]; ?>
 						<div class="single">
-							<img width="109" height="88" alt="" src="https://developer.tripfab.com/images6/home_pic1.jpg" />
+                            <?= $this->thumbnail(array('width'=>109,'height'=>88),$trip->image,'','109:88'); ?>
 							<div class="info">
-								<h6>Honeymoon</h6>
-								<span class="meta"><em></em>7 Days Trip</span>
+								<h6><?= $trip->title ?></h6>
+								<span class="meta"><em></em><?= $trip->days ?> Days Trip</span>
 								<div class="prices">
 									<sup>$</sup>
-									<span>225</span>
+									<span><?= $trip->price ?></span>
 									<sub>per person</sub>
 								</div><!--PRICE-->
-								<a href="" class="edit">Edit Trip</a>
+				            	<?php if(!is_null($this->user) and $this->user->role_id == 2): ?>
+								<a href="/user/trips/" class="edit">Edit Trip</a>
+                                <?php endif ?>
 							</div><!--INFO-->
 						</div><!--SINGLE-->
-						
-						<div class="single">
-							<img width="109" height="88" alt="" src="https://developer.tripfab.com/images6/home_pic1.jpg" />
-							<div class="info">
-								<h6>Weekend with my family</h6>
-								<span class="meta"><em></em>7 Days Trip</span>
-								<div class="prices">
-									<sup>$</sup>
-									<span>225</span>
-									<sub>per person</sub>
-								</div><!--PRICE-->
-								<a href="" class="edit">Edit Trip</a>
-							</div><!--INFO-->
-						</div><!--SINGLE-->
-						
-						<div class="single last">
-							<img width="109" height="88" alt="" src="https://developer.tripfab.com/images6/home_pic1.jpg" />
-							<div class="info">
-								<h6>Vacations!!!!</h6>
-								<span class="meta"><em></em>7 Days Trip</span>
-								<div class="prices">
-									<sup>$</sup>
-									<span>225</span>
-									<sub>per person</sub>
-								</div><!--PRICE-->
-								<a href="" class="edit">Edit Trip</a>
-							</div><!--INFO-->
-						</div><!--SINGLE-->
-						
+                        <?php endfor ?>
 					</div><!--SLIDES-->
-					
-					
-					<div class="slides">
-					
-						<div class="single">
-							<img width="109" height="88" alt="" src="https://developer.tripfab.com/images6/home_pic1.jpg" />
-							<div class="info">
-								<h6>Honeymoon</h6>
-								<span class="meta"><em></em>7 Days Trip</span>
-								<div class="prices">
-									<sup>$</sup>
-									<span>225</span>
-									<sub>per person</sub>
-								</div><!--PRICE-->
-								<a href="" class="edit">Edit Trip</a>
-							</div><!--INFO-->
-						</div><!--SINGLE-->
-						
-						<div class="single">
-							<img width="109" height="88" alt="" src="https://developer.tripfab.com/images6/home_pic1.jpg" />
-							<div class="info">
-								<h6>Honeymoon</h6>
-								<span class="meta"><em></em>7 Days Trip</span>
-								<div class="prices">
-									<sup>$</sup>
-									<span>225</span>
-									<sub>per person</sub>
-								</div><!--PRICE-->
-								<a href="" class="edit">Edit Trip</a>
-							</div><!--INFO-->
-						</div><!--SINGLE-->
-						
-						<div class="single last">
-							<img width="109" height="88" alt="" src="https://developer.tripfab.com/images6/home_pic1.jpg" />
-							<div class="info">
-								<h6>Honeymoon</h6>
-								<span class="meta"><em></em>7 Days Trip</span>
-								<div class="prices">
-									<sup>$</sup>
-									<span>225</span>
-									<sub>per person</sub>
-								</div><!--PRICE-->
-								<a href="" class="edit">Edit Trip</a>
-							</div><!--INFO-->
-						</div><!--SINGLE-->
-						
-					</div><!--SLIDES-->
-					
-					
+                    <?php endfor ?>
 				</div><!--CONT-->
-				
-				
 			</div><!--SIDE-->
 			<div class="clear"></div>
 		</div><!--WRAP-->

@@ -2472,4 +2472,16 @@ class WS_ListingService {
         
         return $fq;
     }
+    
+    public function getRandom($type, $count = 5)
+    {
+        $select = $this->listings->select();
+        $select->where('status = ?',1);
+        $select->where('main_type = ?',$type);
+        $select->limit($count);
+        $select->order('rand()');
+        
+        $listings = $this->listings->fetchAll($select);
+        return $listings;
+    }
 }

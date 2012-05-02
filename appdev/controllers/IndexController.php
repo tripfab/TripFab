@@ -94,6 +94,21 @@ class IndexController extends Zend_Controller_Action
         $country   = $this->places->getPlaceById(18);
         $cities    = $this->places->getPlaces(3, $country->id);
         
+        $hotels = $this->listings->getRandom(self::HOTEL, 5);
+        $activities = $this->listings->getRandom(self::ACTIVITY, 5);
+        $trips = $this->trips->getRamdom(5);
+        
+        if(!is_null($this->user) and $this->user->getRole() == 'user') {
+            $userTrips = $this->trips->getFutureTripsBy($this->user->getId());
+        } else {
+            $userTrips = $this->trips->getRamdom(15);
+        }
+        
+        $this->view->hotels = $hotels;
+        $this->view->activities = $activities;
+        $this->view->trips = $trips;
+        $this->view->userTrips = $userTrips;
+        
         $this->view->countries = $countries;
         $this->view->cities    = $cities;
         $this->view->country   = $country;
