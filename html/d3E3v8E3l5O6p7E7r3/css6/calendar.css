@@ -111,11 +111,11 @@
 	color: #FFF;
 	text-shadow: 0px 1px 0px #3c96dc;
 }
-.calendar .selected a,
-#calendar .selected a{
-	background-color: #60b5f7;
-	color: #FFF;
-	text-shadow: 0px 1px 0px #3c96dc;
+.calendar .selected,
+#calendar .selected{
+	background-color: #60b5f7 !important;
+	color: #FFF !important;
+	text-shadow: 0px 1px 0px #3c96dc !important;
 }
 .calendar .ui-datepicker-other-month a, .calendar .ui-datepicker-other-month span,
 #calendar .ui-datepicker-other-month a, #calendar .ui-datepicker-other-month span {
