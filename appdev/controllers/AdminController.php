@@ -89,7 +89,7 @@ class AdminController extends Zend_Controller_Action {
             $this->view->user = $this->user->getData();
             $this->view->help = $this->listings->getHelpSettings($this->user->getId());
             
-            $nonEditTasks = array('room','type','new','all','activities','hotels','restaurants','entertainments','tourist');
+            $nonEditTasks = array('addplaces','room','type','new','all','activities','hotels','restaurants','entertainments','tourist');
             if($this->_getParam('action') == 'listings'){
                 if(!in_array($this->_getParam('task'),$nonEditTasks)){
                     $this->view->vendor = $this->listings->getVendorOfListing($this->_getParam('page'));
