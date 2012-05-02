@@ -2847,17 +2847,17 @@ ul.cat-menu li.item-1 a img {
 }
 
 /*End Search Result Sidebar-----------------------*/
-#src_rslt .content .sort {
+#search_result .content .sort {
 	background-color:#f3f3f3;
 	border-top: 1px solid #efefef;
 	height: 52px;
 	position: relative;
-	z-index: 100;
+	/*z-index: 100;*/
 }
-#src_rslt .content .sort.fixed {
+#search_result .content .sort.fixed {
 	position: fixed;
 }
-#src_rslt .content .sort .shw {
+#search_result .content .sort .shw {
 	background: url(https://developer.tripfab.com/images6/src_result-shw1.png) no-repeat;
 	width: 870px;
 	height: 30px;
@@ -2866,20 +2866,20 @@ ul.cat-menu li.item-1 a img {
 	left: 0;
 	z-index: 100;
 }
-#src_rslt .content .sort h3 {
-	width: 510px;
+#search_result .content .sort h3 {
+	width: 500px;
 	padding: 16px 0 0 20px;
 	float: left;
 }
-#src_rslt .content .sort .filter {
+#search_result .content .sort .filter {
 	width: 240px;
 	float: right;
 	margin-top: 16px;
 }
-#src_rslt .content .sort .filter label {
+#search_result .content .sort .filter label {
 	float: right;
 }
-#src_rslt .content .sort .filter select {
+#search_result .content .sort .filter select {
 	float: right;
 	margin-left: 10px;
 }
@@ -2888,11 +2888,11 @@ ul.cat-menu li.item-1 a img {
 	float: right;
 	margin-bottom: 40px;
 }
-#src_rslt .listings {
+#search_result .results-wrapper {
 	padding: 30px 0 20px !important;
 	background-color: #F3F3F3;
 } 
-#src_rslt .listings .single {
+#search_result .results-wrapper .single {
 	height: 298px;
 	width:241px ;
 	background-color: #FFF;
@@ -2909,18 +2909,18 @@ ul.cat-menu li.item-1 a img {
 	-moz-box-shadow: 0px 0px 2px 1px #c0c0c0;
 	box-shadow: 0px 0px 2px 1px #c0c0c0; 
 }
-#src_rslt .listings .single:hover {
+#search_result .results-wrapper .single:hover {
 	-webkit-box-shadow: 0px 0px 4px 3px #cbdbf0;
 	-moz-box-shadow: 0px 0px 4px 3px #cbdbf0;
 	box-shadow: 0px 0px 4px 3px #cbdbf0;
 }
-#src_rslt .single .image {
+#search_result .single .image {
 	width: 241px;
 	height: 124px;
 	position: relative;
 	margin-bottom: 10px;
 }
-#src_rslt .single .rating {
+#search_result .single .rating {
 	overflow: hidden;
 	float: left;
 	width: 90px;
@@ -2929,23 +2929,23 @@ ul.cat-menu li.item-1 a img {
 	right: 5px;
 	visibility: hidden;
 }
-#src_rslt .single  .rating li {
+#search_result .single  .rating li {
 	float: left;
 }
-#src_rslt .single .rating li a {
+#search_result .single .rating li a {
 	display: block;
 	background: url(https://developer.tripfab.com/images6/stars.png) no-repeat;
 	width: 15px;
 	height: 15px;
 	margin-right: 3px;
 }
-#src_rslt .single .rating .slct {
+#search_result .single .rating .slct {
 	background-position:0 0;
 }
-#src_rslt .single .rating .nrml {
+#search_result .single .rating .nrml {
 	background-position: -58px 0;
 }
-#src_rslt .single .hvr {
+#search_result .single .hvr {
 	display: none;
 	position: absolute;
 	top: 0;
@@ -2954,10 +2954,10 @@ ul.cat-menu li.item-1 a img {
 	height: 124px;
 	background: url(https://developer.tripfab.com/images6/src_result-shw2.png) repeat;
 }
-#src_rslt .image:hover .hvr {
+#search_result .image:hover .hvr {
 	display: block;
 }
-#src_rslt .single .hvr .cat {
+#search_result .single .hvr .cat {
 	border-right: 1px solid #FFF;
 	font: normal 12px Helvetica;
 	color: #ffffff;
@@ -2967,7 +2967,7 @@ ul.cat-menu li.item-1 a img {
 	margin: 50px 18px 0 15px;
 	float: left;
 }
-#src_rslt .single .hvr .cat em {
+#search_result .single .hvr .cat em {
 	display: inline-block;
 	background: url(https://developer.tripfab.com/images6/src_result-icons.png) no-repeat -12px 0;
 	width: 13px;
@@ -2975,12 +2975,12 @@ ul.cat-menu li.item-1 a img {
 	float: left;
 	margin: 3px 5px 20px 0;
 }
-#src_rslt .single .hvr strong {
+#search_result .single .hvr strong {
 	font: bold 14px Helvetica;
 	display: block;
 	padding-top: 5px;
 }
-#src_rslt .single .time {
+#search_result .single .time {
 	font: normal 12px Helvetica;
 	color: #ffffff;
 	height: 40px;
@@ -2989,7 +2989,7 @@ ul.cat-menu li.item-1 a img {
 	margin: 50px 0 0 0;
 	float: left;
 }
-#src_rslt .single .hvr .time em {
+#search_result .single .hvr .time em {
 	display: inline-block;
 	background: url(https://developer.tripfab.com/images6/src_result-icons.png) no-repeat -11px -71px;
 	width: 13px;
@@ -2997,7 +2997,7 @@ ul.cat-menu li.item-1 a img {
 	float: left;
 	margin: 3px 5px 20px 0;
 }
-#src_rslt .single .hvr a {
+#search_result .single .hvr a {
 	display: block;
 	position: absolute;
 	top: 0;
@@ -3006,7 +3006,7 @@ ul.cat-menu li.item-1 a img {
 	width: 32px;
 	height: 31px;
 }
-#src_rslt .single .hvr .tooltip {
+#search_result .single .hvr .tooltip {
 	display: block;
 	background-color: #000;
 	padding:5px 12px;
@@ -3018,7 +3018,7 @@ ul.cat-menu li.item-1 a img {
 	right: -44px;
 	z-index: 2;
 }
-#src_rslt .single .hvr .tooltip span {
+#search_result .single .hvr .tooltip span {
 	display: block;
 	width: 14px;
 	height: 5px;
@@ -3027,27 +3027,27 @@ ul.cat-menu li.item-1 a img {
 	right: 45%;
     top: -4px;
 }
-#src_rslt .single h4 {
+#search_result .single h4 {
 	color: #303030;
 	font: normal 17px/20px Helvetica;
 	padding-left: 10px;
 }
-#src_rslt .single h4 a {
+#search_result .single h4 a {
 	color: #303030;
 }
-#src_rslt .single h4 a:hover {
+#search_result .single h4 a:hover {
 	color: #60b5f7;
 }
-#src_rslt .single > span {
+#search_result .single > span {
 	margin:0 0 10px 10px;
 	display: block;
 }
-#src_rslt .single > p{
+#search_result .single > p{
 	color: #7c7c7c;
 	font: normal 12px/17px Helvetica;
 	padding:0 10px 10px 10px;
 }
-#src_rslt .single .info {
+#search_result .single .info {
 	height: 58px;
 	border-top: 1px solid #e7e7e7;
 	position: absolute;
@@ -3055,7 +3055,7 @@ ul.cat-menu li.item-1 a img {
 	left: 0;
 	width: 241px;
 }
-#src_rslt .single .location {
+#search_result .single .location {
 	width: 125px;
 	float: left;
 	margin: 0 0 0 10px;
@@ -3063,18 +3063,18 @@ ul.cat-menu li.item-1 a img {
 	font: normal 11px Helvetica;
 	padding-top: 15px;
 }
-#src_rslt .single .location span {
+#search_result .single .location span {
 	display: inline-block;
 	background: url(https://developer.tripfab.com/images6/src_result-icons.png) no-repeat -14px -128px;
 	width: 10px;
 	height: 14px;
 	float: left;
 }
-#src_rslt .single .location strong{
+#search_result .single .location strong{
 	display: block;
 	color: #303030;
 }
-#src_rslt .single .price {
+#search_result .single .price {
 	color: #303030;
 	font:bold 29px Helvetica;
 	text-align: right;
@@ -3082,11 +3082,11 @@ ul.cat-menu li.item-1 a img {
 	float: right;
 	margin: 10px 10px 0 0;
 }
-#src_rslt .single .price sup {
+#search_result .single .price sup {
 	vertical-align: top;
 	font-size:16px ;
 }
-#src_rslt .single .price sub {
+#search_result .single .price sub {
 	font: normal 11px Helvetica;
 	text-align: right;
 	display: block;
@@ -3600,3 +3600,11 @@ ul.cat-menu li.item-1 a img {
 
 
 /*- END SECTION 1---------------------------------------------------------------------------------*/
+
+.main.wrapper {
+	margin-top: 0px !important;
+}
+.main.wrapper .content {
+    border: 0px !important;
+	box-shadow:none !important;
+}
