@@ -292,7 +292,7 @@ class WS_TripsService {
         } else {
             $select->join('listings', 'itinerary_listings.listing_id = listings.id');
         }
-        $select->join('vendors', 'listings.vendor_id = vendors.id', array(
+        $select->joinLeft('vendors', 'listings.vendor_id = vendors.id', array(
             'vendor' => 'name'
         ));
         $select->join('places', 'listings.city_id = places.id', array(
