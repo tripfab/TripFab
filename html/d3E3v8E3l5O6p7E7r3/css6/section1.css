@@ -1982,16 +1982,19 @@
 	z-index: 10;
 	margin: 0;
 }
+
 #fancybox-left-ico.lfarrow{
 	background-position: -577px -71px;
 	left: 20px;
 }
 #fancybox-left-ico.lfarrow:hover {
 	background-position: -577px -14px;
+	left: 20px;
 }
 #fancybox-right-ico.rgarrow{
 	background-position: -612px -71px;
 	right: 20px;
+	left: auto;
 }
 #fancybox-right-ico.rgarrow:hover {
 	background-position: -612px -14px;
