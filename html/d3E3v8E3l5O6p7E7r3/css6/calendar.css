@@ -61,6 +61,7 @@
 	color: #acacac;
 	font-size: 13px;
 }
+.calendar .ui-datepicker-other-month span,
 #calendar .ui-datepicker-other-month span {
     background-color: #f1f1f1;
     color: #acacac;
@@ -75,13 +76,15 @@
 
 
 
-#calendar {
+.calendar, #calendar {
 	position: relative;
 }
 
-#calendar .ui-datepicker {
+.calendar .ui-datepicker,
+#calendar .ui-datepicker  {
     padding: 10px 25px 20px
 }
+.calendar a.ui-state-default,
 #calendar a.ui-state-default {
     background-color: #a9d9fb;
     color: #FFF;
@@ -92,28 +95,34 @@
     text-align: center;
     text-shadow: 0px 1px 0px #85c0e9;
 }
+.calendar .ui-datepicker-unselectable span,
 #calendar .ui-datepicker-unselectable span {
 	width: 30px;
 }
-#calendar a.ui-state-default:hover {
+.calendar a.ui-state-default:hover,
+#calendar a.ui-state-default:hover  {
     background-color: #303030;
     color: #FFFFFF;
     text-shadow: 0px 1px 0px #000;
 }
+.calendar .ui-datepicker-current-day a,
 #calendar .ui-datepicker-current-day a{
 	background-color: #60b5f7;
 	color: #FFF;
 	text-shadow: 0px 1px 0px #3c96dc;
 }
-#calendar .ui-datepicker-current-day .selected{
+.calendar .selected a,
+#calendar .selected a{
 	background-color: #60b5f7;
 	color: #FFF;
 	text-shadow: 0px 1px 0px #3c96dc;
 }
+.calendar .ui-datepicker-other-month a, .calendar .ui-datepicker-other-month span,
 #calendar .ui-datepicker-other-month a, #calendar .ui-datepicker-other-month span {
     color: #ACACAC;
     font-weight: bold;
 }
+.calendar .ui-datepicker .ui-datepicker-next, .calendar .ui-datepicker .ui-datepicker-prev,
 #calendar .ui-datepicker .ui-datepicker-next, #calendar .ui-datepicker .ui-datepicker-prev {
     cursor: pointer;
     display: block;
@@ -127,12 +136,14 @@
     height: 15px;
     width: 53px;
 }	
-#calendar .ui-datepicker .ui-datepicker-prev {
+.calendar .ui-datepicker .ui-datepicker-prev,
+#calendar .ui-datepicker .ui-datepicker-prev  {
     left: 0;
     padding:0 10px 0 0;
     text-align: right;
     background: url(https://developer.tripfab.com/images6/lstng_htl.png) no-repeat -445px -331px #60b5f7;
 }
+.calendar .ui-datepicker .ui-datepicker-next,
 #calendar .ui-datepicker .ui-datepicker-next {
     right: 0;
     padding:0 0 0 10px;

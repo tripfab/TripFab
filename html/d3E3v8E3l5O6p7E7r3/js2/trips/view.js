@@ -119,19 +119,31 @@ $(document).ready(function() {
             $('select[name=kids]').append('<option value="'+i+'">'+i+'</option>');
 		
     });
-    
-});
-var days = 3;
-var lastDay = $('.selected');
-
-for (var especial = 0; especial < days; especial++) {
-	if (especial = 0 ) {
-		lastDay = lastDay.next();
-	}else {
-		lastDay.addClass('selected');
-		lastDay = lastDay.next();
+	var days = parseInt($('#tripDates').val());
+	var lastDay = $('.ui-datepicker-current-day');
+	var aux;
+	
+	function onSelect() {
+		for(var u = 0; u < days; u++) {
+			if (u == 0 ) {
+				lastDay = lastDay.next();
+			}else {
+				lastDay.addClass('selected');
+				aux = lastDay;
+				lastDay = lastDay.next();
+				if (lastDay.length == 0) {
+					lastDay = aux.parents('tr').next().children().eq(0);
+					console.log(lastDay.length);
+				}
+			}
+		}
 	}
-}
+	$(".occ").click(function (){
+		onSelect();
+		return false
+	});
+	
+});
 
 
 
