@@ -522,9 +522,9 @@
                                     <?php endif ?>
                                     <?php if($hiddenSchedules === true): ?>                                
 									<?php if(count($this->options) > 0): ?>
-                                    <input class="hidden" type="radio" value="<?= $this->options[0]->id ?>" name="option"/>
+                                    <input class="hidden" checked="checked" type="radio" value="<?= $this->options[0]->id ?>" name="option"/>
                                     <?php else: ?>
-                                    <input class="hidden" type="radio" value="flex" name="option"/>
+                                    <input class="hidden" checked="checked" type="radio" value="flex" name="option"/>
                                     <?php endif ?>         
                                     <?php endif ?>
                                 </form>
