@@ -23,6 +23,21 @@
 	}
 	#checkout_accordion {
 		overflow:visible !important;}
+	#custom_checkout .right_block table tr.hover td,
+	#custom_checkout .right_block table tr.active td {
+		background-color: #303030;
+		color:#fff !important;
+	}
+	#custom_checkout .right_block table tr.hover a,
+	#custom_checkout .right_block table tr.hover span,
+	#custom_checkout .right_block table tr.active a,
+	#custom_checkout .right_block table tr.active span {
+		color: #FFF;
+		text-decoration: none;
+	}
+	#custom_checkout .header.hover {
+		background:url(https://developer.tripfab.com/images2/g_67.png) repeat-x 0 -1px #f0f9ff;
+	}
 	</style>
 </head>
 <body>
@@ -41,7 +56,7 @@
                     <div id="checkout_accordion">
                         <?php foreach($this->items as $kkk => $item): ?>
                         <?php if($item->available || ($item->available === 0)): ?>
-                        <div class="header active">
+                        <div rel="#itm<?=$kkk ?>" id="itmBig<?= $kkk ?>" class="header active">
                             <span class="arrow"></span> 
                             <a href="#"></a>
                             <div class="descrip"> 
@@ -127,6 +142,7 @@
                             <div class="item"> 
                                 <strong>Activity Date</strong>
                                 <div class="edit"><?= date('L, F jS, Y', strtotime($item->checkin)) ?></div><!--EDIT--> 
+                                <div class="clear"></div>
                             </div><!--ITEM-->
                             <div class="item"> 
                                 <strong>Activity Type</strong>
@@ -552,7 +568,7 @@
                             <?php endif ?>
                         </div><!--DETAILS-->
                         <?php else: ?>
-                        <div class="header inactive"> 
+                        <div rel="#itm<?=$kkk ?>" id="itmBig<?= $kkk ?>" class="header inactive"> 
                             <span class="arrow"></span> 
                             <a href="#"></a>
                             <div class="descrip"> 
@@ -570,7 +586,7 @@
                         <?php endif ?>
                         <?php endforeach ?>
                         <?php foreach($this->items2 as $item): ?>
-                        <div class="header active"> <span class="arrow"></span> <a href="#"></a>
+                        <div rel="#itm2<?=$kkk ?>" id="itmBig2<?= $kkk ?>" class="header active"> <span class="arrow"></span> <a href="#"></a>
                             <div class="descrip"> 
                                 <?= $this->thumbnail(49, $item->listing_image, '', '1:1'); ?>
                                 <h4><?= $item->listing_title ?></h4>
@@ -593,6 +609,7 @@
                             <div class="item last">
                                 <strong>Price not charged</strong>
                                 <div class="edit">Check the prices when you get there</div>
+                                <div class="clear"></div>
                             </div><!--LAST-->
                         </div><!--DETAILS-->
                         <?php endforeach ?>
@@ -609,29 +626,29 @@
                 <div class="inf">
                 	<h5>Trip Details</h5>
                 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-                			<?php foreach($this->items as $item): ?>
+                			<?php foreach($this->items as $kkk => $item): ?>
                 			<?php if($item->available): ?>
-                			<tr>
+                			<tr rel="#itmBig<?=$kkk ?>" id="itm<?= $kkk ?>">
                 				<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><em><?= $item->listing_title ?></em></a></td>
                 				<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>$<?= $item->total ?></span></td>
                 			</tr>
                 			<?php elseif($item->available === false): ?>
                 			
-                			<tr>
+                			<tr rel="#itmBig<?=$kkk ?>" id="itm<?= $kkk ?>">
                 				<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><em><?= $item->listing_title ?></em></a></td>
                 				<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not available</span></td>
                 			</tr>
                 			<?php else: ?>
                 			
-                			<tr>
+                			<tr rel="#itmBig<?=$kkk ?>" id="itm<?= $kkk ?>">
                 				<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><?= $item->listing_title ?></a></td>
                 				<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not ready</span></td>
                 			</tr>
                 			<?php endif ?> 
                 			<?php endforeach ?>
-                			<?php foreach($this->items2 as $item): ?>
+                			<?php foreach($this->items2 as $kkk => $item): ?>
                 			
-                			<tr>
+                			<tr rel="#itmBig2<?=$kkk ?>" id="itm2<?= $kkk ?>">
                 				<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href=""><em><?= $item->listing_title ?></em></a></td>
                 				<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not charged</span></td>
                 			</tr>
@@ -663,13 +680,31 @@
 			return false
 		});
 		$("#checkout_accordion").accordion({
-			autoHeight: false,
-			collapsible: true,
-			header:'.active'
+			active:false,
+			autoHeight:false,
+			collapsible:true,
+			header:'.active',
+			changestart: function(event, ui) {
+				$('.right_block table tr').removeClass('active');
+				$(ui.newHeader.attr('rel')).addClass('active');
+			}
 		});
 		$('a.high-r').hover(function() {
 			$parent = $(this).parents('.details');
 			$('.restricction_tip', $parent).toggleClass('hidden');
+			return false;
+		});
+		
+		$('#checkprices_form .header').hover(function(){
+			$($(this).attr('rel')).toggleClass('hover');
+		});
+		
+		$('.right_block table tr').hover(function(){
+			$($(this).attr('rel')).toggleClass('hover');
+		});
+		
+		$('.right_block table tr').click(function(){
+			$($(this).attr('rel')).click();
 			return false;
 		});
 	});
