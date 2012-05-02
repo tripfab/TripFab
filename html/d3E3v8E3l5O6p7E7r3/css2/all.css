@@ -38,7 +38,7 @@
 	height: 62px;
 	background: url(https://developer.tripfab.com/images6/header.png) repeat-x 0 0;
 	position: relative;
-	z-index: 100000;
+	z-index: 999;
 }
 #header .wrapper {
 	position: relative;
@@ -336,6 +336,8 @@
 }
 #header .top_search {
 	float: right;
+	width: 200px;
+	margin-right: 12px;
 }
 #header .top_search input[type="text"] {
 	background: url(https://developer.tripfab.com/images6/header_icons.png) repeat-x -106px -10px #393939;
@@ -343,7 +345,7 @@
     display: block;
     font: 12px/27px Helvetica;
     height: 25px;
-    margin: 16px 12px 0 0;
+    margin: 16px 0 0 0;
     padding: 2px 25px 0 7px;
     width: 165px;
 	-webkit-border-radius: 2px;
@@ -12103,9 +12105,10 @@ h2.title .back:hover,
 	padding: 20px 50px;
 	position: relative;
 	box-shadow: none;
+	/*min-height: 500px;*/
 }
 /*.trip-itinerary .tabs-wrapper .tab > div {
-	height: 445px !important;
+	height: 500px!important;
 }*/
 .trip-itinerary .tabs-wrapper > ul {
 	background: url(https://developer.tripfab.com/images2/itinerary-g1.png) repeat-x left 73px;
@@ -17569,7 +17572,9 @@ background-color: #FFF;
 	border-radius: 4px;
 	height: 172px;
 	margin-bottom: 20px;
-	padding-bottom: 20px;
+	padding-bottom: 5px;
+	position: relative;
+	z-index: 10;
 	behavior: url(/PIE.htc);
 }
 #all_trips .single .image {
@@ -17864,6 +17869,40 @@ background-color: #FFF;
 }
 #all_trips .single .info .data dd.ended {
 	color: #f26522;
+}
+#all_trips .single .missed {
+	position: absolute;
+	top:0;
+	left: 1px;
+	width: 959px;
+	background: url(https://developer.tripfab.com/images6/op_bl.png) repeat;
+	z-index: 20;
+	padding-top: 46px;
+	height: 130px;
+}
+#all_trips .single .missed h3, #all_trips .single .missed h4 {
+	font: bold 20px Helvetica;
+	color: #303030;
+	margin:0 0 10px 0;
+	text-align: center;
+}
+#all_trips .single .missed h4 {
+	font-size: 14px;
+}
+#all_trips .single .missed .actions{
+	overflow: hidden;
+	width: 210px;
+	margin: 0 auto 0;
+	padding-top: 10px;
+}
+#all_trips .single .missed .actions a{
+	height: 30px;
+}
+#all_trips .single .missed .btn-1 {
+	float: right;
+}
+#all_trips .single .missed .btn-10 {
+	float: left;
 }
 .redefineDates {
 	width: 291px;

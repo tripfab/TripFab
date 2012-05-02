@@ -309,6 +309,7 @@
 	color: #303030;
 	font: normal 26px Helvetica;
 	margin: 9px 0 7px;
+	width: 495px;
 }
 .lstng_dflt .top .info .location {
 	font:normal 13px Helvetica;
@@ -925,8 +926,6 @@
 	color: #FFF;
 	font: normal 26px Helvetica;
 	margin-bottom: 10px;
-	height: 27px;
-	overflow: hidden;
 }
 #lstng_htl .dscript .location {
 	font: normal 12px/12px Helvetica;
@@ -1977,20 +1976,23 @@
 	height: 51px;
 	display: block;
 	position: absolute;
-	top: 205px;
+	top: 48%;
 	z-index: 10;
 	margin: 0;
 }
+
 #fancybox-left-ico.lfarrow{
 	background-position: -577px -71px;
 	left: 20px;
 }
 #fancybox-left-ico.lfarrow:hover {
 	background-position: -577px -14px;
+	left: 20px;
 }
 #fancybox-right-ico.rgarrow{
 	background-position: -612px -71px;
 	right: 20px;
+	left: auto;
 }
 #fancybox-right-ico.rgarrow:hover {
 	background-position: -612px -14px;
@@ -2476,8 +2478,8 @@
 }
 #src_map .top .ttl h2 {
 	color: #303030;
-	font: normal 15px Helvetica;
-	margin: 10px 0 7px 0;
+    font: 19px Helvetica;
+    margin: 23px 0 7px;
 }
 #src_map .top .ttl a {
 	margin-right: 10px;
@@ -2491,8 +2493,8 @@
 }
 #src_map .top .src_bar input[type="text"] {
 	width: 340px;
-	height: 31px;
-	padding-left: 37px;
+	height: 29px;
+	padding:2px 0 0 37px;
 	float: left;
 	font: italic 14px/31px Helvetica;
 	color: #797777;
@@ -2925,6 +2927,7 @@ ul.cat-menu li.item-1 a img {
 	position: absolute;
 	bottom: 5px;
 	right: 5px;
+	visibility: hidden;
 }
 #src_rslt .single  .rating li {
 	float: left;

@@ -36,7 +36,7 @@
                 	<?php for($i=1;$i<=count($this->listingsbyday);$i++): ?>
                     <div class="day">
                         <div class="day-ttl">
-                            <strong>Day <?= $i ?></strong>
+                            <strong>Day <?= $i ?> of <?= $this->trip->days ?></strong>
                             <h2><?= $this->trip->title ?></h2>
                         </div><!-- closes day-ttl -->
                         <?php foreach($this->listingsbyday[$i] as $time => $listings): ?>
@@ -58,7 +58,9 @@
                                     <ul>
                                     	<?php $desc = explode("\n",$listing->description) ?>
                                         <?php foreach($desc as $d): ?>
+                                        <?php $d = trim($d); if(!empty($d)): ?>
                                         <li><?= $d ?></li>
+                                        <?php endif ?>
                                         <?php endforeach ?>
                                     </ul>
                                 </div><!-- closes right -->
@@ -142,15 +144,6 @@
 </div>
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript" src="/js2/trips/view.js"></script>
-<script type="text/javascript">
-		$(document).ready(function() {
-			$('.days-cycle').cycle({
-				next: '.next',
-				prev: '.prev',
-				timeout: 0
-			});
-		});
-	</script>
 <style type="text/css">
 .desc-wrapper #pager a { width:<?= (100 / count($this->images)) . '%'; ?>;} .hidden { display:none;}
 .datepicker a.ui-state-active { background-color: #60B5F7; color: #FFFFFF;}
