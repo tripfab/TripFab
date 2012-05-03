@@ -2946,17 +2946,23 @@ ul.cat-menu li.item-1 a img {
 	background-position: -58px 0;
 }
 #search_result .single .hvr {
-	display: none;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 241px;
-	height: 124px;
-	background: url(https://developer.tripfab.com/images6/src_result-shw2.png) repeat;
+    background: url("https://developer.tripfab.com/images6/src_result-shw2.png") repeat scroll 0 0 transparent;
+    display: none;
+    height: 124px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 241px;
+    z-index: 10;
 }
 #search_result .image:hover .hvr {
 	display: block;
 }
+
+#src_rslt .single.gen-1 .hvr, #src_rslt .single.gen-2 .hvr {
+    height: 183px;
+}
+
 #search_result .single .hvr .cat {
 	border-right: 1px solid #FFF;
 	font: normal 12px Helvetica;
@@ -2997,6 +3003,7 @@ ul.cat-menu li.item-1 a img {
 	float: left;
 	margin: 3px 5px 20px 0;
 }
+/*
 #search_result .single .hvr a {
 	display: block;
 	position: absolute;
@@ -3006,6 +3013,8 @@ ul.cat-menu li.item-1 a img {
 	width: 32px;
 	height: 31px;
 }
+
+*/
 #search_result .single .hvr .tooltip {
 	display: block;
 	background-color: #000;
@@ -3039,8 +3048,10 @@ ul.cat-menu li.item-1 a img {
 	color: #60b5f7;
 }
 #search_result .single > span {
-	margin:0 0 10px 10px;
-	display: block;
+	color: #898989;
+    display: block;
+    font: 300 11px Helvetica;
+    margin: 0 0 10px 10px;
 }
 #search_result .single > p{
 	color: #7c7c7c;
@@ -3061,7 +3072,7 @@ ul.cat-menu li.item-1 a img {
 	margin: 0 0 0 10px;
 	color: #6e6e6e;
 	font: normal 11px Helvetica;
-	padding-top: 15px;
+	padding-top: 13px;
 }
 #search_result .single .location span {
 	display: inline-block;
@@ -3091,7 +3102,120 @@ ul.cat-menu li.item-1 a img {
 	text-align: right;
 	display: block;
 }
+
+#src_rslt .single a.add {
+    background: url("https://developer.tripfab.com/images6/src_result-icons.png") no-repeat scroll 1px -249px transparent;
+    display: block;
+    height: 31px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 32px;
+    z-index: 12;
+}
+
+#search_result .single a.add {
+    background: url("https://developer.tripfab.com/images6/src_result-icons.png") no-repeat scroll 1px -249px transparent;
+    display: block;
+    height: 31px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 32px;
+    z-index: 12;
+}
+#search_result .image .hvr a {
+    background: url("https://developer.tripfab.com/images6/src_result-shw3.png") repeat-x scroll 0 0 transparent;
+    border: 1px solid #000000;
+    border-radius: 40px 40px 40px 40px;
+    color: #FFFFFF;
+    display: block;
+    font: 600 13px/28px Helvetica;
+    height: 28px;
+    margin: 46px auto 0;
+    padding: 0 10px;
+    text-align: center;
+    text-shadow: 0 1px 0 #000000;
+}
+
+
+/*HOTEL 1*/
+#search_result .single.hotel-1 .location strong {
+	margin: 5px 0 0 5px;
+}
+#search_result .single.hotel-1 h4 {
+	margin-bottom: 6px;
+}
+#search_result .single.hotel-1 .hvr a {
+	width:90px;
+}
+#search_result .single.hotel-1 .hvr a span{
+	margin: 9px 6px 0 0;
+}
+/*END HOTEL 1*/
+/*HOTEL 2*/
+#search_result .single .location strong {
+	margin: 5px 0 0 10px;
+}
+#search_result .single.hotel-1 h4 {
+	margin-bottom: 6px;
+}
+/*END HOTEL 2*/
+/*ACTIVITY 1*/
+#search_result .single.activity-1 .hvr a,
+#search_result .single.activity-2 .hvr a {
+	width:107px;
+}
+#search_result .single.activity-1 .hvr a span{
+	margin: 9px 6px 0 0
+}
+/*END ACTIVITY 1*/
+/*ACTIVITY 2*/
+#search_result .single.activity-2 h4 {
+	margin-bottom: 4px;
+}
+#search_result .single.activity-2 > span {
+	margin-bottom: 7px;
+}
+/*END ACTIVITY 2*/
+
+/*RESTAURANT 1*/
+#search_result .single.gen-1  {
+	/*margin-bottom: 4px;*/
+}
+#search_result .single.gen-1 .hvr,
+#search_result .single.gen-2 .hvr {
+	height: 183px;
+}
+#search_result .single.gen-1 .image {
+	height: 183px;
+}
+#search_result .single.gen-2 .image {
+	height: 183px;
+}
+
+#search_result .single.gen-2 h4 {
+	padding-top: 10px;
+}
+#search_result .single .restaurant {
+	width: 140px;
+}
+#search_result .single .sight {
+	width: 149px;
+}
+#search_result .single .entertaiment {
+	width: 150px;
+}
+#search_result .single.gen-1 .hvr a,
+#search_result .single.gen-2 .hvr a {
+	margin-top: 72px;
+}
+/*END RESTAURANT 1*/
 /*End Search result*/
+
+
+/*End Search result*/
+
 
 
 

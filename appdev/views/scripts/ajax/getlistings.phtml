@@ -4,7 +4,32 @@
 		5 => 'hotel',
 		6 => 'activity',
 		7 => 'entertaiment'
-) ?>
+); 
+
+$css_name = array(
+		2 => 'gen',
+		4 => 'gen',
+		5 => 'hotel',
+		6 => 'activity',
+		7 => 'gen'
+) ;
+$cat_name = array(
+		2 => 'Restaurant',
+		4 => 'Tourist Sight',
+		5 => 'Hotel',
+		6 => 'Activity',
+		7 => 'Entertainment'
+); 
+$per_night = array(
+		2 => 'per person',
+		4 => 'per person',
+		5 => 'per night',
+		6 => 'per person',
+		7 => 'per person'
+); 
+
+
+?>
 <?php if(!is_null($this->city)): ?>
 <?php $url = $this->baseUrl() .'/'. $this->country->identifier .'/'. $this->city->identifier .'/filter';
 $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this->stars; ?>
@@ -59,13 +84,19 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
 <div class="loading"><div class="load">Loading...</div></div>
 <?php if(count($this->listings) > 0): ?>
 <?php foreach($this->listings as $i => $list): ?>	
-<?php $class = ((($i+1) % 3) == 0) ? 'last' : '' ?>
 
 
 
-    <div class="single">
+    <div class="single <?=$css_name[$list->main_type] ?>-1">
         <div class="image">
-            <?= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124') ?>
+        
+        <?php if($list->main_type == 2 || $list->main_type == 4 || $list->main_type == 7):?>
+			<?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
+                <a href="#" class="add been"></a>
+            <?php else: ?>
+                <a href="/login" class="add been not"></a>
+			<?php endif ?>
+            <?//= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124') ?>
             <ul class="rating">
                 <li><a href="" class="slct"></a></li>
                 <li><a href="" class="slct"></a></li>
@@ -74,22 +105,49 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
                 <li><a href="" class="nrml"></a></li>
             </ul>
             <div class="hvr">
-                <span class="cat"><em></em>Category <strong><?= ucfirst($_classes[$list->main_type]) ?></strong></span>
-                <span class="time"><em></em>Duration <strong>8 hours</strong></span>
-                <a href="" class="add"></a>
-                <div class="tooltip hidden">Add to My Trips<span></span></div>
+                <a class="restaurant" href="">
+                View <?=$cat_name[$list->main_type] ?>
+                <span> </span>
+                </a>
             </div><!--HVR-->
         </div><!--IMAGE-->
-        
         <h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>"><?= $list->title ?></a></h4>
-        <span>by <a href="" class="link1"><?= $list->vendor_name?></a></span>
-        <p><?= substr($list->description, 0, 100) ?>...</p>
-        
+
         <div class="info">
             <span class="location"><span></span>Location <strong><?= $list->city ?>, <?= $list->country ?></strong></span>
-            <div class="price"><sup>$</sup><?= $list->price ?> <sub>per person</sub></div>
+            <div class="price"><sup>$</sup><?= $list->price ?> <sub><?=$per_night[$list->main_type] ?></sub></div>
             <div class="clear"></div>
         </div><!--INFO-->
+ 
+         <?php else:?>
+            <?//= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124') ?>
+            <a class="add" href=""></a>
+            <ul class="rating">
+                <li><a href="" class="slct"></a></li>
+                <li><a href="" class="slct"></a></li>
+                <li><a href="" class="slct"></a></li>
+                <li><a href="" class="nrml"></a></li>
+                <li><a href="" class="nrml"></a></li>
+            </ul>
+            <div class="hvr">
+                <a class="restaurant" href="">
+                View <?=$cat_name[$list->main_type] ?>
+                <span> </span>
+                </a>
+            </div><!--HVR-->
+        </div><!--IMAGE-->
+        <h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>"><?= $list->title ?></a></h4>
+   		<?php if($list->main_type == 6):?>
+            <span>by <?= $list->vendor_name?></span>
+        <?php endif;?>
+        <p><?= substr($list->description, 0, 100) ?>...</p>      
+        <div class="info">
+            <span class="location"><span></span>Location <strong><?= $list->city ?>, <?= $list->country ?></strong></span>
+            <div class="price"><sup>$</sup><?= $list->price ?> <sub><?=$per_night[$list->main_type] ?></sub></div>
+            <div class="clear"></div>
+        </div><!--INFO-->
+       
+        <?php endif;?>
         
     </div><!--SINGLE-->
 
