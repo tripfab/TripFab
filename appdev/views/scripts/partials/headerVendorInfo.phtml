@@ -7,7 +7,9 @@
 </div><!--LOGOS-->	
 <div class="ttl">
     <h2 id="title"><?= $this->vendor->name ?></h2>
-    <span><em></em>132 Reservations since April 2012</span>
+    <!--<span class="act"><em></em>Activity</span>-->
+    <span class="htl"><em></em>Hotel</span>
+    <span class="reviews"><em></em>0 Reviews</span>
 </div><!--TTL-->
 <p class="qz">
     <strong>Questions about this listing?</strong>
@@ -15,7 +17,7 @@
 </p>
 <?php if($this->user): ?>
 <ul>
-    <li><a href="#start_call" class="phone lbc">Phone Call</a></li>
+    <li><span>FREE</span><a href="#start_call" class="phone lbc">Phone Call</a></li>
     <li><a href="https://<?= $_SERVER['HTTP_HOST'] ?>/chat?provider=<?= $this->vendor->user_id ?>" class="chat livechat">Live Chat</a></li>
     <li><a href="#send_message" class="msj lbc phonecall">Message</a></li>
 </ul>
