@@ -802,6 +802,9 @@ class UserController extends Zend_Controller_Action
                         $item->listing_city = $listing->city;
                         $item->listing_country = $listing->country;
                         $item->triplistingid = $listing->triplisting_id;
+                        $item->ciidf = $listing->cityurl;
+                        $item->coidf = $listing->countryurl;
+                        $item->idf   = $listing->identifier;
 
                         $items[] = $item;
                         
@@ -829,6 +832,9 @@ class UserController extends Zend_Controller_Action
                     $item->listing_city = $listing->city;
                     $item->listing_country = $listing->country;
                     $item->triplistingid = $listing->triplisting_id;
+                    $item->ciidf = $listing->cityurl;
+                    $item->coidf = $listing->countryurl;
+                    $item->idf   = $listing->identifier;
 
                     $items[] = $item;
 
@@ -853,6 +859,9 @@ class UserController extends Zend_Controller_Action
                 $item->listing_type  = $listing->main_type;
                 $item->listing_city = $listing->city;
                 $item->listing_country = $listing->country;
+                $item->ciidf = $listing->cityurl;
+                $item->coidf = $listing->countryurl;
+                $item->idf   = $listing->identifier;
                 $items2[] = $item;
             }
         }
