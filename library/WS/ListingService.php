@@ -2479,13 +2479,23 @@ class WS_ListingService {
         $cacheId = "LS_getRandom_".md5(print_r($args,true));
         
         if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
-            $select = $this->listings->select();
-            $select->where('status = ?',1);
-            $select->where('main_type = ?',$type);
+            $db = Zend_Db_Table::getDefaultAdapter();
+            $select = $db->select();
+            $select->from('listings');
+            $select->join('places','listings.city_id = places.id',array(
+                'city' => 'title',
+                'cityidf' => 'identifier'
+            ));
+            $select->join(array('places2'=>'places'),'listings.country_id = places2.id',array(
+                'country' => 'title',
+                'countryidf' => 'identifier'
+            ));
+            $select->where('listings.status = ?',1);
+            $select->where('listings.main_type = ?',$type);
             $select->limit($count);
             $select->order('rand()');
         
-            $listings = $this->listings->fetchAll($select);
+            $listings = $db->fetchAll($select,array(),5);
         }
         else {
             $listings = $this->cache->load($cacheId);

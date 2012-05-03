@@ -77,7 +77,9 @@
 					<ul>
 						<li><a href="#hotels"><span class="hotel"></span>Featured Hotels</a></li>
 						<li><a href="#activity"><span class="activity"></span>Featured Activities</a></li>
+	                    <?php if($this->user->role_id == 2): ?>
 						<li><a href="#itinerary"><span class="itinerary"></span>Featured Itineraries</a></li>
+                        <?php endif ?>
 					</ul>
 					<div id="hotels">
 						<div class="slideshow">
@@ -86,9 +88,10 @@
 							<div class="cont">
                             	<?php foreach($this->hotels as $h): ?>
 								<div class="one">
-                                	<a href="<?= $h->id ?>"><?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260'); ?></a>
+                                	<a href="/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>">
+									<?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260'); ?></a>
 									<h5><?= $h->title ?></h5>
-									<span class="meta"><strong><em></em>Nicoya Peninsula,</strong> Costa Rica</span>
+									<span class="meta"><strong><em></em><?= $h->city ?>,</strong> <?= $h->country ?></span>
 									<div class="price">
 										<div>
 											<span><?= $h->price ?></span>
@@ -110,9 +113,10 @@
 							<a href="" class="lfarrow"></a>
 							<div class="cont"><?php foreach($this->activities as $h): ?>
 								<div class="one">
-                                	<?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260'); ?>
+                                	<a href="/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>">
+									<?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260'); ?></a>
 									<h5><?= $h->title ?></h5>
-									<span class="meta"><strong><em></em>Nicoya Peninsula,</strong> Costa Rica</span>
+									<span class="meta"><strong><em></em><?= $h->city ?>,</strong> <?= $h->country ?></span>
 									<div class="price">
 										<div>
 											<span><?= $h->price ?></span>
@@ -128,6 +132,7 @@
 						</div><!--SLIDESHOW-->
 					</div><!--ACTIVTIY-->
 					
+                    <?php if($this->user->role_id == 2): ?>
 					<div id="itinerary">
 						<div class="slideshow">
 							<a href="" class="rgarrow"></a>
@@ -152,6 +157,7 @@
 							</div><!--CONT-->
 						</div><!--SLIDESHOW-->
 					</div><!--ITINERARY-->
+                    <?php endif ?>
 					
 				</div><!--TABS-->
 			</div><!--FEATURED-->
