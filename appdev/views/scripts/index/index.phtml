@@ -12,6 +12,12 @@
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="css2/ie.css" /><![endif]-->
     <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
     <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
+    <style type="text/css">
+	#home_trips .side .single h6 a {
+		color:#000;
+		text-decoration:none;
+	}
+	</style>
 </head>
 <body id="home2">
 <div id="wp_all">
@@ -177,9 +183,17 @@
                     	<?php for($j=$i;(($j<count($this->userTrips)) and $j<($i+3));$j++): ?>
                         <?php $trip = $this->userTrips[$j]; ?>
 						<div class="single">
+			            	<?php if(!is_null($this->user) and $this->user->role_id == 2): ?>
+                            <a href="/user/trips/"><?= $this->thumbnail(array('width'=>109,'height'=>88),$trip->image,'','109:88'); ?></a>
+                            <?php else: ?>
                             <a href="/trips/view/<?= $trip->id ?>"><?= $this->thumbnail(array('width'=>109,'height'=>88),$trip->image,'','109:88'); ?></a>
+                            <?php endif ?>
 							<div class="info">
-								<h6><?= $trip->title ?></h6>
+				            	<?php if(!is_null($this->user) and $this->user->role_id == 2): ?>
+								<h6><a href="/user/trips/"><?= $trip->title ?></a></h6>
+                                <?php else: ?>
+								<h6><a href="/trips/view/<?= $trip->id ?>"><?= $trip->title ?></a></h6>                                
+                                <?php endif ?>
 								<span class="meta"><em></em><?= $trip->days ?> Days Trip</span>
 								<div class="prices">
 									<sup>$</sup>
