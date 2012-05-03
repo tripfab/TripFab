@@ -431,6 +431,8 @@ $(document).ready(function() {
         $('.flag img').attr('src', $img);
         $('input[name=code]').val($code);
         
+        $('span.code').text('(+'+$code+')');
+        
         $( ".all_flags" ).removeClass('show');
         
         return false;
