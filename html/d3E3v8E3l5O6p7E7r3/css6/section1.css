@@ -3434,6 +3434,73 @@ ul.cat-menu li.item-1 a img {
     width: 282px;
     height: 174px;
 }
+.error_ph {
+	width: 342px;
+	background-color: #FFF;
+	-webkit-border-radius: 4px;
+	border-radius: 4px
+}
+.error_ph .icon2 {
+	display: block;
+	width: 40px;
+	height: 40px;
+	float: left;
+	background: url(https://developer.tripfab.com/images6/dialpad-ic2.png) no-repeat;
+	margin: 20px 20px 0 20px;
+}
+.error_ph .icon1 {
+	display: block;
+	width: 40px;
+	height: 40px;
+	float: left;
+	background: url(https://developer.tripfab.com/images6/dialpad-ic1.png) no-repeat;
+	margin: 20px 20px 0 20px;
+}
+.error_ph h3 {
+	font: bold 15px Helvetica;
+	padding-top: 20px;
+	margin-bottom:5px;
+}
+.error_ph p {
+	float: left;
+	font: normal 13px/18px Helvetica;
+	width: 240px;
+	padding-bottom: 15px;
+}
+.error_ph .bottom {
+	clear: both;
+	background: url("https://developer.tripfab.com/images2/g-52.gif") repeat-x scroll 0 0 #F6F6F6;
+    height: 45px;
+    overflow: hidden;
+    padding: 15px 20px 0 0;
+    -webkit-border-radius: 0px 0px 4px 4px;
+    border-radius: 0px 0px 4px 4px; 
+}
+.error_ph .bottom .btn-1 {
+	float: right;
+}
+.error_ph .bottom .btn-10 {
+	float: right;
+	height: 30px;
+}
+.load_ph{
+	-webkit-border-radius: 4px;
+	border-radius: 4px; 
+	width: 342px;
+	height: 165px;
+	background-color: #FFF;
+}
+.load_ph img {
+	display: block;
+	width: 50;
+	height: 50px;
+	margin: 0 auto 25px;
+	padding-top: 40px;
+}
+.load_ph h3 {
+	text-align: center;
+	font: bold 15px Helvetica;
+}
 /*END DIALPAD--------------------------------------------------------------*/
 /*LIVE CHAT----------------------------------------------------------------*/
 #livechat {

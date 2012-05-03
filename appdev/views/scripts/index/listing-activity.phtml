@@ -716,6 +716,52 @@
                 <a href="" class="btn-10">Cancel</a>
             </div><!--BOT-->
         </div><!--WRITEREVIEW-->
+        
+        
+        <div class="error_ph" id="errorA">
+        	<div class="cont">
+        		<span class="icon2"></span>
+        		<h3>Missed Call</h3>
+        		<p>An error ocurred and we can’t connect you with the partner, please try later.</p>
+        		<div class="clear"></div>
+        	</div><!--CONT-->
+        	<div class="bottom">
+        		<input class="btn-1" type="submit" name="" value="Try Again" />
+        		<a href="" class="btn-10">Cancel</a>
+        	</div><!--BOTTOM-->
+        </div><!--ERROR_PH-->
+        
+        <div class="error_ph" id="errorB">
+        	<div class="cont">
+        		<span class="icon2"></span>
+        		<h3>Wrong Number</h3>
+        		<p>An error ocurred because you entered a wrong phone number, please dial again</p>
+        	</div><!--CONT-->
+        	<div class="bottom">
+        		<input class="btn-1" type="submit" name="" value="Dial Again" />
+        		<a href="" class="btn-10">Cancel</a>
+        		<div class="clear"></div>
+        	</div><!--BOTTOM-->
+        </div><!--ERROR_PH-->
+        
+        <div class="error_ph" id="errorC">
+        	<div class="cont">
+        		<span class="icon1"></span>
+        		<h3>Connected Successfully!</h3>
+        		<p>You’ll receive a phone call from our partner in a few minutes</p>
+        		<div class="clear"></div>
+        	</div><!--CONT-->
+        	<div class="bottom">
+        		<input class="btn-1" type="submit" name="" value="Okay" />
+        	</div><!--BOTTOM-->
+        </div><!--CONECTED_PH-->
+        
+        <div class="load_ph" id="load_ph">
+        	<img src="https://developer.tripfab.com/images6/loadCall.gif" width="50" height="50" alt="" />
+        	<h3>Connecting with the Business...</h3>
+        </div><!--PHONE-PH-->
+        
+        
     </div><!--HIDDEN-->
 </div><!--WRAPPER_ALL-->
 <input type="hidden" value="<?= ($this->listing->lat) ? $this->listing->lat : 'none' ?>" name="listlat" />

@@ -150,10 +150,30 @@
     text-align: left;
     background: url(https://developer.tripfab.com/images6/lstng_htl.png) no-repeat -368px -331px #60b5f7;
 }
-
-
-
-
+#calendar .datepickerViewDays td{
+	border: 0 none;
+    line-height: 26px;
+    padding: 2px 3px;
+}
+#calendar .datepickerViewDays .datepickerWeek {
+	display: none;
+}
+#calendar .datepickerViewDays td a {
+	background-color: #a9d9fb;
+	color: #FFF;
+	font: normal 12px/27px Helvetica;
+	width: 30px;
+	height: 27px;
+	padding: 0;
+	text-align: center;
+	text-shadow: 0px 1px 0px #85c0e9;
+	display: block;
+}
+#calendar .datepickerViewDays td a:hover {
+	background-color: #303030;
+	color: #FFFFFF;
+	text-shadow: 0px 1px 0px #000;
+}
 
 #ui-datepicker-div {
 	width: 214px;
