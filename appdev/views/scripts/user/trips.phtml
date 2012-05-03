@@ -39,6 +39,7 @@
                 <?php endforeach ?><?php else: ?><?= '"'.$trip->title.'" was ' ?><?php endif ?>
                 never reserved according to dates you established previously, however, you can always change the dates</p>
 			</div><!--TEXT-->
+			<a href="" class="btn-10">Okay!</a>
 		</div><!--NOTIFICATION-->
         <?php endif ?>
 		
@@ -49,6 +50,7 @@
 				<h2><?= $this->user->name ?>, one or more of your trips are around the corner</h2>
 				<p>You set the start date in the next 15 days. We suggest you rush to book to guarantee availability</p>
 			</div><!--TEXT-->
+			<a href="" class="btn-10">Okay!</a>
 		</div><!--NOTIFICATION-->
         <?php endif ?>
         
@@ -213,7 +215,39 @@
             <input type="hidden" name="_task" value="<?= md5('update_dates') ?>" />
             <input type="hidden" name="date" value="<?= date('Y-m-d') ?>" />
         </form>
-	</div><!--REDEFINEDATES-->    
+	</div><!--REDEFINEDATES-->
+	
+	<div class="dates_lbx lb" id="dates_lbx">
+		<form method="post" action="">
+			<div class="top">Redefine Travel Date<span class="label">7 Days Trip</span></div><!--TOP-->
+			<div class="cont">
+				<label>Start</label>
+				<input type="text" id="start" name="start" value="dd/mm/yyyy" />
+				<label>End</label>
+				<input type="text" id="end" name="end" value="dd/mm/yyyy" />
+			</div><!--CONT-->
+			<div class="bottom">
+				<input class="btn-1" type="submit" value="Set Dates & Continue" />
+				<a href="$.fancybox().close" class="btn-10">Cancel</a>
+			</div><!--BOTTOM-->
+		</form>
+	</div><!--DATES_LBX-->
+	
+	<div class="dates_lbx lb" id="dates_lbx">
+		<form method="post" action="">
+			<div class="top">Update Travel Dates<span class="label">7 Days Trip</span></div><!--TOP-->
+			<div class="cont">
+				<label>Start</label>
+				<input type="text" id="start" name="start" value="dd/mm/yyyy" />
+				<label>End</label>
+				<input type="text" id="end" name="end" value="dd/mm/yyyy" />
+			</div><!--CONT-->
+			<div class="bottom">
+				<input class="btn-1" type="submit" value="Update dates" />
+				<a href="$.fancybox().close" class="btn-10">Cancel</a>
+			</div><!--BOTTOM-->
+		</form>
+	</div><!--DATES_LBX-->
     <?php endif ?>
     <?php endforeach ?>
 </div>
