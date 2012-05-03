@@ -109,7 +109,34 @@ $(document).ready(function() {
     
         
     $('#datepicker').wrap('<div id="calendar" class="trips"></div>');
-    $( "#datepicker" ).datepicker({ 
+    
+    $("#datepicker").DatePicker({
+        flat: true,
+        date: '2008-07-31',
+        calendars: 1,
+        mode:'range',
+        starts: 1,
+        onChange:function(date){
+            var days = parseInt($('#tripDates').val());
+            var Start = new Date(date[0]);
+            var End   = new Date(Start.getTime() + ((days + 1) * 24 * 60 * 60 * 1000));
+            
+            var dates = new Array();
+            dates[0] = date[0];
+            dates[1] = End;
+            
+            $('input[name=checkin]').val(date[0]);
+            
+            //console.log(dates);
+            
+            $('#datepicker').DatePickerSetDate(dates);
+        }
+    });
+    
+    
+    
+    /**
+    $( "#datepickers" ).datepicker({ 
         beforeShowDay:function(date){
             if(aux)
             {
@@ -133,7 +160,7 @@ $(document).ready(function() {
             });
         }
         
-    });
+    });*/
 	$(".slideshow .cont").jcarousel({
 		scroll: 1
 	});

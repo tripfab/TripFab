@@ -217,11 +217,11 @@ class CartController extends Zend_Controller_Action {
             if($trip->token != $_POST['triptoken'])
                     throw new Exception();
             
-            $today = time();
+            $today = strtotime(date('Y-m-d'));
             $checkin = strtotime($_POST['checkin']);
             
-            if($today >= $checkin)
-                    throw new Exception('No checkin date provided');
+            if($today > $checkin)
+                    throw new Exception('No checkin date provided');            
             
             $date   = date('Y-m-d G:i:s', $checkin);
             $adults = (isset($_POST['adults']) and !empty($_POST['adults'])) ? $_POST['adults'] : 0;
@@ -239,6 +239,7 @@ class CartController extends Zend_Controller_Action {
             $cart->user_id    = $user->id;
             $cart->listing_id = $trip->id;
             $cart->checkin    = $date;
+            $cart->checkout   = date('Y-m-d G:i:s', (strtotime($date)) + (86400 * $trip->days));
             $cart->adults     = $adults;
             $cart->kids       = $kids;
             $cart->rate       = $trip->price;
