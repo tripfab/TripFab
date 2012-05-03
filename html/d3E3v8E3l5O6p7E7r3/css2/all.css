@@ -7752,6 +7752,11 @@ h2.title .back:hover,
 	padding: 0 10px;
 	margin-top: 10px;
 }
+.w3_itinerary .btn-10 {
+	float: right;
+	height: 30px;
+	margin-top: 10px;
+}
 .title_itinerary {
 	overflow: hidden;
 	height: 17px;
@@ -12085,7 +12090,7 @@ h2.title .back:hover,
 }
 
 .trip-itinerary .tabs-wrapper {
-	background:url("https://developer.tripfab.com/images2/itinerary-g1.png") repeat-x scroll left 74px transparent;
+	background:url("https://developer.tripfab.com/images6/BT-g1.png") repeat-x scroll left -5px #FFF;
 	border: 1px solid #E8E8E8;
 	overflow: hidden;
 	margin-bottom: 20px;
@@ -12096,7 +12101,7 @@ h2.title .back:hover,
 	-webkit-border-radius: 0px 0px 4px 4px;
 	border-radius: 0px 0px 4px 4px; 
 	float:left;
-	width:100%;
+	width:960px;
 }
 
 .trip-itinerary .tabs-wrapper .tab {
@@ -17927,6 +17932,40 @@ background-color: #FFF;
 .redefineDates .calendar .ui-datepicker .ui-datepicker-prev {
 	top: 11px;
 }
+.dates_lbx {
+	width: 320px;
+}
+.dates_lbx .top {
+text-indent: 20px;
+}
+.dates_lbx .label {
+	background: url(https://developer.tripfab.com/images6/trips-label.png) no-repeat;
+	position: absolute;
+	top: 10px;
+	right: 0;
+	width: 90px;
+	height: 22px;
+	font: bold 12px/22px Helvetica;
+	color: #FFF;
+	text-align: right;
+	padding-right: 15px;
+}
+.dates_lbx .cont {
+	padding: 15px 0 15px 20px;
+	background-color: #FFF;
+}
+.dates_lbx .cont input[type="text"] {
+	width: 79px;
+	height: 30px;
+	margin-right:23px;
+	margin-left: 6px;
+	color: #898989;
+	font: normal 13px/30px Helvetica;
+}
+.dates_lbx .cont input[type="text"]:focus{
+	color: #303030;
+	font-weight: bold;
+ }
 /*END MY TRIPS-------------------------------------------------------------*/
 
 /*SEARCH RESULTS COLLECTION------------------------------------------------*/
@@ -18794,6 +18833,7 @@ background-color: #FFF;
 	top: 0;
 	left: 0;
 	height: 75px;
+	z-index: 1;
 }
 #custom_checkout .header.ui-state-active > a {
 	background: url(https://developer.tripfab.com/images2/arrow-30.png) 17px 31px no-repeat ;
@@ -18802,7 +18842,7 @@ background-color: #FFF;
 	background:url(https://developer.tripfab.com/images2/g_67.png) repeat-x 0 -1px #f0f9ff;
 }
 #custom_checkout .header .descrip{
-	width: 300px;
+	width: 320px;
 	float: left;
 }
 #custom_checkout .header img {
@@ -18814,16 +18854,19 @@ background-color: #FFF;
 	color: #303030;
 	height: 17px;
 	overflow: hidden;
+	width: 250px;
 }
 #custom_checkout .header .type {
 	display: block;
-	font: normal 11px/17px Helvetica;
-	color: #5C5C5C;
+	font: bold 11px/17px Helvetica;
+	color: #60b5f7;
+	position: relative;
+	z-index: 12;
 }
 #custom_checkout .header .descrip > p {
 	color: #303030;
 	font: normal 12px/14px Helvetica;
-	background: url(https://developer.tripfab.com/images2/ico-3.png) no-repeat 61px 50%;
+	background: url(https://developer.tripfab.com/images6/location2.png) no-repeat 61px 50%;
 	text-indent: 15px;
 }
 #custom_checkout .header .arrow {
@@ -18839,8 +18882,9 @@ background-color: #FFF;
 	background-position: bottom left;
 }
 #custom_checkout .header .info {
-	width: 300px;
+	width: 280px;
 	float: right;
+	margin-top: 7px;
 }
 #custom_checkout .header .info span{
     color: #FFF;
@@ -18873,13 +18917,14 @@ background-color: #FFF;
 }
 #custom_checkout .header .info p {
 	color: #303030;
-	font:normal 11px/30px Helvetica;
+	font:bold 11px/30px Helvetica;
 	float: right;
 	margin-right: 10px;
 	text-align: right;
 }
 #custom_checkout .header .info p.recommendation {
 	font: bold 11px/13px Helvetica;
+	margin-top: 5px;
 }
 #custom_checkout .header .info p a {
 	display: block;
@@ -19052,6 +19097,9 @@ background-color: #FFF;
 #custom_checkout .right_block table tr:hover td{
 	background-color: #303030;
 }
+#custom_checkout .right_block table tr td.snd {
+	text-align: right;
+}
 #custom_checkout .right_block table tr a {
 	color: #FFF;
 	display: block;
@@ -19067,6 +19115,7 @@ background-color: #FFF;
 	padding-right: 20px;
 	width: 70px;
 	text-align: right;
+	display: block;
 }
 #custom_checkout .right_block table tr:hover a,
 #custom_checkout .right_block table tr:hover span {
@@ -19600,6 +19649,8 @@ background-color: #FFF;
     width: 282px;
     height: 174px;
 }
+
+
 /*END DIALPAD--------------------------------------------------------------*/
 /*LIVE CHAT----------------------------------------------------------------*/
 #livechat {

@@ -802,6 +802,9 @@ class UserController extends Zend_Controller_Action
                         $item->listing_city = $listing->city;
                         $item->listing_country = $listing->country;
                         $item->triplistingid = $listing->triplisting_id;
+                        $item->ciidf = $listing->cityurl;
+                        $item->coidf = $listing->countryurl;
+                        $item->idf   = $listing->identifier;
 
                         $items[] = $item;
                         
@@ -829,6 +832,9 @@ class UserController extends Zend_Controller_Action
                     $item->listing_city = $listing->city;
                     $item->listing_country = $listing->country;
                     $item->triplistingid = $listing->triplisting_id;
+                    $item->ciidf = $listing->cityurl;
+                    $item->coidf = $listing->countryurl;
+                    $item->idf   = $listing->identifier;
 
                     $items[] = $item;
 
@@ -853,6 +859,9 @@ class UserController extends Zend_Controller_Action
                 $item->listing_type  = $listing->main_type;
                 $item->listing_city = $listing->city;
                 $item->listing_country = $listing->country;
+                $item->ciidf = $listing->cityurl;
+                $item->coidf = $listing->countryurl;
+                $item->idf   = $listing->identifier;
                 $items2[] = $item;
             }
         }
@@ -1154,32 +1163,8 @@ class UserController extends Zend_Controller_Action
                 
                 $trip->save();
                 
-                
+                setcookie('alert', 'Trip dates updated');
                 $this->_redirect('/user/trips/itinerary/'.$trip->id);
-                break;
-            case md5('update_dates'):
-                $trip = $this->trips->getItn($_POST['ids'], true);
-                if($trip->token != $_POST['token'])
-                    throw new Exception('Form Corrupted');
-                if($trip->user_id != $this->user->getId())
-                    throw new Exception("The trip you're trying to delete isn't yours");
-                if(empty($_POST['date']))
-                    throw new Exception('Please select the dates');
-                
-                $start = date('Y-m-d', strtotime($_POST['date']));
-                $days = $trip->days;
-                $checkout = strtotime($start);
-                $checkout = $checkout + (86400 * ($days - 1));
-                
-                $end = date('Y-m-d', $checkout);
-                    
-                $trip->start = date('Y-m-d', strtotime($start));
-                $trip->end   = date('Y-m-d', strtotime($end));
-                
-                $trip->save();
-                
-                setcookie('alert','Your changes have been saved');
-                $this->_redirect('/user/trips/');
                 break;
             default:
                 throw new Exception('Form Corrupted');
@@ -1384,6 +1369,39 @@ class UserController extends Zend_Controller_Action
     public function itineraryTripsTask()
     {
         $trip = $this->_getTrip('id', true);
+        
+        if($this->_request->isPost()) {
+            
+            $trip = $this->trips->getItn($_POST['ids'], true);
+            if($trip->token != $_POST['token'])
+                throw new Exception('Form Corrupted');
+            if($trip->user_id != $this->user->getId())
+                throw new Exception("The trip you're trying to delete isn't yours");
+            if(empty($_POST['start']) || empty($_POST['end']))
+                throw new Exception('Please Insert the dates');
+
+            $start = date('D M j Y', strtotime($_POST['start']));
+            $end   = date('D M j Y', strtotime($_POST['end']));
+
+            if($start != $_POST['start'] || $end != $_POST['end'])
+                throw new Exception("Sorry, we couldn't understand the date Formats");
+
+            $trip->start = date('Y-m-d', strtotime($start));
+            $trip->end   = date('Y-m-d', strtotime($end));
+
+            $fday = strtotime($start);
+            $lday = strtotime($end);
+            $days = $lday - $fday;
+            $days = $days / 86400;
+
+            $trip->days         = $days + 1;
+
+            $trip->save();
+            
+            setcookie('alert', 'Trip dates updated');
+            $this->_redirect('/user/trips/itinerary/'.$trip->id);
+        }
+        
         $this->view->trip = $trip;
         
         if($trip->start == '0000-00-00' || $trip->end == '0000-00-00'){

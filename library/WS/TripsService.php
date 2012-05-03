@@ -292,7 +292,7 @@ class WS_TripsService {
         } else {
             $select->join('listings', 'itinerary_listings.listing_id = listings.id');
         }
-        $select->join('vendors', 'listings.vendor_id = vendors.id', array(
+        $select->joinLeft('vendors', 'listings.vendor_id = vendors.id', array(
             'vendor' => 'name'
         ));
         $select->join('places', 'listings.city_id = places.id', array(
@@ -848,6 +848,22 @@ class WS_TripsService {
         return $info;
     }
 
+    public function getRamdom($count = 5)
+    {
+        $args = func_get_args();
+        $cacheId = "TS_getRandom_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+            $select = $this->trips_db->select();
+            $select->limit($count);
+            $select->order('rand()');
 
+            $trips = $this->trips_db->fetchAll($select);
+        } else {
+            $trips = $this->cache->load($cacheId);
+        }
+        
+        return $trips;
+    }
 
 }

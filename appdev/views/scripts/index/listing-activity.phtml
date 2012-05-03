@@ -22,7 +22,7 @@
         	        <li><a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>"><?= $this->city->title ?></a></li>
         	        <li class="last"><a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>/#/activities" class="active">Activities</a></li>
         	    </ul>
-        	    <a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>/#/activities" class="link1">&larr; Back to Results</a>
+        	    <a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>/" class="link1">&larr; Back to Results</a>
         	    <div class="clear"></div>
         	</div><!--CNTRL-->
             <div class="cont">
@@ -347,12 +347,15 @@
                                             <span class="line"></span>
                                         </div><!--CALENDAR-->
                                         
+                                        
+										<?php if(count($this->capacities) > 1): ?>
                                         <h5><span class="i_type"></span>Choose an Activity Type</h5>
                                         <div class="type">
                                             <span class="line"></span>
                                             <div class="details">
 	                                            <table>
-	                                            	<?php if((is_null($this->listing->min) or is_null($this->listing->max)) and count($this->capacities) > 0): ?>
+	                                            	<?php if((is_null($this->listing->min) or is_null($this->listing->max)) and 
+													count($this->capacities) > 0): ?>
 	                                            	<?php foreach($this->capacities as $option): ?>
 	                                            	<tr>
 	                                            		<td>
@@ -380,36 +383,44 @@
 	                                            </table>
 	                                    	</div><!--DETAILS-->
                                         </div><!--TYPE-->
+                                        <?php else: ?>
+                                        <?php $hiddenCapacity = true; ?>
+                                        <?php endif ?>
                                         
                                         
+                                        <?php if(count($this->options) > 1): ?>
                                         <h5><span class="i_sched"></span>Select a Schedule</h5>
                                         <div class="type">
                                             <span class="line"></span>
-                                            	<table width="262">
-                                            		<?php if(count($this->options) > 0): ?>
-                                            		<?php foreach($this->options as $option): ?>
-                                            		<tr>
-                                            			<td width="32"><input class="noclean" type="radio" value="<?= $option->id ?>" name="option" id="schedule<?= $option->id ?>" /></td>
-                                            			<td width="230">
-	                                            			<label for="schedule<?= $option->id ?>">
-	                                            				<?= date('h:i a',strtotime($option->starting)) ?> - 
-	                                            				<?= date('h:i a',strtotime($option->ending)) ?> 
-	                                            			</label>
-                                            			</td>
-                                            		</tr>
-                                            		<?php endforeach ?>
-                                            		<?php else: ?>
-                                            		<tr>
-                                            			<td><input class="noclean" type="radio" value="flex" name="option" id="schedule0"></td>
-                                            			<td><label>Flexible</label></td>
-                                            		</tr>
-                                            		<?php endif ?>
-                                            	</table>
+                                            <table width="262">
+                                                <?php if(count($this->options) > 0): ?>
+                                                <?php foreach($this->options as $option): ?>
+                                                <tr>
+                                                    <td width="32"><input class="noclean" type="radio" value="<?= $option->id ?>" name="option" id="schedule<?= $option->id ?>" /></td>
+                                                    <td width="230">
+                                                        <label for="schedule<?= $option->id ?>">
+                                                            <?= date('h:i a',strtotime($option->starting)) ?> - 
+                                                            <?= date('h:i a',strtotime($option->ending)) ?> 
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                <?php endforeach ?>
+                                                <?php else: ?>
+                                                <tr>
+                                                    <td><input class="noclean" type="radio" value="flex" name="option" id="schedule0"></td>
+                                                    <td><label>Flexible</label></td>
+                                                </tr>
+                                                <?php endif ?>
+                                            </table>
                                         </div><!--TYPE-->
+                                        <?php else: ?>
+                                        <?php $hiddenSchedules = true; ?>                               
+                                        <?php endif ?>
                                         
                                         <h5><span class="i_user"></span>How many travelers?</h5>
                                         <div class="selects activity">
                                             <span class="line"></span>
+                                            <?php if(count($this->capacities) > 1): ?>
                                             <label class="rooms">
                                                 Adults
                                                 <select class="ocp adt"  name="adults">
@@ -427,6 +438,66 @@
                                                     <?php endfor ?>
                                                 </select>
                                             </label>
+                                            <?php else: ?>
+	                                        <?php if(count($this->capacities) > 0): ?>
+                                            <?php $option = $this->capacities[0] ?>
+                                            <label class="rooms">
+                                                Adults
+                                                <select class="ocp adt"  name="adults">
+                                                    <?php for($i=$option->min; $i<=$option->max; $i++): ?>
+                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <?php endfor ?>
+                                                </select>
+                                            </label>
+                                            <label>
+                                                Children
+                                                <select class="ocp kid" name="kids">
+                                                    <option value="0">0</option>
+                                                    <?php for($i=1; $i<=$option->max; $i++): ?>
+                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <?php endfor ?>
+                                                </select>
+                                            </label>
+                                            <?php else: ?>
+                                            <?php if(!is_null($this->listing->max) and !is_null($this->listing->min)): ?>
+                                            <label class="rooms">
+                                                Adults
+                                                <select class="ocp adt"  name="adults">
+                                                    <?php for($i=$this->listing->min; $i<=$this->listing->max; $i++): ?>
+                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <?php endfor ?>
+                                                </select>
+                                            </label>
+                                            <label>
+                                                Children
+                                                <select class="ocp kid" name="kids">
+                                                    <option value="0">0</option>
+                                                    <?php for($i=1; $i<=$this->listing->max; $i++): ?>
+                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <?php endfor ?>
+                                                </select>
+                                            </label>
+                                            <?php else: ?>
+                                            <label class="rooms">
+                                                Adults
+                                                <select class="ocp adt"  name="adults">
+                                                    <?php for($i=1; $i<=12; $i++): ?>
+                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <?php endfor ?>
+                                                </select>
+                                            </label>
+                                            <label>
+                                                Children
+                                                <select class="ocp kid" name="kids">
+                                                    <option value="0">0</option>
+                                                    <?php for($i=1; $i<=12; $i++): ?>
+                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <?php endfor ?>
+                                                </select>
+                                            </label>
+                                            <?php endif ?>                                            
+                                            <?php endif ?>
+                                            <?php endif ?>
                                             <div class="clear"></div>
                                         </div><!--SELECTS-->
                                         <div class="price">
@@ -442,6 +513,20 @@
                                     <input type="hidden" name="<?= $name ?>" value="<?= $value ?>" />
                                     <?php endforeach ?>
                                     <input type="hidden" name="checkin" id="inputCheckin" value="" />
+                                    <?php if($hiddenCapacity === true): ?>                                    
+									<?php if(count($this->capacities) > 0): ?>
+                                    <input type="radio" checked="checked" class="hidden" name="capacity" value="<?= $this->capacities[0]->id ?>" />
+                                    <?php else: ?>
+                                    <input type="radio" checked="checked" class="hidden" name="capacity" value="single" />
+                                    <?php endif ?>
+                                    <?php endif ?>
+                                    <?php if($hiddenSchedules === true): ?>                                
+									<?php if(count($this->options) > 0): ?>
+                                    <input class="hidden" checked="checked" type="radio" value="<?= $this->options[0]->id ?>" name="option"/>
+                                    <?php else: ?>
+                                    <input class="hidden" checked="checked" type="radio" value="flex" name="option"/>
+                                    <?php endif ?>         
+                                    <?php endif ?>
                                 </form>
                                 <div class="add">
                                     <?= $this->partial('partials/addtomytrip.phtml', array(
@@ -505,9 +590,10 @@
                                 </div><!--CONTAINER-->
                             </div><!--HOLDER-->
                         </div><!--ALL_FLAGS-->
+                        <span class="code">(+1)</span>
+                        <a href="" class="close"></a>
                         <input type="text" name="number" value="" />
                         <input type="hidden" name="code" value="1" />
-                        <a href="" class="close"></a>
                         <div class="clear"></div>
                     </div><!--NUMBER-DISPLAY-->
                     <div class="numbers">
@@ -630,6 +716,51 @@
                 <a href="" class="btn-10">Cancel</a>
             </div><!--BOT-->
         </div><!--WRITEREVIEW-->
+        
+        
+       <div class="error_ph" id="errorA">
+            <div class="cont">
+                <span class="icon2"></span>
+                <h3>Missed Call</h3>
+                <p>An error ocurred and we can't connect you with the partner, please try later.</p>
+                <div class="clear"></div>
+            </div><!--CONT-->
+            <div class="bottom">
+                <input onclick="$.fancybox.close(); return false;" class="btn-1" type="submit" name="" value="Got it!" />
+            </div><!--BOTTOM-->
+        </div><!--ERROR_PH-->
+        
+        <div class="error_ph" id="errorB">
+            <div class="cont">
+                <span class="icon2"></span>
+                <h3>Wrong Number</h3>
+                <p>An error ocurred because you entered a wrong phone number, please dial again</p>
+            </div><!--CONT-->
+            <div class="bottom">
+                <input class="btn-1 phonecall" href="#start_call" type="submit" name="" value="Dial Again" />
+                <a href="" onclick="$.fancybox.close(); return false;" class="btn-10">Cancel</a>
+                <div class="clear"></div>
+            </div><!--BOTTOM-->
+        </div><!--ERROR_PH-->
+        
+        <div class="error_ph" id="errorC">
+            <div class="cont">
+                <span class="icon1"></span>
+                <h3>Successfully Connected!</h3>
+                <p>You'll receive a phone call from our partner in a few minutes</p>
+                <div class="clear"></div>
+            </div><!--CONT-->
+            <div class="bottom">
+                <input class="btn-1" type="submit" name="" value="Got it!" onclick="$.fancybox.close(); return false;" />
+            </div><!--BOTTOM-->
+        </div><!--CONECTED_PH-->
+        
+        <div class="load_ph" id="load_ph">
+            <img src="https://developer.tripfab.com/images6/loadCall.gif" width="50" height="50" alt="" />
+            <h3>Connecting with the Business...</h3>
+        </div><!--PHONE-PH-->
+        
+        
     </div><!--HIDDEN-->
 </div><!--WRAPPER_ALL-->
 <input type="hidden" value="<?= ($this->listing->lat) ? $this->listing->lat : 'none' ?>" name="listlat" />
@@ -644,6 +775,15 @@
 #mapcanvas {
 	width:638px;
 	height:354px;}
+#dialpad .middle .number-display input[type="text"] {
+	float: right;
+	width: 110px;} 
+span.code {
+	color: #999;
+	margin-left: 10px;
+	width: 35px;
+	float: left;
+	text-align: right;}
 </style>
 </body>
 </html>

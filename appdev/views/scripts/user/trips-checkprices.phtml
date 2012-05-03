@@ -12,6 +12,33 @@
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
     <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
     <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
+    <style type="text/css">
+	.checkout-item .restricction_tip {					
+		right: -170px !important;
+		top: -215px !important;
+		z-index:20 !important;
+	}
+	#custom_checkout .details .item {
+		overflow:visible !important;
+	}
+	#checkout_accordion {
+		overflow:visible !important;}
+	#custom_checkout .right_block table tr.hover td,
+	#custom_checkout .right_block table tr.active td {
+		background-color: #303030;
+		color:#fff !important;
+	}
+	#custom_checkout .right_block table tr.hover a,
+	#custom_checkout .right_block table tr.hover span,
+	#custom_checkout .right_block table tr.active a,
+	#custom_checkout .right_block table tr.active span {
+		color: #FFF;
+		text-decoration: none;
+	}
+	#custom_checkout .header.hover {
+		background:url(https://developer.tripfab.com/images2/g_67.png) repeat-x 0 -1px #f0f9ff;
+	}
+	</style>
 </head>
 <body>
 <div class="w1">
@@ -29,24 +56,25 @@
                     <div id="checkout_accordion">
                         <?php foreach($this->items as $kkk => $item): ?>
                         <?php if($item->available || ($item->available === 0)): ?>
-                        <div class="header active">
+                        <div rel="#itm<?=$kkk ?>" id="itmBig<?= $kkk ?>" class="header active">
                             <span class="arrow"></span> 
                             <a href="#"></a>
                             <div class="descrip"> 
                                 <?= $this->thumbnail(49, $item->listing_image, '', '1:1'); ?>
                                 <h4><?= $item->listing_title ?></h4>
-                                <span class="type"><?= $this->types[$item->listing_type]['name'] ?></span>
+                                <a href="/<?= $item->coidf ?>/<?= $item->ciidf ?>/<?= $item->idf ?>" 
+                                class="type">View <?= $this->types[$item->listing_type]['name'] ?></a>
                                 <p><?= $item->listing_city ?>, <?= $item->listing_country ?></p>
                             </div><!--DESCRIP-->
                             <?php if($item->available): ?>
                             <div class="info"> 
                                 <span><em></em>Available</span>
-                                <p>Ready to go! Just accept the terms</p>
+                                <p>Ready to go</p>
                             </div><!--INFO--> 
                             <?php else: ?>
                             <div class="info"> 
                                 <span><em></em>Available</span>
-                                <p>But there are some problems</p>
+                                <p>Click to confirm details</p>
                             </div><!--INFO--> 
                             <?php endif ?>
                         </div><!--HEADER-->
@@ -72,19 +100,23 @@
                                         <?php endfor ?>
                                     </select>
                                 </div><!--EDIT--> 
+                                <div class="clear"></div>
                             </div><!--ITEM-->
                             <?php if($item->listing_type == 5): ?>
                             <div class="item"> 
                                 <strong>Check In</strong>
                                 <div class="edit"><?= date('L, F jS, Y', strtotime($item->checkin)) ?></div>
+                                <div class="clear"></div>
                             </div><!--ITEM-->
                             <div class="item"> 
                                 <strong>Check Out</strong>
                                 <div class="edit"><?= date('L, F jS, Y', strtotime($item->checkout)) ?></div><!--EDIT--> 
+                                <div class="clear"></div>
                             </div><!--ITEM-->
                             <div class="item"> 
                                 <strong>Rooms</strong>
                                 <div class="edit"><?= $item->rooms ?></div><!--EDIT--> 
+                                <div class="clear"></div>
                             </div><!--ITEM-->
                             <?php if(isset($this->options[$item->id]['options']) && 
                                     (count($this->options[$item->id]['options'] > 0))): ?>
@@ -104,12 +136,14 @@
                                     </div><!--SINGLE-->
                                     <?php endforeach ?>
                                 </div><!--ROOM-TYPE--> 
+                                <div class="clear"></div>
                             </div><!--ITEM-->
                             <?php endif ?>
                             <?php else: ?>
                             <div class="item"> 
                                 <strong>Activity Date</strong>
                                 <div class="edit"><?= date('L, F jS, Y', strtotime($item->checkin)) ?></div><!--EDIT--> 
+                                <div class="clear"></div>
                             </div><!--ITEM-->
                             <div class="item"> 
                                 <strong>Activity Type</strong>
@@ -156,6 +190,7 @@
                                     </div><!--SINGLE-->
                                     <?php endif ?>
                                 </div><!--ROOM-TYPE--> 
+                                <div class="clear"></div>
                             </div><!--ITEM-->
                             <div class="item"> 
                                 <strong>Schedule</strong>
@@ -175,6 +210,7 @@
                                     <input type="hidden" name="bookings[<?= $item->id ?>][option]" value="flex" />
                                 </div>
                                 <?php endif ?>
+                                <div class="clear"></div>
                             </div><!--ITEM-->
                             <?php endif ?>
                             <?php if($item->available): ?>
@@ -183,6 +219,7 @@
                                 <div class="edit">
                                     $<?= $item->rate ?>, <?= $item->rate_description ?>
                                 </div>
+                                <div class="clear"></div>
                             </div>
                             <?php if(isset($item->additional) and $item->additional > 0): ?>
                             <div class="item">
@@ -190,6 +227,7 @@
                                 <div class="edit">
                                     $<?= $item->additional ?>, <?= $item->additional_description ?>
                                 </div>
+                                <div class="clear"></div>
                             </div>                        
                             <?php endif ?>
                             <div class="item">
@@ -197,12 +235,14 @@
                                 <div class="edit">
                                 	$<?= $item->taxes ?>
                                 </div>
+                                <div class="clear"></div>
                             </div>
                             <div class="item">
                             	<strong>Total</strong>
                                 <div class="edit">
                                 	$<?= $item->total ?>
                                 </div>
+                                <div class="clear"></div>
                             </div>
                             <?php endif ?>
                             
@@ -307,6 +347,7 @@
                                     </div><!--CANCEL_POLICY-->
                                 </div>                            
                                 <?php endif ?>
+                                <div class="clear"></div>
                             </div><!--ITEM-->
 							<?php break; case 2: ?>
                              <div class="checkout-item item"> 
@@ -408,6 +449,7 @@
                                     </div><!--CANCEL_POLICY-->
                                 </div>
                                 <?php endif ?>
+                                <div class="clear"></div>
                             </div><!--ITEM-->
                             <?php break; default: ?>
                              <div class="checkout-item item"> 
@@ -510,10 +552,11 @@
                                         </div><!--MID-->
                                     </div><!--CANCEL_POLICY-->
                                 </div>           
-                                <?php endif ?>    
+                                <?php endif ?>  
+                                <div class="clear"></div>  
                             </div><!--ITEM-->
                             <?php endswitch ?>
-                            <?php if($item->listing_type == 6): ?>
+                            <?php if($item->listing_type == 5): ?>
                             <div class="last"> 
                                 <strong>Hotel Restrictions</strong> 
                                 <a href="/ajax/restrictions/<?= $item->id ?>" class="lb restriction">Read Hotel Restrictions &rarr;</a> 
@@ -521,34 +564,36 @@
                             <?php else: ?>
                             <div class="last"> 
                                 <strong>Activity Restrictions</strong> 
-                                <a href="/ajax/restrictions/<?= $item->id ?>" class="lb restriction">Read Hotel Restrictions &rarr;</a> 
+                                <a href="/ajax/restrictions/<?= $item->id ?>" class="lb restriction">Read Activity Restrictions &rarr;</a> 
                             </div><!--ITEM-->
                             <?php endif ?>
                         </div><!--DETAILS-->
                         <?php else: ?>
-                        <div class="header inactive"> 
+                        <div rel="#itm<?=$kkk ?>" id="itmBig<?= $kkk ?>" class="header inactive"> 
                             <span class="arrow"></span> 
                             <a href="#"></a>
                             <div class="descrip"> 
                                 <?= $this->thumbnail(49, $item->listing_image, '', '1:1'); ?>
                                 <h4><?= $item->listing_title ?></h4>
-                                <span class="type"><?= $this->types[$item->listing_type]['name'] ?></span>
+                                <a href="/<?= $item->coidf ?>/<?= $item->ciidf ?>/<?= $item->idf ?>" 
+                                class="type">View <?= $this->types[$item->listing_type]['name'] ?></a>
                                 <p><?= $item->listing_city ?>, <?= $item->listing_country ?></p>
                             </div><!--DESCRIP-->
                             <div class="info">
                                 <span class="unavaible"><em></em>Not Available</span>
-                                <p class="recommendation"><?= $item->error ?> 
-                                <a href="/ajax/getrecomendations/<?= $item->id ?>?trip=<?= $this->trip->id ?>&listing=<?= $item->triplistingid ?>" class="link-10 lb">See our recommendations</a></p>
+                                <p class="recommendation">
+                                <a href="/ajax/getrecomendations/<?= $item->id ?>?trip=<?= $this->trip->id ?>&listing=<?= $item->triplistingid ?>" class="link-10 lb">See Recommendations</a></p>
                             </div><!--INFO-->
                         </div><!--HEADER-->
                         <?php endif ?>
                         <?php endforeach ?>
-                        <?php foreach($this->items2 as $item): ?>
-                        <div class="header active"> <span class="arrow"></span> <a href="#"></a>
+                        <?php foreach($this->items2 as $kkk => $item): ?>
+                        <div rel="#itm2<?=$kkk ?>" id="itmBig2<?= $kkk ?>" class="header active"> <span class="arrow"></span> <a href="#"></a>
                             <div class="descrip"> 
                                 <?= $this->thumbnail(49, $item->listing_image, '', '1:1'); ?>
                                 <h4><?= $item->listing_title ?></h4>
-                                <span class="type"><?= $this->types[$item->listing_type]['name'] ?></span>
+                                <a href="/<?= $item->coidf ?>/<?= $item->ciidf ?>/<?= $item->idf ?>" 
+                                class="type">View <?= $this->types[$item->listing_type]['name'] ?></a>
                                 <p><?= $item->listing_city ?>, <?= $item->listing_country ?></p>
                             </div><!--DESCRIP-->
                             <?php if($item->available): ?>
@@ -567,6 +612,7 @@
                             <div class="item last">
                                 <strong>Price not charged</strong>
                                 <div class="edit">Check the prices when you get there</div>
+                                <div class="clear"></div>
                             </div><!--LAST-->
                         </div><!--DETAILS-->
                         <?php endforeach ?>
@@ -583,31 +629,31 @@
                 <div class="inf">
                 	<h5>Trip Details</h5>
                 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-                			<?php foreach($this->items as $item): ?>
+                			<?php foreach($this->items as $kkk => $item): ?>
                 			<?php if($item->available): ?>
-                			<tr>
+                			<tr rel="#itmBig<?=$kkk ?>" id="itm<?= $kkk ?>">
                 				<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><em><?= $item->listing_title ?></em></a></td>
-                				<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>$<?= $item->total ?></span></td>
+                				<td width="75" align="right" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>$<?= $item->total ?></span></td>
                 			</tr>
                 			<?php elseif($item->available === false): ?>
                 			
-                			<tr>
+                			<tr rel="#itmBig<?=$kkk ?>" id="itm<?= $kkk ?>">
                 				<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><em><?= $item->listing_title ?></em></a></td>
-                				<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not available</span></td>
+                				<td width="75" align="right" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not available</span></td>
                 			</tr>
                 			<?php else: ?>
                 			
-                			<tr>
+                			<tr rel="#itmBig<?=$kkk ?>" id="itm<?= $kkk ?>">
                 				<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><?= $item->listing_title ?></a></td>
-                				<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not ready</span></td>
+                				<td width="75" align="right" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not ready</span></td>
                 			</tr>
                 			<?php endif ?> 
                 			<?php endforeach ?>
-                			<?php foreach($this->items2 as $item): ?>
+                			<?php foreach($this->items2 as $kkk => $item): ?>
                 			
-                			<tr>
+                			<tr rel="#itmBig2<?=$kkk ?>" id="itm2<?= $kkk ?>">
                 				<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href=""><em><?= $item->listing_title ?></em></a></td>
-                				<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not charged</span></td>
+                				<td width="75" align="right" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not charged</span></td>
                 			</tr>
                 			<?php endforeach ?>
                 		</table>
@@ -636,14 +682,38 @@
 			$('.tip').toggleClass('hidden');
 			return false
 		});
+		
+		$('.header .descrip a.type').click(function(e){
+			e.preventDefault();
+			window.location.href = $(this).attr('href');
+			return false;
+		}); 
 		$("#checkout_accordion").accordion({
-			autoHeight: false,
-			collapsible: true,
-			header:'.active'
+			active:false,
+			autoHeight:false,
+			collapsible:true,
+			header:'.active',
+			changestart: function(event, ui) {
+				$('.right_block table tr').removeClass('active');
+				$(ui.newHeader.attr('rel')).addClass('active');
+			}
 		});
 		$('a.high-r').hover(function() {
 			$parent = $(this).parents('.details');
 			$('.restricction_tip', $parent).toggleClass('hidden');
+			return false;
+		});
+		
+		$('#checkprices_form .header').hover(function(){
+			$($(this).attr('rel')).toggleClass('hover');
+		});
+		
+		$('.right_block table tr').hover(function(){
+			$($(this).attr('rel')).toggleClass('hover');
+		});
+		
+		$('.right_block table tr').click(function(){
+			$($(this).attr('rel')).click();
 			return false;
 		});
 	});
@@ -651,6 +721,7 @@
 <style type="text/css">
 #custom_checkout .details .item.last {
 	border-bottom:0px none;}
+#custom_checkout .header .type { display:inline;}
 </style>
 </body>
 </html>

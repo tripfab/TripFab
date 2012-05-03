@@ -8,6 +8,26 @@
     };
 })( jQuery );
 $(document).ready(function() {
+
+
+	function countLines() {
+		var divH = $("#title").height();
+		var num  = 25;
+		var ttl  = $("#title");
+		var ttl2 = $(".qz");
+		var ttl3 = $(".location");
+		if(divH < num ) {
+				ttl.parent().addClass("ttl");
+			}else {
+				ttl.parent().addClass("two");
+				ttl2.addClass("two");
+				ttl3.css('margin-bottom', '7px');
+			}
+	}
+	countLines();
+
+
+
     $('#mapcanvas').data('lat', $('input[name=listlat]').val());
     $('#mapcanvas').data('lng', $('input[name=listlng]').val());
     $('body').data('listing_title', $('input[name=listtitle]').val());
@@ -431,6 +451,8 @@ $(document).ready(function() {
         $('.flag img').attr('src', $img);
         $('input[name=code]').val($code);
         
+        $('span.code').text('(+'+$code+')');
+        
         $( ".all_flags" ).removeClass('show');
         
         return false;
@@ -455,24 +477,51 @@ $(document).ready(function() {
             return false;
         }
         
-        $.ajax({
-            url:'/phone/call',
-            type:'post',
-            data:{
-                listing:$('body').data('listingid'),
-                number:'+'+$code+''+$numb
-            },
-            success:function(res){
-                if(res.type == "ok") {
-                    $.fancybox.close();
-                    showAlert('You will receive a call from TRIPFAB in the next 5 minutes. Please wait');
-                } else {
-                    $.fancybox.close();
-                    showError('Sorry: '+res.message);
-                }
-            },
-            error:function(res){
-                //console.log(res);
+        //$.fancybox.close();
+        
+        $.fancybox({		
+            padding:0,
+            overlayColor:'#fff',
+            centerOnScroll:1,
+            showCloseButton:0,
+            href:'#load_ph',
+            onComplete:function(){
+                $.ajax({
+                    url:'/phone/call',
+                    type:'post',
+                    data:{
+                        listing:$('body').data('listingid'),
+                        number:'+'+$code+''+$numb
+                    },
+                    success:function(res){
+                        if(res.type == "ok") {
+                            $.fancybox({
+                                padding:0,
+                                overlayColor:'#fff',
+                                centerOnScroll:1,
+                                showCloseButton:0,
+                                href:'#errorC'
+                            });
+                        } else {
+                            $.fancybox({
+                                padding:0,
+                                overlayColor:'#fff',
+                                centerOnScroll:1,
+                                showCloseButton:0,
+                                href:'#errorB'
+                            });
+                        }
+                    },
+                    error:function(res){
+                        $.fancybox({
+                            padding:0,
+                            overlayColor:'#fff',
+                            centerOnScroll:1,
+                            showCloseButton:0,
+                            href:'#errorA'
+                        });
+                    }
+                });
             }
         });
         

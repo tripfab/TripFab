@@ -9,7 +9,7 @@ $(document).ready(function() {
 		height: $ht
 	});
 	}
-
+	
 	
 	
     $('#slider-1').cycle({
@@ -75,8 +75,68 @@ $(document).ready(function() {
     });
     
     var aux = true;
+    
+    
+    
+    
+    
+    
+   function selectDays(lastDay) {
+   	
+   	var days = parseInt($('#tripDates').val());
+   	var aux2;
+   	for(var u = 0; u < days; u++) {
+   		if (u == 0 ) {
+   			aux2 = lastDay;
+   			lastDay = lastDay.next();
+   			if (lastDay.length == 0) {
+   				lastDay = aux2.parents('tr').next().children().eq(0);
+   			}
+   		}else {
+   			$('a',lastDay).addClass('selected');
+   			aux2 = lastDay;
+   			lastDay = lastDay.next();
+   			if (lastDay.length == 0) {
+   				lastDay = aux2.parents('tr').next().children().eq(0);
+   			}
+   		}
+   	}
+   }
+    
+   
+    
+    
+    
+        
     $('#datepicker').wrap('<div id="calendar" class="trips"></div>');
-    $( "#datepicker" ).datepicker({ 
+    
+    $("#datepicker").DatePicker({
+        flat: true,
+        date: '2008-07-31',
+        calendars: 1,
+        mode:'range',
+        starts: 1,
+        onChange:function(date){
+            var days = parseInt($('#tripDates').val());
+            var Start = new Date(date[0]);
+            var End   = new Date(Start.getTime() + ((days + 1) * 24 * 60 * 60 * 1000));
+            
+            var dates = new Array();
+            dates[0] = date[0];
+            dates[1] = End;
+            
+            $('input[name=checkin]').val(date[0]);
+            
+            //console.log(dates);
+            
+            $('#datepicker').DatePickerSetDate(dates);
+        }
+    });
+    
+    
+    
+    /**
+    $( "#datepickers" ).datepicker({ 
         beforeShowDay:function(date){
             if(aux)
             {
@@ -89,11 +149,18 @@ $(document).ready(function() {
         dateFormat:'D M d yy',
         showOtherMonths: true,
         minDate:new Date(),
-        onSelect:function(date){
+        onSelect:function(date, inst){
             $('input[name=checkin]').val(date);
+            inst.inline = false;
+            $(".ui-datepicker-calendar tbody a").removeClass('selected');
+            $(".ui-datepicker-calendar tbody a").each(function(){
+              if ($(this).text() == inst.selectedDay) {
+                selectDays($(this).parent());
+              }
+            });
         }
-    });
-	
+        
+    });*/
 	$(".slideshow .cont").jcarousel({
 		scroll: 1
 	});
@@ -119,29 +186,10 @@ $(document).ready(function() {
             $('select[name=kids]').append('<option value="'+i+'">'+i+'</option>');
 		
     });
-	var days = parseInt($('#tripDates').val());
-	var lastDay = $('.ui-datepicker-current-day');
-	var aux;
 	
-	function onSelect() {
-		for(var u = 0; u < days; u++) {
-			if (u == 0 ) {
-				lastDay = lastDay.next();
-			}else {
-				lastDay.addClass('selected');
-				aux = lastDay;
-				lastDay = lastDay.next();
-				if (lastDay.length == 0) {
-					lastDay = aux.parents('tr').next().children().eq(0);
-					console.log(lastDay.length);
-				}
-			}
-		}
-	}
-	$(".occ").click(function (){
-		onSelect();
-		return false
-	});
+	
+	
+	
 	
 });
 

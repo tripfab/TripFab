@@ -22,7 +22,7 @@
         	        <li><a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>"><?= $this->city->title ?></a></li>
         	        <li class="last"><a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>/#/hotels" class="active">Hotels</a></li>
         	    </ul>
-        	    <a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>/#/activities" class="link1">&larr; Back to Results</a>
+        	    <a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>/" class="link1">&larr; Back to Results</a>
         	    <div class="clear"></div>
         	</div><!--CNTRL-->
             <div class="cont">
@@ -474,9 +474,10 @@
                                 </div><!--CONTAINER-->
                             </div><!--HOLDER-->
                         </div><!--ALL_FLAGS-->
+                        <span class="code">(+1)</span>
+                        <a href="" class="close"></a>
                         <input type="text" name="number" value="" />
                         <input type="hidden" name="code" value="1" />
-                        <a href="" class="close"></a>
                         <div class="clear"></div>
                     </div><!--NUMBER-DISPLAY-->
                     <div class="numbers">
@@ -538,6 +539,49 @@
                 </form>
             </div><!--CREATE_TRIP-->
         </div>
+        
+        	<div class="error_ph" id="errorA">
+        		<div class="cont">
+        			<span class="icon2"></span>
+        			<h3>Missed Call</h3>
+        			<p>An error ocurred and we can’t connect you with the partner, please try later.</p>
+        			<div class="clear"></div>
+        		</div><!--CONT-->
+        		<div class="bottom">
+        			<input onclick="$.fancybox.close(); return false;" class="btn-1" type="submit" name="" value="Got it!" />
+        		</div><!--BOTTOM-->
+        	</div><!--ERROR_PH-->
+        	
+        	<div class="error_ph" id="errorB">
+        		<div class="cont">
+        			<span class="icon2"></span>
+        			<h3>Wrong Number</h3>
+        			<p>An error ocurred because you entered a wrong phone number, please dial again</p>
+        		</div><!--CONT-->
+        		<div class="bottom">
+        			<input class="btn-1 phonecall" href="#start_call" type="submit" name="" value="Dial Again" />
+        			<a href="" onclick="$.fancybox.close(); return false;" class="btn-10">Cancel</a>
+        			<div class="clear"></div>
+        		</div><!--BOTTOM-->
+        	</div><!--ERROR_PH-->
+        	
+        	<div class="error_ph" id="errorC">
+        		<div class="cont">
+        			<span class="icon1"></span>
+        			<h3>Successfully Connected!</h3>
+        			<p>You’ll receive a phone call from our partner in a few minutes</p>
+        			<div class="clear"></div>
+        		</div><!--CONT-->
+        		<div class="bottom">
+        			<input class="btn-1" type="submit" name="" value="Got it!" onclick="$.fancybox.close(); return false;" />
+        		</div><!--BOTTOM-->
+        	</div><!--CONECTED_PH-->
+        	
+        	<div class="load_ph" id="load_ph">
+        		<img src="https://developer.tripfab.com/images6/loadCall.gif" width="50" height="50" alt="" />
+        		<h3>Connecting with the Business...</h3>
+        	</div><!--PHONE-PH-->
+        	
     </div>
 </div><!--WRAPPER_ALL-->
 <input type="hidden" value="<?= ($this->listing->lat) ? $this->listing->lat : 'none' ?>" name="listlat" />
@@ -548,6 +592,17 @@
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript" src="/js2/jquery.popupWindow.js"></script>
 <script type="text/javascript" src="/js2/index/listing-hotel.js"></script>
-<style type="text/css"> #mapcanvas {width:638px; height:354px;}</style>
+<style type="text/css"> 
+#mapcanvas {width:638px; height:354px;}
+#dialpad .middle .number-display input[type="text"] {
+	float: right;
+	width: 110px;} 
+span.code {
+	color: #999;
+	margin-left: 10px;
+	width: 35px;
+	float: left;
+	text-align: right;}
+</style>
 </body>
 </html>
