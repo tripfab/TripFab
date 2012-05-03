@@ -815,14 +815,37 @@
 }
 #lstng_header .ttl span {
 	color: #5c5b5b;
-	font-size: 11px;
+	font:normal 11px/14px Helvetica;
+	height: 14px;
+	display: block;
+	float: left;
+	padding-right: 8px;
 }
 #lstng_header .ttl em {
 	display: inline-block;
-	width: 10px;
-	height: 10px;
+	width: 15px;
+	height: 12px;
 	background: url(https://developer.tripfab.com/images6/lstng_htl.png) no-repeat -206px -8px;
 	margin-right: 5px;
+}
+#lstng_header .ttl .act {
+	border-right: 1px solid #dfdfdf;
+}
+#lstng_header .ttl .act em {
+	background-position: -159px -26px;
+}
+#lstng_header .ttl .htl {
+	border-right: 1px solid #dfdfdf;
+}
+#lstng_header .ttl .htl em {
+	background-position: -159px -46px;
+}
+#lstng_header .ttl .reviews {
+	border-left: 1px solid #FFF;
+	padding-left: 8px;
+}
+#lstng_header .ttl .reviews em {
+	background-position: -159px -7px
 }
 #lstng_header p.qz {
 	float: left;

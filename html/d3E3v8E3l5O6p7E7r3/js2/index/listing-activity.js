@@ -8,6 +8,26 @@
     };
 })( jQuery );
 $(document).ready(function() {
+
+
+	function countLines() {
+		var divH = $("#title").height();
+		var num  = 25;
+		var ttl  = $("#title");
+		var ttl2 = $(".qz");
+		var ttl3 = $(".location");
+		if(divH < num ) {
+				ttl.parent().addClass("ttl");
+			}else {
+				ttl.parent().addClass("two");
+				ttl2.addClass("two");
+				ttl3.css('margin-bottom', '7px');
+			}
+	}
+	countLines();
+
+
+
     $('#mapcanvas').data('lat', $('input[name=listlat]').val());
     $('#mapcanvas').data('lng', $('input[name=listlng]').val());
     $('body').data('listing_title', $('input[name=listtitle]').val());
