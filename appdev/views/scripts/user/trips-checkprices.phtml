@@ -62,13 +62,13 @@
                             <div class="descrip"> 
                                 <?= $this->thumbnail(49, $item->listing_image, '', '1:1'); ?>
                                 <h4><?= $item->listing_title ?></h4>
-                                <span class="type"><?= $this->types[$item->listing_type]['name'] ?></span>
+                                <a href="" class="type">View <?= $this->types[$item->listing_type]['name'] ?></a>
                                 <p><?= $item->listing_city ?>, <?= $item->listing_country ?></p>
                             </div><!--DESCRIP-->
                             <?php if($item->available): ?>
                             <div class="info"> 
                                 <span><em></em>Available</span>
-                                <p>Ready to go! Just accept the terms</p>
+                                <p>Just accept the terms</p>
                             </div><!--INFO--> 
                             <?php else: ?>
                             <div class="info"> 
@@ -574,13 +574,13 @@
                             <div class="descrip"> 
                                 <?= $this->thumbnail(49, $item->listing_image, '', '1:1'); ?>
                                 <h4><?= $item->listing_title ?></h4>
-                                <span class="type"><?= $this->types[$item->listing_type]['name'] ?></span>
+                                <a href="" class="type">View <?= $this->types[$item->listing_type]['name'] ?></a>
                                 <p><?= $item->listing_city ?>, <?= $item->listing_country ?></p>
                             </div><!--DESCRIP-->
                             <div class="info">
                                 <span class="unavaible"><em></em>Not Available</span>
-                                <p class="recommendation"><?= $item->error ?> 
-                                <a href="/ajax/getrecomendations/<?= $item->id ?>?trip=<?= $this->trip->id ?>&listing=<?= $item->triplistingid ?>" class="link-10 lb">See our recommendations</a></p>
+                                <p class="recommendation">
+                                <a href="/ajax/getrecomendations/<?= $item->id ?>?trip=<?= $this->trip->id ?>&listing=<?= $item->triplistingid ?>" class="link-10 lb">See Recommendations</a></p>
                             </div><!--INFO-->
                         </div><!--HEADER-->
                         <?php endif ?>
@@ -590,7 +590,7 @@
                             <div class="descrip"> 
                                 <?= $this->thumbnail(49, $item->listing_image, '', '1:1'); ?>
                                 <h4><?= $item->listing_title ?></h4>
-                                <span class="type"><?= $this->types[$item->listing_type]['name'] ?></span>
+                                <a href="" class="type">View <?= $this->types[$item->listing_type]['name'] ?></a>
                                 <p><?= $item->listing_city ?>, <?= $item->listing_country ?></p>
                             </div><!--DESCRIP-->
                             <?php if($item->available): ?>
@@ -630,19 +630,19 @@
                 			<?php if($item->available): ?>
                 			<tr rel="#itmBig<?=$kkk ?>" id="itm<?= $kkk ?>">
                 				<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><em><?= $item->listing_title ?></em></a></td>
-                				<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>$<?= $item->total ?></span></td>
+                				<td width="75" align="right" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>$<?= $item->total ?></span></td>
                 			</tr>
                 			<?php elseif($item->available === false): ?>
                 			
                 			<tr rel="#itmBig<?=$kkk ?>" id="itm<?= $kkk ?>">
                 				<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><em><?= $item->listing_title ?></em></a></td>
-                				<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not available</span></td>
+                				<td width="75" align="right" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not available</span></td>
                 			</tr>
                 			<?php else: ?>
                 			
                 			<tr rel="#itmBig<?=$kkk ?>" id="itm<?= $kkk ?>">
                 				<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><?= $item->listing_title ?></a></td>
-                				<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not ready</span></td>
+                				<td width="75" align="right" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not ready</span></td>
                 			</tr>
                 			<?php endif ?> 
                 			<?php endforeach ?>
@@ -650,7 +650,7 @@
                 			
                 			<tr rel="#itmBig2<?=$kkk ?>" id="itm2<?= $kkk ?>">
                 				<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href=""><em><?= $item->listing_title ?></em></a></td>
-                				<td width="75" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not charged</span></td>
+                				<td width="75" align="right" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>Not charged</span></td>
                 			</tr>
                 			<?php endforeach ?>
                 		</table>
