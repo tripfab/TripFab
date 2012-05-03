@@ -198,27 +198,45 @@
             <input type="hidden" name="_task" value="<?= md5('delete_trip') ?>" />
         </form>
     </div>
-    
+         
     <div class="dates_lbx lb" id="dates_lbx">
-    	<form method="post" action="">
-    		<div class="top">Change Travel Dates<span class="label">7 Days Trip</span></div><!--TOP-->
-    		<div class="cont">
-    			<label>Start</label>
-    			<input type="text" id="start" name="start" value="dd/mm/yyyy" />
-    			<label>End</label>
-    			<input type="text" id="end" name="end" value="dd/mm/yyyy" />
-    		</div><!--CONT-->
-    		<div class="bottom">
-    			<input class="btn-1" type="submit" value="Set dates" />
-    			<a href="$.fancybox().close" class="btn-10">Cancel</a>
-    		</div><!--BOTTOM-->
-    	</form>
-    </div><!--DATES_LBX-->
-    
-    
+		<form method="post" action="">
+			<div class="top">Change Trip Dates<span class="label"><?= $this->trip->days ?> Days</span></div><!--TOP-->
+			<div class="cont">
+				<label>Start</label>
+                <input name="start" class="calendar1" type="text" />
+				<label>End</label>
+                <input name="end" class="calendar2" type="text" />
+			</div><!--CONT-->
+			<div class="bottom">
+				<input class="btn-1" type="submit" value="Update dates" />
+                <a href="#" onclick="$.fancybox.close(); return false;" class="btn-10">Cancel</a>
+			</div><!--BOTTOM-->
+            <input type="hidden" name="ids" value="<?= $this->trip->id ?>" />
+            <input type="hidden" name="token" value="<?= $this->trip->token ?>" />
+            <input type="hidden" name="_task" value="<?= md5('assign_dates') ?>" />
+		</form>
+	</div><!--DATES_LBX-->
 </div>
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript" src="/js2/user/trips.itinerary.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('input.calendar1').datepicker({
+		minDate:new Date(),
+		onSelect:function(date){
+			$end = $(this).parents('.cont').find('input.calendar2');
+			$end.datepicker('option','minDate', date);
+		},
+		dateFormat:'D M d yy'
+	});
+	
+	$('input.calendar2').datepicker({
+		minDate:new Date(),
+		dateFormat:'D M d yy'
+	});
+});
+</script>
 <style type="text/css">
 .jcarousel-clip.unhidden {
 	position:static !important;

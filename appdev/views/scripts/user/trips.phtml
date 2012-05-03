@@ -169,83 +169,41 @@
     <?php endforeach ?>
 	<?php foreach($this->trips as $trip): ?>
     <?php if($trip->start == '0000-00-00' or $trip->end == '0000-00-00'): ?>
-    <div id="set_dates_<?= $trip->id ?>">
-    	<form method="post" action="">
-            <div class="lb-forgot trip-dates">
-                <div class="ttl">
-                    Ready to travel?
-                    <span>We need some information about your trip to make it fabuluos!</span>
-                </div><!-- closes ttl -->
-                <div class="content">
-                    <div class="left">
-                        <span>Set the starting date</span>
-                        <input name="start" class="calendar1" type="text" />
-                    </div><!-- closes left -->
-                    <div class="right">
-                        <span>Set the ending date</span>
-                        <input type="text" name="end" class="calendar2" />
-                    </div><!-- closes right -->				
-                    <input type="checkbox" />
-                    <label>Receive special offers from vendors near the places I'll visit</label>
-                </div><!-- closes content -->
-                <div class="bottom">
-                    <input type="submit" class="btn-1" value="Manage Itinerary" />
-                    <span class="btn-4" onclick="$.fancybox.close()">Cancel</span>
-                </div><!-- closes bottom -->
-            </div><!-- closes lb-forgot -->
-            <input type="hidden" name="ids" value="<?= $trip->id ?>" />
-            <input type="hidden" name="token" value="<?= $trip->token ?>" />
-            <input type="hidden" name="_task" value="<?= md5('assign_dates') ?>" />
-        </form>
-    </div>
-    <?php elseif(isset($this->missedIds[$trip->id])): ?>     
-    <div class="redefineDates lb" id="redefineDates_<?= $trip->id ?>">
-    	<form method="post" action="">
-            <div class="top">Redefine Travel Date</div>
-            <div class="cont">
-                <p>When do you want to start your trip?</p>
-                <div class="calendar"></div>
-                <div class="bottom">
-                    <input type="submit" class="btn-1" name="" value="Update Dates" />
-                    <a onclick="$.fancybox.close()" class="btn-10">Cancel</a>
-                </div><!--BOTTOM-->
-            </div><!--CONT-->	
-            <input type="hidden" name="ids" value="<?= $trip->id ?>" />
-            <input type="hidden" name="token" value="<?= $trip->token ?>" />
-            <input type="hidden" name="_task" value="<?= md5('update_dates') ?>" />
-            <input type="hidden" name="date" value="<?= date('Y-m-d') ?>" />
-        </form>
-	</div><!--REDEFINEDATES-->
-	
-	<div class="dates_lbx lb" id="dates_lbx">
+    <div class="dates_lbx lb" id="set_dates_<?= $trip->id ?>">
 		<form method="post" action="">
-			<div class="top">Redefine Travel Date<span class="label">7 Days Trip</span></div><!--TOP-->
+			<div class="top">Set Trip Dates<span class="label">When?</span></div><!--TOP-->
 			<div class="cont">
 				<label>Start</label>
-				<input type="text" id="start" name="start" value="dd/mm/yyyy" />
+                <input name="start" class="calendar1" type="text" />
 				<label>End</label>
-				<input type="text" id="end" name="end" value="dd/mm/yyyy" />
-			</div><!--CONT-->
-			<div class="bottom">
-				<input class="btn-1" type="submit" value="Set Dates & Continue" />
-				<a href="$.fancybox().close" class="btn-10">Cancel</a>
-			</div><!--BOTTOM-->
-		</form>
-	</div><!--DATES_LBX-->
-	
-	<div class="dates_lbx lb" id="dates_lbx">
-		<form method="post" action="">
-			<div class="top">Update Travel Dates<span class="label">7 Days Trip</span></div><!--TOP-->
-			<div class="cont">
-				<label>Start</label>
-				<input type="text" id="start" name="start" value="dd/mm/yyyy" />
-				<label>End</label>
-				<input type="text" id="end" name="end" value="dd/mm/yyyy" />
+                <input name="end" class="calendar2" type="text" />
 			</div><!--CONT-->
 			<div class="bottom">
 				<input class="btn-1" type="submit" value="Update dates" />
-				<a href="$.fancybox().close" class="btn-10">Cancel</a>
+                <a href="#" onclick="$.fancybox.close(); return false;" class="btn-10">Cancel</a>
 			</div><!--BOTTOM-->
+            <input type="hidden" name="ids" value="<?= $trip->id ?>" />
+            <input type="hidden" name="token" value="<?= $trip->token ?>" />
+            <input type="hidden" name="_task" value="<?= md5('assign_dates') ?>" />
+		</form>
+	</div><!--DATES_LBX-->
+    <?php elseif(isset($this->missedIds[$trip->id])): ?>     
+    <div class="dates_lbx lb" id="redefineDates_<?= $trip->id ?>">
+		<form method="post" action="">
+			<div class="top">Update Trip Dates<span class="label"><?= $trip->days ?> Days</span></div><!--TOP-->
+			<div class="cont">
+				<label>Start</label>
+                <input name="start" class="calendar1" type="text" />
+				<label>End</label>
+                <input name="end" class="calendar2" type="text" />
+			</div><!--CONT-->
+			<div class="bottom">
+				<input class="btn-1" type="submit" value="Update dates" />
+                <a href="#" onclick="$.fancybox.close(); return false;" class="btn-10">Cancel</a>
+			</div><!--BOTTOM-->
+            <input type="hidden" name="ids" value="<?= $trip->id ?>" />
+            <input type="hidden" name="token" value="<?= $trip->token ?>" />
+            <input type="hidden" name="_task" value="<?= md5('assign_dates') ?>" />
 		</form>
 	</div><!--DATES_LBX-->
     <?php endif ?>
@@ -293,7 +251,7 @@
 		$('input.calendar1').datepicker({
 			minDate:new Date(),
 			onSelect:function(date){
-				$end = $(this).parents('.content').find('input.calendar2');
+				$end = $(this).parents('.cont').find('input.calendar2');
 				$end.datepicker('option','minDate', date);
 			},
 			dateFormat:'D M d yy'
