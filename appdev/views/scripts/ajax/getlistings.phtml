@@ -51,14 +51,13 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
     </div><!--FILTER-->
     <span class="shw"></span>
 </div><!--SORT-->
-                
-
 <?php else: ?>
 <?php $url = $this->baseUrl() .'/'. $this->country->identifier .'/filter';
 $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this->stars; ?>
 <h3>There are <strong><?= $this->listing_count ?> <?= $this->categ ?> in <?= $this->country->title ?></strong></h3>
 <?php endif ?>
 <div class="results-wrapper">
+
 <?php if(count($this->listings) > 0): ?>
 <?php if(!isset($_COOKIE['tooltipHelpSearch'])): ?>
 <div class="firstime_tip">
@@ -84,19 +83,17 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
 <div class="loading"><div class="load">Loading...</div></div>
 <?php if(count($this->listings) > 0): ?>
 <?php foreach($this->listings as $i => $list): ?>	
-
-
-
     <div class="single <?=$css_name[$list->main_type] ?>-1">
-        <div class="image">
         
         <?php if($list->main_type == 2 || $list->main_type == 4 || $list->main_type == 7):?>
-			<?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
+        <div class="image">
+        	<?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
                 <a href="#" class="add been"></a>
+				<?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
             <?php else: ?>
                 <a href="/login" class="add been not"></a>
 			<?php endif ?>
-            <?= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124') ?>
+            <?//= $this->lazylisting(241, $list->image, '','1:1') ?>
             <ul class="rating">
                 <li><a href="" class="slct"></a></li>
                 <li><a href="" class="slct"></a></li>
@@ -105,7 +102,7 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
                 <li><a href="" class="nrml"></a></li>
             </ul>
             <div class="hvr">
-                <a class="restaurant" href="">
+                <a class="restaurant" href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
                 View <?=$cat_name[$list->main_type] ?>
                 <span> </span>
                 </a>
@@ -120,13 +117,15 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
         </div><!--INFO-->
  
          <?php else:?>
-            <?= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124') ?>
-            
+        <div class="image">
 			<?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
                 <a href="#" class="add been"></a>
+				<?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
             <?php else: ?>
                 <a href="/login" class="add been not"></a>
 			<?php endif ?>
+            <?//= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124') ?>
+            
             <ul class="rating">
                 <li><a href="" class="slct"></a></li>
                 <li><a href="" class="slct"></a></li>
@@ -151,18 +150,15 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
             <div class="price"><sup>$</sup><?= $list->price ?> <sub><?=$per_night[$list->main_type] ?></sub></div>
             <div class="clear"></div>
         </div><!--INFO-->
-       
         <?php endif;?>
-        
     </div><!--SINGLE-->
-
-
-
 <?php endforeach ?>
 <div class="clear"></div>
 <?php else: ?>
 <p>No Listings Found</p>
 <div class="clear"></div>
 <?php endif ?>
+
+
 </div><!-- closes results-wrapper -->
 <div class="loading2"></div>
