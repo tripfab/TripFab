@@ -62,18 +62,19 @@
                             <div class="descrip"> 
                                 <?= $this->thumbnail(49, $item->listing_image, '', '1:1'); ?>
                                 <h4><?= $item->listing_title ?></h4>
-                                <a href="" class="type">View <?= $this->types[$item->listing_type]['name'] ?></a>
+                                <a href="/<?= $item->coidf ?>/<?= $item->ciidf ?>/<?= $item->idf ?>" 
+                                class="type">View <?= $this->types[$item->listing_type]['name'] ?></a>
                                 <p><?= $item->listing_city ?>, <?= $item->listing_country ?></p>
                             </div><!--DESCRIP-->
                             <?php if($item->available): ?>
                             <div class="info"> 
                                 <span><em></em>Available</span>
-                                <p>Just accept the terms</p>
+                                <p>Ready to go</p>
                             </div><!--INFO--> 
                             <?php else: ?>
                             <div class="info"> 
                                 <span><em></em>Available</span>
-                                <p>But there are some problems</p>
+                                <p>Click to confirm details</p>
                             </div><!--INFO--> 
                             <?php endif ?>
                         </div><!--HEADER-->
@@ -574,7 +575,8 @@
                             <div class="descrip"> 
                                 <?= $this->thumbnail(49, $item->listing_image, '', '1:1'); ?>
                                 <h4><?= $item->listing_title ?></h4>
-                                <a href="" class="type">View <?= $this->types[$item->listing_type]['name'] ?></a>
+                                <a href="/<?= $item->coidf ?>/<?= $item->ciidf ?>/<?= $item->idf ?>" 
+                                class="type">View <?= $this->types[$item->listing_type]['name'] ?></a>
                                 <p><?= $item->listing_city ?>, <?= $item->listing_country ?></p>
                             </div><!--DESCRIP-->
                             <div class="info">
@@ -590,7 +592,8 @@
                             <div class="descrip"> 
                                 <?= $this->thumbnail(49, $item->listing_image, '', '1:1'); ?>
                                 <h4><?= $item->listing_title ?></h4>
-                                <a href="" class="type">View <?= $this->types[$item->listing_type]['name'] ?></a>
+                                <a href="/<?= $item->coidf ?>/<?= $item->ciidf ?>/<?= $item->idf ?>" 
+                                class="type">View <?= $this->types[$item->listing_type]['name'] ?></a>
                                 <p><?= $item->listing_city ?>, <?= $item->listing_country ?></p>
                             </div><!--DESCRIP-->
                             <?php if($item->available): ?>
@@ -679,6 +682,12 @@
 			$('.tip').toggleClass('hidden');
 			return false
 		});
+		
+		$('.header .descrip a.type').click(function(e){
+			e.preventDefault();
+			window.location.href = $(this).attr('href');
+			return false;
+		}); 
 		$("#checkout_accordion").accordion({
 			active:false,
 			autoHeight:false,
@@ -712,6 +721,7 @@
 <style type="text/css">
 #custom_checkout .details .item.last {
 	border-bottom:0px none;}
+#custom_checkout .header .type { display:inline;}
 </style>
 </body>
 </html>

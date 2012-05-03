@@ -12,6 +12,12 @@
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="css2/ie.css" /><![endif]-->
     <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
     <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
+    <style type="text/css">
+	#home_trips .side .single h6 a {
+		color:#000;
+		text-decoration:none;
+	}
+	</style>
 </head>
 <body id="home2">
 <div id="wp_all">
@@ -77,7 +83,9 @@
 					<ul>
 						<li><a href="#hotels"><span class="hotel"></span>Featured Hotels</a></li>
 						<li><a href="#activity"><span class="activity"></span>Featured Activities</a></li>
+	                    <?php if($this->user->role_id == 2): ?>
 						<li><a href="#itinerary"><span class="itinerary"></span>Featured Itineraries</a></li>
+                        <?php endif ?>
 					</ul>
 					<div id="hotels">
 						<div class="slideshow">
@@ -86,9 +94,10 @@
 							<div class="cont">
                             	<?php foreach($this->hotels as $h): ?>
 								<div class="one">
-                                	<a href="<?= $h->id ?>"><?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260'); ?></a>
+                                	<a href="/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>">
+									<?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260'); ?></a>
 									<h5><?= $h->title ?></h5>
-									<span class="meta"><strong><em></em>Nicoya Peninsula,</strong> Costa Rica</span>
+									<span class="meta"><strong><em></em><?= $h->city ?>,</strong> <?= $h->country ?></span>
 									<div class="price">
 										<div>
 											<span><?= $h->price ?></span>
@@ -110,9 +119,10 @@
 							<a href="" class="lfarrow"></a>
 							<div class="cont"><?php foreach($this->activities as $h): ?>
 								<div class="one">
-                                	<?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260'); ?>
+                                	<a href="/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>">
+									<?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260'); ?></a>
 									<h5><?= $h->title ?></h5>
-									<span class="meta"><strong><em></em>Nicoya Peninsula,</strong> Costa Rica</span>
+									<span class="meta"><strong><em></em><?= $h->city ?>,</strong> <?= $h->country ?></span>
 									<div class="price">
 										<div>
 											<span><?= $h->price ?></span>
@@ -128,6 +138,7 @@
 						</div><!--SLIDESHOW-->
 					</div><!--ACTIVTIY-->
 					
+                    <?php if($this->user->role_id == 2): ?>
 					<div id="itinerary">
 						<div class="slideshow">
 							<a href="" class="rgarrow"></a>
@@ -152,6 +163,7 @@
 							</div><!--CONT-->
 						</div><!--SLIDESHOW-->
 					</div><!--ITINERARY-->
+                    <?php endif ?>
 					
 				</div><!--TABS-->
 			</div><!--FEATURED-->
@@ -171,9 +183,17 @@
                     	<?php for($j=$i;(($j<count($this->userTrips)) and $j<($i+3));$j++): ?>
                         <?php $trip = $this->userTrips[$j]; ?>
 						<div class="single">
+			            	<?php if(!is_null($this->user) and $this->user->role_id == 2): ?>
+                            <a href="/user/trips/"><?= $this->thumbnail(array('width'=>109,'height'=>88),$trip->image,'','109:88'); ?></a>
+                            <?php else: ?>
                             <a href="/trips/view/<?= $trip->id ?>"><?= $this->thumbnail(array('width'=>109,'height'=>88),$trip->image,'','109:88'); ?></a>
+                            <?php endif ?>
 							<div class="info">
-								<h6><?= $trip->title ?></h6>
+				            	<?php if(!is_null($this->user) and $this->user->role_id == 2): ?>
+								<h6><a href="/user/trips/"><?= $trip->title ?></a></h6>
+                                <?php else: ?>
+								<h6><a href="/trips/view/<?= $trip->id ?>"><?= $trip->title ?></a></h6>                                
+                                <?php endif ?>
 								<span class="meta"><em></em><?= $trip->days ?> Days Trip</span>
 								<div class="prices">
 									<sup>$</sup>
