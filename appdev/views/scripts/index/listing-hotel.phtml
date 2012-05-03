@@ -548,8 +548,7 @@
         			<div class="clear"></div>
         		</div><!--CONT-->
         		<div class="bottom">
-        			<input class="btn-1" type="submit" name="" value="Try Again" />
-        			<a href="" class="btn-10">Cancel</a>
+        			<input onclick="$.fancybox.close(); return false;" class="btn-1" type="submit" name="" value="Got it!" />
         		</div><!--BOTTOM-->
         	</div><!--ERROR_PH-->
         	
@@ -560,8 +559,8 @@
         			<p>An error ocurred because you entered a wrong phone number, please dial again</p>
         		</div><!--CONT-->
         		<div class="bottom">
-        			<input class="btn-1" type="submit" name="" value="Dial Again" />
-        			<a href="" class="btn-10">Cancel</a>
+        			<input class="btn-1 phonecall" href="#start_call" type="submit" name="" value="Dial Again" />
+        			<a href="" onclick="$.fancybox.close(); return false;" class="btn-10">Cancel</a>
         			<div class="clear"></div>
         		</div><!--BOTTOM-->
         	</div><!--ERROR_PH-->
@@ -569,12 +568,12 @@
         	<div class="error_ph" id="errorC">
         		<div class="cont">
         			<span class="icon1"></span>
-        			<h3>Connected Successfully!</h3>
+        			<h3>Successfully Connected!</h3>
         			<p>You’ll receive a phone call from our partner in a few minutes</p>
         			<div class="clear"></div>
         		</div><!--CONT-->
         		<div class="bottom">
-        			<input class="btn-1" type="submit" name="" value="Okay" />
+        			<input class="btn-1" type="submit" name="" value="Got it!" onclick="$.fancybox.close(); return false;" />
         		</div><!--BOTTOM-->
         	</div><!--CONECTED_PH-->
         	

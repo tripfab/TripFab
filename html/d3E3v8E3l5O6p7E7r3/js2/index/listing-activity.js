@@ -477,24 +477,51 @@ $(document).ready(function() {
             return false;
         }
         
-        $.ajax({
-            url:'/phone/call',
-            type:'post',
-            data:{
-                listing:$('body').data('listingid'),
-                number:'+'+$code+''+$numb
-            },
-            success:function(res){
-                if(res.type == "ok") {
-                    $.fancybox.close();
-                    showAlert('You will receive a call from TRIPFAB in the next 5 minutes. Please wait');
-                } else {
-                    $.fancybox.close();
-                    showError('Sorry: '+res.message);
-                }
-            },
-            error:function(res){
-                //console.log(res);
+        //$.fancybox.close();
+        
+        $.fancybox({		
+            padding:0,
+            overlayColor:'#fff',
+            centerOnScroll:1,
+            showCloseButton:0,
+            href:'#load_ph',
+            onComplete:function(){
+                $.ajax({
+                    url:'/phone/call',
+                    type:'post',
+                    data:{
+                        listing:$('body').data('listingid'),
+                        number:'+'+$code+''+$numb
+                    },
+                    success:function(res){
+                        if(res.type == "ok") {
+                            $.fancybox({
+                                padding:0,
+                                overlayColor:'#fff',
+                                centerOnScroll:1,
+                                showCloseButton:0,
+                                href:'#errorC'
+                            });
+                        } else {
+                            $.fancybox({
+                                padding:0,
+                                overlayColor:'#fff',
+                                centerOnScroll:1,
+                                showCloseButton:0,
+                                href:'#errorB'
+                            });
+                        }
+                    },
+                    error:function(res){
+                        $.fancybox({
+                            padding:0,
+                            overlayColor:'#fff',
+                            centerOnScroll:1,
+                            showCloseButton:0,
+                            href:'#errorA'
+                        });
+                    }
+                });
             }
         });
         
