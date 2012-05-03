@@ -4,7 +4,7 @@ $(document).ready(function() {
         padding:0,
         overlayColor:'#fff',
         centerOnScroll:1,
-        showCloseButton:0
+        showCloseButton: true
     });
     
     $('.lbox .btn-2, .lbox .btn-11').click(function(){
@@ -357,4 +357,9 @@ $(document).ready(function() {
         $('.firstime_tip').fadeOut();
         return false;
     });
+    $('#start, #end').datepicker({
+    	dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+    	showOtherMonths: true
+    });
+    
 });

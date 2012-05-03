@@ -7752,6 +7752,11 @@ h2.title .back:hover,
 	padding: 0 10px;
 	margin-top: 10px;
 }
+.w3_itinerary .btn-10 {
+	float: right;
+	height: 30px;
+	margin-top: 10px;
+}
 .title_itinerary {
 	overflow: hidden;
 	height: 17px;
@@ -17927,6 +17932,40 @@ background-color: #FFF;
 .redefineDates .calendar .ui-datepicker .ui-datepicker-prev {
 	top: 11px;
 }
+.dates_lbx {
+	width: 320px;
+}
+.dates_lbx .top {
+text-indent: 20px;
+}
+.dates_lbx .label {
+	background: url(https://developer.tripfab.com/images6/trips-label.png) no-repeat;
+	position: absolute;
+	top: 10px;
+	right: 0;
+	width: 90px;
+	height: 22px;
+	font: bold 12px/22px Helvetica;
+	color: #FFF;
+	text-align: right;
+	padding-right: 15px;
+}
+.dates_lbx .cont {
+	padding: 15px 0 15px 20px;
+	background-color: #FFF;
+}
+.dates_lbx .cont input[type="text"] {
+	width: 79px;
+	height: 30px;
+	margin-right:23px;
+	margin-left: 6px;
+	color: #898989;
+	font: normal 13px/30px Helvetica;
+}
+.dates_lbx .cont input[type="text"]:focus{
+	color: #303030;
+	font-weight: bold;
+ }
 /*END MY TRIPS-------------------------------------------------------------*/
 
 /*SEARCH RESULTS COLLECTION------------------------------------------------*/
