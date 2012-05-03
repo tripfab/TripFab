@@ -4,9 +4,9 @@
     <?php else: ?>
     <?= $this->logo('/images/default-profile.gif', '109:89') ?>
     <?php endif ?>
-</div><!--LOGOS-->
+</div><!--LOGOS-->	
 <div class="ttl">
-    <h2><?= $this->vendor->name ?></h2>
+    <h2 id="title"><?= $this->vendor->name ?></h2>
     <span><em></em>132 Reservations since April 2012</span>
 </div><!--TTL-->
 <p class="qz">
@@ -21,7 +21,7 @@
 </ul>
 <?php else: ?>
 <ul>
-    <li><a href="/login" class="phone">Phone Call</a></li>
+    <li><span>FREE</span><a href="/login" class="phone">Phone Call</a></li>
     <li><a href="/login" class="chat">Live Chat</a></li>
     <li><a href="/login" class="msj">Message</a></li>
 </ul>
