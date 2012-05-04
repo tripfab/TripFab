@@ -4275,6 +4275,8 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->trip->days = $_POST['days'];
                 $this->view->trip->nights = $_POST['nights'];
                 $this->view->trip->country_id = $_POST['trip_country'];
+                $this->view->trip->min = $_POST['min'];
+                $this->view->trip->max = $_POST['max'];
 
                 $this->render('trip1');
                 return;
@@ -4285,6 +4287,8 @@ class AdminController extends Zend_Controller_Action {
             $trip->days = $_POST['days'];
             $trip->nights = $_POST['nights'];
             $trip->country_id = $_POST['trip_country'];
+            $trip->min = $_POST['min'];
+            $trip->max = $_POST['max'];
             $trip->save();
 			
             if ($uploadedFileName = $this->saveTripPhoto($trip->id)) {

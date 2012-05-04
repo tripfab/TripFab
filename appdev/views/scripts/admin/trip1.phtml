@@ -87,9 +87,35 @@
 										<span>Write a nice description for your trip</span>
 									</div>
 									<!-- closes item -->
-                                    <div class="item last">
+                                    <div class="item">
 										<input type="text" class="noclean" name="price" value="<?php echo $this->trip->price?>" />
 										<h4>Price</h4>
+										<span>Price for trip</span>
+									</div>
+									<!-- closes item -->
+                                    <div class="item">
+                                    	<div class="selects">
+                                    	<select name="min" style="width: 100px;">
+                                        	<?php for($i=1;$i<=20;$i++): ?>
+                                            <?php $selected = ($this->trip->min == $i) ? 'selected="selected"' : '' ?>
+                                        	<option <?= $selected ?> value="<?= $i ?>"><?= $i ?></option>
+                                            <?php endfor ?>
+                                        </select>
+                                        </div>
+										<h4>Minimun</h4>
+										<span>Price for trip</span>
+									</div>
+									<!-- closes item -->
+                                    <div class="item selects last">
+                                    	<div class="selects">
+                                    	<select name="max" style="width: 100px;">
+                                        	<?php for($i=1;$i<=20;$i++): ?>
+                                            <?php $selected = ($this->trip->max == $i) ? 'selected="selected"' : '' ?>
+                                        	<option <?= $selected ?> value="<?= $i ?>"><?= $i ?></option>
+                                            <?php endfor ?>
+                                        </select>
+                                        </div>
+										<h4>Maximun</h4>
 										<span>Price for trip</span>
 									</div>
 									<!-- closes item -->
