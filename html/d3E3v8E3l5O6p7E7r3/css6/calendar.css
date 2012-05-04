@@ -155,9 +155,7 @@
     line-height: 26px;
     padding: 2px 3px;
 }
-#calendar .datepickerViewDays .datepickerWeek {
-	display: none;
-}
+
 #calendar .datepickerViewDays td a {
 	background-color: #a9d9fb;
 	color: #FFF;
@@ -174,6 +172,100 @@
 	color: #FFFFFF;
 	text-shadow: 0px 1px 0px #000;
 }
+#calendar .datepickerViewDays thead {
+	background: url("https://developer.tripfab.com/images2/g-15.png") repeat-x scroll 0 0 transparent;
+    color: #FFFFFF;
+    height: 44px;
+    line-height: 44px;
+    margin-bottom: 10px;
+    padding: 0;
+    position: absolute;
+    top: 0 ;
+    left: 0;
+    width: 296px;
+}
+#calendar .datepickerViewDays thead tr {
+	width: 296px;
+	position: relative;
+	display: block;
+}
+#calendar .datepickerDoW {
+	height: 30px;
+	padding: 16px 22px 0;
+}
+#calendar .datepickerViewDays thead tr th {
+	display: block;
+}
+#calendar .datepickerViewDays thead tr.datepickerDoW th {
+	display: table-cell;
+	border: 0 none;
+	    line-height: 26px;
+	    padding: 2px 3px;
+	    width: 30px;
+}
+#calendar .datepickerDays {
+	display: block;
+}
+.datepickerMonth span{
+	color: #FFF;
+	display: block;
+	text-align: center;
+	text-transform: uppercase;
+	font: bold 12px Helvetica;
+	padding-top: 17px;
+}
+#calendar #datepicker tbody {
+	padding: 72px 22px 0;
+}
+#calendar .datepickerGoPrev a{
+	background: url("https://developer.tripfab.com/images6/lstng_htl.png") no-repeat scroll -439px -328px #60B5F7;
+	    left: 0;
+	    padding: 0 10px 0 0;
+	    text-align: right;
+	    display: block;
+	    width: 56px;
+	    height: 20px;
+	    position: absolute;
+	    top: 11px;
+	    left: 0;
+}
+#calendar .datepickerGoNext a {
+	background: url("https://developer.tripfab.com/images6/lstng_htl.png") no-repeat scroll -362px -328px #60B5F7;
+   padding: 0  0 0 10px;
+   display: block;
+   width: 56px;
+   height: 20px;
+   position: absolute;
+   top: 11px;
+   right: 0;
+   text-align: left;
+}
+#calendar .datepickerGoPrev a:hover,
+#calendar .datepickerGoNext a {
+	color: #FFF;
+}
+#calendar .datepickerDoW th{
+	text-align: center;
+}
+#calendar .datepickerViewDays .datepickerNotInMonth a {
+	background-color: #E1E1E1;
+	    color: #6F6F6F !important;
+	    font-weight: normal !important;
+	    height: 26px;
+	    padding: 0 !important;
+	    text-shadow: 0 1px 0 #FFFFFF;
+	    width: 30px;
+}
+tbody.datepickerDays td.datepickerSelected {
+	background: none !important;
+}
+#calendar .datepickerViewDays .datepickerDays td.datepickerSelected a {
+	background-color: #60B5F7 !important;
+	    color: #FFFFFF !important;
+	    text-shadow: 0 1px 0 #3C96DC !important;
+}
+
+
 
 #ui-datepicker-div {
 	width: 214px;
