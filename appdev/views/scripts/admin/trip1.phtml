@@ -173,6 +173,21 @@
 											<select  id="trip_city5"  name="trip_city5">
 												<option>Select City</option>
 											</select>
+											<select  id="trip_city6"  name="trip_city6">
+												<option>Select City</option>
+											</select>
+											<select  id="trip_city7"  name="trip_city7">
+												<option>Select City</option>
+											</select>
+											<select  id="trip_city8"  name="trip_city8">
+												<option>Select City</option>
+											</select>
+											<select  id="trip_city9"  name="trip_city9">
+												<option>Select City</option>
+											</select>
+											<select  id="trip_city10"  name="trip_city10">
+												<option>Select City</option>
+											</select>
 										</div>
 										<!-- closes selects -->
 										<h4>Main Cities</h4>
@@ -244,11 +259,21 @@
 				$("#trip_city3" ).children().remove();
 				$("#trip_city4" ).children().remove();
 				$("#trip_city5" ).children().remove();
+				$("#trip_city6" ).children().remove();
+				$("#trip_city7" ).children().remove();
+				$("#trip_city8" ).children().remove();
+				$("#trip_city9" ).children().remove();
+				$("#trip_city10" ).children().remove();
 				$("#trip_city1" ).append(new Option('Select City', 0, true, true));
 				$("#trip_city2" ).append(new Option('Select City', 0, true, true));
 				$("#trip_city3" ).append(new Option('Select City', 0, true, true));
 				$("#trip_city4" ).append(new Option('Select City', 0, true, true));
 				$("#trip_city5" ).append(new Option('Select City', 0, true, true));
+				$("#trip_city6" ).append(new Option('Select City', 0, true, true));
+				$("#trip_city7" ).append(new Option('Select City', 0, true, true));
+				$("#trip_city8" ).append(new Option('Select City', 0, true, true));
+				$("#trip_city9" ).append(new Option('Select City', 0, true, true));
+				$("#trip_city10" ).append(new Option('Select City', 0, true, true));
 				var selected = false;
 				$.getJSON(url, function(fsdata) {
 					$.each(fsdata.data, function(i,city){ 
@@ -272,6 +297,26 @@
 						selected = false;
 						if(typeof selectedCities[4] != "undefined"){ selected = selectedCities[4].city_id == city.id ? true : false ;}
 						$("#trip_city5" ).append(new Option(city.title, city.id, true, selected));
+						
+						selected = false;
+						if(typeof selectedCities[5] != "undefined"){ selected = selectedCities[5].city_id == city.id ? true : false ;}
+						$("#trip_city6" ).append(new Option(city.title, city.id, true, selected));
+						
+						selected = false;
+						if(typeof selectedCities[6] != "undefined"){ selected = selectedCities[6].city_id == city.id ? true : false ;}
+						$("#trip_city7" ).append(new Option(city.title, city.id, true, selected));
+						
+						selected = false;
+						if(typeof selectedCities[7] != "undefined"){ selected = selectedCities[7].city_id == city.id ? true : false ;}
+						$("#trip_city8" ).append(new Option(city.title, city.id, true, selected));
+						
+						selected = false;
+						if(typeof selectedCities[8] != "undefined"){ selected = selectedCities[8].city_id == city.id ? true : false ;}
+						$("#trip_city9" ).append(new Option(city.title, city.id, true, selected));
+						
+						selected = false;
+						if(typeof selectedCities[9] != "undefined"){ selected = selectedCities[9].city_id == city.id ? true : false ;}
+						$("#trip_city10" ).append(new Option(city.title, city.id, true, selected));
 						
 					});
 				});	

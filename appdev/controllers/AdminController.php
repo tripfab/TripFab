@@ -4262,7 +4262,7 @@ class AdminController extends Zend_Controller_Action {
             }
 			
 			$selectedCity = array();
-			for($i=1; $i<=5; $i++){
+			for($i=1; $i<=10; $i++){
 				$selectedCity[] = $_POST["trip_city$i"] ? (object)array('trip_id'=>$trip->id, 'city_id'=>$_POST["trip_city$i"]): (object)array('trip_id'=>$trip->id, 'city_id'=>0);
 			}
 			$this->view->cities = json_encode($selectedCity);
