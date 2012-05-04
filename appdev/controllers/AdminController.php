@@ -4277,6 +4277,7 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->trip->country_id = $_POST['trip_country'];
                 $this->view->trip->min = $_POST['min'];
                 $this->view->trip->max = $_POST['max'];
+                $this->view->trip->category_id = $_POST['category_id'];
 
                 $this->render('trip1');
                 return;
@@ -4289,6 +4290,7 @@ class AdminController extends Zend_Controller_Action {
             $trip->country_id = $_POST['trip_country'];
             $trip->min = $_POST['min'];
             $trip->max = $_POST['max'];
+            $trip->category_id = $_POST['category_id'];
             $trip->save();
 			
             if ($uploadedFileName = $this->saveTripPhoto($trip->id)) {
@@ -4302,6 +4304,9 @@ class AdminController extends Zend_Controller_Action {
             $this->_redirect('/admin/trips/edit/1/' . $trip->id);
             //put success message
         }
+        
+        $categories = new Zend_Db_Table('trip_categories');
+        $this->view->categories = $categories->fetchAll();
 
         $this->render('trip1');
     }

@@ -88,6 +88,18 @@
 									</div>
 									<!-- closes item -->
                                     <div class="item">
+                                    	<div class="selects">
+                                        	<select name="category_id">
+                                            	<?php foreach($this->categories as $cat): ?>
+                                                <?php $selected = ($this->trip->category_id == $cat->id) ? 'selected="selected"' : '' ?>
+                                            	<option <?= $selected ?> value="<?= $cat->id ?>"><?= $cat->name ?></option>
+                                                <?php endforeach ?>
+                                            </select>
+                                        </div>
+                                        <h4>Category</h4>
+                                        <span>Select a category</span>
+                                    </div>
+                                    <div class="item">
 										<input type="text" class="noclean" name="price" value="<?php echo $this->trip->price?>" />
 										<h4>Price</h4>
 										<span>Price for trip</span>
