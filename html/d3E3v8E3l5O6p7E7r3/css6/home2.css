@@ -796,6 +796,7 @@
 	margin: 0 auto;
 	border-bottom: 1px solid #e1e1e1;
 	padding-top: 15px;
+	position: relative;
 }
 #home_trips .side .single.last {
 	border: none;
@@ -852,17 +853,22 @@
 #home_trips .side .single .info {
 	float: left;
 	width: 220px;
-	position: relative;
 }
 #home_trips .side .single h6 {
-	font: normal 16px Helvetica;
-	margin: 0 0 6px;
+	font: normal 16px/18px Helvetica;
+	margin: -2px 0 5px;
 }
 #home_trips .side .single .meta{
 	color: #898989;
 	display: block;
     margin-bottom: 14px;
     font: bold 11px Helvetica;
+}
+#home_trips .side .single h6 a {
+	color: #303030;
+}
+#home_trips .side .single h6 a:hover {
+	color: #60b5f7;
 }
 #home_trips .side .single .meta em {
 	display: block;
@@ -874,6 +880,9 @@
 }
 #home_trips .side .prices {
     color: #303030;
+    position: absolute;
+    bottom: 9px;
+    left: 123;
 }
 #home_trips .side .prices span {
 	font: bold 24px Helvetica;
@@ -883,9 +892,10 @@
 	font-size: 11px;
 }
 #home_trips .side .prices sup{
-	vertical-align: top;
+	float: left;
+	display: block;
 	font:bold 14px Helvetica;
-	margin-top: 2px;
+	margin-top: 3px;
 }
 #home_trips .side .edit {
 	color: #60B5F7;
@@ -893,8 +903,8 @@
 	font: bold 11px Helvetica;
 	background: url(https://developer.tripfab.com/images6/home_icons.png) no-repeat -69px -94px ;
 	position: absolute;
-	bottom: 6px;
-	right: 10px;
+	bottom: 13px;
+	right: 9px;
 }
 #home_trips .side .cont {
 	width: 342px;

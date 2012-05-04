@@ -164,10 +164,9 @@ body {
 /*- Buttons Styles -----------------------------------------------------------*/
 
 .btn-1 {
-    background: url("https://developer.tripfab.com/images2/btn-1.gif") repeat-x  0 0 #8dc73f;
+    background: url("../images2/btn-1.gif") repeat-x  0 0 #8dc73f;
     border: 1px solid #7AB130;
     color: #FFFFFF;
-    cursor: pointer;
     display: block;
     font: bold 11px/30px Helvetica;
     height: 30px;
@@ -175,13 +174,11 @@ body {
     text-align: center;
 	cursor: pointer;
 	padding: 0 8px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
+	-webkit-border-radius: 2px !important;
+	-moz-border-radius: 2px !important;
+	border-radius: 2px !important;
 	text-shadow: 0px 1px 0px #5C961F;
-	
-	filter: progid:DXImageTransform.Microsoft.Chroma(Color=#000000)
-		    progid:DXImageTransform.Microsoft.DropShadow(OffX=0, OffY=4, Color=#000000);
+	behavior: url(/PIE.htc);
 }
 
 .btn-1:hover {
@@ -333,18 +330,18 @@ body {
 }
 
 .btn-10 {
-	background: url(https://developer.tripfab.com/images2/btn-10.gif) repeat-x bottom left #fff; 
+	background: url(https://developer.tripfab.com/images6/btn-10.gif) repeat-x bottom left #fff; 
 	height: 30px;
 	color: #616161;
 	font: bold 11px/30px Helvetica;
 	padding: 0 17px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
 	text-shadow: 0px 1px 0px #FFFFFF;
-	filter: dropshadow(color=#FFFFFF, offx=0, offy=1);
 	border: 1px solid #dbdbdb;
 	text-align: center;
+	behavior: url(/PIE.htc);
 }
 .btn-10:hover {
 	-webkit-box-shadow: 0px 1px 1px 0px #C5C5C5;
