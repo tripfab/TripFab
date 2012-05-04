@@ -102,7 +102,7 @@ class SessionController extends Zend_Controller_Action {
             }
         } 
         catch (Exception $e) {
-            $result[] = $e->getMessage();
+            $result[] = 'Incorrect Email or Password';
         }
         return $result;
     }
