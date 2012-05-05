@@ -323,7 +323,7 @@
 	width: 8px;
 	height: 12px;
 	float: left;
-	margin: 0 5px 5px 3px;
+	margin: 5px 5px 5px 3px;
 }
 .lstng_dflt .top .info .location img {
 	margin: 2px 0 0 2px;
@@ -437,16 +437,27 @@
 	margin: 0 auto;
 }
 .lstng_dflt .top .photos ul li {
-	background-color: #000;
+	background: url("https://developer.tripfab.com/images6/lstng_htl.png") no-repeat -649px 0;
     float: left;
     height: 65px;
     width: 65px;
 }
-.lstng_dflt .top .photos img {
+.lstng_dflt .top .photos ul li {
 	background-color: #000;
-	opacity: 0.5;
+}
+.lstng_dflt .top .photos ul li a {
 	display: block;
 	float: left;
+	background-color: #000;
+	width: 65px;
+	height: 65px;
+	overflow: hidden;
+}
+.lstng_dflt .top .photos a img {
+	background-color: #000;
+	display: block;
+	float: left;
+	opacity: 0.5;
 }
 .lstng_dflt .top .photos .imgs a.active {
 	border: 3px solid #60b5f7;

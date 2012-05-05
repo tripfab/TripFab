@@ -90,23 +90,21 @@
                             </div><!--TEXT-->
                             
                             <div class="photos">
-                                <a href="" class="lf-arrow"></a>
-                                <div class="imgs">
-                                	<?php for($i=0; $i<count($this->pictures); $i=$i+10): ?>
-                                    <div class="single">
-                                    	<?php for($j=$i;$j<($i+10); $j++):?>
-                                        <?php if(isset($this->pictures[$j])): ?>
-                                        <?php $pic = $this->pictures[$j] ?>
-                                        <?php $class = ($j == 0) ? 'active' : '' ?>
-                                        <a class="<?= $class ?>" href="#img<?= $j ?>"><?= $this->thumbnail(65, $pic->url, '', '1:1') ?></a>
-                                        <?php else: ?>
-                                        <img src="/images2/empty-small-photo.png" width="65" height="65" />
-                                        <?php endif ?>
-                                        <?php endfor ?>
-                                    </div>
-                                    <?php endfor ?>
-                                </div><!--IMGS-->
-                                <a href="" class="rg-arrow"></a>
+                            	<?php for($i=0; $i<count($this->pictures); $i=$i+9): ?>
+                            	<ul>	
+                            		<?php for($j=$i;$j<($i+9); $j++):?>
+                            		<?php if(isset($this->pictures[$j])): ?>
+                            		<?php $pic = $this->pictures[$j] ?>
+                            		<?php $class = ($j == 0) ? 'active' : '' ?>
+                            	   	<li>
+                            			<a rel="group1" title="<?= $pic->location ?>" class="<?= $class ?> lbc" href="#img<?= $j ?>" data-tip="#small<?= $j ?>"><?= $this->thumbnail(65, $pic->url, '', '1:1') ?></a>
+                            		</li>
+                            		<?php else: ?>
+                            		<li></li>
+                            		<?php endif ?>
+                            		<?php endfor ?>
+                            	<?php endfor ?>
+                            		</ul>
                             </div><!--PHOTOS-->
                         </div><!--INFO-->
                         <div class="clear"></div>

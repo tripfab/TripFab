@@ -90,9 +90,9 @@
                             </div><!--TEXT-->
                             
                             <div class="photos">
-	                    		<?php for($i=0; $i<count($this->pictures); $i=$i+10): ?>
+	                    		<?php for($i=0; $i<count($this->pictures); $i=$i+9): ?>
 								<ul>	
-									<?php for($j=$i;$j<($i+10); $j++):?>
+									<?php for($j=$i;$j<($i+9); $j++):?>
 									<?php if(isset($this->pictures[$j])): ?>
 									<?php $pic = $this->pictures[$j] ?>
 									<?php $class = ($j == 0) ? 'active' : '' ?>
@@ -100,7 +100,7 @@
 										<a rel="group1" title="<?= $pic->location ?>" class="<?= $class ?> lbc" href="#img<?= $j ?>" data-tip="#small<?= $j ?>"><?= $this->thumbnail(65, $pic->url, '', '1:1') ?></a>
 									</li>
 									<?php else: ?>
-									<li><img src="/images2/empty-small-photo.png" width="65" height="65" /></li>
+									<li></li>
 									<?php endif ?>
 									<?php endfor ?>
 								<?php endfor ?>
