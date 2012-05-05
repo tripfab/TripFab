@@ -156,7 +156,9 @@
                             <?php endif; if(!empty($this->listing->website)): ?>
                             <ul>
                                 <li><strong>Website</strong></li>
-                                <li><a href="<?= $this->listing->website ?>" target="_blank" class="link1"><?= $this->listing->website ?></a></li>
+                                <?php $website = $this->listing->website ?>
+                                <?php if(!(strpos($website, "http://") === 0) && !(strpos($website, "https://") === 0)) 'http://'.$website ?>
+                                <li><a href="<?= $website ?>" target="_blank" class="link1"><?= $website ?></a></li>
                             </ul>
                             <?php endif ?>
                         </div><!--CONTACT--> 
@@ -174,6 +176,10 @@
                                 <?php endforeach ?>
                             </ul>
                         </div><!--PAYMENT_OPTN-->
+                        <?php else: ?>
+                        <div class="payment_optn">
+                        	<h3>Payment Options: Cash Only</h3>
+                        </div>
                         <?php endif ?> 
                         
                         <?php if(!empty($this->place->info))	: ?>
