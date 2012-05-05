@@ -167,7 +167,7 @@
                     
                     <div class="content">
 						<?php $cards = explode(', ', $this->place->cards) ?>
-                        <?php if(count($cards) > 0): ?>
+                        <?php if(count($cards) > 1): ?>
                         <div class="payment_optn">
                             <h3>Payment Options</h3>
                             <ul>                            	
@@ -176,6 +176,10 @@
                                 <?php endforeach ?>
                             </ul>
                         </div><!--PAYMENT_OPTN-->
+                        <?php else: ?>
+                        <div class="payment_optn">
+                        	<h3>Payment Options: Cash Only</h3>
+                        </div>
                         <?php endif ?> 
                         
                         <?php if(!empty($this->place->info))	: ?>
