@@ -174,10 +174,12 @@
                 <?php else: ?>
                 <h5><span></span>Itineraries</h5>
                 <?php endif ?>
+                <?php if(count($this->userTrips) > 3): ?>
 				<div class="paging">
 					<div><a href="" class="prev"></a></div>
 					<a href="" class="next"></a>
 				</div><!--PAGING-->
+                <?php endif ?>
 				<div class="cont">
                 	<?php for($i=0;$i<count($this->userTrips);$i=$i+3): ?>
 					<div class="slides">
