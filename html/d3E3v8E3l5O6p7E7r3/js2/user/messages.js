@@ -92,6 +92,7 @@ $(document).ready(function() {
             success:function(data){
                 refreshConversation(data);
                 $('textarea[name=message]').val('');
+                $('textarea[name=message]').css({height:'36px'});
                 $('.loading').hide();
                 $('.conversation').show();
                 $('.waiting').hide();
