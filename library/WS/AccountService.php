@@ -113,7 +113,7 @@ class WS_AccountService {
         
         $user = $this->users_db->fetchNew();
         
-        $user->name       = $data['contact_name'];
+        $user->name       = $data['name'];
         $user->email      = trim($data['email']);
         $user->phone      = $data['phone'];
         $password         = $data['password'];
@@ -132,7 +132,7 @@ class WS_AccountService {
         $vendor->website  		= $data['website'];
         $vendor->phone   		= $user->phone;
         $vendor->email    		= $user->email;
-		$vendor->contact_name	= $data['contact_name'];
+        $vendor->contact_name           = $data['name'];
         $vendor->user_id  		= $user->id;
         $vendor->token    		= md5('vendor'.$data['email'].time());
         $vendor->created  		= date('Y-m-d H:i:s');
@@ -143,10 +143,10 @@ class WS_AccountService {
         
         $user_settings = new Zend_Db_Table('users_emailsettings');
         foreach($defaultsVdr as $n){
-            $new = $user_settings->fetchNew();
-            $new->user_id = $user->id;
-            $new->setting_id = $n->id;
-            $new->save();
+            $new2 = $user_settings->fetchNew();
+            $new2->user_id = $user->id;
+            $new2->setting_id = $n->id;
+            $new2->save();
         }
         
         if(!empty($data['contact'])){

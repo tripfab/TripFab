@@ -48,7 +48,7 @@ class WS_User {
                 $select->where('user_id = ?', $this->user->id);
                 $this->vendor = $this->vendors_db->fetchRow($select);
                 if(is_null($this->vendor))
-                    throw new Exception();
+                    throw new Exception('asd');
             } else {
                 
             }

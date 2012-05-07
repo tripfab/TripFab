@@ -62,8 +62,11 @@ class ProviderController extends Zend_Controller_Action
         } else {
             $this->user = new WS_User($auth->getStorage()->read());
             if($this->user->getRole() != 'provider'){
-                throw new Exception();
+                die('asd');
+                //throw new Exception();
             } else {
+                
+            
                 $this->messages     = new WS_MessagesService();
                 $this->reservations = new WS_ReservationsService();
                 $this->feeds        = new WS_FeedsService();
