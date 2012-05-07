@@ -17406,6 +17406,15 @@ background-color: #FFF;
 	z-index: 10;
 	behavior: url(/PIE.htc);
 }
+#all_trips .single .new {
+	background: url(https://developer.tripfab.com/images6/new_label.png) no-repeat 0 0;
+	width: 44px;
+	height: 44px;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
 #all_trips .single .image {
 	width: 134px;
 	float:left;

@@ -57,6 +57,7 @@
     	<?php foreach($this->trips as $trip): ?>
 		
         <div class="single">
+        	<span class="new"></span>
             <div class="image">
                 <div class="slideshow">
                 	<?= $this->thumbnail(134, $trip->image, '','1:1'); ?>
@@ -74,11 +75,11 @@
 							<?php $class = (isset($this->missedIds[$trip->id])) ? 'ended' : '' ?>
                             <?php if(!is_null($trip->start) && $trip->start != '0000-00-00'): ?>
                             <dd class="<?= $class ?>"><?= date('M j, Y', strtotime($trip->start)) ?></dd>
-                            <?php else: ?><dd>--</dd><?php endif; ?>
+                            <?php else: ?><dd>No Dated Set</dd><?php endif; ?>
                             <dt>Travel Ends</dt>
                             <?php if(!is_null($trip->start) && $trip->end != '0000-00-00'): ?> 
                             <dd class="<?= $class ?>"><?= date('M j, Y', strtotime($trip->end)) ?></dd>
-                            <?php else: ?><dd>--</dd><?php endif ?>
+                            <?php else: ?><dd>No Dated Set</dd><?php endif ?>
                         </dl>
                     </div><!--DATA-->
                     <div class="data last">
