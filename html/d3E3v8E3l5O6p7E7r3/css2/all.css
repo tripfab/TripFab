@@ -6750,14 +6750,16 @@ h2.title .back:hover,
 
 .wrapper.user-trips .left .hdr, .itinerary-wrapper .hdr {
 	color: #303030;
-	font-size: 13px;
-	font-weight: bold;
-	line-height: 45px;
+	font: bold 15px/45px Helvetica;
 	padding: 0 21px;
 	text-align: center;
 	background-color: #FFF;
 }
-
+.itinerary-wrapper .hdr span {
+	border-right:1px solid #CCC ;
+	padding-right: 10px;
+	margin-right: 10px;
+}
 .trip-details {
 	background: url(https://developer.tripfab.com/images2/g-3.png) repeat-x scroll 0 0 #FFFFFF;
 	border-top: 1px solid #E8E8E8;
@@ -7824,11 +7826,12 @@ h2.title .back:hover,
 	border-radius: 0px 0px 4px 4px;
 	behavior: url(/PIE.htc);
 }
-.listing-content .foot a {
+.listing-content .foot a,
+.vendor-profile .foot a {
 	color: #F26522;
     font-size: 11px;
     font-weight: bold;
-    line-height: 43px;
+    line-height:32px;
 }
 .sign-box .foot a {
 	color: #60b5f7;
