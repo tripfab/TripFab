@@ -17497,7 +17497,7 @@ background-color: #FFF;
 	position: relative;
 	margin-right: 20px;
 }
-#all_trips .single .info .listings li.last {
+#all_trips .single .info .listings li.sight {
 	margin: 0;
 }
 #all_trips .single .info .listings li > span {
@@ -17520,6 +17520,12 @@ background-color: #FFF;
 	left: 0;
 	display: block;
 }
+#all_trips .single .info .listings li.activity img {
+	top:1px
+}
+#all_trips .single .info .listings li.sight img {
+	top:1px;
+}
 #all_trips .single .info .listings li em {
 	background: url(https://developer.tripfab.com/images2/g_59.gif) repeat-x;
 	height: 23px;
@@ -17538,16 +17544,16 @@ background-color: #FFF;
 	box-shadow: 1px 1px 2px #CCC; 
 	border: 1px solid #cfcfcf;
 }
-#all_trips .single .info .listings li .hotels {
+#all_trips .single .info .listings li.hotels em{
 	left: -14px;
 }
-#all_trips .single .info .listings li .restaurants {
+#all_trips .single .info .listings li.restaurants em{
 	left: -33px;
 }
-#all_trips .single .info .listings li .entertaiment {
+#all_trips .single .info .listings li.entertaiment em{
 	left: -38px;
 }
-#all_trips .single .info .listings li.last em {
+#all_trips .single .info .listings li.sight em {
 	width: 100px;
 	left: -42px;
 }
