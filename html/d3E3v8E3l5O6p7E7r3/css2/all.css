@@ -17407,11 +17407,22 @@ background-color: #FFF;
 	behavior: url(/PIE.htc);
 }
 #all_trips .single .image {
-	background:url(https://developer.tripfab.com/images2/trips-default.gif) no-repeat bottom center ;
 	width: 134px;
 	float:left;
-	height: 147px;
+	height: 134px;
 	margin: 18px 0 0 18px;
+	box-shadow: 0px 0px 2px 0px #9f9f9f;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	overflow: hidden;
+}
+#all_trips .single .image img {
+	width: 134px;
+	height: 134px;
+	display: block;
+	box-shadow: 0px 0px 2px 0px #9f9f9f;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
 }
 #all_trips .single .info {
 	width: 765px;
@@ -17581,6 +17592,14 @@ background-color: #FFF;
 	display: block;
 	float: left;
 	padding-left:10px ;
+}
+#all_trips .single .summary .price h4 sup {
+	vertical-align: top;
+	font: bold 19px Helvetica;
+}
+#all_trips .single .summary .price h4 sub {
+	vertical-align: baseline;
+	font: normal 13px Helvetica;
 }
 #all_trips .single .summary .controls {
 	width: 365px;
