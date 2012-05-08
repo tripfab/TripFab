@@ -120,6 +120,15 @@ class WS_TripsService {
             return $trips;
         }
     }
+	
+	public function getRow($trip)
+    {
+        $select = $this->trips_db->select();
+        $select->where('id = ?', $trip);
+        $result = $this->trips_db->fetchRow($select);
+        return $result;
+    }
+
 
     public function get($trip, $arr = false, $user = null) {
         if (!$arr) {
