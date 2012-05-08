@@ -57,7 +57,10 @@
     	<?php foreach($this->trips as $trip): ?>
 		
         <div class="single">
+        	<?php $created = time() - strtotime($trip->created) ?>
+            <?php if($created < 172800): ?>
         	<span class="new"></span>
+            <?php endif ?>
             <div class="image">
                 <div class="slideshow">
                 	<?= $this->thumbnail(134, $trip->image, '','1:1'); ?>

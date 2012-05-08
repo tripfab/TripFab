@@ -1097,12 +1097,14 @@ class UserController extends Zend_Controller_Action
         $missedIds = array();
         $showProximity = false;
         foreach($trips as $trip) {
-            $start = strtotime($trip->start);
-            if($start <= time()) {
-                $missed[] = $trip;
-                $missedIds[$trip->id] = 'yes';
-            } elseif(($start - time()) <= 1296000) {
-                $showProximity = true;
+            if($trip->start != '0000-00-00') {
+                $start = strtotime($trip->start);
+                if($start <= time()) {
+                    $missed[] = $trip;
+                    $missedIds[$trip->id] = 'yes';
+                } elseif(($start - time()) <= 1296000) {
+                    $showProximity = true;
+                }
             }
         }
         

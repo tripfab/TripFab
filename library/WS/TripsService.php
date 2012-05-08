@@ -92,6 +92,7 @@ class WS_TripsService {
             $select = $this->itineraries->select();
             $select->where('user_id = ?', $user);
             $select->where('status = 1');
+            $select->order('created DESC');
 
             $trips = $this->itineraries->fetchAll($select);
             return $trips;
@@ -100,6 +101,7 @@ class WS_TripsService {
             $select->from('itineraries', array('id', 'title'));
             $select->where('user_id = ?', $user);
             $select->where('status = 1');
+            $select->order('created DESC');
 
             $trips = $this->DB->fetchAll($select, array(), 5);
             return $trips;
