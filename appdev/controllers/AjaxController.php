@@ -2419,6 +2419,33 @@ class AjaxController extends Zend_Controller_Action
 		}
 		die;
    }
+   
+   
+   	public function tripstatusAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+        if($user->getRole() != 'admin')
+                throw new Exception('No access allowed');
+
+        $id = $_POST['id'];
+        $action = $_POST['act'];
+		$trip = $this->trips->getRow($id);
+		if($trip){
+			$trip->active = $action;
+			$trip->save();
+                        
+			echo "success";
+		}
+		else{
+			echo "fail";
+		}
+		die;
+   }
+
     
     public function getrecomendationsAction()
     {
