@@ -2662,7 +2662,6 @@
 	width: 960px;
 	margin: 0 auto;
 	position: relative;
-	background: url(https://developer.tripfab.com/images2/g_64.png) repeat-y transparent;
 }
 #search_result.fixed {
 	position: fixed;
@@ -2671,6 +2670,7 @@
 #search_result .left-sidebar{
 	width: 188px;
 	float: left;
+	border-bottom: 1px solid #e2e2e2;
 }
 #search_result .left-sidebar .cont{
 	background-color: #FFF;
@@ -2691,6 +2691,7 @@ ul.cat-menu li.item-1 a img {
 	border-top: 1px solid #303030;
 	border-bottom: 1px solid #303030;
 	clear: both;
+	list-style: none;
 }
 #search_result ul.cat-menu li:hover {
 	background-color: #3c3c3c;
@@ -3145,13 +3146,6 @@ ul.cat-menu li.item-1 a img {
 	text-align: right;
 	display: block;
 }
-
-
-
-
-
-
-
 /*HOTEL 1*/
 #search_result .single.hotel-1 .location strong {
 	margin: 5px 0 0 14px;
@@ -3189,6 +3183,10 @@ ul.cat-menu li.item-1 a img {
 }
 #search_result .single.activity-2 > span {
 	margin-bottom: 7px;
+}
+#search_result .single.activity-2 p {
+	height: 24px;
+	overflow: hidden;
 }
 /*END ACTIVITY 2*/
 
