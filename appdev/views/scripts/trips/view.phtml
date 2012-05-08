@@ -208,7 +208,7 @@
                         <ul>
                         	<?php foreach($this->pictures as $picture): ?>
                             <li><?= $this->thumbnail(array('width'=>176,'height'=>118),$picture->url,'','176:118') ?>
-                            <a href="#pic<?= $picture->id ?>" class="lbc"></a></li>
+                            <a href="#pic<?= $picture->id ?>" rel="group-1" class="lbc"></a></li>
                             <?php endforeach ?>
                         </ul>
                     </div><!--CONT-->

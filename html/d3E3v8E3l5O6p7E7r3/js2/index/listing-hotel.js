@@ -600,8 +600,8 @@ function hideTooltip() {
         padding: 0,
         overlayColor: '#FFF',
         overlayOpacity: '0.7',
-        showCloseButton: 'false',
-        centerOnScroll: 'true',
+        showCloseButton: false,
+        centerOnScroll: true,
         titlePosition: 'inside'
     });
     $('#fancybox-title').addClass('tittle');

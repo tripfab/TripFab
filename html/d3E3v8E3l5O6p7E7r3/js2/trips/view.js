@@ -162,21 +162,9 @@ $(document).ready(function() {
         
     });*/
     
-	$(".slideshow .cont").jcarousel({
+	$(".cont").jcarousel({
 		scroll: 1
 	});
-	
-	$('a.lbc, a.lb').fancybox({
-	    padding: 0,
-	    showCloseButton: false,
-	    centerOnScroll: true,
-	    overlayColor: '#FFF',
-	    overlayOpacity: '0.7',
-	    titlePosition: 'inside'
-	});
-	$('#fancybox-title').addClass('tittle');
-	$('#fancybox-left-ico').addClass('lfarrow');
-	$('#fancybox-right-ico').addClass('rgarrow');
 	
     $('select[name=adults]').change(function(){
         var $limit = $('option:last',this).val() - $(this).val();
@@ -187,7 +175,17 @@ $(document).ready(function() {
 		
     });
 	
-	
+	$('a.lbc').fancybox({
+	    padding: 0,
+	    showCloseButton: true,
+	    centerOnScroll: true,
+	    overlayOpacity: '0.7',
+	    titlePosition: 'inside',
+	    overlayColor: '#FFF',
+	});
+	$('#fancybox-title').addClass('tittle');
+	$('#fancybox-left-ico').addClass('lfarrow').css('display', 'block');
+	$('#fancybox-right-ico').addClass('rgarrow');
 	
 	
 	
