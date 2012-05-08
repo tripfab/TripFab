@@ -225,6 +225,12 @@ $(function(){
         $slider = $('#slider-4');
         $('input[type=checkbox]', $widget).removeAttr('checked');
         $('.widget.destinations').hide();
+        
+        if($rel != "#/activities" && $rel != '#/hotels' && $rel != '#/all') {
+            $('.widget.slider').hide();
+        } else {
+            $('.widget.slider').show();
+        }
 		
         if($ev.queryString == "") {
             $slider.slider('values',[0,3000]);

@@ -49,6 +49,45 @@ $(document).ready(function() {
         };
         map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
     }
+    $(function(){
+        
+    	$('#tooltipHelpList').submit(function(){
+    		if($('input[type=checkbox]', this).is(':checked')) {
+                $.cookie('tooltipHelpList','yes',{expires:365,path:'/'});
+            }
+            $('.firstime_tip').fadeOut();
+            return false;        
+        });
+        
+        $('.imgs').cycle({
+            timeout: 0,
+            fx: 'scrollHorz',
+            prev: '.lf-arrow',
+            next: '.rg-arrow'
+        });
+//        $( ".single a" ).click(function() {
+//            $id = $(this).attr('href');
+//            $(".single a").removeClass('active')
+//            $(this).addClass('active');
+//            $(".slideshow img" ).removeClass('show');
+//            $($id).addClass('show');
+//            return false;
+//        });
+    });
+    $(".photos").jcarousel({
+        scroll: 1
+    });
+    $('a.lbc').fancybox({
+        padding: 0,
+        overlayColor: '#FFF',
+        overlayOpacity: '0.7',
+        showCloseButton: 'false',
+        centerOnScroll: 'true',
+        titlePosition: 'inside'
+    });
+    $('#fancybox-title').addClass('tittle');
+    $('#fancybox-left-ico').addClass('lfarrow');
+    $('#fancybox-right-ico').addClass('rgarrow');
 });
 $(function(){
     $('.listing-gallery ul li a').click(function(){
@@ -402,3 +441,5 @@ function move(id,spd){
         obj.style.top=(spd>0?0:max)+"px";
     }
 }
+
+

@@ -337,7 +337,7 @@
 	overflow: hidden;
 	float: left;
 	width: 103px;
-	display: none;
+	visibility: hidden;
 }
 .lstng_dflt .top .rating li {
 	float: left;
@@ -387,27 +387,35 @@
 	overflow: hidden;
 	position: relative;
 }
-.lstng_dflt .top .photos > a {
+.lstng_dflt .top .photos .jcarousel-next,
+.lstng_dflt .top .photos .jcarousel-prev{
 	background: url(https://developer.tripfab.com/images6/arrows.png) no-repeat;
 	display: block;
 	height: 25px;
 	width: 13px;
 	position: absolute;
 	top: 23px;
+	cursor: pointer;
 }
-.lstng_dflt .top .photos .lf-arrow {
+.lstng_dflt .top .photos .jcarousel-prev:hover{
+	background-position: -36px -6px;
+}
+.lstng_dflt .top .photos .jcarousel-prev,
+.lstng_dflt .top .photos .jcarousel-prev.jcarousel-prev-disabled {
 	background-position: -6px -6px;
 	left: 0;
 }
-.lstng_dflt .top .photos .lf-arrow:hover{
-	background-position: -36px -6px;
+.lstng_dflt .top .photos .jcarousel-next:hover{
+	background-position: -97px -6px;
 }
-.lstng_dflt .top .photos .rg-arrow {
+.lstng_dflt .top .photos .jcarousel-next,
+.lstng_dflt .top .photos .jcarousel-next.jcarousel-next-disabled {
 	background-position: -70px -6px;
 	right: 0;
 }
-.lstng_dflt .top .photos .rg-arrow:hover{
-	background-position: -97px -6px;
+.lstng_dflt .top .photos .jcarousel-prev.jcarousel-prev-disabled,
+.lstng_dflt .top .photos .jcarousel-next.jcarousel-next-disabled {
+	cursor: auto;
 }
 .lstng_dflt .top .photos .imgs{
 	width: 585px;
@@ -422,13 +430,14 @@
 	height: 65px;
 	overflow: hidden;
 }
-.lstng_dflt .top .photos .single {
+.lstng_dflt .top .photos .jcarousel-clip {
 	width: 585px;
 	height: 65px;
 	overflow: hidden;
+	margin: 0 auto;
 }
 .lstng_dflt .top .photos ul li {
-	background: url("https://developer.tripfab.com/images6/lstng_htl.png") no-repeat scroll -651px 0 transparent;
+	background-color: #000;
     float: left;
     height: 65px;
     width: 65px;
@@ -2019,9 +2028,9 @@
 	height: 51px;
 	display: block;
 	position: absolute;
-	top: 48%;
+	top: 50%;
 	z-index: 10;
-	margin: 0;
+	margin: -18px 0 0 0;
 }
 
 #fancybox-left-ico.lfarrow{
@@ -3696,7 +3705,87 @@ ul.cat-menu li.item-1 a img {
 	font-weight: bold;
 }
 /*END SEND MESSAGES LISTINGS-----------------------------------------------*/
+.dd-2 {
+	border: 1px solid #C3C3C3;
+	box-shadow: 0 0 10px #000000;
+	display: none;
+	position: absolute;
+	z-index: 40;
+	right: -11px;
+	top: 24px;
+}
+.img-wrapper .dd-2 {
+    position: absolute;
+    right: -11px;
+    top: 29px;
+}
+.dd-2.show {
+	display: block;
+}
 
+.dd-2 img.arrow {
+	float: none;
+	margin: 0;
+	position: absolute;
+	right: 12px;
+	top: -7px;
+}
+
+.dd-2 > div .jqTransformSelectWrapper {
+	float: none;
+	width: 100% !important;
+}
+.dd-2 > div .jqTransformSelectWrapper div span {
+	width: 100%!important;
+}
+
+.dd-2 > div .jqTransformSelectWrapper ul {
+	width: 99%!important;
+	height: auto!important;
+}
+
+.dd-2 > div input[type="text"] {
+	border: 1px solid #D8D8D8;
+	color: #616161;
+	font-size: 12px;
+	height: 27px;
+	margin-top: 7px;
+	padding: 0 0.5em;
+	width: 90%;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
+}
+
+.dd-2 > div input[type="text"]:focus {
+	border-color: #addeff;
+	box-shadow: 0 0 5px #addeff;
+}
+
+.dd-2 > div {
+	background-color: #FFFFFF;
+	padding: 10px;
+}
+.dd-2 > div select {
+	padding:3px 0;
+	line-height: 25px;
+	width: 170px;
+}
+.dd-2 > div + div {
+	background: url(https://developer.tripfab.com/images2/g-3.png) repeat-x scroll 0 0 #FFFFFF;
+	border-top: 1px solid #E8E8E8;	
+	overflow: hidden;
+}
+
+.dd-2 > div + div a, .dd-2 > div + div input[type="submit"] {
+	float: right;
+	margin-left: 7px;
+	height: 27px;
+	cursor: pointer;
+	line-height: 27px;
+	font-size: 12px;
+	font-weight: bold;
+}
 
 
 

@@ -90,23 +90,21 @@
                             </div><!--TEXT-->
                             
                             <div class="photos">
-                                <a href="" class="lf-arrow"></a>
-                                <div class="imgs">
-                                	<?php for($i=0; $i<count($this->pictures); $i=$i+10): ?>
-                                    <div class="single">
-                                    	<?php for($j=$i;$j<($i+10); $j++):?>
-                                        <?php if(isset($this->pictures[$j])): ?>
-                                        <?php $pic = $this->pictures[$j] ?>
-                                        <?php $class = ($j == 0) ? 'active' : '' ?>
-                                        <a class="<?= $class ?>" href="#img<?= $j ?>"><?= $this->thumbnail(65, $pic->url, '', '1:1') ?></a>
-                                        <?php else: ?>
-                                        <img src="/images2/empty-small-photo.png" width="65" height="65" />
-                                        <?php endif ?>
-                                        <?php endfor ?>
-                                    </div>
-                                    <?php endfor ?>
-                                </div><!--IMGS-->
-                                <a href="" class="rg-arrow"></a>
+	                    		<?php for($i=0; $i<count($this->pictures); $i=$i+10): ?>
+								<ul>	
+									<?php for($j=$i;$j<($i+10); $j++):?>
+									<?php if(isset($this->pictures[$j])): ?>
+									<?php $pic = $this->pictures[$j] ?>
+									<?php $class = ($j == 0) ? 'active' : '' ?>
+								   	<li>
+										<a rel="group1" title="<?= $pic->location ?>" class="<?= $class ?> lbc" href="#img<?= $j ?>" data-tip="#small<?= $j ?>"><?= $this->thumbnail(65, $pic->url, '', '1:1') ?></a>
+									</li>
+									<?php else: ?>
+									<li><img src="/images2/empty-small-photo.png" width="65" height="65" /></li>
+									<?php endif ?>
+									<?php endfor ?>
+								<?php endfor ?>
+	                   			</ul>
                             </div><!--PHOTOS-->
                         </div><!--INFO-->
                         <div class="clear"></div>
@@ -158,7 +156,9 @@
                             <?php endif; if(!empty($this->listing->website)): ?>
                             <ul>
                                 <li><strong>Website</strong></li>
-                                <li><a href="<?= $this->listing->website ?>" target="_blank" class="link1"><?= $this->listing->website ?></a></li>
+                                <?php $website = $this->listing->website ?>
+                                <?php if(!(strpos($website, "http://") === 0) && !(strpos($website, "https://") === 0)) 'http://'.$website ?>
+                                <li><a href="<?= $website ?>" target="_blank" class="link1"><?= $website ?></a></li>
                             </ul>
                             <?php endif ?>
                         </div><!--CONTACT--> 
@@ -167,7 +167,7 @@
                     
                     <div class="content">
 						<?php $cards = explode(', ', $this->place->cards) ?>
-                        <?php if(count($cards) > 0): ?>
+                        <?php if(count($cards) > 1): ?>
                         <div class="payment_optn">
                             <h3>Payment Options</h3>
                             <ul>                            	
@@ -176,6 +176,10 @@
                                 <?php endforeach ?>
                             </ul>
                         </div><!--PAYMENT_OPTN-->
+                        <?php else: ?>
+                        <div class="payment_optn">
+                        	<h3>Payment Options: Cash Only</h3>
+                        </div>
                         <?php endif ?> 
                         
                         <?php if(!empty($this->place->info))	: ?>

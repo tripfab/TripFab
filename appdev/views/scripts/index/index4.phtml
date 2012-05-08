@@ -34,6 +34,7 @@
 			<div class="main">
 				<h2>Plan the perfect trip, in one place.</h2>
 				<h3>From things to do to everything in between - directly from business.</h3>
+				<h4><span>Currently available in Costa Rica. We'll be in your city very soon.</span></h4>
 				<div id="search-box">
 					<div class="search">
 						<input id="tags" type="text" name="" value="Where do you want to go?" />
@@ -41,7 +42,6 @@
 						<div class="clear"></div>
 					</div><!--SEARCH--> 
 				</div><!--SEARCH-BOX-->
-				<h4><span>Currently available in Costa Rica. We’ll be in your city very soon.</span></h4>
 				
 			</div><!--MAIN--> 
 		</div><!--WRAP-->
@@ -174,12 +174,10 @@
                 <?php else: ?>
                 <h5><span></span>Itineraries</h5>
                 <?php endif ?>
-                <?php if(count($this->userTrips) > 3): ?>
 				<div class="paging">
 					<div><a href="" class="prev"></a></div>
 					<a href="" class="next"></a>
 				</div><!--PAGING-->
-                <?php endif ?>
 				<div class="cont">
                 	<?php for($i=0;$i<count($this->userTrips);$i=$i+3): ?>
 					<div class="slides">

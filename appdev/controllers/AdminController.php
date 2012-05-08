@@ -4262,7 +4262,7 @@ class AdminController extends Zend_Controller_Action {
             }
 			
 			$selectedCity = array();
-			for($i=1; $i<=5; $i++){
+			for($i=1; $i<=10; $i++){
 				$selectedCity[] = $_POST["trip_city$i"] ? (object)array('trip_id'=>$trip->id, 'city_id'=>$_POST["trip_city$i"]): (object)array('trip_id'=>$trip->id, 'city_id'=>0);
 			}
 			$this->view->cities = json_encode($selectedCity);
@@ -4275,6 +4275,9 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->trip->days = $_POST['days'];
                 $this->view->trip->nights = $_POST['nights'];
                 $this->view->trip->country_id = $_POST['trip_country'];
+                $this->view->trip->min = $_POST['min'];
+                $this->view->trip->max = $_POST['max'];
+                $this->view->trip->category_id = $_POST['category_id'];
 
                 $this->render('trip1');
                 return;
@@ -4285,6 +4288,9 @@ class AdminController extends Zend_Controller_Action {
             $trip->days = $_POST['days'];
             $trip->nights = $_POST['nights'];
             $trip->country_id = $_POST['trip_country'];
+            $trip->min = $_POST['min'];
+            $trip->max = $_POST['max'];
+            $trip->category_id = $_POST['category_id'];
             $trip->save();
 			
             if ($uploadedFileName = $this->saveTripPhoto($trip->id)) {
@@ -4298,6 +4304,9 @@ class AdminController extends Zend_Controller_Action {
             $this->_redirect('/admin/trips/edit/1/' . $trip->id);
             //put success message
         }
+        
+        $categories = new Zend_Db_Table('trip_categories');
+        $this->view->categories = $categories->fetchAll();
 
         $this->render('trip1');
     }
