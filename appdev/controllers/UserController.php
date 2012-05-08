@@ -1410,9 +1410,9 @@ class UserController extends Zend_Controller_Action
             $this->_redirect('/user/trips/');
         }
         
-        $listings = $this->trips->getItnListingOf($trip->id, false, 'notnull');
-        $days     = $this->trips->getItnListingOf($trip->id, true, 'null');
-        
+        $listings  = $this->trips->getItnListingOf($trip->id, false, 'notnull');
+        $days      = $this->trips->getItnListingOf($trip->id, true, 'null');
+        $listings2 = $this->trips->getItnListingOf($trip->id, false);
         $ids = array(2=>4,4=>3,5=>5,6=>1,7=>2); $used = array(); $result = array();
         foreach($listings as $listing){
             if(!in_array($listing->main_type, $used)){
@@ -1426,6 +1426,14 @@ class UserController extends Zend_Controller_Action
         
         $this->view->favorites = $result;
         $this->view->days     = $days;
+        
+        $tocheckout = false;
+        foreach($listings2 as $list) {
+            if(!$tocheckout) {
+                $tocheckout = (is_null($list->day)) ? false : true;
+            }
+        }
+        $this->view->tocheckout = $tocheckout;
     }
     
     public function offersTripsTask()

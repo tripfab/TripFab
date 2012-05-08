@@ -1628,7 +1628,7 @@ class AdminController extends Zend_Controller_Action {
                 
                 
                 $template = 'listings-editplace';
-                $this->render($template);                
+                $this->render($template);
                 
             } else {
 
