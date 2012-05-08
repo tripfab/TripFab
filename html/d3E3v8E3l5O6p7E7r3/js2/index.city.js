@@ -280,6 +280,28 @@ $(function(){
                     }
                 });
                 
+                $('.single > h4').each(function(){
+                    console.log();
+                    $h = $(this).outerHeight();
+                    $single = $(this).parents('.single');
+                    if($single.hasClass('activity-1')) {
+                        if($h > 20) {
+                            $single.addClass('activity-2');
+                            $single.removeClass('activity-1');
+                        }
+                    } else if($single.hasClass('hotel-1')) {
+                        if($h > 20) {
+                            $single.addClass('hotel-2');
+                            $single.removeClass('hotel-1');
+                        }
+                    } else {
+                        if($h <= 20) {
+                            $single.addClass('gen-2');
+                            $single.removeClass('gen-1');
+                        }
+                    }
+                });
+                
                 //loadMore($data);
             },
             error:function(){
@@ -386,6 +408,27 @@ $(function(){
                                 effect : "fadeIn",
                                 load:function(){
                                     $(this).removeClass('lazy');
+                                }
+                            });
+                            $('.single > h4').each(function(){
+                                console.log();
+                                $h = $(this).outerHeight();
+                                $single = $(this).parents('.single');
+                                if($single.hasClass('activity-1')) {
+                                    if($h > 20) {
+                                        $single.addClass('activity-2');
+                                        $single.removeClass('activity-1');
+                                    }
+                                } else if($single.hasClass('hotel-1')) {
+                                    if($h > 20) {
+                                        $single.addClass('hotel-2');
+                                        $single.removeClass('hotel-1');
+                                    }
+                                } else {
+                                    if($h <= 20) {
+                                        $single.addClass('gen-2');
+                                        $single.removeClass('gen-1');
+                                    }
                                 }
                             });
                         } else {
