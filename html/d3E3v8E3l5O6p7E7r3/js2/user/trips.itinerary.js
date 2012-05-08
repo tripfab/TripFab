@@ -6,7 +6,6 @@ $(document).ready(function() {
         centerOnScroll:1,
         showCloseButton: true
     });
-    
     $('.lbox .btn-2, .lbox .btn-11').click(function(){
         $(this).parents('form').submit();
     });
@@ -360,6 +359,15 @@ $(document).ready(function() {
     $('#start, #end').datepicker({
     	dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
     	showOtherMonths: true
+    });
+    $(".w3_itinerary .btn-1").hover(function() {
+    	$(".w3_itinerary .warning").toggleClass('hidden');
+    	return false
+    });
+    
+    $(".bottom .btn-1").hover(function() {
+    	$(".bottom .warning").toggleClass('hidden');
+    	return false
     });
     
 });

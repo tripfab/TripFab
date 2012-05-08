@@ -7137,8 +7137,15 @@ h2.title .back:hover,
     text-align: center;
     width: 81px;
     background: none !important;
+    cursor:grab;
+    cursor:-moz-grab;
+    cursor:-webkit-grab;
 }
-
+.activities-tabs .tab ul li.ui-draggable-dragging {
+	cursor:grabbing;
+	cursor:-moz-grabbing;
+	cursor:-webkit-grabbing;
+}
 .activities-tabs .tab ul li span {
 	display: none;
 }
@@ -7205,9 +7212,9 @@ h2.title .back:hover,
 }
 
 .itinerary-items .item {
-	background-color: #f5f5f5;
+	background-color: #f7f7f7;
 	float: left;
-	width: 218px;
+	width: 216px;
 	min-height: 323px;
 	margin-right: 9px;
 	padding: 0 2px;
@@ -7216,6 +7223,7 @@ h2.title .back:hover,
 	border-radius: 4px;
 	padding-bottom: 10px;
 	behavior: url(/PIE.htc);
+	border: 1px solid #e5e5e5;
 }
 
 .itinerary-items .item.last {
@@ -7240,12 +7248,26 @@ h2.title .back:hover,
 	background-color: #ffffff;
 	overflow: hidden;
 	padding: 11px 12px;
-	margin-bottom: 2px;
+	margin:0 3px 4px;
 	line-height: 16px;
 	color: #303030;
 	position: relative;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	border: 1px solid #e5e5e5;
+	-webkit-box-shadow: 0px 1px 0px 0px #FFF;
+	box-shadow: 0px 1px 0px 0px #FFF; 
+	-moz-box-shadow: 0px 1px 0px 0x #FFF;
+	cursor:grab;
+	cursor:-moz-grab;
+	cursor:-webkit-grab;
 }
-
+.itinerary-items .item ul li.ui-draggable-dragging {
+	cursor:grabbing;
+	cursor:-moz-grabbing;
+	cursor:-webkit-grabbing;
+}
 .itinerary-items .item ul li img {
 	float: left;
 	margin-right: 12px;
@@ -7257,17 +7279,25 @@ h2.title .back:hover,
 }
 
 .itinerary-items .item ul li h2 {	
-	font-size: 12px;
+	font-size: 11px;
 }
 
 .itinerary-items .item ul li span {
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: bold;
 }
 .itinerary-items .item ul li span h2 {	
 	font-size: 11px;
 	font-weight: normal;
 	color: #CCC;
+}
+.itinerary-items .item ul li span em {
+	font: normal 11px Helvetica;
+}
+.itinerary-items .item ul li span.location {
+	font: normal 11px/14px Helvetica;
+	color: #707070;
+	display: block;
 }
 .itinerary-items .item ul li a.delete {
 	background: url(https://developer.tripfab.com/images2/ico-31.png) no-repeat;
@@ -7308,10 +7338,9 @@ h2.title .back:hover,
 	height: 55px;
 	padding: 0 21px;
 	padding-top: 26px;
-	overflow: hidden;
 	position: relative;
 	z-index: 0;
-	
+	overflow: hidden;
 }
 
 .itinerary-wrapper .bottom span {
@@ -7600,7 +7629,44 @@ h2.title .back:hover,
 	font: bold 11px Helvetica;
 	float: right;
 }
-
+.itineraries .warning {
+	background: url(https://developer.tripfab.com/images6/itinerary-tooltip.png) no-repeat top left;
+	width: 191px;
+	height: 57px;
+	position: absolute;
+	padding:20px 20px 0;
+	text-align: center;
+	font: normal 12px/16px Helvetica;
+	z-index: 100;
+}
+.itineraries .warning h3 {
+	font-weight: bold;
+}
+.itineraries .w3_itinerary {
+	z-index: 100;
+}
+.itineraries .w3_itinerary .wrapper {
+	position: relative;
+	z-index: 100;
+}
+.itineraries .w3_itinerary .warning {
+	top: 33px;
+	right: -50px;
+}
+.itineraries .bottom .warning{
+	background-position: left bottom;
+	    padding: 10px 20px;
+	    right: -30px;
+	    top: -44px;
+}
+.itineraries .itinerary-wrapper {
+	overflow: visible !important;
+}
+.itineraries .itinerary-wrapper .bottom {
+	z-index: 100;
+	position: relative;
+	overflow: visible !important;
+}
 /*- End of Trips Styles -----------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------*/
 

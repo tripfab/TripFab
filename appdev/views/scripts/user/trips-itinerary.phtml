@@ -16,13 +16,17 @@
     <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
 </head>
 <body>
-<div class="w1">
+<div class="w1 itineraries">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
     <div class="w3_itinerary">
         <div class="wrapper">
             <h2><?= $this->trip->title ?> <a href="#">Rename Itinerary</a></h2>
-            <a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1">Process to Checkout</a>
+            <a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1">Proceed to Checkout</a>
              <a href="#dates_lbx" class="btn-10 lb dates">Change Travel Dates</a>
+             <div class="warning hidden">
+             	<h3>You can’t checkout</h3>
+             	<p>You must to add something to do to your itinerary before checkout</p>
+             </div><!--WARNING-->
         </div><!--WRAPPER-->
     </div><!--w3_itinerary-->
     <div class="title_itinerary">
@@ -73,7 +77,7 @@
 										$this->thumbnail(65, '/images/img-70.png', '','1:1'); ?>
                                 <h2><?= $listing->title ?></h2>
                                 <?php if($listing->price > 0): ?>
-                                <span>$<?= $listing->price ?></span>
+                                <span>$<?= $listing->price ?> <em>/person</em></span>
                                 <?php else: ?>
 								<span><h2>Price Not charged</h2></span>
                                 <?php endif ?>
@@ -112,9 +116,10 @@
                                         <?= ($list->image) ? 
 												$this->thumbnail(45, $list->image, '','1:1') :
 												$this->thumbnail(45, '/images/img-70.png', '','1:1'); ?>
-                                        <h2><?= $list->title ?></h2>
+                                        <h2><?= substr($list->title, 0, 19) ?>...</h2>
 										<?php if($list->price > 0): ?>
-                                        <span>$<?= $list->price ?></span>
+										<span class="location"><?= $list->city ?> ,CR</span>
+                                        <span>$<?= $list->price ?><em>/ person</em></span>
                                         <?php else: ?>
 								<span><h2>Price Not charged</h2></span>                            
                                         <?php endif ?>
@@ -142,11 +147,12 @@
                                         <?= ($list->image) ? 
 												$this->thumbnail(45, $list->image, '','1:1') :
 												$this->thumbnail(45, '/images/img-70.png', '','1:1'); ?>
-                                        <h2><?= $list->title ?></h2>
+                                        <h2><?= substr($list->title, 0, 19) ?>...</h2>
+                                        <span class="location"><?= $list->city ?>, CR</span>
 										<?php if($list->price > 0): ?>
-                                        <span>$<?= $list->price ?></span>
+                                        <span>$<?= $list->price ?><em>/ person</em></span>
                                         <?php else: ?>
-								<span><h2>Price Not charged</h2></span>
+										<span><h2>Price Not charged</h2></span>
                                         <?php endif ?>
                                         <a href="" class="delete">Delete</a>
                                     </li>
@@ -169,6 +175,10 @@
                     <span>Trip Estimate</span>
                     <strong id="tripprice">$<?= $this->trip->price ?></strong>
                     <a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1">Proceed to Checkout</a>
+                    <div class="warning hidden">
+                    	<h3>You can’t checkout</h3>
+                    	<p>You must to add something to do to your itinerary before checkout</p>
+                    </div><!--WARNING-->
                 </div><!-- closes bottom -->
             </div><!-- closes itinerary-wrapper -->
         </div><!-- closes user-messages -->
