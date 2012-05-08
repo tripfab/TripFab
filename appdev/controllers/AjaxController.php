@@ -1343,7 +1343,7 @@ class AjaxController extends Zend_Controller_Action
     
     public function getlistingsAction()
     {
-        $auth = Zend_Auth::getInstance();
+		$auth = Zend_Auth::getInstance();
         if($auth->hasIdentity()){
             $user = $auth->getIdentity();
             if($user->role_id == 2){
@@ -1574,7 +1574,7 @@ class AjaxController extends Zend_Controller_Action
     
     public function getsearchtagsAction()
     {
-        $search = new Model_Search();
+	    $search = new Model_Search();
         $tags = $search->fetchAll();
         $tags = $tags->toArray();
         

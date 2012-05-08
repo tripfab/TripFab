@@ -656,6 +656,7 @@ class WS_ListingService {
            
            $listings = $db->fetchAll($select, array(), Zend_Db::FETCH_OBJ);
            
+           
            if($this->use_cache)
                $this->cache->save($listings, $cacheId, array(), 86400);
        } else {
