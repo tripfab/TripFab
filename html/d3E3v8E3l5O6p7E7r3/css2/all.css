@@ -16748,9 +16748,8 @@ background-color: #FFF;
 	font: 12px/14px Helvetica;
 }
 #create_trip .item {
-	padding: 12px 0;
+	padding: 16px 0 18px 18px;
 	border-bottom: 1px solid #ececec;
-	padding-left: 18px;
 }
 #create_trip .item.last {
 	border: none;
@@ -16808,6 +16807,10 @@ background-color: #FFF;
 	float: left;
 	width: 260px;
 	padding-left: 5px;
+}
+#create_trip .item.temp {
+	padding: 15px 0 20px 18px;
+	border-bottom: none;
 }
 #create_trip .bottom {
 	background: url(https://developer.tripfab.com/images2/g-52.gif) repeat-x left top #f6f6f6;
@@ -17184,7 +17187,7 @@ background-color: #FFF;
     right: -6px;
     top: -4px;
     width: 130px;
-    z-index: 1000;
+    z-index: 100;
 }
 #my_trips .mid_banner {
 	background: url(https://developer.tripfab.com/images2/g-54.gif) repeat-x bottom left #303030;
