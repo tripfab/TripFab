@@ -1172,32 +1172,35 @@ class AjaxController extends Zend_Controller_Action
                         if(is_null($listing))
                                 throw new Exception('Listing not found');
 						
-						$trip = $trips->fetchNew();
-						$trip->title = $_POST['title'];
+                        $trip = $trips->fetchNew();
+                        $trip->title = $_POST['title'];
                         $trip->user_id = $user->id;
                         $trip->country_id = $listing->country_id;
 						
-						if((isset($_POST['start']) and !empty($_POST['start']) and $_POST['start'] != 'Starting Date') and
-								(isset($_POST['end']) and !empty($_POST['end']) and $_POST['end'] != 'Ending Date')){
-							
-							$start = date('M j Y', strtotime($_POST['start']));
-							$end   = date('M j Y', strtotime($_POST['end']));
-							if($start != $_POST['start'] || $end != $_POST['end'])
-								throw new Exception("Sorry, we couldn't understand the date Formats");
-							
-							$trip->start = date('Y-m-d', strtotime($start));;
-	                        $trip->end = date('Y-m-d', strtotime($end));
-							
-							$fday = strtotime($start);
-							$lday = strtotime($end);
-							$days = $lday - $fday;
-							$days = $days / 86400;
-							
-							$trip->days         = $days + 1;
-						} else {
-							$trip->start = '0000-00-00';
-							$trip->end   = '0000-00-00';
-						}
+                        if((isset($_POST['start']) and !empty($_POST['start']) and $_POST['start'] != 'Starting Date') and
+                                        (isset($_POST['end']) and !empty($_POST['end']) and $_POST['end'] != 'Ending Date')){
+
+                            $start = date('M j Y', strtotime($_POST['start']));
+                            $end   = date('M j Y', strtotime($_POST['end']));
+                            if($start != $_POST['start'] || $end != $_POST['end'])
+                                    throw new Exception("Sorry, we couldn't understand the date Formats");
+
+                            $trip->start = date('Y-m-d', strtotime($start));;
+                            $trip->end = date('Y-m-d', strtotime($end));
+
+                            $fday = strtotime($start);
+                            $lday = strtotime($end);
+                            $days = $lday - $fday;
+                            $days = $days / 86400;
+
+                            $trip->days         = $days + 1;
+                        } else {
+                            $trip->start = '0000-00-00';
+                            $trip->end   = '0000-00-00';
+                        }
+                        
+                        $trip->adults = (!empty($_POST['adults'])) ? $_POST['adults'] : 1;
+                        $trip->kids = (!empty($_POST['kids'])) ? $_POST['kids'] : 0;
 						
                         $trip->created = date('Y-m-d H:i:s');
                         $trip->updated = date('Y-m-d H:i:s');
