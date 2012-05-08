@@ -355,6 +355,4 @@ class Zend_View_Helper_Lazylisting {
         
         return $image;
     }
-    
-
 }

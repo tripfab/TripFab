@@ -2658,27 +2658,28 @@
 #wp_all #wp_content.fixed {
 	position: fixed;
 }
-#src_rslt {
+#search_result {
 	width: 960px;
 	margin: 0 auto;
 	position: relative;
+	background: url(https://developer.tripfab.com/images2/g_64.png) repeat-y transparent;
 }
-#src_rslt.fixed {
+#search_result.fixed {
 	position: fixed;
 }
 /*Search Result Sidebar---------------------------*/
-#src_rslt .sidebar{
+#search_result .left-sidebar{
 	width: 188px;
 	float: left;
 }
-#src_rslt .sidebar .cont{
+#search_result .left-sidebar .cont{
 	background-color: #FFF;
 }
 ul.cat-menu li.item-1 a img {
     background: url("https://developer.tripfab.com/images2/ico-7.png") no-repeat scroll 0 0 transparent;
     height: 15px;
 }
-#src_rslt ul.cat-menu {
+#search_result ul.cat-menu {
 	background-color:#303030;
 	padding:15px 0 5px 0;
 	margin:0 0 10px;
@@ -2686,22 +2687,22 @@ ul.cat-menu li.item-1 a img {
 	z-index: 101;
 	behavior: url(/PIE.htc);
 }
-#src_rslt ul.cat-menu li {
+#search_result ul.cat-menu li {
 	border-top: 1px solid #303030;
 	border-bottom: 1px solid #303030;
 	clear: both;
 }
-#src_rslt ul.cat-menu li:hover {
+#search_result ul.cat-menu li:hover {
 	background-color: #3c3c3c;
 	border-top: 1px solid #454545;
 	border-bottom: 1px solid #252525;
 }
-#src_rslt ul.cat-menu li.active a{
+#search_result ul.cat-menu li.active a{
 	background: url(https://developer.tripfab.com/images2/arrow_53.png) no-repeat;
 	width: 180px;
 	overflow: hidden;
 }
-#src_rslt ul.cat-menu li a {
+#search_result ul.cat-menu li a {
 	background: none;
 	color: #ebebeb;
 	font-size: 12px;
@@ -2715,17 +2716,17 @@ ul.cat-menu li.item-1 a img {
 	display: block;
 	line-height: 32px;
 }
-#src_rslt ul.cat-menu li em {
+#search_result ul.cat-menu li em {
 	float: left;
 	font-style: normal;
 	display: block;
 }
-#src_rslt ul.cat-menu li span {
+#search_result ul.cat-menu li span {
 	display: block;
 	float: right;
 	padding-right: 10px;
 }
-#src_rslt ul.cat-menu li img {
+#search_result ul.cat-menu li img {
 	background-image: url(https://developer.tripfab.com/images2/ico_135.png);
 	background-repeat: no-repeat;
 	background-position:0 0 ;
@@ -2734,81 +2735,81 @@ ul.cat-menu li.item-1 a img {
 	width: 19px;
 	vertical-align: middle;
 }
-#src_rslt ul.cat-menu li:hover img {
+#search_result ul.cat-menu li:hover img {
 	background-position:-41px  0;
 }
-#src_rslt ul.cat-menu li.active img {
+#search_result ul.cat-menu li.active img {
 	background-position:-82px  0 ;
 }
-#src_rslt ul.cat-menu li.item-2 img {
+#search_result ul.cat-menu li.item-2 img {
 	background-position:0 -37px;
 }
-#src_rslt ul.cat-menu li.item-2:hover img {
+#search_result ul.cat-menu li.item-2:hover img {
 	background-position:-41px -37px;
 }
-#src_rslt ul.cat-menu li.item-2.active img {
+#search_result ul.cat-menu li.item-2.active img {
 	background-position:-82px -37px;
 }
 
-#src_rslt ul.cat-menu li.item-3 img {
+#search_result ul.cat-menu li.item-3 img {
 	background-position:0 -76px;
 }
-#src_rslt ul.cat-menu li.item-3:hover img {
+#search_result ul.cat-menu li.item-3:hover img {
 	background-position:-41px -76px;
 }
-#src_rslt ul.cat-menu li.item-3.active img {
+#search_result ul.cat-menu li.item-3.active img {
 	background-position:-82px -76px;
 }
 
-#src_rslt ul.cat-menu li.item-4 img {
+#search_result ul.cat-menu li.item-4 img {
 	background-position:0 -113px;
 }
-#src_rslt ul.cat-menu li.item-4:hover img {
+#search_result ul.cat-menu li.item-4:hover img {
 	background-position:-41px -113px;
 }
-#src_rslt ul.cat-menu li.item-4.active img {
+#search_result ul.cat-menu li.item-4.active img {
 	background-position:-82px -113px;
 }
 
-#src_rslt ul.cat-menu li.item-5 img {
+#search_result ul.cat-menu li.item-5 img {
 	background-position:0 -150px;
 }
-#src_rslt ul.cat-menu li.item-5:hover img {
+#search_result ul.cat-menu li.item-5:hover img {
 	background-position:-41px -150px;
 }
-#src_rslt ul.cat-menu li.item-5.active img {
+#search_result ul.cat-menu li.item-5.active img {
 	background-position:-82px -150px;
 }
 
-#src_rslt ul.cat-menu li.item-6 img {
+#search_result ul.cat-menu li.item-6 img {
 	background-position:0 -187px;
 }
-#src_rslt ul.cat-menu li.item-6:hover img {
+#search_result ul.cat-menu li.item-6:hover img {
 	background-position:-41px -187px;
 }
-#src_rslt ul.cat-menu li.item-6.active img {
+#search_result ul.cat-menu li.item-6.active img {
 	background-position:-82px -187px;
 }
-#src_rslt .sidebar .widget {
+#search_result .left-sidebar .widget {
 	background: url(https://developer.tripfab.com/images6/src_rslt_side_g1.png) repeat-x #FFF;
 	padding: 10px;
 	overflow: hidden;
 	width: 170px !important;
 }
-#src_rslt .sidebar .widget .scroll-pane {
+#search_result .left-sidebar .widget .scroll-pane {
 	height: 173px !important;
 }
-#src_rslt .sidebar .widget.slider .bg{
+#search_result .left-sidebar .widget.slider .bg{
 	margin-left: 10px;
     width: 132px;
     background: url(https://developer.tripfab.com/images2/slider-dot.png) repeat-x bottom left;
     padding-bottom: 15px;
 }
-#src_rslt .sidebar h3.filter {
+#search_result .left-sidebar h3.filter {
 	background: url(https://developer.tripfab.com/images2/sep-9.png) repeat-x 0 6px;
 	margin-bottom: 10px;
 }
-#src_rslt .sidebar h3.filter span {
+#search_result .left-sidebar h3.filter span {
 	display: block;
 	text-align: center;
 	background-color: #FFF;
@@ -2818,11 +2819,11 @@ ul.cat-menu li.item-1 a img {
 	width: 120px;
 	margin: 0 auto;
 }
-#src_rslt .sidebar .travelers{
+#search_result .left-sidebar .travelers{
 	padding:10px 0 18px 20px;
 	overflow: hidden;
 }
-#src_rslt .sidebar .travelers label {
+#search_result .left-sidebar .travelers label {
 	display: block;
 	background: url(https://developer.tripfab.com/images2/ico_134.png) no-repeat left 50%;
 	padding-left: 20px;
@@ -2831,11 +2832,11 @@ ul.cat-menu li.item-1 a img {
 	color: #464646;
 	float: left;
 }
-#src_rslt .sidebar .travelers select{
+#search_result .left-sidebar .travelers select{
 	float: right;
 	margin:3px 13px 0 0;
 }
-#src_rslt .sidebar p a{
+#search_result .left-sidebar p a{
 	background-color: #60B5F7;
     color: #FFFFFF !important;
     font-size: 9px;
@@ -2846,67 +2847,67 @@ ul.cat-menu li.item-1 a img {
     border-radius: 4px;
     margin-left: 22px;
 }
-#src_rslt .sidebar p a:hover {
+#search_result .left-sidebar p a:hover {
 	background-color: #9ED3FD;
 	text-decoration: none;
 }
-#src_rslt .sidebar .widget.listing-2 h4.location img {
+#search_result .left-sidebar .widget.listing-2 h4.location img {
 	background: url(https://developer.tripfab.com/images2/ico-15.png) no-repeat;
 }
-#src_rslt .sidebar h4 img {
+#search_result .left-sidebar h4 img {
 	background: url(https://developer.tripfab.com/images2/ico_134.png) no-repeat;
 }
-#src_rslt .sidebar h4.landscapes img {
+#search_result .left-sidebar h4.landscapes img {
 	background-position:0 -119px
 }
-#src_rslt .sidebar h4.categories img {
+#search_result .left-sidebar h4.categories img {
 	background-position:0 -90px;
 }
-#src_rslt .sidebar .widget h4 {
+#search_result .left-sidebar .widget h4 {
 	color: #464646;
 	text-transform: uppercase;
 	font-weight: normal;
 	line-height: 21px;
 }
-#src_rslt .sidebar .widget h4 img {
+#search_result .left-sidebar .widget h4 img {
 	margin-right: 5px;
 	vertical-align: middle;
 	width: 8px;	
 }
-#src_rslt .sidebar .widget.slider h4 img {
+#search_result .left-sidebar .widget.slider h4 img {
 	background: url(https://developer.tripfab.com/images2/ico-14.png) no-repeat;
 	height: 12px;
 }
-#src_rslt .sidebar .widget.slider > span {
+#search_result .left-sidebar .widget.slider > span {
 	color: #898989;
 	line-height: 19px;
 	display: block;
 	margin-left: 13px;
 }
-#src_rslt .sidebar .widget.destinations h4 img {
+#search_result .left-sidebar .widget.destinations h4 img {
 	background: url(https://developer.tripfab.com/images2/ico-15.png) no-repeat;
 	height: 12px;	
 	width: 8px;
 }
-#src_rslt .sidebar .widget.listing-1 h4 img {
+#search_result .left-sidebar .widget.listing-1 h4 img {
 	background: url(https://developer.tripfab.com/images2/ico-76.png) no-repeat;
 	height: 15px;	
 	width: 12px;
 }
-#src_rslt .sidebar .widget.listing-2 h4 img {
+#search_result .left-sidebar .widget.listing-2 h4 img {
 	background: url(https://developer.tripfab.com/images2/ico-77.png) no-repeat;
 	height: 13px;	
 	width: 14px;
 }
-#src_rslt .sidebar .widget.destinations p {
+#search_result .left-sidebar .widget.destinations p {
 	color: #303030;
 	line-height: 25px;
 	text-transform: capitalize;
 }
-#src_rslt .sidebar .widget.destinations input[type="checkbox"] {
+#search_result .left-sidebar .widget.destinations input[type="checkbox"] {
 	margin-right: 10px;
 }
-#src_rslt .sidebar .widget.destinations > a {
+#search_result .left-sidebar .widget.destinations > a {
 	color: #60b5f7;
 	display: block;
 	margin-left: 13px;
@@ -2914,17 +2915,17 @@ ul.cat-menu li.item-1 a img {
 }
 
 /*End Search Result Sidebar-----------------------*/
-#src_rslt .content .sort {
+#search_result .content .sort {
 	background-color:#f3f3f3;
 	border-top: 1px solid #efefef;
 	height: 52px;
 	position: relative;
 	z-index: 100;
 }
-#src_rslt .content .sort.fixed {
+#search_result .content .sort.fixed {
 	position: fixed;
 }
-#src_rslt .content .sort .shw {
+#search_result .content .sort .shw {
 	background: url(https://developer.tripfab.com/images6/src_result-shw1.png) no-repeat;
 	width: 870px;
 	height: 30px;
@@ -2933,33 +2934,32 @@ ul.cat-menu li.item-1 a img {
 	left: 0;
 	z-index: 100;
 }
-#src_rslt .content .sort h3 {
+#search_result .content .sort h3 {
 	width: 510px;
 	padding: 16px 0 0 20px;
 	float: left;
 }
-#src_rslt .content .sort .filter {
+#search_result .content .sort .filter {
 	width: 240px;
 	float: right;
 	margin-top: 16px;
 }
-#src_rslt .content .sort .filter label {
+#search_result .content .sort .filter label {
 	float: right;
 }
-#src_rslt .content .sort .filter select {
+#search_result .content .sort .filter select {
 	float: right;
 	margin-left: 10px;
 }
-#src_rslt .content {
+#search_result .content {
 	width: 770px;
 	float: right;
-	margin-bottom: 40px;
 }
-#src_rslt .listings {
+#search_result .results-wrapper {
 	padding: 30px 0 20px !important;
 	background-color: #F3F3F3;
 } 
-#src_rslt .listings .single {
+#search_result .results-wrapper .single {
 	height: 298px;
 	width:241px ;
 	background-color: #FFF;
@@ -2976,18 +2976,18 @@ ul.cat-menu li.item-1 a img {
 	-moz-box-shadow: 0px 0px 2px 1px #c0c0c0;
 	box-shadow: 0px 0px 2px 1px #c0c0c0; 
 }
-#src_rslt .listings .single:hover {
+#search_result .results-wrapper .single:hover {
 	-webkit-box-shadow: 0px 0px 4px 3px #cbdbf0;
 	-moz-box-shadow: 0px 0px 4px 3px #cbdbf0;
 	box-shadow: 0px 0px 4px 3px #cbdbf0;
 }
-#src_rslt .single .image {
+#search_result .single .image {
 	width: 241px;
 	height: 124px;
 	position: relative;
 	margin-bottom: 10px;
 }
-#src_rslt .single .rating {
+#search_result .single .rating {
 	overflow: hidden;
 	float: left;
 	width: 90px;
@@ -2996,23 +2996,23 @@ ul.cat-menu li.item-1 a img {
 	right: 5px;
 	visibility: hidden;
 }
-#src_rslt .single  .rating li {
+#search_result .single  .rating li {
 	float: left;
 }
-#src_rslt .single .rating li a {
+#search_result .single .rating li a {
 	display: block;
 	background: url(https://developer.tripfab.com/images6/stars.png) no-repeat;
 	width: 15px;
 	height: 15px;
 	margin-right: 3px;
 }
-#src_rslt .single .rating .slct {
+#search_result .single .rating .slct {
 	background-position:0 0;
 }
-#src_rslt .single .rating .nrml {
+#search_result .single .rating .nrml {
 	background-position: -58px 0;
 }
-#src_rslt .single .hvr {
+#search_result .single .hvr {
 	display: none;
 	position: absolute;
 	top: 0;
@@ -3022,10 +3022,10 @@ ul.cat-menu li.item-1 a img {
 	background: url(https://developer.tripfab.com/images6/src_result-shw2.png) repeat;
 	z-index: 10;
 }
-#src_rslt .image:hover .hvr {
+#search_result .image:hover .hvr {
 	display: block;
 }
-#src_rslt .image .hvr a {
+#search_result .image .hvr a {
 	background: url(https://developer.tripfab.com/images6/src_result-shw3.png) repeat-x;
 	display: block;
 	padding:0 10px;
@@ -3039,7 +3039,7 @@ ul.cat-menu li.item-1 a img {
 	text-shadow: 0px 1px 0px #000;
 	border: 1px solid #000;
 } 
-#src_rslt .image .hvr a span {
+#search_result .image .hvr a span {
 	background: url(https://developer.tripfab.com/images6/src_result-aw3.png) no-repeat ;
 	display: inline-block;
 	width: 11px;
@@ -3047,7 +3047,7 @@ ul.cat-menu li.item-1 a img {
 	float: right;
 	margin: 10px 10px 0 0;
 }
-#src_rslt .single a.add {
+#search_result .single a.add {
 	display: block;
 	position: absolute;
 	top: 0;
@@ -3057,7 +3057,7 @@ ul.cat-menu li.item-1 a img {
 	height: 31px;
 	z-index: 12;
 }
-#src_rslt .single .tooltip {
+#search_result .single .tooltip {
 	display: block;
 	background-color: #000;
 	padding:5px 12px;
@@ -3069,7 +3069,7 @@ ul.cat-menu li.item-1 a img {
 	right: -44px;
 	z-index: 12;
 }
-#src_rslt .single .tooltip span {
+#search_result .single .tooltip span {
 	display: block;
 	width: 14px;
 	height: 5px;
@@ -3078,29 +3078,29 @@ ul.cat-menu li.item-1 a img {
 	right: 45%;
     top: -4px;
 }
-#src_rslt .single h4 {
+#search_result .single h4 {
 	color: #303030;
 	font: normal 17px/20px Helvetica;
 	padding-left: 10px;
 }
-#src_rslt .single h4 a {
+#search_result .single h4 a {
 	color: #303030;
 }
-#src_rslt .single h4 a:hover {
+#search_result .single h4 a:hover {
 	color: #60b5f7;
 }
-#src_rslt .single > span {
+#search_result .single > span {
 	margin:0 0 10px 10px;
 	display: block;
 	color: #898989;
 	font: 300 11px Helvetica;
 }
-#src_rslt .single > p{
+#search_result .single > p{
 	color: #7c7c7c;
 	font: 300 12px/17px Helvetica;
 	padding:0 10px 10px 10px;
 }
-#src_rslt .single .info {
+#search_result .single .info {
 	height: 58px;
 	border-top: 1px solid #e7e7e7;
 	position: absolute;
@@ -3108,7 +3108,7 @@ ul.cat-menu li.item-1 a img {
 	left: 0;
 	width: 241px;
 }
-#src_rslt .single .location {
+#search_result .single .location {
 	width: 125px;
 	float: left;
 	margin: 0 0 0 10px;
@@ -3116,7 +3116,7 @@ ul.cat-menu li.item-1 a img {
 	font: normal 11px Helvetica;
 	padding-top: 13px;
 }
-#src_rslt .single .location span {
+#search_result .single .location span {
 	display: inline-block;
 	background: url(https://developer.tripfab.com/images6/src_result-icons.png) no-repeat -14px -128px;
 	width: 10px;
@@ -3124,11 +3124,11 @@ ul.cat-menu li.item-1 a img {
 	float: left;
 	margin-right: 4px;
 }
-#src_rslt .single .location strong{
+#search_result .single .location strong{
 	display: block;
 	color: #303030;
 }
-#src_rslt .single .price {
+#search_result .single .price {
 	color: #303030;
 	font:bold 29px Helvetica;
 	text-align: right;
@@ -3136,11 +3136,11 @@ ul.cat-menu li.item-1 a img {
 	float: right;
 	margin: 10px 10px 0 0;
 }
-#src_rslt .single .price sup {
+#search_result .single .price sup {
 	vertical-align: top;
 	font-size:16px ;
 }
-#src_rslt .single .price sub {
+#search_result .single .price sub {
 	font: normal 11px Helvetica;
 	text-align: right;
 	display: block;
@@ -3153,74 +3153,71 @@ ul.cat-menu li.item-1 a img {
 
 
 /*HOTEL 1*/
-#src_rslt .single.hotel-1 .location strong {
+#search_result .single.hotel-1 .location strong {
 	margin: 5px 0 0 14px;
 }
-#src_rslt .single.hotel-1 h4 {
+#search_result .single.hotel-1 h4 {
 	margin-bottom: 6px;
 }
-#src_rslt .single.hotel-1 .hvr a {
+#search_result .single.hotel-1 .hvr a {
 	width:90px;
 }
-#src_rslt .single.hotel-1 .hvr a span{
+#search_result .single.hotel-1 .hvr a span{
 	margin: 9px 6px 0 0;
 }
 /*END HOTEL 1*/
 /*HOTEL 2*/
-#src_rslt .single .location strong {
+#search_result .single .location strong {
 	margin: 5px 0 0 10px;
 }
-#src_rslt .single.hotel-1 h4 {
+#search_result .single.hotel-1 h4 {
 	margin-bottom: 6px;
 }
 /*END HOTEL 2*/
 /*ACTIVITY 1*/
-#src_rslt .single.activity-1 .hvr a,
-#src_rslt .single.activity-2 .hvr a {
+#search_result .single.activity-1 .hvr a,
+#search_result .single.activity-2 .hvr a {
 	width:107px;
 }
-#src_rslt .single.activity-1 .hvr a span{
+#search_result .single.activity-1 .hvr a span{
 	margin: 9px 6px 0 0
 }
 /*END ACTIVITY 1*/
 /*ACTIVITY 2*/
-#src_rslt .single.activity-2 h4 {
+#search_result .single.activity-2 h4 {
 	margin-bottom: 4px;
 }
-#src_rslt .single.activity-2 > span {
+#search_result .single.activity-2 > span {
 	margin-bottom: 7px;
 }
 /*END ACTIVITY 2*/
 
 /*RESTAURANT 1*/
-#src_rslt .single.gen-1  {
-	margin-bottom: 4px;
+#search_result .single.gen-1 .hvr,
+#search_result .single.gen-2 .hvr {
+	height: 240px;
 }
-#src_rslt .single.gen-1 .hvr,
-#src_rslt .single.gen-2 .hvr {
+#search_result .single.gen-1 .image {
 	height: 183px;
 }
-#src_rslt .single.gen-1 .image {
-	height: 183px;
-}
-#src_rslt .single.gen-2 .image {
+#search_result .single.gen-2 .image {
 	height: 183px;
 }
 
-#src_rslt .single.gen-2 h4 {
+#search_result .single.gen-2 h4 {
 	padding-top: 10px;
 }
-#src_rslt .single .restaurant {
-	width: 140px;
-}
-#src_rslt .single .sight {
-	width: 149px;
-}
-#src_rslt .single .entertaiment {
+#search_result .single .restaurant {
 	width: 150px;
 }
-#src_rslt .single.gen-1 .hvr a,
-#src_rslt .single.gen-2 .hvr a {
+#search_result .single .sight {
+	width: 149px;
+}
+#search_result .single .entertaiment {
+	width: 150px;
+}
+#search_result .single.gen-1 .hvr a,
+#search_result .single.gen-2 .hvr a {
 	margin-top: 72px;
 }
 /*END RESTAURANT 1*/
@@ -3453,73 +3450,6 @@ ul.cat-menu li.item-1 a img {
     position: relative;
     width: 282px;
     height: 174px;
-}
-.error_ph {
-	width: 342px;
-	background-color: #FFF;
-	-webkit-border-radius: 4px;
-	border-radius: 4px
-}
-.error_ph .icon2 {
-	display: block;
-	width: 40px;
-	height: 40px;
-	float: left;
-	background: url(https://developer.tripfab.com/images6/dialpad-ic2.png) no-repeat;
-	margin: 20px 20px 0 20px;
-}
-.error_ph .icon1 {
-	display: block;
-	width: 40px;
-	height: 40px;
-	float: left;
-	background: url(https://developer.tripfab.com/images6/dialpad-ic1.png) no-repeat;
-	margin: 20px 20px 0 20px;
-}
-.error_ph h3 {
-	font: bold 15px Helvetica;
-	padding-top: 20px;
-	margin-bottom:5px;
-}
-.error_ph p {
-	float: left;
-	font: normal 13px/18px Helvetica;
-	width: 240px;
-	padding-bottom: 15px;
-}
-.error_ph .bottom {
-	clear: both;
-	background: url("https://developer.tripfab.com/images2/g-52.gif") repeat-x scroll 0 0 #F6F6F6;
-    height: 45px;
-    overflow: hidden;
-    padding: 15px 20px 0 0;
-    -webkit-border-radius: 0px 0px 4px 4px;
-    border-radius: 0px 0px 4px 4px; 
-}
-.error_ph .bottom .btn-1 {
-	float: right;
-}
-.error_ph .bottom .btn-10 {
-	float: right;
-	height: 30px;
-}
-.load_ph{
-	-webkit-border-radius: 4px;
-	border-radius: 4px; 
-	width: 342px;
-	height: 165px;
-	background-color: #FFF;
-}
-.load_ph img {
-	display: block;
-	width: 50;
-	height: 50px;
-	margin: 0 auto 25px;
-	padding-top: 40px;
-}
-.load_ph h3 {
-	text-align: center;
-	font: bold 15px Helvetica;
 }
 /*END DIALPAD--------------------------------------------------------------*/
 /*LIVE CHAT----------------------------------------------------------------*/

@@ -18169,7 +18169,7 @@ text-indent: 20px;
 #search_result {
 	width: 960px;
 	margin: 20px auto 0;
-	border: 1px solid #e7e7e7;
+	/*border: 1px solid #e7e7e7;*/
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
@@ -18426,13 +18426,14 @@ text-indent: 20px;
 	font-size: 11px;
 	float: none;
 }
-#search_result .price {
+/*#search_result .price {
 	position: absolute;
 	bottom: 13px;
 	left: 15px;
 	font: bold 20px Helvetica;
 	color: #555555;
 }
+*/
 #search_result .price em {
 	font: normal 12px Helvetica;
 }
