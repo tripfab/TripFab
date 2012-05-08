@@ -12400,19 +12400,21 @@ h2.title .back:hover,
 	height: 118px;
 	position: relative;
 }
-.trip-itinerary .box .slideshow .cont .jcarousel-prev {
-	background-position: -6px -43px;
-	left: 10px;
-}
 .trip-itinerary .box .slideshow .cont .jcarousel-prev:hover {
 	background-position: -6px -79px;
 }
-.trip-itinerary .box .slideshow .cont .jcarousel-next {
-	background-position: -37px -43px;
-	right: 10px;
-}
 .trip-itinerary .box .slideshow .cont .jcarousel-next:hover {
 	background-position: -37px -79px;
+}
+.trip-itinerary .box .slideshow .cont .jcarousel-prev,
+.trip-itinerary .box .slideshow .cont .jcarousel-prev.jcarousel-prev-disabled  {
+	background-position: -6px -43px;
+	left: 10px;
+}
+.trip-itinerary .box .slideshow .cont .jcarousel-next,
+.trip-itinerary .box .slideshow .cont .jcarousel-next.jcarousel-next-disabled {
+	background-position: -37px -43px;
+	right: 10px;
 }
 .trip-itinerary .box .slideshow .cont ul li {
 	position: relative;
