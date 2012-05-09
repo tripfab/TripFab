@@ -523,10 +523,21 @@
                                     I don't know the travel dates yet
                                 </label>
                             </div><!--ITEM-->
-                            <div class="item last">
-                                    <input type="checkbox" checked="checked" />
-                                    <p>I want to receive special offers from vendors near
-                                        of the places I'll visit in this trip</p>
+                            <div class="item temp">
+                                <label class="travelers">Travelers</label>
+                                <select name="adults">
+                                    <option value="1">1 Adult</option>
+                                    <?php for($i=2;$i<=20;$i++): ?>
+                                    <option value="<?= $i ?>"><?= $i ?> Adults</option>
+                                    <?php endfor ?>
+                                </select>
+                                <select name="kids">
+                                    <option value="">None</option>
+                                    <option value="1">1 Kid</option>
+                                    <?php for($i=2;$i<=20;$i++): ?>
+                                    <option value="<?= $i ?>"><?= $i ?> Kids</option>
+                                    <?php endfor ?>
+                                </select>
                             </div><!--ITEM-->
                         </fieldset>
                     </div><!--CONT-->

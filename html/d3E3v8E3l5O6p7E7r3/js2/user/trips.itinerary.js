@@ -1,5 +1,12 @@
 $(document).ready(function() {
     
+    var assigned_listings = 0;
+    $('.itinerary-wrapper .slider .slide .itinerary-items ul li:not(.empty)').each(function(){
+        assigned_listings++;
+    });
+    
+    console.log(assigned_listings);
+    
     $('a.lb').fancybox({
         padding:0,
         overlayColor:'#fff',
@@ -150,6 +157,15 @@ $(document).ready(function() {
                     $fancybox = true;
                     $drop     = false;
                     $('#tripprice').text('$'+response);
+                    
+                    if(assigned_listings == 0) {
+                        $('.tocheckout').removeClass('deny');
+                    }
+                    
+                    assigned_listings++;
+                    
+                    console.log(assigned_listings);
+                    
                 },
                 error:function(){
                     showError('Something went wrong');
@@ -220,6 +236,14 @@ $(document).ready(function() {
                     $fancybox = true;
                     $drop     = false;
                     $('#tripprice').text('$'+response);
+                    
+                    if(assigned_listings == 0) {
+                        $('.tocheckout').removeClass('deny');
+                    }
+                    
+                    assigned_listings++;
+                    
+                    console.log(assigned_listings);
                 },
                 error:function(){
                     showError('Something went wrong');
@@ -290,6 +314,14 @@ $(document).ready(function() {
                     });
                 });
                 $('#tripprice').text('$'+response);
+                    
+                assigned_listings--;
+                
+                if(assigned_listings == 0) {
+                    $('.tocheckout').addClass('deny');
+                }
+
+                console.log(assigned_listings);
             }
         });		
         return false;
@@ -312,6 +344,14 @@ $(document).ready(function() {
                     $element.remove();
                 });
                 $('#tripprice').text('$'+response);
+                    
+                assigned_listings--;
+                
+                if(assigned_listings == 0) {
+                    $('.tocheckout').addClass('deny');
+                }
+
+                console.log(assigned_listings);
             }
         });		
         return false;
@@ -360,12 +400,12 @@ $(document).ready(function() {
     	dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
     	showOtherMonths: true
     });
-    $(".w3_itinerary .btn-1").hover(function() {
+    $(".w3_itinerary .tocheckout.deny").live('hover', function() {
     	$(".w3_itinerary .warning").toggleClass('hidden');
     	return false
     });
     
-    $(".bottom .btn-1").hover(function() {
+    $(".bottom .tocheckout.deny").live('hover', function() {
     	$(".bottom .warning").toggleClass('hidden');
     	return false
     });

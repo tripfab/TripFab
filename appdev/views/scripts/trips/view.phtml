@@ -76,13 +76,21 @@
 				<?php $show = array(); ?>
                 <?php foreach($this->listings as $listing): ?>
                     <?php if($listing->main_type == 6 or $listing->main_type == 7): ?>
+                    <?php if($listing->featured == 1): ?>
                     <?php $show[1] = true; ?>
+                    <?php endif ?>
                     <?php elseif($listing->main_type == 4): ?>
+                    <?php if($listing->featured == 1): ?>
                     <?php $show[2] = true; ?>
+                    <?php endif ?>
                     <?php elseif($listing->main_type == 5): ?>
+                    <?php if($listing->featured == 1): ?>
                     <?php $show[3] = true; ?>
+                    <?php endif ?>
                     <?php elseif($listing->main_type == 2): ?>
+                    <?php if($listing->featured == 1): ?>
                     <?php $show[4] = true; ?>
+                    <?php endif ?>
                     <?php endif ?>
                 <?php endforeach ?>
                 <ul>

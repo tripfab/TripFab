@@ -33,6 +33,8 @@
 				<div class="sub_menu">
 					<h2>Create. <span>New Trip.</span></h2>
 					<a class="btn-10" href="/admin/trips/preview/<?php echo $this->trip->id ?>" target="_blank">Trip Preview</a>		
+                    <a href="#activate" class="btn-10 act lbc" id="act-btn-342"<?php echo $this->trip->active ? 'style="display:none"' : '';?> >Activate Trip</a>
+            		<a href="#deactivate" class="btn-10 deact lbc" id="deact-btn-342" <?php echo !$this->trip->active ? 'style="display:none"' : '';?>>Deactivate Trip</a>
 				</div><!--SUB_MENU-->
             </div><!--W3-->
 				
@@ -108,27 +110,27 @@
                                     <div class="item">
                                     	<div class="selects">
                                     	<select name="min" style="width: 100px;">
-                                        	<?php for($i=1;$i<=20;$i++): ?>
+                                        	<?php for($i=1;$i<=100;$i++): ?>
                                             <?php $selected = ($this->trip->min == $i) ? 'selected="selected"' : '' ?>
                                         	<option <?= $selected ?> value="<?= $i ?>"><?= $i ?></option>
                                             <?php endfor ?>
                                         </select>
                                         </div>
 										<h4>Minimun</h4>
-										<span>Price for trip</span>
+										<span>Number of people</span>
 									</div>
 									<!-- closes item -->
                                     <div class="item selects last">
                                     	<div class="selects">
                                     	<select name="max" style="width: 100px;">
-                                        	<?php for($i=1;$i<=20;$i++): ?>
+                                        	<?php for($i=1;$i<=100;$i++): ?>
                                             <?php $selected = ($this->trip->max == $i) ? 'selected="selected"' : '' ?>
                                         	<option <?= $selected ?> value="<?= $i ?>"><?= $i ?></option>
                                             <?php endfor ?>
                                         </select>
                                         </div>
 										<h4>Maximun</h4>
-										<span>Price for trip</span>
+										<span>Number of people</span>
 									</div>
 									<!-- closes item -->
 
@@ -279,6 +281,7 @@
 				</div>
 					
 			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+			<?php echo $this->partial('admin_partials/trip.phtml', array('title'=>$this->trip->title, 'tripId'=>$this->trip->id)); ?>
 		</div>
 		<!-- closes w1 -->
 		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>

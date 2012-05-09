@@ -21,12 +21,20 @@
     <div class="w3_itinerary">
         <div class="wrapper">
             <h2><?= $this->trip->title ?> <a href="#">Rename Itinerary</a></h2>
-            <a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1">Proceed to Checkout</a>
-             <a href="#dates_lbx" class="btn-10 lb dates">Change Travel Dates</a>
+            <?php if($this->tocheckout): ?>
+            <a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1 tocheckout">Proceed to Checkout</a>
              <div class="warning hidden">
-             	<h3>You can’t checkout</h3>
+             	<h3>You can't checkout</h3>
              	<p>You must to add something to do to your itinerary before checkout</p>
              </div><!--WARNING-->
+            <?php else: ?>
+            <a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1 deny tocheckout">Proceed to Checkout</a>
+             <div class="warning hidden">
+             	<h3>You can't checkout</h3>
+             	<p>You must to add something to do to your itinerary before checkout</p>
+             </div><!--WARNING-->
+             <?php endif ?>
+             <a href="#dates_lbx" class="btn-10 lb dates">Change Travel Dates</a>
         </div><!--WRAPPER-->
     </div><!--w3_itinerary-->
     <div class="title_itinerary">
@@ -49,7 +57,7 @@
                     <div class="tab" id="tab-<?= $i ?>">
                     	<?php if(!isset($_COOKIE['tooltipHelpItn'])): ?>
                     	<div class="firstime_tip">
-                    		<img class="arrow" src="/images6/tooltiparrow.png" class="arrow" alt="">
+                    		<img class="arrow" src="/images6/tooltiparrow.png" alt="">
                     		<div class="cont">
                     			<img src="https://developer.tripfab.com/images6/tooltipimg2.png" width="75" height="75" alt="" />
                     			<p><strong>Customize your Trip</strong>
@@ -174,11 +182,19 @@
                 <div class="bottom">
                     <span>Trip Estimate</span>
                     <strong id="tripprice">$<?= $this->trip->price ?></strong>
-                    <a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1">Proceed to Checkout</a>
+                    <?php if($this->tocheckout): ?>
+                    <a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1 tocheckout">Proceed to Checkout</a>
+                    <div class="warning hidden">
+                    	<h3>You can't checkout</h3>
+                    	<p>You must to add something to do to your itinerary before checkout</p>
+                    </div><!--WARNING-->
+                    <?php else: ?>
+                    <a  href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1 deny tocheckout">Proceed to Checkout</a>
                     <div class="warning hidden">
                     	<h3>You can’t checkout</h3>
                     	<p>You must to add something to do to your itinerary before checkout</p>
                     </div><!--WARNING-->
+                    <?php endif ?>
                 </div><!-- closes bottom -->
             </div><!-- closes itinerary-wrapper -->
         </div><!-- closes user-messages -->
@@ -244,6 +260,10 @@ $(function(){
 	$('input.calendar2').datepicker({
 		minDate:new Date(),
 		dateFormat:'D M d yy'
+	});
+	
+	$('a.deny').live('click', function(){
+		return false;
 	});
 });
 </script>

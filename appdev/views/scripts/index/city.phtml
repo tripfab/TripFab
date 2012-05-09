@@ -123,11 +123,6 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
             </div><!-- closes left-sidebar -->
            
             <div class="content">
-
-
-                
-                
-
                 <div class="results-wrapper">
                 	<div class="loading"><div class="load">Loading...</div></div>
 		            <div class="clear"></div>
@@ -171,11 +166,18 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
                         </div><!--ITEM-->
                         <div class="item temp">
                         	<label class="travelers">Travelers</label>
-                        	<select>
-                        		<option>Adults</option>
+                        	<select name="adults">
+                        		<option value="1">1 Adult</option>
+                                <?php for($i=2;$i<=20;$i++): ?>
+                                <option value="<?= $i ?>"><?= $i ?> Adults</option>
+                                <?php endfor ?>
                         	</select>
-                        	<select>
-                        		<option>2 Children</option>
+                        	<select name="kids">
+                        		<option value="">None</option>
+                        		<option value="1">1 Kid</option>
+                                <?php for($i=2;$i<=20;$i++): ?>
+                                <option value="<?= $i ?>"><?= $i ?> Kids</option>
+                                <?php endfor ?>
                         	</select>
                         </div><!--ITEM-->
                     </fieldset>

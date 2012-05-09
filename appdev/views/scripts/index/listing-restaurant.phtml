@@ -91,20 +91,25 @@
                             
                             <div class="photos">
                             	<?php for($i=0; $i<count($this->pictures); $i=$i+9): ?>
-                            	<ul>	
-                            		<?php for($j=$i;$j<($i+9); $j++):?>
-                            		<?php if(isset($this->pictures[$j])): ?>
-                            		<?php $pic = $this->pictures[$j] ?>
-                            		<?php $class = ($j == 0) ? 'active' : '' ?>
-                            	   	<li>
-                            			<a rel="group1" title="<?= $pic->location ?>" class="<?= $class ?> lbc" href="#img<?= $j ?>" data-tip="#small<?= $j ?>"><?= $this->thumbnail(65, $pic->url, '', '1:1') ?></a>
-                            		</li>
-                            		<?php else: ?>
-                            		<li></li>
-                            		<?php endif ?>
-                            		<?php endfor ?>
-                            	<?php endfor ?>
-                            		</ul>
+								<ul>	
+									<?php for($j=$i;$j<($i+9); $j++):?>
+									<?php if(isset($this->pictures[$j])): ?>
+									<?php $pic = $this->pictures[$j] ?>
+									<?php $class = ($j == 0) ? 'active' : '' ?>
+								   	<li>
+										<a rel="group1" title="<?= $pic->location ?>" class="<?= $class ?> lbc" href="#imgs<?= $j ?>" data-tip="#small<?= $j ?>"><?= $this->thumbnail(65, $pic->url, '', '1:1') ?></a>
+									</li>
+									<?php else: ?>
+                            		<li><img src="/images2/empty-small-photo.png" width="65" height="65" /></li>
+									<?php endif ?>
+									<?php endfor ?>
+								<?php endfor ?>
+	                   			</ul>
+                                <div class="hidden">
+                                    <?php for($i=0;$i<count($this->pictures);$i++): ?>
+                                    <?= $this->image($this->pictures[$i]->url, 'lgbox_img','imgs'.$i) ?>
+                                    <?php endfor ?>
+                                </div>
                             </div><!--PHOTOS-->
                         </div><!--INFO-->
                         <div class="clear"></div>
@@ -327,6 +332,22 @@
 								I don't know the travel dates yet
 							</label>
 						</div><!--ITEM-->
+                        <div class="item temp">
+                        	<label class="travelers">Travelers</label>
+                        	<select name="adults">
+                        		<option value="1">1 Adult</option>
+                                <?php for($i=2;$i<=20;$i++): ?>
+                                <option value="<?= $i ?>"><?= $i ?> Adults</option>
+                                <?php endfor ?>
+                        	</select>
+                        	<select name="kids">
+                        		<option value="">None</option>
+                        		<option value="1">1 Kid</option>
+                                <?php for($i=2;$i<=20;$i++): ?>
+                                <option value="<?= $i ?>"><?= $i ?> Kids</option>
+                                <?php endfor ?>
+                        	</select>
+                        </div><!--ITEM-->
 					</fieldset>
 				</div><!--CONT-->
 				<div class="bottom">

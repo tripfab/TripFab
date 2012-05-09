@@ -38,22 +38,22 @@
                     <form method="post">
                         <fieldset>
                         	<?php if($this->name): ?>
-                            <input name="name" type="text" value="<?= $this->name ?>" class="noclean in-1 name required" />
+                            <input name="name" type="text" value="<?= $this->name ?>" placeholder="Name" class="noclean in-1 name required" />
                             <?php else: ?>
-                            <input name="name" type="text" value="Name" class="in-1 name required" />
+                            <input name="name" type="text" value="" placeholder="Name" class="in-1 name required" />
                             <?php endif ?>
                             <?php if($this->lname): ?>
-                            <input name="lname" type="text" value="<?= $this->lname ?>" class="noclean in-1 lastname required" />
+                            <input name="lname" type="text" value="<?= $this->lname ?>" placeholder="Last Name" class="noclean in-1 lastname required" />
                             <?php else: ?>
-                            <input name="lname" type="text" value="Last Name" class="in-1 lastname required" />
+                            <input name="lname" type="text" value="" placeholder="Last Name" class="in-1 lastname required" />
                             <?php endif ?>
                             <?php if($this->email): ?>
-                            <input name="email" type="text" value="<?= $this->email ?>" class="noclean in-2 email required" />
+                            <input name="email" type="text" placeholder="E-Mail" value="<?= $this->email ?>" class="noclean in-2 email required" />
                             <?php else: ?>
-                            <input name="email" type="text" value="E-Mail" class="in-2 email required" />
+                            <input name="email" type="text" value="" placeholder="E-Mail" class="in-2 email required" />
                             <?php endif ?>
-                            <input name="password" type="password" value="Password" class="in-3 password required" />
-                            <input name="password2" type="password" value="Confirm Password" class="in-4 password required" />
+                            <input name="password" type="password" placeholder="Password" value="" class="in-3 password required" />
+                            <input name="password2" type="password" placeholder="Re-enter Password" value="" class="in-4 password required" />
                             <select name="country_id">
                                 <option value="">Select your country</option>
                                 <?php foreach($this->countries as $c): ?>
