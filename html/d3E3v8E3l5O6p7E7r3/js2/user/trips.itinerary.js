@@ -7,7 +7,7 @@ $(document).ready(function() {
     
     console.log(assigned_listings);
     
-    $('a.lb').fancybox({
+    $('a.lb, .lbc').fancybox({
         padding:0,
         overlayColor:'#fff',
         centerOnScroll:1,

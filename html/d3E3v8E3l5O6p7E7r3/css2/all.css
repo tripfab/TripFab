@@ -7689,6 +7689,25 @@ h2.title .back:hover,
 	position: relative;
 	overflow: visible !important;
 }
+.renameTrip.lb {
+	width: 339px;
+}
+.renameTrip.lb .top {
+	text-indent: 20px;
+}
+.renameTrip.lb .cont {
+	background-color: #FFF;
+	padding: 10px 0 20px 20px;
+}
+.renameTrip.lb .cont label{
+	font: bold 12px Helvetica;
+	display: block;
+	margin-bottom: 10px;
+}
+.renameTrip.lb .cont input {
+	width: 287px;
+	
+}
 /*- End of Trips Styles -----------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------*/
 
@@ -20517,11 +20536,6 @@ h2.title .back:hover,
 	width: 206px;
 }
 /*END CHECK-EMAIL----------------------------------------------------------*/
-
-
-
-
-
 
 
 

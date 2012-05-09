@@ -20,7 +20,7 @@
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
     <div class="w3_itinerary">
         <div class="wrapper">
-            <h2><?= $this->trip->title ?> <a href="#">Rename Itinerary</a></h2>
+            <h2><?= $this->trip->title ?> <a href="#rename-trip" class="lbc">Rename Itinerary</a></h2>
             <?php if($this->tocheckout): ?>
             <a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1 tocheckout">Proceed to Checkout</a>
              <div class="warning hidden">
@@ -243,6 +243,21 @@
             <input type="hidden" name="_task" value="<?= md5('assign_dates') ?>" />
 		</form>
 	</div><!--DATES_LBX-->
+	
+	<div class="renameTrip lb" id="rename-trip">
+		<div class="top">Rename Trip</div>
+		<div class="cont">
+			<form method="submit" action="">
+				<label for="">Trip Name</label>
+				<input type="text" name="" value="" />
+			</form>
+		</div><!--CONT-->
+		<div class="bottom">
+			<input class="btn-1" type="submit" name="" value="Rename" />
+			<a class="btn-10" href="$.fancybox.close()">Cancel</a>
+		</div><!--BOTTOM-->
+	</div><!--RENAMETRIP-->
+	
 </div>
 <script type="text/javascript" src="/js2/jquery.js"></script>
 <script type="text/javascript" src="/js2/user/trips.itinerary.js"></script>
