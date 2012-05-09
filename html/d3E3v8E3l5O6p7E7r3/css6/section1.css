@@ -2559,11 +2559,11 @@
 	margin-right: 10px;
 }
 #src_map .top .src_bar input[type="text"] {
-	width: 340px;
+	width: 347px;
 	height: 29px;
-	padding:2px 0 0 37px;
+	padding:2px 0 0 30px;
 	float: left;
-	font: italic 14px/31px Helvetica;
+	font: normal 14px/31px Helvetica;
 	color: #797777;
 	-webkit-box-shadow: 0px 1px 0px 0px #FFF;
 	-moz-box-shadow: 0px 1px 0px 0px #FFF;
@@ -2572,6 +2572,11 @@
 	margin-right: 5px;
 	float: right;
 	behavior: url(/PIE.htc);
+}
+#src_map .top .src_bar input[type="text"]:focus,
+#src_map .top .src_bar input[type="text"]:blur, {
+	font-weight: bold;
+	color: #303030;
 }
 #src_map .top .src_bar input[type="submit"] {
 	width: 83px;
@@ -2922,9 +2927,11 @@ ul.cat-menu li.item-1 a img {
 	height: 52px;
 	position: relative;
 	z-index: 100;
+	margin-left: 1px;
 }
 #search_result .content .sort.fixed {
 	position: fixed;
+	padding-right: 20px;
 }
 #search_result .content .sort .shw {
 	background: url(https://developer.tripfab.com/images6/src_result-shw1.png) no-repeat;
@@ -2936,7 +2943,7 @@ ul.cat-menu li.item-1 a img {
 	z-index: 100;
 }
 #search_result .content .sort h3 {
-	width: 510px;
+	width: 500px;
 	padding: 16px 0 0 20px;
 	float: left;
 }
@@ -2947,10 +2954,13 @@ ul.cat-menu li.item-1 a img {
 }
 #search_result .content .sort .filter label {
 	float: right;
+	height: 18px;
+	line-height: 18px;
 }
 #search_result .content .sort .filter select {
 	float: right;
 	margin-left: 10px;
+	height: 18px;
 }
 #search_result .content {
 	width: 770px;
@@ -2959,6 +2969,7 @@ ul.cat-menu li.item-1 a img {
 #search_result .results-wrapper {
 	padding: 30px 0 20px !important;
 	background-color: #F3F3F3;
+	border-left: 1px solid #e3e3e3;
 } 
 #search_result .results-wrapper .single {
 	height: 298px;
@@ -3026,28 +3037,146 @@ ul.cat-menu li.item-1 a img {
 #search_result .image:hover .hvr {
 	display: block;
 }
-#search_result .image .hvr a {
-	background: url(https://developer.tripfab.com/images6/src_result-shw3.png) repeat-x;
+#search_result .single.activity-1  .hvr .cat,
+#search_result .single.activity-2 .hvr .cat  {
+	border-right: 1px solid #FFF;
+	font: normal 12px Helvetica;
+	color: #ffffff;
+	height: 40px;
+	width: 106px;
 	display: block;
-	padding:0 10px;
-	height: 28px;
-	color: #FFF;
-	text-align: center;
-	font: 600 13px/28px Helvetica;
-	margin: 46px auto 0;
-	-webkit-border-radius: 40px;
-	border-radius: 40px; 
-	text-shadow: 0px 1px 0px #000;
-	border: 1px solid #000;
-} 
-#search_result .image .hvr a span {
-	background: url(https://developer.tripfab.com/images6/src_result-aw3.png) no-repeat ;
-	display: inline-block;
-	width: 11px;
-	height: 11px;
-	float: right;
-	margin: 10px 10px 0 0;
+	margin: 50px 18px 0 15px;
+	float: left;
+	padding: 0;
 }
+#search_result .single.activity-1 .hvr .cat em,
+#search_result .single.activity-2 .hvr .cat em {
+	display: inline-block;
+	background: url(https://developer.tripfab.com/images6/src_result-icons.png) no-repeat -12px 0;
+	width: 13px;
+	height: 13px;
+	float: left;
+	margin: 3px 5px 20px 0;
+}
+#search_result .single.activity-1 .hvr strong,
+#search_result .single.activity-2 .hvr strong {
+	font: bold 14px Helvetica;
+	display: block;
+	padding-top: 5px;
+}
+#search_result .single.activity-1 .time,
+#search_result .single.activity-2 .time {
+	font: normal 12px Helvetica;
+	color: #ffffff;
+	height: 40px;
+	width:86px;
+	display: block;
+	margin: 50px 0 0 0;
+	float: left;
+}
+#search_result .single.activity-1 .hvr .time em,
+#search_result .single.activity-2 .hvr .time em {
+	display: inline-block;
+	background: url(https://developer.tripfab.com/images6/src_result-icons.png) no-repeat -11px -71px;
+	width: 13px;
+	height: 13px;
+	float: left;
+	margin: 3px 5px 20px 0;
+}
+#search_result .single.hotel-1 .hvr .type,
+#search_result .single.hotel-2 .hvr .type,
+#search_result .single.hotel-1 .cat,
+#search_result .single.hotel-2 .cat {
+	margin: 45px 0 0 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#search_result .single .hvr .type  {
+	border-right: 1px solid #FFF;
+	font: normal 12px Helvetica;
+	color: #ffffff;
+	height: 40px;
+	width: 88px;
+	display: block;
+	margin: 75px 0 0 0;
+	float: left;
+	padding:0 5px 0 13px;
+}
+#search_result .single .hvr .type em {
+	display: inline-block;
+	background: url(https://developer.tripfab.com/images6/src_result-icons.png) no-repeat -12px 0;
+	width: 13px;
+	height: 13px;
+	float: left;
+	margin: 1px 5px 20px 0;
+}
+#search_result .single .hvr .type .act {
+	background-position: -52px -56px;
+}
+#search_result .single .hvr .type .rest{
+	background-position: -54px -115px;
+}
+#search_result .single .hvr .type .sght{
+	background-position: -57px -230px;
+}
+#search_result .single .hvr .type .ent{
+	background-position: -54px -174px;
+}
+#search_result .single .hvr strong {
+	font: bold 12px Helvetica;
+	display: block;
+	padding-top: 5px;
+}
+#search_result .single .cat {
+	font: normal 12px Helvetica;
+	color: #ffffff;
+	height: 40px;
+	width: 110px;
+	display: block;
+	margin: 75px 0 0 0;
+	float: left;
+	padding: 0 9px 0 11px;
+}
+#search_result .single .hvr .cat em {
+	display: inline-block;
+	background: url(https://developer.tripfab.com/images6/src_result-icons.png) no-repeat -12px 0;
+	width: 13px;
+	height: 13px;
+	float: left;
+	margin: 3px 5px 20px 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #search_result .single a.add {
 	display: block;
 	position: absolute;
@@ -3057,6 +3186,9 @@ ul.cat-menu li.item-1 a img {
 	width: 32px;
 	height: 31px;
 	z-index: 12;
+}
+#search_result .single a.add:hover {
+	background-position:1px -509px;
 }
 #search_result .single .tooltip {
 	display: block;
@@ -3110,12 +3242,13 @@ ul.cat-menu li.item-1 a img {
 	width: 241px;
 }
 #search_result .single .location {
-	width: 125px;
-	float: left;
-	margin: 0 0 0 10px;
+	width: 138px;
+	padding: 0 0 0 10px;
 	color: #6e6e6e;
 	font: normal 11px Helvetica;
-	padding-top: 13px;
+	display: table-cell;
+	vertical-align: middle;
+	height: 58px;
 }
 #search_result .single .location span {
 	display: inline-block;
@@ -3128,27 +3261,41 @@ ul.cat-menu li.item-1 a img {
 #search_result .single .location strong{
 	display: block;
 	color: #303030;
+	margin: 2px 0 0 14px;
 }
 #search_result .single .price {
 	color: #303030;
-	font:bold 29px Helvetica;
 	text-align: right;
-	width: 90px;
-	float: right;
-	margin: 10px 10px 0 0;
+	width: 80px;
+	position: absolute;
+	top: 12px;
+	right: 10px;
 }
 #search_result .single .price sup {
-	vertical-align: top;
-	font-size:16px ;
+	float: right;
+	font:bold 16px/15px Helvetica;
+	display: block;
+	height: 16px;
 }
 #search_result .single .price sub {
-	font: normal 11px Helvetica;
+	font: normal 11px/5px Helvetica;
 	text-align: right;
 	display: block;
+	clear: both;
+	height: 11px;
+}
+#search_result .single .price span {
+	display: block;
+	float: right;
+	font:bold 29px/25px Helvetica;
+	height: 29px;
+	overflow: hidden;
+	vertical-align: text-top;
 }
 /*HOTEL 1*/
+
 #search_result .single.hotel-1 .location strong {
-	margin: 5px 0 0 14px;
+	margin: 2px 0 0 14px;
 }
 #search_result .single.hotel-1 h4 {
 	margin-bottom: 6px;
@@ -3161,23 +3308,20 @@ ul.cat-menu li.item-1 a img {
 }
 /*END HOTEL 1*/
 /*HOTEL 2*/
-#search_result .single .location strong {
-	margin: 5px 0 0 10px;
+#search_result .single.hotel-2 .location strong {
+	margin: 5px 0 0 15px;
 }
-#search_result .single.hotel-1 h4 {
+#search_result .single.hotel-2 h4 {
 	margin-bottom: 6px;
 }
 /*END HOTEL 2*/
 /*ACTIVITY 1*/
-#search_result .single.activity-1 .hvr a,
-#search_result .single.activity-2 .hvr a {
-	width:107px;
-}
 #search_result .single.activity-1 .hvr a span{
 	margin: 9px 6px 0 0
 }
 /*END ACTIVITY 1*/
 /*ACTIVITY 2*/
+#search_result .single.activity-1 h4,
 #search_result .single.activity-2 h4 {
 	margin-bottom: 4px;
 }
@@ -3186,7 +3330,7 @@ ul.cat-menu li.item-1 a img {
 }
 #search_result .single.activity-2 p {
 	height: 24px;
-	overflow: hidden;
+	overflow: hidden ;
 }
 /*END ACTIVITY 2*/
 
@@ -3217,6 +3361,10 @@ ul.cat-menu li.item-1 a img {
 #search_result .single.gen-1 .hvr a,
 #search_result .single.gen-2 .hvr a {
 	margin-top: 72px;
+}
+#search_result .single.gen-1 .location,
+#search_result .single.gen-2 .location {
+	width: 200px;
 }
 /*END RESTAURANT 1*/
 /*End Search result*/

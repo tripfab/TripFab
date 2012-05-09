@@ -1,3 +1,16 @@
+
+$(document).ready(function() {
+	var aboveHeight = 153;
+	$(window).scroll(function(){
+        if ($(window).scrollTop() > aboveHeight){
+            $('.sort').addClass('fixed').css('top','0px').next().css('padding-top','60px');
+        } 
+        else {
+			
+            $('.sort').removeClass('fixed').next().css('padding-top','0px');
+        }
+    });
+});
 (function( $ ){
     $.fn.serializeJSON=function() {
         var json = {};
@@ -375,7 +388,7 @@ $(function(){
         $widget = $('.widget[rel="'+$(this).attr('href')+'"]');
         $('input[type=checkbox]',$widget).removeAttr('checked');
         
-        $('ul.cat-menu li.active').renoveClass('active');
+        $('ul.cat-menu li.active').removeClass('active');
         $(this).parents('li').addClass('active');
         
         document.location.hash = $(this).attr('href');
