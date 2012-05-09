@@ -347,7 +347,7 @@
 
 
 
-	.top {
+	#wrapper-top .top {
 		height: 736px !important;
 		margin: 0;
 		overflow: hidden !important;
@@ -359,7 +359,7 @@
 		z-index: -1000;
 		background-color:#000;
 	}
-	.pattern {
+	#wrapper-top .pattern {
 		height: 736px !important;
 		margin: 0;
 		overflow: hidden !important;
@@ -371,10 +371,10 @@
 		z-index: -1;
 		background: url(https://developer.tripfab.com/images6/pattern1.png) repeat 0 0 ;
 	}
-	.top .low {
+	#wrapper-top .top .low {
 		z-index: -900;
 	}
-	.top .high {
+	#wrapper-top .top .high {
 		z-index: -100;
 	}
 	/**
