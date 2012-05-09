@@ -12597,7 +12597,39 @@ h2.title .back:hover,
 .box.days .day .day-section .left {
 	width: 267px;
 	float: left;
+	position: relative;
 }
+
+.box.days .day .day-section .left > a {
+	display:block;
+	height: 25px;
+	background-color: #303030;
+	-webkit-border-radius: 3px 0px 0px 0px;
+	border-radius: 3px 0px 0px 0px; 
+	-moz-border-radius:3px 0 0 0 0;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 0 15px;
+	font: 500 11px/25px Helvetica;
+	color: #FFF;
+	text-align: center;
+}
+.box.days .day .day-section .left > a span {
+	color: #60b5f7;
+	font-size:15px;
+	display: inline-block;
+	margin: 0 0 0 5px;
+}
+.box.days .day .day-section .left .mapCanvas {
+	background-color: red;
+	width: 267px;
+	height: 168px;
+	overflow: hidden;
+}
+
+
+
 
 .box.days .day .day-section .left img {
 	display: block;

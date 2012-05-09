@@ -2178,7 +2178,7 @@ class AdminController extends Zend_Controller_Action {
         
         if($listing->main_type == 7 or $listing->main_type == 2) {
             $pictures = new Zend_Db_Table('listing_pictures');
-            $pictures->delete(array('listing_id'=> $listing->id));
+            $pictures->delete('listing_id = '.$listing->id);
             if(count($data['pics'])>0) {
                 $main = (isset($data['pics']['main'])) ? $data['pics']['main'] : false;
                 unset($data['pics']['main']);

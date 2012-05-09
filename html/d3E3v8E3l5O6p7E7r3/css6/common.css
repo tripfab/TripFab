@@ -260,11 +260,15 @@
 #header .user-menu .main img {
 	float: left;
 	display: block;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 	margin-right: 18px;
+	-webkit-box-shadow: 0px 1px 0px 0px #ececec;
+	-moz-box-shadow: 0px 1px 0px 0px #ececec;
+	box-shadow: 0px 1px 0px 0px #ececec; 
 	behavior: url(/PIE.htc);
+	border-bottom: 1px solid #c5c5c5;
 }
 #header .user-menu .main ul {
 	float: left;
