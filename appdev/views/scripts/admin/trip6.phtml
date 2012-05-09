@@ -5,37 +5,84 @@
 		<title><?= $this->trip->title ?> - Admin | Tripfab.com</title>
         <link type="text/css" rel="stylesheet" href="/css5/reset.css" />
         <link type="text/css" rel="stylesheet" href="/css5/all.css" />
-		<link rel="stylesheet" media="all" type="text/css" href="/css5/jquery-ui-1.8.16.custom.css" />
-    	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-		<script type="text/javascript" src="/js2/jquery.js"></script>
+		<link type="text/css" rel="stylesheet" href="/css5/jquery-ui-1.8.16.custom.css" />
 		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
   		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css" />
   		<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
   		<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
   		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]--> 
-		<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js"></script>
+    	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+		<script type="text/javascript" src="/js2/jquery.js"></script>
     	<script type="text/javascript" src="/js2/admin/place-edit.js"></script>
-		<script type="text/javascript" src="/js2/jquery-ui-1.8.18.custom.min.js"></script>
         <script type="text/javascript" src="/js2/jquery-ui-timepicker-addon.js"></script>
-			<script>
-				$(document).ready(function() {
-					$('a.lbc').fancybox({
-						padding: 0,
-						overlayColor: '#FFF',
-						overlayOpacity: '0.7',
-						showCloseButton: 'false',
+		<script>
+            $(document).ready(function() {
+                $('a.lbc').fancybox({
+                    padding: 0,
+                    overlayColor: '#FFF',
+                    overlayOpacity: '0.7',
+                    showCloseButton: 'false',
+                });
+                $("#report_tabs").tabs();
+				
+				$('#activate .btn-1').click(function(){
+					$id = $(this).parents('form').find('input[name=tripid]').val();
+					$action = 1;
+					$.ajax({
+						url:'/ajax/tripstatus',
+						type:'post',
+						data: {
+							id:$id,
+							act:$action,
+						},
+						success:function(res){
+							if(res == 'success') {
+								$.cookie('alert','Changes saved');
+								window.location.reload();
+							} else {
+								showError('Something went wrong');
+							}
+						},
+						error:function(){
+							showError('Something went wrong');
+						}
 					});
-            		$("#report_tabs").tabs();
-					
 				});
-			</script>
+				
+				$('#deactivate .btn-1').click(function(){
+					$id = $(this).parents('form').find('input[name=tripid]').val();
+					$action = 0;
+					$.ajax({
+						url:'/ajax/tripstatus',
+						type:'post',
+						data: {
+							id:$id,
+							act:$action,
+						},
+						success:function(res){
+							if(res == 'success') {
+								$.cookie('alert','Changes saved');
+								window.location.reload();
+							} else {
+								showError('Something went wrong');
+							}
+						},
+						error:function(){
+							showError('Something went wrong');
+						}
+					});
+				});
+                
+            });
+        </script>
 	</head>
 	<body>
 		<div class="w1">
     		<?php echo $this->partial('admin_partials/header.phtml', array()); ?>			
 			<div class="w3_admin">
 				<div class="sub_menu">
-					<h2><?php echo $this->doWhat?>. <span>Itinerary Item.</span></h2>
+                	<h2>
+                    <?php echo $this->doWhat?>. <span>Itinerary Item.</span></h2>
 					<a href="<?php echo $this->url(array('page'=>5, 'q'=>$this->day)); ?>" class="back">Back to Itinerary</a>
 				</div><!--SUB_MENU-->
             </div><!--W3-->

@@ -72,7 +72,13 @@
     <?php echo $this->partial('admin_partials/header.phtml', array()); ?>    
     <div class="w3_admin">
         <div class="sub_menu">
-            <h2>Create. <span>New Trip.</span></h2>
+            <h2>
+					<?php if($this->trip->active == 1): ?>
+                    <span class="lstngActv">Active</span>
+                    <?php else: ?>
+                    <span class="lstngInct">Inactive</span>
+                    <?php endif ?>
+                    Create. <span>New Trip.</span></h2>
 			<a class="btn-10" href="/admin/trips/preview/<?php echo $this->trip->id?>" target="_blank">Trip Preview</a>					
             <a href="#activate" class="btn-10 act lbc" id="act-btn-342"<?php echo $this->trip->active ? 'style="display:none"' : '';?> >Activate Trip</a>
             <a href="#deactivate" class="btn-10 deact lbc" id="deact-btn-342" <?php echo !$this->trip->active ? 'style="display:none"' : '';?>>Deactivate Trip</a>
@@ -226,6 +232,54 @@
 		$('a.deny').click(function(){
 			showError('You have upload 10 images already');
 			return false;
+		});
+		
+		$('#activate .btn-1').click(function(){
+			$id = $(this).parents('form').find('input[name=tripid]').val();
+			$action = 1;
+			$.ajax({
+				url:'/ajax/tripstatus',
+				type:'post',
+				data: {
+					id:$id,
+					act:$action,
+				},
+				success:function(res){
+					if(res == 'success') {
+						$.cookie('alert','Changes saved');
+						window.location.reload();
+					} else {
+						showError('Something went wrong');
+					}
+				},
+				error:function(){
+					showError('Something went wrong');
+				}
+			});
+		});
+		
+		$('#deactivate .btn-1').click(function(){
+			$id = $(this).parents('form').find('input[name=tripid]').val();
+			$action = 0;
+			$.ajax({
+				url:'/ajax/tripstatus',
+				type:'post',
+				data: {
+					id:$id,
+					act:$action,
+				},
+				success:function(res){
+					if(res == 'success') {
+						$.cookie('alert','Changes saved');
+						window.location.reload();
+					} else {
+						showError('Something went wrong');
+					}
+				},
+				error:function(){
+					showError('Something went wrong');
+				}
+			});
 		});
 	});
 </script>
