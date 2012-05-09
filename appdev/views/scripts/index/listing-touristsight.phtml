@@ -92,7 +92,7 @@
                             		<?php $pic = $this->pictures[$j] ?>
                             		<?php $class = ($j == 0) ? 'active' : '' ?>
                             	   	<li>
-                            			<a rel="group1" title="<?= $pic->location ?>" class="<?= $class ?> lbc" href="#img<?= $j ?>" data-tip="#small<?= $j ?>"><?= $this->thumbnail(65, $pic->url, '', '1:1') ?></a>
+                            			<a rel="group1" title="<?= $pic->location ?>" class="<?= $class ?> lbc" href="#imgs<?= $j ?>" data-tip="#small<?= $j ?>"><?= $this->thumbnail(65, $pic->url, '', '1:1') ?></a>
                             		</li>
                             		<?php else: ?>
                             		<li><img src="/images2/empty-small-photo.png" width="65" height="65" /></li>
@@ -100,6 +100,11 @@
                             		<?php endfor ?>
                             	<?php endfor ?>
                             	</ul>
+                                <div class="hidden">
+                                    <?php for($i=0;$i<count($this->pictures);$i++): ?>
+                                    <?= $this->image($this->pictures[$i]->url, 'lgbox_img','imgs'.$i) ?>
+                                    <?php endfor ?>
+                                </div>
                             </div><!--PHOTOS-->
                         </div><!--INFO-->
                         <div class="clear"></div>
