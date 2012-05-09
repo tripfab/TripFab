@@ -2573,8 +2573,7 @@
 	float: right;
 	behavior: url(/PIE.htc);
 }
-#src_map .top .src_bar input[type="text"]:focus,
-#src_map .top .src_bar input[type="text"]:blur, {
+#src_map .top .src_bar input[type="text"]:focus {
 	font-weight: bold;
 	color: #303030;
 }
@@ -3034,6 +3033,19 @@ ul.cat-menu li.item-1 a img {
 	background: url(https://developer.tripfab.com/images6/src_result-shw2.png) repeat;
 	z-index: 10;
 }
+#search_result .single .hvr > a {
+	display: block;
+	width: 241px;
+	height: 124px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 30;
+}
+#search_result .single.gen-1 .hvr > a,
+#search_result .single.gen-2 .hvr > a {
+	height: 183px;
+}
 #search_result .image:hover .hvr {
 	display: block;
 }
@@ -3289,7 +3301,6 @@ ul.cat-menu li.item-1 a img {
 	float: right;
 	font:bold 29px/25px Helvetica;
 	height: 29px;
-	overflow: hidden;
 	vertical-align: text-top;
 }
 /*HOTEL 1*/
@@ -3358,10 +3369,7 @@ ul.cat-menu li.item-1 a img {
 #search_result .single .entertaiment {
 	width: 150px;
 }
-#search_result .single.gen-1 .hvr a,
-#search_result .single.gen-2 .hvr a {
-	margin-top: 72px;
-}
+
 #search_result .single.gen-1 .location,
 #search_result .single.gen-2 .location {
 	width: 200px;

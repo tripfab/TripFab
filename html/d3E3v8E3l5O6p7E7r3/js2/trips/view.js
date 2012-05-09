@@ -76,9 +76,28 @@ $(document).ready(function() {
     
     var aux = true;
     
+    function showMap() {
+	    $(".box.days .day .day-section .left > a").click(function () {
+	    	var htmlStr = $(this).html("Hide Map <span>&darr;</span>");
+	        $(this).text(htmlStr);
+	        return false
+	    });
+	}
     
-    
-    
+    $aaa = false;
+    $('.box.days .day .day-section .left > a').live('click', function(){
+        $('.mapCanvas').removeClass('hidden');
+        $(this).parent().find('.mapCanvas').toggleClass('show');
+        $aaa = $(this).data('aaa');
+        if(!$aaa) {
+            $(this).html('Hide Map <span>&darr;</span>');
+            $(this).data('aaa', true);
+        } else {
+            $(this).html('Show Map <span>&uarr;</span>');
+            $(this).data('aaa', false);
+        }
+        return false;       	
+    });
     
     
    function selectDays(lastDay) {

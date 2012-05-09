@@ -1321,11 +1321,7 @@ ul.days li {
 .filters .top {
 	background-color: #303030;
 	overflow: hidden;
-	color: #cccccc;
-	font-size: 16px;
-	font-weight: bold;
 	padding: 12px 26px;
-	line-height: 35px;
 	background: url("https://developer.tripfab.com/images2/g_56.gif") repeat-x scroll left bottom #303030;
 	-moz-border-radius-topleft: 4px;
 	-moz-border-radius-topright: 4px;
@@ -1334,8 +1330,14 @@ ul.days li {
 	-webkit-border-radius: 0px 4px 0px 0px;
 	border-radius: 4px 4px 0px 0px;
 	behavior: url(/PIE.htc);
+	position: relative;
 }
-
+.filters .top p {
+	background: url(https://developer.tripfab.com/images6/trip-map.png) no-repeat 0 0;
+	font: bold 14px/35px Helvetica;
+	color: #FFF;
+	padding-left: 55px;
+}
 .filters .top span {
 	color: #FFFFFF;
 }
@@ -1375,7 +1377,20 @@ ul.days li {
 	font-weight: bold;
 	padding: 0 20px;
 }
-
+.filters .top h3 {
+	background: url(https://developer.tripfab.com/images6/trip-aw.png) no-repeat left top #000;
+	position: absolute;
+	top: 15px;
+	right: 0;
+	height: 30px;
+	padding:0 20px 0 10px;
+	font: 500 13px/30px Helvetica;
+}
+.filters .top h3 span {
+	background: url(https://developer.tripfab.com/images6/flagCR.png) no-repeat 0 0;
+	padding-left: 25px;
+	margin-left: 10px;
+}
 .filters .bottom {
 	background-color: #e1e1e1;
 	overflow: hidden;
@@ -1553,8 +1568,8 @@ border-top: 1px solid #e3e3e3;
 	font-size: 24px;
 	font-weight: bold;
 	display: block;
-	margin-top: 15px;
-	text-shadow: 0px 1px 0px #ffffff;
+	margin-top: 19px;
+	text-shadow: 0px 1px 0px #FFF;
 }
 
 .search-item .meta em {
@@ -1569,31 +1584,19 @@ border-top: 1px solid #e3e3e3;
 }
 
 .time-stamp-2 {
-	background: url(https://developer.tripfab.com/images2/t-4.png) no-repeat;
-	height: 54px;
+	background: url(https://developer.tripfab.com/images6/t-5.png) no-repeat;
+	height: 18px;
 	position: absolute;
-	right: 0;
-	top: 0;
-	width: 94px;
+	left: 0;
+	top: 10px;
+	width: 74px;
 	color: #ffffff;
-	font-size: 11px;
-	font-weight: bold;
-	transform: rotate(90deg);
+	font:bold 11px/18px Helvetica;
 	z-index: 100;
 	text-transform: uppercase;
+	text-indent: 10px;
 }
 
-.time-stamp-2 span {
-	/*This is CSS3*/
-	-moz-transform: rotate(390deg);
-	-webkit-transform: rotate(390deg);
-	-o-transform: rotate(390deg);
-	transform: rotate(390deg);
-	display: block;
-	margin-left: 37px;
-	margin-top: 19px;
-	text-transform: uppercase;
-}
 
 .sidebar {
 	float: right;
@@ -1619,6 +1622,9 @@ border-top: 1px solid #e3e3e3;
 .sidebar .widget h2.landscapes {
 	background-position: 0 -117px;
 }
+.sidebar .widget h2.cat {
+	background-position: 0 -86px;
+}
 .sidebar .widget.menu ul {
 	list-style: none;
 }
@@ -1643,6 +1649,22 @@ border-top: 1px solid #e3e3e3;
 .sidebar .widget.menu ul li a:hover{
 	color: #90CEFF;
 	text-decoration: none;
+}
+.sidebar .widget.menu ul li a.last {
+	font: bold 9px/16px Helvetica;
+	height: 16px;
+	padding: 0 4px;
+	background-color: #60b5f7;
+	text-align: center;
+	color: #FFF;
+	text-transform: uppercase;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	display: inline-block;
+}
+.sidebar .widget.menu ul li a.last:hover {
+	background-color: #90CEFF;
 }
 .pager-wrapper {
 	background: url(https://developer.tripfab.com/images2/g-3.png) repeat-x scroll 0 0 #FFFFFF;
@@ -12614,6 +12636,7 @@ h2.title .back:hover,
 	font: 500 11px/25px Helvetica;
 	color: #FFF;
 	text-align: center;
+	z-index: 10;
 }
 .box.days .day .day-section .left > a span {
 	color: #60b5f7;
@@ -12626,8 +12649,15 @@ h2.title .back:hover,
 	width: 267px;
 	height: 168px;
 	overflow: hidden;
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 9;
 }
-
+.box.days .day .day-section .left .mapCanvas.show {
+	display: block;
+}
 
 
 
@@ -20487,6 +20517,11 @@ h2.title .back:hover,
 	width: 206px;
 }
 /*END CHECK-EMAIL----------------------------------------------------------*/
+
+
+
+
+
 
 
 

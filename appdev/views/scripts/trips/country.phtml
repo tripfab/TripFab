@@ -22,7 +22,8 @@
     <div class="w2">
         <div class="wrapper filters">
             <div class="top">
-                We have <span><?= count($this->trips) ?></span> preplaned itineraries to <span>Costa Rica</span>
+               <p>We have <span><?= count($this->trips) ?></span> preplaned itineraries to <span>Costa Rica</span></p>
+                <h3><span>Itineraries are currently available only in Costa Rica</span></h3>
             </div><!-- closes top -->
             <div class="bottom">
                 <div class="slider-wrapper">
@@ -46,12 +47,13 @@
             <div class="sidebar">
             	<div class="scrollContainer">
                     <div class="widget menu">
-                        <h2>Categories</h2>
+                        <h2 class="cat">Categories</h2>
                         <ul class="cats-menu">
-	                        <li><a data-category="all" href="#/all">Show all</a></li>
+	                        <li><a data-category="all" href="#/all">Show All</a></li>
                             <?php foreach($this->categories as $cat): ?>
                             <li><a data-category="<?= $cat->id ?>" href="#/<?= strtolower(str_replace(' ','_', $cat->name)) ?>"><?= $cat->name ?></a></li>
                             <?php endforeach ?>
+                           
                         </ul>
                     </div><!-- closes widget -->
                 </div>
