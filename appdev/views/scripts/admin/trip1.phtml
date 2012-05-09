@@ -110,7 +110,7 @@
                                     <div class="item">
                                     	<div class="selects">
                                     	<select name="min" style="width: 100px;">
-                                        	<?php for($i=1;$i<=20;$i++): ?>
+                                        	<?php for($i=1;$i<=100;$i++): ?>
                                             <?php $selected = ($this->trip->min == $i) ? 'selected="selected"' : '' ?>
                                         	<option <?= $selected ?> value="<?= $i ?>"><?= $i ?></option>
                                             <?php endfor ?>
@@ -123,7 +123,7 @@
                                     <div class="item selects last">
                                     	<div class="selects">
                                     	<select name="max" style="width: 100px;">
-                                        	<?php for($i=1;$i<=20;$i++): ?>
+                                        	<?php for($i=1;$i<=100;$i++): ?>
                                             <?php $selected = ($this->trip->max == $i) ? 'selected="selected"' : '' ?>
                                         	<option <?= $selected ?> value="<?= $i ?>"><?= $i ?></option>
                                             <?php endfor ?>
