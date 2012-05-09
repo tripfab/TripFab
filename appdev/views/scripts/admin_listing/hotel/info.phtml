@@ -98,7 +98,7 @@ input.schname { float:none !important; width:90px !important; }
 			</div><!-- closes item -->
 			<div class="item last">
 				<input placeholder="Your website url" <?= $disabled ?> type="text" name="website" value="<?= $_POST['website'] ?>" />
-				<h4>Website</h4>
+				<h4><a href="<?= $_POST['website'] ?>" target="_blank">Website</a></h4>
 				<span>Company Website</span>
 			</div><!-- closes item -->
 			<div class="clear"></div>									
@@ -368,7 +368,7 @@ input.schname { float:none !important; width:90px !important; }
 			</div><!-- closes item -->
 			<div class="item last">
 				<input placeholder="Your website url" <?= $disabled ?> type="text" name="website" value="<?= $this->listing->website ?>" />
-				<h4>Website</h4>
+				<h4><a href="<?= $this->listing->website ?>" target="_blank">Website</a></h4>
 				<span>Company Website</span>
 			</div><!-- closes item -->
 			<div class="clear"></div>									
