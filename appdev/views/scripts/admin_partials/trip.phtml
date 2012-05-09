@@ -1,0 +1,31 @@
+<div class="lb activation" id="activate">
+    <div class="top"> Activate Listing </div><!--TOP-->
+    <form method="post" action="">
+        <fieldset>
+            <div class="cont">
+                <p> Are you sure you want to activate<br /> "<?php echo $this->title?>"?</p>
+            </div><!--CONT-->
+            <div class="bottom">
+                <a href="javascript://" class="btn-1" id="btn-activate-326">Activate</a>
+                <a href="javascript://" onClick="$.fancybox.close(); return false;" class="btn-10" id="btn-cancel-326">Cancel</a>
+            </div><!--BOTTOM-->
+        </fieldset>
+        <input name="tripid" value="<?= $this->tripId ?>" type="hidden" />
+    </form>
+</div><!--ACTIVATE-->
+
+<div class="lb activation" id="deactivate">
+    <div class="top">Deactivate Listing </div><!--TOP-->
+    <form method="post" action="">
+        <fieldset>
+            <div class="cont">
+                <p>Are you sure you want to deactivate "<?php echo $this->title ?>"?</p>
+            </div><!--CONT-->
+            <div class="bottom">
+                <a href="javascript://" class="btn-1" id="btn-deactivate-327">Deactivate</a>
+                <a href="javascript://" onClick="$.fancybox.close(); return false;" class="btn-10" id="btn-cancel-327">Cancel</a>
+            </div><!--BOTTOM-->
+        </fieldset>
+        <input name="tripid" value="<?= $this->tripId ?>" type="hidden" />
+    </form>
+</div><!--ACTIVATE-->
