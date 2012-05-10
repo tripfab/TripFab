@@ -1379,29 +1379,44 @@ class UserController extends Zend_Controller_Action
                 throw new Exception('Form Corrupted');
             if($trip->user_id != $this->user->getId())
                 throw new Exception("The trip you're trying to delete isn't yours");
-            if(empty($_POST['start']) || empty($_POST['end']))
-                throw new Exception('Please Insert the dates');
-
-            $start = date('D M j Y', strtotime($_POST['start']));
-            $end   = date('D M j Y', strtotime($_POST['end']));
-
-            if($start != $_POST['start'] || $end != $_POST['end'])
-                throw new Exception("Sorry, we couldn't understand the date Formats");
-
-            $trip->start = date('Y-m-d', strtotime($start));
-            $trip->end   = date('Y-m-d', strtotime($end));
-
-            $fday = strtotime($start);
-            $lday = strtotime($end);
-            $days = $lday - $fday;
-            $days = $days / 86400;
-
-            $trip->days         = $days + 1;
-
-            $trip->save();
             
-            setcookie('alert', 'Trip dates updated');
-            $this->_redirect('/user/trips/itinerary/'.$trip->id);
+            switch($_POST['_task']) {
+                case md5('assign_dates'):
+                    if(empty($_POST['start']) || empty($_POST['end']))
+                        throw new Exception('Please Insert the dates');
+
+                    $start = date('D M j Y', strtotime($_POST['start']));
+                    $end   = date('D M j Y', strtotime($_POST['end']));
+
+                    if($start != $_POST['start'] || $end != $_POST['end'])
+                        throw new Exception("Sorry, we couldn't understand the date Formats");
+
+                    $trip->start = date('Y-m-d', strtotime($start));
+                    $trip->end   = date('Y-m-d', strtotime($end));
+
+                    $fday = strtotime($start);
+                    $lday = strtotime($end);
+                    $days = $lday - $fday;
+                    $days = $days / 86400;
+
+                    $trip->days         = $days + 1;
+
+                    $trip->save();
+
+                    setcookie('alert', 'Trip dates updated');
+                    $this->_redirect('/user/trips/itinerary/'.$trip->id);
+                    
+                    break;
+                case md5('update_title'): 
+                    if(!empty($_POST['title'])) {
+                        $trip->title = $_POST['title'];
+                        $trip->save();
+
+                        setcookie('alert', 'Trip dates updated');
+                        $this->_redirect('/user/trips/itinerary/'.$trip->id);
+                    }
+                    break;
+            }
         }
         
         $this->view->trip = $trip;

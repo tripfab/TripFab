@@ -246,16 +246,19 @@
 	
 	<div class="renameTrip lb" id="rename-trip">
 		<div class="top">Rename Trip</div>
-		<div class="cont">
-			<form method="submit" action="">
-				<label for="">Trip Name</label>
-				<input type="text" name="" value="" />
-			</form>
-		</div><!--CONT-->
-		<div class="bottom">
-			<input class="btn-1" type="submit" name="" value="Rename" />
-			<a class="btn-10" href="$.fancybox.close()">Cancel</a>
-		</div><!--BOTTOM-->
+		<form method="post" action="">
+            <div class="cont">
+                <label for="">Trip Name</label>
+                <input type="text" name="title" class="noclean" value="<?= $this->trip->title ?>" />
+            </div><!--CONT-->
+            <div class="bottom">
+                <input class="btn-1" type="submit" name="" value="Rename" />
+                <a class="btn-10" href="$.fancybox.close()">Cancel</a>
+            </div><!--BOTTOM-->
+            <input type="hidden" name="ids" value="<?= $this->trip->id ?>" />
+            <input type="hidden" name="token" value="<?= $this->trip->token ?>" />
+            <input type="hidden" name="_task" value="<?= md5('update_title') ?>" />
+		</form>
 	</div><!--RENAMETRIP-->
 	
 </div>
