@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<title><?= $this->user->name ?> : Partners - Admin | Tripfab.com</title>
+        <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
+        <link type="text/css" rel="stylesheet" href="/css2/all.css" />
+		<script type="text/javascript" src="/js2/jquery.js"></script>
+	    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
+		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+  		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css" />
+  		<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
+  		<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
+  		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
+	    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+		<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js"></script>
+    	<script type="text/javascript" src="/js2/admin/traveller-view.js"></script>
+			<script>
+				$(document).ready(function() {
+					$('a.lbc').fancybox({
+						padding: 0,
+						overlayColor: '#FFF',
+						overlayOpacity: '0.7',
+						showCloseButton: 'false'
+					});
+            		$("#report_tabs").tabs();
+				});
+			</script>
+		</head>
+		<body>
+			<div class="w1">
+    		<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
+			
+			<div class="w3_admin">
+				<div class="sub_menu">
+					<h2><?php echo $this->user->name?>. <span>Bank Accounts</span></h2>
+					<a href="#password-reset" class="btn-10 lbc">Reset Password</a>
+                    <a href="#activate" class="btn-10 act lbc" id="act-btn-342"<?php echo $this->user->active==1 ? 'style="display:none"' : '';?> >Activate Partner</a>
+            		<a href="#deactivate" class="btn-10 deact lbc" id="deact-btn-342" <?php echo $this->user->active==0 ? 'style="display:none"' : '';?>>Deactivate Partner</a>
+				</div><!--SUB_MENU-->
+            </div><!--W3-->
+			<div class="all_listing">
+				<div id="user_view" class="listing-wrapper wrapper">
+					<div class="listing-content">
+						<div class="left">
+							<ul>
+								<li id="nav1"><a href="<?php echo $this->url(array('seq'=>1))?>">General Information</a></li>
+								<li id="nav2"><a href="<?php echo $this->url(array('seq'=>2))?>">Listings</a></li>
+								<li id="nav3"><a href="<?php echo $this->url(array('seq'=>3))?>">Reservations</a></li>
+								<li id="nav4"><a href="<?php echo $this->url(array('seq'=>4))?>">Offers</a></li>
+								<li id="nav5"><a href="<?php echo $this->url(array('seq'=>5))?>">Bank Accounts</a></li>
+								<li id="nav7" class="current"><a href="<?php echo $this->url(array('seq'=>7))?>">Staffs</a></li>
+							</ul>
+						</div><!-- closes left -->
+						<div class="right">
+                        
+                        
+							<?php if($this->successMessage): ?>
+							<script type="text/javascript">
+                                showAlert("Your changes have been saved");
+                            </script>
+                            <?php endif ?>	
+                        
+							<div class="lstng-details" id="content">
+<h3 class="title">Bank Account<a href="/admin/users/partners" class="back">Back to Partners</a></h3>
+<div class="block">
+
+<form id="general" name="general" method="POST">
+<div class="single_trip">
+    <table width="520" border="0" class="info">
+        <tr>            
+            <td width="180">First Name</td>
+			<td width="340"><input type="text" class="noclean" name="fname" value="<?php echo $this->staff->fname?>" /></td>
+        </tr>
+        <tr>
+            <td width="180">Last Name</td>
+			<td width="340"><input type="text" class="noclean" name="lname" value="<?php echo $this->staff->lname?>" /></td>
+        </tr>
+        <tr>
+            <td width="180">Position</td>
+			<td width="340"><input type="text" class="noclean" name="position" value="<?php echo $this->staff->position?>" /></td>
+        </tr>
+        <tr>
+            <td width="180">Contact e-mail</td>
+			<td width="340"><input type="text" class="noclean" name="email" value="<?php echo $this->staff->email?>" /></td>
+        </tr>
+        <tr>
+            <td width="180">Phone</td>
+			<td width="340">
+            	<input placeholder="code" type="text" class="noclean" style="width:60px !important;" name="code" value="<?php echo $this->staff->code?>" />
+            	&nbsp;<input placeholder="phone" type="text" class="noclean" style="width:183px !important;" name="phone" value="<?php echo $this->staff->phone?>" />
+            	&nbsp;<input  placeholder="ext" type="text" class="noclean" style="width:60px !important;" name="ext" value="<?php echo $this->staff->ext?>" />
+             </td>
+        </tr>
+    </table>
+</div><!--SINGLE_TRIP-->
+<input class="btn-1" type="submit" value="<?php echo $this->staff->id ? 'Upadate' : 'Add'?>"/>
+</form>
+<br/>
+</div><!--BLOCK-->
+
+
+							</div>
+							<!-- closes lstng-details -->
+						</div>
+						<!-- closes right -->
+					</div>
+					<!-- closes listing-content -->
+				</div><!--USER_VIEW-->
+
+			</div><!--ALL_LISTING-->
+					
+			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+			<?php echo $this->partial('admin_partials/partner.phtml', array('name'=>$this->user->name, 'userId'=>$this->user->user_id)); ?>
+            
+            
+            
+            
+		</div>
+		<!-- closes w1 -->
+		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+		
+<div class="hidden">
+	<div class="lightbox-2" id="password-reset">
+		<h2>Reset Password</h2>
+		<h3>Do you want to reset the password to Karina Romaine</h3>
+		<div class="buttons">
+			<ul>
+				<li><a href="" class="btn-1">Reset</a></li>
+				<li><a href="" class="btn-10">Cancel</a></li>
+			</ul>
+		</div><!--BUTTONS-->
+	</div><!--PASSWORD-RESET-->
+</div><!--HIDDEN--> 
+
+
+
+
+
+	</body>
+</html>
