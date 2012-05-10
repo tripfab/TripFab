@@ -528,6 +528,47 @@ input.schname { float:none !important; width:90px !important; }
 			</div><!-- closes item -->
 			<div class="clear"></div>								
         </div><!-- closes item-wrppr -->
+        <div id="contacts" class="item-wrppr">
+	       <div class="item-ttl">
+	           Staff Contacts
+	       </div><!-- closes item ttl -->
+	       <div class="item first">
+	           <ul class="controls">
+	               <li><a href="#edit_contact_339" class="edit f_b lb">Edit</a></li>
+	               <li><a href="" class="remove">Remove</a></li>
+	           </ul>
+	           <h4>alksjhdljsakldj kasjdlkjaksl</h4>
+	           <input type="hidden" name="contactid[339]" value="339" />
+	       </div><!-- closes item -->
+	                                                               <div class="item ">
+	           <ul class="controls">
+	               <li><a href="#edit_contact" class="edit f_b lb">Edit</a></li>
+	               <li><a href="" class="remove">Remove</a></li>
+	           </ul>
+	           <h4>asdasd asd</h4>
+	           <input type="hidden" name="contactid[340]" value="340" />
+	       </div><!-- closes item -->
+	                                   <div class="item last">
+	           <a href="#new_contact" class="add-btn f_b lb">Add another Staff Contact</a>
+	       </div><!-- closes item -->
+	       <div class="clear"></div>									
+	   </div><!-- closes item-wrppr -->
+	   
+	   <div class="item-wrppr">
+			<div class="item-ttl">Live Chat</div>
+			<div class="item_descr">
+				<p>
+					<strong>Connect your favorite IM Service</strong>
+					Select the IM Service you prefer<br />
+					to talk with your clients
+				</p>
+				<ul>
+					<li><a class="btn-13 f_b" href="#lb_yahoo"><span class="yahoo lbc">Connect with your Yahoo Account</span></a></li>
+					<li><a class="btn-13 f_b" href="#lb_gtalk"><span class="gtalk lbc">Update your Google Talk Account</span></a></li>
+				</ul>
+			</div><!--ITEM_DESCR-->
+		</div><!-- closes item-wrppr -->
+        
     </div><!-- closes profile-items -->
     <div class="foot">
         <input type="submit" class="btn-1 noclean" value="Save Changes" />
@@ -539,4 +580,60 @@ input.schname { float:none !important; width:90px !important; }
     <input type="hidden" name="_task" value="<?= md5('edit_listing') ?>" />
     <input type="hidden" name="partner" value="<?= $this->listing->vendor_id ?>" />
 </form>
+<div class="hidden">
+	<div class="lb_connect" id="new_member">
+       <h2>Edit Contact</h2>
+       <form action="" method="post">
+           <label>First Name</label>
+           <input type="text" name="fname" class="noclean" value="alksjhdljsakldj" />
+           <label>Last Name</label>
+           <input type="text" name="lname" class="noclean" value="kasjdlkjaksl" />
+           <label>Position</label>
+           <input type="text" name="position" class="noclean" value="alsdjlkasjlkd" />
+           <label>Contact e-mail</label>
+           <input type="text" name="email" class="noclean" value="alksjdksa@sadjasio.com" />
+           <label>Phone</label>
+           <input type="text" class="code" class="noclean" value="4323" name="code" />
+           <input type="text" class="number" class="noclean" value="23423423432" name="phone" />
+           <input type="text" class="ext" class="noclean" value="1234" name="ext" />
+           <ul>
+               <li><input type="submit" class="btn-1 noclean" value="Add Member" /></li>
+               <li><input type="button" class="btn-13 noclean" onclick="$.fancybox.close(); return false;" value="Cancel" /></li>
+           </ul>
+           <input type="hidden" name="_task" value="ca78a4e9621c8fb9a5d2b2539c07c41d" />
+           <input type="hidden" name="id" value="339" />
+       </form>
+   </div><!--NEW-MEMBER-->
+   
+   <div class="lb_connect" id="lb_yahoo">
+   		<h2>Connect your Yahoo Account</h2>
+   		<form action="" method="post">
+   			<label>e-Mail</label>
+             			<input class="yahoo" type="text" value="" />            
+             			<ul>
+   				<li><input type="submit" class="btn-1" value="Connect" /></li>
+   				<li><input type="button" class="btn-13" onclick="$.fancybox.close();" value="Cancel" /></li>
+   			</ul>
+             <input type="hidden" name="service" value="yahoo" />
+             <input type="hidden" name="id" value="3" />
+             <input type="hidden" name="_task" value="909790e70d5cc1f987e88b7b9d6c003a" />
+   		</form>
+   	</div><!--L_CONNECT-->
+   	
+   	<div class="lb_connect" id="lb_gtalk">
+   		<h2>Connect your Google Talk Account</h2>
+   		<form action="" method="post">
+   			<label>e-Mail</label>
+             			<input class="gtalk" name="email" type="text" value="cristian0789@gmail.com" />
+             			<ul>
+   				<li><input type="submit" class="btn-1" value="Connect" /></li>
+   				<li><input type="button" class="btn-13" onclick="$.fancybox.close();" value="Cancel" /></li>
+   			</ul>
+             <input type="hidden" name="service" value="gmail" />
+             <input type="hidden" name="id" value="3" />
+             <input type="hidden" name="_task" value="909790e70d5cc1f987e88b7b9d6c003a" />
+   		</form>
+   	</div><!--L_CONNECT-->
+   	
+</div><!--HIDDEN-->
 <?php endif ?>
