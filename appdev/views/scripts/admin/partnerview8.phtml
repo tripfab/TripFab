@@ -48,8 +48,8 @@
 								<li id="nav2"><a href="<?php echo $this->url(array('seq'=>2))?>">Listings</a></li>
 								<li id="nav3"><a href="<?php echo $this->url(array('seq'=>3))?>">Reservations</a></li>
 								<li id="nav4"><a href="<?php echo $this->url(array('seq'=>4))?>">Offers</a></li>
-								<li id="nav5" class="current"><a href="<?php echo $this->url(array('seq'=>5))?>">Bank Accounts</a></li>
-								<li id="nav7"><a href="<?php echo $this->url(array('seq'=>7))?>">Staffs</a></li>
+								<li id="nav5"><a href="<?php echo $this->url(array('seq'=>5))?>">Bank Accounts</a></li>
+								<li id="nav7" class="current"><a href="<?php echo $this->url(array('seq'=>7))?>">Staffs</a></li>
 							</ul>
 						</div><!-- closes left -->
 						<div class="right">
@@ -67,33 +67,34 @@
 
 <form id="general" name="general" method="POST">
 <div class="single_trip">
-    <div class="image"><img src="<?php echo $this->user->image?>" width="134" height="134" alt="" /></div><!--IMAGE-->
     <table width="520" border="0" class="info">
         <tr>            
-            <td width="180">Bank</td>
+            <td width="180">First Name</td>
+			<td width="340"><input type="text" class="noclean" name="fname" value="<?php echo $this->staff->fname?>" /></td>
+        </tr>
+        <tr>
+            <td width="180">Last Name</td>
+			<td width="340"><input type="text" class="noclean" name="lname" value="<?php echo $this->staff->lname?>" /></td>
+        </tr>
+        <tr>
+            <td width="180">Position</td>
+			<td width="340"><input type="text" class="noclean" name="position" value="<?php echo $this->staff->position?>" /></td>
+        </tr>
+        <tr>
+            <td width="180">Contact e-mail</td>
+			<td width="340"><input type="text" class="noclean" name="email" value="<?php echo $this->staff->email?>" /></td>
+        </tr>
+        <tr>
+            <td width="180">Phone</td>
 			<td width="340">
-             <select id="bank"  name="bank">
-				<?php foreach($this->banks as $bank):?>
-                <option <?php echo $this->bankId == $bank->id ? ' selected="selected"' : ''; ?> value="<?php echo $bank->id?>"><?php echo $bank->name?></option>
-                <?php endforeach;?>
-            </select>
-            </td>
-        </tr>
-        <tr>
-            <td width="180">Account Holder Name</td>
-			<td width="340"><input type="text" class="noclean" name="holder_name" value="<?php echo $this->holderName?>" /></td>
-        </tr>
-        <tr>
-            <td width="180">Account Number</td>
-			<td width="340"><input type="text" class="noclean" name="ac_num" value="<?php echo $this->accountNumber?>" /></td>
-        </tr>
-        <tr>
-            <td width="180">Legal ID</td>
-			<td width="340"><input type="text" class="noclean" name="legal_id" value="<?php echo $this->legalId?>" /></td>
+            	<input placeholder="code" type="text" class="noclean" style="width:60px !important;" name="code" value="<?php echo $this->staff->code?>" />
+            	&nbsp;<input placeholder="phone" type="text" class="noclean" style="width:183px !important;" name="phone" value="<?php echo $this->staff->phone?>" />
+            	&nbsp;<input  placeholder="ext" type="text" class="noclean" style="width:60px !important;" name="ext" value="<?php echo $this->staff->ext?>" />
+             </td>
         </tr>
     </table>
 </div><!--SINGLE_TRIP-->
-<input class="btn-1" type="submit" value="Upadate"/>
+<input class="btn-1" type="submit" value="<?php echo $this->staff->id ? 'Upadate' : 'Add'?>"/>
 </form>
 <br/>
 </div><!--BLOCK-->
@@ -132,44 +133,6 @@
 	</div><!--PASSWORD-RESET-->
 </div><!--HIDDEN--> 
 
-
-<script>
-		var cityId = '<?php echo $this->city;?>';
-		fillCityTrip($('#country').val());
-		screenUpdate();
-		$('select#country').change(function(){
-			fillCityTrip($('#country').val());
-		});
-		
-		$('select#type').change(function(){
-			screenUpdate();
-		});
-		
-		function screenUpdate(){
-			if($('#type').val() == 5){
-				$("#field-wrapper").hide();
-			}
-			else{
-				$("#field-wrapper").show();
-			}
-		}
-		
-		function fillCityTrip(countryId){
-			var url = "/ajax/places/?type=city&c=" + countryId;
-			$("#city" ).children().remove();
-			$("#city" ).append(new Option('Select City', 0, true, true));
-			var selected = false;
-			$.getJSON(url, function(fsdata) {
-				$.each(fsdata.data, function(i,city){ 
-					selected = cityId == city.id ? true : false ;
-					$("#city" ).append(new Option(city.title, city.id, true, selected));
-					
-					
-				});
-			});	
-		}
-				
-		</script>
 
 
 

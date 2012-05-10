@@ -3306,7 +3306,15 @@ class AdminController extends Zend_Controller_Action {
 		$page = $this->_getParam('seq')=='default' ? 1: $this->_getParam('seq') ;
 		switch($page){
 			case '1':
+				$yahoo = $this->vendors->getIM($vendorId, 'yahoo');
+				$gmail = $this->vendors->getIM($vendorId, 'gmail');
 				
+				$vendorUser = false;
+				if($user->user_id){
+					$tblUser = new Zend_Db_Table('users');
+					$vendorUser = $tblUser->fetchRow($tblUser->select()->where('id=?',$user->user_id)); 
+				}
+
 				if ($this->getRequest()->isPost()) {
 					$name = $_POST['name'];
 					$email = $_POST['email'];
@@ -3318,9 +3326,32 @@ class AdminController extends Zend_Controller_Action {
 					$website = $_POST['website'];
 					$user_id = $_POST['user_id'];
 					$this->vendors->saveInfo($vendorId, $name, $email, $contact_name, $date, $phone, $city, $country, $website, $user->user_id);
+					 if($_POST['yahoo'] && $yahoo && $user->user_id){
+						 $yahoo->email = $_POST['yahoo'];
+						 if(!$yahoo->id){
+							$yahoo->service = 'yahoo';
+							$yahoo->user_id =  $user->user_id;
+						 }
+						 $yahoo->save();
+					 }
+					
+					 if($_POST['gmail'] && $gmail && $user->user_id){
+						 $gmail->email = $_POST['gmail'];
+						 if(!$gmail->id){
+							$gmail->service = 'gmail'; 
+							$gmail->user_id =  $user->user_id;
+						 }
+						 $gmail->save();
+					 }
+					 
+					 if($vendorUser){
+						 $vendorUser->lang = $_POST['language'];
+						 $vendorUser->save();
+					 }
+					 
 					$_SESSION['alert'] = 'Your changes have been saved';
                                         
-                                        $this->_redirect('/admin/users/view/partner/'.$vendorId);
+                    $this->_redirect('/admin/users/view/partner/'.$vendorId);
                                         
 			   		$user = $this->vendors->getVendorDetailsById($vendorId);
                 	$this->view->user = $user;
@@ -3330,6 +3361,9 @@ class AdminController extends Zend_Controller_Action {
 				$this->view->countries = $countries;
 				$this->view->partnerPhoto = $user->image ? $user->image : '/images/default-profile.gif';
 				$this->view->vendorId = $vendorId;
+				$this->view->yahoo = $yahoo ? $yahoo->email : '';
+				$this->view->gmail = $gmail ? $gmail->email : '';
+				$this->view->language = $vendorUser ? $vendorUser->lang : '';
 				$this->render('partnerview1');
 				break;
 			case '2':
@@ -3387,6 +3421,39 @@ class AdminController extends Zend_Controller_Action {
 					$this->view->legalId = $bank->legalid;	
 				}
 				$this->render('partnerview6');
+				break;
+			case '7':
+                $offers = $this->vendors->getStaffsBy($vendorId);
+                $this->view->staffs = $offers;
+				$this->render('partnerview7');
+				break;
+			case '7a':
+				$staffId = $this->_getParam('q');
+                $this->vendors->deleteStaff($staffId);
+				$this->_redirect("/admin/users/view/partner/$vendorId/7");
+				break;
+			case '8':
+				$staffId = $this->_getParam('q');
+                $staff = $this->vendors->getStaffBy($staffId);
+				if ($this->getRequest()->isPost()) {
+					$staff->fname = $_POST['fname'];	
+					$staff->lname = $_POST['lname'];	
+					$staff->position = $_POST['position'];	
+					$staff->email = $_POST['email'];	
+					$staff->code = $_POST['code'];	
+					$staff->phone = $_POST['phone'];	
+					$staff->ext = $_POST['ext'];	
+					$staff->updated = date("Y-m-d h:i:s");
+					if(!$staff->created){
+						$staff->vendor_id = $vendorId;
+						$staff->created = date("Y-m-d h:i:s");
+					}
+					$staff->save();
+					$_SESSION['alert'] = 'Your changes have been saved';
+					$this->_redirect($this->view->url(array('seq'=>7)));
+				}
+				$this->view->staff = $staff;
+				$this->render('partnerview8');
 				break;
 		}
 	}
