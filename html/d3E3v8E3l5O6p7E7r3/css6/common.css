@@ -695,3 +695,173 @@
 	font: bold 11px/24px Helvetica;
 }
 /*END FIRST TIME TOOLTIPS------------------------------------*/
+
+/*SIGN IN LIGHTBOX-------------------------------------------*/
+.signLog {
+	width: 460px;
+	border-radius: 3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius: 3px;
+}
+.signLog .top {
+	background: url("https://developer.tripfab.com/images2/g-18.png") repeat-x scroll left bottom #303030;
+	height: 72px;
+	-webkit-border-radius: 3px 3px 0px 0px;
+	-moz-border-radius: 3px 3px 0px 0px;
+	border-radius: 3px 3px 0px 0px;
+	text-align: center;
+	color: #FFF;
+}
+.signLog .top h2{
+	font: 600 20px Helvetica;
+	text-shadow: 0px 1px 0px #000;
+	padding: 15px 0 5px;
+}
+.signLog .top h2 span {
+	color: #8dc63f;
+	font: italic 300 20px Georgia, "Times New Roman", Times, serif;
+}
+.signLog .top p {
+	color:#c2c2c2;
+	font: 100 16px Helvetica;
+	text-shadow: 0px 1px 0px #000;
+}
+.signLog .cont {
+	background: url(https://developer.tripfab.com/images6/signIn-sh.png) no-repeat 0 77px #FFF;
+	padding-top: 15px;
+}
+.signLog .cont > a.fb {
+	width: 253px;
+	height: 45px;
+	display: block;
+	margin: 0 auto;
+	background: url(https://developer.tripfab.com/images6/signUpFB.png) no-repeat 0 0;
+}
+.signLog .cont > a.fb:hover {
+	background-position: 0 -57px;
+}
+.signLog .cont > a.fb:active {
+	background-position: 0 -112px;
+}
+.signLog .contForm {
+	padding: 30px 28px 0 28px;
+	margin-top: 16px;
+	position: relative;
+}
+.signLog .contForm em {
+	position: absolute;
+	top: -4px;
+	left: 221px;
+	color: #c7c7c7;
+	font: italic 14px Helvetica;
+}
+.signLog .contForm input[type="text"] {
+	width: 378px;
+	height: 41px;
+	margin-bottom: 15px;
+	background: url(https://developer.tripfab.com/images6/signInIcons.png) no-repeat 0 0;
+	color: #898989;
+	font: normal 16px/41px Helvetica;
+	padding-left: 15px;
+}
+.signLog .contForm input[type="text"]:focus {
+	font-weight: bold;
+	color: #303030;
+}
+.signLog .contForm input[type="text"].name {
+	background-position: 371px 13px;
+}
+.signLog .contForm input[type="text"].lastName {
+	background-position: 371px -42px;
+}
+.signLog .contForm input[type="text"].email {
+	background-position: 371px -96px;
+}
+.signLog .contForm input[type="text"].password {
+	background-position: 371px -151px;
+}
+.signLog .contForm input[type="text"].confirm {
+	background-position: 371px -208px;
+}
+.signLog .cntrl {
+	overflow: hidden;
+	padding-bottom: 15px;
+}
+.signLog .cntrl label{
+	font: bold 12px/30px Helvetica;
+	height: 30px;
+	color: #616161;
+	float: left;
+	margin-top: 6px;
+}
+.signLog .cntrl label input {
+	display: block;
+	float: left;
+	margin: 8px 5px 0 0;
+}
+.signLog .cntrl .btn-1 {
+	float: right;
+	width: 161px;
+	height: 41px;
+	padding: 0;
+	font: 500 16px/41px Helvetica;
+}
+.signLog .note {
+	border-top: 1px solid #e8e8e8;
+	height: 45px;
+	padding: 15px 0 0 0;
+	background-color: #FFF;
+}
+#signIn.signLog .note {
+	height: auto;
+	padding: 13px 0 10px;
+}
+#signIn.signLog .note a {
+	font-weight: bold;
+}
+.signLog .note p {
+	text-align: center;
+	font: normal 12px/16px Helvetica;
+	color: #616161;
+}
+.signLog .bottom {
+	background: url("https://developer.tripfab.com/images2/g-52.gif") repeat-x scroll 0 0 #F6F6F6;
+	height: 65px;
+	overflow: hidden;
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-topright: 0px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-webkit-border-radius: 0px 0px 5px 5px;
+	border-radius: 0px 0px 5px 5px;
+}
+.signLog .bottom h6 {
+	text-align: center;
+	color: #303030;
+	font: bold 17px/65px Helvetica;
+}
+/*END SIGN IN LIGHTBOX---------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

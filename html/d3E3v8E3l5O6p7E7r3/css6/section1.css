@@ -3046,7 +3046,7 @@ ul.cat-menu li.item-1 a img {
 #search_result .single.gen-2 .hvr > a {
 	height: 183px;
 }
-#search_result .image:hover .hvr {
+#search_result .single:hover .image .hvr {
 	display: block;
 }
 #search_result .single.activity-1  .hvr .cat,
@@ -3231,7 +3231,7 @@ ul.cat-menu li.item-1 a img {
 #search_result .single h4 a {
 	color: #303030;
 }
-#search_result .single h4 a:hover {
+#search_result .single:hover  h4 a{
 	color: #60b5f7;
 }
 #search_result .single > span {
@@ -3311,9 +3311,7 @@ ul.cat-menu li.item-1 a img {
 #search_result .single.hotel-1 h4 {
 	margin-bottom: 6px;
 }
-#search_result .single.hotel-1 .hvr a {
-	width:90px;
-}
+
 #search_result .single.hotel-1 .hvr a span{
 	margin: 9px 6px 0 0;
 }

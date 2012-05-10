@@ -435,6 +435,8 @@
 }
 #wrapper-top .main {
 	padding-top: 44px;
+	position: relative;
+	z-index: 10;
 }
 #wrapper-top h1 a{
 	display: block;

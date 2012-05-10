@@ -7763,14 +7763,22 @@ h2.title .back:hover,
 	display: block;
 	width: 251px;
 }
-
-.sign-box a.fb img {
+.sign-box a.fb{
+	width: 253px;
+	height: 45px;
 	display: block;
+	margin: 20px auto;
+	background: url(https://developer.tripfab.com/images6/signUpFB.png) no-repeat 0 0;
 }
-
+.sign-box a.fb:hover {
+	background-position: 0 -57px;
+}
+.sign-box a.fb:active {
+	background-position: 0 -112px;
+}
 .sign-box .content {
-	border-top: 1px dotted #B2B2B2;
-	margin-top: 40px;
+	background: url("https://developer.tripfab.com/images6/signIn-sh.png") no-repeat scroll 0 0 #FFFFFF;
+	margin-top: 22px;
 	padding: 35px 28px;
 	position: relative;
 }
@@ -7870,7 +7878,6 @@ h2.title .back:hover,
 	color: #C7C7C7;
 	font-size: 17px;
 	font-style: italic;
-	font-weight: bold;
 	left: 202px;
 	padding: 0 10px;
 	position: absolute;
@@ -7950,7 +7957,9 @@ h2.title .back:hover,
 .sign-box .content input.in-1 {
 	background: url(https://developer.tripfab.com/images2/ico-35.png) no-repeat 97% 50%;
 }
-
+.sign-box .content input.in-7 {
+	background: url("https://developer.tripfab.com/images6/signInIcons.png") no-repeat scroll 371px -42px transparent;
+}
 .sign-box .content input.in-2 {
 	background: url(https://developer.tripfab.com/images2/ico-36.png) no-repeat 97% 50% #FFF;
 }

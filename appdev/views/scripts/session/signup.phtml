@@ -6,7 +6,7 @@
     <title>Join us! | Tripfab.com</title>
     <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
     <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
     <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
@@ -16,11 +16,12 @@
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>        
     <div class="w2">
         <div class="small-wrapper">
-            <div class="sign-box">
-                <div class="ttl">
-                    Join Tripfab
-                </div><!-- closes ttl -->
-                <a href="<?= $this->fbLoginUrl ?>" class="fb"><img src="/images2/t-28.png" alt="" /></a>
+            <div class="sign-box signLog">
+                <div class="top">
+                	<h2>Sign up for TripFab. <span>It’s Free!</span></h2>
+                	<p>You need to create an account to continue</p>
+                </div><!--TOP-->
+                <a href="<?= $this->fbLoginUrl ?>" class="fb"></a>
                 <div class="content">
                     <span>Or</span>
                     <?php if($this->errors): ?>
@@ -43,9 +44,9 @@
                             <input name="name" type="text" value="" placeholder="Name" class="in-1 name required" />
                             <?php endif ?>
                             <?php if($this->lname): ?>
-                            <input name="lname" type="text" value="<?= $this->lname ?>" placeholder="Last Name" class="noclean in-1 lastname required" />
+                            <input name="lname" type="text" value="<?= $this->lname ?>" placeholder="Last Name" class="noclean in-7 lastname required" />
                             <?php else: ?>
-                            <input name="lname" type="text" value="" placeholder="Last Name" class="in-1 lastname required" />
+                            <input name="lname" type="text" value="" placeholder="Last Name" class="in-7 lastname required" />
                             <?php endif ?>
                             <?php if($this->email): ?>
                             <input name="email" type="text" placeholder="E-Mail" value="<?= $this->email ?>" class="noclean in-2 email required" />
@@ -54,13 +55,7 @@
                             <?php endif ?>
                             <input name="password" type="password" placeholder="Password" value="" class="in-3 password required" />
                             <input name="password2" type="password" placeholder="Re-enter Password" value="" class="in-4 password required" />
-                            <select name="country_id">
-                                <option value="">Select your country</option>
-                                <?php foreach($this->countries as $c): ?>
-                                <?php $selected = ($this->country == $c->id) ? 'selected="selected"' : ''; ?>
-                                <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
-                                <?php endforeach ?>
-                            </select>
+                            
                         </fieldset>
                         <fieldset>
                             <label><input type="checkbox" /> Remember me next time</label>

@@ -6,7 +6,7 @@
     <title>Login to your account | Tripfab.com</title>
     <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
     <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css" />
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
     <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
@@ -17,11 +17,12 @@
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>    
     <div class="w2">
         <div class="small-wrapper">
-            <div class="sign-box">
-                <div class="ttl">
-                    Sign in into your Tripfab account
-                </div><!-- closes ttl -->
-                <a href="/signup/facebook" class="fb"><img src="/images2/t-29.png" alt="" /></a>
+            <div class="sign-box signLog">
+                <div class="top">
+                	<h2>Sign into your TripFab account</h2>
+                	<p>Welcome back, we love you :)</p>
+                </div><!--TOP-->
+                <a href="/signup/facebook" class="fb"></a>
                 <div class="content su">
                     <span>Or</span>
                     <?php if($this->errors): ?>
