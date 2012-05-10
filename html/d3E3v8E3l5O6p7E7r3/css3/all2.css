@@ -76,9 +76,8 @@ html, body {
 }
 
 .form-wrapper {
-	background: url("../images3/email_bg.png") no-repeat scroll center top transparent;
 	position: relative;
-	height:128px;
+	height:140px;
 }
 
 .form-wrapper .w3 {
@@ -114,7 +113,6 @@ html, body {
 	font: 13px helvetica;
 	color: #afafaf;
 	border-radius:3px;
-	margin-top: 2px;
 }
 
 .form-wrapper input[type="text"].error {
@@ -317,16 +315,14 @@ html, body {
 	padding-top:20px;
 }
 .email-form {
-	width:960px;
+	width:475px;
 	margin:0 auto;
 	position:relative;
 }
 .email-form label {
 	float:left;
 	display:inline-block;
-	margin-left: 170px;
-	margin-right: 18px;
-	padding-top: 7px;
+	padding-top:10px;
 }
 .popUp {
 	background: url("../images3/white-box.png") no-repeat scroll 0 0 transparent;
@@ -341,15 +337,14 @@ html, body {
 	font:bold 12px/18px Helvetica, Arial, sans-serif;
 	color:#303030;
 	padding: 20px 0 4px;
-	text-align: center;
 }
-.popUp p {
+#footer .popUp p {
 	color:#707070;
 	font:normal 12px/15px Helvetica, Arial, sans-serif;
 	text-align:center;
 	padding:0 10px;
 }
-.message-sent{
+#footer .message-sent{
 	margin: 0 auto;
     position: relative;
     width: 375px;
@@ -359,7 +354,7 @@ html, body {
 	padding-top:20px;
 	display:none;
 }
-.message-sent h4 {
+#footer .message-sent h4 {
 	background:url(../images3/ico-5.png) no-repeat left 50%;
 	padding-left:20px;	
 }
@@ -395,7 +390,7 @@ html, body {
 	display: block;
 	width: 219px;
 	height: 57px;
-	margin: 0 auto 37px !important;
+	margin: 0 auto 37px;
 	text-indent: -99999px;
 	margin-bottom: 20px; 
 }
@@ -414,31 +409,27 @@ html, body {
 	text-transform: uppercase;
 	letter-spacing: 5px;
 	text-align: center;
-	padding-top: 21px;
+	padding-top: 10px;
 	color: #457db0;
 	text-shadow: 0px 1px 0px #FFF;
 }
 #main .cont .features {
 	overflow: hidden;
 	padding-top: 46px;
-	padding-bottom: 43px;
 }
 #main .cont .features .single{
-	width: 294px;
+	width: 290px;
 	margin-left:8px;
 	float: left;
-	margin-right: 34px;
 }
 #main .cont .features .single.last {
-	margin: 0;
-	width: 284px;
+	margin-right: 0;
 }
 #main .cont .features .single h4 {
 	color: #073153;
 	text-transform: uppercase;
 	height: 34px;
 	font: bold 14px/34px Helvetica;
-	margin-bottom: 7px;
 }
 #main .cont .features .single h4 span {
 	display: block;

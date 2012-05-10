@@ -34,13 +34,13 @@ $(document).ready(function() {
         }
     });
 	
-    $('#footer').hover(function(){
+    $('.w3').hover(function(){
         $('.popUp').css({
             opacity:0,
             display:'block'
         });
         $('.popUp').animate({
-            left:'95px',
+            left:'300px',
             opacity:1
         },100,'linear');
     }, function(){

@@ -16,7 +16,7 @@
     top: 0px !important;
     display:none;}
 .user-messages > .right > div {
-    background: url(https://developer.tripfab.com/images2/g_68.png) repeat-y 0 0 #FFF;
+    background: url(https://developer.tripfab.com/images2/g_68.png) repeat-y -2px 0 #FFF;
     border: 0px none;
     padding:0;
     -moz-border-radius-topleft: 0px;
@@ -46,7 +46,7 @@
 .user-messages > .right .conversation div h4 {
     margin-bottom: 10px;
 }
-.user-messages .right  textarea {
+.user-messages .right textarea {
     border: 1px solid #DDDDDD;
     box-shadow: -1px 0 0 #FFFFFF;
     color: #303030;
@@ -54,7 +54,7 @@
     min-height: 41px;
     padding: 5px;
     resize: none;
-    width: 443px;
+    width: 350px;
 }
 .user-messages .right input[type="submit"] {
     border: medium none;
