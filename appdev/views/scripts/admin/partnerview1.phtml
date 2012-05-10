@@ -49,6 +49,7 @@
 								<li id="nav3"><a href="<?php echo $this->url(array('seq'=>3))?>">Reservations</a></li>
 								<li id="nav4"><a href="<?php echo $this->url(array('seq'=>4))?>">Offers</a></li>
 								<li id="nav5"><a href="<?php echo $this->url(array('seq'=>5))?>">Bank Accounts</a></li>
+								<li id="nav7"><a href="<?php echo $this->url(array('seq'=>7))?>">Staffs</a></li>
 							</ul>
 						</div><!-- closes left -->
 						<div class="right">
@@ -117,6 +118,28 @@
             <td width="180">Website</td>
 			<td width="340"><input type="text" class="noclean" name="website" value="<?php echo $this->user->website?>" /></td>
         </tr>
+
+        
+        
+        <tr>
+            <td width="180">Live Chat (Yahoo!)</td>
+			<td width="340"><input type="text" class="noclean" name="yahoo" value="<?php echo @$this->yahoo?>" /></td>
+        </tr>
+        <tr>
+            <td width="180">Live Chat (Google)</td>
+			<td width="340"><input type="text" class="noclean" name="gmail" value="<?php echo @$this->gmail?>" /></td>
+        </tr>
+        <tr>
+            <td width="180">Language</td>
+			<td width="340">
+            <select name="language" class="language valid">
+                <option value="en-US" <?php echo $this->language=='en-US' ? 'selected="selected"' : ''?>>English</option>
+                <option value="en-ES" <?php echo $this->language=='en-ES' ? 'selected="selected"' : ''?>>Spanish</option>
+			</select>
+            </td>
+        </tr>
+
+
     </table>
 </div><!--SINGLE_TRIP-->
 <input type="hidden" name="user_id" value="<?php echo $this->user->user_id ?>"/>
