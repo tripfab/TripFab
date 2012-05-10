@@ -171,7 +171,7 @@
                             <div class="clear"></div>
                         </div><!-- closes checkout-item -->
                         
-                        <div class="bottom"> <span>Grand Total<strong>$<?= $this->cartitem->total ?></strong></span>
+                        <div class="bottom"> <span>Grand Total<strong>$<?= $this->formatnumber($this->cartitem->total) ?></strong></span>
                             <input type="submit" class="btn-1 noclean" value="Book Trip" />
                         </div><!-- closes bottom -->
                         <input type="hidden" name="userids" value="<?= $this->user->id ?>" />
@@ -203,7 +203,7 @@
                             </li>
                         </ul>
                         <div class="total"> <a href="#" class="booknow btn-1">Book Now</a>
-                            <p>Grand Total <strong>$<?= $this->cartitem->total ?></strong></p>
+                            <p>Grand Total <strong>$<?= $this->formatnumber($this->cartitem->total) ?></strong></p>
                         </div><!-- closes total --> 
                     </div><!-- closes widget --> 
                 </div><!-- closes right --> 

@@ -88,7 +88,7 @@
                 </div><!--DESCRIPTION-->
                 <div class="summary">
                     <div class="price">
-                        <em>Total paid</em><h4> $<?= $trip->price ?> </h4>
+                        <em>Total paid</em><h4> $<?= $this->formatnumber($trip->price) ?> </h4>
                     </div><!--PRICE-->
                     <div class="controls">
                         <a href="/user/trips/view/<?= $trip->id ?>" class="btn-1">View Trip</a>

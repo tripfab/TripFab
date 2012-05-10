@@ -33,9 +33,9 @@
 							<p><?= $list->description ?></p>
 							<div class="bot">
                             	<?php if($list->main_type == 5): ?>
-								<span><sup>$</sup><?= $list->price ?> <em>/ night</em></span>
+								<span><sup>$</sup><?= $this->formatnumber($list->price) ?> <em>/ night</em></span>
                                 <?php else: ?>
-								<span><sup>$</sup><?= $list->price ?> <em>/ person</em></span>                                
+								<span><sup>$</sup><?= $this->formatnumber($list->price) ?> <em>/ person</em></span>                                
                                 <?php endif ?>
 								<input type="submit" class="btn-1" value="Replace" />
 								<a href="/<?= $list->country_idf ?>/<?= $list->city_idf ?>/<?= $list->identifier ?>" class="btn-10">Read More</a>

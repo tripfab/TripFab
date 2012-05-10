@@ -44,7 +44,7 @@
                                 <div class="price">
                                     <em>From</em>
                                     <sup>$</sup>
-                                    <span><?= $this->listing->price ?> <sub>per night</sub></span>
+                                    <span><?= $this->formatnumber($this->listing->price) ?> <sub>per night</sub></span>
                                 </div><!--PRICE-->
                                 <!--
                                 <div class="reviews">
@@ -344,13 +344,13 @@
                                                         name="option" value="<?= $option->id ?>" /></td>
 	                                        			<td width="175"><label for="room<?= $option->id ?>"><?= $option->name ?> 
                                                         (<?= $this->rooms2[$option->id]['people'] ?>/room)</label></td>
-	                                        			<td width="55"><em>$<?= $this->prices[$option->id]['price'] ?> </em></td>
+	                                        			<td width="55"><em>$<?= $this->formatnumber($this->prices[$option->id]['price']) ?> </em></td>
 	                                        		</tr>
 	                                        	</table>
                                         		<!--<label for="room<?= $option->id ?>">
 													<input type="radio" id="room<?= $option->id ?>" name="option" value="<?= $option->id ?>" />
 													<span><?= $option->name ?> (<?= $this->rooms2[$option->id]['people'] ?>/room)</span> 
-													<em>$<?= $this->prices[$option->id]['price'] ?> </em>
+													<em>$<?= $this->formatnumber($this->prices[$option->id]['price']) ?> </em>
 												</label>-->
 
 												<div class="room_tip">
@@ -400,7 +400,7 @@
                                     <div class="price">
                                          <div>
                                          	<span><sup>$</sup>
-                                         	<abbr id="sumaryPrice"><?= $this->listing->price ?></abbr> 
+                                         	<abbr id="sumaryPrice"><?= $this->formatnumber($this->listing->price) ?></abbr> 
                                          	<sub>Subtotal</sub></span>
                                          </div>
                                     </div><!--PRICE-->

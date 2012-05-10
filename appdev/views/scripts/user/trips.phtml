@@ -122,7 +122,7 @@
                 </div><!--DESCRIPTION-->
                 <div class="summary">
                     <div class="price">
-                        <em>Trip Estimate</em><h4> <sup>$</sup><?= $trip->price ?> <sub>/ person</sub> </h4>
+                        <em>Trip Estimate</em><h4> <sup>$</sup><?= $this->formatnumber($trip->price) ?> <sub>/ person</sub> </h4>
                     </div><!--PRICE-->
                     <div class="controls">
                     	<?php if($trip->start == '0000-00-00' && $trip->end == '0000-00-00'): ?>

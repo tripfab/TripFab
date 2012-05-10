@@ -39,7 +39,7 @@
                         <span class="place"><?= $this->trip->country ?></span>
                         <span class="duration"><?= ($this->trip->days > 1) ? $this->trip->days . ' days' : $this->trip->days . ' day' ?> /
                         <?= ($this->trip->nights > 1) ? $this->trip->nights . ' nights' : $this->trip->nights . ' night' ?></span>
-                        <h4><sup>$</sup><?= $this->trip->price ?><span>per person</span></h4>
+                        <h4><sup>$</sup><?= $this->formatnumber($this->trip->price) ?><span>per person</span></h4>
                     </div><!--INFO-->
                 </div><!--IMAGE-->
             </div><!--OVERVIEW-->
@@ -293,7 +293,7 @@
             </div>
             <div class="result">
                 <a href="#dates_lb" class="btn-1 lb">Buy Itinerary</a>
-                <span><sup>$</sup><?= $this->trip->price ?> <em>per person</em></span>
+                <span><sup>$</sup><?= $this->formatnumber($this->trip->price) ?> <em>per person</em></span>
             </div><!--RESULT-->
         </div><!-- closes BROWSE_TRIPS --> 
     </div>

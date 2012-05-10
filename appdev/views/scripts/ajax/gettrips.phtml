@@ -28,7 +28,7 @@
 		</div><!--SPECS-->
 	</div><!-- closes info -->
 	<div class="meta">
-		<span>$<?= $trip->price ?></span><em>per person</em>
+		<span>$<?= $this->formatnumber($trip->price) ?></span><em>per person</em>
 		<a href="/trips/view/<?= $trip->id ?>" class="btn-1">View Itinerary</a>
 		<div class="time-stamp-2">
 			<span><?= ($trip->days > 1) ? $trip->days . ' days' : '1 day' ?></span>

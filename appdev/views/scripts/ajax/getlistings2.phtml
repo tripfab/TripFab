@@ -106,7 +106,7 @@ $per_night = array(
  		<p><?= substr($list->description, 0, 100) ?>...</p>      
  		<div class="info">
  		    <span class="location"><span></span>Location <strong><?= $list->city ?>, <?= $list->country ?></strong></span>
- 		    <div class="price"><span><?= $list->price ?></span><sup>$</sup> <sub><?=$per_night[$list->main_type] ?></sub></div>
+ 		    <div class="price"><span><?= $this->formatnumber($list->price) ?></span><sup>$</sup> <sub><?=$per_night[$list->main_type] ?></sub></div>
  		    <div class="clear"></div>
  		</div><!--INFO-->
  		
@@ -142,7 +142,7 @@ $per_night = array(
         <p><?= substr($list->description, 0, 100) ?>...</p>      
         <div class="info">
             <span class="location"><span></span>Location <strong><?= $list->city ?>, <?= $list->country ?></strong></span>
-            <div class="price"><span><?= $list->price ?></span><sup>$</sup><sub><?=$per_night[$list->main_type] ?></sub></div>
+            <div class="price"><span><?= $this->formatnumber($list->price) ?></span><sup>$</sup><sub><?=$per_night[$list->main_type] ?></sub></div>
             <div class="clear"></div>
         </div><!--INFO-->
        
