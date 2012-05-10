@@ -64,5 +64,14 @@ $(document).ready(function() {
         window.open(this.href);
         return false;
     });
-	  
+    
+    $starttime = new Date();
+    $endtime   = new Date('2012-05-21 10:00:00');
+    
+    console.log($endtime.getDate());
+    
+    /**$('.counter')..countdown({
+        image: '/images/digits.png',
+        startTime: $starttime
+    });*/ 
 });
