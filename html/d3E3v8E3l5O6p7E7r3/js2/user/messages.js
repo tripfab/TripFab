@@ -109,72 +109,89 @@ $(document).ready(function() {
     });
     
     
-    $putFixLimit = $('.user-messages .left').offset().top;
+//    $putFixLimit = $('.user-messages .left').offset().top;
+//    
+//    $left = $('.user-messages .right').offset().left;
+//    
+//    $(window).scroll(function(e){
+//        $top = $(window).scrollTop();
+//        if($top >= $putFixLimit){
+//            $('.user-messages .right').css({
+//                position:'static',
+//                left:$left,
+//                top:0
+//            });            
+//        } else {
+//            $('.user-messages .right').css({
+//                position:'static'
+//            });
+//        }
+//        resizeConversation();
+//    });
     
-    $left = $('.user-messages .right').offset().left;
+//    $(window).resize(resizeConversation);
     
-    $(window).scroll(function(e){
-        $top = $(window).scrollTop();
-        if($top >= $putFixLimit){
-            $('.user-messages .right').css({
-                position:'fixed',
-                left:$left,
-                top:0
-            });            
-        } else {
-            $('.user-messages .right').css({
-                position:'static'
-            });
-        }
-        resizeConversation();
-    });
-    
-    $(window).resize(resizeConversation);
-    
-    function resizeConversation(){
-        $maxheight = $(window).height();
-        $right     = $('.user-messages .right');
-        $top       = $(window).scrollTop();
-        
-        $foot      = $('#footer').offset().top - 14;
-        
-        $sum = ($top + $maxheight);
-        $diff = ($sum >= $foot) ? ($sum - $foot) + 8 : 0;
-        
-        $form = 144;
-        
+//    function resizeConversation(){
+//        $maxheight = $(window).height();
+//        $right     = $('.user-messages .right');
+//        $top       = $(window).scrollTop();
+//        
+//        $foot      = $('#footer').offset().top - 14;
+//        
+//        $sum = ($top + $maxheight);
+//        $diff = ($sum >= $foot) ? ($sum - $foot) + 8 : 0;
+//        
+//        $form = 144;
+//        
         //alert($('.user-messages').height());
-        
-        if($right.css('position') == 'fixed') {
-            $height = $maxheight - 28 - $diff;
-            $('.waiting, .conversation', $right).css({
-                height:$height
-            });
-            $('.conversation ul', $right).css({
-                height:$height - $form
-            });
-            if($('.user-messages').height() < ($height + 100)) {
-                $('.user-messages').css({
-                    height:($height + 100)
-                });
-            }
-        } else {
-            $height = $maxheight - $putFixLimit - 28 + $top - $diff;
-            $('.waiting, .conversation', $right).css({
-                height:$height
-            });
-            $('.conversation ul', $right).css({
-                height:$height - $form
-            });
-            if($('.user-messages').height() < ($height + 100)) {
-                $('.user-messages').css({
-                    height:($height + 100)
-                });
-            }
-        }
-    }
+//        
+//        if($right.css('position') == 'fixed') {
+//            $height = $maxheight - 28 - $diff;
+//            $('.waiting, .conversation', $right).css({
+//                height:$height
+//            });
+//            $('.conversation ul', $right).css({
+//                height:$height - $form
+//            });
+//            if($('.user-messages').height() < ($height + 100)) {
+//                $('.user-messages').css({
+//                    height:($height + 100)
+//                });
+//            }
+//        } else {
+//            $height = $maxheight - $putFixLimit - 28 + $top - $diff;
+//            $('.waiting, .conversation', $right).css({
+//                height:$height
+//            });
+//            $('.conversation ul', $right).css({
+//                height:$height - $form
+//            });
+//            if($('.user-messages').height() < ($height + 100)) {
+//                $('.user-messages').css({
+//                    height:($height + 100)
+//                });
+//            }
+//        }
+//    }
     
-    resizeConversation();
+//    resizeConversation();
+    
+    
+    
+   		
+        var aboveHeight = 145;
+        $(window).scroll(function(){
+            if ($(window).scrollTop() > aboveHeight){
+                $('.user-messages > .right .conversation').addClass('fixed').css('top','-23');
+                $('#wp_content').css('padding-top', '107px');
+            } 
+            else {
+                $('.user-messages > .right .conversation').removeClass('fixed');
+                $('#wp_content').css('padding-top', '0');
+            }
+        });
+    
+    
     
     $('a.selectAll').click(function(){
         if($(this).hasClass('checked')) {
