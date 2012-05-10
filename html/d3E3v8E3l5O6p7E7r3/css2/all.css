@@ -3334,7 +3334,27 @@ ul.reviews li > div div.meta em.red {
 	position: relative;
 	z-index: 0;
 }
-
+.checkout-wrapper .warnings {
+	background-color: #fff1ea;
+	border-bottom: 1px solid #f6dbcd;
+	margin: 0 1px;
+	padding: 25px 0 10px 25px;
+}
+.checkout-wrapper .warnings h3 {
+	background: url(https://developer.tripfab.com/images6/warning.png) no-repeat 0 0;
+	height: 21px;
+	padding-left: 30px;
+	font: bold 12px/21px Helvetica;
+	color: #f26522;
+	margin-bottom: 4px;
+}
+.checkout-wrapper .warnings ul li{
+	color:#f26522 ;
+	font: normal 12px Helvetica;
+	margin-bottom: 5px;
+	list-style: none;
+	padding-left: 23px;
+}
 .checkout-item {
 	padding: 25px 0 0 25px;
 	background: url(https://developer.tripfab.com/images2/g-54.png) repeat-x left top;
@@ -3342,7 +3362,7 @@ ul.reviews li > div div.meta em.red {
 	/*overflow: hidden;*/
 }
 .checkout-item.first {
-	background: none;
+	background: url(https://developer.tripfab.com/images2/g-54.png) repeat-x left -1px;
 }
 .checkout-item .ttl {
 	overflow: hidden;
@@ -3581,7 +3601,6 @@ ul.reviews li > div div.meta em.red {
 	overflow: visible !important;
 }
 .payment-item .new-card .item.required > div{
-	background-color: #FFF1EA;
     height: 68px;
     left: -33px;
     padding-left: 33px;
