@@ -155,7 +155,7 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
         <p><?= substr($list->description, 0, 100) ?>...</p>      
         <div class="info">
             <span class="location"><span></span>Location <strong><?= $list->city ?>, <?= $list->country ?></strong></span>
-            <div class="price"><span><?= $list->price ?></span><sup>$</sup> <sub><?=$per_night[$list->main_type] ?></sub></div>
+            <div class="price"><span><?= $this->formatnumber($list->price) ?></span><sup>$</sup> <sub><?=$per_night[$list->main_type] ?></sub></div>
             <div class="clear"></div>
         </div><!--INFO-->
         <?php else: ?>
@@ -190,7 +190,7 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
         <p><?= substr($list->description, 0, 100) ?>...</p>      
         <div class="info">
             <span class="location"><span></span>Location <strong><?= $list->city ?>, <?= $list->country ?></strong></span>
-            <div class="price"><span><?= $list->price ?></span><sup>$</sup> <sub><?=$per_night[$list->main_type] ?></sub></div>
+            <div class="price"><span><?= $this->formatnumber($list->price) ?></span><sup>$</sup> <sub><?=$per_night[$list->main_type] ?></sub></div>
             <div class="clear"></div>
         </div><!--INFO-->
         <?php endif ?>

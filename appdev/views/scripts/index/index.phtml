@@ -101,7 +101,7 @@
 									<span class="meta"><strong><em></em><?= $h->city ?>,</strong> <?= $h->country ?></span>
 									<div class="price">
 										<div>
-											<span><?= $h->price ?></span>
+											<span><?= $this->formatnumber($h->price) ?></span>
 											<sup>$</sup>
 											<div class="clear"></div>
 										</div>
@@ -126,7 +126,7 @@
 									<span class="meta"><strong><em></em><?= $h->city ?>,</strong> <?= $h->country ?></span>
 									<div class="price">
 										<div>
-											<span><?= $h->price ?></span>
+											<span><?=$this->formatnumber($h->price) ?></span>
 											<sup>$</sup>
 											<div class="clear"></div>
 										</div>
@@ -152,7 +152,7 @@
 									<span class="meta"><strong><em></em></strong>Costa Rica</span>
 									<div class="price">
 										<div>
-											<span><?= $h->price ?></span>
+											<span><?= $this->formatnumber($h->price) ?></span>
 											<sup>$</sup>
 											<div class="clear"></div>
 										</div>
@@ -200,7 +200,7 @@
 								<span class="meta"><em></em><?= $trip->days ?> Day Trip</span>
 								<div class="prices">
 									<sup>$</sup>
-									<span><?= $trip->price ?></span>
+									<span><?= $this->formatnumber($trip->price) ?></span>
 									<sub>per person</sub>
 								</div><!--PRICE-->
 				            	<?php if(!is_null($this->user) and $this->user->role_id == 2): ?>

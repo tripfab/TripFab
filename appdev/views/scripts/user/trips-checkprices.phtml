@@ -132,7 +132,7 @@
                                             id="Room1" value="<?= $room->schedule_id ?>" /><?= $room->name ?></strong> 
                                             <span><?= $room->description ?></span>
                                         </label>
-                                        <span class="price">$<?= $this->options[$item->id]['prices'][$room->schedule_id]['price'] ?></span> 
+                                        <span class="price">$<?= $this->formatnumber($this->options[$item->id]['prices'][$room->schedule_id]['price']) ?></span> 
                                     </div><!--SINGLE-->
                                     <?php endforeach ?>
                                 </div><!--ROOM-TYPE--> 
@@ -168,7 +168,7 @@
                                                                                 : $option->max .' people'  
                                                                             : 'Not defined'  ?></span>
                                        </label>
-                                       <span class="price">$<?= $this->options[$item->id]['prices'][$option->id]['price'] ?></span> 
+                                       <span class="price">$<?= $this->formatnumber($this->options[$item->id]['prices'][$option->id]['price']) ?></span> 
                                     </div><!--SINGLE-->
                                     <?php endforeach ?>
                                     <?php else: ?>
@@ -186,7 +186,7 @@
                                                                             ? '1 person' 
                                                                             : $item->listing_max .' people'  
                                                                         : 'Not defined'  ?></span>
-                                       </label><span class="price">$<?= $item->listing_price ?></span>
+                                       </label><span class="price">$<?= $this->formatnumber($item->listing_price) ?></span>
                                     </div><!--SINGLE-->
                                     <?php endif ?>
                                 </div><!--ROOM-TYPE--> 
@@ -240,7 +240,7 @@
                             <div class="item">
                             	<strong>Total</strong>
                                 <div class="edit">
-                                	$<?= $item->total ?>
+                                	$<?= $this->formatnumber($item->total) ?>
                                 </div>
                                 <div class="clear"></div>
                             </div>
@@ -633,7 +633,7 @@
                 			<?php if($item->available): ?>
                 			<tr rel="#itmBig<?=$kkk ?>" id="itm<?= $kkk ?>">
                 				<td width="200" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'"><a href="#"><em><?= $item->listing_title ?></em></a></td>
-                				<td width="75" align="right" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>$<?= $item->total ?></span></td>
+                				<td width="75" align="right" class="celdano" onmouseover="className='celdasi'" onmouseout="className='celdano'" valign="middle"><span>$<?= $this->formatnumber($item->total) ?></span></td>
                 			</tr>
                 			<?php elseif($item->available === false): ?>
                 			
@@ -666,7 +666,7 @@
                 </div><!--TERMS-->	
                 
                 <div class="bottom"> <a href="" class="btn-1">Okay, continue</a>
-                    <p>Grand Total<strong>$<?= $this->bigtotal ?></strong></p>
+                    <p>Grand Total<strong>$<?= $this->formatnumber($this->bigtotal) ?></strong></p>
                 </div><!--BOTTOM--> 
                 
             </div><!--RIGHT_BLOCK--> 

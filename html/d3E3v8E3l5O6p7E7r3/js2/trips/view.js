@@ -76,13 +76,42 @@ $(document).ready(function() {
     
     var aux = true;
     
-    function showMap() {
-	    $(".box.days .day .day-section .left > a").click(function () {
-	    	var htmlStr = $(this).html("Hide Map <span>&darr;</span>");
-	        $(this).text(htmlStr);
-	        return false
-	    });
-	}
+    function showMap($el) {
+        $canvas  = $el.attr('href');
+        var $lat = $el.data('lat');
+        var $lng = $el.data('lng');
+        var $title = $el.data('title');
+
+        var latlng, myOptions, map, marker;
+
+        if($lat != 'none' && $lng != 'none'){
+            latlng = new google.maps.LatLng($lat,$lng);
+
+            myOptions = {
+                zoom: 12,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            map = new google.maps.Map(document.getElementById($canvas),myOptions);
+
+            marker = new google.maps.Marker({
+                position: latlng,
+                title:$title
+            }); 
+            marker.setMap(map);
+        } else {
+            latlng = new google.maps.LatLng(40,0);
+
+            myOptions = {
+                zoom: 2,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
+        }
+        $el.data('done',true);
+    }
     
     $aaa = false;
     $('.box.days .day .day-section .left > a').live('click', function(){
@@ -92,6 +121,9 @@ $(document).ready(function() {
         if(!$aaa) {
             $(this).html('Hide Map <span>&darr;</span>');
             $(this).data('aaa', true);
+            if(!$(this).data('done')) {
+                showMap($(this));
+            }
         } else {
             $(this).html('Show Map <span>&uarr;</span>');
             $(this).data('aaa', false);

@@ -57,7 +57,7 @@
                             <?php $total = $total + $list->ammount ?>
                             <?php endforeach ?>
                             <dt class="total">Total</dt>
-                            <dd class="total">$<?= $total ?></dd>
+                            <dd class="total">$<?= $this->formatnumber($total) ?></dd>
                         </dl>
                     </div><!--DETAILS-->
                     

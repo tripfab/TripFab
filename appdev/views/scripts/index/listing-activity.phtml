@@ -44,7 +44,7 @@
                                 <div class="price">
                                     <em>From</em>
                                     <sup>$</sup>
-                                    <span><?= $this->listing->price ?> <sub>per person</sub></span>
+                                    <span><?= $this->formatnumber($this->listing->price) ?> <sub>per person</sub></span>
                                 </div><!--PRICE-->
                                 <!--
                                 <div class="reviews">
@@ -364,7 +364,7 @@
 	                                            		<td>
 		                                            		<label for="activityType<?= $option->id ?>">
 		                                            		<?= $option->name ?> (<?= $option->min ?> - <?= $option->max ?>) / 
-		                                            		$<?= $this->prices[$option->id]['price'] ?></label>
+		                                            		$<?= $this->formatnumber($this->prices[$option->id]['price']) ?></label>
 		                                            	</td>
 	                                            	</tr>
 	                                            	<?php endforeach ?>
@@ -376,7 +376,7 @@
 	                                            		<td>
 	                                            			<label for="activityType0">
 	                                            			Single Capacity (<?= $this->listing->min ?> - <?= $this->listing->max ?>) / 
-	                                            			$<?= $this->listing->price ?></label>
+	                                            			$<?= $this->formatnumber($this->listing->price) ?></label>
 	                                            		</td>
 	                                            	</tr>
 	                                            	<?php endif ?>
@@ -503,7 +503,7 @@
                                         <div class="price">
                                         	<div>
 	                                         	<span><sup>$</sup>
-	                                         	<abbr id="sumaryPrice"><?= $this->listing->price ?></abbr> 
+	                                         	<abbr id="sumaryPrice"><?= $this->formatnumber($this->listing->price) ?></abbr> 
 	                                         	<sub>Subtotal</sub></span>
                                             </div>
                                         </div><!--PRICE-->

@@ -112,7 +112,7 @@
                                 </div><!--NEW-CARD--> 
                             </div><!-- closes payment-item -->                             
                         </div><!-- closes checkout-item -->
-                        <div class="bottom"> <span>Grand Total<strong>$<?= $this->cartitem->total ?></strong></span>
+                        <div class="bottom"> <span>Grand Total<strong>$<?= $this->formatnumber($this->cartitem->total) ?></strong></span>
                             <input type="submit" class="btn-1 noclean" value="Book Trip" />
                         </div><!-- closes bottom -->
                         <input type="hidden" name="userids" value="<?= $this->user->id ?>" />
@@ -142,7 +142,7 @@
                             <dl>
                         		<dt><?= $item->listing_name ?></dt>
                                 <?php if($item->total > 0): ?>
-                        		<dd>$<?= $item->total ?></dd>
+                        		<dd>$<?= $this->formatnumber($item->total) ?></dd>
                                 <?php else: ?>
                                 <dd>Not charged</dd>
                                 <?php endif ?>
@@ -150,7 +150,7 @@
                             <?php endforeach ?>
                         </div><!--PRICING_DET-->
                         <div class="total"> <a href="#" class="booknow btn-1">Book Now</a>
-                            <p>Grand Total <strong>$<?= $this->cartitem->total ?></strong></p>
+                            <p>Grand Total <strong>$<?= $this->formatnumber($this->cartitem->total) ?></strong></p>
                         </div><!-- closes total --> 
                     </div><!-- closes widget --> 
                 </div><!-- closes right --> 

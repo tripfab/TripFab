@@ -128,17 +128,17 @@
                                         <strong>$<?= $cart->additional ?></strong>
                                         <span><?= $cart->additional_description ?></span>
                                     </li>
-                                    <?php endif ?>
+                                    <?php endif ?>                                    
                                     <li>
-                                    	<strong>$<?= $cart->subtotal ?></strong>
+                                    	<strong>$<?= $this->formatnumber($cart->subtotal) ?></strong>
                                         <span>Subtotal</span>
                                     </li>
                                     <li>
-                                    	<strong>$<?= $cart->taxes ?></strong>
+                                    	<strong>$<?= $this->formatnumber($cart->taxes) ?></strong>
                                         <span>Taxes and Fees</span>
                                     </li>
                                     <li>
-                                    	<strong>$<?= $cart->total ?></strong>
+                                    	<strong>$<?= $this->formatnumber($cart->total) ?></strong>
                                         <span>Total</span>
                                     </li>
                                 </ul>
@@ -184,7 +184,7 @@
                                 <?php $class = ($cart->available) ? '' : 'error' ?>
                                 <li class="<?= $class ?>">
                                     <a href="#item-<?= $key ?>"><span>&larr;</span> <?= $cart->listing_title ?>
-                                    <?php if($cart->available): ?><strong>$<?= $cart->total ?></trong><?php endif ?></a>
+                                    <?php if($cart->available):?> <strong>$<?= $this->formatnumber($cart->total) ?></strong><?php endif ?></a>
                                 </li>
                                 <?php endforeach ?>
                                 <?php foreach($this->items2 as $key => $cart): ?>
@@ -196,7 +196,7 @@
                             <div class="total">
                             <form action="/en-US/cart/purchasetrip" method="post">
                                 <input type="submit" class="btn-2" value="Process to Checkout" />
-                                <span>Trip Total <strong>$<?= $this->bigtotal ?></strong></span>
+                                <span>Trip Total <strong>$<?= $this->formatnumber($this->bigtotal) ?></strong></span>
                                 <input type="hidden" name="checkin" value="<?= $_POST['date'] ?>" />
                                 <input type="hidden" name="kids" value="<?= $_POST['kids'] ?>" />
                                 <input type="hidden" name="adults" value="<?= $_POST['adults'] ?>" />
