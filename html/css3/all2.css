@@ -27,8 +27,7 @@ html, body {
 #main {
 	background: url("../images3/main.png") repeat-x scroll 0 -4px transparent;
 	min-height:100%;
-	position:relative;
-	line-height: normal;
+   position:relative;
 }
 
 #main > .wrapper {
@@ -260,9 +259,11 @@ html, body {
 	font-size: 11px;
 	text-align: center;
 	text-shadow: 0 1px 0 #FFFFFF;
-	width:100%;
 	line-height: 20px;
 	height:82px;
+	position:absolute;
+	   bottom:0;
+	   width:100%;
 }
 
 #footer img {
@@ -359,9 +360,8 @@ html, body {
 	padding-top:20px;
 	display:none;
 }
-.message-sent h4 {
+<strong>.message-sent h4</strong> {
 	background:url(../images3/ico-5.png) no-repeat left 50%;
-	padding-left:20px;	
 }
 
 
@@ -383,6 +383,7 @@ html, body {
 #main .cont {
 	width: 960px;
 	margin: 0 auto;
+	padding-bottom: 82px;
 }
 
 #main .cont .top{
@@ -417,17 +418,49 @@ html, body {
 	padding-top: 21px;
 	color: #457db0;
 	text-shadow: 0px 1px 0px #FFF;
+	margin-bottom: 14px;
+}
+#main .cont .inner {
+	padding-left: 239px;
+	    padding-top: 6px;
+	    background: url(https://developer.tripfab.com/images3/countBG.png) 240px 0 no-repeat;
+	    height: 104px !important;
 }
 #main .cont .counter {
-	padding-left: 239px;
-	    padding-top: 14px;
+	padding-left: 7px;
 }
-#main .cont .mid .each {
+#main .cont .counter > .cntSeparator {
+	display: none;
+}
+#main .cont .counter #cnt_1,
+#main .cont .counter #cnt_4,
+#main .cont .counter #cnt_7 {
+	margin-right: 14px;
+}
+/*#main .cont .mid .each {
 	background: url(https://developer.tripfab.com/images3/cmsn-count.png) no-repeat 0 0;
 	width: 116px;
-	height: 110px;
+	height: 105px;
 	margin-right: 5px;
 	float: left;
+	padding-top: 5px;
+}
+
+#main .cont .mid .each .num {
+	width: 53px;
+	height: 78px;
+	background-color: red;
+	margin-left: 3px;
+	float: left;
+	margin-bottom: 5px;
+}*/
+#main .cont .mid .each em {
+	text-align: center;
+	color: #303030;
+	font: bold 13px Helvetica;
+	text-transform: uppercase;
+	display: block;
+	clear: both;
 }
 #main .cont .features {
 	overflow: hidden;
@@ -456,14 +489,14 @@ html, body {
 	float: left;
 	background: url(https://developer.tripfab.com/images3/cmsn-icons.png) no-repeat;
 	height: 34px;
-	width: 31px;
+	width: 42px;
 	margin-right: 10px;
 }
 #main .cont .features .single h4 .location {
 	background-position:0 0 ;
 }
 #main .cont .features .single h4 .create {
-	background-position: 0 -51px;	
+	background-position: 0 -48px;
 }
 #main .cont .features .single h4 .commission {
 	background-position: 0 -97px;	
@@ -471,9 +504,8 @@ html, body {
 #main .cont .features .single p {
 	color: #3e82b9;
 	font: normal 13px/19px Helvetica;
-	margin-left: 41px;
+	margin-left: 51px;
 }
-#main .cont .features .single p 
 
 
 
