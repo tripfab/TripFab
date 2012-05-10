@@ -4,10 +4,12 @@ class WS_VendorService {
 
     protected $vendors;
 	protected $bankAccounts;
+	protected $staffs;
 
     public function __construct() {
         $this->vendors = new Model_Vendors();
 		$this->bankAccounts = new Zend_Db_Table('bankaccounts');
+		$this->staffs = new Zend_Db_Table('contacts');
     }
 
     public function getVendorById($ids) {
@@ -69,6 +71,44 @@ class WS_VendorService {
 		return $db->fetchAll($select);
 	}
 	
+	public function getStaffsBy($vendor){
+		$db = Zend_Db_Table::getDefaultAdapter();
+	 	$db->setFetchMode(Zend_Db::FETCH_OBJ);
+		$select = $db->select();
+		$select->from(array('contacts'));
+        $select->where('contacts.vendor_id = ?', $vendor);
+		return $db->fetchAll($select);
+	}
+
+	public function getStaffBy($id){
+		if($id){
+			return $this->staffs->fetchRow($this->staffs->select()->where('id=?', $id));
+		}
+		else{
+			return $this->staffs->fetchNew();
+		}
+	}
+
+	public function deleteStaff($id){
+		$this->staffs->delete("id= $id");
+		return true;
+	}
+	
+	public function getIM($id, $service){
+		$vendor = $this->getVendorById($id);
+
+		if(!$vendor->user_id){
+			return false;
+		}
+        $accounts = new Zend_Db_Table('livechat_accounts');
+		$row = $accounts->fetchRow($accounts->select()->where('user_id=?',$vendor->user_id)->where('service=?', $service)); 
+		if(!$row) {
+			$row= $accounts->fetchNew();	
+		}
+		return $row;
+	}
+	
+
 	public function saveBanking($data){
 	    $db = Zend_Db_Table::getDefaultAdapter();
 		$bank_r['name']=$name;
