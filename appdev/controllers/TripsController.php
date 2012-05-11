@@ -57,7 +57,7 @@ class TripsController extends Zend_Controller_Action {
         $this->places = new WS_PlacesService();
         $this->view->tags = $this->json->getSerchTerms();
         
-        $this->view->_cssVC = Zend_Registry::get('vc');
+        $this->view->cssVC = Zend_Registry::get('vc');
     }
     
     public function indexAction()

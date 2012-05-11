@@ -11,7 +11,7 @@ class SessionController extends Zend_Controller_Action {
         $this->places = new WS_PlacesService();
         $this->view->lang = $this->_getParam('lang');
         
-        $this->view->_cssVC = Zend_Registry::get('vc');
+        $this->view->cssVC = Zend_Registry::get('vc');
     }
     
     public function logoutAction()

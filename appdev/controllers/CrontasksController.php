@@ -5,7 +5,7 @@ class CrontasksController extends Zend_Controller_Action
 
     public function init()
     {
-        $this->view->_cssVC = Zend_Registry::get('vc');
+        $this->view->cssVC = Zend_Registry::get('vc');
     }
     
     public function deleteAction() {

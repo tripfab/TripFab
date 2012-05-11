@@ -63,7 +63,7 @@ class AjaxController extends Zend_Controller_Action
             echo 'Wrong request'; die;
         }
         
-        $this->view->_cssVC = Zend_Registry::get('vc');
+        $this->view->cssVC = Zend_Registry::get('vc');
     }
     
     public function activateAction()

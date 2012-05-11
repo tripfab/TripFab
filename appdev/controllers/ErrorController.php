@@ -42,7 +42,7 @@ class ErrorController extends Zend_Controller_Action
         
         $this->view->request   = $errors->request;
         
-        $this->view->_cssVC = Zend_Registry::get('vc');
+        $this->view->cssVC = Zend_Registry::get('vc');
     }
 
     public function getLog()

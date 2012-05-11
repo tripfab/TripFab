@@ -67,7 +67,7 @@ class CartController extends Zend_Controller_Action {
             $this->trips        = new WS_TripsService();
         }
         
-        $this->view->_cssVC = Zend_Registry::get('vc');
+        $this->view->cssVC = Zend_Registry::get('vc');
     }
     
     public function indexAction()
