@@ -10,6 +10,8 @@
     <link type="text/css" rel="stylesheet" href="/css2/common.css" />
     <link type="text/css" rel="stylesheet" href="/css2/messages.css" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
 </head>
 <body>
 <div class="w1">
@@ -30,7 +32,9 @@
 					<?php if($message->starter == $this->user->id): ?>
                     <?php $class = ($message->snew == 1) ? 'new' : ''; ?>
                     <div class="s-message <?= $class ?>">
+                    	<?php if($message->snew == 1): ?>
                     	<span class="new"></span>
+                        <?php endif ?>
                         <span class="number"><?= $message->msgcount ?></span>
                         <div>
 	                        <input type="checkbox" name="message_id" class="message_id" value="<?= $message->id ?>" />                        
@@ -44,6 +48,9 @@
                     <?php else: ?>
                     <?php $class = ($message->wnew == 1) ? 'new' : ''; ?>
                     <div class="s-message <?= $class ?>">
+                    	<?php if($message->wnew == 1): ?>
+                    	<span class="new"></span>
+                        <?php endif ?>
                         <span class="number"><?= $message->msgcount ?></span>
                         <div>
                             <input type="checkbox" name="message_id" class="message_id" value="<?= $message->id ?>" />
@@ -56,18 +63,24 @@
                     </div><!-- closes message -->
                     <?php endif ?>
                     <?php endforeach ?>
+                    <!--
                     <div class="load-more">
                     	<a href="" class="btn-10">Load Earlier Messages</a>
-                    </div><!--LOAD-MORE-->
+                    </div>
+                    -->
 					<!-- <a href="" class="btn-5">Older messages</a> -->
                 </div><!-- closet messages-wrapper -->
             </div><!-- closes left -->
             <div class="right">
-				
+            	<div class="waiting" style="height:300px;">
+                    <p style="text-align:center; line-height:50px; margin-top:125px;">
+                    No message selected
+                    </p>
+                </div>
                 <div class="loading">Some Text</div>
-                <div class="conversation">
+                <div class="conversation" style="width: 525px;">
                     <div class="sendMessageFormWrapper">
-                        <h4>Send a message <em>to</em> <?= $message->wname ?></h4>
+                        <h4>Send a message</h4>
                         <textarea name="message" rows="" cols=""></textarea>
                         <input class="btn-1" type="submit" id="sendmessage" value="Send Message">
                     </div>
