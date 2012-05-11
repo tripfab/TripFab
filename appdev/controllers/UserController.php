@@ -117,6 +117,8 @@ class UserController extends Zend_Controller_Action
                 $this->cartitems = new Zend_Db_Table('cartitems');
             }
         }
+        
+        $this->view->_cssVC = Zend_Registry::get('vc');
     }
     
     

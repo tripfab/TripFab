@@ -41,6 +41,8 @@ class CallsController extends Zend_Controller_Action {
         $this->service  = new WS_Phone();
         $this->listings = new WS_ListingService();
         $this->callback = "http://developer.tripfab.com/phone/callback";
+        
+        $this->view->_cssVC = Zend_Registry::get('vc');
     }
     
     public function callAction()

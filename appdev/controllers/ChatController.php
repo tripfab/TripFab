@@ -39,6 +39,8 @@ class ChatController extends Zend_Controller_Action {
         $this->users   = new WS_UsersService();
         $this->user    = new WS_User($auth->getIdentity());
         $this->session = new Zend_Session_Namespace('Chat');
+        
+        $this->view->_cssVC = Zend_Registry::get('vc');
     }
     
     public function indexAction()

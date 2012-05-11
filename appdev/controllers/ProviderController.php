@@ -84,6 +84,8 @@ class ProviderController extends Zend_Controller_Action
             $this->view->help   = $this->listings->getHelpSettings($this->user->getId());
         }
         $this->places = new WS_PlacesService();
+        
+        $this->view->_cssVC = Zend_Registry::get('vc');
     }
     
     public function listingsAction()

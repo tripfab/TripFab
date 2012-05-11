@@ -96,6 +96,8 @@ class AdminController extends Zend_Controller_Action {
                 }
             }
         }
+        
+        $this->view->_cssVC = Zend_Registry::get('vc');
     }
 
     public function listingsAction() {

@@ -86,6 +86,8 @@ class IndexController extends Zend_Controller_Action
         $this->view->tags = $this->json->getSerchTerms();
         
         $this->view->lang = $this->_getParam('lang');
+        
+        $this->view->_cssVC = Zend_Registry::get('vc');
     }
 
     public function indexAction()

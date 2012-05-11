@@ -567,5 +567,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $config = $this->getOption('facebook');
         Zend_Registry::set('facebook', $config);
     }
+    
+    protected function _initVersionControl() 
+    {
+        $conf = $this->getOption('css');
+        Zend_Registry::set('vc',$conf['version_control']);
+    }
 }
 
