@@ -540,7 +540,7 @@
             </form>
         </div>
         <div id="live_chat">
-            <img src="/images2/chat.png" />
+            <img src="https://static.tripfab.com/images2/chat.png" />
         </div>
         <div id="start_call">
             <div id="dialpad" class="lb">
@@ -548,7 +548,7 @@
                 <div class="middle">
                     <p>We'll connect you with the vendor in few minutes. Directly.</p>
                     <div class="number-display">
-                        <a href="#" class="flag"><img src="/images2/flags/us.png" width="16" height="16" alt="" /></a>
+                        <a href="#" class="flag"><img src="https://static.tripfab.com/images2/flags/us.png" width="16" height="16" alt="" /></a>
                         <div class="all_flags">
                             <a href="#" class="up" onMouseover="move('container',10)" onMouseout="clearTimeout(move.to)"></a>
                             <a href="#" class="down" onMouseover="move('container',-10)" onMouseout="clearTimeout(move.to)"></a>
@@ -556,7 +556,7 @@
                                 <div id="container" style="position:absolute;width:282px;left:0;top:0">
                                     <p>ALL COUNTRIES</p>
                                     <?php foreach($this->countries as $c): ?>
-                                    <a href="#" data-code="<?= $c->phone ?>"><img src="/images2/flags/<?= strtolower($c->code) ?>.png" width="16" height="16" alt="" />
+                                    <a href="#" data-code="<?= $c->phone ?>"><img src="https://static.tripfab.com/images2/flags/<?= strtolower($c->code) ?>.png" width="16" height="16" alt="" />
                                     <?= $c->title ?> <strong>(+<?= $c->phone ?>)</strong></a>
                                     <?php endforeach ?> 
                                 </div><!--CONTAINER-->

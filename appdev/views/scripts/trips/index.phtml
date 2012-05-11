@@ -112,7 +112,7 @@
                         	<a href="/trips/view/<?= $trip->id ?>">
                         	<?= $this->thumbnail(array('width'=>180,'height'=>119), $trip->image, '','180:119'); ?></a>
                             <h5><?= $trip->title ?></h5>
-                            <span><img src="/images2/flag-1.png" alt="" /> <?= $trip->country ?></span>
+                            <span><img src="https://static.tripfab.com/images2/flag-1.png" alt="" /> <?= $trip->country ?></span>
                             <p><?= $trip->description ?></p>
                             <a href="/trips/view/<?= $trip->id ?>" class="link-1">See Trip</a>
                         </li>
@@ -126,7 +126,7 @@
                         	<a href="/trips/view/<?= $trip->id ?>">
                         	<?= $this->thumbnail(array('width'=>180,'height'=>119), $trip->image, '','180:119'); ?>
                             <h5><?= $trip->title ?></h5>
-                            <span><img src="/images2/flag-1.png" alt="" /> <?= $trip->country ?></span>
+                            <span><img src="https://static.tripfab.com/images2/flag-1.png" alt="" /> <?= $trip->country ?></span>
                             <p><?= $trip->description ?></p>
                             <a href="/trips/view/<?= $trip->id ?>" class="link-1">See Trip</a>
                         </li>
@@ -140,7 +140,7 @@
                         	<a href="/trips/view/<?= $trip->id ?>">
                         	<?= $this->thumbnail(array('width'=>180,'height'=>119), $trip->image, '','180:119'); ?>
                             <h5><?= $trip->title ?></h5>
-                            <span><img src="/images2/flag-1.png" alt="" /> <?= $trip->country ?></span>
+                            <span><img src="https://static.tripfab.com/images2/flag-1.png" alt="" /> <?= $trip->country ?></span>
                             <p><?= $trip->description ?></p>
                             <a href="/trips/view/<?= $trip->id ?>" class="link-1">See Trip</a>
                         </li>
@@ -163,7 +163,7 @@
 		<ul>
         	<?php foreach($this->categories as $c): ?>
         	<li><a href="/trips/search?cat=<?= $c->id ?>">
-            <img src="/images2/placeholder-icon.gif" />
+            <img src="https://static.tripfab.com/images2/placeholder-icon.gif" />
             <span><?= $c->label ?></span></a></li>
             <?php endforeach ?>
         </ul>
@@ -172,7 +172,7 @@
 		<ul>
         	<?php foreach($this->landscapes as $c): ?>
         	<li><a href="/trips/search?land=<?= $c->id ?>">
-            <img src="/images2/placeholder-icon.gif" />
+            <img src="https://static.tripfab.com/images2/placeholder-icon.gif" />
             <span><?= $c->name ?></span></a></li>
             <?php endforeach ?>
         </ul>
@@ -181,7 +181,7 @@
 		<ul>
         	<?php foreach($this->regions as $c): ?>
         	<li><a href="/trips/search?region=<?= $c->id ?>">
-            <img src="/images2/placeholder-icon.gif" />
+            <img src="https://static.tripfab.com/images2/placeholder-icon.gif" />
             <span><?= $c->title ?></span></a></li>
             <?php endforeach ?>
         </ul>

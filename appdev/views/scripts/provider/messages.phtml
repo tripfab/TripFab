@@ -38,7 +38,7 @@
                         <span class="number"><?= $message->msgcount ?></span>
                         <div>
 	                        <input type="checkbox" name="message_id" class="message_id" value="<?= $message->id ?>" />                        
-                            <img alt="" src="/images/cleardot.gif" class="star">
+                            <img alt="" src="https://static.tripfab.com/images/cleardot.gif" class="star">
                             <?php $image = (!empty($message->wimage)) ? $message->wimage : '/images/default-profile.gif' ?>
                             <?= $this->thumbnail(47, $image, 'user', '1:1') ?>
                         </div>
@@ -54,7 +54,7 @@
                         <span class="number"><?= $message->msgcount ?></span>
                         <div>
                             <input type="checkbox" name="message_id" class="message_id" value="<?= $message->id ?>" />
-                            <img alt="" src="/images/cleardot.gif" class="star">
+                            <img alt="" src="https://static.tripfab.com/images/cleardot.gif" class="star">
                             <?php $image = (!empty($message->simage)) ? $message->simage : '/images/default-profile.gif' ?>
                             <?= $this->thumbnail(47, $image, 'user', '1:1') ?>
                         </div>

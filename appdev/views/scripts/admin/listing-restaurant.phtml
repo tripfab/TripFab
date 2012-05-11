@@ -57,7 +57,7 @@
                             <h2><?= $this->listing->title ?> <a href="/admin/listings/edit/<?= $this->listing->id ?>" class="link1">Edit Name</a></h2>
                             <?php if(!is_null($this->city) or !is_null($this->country)): ?>
                             <span class="location"><em></em><strong><?= $this->city->title ?>,</strong> <?= $this->country->title ?> 
-                            <img src="/images6/flag<?= strtoupper($this->country->code) ?>.png" width="" height="" alt="" /></span>
+                            <img src="https://static.tripfab.com/images6/flag<?= strtoupper($this->country->code) ?>.png" width="" height="" alt="" /></span>
                             <?php else: ?>
 							<span class="location"><em></em><strong>Unknown Location. </strong>
                             <a href="/admin/listings/edit/<?= $this->listing->id ?>" class="link1">Set location</a> </span>
@@ -118,7 +118,7 @@
                                         <?php $class = ($j == 0) ? 'active' : '' ?>
                                         <a class="<?= $class ?>" href="#img<?= $j ?>"><?= $this->thumbnail(65, $pic->url, '', '1:1') ?></a>
                                         <?php else: ?>
-                                        <img src="/images2/empty-small-photo.png" width="65" height="65" />
+                                        <img src="https://static.tripfab.com/images2/empty-small-photo.png" width="65" height="65" />
                                         <?php endif ?>
                                         <?php endfor ?>
                                     </div>
@@ -150,7 +150,7 @@
                             </div><!--CONT-->
                         </div><!--MAP-->
                         <div class="location">
-                            <img src="/images6/map_<?= strtolower($this->country->code) ?>.png" class="country" width="45" height="43" alt="" />
+                            <img src="https://static.tripfab.com/images6/map_<?= strtolower($this->country->code) ?>.png" class="country" width="45" height="43" alt="" />
                             <p><strong>Location</strong> <?= $this->listing->address ?></p>
                             <div class="clear"></div>
                         </div><!--LOCATION-->

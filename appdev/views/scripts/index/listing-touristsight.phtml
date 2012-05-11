@@ -46,7 +46,7 @@
                         <div class="info">
                             <h2><?= $this->listing->title ?></h2>
                             <span class="location"><em></em><strong><?= $this->city->title ?>,</strong> <?= $this->country->title ?>
-                            <img src="/images6/flag<?= strtoupper($this->country->code) ?>.png" width="" height="" alt="" /></span>
+                            <img src="https://static.tripfab.com/images6/flag<?= strtoupper($this->country->code) ?>.png" width="" height="" alt="" /></span>
 							<?= $this->partial('partials/addtomytrip.phtml', array(
                                     'user' => $this->user,
                                     'trips' => $this->trips,
@@ -95,7 +95,7 @@
                             			<a rel="group1" title="<?= $pic->location ?>" class="<?= $class ?> lbc" href="#imgs<?= $j ?>" data-tip="#small<?= $j ?>"><?= $this->thumbnail(65, $pic->url, '', '1:1') ?></a>
                             		</li>
                             		<?php else: ?>
-                            		<li><img src="/images2/empty-small-photo.png" width="65" height="65" /></li>
+                            		<li><img src="https://static.tripfab.com/images2/empty-small-photo.png" width="65" height="65" /></li>
                             		<?php endif ?>
                             		<?php endfor ?>
                             	<?php endfor ?>
@@ -121,7 +121,7 @@
                         </div><!--MAP-->
                         <?php if(!empty($this->listing->address)): ?>
                         <div class="location">
-                            <img src="/images6/map_<?= strtolower($this->country->code) ?>.png" class="country" width="45" height="43" alt="" />
+                            <img src="https://static.tripfab.com/images6/map_<?= strtolower($this->country->code) ?>.png" class="country" width="45" height="43" alt="" />
                             <p><strong>Location</strong> <?= $this->listing->address ?></p>
                             <div class="clear"></div>
                         </div><!--LOCATION-->

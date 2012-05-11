@@ -64,13 +64,13 @@
                         	<?php foreach($this->validate as $key => $val): ?>
                             <?php if($val['done']): ?>
                             <li class="done">
-                                <img src="/images2/cleardot.gif" alt="" />
+                                <img src="https://static.tripfab.com/images2/cleardot.gif" alt="" />
                                 <span><?= $val['label'] ?></span>
                                 <?= $val['desription'] ?>
                             </li>
                             <?php else: ?>
                             <li>
-                                <img src="/images2/cleardot.gif" alt="" />
+                                <img src="https://static.tripfab.com/images2/cleardot.gif" alt="" />
                                 <?php if($key == "profile"): ?>
                                 <a href="<?= $val['url'] ?>"><?= $val['label'] ?></a>
                                 <?php else: ?>

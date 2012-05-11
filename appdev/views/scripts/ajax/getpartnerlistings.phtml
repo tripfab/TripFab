@@ -23,7 +23,7 @@
 	<div class="lstng <?= $statuses[$listing->status] ?> listing<?= $listing->id ?>" <?= ($listing->status == 0) ? 'data-id="'.$listing->id.'"' : '' ?> >
 		<div class="left">
 			<?= $this->thumbnail(97, $listing->image, '','1:1'); ?>
-			<h2><a href="/provider/listings/edit/<?= $listing->id ?>"><img class="listing<?= $listing->main_type ?>" src="/images2/cleardot.gif" alt="" /><?= $listing->title ?></a></h2>
+			<h2><a href="/provider/listings/edit/<?= $listing->id ?>"><img class="listing<?= $listing->main_type ?>" src="https://static.tripfab.com/images2/cleardot.gif" alt="" /><?= $listing->title ?></a></h2>
 			<p><?= stripslashes($listing->description) ?></p>
 		</div><!-- closes left -->
 		<div class="right">
@@ -37,7 +37,7 @@
 				<?php endif ?>
 				<li class="edit"><a href="/provider/listings/edit/<?= $listing->id ?>" class="btn-10"><span>Edit Listing</span></a></li>
 				<li class="preferences">
-					<a href="" class="btn-10"><span><img src="/images2/cleardot.gif" /></span></a>
+					<a href="" class="btn-10"><span><img src="https://static.tripfab.com/images2/cleardot.gif" /></span></a>
 					<ul>
 						<li><a target="_blank" href="/provider/listings/preview/<?= $listing->id ?>">View Preview</a></li>
 						<li><a href="#listing_delete_<?= $listing->id ?>" class="lb">Delete Listing</a></li>
@@ -95,7 +95,7 @@
 	</div><!-- closes sub-ttl -->
 </div>
 <div class="empty-container">
-	<img src="/images/empty-1.png" alt="" /><br />
+	<img src="https://static.tripfab.com/images/empty-1.png" alt="" /><br />
     <?php if($page == 1): ?>
 	There are no listings in this section :(
     <?php else: ?>
@@ -130,7 +130,7 @@
                 <li class="select">
                 	<form method="post" action="/en-US/provider/listings/new">
                         <a href="" onclick="$(this).parents('form').submit(); return false;">
-                            <span><img src="/images2/ico-105.png" width="35" height="87" alt="" /></span>
+                            <span><img src="https://static.tripfab.com/images2/ico-105.png" width="35" height="87" alt="" /></span>
                             <h2>Activity</h2>
                             <p>Fun activities that can done: sight seeing, boat tours, guided visits, etc.</p>
                         </a>
@@ -142,7 +142,7 @@
                 <li>
                 	<form method="post" action="/en-US/provider/listings/new">
                         <a href="" onclick="$(this).parents('form').submit(); return false;">
-                            <span><img src="/images2/ico-106.png" width="35" height="87" alt="" /></span>
+                            <span><img src="https://static.tripfab.com/images2/ico-106.png" width="35" height="87" alt="" /></span>
                             <h2>Hotel</h2>
                             <p>Types of rooms and accomodations available, amenities included, etc.</p>
                         </a>
@@ -154,7 +154,7 @@
                 <li>
                 	<form method="post" action="/en-US/provider/listings/new">
                         <a href="" onclick="$(this).parents('form').submit(); return false;">
-                            <span><img src="/images2/ico-107.png" width="35" height="87" alt="" /></span>
+                            <span><img src="https://static.tripfab.com/images2/ico-107.png" width="35" height="87" alt="" /></span>
                             <h2>Restaurant</h2>
                             <p>Types of cuisine, specials and dining options available.</p>
                         </a>
@@ -166,7 +166,7 @@
                 <li>
                 	<form method="post" action="/en-US/provider/listings/new">
                         <a href="" onclick="$(this).parents('form').submit(); return false;">
-                            <span><img src="/images2/ico-108.png" width="35" height="87" alt="" /></span>
+                            <span><img src="https://static.tripfab.com/images2/ico-108.png" width="35" height="87" alt="" /></span>
                             <h2>Entertainment</h2>
                             <p>Shows, concerts, events and activities that visitors can experience.</p>
                         </a>
@@ -178,7 +178,7 @@
                 <li>
                 	<form method="post" action="/en-US/provider/listings/new">
                         <a href="" onclick="$(this).parents('form').submit(); return false;">
-                            <span><img src="/images2/ico-109.png" width="35" height="87" alt="" /></span>
+                            <span><img src="https://static.tripfab.com/images2/ico-109.png" width="35" height="87" alt="" /></span>
                             <h2>Tourist Sight</h2>
                             <p>Impressive locations, sceneries and places that visitors will enjoy.</p>
                         </a>
@@ -195,7 +195,7 @@
         		<li class="select">
         			<form method="post" action="/en-US/provider/listings/new">
 	        			<a href="" onclick="$(this).parents('form').submit(); return false;">
-	        				<span><img src="/images2/ico-105.png" width="35" height="87" alt="" /></span>
+	        				<span><img src="https://static.tripfab.com/images2/ico-105.png" width="35" height="87" alt="" /></span>
 	        				<h2>Activity</h2>
 	        				<p>Fun activities that can done: sight seeing, boat tours, guided visits, etc.</p>
 	        			</a>
@@ -207,7 +207,7 @@
         		<li>
         			<form method="post" action="/en-US/provider/listings/new">
 	        			<a href="" onclick="$(this).parents('form').submit(); return false;">
-	        				<span><img src="/images2/ico-106.png" width="35" height="87" alt="" /></span>
+	        				<span><img src="https://static.tripfab.com/images2/ico-106.png" width="35" height="87" alt="" /></span>
 	        				<h2>Hotel</h2>
 	        				<p>Types of rooms and accomodations available, amenities included, etc.</p>
 	        				<input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
@@ -219,7 +219,7 @@
         		<li>
         			<form method="post" action="/en-US/provider/listings/new">
 	        			<a href="" onclick="$(this).parents('form').submit(); return false;">
-	        				<span><img src="/images2/ico-107.png" width="35" height="87" alt="" /></span>
+	        				<span><img src="https://static.tripfab.com/images2/ico-107.png" width="35" height="87" alt="" /></span>
 	        				<h2>Restaurant</h2>
 	        				<p>Types of cuisine, specials and dining options available.</p>
 	        			</a>
@@ -231,7 +231,7 @@
         		<li>
         			<form method="post" action="/en-US/provider/listings/new">
 	        			<a href="" onclick="$(this).parents('form').submit(); return false;">
-	        				<span><img src="/images2/ico-108.png" width="35" height="87" alt="" /></span>
+	        				<span><img src="https://static.tripfab.com/images2/ico-108.png" width="35" height="87" alt="" /></span>
 	        				<h2>Entertainment</h2>
 	        				<p>Shows, concerts, events and activities that visitors can experience.</p>
 	        			</a>
@@ -243,7 +243,7 @@
         		<li>
         			<form method="post" action="/en-US/provider/listings/new">
 	        			<a href="" onclick="$(this).parents('form').submit(); return false;">
-	        				<span><img src="/images2/ico-109.png" width="35" height="87" alt="" /></span>
+	        				<span><img src="https://static.tripfab.com/images2/ico-109.png" width="35" height="87" alt="" /></span>
 	        				<h2>Tourist Sight</h2>
 	        				<p>Impressive locations, sceneries and places that visitors will enjoy.</p>
 	        			</a>

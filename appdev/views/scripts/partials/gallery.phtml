@@ -46,12 +46,12 @@
         <?php $class = ($i == 0) ? 'active' : ''; ?>
         <li class="<?= $class ?>"><a href="#pic<?= $pic->id ?>"><?= $this->thumbnail(65, $pic->url); ?></a></li>
         <?php else: ?>
-        <li><a><img src="/images2/empty-small-photo.png" /></a></li>
+        <li><a><img src="https://static.tripfab.com/images2/empty-small-photo.png" /></a></li>
         <?php endif ?>
         <?php endfor ?>
         <?php else: ?>
         <?php for($i=0;$i<10;$i++): ?>
-        <li class="active"><a><img src="/images2/empty-small-photo.png" /></a></li>
+        <li class="active"><a><img src="https://static.tripfab.com/images2/empty-small-photo.png" /></a></li>
         <?php endfor ?>
         <?php endif ?>
     </ul>
@@ -94,7 +94,7 @@
     <?php endforeach ?>
     <?php else: ?>
     <div id="pic1" class="img-wrapper active">
-    <a href="/provider/listings/photos/<?= $this->listing->id ?>"><img src="/images2/empty-main-photo.gif" /></a>
+    <a href="/provider/listings/photos/<?= $this->listing->id ?>"><img src="https://static.tripfab.com/images2/empty-main-photo.gif" /></a>
     <p>The description goes here</p>
     </div>
     <?php endif ?>
@@ -107,12 +107,12 @@
         <?php $class = ($i == 0) ? 'active' : ''; ?>
         <li class="<?= $class ?>"><a href="#pic<?= $pic->id ?>"><?= $this->thumbnail(65, $pic->url); ?></a></li>
         <?php else: ?>
-        <li><a><img src="/images2/empty-small-photo.png" /></a></li>
+        <li><a><img src="https://static.tripfab.com/images2/empty-small-photo.png" /></a></li>
         <?php endif ?>
         <?php endfor ?>
         <?php else: ?>
         <?php for($i=0;$i<10;$i++): ?>
-        <li class="active"><a><img src="/images2/empty-small-photo.png" /></a></li>
+        <li class="active"><a><img src="https://static.tripfab.com/images2/empty-small-photo.png" /></a></li>
         <?php endfor ?>
         <?php endif ?>
     </ul>

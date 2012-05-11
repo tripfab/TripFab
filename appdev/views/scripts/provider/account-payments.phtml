@@ -24,7 +24,7 @@
             <div id="b_accounts">
             	<?php foreach($this->accounts as $a): ?>
                 <div class="each"> 
-                	<span class="type"><img src="/images2/bank-bac.png" width="41" height="31" alt="" /> <?= $this->banks[$a->bank_id]['name'] ?></span>
+                	<span class="type"><img src="https://static.tripfab.com/images2/bank-bac.png" width="41" height="31" alt="" /> <?= $this->banks[$a->bank_id]['name'] ?></span>
                     <span class="number">Account Name <strong><?= $a->holder ?></strong></span> 
                     <span class="expiration">Account Number<strong>*****************</strong></span> 
                     <a class="delete lbc" href="#delete_card_<?= $a->id ?>">Delete Account</a> 

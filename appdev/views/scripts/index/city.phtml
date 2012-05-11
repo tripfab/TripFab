@@ -95,25 +95,25 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
                     <?php $class.= ($i == (count($this->categories) - 1)) ? 'last' : ''; ?>
                     <li class="item-<?= $ii ?> <?= $class ?>">
                     <a data-cat="<?= $_cat ?>" href="#/<?= $_cat ?>">
-                    <em><img src="/images2/cleardot.gif" alt="" />
+                    <em><img src="https://static.tripfab.com/images2/cleardot.gif" alt="" />
                     <?= $category['name'] ?></em><span><?= $this->ls_count[$category['id']] ?></span></a>
                     </li>
                     <?php $ii++ ?>
                     <?php endforeach ?>
                 </ul>
                 <div class="widget slider">
-                    <h4><img src="/images2/cleardot.gif" alt="" />Price Per Person</h4>
+                    <h4><img src="https://static.tripfab.com/images2/cleardot.gif" alt="" />Price Per Person</h4>
                     <span id="value-4">Free - $1000</span>
                     <div class="bg">
 	                    <div id="slider-4"></div>
                     </div>
                 </div><!-- closes widget -->
                 <div class="widget destinations listing-2">
-                	<h4 class="location"><img src="/images2/cleardot.gif" alt="" />CITIES</h4>
+                	<h4 class="location"><img src="https://static.tripfab.com/images2/cleardot.gif" alt="" />CITIES</h4>
                 </div>
                 <?php foreach($this->subcats as $_cat => $c): ?>
                 <div rel="#/<?= $_cat ?>" class="widget cats destinations listing-2">
-                    <h4 class="categories"><img src="/images2/cleardot.gif" alt="" />Categories</h4>
+                    <h4 class="categories"><img src="https://static.tripfab.com/images2/cleardot.gif" alt="" />Categories</h4>
                     <?php foreach($c as $sc): ?>
                     <p><input type="checkbox" class="noclean" name="cat[<?= $sc->id ?>]" value="<?= $sc->id ?>" /><label><?= $sc->name ?></label></p>
                     <?php endforeach ?>

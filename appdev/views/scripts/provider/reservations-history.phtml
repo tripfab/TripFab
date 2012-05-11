@@ -38,7 +38,7 @@
                         <tr>
                             <td><?= $reserve->code ?></td>
                             <td><?= $reserve->user_name ?></td>
-                            <td><img class="card-3" src="images/cleardot.gif" alt=""/><?= $reserve->method ?></td>
+                            <td><img class="card-3" src="https://static.tripfab.com/images/cleardot.gif" alt=""/><?= $reserve->method ?></td>
                             <td>$<?= $reserve->ammount ?></td>
                             <td><?= date('d/m/Y', strtotime($reserve->checkin)) ?></td>
                             <td><a href="/cart/invoice/<?= $reserve->id ?>">See details</a></td>
@@ -49,7 +49,7 @@
             </div><!-- closes reservations -->
             <?php else: ?>
             <div class="empty-container">
-                <img src="/images/empty-7.png" alt="" /><br />
+                <img src="https://static.tripfab.com/images/empty-7.png" alt="" /><br />
                 There are no incoming reservations :(
             </div><!-- closes empty -->            
             <?php endif ?>
