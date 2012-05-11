@@ -39,58 +39,67 @@ $(document).ready(function() {
         } else if($('input[name=account]:checked').val() == 'new') { 
             $continue = true;
             if($('.cname', this).val() == '') {
-				$item = $('.cname',this).parents('.item');
-				$item.addClass('required');
-				$('p span.alert', $item).remove();
-				$('p strong',$item).before('<span class="alert"></span>');
-				$continue = false;
+                $item = $('.cname',this).parents('.item');
+                $item.addClass('required');
+                $('p span.alert', $item).remove();
+                $('p strong',$item).before('<span class="alert"></span>');
+                $('#js_error_messages').append('<li class="js_cname">- Credit Card Holder Name is required');
+                $continue = false;
             } else {
-				$item = $('.cname',this).parents('.item');
-				$item.removeClass('required');
-				$('p span.alert', $item).remove();
-			}
+                $item = $('.cname',this).parents('.item');
+                $item.removeClass('required');
+                $('p span.alert', $item).remove();
+                $('#js_error_messages .js_cname').remove();
+            }
 			
             if($('.cnum', this).val() == '') {
-				$item = $('.cnum',this).parents('.item');
-				$item.addClass('required');
-				$('p span.alert', $item).remove();
-				$('p strong',$item).before('<span class="alert"></span>');
-				$continue = false;
+                $item = $('.cnum',this).parents('.item');
+                $item.addClass('required');
+                $('p span.alert', $item).remove();
+                $('p strong',$item).before('<span class="alert"></span>');
+                $('#js_error_messages').append('<li class="js_cnum">- Credit Card Number is required');
+                $continue = false;
             } else {
-				$item = $('.cnum',this).parents('.item');
-				$item.removeClass('required');
-				$('p span.alert', $item).remove();
-			}
+                $item = $('.cnum',this).parents('.item');
+                $item.removeClass('required');
+                $('p span.alert', $item).remove();
+                $('#js_error_messages .js_cnum').remove();
+            }
 			
 			
             if(($('.cmonth', this).val() == '') || ($('.cyear', this).val() == '')) {
-				$item = $('.cmonth',this).parents('.item');
-				$item.addClass('required');
-				$('p span.alert', $item).remove();
-				$('p strong',$item).before('<span class="alert"></span>');
-				$continue = false;
+                $item = $('.cmonth',this).parents('.item');
+                $item.addClass('required');
+                $('p span.alert', $item).remove();
+                $('p strong',$item).before('<span class="alert"></span>');
+                $('#js_error_messages').append('<li class="js_cmonth">- Expiration Date is required');
+                $continue = false;
             } else {
-				$item = $('.cmonth',this).parents('.item');
-				$item.removeClass('required');
-				$('p span.alert', $item).remove();
-			}
+                $item = $('.cmonth',this).parents('.item');
+                $item.removeClass('required');
+                $('p span.alert', $item).remove();
+                $('#js_error_messages .js_cmonth').remove();
+            }
 			
 			
             if($('.ccode', this).val() == '') {
-				$item = $('.ccode',this).parents('.item');
-				$item.addClass('required');
-				$('p span.alert', $item).remove();
-				$('p strong',$item).before('<span class="alert"></span>')
-				$continue = false;
+                $item = $('.ccode',this).parents('.item');
+                $item.addClass('required');
+                $('p span.alert', $item).remove();
+                $('p strong',$item).before('<span class="alert"></span>')
+                $('#js_error_messages').append('<li class="js_ccode">- Security Code is required');
+                $continue = false;
             } else {
-				$item = $('.ccode',this).parents('.item');
-				$item.removeClass('required');
-				$('p span.alert', $item).remove();
-			}
+                $item = $('.ccode',this).parents('.item');
+                $item.removeClass('required');
+                $('p span.alert', $item).remove();
+                $('#js_error_messages .js_ccode').remove();
+            }
 			
-			console.log($continue);
+            console.log($continue);
 			
-			if($continue) {
+            if($continue) {
+                $('.js_errors_container').addClass('hidden');
                 Stripe.setPublishableKey(PUBLIC_KEY);
                 $data = {
                     number:    $('.cnum', this).val(),
@@ -104,8 +113,9 @@ $(document).ready(function() {
                 // prevent the form from submitting with the default action
                 return false;
             } else {
-				return false;
-			}
+                $('.js_errors_container').removeClass('hidden');
+                return false;
+            }
         } else 
             return true;
     });

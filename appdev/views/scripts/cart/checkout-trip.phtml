@@ -24,16 +24,11 @@
                         <span class="label"><?= ($this->trip->days > 1) ? $this->trip->days.' Days' : '1 Day' ?> Trip<em></em></span> 
                         <?= $this->thumbnail(array('width'=>650,'height'=>138), $this->trip->image, '', '650:138') ?>
                     </div><!--HEADER_CHECKOUT-->
-                    <div class="warnings">
-                    	<h3>The following information is missing or wrong</h3>
-                    	<ul>
-                    		<li>- The Credit Card Number required</li>
-                    		<li>- The Cardholder Name is wrong</li>
-                    		<li>- The Expiration Date is wrong</li>
-                    		<li>- The Security Code is wrong</li>
-                    		<li>- Please accept the terms and conditions</li>
-                    	</ul>
-                    </div><!--WARNINGS-->
+                	<div class="warnings js_errors_container hidden">
+                		<h3>The following information is missing or wrong</h3>
+                		<ul id="js_error_messages">
+                		</ul>
+                	</div><!--WARNINGS-->
                     <form id="checkout" action="/en-US/cart/charge" method="post">
                         <div class="checkout-item first">
                             <div class="ttl"><span>1</span><strong>How it works</strong></div>
