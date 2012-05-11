@@ -4,15 +4,15 @@
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
     <title><?= $this->trip->title ?>, <?= $this->trip->country ?> : Overview | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" /> 
-    <link type="text/css" rel="stylesheet" href="/css6/common.css" />       
-	<link type="text/css" rel="stylesheet" href="/css2/index/index.css" />
-	<link type="text/css" rel="stylesheet" href="/css6/calendar.css" />
-	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
-	<link rel="stylesheet" href="/css2/datepicker.css" type="text/css" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" /> 
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />       
+	<link type="text/css" rel="stylesheet" href="/css2/index/index.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+	<link rel="stylesheet" href="/css2/datepicker.css?v=<?= $this->cssVC ?>" type="text/css" />
 	<link rel="icon" type="image/png" href="/images3/favicon.png" />
-	<!--[if IE 7]><link type="text/css" rel="stylesheet" href="css2/ie.css" /><![endif]-->
+	<!--[if IE 7]><link type="text/css" rel="stylesheet" href="css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1 profile">
@@ -367,9 +367,9 @@
 		</div><!-- closes dates -->
     </div>
 </div><!--HIDDEN-->
-<script type="text/javascript" src="/js2/jquery.js"></script>
-<script type="text/javascript" src="/js2/datepicker.js"></script>
-<script type="text/javascript" src="/js2/trips/view.js"></script>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/datepicker.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/trips/view.js?v=<?= $this->cssVC ?>"></script>
 <input type="hidden" id="tripDates" value="<?= $this->trip->days ?>" />
 </body>
 </html>

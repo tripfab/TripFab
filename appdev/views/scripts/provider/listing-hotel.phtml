@@ -4,11 +4,11 @@
 	<meta content="noindex,nofollow" name="robots" />
 	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
     <title><?= $this->listing->title ?> - <?= $this->user->name ?> | Tripfab.com</title>
-	<link type="text/css" rel="stylesheet" href="/css6/reset.css" />
-	<link type="text/css" rel="stylesheet" href="/css6/common.css" />
-	<link type="text/css" rel="stylesheet" href="/css6/section1.css" />
-	<link type="text/css" rel="stylesheet" href="/css6/calendar.css" />	
-	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
+	<link type="text/css" rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/section1.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />	
+	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
 </head>
 <body class="bg_hl">
 <div id="wp_all">
@@ -634,9 +634,9 @@
 <input type="hidden" value="<?= $this->listing->title ?>" name="listtitle" />
 <input type="hidden" value="<?php foreach($this->disabledDates as $d): ?><?= $d ?>,<?php endforeach ?>" name="diableddates" />
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript" src="/js2/jquery.js"></script>
-<script type="text/javascript" src="/js2/jquery.popupWindow.js"></script>
-<script type="text/javascript" src="/js2/index/listing-hotel.js"></script>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/jquery.popupWindow.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/index/listing-hotel.js?v=<?= $this->cssVC ?>"></script>
 <style type="text/css">
 #mapcanvas {
 	width:638px;

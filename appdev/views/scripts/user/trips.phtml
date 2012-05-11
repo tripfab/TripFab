@@ -3,14 +3,14 @@
 <head>
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
     <title><?= $this->user->name ?> - Trips | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/lightboxes.css" />
-    <link type="text/css" rel="stylesheet" href="/css6/calendar.css" />
-	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
-    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/lightboxes.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1">
@@ -217,7 +217,7 @@
     <?php endif ?>
     <?php endforeach ?>
 </div>
-<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {
@@ -281,6 +281,6 @@
 		<?php endif ?>
     });
 </script>
-<script type="text/javascript" src="/js2/index/listing-hotel.js"></script>
+<script type="text/javascript" src="/js2/index/listing-hotel.js?v=<?= $this->cssVC ?>"></script>
 </body>
 </html>

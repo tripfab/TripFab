@@ -4,11 +4,11 @@
 	<meta content="noindex,nofollow" name="robots" />
 	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
 	<title>Cristian Andrés  : Change Password | Tripfab.com</title>
-	<link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-	<link type="text/css" rel="stylesheet" href="/css2/all.css" />
-	<link type="text/css" rel="stylesheet" href="/css2/common.css" />
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css2/common.css?v=<?= $this->cssVC ?>" />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js?v=<?= $this->cssVC ?>"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js?v=<?= $this->cssVC ?>"></script>
 	<script type="text/javascript">
         jQuery(document).ready(function(){
 			$('.accordion').accordion({
@@ -395,7 +395,7 @@
     	<!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
-<script type="text/javascript" src="/js2/jquery.js"></script>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function(){
 		$('.accordion').accordion({
