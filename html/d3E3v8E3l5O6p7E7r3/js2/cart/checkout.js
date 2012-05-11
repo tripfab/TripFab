@@ -42,7 +42,7 @@ $(document).ready(function() {
 				$item = $('.cname',this).parents('.item');
 				$item.addClass('required');
 				$('p span.alert', $item).remove();
-				$('p strong',$item).before('<span class="alert">Card Holder cannot be empty</span>');
+				$('p strong',$item).before('<span class="alert"></span>');
 				$continue = false;
             } else {
 				$item = $('.cname',this).parents('.item');
@@ -54,7 +54,7 @@ $(document).ready(function() {
 				$item = $('.cnum',this).parents('.item');
 				$item.addClass('required');
 				$('p span.alert', $item).remove();
-				$('p strong',$item).before('<span class="alert">Credit Card cannot be empty</span>');
+				$('p strong',$item).before('<span class="alert"></span>');
 				$continue = false;
             } else {
 				$item = $('.cnum',this).parents('.item');
@@ -67,7 +67,7 @@ $(document).ready(function() {
 				$item = $('.cmonth',this).parents('.item');
 				$item.addClass('required');
 				$('p span.alert', $item).remove();
-				$('p strong',$item).before('<span class="alert">Incorrect expiration date</span>');
+				$('p strong',$item).before('<span class="alert"></span>');
 				$continue = false;
             } else {
 				$item = $('.cmonth',this).parents('.item');
@@ -80,7 +80,7 @@ $(document).ready(function() {
 				$item = $('.ccode',this).parents('.item');
 				$item.addClass('required');
 				$('p span.alert', $item).remove();
-				$('p strong',$item).before('<span class="alert">Security Code cannot be empty</span>')
+				$('p strong',$item).before('<span class="alert"></span>')
 				$continue = false;
             } else {
 				$item = $('.ccode',this).parents('.item');

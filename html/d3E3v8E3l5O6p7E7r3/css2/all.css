@@ -3359,7 +3359,7 @@ ul.reviews li > div div.meta em.red {
 	padding: 25px 0 0 25px;
 	background: url(https://developer.tripfab.com/images2/g-54.png) repeat-x left top;
 	position: relative;
-	/*overflow: hidden;*/
+	overflow: hidden;
 }
 .checkout-item.first {
 	background: url(https://developer.tripfab.com/images2/g-54.png) repeat-x left -1px;
@@ -3499,7 +3499,6 @@ ul.reviews li > div div.meta em.red {
 .payment-item {
 	border-bottom: 1px dotted #b2b2b2;
 	line-height: 39px;
-	overflow: hidden;
 	padding-left: 30px;
 	width: 550px;
 }
@@ -3534,7 +3533,6 @@ ul.reviews li > div div.meta em.red {
 	display: block;
 }
 .new-card {
-	overflow: hidden;
 	border-top: 1px solid #dbdbdb;
 	padding-bottom: 20px;
 	float: left;
@@ -3596,16 +3594,8 @@ ul.reviews li > div div.meta em.red {
 	left: -6px;
 }
 .payment-item .new-card .item.required {
-	padding: 1px 0;
-	height: 68px;
+
 	overflow: visible !important;
-}
-.payment-item .new-card .item.required > div{
-    height: 68px;
-    left: -33px;
-    padding-left: 33px;
-    position: absolute;
-    width: 100%;
 }
 .payment-item .new-card .item.required .alert {
 	color: #f26522;
@@ -3615,18 +3605,13 @@ ul.reviews li > div div.meta em.red {
 	height: 16px;
 	display: block;
 	margin-bottom: 5px;
+	position: absolute;
+	right: -30px;
+	top: 20px;
 }
-.payment-item .new-card .item.required p {
-	padding-top:10px;
-}
-.payment-item .new-card .item.required select {
-	margin: 39px 10px 0 20px;
-}
-.payment-item .new-card .item.required input {
-	margin: 29px 10px 0 0;
+.payment-item .new-card .item.required input[type="text"] {
 	border: 1px solid #f26522;
 }
-
 
 .payment-item .new-card input[type="text"] {
 	width: 240px;
@@ -3948,6 +3933,7 @@ ul.reviews li > div div.meta em.red {
     -webkit-border-radius: 0px 0px 4px 4px;
     border-radius: 0px 0px 4px 4px;
     behavior: url(/PIE.htc);
+    clear: both;
 }
 
 .checkout-wrapper .bottom span {
