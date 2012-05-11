@@ -1988,6 +1988,9 @@ class AjaxController extends Zend_Controller_Action
                 $list = $listings->fetchRow("id = {$listing->listing_id}");
                 
                 $trip->price = $trip->price - $list->price;
+                if($trip->price < 0) {
+                    $trip->price = 0;
+                }
                 $trip->save();
                 
                 if($listing->time == 4) {
