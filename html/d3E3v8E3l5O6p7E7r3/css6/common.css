@@ -473,7 +473,7 @@
 /*- FOOTER STYLES---------------------------------------------------------------*/
 
 #footer {
-	height: 88px;
+	height: 150px;
 	background:url(https://developer.tripfab.com/images2/home-sep5.png) no-repeat center top #2a2a2a;
 	margin-top: 30px;
 }
@@ -491,37 +491,99 @@
 	top: -3px;
 	left: 427px ;
 }
-#footer p {
-	color: #c2c2c2;
-	width: 390px;
+#footer .left {
+	width: 280px;
 	float: left;
-	background: url(https://developer.tripfab.com/images2/home-logo2.png) no-repeat left top;
-	padding-left: 50px;
-	margin-top: 30px;
-	height: 50px;
-	font: normal 11px Helvetica;
 }
-#footer p strong {
+#footer .number {
+	width: 226px;
+	height: 51px;
+	background-color: #202020;
+	font: bold 14px/60px Helvetica;
+	color: #FFF;
+	margin-bottom: 8px;
+} 
+#footer .number span {
 	display: block;
-	font-size: 12px;
-	margin-bottom: 5px;
-}
-#footer ul {
-	float: right;
-	margin: 36px 0 0 0;
-}
-#footer ul li {
+	background: url(https://developer.tripfab.com/images6/footerIcons.png) no-repeat 0 0;
+	width: 25px;
+	height: 21px;
 	float: left;
-	list-style: none;
-	margin-left: 15px;
+	margin: 19px 5px 0 10px;
 }
-#footer ul li a {
+#footer .left > span {
+	font: normal 11px Helvetica;
 	color: #c2c2c2;
-	font: bold 11px Helvetica;
 }
-#footer ul li a:hover {
-	color: #ffffff;
+#footer .right {
+	float: right;
+	width: 560px;
+	padding-top: 20px;
 }
+#footer .right ul {
+	float: right;
+	padding-right: 70px;
+	margin-left: 17px;
+}
+#footer .right ul li {
+	color: #898989;
+	font: normal 11px Helvetica;
+	margin-bottom: 8px;
+}
+#footer .right ul li a {
+	color: #c2c2c2;
+	font: normal 12px Helvetica;
+}
+#footer .right ul li a:hover {
+	color: #FFF;
+}
+#footer .right ul li a em {
+	display: block;
+	float: left;
+	background: url(https://developer.tripfab.com/images6/footerIcons.png) no-repeat 0 0;
+	width: 17px;
+	height: 15px;
+}
+#footer .right ul li a .tw {
+	background-position: -51px -6px;
+}
+#footer .right ul li:hover a .tw {
+	background-position: -79px -6px;
+}
+#footer .right ul li a .fb {
+	background-position: -51px -27px;
+}
+#footer .right ul li:hover a .fb {
+	background-position: -79px -27px;
+}
+#footer .right ul li a .gl {
+	background-position: -51px -47px;
+}
+#footer .right ul li:hover a .gl {
+	background-position: -79px -47px;
+}
+
+
+#footer .bot {
+	clear: both;
+	background: url(https://developer.tripfab.com/images6/footerSep.png) no-repeat center top;
+	height: 44px;
+	font: bold 12px/44px Helvetica;
+	color: #c2c2c2;
+	text-align: center;
+}
+#footer .bot em {
+	background: url(https://developer.tripfab.com/images6/footerIcons.png) no-repeat 0 -40px;
+	width: 24px;
+	height: 23px;
+	display: inline-block;
+	margin: 11px 0 0 0;
+	float: left;
+}
+#footer .bot p {
+	width: 328px;
+	margin: 0 auto;
+} 
 /*- END FOOTER STYLES-----------------------------------------------------------*/
 /*- CONTENT WRAPPER ALL---------------------------------------------------------*/
 /*-------STICKY FOOTER DONT CHANGE IT-------*/
@@ -530,11 +592,11 @@
 	position:relative;
 }
 #wp_all #wp_content {
-	padding-bottom: 82px;
+	padding-bottom: 150px;
 }
 #wp_all #wp_footer {
 	bottom:0;
-	height: 82px;
+	height: 150px;
 	position:absolute;
 	width:100%;
 }
