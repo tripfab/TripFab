@@ -48,7 +48,7 @@ $per_night = array(
                 <a href="#" class="add been"></a>
 				<?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
             <?php else: ?>
-                <a href="/login" class="add been not"></a>
+                <a href="#signIn" class="add been not js-login"></a>
 			<?php endif ?>
             <?= $this->lazylisting(array('width'=>'241', 'height'=>'183'), $list->image, '','241:241') ?>
             <ul class="rating">
@@ -81,7 +81,7 @@ $per_night = array(
  		        <a href="#" class="add been"></a>
  				<?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
  		    <?php else: ?>
- 		        <a href="/login" class="add been not"></a>
+ 		        <a href="#signIn" class="add been not js-login"></a>
  			<?php endif ?>
  		    <?= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124') ?>
  		    
@@ -117,7 +117,7 @@ $per_night = array(
                 <a href="#" class="add been"></a>
 				<?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
             <?php else: ?>
-                <a href="/login" class="add been not"></a>
+                <a href="#signIn" class="add been not js-login"></a>
 			<?php endif ?>
             <?= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124') ?>
             <ul class="rating">

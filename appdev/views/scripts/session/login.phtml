@@ -72,24 +72,6 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
-<div class="hidden">
-	<div id="forgot">
-        <div class="lb-forgot">
-            <div class="ttl">Reset Password</div>
-            <form action="" method="post">
-                <div class="content">
-                    <p>Enter your e-mail address to have the password associated with that account reset. 
-                    A new password will be e-mailed to the address. </p>
-                    <input type="text" name="resetemail" value="Enter your e-mail" />
-                </div><!-- closes content -->
-                <div class="bottom">
-                    <input type="submit" class="btn-1" />
-                    <span onclick="$.fancybox.close()" class="btn-4">Cancel</span>				
-                </div><!-- closes bottom -->
-            </form>
-        </div><!-- closes lb-forgot -->
-    </div>
-</div>
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -100,35 +82,6 @@
 			padding: 0,
 			overlayOpacity: 0.8,
 			showCloseButton: false
-		});
-		$('#forgot form').submit(function(){
-			$form = $(this);
-			$data = { email:$('input[name=resetemail]', $form).val() };
-			if($data.email == 'Enter your e-mail' || $data.email == '') {
-				showError("Please enter your email");
-				return false;
-			}
-				
-			$.ajax({
-				url:'/ajax/resetpassword',
-				type:'post',
-				data:$data,
-				success:function(response){
-					if(response.type == 'success'){
-						$.fancybox.close();
-						showAlert(response.message);
-					} else {
-						$.fancybox.close();
-						showError(response.message);
-					}
-				},
-				error:function(){
-					$.fancybox.close();
-					showError('Something went wrong. Please try again later');
-				}
-			});
-			
-			return false;
 		});
 		$('form input').focus(function() {
 			$(this).prev('label').addClass('hide');

@@ -15,12 +15,12 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
     <?php else: ?>
     <title><?= $this->country->title ?> | Tripfab.com</title>
     <?php endif ?>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css6/common.css" />
-    <link type="text/css" rel="stylesheet" href="/css6/section1.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/index/city.css" />
-    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
-    <link href="/css6/calendar.css" rel="stylesheet" type="text/css">
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/section1.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/index/city.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+    <link href="/css6/calendar.css?v=<?= $this->cssVC ?>" rel="stylesheet" type="text/css">
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css" /><![endif]-->
     <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
     <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
@@ -29,60 +29,54 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
 <div class="w1">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>
     <div class="w2">
-    
-				<div class="sub_header" id="src_map">
-					<div class="cont">
-						<div class="top">
-							<div class="ttl">
-								<img class="country" alt="" src="https://static.tripfab.com/images6/map_cr.png" width="45" height="43">
-								<h2><?php if(!is_null($this->city)): ?>
-                                <strong><?= $this->city->title ?>,</strong>
-                                <?php endif; ?> <?= $this->country->title ?> 
-                                <img alt="" src="https://static.tripfab.com/images6/flagCR.png" width="" height=""></h2>
-								<!--<a href="" class="link1 maplink">Show Map &rarr;</a>
-								<a href="" class="link1 near">View Nearby Cities &rarr;</a>-->
-								<div class="near_cities hidden">
-									<span class="arrow"></span>
-									<ul>
-										<li class="active"><a href="">Tamarindo<span>→</span></a></li>
-										<li><a href="">Drake Bay<span>→</span></a></li>
-										<li><a href="">Jacó<span>→</span></a></li>
-										<li><a href="">Santa Teresa<span>→</span></a></li>
-										<li><a href="">Tamarindo<span>→</span></a></li>
-									</ul>
-									<ul>
-										<li><a href="">Tamarindo<span>→</span></a></li>
-										<li><a href="">Drake Bay<span>→</span></a></li>
-										<li><a href="">Jacó<span>→</span></a></li>
-										<li><a href="">Santa Teresa<span>→</span></a></li>
-										<li><a href="">Tamarindo<span>→</span></a></li>
-									</ul>
-								</div><!--NEAR_CITIES-->
-							</div><!--TTL-->
-							
-							<div class="src_bar">
-								<form action="">
-									<fieldset>
-										<input name="" value="Search" class="btn-1" type="submit">
-										<input id="citiesSearch2" placeholder="Search places" type="text">
-										<div class="clear"></div>
-									</fieldset>
-								</form>
-							</div><!--SRC_BAR-->
-							<div class="clear"></div>
-							
-						</div><!--TOP-->
-						
-						<div class="map less">
-							<div class="mapcanvas"><img src="search-result-hybrid_files/src_result-img2.png" alt="" width="" height=""></div>						
-						</div><!--MAP-->
-						
-					</div><!--CONT-->
-				</div><!--SUB_HEADER-->
-
-
-
-
+        <div class="sub_header" id="src_map">
+            <div class="cont">
+                <div class="top">
+                    <div class="ttl">
+                        <img class="country" alt="" src="https://static.tripfab.com/images6/map_cr.png" width="45" height="43">
+                        <h2><?php if(!is_null($this->city)): ?>
+                        <strong><?= $this->city->title ?>,</strong>
+                        <?php endif; ?> <?= $this->country->title ?> 
+                        <img alt="" src="https://static.tripfab.com/images6/flagCR.png" width="" height=""></h2>
+                        <!--<a href="" class="link1 maplink">Show Map &rarr;</a>
+                        <a href="" class="link1 near">View Nearby Cities &rarr;</a>-->
+                        <div class="near_cities hidden">
+                            <span class="arrow"></span>
+                            <ul>
+                                <li class="active"><a href="">Tamarindo<span>→</span></a></li>
+                                <li><a href="">Drake Bay<span>→</span></a></li>
+                                <li><a href="">Jacó<span>→</span></a></li>
+                                <li><a href="">Santa Teresa<span>→</span></a></li>
+                                <li><a href="">Tamarindo<span>→</span></a></li>
+                            </ul>
+                            <ul>
+                                <li><a href="">Tamarindo<span>→</span></a></li>
+                                <li><a href="">Drake Bay<span>→</span></a></li>
+                                <li><a href="">Jacó<span>→</span></a></li>
+                                <li><a href="">Santa Teresa<span>→</span></a></li>
+                                <li><a href="">Tamarindo<span>→</span></a></li>
+                            </ul>
+                        </div><!--NEAR_CITIES-->
+                    </div><!--TTL-->
+                    
+                    <div class="src_bar">
+                        <form action="">
+                            <fieldset>
+                                <input name="" value="Search" class="btn-1" type="submit">
+                                <input id="citiesSearch2" placeholder="Search places" type="text">
+                                <div class="clear"></div>
+                            </fieldset>
+                        </form>
+                    </div><!--SRC_BAR-->
+                    <div class="clear"></div>
+                    
+                </div><!--TOP-->
+                <div class="map less">
+                    <div class="mapcanvas"><img src="search-result-hybrid_files/src_result-img2.png" alt="" width="" height=""></div>						
+                </div><!--MAP-->
+            </div><!--CONT-->
+        </div><!--SUB_HEADER-->
+        
         <div class="main wrapper" id="search_result">
             <div class="left-sidebar">
             	<div class="scrollcontainer">

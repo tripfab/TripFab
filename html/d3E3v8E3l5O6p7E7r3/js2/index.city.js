@@ -454,3 +454,9 @@ $(function(){
         }
     }
 });
+
+$(function(){
+    $(window).bind('login_success', function(){
+        alert('asd');
+    });
+})
