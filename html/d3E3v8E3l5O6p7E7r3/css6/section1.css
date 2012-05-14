@@ -3913,12 +3913,12 @@ ul.cat-menu li.item-1 a img {
 	background: url("https://developer.tripfab.com/images6/lstng_htl_sh2.png") repeat-x scroll 0 0;
 }
 #contactUs .left .inner .single {
-	margin: 0 18px 0 22px;
+	margin: 0 30px 0 32px;
 	border-bottom: 1px solid #e8e8e8;
 	height: 54px;
 }
 #contactUs .left .inner h4 {
-	width: 223px;
+	width: 193px;
 	float: left;
 	height: 54px;
 	font: bold 13px/54px Helvetica;
@@ -3926,6 +3926,16 @@ ul.cat-menu li.item-1 a img {
 #contactUs .left .inner .option {
 	width: 385px;
 	float: right;
+}
+#contactUs .left .error_msj{
+	background: url(https://developer.tripfab.com/images6/contactUsBg.gif) repeat-x 0 0;
+	height: 37px;
+	font: bold 12px/37px Helvetica;
+	color: #f26522;
+	text-indent: 32px;
+}
+#contactUs .left .inner .option.error {
+	background: url(https://developer.tripfab.com/images6/contactUsError.gif) no-repeat right 18px;
 }
 #contactUs .left .inner .option label {
 	padding-top: 17px;
@@ -3960,8 +3970,8 @@ ul.cat-menu li.item-1 a img {
 	border: none;
 }
 #contactUs .left .inner .single textarea{
-	width: 373px;
-	height: 80px;
+	width: 345px;
+	height: 55px;
 	margin: 10px 0 0 0;
 	font: normal 13px/16px Helvetica;
 	color: #898989;
