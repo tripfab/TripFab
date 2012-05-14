@@ -14,7 +14,7 @@
 <div id="citiesAutocompleteContainer"></div>
 
 <div class="hidden">
-	<div id="signUp" class="signLog">
+	<div id="signUp" class="signLog js-div-signup">
 		<div class="top">
 			<h2>Sign up for TripFab. <span>It’s Free!</span></h2>
 			<p>You need to create an account to continue</p>
@@ -23,14 +23,14 @@
 			<a href="" class="fb"></a>		
 			<div class="contForm">
 				<em>Or</em>
-				<form method="post" action="https://developer.tripfab.com/en-US/login">
-					<input class="name" type="text" name="" value="Name" />
-					<input class="lastName" type="text" name="" value="Last Name" />
-					<input class="email" type="text" name="" value="E-mail" />
-					<input class="password" type="text" name="" value="Password" />
-					<input class="confirm" type="text" name="" value="Confirm Password" />
+				<form method="post" action="">
+					<input class="name js-input-name" type="text" name="name" placeholder="Name" value="" />
+					<input class="lastName js-input-lastname" type="text" name="lastname" placeholder="Last Name" value="" />
+					<input class="email js-input-email" type="text" name="email" placeholder="E-mail" value="" />
+					<input class="password js-input-password" id="js-password" type="password" name="password" placeholder="Password" value="" />
+					<input class="confirm js-input-confirm" type="password" name="password2" placeholder="Confirm Password" value="" />
 					<div class="cntrl">
-						<label><input type="checkbox" name="remenber" value="" /> Remember me next time</label>
+						<label><input type="checkbox" class="js-input-remember" name="remenber" value="1" /> Remember me next time</label>
 						<input type="submit" class="btn-1 noclean" value="Create Account" />
 					</div><!--CNTRL-->
 				</form>
@@ -41,35 +41,52 @@
 			</div>
 		</div><!--CONT-->
 		<div class="bottom">
-			<h6>Already an TripFab member? <a href="#signIn" class="link1 lbc">Sign In Now</a></h6>
+			<h6>Already an TripFab member? <a href="#signIn" class="link1 lbc js-login">Sign In Now</a></h6>
 		</div><!--BOTTOM-->
 	</div><!--SIGNUP-->
 	
 	
-	<div id="signIn" class="signLog">
+	<div id="signIn" class="signLog js-div-signin">
 		<div class="top">
-			<h2>Sign into your TripFab account</h2>
+			<h2>Sign in into your TripFab account</h2>
 			<p>Welcome back, we love you :)</p>
 		</div><!--TOP-->
 		<div class="cont">
-			<a href="" class="fb"></a>		
+			<a href="" class="fb js-fb-signin"></a>
 			<div class="contForm">
 				<em>Or</em>
-				<form method="post" action="https://developer.tripfab.com/en-US/login">
-					<input class="email" type="text" name="" value="E-mail" />
-					<input class="password" type="text" name="" value="Password" />
+				<form method="post" action="">
+					<input class="email js-input-email" type="text" name="email" placeholder="E-mail" value="" />
+					<input class="password js-input-password" type="password" name="password" placeholder="Password" value="" />
 					<div class="cntrl">
-						<label><input type="checkbox" name="remenber" value="" /> Remember me next time</label>
-						<input type="submit" class="btn-1 noclean" value="Create Account" />
+						<label><input type="checkbox" class="js-input-remember" name="remenber" value="1" /> Remember me next time</label>
+						<input type="submit" class="btn-1 noclean" value="Sign in" />
 					</div><!--CNTRL-->
 				</form>
 			</div><!--CONTFORM-->
 			<div class="note">
-				<p><a href="" class="link1">Forgot password?</a> </p>
+				<p><a href="#forgot" class="link1 js-forgot">Forgot password?</a> </p>
 			</div>
 		</div><!--CONT-->
 		<div class="bottom">
-			<h6>New on TripFab?<a href="#signUp" class="link1 lbc"> Sign Up Now</a></h6>
+			<h6>New on TripFab?<a href="#signUp" class="link1 lbc js-signup"> Sign Up Now</a></h6>
 		</div><!--BOTTOM-->
 	</div><!--SIGNIn-->
+    
+	<div id="forgot" class="js-div-forgot">
+        <div class="lb-forgot">
+            <div class="ttl">Reset Password</div>
+            <form action="" method="post">
+                <div class="content">
+                    <p>Enter your e-mail address to have the password associated with that account reset. 
+                    A new password will be e-mailed to the address. </p>
+                    <input type="text" name="resetemail" value="Enter your e-mail" />
+                </div><!-- closes content -->
+                <div class="bottom">
+                    <input type="submit" class="btn-1" />
+                    <span onclick="$.fancybox.close()" class="btn-4">Cancel</span>				
+                </div><!-- closes bottom -->
+            </form>
+        </div><!-- closes lb-forgot -->
+    </div>
 </div><!--HIDDEN-->

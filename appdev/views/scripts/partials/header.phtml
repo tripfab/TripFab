@@ -1,3 +1,4 @@
+<div class="js-header-container">
 <?php $path = @explode('/',$_SERVER[REQUEST_URI]) ?>
 <?php if(isset($path[2]) and $path[2] == 'trips') $class1 ='active'; ?>
 <?php if(isset($path[2]) and $path[2] == 'user' and isset($path[3]) and $path[3] == 'trips') $class2 ='active'; ?>
@@ -7,12 +8,14 @@
     <div class="wrapper"><img src="https://static.tripfab.com/images2/cleardot.gif" alt=""> 
     <span>Your changes have been saved!</span></div><!-- closes wrapper -->
 </div>
+<?php if($this->user->active != 0): ?>
 <div class="checkEmail">
 	<div class="wrapper">
-		<h2>Karina, please go to karina@gmail.com to complete your sign-up process</h2>
-		<a href="" class="btn-10">Resend E-mail</a>
+		<h2><?= $this->user->name ?>, please go to <?= $this->user->email ?> to complete your sign-up process</h2>
+		<a href="" class="btn-10 js-resend-verification">Resend E-mail</a>
 	</div><!--WRAPPER-->
 </div><!--CHECKEMAIL-->
+<?php endif ?>
 <div id="header">
     <div class="wrapper">
         <h1 class="logo"><a href="/">Tripfab</a></h1>
@@ -143,7 +146,6 @@
         		<?php endif ?>
         	<?php endif ?>
         	</div><!--LOG-->
-        	
         	<div class="top_search">
         		<form method="post" action="">
         			<fieldset>
@@ -151,9 +153,9 @@
         			</fieldset>
         		</form>
         	</div><!--TOP_SEARCH-->
-        	
         </div><!--RG-->
         <div class="clear"></div>
     </div><!-- WRAPPER -->
     <div class="overlay"></div>	
 </div><!-- closes header -->
+</div>

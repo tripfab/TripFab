@@ -3102,4 +3102,52 @@ class AjaxController extends Zend_Controller_Action
         header('Content-type: application/json');
         echo json_encode($result); die;
     }
+    
+    public function loginAction(){
+        $this->auth = Zend_Auth::getInstance();
+        if($this->auth->hasIdentity()){
+            $result = array(
+                'type'=>'error',
+                'message' => 'You are already logged in'
+            );
+        } else {
+            try {
+                if(empty($_POST['email'])) 
+                    throw new Exception('Email cannot be empty');
+                if(empty($_POST['password']))
+                    throw new Exception('Password cannot be empty');
+
+                $email = new Zend_Validate_EmailAddress();
+                if(!$email->isValid($_POST['email']))
+                    throw new Exception('Invalid Emil Address');
+
+                $this->accounts = new WS_AccountService();
+                $_result = $this->accounts->login($_POST['email'], $_POST['password']);
+                if($_result === true){
+                    $result = array(
+                        'type'=>'success'
+                    );
+                } else {
+                    $result = array(
+                        'type' => 'error',
+                        'message' => 'Incorrect Email or Password'
+                    );
+                }
+            } 
+            catch (Exception $e) {
+                $result = array(
+                    'type' => 'error',
+                    'message' => $e->getMessage()
+                );
+            }
+        }
+        
+        header('Content-type: application/json');
+        echo json_encode($result); die;
+    }
+    
+    public function getheaderAction(){
+        echo 'asd';
+        die;
+    }
 }
