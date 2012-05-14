@@ -378,74 +378,6 @@
 /*- End of Header Styles -----------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------*/
 
-/*- Footer Styles -----------------------------------------------------------*/
-.footer {
-    background: url("https://developer.tripfab.com/images2/g-3.png") repeat-x scroll 0 0 #FFFFFF;
-    border-top: 1px solid #E8E8E8;
-    bottom: 0;
-    color: #555555;
-    font-size: 11px;
-    height: 54px;
-    padding: 28px 0;
-    position: absolute;
-    width: 100%;
-}
-
-#footer {
-	height: 88px;
-	background:url(https://developer.tripfab.com/images2/home-sep5.png) no-repeat center top #2a2a2a;
-	margin-top: 30px;
-	width:100%;
-	position:absolute;
-	bottom:0;
-}
-#footer .wrap {
-	position: relative;
-	width: 960px;
-	margin: 0 auto;
-}
-#footer .flag {
-	background: url(https://developer.tripfab.com/images2/home-flag.png) no-repeat;
-	width: 108px;
-	height: 3px;
-	display: block;
-	position: absolute;
-	top: -3px;
-	left: 427px ;
-}
-#footer p {
-	color: #c2c2c2;
-	width: 390px;
-	float: left;
-	background: url(https://developer.tripfab.com/images2/home-logo2.png) no-repeat left top;
-	padding-left: 50px;
-	margin-top: 30px;
-	height: 50px;
-	font: normal 11px Helvetica;
-}
-#footer p strong {
-	display: block;
-	font-size: 12px;
-	margin-bottom: 5px;
-}
-#footer ul {
-	float: right;
-	margin: 36px 0 0 0;
-}
-#footer ul li {
-	float: left;
-	list-style: none;
-	margin-left: 15px;
-}
-#footer ul li a {
-	color: #c2c2c2;
-	font: bold 11px Helvetica;
-}
-#footer ul li a:hover {
-	color: #ffffff;
-}
-
-/*- End of Footer Styles -----------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------*/
 
 /*- Browse Trips Page Styles -----------------------------------------------------------*/
@@ -7540,7 +7472,7 @@ h2.title .back:hover,
 .sign-box .content {
 	background: url("https://developer.tripfab.com/images6/signIn-sh.png") no-repeat scroll 0 0 #FFFFFF;
 	margin-top: 22px;
-	padding: 35px 28px;
+	padding: 35px 0 35px 28px;
 	position: relative;
 }
 
@@ -7661,6 +7593,7 @@ h2.title .back:hover,
 	border: none;
 	font-size: 16px;
 	padding:0 10px;
+	margin-right: 25px;
 }
 
 .sign-box .content label {

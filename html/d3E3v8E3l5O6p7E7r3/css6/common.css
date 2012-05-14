@@ -922,7 +922,48 @@
 	color: #303030;
 	font: bold 17px/65px Helvetica;
 }
-
+.signLog div.error {
+	background-color: #fff1ea;
+	width: 403px;
+	height: 29px;
+	font: bold 12px/29px Helvetica;
+	color: #f26522;
+	text-align: center;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+.signLog .errorIn {
+	position: relative;
+	background: url(https://developer.tripfab.com/images6/contactUsError.gif) no-repeat 413px 13px;
+	
+}
+.signLog .errorIn input[type="text"],
+.signLog .errorIn input[type="password"] {
+	border: 1px solid #f26522 !important;
+}
+.signLog .errorIn p{
+	position: absolute;
+	background-color: #f26522;
+	color: #FFF;
+	padding: 0 5px;
+	font: 500 11px/18px Helvetica;
+	bottom: -7px;
+	left: -10px;
+	z-index: 10;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px; 
+	behavior: url(/PIE.htc);
+}
+.signLog .errorIn p em {
+	display: block;
+	background: url(https://developer.tripfab.com/images6/errorAw.png) no-repeat 0 0;
+	width: 11px;
+	height: 5px;
+	position: absolute;
+	top: -5px;
+	left: 15px;
+}
 #send_message {
 	width: 461px;
 }

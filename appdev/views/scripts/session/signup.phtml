@@ -26,9 +26,7 @@
                     <span>Or</span>
                     <?php if($this->errors): ?>
                     <div class="error">
-                    	<?php foreach($this->errors as $err): ?>
-	                    	<?= $err ?><br />
-                        <?php endforeach ?>
+                    	Oops! The following information is missing or wrong
                     </div>
                     <?php endif ?>
                     <?php if($this->alerts): ?>
@@ -38,10 +36,13 @@
                     <?php endif ?>
                     <form method="post">
                         <fieldset>
-                        	<?php if($this->name): ?>
-                            <input name="name" type="text" value="<?= $this->name ?>" placeholder="Name" class="noclean in-1 name required" />
+                        	<?php if($this->name): ?>                          
+                            	<input name="name" type="text" value="<?= $this->name ?>" placeholder="Name" class="noclean in-1 name required" />
                             <?php else: ?>
-                            <input name="name" type="text" value="" placeholder="Name" class="in-1 name required" />
+                            <div class="errorIn">
+                            	<input name="name" type="text" value="" placeholder="Name" class="in-1 name required" />
+                            	<p><em></em>Please enter a valid e-mail here</p>
+                            </div><!--ERRORIN-->
                             <?php endif ?>
                             <?php if($this->lname): ?>
                             <input name="lname" type="text" value="<?= $this->lname ?>" placeholder="Last Name" class="noclean in-7 lastname required" />
@@ -75,9 +76,5 @@
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
-<style type="text/css">
-.error { border:1px solid #F00; padding:5px; margin-bottom:10px; color:#F00; font-style:italic;}
-.hidden { display:none;}
-</style>
 </body>
 </html>

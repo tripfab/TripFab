@@ -44,7 +44,10 @@
                         	<?php if($this->email): ?>
                             <input type="text" name="email" value="<?= $this->email ?>" class="noclean in-2 required email" />
                             <?php else: ?>
-                            <input type="text" name="email" value="E-Mail" class="in-2 required email" />
+                            <div class="errorIn">
+                            	<input type="text" name="email" value="E-Mail" class="in-2 required email" />
+	                            <p><em></em>Please enter a valid e-mail here</p>
+                            </div><!--ERRORIN-->
                             <?php endif ?>
                             <span>
                             	<label for="password">Password</label>
