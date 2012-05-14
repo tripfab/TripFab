@@ -3146,12 +3146,80 @@ class AjaxController extends Zend_Controller_Action
         echo json_encode($result); die;
     }
     
-    public function getheaderAction(){
-        echo 'asd';
-        die;
+    public function signupAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if($auth->hasIdentity()){
+            $result = array(
+                'type'=>'error',
+                'message' => 'You are already logged in'
+            );
+        } else {
+            if($this->getRequest()->isPost()){
+                $errors = array();
+                if(empty($_POST['name']) || $_POST['name'] == 'Name')
+                    $errors[] = 'Name cannot be empty';
+                if(empty($_POST['lname']) || $_POST['lname'] == 'Last Name')
+                    $errors[] = 'Lastname cannot be empty';
+                if(empty($_POST['email']) || $_POST['email'] == 'E-Mail')
+                    $errors[] = 'Email cannot be empty';
+                if(empty($_POST['password']) || $_POST['password'] == 'Password')
+                    $errors[] = 'Password cannot be empty';
+                if($_POST['password2'] != $_POST['password'])
+                    $errors[] = 'Password confirmation fallure';
+
+                $email = new Zend_Validate_EmailAddress();
+                if(!$email->isValid($_POST['email']))
+                    $errors[] = 'Invalid Email Address';
+
+                if(count($errors) > 0) {
+                    $result = array(
+                        'type'=>'error',
+                        'errors' => $errors
+                    );
+                } else {
+
+                    $this->accounts = new WS_AccountService();
+                    if($this->accounts->validateEmail($_POST['email'])){
+                        $this->accounts->signup($_POST);
+                        $result = array(
+                            'type' => 'success'
+                        );
+                    } else {
+                        $result = array(
+                            'type' => 'exists'
+                        );
+                    }
+                }
+            } else {
+                die('Wrong request');
+            }
+        }
+        header('Content-type: application/json');
+        echo json_encode($result); die;
     }
     
-    // public function sighupAction(){}
+    public function resendverificationAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity()) 
+            throw new Exception('No access allowed');
+        
+        $user = $auth->getIdentity();
+        
+        $activations = new Zend_Db_Table('activation_tokens');
+        $token = $activations->fetchNew();
+        $token->user_id = $user->id;
+        $token->token   = hash('sha256',$user->email.time().rand(0,1000000));
+        $token->created = date('Y-m-d H:i:s');
+        $token->updated = date('Y-m-d H:i:s');
+        $token->save();
+
+        $notifier = new WS_Notifier($user->id);
+        $notifier->emailVerification($token);
+        
+        echo 'done'; die;
+    }
     
     public function contactAction()
     {

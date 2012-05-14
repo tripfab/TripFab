@@ -101,6 +101,8 @@ class WS_AccountService {
 
         $notifier = new WS_Notifier($user->id);
         $notifier->emailVerification($token);
+        
+        $this->login($user->email, $password);
     }
     
     public function signupVendor($data, $flag = true, $new = false)

@@ -5137,38 +5137,57 @@ $(function(){
     $('.js-div-signup form').submit(function(){
         $form = $(this);
         
-            $data = {
-                name:$('.js-input-name',$form).val(),
-                lastname:$('.js-input-lastname',$form).val(),
-                email:$('.js-input-email',$form).val(),
-                password:$('.js-input-password',$form).val(),
-                password2:$('.js-input-confirm',$form).val(),
-                remember:$('.js-input-remember',$form).val()
-            };
-            
-            $('input', $form).attr('disabled','disabled');
-            
-            $.ajax({
-                url:'/ajax/signup',
-                type:'post',
-                data:$data,
-                dataType:'json',
-                success:function(res) {
-                    if(res.type == "success") {
-                        window.location.reload();
-                    } else {
-                        $('input', $form).removeAttr('disabled');
-                        $('.js-input-name').focus();
-                        showError(res.message);
-                    }
-                }, error:function(){
+        $data = {
+            name:$('.js-input-name',$form).val(),
+            lname:$('.js-input-lastname',$form).val(),
+            email:$('.js-input-email',$form).val(),
+            password:$('.js-input-password',$form).val(),
+            password2:$('.js-input-confirm',$form).val(),
+            remember:$('.js-input-remember',$form).val(),
+            country_id:0
+        };
+
+        $('input', $form).attr('disabled','disabled');
+
+        $.ajax({
+            url:'/ajax/signup',
+            type:'post',
+            data:$data,
+            dataType:'json',
+            success:function(res) {
+                if(res.type == "success") {
+                    window.location.reload();
+                } else if(res.type == "exists") {
+                    showError('The email already exists');
+                    $('input', $form).removeAttr('disabled');
+                    $('.js-input-email').val('');
+                    $('.js-input-email').focus();
+                } else {
                     $('input', $form).removeAttr('disabled');
                     $('.js-input-name').focus();
-                    showError('Something went wrong please try later');
+                    $('ul.js-signup-errors').html('');
+                    for(i in res.errors) {
+                        $('ul.js-signup-errors').append('<li>'+res.errors[i]+'</li>');
+                    }
                 }
-            });
+            }, error:function(){
+                $('input', $form).removeAttr('disabled');
+                $('.js-input-name').focus();
+                showError('Something went wrong please try later');
+            }
+        });
         
         return false;
         
+    });
+    
+    $('.js-resend-verification').live('click',function(){
+        $.ajax({
+            url:'/ajax/resendverification',
+            success:function(){
+                showAlert('Verification resent. Check your email');
+            }
+        });
+        return false;
     });
 });

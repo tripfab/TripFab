@@ -190,7 +190,7 @@ class SessionController extends Zend_Controller_Action {
         $this->accounts = new WS_AccountService();
         if($this->accounts->validateEmail($_POST['email'])){
             $this->accounts->signup($_POST);
-            $this->_redirect('/thanks');
+            $this->_redirect('/');
         }
         
         $flashMessenger = $this->_helper->getHelper('FlashMessenger');
