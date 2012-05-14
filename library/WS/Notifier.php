@@ -302,6 +302,15 @@ class WS_Notifier extends Zend_Mail {
         $this->sendHTMLTemplate('password-reset.phtml');
     }
     
+    public function sendContactForm($info) 
+    {
+        $this->setSubject('New message from contact form');
+        $this->addTo('cristian@tripfab.com');
+        
+        $this->_view->info = $info;
+        $this->sendHTMLTemplate('contact-form.phtml');
+    }
+    
     /**
      * 
      * Retunrs a Zend View instance

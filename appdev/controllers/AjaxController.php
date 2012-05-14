@@ -3150,4 +3150,52 @@ class AjaxController extends Zend_Controller_Action
         echo 'asd';
         die;
     }
+    
+    // public function sighupAction(){}
+    
+    public function contactAction()
+    {
+        if($this->getRequest()->isPost()) {
+            $data = $_POST; $errors = 0;
+            
+            if(empty($data['name']))
+                $errors++;
+            
+            if(empty($data['email']))
+                $errors++;
+            
+            if(empty($data['subject']))
+                $errors++;
+            
+            if(empty($data['message']))
+                $errors++;
+            
+            if($errors == 0) {
+                $auth = Zend_Auth::getInstance();
+                if($auth->hasIdentity())
+                    $user = $auth->getIdentity();
+                else {
+                    $user = new stdClass();
+                }
+                $contacts = new Zend_Db_Table('contact_form');
+                $new = $contacts->fetchNew();
+                $new->user_id = $user->id;
+                $new->type = $data['type'];
+                $new->name = $data['name'];
+                $new->company = $data['company'];
+                $new->email = $data['email'];
+                $new->subject = $data['subject'];
+                $new->message = $data['message'];
+                $new->created = date('Y-m-d H:i:s');
+                $new->save();
+                
+                $notifier = new WS_Notifier();
+                $notifier->sendContactForm($new);
+                
+                echo json_encode(array('sent')); die;
+            }
+            throw new Exception('ERRORS');
+        }
+        throw new Exception('WRONG REQUEST');
+    }
 }
