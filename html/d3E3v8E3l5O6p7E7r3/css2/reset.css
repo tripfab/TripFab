@@ -417,7 +417,12 @@ body {
 /*-----------------------------------------------------------------------------------------------*/
 
 /*- Links Styles -----------------------------------------------------------*/
-
+.link1 {
+	color: #60b5f7;
+}
+.link1:hover {
+	color: #9BD2FC;
+}
 .link-1 {
 	background: url(https://static.tripfab.com/images2/arrow-1.png) no-repeat 100% 50%;
 	color: #60b5f7;

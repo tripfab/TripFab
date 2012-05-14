@@ -2927,6 +2927,7 @@ ul.cat-menu li.item-1 a img {
 	position: relative;
 	z-index: 100;
 	margin-left: 1px;
+	width: 870px;
 }
 #search_result .content .sort.fixed {
 	position: fixed;
@@ -3868,6 +3869,265 @@ ul.cat-menu li.item-1 a img {
 	font-weight: bold;
 }
 /*END SEND MESSAGES LISTINGS-----------------------------------------------*/
+/*CONTACT TRIPFAB----------------------------------------------------------*/
+#contactUs {
+	width: 960px;
+	margin: 0 auto;
+	padding-top: 18px;
+}
+#contactUs .left {
+	width: 650px;
+	float: left;
+}
+#contactUs .left .inner {
+	width: 650px;
+	border: 1px solid #e7e7e7;
+	background-color: #FFF;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: 0px 0px 1px 0px #e7e7e7;
+	-moz-box-shadow: 0px 0px 1px 0px #e7e7e7;
+	box-shadow: 0px 0px 1px 0px #e7e7e7;
+	behavior: url(/PIE.htc);
+}
+#contactUs .left h2{
+	color: #303030;
+	font: bold 17px Helvetica;
+	text-shadow: 0px 1px 0px #FFF;
+	margin-bottom: 15px;
+}
+#contactUs .left h2 span {
+	display: block;
+	font: normal 13px/20px Helvetica;
+	text-shadow: 0px 1px 0px #FFF;
+}
+#contactUs .left .inner h3{
+	font: bold 13px/44px Helvetica;
+	color: #303030;
+	height: 44px;
+	padding-left: 22px;
+}
+#contactUs .left .inner form {
+	display: block;
+	background: url("https://developer.tripfab.com/images6/lstng_htl_sh2.png") repeat-x scroll 0 0;
+}
+#contactUs .left .inner .single {
+	margin: 0 18px 0 22px;
+	border-bottom: 1px solid #e8e8e8;
+	height: 54px;
+}
+#contactUs .left .inner h4 {
+	width: 223px;
+	float: left;
+	height: 54px;
+	font: bold 13px/54px Helvetica;
+}
+#contactUs .left .inner .option {
+	width: 385px;
+	float: right;
+}
+#contactUs .left .inner .option label {
+	padding-top: 17px;
+	display: block;
+	float: left;
+	margin-right: 6px;
+	font: bold 13px Helvetica;
+}
+#contactUs .left .inner .option label input {
+	float: left;
+	margin-top: 0;
+	margin-right: 5px;
+}
+#contactUs .left .inner input[type="text"] {
+	width: 244px;
+	height: 32px;
+	margin-top: 10px;
+	font: normal 13px/32px Helvetica;
+	color: #898989;
+}
+#contactUs .left .inner input[type="text"]:focus {
+	font-weight: bold;
+	color: #303030;
+}
+#contactUs .left .inner select {
+	height: 18px;
+	margin: 19px 0 0 0;
+	width: 255px;
+}
+#contactUs .left .inner .single.last {
+	height: auto;
+	border: none;
+}
+#contactUs .left .inner .single textarea{
+	width: 373px;
+	height: 80px;
+	margin: 10px 0 0 0;
+	font: normal 13px/16px Helvetica;
+	color: #898989;
+}
+#contactUs .left .inner .single textarea:focus{
+	font-weight: bold;
+	color: #303030;
+}
+#contactUs .left .btn-1 {
+	float: right;
+	margin: 10px 18px 10px 0;
+	display: block;
+	width: 129px;
+	height: 35px;
+	font: bold 14px/35px Helvetica;
+}
+
+#contactUs .right {
+	width: 291px;
+	float: right;
+}
+#contactUs .right .inner {
+	border: 1px solid #e7e7e7;
+	background-color: #FFF;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
+}
+#contactUs .right .top {
+	position: relative;
+	height: 47px;
+	padding-bottom: 6px;
+}
+#contactUs .right .top h5 {
+	font: bold 12px/16px Helvetica;
+	display: block;
+	width: 182px;
+	padding-top: 4px;
+}
+#contactUs .right .top h5 span {
+	display: block;
+	font-weight: normal;
+}
+#contactUs .right .top h5 em {
+	display: block;
+	background: url(https://developer.tripfab.com/images6/contactUsIcons.png) no-repeat -3px 0;
+	width: 16px;
+	height: 17px;
+	float: left;
+	margin: 7px 10px 0 0;
+}
+#contactUs .right .top .btn-1 {
+	width: 94px;
+	position: absolute;
+	top: 4px;
+	right: 0;
+	margin: 0;
+	padding:0;
+	font-size: 13px;
+}
+#contactUs .right .single {
+	background: url("https://developer.tripfab.com/images6/lstng_htl_sh2.png") repeat-x scroll 0 0;
+	padding: 17px 15px 17px 27px;
+}
+#contactUs .right .single:first-child {
+	background: none
+}
+#contactUs .right .single h6 {
+	background:url(https://developer.tripfab.com/images6/contactUsIcons.png) no-repeat 0 -34px;
+	padding-left: 31px;
+	height: 17px;
+	font: bold 13px Helvetica;
+	margin-bottom: 9px;
+}
+#contactUs .right .single.chat {
+	position: relative;
+}
+#contactUs .right .single.chat h6 {
+	background-position: 0 -67px;
+}
+#contactUs .right .single.office h6 {
+	background-position: 0 -106px;
+}
+#contactUs .right .single p {
+	font: normal 12px/16px Helvetica;
+}
+#contactUs .right .single.chat p {
+	width: 140px;
+}
+#contactUs .right .single.chat .btn-10 {
+	position: absolute;
+	bottom: 20px;
+	right: 15px;
+	padding: 0 8px;
+}
+#contactUs .right .single .number {
+	display: block;
+	color: #303030;
+	font: bold 14px Helvetica;
+	padding-top: 20px;
+}
+#contactUs .right .single.office p{
+	width: 173px;
+	padding-bottom:5px;
+}
+#contactUs .right .single.office dt {
+	float: left;
+	font-weight: bold;
+	margin-right: 4px;
+}
+#contactUs .right .single ul li{
+	margin-bottom: 15px;
+}
+#contactUs .right .single ul li a {
+	color: #60b5f7;
+	display: block;
+}
+#contactUs .right .single ul li a:hover {
+	color: #98cef8;
+}
+#contactUs .right .single ul li a span{
+	background: url(https://developer.tripfab.com/images6/contactUsIcons.png) no-repeat 0 0;
+	height: 15px;
+	display: block;
+	float: left;
+	width: 22px;
+	margin-right: 7px;
+}
+#contactUs .right .single ul li .tw {
+	background-position: 0 -144px;
+}
+#contactUs .right .single ul li a:hover .tw {
+	background-position: 1px -226px;
+}
+#contactUs .right .single ul li .fb {
+	background-position: 0 -171px;
+}
+#contactUs .right .single ul li a:hover .fb {
+	background-position: 1px -253px;
+}
+#contactUs .right .single ul li .bl {
+	background-position: 0 -202px;
+}
+#contactUs .right .single ul li a:hover .bl {
+	background-position: 1px -284px;
+}
+#contactUs .right .single:last-child {
+	padding-bottom: 10px;
+}
+#contactUs .left .sent {
+	background: url(https://developer.tripfab.com/images6/contactUsSent.png) no-repeat ;
+	height: 172px;
+	padding-top: 80px;
+	text-align: center;
+	display: none;
+	opacity: 0;
+}
+#contactUs .left .sent h6{
+	font: bold 17px Helvetica;
+	margin-bottom: 5px;
+}
+#contactUs .left .sent p{
+	font: 300 15px Helvetica;
+	margin-bottom: 15px;
+}
+/*END CONTACT TRIPFAB------------------------------------------------------*/
 .dd-2 {
 	border: 1px solid #C3C3C3;
 	box-shadow: 0 0 10px #000000;

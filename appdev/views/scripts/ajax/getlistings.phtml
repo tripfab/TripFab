@@ -61,7 +61,7 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
 <?php else: ?>
 <?php $url = $this->baseUrl() .'/'. $this->country->identifier .'/filter';
 $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this->stars; ?>
-<h3>There are <strong><?= $this->listing_count ?> <?= $this->categ ?> in <?= $this->country->title ?></strong></h3>
+<div class="sort"><h3>There are <strong><?= $this->listing_count ?> <?= $this->categ ?> in <?= $this->country->title ?></strong></h3><span class="shw"></span></div><!--SORT-->
 <?php endif ?>
 <div class="results-wrapper">
 

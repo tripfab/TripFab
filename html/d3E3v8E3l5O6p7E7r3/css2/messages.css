@@ -355,13 +355,14 @@
 
 .loading {
     position:absolute;
-    background:#FF9 !important;
+    background: url(https://developer.tripfab.com/images6/Loading-Messages.gif) no-repeat 229px 197px #FFF !important;
     color:#000 !important;
     line-height:normal !important;
     padding:2px 4px !important;
     right: 0px !important;
     top: 0px !important;
     display:none;
+    text-indent: -99999px;
 }
 .user-messages > .right > div {
     background: url(https://static.tripfab.com/images2/g_68.png) repeat-y -2px 0 #FFF;
@@ -377,7 +378,7 @@
     border: 1px solid #E7E7E7;
 }
 .user-messages > .right > .waiting {
-    
+    display: none;
 }
 .user-messages > .right .conversation div {
     background: url(https://static.tripfab.com/images2/g_68.png) repeat-y 0 0 #F3F3F3;

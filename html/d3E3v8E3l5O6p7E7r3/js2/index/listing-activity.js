@@ -9,22 +9,28 @@
 })( jQuery );
 $(document).ready(function() {
 
-
 	function countLines() {
-		var divH = $("#title").height();
-		var num  = 25;
-		var ttl  = $("#title");
-		var ttl2 = $(".qz");
-		var ttl3 = $(".location");
-		if(divH < num ) {
-				ttl.parent().addClass("ttl");
-			}else {
-				ttl.parent().addClass("two");
-				ttl2.addClass("two");
-				ttl3.css('margin-bottom', '7px');
+	
+			var num  = 25;
+			var num2  = 35;
+			var num3  = 32;
+			var ttl  = $(".ttl h2").height();
+			var ttl2 = $(".qz").height();
+			var ttl3 = $(".dscript h3").height();
+			
+			if(ttl > num) {
+				$(".ttl h2").parent().addClass("two");
 			}
-	}
-	countLines();
+			if(ttl2 > num2) {
+				$(".qz").addClass("two");
+			}
+			if(ttl3 > num3) {
+				$(".location").css('margin-bottom', '7px');
+			}
+			console.log(ttl3);
+		}
+		
+		countLines();
 
 
 

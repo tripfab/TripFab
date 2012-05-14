@@ -138,6 +138,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             )
         );
         $router->addRoute(
+            'contact',
+            new Zend_Controller_Router_Route(
+                '/:lang/contact',
+                array(
+                    'controller' => 'index',
+                    'action'     => 'contact',
+                    'module'     => 'default',
+                    'lang'       => $lang
+                )
+            )
+        );
+        $router->addRoute(
             'thanks',
             new Zend_Controller_Router_Route(
                 '/:lang/thanks',
