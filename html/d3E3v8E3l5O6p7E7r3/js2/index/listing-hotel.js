@@ -31,6 +31,9 @@ $(document).ready(function() {
 	
 	countLines();
 	
+	$(".imgs").jcarousel({
+	    scroll: 1
+	});
 	
 	$('a.lbc').fancybox({
 	    padding: 0,

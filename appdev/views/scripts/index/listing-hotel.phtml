@@ -147,22 +147,19 @@
                                         </ul>
                                     </div><!--INFO-->
                                     <h4><span class="hotel"></span><?= $this->listing->title ?></h4>
+                                    <?php $ok = true ?>
                                     <?php if(!empty($this->overview->about)): ?>
+                                    <?php $ok = false; ?>
                                     <p><?= nl2br($this->overview->about) ?></p>
-                                    <?php endif; if(!empty($this->oveview->expect)): ?>
+                                    <?php endif; if(!empty($this->overview->expect)): ?>
+                                    <?php $ok = false; ?>
                                     <h5>What to Expect</h5>
                                     <p><?= nl2br($this->overview->expect) ?></p>
                                     <?php endif; if(!empty($this->overview->love)): ?>
+                                    <?php $ok = false; ?>
                                     <h5>Things you'll love</h5>
-                                    <p><?= nl2br($this->overview->expect) ?></p>
-                                    <?php endif ?>
-									<?php $ok = true; $i=0; $limit = count($this->details) ?>
-                                    <?php $ok1 = true; $ok3 = true; ?>
-                                    <?php while($i<$limit) { 
-                                            if($this->details[$i]->type == 1) {$ok = false; $ok1 = false; }
-                                            if($this->details[$i]->type == 3) {$ok = false; $ok3 = false; }
-                                            $i++; } ?>
-                                    <?php if(!$ok1 or (count($this->listing_amenities) > 0)): ?>
+                                    <p><?= nl2br($this->overview->love) ?></p>
+                                    
                                     <div class="amenities">
                                         <h4><span class="icon"></span>Amenities</h4>
                                         <ul>
