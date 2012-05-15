@@ -188,7 +188,7 @@
                                             <h5>Includes</h5>
                                             <ul>
                                                 <?php foreach($this->details as $detail): ?>
-                                                <?php if($detail->type == 1): ?>
+                                                <?php if($detail->type == 1 and !empty(trim($detail->text))): ?>
                                                 <li><?= stripslashes($detail->text) ?></li>
                                                 <?php endif ?>
                                                 <?php endforeach ?>
@@ -200,7 +200,7 @@
                                             <h5>Excludes</h5>
                                             <ul>
                                                 <?php foreach($this->details as $detail): ?>
-                                                <?php if($detail->type == 2): ?>
+                                                <?php if($detail->type == 2 and !empty(trim($detail->text))): ?>
                                                 <li><?= stripslashes($detail->text) ?></li>
                                                 <?php endif ?>
                                                 <?php endforeach ?>
