@@ -1701,9 +1701,10 @@ class AjaxController extends Zend_Controller_Action
                                 $listing, $adults, $kids, $checkin, $checkout, null, $option, $capacity);
                 }
                 
-                if($quote->available)
-                    echo $quote->subtotal;
-                else
+                if($quote->available) {
+                    echo $this->view->formatnumber($quote->subtotal);
+                }
+                else 
                     throw new Exception($quote->error, 1);
                 die;
             }
