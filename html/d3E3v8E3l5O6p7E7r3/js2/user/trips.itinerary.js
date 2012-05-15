@@ -7,6 +7,24 @@ $(document).ready(function() {
     
     console.log(assigned_listings);
     
+    
+    $('input.calendar1').datepicker({
+		minDate:new Date(),
+		onSelect:function(date){
+			$end = $(this).parents('.cont').find('input.calendar2');
+			$end.datepicker('option','minDate', date);
+		},
+		dateFormat:'D M d yy'
+	});
+	
+	$('input.calendar2').datepicker({
+		minDate:new Date(),
+		dateFormat:'D M d yy'
+	});
+	
+	$('#ui-datepicker-div').wrap('<div id="calendarContainer"></div>');
+    
+    
     $('a.lb, .lbc').fancybox({
         padding:0,
         overlayColor:'#fff',

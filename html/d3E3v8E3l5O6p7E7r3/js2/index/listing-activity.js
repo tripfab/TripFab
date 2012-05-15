@@ -32,7 +32,18 @@ $(document).ready(function() {
 		
 		countLines();
 
-
+	$('a.lbc').fancybox({
+	    padding: 0,
+	    overlayColor: '#FFF',
+	    overlayOpacity: '0.7',
+	    showCloseButton: false,
+	    centerOnScroll: true,
+	    titlePosition: 'inside',
+	    showNavArrows: true
+	});
+	$('#fancybox-title').addClass('tittle');
+	$('#fancybox-left-ico').addClass('lfarrow');
+	$('#fancybox-right-ico').addClass('rgarrow');
 
     $('#mapcanvas').data('lat', $('input[name=listlat]').val());
     $('#mapcanvas').data('lng', $('input[name=listlng]').val());
@@ -613,18 +624,7 @@ $(document).ready(function() {
         scroll: 1
     });
 		
-    $('a.lbc').fancybox({
-        padding: 0,
-        overlayColor: '#FFF',
-        overlayOpacity: '0.7',
-        showCloseButton: false,
-        centerOnScroll: true,
-        titlePosition: 'inside',
-        showNavArrows: true
-    });
-    $('#fancybox-title').addClass('tittle');
-    $('#fancybox-left-ico').addClass('lfarrow');
-    $('#fancybox-right-ico').addClass('rgarrow');
+    
 });
 
 $(document).ready(function(){

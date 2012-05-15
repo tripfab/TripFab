@@ -8,7 +8,7 @@
     };
 })( jQuery );
 $(document).ready(function() {
-
+	
 	function countLines() {
 
 		var num  = 25;
@@ -27,12 +27,25 @@ $(document).ready(function() {
 		if(ttl3 > num3) {
 			$(".location").css('margin-bottom', '7px');
 		}
-		console.log(ttl3);
 	}	
 	
 	countLines();
 	
-
+	
+	$('a.lbc').fancybox({
+	    padding: 0,
+	    overlayColor: '#FFF',
+	    overlayOpacity: '0.7',
+	    showCloseButton: false,
+	    centerOnScroll: true,
+	    titlePosition: 'inside'
+	});
+	
+	$('#fancybox-title').addClass('tittle');
+	$('#fancybox-left-ico').addClass('lfarrow');
+	$('#fancybox-right-ico').addClass('rgarrow');
+	
+	
     $('#mapcanvas').data('lat', $('input[name=listlat]').val());
     $('#mapcanvas').data('lng', $('input[name=listlng]').val());
     $('body').data('listing_title', $('input[name=listtitle]').val());
@@ -600,20 +613,8 @@ function hideTooltip() {
             $('#wp_content').css('padding-top', '0');
         }
     });
-    $(".imgs").jcarousel({
-        scroll: 1
-    });
-    $('a.lbc').fancybox({
-        padding: 0,
-        overlayColor: '#FFF',
-        overlayOpacity: '0.7',
-        showCloseButton: false,
-        centerOnScroll: true,
-        titlePosition: 'inside'
-    });
-    $('#fancybox-title').addClass('tittle');
-    $('#fancybox-left-ico').addClass('lfarrow');
-    $('#fancybox-right-ico').addClass('rgarrow');
+   
+    
 });
 
 $(document).ready(function(){
@@ -653,10 +654,6 @@ function resizeImg($bgImg) {
     $bgImg.css('height',height);
     $bgImg.css('top',top);
 }
-
-
-
-
 
 
 
