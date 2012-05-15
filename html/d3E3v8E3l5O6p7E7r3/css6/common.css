@@ -503,7 +503,7 @@
 } 
 #footer .number span {
 	display: block;
-	background: url(https://developer.tripfab.com/images6/footerIcons.png) no-repeat 0 0;
+	background: url(https://static.tripfab.com/images6/footerIcons.png) no-repeat 0 0;
 	width: 25px;
 	height: 21px;
 	float: left;
@@ -527,6 +527,7 @@
 	color: #898989;
 	font: normal 11px Helvetica;
 	margin-bottom: 8px;
+	list-style: none;
 }
 #footer .right ul li a {
 	color: #c2c2c2;
@@ -538,7 +539,7 @@
 #footer .right ul li a em {
 	display: block;
 	float: left;
-	background: url(https://developer.tripfab.com/images6/footerIcons.png) no-repeat 0 0;
+	background: url(https://static.tripfab.com/images6/footerIcons.png) no-repeat 0 0;
 	width: 17px;
 	height: 15px;
 	margin-right: 7px;
@@ -565,14 +566,14 @@
 
 #footer .bot {
 	clear: both;
-	background: url(https://developer.tripfab.com/images6/footerSep.png) no-repeat center top;
+	background: url(https://static.tripfab.com/images6/footerSep.png) no-repeat center top;
 	height: 44px;
 	font: bold 12px/44px Helvetica;
 	color: #c2c2c2;
 	text-align: center;
 }
 #footer .bot em {
-	background: url(https://developer.tripfab.com/images6/footerIcons.png) no-repeat 0 -40px;
+	background: url(https://static.tripfab.com/images6/footerIcons.png) no-repeat 0 -40px;
 	width: 24px;
 	height: 23px;
 	display: inline-block;
@@ -823,7 +824,7 @@
 	background-position: 0 -112px;
 }
 .signLog .contForm {
-	padding: 30px 28px 0 28px;
+	padding: 30px 0 0 28px;
 	margin-top: 16px;
 	position: relative;
 }
@@ -843,6 +844,7 @@
 	color: #898989;
 	font: normal 16px/41px Helvetica;
 	padding-left: 15px;
+	display: block;
 }
 .signLog .contForm input[type="text"]:focus {
 	font-weight: bold;
@@ -857,10 +859,10 @@
 .signLog .contForm input[type="text"].email {
 	background-position: 371px -96px;
 }
-.signLog .contForm input[type="text"].password {
+.signLog .contForm input[type="password"].password {
 	background-position: 371px -151px;
 }
-.signLog .contForm input[type="text"].confirm {
+.signLog .contForm input[type="password"].confirm {
 	background-position: 371px -208px;
 }
 .signLog .cntrl {
@@ -885,6 +887,7 @@
 	height: 41px;
 	padding: 0;
 	font: 500 16px/41px Helvetica;
+	margin-right: 32px;
 }
 .signLog .note {
 	border-top: 1px solid #e8e8e8;
@@ -932,7 +935,7 @@
 }
 .signLog .errorIn {
 	position: relative;
-	background: url(https://developer.tripfab.com/images6/contactUsError.gif) no-repeat 413px 13px;
+	background: url(https://static.tripfab.com/images6/contactUsError.gif) no-repeat 411px 13px;
 	
 }
 .signLog .errorIn input[type="text"],
@@ -955,7 +958,7 @@
 }
 .signLog .errorIn p em {
 	display: block;
-	background: url(https://developer.tripfab.com/images6/errorAw.png) no-repeat 0 0;
+	background: url(https://static.tripfab.com/images6/errorAw.png) no-repeat 0 0;
 	width: 11px;
 	height: 5px;
 	position: absolute;
@@ -983,7 +986,7 @@
 	line-height: 30px;
 }
 #send_message .intro_m {
-	background: url(https://developer.tripfab.com/images2/ico_msj.png) no-repeat 20px 50% #f5f5f5;
+	background: url(https://static.tripfab.com/images2/ico_msj.png) no-repeat 20px 50% #f5f5f5;
 	height: 60px;
 	padding-left: 60px;
 	border-bottom: 1px solid #e0e0e0;
