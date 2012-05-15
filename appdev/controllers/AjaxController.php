@@ -2252,7 +2252,7 @@ class AjaxController extends Zend_Controller_Action
             
         } catch(Exception $e) {
 
-            echo $e->getMessage();
+            throw new Exception();
 
         }
         
