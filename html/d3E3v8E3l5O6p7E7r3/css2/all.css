@@ -6850,6 +6850,7 @@ h2.title .back:hover,
     padding: 0 5px;
     text-align: center;
     width: 81px;
+    margin-top: 16px;
     background: none !important;
     cursor:grab;
     cursor:-moz-grab;
@@ -8322,20 +8323,20 @@ h2.title .back:hover,
 	line-height:32px;
 }
 .user-messages .lstng .right .active a span{
-	background:url(https://developer.tripfab.com/images2/ico-118.png) no-repeat 7px 11px;
+	background:url(https://static.tripfab.com/images2/ico-118.png) no-repeat 7px 11px;
 }
 .user-messages .lstng .right .deactive a span{
-	background:url(https://developer.tripfab.com/images2/ico-119.png) no-repeat 7px 11px;
+	background:url(https://static.tripfab.com/images2/ico-119.png) no-repeat 7px 11px;
 }
 .user-messages .lstng .right .edit a {
 	padding:0;
 	width:114px;
 }
 .user-messages .lstng .right .edit a span {
-	background:url(https://developer.tripfab.com/images2/ico-120.png) no-repeat 10px 9px;
+	background:url(https://static.tripfab.com/images2/ico-120.png) no-repeat 10px 9px;
 }
 .user-messages .lstng .right a.btn-10 {
-	background:url(https://developer.tripfab.com/images2/btn-10.gif) top left repeat-x !important;
+	background:url(https://static.tripfab.com/images2/btn-10.gif) top left repeat-x !important;
 }
 .user-messages .lstng .right a.btn-10:hover {
 	background-position:bottom left!important;
@@ -8348,7 +8349,7 @@ h2.title .back:hover,
 	margin:0;
 }
 .user-messages .lstng .right .preferences a span {
-	background:url("https://developer.tripfab.com/images2/ico-121.png") no-repeat 7px 50% transparent;
+	background:url("https://static.tripfab.com/images2/ico-121.png") no-repeat 7px 50% transparent;
 	text-indent:-99999px;
 }
 .user-messages .lstng .right .preferences ul {
@@ -17307,7 +17308,7 @@ background-color: #FFF;
 #all_trips {
 	width: 960px;
 	margin: 20px auto 0;
-	padding-bottom: 132px;
+	padding-bottom: 150px;
 }
 #all_trips .single {
 	width: 958px;
@@ -18839,6 +18840,7 @@ text-indent: 20px;
 #custom_checkout .right_block {
 	float: right;
 	width: 290px;
+	margin-bottom: 30px;
 }
 #custom_checkout .right_block .inf {
 	border: 1px solid #e7e7e7;
