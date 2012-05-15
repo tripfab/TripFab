@@ -1653,8 +1653,6 @@ class AjaxController extends Zend_Controller_Action
             if(!isset($_GET['option']))
                 throw new Exception ("Option Missing", 1);
             else {
-                if(!isset($_GET['checkin']) || empty($_GET['checkin']))
-                    throw new Exception ("Checking Missing", 1);
 
                 $id = $_GET['id'];
                 $listings = new WS_ListingService();
@@ -1662,11 +1660,6 @@ class AjaxController extends Zend_Controller_Action
                 if($listing->token != $_GET['token']){
                     if(md5($listing->token) != $_GET['token'])
                         throw new Exception ("Error, try later", 1);
-                }
-
-                if($listing->main_type == 5){
-                    if(!isset($_GET['checkout']) || empty($_GET['checkout']))
-                        throw new Exception ("Checkout Missing", 1);
                 }
                 
                 if($listing->main_type == 6) {
@@ -1678,9 +1671,10 @@ class AjaxController extends Zend_Controller_Action
                 $adults   = $_GET['adults'];
                 $kids     = $_GET['kids'];
                 $checkin  = $_GET['checkin'];
-                if($checkin == 'dd/mm/yyyy') {
+                if(($checkin == 'dd/mm/yyyy') || empty($checkin)) {
                     $checkin = date('Y-m-d');
                 }
+                
                 if($listing->main_type == 5 and $_GET['checkout'] != 'dd/mm/yyyy')
                     $checkout = $_GET['checkout'];
                 else
