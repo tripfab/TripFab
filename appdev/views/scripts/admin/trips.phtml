@@ -72,10 +72,11 @@
                 <tr>
                     <th width="310"><a href="<?php echo $this->url(array('sort'=>0, 'seq'=>$this->paramSort == 0 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Trip Name</a></th>
                     <th width="100"><a href="<?php echo $this->url(array('sort'=>1, 'seq'=>$this->paramSort == 1 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Duration</a></th>
-                    <th width="110"><a href="<?php echo $this->url(array('sort'=>2, 'seq'=>$this->paramSort == 2 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Price</a></th>
+                    <th width="90"><a href="<?php echo $this->url(array('sort'=>2, 'seq'=>$this->paramSort == 2 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Price</a></th>
                     <th width="86"><a href="<?php echo $this->url(array('sort'=>3, 'seq'=>$this->paramSort == 3 && $this->paramSequence !='desc' ? 'desc':'default'));?>">People</a></th>
-                    <th width="135"><a href="<?php echo $this->url(array('sort'=>4, 'seq'=>$this->paramSort == 4 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Category</a></th>
+                    <th width="100"><a href="<?php echo $this->url(array('sort'=>4, 'seq'=>$this->paramSort == 4 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Category</a></th>
                     <th width="114"><a href="<?php echo $this->url(array('sort'=>5, 'seq'=>$this->paramSort == 5 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Country</a></th>
+                    <th width="114"><a href="<?php echo $this->url(array('sort'=>5, 'seq'=>$this->paramSort == 6 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Status</a></th>
                     <th width="67" class="last">&nbsp;</th>
                 </tr>
                 <?php foreach($this->paginator as $key=>$listing):?>
@@ -86,6 +87,7 @@
                     <td><?php echo $listing->min?> - <?php echo $listing->max?> </td>
                     <td><?php echo $listing->category_name?></td>
                     <td><?php echo $listing->country_name?></td>
+                    <td><?php echo $listing->active ? 'Active' : 'Inactive'?></td>
                     <td class="drp_dn">
                         <a href="" class="btn-10"><span>Actions</span></a>
                         <ul>
