@@ -65,10 +65,11 @@ $per_night = array(
 				<div class="tooltip hidden">Add to My Trips<span></span></div>
 			</div><!--HVR-->
         </div><!--IMAGE-->
-        <h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>"><?= $list->title ?></a></h4>
+        <h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+		<?= (strlen($list->title) > 40) ? substr($list->title, 0, 39) . '...' : $list->title ?></a></h4>
 
         <div class="info">
-            <span class="location"><span></span>Location <strong><?= $list->city ?>, <?= $list->country ?></strong></span>
+            <span class="location"><span></span>Location <strong><?= $list->city ?>, <?= $list->countrycode ?></strong></span>
            <!-- <div class="price"><span><?= $list->price ?></span><sup>$</sup><span><?= $list->price ?></span> <sub><?=$per_night[$list->main_type] ?></sub></div>-->
             <div class="clear"></div>
         </div><!--INFO-->
@@ -99,13 +100,14 @@ $per_night = array(
  				<div class="tooltip hidden">Add to My Trips<span></span></div>
  			</div><!--HVR-->
  		</div><!--IMAGE-->
- 		<h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>"><?= $list->title ?></a></h4>
+ 		<h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+		<?= (strlen($list->title) > 40) ? substr($list->title, 0, 39) . '...' : $list->title ?></a></h4>
  			<?php if($list->main_type == 6):?>
  		    <span>by <?= $list->vendor_name?></span>
  		<?php endif;?>
  		<p><?= substr($list->description, 0, 100) ?>...</p>      
  		<div class="info">
- 		    <span class="location"><span></span>Location <strong><?= $list->city ?>, <?= $list->country ?></strong></span>
+ 		    <span class="location"><span></span>Location <strong><?= $list->city ?>, <?= $list->countrycode ?></strong></span>
  		    <div class="price"><span><?= $this->formatnumber($list->price) ?></span><sup>$</sup> <sub><?=$per_night[$list->main_type] ?></sub></div>
  		    <div class="clear"></div>
  		</div><!--INFO-->
@@ -135,13 +137,14 @@ $per_night = array(
 				<div class="tooltip hidden">Add to My Trips<span></span></div>
 			</div><!--HVR-->
         </div><!--IMAGE-->
-        <h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>"><?= $list->title ?></a></h4>
+        <h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+		<?= (strlen($list->title) > 40) ? substr($list->title, 0, 39) . '...' : $list->title ?></a></h4>
    		<?php if($list->main_type == 6):?>
             <span>by <?= $list->vendor_name?></span>
         <?php endif;?>
         <p><?= substr($list->description, 0, 100) ?>...</p>      
         <div class="info">
-            <span class="location"><span></span>Location <strong><?= $list->city ?>, <?= $list->country ?></strong></span>
+            <span class="location"><span></span>Location <strong><?= $list->city ?>, <?= $list->countrycode ?></strong></span>
             <div class="price"><span><?= $this->formatnumber($list->price) ?></span><sup>$</sup><sub><?=$per_night[$list->main_type] ?></sub></div>
             <div class="clear"></div>
         </div><!--INFO-->

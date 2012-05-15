@@ -639,7 +639,8 @@ class WS_ListingService {
            ));
            $select->join(array('places2'=>'places'),'listings.country_id = places2.id', array(
                'country'=>'title',
-               'countryidf'=>'identifier'
+               'countryidf'=>'identifier',
+               'countrycode' => 'code'
            ));
            //print $select->assemble(); //die;
 
