@@ -12,7 +12,6 @@
 	<link type="text/css" rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
 	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
 	<link rel="stylesheet" href="/css2/datepicker.css?v=<?= $this->cssVC ?>" type="text/css" />
-	
 	<!--[if IE 7]><link type="text/css" rel="stylesheet" href="css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
@@ -22,7 +21,11 @@
         <div class="w3 browseTrips">
             <div class="wrapper">
         	    <h3><?= $this->trip->title ?></h3>
+                <?php if($this->user): ?>
                 <a href="#dates_lb" class="lb btn-1">Buy Itinerary</a>
+                <?php else: ?>
+                <a href="#" class="js-login btn-1">Buy Itinerary</a>
+                <?php endif ?>
                 <div class="clear"></div>
             </div>
         </div><!--W3 BROWSE TRIPS-->
@@ -293,7 +296,11 @@
                 </div>
             </div>
             <div class="result">
-                <a href="#dates_lb" class="btn-1 lb">Buy Itinerary</a>
+            	<?php if($this->user): ?>
+                <a href="#dates_lb" class="lb btn-1">Buy Itinerary</a>
+                <?php else: ?>
+                <a href="#" class="js-login btn-1">Buy Itinerary</a>
+                <?php endif ?>
                 <span><sup>$</sup><?= $this->formatnumber($this->trip->price) ?> <em>per person</em></span>
             </div><!--RESULT-->
         </div><!-- closes BROWSE_TRIPS --> 

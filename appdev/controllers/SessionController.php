@@ -42,7 +42,7 @@ class SessionController extends Zend_Controller_Action {
                 case 1:
                     $this->_redirect('/'); break;
                 case 2:
-                    $this->_redirect('/user'); break;
+                    $this->_redirect('/user/trips'); break;
                 case 3:
                     $this->_redirect('/provider'); break;
                 case 4:
@@ -93,7 +93,7 @@ class SessionController extends Zend_Controller_Action {
                     case 1:
                         $this->_redirect('/'); break;
                     case 2:
-                        $this->_redirect('/'); break;
+                        $this->_redirect('/user/trips'); break;
                     case 3:
                         $this->_redirect('/provider'); break;
                     case 4:
@@ -169,16 +169,12 @@ class SessionController extends Zend_Controller_Action {
         $errors = array();
         if(empty($_POST['name']) || $_POST['name'] == 'Name')
             $errors[] = 'Name cannot be empty';
-        if(empty($_POST['lname']) || $_POST['lname'] == 'Last Name')
-            $errors[] = 'Lastname cannot be empty';
         if(empty($_POST['email']) || $_POST['email'] == 'E-Mail')
             $errors[] = 'Email cannot be empty';
         if(empty($_POST['password']) || $_POST['password'] == 'Password')
             $errors[] = 'Password cannot be empty';
         if($_POST['password2'] != $_POST['password'])
             $errors[] = 'Password confirmation fallure';
-        if(empty($_POST['country_id']))
-            $errors[] = 'Select a country';
         
         $email = new Zend_Validate_EmailAddress();
         if(!$email->isValid($_POST['email']))

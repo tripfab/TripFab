@@ -5031,7 +5031,7 @@ $(function(){
 $(function(){
     $('body').data('facebookid',$('input[name=fbappid]').val());
     
-    $('a.js-login').live('click',function(){
+    $('.js-login').live('click',function(){
         $.fancybox({
             href:'#signIn',
             padding:0,
@@ -5041,7 +5041,7 @@ $(function(){
         return false;
     });
     
-    $('a.js-signup').live('click', function(){
+    $('.js-signup').live('click', function(){
         $.fancybox({
             href:'#signUp',
             padding:0,
@@ -5051,7 +5051,7 @@ $(function(){
         return false;
     });
     
-    $('a.js-forgot').live('click',function(){
+    $('.js-forgot').live('click',function(){
         $.fancybox({
             href:'#forgot',
             padding:0,

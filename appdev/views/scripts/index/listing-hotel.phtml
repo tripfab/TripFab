@@ -404,7 +404,11 @@
                                          	<sub>Subtotal</sub></span>
                                          </div>
                                     </div><!--PRICE-->
+                                    <?php if($this->user): ?>
                                     <input type="submit" value="Book Now!" class="btn-1 noclean" />
+                                    <?php else: ?>
+                                    <input type="button" value="Book Now!" class="btn-1 noclean js-login" />
+                                    <?php endif ?>
                                     <?php foreach($this->form_fields as $name => $value): ?>
                                     <input type="hidden" name="<?= $name ?>" value="<?= $value ?>" />
                                     <?php endforeach ?>
