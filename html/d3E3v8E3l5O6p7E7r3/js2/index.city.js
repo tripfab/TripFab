@@ -472,6 +472,15 @@ $(document).ready(function() {
 		$('.note1').fadeOut('slow');
 	});
 	
+	
+	
+//	function remenber() {
+//		if( $('ul.ui-autocomplete').css('display' == 'none')  ) {
+//			$('.note1').fadeIn('slow');
+//			alert("Hello");
+//		}
+//	}
+//	remenber();
 });
 
 
