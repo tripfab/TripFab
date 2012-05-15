@@ -3,7 +3,7 @@ $(document).ready(function() {
 	var aboveHeight = 153;
 	$(window).scroll(function(){
         if ($(window).scrollTop() > aboveHeight){
-            $('.sort').addClass('fixed').css('top','0px').next().css('padding-top','60px');
+            $('.sort').addClass('fixed').css('top','0px').next().css('padding-top','60px !important');
         } 
         else {
 			
@@ -460,3 +460,43 @@ $(function(){
         alert('asd');
     });
 })
+
+$(document).ready(function() {
+	$('#citiesSearch2').click(function() {
+		$('.note1').fadeIn('slow');
+		return false;
+	});
+	
+	
+	$('#citiesSearch2').keypress(function() {
+		$('.note1').fadeOut('slow');
+	});
+	
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
