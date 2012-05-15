@@ -221,7 +221,7 @@
                                     <?php while($i<$limit) { if($this->details[$i]->type == 3) {$ok = false; } $i++; } ?>
                                     <?php if(!$ok): ?>
                                     <div class="policies">
-                                        <h5>Policies</h5>
+                                        <h5>Restrictions</h5>
                                         <ul>
                                             <?php foreach($this->details as $detail): ?>
                                             <?php if($detail->type == 3): ?>
