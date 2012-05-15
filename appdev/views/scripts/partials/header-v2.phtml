@@ -33,27 +33,32 @@
         	<div class="log">
         				
         		<?php if(!$this->user): ?>
-        		<div class="btn"><a href="/signup" class="btn-1">Sign Up</a></div>
+        		<div class="btn"><a href="/signup" class="btn-1 js-signup">Sign Up</a></div>
         		<div class="sign_in">
         			Have an Account? <a href="" id="sign-in">Sign In<span class="aw"></span></a>
         		</div><!--SIGN_IN-->
         		
-        		<div class="login">
+        		<div class="login js-div-signin js-form-container">
         			<span class="arrow"></span>
         			<form method="post" action="https://<?= $_SERVER['HTTP_HOST'] ?>/en-US/login">
-        				<input class="email" type="text" name="email" value="eMail" />
-        				<input class="pass" type="password" name="password" value="******" />
+                    	<div class="">
+        				<input class="email js-input-email" type="text" name="email" value="eMail" />
+                        </div>
+                        <div class="">
+        				<input class="pass js-input-password" type="password" name="password" value="******" />
+                        </div>
         				<div class="bttns">
-        					<label for="remenber"><input type="checkbox" id="remenber" name="remenber" value="" />Remember me</label>
-        					<input type="submit" class="btn-1" value="Sign In" />
+        					<label for="remenber"><input class="js-input-remember" 
+                            type="checkbox" id="remenber" name="remenber" value="1" />Remember me</label>
+        					<input type="submit" class="btn-1 noclean" value="Sign In" />
         				</div><!--BTTNS-->
         				<div class="actions">
-        					<a href="/login" class="link1">Forgot Password?</a>
-        					<a href="/signup" class="link1 create">Create a TripFab Account</a>
+        					<a href="#" class="link1 js-forgot">Forgot Password?</a>
+        					<a href="#" class="link1 create js-signup">Create a TripFab Account</a>
         					<div class="clear"></div>
         				</div><!--ACTIONS-->
         				<div class="fb">
-        					<a href="/signup/facebook">Sign In with Facebook</a>
+        					<a href="/signup/facebook" class="js-fb-sigup">Sign In with Facebook</a>
         				</div><!--FB-->
         			</form>
         		</div><!--LOGIN-->

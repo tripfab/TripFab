@@ -22,7 +22,7 @@
                 	<h2>Sign into your TripFab account</h2>
                 	<p>Welcome back, we love you :)</p>
                 </div><!--TOP-->
-                <a href="/signup/facebook" class="fb"></a>
+                <a href="#" class="fb js-fb-sigup"></a>
                 <div class="content su">
                     <span>Or</span>
                     <?php if($this->errors): ?>
@@ -39,20 +39,22 @@
                         <?php endforeach ?>
                     </div>
                     <?php endif ?>
-                    <form action="" method="post">
+                    <form action="" method="post" id="js-main-login-form">
                         <fieldset>
                         	<?php if($this->email): ?>
-                            <input type="text" name="email" value="<?= $this->email ?>" class="noclean in-2 required email" />
+                            <div class="">
+                            	<input type="text" name="email" value="<?= $this->email ?>" class="noclean in-2" />
+                            </div>
                             <?php else: ?>
-                            <div class="errorIn">
-                            	<input type="text" name="email" value="E-Mail" class="in-2 required email" />
-	                            <p><em></em>Please enter a valid e-mail here</p>
+                            <div class="">
+                            	<input type="text" name="email" placeholder="E-Mail" class="in-2" />
                             </div><!--ERRORIN-->
                             <?php endif ?>
-                            <span>
-                            	<label for="password">Password</label>
-                            	<input type="password" name="password" class="in-3 required password" />
-                            </span>                            
+                            <div class="">
+                                <span>
+                                    <input type="password" name="password" placeholder="Password" class="in-3 password" />
+                                </span>
+                            </div>
                         </fieldset>
                         <fieldset>
                             <label for="rememberme"><input id="rememberme" name="remember" value="1" type="checkbox" /> Remember me next time</label>
@@ -62,7 +64,7 @@
                     </form>
                 </div><!-- closes content -->
                 <div class="foot">
-                    <a href="#forgot" class="lb">Forgot pasword?</a>
+                    <a href="#forgot" class="js-forgot">Forgot pasword?</a>
                 </div><!-- closes foot -->
             </div><!-- closes sign-box -->
             <div class="sign-box last">
@@ -74,22 +76,27 @@
 </div><!-- closes w1 -->
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-		$('a.lb').fancybox({
-			padding:0,
-			overlayColor:'#ffffff',
-			centerOnScroll:1,
-			padding: 0,
-			overlayOpacity: 0.8,
-			showCloseButton: false
-		});
-		$('form input').focus(function() {
-			$(this).prev('label').addClass('hide');
-		});
-		$('form input').focusout(function() {
-			if (!$(this).val()) {
-				$(this).prev('label').removeClass('hide');
-			}
+    $(document).ready(function() {		
+		$('#js-main-login-form').submit(function(){
+			$isValid = $(this).validate({
+				rules:{
+					email:'required email',
+					password:'required'
+				},
+				errorPlacement:function(error, element) {
+					console.log(error);
+					if(error.text() == "") {
+						console.log(element);
+						element.parents('div:eq(0)').removeClass('errorIn');
+						element.parents('div:eq(0)').find('p').remove();
+					} else {
+						element.parents('div:eq(0)').addClass('errorIn');
+						element.parents('div:eq(0)').append('<p><em></em>'+error.text()+'</p>');
+					}
+				}
+			});
+			
+			return $isValid.form();
 		});
     });
 </script>

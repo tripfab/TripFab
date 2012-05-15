@@ -222,10 +222,10 @@ $(document).ready(function() {
         }
         
     });
-    
-	$(".cont").jcarousel({
-		scroll: 1
-	});
+        
+    $(".cont").jcarousel({
+            scroll: 1
+    });
 	
     $('select[name=adults]').change(function(){
         var $limit = $('option:last',this).val() - $(this).val();

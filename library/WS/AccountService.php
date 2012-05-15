@@ -83,7 +83,7 @@ class WS_AccountService {
                 $user->token      = md5($data['email'].time());
                 $user->created    = date('Y-m-d H:i:s');
                 $user->updated    = date('Y-m-d H:i:s');
-                $user->country_id = $data['country_id'];
+                $user->country_id = (!is_null($data['country_id'])) ? $data['country_id'] : 0;
                 $user->active     = 0;
                 $user->save();
             } else {

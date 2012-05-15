@@ -21,12 +21,14 @@
                 	<h2>Sign up for TripFab. <span>It’s Free!</span></h2>
                 	<p>You need to create an account to continue</p>
                 </div><!--TOP-->
-                <a href="<?= $this->fbLoginUrl ?>" class="fb"></a>
+                <a href="#" class="fb js-fb-signup"></a>
                 <div class="content">
                     <span>Or</span>
                     <?php if($this->errors): ?>
                     <div class="error">
-                    	Oops! The following information is missing or wrong
+                    	<?php foreach($this->errors as $err): ?>
+                        <p><?= $err ?></p>
+                        <?php endforeach ?>
                     </div>
                     <?php endif ?>
                     <?php if($this->alerts): ?>
@@ -34,29 +36,30 @@
                     	<?= $this->alerts ?>
                     </div>
                     <?php endif ?>
-                    <form method="post">
+                    <form method="post" id="js-main-signup-form">
                         <fieldset>
                         	<?php if($this->name): ?>                          
+                            <div class="">
                             	<input name="name" type="text" value="<?= $this->name ?>" placeholder="Name" class="noclean in-1 name required" />
+                            </div>
                             <?php else: ?>
-                            <div class="errorIn">
+                            <div class="">
                             	<input name="name" type="text" value="" placeholder="Name" class="in-1 name required" />
-                            	<p><em></em>Please enter a valid e-mail here</p>
                             </div><!--ERRORIN-->
                             <?php endif ?>
-                            <?php if($this->lname): ?>
-                            <input name="lname" type="text" value="<?= $this->lname ?>" placeholder="Last Name" class="noclean in-7 lastname required" />
-                            <?php else: ?>
-                            <input name="lname" type="text" value="" placeholder="Last Name" class="in-7 lastname required" />
-                            <?php endif ?>
+                            <div class="">
                             <?php if($this->email): ?>
                             <input name="email" type="text" placeholder="E-Mail" value="<?= $this->email ?>" class="noclean in-2 email required" />
                             <?php else: ?>
                             <input name="email" type="text" value="" placeholder="E-Mail" class="in-2 email required" />
                             <?php endif ?>
-                            <input name="password" type="password" placeholder="Password" value="" class="in-3 password required" />
+                            </div>
+                            <div class="">
+                            <input id="password" name="password" type="password" placeholder="Password" value="" class="in-3 password required" />
+                            </div>
+                            <div class="">
                             <input name="password2" type="password" placeholder="Re-enter Password" value="" class="in-4 password required" />
-                            
+                            </div>                            
                         </fieldset>
                         <fieldset>
                             <label><input type="checkbox" /> Remember me next time</label>
@@ -76,5 +79,32 @@
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+$(function(){
+	$('#js-main-signup-form').submit(function(){
+		$isValid = $(this).validate({
+			rules: {
+				name:'required',
+				email:'required email',
+				password:'required',
+				password2:{
+					equalTo:'#password'
+				},				
+			},
+			errorPlacement:function(error, element) {
+				if(error.text() == "") {
+					element.parent('div').removeClass('errorIn');
+					element.parent('div').find('p').remove();
+				} else {
+					element.parent('div').addClass('errorIn');
+					element.parent('div').append('<p><em></em>'+error.text()+'</p>');
+				}
+			}
+		});
+		
+		return $isValid.form();
+	});
+});
+</script>
 </body>
 </html>

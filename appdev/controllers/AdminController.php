@@ -3694,7 +3694,7 @@ class AdminController extends Zend_Controller_Action {
 							'Due Date',
 							'Total to Paid'
 						));
-					$fnRow = function($row){
+					$fnRow = create_function('$row',"
 						return array(
 							$row->vendor_name, 
 							$row->vendor_id,
@@ -3702,7 +3702,7 @@ class AdminController extends Zend_Controller_Action {
 							date('M d, Y', strtotime($row->due_date)),
 							$row->paid_total
 							);
-						};
+						");
 					
 					require_once("TF/Export.php");
 					TF_Export::xlsFromData(
@@ -3751,7 +3751,7 @@ class AdminController extends Zend_Controller_Action {
 							'Paid Date',
 							'Total to Paid'
 						));
-					$fnRow = function($row){
+					$fnRow = create_function('$row',"
 						return array(
 							$row->vendor_name, 
 							$row->vendor_id,
@@ -3759,7 +3759,7 @@ class AdminController extends Zend_Controller_Action {
 							date('M d, Y', strtotime($row->paid_date)),
 							$row->paid_total
 							);
-						};
+						");
 					
 					require_once("TF/Export.php");
 					TF_Export::xlsFromData(
@@ -4325,7 +4325,7 @@ class AdminController extends Zend_Controller_Action {
             case 'all':
                 $this->view->title = "";
                 $template = 'trips';
-                $dataFields = array('title', 'days', 'price', 'min', 'category_name', 'country_name');
+                $dataFields = array('title', 'days', 'price', 'min', 'category_name', 'country_name', 'active');
                 $select->from('trips')
                         ->joinleft(array('country' => 'places'), 'trips.country_id=country.id', array('country_name' => 'title'))
                         ->joinleft('tripcategories', 'trips.category_id=tripcategories.id', array('category_name' => 'label'));

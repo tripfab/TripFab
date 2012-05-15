@@ -181,6 +181,7 @@
 				</div><!--PAGING-->
                 <?php endif ?>
 				<div class="cont">
+                	<?php if(count($this->userTrips) > 0): ?>
                 	<?php for($i=0;$i<count($this->userTrips);$i=$i+3): ?>
 					<div class="slides">
                     	<?php for($j=$i;(($j<count($this->userTrips)) and $j<($i+3));$j++): ?>
@@ -211,6 +212,10 @@
                         <?php endfor ?>
 					</div><!--SLIDES-->
                     <?php endfor ?>
+                    <?php else: ?>
+					<div class="slides">
+                    </div>
+                    <?php endif ?>
 				</div><!--CONT-->
 			</div><!--SIDE-->
 			<div class="clear"></div>
