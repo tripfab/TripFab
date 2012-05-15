@@ -26,10 +26,10 @@ class WS_Uploader {
         if(null === $config) {
             $config = array(
                 'host'      =>  'localhost',
-                'username'  =>  'costar_admCoreTF',
-                'password'  =>  'OgkX-JLV2L7i',
-                //'username'  =>  'root',
-                //'password'  =>  'root',
+                //'username'  =>  'costar_admCoreTF',
+                //'password'  =>  'OgkX-JLV2L7i',
+                'username'  =>  'root',
+                'password'  =>  'root',
                 'dbname'    =>  'costar_coreTF'                
             );
         }

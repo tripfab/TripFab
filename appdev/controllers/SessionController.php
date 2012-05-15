@@ -244,7 +244,7 @@ class SessionController extends Zend_Controller_Action {
             $user_profile = $facebook->api('/me');
             if($this->accounts->validateEmail($user_profile['email'], true)){
                 $this->accounts->signup($user_profile, true);
-                $this->_redirect('/thanks');
+                $this->_redirect('/');
             } else {
                 $this->accounts->login($user_profile, null, true);
                 $this->_redirect('/');
