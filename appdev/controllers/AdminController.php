@@ -272,7 +272,7 @@ class AdminController extends Zend_Controller_Action {
             $select->where("listings.main_type=?", $listingType);
         }
         if ($this->view->searchText) {
-            $select->where("listings.title like '{$this->view->searchText}%'");
+            $select->where("listings.title like '%{$this->view->searchText}%'");
         }
 		
 		if($this->_getParam('co')){
@@ -3573,7 +3573,7 @@ class AdminController extends Zend_Controller_Action {
     }
 
     public function paymentsAction() {
-        if (@$_SESSION['alert']) {
+		if (@$_SESSION['alert']) {
             $this->view->successMessage = "Your changes have been saved";
             $_SESSION['alert'] = '';
         }
@@ -3669,7 +3669,52 @@ class AdminController extends Zend_Controller_Action {
 						->join('vendors', 'vendors.id=reservations.vendor_id', array('vendor_name' => 'name', 'vendor_id'=>'id'));
                 $select->where("reservations.status_id=?", 1);
 				$select->group(array('vendors.id', 'due_date'));
-                break;
+				if ($this->view->searchText) {
+					$select->where("vendors.name like '%{$this->view->searchText}%' or vendors.id like '{$this->view->searchText}'");
+				}
+				$select->order(array_key_exists($this->view->paramSort, $reservationFields) ? $reservationFields[$this->view->paramSort] . "$seq" : $reservationFields[0]);
+               
+                $titleFields = array(
+					'vendor_name' => 'Partner Name', 
+					'vendor_id' => 'Partner ID', 
+					'reservation_count' => 'Reservations', 
+					'due_date' => 'Due Date', 
+					'paid_total' => 'Total to Paid'
+					);
+                if ($page == 'pdf') {
+        			require('html2pdf/lib.php');
+                    $pdfMaker = new PdfMaker();
+                    $pdfMaker->makeByHtml($titleFields, $db->fetchAll($select));
+                }
+                if ($page == 'xls') {
+					$headers = array(array(
+							'Partner Name', 
+							'Partner ID',
+							'Reservations',
+							'Due Date',
+							'Total to Paid'
+						));
+					$fnRow = function($row){
+						return array(
+							$row->vendor_name, 
+							$row->vendor_id,
+							$row->reservation_count, 
+							date('M d, Y', strtotime($row->due_date)),
+							$row->paid_total
+							);
+						};
+					
+					require_once("TF/Export.php");
+					TF_Export::xlsFromData(
+						"log-reports.xls",
+						$headers,
+						$fnRow,
+						$db->fetchAll($select)
+					);
+				}
+			   
+			   
+			    break;
             case 'all':
             case 'paid':
             case 'history':
@@ -3681,21 +3726,63 @@ class AdminController extends Zend_Controller_Action {
 						->join('payments', 'payments.id=paid_reservations.payment_id', array('paid_date'=>'created'));
                 $select->where("reservations.status_id=?", 5);
 				$select->group(array('vendors.id', 'payments.created'));
-                break;
+				if ($this->view->searchText) {
+					$select->where("vendors.name like '%{$this->view->searchText}%' or vendors.id like '{$this->view->searchText}'");
+				}
+				$select->order(array_key_exists($this->view->paramSort, $reservationFields) ? $reservationFields[$this->view->paramSort] . "$seq" : $reservationFields[0]);
+                
+                $titleFields = array(
+					'vendor_name' => 'Partner Name', 
+					'vendor_id' => 'Partner ID', 
+					'reservation_count' => 'Reservations', 
+					'paid_date' => 'Paid Date', 
+					'paid_total' => 'Total to Paid'
+					);
+				if ($page == 'pdf') {
+         			require('html2pdf/lib.php');
+                   $pdfMaker = new PdfMaker();
+                    $pdfMaker->makeByHtml($titleFields, $db->fetchAll($select));
+                }
+                if ($page == 'xls') {
+					$headers = array(array(
+							'Partner Name', 
+							'Partner ID',
+							'Reservations',
+							'Paid Date',
+							'Total to Paid'
+						));
+					$fnRow = function($row){
+						return array(
+							$row->vendor_name, 
+							$row->vendor_id,
+							$row->reservation_count, 
+							date('M d, Y', strtotime($row->paid_date)),
+							$row->paid_total
+							);
+						};
+					
+					require_once("TF/Export.php");
+					TF_Export::xlsFromData(
+						"log-reports.xls",
+						$headers,
+						$fnRow,
+						$db->fetchAll($select)
+					);
+				}
+			   
+
+				
+				break;
             default:
                 $this->view->title = "Pending";
         }
 
-		if ($this->view->searchText) {
-            $select->where("vendors.name like '{$this->view->searchText}' or vendors.id like '{$this->view->searchText}%'");
-        }
-        $select->order(array_key_exists($this->view->paramSort, $reservationFields) ? $reservationFields[$this->view->paramSort] . "$seq" : $reservationFields[0]);
 		$paginator = Zend_Paginator::factory($select);
         $paginator->setItemCountPerPage(self::ITEMS_PER_PAGE);
         $paginator->setCurrentPageNumber($page);
         $this->view->paginator = $paginator;
         $this->view->numCount = $paginator->getTotalItemCount();
-        $this->render($template);
+		$this->render($template);
     }
 
     public function reportsAction() {

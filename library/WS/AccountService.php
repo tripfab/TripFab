@@ -75,7 +75,6 @@ class WS_AccountService {
         } else {
             if($this->validateEmail($data['email'])) {
                 $user->name       = $data['name'];
-                $user->lname      = $data['lname'];
                 $user->email      = $data['email'];
                 $password         = $data['password'];
                 $user->password   = md5($password);

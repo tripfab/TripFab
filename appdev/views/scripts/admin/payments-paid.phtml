@@ -43,7 +43,7 @@
 			<div class="all_listing">
 				<div class="search_list">
 					<form action="" onsubmit="return false">
-						<input type="text" placeholder="Search for listings" name="q" id="q" value="<?php echo $this->searchText?>" />
+						<input type="text" placeholder="Search for partner" name="q" id="q" value="<?php echo $this->searchText?>" />
 						<input type="button" class="btn-1" value="Search" onclick="searchSubmit()" />
 					</form>
 					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
@@ -71,6 +71,10 @@
 						</table>
 				</div><!--LIST-CONTENT-->
 				<div class="paging_bottom">
+					<ul class="get-report">
+						<li><a href="<?php echo $this->url(array('page' => 'pdf')); ?>" class="btn-10"><span class="pdf">Download .pdf</span></a></li>
+						<li><a href="<?php echo $this->url(array('page' => 'xls')); ?>" class="btn-10"><span class="excel">Download .xls</span></a></li>
+					</ul>
 					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
 				</div><!--PAGING_BOTTOM-->
 			</div><!--ALL_LISTING-->

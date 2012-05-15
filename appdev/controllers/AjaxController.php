@@ -3158,19 +3158,17 @@ class AjaxController extends Zend_Controller_Action
             if($this->getRequest()->isPost()){
                 $errors = array();
                 if(empty($_POST['name']) || $_POST['name'] == 'Name')
-                    $errors[] = 'Name cannot be empty';
-                if(empty($_POST['lname']) || $_POST['lname'] == 'Last Name')
-                    $errors[] = 'Lastname cannot be empty';
+                    $errors['js-input-name'] = 'Name cannot be empty';
                 if(empty($_POST['email']) || $_POST['email'] == 'E-Mail')
-                    $errors[] = 'Email cannot be empty';
+                    $errors['js-input-email'] = 'Email cannot be empty';
                 if(empty($_POST['password']) || $_POST['password'] == 'Password')
-                    $errors[] = 'Password cannot be empty';
+                    $errors['js-input-password'] = 'Password cannot be empty';
                 if($_POST['password2'] != $_POST['password'])
-                    $errors[] = 'Password confirmation fallure';
+                    $errors['js-input-confirm'] = 'Password confirmation fallure';
 
                 $email = new Zend_Validate_EmailAddress();
-                if(!$email->isValid($_POST['email']))
-                    $errors[] = 'Invalid Email Address';
+                if(!empty($_POST['email']) and !$email->isValid($_POST['email']))
+                    $errors['js-input-email'] = 'Invalid Email Address';
 
                 if(count($errors) > 0) {
                     $result = array(
@@ -3265,5 +3263,69 @@ class AjaxController extends Zend_Controller_Action
             throw new Exception('ERRORS');
         }
         throw new Exception('WRONG REQUEST');
+    }
+    
+    public function fbsignupAction()
+    {
+        if($this->getRequest()->isPost()) {
+            $auth = Zend_Auth::getInstance();
+            if($auth->hasIdentity()) {
+                $result = array(
+                    'type' => 'error',
+                    'error' => 'You are already logged in',
+                );
+            } else {
+                $token = $_POST['token'];
+                if(empty($token) || is_null($token)) {
+                    $result = array(
+                        'type' => 'error',
+                        'error' => 'Wrong Request'
+                    );
+                } else {
+                    try {
+                        
+                        $conf = Zend_Registry::get('facebook');
+        
+                        $facebook = new Fb_Facebook(array(
+                            'appId' => $conf['id'],
+                            'secret'=> $conf['secret'],
+                        ));
+                        
+                        $facebook->setAccessToken($token);
+                        
+                        $user = $facebook->getUser();
+                        
+                        if(!$user) {
+                            $result = array(
+                                'type' => 'error',
+                                'error' => "We couldn't fecth your information from facebook Not User",
+                            );
+                        } else {
+                            $user_profile = $facebook->api('/me');
+                            if($this->accounts->validateEmail($user_profile['email'], true)){
+                                $this->accounts->signup($user_profile, true);
+                                $result = array('type'=>'success');
+                            } else {
+                                $this->accounts->login($user_profile, null, true);
+                                $result = array('type'=>'success');
+                            }
+                        }
+                    } catch(Exception $e) {
+                        $result = array(
+                            'type' => 'error',
+                            'error' => "We couldn't fecth your information from facebook Not User"
+                        );
+                    }
+                }
+            }
+        } else {
+            $result = array(
+                'type' => 'error',
+                'error'=>'Wrong Request'
+            );
+        }
+        
+        header('Content-type: application/json');
+        echo json_encode($result); die;
     }
 }

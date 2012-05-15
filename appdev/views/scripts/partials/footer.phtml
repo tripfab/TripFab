@@ -37,20 +37,23 @@
 			<h2>Sign up for TripFab. <span>It’s Free!</span></h2>
 			<p>You need to create an account to continue</p>
 		</div><!--TOP-->
-		<div class="cont">
-			<a href="" class="fb"></a>		
+		<div class="cont js-form-container">
+			<a href="" class="fb js-fb-sigup"></a>		
 			<div class="contForm">
 				<em>Or</em>
 				<form method="post" action="">
-                	<ul class="js-signup-errors"></ul>
-					<div class="errorIn">
-						<input class="name js-input-name" type="text" name="name" placeholder="Name" value="" />
-						<p><em></em>How to Get There</p>
-					</div>
-					<input class="lastName js-input-lastname" type="text" name="lastname" placeholder="Last Name" value="" />
+                    <div class="">
+					<input class="name js-input-name" type="text" name="name" placeholder="Name" value="" />
+                    </div>
+                    <div class="">
 					<input class="email js-input-email" type="text" name="email" placeholder="E-mail" value="" />
+                    </div>                    
+                    <div class="">
 					<input class="password js-input-password" id="js-password" type="password" name="password" placeholder="Password" value="" />
+                    </div>
+                    <div class="">
 					<input class="confirm js-input-confirm" type="password" name="password2" placeholder="Confirm Password" value="" />
+                    </div>
 					<div class="cntrl">
 						<label><input type="checkbox" class="js-input-remember" name="remenber" value="1" /> Remember me next time</label>
 						<input type="submit" class="btn-1 noclean" value="Create Account" />
@@ -59,7 +62,7 @@
 			</div><!--CONTFORM-->
 			<div class="note">
 				<p>By clicking "Create Account" or "Sign up with Facebook,"<br />
-					you confirm that you accept the <a href="/terms" class="link1">Terms of Service.</a> </p>
+					you confirm that you accept the <a target="_blank" href="/terms" class="link1">Terms of Service.</a> </p>
 			</div>
 		</div><!--CONT-->
 		<div class="bottom">
@@ -73,13 +76,17 @@
 			<h2>Sign in into your TripFab account</h2>
 			<p>Welcome back, we love you :)</p>
 		</div><!--TOP-->
-		<div class="cont">
-			<a href="" class="fb js-fb-signin"></a>
+		<div class="cont js-form-container">
+			<a href="" class="fb js-fb-sigup"></a>
 			<div class="contForm">
 				<em>Or</em>
 				<form method="post" action="">
+                	<div class="">
 					<input class="email js-input-email" type="text" name="email" placeholder="E-mail" value="" />
+                    </div>
+                    <div class="">
 					<input class="password js-input-password" type="password" name="password" placeholder="Password" value="" />
+                    </div>
 					<div class="cntrl">
 						<label><input type="checkbox" class="js-input-remember" name="remenber" value="1" /> Remember me next time</label>
 						<input type="submit" class="btn-1 noclean" value="Sign in" />
@@ -93,7 +100,8 @@
 		<div class="bottom">
 			<h6>New on TripFab?<a href="#signUp" class="link1 lbc js-signup"> Sign Up Now</a></h6>
 		</div><!--BOTTOM-->
-	</div><!--SIGNIn-->    
+	</div><!--SIGNIn-->
+    
 	<div id="forgot" class="js-div-forgot">
         <div class="lb-forgot">
             <div class="ttl">Reset Password</div>
@@ -111,3 +119,4 @@
         </div><!-- closes lb-forgot -->
     </div>
 </div><!--HIDDEN-->
+<input type="hidden" name="fbappid" value="<?= $this->facebookid() ?>"/>
