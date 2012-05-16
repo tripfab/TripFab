@@ -68,7 +68,8 @@ $(document).ready(function() {
             city	: $(this).data('city'),
             type	: $(this).data('type'),
             clas	: $(this).data('class'),
-            trip	: $(this).data('trip')
+            trip	: $(this).data('trip'),
+            url         : '/'+$(this).data('coidf')+'/'+$(this).data('ciidf')+'/'+$(this).data('idf')
         };
         $(this).data('values',$values);
     });
@@ -80,7 +81,8 @@ $(document).ready(function() {
             city	: $(this).data('city'),
             type	: $(this).data('type'),
             clas	: $(this).data('class'),
-            trip	: $(this).data('trip')
+            trip	: $(this).data('trip'),
+            url         : '/'+$(this).data('coidf')+'/'+$(this).data('ciidf')+'/'+$(this).data('idf')
         };
         $(this).data('values',$values);
     });
@@ -395,10 +397,12 @@ $(document).ready(function() {
         });
     }
 	
-    $('.activities-tabs .tab ul li img').live('click', function(){
+    $('.activities-tabs .tab ul li img, '+
+      '.slider .slide .itinerary-items .item ul li:not(.empty) img, '+
+      '.slider .slide .itinerary-items .item ul li:not(.empty) h2').live('click', function(){
         if($fancybox) {
             $values = $(this).parent().data('values')
-            alert($values.id);
+            window.location = $values.url;
         }
     });
     

@@ -81,7 +81,8 @@
                         	<?php foreach($this->favorites[$i] as $listing): ?>
                             <?php if(($listing->main_type != 5) or (is_null($listing->day) and is_null($listing->time))): ?>
                             <li data-id="<?= $listing->id ?>" data-city="<?= $listing->city_id ?>" data-class="<?= $class[$i] ?>"
-                            data-country="<?= $listing->country_id ?>" data-type="<?= $i ?>" class="<?= $class[$i] ?>" data-trip="<?= $this->trip->id ?>">
+                            data-country="<?= $listing->country_id ?>" data-type="<?= $i ?>" class="<?= $class[$i] ?>" data-trip="<?= $this->trip->id ?>"
+                            data-coidf="<?= $listing->countryurl ?>" data-ciidf="<?= $listing->cityurl ?>" data-idf="<?= $listing->identifier ?>">
                                 <?= ($listing->image) ? 
 										$this->thumbnail(65, $listing->image, '','1:1') :
 										$this->thumbnail(65, '/images/img-70.png', '','1:1'); ?>
@@ -122,7 +123,10 @@
                                     <?php foreach($listings as $list): ?>
                                     <li data-id="<?= $list->id ?>" data-city="<?= $list->city_id ?>" data-class="<?= $class[$i] ?>"
 		                            data-country="<?= $list->country_id ?>" data-type="<?= $list->main_type ?>" class="<?= $class[$i] ?>" 
-                                    data-trip="<?= $this->trip->id ?>">
+                                    data-trip="<?= $this->trip->id ?>"
+                                    data-coidf="<?= $list->countryurl ?>" 
+                                    data-ciidf="<?= $list->cityurl ?>" 
+                                    data-idf="<?= $list->identifier ?>">
                                         <?= ($list->image) ? 
 												$this->thumbnail(45, $list->image, '','1:1') :
 												$this->thumbnail(45, '/images/img-70.png', '','1:1'); ?>
@@ -153,7 +157,10 @@
                                     <?php foreach($this->days[$i+1]['stay'] as $list): ?>
                                     <li data-id="<?= $list->id ?>" data-city="<?= $list->city_id ?>" data-class="<?= $class[5] ?>"
 		                            data-country="<?= $list->country_id ?>" data-type="<?= $list->main_type ?>" class="<?= $class[5] ?>" 
-                                    data-trip="<?= $this->trip->id ?>">
+                                    data-trip="<?= $this->trip->id ?>"
+                                    data-coidf="<?= $list->countryurl ?>" 
+                                    data-ciidf="<?= $list->cityurl ?>" 
+                                    data-idf="<?= $list->identifier ?>">
                                         <?= ($list->image) ? 
 												$this->thumbnail(45, $list->image, '','1:1') :
 												$this->thumbnail(45, '/images/img-70.png', '','1:1'); ?>
