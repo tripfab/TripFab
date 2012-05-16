@@ -84,7 +84,7 @@
                                     <li><a href="" class="nrml"></a></li>
                                 </ul>
                                 <?php if(!empty($this->listing->description)): ?>
-                                <p><?= $this->listing->description ?></p>
+                                <p class="js-translate" data-text="<?= $this->listing->description ?>"></p>
                                 <?php endif ?>
                                 <div class="clear"></div>
                             </div><!--TEXT-->
@@ -160,7 +160,7 @@
                             <ul>
                                 <li><strong>Website</strong></li>
                                 <?php $website = $this->listing->website ?>
-                                <?php if(!(strpos($website, "http://") === 0) && !(strpos($website, "https://") === 0)) 'http://'.$website ?>
+                                <?php if(!(strpos($website, "http://") === false) && !(strpos($website, "https://") === false)) 'http://'.$website ?>
                                 <li><a href="<?= $website ?>" target="_blank" class="link1"><?= $website ?></a></li>
                             </ul>
                             <?php endif ?>
@@ -187,7 +187,7 @@
                         
                         <?php if(!empty($this->place->info))	: ?>
                         <div class="descrip">
-                            <p><?= $this->place->info ?></p>
+                            <p class="js-translate" data-text="<?= $this->place->info ?>"></p>
                         </div><!--DESCRIP-->
                         <?php endif ?>
                         

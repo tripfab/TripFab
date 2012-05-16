@@ -585,5 +585,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $conf = $this->getOption('css');
         Zend_Registry::set('vc',$conf['version_control']);
     }
+    
+    protected function _initGoogle()
+    {
+        $conf = $this->getOption('googleapis');
+        Zend_Registry::set('gl', $conf);
+    }
 }
 

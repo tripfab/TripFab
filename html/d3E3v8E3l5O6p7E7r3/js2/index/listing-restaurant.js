@@ -434,3 +434,20 @@ function move(id,spd){
         obj.style.top=(spd>0?0:max)+"px";
     }
 }
+
+function translate($element) {
+    $text = $element.data('text');
+    $.ajax({
+        url:'/ajax/translate',
+        data:{text:$text},
+        success:function(res){
+            $element.text(res);
+        }
+    });
+}
+
+$(function(){
+    $('.js-translate').each(function(){
+        translate($(this));
+    });
+});

@@ -3325,4 +3325,42 @@ class AjaxController extends Zend_Controller_Action
         header('Content-type: application/json');
         echo json_encode($result); die;
     }
+    
+    public function translateAction(){
+        if(Zend_Registry::isRegistered('cache'))
+            $cache = Zend_Registry::get('cache');
+        
+        $text = $this->_getParam('text');
+        
+        $cacheId = 'translates_'.md5($text);
+        
+        if(!is_null($cache)) {
+            if($cache->test($cacheId) !== false) {
+                header('Content-type: text/plain');
+                echo $cache->load($cacheId); die;
+            }
+        }
+        
+        $conf   = Zend_Registry::get('gl');
+        $client = new Zend_Http_Client($conf['translate']);
+        $client->setParameterGet('key',$conf['key']);
+        $client->setParameterGet('userOd','50.56.241.127');
+        $client->setParameterGet('source', 'es');
+        $client->setParameterGet('target', 'en');
+        $client->setParameterGet('q',$text);
+        
+        $respomse   = $client->request();
+        $traslation = json_decode($respomse->getBody());
+        
+        if(isset($traslation->error)) {
+            header('Content-type: text/plain');
+            echo $text; die;
+        }
+        
+        if(!is_null($cache)) 
+            $cache->save($traslation->data->translations->translatedText, $cacheId);
+        
+        header('Content-type: text/plain');
+        echo $traslation->data->translations->translatedText; die;
+    }
 }
