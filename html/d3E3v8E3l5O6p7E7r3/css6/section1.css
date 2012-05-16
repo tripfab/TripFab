@@ -1186,12 +1186,14 @@
 #lstng_htl .tabs .info .duration {
 	background-position: -390px -218px;
 }
-
 #lstng_htl .tabs .info .depature {
 	background-position: -427px -217px;
 }
 #lstng_htl .tabs .info .return {
 	background-position: -459px -218px;
+}
+#lstng_htl .tabs .info .cancel {
+	background-position: -493px -218px;
 }
 #lstng_htl .tabs .info p {
 	color: #303030;
@@ -2118,6 +2120,64 @@ background: url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat -407
     font: 14px/18px Helvetica;
     padding-bottom: 18px;
 }
+/*- RESTRICCTIONS LISTING -*/
+.cancel_policy {
+	width:960px;
+}
+.cancel_policy .top {
+	height:42px;
+	font:bold 13px/42px Helvetica, sans-serif;
+	color:#FFF;
+	padding-left:20px
+}
+.cancel_policy .mid {
+	padding:20px;
+	background-color: #FFF;
+}
+.cancel_policy .mid h3 {
+	font-size: 13px;
+	margin-bottom: 15px;
+} 
+.cancel_policy .mid ul {
+	padding-bottom: 29px;
+}
+.cancel_policy .mid ul li {
+	list-style:none;
+	font:normal 12px/16px Helvetica, sans-serif;
+	color:#303030
+}
+.cancel_policy .mid .inner {
+	background-color: #f3f3f3;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: inset 0px 0px 3px 2px #b4b4b4;
+	-moz-box-shadow: inset 0px 0px 3px 2px #b4b4b4;
+	box-shadow: inset 0px 0px 3px 2px #b4b4b4;
+}
+.cancel_policy .mid .inner img {
+	padding: 16px 0 16px 33px;
+}
+.cancel_policy .mid .specs {
+	padding-left: 10px;
+	background: url(https://static.tripfab.com/images2/cancellations_policyg.png) repeat-x 0 0;
+}
+.cancel_policy .mid .column {
+	width: 300px;
+	float: left;
+	background: url(https://static.tripfab.com/images2/cancellations_policy.png) no-repeat right bottom;
+	height: 124px;
+}
+.cancel_policy .mid .column.last {
+	background: none;
+}
+.cancel_policy .mid .column p {
+	padding:20px 20px 0;
+	color: #303030;
+	font: 12px/18px Helvetica;
+}
+/*- END RESTRICCTIONS LISTING -*/
+
 /*- END LISTING HOTELS --------------------------------------------*/
 /*-	LISTING TOURIST SIGHTS ----------------------------------------*/
 .bg_ts {
@@ -2583,33 +2643,43 @@ background: url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat -407
 	float: right;
 	behavior: url(/PIE.htc);
 }
-#src_map .top .src_bar .note1 {
+#src_map .top .src_bar .note {
 	display: none;
 	position: absolute;
 	bottom: -25px;
-	left: 0;
+	left: -8px;
 	background: url(https://static.tripfab.com/images6/searchWgG.png) repeat-x 0 0;
 	height:29px;
 	font: normal 13px/29px Helvetica;
 	color: #303030;
 	text-align: center;
-	padding: 0 8px;
-	text-shadow: 0 1px 0 0 #FFF;
+	text-shadow: 0px 1px 0px #FFF;
 	-webkit-box-shadow: 0px 0px 2px 1px rgba(60, 60, 60, 0.2);
 	box-shadow: 0px 0px 2px 1px rgba(60, 60, 60, 0.2);
 	-moz-shadow:0px 0px 2px 1px rgba(60, 60, 60, 0.2);
 }
-#src_map .top .src_bar .note1 em {
+#src_map .top .src_bar .note em {
 	display: block;
 	background: url(https://static.tripfab.com/images6/searchWgA.png) no-repeat 0 0;
-	width: 10px;
-	height: 4px;
-	margin: -4px auto 0;
+	width: 15px;
+	height: 7px;
+	margin: -7px auto 0;
 }
-#src_map .top .src_bar .note1 p {
-	background: url(https://static.tripfab.com/images6/flagCR.png) no-repeat left 50%;
+#src_map .top .src_bar .note p.flag {
+	background: url(https://static.tripfab.com/images6/flagCR.png) no-repeat 10px 50%;
 	padding-left: 22px;
 }
+#src_map .top .src_bar #note1 {
+	width: 422px;
+}
+#src_map .top .src_bar #note2 {
+	width: 352px;
+	text-align: left;
+	text-indent: 15px;
+	left: 27px;
+}
+
+
 #src_map .top .src_bar input[type="text"]:focus {
 	font-weight: bold;
 	color: #303030;

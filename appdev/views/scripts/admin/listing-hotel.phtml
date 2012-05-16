@@ -185,7 +185,9 @@
                                     <h5>Things you'll love</h5>
                                     <p><?= nl2br($this->overview->love) ?></p>
                                     <?php endif ?>
-                                    
+                                    <li><span class="cancel"></span><strong>Cancellation</strong> 
+                                        <p><a href="#policy" class="link1 lb">High Restriction</a></p>
+                                    </li>
                                     <?php if($ok): ?>
                                     <div class="empty">
                                         <p>There are no description yet. 
@@ -224,7 +226,7 @@
                                     <?php endif ?>
                                     <?php if(!$ok3): ?>
                                     <div class="policies">
-                                        <h5>Restrictions</h5>
+                                        <h5>Policies</h5>
                                         <ul>
 											<?php foreach($this->details as $detail): ?>
                                             <?php if($detail->type == 3): ?>
@@ -626,7 +628,46 @@
                 </form>
             </div><!--CREATE_TRIP-->
         </div>
-    </div>
+        
+        
+        <div id="policy">
+            <div class="cancel_policy lb">
+        		<div class="top">Low Restrictions Cancellation Policy</div>
+        		<div class="mid">
+        			<h3>Full refund 1 day prior to arrival, except fees</h3>
+        			<ul>
+        				<li>Cleaning fees are always refunded if the guest did not check in</li>
+        				<li>The Tripfab service fee is refundable.</li>
+        				<li>If there is a complaint from either party, notice must be given to Tripfab 
+        				Resolution Center within 24 hours of check-in</li>
+        				<li>Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+        				<li>A reservation is not officially canceled until the guest receives a cancellation confirmation 
+        				e-mail from Tripfab Resolution Center.</li>
+        			</ul>
+        			<div class="inner">
+        				<img src="https://static.tripfab.com/images2/img-65-hotel.png" alt="" />
+        				<div class="specs">
+        					<div class="column">
+        						<p>Must be made a full 24 hours prior to listing's local check in time (or 2:00 PM 
+        						if not specified) on the day of check in. For example, if check-in is on Friday, 
+        						cancel by Thursday of that week before check in time.</p>
+        					</div><!--COLUMN-->
+        					<div class="column">
+        						<p>If the guest cancels less than 24 hours before check-in, the first night is non-refundable.</p>
+        					</div><!--COLUMN-->
+        					<div class="column last">
+        						<p>If the guest arrives and decides to leave early, the nights not spent 24 hours after 
+        						the official cancellation are 100% refunded.</p>
+        					</div><!--COLUMN-->
+        					<div class="clear"></div>
+        				</div><!--SPECS-->
+        			</div><!--INNER-->
+        		</div><!--MID-->
+        	</div><!--CANCEL_POLICY-->
+        </div>
+        
+        
+    </div><!--HIDDEN-->
 </div><!--WRAPPER_ALL-->
 <input type="hidden" value="<?= ($this->listing->lat) ? $this->listing->lat : 'none' ?>" name="listlat" />
 <input type="hidden" value="<?= ($this->listing->lng) ? $this->listing->lng : 'none' ?>" name="listlng" />
