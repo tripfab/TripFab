@@ -158,6 +158,43 @@
 #header .login input[type="text"] { background-position:-72px -53px;}
 #header .login input[type="password"] { background-position: -72px -95px;}
 
+#header .top_search .note {
+	display: none;
+	position: absolute;
+	bottom: -25px;
+	left: -8px;
+	background: url(https://static.tripfab.com/images6/searchWgG.png) repeat-x 0 0;
+	height:29px;
+	font: normal 12px/29px Helvetica;
+	color: #303030;
+	text-align: center;
+	text-shadow: 0px 1px 0px #FFF;
+	-webkit-box-shadow: 0px 0px 2px 1px rgba(60, 60, 60, 0.2);
+	box-shadow: 0px 0px 2px 1px rgba(60, 60, 60, 0.2);
+	-moz-shadow:0px 0px 2px 1px rgba(60, 60, 60, 0.2);
+}
+#header .top_search .note em {
+	display: block;
+	background: url(https://static.tripfab.com/images6/searchWgA.png) no-repeat 0 0;
+	width: 15px;
+	height: 5px;
+	margin: -5px auto 0;
+}
+#header .top_search .note p.flag {
+	background: url(https://static.tripfab.com/images6/flagCR.png) no-repeat 10px 50%;
+	padding-left: 22px;
+}
+#header .top_search #note3 {
+	width: 392px;
+	left: -94px;
+}
+#header .top_search #note4 {
+	width: 326px;
+	text-align: left;
+	text-indent: 15px;
+	left: -68px;
+}
+
 #header .login .bttns {
 	position: relative;
 	height: 30px;
@@ -313,6 +350,7 @@
 	float: right;
 	width: 200px;
 	margin-right: 12px;
+	position: relative;
 }
 #header .top_search input[type="text"] {
 	background: url(https://static.tripfab.com/images6/header_icons.png) repeat-x -106px -10px #393939;
@@ -441,7 +479,9 @@
 #citiesAutocompleteContainer .ui-autocomplete li a.ui-state-hover {
 	background: url(https://static.tripfab.com/images2/arrow-25.png) no-repeat 98% 50% #60b6e8;
 	color: #FFFFFF;
-	text-decoration:none;}
+	text-decoration:none;
+	border: none;
+}
 #citiesAutocompleteContainer2 {
 	height:0px;}
 #citiesAutocompleteContainer2 .ui-autocomplete { 

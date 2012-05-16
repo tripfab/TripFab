@@ -1577,6 +1577,10 @@ border-top: 1px solid #e3e3e3;
 .sidebar .widget.menu ul li a {
 	color: #60b5f7;
 }
+.sidebar .widget.menu ul li a .num {
+	color: #898989;
+	font: normal 11px Helvetica;
+}
 .sidebar .widget.menu ul li a:hover{
 	color: #90CEFF;
 	text-decoration: none;
@@ -17329,6 +17333,19 @@ background-color: #FFF;
 	margin: 20px auto 0;
 	padding-bottom: 150px;
 }
+#all_trips .create {
+	text-align: center;
+	font: bold 14px Helvetica;
+	color: #303030;
+	padding: 10px 0 25px;
+}
+#all_trips .create a {
+	color: #8dc63f;
+	text-decoration: underline;
+}
+#all_trips .create a:hover{
+	color:#a4de56
+}
 #all_trips .single {
 	width: 958px;
 	background-color:#FFF;
@@ -17623,8 +17640,14 @@ background-color: #FFF;
 	text-align: center;
 	font: bold 20px Helvetica;
 }
-
-
+.no_trips .icon a {
+	color: #8dc63f;
+	display: block;
+	margin-top: 5px;
+}
+.no_trips .icon a:hover {
+	color: #a4de56;
+}
 #all_trips .notification {
 	margin-bottom: 20px;
 	background-color: #ffffdb;
@@ -19870,6 +19893,67 @@ h2.title .back:hover,
 #errorpage .bottom .previous-page a:hover {
 	color:#0a283e;
 } 
+#errorpage .search .note {
+	display: none;
+	position: absolute;
+	bottom: -25px;
+	left: -23px;
+	background: url(https://static.tripfab.com/images6/homeWgG.png) repeat-x 0 0;
+	height:37px;
+	font: normal 16px/37px Helvetica;
+	color: #303030;
+	text-align: center;
+	text-shadow: 0px 1px 0px #FFF;
+	-webkit-box-shadow: 0px 0px 2px 1px rgba(60, 60, 60, 0.2);
+	box-shadow: 0px 0px 2px 1px rgba(60, 60, 60, 0.2);
+	-moz-shadow:0px 0px 2px 1px rgba(60, 60, 60, 0.2);
+}
+#errorpage .search .note em {
+	display: block;
+	background: url(https://static.tripfab.com/images6/searchWgA.png) no-repeat 0 0;
+	width: 15px;
+	height: 7px;
+	margin: -7px auto 0;
+}
+#errorpage .search .note p.flag {
+	background: url(https://static.tripfab.com/images6/homeWf.png) no-repeat 10px 50%;
+	padding-left: 35px;
+}
+#errorpage .search #note1 {
+	width: 513px;
+}
+#errorpage .search #note2 {
+	width:513px;
+	text-align: left;
+	text-indent: 15px;
+}
+#errorpage #citiesAutocompleteContainerError .ui-autocomplete {
+	border-radius:2px;
+	overflow-x:hidden;
+	overflow-y:auto;
+	width:462px;
+	background:#fff;
+	box-shadow: 0 0 10px #000000; 
+	max-height: 240px;
+	left:-451px !important;
+	top:44px !important;
+	z-index: 1000 !important;
+}
+
+#errorpage #citiesAutocompleteContainerError .ui-autocomplete li a {
+	line-height:24px;
+	color:#464646;
+	padding-left:10px;
+	font-weight:bold;
+	display:block;
+	font-size: 14px;
+}
+#errorpage #citiesAutocompleteContainerError .ui-autocomplete li a:hover,  
+#errorpage #citiesAutocompleteContainerError .ui-autocomplete li a.ui-state-hover {
+	background: url(https://static.tripfab.com/images2/arrow-25.png) no-repeat 98% 50% #60b6e8;
+	color: #FFFFFF;
+	text-decoration:none;
+}
 /*END 404 ERROR PAGE-------------------------------------------------------*/
 /*TERMS OF USE-------------------------------------------------------------*/
 #terms_use {

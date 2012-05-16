@@ -510,6 +510,7 @@ $(document).ready(function() {
 	});
 	$( "#citiesSearch2" ).focusout(function() {
 		$('#note2').fadeOut('slow');
+		$('#note1').fadeOut('slow');
 	});
 });
 

@@ -28,37 +28,35 @@
 					.appendTo( ul );
 				};
 			}
-		});	
+		});
     });	
+    $(document).ready(function() {
+    	
+    	$('#tags').one('click', function() {
+    		$('#note1').fadeIn('slow');
+    		return false;
+    	});
+    	$('#tags').keypress(function() {
+    		$('#citiesAutocompleteContainer2 ul').css('display', 'block');
+    	});
+    	$('#tags').keypress("autocompleteclose", function() {
+    		$('#note1').fadeOut('fast');
+    	});
+    	$( "#tags" ).bind( "autocompleteclose", function() {
+    		$('#note2').fadeIn('slow');
+    	});
+    	$( "#tags" ).bind( "autocompleteopen", function() {
+    		$('#note2').fadeOut('slow');
+    	});
+    	$( "#tags" ).focusout(function() {
+    		$('#note2').fadeOut('slow');
+    		$('#note1').fadeOut('slow');
+    	});
+    	$( "#tags" ).bind( "autocompleteselect", function() {
+    		$('#note2').hide();
+    	});
+    });
 	</script>
-    <style type="text/css">
-	#citiesAutocompleteContainerError .ui-autocomplete {
-		border-radius:2px;
-		overflow-x:hidden;
-		overflow-y:auto;
-		width:462px;
-		background:#fff;
-		box-shadow: 0 0 10px #000000; 
-		max-height: 240px;
-		left:440px !important;
-		top:-265px !important;
-	}
-	
-	#citiesAutocompleteContainerError .ui-autocomplete li a {
-		line-height:24px;
-		color:#464646;
-		padding-left:10px;
-		font-weight:bold;
-		display:block;
-		font-size: 14px;
-	}
-	#citiesAutocompleteContainerError .ui-autocomplete li a:hover,  
-	#citiesAutocompleteContainerError .ui-autocomplete li a.ui-state-hover {
-		background: url(https://static.tripfab.com/images2/arrow-25.png) no-repeat 98% 50% #60b6e8;
-		color: #FFFFFF;
-		text-decoration:none;
-	}
-	</style>
 </head>
 <body>
 <div class="w1" id="errorpage">
@@ -76,6 +74,13 @@
                     <fieldset>
                         <input type="text" id="tags" value="Where do you want to go?"  />
                         <input type="submit" class="btn-1 noclean" value="Go!" />
+                        <div id="citiesAutocompleteContainerError"></div>
+                        <div id="note1" class="note"><em></em>
+                        	<p class="flag">We have listings only in <strong>Costa Rica</strong>, other countries coming soon.</p>
+                        </div><!--NOTE1-->
+                        <div id="note2" class="note"><em></em>
+                        	<p><strong>0 Results. </strong>You know we work just in Costa Rica. Right?</p>
+                        </div><!--NOTE2-->
                     </fieldset>
                 </form>
             </div><!--SEARCH--> 
@@ -107,6 +112,6 @@
 <?php endif ?>
 -->
 
-<div id="citiesAutocompleteContainerError"></div>
+
 </body>
 </html>
