@@ -307,10 +307,14 @@ $(document).ready(function() {
 			url: '/ajax/newssignup',
 			data: {email:$email},
 			success: function() {
-				$('#newsletter .cont').fadeOut('fast', function(){
-					$('#newsletter .sent').fadeIn('fast');
+				google_conversion_id = 956485843;
+				google_conversion_label = "wsLjCI2i8gMQ06GLyAM";
+				$.getScript('http://www.googleadservices.com/pagead/conversion.js',function(){				
+					$('#newsletter .cont').fadeOut('fast', function(){
+						$('#newsletter .sent').fadeIn('fast');
+					});
+					$.cookie('newsletter','1',{ expires: 365 })
 				});
-				$.cookie('newsletter','1',{ expires: 365 })
 			}
 		});
 		
