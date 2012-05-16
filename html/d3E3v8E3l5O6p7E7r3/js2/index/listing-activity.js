@@ -7,43 +7,44 @@
         return json;
     };
 })( jQuery );
+
 $(document).ready(function() {
 
-	function countLines() {
+    function countLines() {
 	
-			var num  = 25;
-			var num2  = 35;
-			var num3  = 32;
-			var ttl  = $(".ttl h2").height();
-			var ttl2 = $(".qz").height();
-			var ttl3 = $(".dscript h3").height();
+        var num  = 25;
+        var num2  = 35;
+        var num3  = 32;
+        var ttl  = $(".ttl h2").height();
+        var ttl2 = $(".qz").height();
+        var ttl3 = $(".dscript h3").height();
 			
-			if(ttl > num) {
-				$(".ttl h2").parent().addClass("two");
-			}
-			if(ttl2 > num2) {
-				$(".qz").addClass("two");
-			}
-			if(ttl3 > num3) {
-				$(".location").css('margin-bottom', '7px');
-			}
-			console.log(ttl3);
-		}
+        if(ttl > num) {
+            $(".ttl h2").parent().addClass("two");
+        }
+        if(ttl2 > num2) {
+            $(".qz").addClass("two");
+        }
+        if(ttl3 > num3) {
+            $(".location").css('margin-bottom', '7px');
+        }
+        console.log(ttl3);
+    }
 		
-		countLines();
+    countLines();
 
-	$('a.lbc').fancybox({
-	    padding: 0,
-	    overlayColor: '#FFF',
-	    overlayOpacity: '0.7',
-	    showCloseButton: false,
-	    centerOnScroll: true,
-	    titlePosition: 'inside',
-	    showNavArrows: true
-	});
-	$('#fancybox-title').addClass('tittle');
-	$('#fancybox-left-ico').addClass('lfarrow');
-	$('#fancybox-right-ico').addClass('rgarrow');
+    $('a.lbc').fancybox({
+        padding: 0,
+        overlayColor: '#FFF',
+        overlayOpacity: '0.7',
+        showCloseButton: false,
+        centerOnScroll: true,
+        titlePosition: 'inside',
+        showNavArrows: true
+    });
+    $('#fancybox-title').addClass('tittle');
+    $('#fancybox-left-ico').addClass('lfarrow');
+    $('#fancybox-right-ico').addClass('rgarrow');
 
     $('#mapcanvas').data('lat', $('input[name=listlat]').val());
     $('#mapcanvas').data('lng', $('input[name=listlng]').val());
@@ -136,10 +137,50 @@ $(document).ready(function() {
     });
     $('input[name=capacity]').click(function(){
         $('#accordion').accordion('activate',2);
+        
+        $('select[name=adults].ocp').html('');
+        $('select[name=kids].ocp').html('');
+        
+        var min = parseInt($(this).data('min'));
+        var max = parseInt($(this).data('max'));
+        var kids = parseInt($(this).data('kids'));
+        console.log(kids);
+        if(kids == 1) {
+            for(i=min;i<=max;i++) {
+                $('select[name=adults].ocp').append('<option value="'+i+'">'+i+'</option>');
+            }
+            console.log($('select[name=kids].ocp').parent());
+            if($('select[name=kids].ocp').length == 0) {
+                $('select[name=adults].ocp').parent().after('<label>Children<select class="ocp kid" name="kids"></select></label>');
+            }
+            for(i=0;i<=max;i++) {
+                $('select[name=kids].ocp').append('<option value="'+i+'">'+i+'</option>');
+            }
+        } else {
+            for(i=min;i<=max;i++) {
+                $('select[name=adults].ocp').append('<option value="'+i+'">'+i+'</option>');
+            }
+            $('select[name=kids].ocp').parent().remove();
+        }
+        for(i=min;i<=max;i++) {
+            $('select[name=adults].ocp').append('<option value="'+i+'">'+i+'</option>');
+        }
         refreshPrice();
     });
-    $('select[name=kids]').change(refreshPrice);
-    $('select[name=adults]').change(refreshPrice);
+    $('select[name=kids].ocp').live('change',function(){
+        refreshPrice();
+    });
+    $('select[name=adults].ocp').live('change', function(){
+        var min = parseInt($(this).val());
+        var max = parseInt($('option:last',this).text());
+        
+        $('select[name=kids].ocp').html('');
+        for(i=0;i<=(max-min);i++) {
+            $('select[name=kids].ocp').append('<option value="'+i+'">'+i+'</option>');
+        }
+        
+        refreshPrice();
+    });
 });
 
 $(function(){
@@ -170,8 +211,8 @@ function refreshPrice()
         checkin	 : $('#inputCheckin').val(),
         option	 : $('input[name=option]:checked').val(),
         capacity : $('input[name=capacity]:checked').val(),
-        adults	 : $('select[name=adults]').val(),
-        kids	 : $('select[name=kids]').val(),
+        adults	 : $('select[name=adults].ocp').val(),
+        kids	 : $('select[name=kids].ocp').val(),
         id		 : $('body').data('listingid'),
         token	 : $('body').data('listingtoken'),
         price	 : $('body').data('listingprice')
@@ -547,7 +588,10 @@ $(document).ready(function() {
     
     $('#tooltipHelpList').submit(function(){
         if($('input[type=checkbox]', this).is(':checked')) {
-            $.cookie('tooltipHelpList','yes',{expires:365,path:'/'});
+            $.cookie('tooltipHelpList','yes',{
+                expires:365,
+                path:'/'
+            });
         }
         $('.firstime_tip').fadeOut();
         return false;        

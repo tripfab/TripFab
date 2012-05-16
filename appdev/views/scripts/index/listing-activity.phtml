@@ -370,12 +370,14 @@
                                             <span class="line"></span>
                                             <div class="details">
 	                                            <table>
-	                                            	<?php if((is_null($this->listing->min) or is_null($this->listing->max)) and 
-													count($this->capacities) > 0): ?>
-	                                            	<?php foreach($this->capacities as $option): ?>
+	                                            	<?php foreach($this->capacities as $kopt=>$option): ?>
 	                                            	<tr>
 	                                            		<td>
-	                                            			<input class="noclean" type="radio" value="<?= $option->id ?>" name="capacity" id="activityType<?= $option->id ?>">
+                                                        	<?php $checked = ($kopt == 0) ? 'checked="checked"' : '' ?>
+	                                            			<input class="noclean" type="radio" value="<?= $option->id ?>" 
+                                                            <?= $checked ?> name="capacity" id="activityType<?= $option->id ?>"
+                                                            data-min="<?= $option->min ?>" data-max="<?= $option->max ?>"
+                                                            data-kids="<?= $option->kids ?>">
 	                                            		</td>
 	                                            		<td>
 		                                            		<label for="activityType<?= $option->id ?>">
@@ -384,18 +386,6 @@
 		                                            	</td>
 	                                            	</tr>
 	                                            	<?php endforeach ?>
-	                                            	<?php else: ?>
-	                                            	<tr>
-	                                            		<td>
-	                                            			<input checked="checked" class="noclean" type="radio" value="single" name="capacity" id="activityType0">
-	                                            		</td>
-	                                            		<td>
-	                                            			<label for="activityType0">
-	                                            			Single Capacity (<?= $this->listing->min ?> - <?= $this->listing->max ?>) / 
-	                                            			$<?= $this->formatnumber($this->listing->price) ?></label>
-	                                            		</td>
-	                                            	</tr>
-	                                            	<?php endif ?>
 	                                            </table>
 	                                    	</div><!--DETAILS-->
                                         </div><!--TYPE-->
@@ -437,23 +427,26 @@
                                         <div class="selects activity">
                                             <span class="line"></span>
                                             <?php if(count($this->capacities) > 1): ?>
+                                            <?php $option = $this->capacities[0] ?>
                                             <label class="rooms">
                                                 Adults
                                                 <select class="ocp adt"  name="adults">
-                                                    <?php for($i=1; $i<=12; $i++): ?>
+                                                    <?php for($i=$option->min; $i<=$option->max; $i++): ?>
                                                     <option value="<?= $i ?>"><?= $i ?></option>
                                                     <?php endfor ?>
                                                 </select>
                                             </label>
+                                            <?php if($option->kids == 1): ?>
                                             <label>
                                                 Children
                                                 <select class="ocp kid" name="kids">
                                                     <option value="0">0</option>
-                                                    <?php for($i=1; $i<=12; $i++): ?>
+                                                    <?php for($i=1; $i<=$option->max; $i++): ?>
                                                     <option value="<?= $i ?>"><?= $i ?></option>
                                                     <?php endfor ?>
                                                 </select>
                                             </label>
+                                            <?php endif ?>
                                             <?php else: ?>
 	                                        <?php if(count($this->capacities) > 0): ?>
                                             <?php $option = $this->capacities[0] ?>
@@ -465,6 +458,7 @@
                                                     <?php endfor ?>
                                                 </select>
                                             </label>
+                                            <?php if($option->kids): ?>
                                             <label>
                                                 Children
                                                 <select class="ocp kid" name="kids">
@@ -474,6 +468,7 @@
                                                     <?php endfor ?>
                                                 </select>
                                             </label>
+                                            <?php endif ?>
                                             <?php else: ?>
                                             <?php if(!is_null($this->listing->max) and !is_null($this->listing->min)): ?>
                                             <label class="rooms">
@@ -484,6 +479,7 @@
                                                     <?php endfor ?>
                                                 </select>
                                             </label>
+                                            <?php if($this->listing->kids): ?>
                                             <label>
                                                 Children
                                                 <select class="ocp kid" name="kids">
@@ -493,6 +489,7 @@
                                                     <?php endfor ?>
                                                 </select>
                                             </label>
+                                            <?php endif ?>
                                             <?php else: ?>
                                             <label class="rooms">
                                                 Adults

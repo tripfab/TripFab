@@ -1956,7 +1956,7 @@ class WS_ListingService {
             $max = 50;
         $kids_alowed = (!is_null($capacity)) ? $capacity->kids : $listing->kids;
         
-        if($kids > 0 && !is_null($kids_alowed))
+        if($kids > 0 && (is_null($kids_alowed) || $kids_alowed != 1))
             throw new Exception('Kids are not allowed', 2);
         
         $total_people = $kids + $adults;
