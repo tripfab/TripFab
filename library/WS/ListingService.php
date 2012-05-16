@@ -601,6 +601,7 @@ class WS_ListingService {
                 $select->where('listings.main_type = ?', $_cat->id);}
             if($subcat != 'all'){
                 $select->join('listing_listingtypes', 'listing_listingtypes.listing_id = listings.id' ,array('subcat' => 'listingtype_id'));
+                $select->join('listing_types', 'listing_types.id = listing_listingtypes.listingtype_id' ,array('subcatname' => 'name'));
                 if(count($subcat) == 1) {
                     $select->where('listing_listingtypes.listingtype_id = ?', reset($subcat));
                 } else {
@@ -611,6 +612,9 @@ class WS_ListingService {
                         else $select->orWhere('listing_listingtypes.listingtype_id = ?', $sc);
                         $i++;}
                 }
+            } else {
+                $select->joinLeft('listing_listingtypes', 'listing_listingtypes.listing_id = listings.id' ,array('subcat' => 'listingtype_id'));
+                $select->joinLeft('listing_types', 'listing_types.id = listing_listingtypes.listingtype_id' ,array('subcatname' => 'name'));
             }
             //echo $select->assemble(); die;
             if($sort != 'newest'){

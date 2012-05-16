@@ -109,8 +109,9 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
             </ul>
             <div class="hvr">
             	<a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>"></a>
-				<span class="type"><em class="<?= $icons[$list->main_type] ?>"></em>Type <strong>Adventure</strong></span>
-				<span class="cat"><em></em>Category <strong>Mexican Food</strong></span>
+				<span class="type"><em class="<?= $icons[$list->main_type] ?>"></em>Type <strong><?= $cat_name[$list->main_type] ?></strong></span>
+				<span class="cat"><em></em>Category 
+                <strong><?= empty($list->subcatname) ? 'Other' : $list->subcatname ?></strong></span>
 				<div class="tooltip hidden">Add to My Trips<span></span></div>
 			</div><!--HVR-->
         </div><!--IMAGE-->
@@ -143,8 +144,9 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
             </ul>
             <div class="hvr">
             	<a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>"></a>
-				<span class="type"><em class="htl"></em>Type <strong>Hotel</strong></span>
-				<span class="cat"><em></em>Category <strong>Beach Resort</strong></span>
+				<span class="type"><em class="htl"></em>Type <strong><?= $cat_name[$list->main_type] ?></strong></span>
+				<span class="cat"><em></em>Category 
+                <strong><?= empty($list->subcatname) ? 'Other' : $list->subcatname ?></strong></span>
 				<div class="tooltip hidden">Add to My Trips<span></span></div>
 			</div><!--HVR-->
         </div><!--IMAGE-->
@@ -178,9 +180,9 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
             </ul>
             <div class="hvr">
             	<a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>"></a>
-        		<span class="type"><em class="act"></em>Type <strong>Activity</strong></span>
-        		<span class="cat"><em></em>Category <strong>Adventure</strong></span>
-        		
+        		<span class="type"><em class="act"></em>Type <strong><?= $cat_name[$list->main_type] ?></strong></span>
+				<span class="cat"><em></em>Category 
+                <strong><?= empty($list->subcatname) ? 'Other' : $list->subcatname ?></strong></span>        		
         		<div class="tooltip hidden">Add to My Trips<span></span></div>
         	</div><!--HVR-->
         </div><!--IMAGE-->
