@@ -17333,6 +17333,19 @@ background-color: #FFF;
 	margin: 20px auto 0;
 	padding-bottom: 150px;
 }
+#all_trips .create {
+	text-align: center;
+	font: bold 14px Helvetica;
+	color: #303030;
+	padding: 10px 0 25px;
+}
+#all_trips .create a {
+	color: #8dc63f;
+	text-decoration: underline;
+}
+#all_trips .create a:hover{
+	color:#a4de56
+}
 #all_trips .single {
 	width: 958px;
 	background-color:#FFF;
@@ -17627,8 +17640,14 @@ background-color: #FFF;
 	text-align: center;
 	font: bold 20px Helvetica;
 }
-
-
+.no_trips .icon a {
+	color: #8dc63f;
+	display: block;
+	margin-top: 5px;
+}
+.no_trips .icon a:hover {
+	color: #a4de56;
+}
 #all_trips .notification {
 	margin-bottom: 20px;
 	background-color: #ffffdb;

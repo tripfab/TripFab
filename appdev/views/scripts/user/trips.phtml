@@ -27,6 +27,7 @@
     
     <?php if(count($this->trips) > 0): ?>
     <div id="all_trips">
+    	<div class="create">Wanna create a new trip? <a href="#create_trip" class="lbc">Click here</a></div>
     	<?php if(count($this->missed) > 0): ?>
     	<div class="notification end-1">
 			<span class="end"></span>
@@ -152,7 +153,7 @@
     </div><!-- ALL_TRIPS -->
     <?php else: ?>
     	<div class="no_trips">
-    		<div class="icon">You are not planning any trip yet</div>
+    		<div class="icon">You are not planning any trip yet. <a href="#create_trip" class="lbc">Create a Trip Now</a></div>
     	</div><!--NO_TRIPS-->
     <?php endif ?>
     <?= $this->partial('partials/footer.phtml'); ?>
@@ -216,7 +217,59 @@
 	</div><!--DATES_LBX-->
     <?php endif ?>
     <?php endforeach ?>
+    
+    <div id="newtrip">
+    	<div id="create_trip">
+    		<form action="">
+                <div class="top">
+                    <h3>Create a New Trip</h3>
+                    <p>Complete the information below to start your next trip</p>
+                </div><!--TOP-->
+                <div class="cont">
+                    <fieldset>
+                        <div class="item">
+                            <label class="trip">Trip Name</label>
+                            <input type="text" name="title" value="" />
+                        </div><!--ITEM-->
+                        <div class="item">
+                            <label class="dates">Trip Dates</label>
+                            <input class="start" type="text" name="start" value="Starting Date" />
+                            <input class="end"type="text" name="end" value="Ending Date" />
+                            <label class="check">
+                                <input type="checkbox" class="nodatesyet"/>
+                                I don't know the travel dates yet
+                            </label>
+                        </div><!--ITEM-->
+                        <div class="item temp">
+                        	<label class="travelers">Travelers</label>
+                        	<select name="adults">
+                        		<option value="1">1 Adult</option>
+                                <?php for($i=2;$i<=20;$i++): ?>
+                                <option value="<?= $i ?>"><?= $i ?> Adults</option>
+                                <?php endfor ?>
+                        	</select>
+                        	<select name="kids">
+                        		<option value="">None</option>
+                        		<option value="1">1 Kid</option>
+                                <?php for($i=2;$i<=20;$i++): ?>
+                                <option value="<?= $i ?>"><?= $i ?> Kids</option>
+                                <?php endfor ?>
+                        	</select>
+                        </div><!--ITEM-->
+                    </fieldset>
+                </div><!--CONT-->
+                <div class="bottom">
+                    <input type="submit" class="btn-1 noclean" value="Create Trip" />
+                    <input type="button" onclick="$.fancybox.close(); return false;" class="btn-10 noclean" value="Cancel" />
+                </div><!--BOTTOM-->
+                <input type="hidden" name="trip" value="new" />
+                <input type="hidden" name="listing" value="" />
+            </form>
+    	</div><!--CREATE_TRIP-->
+    </div>
+    
 </div>
+
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 
 <script type="text/javascript">
@@ -237,7 +290,7 @@
 			return false
 		});
 		
-		$('.calendar').datepicker({
+		$('.calendar, .start, .end').datepicker({
 			dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
 			minDate:new Date(),
 			maxDate:'+1y',
