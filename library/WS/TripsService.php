@@ -681,6 +681,18 @@ class WS_TripsService {
         $table->delete('trip_id = ' . $trip);
     }
 
+    public function saveCategories($trip, $categories) {
+        $table = new Zend_Db_Table('trip_tripcategories');
+		$table->delete('trip_id = ' . $trip);		
+        foreach($categories as $category){
+			$row = $table->fetchNew();
+			$row->trip_id = $trip;
+			$row->category_id = $category;
+			$row->save();
+		}
+    }
+
+
     public function saveIncludes($trip, $includes, $type) {
         $table = new Zend_Db_Table('trip_includes');
         foreach ($includes as $include) {
@@ -877,6 +889,20 @@ class WS_TripsService {
         }
         
         return $trips;
+    }
+	
+	public function getTripCategories($id) {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->setFetchMode(Zend_Db::FETCH_OBJ);
+        $select = $db->select();
+        $select->from('trip_tripcategories');
+        $select->where('trip_id = ?', $id);
+		$categories = $db->fetchAll($select);
+		$cats = array();
+		foreach($categories as $category){
+			$cats[] = $category->category_id;
+		}
+        return $cats;
     }
 
 }

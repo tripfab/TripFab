@@ -4399,11 +4399,14 @@ class AdminController extends Zend_Controller_Action {
 
     private function tripEditTask1($trip) {
         $this->view->trip = $trip;
+		$this->view->tripCategories = $this->trips->getTripCategories($trip->id);
         $this->view->highlights = $this->trips->getHighlights($trip->id);
         $this->view->errors = array();
         $countries = $this->places->getPlaces(2);
         $this->view->countries = $countries;
 		$this->view->cities = json_encode($this->trips->getCities($trip->id));
+        $categories = new Zend_Db_Table('trip_categories');
+        $this->view->categories = $categories->fetchAll();
 
 
         if ($this->getRequest()->isPost()) {
@@ -4434,6 +4437,7 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->trip->min = $_POST['min'];
                 $this->view->trip->max = $_POST['max'];
                 $this->view->trip->category_id = $_POST['category_id'];
+				$this->view->tripCategories = $_POST['category_id'];
 
                 $this->render('trip1');
                 return;
@@ -4456,13 +4460,13 @@ class AdminController extends Zend_Controller_Action {
 
             $this->trips->saveHighlights($trip->id, $highlights);
 			$this->trips->saveCities($trip->id, $trip->country_id, $selectedCity );
+			$this->trips->saveCategories($trip->id, $_POST['category_id']);
+
             $_SESSION['alert'] = 'Your changes have been saved';
             $this->_redirect('/admin/trips/edit/1/' . $trip->id);
             //put success message
         }
         
-        $categories = new Zend_Db_Table('trip_categories');
-        $this->view->categories = $categories->fetchAll();
 
         $this->render('trip1');
     }
