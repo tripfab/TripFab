@@ -460,30 +460,28 @@ $(function(){
         alert('asd');
     });
 })
-
 $(document).ready(function() {
-	$('#citiesSearch2').click(function() {
-		$('.note1').fadeIn('slow');
+	
+	$('#citiesSearch2').one('click', function() {
+		$('#note1').fadeIn('slow');
 		return false;
 	});
-	
-	
 	$('#citiesSearch2').keypress(function() {
-		$('.note1').fadeOut('slow');
+		$('#citiesAutocompleteContainer2 ul').css('display', 'block');
 	});
-	
-	
-	
-//	function remenber() {
-//		if( $('ul.ui-autocomplete').css('display' == 'none')  ) {
-//			$('.note1').fadeIn('slow');
-//			alert("Hello");
-//		}
-//	}
-//	remenber();
+	$('#citiesSearch2').keypress("autocompleteclose", function() {
+		$('#note1').fadeOut('fast');
+	});
+	$( "#citiesSearch2" ).bind( "autocompleteclose", function() {
+		$('#note2').fadeIn('slow');
+	});
+	$( "#citiesSearch2" ).bind( "autocompleteopen", function() {
+		$('#note2').fadeOut('slow');
+	});
+	$( "#citiesSearch2" ).focusout(function() {
+		$('#note2').fadeOut('slow');
+	});
 });
-
-
 
 
 
