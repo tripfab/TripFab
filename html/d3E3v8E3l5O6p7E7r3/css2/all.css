@@ -7626,6 +7626,7 @@ h2.title .back:hover,
 	color: #616161;
 	line-height: normal;
 	font-size: 12px;
+	padding:19px 0 19px 28px;
 	-moz-border-radius-topleft: 0px;
 	-moz-border-radius-topright: 0px;
 	-moz-border-radius-bottomright: 4px;
@@ -7641,12 +7642,31 @@ h2.title .back:hover,
     font-weight: bold;
     line-height:32px;
 }
-.sign-box .foot a {
+.sign-box .content p a {
 	color: #60b5f7;
 	font-size: 12px;
 }
-.sign-box .foot > p {
+.sign-box .content p {
 	font: normal 12px/18px Helvetica;
+	text-align: center;
+	padding-right: 28px;
+}
+.sign-box .foot label {
+	color: #616161;
+    display: block;
+    float: left;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 40px;
+    vertical-align: middle;
+}
+.sign-box .foot input[type="submit"] {
+	float: right;
+	height: 40px;
+	border: none;
+	font-size: 16px;
+	padding:0 10px;
+	margin-right: 25px;
 }
 .sign-box .content input.in-1 {
 	background: url(https://static.tripfab.com/images2/ico-35.png) no-repeat 97% 50%;
@@ -7673,7 +7693,6 @@ h2.title .back:hover,
 .sign-box .content input.in-6 {
 	background: url(https://static.tripfab.com/images2/ico-45.png) no-repeat 97% 50%;
 }
-
 /*- End of Small Wrapper Styles -----------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------*/
 

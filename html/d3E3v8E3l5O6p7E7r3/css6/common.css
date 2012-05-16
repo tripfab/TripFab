@@ -867,7 +867,8 @@
 }
 .signLog .cntrl {
 	overflow: hidden;
-	padding-bottom: 15px;
+	padding: 15px 0;
+	border-top: 1px solid #e8e8e8;
 }
 .signLog .cntrl label{
 	font: bold 12px/30px Helvetica;
@@ -890,9 +891,8 @@
 	margin-right: 32px;
 }
 .signLog .note {
-	border-top: 1px solid #e8e8e8;
 	height: 45px;
-	padding: 15px 0 0 0;
+	padding: 0 28px 0 0;
 	background-color: #FFF;
 }
 #signIn.signLog .note {
