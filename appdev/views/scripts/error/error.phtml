@@ -9,7 +9,56 @@
     <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
     <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
-
+    <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+    <script type="text/javascript">
+	$(function(){
+		$.ajax({
+			url:'/ajax/getsearchtags',
+			success:function(tags){
+				$( "#tags" ).autocomplete({
+					source:tags,
+					select:function(e, ui){
+						window.location = ui.item.url
+					},
+					appendTo:'#citiesAutocompleteContainerError'
+				}).data( "autocomplete" )._renderItem = function( ul, item ) {
+					return $( "<li></li>" )
+					.data( "item.autocomplete", item )
+					.append( '<a href="'+item.url+'">' + item.label + "</a>" )
+					.appendTo( ul );
+				};
+			}
+		});	
+    });	
+	</script>
+    <style type="text/css">
+	#citiesAutocompleteContainerError .ui-autocomplete {
+		border-radius:2px;
+		overflow-x:hidden;
+		overflow-y:auto;
+		width:462px;
+		background:#fff;
+		box-shadow: 0 0 10px #000000; 
+		max-height: 240px;
+		left:440px !important;
+		top:-265px !important;
+	}
+	
+	#citiesAutocompleteContainerError .ui-autocomplete li a {
+		line-height:24px;
+		color:#464646;
+		padding-left:10px;
+		font-weight:bold;
+		display:block;
+		font-size: 14px;
+	}
+	#citiesAutocompleteContainerError .ui-autocomplete li a:hover,  
+	#citiesAutocompleteContainerError .ui-autocomplete li a.ui-state-hover {
+		background: url(https://static.tripfab.com/images2/arrow-25.png) no-repeat 98% 50% #60b6e8;
+		color: #FFFFFF;
+		text-decoration:none;
+	}
+	</style>
 </head>
 <body>
 <div class="w1" id="errorpage">
@@ -25,7 +74,7 @@
             <div class="search">
                 <form action="">
                     <fieldset>
-                        <input id="tags" type="text" value="Where do you want to go?"  />
+                        <input type="text" id="tags" value="Where do you want to go?"  />
                         <input type="submit" class="btn-1 noclean" value="Go!" />
                     </fieldset>
                 </form>
@@ -57,8 +106,7 @@
 
 <?php endif ?>
 -->
-<div id="citiesAutocompleteContainer"></div>
-<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
-<script type="text/javascript" src="/js2/error.js?v=<?= $this->cssVC ?>"></script>
+
+<div id="citiesAutocompleteContainerError"></div>
 </body>
 </html>

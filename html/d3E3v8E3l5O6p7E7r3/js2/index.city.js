@@ -343,11 +343,14 @@ $(function(){
                 $('input[type=checkbox]:checked', $widget).each(function(){
                     $cats.push($(this).val());
                 });
+        
+                $sort = $('.js-search-sort').val();
 				
                 var $data = {
                     pricemin :ui.values[0],
                     pricemax :ui.values[1],
-                    cats	  :$cats
+                    cats	  :$cats,
+                    sort     :$sort
                 };
 				
                 $.address.queryString($.param($data, true));
@@ -367,12 +370,15 @@ $(function(){
         // Get Price slider values
         $price  = $('#slider-4').slider('values');
         $('#slider-4').slider('disable');
-		
+        
+        $sort = $('.js-search-sort').val();
+        
         // Init data to send over ajax request
         var $data = {
             pricemin :$price[0],
             pricemax :$price[1],
-            cats	  :$cats
+            cats	  :$cats,
+            sort     :$sort
         };
 		
         $.address.queryString($.param($data, true));
@@ -393,6 +399,30 @@ $(function(){
         
         document.location.hash = $(this).attr('href');
         return false;
+    });
+    
+    $('.js-search-sort').live('change',function(){
+        
+        $price  = $('#slider-4').slider('values');
+        $('#slider-4').slider('disable');
+        
+        $rel  = '#/'+$.address.pathNames()[0];
+        $cats = new Array();
+        $widget = $('.widget[rel="'+$rel+'"]');
+        $('input[type=checkbox]:checked', $widget).each(function(){
+            $cats.push($(this).val());
+        });
+        
+        $sort = $(this).val();
+        
+        var $data = {
+            pricemin :$price[0],
+            pricemax :$price[1],
+            cats     :$cats,
+            sort     :$sort
+        };
+        
+        $.address.queryString($.param($data, true));
     });
     
     $(window).scroll(function(){

@@ -601,6 +601,7 @@ class WS_ListingService {
                 $select->where('listings.main_type = ?', $_cat->id);}
             if($subcat != 'all'){
                 $select->join('listing_listingtypes', 'listing_listingtypes.listing_id = listings.id' ,array('subcat' => 'listingtype_id'));
+                $select->join('listing_types', 'listing_types.id = listing_listingtypes.listingtype_id' ,array('subcatname' => 'name'));
                 if(count($subcat) == 1) {
                     $select->where('listing_listingtypes.listingtype_id = ?', reset($subcat));
                 } else {
@@ -611,6 +612,9 @@ class WS_ListingService {
                         else $select->orWhere('listing_listingtypes.listingtype_id = ?', $sc);
                         $i++;}
                 }
+            } else {
+                $select->joinLeft('listing_listingtypes', 'listing_listingtypes.listing_id = listings.id' ,array('subcat' => 'listingtype_id'));
+                $select->joinLeft('listing_types', 'listing_types.id = listing_listingtypes.listingtype_id' ,array('subcatname' => 'name'));
             }
             //echo $select->assemble(); die;
             if($sort != 'newest'){
@@ -624,7 +628,9 @@ class WS_ListingService {
                     case 'highest': $select->where('listings.price <> ?',0);
                         $select->order('listings.price DESC'); break;
                     default: break;
-                }}
+                }} else {
+                    $select->order('listings.created DESC');
+                }
             if($stars != 'all'){
                 $_stars = (int) str_replace('-stars','',$stars);
                 if(is_int($_stars) && $_stars > 0 && $_stars < 6){
@@ -1950,7 +1956,7 @@ class WS_ListingService {
             $max = 50;
         $kids_alowed = (!is_null($capacity)) ? $capacity->kids : $listing->kids;
         
-        if($kids > 0 && !is_null($kids_alowed))
+        if($kids > 0 && (is_null($kids_alowed) || $kids_alowed != 1))
             throw new Exception('Kids are not allowed', 2);
         
         $total_people = $kids + $adults;
