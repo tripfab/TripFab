@@ -5167,7 +5167,18 @@ $(function(){
             dataType:'json',
             success:function(res) {
                 if(res.type == "success") {
-                    window.location.reload();
+                    //window.location.reload();
+                    google_conversion_id = 956485843;
+                    google_conversion_label = 'bejuCMXWuAMQ06GLyAM';
+                    $.getScript('http://www.googleadservices.com/pagead/conversion.js',function(){
+                        $div = $('<div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/956485843/?label=bejuCMXWuAMQ06GLyAM&amp;guid=ON&amp;script=0"/></div>');
+                        $('img',$div).load(function(){
+                            window.location.reload();
+                        });
+                        $('#footer').append($div);
+                    });
+                    
+                    
                 } else if(res.type == "exists") {
                     showError('The email already exists');
                     $('input', $form).removeAttr('disabled');

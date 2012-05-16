@@ -3114,7 +3114,7 @@ class AjaxController extends Zend_Controller_Action
 
                 $email = new Zend_Validate_EmailAddress();
                 if(!$email->isValid($_POST['email']))
-                    throw new Exception('Invalid Emil Address');
+                    throw new Exception('Invalid Email Address');
 
                 $this->accounts = new WS_AccountService();
                 $_result = $this->accounts->login($_POST['email'], $_POST['password']);
