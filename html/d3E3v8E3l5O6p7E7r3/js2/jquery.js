@@ -5256,6 +5256,29 @@ $(function(){
     $appId = $('body').data('facebookid');
 });
 
+$(document).ready(function() {
+	
+	$('#citiesSearch').one('click', function() {
+		$('#note3').fadeIn('slow');
+		return false;
+	});
+	$('#citiesSearch').keypress(function() {
+		$('#citiesAutocompleteContainer2 ul').css('display', 'block');
+	});
+	$('#citiesSearch').keypress("autocompleteclose", function() {
+		$('#note3').fadeOut('fast');
+	});
+	$( "#citiesSearch" ).bind( "autocompleteclose", function() {
+		$('#note4').fadeIn('slow');
+	});
+	$( "#citiesSearch" ).bind( "autocompleteopen", function() {
+		$('#note4').fadeOut('slow');
+	});
+	$( "#citiesSearch" ).focusout(function() {
+		$('#note4').fadeOut('slow');
+		$('#note3').fadeOut('slow');
+	});
+});
 (function(d) {
     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
     if (d.getElementById(id)) {return;}
