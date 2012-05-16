@@ -434,7 +434,7 @@
 	position: relative;
 }
 #wrapper-top .main {
-	padding-top: 44px;
+	padding-top: 62px;
 	position: relative;
 	z-index: 10;
 }
@@ -481,6 +481,7 @@
 		    progid:DXImageTransform.Microsoft.DropShadow(OffX=0, OffY=1, Color=#000000);
 }
 #search-box {
+	position: relative;
 	-webkit-box-shadow:inset  0px 0px 1px #FFF;
 	-moz-box-shadow: inset 0px 0px 1px #FFF;
 	box-shadow: inset 0px 0px 1px #FFF;
@@ -526,6 +527,43 @@
 	box-shadow: 0px 1px 1px 0px #303030;
 	text-decoration: none;
 }
+#search-box .note {
+	display: none;
+	position: absolute;
+	bottom: -32px;
+	left: -8px;
+	background: url(https://static.tripfab.com/images6/homeWgG.png) repeat-x 0 0;
+	height:37px;
+	font: normal 16px/37px Helvetica;
+	color: #303030;
+	text-align: center;
+	text-shadow: 0px 1px 0px #FFF;
+	-webkit-box-shadow: 0px 0px 2px 1px rgba(60, 60, 60, 0.2);
+	box-shadow: 0px 0px 2px 1px rgba(60, 60, 60, 0.2);
+	-moz-shadow:0px 0px 2px 1px rgba(60, 60, 60, 0.2);
+}
+#search-box .note em {
+	display: block;
+	background: url(https://static.tripfab.com/images6/searchWgA.png) no-repeat 0 0;
+	width: 15px;
+	height: 7px;
+	margin: -7px auto 0;
+}
+#search-box .note p.flag {
+	background: url(https://static.tripfab.com/images6/homeWf.png) no-repeat 10px 50%;
+	padding-left: 22px;
+}
+#search-box #note1 {
+	width: 573px;
+}
+#search-box #note2 {
+	width:513px;
+	text-align: left;
+	text-indent: 15px;
+	left: 15px;
+	bottom:-16px ;
+}
+
 #wrapper-top .main h4{
 	width: 496px;
 	height: 42px;

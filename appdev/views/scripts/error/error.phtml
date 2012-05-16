@@ -9,7 +9,7 @@
     <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
     <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
-    <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+
 </head>
 <body>
 <div class="w1" id="errorpage">
@@ -25,14 +25,15 @@
             <div class="search">
                 <form action="">
                     <fieldset>
-                        <input type="text" value="Where do you want to go?"  />
+                        <input id="tags" type="text" value="Where do you want to go?"  />
                         <input type="submit" class="btn-1 noclean" value="Go!" />
                     </fieldset>
                 </form>
             </div><!--SEARCH--> 
-            <span class="previous-page"><a href="">Go back</a> to the previous page</span> 
+            <span class="previous-page"><a href="javascript:history.go(-1)">Go back</a> to the previous page</span> 
         </div><!--BOTTOM--> 
     </div><!-- closes w2 -->
+    
 	<?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
 <!--
@@ -56,5 +57,8 @@
 
 <?php endif ?>
 -->
+<div id="citiesAutocompleteContainer"></div>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/error.js?v=<?= $this->cssVC ?>"></script>
 </body>
 </html>
