@@ -273,6 +273,8 @@ class AdminController extends Zend_Controller_Action {
         }
         if ($this->view->searchText) {
             $select->where("listings.title like '%{$this->view->searchText}%'");
+            $select->orwhere("vendors.name like '%{$this->view->searchText}%'");
+            $select->orwhere("listing_types.name like '{$this->view->searchText}'");
         }
 		
 		if($this->_getParam('co')){
