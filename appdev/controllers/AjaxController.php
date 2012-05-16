@@ -1401,6 +1401,8 @@ class AjaxController extends Zend_Controller_Action
             'rating' => 'Rating' 
         );
         
+        $this->view->activeSort = $sort;
+        
         $subcategories = null;
         $category = null;
         if($cat != 'all'){

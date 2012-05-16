@@ -628,7 +628,9 @@ class WS_ListingService {
                     case 'highest': $select->where('listings.price <> ?',0);
                         $select->order('listings.price DESC'); break;
                     default: break;
-                }}
+                }} else {
+                    $select->order('listings.created DESC');
+                }
             if($stars != 'all'){
                 $_stars = (int) str_replace('-stars','',$stars);
                 if(is_int($_stars) && $_stars > 0 && $_stars < 6){

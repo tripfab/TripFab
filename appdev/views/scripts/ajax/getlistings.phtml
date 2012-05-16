@@ -46,9 +46,10 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
     <div class="filter">
         <form action="">
             <fieldset>
-                <select>
-                    <?php foreach($this->sortOptions as $opt):?>
-                    <option ><?php echo $opt?></option>
+                <select class="js-search-sort">
+                    <?php foreach($this->sortOptions as $optkey => $opt):?>
+                    <?php $selected = ($optkey == $this->activeSort) ? 'selected="selected"' : '' ?>
+                    <option <?= $selected ?> value="<?= $optkey ?>"><?= $opt ?></option>
                     <?php endforeach;?>
                 </select>
                 <label>Sort by:</label>
