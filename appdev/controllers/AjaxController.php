@@ -3330,7 +3330,7 @@ class AjaxController extends Zend_Controller_Action
         if(Zend_Registry::isRegistered('cache'))
             $cache = Zend_Registry::get('cache');
         
-        $text = $this->_getParam('text');
+        echo $this->_getParam('text'); die;
         
         $cacheId = 'translates_'.md5($text);
         
@@ -3351,6 +3351,8 @@ class AjaxController extends Zend_Controller_Action
         
         $respomse   = $client->request();
         $traslation = json_decode($respomse->getBody());
+        
+        var_dump($traslation); die;
         
         if(isset($traslation->error)) {
             header('Content-type: text/plain');
