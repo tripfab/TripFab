@@ -73,7 +73,7 @@
 						</div><!--DETAILS-->
 					</div><!--ALL-->
 					<div class="bottom">
-						<a href="#">Print Reservation</a>
+						<a href="#" class="js-print">Print Reservation</a>
 					</div><!--BOTTOM-->
 				</div><!--WRAP-->
 			</div><!--RESERV_DETAIL-->
@@ -90,9 +90,15 @@
 			$parent = $(this).parents('.reservation');
 			$('.bottom', $parent).slideToggle();
 		});
-		
-		
     });
+</script>
+<script type="text/javascript">
+$(function(){
+	$('.js-print').click(function(){
+		window.print();
+		return false;
+	});
+});
 </script>
 </body>
 </html>

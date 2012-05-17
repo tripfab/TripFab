@@ -68,7 +68,7 @@
                     <div class="bottom">
                         <p><strong>Questions?</strong> Contact service@tripfab.com </p>
                         <a href="/user/reservations/view/<?= $this->reservation->id ?>">Reservation Details</a> 
-                        <a href="/user/reservations/print/<?= $this->reservation->id ?>">Print Reservation</a>
+                        <a href="#" class="js-print">Print Reservation</a>
                     </div><!--BOTTOM-->
                 </div><!--WRAP--> 
             </div><!--CONFIRMATION-->             
@@ -77,6 +77,14 @@
 	<?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+$(function(){
+	$('.js-print').click(function(){
+		window.print();
+		return false;
+	});
+});
+</script>
 <!-- Google Code for Single Order Conversion Page -->
 <script type="text/javascript">
 /* <![CDATA[ */

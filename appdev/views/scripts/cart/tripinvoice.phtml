@@ -19,7 +19,7 @@
                 <div class="wrap"> <span class="stamp"></span>
                     <h2>Thank You <?= $this->user->name ?>!</h2>
                     <h3>We wish you the best trip ever!</h3>
-                    <a href="#" class="btn-10">Print your Reservation</a>
+                    <a href="#" class="btn-10 js-print">Print your Reservation</a>
                     <div class="warning">
                         <p><strong>We'll contact you in the next 24 hours</strong><br />To help you with all of the details</p>
                     </div><!--WARNING-->
@@ -57,7 +57,7 @@
                     
                     <div class="bottom">
                         <p><strong>Questions?</strong> Contact service@tripfab.com </p>
-                        <a href="#">Reservation Details</a> <a href="#">Print Reservation</a> 
+                        <a href="#">Reservation Details</a> <a href="#" class="js-print">Print Reservation</a> 
                     </div><!--BOTTOM--> 
                 </div><!--WRAP--> 
             </div><!--CONFIRMATION--> 
@@ -67,6 +67,14 @@
 	<?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+$(function(){
+	$('.js-print').click(function(){
+		window.print();
+		return false;
+	});
+});
+</script>
 <img height="1" width="1" alt="" src="https://www.googleadservices.com/pagead/conversion/956485843/imp.gif?label=GdcvCKWf8gMQ06GLyAM&amp;guid=ON&amp;script=0"/>
 </body>
 </html>

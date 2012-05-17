@@ -71,7 +71,7 @@
 						</div><!--DETAILS-->
 					</div><!--ALL-->
 					<div class="bottom">
-						<a href="#">Print Reservation</a>
+						<a href="#" class="js-print">Print Reservation</a>
 					</div><!--BOTTOM-->
 				</div><!--WRAP-->
 			</div><!--RESERV_DETAIL-->
@@ -80,5 +80,13 @@
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+$(function(){
+	$('.js-print').click(function(){
+		window.print();
+		return false;
+	});
+});
+</script>
 </body>
 </html>
