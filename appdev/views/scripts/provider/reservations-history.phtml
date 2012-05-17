@@ -41,7 +41,7 @@
                             <td><img class="card-3" src="https://static.tripfab.com/images/cleardot.gif" alt=""/><?= $reserve->method ?></td>
                             <td>$<?= $reserve->ammount ?></td>
                             <td><?= date('d/m/Y', strtotime($reserve->checkin)) ?></td>
-                            <td><a href="/cart/invoice/<?= $reserve->id ?>">See details</a></td>
+                            <td><a href="/provider/reservations/view/<?= $reserve->id ?>">See details</a></td>
                         </tr>
                         <?php endforeach ?>					
                     </tbody>

@@ -126,7 +126,9 @@
                                 	<div class="hover" id="small<?= $j ?>">
                                         <a href="#grande<?= $j ?>" class="lbc">
                                         <?= $this->thumbnail(array('width'=>391,'height'=>254),$pic->url,'','391:254') ?>
-                                        <span><?= $pic->location ?></span></a>
+                                        <?php if(!empty($pic->location)): ?>
+                                        <span><?= $pic->location ?></span>
+                                        <?php endif ?></a>
                                         <a href="#grande<?= $j ?>" class="view lbc"><em></em>See Full Size</a>
                                     </div>
                                     <?php endforeach ?>

@@ -700,7 +700,6 @@
 			<?php if($this->listing->main_type == 5): ?>
 			var $item = $('<div class="item"><input tabindex="'+(i+1)+'" name="sch['+i+'][name]" value="Standard, Familiar...." type="text" /><h4><a href="" class="remove">Remove</a>Room Name</h4><span>Write a name for this room</span><div class="clear"></div></div>');
 			$('.item-wrppr .item:last').before($item);
-			$('input').ToggleInputValue();
 			i++;
 			<?php else: ?>
 			var $item = $('.prcng-item.hidden.ltt').html();

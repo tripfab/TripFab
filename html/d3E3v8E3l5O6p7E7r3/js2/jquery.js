@@ -4903,7 +4903,7 @@ function replaceAll( text, busca, reemplaza ){
 	return text;
 }
 $(function(){
-	$('input:not(.noclean),textarea:not(.noclean)').ToggleInputValue();
+	$('input[type=text]:not(.noclean),textarea:not(.noclean)').ToggleInputValue();
 	if($('.top_search').html() != null){
 		$.ajax({
 			url:'/ajax/getsearchtags',

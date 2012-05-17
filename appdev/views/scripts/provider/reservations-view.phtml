@@ -17,15 +17,13 @@
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
     <div class="w2">
     	<div class="main wrapper">
-
 			<div id="reserv_detail">
 				<div class="wrap">
-					
 					<div class="top">
 						<?= $this->thumbnail(69, $this->listing->image, '', '1:1'); ?>
 						<h2>Reservation Details <strong><?= $this->listing->title ?></strong></h2>
 						<div class="right">
-							<a href="/user/reservations">&larr; Back to Reservations</a>
+							<a href="/provider/reservations">&larr; Back to Reservations</a>
 							<span>Reservation Code: <?= $this->reservation->code ?></span>
 						</div><!--RIGHT-->
 					</div><!--TOP-->
@@ -82,17 +80,5 @@
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('textarea').elastic();
-		
-		$('.reservation .top h2').click(function(){
-			$parent = $(this).parents('.reservation');
-			$('.bottom', $parent).slideToggle();
-		});
-		
-		
-    });
-</script>
 </body>
 </html>

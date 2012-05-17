@@ -34,7 +34,7 @@
                             <li>
                                 <div><?= $this->thumbnail(34, $booking['image'], '','1:1'); ?><?= $booking['user'] ?></div>
                                 <div><span>Reserve Code: <?= $booking['code'] ?></span></div>
-                                <div><a href="/cart/invoice/<?= $booking['id'] ?>">Order Details</a></div>
+                                <div><a href="/provider/reservations/view/<?= $booking['id'] ?>">Order Details</a></div>
                             </li>
                             <?php endforeach ?>
                         </ul>

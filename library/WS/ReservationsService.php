@@ -46,6 +46,7 @@ class WS_ReservationsService {
         $select->from('reservations');
         $select->join('users','reservations.user_id = users.id',array(
             'username'=>'name',
+            'userlname'=>'lname',
             'userimage'=>'image'
         ));
         $select->join('listings','reservations.listing_id = listings.id',array('listing_name'=>'title'));
@@ -75,7 +76,7 @@ class WS_ReservationsService {
                                 if($rrr['checkin'] == $r['checkin']){
                                     if($rrr['listing_id'] == $rr['listing_id']){
                                         $reservations[$r['checkin']]['listings'][$rr['listing_id']]['bookings'][] = array(
-                                            'user' => $rr['username'],
+                                            'user' => $rr['username'].' '.$rr['userlname'],
                                             'code' => $rr['code'],
                                             'image'=> $rr['userimage'],
                                             'id'   => $rrr['id'],
