@@ -5249,7 +5249,6 @@ $(function(){
         $('input, select, textarea',$form).attr('disabled','disabled');
         
         FB.login(function(response2) {
-            console.log(response2);
             if (response2.authResponse) {
                 facebookLogin(response2.authResponse.accessToken);
             } else {
@@ -5319,7 +5318,6 @@ $(document).ready(function() {
 })(document);
 
 window.fbAsyncInit = function() {
-    console.log('fbinit');
     FB.init({
         appId      : $appId,
         status     : true, 

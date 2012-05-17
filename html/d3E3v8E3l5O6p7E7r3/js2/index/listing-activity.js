@@ -28,7 +28,6 @@ $(document).ready(function() {
         if(ttl3 > num3) {
             $(".location").css('margin-bottom', '7px');
         }
-        console.log(ttl3);
     }
 		
     countLines();
@@ -56,8 +55,6 @@ $(document).ready(function() {
     $('body').data('listingid', $('input[name=listingids]').val());
     $('body').data('listingtoken', $('input[name=listingstoken]').val());
     $('body').data('listingprice', $('input[name=listingprice]').val());
-    
-    console.log('good');
     
     //$('.tabs').tabs({selected: 0});
 	
@@ -144,12 +141,10 @@ $(document).ready(function() {
         var min = parseInt($(this).data('min'));
         var max = parseInt($(this).data('max'));
         var kids = parseInt($(this).data('kids'));
-        console.log(kids);
         if(kids == 1) {
             for(i=min;i<=max;i++) {
                 $('select[name=adults].ocp').append('<option value="'+i+'">'+i+'</option>');
             }
-            console.log($('select[name=kids].ocp').parent());
             if($('select[name=kids].ocp').length == 0) {
                 $('select[name=adults].ocp').parent().after('<label>Children<select class="ocp kid" name="kids"></select></label>');
             }

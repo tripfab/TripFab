@@ -210,7 +210,6 @@ $(function(){
     
     $.address.change(function($ev){
         // Get main category from the url
-        //console.dir($ev);
         $rel = '#/'+$ev.pathNames[0];
         $validHashes = new Array("#/all","#/activities","#/entertaiment","#/tourist-sights","#/restaurants","#/hotels");
         if(!$rel == "#/undefined") {
@@ -294,7 +293,6 @@ $(function(){
                 });
                 
                 $('.single > h4').each(function(){
-                    console.log();
                     $h = $(this).outerHeight();
                     $single = $(this).parents('.single');
                     if($single.hasClass('activity-1')) {
@@ -439,7 +437,6 @@ $(function(){
         if(proceed) {
             if(!ajax2) {
                 page++;
-                console.log(page);
                 $data.page = page;
                 ajax2 = $.ajax({
                     url:'/ajax/getlistings2',
@@ -454,7 +451,6 @@ $(function(){
                                 }
                             });
                             $('.single > h4').each(function(){
-                                console.log();
                                 $h = $(this).outerHeight();
                                 $single = $(this).parents('.single');
                                 if($single.hasClass('activity-1')) {
