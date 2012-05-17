@@ -2993,6 +2993,10 @@ class ProviderController extends Zend_Controller_Action
                 $this->transactionsTask();
                 $template = 'reservations-transactions';
                 break;
+            case 'view':
+                $this->viewReservationTask();
+                $template = 'reservations-view';
+                break;
             default:
                 throw new Exception(); break;
         }
@@ -3016,6 +3020,23 @@ class ProviderController extends Zend_Controller_Action
     {
         $_reservs   = $this->reservations->getHistory($this->user->getVendorId());
         $this->view->reservations = $_reservs;
+    }
+    
+    public function viewReservationTask()
+    {
+        $id = $this->_getParam('id');
+        $reservation = $this->reservations->get($id, $this->user->getVendorId(), true);
+        $listing = $this->listings->getListing($reservation->listing_id);
+
+        $this->transactions = new Model_Transactions();
+        $select = $this->transactions->select();
+        $select->where('id = ?', $reservation->transaction_id);
+        $transaction = $this->transactions->fetchRow($select);
+
+        $this->view->transaction = $transaction;
+        $this->view->listing     = $listing;
+        $this->view->user        = $this->user->getData();
+        $this->view->reservation = $reservation;
     }
     
     public function transactionsTask()

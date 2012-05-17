@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> - Reservation Details | Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+    	<div class="main wrapper">
+			<div id="reserv_detail">
+				<div class="wrap">
+					<div class="top">
+						<?= $this->thumbnail(69, $this->listing->image, '', '1:1'); ?>
+						<h2>Reservation Details <strong><?= $this->listing->title ?></strong></h2>
+						<div class="right">
+							<a href="/provider/reservations">&larr; Back to Reservations</a>
+							<span>Reservation Code: <?= $this->reservation->code ?></span>
+						</div><!--RIGHT-->
+					</div><!--TOP-->
+										
+					<div class="all">
+						<div class="details">
+							<h4>Payment Method</h4>
+							<ul>
+								<li><strong>Credit Card</strong> 
+                                <?= $this->transaction->method ?></li>
+							</ul>
+						</div><!--DETAILS-->
+						
+						<div class="details">
+							<h4>Purchase Details</h4>
+							<ul>
+								<li><strong>Check In</strong> <?= date('D, F jS Y', strtotime($this->reservation->checkin)) ?></li>
+                                <?php if($this->reservation->checkout): ?>
+								<li><strong>Check Out</strong> <?= date('D, F jS Y', strtotime($this->reservation->checkout)) ?></li>
+                                <?php endif ?>
+								<li><strong>Ocupation</strong> <?= $this->reservation->adults ?> Adults
+                                <?php if($this->reservation->kids): ?>
+                                , <?= $this->reservation->kids ?> Children
+                                <?php endif; if($this->reservation->rooms): ?>
+	                            , <?= $this->reservation->rooms ?> Rooms <?php endif ?></li>
+							</ul>
+						</div><!--DETAILS-->
+						
+						<div class="details">
+							<h4>Total Paid</h4>
+							<dl>
+								<dt><?= $this->reservation->rate_description ?></dt>
+								<dd>$<?= $this->reservation->rate ?></dd>
+                                <?php if($this->reservation->additional > 0): ?>
+								<dt><?= $this->reservation->additional_description ?></dt>
+								<dd>$<?= $this->reservation->additional ?></dd>
+                                <?php endif ?>
+								<dt>Subtotal</dt>
+								<dd>$<?= $this->reservation->subtotal ?></dd>
+								<dt>Taxes & Fees</dt>
+								<dd>$<?= $this->reservation->taxes ?></dd> 
+								<dt class="total">Total</dt>
+								<dd class="total">$<?= $this->reservation->ammount ?></dd>
+							</dl>
+						</div><!--DETAILS-->
+					</div><!--ALL-->
+					<div class="bottom">
+						<a href="#">Print Reservation</a>
+					</div><!--BOTTOM-->
+				</div><!--WRAP-->
+			</div><!--RESERV_DETAIL-->
+        </div><!-- closes main -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+</body>
+</html>
