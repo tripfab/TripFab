@@ -4867,6 +4867,37 @@ this.$clip[0]['scroll' + this.scrollPos] = this.resetPosition;
 
 (function($){$.fn.extend({limit:function(limit,element){var interval,f;var self=$(this);$(this).focus(function(){interval=window.setInterval(substring,100)});$(this).blur(function(){clearInterval(interval);substring()});substringFunction="function substring(){ var val = $(self).val();var length = val.length;if(length > limit){$(self).val($(self).val().substring(0,limit));}";if(typeof element!='undefined')substringFunction+="if($(element).html() != limit-length){$(element).html((limit-length<=0)?'0':limit-length);}";substringFunction+="}";eval(substringFunction);substring()}})})(jQuery);
 
+$(function() {
+    var input = document.createElement("input");
+    if(('placeholder' in input)==false) { 
+        $('[placeholder]').focus(function() {
+            var i = $(this);
+            if(i.val() == i.attr('placeholder')) {
+                i.val('').removeClass('placeholder');
+                if(i.hasClass('password')) {
+                    i.removeClass('password');
+                    this.type='password';
+                }			
+            }
+        }).blur(function() {
+            var i = $(this);	
+            if(i.val() == '' || i.val() == i.attr('placeholder')) {
+                if(this.type=='password') {
+                    i.addClass('password');
+                    this.type='text';
+                }
+                i.addClass('placeholder').val(i.attr('placeholder'));
+            }
+        }).blur().parents('form').submit(function() {
+            $(this).find('[placeholder]').each(function() {
+                var i = $(this);
+                if(i.val() == i.attr('placeholder'))
+                    i.val('');
+            })
+        });
+    }
+});
+
 $(function(){
 	$('textarea.limitcc').each(function(){
 		$limit = $(this).attr('rel');
@@ -5282,7 +5313,7 @@ $(document).ready(function() {
 (function(d) {
     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
     if (d.getElementById(id)) {return;}
-    js = d.createElement('script'); js.id = id; js.async = true;
+    js = d.createElement('script');js.id = id;js.async = true;
     js.src = "//connect.facebook.net/en_US/all.js";
     ref.parentNode.insertBefore(js, ref);
 })(document);
