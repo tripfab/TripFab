@@ -3,10 +3,7 @@ $(document).ready(function() {
     var assigned_listings = 0;
     $('.itinerary-wrapper .slider .slide .itinerary-items ul li:not(.empty)').each(function(){
         assigned_listings++;
-    });
-    
-    console.log(assigned_listings);
-    
+    });    
     
     $('input.calendar1').datepicker({
 		minDate:new Date(),
@@ -184,8 +181,6 @@ $(document).ready(function() {
                     
                     assigned_listings++;
                     
-                    console.log(assigned_listings);
-                    
                 },
                 error:function(){
                     showError('Something went wrong');
@@ -262,8 +257,6 @@ $(document).ready(function() {
                     }
                     
                     assigned_listings++;
-                    
-                    console.log(assigned_listings);
                 },
                 error:function(){
                     showError('Something went wrong');
@@ -340,8 +333,6 @@ $(document).ready(function() {
                 if(assigned_listings == 0) {
                     $('.tocheckout').addClass('deny');
                 }
-
-                console.log(assigned_listings);
             }
         });		
         return false;
@@ -370,8 +361,6 @@ $(document).ready(function() {
                 if(assigned_listings == 0) {
                     $('.tocheckout').addClass('deny');
                 }
-
-                console.log(assigned_listings);
             }
         });		
         return false;

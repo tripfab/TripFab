@@ -96,8 +96,6 @@ $(document).ready(function() {
                 $('#js_error_messages .js_ccode').remove();
             }
 			
-            console.log($continue);
-			
             if($continue) {
                 $('.js_errors_container').addClass('hidden');
                 Stripe.setPublishableKey(PUBLIC_KEY);

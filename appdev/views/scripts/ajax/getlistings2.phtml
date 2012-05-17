@@ -1,3 +1,4 @@
+<?php $_imgloading = 'https://static.tripfab.com/images2/listing_loading.gif'; ?>
 <?php $_classes = array(
 		2 => 'restaurant',
 		4 => 'sights',
@@ -50,7 +51,7 @@ $per_night = array(
             <?php else: ?>
                 <a href="#signIn" class="add been not js-login"></a>
 			<?php endif ?>
-            <?= $this->lazylisting(array('width'=>'241', 'height'=>'183'), $list->image, '','241:241') ?>
+            <?= $this->lazylisting(array('width'=>'241', 'height'=>'183'), $list->image, '','241:241',null,$_imgloading) ?>
             <ul class="rating">
                 <li><a href="" class="slct"></a></li>
                 <li><a href="" class="slct"></a></li>
@@ -85,7 +86,7 @@ $per_night = array(
  		    <?php else: ?>
  		        <a href="#signIn" class="add been not js-login"></a>
  			<?php endif ?>
- 		    <?= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124') ?>
+ 		    <?= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124',null,$_imgloading) ?>
  		    
  		    <ul class="rating">
  		        <li><a href="" class="slct"></a></li>
@@ -123,7 +124,7 @@ $per_night = array(
             <?php else: ?>
                 <a href="#signIn" class="add been not js-login"></a>
 			<?php endif ?>
-            <?= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124') ?>
+            <?= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124',null,$_imgloading) ?>
             <ul class="rating">
                 <li><a href="" class="slct"></a></li>
                 <li><a href="" class="slct"></a></li>

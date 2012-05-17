@@ -388,7 +388,7 @@ $(document).ready(function() {
                 }
             },
             error:function(res){
-                //console.log(res);
+                
             }
         });
         

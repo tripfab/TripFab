@@ -61,8 +61,6 @@ $(document).ready(function(){
         if($(this).hasClass('done') || $(this).hasClass('active'))
             return false;
         
-        console.log('asd');
-        
         $('.slideshow .cont ul li a').removeClass('active');
         $(this).addClass('active');
         
@@ -160,7 +158,6 @@ function fqrequest(url, data, limit, success){
         success:success,
         error:function(res){
             alert('Something went wrong with Foursquare');
-            console.log(res);
         }
     });
 }
@@ -189,7 +186,6 @@ window.fbAsyncInit = function() {
     });
     
     FB.getLoginStatus(function(response) {
-        console.log(response);
         if (response.status === 'connected') {
             $token = response.authResponse.accessToken;
             $('select, input').removeAttr('disabled');

@@ -188,8 +188,6 @@ $(document).ready(function() {
             
             $('input[name=checkin]').val(date[0]);
             
-            //console.log(dates);
-            
             $('#datepicker').DatePickerSetDate(dates);
         }
     });
