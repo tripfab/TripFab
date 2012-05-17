@@ -271,8 +271,16 @@
 </div>
 
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
-
 <script type="text/javascript">
+	(function( $ ){
+		$.fn.serializeJSON=function() {
+			var json = {};
+			jQuery.map($(this).serializeArray(), function(n, i){
+				json[n['name']] = n['value'];
+			});
+			return json;
+		};
+	})( jQuery );
     $(document).ready(function() {
 		$('a.lbc').fancybox({
 			padding:0,
@@ -290,16 +298,6 @@
 			return false
 		});
 		
-		$('.calendar, .start, .end').datepicker({
-			dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-			minDate:new Date(),
-			maxDate:'+1y',
-			onSelect:function(date){
-				$('input[name=date]').val(date);
-				console.log(date);
-			}
-		});
-		
 		$('a.delete_btn').click(function(){
 			$form = $(this).parents('form');
 			$form.submit();
@@ -315,12 +313,12 @@
 				$end = $(this).parents('.cont').find('input.calendar2');
 				$end.datepicker('option','minDate', date);
 			},
-			dateFormat:'D M d yy'
+	        dateFormat:'M d yy'
 		});
 		
 		$('input.calendar2').datepicker({
 			minDate:new Date(),
-			dateFormat:'D M d yy'
+	        dateFormat:'M d yy'
 		});
 		
 		$('#ui-datepicker-div').wrap('<div id="calendarContainer"></div>');
@@ -332,6 +330,48 @@
 		<?php if($this->error): ?>
 		showError("<?= $this->error ?>");
 		<?php endif ?>
+		
+		$('#newtrip form').submit(function(){
+			$data = $(this).serializeJSON();
+			if($data.title == ""){
+				showError('You need to add a name to the trip');
+				return false;
+			}
+			$.ajax({
+				url:'/ajax/addtotrip2',
+				data:$data,
+				type:'post',
+				success:function(response){
+					if(response.type == 'success'){
+						$.cookie('alert','Trip created successfully');
+						window.location.reload();
+					} else if(response.type == 'newtrip'){
+						$.cookie('alert','Trip created successfully');
+						window.location.reload();
+					} else {
+						$('input, select').removeAttr('disabled');
+						showError(response.message);
+					}
+				},
+				error:function(){
+					$('input, select').removeAttr('disabled');
+					showError('Somehing went wrong please try later');
+				}
+			});
+			return false;
+		});
+		$('#newtrip input[name=end]').datepicker({
+			minDate:new Date(),
+			dateFormat:'M d yy'
+		});
+		
+		$('#newtrip input[name=start]').datepicker({
+			minDate:new Date(),
+			onSelect:function(date){
+				$('#newtrip input[name=end]').datepicker('option', 'minDate', new Date(date));
+			},
+			dateFormat:'M d yy'
+		});
     });
 </script>
 <script type="text/javascript" src="/js2/index/listing-hotel.js?v=<?= $this->cssVC ?>"></script>

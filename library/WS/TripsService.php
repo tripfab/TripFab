@@ -167,7 +167,7 @@ class WS_TripsService {
         else {
             $select = $this->DB->select();
             $select->from('itineraries');
-            $select->join('places', 'itineraries.country_id = places.id', array('country' => 'title'));
+            $select->joinLeft('places', 'itineraries.country_id = places.id', array('country' => 'title'));
             $select->where('itineraries.id = ?', $trip);
             $result = $this->DB->fetchRow($select, array(), 5);
             if (is_null($result))

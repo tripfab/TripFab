@@ -1171,13 +1171,11 @@ class AjaxController extends Zend_Controller_Action
                         $select = $listings->select();
                         $select->where('id = ?', $_POST['listing']);
                         $listing = $listings->fetchRow($select);
-                        if(is_null($listing))
-                                throw new Exception('Listing not found');
 						
                         $trip = $trips->fetchNew();
                         $trip->title = $_POST['title'];
                         $trip->user_id = $user->id;
-                        $trip->country_id = $listing->country_id;
+                        $trip->country_id = (is_null($listing)) ? 0 : $listing->country_id;
 						
                         if((isset($_POST['start']) and !empty($_POST['start']) and $_POST['start'] != 'Starting Date') and
                                         (isset($_POST['end']) and !empty($_POST['end']) and $_POST['end'] != 'Ending Date')){
@@ -1211,44 +1209,46 @@ class AjaxController extends Zend_Controller_Action
                         $trip->token = md5($trip->id.$user->id.time());
                         $trip->save();
 
-                        $row = $trip_listings->fetchNew();
-                        $row->user_id       = $user->id;
-                        $row->itinerary_id  = $trip->id;
-                        $row->listing_id    = $listing->id;
-                        $row->city_id       = $listing->city_id;
-                        $row->country_id    = $listing->country_id;
-                        $row->save();
-
-                        $trip->listings = $trip->listings + 1;
-
-                        $cities = new Zend_Db_Table('itinerary_cities');
-                        $select = $cities->select();
-                        $select->where('itinerary_id = ?', $trip->id);
-                        $select->where('city_id = ?', $row->city_id);
-                        $city = $cities->fetchRow($select);
-                        if(is_null($city)){
+                        if(!is_null($listing)) {
+                            $row = $trip_listings->fetchNew();
+                            $row->user_id       = $user->id;
+                            $row->itinerary_id  = $trip->id;
+                            $row->listing_id    = $listing->id;
+                            $row->city_id       = $listing->city_id;
+                            $row->country_id    = $listing->country_id;
+                            $row->save();
+                            
+                            $trip->listings = $trip->listings + 1;
+                            
+                            $cities = new Zend_Db_Table('itinerary_cities');
                             $select = $cities->select();
                             $select->where('itinerary_id = ?', $trip->id);
-                            $select->where('country_id = ?', $row->country_id);
-                            $country = $cities->fetchRow($select);
-                            if(is_null($country)){
-                                $trip->countries = $trip->countries + 1;
+                            $select->where('city_id = ?', $row->city_id);
+                            $city = $cities->fetchRow($select);
+                            if(is_null($city)){
+                                $select = $cities->select();
+                                $select->where('itinerary_id = ?', $trip->id);
+                                $select->where('country_id = ?', $row->country_id);
+                                $country = $cities->fetchRow($select);
+                                if(is_null($country)){
+                                    $trip->countries = $trip->countries + 1;
+                                }
+
+                                $city = $cities->fetchNew();
+                                $city->itinerary_id = $trip->id;
+                                $city->city_id = $row->city_id;
+                                $city->country_id = $row->country_id;
+                                $city->save();
+
+                                $trip->cities = $trip->cities + 1;
                             }
 
-                            $city = $cities->fetchNew();
-                            $city->itinerary_id = $trip->id;
-                            $city->city_id = $row->city_id;
-                            $city->country_id = $row->country_id;
-                            $city->save();
+                            if(!$trip->image)
+                                $trip->image = $listing->image;
 
-                            $trip->cities = $trip->cities + 1;
+                            $trip->save();
                         }
-
-                        if(!$trip->image)
-                            $trip->image = $listing->image;
-
-                        $trip->save();
-
+                        
                         $result['type']     = 'newtrip';
                         $result['message']  = $trip->title.' trip has been created and listing '.$listing->title.' has been added to it';
                         $result['tripid']   = $trip->id;
@@ -1321,6 +1321,10 @@ class AjaxController extends Zend_Controller_Action
 
                         if(!$trip->image)
                             $trip->image = $listing->image;
+                        
+                        if($trip->country_id == 0) {
+                            $trip->country_id = $listing->country_id;
+                        }
 
                         $trip->save();
 
