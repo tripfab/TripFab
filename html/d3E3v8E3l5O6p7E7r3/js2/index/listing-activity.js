@@ -708,3 +708,16 @@ function resizeImg($bgImg) {
     $bgImg.css('height',height);
     $bgImg.css('top',top);
 }
+
+$(document).ready(function() {
+	$(".container .btn-2").click(function() {
+		$(".container .first_user").toggleClass('hidden');
+		return false;
+	});
+	
+	$(".sidebar .btn-2").click(function() {
+		$(".sidebar .first_user").toggleClass('hidden');
+		return false;
+	});
+});
+

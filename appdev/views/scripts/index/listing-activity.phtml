@@ -92,31 +92,45 @@
 							</div><!--FIRSTIME_TIP-->
                             <?php endif ?>
 							
+							<div class="first_user hidden">
+								<img class="arrow" src="https://static.tripfab.com/images6/arrow-24.png" alt="">
+								<h6>Do you want to create a new Trip?</h6>
+								<p>Sign in to your account before continue</p>
+								<div class="lgbx">
+									<a href="#signIn" class="lbc btn-1 js-login">Sign In</a>
+									<em>or</em>
+									<a href="#signUp" class="lbc link1 js-signup">Create an account</a>
+								</div><!--LGBX-->
+							</div><!--FIRST_USER-->
+							
                             <div class="carousel">
                                 <p><span></span>Photos & Video</p>
                                 <a href="" class="lf-arrow"></a>
                                 <div class="imgs">
-									<ul>
-	                                <?php for($i=0;$i<=count($this->pictures);$i=$i+6): ?>
-										<?php for($j=$i;($j<($i+6)) and ($j<count($this->pictures));$j++): ?>
-										<?php $pic = $this->pictures[$j] ?>
-										<li>
-											<a rel="group1" title="<?= $pic->location ?>" class="lbc" href="#grande<?= $j ?>" data-tip="#small<?= $j ?>">
-											<?= $this->thumbnail(65,$pic->url,'','1:1') ?><span class="arrow"></span></a>
-										</li>
-										<?php endfor ?>                            
-	                                <?php endfor ?>
-									</ul>
-	                            </div><!--IMGS-->
-								<div class="bigImages">
+                                	<ul>
+                                    <?php for($i=0;$i<=count($this->pictures);$i=$i+6): ?>
+                            			<?php for($j=$i;($j<($i+6)) and ($j<count($this->pictures));$j++): ?>
+                                        <?php $pic = $this->pictures[$j] ?>
+                                        <li>
+                                            <a rel="group1" title="<?= $pic->location ?>" class="lbc" href="#grande<?= $j ?>" data-tip="#small<?= $j ?>">
+                                            <?= $this->thumbnail(65,$pic->url,'','1:1') ?><span class="arrow"></span></a>
+                                        </li>
+                                        <?php endfor ?>
+                                    <?php endfor ?>
+                                    </ul>	
+                                </div><!--IMGS-->
+                                
+                                <div class="bigImages">
                                 	<?php foreach($this->pictures as $j => $pic): ?>
                                 	<div class="hover" id="small<?= $j ?>">
                                         <a href="#grande<?= $j ?>" class="lbc">
                                         <?= $this->thumbnail(array('width'=>391,'height'=>254),$pic->url,'','391:254') ?>
                                         <span><?= $pic->location ?></span></a>
+                                        <a href="#grande<?= $j ?>" class="view lbc"><em></em>See Full Size</a>
                                     </div>
                                     <?php endforeach ?>
-								</div><!--BIGIMAGES-->
+                                </div><!--BIGIMAGES-->
+                                
                             </div><!--CAROUSEL-->
                             <div class="hidden">
                                 <?php for($i=0;$i<count($this->pictures);$i++): ?>
@@ -556,6 +570,18 @@
                                     <em>or you can</em>
                                     <div class="clear"></div>
                                 </div><!--ADD-->
+                                
+                                <div class="first_user hidden">
+                                	<img class="arrow" src="https://static.tripfab.com/images6/arrow-24.png" alt="">
+                                	<h6>Do you want to create a new Trip?</h6>
+                                	<p>Sign in to your account before continue</p>
+                                	<div class="lgbx">
+                                		<a href="#signIn" class="lbc btn-1 js-login">Sign In</a>
+                                		<em>or</em>
+                                		<a href="#signUp" class="lbc link1 js-signup">Create an account</a>
+                                	</div><!--LGBX-->
+                                </div><!--FIRST_USER-->
+                                
                             </div><!--CONT-->
 						</div><!--SIDEBAR-->
                         <div class="clear"></div>
