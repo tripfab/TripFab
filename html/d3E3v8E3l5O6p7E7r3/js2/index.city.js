@@ -1,13 +1,32 @@
+//$(document).ready(function() {
+// 	var Cntrl = 31;
+//    var aboveHeight = Cntrl + $("#header").outerHeight();
+//    $(window).scroll(function(){
+//        if ($(window).scrollTop() > aboveHeight){
+//            $('#lstng_header').addClass('fixed').css('top','-23');
+//            $('#wp_content').css('padding-top', '107px');
+//        } 
+//        else {
+//            $('#lstng_header').removeClass('fixed');
+//            $('#wp_content').css('padding-top', '0');
+//        }
+//    });
+//   
+//    
+//});
+
+
 
 $(document).ready(function() {
-	var aboveHeight = 153;
+	var aboveHeight = 154
 	$(window).scroll(function(){
         if ($(window).scrollTop() > aboveHeight){
-            $('.sort').addClass('fixed').css('top','0px').next().css('padding-top','60px !important');
+            $('.sort').addClass('fixed').css('top','0px');
+            $('.results-wrapper').css('margin-top', '81px');
         } 
         else {
-			
-            $('.sort').removeClass('fixed').next().css('padding-top','0px');
+			$('.sort').removeClass('fixed');
+			$('.results-wrapper').css('margin-top', '30px');
         }
     });
 });

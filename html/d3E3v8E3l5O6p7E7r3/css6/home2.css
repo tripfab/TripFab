@@ -436,7 +436,7 @@
 #wrapper-top .main {
 	padding-top: 62px;
 	position: relative;
-	z-index: 10;
+	z-index: 0;
 }
 #wrapper-top h1 a{
 	display: block;
@@ -491,9 +491,10 @@
 	behavior: (PIE.htc);
 	width: 662px;
 	margin: 0 auto 20px;
-	padding: 18px 0 18px 18px;
+	padding: 18px 0 0px 18px;
 	background: url(https://static.tripfab.com/images2/home-search.png) repeat;
 	behavior: url(PIE.htc);
+	height: 66px;
 }
 #search-box input[type="text"] {
 	width: 436px;
