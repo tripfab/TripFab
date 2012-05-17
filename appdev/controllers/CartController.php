@@ -115,7 +115,6 @@ class CartController extends Zend_Controller_Action {
                 
                 $row->user_id    = $this->user->getId();
                 $row->checkin    = date('Y-m-d', strtotime($data['checkin']));
-                $row->checkout   = date('Y-m-d', strtotime($data['checkout']));
                 $row->listing_id = $listing->id;
                 $row->option_id  = $rowR->option_id;
                 $row->adults     = $rowR->adults;
@@ -991,7 +990,7 @@ class CartController extends Zend_Controller_Action {
                 }
                 break;
             default:
-                $this->_redirect('cart/checkout/'.$this->_getParam('id'));
+                $this->_redirect('/cart/checkout/'.$this->_getParam('id'));
         }
     }
     
