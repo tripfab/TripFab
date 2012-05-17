@@ -85,9 +85,7 @@
 					password:'required'
 				},
 				errorPlacement:function(error, element) {
-					console.log(error);
 					if(error.text() == "") {
-						console.log(element);
 						element.parents('div:eq(0)').removeClass('errorIn');
 						element.parents('div:eq(0)').find('p').remove();
 					} else {

@@ -17,7 +17,7 @@ class Zend_View_Helper_Lazylisting {
     
     protected $ext;
 
-    public function lazylisting($size, $image, $class='', $cropratio='1:1', $id = null) {
+    public function lazylisting($size, $image, $class='', $cropratio='1:1', $id = null, $loading = 'https://partners.tripfab.com/images2/listing_loading.gif') {
 
         $this->cacheFolder = APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3/cache/';
         $this->remoteFolder = $this->cacheFolder . 'remote/';
@@ -37,7 +37,7 @@ class Zend_View_Helper_Lazylisting {
         if (file_exists($imagePath) == false):
             $imagePath = $_SERVER['DOCUMENT_ROOT'] . $imagePath;
             if (file_exists($imagePath) == false):
-                return '<img class="lazy" src="https://developer.tripfab.com/images2/listing_loading.gif" data-original="' . $imagePath . '" width="' . $width . '" height="' . $height . '" />';
+                return '<img class="lazy" src="'.$loading.'" data-original="' . $imagePath . '" width="' . $width . '" height="' . $height . '" />';
             endif;
         endif;
         
@@ -84,7 +84,7 @@ class Zend_View_Helper_Lazylisting {
                 $size = GetImageSize($imagePath);
                 if($size === false) {
                     $imagePath = $this->getRemote($image);
-                    return '<img class="lazy" src="https://developer.tripfab.com/images2/listing_loading.gif" data-original="' . $imagePath . '" width="' . $width . '" height="' . $height . '" />';
+                    return '<img class="lazy" src="'.$loading.'" data-original="' . $imagePath . '" width="' . $width . '" height="' . $height . '" />';
                 }
             }
             
@@ -174,7 +174,7 @@ class Zend_View_Helper_Lazylisting {
                 $src	   = $creationFunction($imagePath);
                 if($src === false) {
                     $imagePath = $this->getRemote($image);
-                    return '<img class="lazy" src="https://developer.tripfab.com/images2/listing_loading.gif" data-original="' . $imagePath . '" width="' . $width . '" height="' . $height . '" />';
+                    return '<img class="lazy" src="'.$loading.'" data-original="' . $imagePath . '" width="' . $width . '" height="' . $height . '" />';
                 }
             }
             
@@ -266,7 +266,7 @@ class Zend_View_Helper_Lazylisting {
 
         # return cache file path
         $id = (is_null($id)) ? '' : 'id="'.$id.'"';
-        return '<img '.$id.' class="lazy ' . $class . '" src="https://developer.tripfab.com/images2/listing_loading.gif" data-original="' . str_replace(APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3', '', $newPath) . '" width="' . $opts['w'] . '" height="' . $opts['h'] . '" />';
+        return '<img '.$id.' class="lazy ' . $class . '" src="'.$loading.'" data-original="' . str_replace(APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3', '', $newPath) . '" width="' . $opts['w'] . '" height="' . $opts['h'] . '" />';
     }
     
     protected function findSharp($orig, $final) // function from Ryan Rud (http://adryrun.com)

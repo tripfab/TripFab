@@ -18,6 +18,10 @@
 		color:#000;
 		text-decoration:none;
 	}
+	#home_trips .tabs > div > .slideshow > .cont .one > a {
+		width:563px;
+		height:260px;
+		display:block;}
 	</style>
 </head>
 <body id="home2">
@@ -103,7 +107,8 @@
                             	<?php foreach($this->hotels as $h): ?>
 								<div class="one">
                                 	<a href="/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>">
-									<?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260'); ?></a>
+                                    <?php $img_loading = "http://static.tripfab.com/images2/Listing-Home-Loading.gif" ?>
+									<?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260',null,$img_loading); ?></a>
 									<h5><?= $h->title ?></h5>
 									<span class="meta"><strong><em></em><?= $h->city ?>,</strong> <?= $h->country ?></span>
 									<div class="price">
@@ -128,7 +133,8 @@
 							<div class="cont"><?php foreach($this->activities as $h): ?>
 								<div class="one">
                                 	<a href="/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>">
-									<?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260'); ?></a>
+                                    <?php $img_loading = "http://static.tripfab.com/images2/Listing-Home-Loading.gif" ?>
+									<?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260',null,$img_loading); ?></a>
 									<h5><?= $h->title ?></h5>
 									<span class="meta"><strong><em></em><?= $h->city ?>,</strong> <?= $h->country ?></span>
 									<div class="price">
@@ -154,7 +160,9 @@
 							<div class="cont">
                             	<?php foreach($this->trips as $h): ?>
 								<div class="one">
-                                	<a href="/trips/view/<?= $h->id ?>"><?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260'); ?></a>
+                                	<a href="/trips/view/<?= $h->id ?>">
+                                    <?php $img_loading = "http://static.tripfab.com/images2/Listing-Home-Loading.gif" ?>
+									<?= $this->thumbnail(array('width'=>563,'height'=>260),$h->image,'','563:260',null,$img_loading); ?></a>
 									<h5><?= $h->title ?></h5>
 									<span class="meta"><strong><em></em></strong>Costa Rica</span>
 									<div class="price">
