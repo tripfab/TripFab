@@ -287,7 +287,7 @@ $(function(){
     });
 	
     $('.addtotrip .btn-10').live('click', function(){
-        $(this).parents('.addTrip').removeClass('show');
+        $('.addTrip').removeClass('show');
         $('.addtotrip select option:first').attr('selected','selected');
         return false;
     });
@@ -309,13 +309,16 @@ $(function(){
             data:$data,
             type:'post',
             success:function(response){
+                console.log(response);
                 if(response.type == 'success'){
                     $('input, select').removeAttr('disabled');
                     $('.addTrip').removeClass('show');
+                    $.fancybox.close();
                     showAlert(response.message);
                 } else if(response.type == 'newtrip'){
                     $('input, select').removeAttr('disabled');
                     $('.addTrip').removeClass('show');
+                    $.fancybox.close();
                     showAlert(response.message);
                     $('.addTrip select').append('<option value="'+response.tripid+'">'+response.triptitle+'</option>');
                 } else {
@@ -671,28 +674,28 @@ function resizeImg($bgImg) {
     $bgImg.css('top',top);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-$(document).ready(function() {
-	$("#fancybox-content ").css('overflow', 'visible');
-	$(".choiceLB").parent().css('overflow', 'visible');
-	$(".choiceLB a").click(function() {
-		$(".addTrip").css('display', 'block');
-	});
+$(function(){
+    $('.js-book').click(function(){
+        $href = $(this).attr('href');
+        $.fancybox({
+            href:$href,
+            overlayColor:'#fff',
+            showCloseButton:0,
+            padding:0,
+            centerOnScroll:1,
+            onStart:function(){
+                $('#fancybox-outer').addClass('noshadow');
+            },
+            onCleanup:function(){
+                $('#fancybox-outer').removeClass('noshadow');
+            }
+        });
+        return false;
+    });
+    
+    $('.js-submit-bookin').click(function(){
+        $.fancybox.close();
+        $('#booking').submit();
+        return false;
+    });
 });
-
-
-

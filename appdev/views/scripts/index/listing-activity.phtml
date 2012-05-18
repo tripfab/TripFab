@@ -66,14 +66,8 @@
                 <div class="wrap">
                     <div class="cont">
                         <div class="container">
-                        	<?= $this->partial('partials/addtomytrip.phtml', array(
-									'user' => $this->user,
-									'trips' => $this->trips,
-									'listing' => $this->listing,
-									'class'	=> 'btn-2',
-									'class2' => 'one'
-							)) ?>
-                            <?php if(!isset($_COOKIE['tooltipHelpList'])): ?>
+							
+							<?php if(!isset($_COOKIE['tooltipHelpList'])): ?>
 							<div class="firstime_tip">
 								<img class="arrow" src="https://static.tripfab.com/images6/arrow-24.png" alt="" />
 								<div class="cont">
@@ -368,8 +362,6 @@
                                         <div id="calendar">
                                             <span class="line"></span>
                                         </div><!--CALENDAR-->
-                                        
-                                        
 										<?php if(count($this->capacities) > 1): ?>
                                         <h5><span class="i_type"></span>Choose an Activity Type</h5>
                                         <div class="type">
@@ -528,10 +520,13 @@
                                         </div><!--PRICE-->
                                     </div><!--ACCORDION-->
                                     <?php if($this->user): ?>
-                                    <input type="submit" value="Book Now!" class="btn-1 noclean" />
+                                    <a href="#choiceLB" class="btn-1 js-book">Book Now!</a>
                                     <?php else: ?>
-                                    <input type="button" value="Book Now!" class="btn-1 noclean js-signup" />
+                                    <a href="/signup" class="btn-1 js-signup">Book Now!</a>
                                     <?php endif ?>
+                                    <?php foreach($this->form_fields as $name => $value): ?>
+                                    <input type="hidden" name="<?= $name ?>" value="<?= $value ?>" />
+                                    <?php endforeach ?>
                                     <?php foreach($this->form_fields as $name => $value): ?>
                                     <input type="hidden" name="<?= $name ?>" value="<?= $value ?>" />
                                     <?php endforeach ?>
@@ -551,17 +546,6 @@
                                     <?php endif ?>         
                                     <?php endif ?>
                                 </form>
-                                <div class="add">
-                                    <?= $this->partial('partials/addtomytrip.phtml', array(
-                                            'user' => $this->user,
-                                            'trips' => $this->trips,
-                                            'listing' => $this->listing,
-                                            'class'	=> 'btn-2',
-                                            'class2' => 'two'
-                                    )) ?>
-                                    <em>or you can</em>
-                                    <div class="clear"></div>
-                                </div><!--ADD-->
                             </div><!--CONT-->
 						</div><!--SIDEBAR-->
                         <div class="clear"></div>
@@ -574,6 +558,24 @@
 	    <?= $this->partial('partials/footer.phtml'); ?>   
     </div> 
     <div class="hidden">
+    	<div id="choiceLB">
+            <div class="spacer">
+                <div class="choiceLB">
+                    <div class="top"><h6>Great! Now, what do you want to do?</h6></div>
+                    <div class="cont">
+                        <input class="btn-1 js-submit-bookin" type="submit" name="" value="Go to Checkout" />
+                        <?= $this->partial('partials/addtomytrip.phtml', array(
+                                'user' => $this->user,
+                                'trips' => $this->trips,
+                                'listing' => $this->listing,
+                                'class'	=> 'btn-1',
+                                'class2' => 'two'
+                        )) ?>
+                        <em>or</em>
+                    </div><!--CONT-->
+                </div><!--CHOICELB-->
+            </div>
+        </div>
         <div id="send_message">
             <form action="" id="sendMessageForm">
                 <div class="lb-forgot">
@@ -924,7 +926,10 @@ span.code {
 	width: 35px;
 	float: left;
 	text-align: right;}
+.spacer { padding:100px 50px;;}
+#fancybox-outer.noshadow { -webkit-box-shadow:0px 0px 0px 0px #b3b3b3; }
+.choiceLB {
+	border:1px #b3b3b3 solid; }
 </style>
-<a href="#">asd</a>
 </body>
 </html>

@@ -66,14 +66,6 @@
                 <div class="wrap">
                     <div class="cont">
                         <div class="container">
-                        	<?= $this->partial('partials/addtomytrip.phtml', array(
-									'user' => $this->user,
-									'trips' => $this->trips,
-									'listing' => $this->listing,
-									'class'	=> 'btn-2',
-									'class2' => 'one'
-							)) ?>
-							
                             <?php if(!isset($_COOKIE['tooltipHelpList'])): ?>
 							<div class="firstime_tip">
 								<img class="arrow" src="https://static.tripfab.com/images6/arrow-24.png" alt="">
@@ -188,6 +180,7 @@
                                         </ul>
                                     </div><!--AMENITIES-->
                                     <?php endif ?>
+                                    <?php $ok3=true; foreach($this->details as $d): if($d->type == 3 and $ok3): $ok3 = false; endif; endforeach ?>
                                     <?php if(!$ok3): ?>
                                     <div class="policies">
                                         <h5>Policies</h5>
@@ -415,15 +408,14 @@
                                          	<sub>Subtotal</sub></span>
                                          </div>
                                     </div><!--PRICE-->
-                                    <!--<?php if($this->user): ?>
-                                    <input type="submit" value="Book Now!" class="btn-1 noclean" />
+                                    <?php if($this->user): ?>
+                                    <a href="#choiceLB" class="btn-1 js-book">Book Now!</a>
                                     <?php else: ?>
-                                    <input type="button" value="Book Now!" class="btn-1 noclean js-signup" />
+                                    <a href="/signup" class="btn-1 js-signup">Book Now!</a>
                                     <?php endif ?>
                                     <?php foreach($this->form_fields as $name => $value): ?>
                                     <input type="hidden" name="<?= $name ?>" value="<?= $value ?>" />
-                                    <?php endforeach ?>-->
-                                    <a href="#choiceLB" class="btn-1 lbc">Book Now!</a>
+                                    <?php endforeach ?>
                                 </form>                     
                             </div><!--CONT-->
                         </div><!--SIDEBAR-->
@@ -437,44 +429,24 @@
 	    <?= $this->partial('partials/footer.phtml'); ?>  
     </div><!--WP_FOOTER-->
     <div class="hidden">
-    	
-    	<div class="choiceLB" id="choiceLB">
-    		<div class="top"><h6>Great! Now, what do you want to do?</h6></div>
-    		<div class="cont">
-    			<form action="">
-    				<input class="btn-1" type="submit" name="" value="Go to Checkout" />
-    				<?= $this->partial('partials/addtomytrip.phtml', array(
-    				        'user' => $this->user,
-    				        'trips' => $this->trips,
-    				        'listing' => $this->listing,
-    				        'class'	=> 'btn-1',
-    				        'class2' => 'two'
-    				)) ?>
-    				<em>or</em>
-    			</form>
-    			<form method="post" class="addtotrip" action="/ajax/addtotrips">
-    			    <div class="addTrip <?= $this->class2 ?>">
-    			        <img class="arrow" alt="" src="https://static.tripfab.com/images2/arrow-24.png">
-    			        <div class="top">
-    			            <select name="trip">
-    			                <option value="">Select one of your trips</option>
-    			                <option value="new">Create New Trip</option>
-    			                <option disabled="disabled">------</option>
-    			                <?php foreach($this->trips as $trip): ?>
-    			                <option value="<?= $trip->id ?>"><?= $trip->title ?></option>
-    			                <?php endforeach ?>
-    			            </select>
-    			            <input class="hidden" name="title" type="text" value="Trip Name" />
-    			        </div><!--TOP-->
-    			        <div class="bot">
-    			            <input type="submit" class="btn-1" value="Add">
-    			            <a class="btn-10" href="">Cancel</a>
-    			        </div><!--BOT-->
-    			    </div><!-- closes dd-2 -->
-    			    <input type="hidden" value="<?= $this->listing->id ?>" name="listing">
-    			</form>
-    		</div><!--CONT-->
-    	</div><!--CHOICELB-->
+    	<div id="choiceLB">
+            <div class="spacer">
+                <div class="choiceLB">
+                    <div class="top"><h6>Great! Now, what do you want to do?</h6></div>
+                    <div class="cont">
+                        <input class="btn-1 js-submit-bookin" type="submit" name="" value="Go to Checkout" />
+                        <?= $this->partial('partials/addtomytrip.phtml', array(
+                                'user' => $this->user,
+                                'trips' => $this->trips,
+                                'listing' => $this->listing,
+                                'class'	=> 'btn-1',
+                                'class2' => 'two'
+                        )) ?>
+                        <em>or</em>
+                    </div><!--CONT-->
+                </div><!--CHOICELB-->
+            </div>
+        </div>
     	
         <div id="send_message">
             <form action="" id="sendMessageForm">
@@ -595,154 +567,152 @@
             </div><!--CREATE_TRIP-->
         </div>
         
-        	<div class="error_ph" id="errorA">
-        		<div class="cont">
-        			<span class="icon2"></span>
-        			<h3>Missed Call</h3>
-        			<p>An error ocurred and we can’t connect you with the partner, please try later.</p>
-        			<div class="clear"></div>
-        		</div><!--CONT-->
-        		<div class="bottom">
-        			<input onclick="$.fancybox.close(); return false;" class="btn-1" type="submit" name="" value="Got it!" />
-        		</div><!--BOTTOM-->
-        	</div><!--ERROR_PH-->
-        	
-        	<div class="error_ph" id="errorB">
-        		<div class="cont">
-        			<span class="icon2"></span>
-        			<h3>Wrong Number</h3>
-        			<p>An error ocurred because you entered a wrong phone number, please dial again</p>
-        		</div><!--CONT-->
-        		<div class="bottom">
-        			<input class="btn-1 phonecall" href="#start_call" type="submit" name="" value="Dial Again" />
-        			<a href="" onclick="$.fancybox.close(); return false;" class="btn-10">Cancel</a>
-        			<div class="clear"></div>
-        		</div><!--BOTTOM-->
-        	</div><!--ERROR_PH-->
-        	
-        	<div class="error_ph" id="errorC">
-        		<div class="cont">
-        			<span class="icon1"></span>
-        			<h3>Successfully Connected!</h3>
-        			<p>You’ll receive a phone call from our partner in a few minutes</p>
-        			<div class="clear"></div>
-        		</div><!--CONT-->
-        		<div class="bottom">
-        			<input class="btn-1" type="submit" name="" value="Got it!" onclick="$.fancybox.close(); return false;" />
-        		</div><!--BOTTOM-->
-        	</div><!--CONECTED_PH-->
-        	
-        	<div class="load_ph" id="load_ph">
-        		<img src="https://static.tripfab.com/images6/loadCall.gif" width="50" height="50" alt="" />
-        		<h3>Connecting with the Business...</h3>
-        	</div><!--PHONE-PH-->
-        	
-        	
-        	<div id="policy">
-				<?php switch($this->listing->policy): case 1: ?>
-                <div id="cancel_policy" class="cancel_policy lb">
-                    <div class="top">Low Restrictions Cancellation Policy</div>
-                    <div class="mid">
-                        <h3>Full refund 1 day prior to arrival, except fees</h3>
-                        <ul>
-                            <li>Cleaning fees are always refunded if the guest did not check in</li>
-                            <li>The Tripfab service fee is refundable.</li>
-                            <li>If there is a complaint from either party, notice must be given to Tripfab 
-                            Resolution Center within 24 hours of check-in</li>
-                            <li>Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
-                            <li>A reservation is not officially canceled until the guest receives a cancellation confirmation 
-                            e-mail from Tripfab Resolution Center.</li>
-                        </ul>
-                        <div class="inner">
-                            <img src="https://static.tripfab.com/images2/img-65-hotel.png" alt="" />
-                            <div class="specs">
-                                <div class="column">
-                                    <p>Must be made a full 24 hours prior to listing's local check in time (or 2:00 PM 
-                                    if not specified) on the day of check in. For example, if check-in is on Friday, 
-                                    cancel by Thursday of that week before check in time.</p>
-                                </div><!--COLUMN-->
-                                <div class="column">
-                                    <p>If the guest cancels less than 24 hours before check-in, the first night is non-refundable.</p>
-                                </div><!--COLUMN-->
-                                <div class="column last">
-                                    <p>If the guest arrives and decides to leave early, the nights not spent 24 hours after 
-                                    the official cancellation are 100% refunded.</p>
-                                </div><!--COLUMN-->
-                                <div class="clear"></div>
-                            </div><!--SPECS-->
-                        </div><!--INNER-->
-                    </div><!--MID-->
-                </div><!--CANCEL_POLICY-->
-                <?php break; case 2: ?>
-                <div id="cancel_policy" class="cancel_policy lb">
-                    <div class="top">Medium Restrictions Cancellation Policy</div>
-                    <div class="mid">
-                        <h3>Full refund 3 days prior to arrival, except fees</h3>
-                        <ul>
-                            <li>Cleaning fees are always refunded if the guest did not check in.
-                            <li>The Tripfab service fee is refundable.</li></li>
-                            <li>If there is a complaint from either party, notice must be given to 
-                            Tripfab Resolution Center within 24 hours of check-in.</li>
-                            <li>Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
-                            <li>A reservation is not officially canceled until the guest receives a cancellation confirmation 
-                            e-mail from Tripfab Resolution Center.</li>
-                        </ul>
-                        <div class="inner">
-                            <img src="https://static.tripfab.com/images2/img-66-hotel.png" width="    " height="" alt="" />
-                            <div class="specs">
-                                <div class="column">
-                                    <p>Must be made three full days prior to listing's local check in time (or 2:00 PM if not specified) on the day of check in. For example, if check-in is on Friday, cancel by the previous Tuesday before check in time.</p>
-                                </div><!--COLUMN-->
-                                <div class="column">
-                                    <p>If the guest cancels less than 3 days in advance, the first night is 
-                                    non-refundable but the remaining nights will be 50% refunded.</p>
-                                </div><!--COLUMN-->
-                                <div class="column last">
-                                    <p>If the guest arrives and decides to leave early, the nights not spent 24 hours 
-                                    after the cancellation occurs are 50% refunded.</p>
-                                </div><!--COLUMN-->
-                                <div class="clear"></div>
-                            </div><!--SPECS-->
-                        </div><!--INNER-->
-                    </div><!--MID-->
-                </div><!--CANCEL_POLICY-->
-                <?php break; default: ?>
-                <div id="cancel_policy" class="cancel_policy lb">
-                    <div class="top">High Restrictions Cancellation Policy</div>
-                    <div class="mid">
-                        <h3>50% refund up until 1 week prior to arrival, except fees</h3>
-                        <ul>
-                            <li>Cleaning fees are always refunded if the guest did not check in.</li>
-                            <li>The Tripfab service fee is non-refundable.</li>
-                            <li>If there is a complaint from either party, notice must be given to Tripfab 
-                            Resolution Center within 24 hours of check-in.</li>
-                            <li>Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
-                            <li>A reservation is not officially canceled until the guest receives a cancellation confirmation 
-                            e-mail from Tripfab Resolution Center.</li>
-                        </ul>
-                        <div class="inner">
-                            <img src="https://static.tripfab.com/images2/img-67-hotel.png" width="    " height="" alt="" />
-                            <div class="specs">
-                                <div class="column">
-                                    <p>Must be made seven full days prior to listing's local check in time (or 2:00 PM 
-                                    if not specified) on the day of check in, otherwise no refund. For example, 
-                                    if check-in is on Friday, cancel by Friday of the previous</p>
-                                </div><!--COLUMN-->
-                                <div class="column">
-                                    <p>If the guest cancels less than 7 days in advance, the nights not spent are not refunded.</p>
-                                </div><!--COLUMN-->
-                                <div class="column last">
-                                    <p>If the guest arrives and decides to leave early, the nights not spent are not refunded.</p>
-                                </div><!--COLUMN-->
-                                <div class="clear"></div>
-                            </div><!--SPECS-->
-                        </div><!--INNER-->
-                    </div><!--MID-->
-                </div><!--CANCEL_POLICY-->
-                <?php endswitch ?>
-        	</div>
-        	
-        	
+        <div class="error_ph" id="errorA">
+            <div class="cont">
+                <span class="icon2"></span>
+                <h3>Missed Call</h3>
+                <p>An error ocurred and we can’t connect you with the partner, please try later.</p>
+                <div class="clear"></div>
+            </div><!--CONT-->
+            <div class="bottom">
+                <input onclick="$.fancybox.close(); return false;" class="btn-1" type="submit" name="" value="Got it!" />
+            </div><!--BOTTOM-->
+        </div><!--ERROR_PH-->
+        
+        <div class="error_ph" id="errorB">
+            <div class="cont">
+                <span class="icon2"></span>
+                <h3>Wrong Number</h3>
+                <p>An error ocurred because you entered a wrong phone number, please dial again</p>
+            </div><!--CONT-->
+            <div class="bottom">
+                <input class="btn-1 phonecall" href="#start_call" type="submit" name="" value="Dial Again" />
+                <a href="" onclick="$.fancybox.close(); return false;" class="btn-10">Cancel</a>
+                <div class="clear"></div>
+            </div><!--BOTTOM-->
+        </div><!--ERROR_PH-->
+        
+        <div class="error_ph" id="errorC">
+            <div class="cont">
+                <span class="icon1"></span>
+                <h3>Successfully Connected!</h3>
+                <p>You’ll receive a phone call from our partner in a few minutes</p>
+                <div class="clear"></div>
+            </div><!--CONT-->
+            <div class="bottom">
+                <input class="btn-1" type="submit" name="" value="Got it!" onclick="$.fancybox.close(); return false;" />
+            </div><!--BOTTOM-->
+        </div><!--CONECTED_PH-->
+        
+        <div class="load_ph" id="load_ph">
+            <img src="https://static.tripfab.com/images6/loadCall.gif" width="50" height="50" alt="" />
+            <h3>Connecting with the Business...</h3>
+        </div><!--PHONE-PH-->
+        
+        
+        <div id="policy">
+            <?php switch($this->listing->policy): case 1: ?>
+            <div id="cancel_policy" class="cancel_policy lb">
+                <div class="top">Low Restrictions Cancellation Policy</div>
+                <div class="mid">
+                    <h3>Full refund 1 day prior to arrival, except fees</h3>
+                    <ul>
+                        <li>Cleaning fees are always refunded if the guest did not check in</li>
+                        <li>The Tripfab service fee is refundable.</li>
+                        <li>If there is a complaint from either party, notice must be given to Tripfab 
+                        Resolution Center within 24 hours of check-in</li>
+                        <li>Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                        <li>A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                        e-mail from Tripfab Resolution Center.</li>
+                    </ul>
+                    <div class="inner">
+                        <img src="https://static.tripfab.com/images2/img-65-hotel.png" alt="" />
+                        <div class="specs">
+                            <div class="column">
+                                <p>Must be made a full 24 hours prior to listing's local check in time (or 2:00 PM 
+                                if not specified) on the day of check in. For example, if check-in is on Friday, 
+                                cancel by Thursday of that week before check in time.</p>
+                            </div><!--COLUMN-->
+                            <div class="column">
+                                <p>If the guest cancels less than 24 hours before check-in, the first night is non-refundable.</p>
+                            </div><!--COLUMN-->
+                            <div class="column last">
+                                <p>If the guest arrives and decides to leave early, the nights not spent 24 hours after 
+                                the official cancellation are 100% refunded.</p>
+                            </div><!--COLUMN-->
+                            <div class="clear"></div>
+                        </div><!--SPECS-->
+                    </div><!--INNER-->
+                </div><!--MID-->
+            </div><!--CANCEL_POLICY-->
+            <?php break; case 2: ?>
+            <div id="cancel_policy" class="cancel_policy lb">
+                <div class="top">Medium Restrictions Cancellation Policy</div>
+                <div class="mid">
+                    <h3>Full refund 3 days prior to arrival, except fees</h3>
+                    <ul>
+                        <li>Cleaning fees are always refunded if the guest did not check in.
+                        <li>The Tripfab service fee is refundable.</li></li>
+                        <li>If there is a complaint from either party, notice must be given to 
+                        Tripfab Resolution Center within 24 hours of check-in.</li>
+                        <li>Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                        <li>A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                        e-mail from Tripfab Resolution Center.</li>
+                    </ul>
+                    <div class="inner">
+                        <img src="https://static.tripfab.com/images2/img-66-hotel.png" width="    " height="" alt="" />
+                        <div class="specs">
+                            <div class="column">
+                                <p>Must be made three full days prior to listing's local check in time (or 2:00 PM if not specified) on the day of check in. For example, if check-in is on Friday, cancel by the previous Tuesday before check in time.</p>
+                            </div><!--COLUMN-->
+                            <div class="column">
+                                <p>If the guest cancels less than 3 days in advance, the first night is 
+                                non-refundable but the remaining nights will be 50% refunded.</p>
+                            </div><!--COLUMN-->
+                            <div class="column last">
+                                <p>If the guest arrives and decides to leave early, the nights not spent 24 hours 
+                                after the cancellation occurs are 50% refunded.</p>
+                            </div><!--COLUMN-->
+                            <div class="clear"></div>
+                        </div><!--SPECS-->
+                    </div><!--INNER-->
+                </div><!--MID-->
+            </div><!--CANCEL_POLICY-->
+            <?php break; default: ?>
+            <div id="cancel_policy" class="cancel_policy lb">
+                <div class="top">High Restrictions Cancellation Policy</div>
+                <div class="mid">
+                    <h3>50% refund up until 1 week prior to arrival, except fees</h3>
+                    <ul>
+                        <li>Cleaning fees are always refunded if the guest did not check in.</li>
+                        <li>The Tripfab service fee is non-refundable.</li>
+                        <li>If there is a complaint from either party, notice must be given to Tripfab 
+                        Resolution Center within 24 hours of check-in.</li>
+                        <li>Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                        <li>A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                        e-mail from Tripfab Resolution Center.</li>
+                    </ul>
+                    <div class="inner">
+                        <img src="https://static.tripfab.com/images2/img-67-hotel.png" width="    " height="" alt="" />
+                        <div class="specs">
+                            <div class="column">
+                                <p>Must be made seven full days prior to listing's local check in time (or 2:00 PM 
+                                if not specified) on the day of check in, otherwise no refund. For example, 
+                                if check-in is on Friday, cancel by Friday of the previous</p>
+                            </div><!--COLUMN-->
+                            <div class="column">
+                                <p>If the guest cancels less than 7 days in advance, the nights not spent are not refunded.</p>
+                            </div><!--COLUMN-->
+                            <div class="column last">
+                                <p>If the guest arrives and decides to leave early, the nights not spent are not refunded.</p>
+                            </div><!--COLUMN-->
+                            <div class="clear"></div>
+                        </div><!--SPECS-->
+                    </div><!--INNER-->
+                </div><!--MID-->
+            </div><!--CANCEL_POLICY-->
+            <?php endswitch ?>
+        </div>
     </div><!--HIDDEN-->
 </div><!--WRAPPER_ALL-->
 <input type="hidden" value="<?= ($this->listing->lat) ? $this->listing->lat : 'none' ?>" name="listlat" />
@@ -764,6 +734,10 @@ span.code {
 	width: 35px;
 	float: left;
 	text-align: right;}
+.spacer { padding:100px 50px;;}
+#fancybox-outer.noshadow { -webkit-box-shadow:0px 0px 0px 0px #b3b3b3; }
+.choiceLB {
+	border:1px #b3b3b3 solid; }
 </style>
 </body>
 </html>
