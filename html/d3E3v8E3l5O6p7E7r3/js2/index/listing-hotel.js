@@ -670,3 +670,29 @@ function resizeImg($bgImg) {
     $bgImg.css('height',height);
     $bgImg.css('top',top);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$(document).ready(function() {
+	$("#fancybox-content ").css('overflow', 'visible');
+	$(".choiceLB").parent().css('overflow', 'visible');
+	$(".choiceLB a").click(function() {
+		$(".addTrip").css('display', 'block');
+	});
+});
+
+
+

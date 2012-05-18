@@ -407,8 +407,8 @@ class IndexController extends Zend_Controller_Action
         if(!is_null($this->user))
                 $this->view->user = $this->user->getData();
         
-        $listing->views = $listing->views + 1;
-        $listing->save();
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->update('listings', array('views'=>$listing->views + 1),'id = '.$listing->id);
         
         $this->render($template);     
     }

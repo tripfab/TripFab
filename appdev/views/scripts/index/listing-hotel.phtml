@@ -415,26 +415,16 @@
                                          	<sub>Subtotal</sub></span>
                                          </div>
                                     </div><!--PRICE-->
-                                    <?php if($this->user): ?>
+                                    <!--<?php if($this->user): ?>
                                     <input type="submit" value="Book Now!" class="btn-1 noclean" />
                                     <?php else: ?>
                                     <input type="button" value="Book Now!" class="btn-1 noclean js-signup" />
                                     <?php endif ?>
                                     <?php foreach($this->form_fields as $name => $value): ?>
                                     <input type="hidden" name="<?= $name ?>" value="<?= $value ?>" />
-                                    <?php endforeach ?>
-                                </form>
-                                <div class="add">
-                                    <?= $this->partial('partials/addtomytrip.phtml', array(
-                                            'user' => $this->user,
-                                            'trips' => $this->trips,
-                                            'listing' => $this->listing,
-                                            'class'	=> 'btn-2',
-                                            'class2' => 'two'
-                                    )) ?>
-                                    <em>or you can</em>
-                                    <div class="clear"></div>
-                                </div><!--ADD-->
+                                    <?php endforeach ?>-->
+                                    <a href="#choiceLB" class="btn-1 lbc">Book Now!</a>
+                                </form>                     
                             </div><!--CONT-->
                         </div><!--SIDEBAR-->
                         <div class="clear"></div>
@@ -447,6 +437,45 @@
 	    <?= $this->partial('partials/footer.phtml'); ?>  
     </div><!--WP_FOOTER-->
     <div class="hidden">
+    	
+    	<div class="choiceLB" id="choiceLB">
+    		<div class="top"><h6>Great! Now, what do you want to do?</h6></div>
+    		<div class="cont">
+    			<form action="">
+    				<input class="btn-1" type="submit" name="" value="Go to Checkout" />
+    				<?= $this->partial('partials/addtomytrip.phtml', array(
+    				        'user' => $this->user,
+    				        'trips' => $this->trips,
+    				        'listing' => $this->listing,
+    				        'class'	=> 'btn-1',
+    				        'class2' => 'two'
+    				)) ?>
+    				<em>or</em>
+    			</form>
+    			<form method="post" class="addtotrip" action="/ajax/addtotrips">
+    			    <div class="addTrip <?= $this->class2 ?>">
+    			        <img class="arrow" alt="" src="https://static.tripfab.com/images2/arrow-24.png">
+    			        <div class="top">
+    			            <select name="trip">
+    			                <option value="">Select one of your trips</option>
+    			                <option value="new">Create New Trip</option>
+    			                <option disabled="disabled">------</option>
+    			                <?php foreach($this->trips as $trip): ?>
+    			                <option value="<?= $trip->id ?>"><?= $trip->title ?></option>
+    			                <?php endforeach ?>
+    			            </select>
+    			            <input class="hidden" name="title" type="text" value="Trip Name" />
+    			        </div><!--TOP-->
+    			        <div class="bot">
+    			            <input type="submit" class="btn-1" value="Add">
+    			            <a class="btn-10" href="">Cancel</a>
+    			        </div><!--BOT-->
+    			    </div><!-- closes dd-2 -->
+    			    <input type="hidden" value="<?= $this->listing->id ?>" name="listing">
+    			</form>
+    		</div><!--CONT-->
+    	</div><!--CHOICELB-->
+    	
         <div id="send_message">
             <form action="" id="sendMessageForm">
                 <div class="lb-forgot">

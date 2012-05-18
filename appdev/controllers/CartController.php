@@ -118,7 +118,7 @@ class CartController extends Zend_Controller_Action {
                 $row->listing_id = $listing->id;
                 $row->option_id  = $rowR->option_id;
                 $row->adults     = $rowR->adults;
-                $row->kids       = $rowR->kids;
+                $row->kids       = !is_null($rowR->kids) ? $rowR->kids : 0;
                 $row->rate       = $rowR->rate;
                 $row->rate       = $rowR->rate;
                 $row->additional = $rowR->additional;

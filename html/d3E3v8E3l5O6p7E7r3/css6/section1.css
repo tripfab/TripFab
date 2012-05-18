@@ -1095,6 +1095,55 @@
     margin: 10px 0 0 9px;
     width: 10px;
 }
+/*CHOICE LIGHTBOX --------------------------------*/
+.choiceLB {
+	width: 390px;
+	height: 136px;
+	background-color: #FFF;
+	position: relative;
+}
+.choiceLB .top {
+	height: 48px;
+	background-color: #ededed;
+	font: bold 14px/48px Helvetica;
+	color: #303030;
+	text-align: center;
+	margin: 1px;
+}
+.choiceLB .btn-1 {
+	width: 143px;
+	float: left;
+	font: bold 14px/33px Helvetica;
+	height: 33px;
+	margin-left:25px;
+	-moz-border-radius: 3px 3px 0px 0px;
+	-webkit-border-radius: 3px 3px 0px 0px;
+	border-radius: 3px 3px 0px 0px; 
+}
+.choiceLB .btn-1 + .btn-1 {
+	float: right;
+	width: 138px;
+	margin:0  25px 0 0;
+}
+.choiceLB .btn-1 + .btn-1 span {
+	background: url("https://static.tripfab.com/images6/lstng_htl.png") no-repeat scroll -38px -196px transparent;
+    display: inline-block;
+    float: left;
+    height: 9px;
+    margin: 10px 0 0 9px;
+    width: 10px;
+}
+.choiceLB .cont {
+	padding-top: 28px;
+}
+.choiceLB em {
+	display: block;
+	color: #898989;
+	font: bold 14px Helvetica;
+	margin: 0 auto;
+	width: 30px;padding-top: 10px;
+}
+/*END CHOICE LIGHTBOX ----------------------------*/
 #lstng_htl .tabs > ul {
 	overflow: hidden;
 	padding: 10px 0 0 3px;
@@ -1831,7 +1880,8 @@ background: url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat -407
 	margin:0 15px;
 	height: 39px;
 	font: bold 14px/39px Helvetica;
-	width: 262px;
+	width: 243px;
+	margin-bottom: 19px;
 }
 #lstng_htl .sidebar .add em {
 	color: #898989;
