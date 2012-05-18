@@ -700,7 +700,7 @@ class UserController extends Zend_Controller_Action
     
     public function checkpricesTripsTask()
     {
-        if($this->getRequest()->isPost()){            
+        if($this->getRequest()->isPost()){
             $ids = $_POST['ids'];
             $id  = $this->_getParam('id');
             if($ids != $id)
@@ -728,8 +728,8 @@ class UserController extends Zend_Controller_Action
                 foreach($listings as $list) {
                     if($list->main_type == 6 || $list->main_type == 5){
                         $bookings[$list->id] = array(
-                            'adults' => 1,
-                            'child'  => 0
+                            'adults' => $trip->adults,
+                            'child'  => $trip->kids
                         );
                     }
                 }
