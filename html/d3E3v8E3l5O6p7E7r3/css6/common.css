@@ -3,7 +3,7 @@
 	height: 62px;
 	background: url(https://static.tripfab.com/images6/header.png) repeat-x 0 0;
 	position: relative;
-	z-index: 10000;
+	z-index: 999;
 }
 #header .wrapper {
 	position: relative;
@@ -18,6 +18,7 @@
 #header > .wrapper > ul {
 	height: 62px;
 	list-style: none;
+	float: left;
 }
 #header > .wrapper > ul >li {
 	float: left;
@@ -57,10 +58,9 @@
 #header .rg {
 	position: absolute;
 	height: 62px;
-	width: 480px;
+	width: 530px;
 	top: 0;
 	right: 0;
-	z-index: 10000;
 }
 #header .log {
 	float: right;
@@ -90,34 +90,24 @@
 	font: normal 11px/62px Helvetica;
 	float: right;
 }
-#header .log .sign_in a {
+#header .sign_in a {
     display: inline-block;
     color: #FFF;
-    font-weight: bold;
     text-shadow: 0px 1px 0px #000;
+    font: 200 11px/62px Helvetica;
 }
-#header .log .sign_in a .aw {
+#header .sign_in a .aw,
+#header #logged_in a .aw {
 	background: url("https://static.tripfab.com/images6/header_icons.png") no-repeat -148px 0;
 	display: inline-block;
 	width: 9px;
 	height: 5px;
 	margin: 0 3px 2px 5px;
 }
-#header .log .sign_in img {
-	float: left;
-	display: block;
-	margin: 18px 9px 0 0;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
-	-webkit-box-shadow: 0px 1px 1px 0px #0a0a0a;
-	-moz-box-shadow: 0px 1px 1px 0px #0a0a0a;
-	box-shadow: 0px 1px 1px 0px #0a0a0a; 
-}
 #header .login {
 	position: absolute;
 	top: 48px;
-	right: 30px;
+	right: 296px;
 	width: 235px;
 	min-height: 206px;
 	display: none;
@@ -127,7 +117,7 @@
 	-webkit-box-shadow: 0px 0px 4px 2px #545454;
 	-moz-box-shadow: 0px 0px 4px 2px #545454;
 	box-shadow: 0px 0px 4px 2px #545454;
-	z-index: 100000;
+	z-index: 10000;
 }
 #header .login.show {
 	display: block;
@@ -260,7 +250,7 @@
 	background-color: #FFF;
 	position: absolute;
 	top: 52px;
-	right: -13px;
+	right: 337px;
 	-webkit-box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.25);
 	-moz-box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.25);
 	box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.25);
@@ -294,6 +284,7 @@
 }
 #header .user-menu .main {
 	padding: 13px 10px 10px 15px;
+	overflow: hidden;
 }
 #header .user-menu .main img {
 	float: left;
@@ -350,14 +341,16 @@
 #header .top_search {
 	float: right;
 	width: 200px;
-	margin-right: 12px;
 	position: relative;
+	height: 62px;
+	padding:0 10px;
+	background: url("https://developer.tripfab.com/images6/header.png") repeat-x scroll 0 -124px transparent;
 }
 #header .top_search input[type="text"] {
 	background: url(https://static.tripfab.com/images6/header_icons.png) repeat-x -106px -10px #393939;
 	color: #D7D7D7;
     display: block;
-    font: 12px/27px Helvetica;
+    font: 200 12px/27px Helvetica;
     height: 25px;
     margin: 16px 0 0 0;
     padding: 2px 25px 0 7px;
@@ -391,7 +384,44 @@
 	box-shadow:0 0px 5px 0px #addeff !important;
 	behavior: url(/PIE.htc);
 }
-
+#header .rg .phone {
+	width: 130px;
+	text-align: right;
+	float: right;
+	padding-top: 15px;
+}
+#header .rg .phone span {
+	color: #fbd668;
+	font: normal 10px Helvetica;
+	text-shadow: 0px 1px 0px #000;
+	padding-bottom: 3px;
+	display: block;
+}
+#header .rg .phone strong {
+	font: bold 16px Helvetica;
+	color: #FFF;
+	display: block
+	text-shadow: 0px 1px 0px #000;
+}
+#header .rg .sign_in {
+	float: right;
+	margin-right: 10px;
+}
+#header .rg .sign_in a {
+	color: #60b5f7;
+	display: block;
+}
+#header #logged_in {
+	float: right;
+	padding-right: 10px;
+}
+#header #logged_in a{
+	color: #FFF;
+	background: url(https://static.tripfab.com/images6/headerLoggedIn.png) no-repeat 0 0;
+	font: 200 11px/62px Helvetica;
+	text-shadow: 0 1px 0 #000000;
+	padding-left: 20px;
+}
 .big-message {
 	height: 63px;
 	line-height: 61px;
@@ -887,23 +917,23 @@
 	padding-left: 15px;
 	display: block;
 }
-.signLog .contForm input[type="text"]:focus {
+/*.signLog .contForm input[type="text"]:focus {
 	font-weight: bold;
 	color: #303030;
-}
-.signLog .contForm input[type="text"].name {
+}*/
+.signLog .contForm input.name {
 	background-position: 371px 13px;
 }
-.signLog .contForm input[type="text"].lastName {
+.signLog .contForm input.lastName {
 	background-position: 371px -42px;
 }
-.signLog .contForm input[type="text"].email {
+.signLog .contForm input.email {
 	background-position: 371px -96px;
 }
-.signLog .contForm input[type="password"].password {
-	background-position: 371px -151px;
+.signLog .contForm input.password {
+	background-position: 371px -151px !important;
 }
-.signLog .contForm input[type="password"].confirm {
+.signLog .contForm input.confirm {
 	background-position: 371px -208px;
 }
 .signLog .cntrl {

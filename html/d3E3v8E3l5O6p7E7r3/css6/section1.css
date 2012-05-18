@@ -2611,7 +2611,6 @@ background: url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat -407
 	margin: 0 auto;
 	padding: 13px 0;
 	position: relative;
-	z-index: 1;
 }
 #src_map .top {
 	background-color: #f5f5f5;
@@ -4384,6 +4383,7 @@ ul.cat-menu li.item-1 a img {
 	-moz-border-radius:3px;
 	background-color: #FFF;
 	margin-bottom: 40px;
+	overflow: hidden;
 }
 #faqs h2 {
 	font: bold 26px Helvetica;
@@ -4394,11 +4394,28 @@ ul.cat-menu li.item-1 a img {
 	color: #787878;
 	margin-bottom: 20px;
 }
-
-
-
-
-
+#faqs .inner ul {
+	float: right;
+	width: 193px;
+}
+#faqs #faqs_tabs > div {
+	float: left;
+	width: 765px;
+}
+#faqs #faqs_tabs h4 {
+	height: 62px;
+	font: bold 18px/62px Helvetica;
+	color: #303030;
+	text-indent: 30px;
+}
+#faqs #faqs_tabs .cont {
+	background: url(https://static.tripfab.com/images6/faqBG.png) repeat-x 0 0;
+	padding: 30px;
+}
+#faqs #faqs_tabs h5 {
+	
+	
+}
 
 
 
