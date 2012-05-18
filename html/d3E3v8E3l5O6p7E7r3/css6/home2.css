@@ -110,9 +110,12 @@
 }
 #wrapper-top .main .right .video a{
 	display: block;
-	background: url(https://static.tripfab.com/images6/homeVideo.png) no-repeat 0 0;
-	width: 430px;
-	height: 270px;
+	background: url(https://static.tripfab.com/images6/homeVideo.png) no-repeat left top;
+	width: 413px;
+	height: 253px;
+}
+#wrapper-top .main .right .video a:hover {
+	background-position: left bottom;
 }
 #wrapper-top h1 a{
 	display: block;
@@ -265,8 +268,8 @@
 }
 #wrapper-top .bottom .each {
 	float: left;
-	margin-right: 67px;
-	padding-top: 23px;
+	margin-right: 39px;
+	padding-top: 32px;
 }
 #wrapper-top .bottom .each .inner {
 	float: left;
@@ -309,6 +312,9 @@
 }
 #wrapper-top .bottom .each.last {
 	margin-right: 0;
+}
+#wrapper-top .bottom .each.last .inner {
+	width: 280px;
 }
 .slideshow .lfarrow, .slideshow .rgarrow {
     background: url("https://static.tripfab.com/images6/lstng_htl.png") no-repeat scroll 0 0 transparent;
@@ -639,7 +645,8 @@
 	box-shadow: 0px 1px 1px 0px #000;
 }
 #popular-cities {
-	padding-bottom: 58px;
+	padding-bottom: 48px;
+	padding-top: 20px;
 }
 #popular-cities h5 {
 	font: bold 13px/52px Helvetica;

@@ -411,6 +411,9 @@
 	color: #60b5f7;
 	display: block;
 }
+#header .rg .sign_in a:hover {
+	color: #297ec0;
+}
 #header #logged_in {
 	float: right;
 	padding-right: 10px;
@@ -420,7 +423,10 @@
 	background: url(https://static.tripfab.com/images6/headerLoggedIn.png) no-repeat 0 0;
 	font: 200 11px/62px Helvetica;
 	text-shadow: 0 1px 0 #000000;
-	padding-left: 20px;
+	padding-left: 14px;
+}
+#header #logged_in a:hover{
+	color:#e1e1e1;
 }
 .big-message {
 	height: 63px;
@@ -1072,6 +1078,127 @@
 #send_message .lb-forgot .ttl em{
 	font-weight: normal;
 }
+
+
+
+
+
+.lgbx_login {
+	width: 820px;
+	height: 454px;
+}
+.lgbx_login .login {
+	width: 316px;
+	float: left;
+	background-color: #282828;
+	height: 454px;
+	padding: 20px 47px 0;
+	-moz-border-radius: 3px 0px 3px 0px;
+	-webkit-border-radius: 3px 0px 3px 0px;
+	border-radius: 3px 0px 3px 0px;
+}
+.lgbx_login .login h6 {
+	color: #FFF;
+	font: bold 20px Helvetica;
+	margin-bottom: 10px;
+}
+.lgbx_login .login p{
+	color: #FFF;
+	font: normal 13px/20px Helvetica;
+	margin-bottom: 10px;
+}
+.lgbx_login .login input[type="text"],
+.lgbx_login .login input[type="password"] {
+	width: 303px;
+	height: 30px;
+	margin-bottom: 15px;
+	color: #898989;
+	font: normal 13px/30px Helvetica;
+}
+.lgbx_login .login input.email {
+	background: url("https://static.tripfab.com/images6/signInIcons.png") no-repeat scroll 286px -101px #FFF;
+}
+.lgbx_login .login input.password {
+	background: url("https://static.tripfab.com/images6/signInIcons.png") no-repeat scroll 282px -157px #FFF;
+}
+.lgbx_login .login .link1 {
+	margin-bottom: 10px;
+	display: block;
+	font-weight: bold;
+}
+.lgbx_login .login .cntrl {
+	overflow: hidden;
+}
+.lgbx_login .login .cntrl label {
+	display: block;
+	float: left;
+	height: 13px;
+	font: bold 12px Helvetica;
+	color: #ebebeb;
+	margin: 11px 0 0 0;
+}
+.lgbx_login .login .cntrl label input {
+	display: block;
+	height: 13px;
+	width: 13px;
+	float: left;
+	margin: 0 10px 0 0;
+}
+.lgbx_login .login .cntrl .btn-1 {
+	float: right;
+	height: 35px;
+	width: 91px;
+	padding: 0;
+	font: 400 16px/35px Helvetica;
+	float: right;
+}
+.lgbx_login .login .sep {
+	display: block;
+	background: url(https://static.tripfab.com/images6/lgbx_signinLine.png) repeat-x 0 50%;
+	height: 30px;
+}
+.lgbx_login .login .sep em {
+	display: block;
+	width: 31px;
+	margin: 0 auto;
+	font: bold 14px/31px Helvetica;
+	color: #898989;
+	background-color: #282828;
+	text-align: center;
+}
+.lgbx_login .login .fb {
+	display: block;
+	width: 306px;
+	height: 50px;
+	background: url(https://static.tripfab.com/images6/lgbx_signinFB.png) no-repeat 0 0;
+	font: bold 16px/50px Helvetica;
+	color: #FFF;
+	text-align: center;
+	text-shadow: 0 1px 0 #034ba0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.lgbx_login .signUp {
+	width: 360px;
+	float: right;
+	height: 454px;
+	background-color: #FFF;
+	padding: 40px 25px 0;
+}
+
+
+
 /*END SIGN IN LIGHTBOX---------------------------------------*/
 /*TOOLTIP FIRST USER add to my trips-------------------------*/
 .first_user {
