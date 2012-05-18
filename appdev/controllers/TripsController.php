@@ -178,7 +178,7 @@ class TripsController extends Zend_Controller_Action {
             $times[$day->day] = array();
             foreach($listings as $time){
               if($time->day == $day->day){
-                if(!in_array($time->time, $times[$day->day]) and $time->time != 4){
+                if(!in_array($time->time, $times[$day->day])){
                   if(is_null($time->time)) {
                     $start = explode(':', $time->start); $start = $start[0];
                     if($start >= 05 and $start <= 11) $time->time = 1;
@@ -196,9 +196,7 @@ class TripsController extends Zend_Controller_Action {
                     }
                     if(($listing->day == $day->day) and ($listing->time == $time->time)){
                       $results[$day->day][$labels[$time->time]][] = $listing;
-        }}} elseif($time->time == 4){
-            $stay[] = $time;
-        }}}}}
+        }}}}}}}
         
         $this->view->stay = $stay;
         

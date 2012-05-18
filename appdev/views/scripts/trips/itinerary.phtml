@@ -23,9 +23,9 @@
     	<div class="w3 itinerary">
         	<div class="wrapper">
             	<?php if($this->user): ?>
-                <a href="#dates_lb" class="lb btn-1">Buy Itinerary</a>
+                <a href="#dates_lb" class="lb btn-1">Buy Trip</a>
                 <?php else: ?>
-                <a href="/signup" class="js-signup btn-1">Buy Itinerary</a>
+                <a href="/signup" class="js-signup btn-1">Buy Trip</a>
                 <?php endif ?>
         	    <h2><?= $this->trip->title ?></h2>
         	</div><!-- closes ttl -->
@@ -48,7 +48,7 @@
                         </div><!-- closes day-ttl -->
                         <?php foreach($this->listingsbyday[$i] as $time => $listings): ?>
                         <div class="day-section">
-                            <span class="sub-ttl"><?= ucfirst($time) ?> Itinerary</span>
+                            <span class="sub-ttl"><?= ucfirst($time) ?> <?= ($time != 'Stay') ? 'Itinerary' : '' ?></span>
                             <div class="clear"></div>
                             <?php foreach($listings as $listing): ?>
                             <div class="day-item">
@@ -82,50 +82,12 @@
                         <?php endforeach ?>
                     </div><!-- closes day -->
                     <?php endfor ?>
-                    <?php if(count($this->stay) > 0): ?>
-                    <div class="day">
-                    	<div class="day-ttl">
-                        	<strong>Stay</strong>
-                            <h2><?= $this->trip->title ?></h2>
-                        </div>
-                        <div class="day-section">
-                        	<?php foreach($this->stay as $listing): ?>
-                            <div class="day-item">
-                                <div class="left">
-                                    <?= $this->thumbnail(array('width'=>267,'height'=>168), $listing->image, '', '267:168') ?>
-                                    <a href="mapcanvas<?= $listing->id ?>" class="mos"
-                                    data-lat="<?= $listing->lat ?>" data-lng="<?= $listing->lng ?>" 
-                                    data-title="<?= $listing->title ?>">Show Map <span>&uarr;</span></a>
-                                    <div id="mapcanvas<?= $listing->id ?>" class="mapCanvas hidden">
-                                    </div><!--MAPCANVAS-->
-                                </div><!-- closes left -->
-                                <div class="right">
-                                	<?php if($listing->start != '00:00:00'): ?>
-                                    <strong><?= date('g:i A',strtotime($listing->start)) ?> - <?= date('g:i A',strtotime($listing->end)) ?></strong>
-                                    <?php else: ?>
-                                    <strong><?= $times[$listing->time] ?></strong>
-                                    <?php endif ?>
-                                    <h4><?= $listing->title ?></h4>
-                                    <ul>
-                                    	<?php $desc = explode("\n",$listing->description) ?>
-                                        <?php foreach($desc as $d): ?>
-                                        <?php $d = trim($d); if(!empty($d)): ?>
-                                        <li><?= $d ?></li>
-                                        <?php endif ?>
-                                        <?php endforeach ?>
-                                    </ul>
-                                </div><!-- closes right -->
-                            </div><!-- closes day-item -->
-                            <?php endforeach ?>
-                        </div>
-                    </div>
-                    <?php endif ?>
                 </div><!-- closes day-cycle -->
                 <div class="result">
 					<?php if($this->user): ?>
-                    <a href="#dates_lb" class="lb btn-1">Buy Itinerary</a>
+                    <a href="#dates_lb" class="lb btn-1">Buy Trip</a>
                     <?php else: ?>
-                    <a href="/signup" class="js-signup btn-1">Buy Itinerary</a>
+                    <a href="/signup" class="js-signup btn-1">Buy Trip</a>
                     <?php endif ?>
                     <span><sup>$</sup><?= $this->formatnumber($this->trip->price) ?> <em>per person</em></span>
                 </div><!--RESULT-->

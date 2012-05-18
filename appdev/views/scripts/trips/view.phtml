@@ -22,9 +22,9 @@
             <div class="wrapper">
         	    <h3><?= $this->trip->title ?></h3>
             	<?php if($this->user): ?>
-                <a href="#dates_lb" class="lb btn-1">Buy Itinerary</a>
+                <a href="#dates_lb" class="lb btn-1">Buy Trip</a>
                 <?php else: ?>
-                <a href="/signup" class="js-signup btn-1">Buy Itinerary</a>
+                <a href="/signup" class="js-signup btn-1">Buy Trip</a>
                 <?php endif ?>
                 <div class="clear"></div>
             </div>
@@ -297,9 +297,9 @@
             </div>
             <div class="result">
             	<?php if($this->user): ?>
-                <a href="#dates_lb" class="lb btn-1">Buy Itinerary</a>
+                <a href="#dates_lb" class="lb btn-1">Buy Trip</a>
                 <?php else: ?>
-                <a href="/signup" class="js-signup btn-1">Buy Itinerary</a>
+                <a href="/signup" class="js-signup btn-1">Buy Trip</a>
                 <?php endif ?>
                 <span><sup>$</sup><?= $this->formatnumber($this->trip->price) ?> <em>per person</em></span>
             </div><!--RESULT-->
