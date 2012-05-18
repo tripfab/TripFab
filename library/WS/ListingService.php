@@ -566,7 +566,7 @@ class WS_ListingService {
         return $lists;
     }
     
-    public function getListings2($place, $cat, $subcat, $sort, $stars, $pricemin = 0, $pricemax = 3000, $country = null, $page = 1)
+    public function getListings2($place, $cat, $subcat, $sort, $stars, $pricemin = 0, $pricemax = 1500, $country = null, $page = 1)
     {
         $args = func_get_args();
         $cacheId = "LS_getListings2_".md5(print_r($args, true));
@@ -629,7 +629,7 @@ class WS_ListingService {
                         $select->order('listings.price DESC'); break;
                     default: break;
                 }} else {
-                    $select->order('listings.created DESC');
+                    $select->order('listings.price DESC');
                 }
             if($stars != 'all'){
                 $_stars = (int) str_replace('-stars','',$stars);
