@@ -521,10 +521,11 @@ class WS_TripsService {
         $select->join('places', 'trips.country_id = places.id', array('country' => 'title'));
         $select->join(array('places2' => 'places'), 'trips.start_city = places2.id', array('start_city_name' => 'title'));
         $select->join(array('places3' => 'places'), 'trips.end_city = places3.id', array('end_city_name' => 'title'));
-        $select->joinLeft('trip_categories', 'trips.category_id = trip_categories.id', array('category' => 'name'));
+        $select->join('trip_tripcategories','trips.id = trip_tripcategories.trip_id', array('category_id'));
+        $select->join('trip_categories','trip_categories.id = trip_tripcategories.category_id', array('category'=>'name'));
         $select->where('trips.country_id = ?', $country);
         if ($category != 'all')
-            $select->where('trips.category_id = ?', $category);
+            $select->where('trip_tripcategories.category_id = ?', $category);
         if (isset($price['max']) && isset($price['min'])) {
             $select->where('trips.price >= ?', $price['min']);
             $select->where('trips.price <= ?', $price['max']);
@@ -541,6 +542,8 @@ class WS_TripsService {
         $select->where('active = 1');
 
         $select->order('trips.created DESC');
+        
+        $select->group('trips.id');
 
         //echo $select->assemble(); die;
         //$select->limit(5);
@@ -903,6 +906,36 @@ class WS_TripsService {
 			$cats[] = $category->category_id;
 		}
         return $cats;
+    }
+    
+    public function countTrips($country) {
+        $cats = $this->getCategories();
+        $db   = Zend_Db_Table::getDefaultAdapter();
+        $trips_count = array();
+        foreach($cats as $cat) {
+            $select = $db->select();
+            $select->from('trips',array('c'=>'count(*)'));
+            $select->join('trip_tripcategories', 'trips.id = trip_tripcategories.trip_id');
+            $select->where('trips.country_id = ?', $country);
+            $select->where('trips.active = ?', 1);
+            $select->where('trip_tripcategories.category_id = ?', $cat->id);
+            $select->group('trips.id');
+            
+            $count = $db->fetchRow($select);
+            
+            $trips_count[$cat->id] = !is_null($count['c']) ? $count['c'] : 0;
+        }
+        
+        $select = $db->select();
+        $select->from('trips',array('c'=>'count(*)'));
+        $select->where('trips.country_id = ?', $country);
+        $select->where('trips.active = ?', 1);
+
+        $count = $db->fetchRow($select);
+
+        $trips_count['all'] = !is_null($count['c']) ? $count['c'] : 0;
+        
+        return $trips_count;
     }
 
 }

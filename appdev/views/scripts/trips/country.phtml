@@ -50,9 +50,9 @@
                     <div class="widget menu">
                         <h2 class="cat">Categories</h2>
                         <ul class="cats-menu">
-	                        <li><a data-category="all" href="#/all">Show All <span class="num">(58)</span></a></li>
+	                        <li><a data-category="all" href="#/all">Show All <span class="num">(<?= $this->trips_count['all'] ?>)</span></a></li>
                             <?php foreach($this->categories as $cat): ?>
-                            <li><a data-category="<?= $cat->id ?>" href="#/<?= strtolower(str_replace(' ','_', $cat->name)) ?>"><?= $cat->name ?> <span class="num">(58)</span></a></li>
+                            <li><a data-category="<?= $cat->id ?>" href="#/<?= strtolower(str_replace(' ','_', $cat->name)) ?>"><?= $cat->name ?> <span class="num">(<?= $this->trips_count[$cat->id] ?>)</span></a></li>
                             <?php endforeach ?>
                         </ul>
                     </div><!-- closes widget -->
