@@ -42,14 +42,17 @@ $per_night = array(
 <?php if(count($this->listings) > 0): ?>
 <?php foreach($this->listings as $i => $list): ?>	
     <div class="single <?=$css_name[$list->main_type] ?>-1">
-        
         <?php if($list->main_type == 2 || $list->main_type == 4 || $list->main_type == 7):?>
         <div class="image">
 			<?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
+                <?php if(count($this->trips > 0)): ?>
                 <a href="#" class="add been"></a>
+                <?php else: ?>
+                <a href="#" class="add been not js-new-trip"></a>
+                <?php endif ?>
 				<?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
             <?php else: ?>
-                <a href="#signIn" class="add been not js-login"></a>
+                <a href="#signIn" class="add been not js-signup"></a>
 			<?php endif ?>
             <?= $this->lazylisting(array('width'=>'241', 'height'=>'183'), $list->image, '','241:241',null,$_imgloading) ?>
             <ul class="rating">
@@ -81,11 +84,15 @@ $per_night = array(
  		<?php if ($list->main_type == 5): ?>
  		<div class="image">
  			<?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
- 		        <a href="#" class="add been"></a>
- 				<?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
- 		    <?php else: ?>
- 		        <a href="#signIn" class="add been not js-login"></a>
- 			<?php endif ?>
+                <?php if(count($this->trips > 0)): ?>
+                <a href="#" class="add been"></a>
+                <?php else: ?>
+                <a href="#" class="add been not js-new-trip"></a>
+                <?php endif ?>
+				<?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
+            <?php else: ?>
+                <a href="#signIn" class="add been not js-signup"></a>
+			<?php endif ?>
  		    <?= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124',null,$_imgloading) ?>
  		    
  		    <ul class="rating">
@@ -119,10 +126,14 @@ $per_night = array(
         <?php else:?>
         <div class="image">
             <?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
+                <?php if(count($this->trips > 0)): ?>
                 <a href="#" class="add been"></a>
+                <?php else: ?>
+                <a href="#" class="add been not js-new-trip"></a>
+                <?php endif ?>
 				<?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
             <?php else: ?>
-                <a href="#signIn" class="add been not js-login"></a>
+                <a href="#signIn" class="add been not js-signup"></a>
 			<?php endif ?>
             <?= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124',null,$_imgloading) ?>
             <ul class="rating">

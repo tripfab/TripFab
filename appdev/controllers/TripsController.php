@@ -119,10 +119,10 @@ class TripsController extends Zend_Controller_Action {
         $idf = $this->_getParam('country');
         $country = $this->places->getPlaceByIdf($idf);
         
-        $trips = $this->trips->getTripsOf($country->id);
+        $trips_count = $this->trips->countTrips($country->id);
+        $this->view->trips_count = $trips_count;
         
         $this->view->country = $country;
-        $this->view->trips   = $trips;
     }
     
     public function futureAction()

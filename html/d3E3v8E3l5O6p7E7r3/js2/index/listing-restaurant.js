@@ -51,9 +51,11 @@ $(document).ready(function() {
     }
 });
 $(function(){
-	$(".photos").jcarousel({
-	    scroll: 1
-	});
+        if($('.photos ul li').length > 9) {
+            $(".photos").jcarousel({
+                scroll: 1
+            });
+        }
 	$('a.lbc').fancybox({
 	    padding: 0,
 	    overlayColor: '#FFF',
@@ -87,10 +89,23 @@ $(function(){
 });
 
 $(function(){
-    $('.addToTripBtn').live('click', function(){
+    $('.addToTripBtn:not(.not)').live('click', function(){
         $('.addTrip').removeClass('show');
         $form = $(this).next('form');
         $('.addTrip', $form).toggleClass('show');
+        return false;
+    });
+    
+    $('.js-new-trip').live('click',function(){
+        $.fancybox({
+            href:'#newtrip',
+            padding:0,
+            overlayColor:'#fff',
+            showCloseButton:false,
+            modal:true,
+            centerOnScroll:true
+        });
+        
         return false;
     });
 	
