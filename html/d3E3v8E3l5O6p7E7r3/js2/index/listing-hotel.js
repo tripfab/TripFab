@@ -183,10 +183,23 @@ function refreshPrice()
 }
 
 $(function(){
-    $('.addToTripBtn').live('click', function(){
+    $('.addToTripBtn:not(.not)').live('click', function(){
         $('.addTrip').removeClass('show');
         $form = $(this).next('form');
         $('.addTrip', $form).toggleClass('show');
+        return false;
+    });
+    
+    $('.js-new-trip').live('click',function(){
+        $.fancybox({
+            href:'#newtrip',
+            padding:0,
+            overlayColor:'#fff',
+            showCloseButton:false,
+            modal:true,
+            centerOnScroll:true
+        });
+        
         return false;
     });
 	
@@ -657,38 +670,3 @@ function resizeImg($bgImg) {
     $bgImg.css('height',height);
     $bgImg.css('top',top);
 }
-$(document).ready(function() {
-	$(".container .btn-2").click(function() {
-		$(".container .first_user").toggleClass('hidden');
-		return false;
-	});
-	
-	$(".sidebar .btn-2").click(function() {
-		$(".sidebar .first_user").toggleClass('hidden');
-		return false;
-	});
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
