@@ -1,3 +1,4 @@
+<?php $_imgloading = 'https://static.tripfab.com/images2/listing_loading.gif'; ?>
 <div class="loading"><div class="load">Loading...</div></div>
 <?php if(count($this->trips) > 0): ?>
 <?php foreach($this->trips as $i => $trip): ?>
@@ -5,7 +6,7 @@
 	<div class="slide">
 		<div class="photos" style="position: relative; width: 200px; height: 167px; ">
 			<a href="/trips/view/<?= $trip->id ?>">
-			<?= $this->thumbnail(array('width'=>200,'height'=>164), $trip->image, '', '200:164') ?></a>
+			<?= $this->lazylisting(array('width'=>200,'height'=>164), $trip->image, '', '200:164', '',$_imgloading) ?></a>
 		</div><!--PHOTOS-->
 	</div><!--SLIDE-->
 	<div class="info">

@@ -147,6 +147,13 @@ $(function(){
                 $days.slider('enable');
                 $people.slider('enable');
                 $('.wrapper.results .content').html(response);
+                
+                $("img.lazy").lazyload({ 
+                    effect : "fadeIn",
+                    load:function(){
+                        $(this).removeClass('lazy');
+                    }
+                });
             },
             error:function(){
                 $( '#slider-3' ).slider('enable');
@@ -176,6 +183,12 @@ $(function(){
                     success:function(results){
                         if(results != "") {
                             $('.wrapper.results .content').append(results);
+                            $("img.lazy").lazyload({ 
+                                effect : "fadeIn",
+                                load:function(){
+                                    $(this).removeClass('lazy');
+                                }
+                            });
                         } else {
                             proceed = false;
                         }
