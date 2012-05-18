@@ -32,7 +32,57 @@
 <div id="citiesAutocompleteContainer"></div>
 
 <div class="hidden">
-	<div id="signUp" class="signLog js-div-signup">
+	<div id="signUp" class="lgbx_login">
+		<div class="login js-form-container js-div-signin">
+			<h6>Sign in</h6>
+			<p>Welcome back to TripFab! Enter your e-mail address and password below to access to your account</p>
+            <form method="post" action="/en-US/login">
+                <div class="">
+                <input class="email js-input-email" type="text" name="email" placeholder="E-mail" value="" />
+                </div>
+                <div class="">
+                <input class="password js-input-password" type="password" name="password" placeholder="Password" value="" />
+                </div>
+				<a href="" class="link1 js-forgot">Forgot your password?</a>
+                <div class="cntrl">
+                    <label><input type="checkbox" class="js-input-remember" name="remenber" value="1" /> Keep me log in</label>
+                    <input type="submit" class="btn-1 noclean" value="Sign in" />
+                </div><!--CNTRL-->
+            </form>
+			<span class="sep"><em>or</em></span>
+			<a href="/signup/facebook" class="fb js-fb-sigup">Sign in with Facebook</a>
+		</div><!--LOGIN-->
+        
+		<div class="signUp js-div-signup js-form-container">
+			<span class="free"></span>
+			<h6>Join TripFab</h6>
+			<p>It only takes <em>15 seconds</em> to sign up.</p>
+			<form method="post" action="/en-US/signup">
+            	<div class="">
+				<input class="name js-input-name" type="text" name="name" placeholder="Full Name" />
+                </div>
+            	<div class="">
+				<input class="email js-input-email" type="text" name="email" placeholder="E-mail" value="" />
+                </div>
+            	<div class="">
+				<input class="password js-input-password" id="js-password" type="password" name="password" placeholder="Password" value="" />
+                </div>
+            	<div class="">
+				<input class="pass js-input-confirm" type="password" name="password2" placeholder="Confirm Password" value="" />
+                </div>
+				<p>By clicking "Create Account" or "Sign up with Facebook,"
+					you confirm that you accept the <a href="/terms" class="link1">Terms of Service.</a> </p>
+				<div class="cntrl">
+					<label><input type="checkbox" value="" />Keep me log in</label>
+					<input type="submit" class="btn-1" name="" value="Create Account" />
+				</div><!--CNTRL-->	
+			</form>
+			<span class="sep"><em>or</em></span>
+			<a href="/signup/facebook" class="fb js-fb-sigup">Sign up with Facebook</a>
+		</div><!--SIGNUP-->
+	</div><!--LGBX_LOGIN-->
+    
+	<div id="signUp2" class="signLog js-div-signup">
 		<div class="top">
 			<h2>Sign up for TripFab. <span>It’s Free!</span></h2>
 			<p>You need to create an account to continue</p>
@@ -72,7 +122,7 @@
 	</div><!--SIGNUP-->
 	
 	
-	<div id="signIn" class="signLog js-div-signin">
+	<div id="signIn2" class="signLog js-div-signin">
 		<div class="top">
 			<h2>Sign in into your TripFab account</h2>
 			<p>Welcome back, we love you :)</p>

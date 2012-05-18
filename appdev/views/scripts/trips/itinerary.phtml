@@ -22,7 +22,11 @@
 	<div class="w2">
     	<div class="w3 itinerary">
         	<div class="wrapper">
-        	    <a href="#dates_lb" class="lb btn-1">Buy Itinerary</a>
+            	<?php if($this->user): ?>
+                <a href="#dates_lb" class="lb btn-1">Buy Itinerary</a>
+                <?php else: ?>
+                <a href="/signup" class="js-signup btn-1">Buy Itinerary</a>
+                <?php endif ?>
         	    <h2><?= $this->trip->title ?></h2>
         	</div><!-- closes ttl -->
         </div>
@@ -118,7 +122,11 @@
                     <?php endif ?>
                 </div><!-- closes day-cycle -->
                 <div class="result">
+					<?php if($this->user): ?>
                     <a href="#dates_lb" class="lb btn-1">Buy Itinerary</a>
+                    <?php else: ?>
+                    <a href="/signup" class="js-signup btn-1">Buy Itinerary</a>
+                    <?php endif ?>
                     <span><sup>$</sup><?= $this->formatnumber($this->trip->price) ?> <em>per person</em></span>
                 </div><!--RESULT-->
             </div><!-- closes days -->

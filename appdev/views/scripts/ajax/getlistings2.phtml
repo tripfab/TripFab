@@ -51,8 +51,8 @@ $per_night = array(
                 <a href="#" class="add been not js-new-trip"></a>
                 <?php endif ?>
 				<?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
-            <?php else: ?>
-                <a href="#signIn" class="add been not js-signup"></a>
+            <?php elseif(is_null($this->user)): ?>
+                <a href="/signup" class="add been not js-signup"></a>
 			<?php endif ?>
             <?= $this->lazylisting(array('width'=>'241', 'height'=>'183'), $list->image, '','241:241',null,$_imgloading) ?>
             <ul class="rating">
@@ -63,11 +63,10 @@ $per_night = array(
                 <li><a href="" class="nrml"></a></li>
             </ul>
             <div class="hvr">
-            	<a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>"></a>
-				<span class="type"><em class="<?= $icons[$list->main_type]; ?>"></em>Type <strong><?= $cat_name[$list->main_type] ?></strong></span>
-				<span class="cat"><em></em>Category 
-                <strong><?= empty($list->subcatname) ? 'Other' : $list->subcatname ?></strong></span>
-				<div class="tooltip hidden">Add to My Trips<span></span></div>
+            	<a class="restaurant" href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+                View <?=$cat_name[$list->main_type] ?>
+                <span> </span>
+                </a>
 			</div><!--HVR-->
         </div><!--IMAGE-->
         <h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
@@ -90,8 +89,8 @@ $per_night = array(
                 <a href="#" class="add been not js-new-trip"></a>
                 <?php endif ?>
 				<?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
-            <?php else: ?>
-                <a href="#signIn" class="add been not js-signup"></a>
+            <?php elseif(is_null($this->user)): ?>
+                <a href="/signup" class="add been not js-signup"></a>
 			<?php endif ?>
  		    <?= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124',null,$_imgloading) ?>
  		    
@@ -103,11 +102,10 @@ $per_night = array(
  		        <li><a href="" class="nrml"></a></li>
  		    </ul>
  		    <div class="hvr">
- 		    	<a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>"></a>
- 				<span class="type"><em class="htl"></em>Type <strong><?= $cat_name[$list->main_type] ?></strong></span>
-				<span class="cat"><em></em>Category 
-                <strong><?= empty($list->subcatname) ? 'Other' : $list->subcatname ?></strong></span>
- 				<div class="tooltip hidden">Add to My Trips<span></span></div>
+            	<a class="restaurant" href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+                View <?=$cat_name[$list->main_type] ?>
+                <span> </span>
+                </a>
  			</div><!--HVR-->
  		</div><!--IMAGE-->
  		<h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
@@ -125,15 +123,15 @@ $per_night = array(
  		
         <?php else:?>
         <div class="image">
-            <?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
+ 			<?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
                 <?php if(count($this->trips > 0)): ?>
                 <a href="#" class="add been"></a>
                 <?php else: ?>
                 <a href="#" class="add been not js-new-trip"></a>
                 <?php endif ?>
 				<?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
-            <?php else: ?>
-                <a href="#signIn" class="add been not js-signup"></a>
+            <?php elseif(is_null($this->user)): ?>
+                <a href="/signup" class="add been not js-signup"></a>
 			<?php endif ?>
             <?= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124',null,$_imgloading) ?>
             <ul class="rating">
@@ -144,11 +142,10 @@ $per_night = array(
                 <li><a href="" class="nrml"></a></li>
             </ul>
             <div class="hvr">
-            	<a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>"></a>
-				<span class="type"><em class="act"></em>Type <strong><?= $cat_name[$list->main_type] ?></strong></span>
-				<span class="cat"><em></em>Category 
-                <strong><?= empty($list->subcatname) ? 'Other' : $list->subcatname ?></strong></span>
-				<div class="tooltip hidden">Add to My Trips<span></span></div>
+            	<a class="restaurant" href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+                View <?=$cat_name[$list->main_type] ?>
+                <span> </span>
+                </a>
 			</div><!--HVR-->
         </div><!--IMAGE-->
         <h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
