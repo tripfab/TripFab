@@ -3174,7 +3174,7 @@ ul.cat-menu li.item-1 a img {
 	background: url(https://static.tripfab.com/images6/src_result-shw2.png) repeat;
 	z-index: 10;
 }
-#search_result .single .hvr > a {
+/*#search_result .single .hvr > a {
 	display: block;
 	width: 241px;
 	height: 124px;
@@ -3182,345 +3182,210 @@ ul.cat-menu li.item-1 a img {
 	top: 0;
 	left: 0;
 	z-index: 30;
+}*/
+#search_result .single .hvr {
+display: none;
+position: absolute;
+top: 0;
+left: 0;
+width: 241px;
+height: 124px;
+background: url(https://developer.tripfab.com/images6/src_result-shw2.png) repeat;
+z-index: 10;
 }
-#search_result .single.gen-1 .hvr > a,
-#search_result .single.gen-2 .hvr > a {
-	height: 183px;
+#search_result .image:hover .hvr {
+display: block;
 }
-#search_result .single:hover .image .hvr {
-	display: block;
+#search_result .image .hvr a {
+background: url(https://developer.tripfab.com/images6/src_result-shw3.png) repeat-x;
+display: block;
+padding:0 10px;
+height: 28px;
+color: #FFF;
+text-align: center;
+font: 600 13px/28px Helvetica;
+margin: 46px auto 0;
+-webkit-border-radius: 40px;
+border-radius: 40px;
+text-shadow: 0px 1px 0px #000;
+border: 1px solid #000;
 }
-#search_result .single.activity-1 .hvr .cat,
-#search_result .single.activity-2 .hvr .cat  {
-	color: #FFFFFF;
-    display: block;
-    float: left;
-    font: 12px Helvetica;
-    height: 40px;
-    margin: 45px 0 0;
-    padding: 0 9px 0 11px;
-    width: 110px;
+#search_result .image .hvr a span {
+background: url(https://developer.tripfab.com/images6/src_result-aw3.png) no-repeat ;
+display: inline-block;
+width: 11px;
+height: 11px;
+float: right;
+margin: 10px 10px 0 0;
 }
-#search_result .single.activity-1 .hvr .type,
-#search_result .single.activity-2 .hvr .type {
-	margin-top: 45px;
-}
-#search_result .single.activity-1 .hvr .cat em,
-#search_result .single.activity-2 .hvr .cat em {
-	display: inline-block;
-	background: url(https://static.tripfab.com/images6/src_result-icons.png) no-repeat -12px 0;
-	width: 13px;
-	height: 13px;
-	float: left;
-	margin: 3px 5px 20px 0;
-}
-#search_result .single.activity-1 .hvr strong,
-#search_result .single.activity-2 .hvr strong {
-	font: bold 14px Helvetica;
-	display: block;
-	padding-top: 5px;
-}
-#search_result .single.activity-1 .time,
-#search_result .single.activity-2 .time {
-	font: normal 12px Helvetica;
-	color: #ffffff;
-	height: 40px;
-	width:86px;
-	display: block;
-	margin: 50px 0 0 0;
-	float: left;
-}
-#search_result .single.activity-1 .hvr .time em,
-#search_result .single.activity-2 .hvr .time em {
-	display: inline-block;
-	background: url(https://static.tripfab.com/images6/src_result-icons.png) no-repeat -11px -71px;
-	width: 13px;
-	height: 13px;
-	float: left;
-	margin: 3px 5px 20px 0;
-}
-#search_result .single.hotel-1 .hvr .type,
-#search_result .single.hotel-2 .hvr .type,
-#search_result .single.hotel-1 .cat,
-#search_result .single.hotel-2 .cat {
-	margin: 45px 0 0 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#search_result .single .hvr .type  {
-	border-right: 1px solid #FFF;
-	font: normal 12px Helvetica;
-	color: #ffffff;
-	height: 40px;
-	width: 88px;
-	display: block;
-	margin: 75px 0 0 0;
-	float: left;
-	padding:0 5px 0 13px;
-}
-#search_result .single .hvr .type em {
-	display: inline-block;
-	background: url(https://static.tripfab.com/images6/src_result-icons.png) no-repeat -12px 0;
-	width: 13px;
-	height: 13px;
-	float: left;
-	margin: 1px 5px 20px 0;
-}
-#search_result .single .cat {
-	font: normal 12px Helvetica;
-	color: #ffffff;
-	height: 40px;
-	width: 110px;
-	display: block;
-	margin: 75px 0 0 0;
-	float: left;
-	padding: 0 9px 0 11px;
-}
-#search_result .single .hvr .cat em {
-	display: inline-block;
-	background: url(https://static.tripfab.com/images6/src_result-icons.png) no-repeat -12px 0;
-	width: 13px;
-	height: 13px;
-	float: left;
-	margin: 3px 5px 20px 0;
-}
-#search_result .single.activity-1 .hvr .cat .act,
-#search_result .single.activity-2 .hvr .cat .act {
-	background-position: -52px -57px;
-}
-#search_result .single.hotel-1 .hvr .type .htl,
-#search_result .single.hotel-2 .hvr .type .htl {
-	background-position: -53px 0;
-	width: 16px;
-	height: 14px;
-}
-#search_result .single .hvr .type .rest{
-	background-position: -54px -115px;
-}
-#search_result .single .hvr .type .sght{
-	background-position: -57px -230px;
-}
-#search_result .single .hvr .type .ent{
-	background-position: -54px -174px;
-}
-#search_result .single .hvr strong {
-	font: bold 12px Helvetica;
-	display: block;
-	padding-top: 5px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #search_result .single a.add {
-	display: block;
-	position: absolute;
-	top: 0;
-	right: 0;
-	background: url(https://static.tripfab.com/images6/src_result-icons.png) no-repeat 1px -249px;
-	width: 32px;
-	height: 31px;
-	z-index: 12;
-}
-#search_result .single a.add:hover {
-	background-position:1px -509px;
+display: block;
+position: absolute;
+top: 0;
+right: 0;
+background: url(https://developer.tripfab.com/images6/src_result-icons.png) no-repeat 1px -249px;
+width: 32px;
+height: 31px;
+z-index: 12;
 }
 #search_result .single .tooltip {
-	display: block;
-	background-color: #000;
-	padding:5px 12px;
-	text-align: center;
-	color: #FFF;
-	font: bold 11px/15px Helvetica;
-	position: absolute;
-	top: 21px;
-	right: -44px;
-	z-index: 12;
+display: block;
+background-color: #000;
+padding:5px 12px;
+text-align: center;
+color: #FFF;
+font: bold 11px/15px Helvetica;
+position: absolute;
+top: 21px;
+right: -44px;
+z-index: 12;
 }
 #search_result .single .tooltip span {
-	display: block;
-	width: 14px;
-	height: 5px;
-	background:url(https://static.tripfab.com/images6/src_result-icons.png) no-repeat -8px -339px;
-	position: absolute;
-	right: 45%;
+display: block;
+width: 14px;
+height: 5px;
+background:url(https://developer.tripfab.com/images6/src_result-icons.png) no-repeat -8px -339px;
+position: absolute;
+right: 45%;
     top: -4px;
 }
 #search_result .single h4 {
-	color: #303030;
-	font: normal 17px/20px Helvetica;
-	padding-left: 10px;
+color: #303030;
+font: normal 17px/20px Helvetica;
+padding-left: 10px;
 }
 #search_result .single h4 a {
-	color: #303030;
+color: #303030;
 }
-#search_result .single:hover  h4 a{
-	color: #60b5f7;
+#search_result .single h4 a:hover {
+color: #60b5f7;
 }
 #search_result .single > span {
-	margin:0 0 10px 10px;
-	display: block;
-	color: #898989;
-	font: 300 11px Helvetica;
+margin:0 0 10px 10px;
+display: block;
+color: #898989;
+font: 300 11px Helvetica;
 }
 #search_result .single > p{
-	color: #7c7c7c;
-	font: 300 12px/17px Helvetica;
-	padding:0 10px 10px 10px;
+color: #7c7c7c;
+font: 300 12px/17px Helvetica;
+padding:0 10px 10px 10px;
 }
 #search_result .single .info {
-	height: 58px;
-	border-top: 1px solid #e7e7e7;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 241px;
+height: 58px;
+border-top: 1px solid #e7e7e7;
+position: absolute;
+bottom: 0;
+left: 0;
+width: 241px;
 }
 #search_result .single .location {
-	width: 138px;
-	padding: 0 0 0 10px;
-	color: #6e6e6e;
-	font: normal 11px Helvetica;
-	display: table-cell;
-	vertical-align: middle;
-	height: 58px;
+width: 125px;
+float: left;
+margin: 0 0 0 10px;
+color: #6e6e6e;
+font: normal 11px Helvetica;
+padding-top: 13px;
 }
 #search_result .single .location span {
-	display: inline-block;
-	background: url(https://static.tripfab.com/images6/src_result-icons.png) no-repeat -14px -128px;
-	width: 10px;
-	height: 14px;
-	float: left;
-	margin-right: 4px;
+display: inline-block;
+background: url(https://developer.tripfab.com/images6/src_result-icons.png) no-repeat -14px -128px;
+width: 10px;
+height: 14px;
+float: left;
+margin-right: 4px;
 }
 #search_result .single .location strong{
-	display: block;
-	color: #303030;
-	margin: 2px 0 0 14px;
+display: block;
+color: #303030;
 }
 #search_result .single .price {
-	color: #303030;
-	text-align: right;
-	width: 80px;
-	position: absolute;
-	top: 12px;
-	right: 10px;
+color: #303030;
+font:bold 29px Helvetica;
+text-align: right;
+width: 90px;
+float: right;
+margin: 10px 10px 0 0;
 }
 #search_result .single .price sup {
-	float: right;
-	font:bold 16px/15px Helvetica;
-	display: block;
-	height: 16px;
+vertical-align: top;
+font-size:16px ;
 }
 #search_result .single .price sub {
-	font: normal 11px/5px Helvetica;
-	text-align: right;
-	display: block;
-	clear: both;
-	height: 11px;
+font: normal 11px Helvetica;
+text-align: right;
+display: block;
 }
-#search_result .single .price span {
-	display: block;
-	float: right;
-	font:bold 29px/25px Helvetica;
-	height: 29px;
-	vertical-align: text-top;
-}
-/*HOTEL 1*/
 
+/*HOTEL 1*/
 #search_result .single.hotel-1 .location strong {
-	margin: 2px 0 0 14px;
+margin: 5px 0 0 14px;
 }
 #search_result .single.hotel-1 h4 {
-	margin-bottom: 6px;
+margin-bottom: 6px;
 }
-
-#search_result .single.hotel-1 .hvr a span{
-	margin: 9px 6px 0 0;
+#search_result .single.hotel-1 .hvr a,
+#search_result .single.hotel-2 .hvr a {
+width:90px;
+}
+#search_result .single.hotel-1 .hvr a span,
+#search_result .single.hotel-2 .hvr a span{
+margin: 9px 6px 0 0;
 }
 /*END HOTEL 1*/
 /*HOTEL 2*/
-#search_result .single.hotel-2 .location strong {
-	margin: 5px 0 0 15px;
+#search_result .single .location strong {
+margin: 5px 0 0 10px;
 }
-#search_result .single.hotel-2 h4 {
-	margin-bottom: 6px;
+#search_result .single.hotel-1 h4 {
+margin-bottom: 6px;
 }
 /*END HOTEL 2*/
 /*ACTIVITY 1*/
+#search_result .single.activity-1 .hvr a,
+#search_result .single.activity-2 .hvr a {
+width:107px;
+}
 #search_result .single.activity-1 .hvr a span{
-	margin: 9px 6px 0 0
+margin: 9px 6px 0 0
 }
 /*END ACTIVITY 1*/
 /*ACTIVITY 2*/
-#search_result .single.activity-1 h4,
 #search_result .single.activity-2 h4 {
-	margin-bottom: 4px;
+margin-bottom: 4px;
 }
 #search_result .single.activity-2 > span {
-	margin-bottom: 7px;
-}
-#search_result .single.activity-2 p {
-	height: 24px;
-	overflow: hidden ;
+margin-bottom: 7px;
 }
 /*END ACTIVITY 2*/
 
 /*RESTAURANT 1*/
 #search_result .single.gen-1 .hvr,
 #search_result .single.gen-2 .hvr {
-	height: 183px;
+height: 183px;
 }
 #search_result .single.gen-1 .image {
-	height: 183px;
+height: 183px;
 }
 #search_result .single.gen-2 .image {
-	height: 183px;
+height: 183px;
 }
 
 #search_result .single.gen-2 h4 {
-	padding-top: 10px;
+padding-top: 10px;
 }
 #search_result .single .restaurant {
-	width: 150px;
+width: 150px;
 }
 #search_result .single .sight {
-	width: 149px;
+width: 149px;
 }
 #search_result .single .entertaiment {
-	width: 150px;
+width: 150px;
 }
-
-#search_result .single.gen-1 .location,
-#search_result .single.gen-2 .location {
-	width: 200px;
+#search_result .single.gen-1 .hvr a,
+#search_result .single.gen-2 .hvr a {
+margin-top: 72px;
 }
 /*END RESTAURANT 1*/
 /*End Search result*/
