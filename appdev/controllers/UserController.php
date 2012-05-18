@@ -1149,8 +1149,8 @@ class UserController extends Zend_Controller_Action
                 if(empty($_POST['start']) || empty($_POST['end']))
                     throw new Exception('Please Insert the dates');
                 
-                $start = date('D M j Y', strtotime($_POST['start']));
-                $end   = date('D M j Y', strtotime($_POST['end']));
+                $start = date('M j Y', strtotime($_POST['start']));
+                $end   = date('M j Y', strtotime($_POST['end']));
                 
                 if($start != $_POST['start'] || $end != $_POST['end'])
                     throw new Exception("Sorry, we couldn't understand the date Formats");
