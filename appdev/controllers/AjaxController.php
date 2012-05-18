@@ -1352,14 +1352,15 @@ class AjaxController extends Zend_Controller_Action
     
     public function getlistingsAction()
     {
-		$auth = Zend_Auth::getInstance();
+        $auth = Zend_Auth::getInstance();
         if($auth->hasIdentity()){
             $user = $auth->getIdentity();
             if($user->role_id == 2){
                 $trips = $this->trips->getFutureTripsBy($user->id, true);
-                $this->view->user  = $user;
                 $this->view->trips = $trips; 
             }
+            
+                $this->view->user  = $user;
          
         }
         
@@ -1459,9 +1460,9 @@ class AjaxController extends Zend_Controller_Action
             $user = $auth->getIdentity();
             if($user->role_id == 2){
                 $trips = $this->trips->getFutureTripsBy($user->id, true);
-                $this->view->user  = $user;
                 $this->view->trips = $trips; 
             }
+                $this->view->user  = $user;
          
         }
         

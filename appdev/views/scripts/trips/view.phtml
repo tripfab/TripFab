@@ -21,10 +21,10 @@
         <div class="w3 browseTrips">
             <div class="wrapper">
         	    <h3><?= $this->trip->title ?></h3>
-                <?php if($this->user): ?>
+            	<?php if($this->user): ?>
                 <a href="#dates_lb" class="lb btn-1">Buy Itinerary</a>
                 <?php else: ?>
-                <a href="#" class="js-login btn-1">Buy Itinerary</a>
+                <a href="/signup" class="js-signup btn-1">Buy Itinerary</a>
                 <?php endif ?>
                 <div class="clear"></div>
             </div>
@@ -299,7 +299,7 @@
             	<?php if($this->user): ?>
                 <a href="#dates_lb" class="lb btn-1">Buy Itinerary</a>
                 <?php else: ?>
-                <a href="#" class="js-login btn-1">Buy Itinerary</a>
+                <a href="/signup" class="js-signup btn-1">Buy Itinerary</a>
                 <?php endif ?>
                 <span><sup>$</sup><?= $this->formatnumber($this->trip->price) ?> <em>per person</em></span>
             </div><!--RESULT-->

@@ -5042,21 +5042,21 @@ if(typeof loadReady == "function"){
 }
 
 $(function(){
-	$alert = $.cookie('alert');
-	if($alert != null){
-		showAlert(replaceAll($alert,'+',' '));
-		$.cookie('alert', null);
-	} else {
-		$error = $.cookie('error');
-		if($error != null){
-			showError(replaceAll($error,'+',' '));
-			$.cookie('error', null);
-		}
-	}
-        
-        $('.confirmDeleteListing').click(function(){
-            return confirm('Are you sure??? There is not undo');
-        });
+    $alert = $.cookie('alert');
+    if($alert != null){
+            showAlert(replaceAll($alert,'+',' '));
+            $.cookie('alert', null);
+    } else {
+            $error = $.cookie('error');
+            if($error != null){
+                    showError(replaceAll($error,'+',' '));
+                    $.cookie('error', null);
+            }
+    }
+
+    $('.confirmDeleteListing').click(function(){
+        return confirm('Are you sure??? There is not undo');
+    });
 });
 
 $(function(){
@@ -5064,7 +5064,7 @@ $(function(){
     
     $('.js-login').live('click',function(){
         $.fancybox({
-            href:'#signIn',
+            href:'#signUp',
             padding:0,
             overlayColor:'#fff',
             centerOnScroll:true
@@ -5089,6 +5089,7 @@ $(function(){
             overlayColor:'#fff',
             centerOnScroll:true
         });
+        return false;
     });
     
     $('.js-div-signin form').submit(function(){
@@ -5098,7 +5099,7 @@ $(function(){
                 email:'required email',
                 password:'required'
             },
-        errorPlacement:function(error, element) {
+            errorPlacement:function(error, element) {
                 element.parent().removeClass('errorIn');
                 element.parent().children('p').remove();
                 if(error.text() == '') {
@@ -5211,15 +5212,15 @@ $(function(){
                 } else if(res.type == "exists") {
                     showError('The email already exists');
                     $('input', $form).removeAttr('disabled');
-                    $('.js-input-email').val('');
-                    $('.js-input-email').focus();
+                    $('.js-input-email',$form).val('');
+                    $('.js-input-email',$form).focus();
                 } else {
                     $('input', $form).removeAttr('disabled');
-                    $('.js-input-name').focus();
-                    $('.errorIn p').remove();
-                    $('.errorIn').removeClass('errorIn');
+                    $('.js-input-name',$form).focus();
+                    $('.errorIn p',$form).remove();
+                    $('.errorIn',$form).removeClass('errorIn');
                     for(key in res.errors) {
-                        $inp = $('.'+key);
+                        $inp = $('.'+key, $form);
                         $inp.parent().addClass('errorIn');
                         $inp.parent().append('<p><em></em>'+res.errors[key]+'</p>');
                     }
