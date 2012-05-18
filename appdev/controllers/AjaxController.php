@@ -1368,7 +1368,7 @@ class AjaxController extends Zend_Controller_Action
         $subcat   = $this->_getParam('cats', 'all');
         $sort     = $this->_getParam('sort', 'highest');
         $stars    = $this->_getParam('stars', 'all');
-        $pricemax = $this->_getParam('pricemax', 3000);
+        $pricemax = $this->_getParam('pricemax', 1500);
         $pricemin = $this->_getParam('pricemin', 0);
         $page = $this->_getParam('page', 1);
         

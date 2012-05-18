@@ -264,7 +264,7 @@ $(function(){
         }
 		
         if($ev.queryString == "") {
-            $slider.slider('values',[0,3000]);
+            $slider.slider('values',[0,1500]);
         } else {
             $slider.slider('values',[$data.pricemin,$data.pricemax]);
             if(typeof $data.cats == "object") {
@@ -346,8 +346,8 @@ $(function(){
         step: 50,
         range: true,
         min: 0,
-        max: 3000,
-        values: [ 0, 3000 ],
+        max: 1500,
+        values: [ 0, 1500 ],
         slide: function( event, ui ) {
             $('#value-4').text( '$' + ui.values[ 0 ] + ' - $' + ui.values[ 1 ] );
         },
