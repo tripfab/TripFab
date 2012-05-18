@@ -2796,7 +2796,87 @@ background: url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat -407
 	width: 960px;
 	margin: 0 auto;
 	position: relative;
-	z-index: 10;
+	z-index: 10;	
+}
+#search_result .no_city {
+	height: 56px;
+	background: url(https://static.tripfab.com/images6/no_cityBG.png) repeat-x 0 0;
+	width: 1000px;
+	margin-left: -23px;
+	-webkit-border-radius: 0px 0px 4px 4px;
+	-moz-border-radius: 0px 0px 4px 4px;
+	border-radius: 0px 0px 4px 4px;
+	-moz-box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
+	position: relative;
+	z-index: 101;
+	text-indent: 23px;
+}
+#search_result .no_city p{
+	font: normal 13px/56px Helvetica;
+	color: #303030;
+	text-shadow: 0 1px 0 #FFF;
+}
+#search_result .no_city a {
+	display: block;
+	position: absolute;
+	top: 18px;
+	right: 23px;
+	color: #168dda;
+	font: bold 13px Helvetica;
+	text-decoration: underline;
+	background: url(https://static.tripfab.com/images6/no_cityAw.png) no-repeat right 50%;
+	padding-right: 17px;
+	text-shadow: 0 1px 0 #FFF;
+}
+.cityExplore {
+	width: 820px;
+	background-color: #FFF;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
+}
+.cityExplore h6 {
+	height: 54px;
+	font: bold 18px/54px Helvetica;
+	text-indent: 30px;
+}
+.cityExplore .cont {
+	background:url("https://static.tripfab.com/images6/lstng_htl_sh2.png") repeat-x scroll 0 0 #FFFFFF;
+	padding: 30px 0 15px 30px;
+}
+.cityExplore .cont ul {
+	list-style: none;
+	width: 154px;
+	padding-right: 10px;
+	float: left;
+}
+.cityExplore .cont ul.last {
+	width: 120px;
+	padding-right: 10px;
+}
+.cityExplore .cont ul li {
+	margin-bottom: 7px;
+}
+.cityExplore .cont ul li a {
+	color: #60b5f7;
+}
+.cityExplore .cont ul li a:hover {
+	color: #004a80;
+}
+.cityExplore .bot {
+	width: 757px;
+	margin: 0 auto;
+	padding: 15px 0;
+	overflow: hidden;
+	border-top: 1px solid #e8e8e8;
+}
+.cityExplore .bot .btn-1 {
+	float: right;
+	width: 143px;
+	height: 33px;
+	font: 400 14px/33px Helvetica;
 }
 #search_result.fixed {
 	position: fixed;
@@ -3190,14 +3270,14 @@ top: 0;
 left: 0;
 width: 241px;
 height: 124px;
-background: url(https://developer.tripfab.com/images6/src_result-shw2.png) repeat;
+background: url(https://static.tripfab.com/images6/src_result-shw2.png) repeat;
 z-index: 10;
 }
-#search_result .image:hover .hvr {
+#search_result .results-wrapper .single:hover .hvr {
 display: block;
 }
 #search_result .image .hvr a {
-background: url(https://developer.tripfab.com/images6/src_result-shw3.png) repeat-x;
+background: url(https://static.tripfab.com/images6/src_result-shw3.png) repeat-x;
 display: block;
 padding:0 10px;
 height: 28px;
@@ -3211,7 +3291,7 @@ text-shadow: 0px 1px 0px #000;
 border: 1px solid #000;
 }
 #search_result .image .hvr a span {
-background: url(https://developer.tripfab.com/images6/src_result-aw3.png) no-repeat ;
+background: url(https://static.tripfab.com/images6/src_result-aw3.png) no-repeat ;
 display: inline-block;
 width: 11px;
 height: 11px;
@@ -3222,10 +3302,10 @@ margin: 10px 10px 0 0;
 display: block;
 position: absolute;
 top: 0;
-right: 0;
-background: url(https://developer.tripfab.com/images6/src_result-icons.png) no-repeat 1px -249px;
-width: 32px;
-height: 31px;
+right: -1px;
+background: url(https://static.tripfab.com/images6/addtoMyTrips.png) no-repeat top right;
+width: 23px;
+height: 22px;
 z-index: 12;
 }
 #search_result .single .tooltip {
@@ -3244,7 +3324,7 @@ z-index: 12;
 display: block;
 width: 14px;
 height: 5px;
-background:url(https://developer.tripfab.com/images6/src_result-icons.png) no-repeat -8px -339px;
+background:url(https://static.tripfab.com/images6/src_result-icons.png) no-repeat -8px -339px;
 position: absolute;
 right: 45%;
     top: -4px;
@@ -3289,7 +3369,7 @@ padding-top: 13px;
 }
 #search_result .single .location span {
 display: inline-block;
-background: url(https://developer.tripfab.com/images6/src_result-icons.png) no-repeat -14px -128px;
+background: url(https://static.tripfab.com/images6/src_result-icons.png) no-repeat -14px -128px;
 width: 10px;
 height: 14px;
 float: left;

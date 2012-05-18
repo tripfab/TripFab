@@ -102,7 +102,12 @@ $(function(){
             $(this).next('input').addClass('hidden');
         }
     });
-	
+	$('.lbc').fancybox({
+	    overlayColor:'#fff',
+	    overlayOpacity:0.7,
+	    centerOnScroll:1,
+	    padding: 0
+	});
     $('input.nodatesyet').change(function(){
         $parent = $(this).parents('.item');
         if($(this).attr('checked') == 'checked'){
@@ -532,7 +537,14 @@ $(document).ready(function() {
 
 
 
+$(document).ready(function() {
+	$(".single").click(function() {
+		$(".image .add").animate({
+            width: "98px",
+        }, 500 );
 
+	});
+});
 
 
 
