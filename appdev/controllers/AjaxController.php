@@ -1366,7 +1366,7 @@ class AjaxController extends Zend_Controller_Action
         
         $cat      = $this->_getParam('category', 'activities');
         $subcat   = $this->_getParam('cats', 'all');
-        $sort     = $this->_getParam('sort', 'newest');
+        $sort     = $this->_getParam('sort', 'highest');
         $stars    = $this->_getParam('stars', 'all');
         $pricemax = $this->_getParam('pricemax', 3000);
         $pricemin = $this->_getParam('pricemin', 0);
@@ -1397,13 +1397,10 @@ class AjaxController extends Zend_Controller_Action
         $categories  = $this->listings->getMainCategories(true);
         
         $sortOptions = array(
-            'newest' => 'Newest',
-            'popular' => 'Most Popular',
-            'name' => 'Name',
-            'free' => 'Free',
-            'lowest' => 'Lowest Price',
             'highest' => 'Highest Price',
-            'rating' => 'Rating' 
+            'lowest' => 'Lowest Price',
+            'free' => 'Free',
+            'popular' => 'Most Popular',
         );
         
         $this->view->activeSort = $sort;

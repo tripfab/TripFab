@@ -629,7 +629,7 @@ class WS_ListingService {
                         $select->order('listings.price DESC'); break;
                     default: break;
                 }} else {
-                    $select->order('listings.created DESC');
+                    $select->order('listings.price DESC');
                 }
             if($stars != 'all'){
                 $_stars = (int) str_replace('-stars','',$stars);
