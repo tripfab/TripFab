@@ -86,11 +86,12 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
         </div><!--SUB_HEADER-->
         
         <div class="main wrapper" id="search_result">
-        	
+        	<?php if(!$this->city): ?>
         	<div class="no_city">
         		<p><strong>Too many listings?</strong> You can narrow these down by selecting a specific city instead of a whole country.</p>
         		<a href="#cityExplore" class="lbc">Select a Costa Rica City</a>
         	</div><!--NO_CITY-->
+            <?php endif ?>
         	
             <div class="left-sidebar">
             	<div class="scrollcontainer">
@@ -200,51 +201,8 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
     	<div class="top">
     		<h6>Select the city you want to explore</h6></div>
     		<div class="cont">
-    			<ul>
-    				<li><a href="">Tamarindo</a></li>
-    				<li><a href="">Drake Bay</a></li>
-    				<li><a href="">Jacó</a></li>
-    				<li><a href="">La Fortuna</a></li>
-    				<li><a href="">Monteverde</a></li>
-    				<li><a href="">San Jose</a></li>
-    				<li><a href="">Puerto Viejo</a></li>
-    			</ul>
-    			<ul>
-    				<li><a href="">Tamarindo</a></li>
-    				<li><a href="">Drake Bay</a></li>
-    				<li><a href="">Jacó</a></li>
-    				<li><a href="">La Fortuna</a></li>
-    				<li><a href="">Monteverde</a></li>
-    				<li><a href="">San Jose</a></li>
-    				<li><a href="">Puerto Viejo</a></li>
-    			</ul>
-    			<ul>
-    				<li><a href="">Tamarindo</a></li>
-    				<li><a href="">Drake Bay</a></li>
-    				<li><a href="">Jacó</a></li>
-    				<li><a href="">La Fortuna</a></li>
-    				<li><a href="">Monteverde</a></li>
-    				<li><a href="">San Jose</a></li>
-    				<li><a href="">Puerto Viejo</a></li>
-    			</ul>
-    			<ul>
-    				<li><a href="">Tamarindo</a></li>
-    				<li><a href="">Drake Bay</a></li>
-    				<li><a href="">Jacó</a></li>
-    				<li><a href="">La Fortuna</a></li>
-    				<li><a href="">Monteverde</a></li>
-    				<li><a href="">San Jose</a></li>
-    				<li><a href="">Puerto Viejo</a></li>
-    			</ul>
-    			<ul class="last">
-    				<li><a href="">Tamarindo</a></li>
-    				<li><a href="">Drake Bay</a></li>
-    				<li><a href="">Jacó</a></li>
-    				<li><a href="">La Fortuna</a></li>
-    				<li><a href="">Monteverde</a></li>
-    				<li><a href="">San Jose</a></li>
-    				<li><a href="">Puerto Viejo</a></li>
-    			</ul><div class="clear"></div>
+				<?= $this->partial('partials/indexcities.phtml', array('cities'=>$this->cities, 'country'=>$this->country)) ?>
+                <div class="clear"></div>
     		</div><!--CONT-->
     		<div class="bot">
     			<a href="" class="btn-1">Go to Checkout</a>

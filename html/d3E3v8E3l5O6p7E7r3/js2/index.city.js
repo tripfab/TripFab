@@ -18,15 +18,25 @@
 
 
 $(document).ready(function() {
-	var aboveHeight = 154
-	$(window).scroll(function(){
+        
+    
+    var aboveHeight = 0;
+    $(window).scroll(function(){
+        var stickyBar = $('#search_result .content .sort');
+        if(stickyBar.length == 0)
+            return;
+        
+        if(aboveHeight == 0)
+            aboveHeight = stickyBar.offset().top;
+
         if ($(window).scrollTop() > aboveHeight){
-            $('.sort').addClass('fixed').css('top','0px');
+
+            stickyBar.addClass('fixed').css('top','0px');
             $('.results-wrapper').css('margin-top', '81px');
         } 
         else {
-			$('.sort').removeClass('fixed');
-			$('.results-wrapper').css('margin-top', '30px');
+            stickyBar.removeClass('fixed');
+            $('.results-wrapper').css('margin-top', '30px');
         }
     });
 });
@@ -538,12 +548,17 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-	$(".single").click(function() {
-		$(".image .add").animate({
-            width: "98px",
-        }, 500 );
-
-	});
+    $(".single").live('hover',function() {
+        $(".image .add", this).text('Add to my Trip');
+        $(".image .add",this).animate({
+            width: "98px"
+        }, 200);
+    }).live('mouseleave', function(){
+        $(".image .add", this).text('');
+        $(".image .add",this).animate({
+            width: "23px"
+        }, 200);
+    });
 });
 
 

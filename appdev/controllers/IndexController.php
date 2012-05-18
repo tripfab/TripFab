@@ -153,8 +153,11 @@ class IndexController extends Zend_Controller_Action
         
         if(!is_null($city)) 
             $ls_count = $this->listings->countListings($city);
-        else
+        else {
             $ls_count = $this->listings->countListings(null, null, $country->id);
+            $cities = $this->places->getPlaces(3, $country->id);
+            $this->view->cities = $cities;
+        }
         
         $this->view->countries = $countries;
         
