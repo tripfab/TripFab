@@ -1576,7 +1576,38 @@ class AjaxController extends Zend_Controller_Action
         
         $category = $this->_getParam('category');
         
-        $trips = $trips->getTripsOf($country->id, $price, $days, $people, $category);
+        $page = $this->_getParam('page', 1);
+        
+        $trips = $trips->getTripsOf($country->id, $price, $days, $people, $category, $page);
+        $this->view->country = $country;
+        $this->view->trips   = $trips;
+    }
+    
+    public function gettrips2Action()
+    {
+        $places = new WS_PlacesService();
+        $trips  = new WS_TripsService();
+        
+        $id = $this->_getParam('country');
+        $country = $places->getPlaceById($id);
+        if(is_null($country))
+                throw new Exception();
+        
+        $price = array(
+            'min' => $this->_getParam('pricemin'),
+            'max' => $this->_getParam('pricemax'),
+        );
+        $days = array(
+            'min' => $this->_getParam('daymin'),
+            'max' => $this->_getParam('daymax'),
+        );
+        $people   = $this->_getParam('people');
+        
+        $category = $this->_getParam('category');
+        
+        $page = $this->_getParam('page', 1);
+        
+        $trips = $trips->getTripsOf($country->id, $price, $days, $people, $category,$page);
         $this->view->country = $country;
         $this->view->trips   = $trips;
     }

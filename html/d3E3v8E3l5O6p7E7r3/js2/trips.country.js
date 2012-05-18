@@ -2,6 +2,12 @@ $(function(){
     
     var ajax = false;
     var refresh_price = true;
+    var page = 1;
+    
+    var globalData;
+    
+    var ajax2 = false;
+    var proceed = true;
     
     $('.slider-wrapper').each(function(index){
         $(this).data('country', $('#hddCountryId').val());
@@ -117,6 +123,11 @@ $(function(){
             $people.slider('value',$data.people);
         }
         
+        globalData = $data;
+        
+        proceed = true;
+        page = 1;
+        
         refresh_price = true;
         
         if(ajax != false)
@@ -143,4 +154,35 @@ $(function(){
             }
         });	
     });
+    
+    $(window).scroll(function(){
+        $top = $('#footer').offset();
+        $top = $top.top - 1500;
+        
+        $wtop = $(window).scrollTop();
+        
+        if($wtop > $top)
+            loadMore(globalData);
+    });
+    
+    function loadMore($data){
+        if(proceed) {
+            if(!ajax2) {
+                page++;
+                $data.page = page;
+                ajax2 = $.ajax({
+                    url:'/ajax/gettrips2',
+                    data:$data,
+                    success:function(results){
+                        if(results != "") {
+                            $('.wrapper.results .content').append(results);
+                        } else {
+                            proceed = false;
+                        }
+                        ajax2 = false;
+                    }
+                });
+            }
+        }
+    }
 });

@@ -521,8 +521,8 @@ class WS_TripsService {
         $select->join('places', 'trips.country_id = places.id', array('country' => 'title'));
         $select->join(array('places2' => 'places'), 'trips.start_city = places2.id', array('start_city_name' => 'title'));
         $select->join(array('places3' => 'places'), 'trips.end_city = places3.id', array('end_city_name' => 'title'));
-        $select->join('trip_tripcategories','trips.id = trip_tripcategories.trip_id', array('category_id'));
-        $select->join('trip_categories','trip_categories.id = trip_tripcategories.category_id', array('category'=>'name'));
+        $select->joinLeft('trip_tripcategories','trips.id = trip_tripcategories.trip_id', array('category_id'));
+        $select->joinLeft('trip_categories','trip_categories.id = trip_tripcategories.category_id', array('category'=>'name'));
         $select->where('trips.country_id = ?', $country);
         if ($category != 'all')
             $select->where('trip_tripcategories.category_id = ?', $category);
@@ -539,11 +539,18 @@ class WS_TripsService {
             $select->where('trips.max >= ?', $people);
         }
         
-        $select->where('active = 1');
+        //$select->where('active = 1');
 
         $select->order('trips.created DESC');
         
         $select->group('trips.id');
+        
+        $limit = 5;
+        $offset = (5 * ($page - 1));
+        
+        //echo $page; die;
+        
+        $select->limit($limit, $offset);
 
         //echo $select->assemble(); die;
         //$select->limit(5);
