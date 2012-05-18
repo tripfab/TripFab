@@ -5098,7 +5098,9 @@ $(function(){
                 email:'required email',
                 password:'required'
             },
-            errorPlacement:function(error, element) {
+        errorPlacement:function(error, element) {
+                element.parent().removeClass('errorIn');
+                element.parent().children('p').remove();
                 if(error.text() == '') {
                     element.parent().removeClass('errorIn');
                     element.parent().children('p').remove();
@@ -5326,3 +5328,21 @@ window.fbAsyncInit = function() {
         xfbml      : true  
     });
 };
+
+$(function(){
+    $(".js-header-signin").click(function() {
+    	$(".js-header-login, .js-menu-overlay-login").toggle(); 
+        return false
+    });
+    
+    $(".js-header-account").click(function() {
+    	$(".js-header-user-menu, .js-menu-overlay-login").toggle(); 
+        return false
+    });
+    
+   $(".js-menu-overlay-login" ).click(function() {
+       $(".js-menu-overlay-login, .js-header-login, .js-header-user-menu").hide();
+       return false
+   });
+   
+})

@@ -1121,23 +1121,72 @@
 	font-weight: bold;
 }
 /*END TOOLTIP FIRST USER add to my trips---------------------*/
+.lb-forgot {
+	width: 420px;
+	z-index: 0;
+	position: relative;
+}
+
+.lb-forgot .ttl {
+	background: #303030 url(https://static.tripfab.com/images2/g-29.png) repeat-x 0 100%;
+	color: #FFFFFF;
+	font-size: 15px;
+	font-weight: bold;
+	height: 39px;
+	line-height: 39px;
+	padding: 0 29px;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright: 0px;
+	-moz-border-radius-bottomright: 0px;
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-radius: 4px 0px 0px 0px;
+	border-radius: 4px 0px 0px 0px;
+}
+
+.lb-forgot .content {
+	padding: 12px 29px 16px;
+	color: #898989;
+	font-size: 12px;
+	background-color: #FFF;
+}
+
+.lb-forgot .content input[type="text"] {
+	margin-top: 12px;
+	width: 340px;
+	font:bold 16px/36px Helvetica;
+	height:36px;
+	padding:0 10px;
+}
+
+.lb-forgot .content textarea {
+	width: 348px;
+	height: 80px;
+}
+.lb-forgot .content p {
+	line-height:18px;}
+
+.lb-forgot .bottom {
+	background: url(https://static.tripfab.com/images2/g-3.png) repeat-x scroll 0 0 ;
+	border-top: 1px solid #E8E8E8;
+	overflow: hidden;
+	padding: 10px 29px;
+	-moz-border-radius-topleft: 0px;
+	-moz-border-radius-topright: 0px;
+	-moz-border-radius-bottomright: 4px;
+	-moz-border-radius-bottomleft: 4px;
+	-webkit-border-radius: 0px 0px 4px 4px;
+	border-radius: 0px 0px 4px 4px;
+	behavior: url(PIE.htc);
+}
+
+.lb-forgot .bottom span, .lb-forgot .bottom input {
+	float: right;
+	cursor: pointer;
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.lb-forgot .bottom input {
+	height: 25px;
+	margin-left: 8px;
+	line-height: 25px;
+}

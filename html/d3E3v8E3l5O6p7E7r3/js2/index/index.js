@@ -14,19 +14,7 @@ $(document).ready(function() {
 });
 var __a = 0;
 $(document).ready(function() {
-    $(".slideshow .cont").cycle({
-        timeout: 0,
-        fx: 'scrollHorz',
-        prev: '.lfarrow',
-        next: '.rgarrow'
-    });
-    $(".side .cont").cycle({
-        timeout: 0,
-        fx: 'scrollHorz',
-        prev: '.prev',
-        next: '.next'
-    	
-    });
+    
     $(".featured .tabs").tabs({
         show:function(){
             $('.lazy').lazyload({ 
@@ -87,7 +75,7 @@ function img_ready($obj){
 }
 function resizeImg($bgImg) { 
     var imgwidth = 1244;
-    var imgheight = 490	;
+    var imgheight = 552	;
 	
     var winwidth = $(window).width();
     var winheight = $(window).height();
