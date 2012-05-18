@@ -271,10 +271,7 @@ class SessionController extends Zend_Controller_Action {
     
     public function confirmemailAction()
     {
-        
         $auth = Zend_Auth::getInstance();
-        if($auth->hasIdentity())
-                throw new Exception('No access allowed');
         
         $email = $this->_getParam('email','default');
         if($email == 'default') 
@@ -309,6 +306,9 @@ class SessionController extends Zend_Controller_Action {
         $token->save();
 
         setcookie('alert','Your account has been activated');
+        if($auth->hasIdentity())
+            $this->_redirect('/');
+        
         $this->_redirect('/login');
     }
     
