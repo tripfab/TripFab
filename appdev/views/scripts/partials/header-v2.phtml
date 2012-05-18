@@ -21,9 +21,9 @@
         <h1 class="logo"><a href="/">Tripfab</a></h1>
         <ul>
             <li><a class="<?= $class3 ?>" href="/"><span>Home</span></a></li>
-            <li><a class="<?= $class1 ?>" href="/trips/costa_rica"><span>Browse Itineraries</span></a></li>
+            <li><a class="<?= $class1 ?>" href="/trips/costa_rica"><span>Preplanned trips</span></a></li>
             <?php if(!$this->user): ?>
-            <li><a class="<?= $class2 ?>" href="/mytrips"><span>My Trips</span></a></li>
+            <li><a class="<?= $class2 ?>" href="/mytrips"><span>Create Trip</span></a></li>
             <?php else: ?>
             <li><a class="<?= $class2 ?>" href="/user/trips"><span>My Trips</span></a></li>
             <?php endif ?>
@@ -65,7 +65,6 @@
         		
         		<?php else: ?>
         		<?php if($this->user->role_id == 2): ?>
-        		
         		<div class="sign_in">
         			<?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
         			<?= $this->thumbnail(25,$image,'','1:1'); ?>
