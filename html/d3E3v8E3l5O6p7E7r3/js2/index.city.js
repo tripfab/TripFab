@@ -104,6 +104,7 @@ $(function(){
                     $('input, select').removeAttr('disabled');
                     showError(response.message);
                 }
+                $(window).trigger('addtotrip');
             },
             error:function(){
                 $('input, select').removeAttr('disabled');
@@ -195,12 +196,12 @@ $(function(){
                     showAlert(response.message);
                     $('.js-new-trip').removeClass('not');
                     $('.js-new-trip').removeClass('js-new-trip');
-                    //$('.dd-2 select').append('<option value="'+response.tripid+'">'+response.triptitle+'</option>');
                 } else {
                     $.fancybox.close();
                     $('input, select').removeAttr('disabled');
                     showError(response.message);
                 }
+                $(window).trigger('addtotrip');
             },
             error:function(){
                 $.fancybox.close();
@@ -509,8 +510,14 @@ $(function(){
 });
 
 $(function(){
-    $(window).bind('login_success', function(){
-        alert('asd');
+    $('.js-filter-cities').live('click',function(){
+        $href = $(this).attr('href');
+        $.fancybox({
+            href:$href,
+            padding:0,
+            overlayColor:'#fff',
+            centerOnScroll:1
+        });
     });
 })
 $(document).ready(function() {

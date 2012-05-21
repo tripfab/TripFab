@@ -224,9 +224,41 @@ function refreshPrice()
 
 $(function(){
     $('.addToTripBtn:not(.not)').live('click', function(){
-        $('.addTrip').removeClass('show');
-        $form = $(this).next('form');
-        $('.addTrip', $form).toggleClass('show');
+        $data = {
+            listing:$(this).data('listing')
+        };
+			
+        $('input, select').attr('disabled','disabled');
+        
+        $.ajax({
+            url:'/ajax/addtotrip2',
+            data:$data,
+            type:'post',
+            success:function(response){
+                console.log(response);
+                if(response.type == 'success'){
+                    $('input, select').removeAttr('disabled');
+                    $('.addTrip').removeClass('show');
+                    $.fancybox.close();
+                    showAlert(response.message);
+                } else if(response.type == 'newtrip'){
+                    $('input, select').removeAttr('disabled');
+                    $('.addTrip').removeClass('show');
+                    $.fancybox.close();
+                    showAlert(response.message);
+                    $('.addTrip select').append('<option value="'+response.tripid+'">'+response.triptitle+'</option>');
+                } else {
+                    $('input, select').removeAttr('disabled');
+                    showError(response.message);
+                }
+                $(window).trigger('addtotrip');
+            },
+            error:function(){
+                $('input, select').removeAttr('disabled');
+                showError('Somehing went wrong please try later');
+            }
+        });
+        $.fancybox.close();
         return false;
     });
     
