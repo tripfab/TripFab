@@ -25,35 +25,37 @@
     
     <div class="sub_header" id="src_map">
         <div class="cont">
-            
             <div class="title">
-            	<h2>Build Your Trip</h2>
+            	<h2>Buy Pre-planned Trips</h2>
             	<h3>Book activities and hotels, or add things to do to your custom trip</h3>
             </div>
             <div class="links">
-            	<a class="active" spellcheckhref="#">Pre-Planned Packages <span>(25)</span></a>
+            	<a class="active" href="#">Pre-Planned Packages <span>(25)</span></a>
             	<a href="/costa_rica#/all">Build Your Trip <span>(1,258)</span></a>
             </div><!--LINKS-->
             <div class="clear"></div>
-            
         </div><!--CONT-->
     </div><!--SUB_HEADER-->
     
     <div class="w2">
         <div class="wrapper filters">
-            
             <div class="bottom">
                 <div class="slider-wrapper">
-                    Cost per person: <span id="value-1"></span>
-                    <div id="slider-1"></div>
+                    Price Range: <span id="value-1"></span>
+                    <div id="slider-1" data-max="<?= $this->max ?>"></div>
                 </div><!-- closes slider-wrapper -->
                 <div class="slider-wrapper">
                     Duration: <span id="value-2"></span>
                     <div id="slider-2"></div>
                 </div><!-- closes slider-wrapper -->
                 <div class="slider-wrapper last">
-                    People: <span id="value-3"></span>
-                    <div id="slider-3"></div>
+                    People: 
+                    <select class="js-people">
+                    	<option value="0">Any</option>
+                    	<?php for($i=1;$i<100;$i++): ?>
+                    	<option value="<?= $i ?>"><?= $i ?></option>
+                        <?php endfor ?>
+                    </select>
                 </div><!-- closes slider-wrapper -->
             </div><!-- closes bottom -->
         </div><!-- closes filters -->

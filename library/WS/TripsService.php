@@ -921,28 +921,39 @@ class WS_TripsService {
         $trips_count = array();
         foreach($cats as $cat) {
             $select = $db->select();
-            $select->from('trips',array('c'=>'count(*)'));
+            $select->from('trips');
             $select->join('trip_tripcategories', 'trips.id = trip_tripcategories.trip_id');
             $select->where('trips.country_id = ?', $country);
             $select->where('trips.active = ?', 1);
             $select->where('trip_tripcategories.category_id = ?', $cat->id);
             $select->group('trips.id');
             
-            $count = $db->fetchRow($select);
+            $count = $db->fetchAll($select);
             
-            $trips_count[$cat->id] = !is_null($count['c']) ? $count['c'] : 0;
+            $trips_count[$cat->id] = count($count);
         }
         
         $select = $db->select();
-        $select->from('trips',array('c'=>'count(*)'));
+        $select->from('trips');
         $select->where('trips.country_id = ?', $country);
         $select->where('trips.active = ?', 1);
 
-        $count = $db->fetchRow($select);
+        $count = $db->fetchAll($select);
 
-        $trips_count['all'] = !is_null($count['c']) ? $count['c'] : 0;
+        $trips_count['all'] = count($count);
         
         return $trips_count;
+    }
+    
+    public function getHighestPrice($country)
+    {
+        $select = $this->trips_db->select();
+        $select->where('country_id = ?', $country);
+        $select->where('active = 1');
+        $select->order('price DESC');
+        $trip = $this->trips_db->fetchRow($select);
+        
+        return $trip->price;
     }
 
 }

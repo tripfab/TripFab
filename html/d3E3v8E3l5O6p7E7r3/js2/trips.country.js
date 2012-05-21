@@ -9,6 +9,8 @@ $(function(){
     var ajax2 = false;
     var proceed = true;
     
+    $max = $('#slider-1').data('max'); 
+    
     $('.slider-wrapper').each(function(index){
         $(this).data('country', $('#hddCountryId').val());
     });
@@ -17,15 +19,15 @@ $(function(){
         step  : 50,
         range : true,
         min   : 0,
-        max   : 3000,
-        values: [0, 3000],
+        max   : $max,
+        values: [0, $max],
         slide : function(event, ui ) {
             $('#value-1').text( '$' + ui.values[ 0 ] + ' - $' + ui.values[ 1 ] );
         },
         change:function(event, ui){
             if(refresh_price) {
                 var $days = $('#slider-2').slider('option','values');
-                var $people = $('#slider-3').slider('option','value');
+                var $people = $('select.js-people').val();
                 var $data = {
                     pricemin:ui.values[0],
                     pricemax:ui.values[1],
@@ -51,7 +53,7 @@ $(function(){
         change:function(event, ui){
             if(refresh_price) {
                 var $prices = $('#slider-1').slider('option','values');
-                var $people = $('#slider-3').slider('option','value');
+                var $people = $('select.js-people').val();
                 var $data = {
                     pricemin:$prices[0],
                     pricemax:$prices[1],
@@ -65,31 +67,27 @@ $(function(){
         }
     });
     $('#value-2').text($( '#slider-2' ).slider( 'values', 0 ) + ' days - ' + $( '#slider-2' ).slider( 'values', 1 ) + ' days');
-	
-    $('#slider-3').slider({
-        value: 0,
-        min: 0,
-        max: 10,
-        slide: function( event, ui ) {
-            $('#value-3').text((ui.value > 0) ? ui.value : 'Undefined');
-        },
-        change:function(event, ui){
-            if(refresh_price) {
-                var $prices = $('#slider-1').slider('option','values');
-                var $days = $('#slider-2').slider('option','values');
-                var $data = {
-                    pricemin:$prices[0],
-                    pricemax:$prices[1],
-                    daymin:$days[0],
-                    daymax:$days[1],
-                    people:ui.value
-                };
+    
+    $('select.js-people').change(function(){
+        if(refresh_price) {
+            $this = $(this);
+            var $prices = $('#slider-1').slider('option','values');
+            var $days = $('#slider-2').slider('option','values');
+            var $data = {
+                pricemin:$prices[0],
+                pricemax:$prices[1],
+                daymin:$days[0],
+                daymax:$days[1],
+                people:$this.val()
+            };
 
-                $.address.queryString($.param($data, true));
-            }
+            $.address.queryString($.param($data, true));
+            
+            $('#value-3').text(($this.val() > 0) ? $this.val() : 'Any');
         }
     });
-    $('#value-3').text(($( '#slider-3' ).slider('value') > 0) ? $( '#slider-3' ).slider('value') : 'Undefined' );
+    
+    $('#value-3').text(($('select.js-people').val() > 0) ? $('select.js-people').val() : 'Any' );
 	
     //$('.scrollContainer').scrollElement();
     
@@ -103,7 +101,7 @@ $(function(){
         
         var $price  = $('#slider-1');
         var $days   = $('#slider-2');
-        var $people = $('#slider-3');
+        var $people = $('select.js-people');
         
         var $a = $('ul.cats-menu li a[href="'+$rel+'"]');
         var $data = $ev.parameters;
@@ -114,13 +112,14 @@ $(function(){
         refresh_price = false;
         
         if($ev.queryString == "") {
-            $price.slider('values',[0,3000]);
+            $price.slider('values',[0,$max]);
             $days.slider('values',[0,30]);
-            $people.slider('value',0);
+            $people.val('0');
         } else {
             $price.slider('values',[$data.pricemin, $data.pricemax]);
             $days.slider('values',[$data.daymin, $data.daymax]);
-            $people.slider('value',$data.people);
+            $people.val($data.people); 
+            $('#value-3').text(($people.val() > 0) ? $people.val() : 'Any');
         }
         
         globalData = $data;
@@ -135,7 +134,7 @@ $(function(){
         
         $price.slider('disable');
         $days.slider('disable');
-        $people.slider('disable');
+        $people.attr('disabled','disabled');
         
         $('.loading').show();
         
@@ -145,7 +144,7 @@ $(function(){
             success:function(response){
                 $price.slider('enable');
                 $days.slider('enable');
-                $people.slider('enable');
+                $people.removeAttr('disabled');
                 $('.wrapper.results .content').html(response);
                 
                 $("img.lazy").lazyload({ 
@@ -156,7 +155,8 @@ $(function(){
                 });
             },
             error:function(){
-                $( '#slider-3' ).slider('enable');
+                
+                $people.removeAttr('disabled');
                 $('.loading').hide();
             }
         });	
