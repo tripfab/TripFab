@@ -11171,6 +11171,29 @@ h2.title .back:hover,
 	width: 360px;
 	float: right;
 }
+.w3.browseTrips .right .price {
+	display: block;
+	float: right;
+	font-weight: bold;
+	line-height: 63px;
+}
+.w3.browseTrips .price sup{
+	font-size: 15px;
+	line-height: 59px;
+	float: right;
+	display: block;
+}
+.w3.browseTrips .price span {
+	font-size: 23px;
+	float: right;
+	display: block;
+}
+.w3.browseTrips .price sub {
+	font:normal 11px/70px Helvetica;
+	display: block;
+	float: right;
+	margin-left: 5px;
+}
 .w3.browseTrips .left ul {
 	float: left;
 	list-style: none;
@@ -11196,25 +11219,29 @@ h2.title .back:hover,
 	width: 96px;
 }
 .w3.browseTrips .left ul li.act a{
-	background: url(https://static.tripfab.com/images6/B_itinerariesHove.png) no-repeat 0 1px; 
+	background: url(https://static.tripfab.com/images6/B_itinerariesHove.png) no-repeat 0 0px;
+	color: #303030;
+}
+.w3.browseTrips .left ul li a:hover {
+	color: #60b5f7;
 }
 .w3.browseTrips .left ul li.overview a span{
-	background-position: 0 18px;
-}
-.w3.browseTrips .left ul li.overview a:hover span{
-	background-position: 0 -35px;
+	background-position: 3px 18px;
 }
 .w3.browseTrips .left ul li.overview.act a span {
-	background-position: 0 -89px;
+	background-position: 3px -89px;
 }
-.w3.browseTrips .left ul li.itinerary a{
-	background-position: 0 0;
+.w3.browseTrips .left ul li.overview a:hover span{
+	background-position: 3px -35px;
 }
-.w3.browseTrips .left ul li.itinerary a:hover{
-	background-position: 0 0;
+.w3.browseTrips .left ul li.itinerary a span{
+	background-position: -72px 18px;
 }
-.w3.browseTrips .left ul li.itinerary.act a{
-	background-position: 0 0;
+.w3.browseTrips .left ul li.itinerary a:hover span{
+	background-position: -72px -35px;
+}
+.w3.browseTrips .left ul li.itinerary.act a span{
+	background-position: -72px -88px;
 }
 .w3.browseTrips .cntrl {
 	height: 18px;
@@ -11391,7 +11418,7 @@ h2.title .back:hover,
 	-webkit-border-radius: 0px 4px 4px 4px;
 	border-radius: 0px 4px 4px 4px; 
 	position: relative;
-	margin: 55px 0 20px;
+	margin: 20px 0 20px;
 	behavior: url(PIE.htc);
 }
 .trip-itinerary  ul.menu {
@@ -19985,15 +20012,17 @@ h2.title .back:hover,
 	color:#9BD2FC;
 }
 .w3.browseTrips h3 {
-	font: bold 20px/51px Helvetica;
+	font: bold 20px/63px Helvetica;
 	color: #303030;
 	float: left;
+	height: 63px;
 }
 .w3.browseTrips .btn-1 {
 	float: right;
 	display: block;
 	font-size: 14px;
 	width: 113px;
+	margin-top: 15px;
 }
 
 /*END-NEW-BROWSE-TRIPS-----------------------------------------------------*/

@@ -23,9 +23,8 @@
             	<div class="cntrl">
 	        	    <ul class="breadcrump">
 	        	        <li class="first"><a href="/" class="home"></a></li>
-	        	        <li><a href="/costa_rica">Costa Rica</a></li>
-	        	        <li><a href="/costa_rica/san_jose">San Jose</a></li>
-	        	        <li class="last"><a href="/costa_rica/san_jose/#/hotels" class="active">Hotels</a></li>
+	        	        <li><a href="/trips/costa_rica#/all">Pre-Planned Trips</a></li>
+	        	        <li class="last"><a class="active" href="/costa_rica">Costa Rica</a></li>
 	        	    </ul>
 	        	    <a href="/trips/costa_rica" class="link1">&larr; Back to Browse Itineraries</a>
 	        	    <div class="clear"></div>
@@ -46,7 +45,11 @@
 	        			<?php else: ?>
 	        			<a href="/signup" class="js-signup btn-1">Buy Trip</a>
 	        			<?php endif ?>
-	        			<span><sup>$</sup><?= $this->formatnumber($this->trip->price) ?> <em>per person</em></span>
+	        			<div class="price">
+	        				<sub>per person</sub>
+	        				<span><?= $this->formatnumber($this->trip->price) ?></span>
+	        				<sup>$</sup>
+	        			</div><!--PRICE-->
 	        			<div class="clear"></div>
 	        		</div><!--RIGHT-->
 	        		<div class="clear"></div>
