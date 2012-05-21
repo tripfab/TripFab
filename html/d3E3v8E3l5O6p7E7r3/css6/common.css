@@ -1,8 +1,7 @@
 /*- HEADER STYLES---------------------------------------------------------------*/
 #header {
 	height: 78px;
-	/*background: url(https://static.tripfab.com/images6/header.png) repeat-x 0 0;*/
-	background-color: #303030;
+	background: url(https://static.tripfab.com/images6/header.png) repeat-x 0 15px #272727;
 	position: relative;
 	z-index: 999;
 }
@@ -95,7 +94,7 @@
     display: inline-block;
     color: #FFF;
     text-shadow: 0px 1px 0px #000;
-    font: 200 11px/62px Helvetica;
+    font: 200 11px/78px Helvetica;
 }
 #header .sign_in a .aw,
 #header #logged_in a .aw {
@@ -177,14 +176,14 @@
 	padding-left: 22px;
 }
 #header .top_search #note3 {
-	width: 392px;
-	left: -94px;
+	left: 10px;
+    width: 405px;
 }
 #header .top_search #note4 {
-	width: 326px;
 	text-align: left;
 	text-indent: 15px;
-	left: -68px;
+	left: 10px;
+	width: 405px;
 }
 
 #header .login .bttns {
@@ -251,7 +250,7 @@
 	background-color: #FFF;
 	position: absolute;
 	top: 52px;
-	right: 337px;
+	right: -9px;
 	-webkit-box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.25);
 	-moz-box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.25);
 	box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.25);
@@ -352,7 +351,7 @@
 	/*background: url(https://static.tripfab.com/images6/header_icons.png) repeat-x -106px -10px #FFF;*/
 	color: #898989;
     display: block;
-    font:200 italic 13px/27px Helvetica;
+    font:200 italic 14px/27px Helvetica;
     height: 30px;
     margin: 5px 0 0 0;
     padding: 2px 25px 0 7px;
@@ -381,7 +380,6 @@
 	border-color: #addeff !important;
 	background-color: #FFF;
 	color: #303030;
-	font-weight: bold;
 	-webkit-box-shadow:0 0px 5px 0px #addeff !important;
 	-moz-box-shadow:0 0px 5px 0px #addeff !important;
 	box-shadow:0 0px 5px 0px #addeff !important;
@@ -396,13 +394,18 @@
 	margin: 5px 0 0 -43px;
 	background: url(https://static.tripfab.com/images6/header_srcBtn.png) no-repeat 0 0;
 	border: none;
+	position: relative;
+	z-index: 10;
+}
+#header .top_search .srcBtn:hover {
+	background-position: bottom left;
 }
 #header .rg .phone {
 	width: 130px;
 	text-align: right;
 	float: right;
-	padding-top: 23px;
-	margin-right: 10px;
+	padding-top: 26px;
+	margin-right: 15px;
 }
 #header .rg .phone span {
 	color: #fbd668;
@@ -419,9 +422,9 @@
 }
 #header .rg .sign_in {
 	float: right;
-	margin-right: 10px;
-	background-color: #282828;
+	background-color: #121212;
 	padding:0 13px;
+	height: 78px;
 }
 #header .rg .sign_in a {
 	color: #60b5f7;
@@ -433,7 +436,7 @@
 #header #logged_in {
 	float: right;
 	padding-right: 10px;
-	background-color: #282828;
+	background-color: #121212;
 	padding: 0 13px;
 	height: 78px;
 }
@@ -518,7 +521,7 @@
 	border:1px solid #D8D8D8; 
 	border-top:none; 
 	box-shadow: 0 0 10px #000000; 
-	width:198px !important;
+	width:445px !important;
 	list-style:none; 
 	max-height:200px; 
 	overflow-y:auto; 

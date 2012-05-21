@@ -11158,6 +11158,117 @@ h2.title .back:hover,
 .trip-itinerary {
 	padding-bottom: 100px;
 }
+.w3.browseTrips {
+	height: 101px;
+	background: url(https://static.tripfab.com/images6/B_itinerariesTop.png) repeat-x 0 0;
+	border: none;
+}
+.w3.browseTrips .left {
+	width: 600px;
+	float: left;
+}
+.w3.browseTrips .right {
+	width: 360px;
+	float: right;
+}
+.w3.browseTrips .left ul {
+	float: left;
+	list-style: none;
+	margin-left: 15px;
+}
+.w3.browseTrips .left ul li {
+	 float: left;
+}
+.w3.browseTrips .left ul li span {
+	display: block;
+	width: 29px;
+	height: 25px;
+	margin: 0 auto;
+	padding-top: 15px;
+	background: url(https://static.tripfab.com/images6/B_itinerariesIcon.png) no-repeat 0 0;
+}
+.w3.browseTrips .left ul li a {
+	display: block;
+	height: 80px;
+	font: bold 12px/18px Helvetica;
+	color: #898989;
+	text-align: center;
+	width: 96px;
+}
+.w3.browseTrips .left ul li.act a{
+	background: url(https://static.tripfab.com/images6/B_itinerariesHove.png) no-repeat 0 1px; 
+}
+.w3.browseTrips .left ul li.overview a span{
+	background-position: 0 18px;
+}
+.w3.browseTrips .left ul li.overview a:hover span{
+	background-position: 0 -35px;
+}
+.w3.browseTrips .left ul li.overview.act a span {
+	background-position: 0 -89px;
+}
+.w3.browseTrips .left ul li.itinerary a{
+	background-position: 0 0;
+}
+.w3.browseTrips .left ul li.itinerary a:hover{
+	background-position: 0 0;
+}
+.w3.browseTrips .left ul li.itinerary.act a{
+	background-position: 0 0;
+}
+.w3.browseTrips .cntrl {
+	height: 18px;
+	border-bottom: 1px solid #ebebeb;
+	padding-top: 12px;
+	width: 960px;
+	margin: 0 auto;
+}
+.w3.browseTrips .cntrl .breadcrump {
+	float: left;
+}
+.w3.browseTrips .cntrl .breadcrump li {
+	float: left;
+	background: url(https://static.tripfab.com/images6/slash.png) no-repeat right 50%;
+	padding-left: 12px;
+	padding-right: 16px;
+	font: normal 11px Helvetica;
+	list-style: none;
+}
+.w3.browseTrips .cntrl .breadcrump li a {
+	color: #959595;
+}
+.w3.browseTrips .cntrl .breadcrump li a:hover {
+	color: #60b5f7;
+}
+.w3.browseTrips .cntrl .breadcrump li a.active {
+	color: #60b5f7;
+}
+.w3.browseTrips .breadcrump .home {
+	display: block;
+	background: url(https://static.tripfab.com/images6/icons-llt.png) no-repeat -346px -5px;
+	width: 14px;
+	height: 11px;
+}
+.w3.browseTrips .cntrl .breadcrump .first {
+	padding-left: 0;
+	padding-right: 14px;
+}
+.w3.browseTrips .cntrl .breadcrump li.last {
+	background: none;
+}
+.w3.browseTrips .cntrl .link1 {
+	float: right;
+}
+ 
+
+
+
+
+
+
+
+
+
 .trip-itinerary .ttl {
 	background:  url(https://static.tripfab.com/images2/g-33.png) repeat-x;
 	border: 1px solid #E7E7E7;
@@ -19876,13 +19987,10 @@ h2.title .back:hover,
 .w3.browseTrips h3 {
 	font: bold 20px/51px Helvetica;
 	color: #303030;
-	width: 600px;
 	float: left;
 }
 .w3.browseTrips .btn-1 {
-	position: absolute;
-	top: 10px;
-	right: 0;
+	float: right;
 	display: block;
 	font-size: 14px;
 	width: 113px;

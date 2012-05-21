@@ -221,7 +221,7 @@ $(document).ready(function() {
         
     });
         
-    $(".cont").jcarousel({
+    $(".slideshow .cont").jcarousel({
             scroll: 1
     });
 	
