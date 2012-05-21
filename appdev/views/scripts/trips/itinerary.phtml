@@ -20,22 +20,45 @@
 <div class="w1">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>    
 	<div class="w2">
-    	<div class="w3 itinerary">
+    	<div class="w3 itinerary browseTrips js-stickys">
         	<div class="wrapper">
-            	<?php if($this->user): ?>
-                <a href="#dates_lb" class="lb btn-1">Buy Trip</a>
-                <?php else: ?>
-                <a href="/signup" class="js-signup btn-1">Buy Trip</a>
-                <?php endif ?>
-        	    <h2><?= $this->trip->title ?></h2>
+            	<div class="cntrl">
+	        	    <ul class="breadcrump">
+	        	        <li class="first"><a href="/" class="home"></a></li>
+	        	        <li><a href="/trips/costa_rica#/all">Pre-Planned Trips</a></li>
+	        	        <li class="last"><a class="active" href="/costa_rica">Costa Rica</a></li>
+	        	    </ul>
+	        	    <a href="/trips/costa_rica" class="link1">&larr; Back to Browse Itineraries</a>
+	        	    <div class="clear"></div>
+	        	</div><!--CNTRL-->
+	        	<div class="cont js-sticky-child">
+	        		<div class="left">
+	        			<h3><?= $this->trip->title ?></h3>
+	        			<ul class="menu">
+	        				<li class="overview"><a href="/trips/view/<?= $this->trip->id ?>"><span></span>Overview</a></li>
+	        				<li class="itinerary act"><a href="/trips/itinerary/<?= $this->trip->id ?>"><span></span>Itinerary</a></li>
+	        			</ul>
+	        			<div class="clear"></div>
+	        		</div><!--LEFT-->
+	        		<div class="right">
+	        			<?php if($this->user): ?>
+	        			<a href="#dates_lb" class="lb btn-1">Buy Trip</a>
+	        			<?php else: ?>
+	        			<a href="/signup" class="js-signup btn-1">Buy Trip</a>
+	        			<?php endif ?>
+	        			<div class="price">
+	        				<sub>per person</sub>
+	        				<span><?= $this->formatnumber($this->trip->price) ?></span>
+	        				<sup>$</sup>
+	        			</div><!--PRICE-->
+	        			<div class="clear"></div>
+	        		</div><!--RIGHT-->
+	        		<div class="clear"></div>
+	        	</div><!--CONT-->
         	</div><!-- closes ttl -->
         </div>
         <div class="wrapper trip-itinerary">
             <div class="box days">
-            	<ul class="menu">
-            		<li><a href="/trips/view/<?= $this->trip->id ?>">Overview</a></li>
-            		<li class="active"><a href="/trips/itinerary/<?= $this->trip->id ?>">Itinerary</a></li>
-            	</ul>
                 <a href="" class="prev">Previous Day</a>
                 <a href="" class="next">Next Day</a>
                 <div class="days-cycle">

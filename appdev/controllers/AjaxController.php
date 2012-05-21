@@ -1265,8 +1265,8 @@ class AjaxController extends Zend_Controller_Action
                         $trip_listings = new Zend_Db_Table('itinerary_listings');
 
                         $select = $trips->select();
-                        $select->where('id = ?', $_POST['trip']);
                         $select->where('user_id = ?', $user->id);
+                        $select->where('status = 1');
                         $trip = $trips->fetchRow($select);
                         if(is_null($trip))
                                 throw new Exception('Trip not found');

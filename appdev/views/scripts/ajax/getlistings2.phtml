@@ -45,12 +45,11 @@ $per_night = array(
         <?php if($list->main_type == 2 || $list->main_type == 4 || $list->main_type == 7):?>
         <div class="image">
 			<?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
-                <?php if(count($this->trips > 0)): ?>
-                <a href="#" class="add been"></a>
+                <?php if(count($this->trips) > 0): ?>
+                <a href="#" class="add been" data-listing="<?= $list->id ?>"></a>
                 <?php else: ?>
-                <a href="#" class="add been not js-new-trip"></a>
+                <a href="#" class="add been js-new-trip not" data-listing="<?= $list->id ?>"></a>
                 <?php endif ?>
-				<?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
             <?php elseif(is_null($this->user)): ?>
                 <a href="/signup" class="add been not js-signup"></a>
 			<?php endif ?>
@@ -83,12 +82,11 @@ $per_night = array(
  		<?php if ($list->main_type == 5): ?>
  		<div class="image">
  			<?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
-                <?php if(count($this->trips > 0)): ?>
-                <a href="#" class="add been"></a>
+                <?php if(count($this->trips) > 0): ?>
+                <a href="#" class="add been" data-listing="<?= $list->id ?>"></a>
                 <?php else: ?>
-                <a href="#" class="add been not js-new-trip"></a>
+                <a href="#" class="add been js-new-trip not" data-listing="<?= $list->id ?>"></a>
                 <?php endif ?>
-				<?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
             <?php elseif(is_null($this->user)): ?>
                 <a href="/signup" class="add been not js-signup"></a>
 			<?php endif ?>
@@ -124,12 +122,11 @@ $per_night = array(
         <?php else:?>
         <div class="image">
  			<?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
-                <?php if(count($this->trips > 0)): ?>
-                <a href="#" class="add been"></a>
+                <?php if(count($this->trips) > 0): ?>
+                <a href="#" class="add been" data-listing="<?= $list->id ?>"></a>
                 <?php else: ?>
-                <a href="#" class="add been not js-new-trip"></a>
+                <a href="#" class="add been js-new-trip not" data-listing="<?= $list->id ?>"></a>
                 <?php endif ?>
-				<?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
             <?php elseif(is_null($this->user)): ?>
                 <a href="/signup" class="add been not js-signup"></a>
 			<?php endif ?>
@@ -159,12 +156,9 @@ $per_night = array(
             <div class="price"><span><?= $this->formatnumber($list->price) ?></span><sup>$</sup><sub><?=$per_night[$list->main_type] ?></sub></div>
             <div class="clear"></div>
         </div><!--INFO-->
-       
         <?php endif;?>
         <?php endif;?>
     </div><!--SINGLE-->
-
-
 <?php endforeach ?>
 <div class="clear"></div>
 <?php endif ?>
