@@ -1,21 +1,3 @@
-//$(document).ready(function() {
-// 	var Cntrl = 31;
-//    var aboveHeight = Cntrl + $("#header").outerHeight();
-//    $(window).scroll(function(){
-//        if ($(window).scrollTop() > aboveHeight){
-//            $('#lstng_header').addClass('fixed').css('top','-23');
-//            $('#wp_content').css('padding-top', '107px');
-//        } 
-//        else {
-//            $('#lstng_header').removeClass('fixed');
-//            $('#wp_content').css('padding-top', '0');
-//        }
-//    });
-//   
-//    
-//});
-
-
 
 $(document).ready(function() {
         
@@ -551,7 +533,7 @@ $(document).ready(function() {
     $(".single").live('hover',function() {
         $(".image .add", this).text('Add to my Trip');
         $(".image .add",this).animate({
-            width: "98px"
+            width: "108px"
         }, 200);
     }).live('mouseleave', function(){
         $(".image .add", this).text('');

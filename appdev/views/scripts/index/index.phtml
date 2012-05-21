@@ -20,19 +20,25 @@
 		<div id="wrapper-top">
 		<div class="pattern"></div>
 		<div class="top"> 
-			<?php $rand = mt_rand(1,5) ?>
+			<?php $rand = mt_rand(1,2) ?>
 			<img class="high background" src="https://static.tripfab.com/images6/home_top<?= $rand ?>.jpg"  style="display:none;" />
         </div><!--TOP-->
 		<div class="wrap">
 			<div class="main">
 				<div class="left">
-					<h2>Plan the perfect trip,<br /> in one place.</h2>
+					<h2>Plan your whole trip<br /> all in one place</h2>
 					<h3>From things to do and everything in between -<br /> directly from businesses.</h3>
 					<div id="search-box">
 						<div class="search">
                             <form action="/costa_rica">
                                 <input id="tags" type="text" name="" value="Search for city" />
                                 <input type="submit" name="" value="Search" class="btn-1 noclean" />
+                                <div id="note1" class="note"><em></em>
+	                               	<p class="flag">We have listings only in <strong>Costa Rica</strong>, other countries coming soon.</p>
+                               	</div><!--NOTE1-->
+	                            <div id="note2" class="note"><em></em>
+	                            	<p><strong>0 Results. </strong>You know we work just in Costa Rica. Right?</p>
+	                            </div><!--NOTE2-->
                             </form>	
 							<div class="clear"></div>
 						</div><!--SEARCH--> 

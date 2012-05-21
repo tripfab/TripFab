@@ -65,7 +65,7 @@ $(document).ready(function() {
         return false;
     });
     
-    $endtime   = new Date(2012,4,21,10,0,0,0);
+    $endtime   = new Date(2012,4,21,20,0,0,0);
 	$today	   = new Date();
 	
     $starttime = (($endtime.getTime() - $today.getTime()));

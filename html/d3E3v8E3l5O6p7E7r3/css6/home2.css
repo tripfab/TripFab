@@ -207,17 +207,18 @@
 #search-box .note {
 	display: none;
 	position: absolute;
-	bottom: -32px;
-	left: -8px;
+	bottom: -16px;
+	left: -10px;
 	background: url(https://static.tripfab.com/images6/homeWgG.png) repeat-x 0 0;
 	height:37px;
-	font: normal 16px/37px Helvetica;
+	font: normal 13px/37px Helvetica;
 	color: #303030;
 	text-align: center;
 	text-shadow: 0px 1px 0px #FFF;
 	-webkit-box-shadow: 0px 0px 2px 1px rgba(60, 60, 60, 0.2);
 	box-shadow: 0px 0px 2px 1px rgba(60, 60, 60, 0.2);
 	-moz-shadow:0px 0px 2px 1px rgba(60, 60, 60, 0.2);
+	width: 494px;
 }
 #search-box .note em {
 	display: block;
@@ -230,15 +231,9 @@
 	background: url(https://static.tripfab.com/images6/homeWf.png) no-repeat 10px 50%;
 	padding-left: 22px;
 }
-#search-box #note1 {
-	width: 573px;
-}
 #search-box #note2 {
-	width:513px;
-	text-align: left;
-	text-indent: 15px;
-	left: 15px;
-	bottom:-16px ;
+    text-align: left;
+    text-indent: 15px;
 }
 
 #wrapper-top .main h4{

@@ -27,13 +27,23 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
     <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
     <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
 </head>
-<body>
+<body class="srchBG">
 <div class="w1">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>
     <div class="w2">
         <div class="sub_header" id="src_map">
             <div class="cont">
-                <div class="top">
+                
+                <div class="title">
+                	<h2>Build Your Trip</h2>
+                	<h3>Book activities and hotels, or add things to do to your custom trip</h3>
+                </div>
+                <div class="links">
+                	<a href="/trips/costa_rica/">Pre-Planned Packages <span>(25)</span></a>
+                	<a class="active" href="/">Build Your Trip <span>(1,258)</span></a>
+                </div><!--LINKS-->
+                <div class="clear"></div>
+                <!--<div class="top">
                     <div class="ttl">
                         <img class="country" alt="" src="https://static.tripfab.com/images6/map_cr.png" width="45" height="43">
                         <h2><?php if(!is_null($this->city)): ?>
@@ -41,7 +51,7 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
                         <?php endif; ?> <?= $this->country->title ?> 
                         <img alt="" src="https://static.tripfab.com/images6/flagCR.png" width="" height=""></h2>
                         <!--<a href="" class="link1 maplink">Show Map &rarr;</a>
-                        <a href="" class="link1 near">View Nearby Cities &rarr;</a>-->
+                        <a href="" class="link1 near">View Nearby Cities &rarr;</a>--*>
                         <div class="near_cities hidden">
                             <span class="arrow"></span>
                             <ul>
@@ -58,8 +68,8 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
                                 <li><a href="">Santa Teresa<span>→</span></a></li>
                                 <li><a href="">Tamarindo<span>→</span></a></li>
                             </ul>
-                        </div><!--NEAR_CITIES-->
-                    </div><!--TTL-->
+                        </div><!--NEAR_CITIES--*>
+                    </div><!--TTL--*>
                     
                     <div class="src_bar">
                         <form action="">
@@ -68,20 +78,18 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
                                 <input id="citiesSearch2" placeholder="Search places" type="text">
                                 <div id="note1" class="note"><em></em>
                                 	<p class="flag">We have listings only in <strong>Costa Rica</strong>, other countries coming soon.</p>
-                                </div><!--NOTE1-->
+                                </div><!--NOTE1--*>
                                 <div id="note2" class="note"><em></em>
                                 	<p><strong>0 Results. </strong>You know we work just in Costa Rica. Right?</p>
-                                </div><!--NOTE2-->
+                                </div><!--NOTE2--*>
                                 <div class="clear"></div>
                             </fieldset>
                         </form>
-                    </div><!--SRC_BAR-->
+                    </div><!--SRC_BAR--*>
                     <div class="clear"></div>
                     
-                </div><!--TOP-->
-                <div class="map less">
-                    <div class="mapcanvas"><img src="search-result-hybrid_files/src_result-img2.png" alt="" width="" height=""></div>						
-                </div><!--MAP-->
+                </div>TOP-->
+                
             </div><!--CONT-->
         </div><!--SUB_HEADER-->
         
@@ -204,9 +212,6 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
 				<?= $this->partial('partials/indexcities.phtml', array('cities'=>$this->cities, 'country'=>$this->country)) ?>
                 <div class="clear"></div>
     		</div><!--CONT-->
-    		<div class="bot">
-    			<a href="" class="btn-1">Go to Checkout</a>
-    		</div><!--BOT-->
     	</div><!--TOP-->
     </div><!--CITYEXPLORE-->
 </div>

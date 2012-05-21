@@ -539,7 +539,7 @@ class WS_TripsService {
             $select->where('trips.max >= ?', $people);
         }
         
-        //$select->where('active = 1');
+        $select->where('active = 1');
 
         $select->order('trips.created DESC');
         

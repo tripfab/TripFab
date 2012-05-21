@@ -151,7 +151,7 @@
 #header .login {
 	position: absolute;
 	top: 48px;
-	right: 30px;
+	right: 306px;
 	width: 235px;
 	min-height: 206px;
 	display: none;
@@ -253,7 +253,7 @@
 	background-color: #FFF;
 	position: absolute;
 	top: 52px;
-	right: -13px;
+	right: 349px;
 	-webkit-box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.25);
 	-moz-box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.25);
 	box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.25);
@@ -7638,6 +7638,9 @@ h2.title .back:hover,
 	-webkit-border-radius: 0px 0px 4px 4px;
 	border-radius: 0px 0px 4px 4px;
 	behavior: url(/PIE.htc);
+}
+.sign-box .foot a {
+	color: #60b5f7;
 }
 .listing-content .foot a,
 .vendor-profile .foot a {
