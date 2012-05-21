@@ -66,7 +66,12 @@
                 <div class="wrap">
                     <div class="cont">
                         <div class="container">
-							
+                        <?= $this->partial('partials/addtomytrip.phtml', array(
+							'user' => $this->user,
+							'trips' => $this->trips,
+							'listing' => $this->listing,
+							'class'  => 'btn-2',
+							'class2' => 'one')) ?>	
 							<?php if(!isset($_COOKIE['tooltipHelpList'])): ?>
 							<div class="firstime_tip">
 								<img class="arrow" src="https://static.tripfab.com/images6/arrow-24.png" alt="" />
