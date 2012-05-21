@@ -221,6 +221,7 @@ class WS_Notifier extends Zend_Mail {
         $this->_view->trip        = $trip;
         $this->setSubject('Preplaned Itinerary Purchase');
         $this->addTo($this->user->email);
+        $this->addBcc('ricardo@tripfab.com');
         //$this->addTo('cristian@tripfab.com');
         $this->sendHTMLTemplate('trip.phtml');
     }

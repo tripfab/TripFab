@@ -680,7 +680,6 @@ $(function(){
         $.fancybox({
             href:$href,
             overlayColor:'#fff',
-            showCloseButton:0,
             padding:0,
             centerOnScroll:1,
             onStart:function(){
