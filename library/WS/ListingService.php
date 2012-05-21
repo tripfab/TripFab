@@ -656,7 +656,7 @@ class WS_ListingService {
             
             $db = Zend_Db_Table::getDefaultAdapter();
             $select = $db->select();
-            $select->from('listings');
+            $select->from('listings', 'listings.*, if((listings.main_type = 5) or (listings.main_type = 6), 1, 0) as typesort');
             $select->where('listings.status = ?', 1);
             if(!is_null($place)) {
                 //$select->where('listings.city_id = ?', $place);
@@ -693,6 +693,7 @@ class WS_ListingService {
                         $i++;}
                 }
             }
+            $select->order('typesort DESC');
             //echo $select->assemble(); die;
             if($sort != 'newest'){
                 switch($sort){
@@ -740,9 +741,9 @@ class WS_ListingService {
            $select->group('listings.id');
            
            //echo $select->assemble(); die;
+           //echo $select->assemble(); die;
            
            $listings = $db->fetchAll($select, array(), Zend_Db::FETCH_OBJ);
-           
            
            if($this->use_cache)
                $this->cache->save($listings, $cacheId, array(), 86400);
