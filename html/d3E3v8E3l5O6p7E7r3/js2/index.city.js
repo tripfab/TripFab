@@ -1,7 +1,5 @@
 
 $(document).ready(function() {
-        
-    
     var aboveHeight = 0;
     $(window).scroll(function(){
         var stickyBar = $('#search_result .content .sort');
@@ -20,6 +18,23 @@ $(document).ready(function() {
             stickyBar.removeClass('fixed');
             $('.results-wrapper').css('margin-top', '30px');
         }
+    });
+    
+    $('.js-new-trip').live('click',function(){
+        
+        $listing = $(this).data('listing');
+        $('#newtrip form input[name=listing]').val($listing);
+        
+        $.fancybox({
+            href:'#newtrip',
+            padding:0,
+            overlayColor:'#fff',
+            showCloseButton:false,
+            modal:true,
+            centerOnScroll:true
+        });
+        
+        return false;
     });
 });
 (function( $ ){
@@ -64,8 +79,38 @@ $(function(){
 
 $(function(){
     $('.results-wrapper .single .been:not(.not)').live('click', function(){
-        $('.dd-2').removeClass('show');
-        $(this).parent().find('.dd-2').toggleClass('show');
+        $form = $(this);
+        $data = {
+            listing:$form.data('listing')
+        };
+	
+        $('input, select').attr('disabled','disabled');
+        
+        $.ajax({
+            url:'/ajax/addtotrip2',
+            data:$data,
+            type:'post',
+            success:function(response){
+                if(response.type == 'success'){
+                    $('input, select').removeAttr('disabled');
+                    $('.dd-2').removeClass('show');
+                    showAlert(response.message);
+                } else if(response.type == 'newtrip'){
+                    $('input, select').removeAttr('disabled');
+                    $('.dd-2').removeClass('show');
+                    showAlert(response.message);
+                    $('.dd-2 select').append('<option value="'+response.tripid+'">'+response.triptitle+'</option>');
+                } else {
+                    $('input, select').removeAttr('disabled');
+                    showError(response.message);
+                }
+                $(window).trigger('addtotrip');
+            },
+            error:function(){
+                $('input, select').removeAttr('disabled');
+                showError('Somehing went wrong please try later');
+            }
+        });
         return false;
     });
     
@@ -149,12 +194,14 @@ $(function(){
                     $('input, select').removeAttr('disabled');
                     $('.dd-2').removeClass('show');
                     showAlert(response.message);
-                    $('.dd-2 select').append('<option value="'+response.tripid+'">'+response.triptitle+'</option>');
+                    $('.js-new-trip').removeClass('not');
+                    $('.js-new-trip').removeClass('js-new-trip');
                 } else {
                     $.fancybox.close();
                     $('input, select').removeAttr('disabled');
                     showError(response.message);
                 }
+                $(window).trigger('addtotrip');
             },
             error:function(){
                 $.fancybox.close();
@@ -173,42 +220,7 @@ $(function(){
     });
 	
     $('.addtotrip').live('submit', function(){
-        $form = $(this);
-        $data = {
-            listing:$('input[name=listing]', $form).val(),
-            trip:$('select[name=trip]', $form).val(),
-            title:$('input[name=title]', $form).val()
-        };
-		
-        if($data.trip == '')
-            return false;
-			
-        $('input, select').attr('disabled','disabled');
-        $.ajax({
-            url:'/ajax/addtotrip2',
-            data:$data,
-            type:'post',
-            success:function(response){
-                if(response.type == 'success'){
-                    $('input, select').removeAttr('disabled');
-                    $('.dd-2').removeClass('show');
-                    showAlert(response.message);
-                } else if(response.type == 'newtrip'){
-                    $('input, select').removeAttr('disabled');
-                    $('.dd-2').removeClass('show');
-                    showAlert(response.message);
-                    $('.dd-2 select').append('<option value="'+response.tripid+'">'+response.triptitle+'</option>');
-                } else {
-                    $('input, select').removeAttr('disabled');
-                    showError(response.message);
-                }
-            },
-            error:function(){
-                $('input, select').removeAttr('disabled');
-                showError('Somehing went wrong please try later');
-            }
-        });
-        return false;
+        
     });
     
     $('#ui-datepicker-div').wrap('<div id="calendarContainer"></div>');
@@ -498,8 +510,14 @@ $(function(){
 });
 
 $(function(){
-    $(window).bind('login_success', function(){
-        alert('asd');
+    $('.js-filter-cities').live('click',function(){
+        $href = $(this).attr('href');
+        $.fancybox({
+            href:$href,
+            padding:0,
+            overlayColor:'#fff',
+            centerOnScroll:1
+        });
     });
 })
 $(document).ready(function() {

@@ -12,6 +12,9 @@
 	<!--[if IE 7]><link type="text/css" rel="stylesheet" href="css2/ie.css" /><![endif]-->
 	<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
 	<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
+    <style type="text/css">
+	.cart-B { display:none !important;}
+	</style>
 </head>
 <body id="home2">
 <div id="wp_all">
@@ -88,12 +91,12 @@
 			<h5>Hot Cities in Costa Rica</h5>
 			<div class="all">
 				<?= $this->partial('partials/indexcities.phtml', array('cities'=>$this->cities, 'country'=>$this->country)) ?>
-			</div><!--ALL--> 
-		</div><!--WRAP--> 
+			</div><!--ALL-->
+		</div><!--WRAP-->
 	</div><!--POPULAR-CITIES-->
 	</div><!--wp_content-->
 	<div id="wp_footer">
-		<?= $this->partial('partials/footer.phtml'); ?>  
+		<?= $this->partial('partials/footer.phtml'); ?>
 	</div><!--WP_FOOTER-->
 </div><!--WP_ALL-->
 <div id="citiesAutocompleteContainer"></div>

@@ -1249,10 +1249,146 @@ class AjaxController extends Zend_Controller_Action
                             $trip->save();
                         }
                         
+                        $_listings = $this->trips->getItnListingOf($trip->id, false, null, true, true);
+                        $bookings = array();
+            
+                        foreach($_listings as $list) {
+                            if($list->main_type == 6 || $list->main_type == 5){
+                                $bookings[$list->id] = array(
+                                    'adults' => $trip->adults,
+                                    'child'  => $trip->kids,
+                                );
+                            }
+                        }
+                        
+                        $date = date('Y-m-d G:i:s', strtotime($trip->start));
+                        
+                        $items  = array();
+                        $items2 = array();
+                        $options = array();
+
+                        $caculated = array();
+
+                        foreach($_listings as $u => $listing){
+                            if($listing->main_type == 6 || $listing->main_type == 5){
+                                if($listing->main_type == 5) {
+                                    if(!@in_array($listing->triplisting_id, $caculated)) {
+                                        $j = 2;
+                                        $listing->day = (is_null($listing->day)) ? 1 : $listing->day; 
+                                        for($i = $listing->day; $i <= $trip->days; $i++){
+                                            $_diff = false; $found = false;
+                                            foreach($_listings as $list2) {
+                                                $list2->day = (is_null($list2->day)) ? 1 : $list2->day;
+                                                if($list2->day == ($i+1) && $list2->main_type == 5) {
+                                                    if($list2->listing_id == $listing->listing_id) {
+                                                        $j++;
+                                                        $caculated[] = $list2->triplisting_id;
+                                                        $found = true;
+                                                    } else {
+                                                        $_diff = true;
+                                                    } break;
+                                                }
+                                            }
+                                            if($_diff) break;
+                                            elseif(!$found and ($trip->days - 1) > $i) $j++;
+                                        }
+
+                                        $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                                        $checkin = date('Y-m-d', $checkin);
+
+                                        $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                                        $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                                        $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                                        $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                                        $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $j, $option, $capacity);
+
+                                        $item->day = $listing->day;
+                                        $item->listing_city = $listing->city;
+                                        $item->listing_country = $listing->country;
+                                        $item->triplistingid = $listing->triplisting_id;
+                                        $item->ciidf = $listing->cityurl;
+                                        $item->coidf = $listing->countryurl;
+                                        $item->idf   = $listing->identifier;
+
+                                        $items[] = $item;
+
+                                        $options[$listing->id]['options'] = $this->listings->getHotelRooms($listing->id);
+
+                                        $prices = $this->listings->getSchPrices($listing);
+                                        $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+
+                                        $caculated[] = $listing->id;
+                                    }
+                                } 
+                                else {
+                                    $listing->day = (is_null($listing->day)) ? 1 : $listing->day; 
+                                    
+                                    $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                                    $checkin = date('Y-m-d', $checkin);
+
+                                    $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                                    $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                                    $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                                    $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                                    $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $trip->days, $option, $capacity);
+
+                                    $item->day = $listing->day;
+                                    $item->listing_city = $listing->city;
+                                    $item->listing_country = $listing->country;
+                                    $item->triplistingid = $listing->triplisting_id;
+                                    $item->ciidf = $listing->cityurl;
+                                    $item->coidf = $listing->countryurl;
+                                    $item->idf   = $listing->identifier;
+
+                                    $items[] = $item;
+
+                                    $options[$listing->id]['options'] = $this->listings->getSchedulesOf($listing->id);
+
+                                    if(is_null($listing->min) or is_null($listing->max)){
+                                        $options[$listing->id]['capacity'] = $this->listings->getActivityTypes($listing->id);
+
+                                        $prices = $this->listings->getSchPrices($listing);
+                                        $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+                                    }
+                                }
+                            }
+                        }
+
+                        foreach($_listings as $listing){
+                            if($listing->main_type != 6 && $listing->main_type != 5){
+                                $item = new stdClass();
+                                $item->available = true;
+                                $item->listing_title = $listing->title;
+                                $item->listing_image = $listing->image;
+                                $item->listing_type  = $listing->main_type;
+                                $item->listing_city = $listing->city;
+                                $item->listing_country = $listing->country;
+                                $item->ciidf = $listing->cityurl;
+                                $item->coidf = $listing->countryurl;
+                                $item->idf   = $listing->identifier;
+                                $items2[] = $item;
+                            }
+                        }
+
+                        $total = 0;
+                        foreach($items as $cart){
+                            if($cart->available)
+                                $total = $total + $cart->total;
+                        }
+                        
+                        $trip->price = $total; 
+                        $trip->save();
+                        
                         $result['type']     = 'newtrip';
                         $result['message']  = $trip->title.' trip has been created and listing '.$listing->title.' has been added to it';
                         $result['tripid']   = $trip->id;
                         $result['triptitle']= $trip->title;
+                        $result['price']= $trip->price;
+                        
                     } catch(Exception $e){
                         $result['type']     = 'error';
                         $result['message']  = $e->getMessage();
@@ -1265,8 +1401,8 @@ class AjaxController extends Zend_Controller_Action
                         $trip_listings = new Zend_Db_Table('itinerary_listings');
 
                         $select = $trips->select();
-                        $select->where('id = ?', $_POST['trip']);
                         $select->where('user_id = ?', $user->id);
+                        $select->where('status = 1');
                         $trip = $trips->fetchRow($select);
                         if(is_null($trip))
                                 throw new Exception('Trip not found');
@@ -1327,9 +1463,144 @@ class AjaxController extends Zend_Controller_Action
                         }
 
                         $trip->save();
+                        
+                        $_listings = $this->trips->getItnListingOf($trip->id, false, null, true, true);
+                        $bookings = array();
+            
+                        foreach($_listings as $list) {
+                            if($list->main_type == 6 || $list->main_type == 5){
+                                $bookings[$list->id] = array(
+                                    'adults' => $trip->adults,
+                                    'child'  => $trip->kids,
+                                );
+                            }
+                        }
+                        
+                        $date = date('Y-m-d G:i:s', strtotime($trip->start));
+                        
+                        $items  = array();
+                        $items2 = array();
+                        $options = array();
+
+                        $caculated = array();
+
+                        foreach($_listings as $u => $listing){
+                            if($listing->main_type == 6 || $listing->main_type == 5){
+                                if($listing->main_type == 5) {
+                                    if(!@in_array($listing->triplisting_id, $caculated)) {
+                                        $j = 2;
+                                        $listing->day = (is_null($listing->day)) ? 1 : $listing->day; 
+                                        for($i = $listing->day; $i <= $trip->days; $i++){
+                                            $_diff = false; $found = false;
+                                            foreach($_listings as $list2) {
+                                                $list2->day = (is_null($list2->day)) ? 1 : $list2->day;
+                                                if($list2->day == ($i+1) && $list2->main_type == 5) {
+                                                    if($list2->listing_id == $listing->listing_id) {
+                                                        $j++;
+                                                        $caculated[] = $list2->triplisting_id;
+                                                        $found = true;
+                                                    } else {
+                                                        $_diff = true;
+                                                    } break;
+                                                }
+                                            }
+                                            if($_diff) break;
+                                            elseif(!$found and ($trip->days - 1) > $i) $j++;
+                                        }
+
+                                        $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                                        $checkin = date('Y-m-d', $checkin);
+
+                                        $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                                        $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                                        $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                                        $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                                        $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $j, $option, $capacity);
+
+                                        $item->day = $listing->day;
+                                        $item->listing_city = $listing->city;
+                                        $item->listing_country = $listing->country;
+                                        $item->triplistingid = $listing->triplisting_id;
+                                        $item->ciidf = $listing->cityurl;
+                                        $item->coidf = $listing->countryurl;
+                                        $item->idf   = $listing->identifier;
+
+                                        $items[] = $item;
+
+                                        $options[$listing->id]['options'] = $this->listings->getHotelRooms($listing->id);
+
+                                        $prices = $this->listings->getSchPrices($listing);
+                                        $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+
+                                        $caculated[] = $listing->id;
+                                    }
+                                } 
+                                else {
+                                    $listing->day = (is_null($listing->day)) ? 1 : $listing->day; 
+                                    
+                                    $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                                    $checkin = date('Y-m-d', $checkin);
+
+                                    $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                                    $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                                    $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                                    $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                                    $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $trip->days, $option, $capacity);
+
+                                    $item->day = $listing->day;
+                                    $item->listing_city = $listing->city;
+                                    $item->listing_country = $listing->country;
+                                    $item->triplistingid = $listing->triplisting_id;
+                                    $item->ciidf = $listing->cityurl;
+                                    $item->coidf = $listing->countryurl;
+                                    $item->idf   = $listing->identifier;
+
+                                    $items[] = $item;
+
+                                    $options[$listing->id]['options'] = $this->listings->getSchedulesOf($listing->id);
+
+                                    if(is_null($listing->min) or is_null($listing->max)){
+                                        $options[$listing->id]['capacity'] = $this->listings->getActivityTypes($listing->id);
+
+                                        $prices = $this->listings->getSchPrices($listing);
+                                        $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+                                    }
+                                }
+                            }
+                        }
+
+                        foreach($_listings as $listing){
+                            if($listing->main_type != 6 && $listing->main_type != 5){
+                                $item = new stdClass();
+                                $item->available = true;
+                                $item->listing_title = $listing->title;
+                                $item->listing_image = $listing->image;
+                                $item->listing_type  = $listing->main_type;
+                                $item->listing_city = $listing->city;
+                                $item->listing_country = $listing->country;
+                                $item->ciidf = $listing->cityurl;
+                                $item->coidf = $listing->countryurl;
+                                $item->idf   = $listing->identifier;
+                                $items2[] = $item;
+                            }
+                        }
+
+                        $total = 0;
+                        foreach($items as $cart){
+                            if($cart->available)
+                                $total = $total + $cart->total;
+                        }
+                        
+                        $trip->price = $total; 
+                        $trip->save();
 
                         $result['type']     = 'success';
                         $result['message']  = 'The listing '.$listing->title.' has been added to '.$trip->title;
+                        $result['price']    = $trip->price;
                     } catch(Exception $e){
                         $result['type']     = 'error';
                         $result['message']  = $e->getMessage();
@@ -1929,10 +2200,139 @@ class AjaxController extends Zend_Controller_Action
                 }
                 
                 if($updatePrice){
-                    $listings = new Model_Listings();
-                    $list = $listings->fetchRow("id = {$listing->listing_id}");
+                    $_listings = $this->trips->getItnListingOf($trip->id, false, null, true, true);
+                    $bookings = array();
 
-                    $trip->price = $trip->price + $list->price;
+                    foreach($_listings as $list) {
+                        if($list->main_type == 6 || $list->main_type == 5){
+                            $bookings[$list->id] = array(
+                                'adults' => $trip->adults,
+                                'child'  => $trip->kids,
+                            );
+                        }
+                    }
+
+                    $date = date('Y-m-d G:i:s', strtotime($trip->start));
+
+                    $items  = array();
+                    $items2 = array();
+                    $options = array();
+
+                    $caculated = array();
+
+                    foreach($_listings as $u => $listing){
+                        if($listing->main_type == 6 || $listing->main_type == 5){
+                            if($listing->main_type == 5) {
+                                if(!@in_array($listing->triplisting_id, $caculated)) {
+                                    $j = 2;
+                                    $listing->day = (is_null($listing->day)) ? 1 : $listing->day; 
+                                    for($i = $listing->day; $i <= $trip->days; $i++){
+                                        $_diff = false; $found = false;
+                                        foreach($_listings as $list2) {
+                                            $list2->day = (is_null($list2->day)) ? 1 : $list2->day;
+                                            if($list2->day == ($i+1) && $list2->main_type == 5) {
+                                                if($list2->listing_id == $listing->listing_id) {
+                                                    $j++;
+                                                    $caculated[] = $list2->triplisting_id;
+                                                    $found = true;
+                                                } else {
+                                                    $_diff = true;
+                                                } break;
+                                            }
+                                        }
+                                        if($_diff) break;
+                                        elseif(!$found and ($trip->days - 1) > $i) $j++;
+                                    }
+
+                                    $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                                    $checkin = date('Y-m-d', $checkin);
+
+                                    $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                                    $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                                    $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                                    $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                                    $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $j, $option, $capacity);
+
+                                    $item->day = $listing->day;
+                                    $item->listing_city = $listing->city;
+                                    $item->listing_country = $listing->country;
+                                    $item->triplistingid = $listing->triplisting_id;
+                                    $item->ciidf = $listing->cityurl;
+                                    $item->coidf = $listing->countryurl;
+                                    $item->idf   = $listing->identifier;
+
+                                    $items[] = $item;
+
+                                    $options[$listing->id]['options'] = $this->listings->getHotelRooms($listing->id);
+
+                                    $prices = $this->listings->getSchPrices($listing);
+                                    $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+
+                                    $caculated[] = $listing->id;
+                                }
+                            } 
+                            else {
+                                $listing->day = (is_null($listing->day)) ? 1 : $listing->day; 
+
+                                $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                                $checkin = date('Y-m-d', $checkin);
+
+                                $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                                $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                                $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                                $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                                $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $trip->days, $option, $capacity);
+
+                                $item->day = $listing->day;
+                                $item->listing_city = $listing->city;
+                                $item->listing_country = $listing->country;
+                                $item->triplistingid = $listing->triplisting_id;
+                                $item->ciidf = $listing->cityurl;
+                                $item->coidf = $listing->countryurl;
+                                $item->idf   = $listing->identifier;
+
+                                $items[] = $item;
+
+                                $options[$listing->id]['options'] = $this->listings->getSchedulesOf($listing->id);
+
+                                if(is_null($listing->min) or is_null($listing->max)){
+                                    $options[$listing->id]['capacity'] = $this->listings->getActivityTypes($listing->id);
+
+                                    $prices = $this->listings->getSchPrices($listing);
+                                    $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+                                }
+                            }
+                        }
+                    }
+
+                    foreach($_listings as $listing){
+                        if($listing->main_type != 6 && $listing->main_type != 5){
+                            $item = new stdClass();
+                            $item->available = true;
+                            $item->listing_title = $listing->title;
+                            $item->listing_image = $listing->image;
+                            $item->listing_type  = $listing->main_type;
+                            $item->listing_city = $listing->city;
+                            $item->listing_country = $listing->country;
+                            $item->ciidf = $listing->cityurl;
+                            $item->coidf = $listing->countryurl;
+                            $item->idf   = $listing->identifier;
+                            $items2[] = $item;
+                        }
+                    }
+
+                    $total = 0;
+                    
+                    foreach($items as $cart){
+                        if($cart->available)
+                            $total = $total + $cart->total;
+                    }
+
+                    $trip->price = $total; 
                     $trip->save();
                 }
                 
@@ -2030,6 +2430,140 @@ class AjaxController extends Zend_Controller_Action
 
                     $listing->save();
                 }
+                
+                $_listings = $this->trips->getItnListingOf($trip->id, false, null, true, true);
+                $bookings = array();
+
+                foreach($_listings as $list) {
+                    if($list->main_type == 6 || $list->main_type == 5){
+                        $bookings[$list->id] = array(
+                            'adults' => $trip->adults,
+                            'child'  => $trip->kids,
+                        );
+                    }
+                }
+
+                $date = date('Y-m-d G:i:s', strtotime($trip->start));
+
+                $items  = array();
+                $items2 = array();
+                $options = array();
+
+                $caculated = array();
+
+                foreach($_listings as $u => $listing){
+                    if($listing->main_type == 6 || $listing->main_type == 5){
+                        if($listing->main_type == 5) {
+                            if(!@in_array($listing->triplisting_id, $caculated)) {
+                                $j = 2;
+                                $listing->day = (is_null($listing->day)) ? 1 : $listing->day; 
+                                for($i = $listing->day; $i <= $trip->days; $i++){
+                                    $_diff = false; $found = false;
+                                    foreach($_listings as $list2) {
+                                        $list2->day = (is_null($list2->day)) ? 1 : $list2->day;
+                                        if($list2->day == ($i+1) && $list2->main_type == 5) {
+                                            if($list2->listing_id == $listing->listing_id) {
+                                                $j++;
+                                                $caculated[] = $list2->triplisting_id;
+                                                $found = true;
+                                            } else {
+                                                $_diff = true;
+                                            } break;
+                                        }
+                                    }
+                                    if($_diff) break;
+                                    elseif(!$found and ($trip->days - 1) > $i) $j++;
+                                }
+
+                                $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                                $checkin = date('Y-m-d', $checkin);
+
+                                $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                                $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                                $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                                $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                                $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $j, $option, $capacity);
+
+                                $item->day = $listing->day;
+                                $item->listing_city = $listing->city;
+                                $item->listing_country = $listing->country;
+                                $item->triplistingid = $listing->triplisting_id;
+                                $item->ciidf = $listing->cityurl;
+                                $item->coidf = $listing->countryurl;
+                                $item->idf   = $listing->identifier;
+
+                                $items[] = $item;
+
+                                $options[$listing->id]['options'] = $this->listings->getHotelRooms($listing->id);
+
+                                $prices = $this->listings->getSchPrices($listing);
+                                $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+
+                                $caculated[] = $listing->id;
+                            }
+                        } 
+                        else {
+                            $listing->day = (is_null($listing->day)) ? 1 : $listing->day; 
+
+                            $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                            $checkin = date('Y-m-d', $checkin);
+
+                            $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                            $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                            $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                            $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                            $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $trip->days, $option, $capacity);
+
+                            $item->day = $listing->day;
+                            $item->listing_city = $listing->city;
+                            $item->listing_country = $listing->country;
+                            $item->triplistingid = $listing->triplisting_id;
+                            $item->ciidf = $listing->cityurl;
+                            $item->coidf = $listing->countryurl;
+                            $item->idf   = $listing->identifier;
+
+                            $items[] = $item;
+
+                            $options[$listing->id]['options'] = $this->listings->getSchedulesOf($listing->id);
+
+                            if(is_null($listing->min) or is_null($listing->max)){
+                                $options[$listing->id]['capacity'] = $this->listings->getActivityTypes($listing->id);
+
+                                $prices = $this->listings->getSchPrices($listing);
+                                $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+                            }
+                        }
+                    }
+                }
+
+                foreach($_listings as $listing){
+                    if($listing->main_type != 6 && $listing->main_type != 5){
+                        $item = new stdClass();
+                        $item->available = true;
+                        $item->listing_title = $listing->title;
+                        $item->listing_image = $listing->image;
+                        $item->listing_type  = $listing->main_type;
+                        $item->listing_city = $listing->city;
+                        $item->listing_country = $listing->country;
+                        $item->ciidf = $listing->cityurl;
+                        $item->coidf = $listing->countryurl;
+                        $item->idf   = $listing->identifier;
+                        $items2[] = $item;
+                    }
+                }
+
+                $total = 0;
+                foreach($items as $cart){
+                    if($cart->available)
+                        $total = $total + $cart->total;
+                }
+
+                $trip->price = $total; 
+                $trip->save();
                 
                 echo $trip->price; die;
             } else {
@@ -3394,5 +3928,40 @@ class AjaxController extends Zend_Controller_Action
         
         header('Content-type: text/plain');
         echo $traslation->data->translations->translatedText; die;
+    }
+    
+    public function getusertripinfoAction(){
+        $result = array('type'=>'error');
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+            throw new Exception('No access allowed');
+        
+        $user = $auth->getIdentity();
+        if($user->role_id != 2) 
+            throw new Exception('No access allowed');
+        
+        $trips = new Zend_Db_Table('itineraries');
+        $select = $trips->select();
+        $select->where('user_id = ?', $user->id);
+        $select->where('status = 1');
+        $trip = $trips->fetchRow($select);
+
+        if(!is_null($trip))
+            $result = array(
+                'type'=>'success',
+                'html' => '<div class="cart-B js-cart-B"><a href="/user/trips/itinerary/'.$trip->id.'" class="icon"><span>'.$this->view->formatnumber($trip->listings).'</span></a><div class="info"><h3>$'.$trip->price.'</h3><span>'.$trip->listings.' listings in your trip</span><a href="/user/trips/itinerary/'.$trip->id.'" class="organize"><span>Organize Trip</span></a></div></div>',
+                'count' => $trip->listings,
+                'trip'=>$trip->id
+            );
+        else
+            $result = array(
+                'type'=>'success',
+                'html' => '<div class="cart-B js-cart-B"><a href="#" class="icon js-new-trip"><span>0</span></a><div class="info"><h3>$0</h3><span>0 listings in your trip</span><a href="#" class="organize js-new-trip"><span>Create Trip</span></a></div></div>',
+                'count' => 0,
+                'trip'=> 0
+            );
+        
+        header('Content-type: application/json');
+        echo json_encode($result); die;
     }
 }
