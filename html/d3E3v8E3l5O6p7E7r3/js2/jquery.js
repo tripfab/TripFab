@@ -5022,15 +5022,15 @@ $(function(){
 
 $(function(){
 	$('.item .help a, .lstng-detail .help a, .photo .help a, .main-ttl .help a').fancybox({
-		width:808,
-		height:605,
-		autoScale:0,
-		overlayColor:'#ffffff',
-		centerOnScroll:1
+            width:808,
+            height:605,
+            autoScale:0,
+            overlayColor:'#ffffff',
+            centerOnScroll:1
 	});
 	
 	if(typeof $('.listing-content .right input, .listing-content .right textarea')[0] != "undefined"){
-		$('.listing-content .right input, .listing-content .right textarea')[0].focus();
+            $('.listing-content .right input, .listing-content .right textarea')[0].focus();
 	}
 });
 

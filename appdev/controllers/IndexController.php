@@ -151,8 +151,9 @@ class IndexController extends Zend_Controller_Action
                 $subcats[$s] = $this->listings->getSubCategoriesOf($c);
         }
         
-        if(!is_null($city)) 
+        if(!is_null($city)) {
             $ls_count = $this->listings->countListings($city);
+        }
         else {
             $ls_count = $this->listings->countListings(null, null, $country->id);
             $cities = $this->places->getPlaces(3, $country->id);

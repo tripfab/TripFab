@@ -566,6 +566,87 @@ class WS_ListingService {
         return $lists;
     }
     
+    public function countListings($city, $vendor = null, $country = null)
+    {
+        if(!is_null($city)){
+            $db = Zend_Db_Table::getDefaultAdapter();
+            $cats = $this->getMainCategories();
+            
+            $r = 25 / 111;
+            $latmin = $city->lat - $r;
+            $latmax = $city->lat + $r;
+
+            $lngmin = $city->lng - $r;
+            $lngmax = $city->lng + $r;            
+            
+            $counter = array();
+            foreach($cats as $cat){
+                if($cat->name == 'All'){
+                    $select = $db->select();
+                    $select->from('listings', array('c'=>'count(*)'));
+
+                    $select->where("((lat >= ?", $latmin);
+                    $select->where("lat <= ?", $latmax);
+                    $select->where("lng >= ?", $lngmin);
+                    $select->where("lng <= ?)", $lngmax);
+                    
+                    $select->orWhere('city_id = ?)', $city->id);
+                    
+                    $select->where('status = 1');
+                    
+                    $count = $db->fetchRow($select);
+                    $counter[$cat->id] = $count['c'];
+                    
+                    //var_dump($select->assemble()); die;
+                } else {
+                    $select = $db->select();
+                    $select->from('listings', array('c'=>'count(*)'));
+
+                    $select->where("((lat >= ?", $latmin);
+                    $select->where("lat <= ?", $latmax);
+                    $select->where("lng >= ?", $lngmin);
+                    $select->where("lng <= ?)", $lngmax);
+                    
+                    $select->orWhere('city_id = ?)', $city->id);
+                    
+                    $select->where('main_type = ?', $cat->id);
+                    
+                    $select->where('status = 1');
+
+                    $count = $db->fetchRow($select);
+                    $counter[$cat->id] = $count['c'];
+                }
+            }
+            return $counter;
+        } elseif(!is_null($vendor)){
+            $db = Zend_Db_Table::getDefaultAdapter();
+            
+            $sql     = "Select count(*) as c from listings where vendor_id = {$vendor} and status = 1";
+            $count   = $db->fetchRow($sql);
+            $counter = $count['c'];
+            
+            return $counter;
+        } elseif(!is_null($country)){
+            $db = Zend_Db_Table::getDefaultAdapter();
+            $cats = $this->getMainCategories();
+            $counter = array();
+            foreach($cats as $cat){
+                if($cat->name == 'All'){
+                    $sql = "Select count(*) as c from listings where country_id = {$country} and status = 1";
+                    $count = $db->fetchRow($sql);
+                    $counter[$cat->id] = $count['c'];
+                } else {
+                    $sql = "Select count(*) as c from listings where country_id = {$country} and main_type = {$cat->id} and status = 1";
+                    $count = $db->fetchRow($sql);
+                    $counter[$cat->id] = $count['c'];
+                }
+            }
+            return $counter;
+        } else {
+            throw new Exception();
+        }
+    }
+    
     public function getListings2($place, $cat, $subcat, $sort, $stars, $pricemin = 0, $pricemax = 1500, $country = null, $page = 1)
     {
         $args = func_get_args();
@@ -601,7 +682,6 @@ class WS_ListingService {
                 $select->where('listings.main_type = ?', $_cat->id);}
             if($subcat != 'all'){
                 $select->join('listing_listingtypes', 'listing_listingtypes.listing_id = listings.id' ,array('subcat' => 'listingtype_id'));
-                $select->join('listing_types', 'listing_types.id = listing_listingtypes.listingtype_id' ,array('subcatname' => 'name'));
                 if(count($subcat) == 1) {
                     $select->where('listing_listingtypes.listingtype_id = ?', reset($subcat));
                 } else {
@@ -612,9 +692,6 @@ class WS_ListingService {
                         else $select->orWhere('listing_listingtypes.listingtype_id = ?', $sc);
                         $i++;}
                 }
-            } else {
-                $select->joinLeft('listing_listingtypes', 'listing_listingtypes.listing_id = listings.id' ,array('subcat' => 'listingtype_id'));
-                $select->joinLeft('listing_types', 'listing_types.id = listing_listingtypes.listingtype_id' ,array('subcatname' => 'name'));
             }
             //echo $select->assemble(); die;
             if($sort != 'newest'){
@@ -623,10 +700,11 @@ class WS_ListingService {
                     case 'name'   : $select->order('listings.title ASC'); break;
                     case 'free'   : $select->where('listings.price = ?',0); break;
                     case 'rating' : $select->order('listings.loves DESC');break;
-                    case 'lowest' : $select->where('listings.price <> ?',0);
+                    case 'lowest' : $select->where('listings.price <> 0');
                         $select->order('listings.price ASC'); break;
-                    case 'highest': $select->where('listings.price <> ?',0);
+                    case 'highest': $select->where('listings.price <> 0');
                         $select->order('listings.price DESC'); break;
+                    case 'random' : $select->order('rand(0.553)'); break;
                     default: break;
                 }} else {
                     $select->order('listings.price DESC');
@@ -636,6 +714,8 @@ class WS_ListingService {
                 if(is_int($_stars) && $_stars > 0 && $_stars < 6){
                     $select->where('listings.rate = ?', $_stars);
                 }}
+                
+           $select->order('listings.main_type');
 
            $select->joinLeft('vendors','listings.vendor_id = vendors.id',array('vendor_name'=>'name'));
            
@@ -672,10 +752,10 @@ class WS_ListingService {
        return $listings;
     }
     
-    public  function getListingsCount($place, $cat, $subcat, $sort, $stars, $pricemin = 0, $pricemax = 3000, $country = null, $page = 1)
+    public  function getListingsCount($place, $cat, $subcat, $sort, $stars, $pricemin = 0, $pricemax = 1500, $country = null, $page = 1)
     {
         $args = func_get_args();
-        $cacheId = "LS_getListings2_".md5(print_r($args, true));
+        $cacheId = "LS_getListingsCount_".md5(print_r($args, true));
         
         if(true){//$this->use_cache || !$this->cache->test($cacheId)) {
             
@@ -725,12 +805,15 @@ class WS_ListingService {
                     case 'name'   : $select->order('listings.title ASC'); break;
                     case 'free'   : $select->where('listings.price = ?',0); break;
                     case 'rating' : $select->order('listings.loves DESC');break;
-                    case 'lowest' : $select->where('listings.price <> ?',0);
+                    case 'lowest' : $select->where('listings.price <> 0');
                         $select->order('listings.price ASC'); break;
-                    case 'highest': $select->where('listings.price <> ?',0);
+                    case 'highest': $select->where('listings.price <> 0');
                         $select->order('listings.price DESC'); break;
+                    case 'random' : $select->order('rand(0.553)'); break;
                     default: break;
-                }}
+                }} else {
+                    $select->order('listings.price DESC');
+                }
             if($stars != 'all'){
                 $_stars = (int) str_replace('-stars','',$stars);
                 if(is_int($_stars) && $_stars > 0 && $_stars < 6){
@@ -745,11 +828,12 @@ class WS_ListingService {
            ));
            $select->join(array('places2'=>'places'),'listings.country_id = places2.id', array(
                'country'=>'title',
-               'countryidf'=>'identifier'
+               'countryidf'=>'identifier',
+               'countrycode' => 'code'
            ));
            //print $select->assemble(); //die;
 
-           //$count = 9;
+           //$count = 15;
            //$offset = $count * ($page - 1);
            //$select->limit($count, $offset);
 
@@ -761,6 +845,7 @@ class WS_ListingService {
            //echo $select->assemble(); die;
            
            $listings = $db->fetchAll($select, array(), Zend_Db::FETCH_OBJ);
+           
            
            if($this->use_cache)
                $this->cache->save($listings, $cacheId, array(), 86400);
@@ -1703,87 +1788,6 @@ class WS_ListingService {
         $row = $this->listings->fetchRow($select);
         
         return $row->title;
-    }
-    
-    public function countListings($city, $vendor = null, $country = null)
-    {
-        if(!is_null($city)){
-            $db = Zend_Db_Table::getDefaultAdapter();
-            $cats = $this->getMainCategories();
-            
-            $r = 25 / 111;
-            $latmin = $city->lat - $r;
-            $latmax = $city->lat + $r;
-
-            $lngmin = $city->lng - $r;
-            $lngmax = $city->lng + $r;            
-            
-            $counter = array();
-            foreach($cats as $cat){
-                if($cat->name == 'All'){
-                    $select = $db->select();
-                    $select->from('listings', array('c'=>'count(*)'));
-
-                    $select->where("((lat >= ?", $latmin);
-                    $select->where("lat <= ?", $latmax);
-                    $select->where("lng >= ?", $lngmin);
-                    $select->where("lng <= ?)", $lngmax);
-                    
-                    $select->orWhere('city_id = ?)', $city->id);
-                    
-                    $select->where('status = 1');
-                    
-                    $count = $db->fetchRow($select);
-                    $counter[$cat->id] = $count['c'];
-                    
-                    //var_dump($select->assemble()); die;
-                } else {
-                    $select = $db->select();
-                    $select->from('listings', array('c'=>'count(*)'));
-
-                    $select->where("((lat >= ?", $latmin);
-                    $select->where("lat <= ?", $latmax);
-                    $select->where("lng >= ?", $lngmin);
-                    $select->where("lng <= ?)", $lngmax);
-                    
-                    $select->orWhere('city_id = ?)', $city->id);
-                    
-                    $select->where('main_type = ?', $cat->id);
-                    
-                    $select->where('status = 1');
-
-                    $count = $db->fetchRow($select);
-                    $counter[$cat->id] = $count['c'];
-                }
-            }
-            return $counter;
-        } elseif(!is_null($vendor)){
-            $db = Zend_Db_Table::getDefaultAdapter();
-            
-            $sql     = "Select count(*) as c from listings where vendor_id = {$vendor} and status = 1";
-            $count   = $db->fetchRow($sql);
-            $counter = $count['c'];
-            
-            return $counter;
-        } elseif(!is_null($country)){
-            $db = Zend_Db_Table::getDefaultAdapter();
-            $cats = $this->getMainCategories();
-            $counter = array();
-            foreach($cats as $cat){
-                if($cat->name == 'All'){
-                    $sql = "Select count(*) as c from listings where country_id = {$country} and status = 1";
-                    $count = $db->fetchRow($sql);
-                    $counter[$cat->id] = $count['c'];
-                } else {
-                    $sql = "Select count(*) as c from listings where country_id = {$country} and main_type = {$cat->id} and status = 1";
-                    $count = $db->fetchRow($sql);
-                    $counter[$cat->id] = $count['c'];
-                }
-            }
-            return $counter;
-        } else {
-            throw new Exception();
-        }
     }
     
     public function getListingForCart($data)

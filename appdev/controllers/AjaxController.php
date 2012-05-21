@@ -1359,14 +1359,12 @@ class AjaxController extends Zend_Controller_Action
                 $trips = $this->trips->getFutureTripsBy($user->id, true);
                 $this->view->trips = $trips; 
             }
-            
-                $this->view->user  = $user;
-         
+            $this->view->user  = $user;
         }
         
         $cat      = $this->_getParam('category', 'activities');
         $subcat   = $this->_getParam('cats', 'all');
-        $sort     = $this->_getParam('sort', 'highest');
+        $sort     = $this->_getParam('sort', 'random');
         $stars    = $this->_getParam('stars', 'all');
         $pricemax = $this->_getParam('pricemax', 1500);
         $pricemin = $this->_getParam('pricemin', 0);
@@ -1397,10 +1395,11 @@ class AjaxController extends Zend_Controller_Action
         $categories  = $this->listings->getMainCategories(true);
         
         $sortOptions = array(
-            'highest' => 'Highest Price',
-            'lowest' => 'Lowest Price',
-            'free' => 'Free',
+            '' => 'Select',
             'popular' => 'Most Popular',
+            'lowest' => 'Lowest Price',
+            'highest' => 'Highest Price',
+            'free' => 'Free',
         );
         
         $this->view->activeSort = $sort;
@@ -1459,18 +1458,18 @@ class AjaxController extends Zend_Controller_Action
                 $trips = $this->trips->getFutureTripsBy($user->id, true);
                 $this->view->trips = $trips; 
             }
-                $this->view->user  = $user;
+            $this->view->user  = $user;
          
         }
         
         $cat      = $this->_getParam('category', 'activities');
         $subcat   = $this->_getParam('cats', 'all');
-        $sort     = $this->_getParam('sort', 'newest');
+        $sort     = $this->_getParam('sort', 'random');
         $stars    = $this->_getParam('stars', 'all');
         $pricemax = $this->_getParam('pricemax', 3000);
         $pricemin = $this->_getParam('pricemin', 0);
-        $page = $this->_getParam('page', 1);
         
+        $page = $this->_getParam('page', 1);
         $images = array(
             'all' => 'All-Small-0',
             'activities' => 'All-Activities-0',
@@ -1496,13 +1495,11 @@ class AjaxController extends Zend_Controller_Action
         $categories  = $this->listings->getMainCategories(true);
         
         $sortOptions = array(
-            'newest' => 'Newest',
+            '' => 'Select',
             'popular' => 'Most Popular',
-            'name' => 'Name',
-            'free' => 'Free',
             'lowest' => 'Lowest Price',
             'highest' => 'Highest Price',
-            'rating' => 'Rating' 
+            'free' => 'Free',
         );
         
         $subcategories = null;
