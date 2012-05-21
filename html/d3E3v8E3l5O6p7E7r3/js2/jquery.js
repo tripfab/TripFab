@@ -5344,3 +5344,16 @@ $(function(){
    });
    
 })
+
+$(document).ready(function() {
+	$('.js-cart, .js-cart-B').mouseenter(function() {
+		$('.cart-B').animate({		
+			right: "0"
+		},200 );
+	});
+	$('.js-cart, .js-cart-B').mouseleave(function() {
+		$('.cart-B').animate({		
+			right: "-284px"
+		},200 );
+	});
+});
