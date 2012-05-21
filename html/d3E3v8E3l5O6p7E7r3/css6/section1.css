@@ -2664,12 +2664,14 @@ background: url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat -407
 #src_map {
 	height: 64px;
 	background-color: #FFF;
-	background: url(https://static.tripfab.com/images6/src-resultTop.png) repeat-x 0 0;
+ 	background: url(https://static.tripfab.com/images6/src-resultTop.png) repeat-x 0 0;
+ 	overflow: hidden;
 }
 #src_map .cont {
 	width: 960px;
 	margin: 0 auto;
 	position: relative;
+	height: 64px;
 }
 #src_map .title {
 	width: 470px;
@@ -2686,12 +2688,14 @@ background: url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat -407
 	font: normal 13px Helvetica;
 }
 #src_map .links {
-	float: right;
+	position: absolute;
+	bottom: -1px;
+	right: 0;
 	width: 460px;
 }
 #src_map .links a {
 	display: block;
-	background: url(https://static.tripfab.com/images6/src-resultTab.png) repeat-x bottom left;
+	background: url(https://static.tripfab.com/images6/src-resultTab.png) repeat-x 0 -50px;
 	padding: 0 12px;
 	color: #60b5f7;
 	text-align: center;
@@ -2706,16 +2710,21 @@ background: url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat -407
 	margin:16px 0 0 17px;
 	height: 49px;
 }
+#src_map .links a span {
+	font: normal 11px Helvetica;
+}
 #src_map .links a:hover {
 	color: #60b5f7;
 }
 #src_map .links a.active {
 	background-position: top left;
 	color: #303030;
+	-moz-box-shadow:  0px -2px 6px 0px rgba(121, 121, 121, 0.6);
+	-webkit-box-shadow: 0px -2px 6px 0px rgba(121, 121, 121, 0.6);
+	box-shadow: 0px -2px 6px 0px rgba(121, 121, 121, 0.6); 
 }
 #src_map .links a.active span {
 	color: #898989;
-	font: normal 11px Helvetica;
 }
 /*End top*/
 /*Search result*/
@@ -2747,9 +2756,11 @@ background: url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat -407
 	text-indent: 23px;
 }
 #search_result .no_city p{
-	font: normal 13px/56px Helvetica;
+	font: normal 13px/18px Helvetica;
 	color: #303030;
 	text-shadow: 0 1px 0 #FFF;
+	width: 960px;
+	padding-top: 19px;
 }
 #search_result .no_city a {
 	display: block;

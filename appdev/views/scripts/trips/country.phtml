@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" href="/images3/favicon.png" />
     <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
     <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/section1.css?v=<?= $this->cssVC ?>" />
     <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
     <link type="text/css" rel="stylesheet" href="/css2/trips/country.css?v=<?= $this->cssVC ?>" />
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
@@ -22,12 +23,25 @@
     <?= $this->partial('partials/header.phtml', 
 	array('user'=>$this->user,'full'=>true)); ?>
     
+    <div class="sub_header" id="src_map">
+        <div class="cont">
+            
+            <div class="title">
+            	<h2>Build Your Trip</h2>
+            	<h3>Book activities and hotels, or add things to do to your custom trip</h3>
+            </div>
+            <div class="links">
+            	<a class="active" spellcheckhref="#">Pre-Planned Packages <span>(25)</span></a>
+            	<a href="/costa_rica#/all">Build Your Trip <span>(1,258)</span></a>
+            </div><!--LINKS-->
+            <div class="clear"></div>
+            
+        </div><!--CONT-->
+    </div><!--SUB_HEADER-->
+    
     <div class="w2">
         <div class="wrapper filters">
-            <div class="top">
-               <p>We have <span><?= count($this->trips) ?></span> pre-planed trips to <span>Costa Rica</span></p>
-                <h3><span>Pre-planed Trips are currently available only in Costa Rica</span></h3>
-            </div><!-- closes top -->
+            
             <div class="bottom">
                 <div class="slider-wrapper">
                     Cost per person: <span id="value-1"></span>

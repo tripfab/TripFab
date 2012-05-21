@@ -18,7 +18,7 @@
 <div id="header">
     <div class="wrapper">
         <h1 class="logo"><a href="/">Tripfab</a></h1>
-        <ul>
+        <!--<ul>
             <li><a class="<?= $class3 ?>" href="/"><span>Home</span></a></li>
             <li><a class="<?= $class1 ?>" href="/trips/costa_rica"><span>Pre-Planned Trips</span></a></li>
             <?php if(!$this->user): ?>
@@ -26,11 +26,23 @@
             <?php else: ?>
             <li><a class="<?= $class2 ?>" href="/user/trips"><span>My Trips</span></a></li>
             <?php endif ?>
-        </ul>
+        </ul>-->
+        <div class="top_search">
+            <form method="post" action="/costa_rica">
+                <fieldset>
+                    <input id="citiesSearch" type="text" value="Search Places"/>
+                    <a href="" class="srcBtn">Search</a>
+                    <div id="note3" class="note"><em></em>
+                       	<p class="flag">We have listings only in <strong>Costa Rica</strong>, other countries coming soon.</p>
+                    	</div><!--NOTE1-->
+                    <div id="note4" class="note"><em></em>
+                    	<p><strong>0 Results. </strong>You know we work just in Costa Rica. Right?</p>
+                    </div><!--NOTE2-->
+                </fieldset>
+            </form>
+        </div><!--TOP_SEARCH-->
         <div class="rg">
-            <div class="phone">
-                <span>Customer Service</span> <strong>1-866-401-0382</strong>
-            </div><!--PHONE-->
+            
             <?php if(!$this->user): ?>
             <div class="login js-header-login js-div-signin js-form-container">
                 <span class="arrow"></span>
@@ -109,25 +121,16 @@
 				<?php break; endswitch ?>
             </div><!--USER-MENU-->
             <?php endif ?>
-            <div class="top_search">
-                <form method="post" action="/costa_rica">
-                    <fieldset>
-                        <input id="citiesSearch" type="text" value="Search Places"/>
-                        <div id="note3" class="note"><em></em>
-                           	<p class="flag">We have listings only in <strong>Costa Rica</strong>, other countries coming soon.</p>
-                        	</div><!--NOTE1-->
-                        <div id="note4" class="note"><em></em>
-                        	<p><strong>0 Results. </strong>You know we work just in Costa Rica. Right?</p>
-                        </div><!--NOTE2-->
-                    </fieldset>
-                </form>
-            </div><!--TOP_SEARCH-->
+  
             <?php if(!$this->user): ?>
             <div class="sign_in"><a class="js-header-signin" href="/login">Sign In<span class="aw"></span></a></div>
             <?php else: ?>
             <div id="logged_in"><a class="js-header-account" href="/login">My Account<span class="aw"></span></a></div><!--LOGGED_IN-->
             <?php endif ?>
             <div class="overlay js-menu-overlay-login"></div>
+            <div class="phone">
+                <span>Customer Service</span> <strong>1-866-401-0382</strong>
+            </div><!--PHONE-->
         </div><!--RG-->
     </div><!--WRAPPER-->
 </div><!--HEADER-->

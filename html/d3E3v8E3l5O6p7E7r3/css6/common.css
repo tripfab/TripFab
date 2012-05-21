@@ -1,7 +1,8 @@
 /*- HEADER STYLES---------------------------------------------------------------*/
 #header {
-	height: 62px;
-	background: url(https://static.tripfab.com/images6/header.png) repeat-x 0 0;
+	height: 78px;
+	/*background: url(https://static.tripfab.com/images6/header.png) repeat-x 0 0;*/
+	background-color: #303030;
 	position: relative;
 	z-index: 999;
 }
@@ -12,7 +13,7 @@
 #header h1{
 	float: left;
 	width: 102px;
-	padding-top: 15px;
+	padding-top: 23px;
 	margin-right: 24px;
 }
 #header > .wrapper > ul {
@@ -57,8 +58,8 @@
 }
 #header .rg {
 	position: absolute;
-	height: 62px;
-	width: 530px;
+	height: 78px;
+	width: 330px;
 	top: 0;
 	right: 0;
 }
@@ -107,7 +108,7 @@
 #header .login {
 	position: absolute;
 	top: 48px;
-	right: 296px;
+	right: -42px;
 	width: 235px;
 	min-height: 206px;
 	display: none;
@@ -339,32 +340,34 @@
 	color: #F26522;
 }
 #header .top_search {
-	float: right;
-	width: 200px;
+	float: left;
+	width: 490px;
 	position: relative;
-	height: 62px;
+	height: 45px;
 	padding:0 10px;
-	background: url("https://developer.tripfab.com/images6/header.png") repeat-x scroll 0 -124px transparent;
+	border-left: 1px solid #3a3a3a;
+	margin-top: 17px;
 }
 #header .top_search input[type="text"] {
-	background: url(https://static.tripfab.com/images6/header_icons.png) repeat-x -106px -10px #393939;
-	color: #D7D7D7;
+	/*background: url(https://static.tripfab.com/images6/header_icons.png) repeat-x -106px -10px #FFF;*/
+	color: #898989;
     display: block;
-    font: 200 12px/27px Helvetica;
-    height: 25px;
-    margin: 16px 0 0 0;
+    font:200 italic 13px/27px Helvetica;
+    height: 30px;
+    margin: 5px 0 0 0;
     padding: 2px 25px 0 7px;
-    width: 165px;
+    float: left;
+    width: 413px;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
-	border: 1px solid #181818;
+	border: 1px solid #FFF;
 	-webkit-box-shadow:0 1px 0px 0px #2d2d2d;
 	-moz-box-shadow:0 1px 0px 0px #2d2d2d;
 	box-shadow:0 1px 0px 0px #2d2d2d;
 	behavior: url(/PIE.htc);
 }
-#header .top_search input[type="text"]:hover{
+/*#header .top_search input[type="text"]:hover{
 	border-color: #181818 !important;
     box-shadow:none !important;
     background-color: #464646;
@@ -372,7 +375,7 @@
     -moz-box-shadow:0 1px 0px 0px #2d2d2d !important;
     box-shadow:0 1px 0px 0px #2d2d2d !important;
     behavior: url(/PIE.htc);
-}
+}*/
 
 #header .top_search input[type="text"]:focus {
 	border-color: #addeff !important;
@@ -384,11 +387,22 @@
 	box-shadow:0 0px 5px 0px #addeff !important;
 	behavior: url(/PIE.htc);
 }
+#header .top_search .srcBtn {
+	width: 43px;
+	height: 34px;
+	display: block;
+	text-indent: -99999px;
+	float: left;
+	margin: 5px 0 0 -43px;
+	background: url(https://static.tripfab.com/images6/header_srcBtn.png) no-repeat 0 0;
+	border: none;
+}
 #header .rg .phone {
 	width: 130px;
 	text-align: right;
 	float: right;
-	padding-top: 15px;
+	padding-top: 23px;
+	margin-right: 10px;
 }
 #header .rg .phone span {
 	color: #fbd668;
@@ -406,6 +420,8 @@
 #header .rg .sign_in {
 	float: right;
 	margin-right: 10px;
+	background-color: #282828;
+	padding:0 13px;
 }
 #header .rg .sign_in a {
 	color: #60b5f7;
@@ -417,11 +433,14 @@
 #header #logged_in {
 	float: right;
 	padding-right: 10px;
+	background-color: #282828;
+	padding: 0 13px;
+	height: 78px;
 }
 #header #logged_in a{
 	color: #FFF;
 	background: url(https://static.tripfab.com/images6/headerLoggedIn.png) no-repeat 0 0;
-	font: 200 11px/62px Helvetica;
+	font: 200 11px/78px Helvetica;
 	text-shadow: 0 1px 0 #000000;
 	padding-left: 14px;
 }
