@@ -94,7 +94,7 @@ $(function(){
             $(this).next('input').addClass('hidden');
         }
     });
-	$('.lbc').fancybox({
+	$('.lbc, .js-index-cities').fancybox({
 	    overlayColor:'#fff',
 	    overlayOpacity:0.7,
 	    centerOnScroll:1,

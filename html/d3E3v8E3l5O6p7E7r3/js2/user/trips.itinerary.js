@@ -411,8 +411,8 @@ $(document).ready(function() {
     	dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
     	showOtherMonths: true
     });
-    $(".w3_itinerary .tocheckout.deny").live('hover', function() {
-    	$(".w3_itinerary .warning").toggleClass('hidden');
+    $(".w3.browseTrips .tocheckout.deny").live('hover', function() {
+    	$(".w3.browseTrips .warning").toggleClass('hidden');
     	return false
     });
     

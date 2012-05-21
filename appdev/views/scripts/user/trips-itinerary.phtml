@@ -19,7 +19,58 @@
 <body>
 <div class="w1 itineraries">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
-    <div class="w3_itinerary">
+    
+    <div class="w3 browseTrips">
+        <div class="wrapper">
+        	<div class="cntrl">
+        	    <ul class="breadcrump">
+        	        <li class="first"><a href="/" class="home"></a></li>
+        	        <li><a href="/trips/costa_rica#/all">Pre-Planned Trips</a></li>
+        	        <li class="last"><a class="active" href="/costa_rica">Costa Rica</a></li>
+        	    </ul>
+        	    <a href="/trips/costa_rica" class="link1">&larr; Back to Browse Itineraries</a>
+        	    <div class="clear"></div>
+        	</div><!--CNTRL-->
+        	
+        	<div class="cont">
+        		<div class="left">
+        			<h3 class="ttl1"><?= $this->trip->title ?> <a href="#rename-trip" class="lbc link1">Rename Itinerary</a></h3>
+        		</div><!--LEFT-->
+        		<div class="right">
+        			<?php if($this->tocheckout): ?>
+        			<a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1 tocheckout">Proceed to Checkout</a>
+        			 <div class="warning hidden">
+        			 	<h3>You can't checkout</h3>
+        			 	<p>You must to add something to do to your itinerary before checkout</p>
+        			 </div><!--WARNING-->
+        			<?php else: ?>
+        			<a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1 deny tocheckout">Proceed to Checkout</a>
+        			 <div class="warning hidden">
+        			 	<h3>You can't checkout</h3>
+        			 	<p>You must to add something to do to your itinerary before checkout</p>
+        			 </div><!--WARNING-->
+        			 <?php endif ?>
+        			<div class="price">	
+        				<span><?= $this->formatnumber($this->trip->price) ?></span>
+        				<sup>$</sup>
+        				<sub class="tripCost">Trip Cost</sub>
+        			</div><!--PRICE-->
+        			<div class="clear"></div>
+        		</div><!--RIGHT-->
+        		<div class="clear"></div>
+        	</div><!--CONT-->
+        </div><!--WRAPPER-->
+    </div><!--W3 BROWSE TRIPS-->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!--<div class="w3_itinerary">
         <div class="wrapper">
             <h2><?= $this->trip->title ?> <a href="#rename-trip" class="lbc">Rename Itinerary</a></h2>
             <?php if($this->tocheckout): ?>
@@ -27,20 +78,30 @@
              <div class="warning hidden">
              	<h3>You can't checkout</h3>
              	<p>You must to add something to do to your itinerary before checkout</p>
-             </div><!--WARNING-->
+             </div><!--WARNING--*>
             <?php else: ?>
             <a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1 deny tocheckout">Proceed to Checkout</a>
              <div class="warning hidden">
              	<h3>You can't checkout</h3>
              	<p>You must to add something to do to your itinerary before checkout</p>
-             </div><!--WARNING-->
+             </div><!--WARNING--*>
              <?php endif ?>
              <a href="#dates_lbx" class="btn-10 lb dates">Change Travel Dates</a>
-        </div><!--WRAPPER-->
-    </div><!--w3_itinerary-->
+        </div><!--WRAPPER--*>
+    </div><!--w3_itinerary--*>-->
+    
+    
+    
+    
+    
+    
+    
     <div class="title_itinerary">
-        <h3>Itinerary Manager</h3>
-        <a href="/user/trips">&larr; Back to My Future Trips</a>
+        <div class="hdr">
+        	<?php $time = strtotime($this->trip->start); ?>
+            <?php $daytime = $time + ($i * 86400) ?>
+        	<span>Day <?= $i+1 ?></span> <?= date('F jS, Y', $daytime) ?>
+        </div><!-- closes hdr -->
     </div><!--title_itinerary-->
     <div class="w2">
         <div class="wrapper user-messages user-trips no-over">
@@ -109,11 +170,7 @@
                 	
                 	<?php for($i=0; $i<$this->trip->days; $i++): ?>
                     <div class="slide">
-                        <div class="hdr">
-                        	<?php $time = strtotime($this->trip->start); ?>
-                            <?php $daytime = $time + ($i * 86400) ?>
-							<span>Day <?= $i+1 ?></span> <?= date('F jS, Y', $daytime) ?>
-                        </div><!-- closes hdr -->
+                        
                         <div class="itinerary-items">
                         	<?php foreach($this->days[$i+1] as $time => $listings): ?>
                             <?php if(!empty($time) and $time != 'stay'): ?>
@@ -189,7 +246,7 @@
                     </div><!-- closes slide -->
                     <?php endfor ?>
                 </div><!-- closes slider -->	
-                <div class="bottom">
+               <!-- <div class="bottom">
                     <span>Trip Estimate</span>
                     <strong id="tripprice">$<?= $this->formatnumber($this->trip->price) ?></strong>
                     <?php if($this->tocheckout): ?>
@@ -197,15 +254,15 @@
                     <div class="warning hidden">
                     	<h3>You can't checkout</h3>
                     	<p>You must to add something to do to your itinerary before checkout</p>
-                    </div><!--WARNING-->
+                    </div><!--WARNING--*>
                     <?php else: ?>
                     <a  href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1 deny tocheckout">Proceed to Checkout</a>
                     <div class="warning hidden">
                     	<h3>You can’t checkout</h3>
                     	<p>You must to add something to do to your itinerary before checkout</p>
-                    </div><!--WARNING-->
+                    </div><!--WARNING--*>
                     <?php endif ?>
-                </div><!-- closes bottom -->
+                </div><!-- closes bottom --*>-->
             </div><!-- closes itinerary-wrapper -->
         </div><!-- closes user-messages -->
     </div><!-- closes w2 -->

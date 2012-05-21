@@ -66,7 +66,14 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
 <div class="sort"><h3>There are <strong><?= $this->listing_count ?> <?= $this->categ ?> in <?= $this->country->title ?></strong></h3><span class="shw"></span></div><!--SORT-->
 <?php endif ?>
 <div class="results-wrapper">
-
+	
+<?php if(!$this->city): ?>
+<div class="no_city">
+	<p><strong>Too many listings?</strong> You can narrow these down by selecting a specific city instead of a whole country.</p>
+	<a href="#cityExplore" class="js-index-cities">Select a Costa Rica City</a>
+</div><!--NO_CITY-->
+<?php endif ?>	
+	
 <?php if(count($this->listings) > 0): ?>
 <?php if(!isset($_COOKIE['tooltipHelpSearch'])): ?>
 <div class="firstime_tip">
