@@ -98,6 +98,56 @@
             </form>
         </div><!-- closes lb-forgot -->
     </div>
+    
+	<div id="newtrip">
+    	<div id="create_trip">
+			<form action="">
+                <div class="top">
+                    <h3>Create a New Trip</h3>
+                    <p>Complete the information below to start your next trip</p>
+                </div><!--TOP-->
+                <div class="cont">
+                    <fieldset>
+                        <div class="item">
+                            <label class="trip">Trip Name</label>
+                            <input type="text" name="title" value="" />
+                        </div><!--ITEM-->
+                        <div class="item">
+                            <label class="dates">Trip Dates</label>
+                            <input class="start" type="text" name="start" value="Starting Date" />
+                            <input class="end"type="text" name="end" value="Ending Date" />
+                            <label class="check">
+                                <input type="checkbox" class="nodatesyet"/>
+                                I don't know the travel dates yet
+                            </label>
+                        </div><!--ITEM-->
+                        <div class="item temp">
+                        	<label class="travelers">Travelers</label>
+                        	<select name="adults">
+                        		<option value="1">1 Adult</option>
+                                <?php for($i=2;$i<=20;$i++): ?>
+                                <option value="<?= $i ?>"><?= $i ?> Adults</option>
+                                <?php endfor ?>
+                        	</select>
+                        	<select name="kids">
+                        		<option value="">None</option>
+                        		<option value="1">1 Kid</option>
+                                <?php for($i=2;$i<=20;$i++): ?>
+                                <option value="<?= $i ?>"><?= $i ?> Kids</option>
+                                <?php endfor ?>
+                        	</select>
+                        </div><!--ITEM-->
+                    </fieldset>
+                </div><!--CONT-->
+                <div class="bottom">
+                    <input type="submit" class="btn-1 noclean" value="Create Trip" />
+                    <input type="button" onclick="$.fancybox.close(); return false;" class="btn-10 noclean" value="Cancel" />
+                </div><!--BOTTOM-->
+                <input type="hidden" name="trip" value="new" />
+                <input type="hidden" name="listing" value="" />
+            </form>
+		</div><!--CREATE_TRIP-->
+    </div>
 </div><!--HIDDEN-->
 <input type="hidden" name="fbappid" value="<?= $this->facebookid() ?>"/>
 <script type="text/javascript">
@@ -123,5 +173,5 @@ var google_conversion_value = 0;
 </script>
 <script type="text/javascript">
 document.write(unescape("%3Cscript src='" + ((document.location.protocol=="https:")?"https://snapabug.appspot.com":"http://www.snapengage.com") + "/snapabug.js' type='text/javascript'%3E%3C/script%3E"));</script><script type="text/javascript">
-SnapABug.addButton("12926583-ebae-4874-8f3e-57cbe2114ebc","1","55%");
+SnapABug.addButton("12926583-ebae-4874-8f3e-57cbe2114ebc","0","55%");
 </script>
