@@ -58,7 +58,7 @@
 #header .rg {
 	position: absolute;
 	height: 78px;
-	width: 330px;
+	width: 360px;
 	top: 0;
 	right: 0;
 }
@@ -1531,11 +1531,12 @@
 .lb-forgot .bottom span, .lb-forgot .bottom input {
 	float: right;
 	cursor: pointer;
+	height: 32px;
+	line-height: 32px;
 }
-
-
-.lb-forgot .bottom input {
-	height: 25px;
-	margin-left: 8px;
-	line-height: 25px;
+.lb-forgot .bottom .btn-1 {
+	border: 1px solid #7AB130;
+	padding: 0 15px;
+	height: 31px;
+	line-height: 31px;
 }

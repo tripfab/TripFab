@@ -101,6 +101,7 @@
         	<?php $time = strtotime($this->trip->start); ?>
             <?php $daytime = $time + ($i * 86400) ?>
         	<span>Day <?= $i+1 ?> of <?= $this->trip->days ?></span> <?= date('F jS, Y', $daytime) ?>
+        	<a href="#dates_lbx" class="lb dates">Change Travel Dates</a>
         </div><!-- closes hdr -->
     </div><!--title_itinerary-->
     <div class="w2">
@@ -242,6 +243,7 @@
                                 </ul>
 								<?php endif ?>
                             </div><!-- closes item -->
+                            <div class="clear"></div>
                         </div><!-- closes itinerary-items -->
                     </div><!-- closes slide -->
                     <?php endfor ?>

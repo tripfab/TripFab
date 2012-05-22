@@ -79,12 +79,12 @@
         			<?= $this->thumbnail(72,$image,'','1:1'); ?>
                     <ul>
                         <!--<li><a href="/user/trips">My Trips</a></li>-->
+                        <li><a href="/user/account" class="account">Account</a></li>
                         <li><a href="/user/messages">Messages</a></li>
                         <li><a href="/user/reservations">Reservations</a></li>
                     </ul>
                 </div><!--MAIN-->
                 <div class="bot">
-                    <a href="/user/account" class="account">Account</a>
                     <a href="/logout" class="sign_out">Sign Out</a>
                 </div><!--BOT-->
 				<?php break; case 3: ?>
@@ -92,6 +92,7 @@
         			<?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
         			<?= $this->thumbnail(72,$image,'','1:1'); ?>
                     <ul>
+                    	<li><a href="/provider/account" class="account">Account</a></li>
                         <li><a href="/provider/listings">Listings</a></li>
                         <li><a href="/provider/messages">Messages</a></li>
                         <li><a href="/provider/reservations">Reservations</a></li>
@@ -100,7 +101,7 @@
                     </ul>
                 </div><!--MAIN-->
                 <div class="bot">
-                    <a href="/provider/account" class="account">Account</a>
+                    
                     <a href="/logout" class="sign_out">Sign Out</a>
                 </div><!--BOT-->
 				<?php break; case 4: ?>
@@ -108,6 +109,7 @@
         			<?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
         			<?= $this->thumbnail(72,$image,'','1:1'); ?>
                     <ul>
+                    	<li><a href="admin" class="account">Account</a></li>
                         <li><a href="/admin/listings">Listings</a></li>
                         <li><a href="/admin/trips">Trips</a></li>
                         <li><a href="/admin/places">Places</a></li>
@@ -117,7 +119,7 @@
                     </ul>    
                 </div><!--MAIN-->
                 <div class="bot">
-                    <a href="admin" class="account">Account</a>
+                    
                     <a href="/logout" class="sign_out">Sign Out</a>
                 </div><!--BOT-->
 				<?php break; endswitch ?>

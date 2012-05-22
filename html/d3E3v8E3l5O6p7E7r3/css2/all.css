@@ -6124,6 +6124,9 @@ h2.title .back:hover,
 	text-align: center;
 
 }
+.title_itinerary .hdr {
+	position: relative;
+}
 .title_itinerary .hdr span {
 	border-right:1px solid #CCC ;
 	padding-right: 10px;
@@ -6476,7 +6479,6 @@ h2.title .back:hover,
 	height: 111px;
 	background: url(https://static.tripfab.com/images2/g_69.png) repeat-x left bottom #303030;
 	padding-top: 20px;
-	overflow: hidden;
 }
 .activities-tabs > ul > li em {
 	color: #898989 ;
@@ -6580,7 +6582,6 @@ h2.title .back:hover,
 }
 .itinerary-items {
 	background: url(https://static.tripfab.com/images6/dragAndDrop.png) no-repeat 712px 5px;
-	overflow: hidden;
 	padding: 20px 21px 17px;
 }
 
@@ -7006,6 +7007,12 @@ h2.title .back:hover,
 	color: #60b5f7;
 	font: bold 11px Helvetica;
 	float: right;
+}
+.title_itinerary a.dates {
+	display: block;
+	position: absolute;
+	top: 17px;
+	right: 0px;
 }
 .itineraries .warning {
 	background: url(https://static.tripfab.com/images6/itinerary-tooltip.png) no-repeat top left;
@@ -19629,6 +19636,7 @@ h2.title .back:hover,
 	background:url(https://static.tripfab.com/images2/404-wave.png) repeat-x;
 	position:relative;
 	text-align:center;
+	z-index: 10;
 }
 #errorpage .bottom .island {
 	width:793px;
@@ -19740,6 +19748,7 @@ h2.title .back:hover,
 	left:-451px !important;
 	top:44px !important;
 	z-index: 1000 !important;
+	text-align: left;
 }
 
 #errorpage #citiesAutocompleteContainerError .ui-autocomplete li a {

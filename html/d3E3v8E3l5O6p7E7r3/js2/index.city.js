@@ -561,7 +561,11 @@ $(document).ready(function() {
     });
 });
 
-
+//$(document).ready(function() {
+//	if( $('.no_city').is(":visible")) {
+//		$('.firstime_tip').css('top', '88px');
+//	}
+//});
 
 
 

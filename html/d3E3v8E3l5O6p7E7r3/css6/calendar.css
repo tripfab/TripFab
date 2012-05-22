@@ -167,6 +167,15 @@
 	text-shadow: 0px 1px 0px #85c0e9;
 	display: block;
 }
+#calendar .datepickerDays td.datepickerDisabled a {
+	color: #ACACAC;
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 0.2em;
+    text-align: center;
+    text-decoration: none;
+}
 #calendar .datepickerViewDays td a:hover {
 	background-color: #303030;
 	color: #FFFFFF;

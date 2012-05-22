@@ -1,5 +1,8 @@
 $(document).ready(function() {
     
+    
+    
+    
     var assigned_listings = 0;
     $('.itinerary-wrapper .slider .slide .itinerary-items ul li:not(.empty)').each(function(){
         assigned_listings++;
@@ -49,13 +52,22 @@ $(document).ready(function() {
             }
         }
     });
-    
+    function onAfter(curr, next, opts, fwd) {
+        var index = opts.currSlide;
+        //get the height of the current slide
+        var $ht = $(this).height();
+        //set the container's height to that of the current slide
+        $(this).parent().animate({
+        	height: $ht
+        });
+    }
     $('.slider').cycle({
         fx:     'fade', 
         speed:  'fast', 
         timeout: 0,
         next:   '.next', 
-        prev:   '.prev'
+        prev:   '.prev',
+        after: onAfter
     });
 	
     $( ".tab ul li" ).each(function(){
