@@ -171,12 +171,20 @@ $(document).ready(function() {
         
     $('#datepicker').wrap('<div id="calendar" class="trips"></div>');
     
+    $ddate = $.datepicker.formatDate('yy-mm-dd',new Date());
+    
+    now = new Date();
+    
     $("#datepicker").DatePicker({
         flat: true,
-        date: '2008-07-31',
         calendars: 1,
         mode:'range',
+        date:$ddate,
         starts: 1,
+	onRender: function(date) {
+            $a = date.valueOf() < now.valueOf();
+		return {disabled:$a}
+	},
         onChange:function(date){
             var days = parseInt($('#tripDates').val());
             var Start = new Date(date[0]);
@@ -233,11 +241,6 @@ $(document).ready(function() {
             $('select[name=kids]').append('<option value="'+i+'">'+i+'</option>');
 		
     });
-	
-	
-	
-	
-	
 });
 
 
