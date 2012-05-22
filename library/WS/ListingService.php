@@ -652,7 +652,7 @@ class WS_ListingService {
         $args = func_get_args();
         $cacheId = "LS_getListings2_".md5(print_r($args, true));
         
-        if(true){//$this->use_cache || !$this->cache->test($cacheId)) {
+        if($this->use_cache || !$this->cache->test($cacheId)) {
             
             $db = Zend_Db_Table::getDefaultAdapter();
             $select = $db->select();

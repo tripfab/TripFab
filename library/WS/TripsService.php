@@ -56,6 +56,9 @@ class WS_TripsService {
 
         $this->purchases = new Zend_Db_Table('trip_purchases');
         
+        if(Zend_Registry::isRegistered('cache'))
+            $this->cache = Zend_Registry::get('cache');
+        
         $this->use_cache = $use_cache;
     }
 
