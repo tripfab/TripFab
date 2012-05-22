@@ -3133,6 +3133,7 @@ ul.cat-menu li.item-1 a img {
 #search_result .content {
 	width: 770px;
 	float: right;
+	position: relative;
 }
 #search_result .results-wrapper {
 	padding-bottom: 20px !important	;
@@ -3345,14 +3346,24 @@ width: 90px;
 float: right;
 margin: 10px 10px 0 0;
 }
+#search_result .single .price span {
+	display: block;
+	float: right;
+	height: 30px;
+	text-align: right;
+	vertical-align: text-top;
+}
 #search_result .single .price sup {
-vertical-align: top;
-font-size:16px ;
+	font-size:16px;
+	height: 16px;
+	float: right;
+	display: block;
 }
 #search_result .single .price sub {
-font: normal 11px Helvetica;
-text-align: right;
-display: block;
+	font: normal 11px Helvetica;
+	text-align: right;
+	display: block;
+	clear: both;
 }
 
 /*HOTEL 1*/

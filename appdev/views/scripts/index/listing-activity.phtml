@@ -602,49 +602,54 @@
         </div><!--SEND_MESSAGE-->
         <div id="start_call">
             <div id="dialpad" class="lb">
-                <div class="top">Dial your phone number</div><!--TOP-->
-                <div class="middle">
-                    <p>We'll connect you with the vendor in few minutes. Directly.</p>
-                    <div class="number-display">
-                        <a href="#" class="flag"><img src="https://static.tripfab.com/images2/flags/us.png" width="16" height="16" alt="" /></a>
-                        <div class="all_flags">
-                            <a href="#" class="up" onMouseover="move('container',10)" onMouseout="clearTimeout(move.to)"></a>
-                            <a href="#" class="down" onMouseover="move('container',-10)" onMouseout="clearTimeout(move.to)"></a>
-                            <div class="holder">
-                                <div id="container" style="position:absolute;width:282px;left:0;top:0">
-                                    <p>ALL COUNTRIES</p>
-                                    <?php foreach($this->countries as $c): ?>
-                                    <a href="#" data-code="<?= $c->phone ?>"><img src="https://static.tripfab.com/images2/flags/<?= strtolower($c->code) ?>.png" width="16" height="16" alt="" />
-                                    <?= $c->title ?> <strong>(+<?= $c->phone ?>)</strong></a>
-                                    <?php endforeach ?>
-                                </div><!--CONTAINER-->
-                            </div><!--HOLDER-->
-                        </div><!--ALL_FLAGS-->
-                        <span class="code">(+1)</span>
-                        <a href="" class="close"></a>
-                        <input type="text" name="number" value="" />
-                        <input type="hidden" name="code" value="1" />
-                        <div class="clear"></div>
-                    </div><!--NUMBER-DISPLAY-->
-                    <div class="numbers">
-                        <a data-num="1" href="">1</a>
-                        <a data-num="2" href="">2<span>ABC</span></a>
-                        <a data-num="3" href="">3<span>DEF</span></a>
-                        <a data-num="4" href="">4<span>GHI</span></a>
-                        <a data-num="5" href="">5<span>JKL</span></a>
-                        <a data-num="6" href="">6<span>MNO</span></a>
-                        <a data-num="7" href="">7<span>PQRS</span></a>
-                        <a data-num="8" href="">8<span>TUV</span></a>
-                        <a data-num="9" href="">9<span>WXYZ</span></a>
-                        <a data-num="*" href="">*</a>
-                        <a data-num="0" href="">0</a>
-                        <a data-num="#" href="">#</a>
-                    </div><!--NUMBERS-->
-                    <div class="control">
-                        <input type="button" name="start" class="btn-1" value="Start Call" />
-                        <input type="button" name="Cancel"  class="cancel" value="Cancel" />
-                    </div><!--CONTROL-->
-                </div><!--MIDDLE-->
+            	<div class="top"></div><!--TOP-->
+            	<div class="left">
+            		
+            	</div><!--LEFT-->
+                <div class="right">
+                	<div class="middle">
+                		
+                		<div class="number-display">
+                			<a href="#" class="flag"><img src="https://static.tripfab.com/images2/flags/us.png" width="16" height="16" alt="" /></a>
+                			<div class="all_flags">
+                				<a href="#" class="up" onMouseover="move('container',10)" onMouseout="clearTimeout(move.to)"></a>
+                				<a href="#" class="down" onMouseover="move('container',-10)" onMouseout="clearTimeout(move.to)"></a>
+                				<div class="holder">
+                					<div id="container" style="position:absolute;width:282px;left:0;top:0">
+                						<p>ALL COUNTRIES</p>
+                						<?php foreach($this->countries as $c): ?>
+                						<a href="#" data-code="<?= $c->phone ?>"><img src="https://static.tripfab.com/images2/flags/<?= strtolower($c->code) ?>.png" width="16" height="16" alt="" />
+                						<?= $c->title ?> <strong>(+<?= $c->phone ?>)</strong></a>
+                						<?php endforeach ?>
+                					</div><!--CONTAINER-->
+                				</div><!--HOLDER-->
+                			</div><!--ALL_FLAGS-->
+                			<span class="code">(+1)</span>
+                			<a href="" class="close"></a>
+                			<input type="text" name="number" value="" />
+                			<input type="hidden" name="code" value="1" />
+                			<div class="clear"></div>
+                		</div><!--NUMBER-DISPLAY-->
+                		<div class="numbers">
+                			<a data-num="1" href="">1</a>
+                			<a data-num="2" href="">2<span>ABC</span></a>
+                			<a data-num="3" href="">3<span>DEF</span></a>
+                			<a data-num="4" href="">4<span>GHI</span></a>
+                			<a data-num="5" href="">5<span>JKL</span></a>
+                			<a data-num="6" href="">6<span>MNO</span></a>
+                			<a data-num="7" href="">7<span>PQRS</span></a>
+                			<a data-num="8" href="">8<span>TUV</span></a>
+                			<a data-num="9" href="">9<span>WXYZ</span></a>
+                			<a data-num="*" href="">*</a>
+                			<a data-num="0" href="">0</a>
+                			<a data-num="#" href="">#</a>
+                		</div><!--NUMBERS-->
+                		<div class="control">
+                			<input type="button" name="start" class="btn-1" value="Start Call" />
+                			<input type="button" name="Cancel"  class="cancel" value="Cancel" />
+                		</div><!--CONTROL-->
+                	</div><!--MIDDLE-->
+                </div><!--RIGHT-->
             </div><!--DIALPAD-->
         </div>
         <div id="newtrip">
