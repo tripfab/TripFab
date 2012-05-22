@@ -42,7 +42,7 @@ class SessionController extends Zend_Controller_Action {
                 case 1:
                     $this->_redirect('/'); break;
                 case 2:
-                    $this->_redirect('/user/trips'); break;
+                    $this->_redirect('/'); break;
                 case 3:
                     $this->_redirect('/provider'); break;
                 case 4:
@@ -93,7 +93,7 @@ class SessionController extends Zend_Controller_Action {
                     case 1:
                         $this->_redirect('/'); break;
                     case 2:
-                        $this->_redirect('/user/trips'); break;
+                        $this->_redirect('/'); break;
                     case 3:
                         $this->_redirect('/provider'); break;
                     case 4:

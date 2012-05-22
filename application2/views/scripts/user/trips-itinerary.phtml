@@ -19,7 +19,6 @@
 <body>
 <div class="w1 itineraries">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
-    
     <div class="w3 browseTrips">
         <div class="wrapper">
         	<div class="cntrl">
@@ -98,10 +97,16 @@
     
     <div class="title_itinerary">
         <div class="hdr">
-        	<?php $time = strtotime($this->trip->start); ?>
-            <?php $daytime = $time + ($i * 86400) ?>
-        	<span>Day <?= $i+1 ?> of <?= $this->trip->days ?></span> <?= date('F jS, Y', $daytime) ?>
-        	<a href="#dates_lbx" class="lb dates">Change Travel Dates</a>
+            <div class="daysslider">
+            	<?php for($i=1;$i<=$this->trip->days; $i++): ?>
+				<?php $time = strtotime($this->trip->start); ?>
+                <?php $daytime = $time + ($i * 86400) ?>
+                <div>
+                <span>Day <?= $i ?> of <?= $this->trip->days ?></span> <?= date('F jS, Y', $daytime) ?>
+                </div>
+                <?php endfor ?>
+            </div>
+            <a href="#dates_lbx" class="lb dates">Change Travel Dates</a>
         </div><!-- closes hdr -->
     </div><!--title_itinerary-->
     <div class="w2">

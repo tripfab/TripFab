@@ -1,8 +1,5 @@
 $(document).ready(function() {
-    
-    
-    
-    
+	
     var assigned_listings = 0;
     $('.itinerary-wrapper .slider .slide .itinerary-items ul li:not(.empty)').each(function(){
         assigned_listings++;
@@ -23,7 +20,6 @@ $(document).ready(function() {
 	});
 	
 	$('#ui-datepicker-div').wrap('<div id="calendarContainer"></div>');
-    
     
     $('a.lb, .lbc').fancybox({
         padding:0,
@@ -69,6 +65,13 @@ $(document).ready(function() {
         prev:   '.prev',
         after: onAfter
     });
+	$('.daysslider').cycle({
+        fx:     'fade', 
+        speed:  'fast', 
+        timeout: 0,
+        next:   '.next', 
+        prev:   '.prev',
+	});
 	
     $( ".tab ul li" ).each(function(){
         var $values = {

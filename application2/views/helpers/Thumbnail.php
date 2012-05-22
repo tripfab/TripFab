@@ -17,9 +17,8 @@ class Zend_View_Helper_Thumbnail {
     
     protected $ext;
 
-    public function thumbnail($size, $image, $class='', $cropratio='1:1', $id = null) {
-
-        $this->cacheFolder = APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3/cache/';
+    public function thumbnail($size, $image, $class='', $cropratio='1:1', $id = null) {		
+        $this->cacheFolder = APPLICATION_PATH . '/../html/cache/';
         $this->remoteFolder = $this->cacheFolder . 'remote/';
         
         $imagePath = $this->getImage($image);
@@ -35,6 +34,7 @@ class Zend_View_Helper_Thumbnail {
         $quality = 90; # image quality to use for ImageMagick (0 - 100)
 
         if (file_exists($imagePath) == false):
+			return 'asd';
             $imagePath = $_SERVER['DOCUMENT_ROOT'] . $imagePath;
             if (file_exists($imagePath) == false):
                 return '<img src="' . $imagePath . '" width="' . $width . '" height="' . $height . '" />';
@@ -63,15 +63,10 @@ class Zend_View_Helper_Thumbnail {
         $create = true;
         
         if (file_exists($newPath) == true):
-            
             $create = (getimagesize($newPath) === false) ? true : false;
-        
-            $origFileTime = date("YmdHis", filemtime($imagePath));
-            $newFileTime = date("YmdHis", filemtime($newPath));
-            if ($newFileTime < $origFileTime):
-                $create = true;
-            endif;
         endif;
+		
+		$create = true;
 		
         if ($create == true):
             
@@ -104,20 +99,20 @@ class Zend_View_Helper_Thumbnail {
             if (count($cropRatio) == 2)
             {
                 $ratioComputed		= $width / $height;
-		$cropRatioComputed	= (float) $cropRatio[0] / (float) $cropRatio[1];
+				$cropRatioComputed	= (float) $cropRatio[0] / (float) $cropRatio[1];
                 
                 if ($ratioComputed < $cropRatioComputed)
-		{ // Image is too tall so we will crop the top and bottom
-			$origHeight	= $height;
-			$height		= $width / $cropRatioComputed;
-			$offsetY	= ($origHeight - $height) / 2;
-		}
-		else if ($ratioComputed > $cropRatioComputed)
-		{ // Image is too wide so we will crop off the left and right sides
-			$origWidth	= $width;
-			$width		= $height * $cropRatioComputed;
-			$offsetX	= ($origWidth - $width) / 2;
-		}
+				{ // Image is too tall so we will crop the top and bottom
+					$origHeight	= $height;
+					$height		= $width / $cropRatioComputed;
+					$offsetY	= ($origHeight - $height) / 2;
+				}
+				else if ($ratioComputed > $cropRatioComputed)
+				{ // Image is too wide so we will crop off the left and right sides
+					$origWidth	= $width;
+					$width		= $height * $cropRatioComputed;
+					$offsetX	= ($origWidth - $width) / 2;
+				}
             }
             
             $xRatio		= $maxWidth / $width;
@@ -266,7 +261,7 @@ class Zend_View_Helper_Thumbnail {
 
         # return cache file path
         $id = (is_null($id)) ? '' : 'id="'.$id.'"';
-        return '<img '.$id.' class="' . $class . '" src="' . str_replace(APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3', '', $newPath) . '" width="' . $opts['w'] . '" height="' . $opts['h'] . '" />';
+        return '<img '.$id.' class="' . $class . '" src="' . str_replace(APPLICATION_PATH . '/../html', '', $newPath) . '" width="' . $opts['w'] . '" height="' . $opts['h'] . '" />';
     }
     
     protected function findSharp($orig, $final) // function from Ryan Rud (http://adryrun.com)
@@ -287,7 +282,7 @@ class Zend_View_Helper_Thumbnail {
         $imagePath = $image;
 
         if (!file_exists($imagePath)) {
-            $imagePath = APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3' . $imagePath;
+            $imagePath = APPLICATION_PATH . '/../html' . $imagePath;
             if (!file_exists($imagePath)) {
                 $purl = parse_url($image);
                 $finfo = pathinfo($image);
@@ -299,13 +294,15 @@ class Zend_View_Helper_Thumbnail {
                 endif;
             }
         }
+		
+		
 
         $purl = parse_url($imagePath);
         $finfo = pathinfo($imagePath);
         $this->xet = $finfo['extension'];
 
         # check for remote image..
-        if (isset($purl['scheme']) && ($purl['scheme'] == 'http' || $purl['scheme'] == 'https')):# grab the image, and cache it so we have something to work with..
+        if (isset($purl['scheme']) && ($purl['scheme'] == 'http' || $purl['scheme'] == 'https')):# grab the image, and cache it so we have something to work with.. 
             list($filename) = explode('?', $finfo['basename']);
             $local_filepath = $this->remoteFolder . $filename;
             $imagePath = $this->downloadImage($imagePath, $local_filepath, $force);
@@ -319,7 +316,7 @@ class Zend_View_Helper_Thumbnail {
         $imagePath = $image;
 
         if (!file_exists($imagePath)) {
-            $imagePath = APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3' . $imagePath;
+            $imagePath = APPLICATION_PATH . '/../html' . $imagePath;
             if (!file_exists($imagePath)) {
                 $purl = parse_url($image);
                 $finfo = pathinfo($image);

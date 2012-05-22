@@ -1978,7 +1978,7 @@ class AjaxController extends Zend_Controller_Action
                     $checkin = date('Y-m-d');
                 }
                 
-                if($listing->main_type == 5 and $_GET['checkout'] != 'dd/mm/yyyy')
+                if($listing->main_type == 5 and $_GET['checkout'] != 'dd/mm/yyyy' and !empty($_GET['checkout']))
                     $checkout = $_GET['checkout'];
                 else
                     $checkout = null;

@@ -240,7 +240,7 @@
 /*LISTING ENTERTAIMENT & RESTAURANTS-------------------------------*/
 .bg_wh {
 	background-color: #FFF;
-	background: url(https://static.tripfab.com/images6/lst_bg.png) repeat-x 0 62px #FFF;
+	background: url(https://static.tripfab.com/images6/lst_bg.png) repeat-x 0 82px #FFF;
 }
 .lstng_dflt {
 	width: 960px;
@@ -563,11 +563,15 @@
 	margin-bottom: 6px;
 }
 
-
+#sight.lstng_dflt .container .content {
+	background: none;
+}
 .lstng_dflt .container .content {
 	width: 632px;
 	float: right;
 	margin-bottom: 30px;
+	padding-bottom: 20px;
+	background: url(https://static.tripfab.com/images6/poweredFaF.gif) no-repeat 37px bottom;
 }
 .lstng_dflt .container .payment_optn {
 	font: bold 12px/39px Helvetica;

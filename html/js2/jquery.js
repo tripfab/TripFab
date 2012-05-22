@@ -5392,6 +5392,8 @@ $(document).ready(function() {
     }
     
     $('.js-new-trip').live('click',function(){
+		$val =  $(this).data('listing');
+		$('#newtrip input[name=listing]').val($val);
         $.fancybox({
             href:'#newtrip',
             overlayColor:'#fff',
@@ -5443,6 +5445,7 @@ $(document).ready(function() {
                     $('input, select').removeAttr('disabled');
                     showError(response.message);
                 }
+				$(window).trigger('addtotrip');
             },
             error:function(){
                 $.fancybox.close();

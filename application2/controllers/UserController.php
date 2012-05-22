@@ -684,7 +684,7 @@ class UserController extends Zend_Controller_Action
                 
                 $trip->save();
                 
-                $this->_redirect('/user/trips');
+                $this->_redirect('/user/trips/itinerary/'.$trip->id);
             } catch(Exception $e) {
                 $this->view->error = $e->getMessage();
             }
@@ -1276,7 +1276,7 @@ class UserController extends Zend_Controller_Action
     {
         $id = $this->_getParam($var);
         if(!$this->_isValidId($id))
-                $this->_redirect('user/trips');
+                $this->_redirect('/');
         
         return $id;
     }
@@ -1426,7 +1426,7 @@ class UserController extends Zend_Controller_Action
         if($trip->start == '0000-00-00' || $trip->end == '0000-00-00'){
             $flash = $this->_helper->getHelper('FlashMessenger');
             $flash->addMessage('You need to setup the dates before planing your itinerary');
-            $this->_redirect('/user/trips/');
+            $this->_redirect('/');
         }
         
         $listings  = $this->trips->getItnListingOf($trip->id, false, 'notnull');
