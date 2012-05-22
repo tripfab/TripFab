@@ -4027,12 +4027,12 @@ class AjaxController extends Zend_Controller_Action
 
             $result = array(
                 'type'=>'success',
-                'trip'=>$trip->id
+                'id'=>$trip->id
             );
         } catch(Exception $e) {
             $result = array(
                 'type'=>'error',
-                'error'=>$e->getMessage()
+                'id'=>$e->getMessage()
             );
         }
         
