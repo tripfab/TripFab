@@ -6119,15 +6119,16 @@ h2.title .back:hover,
 
 .wrapper.user-trips .left .hdr, .title_itinerary .hdr {
 	color: #303030;
-	font: bold 15px/45px Helvetica;
+	font: normal 12px/45px Helvetica;
 	padding: 0 21px;
 	text-align: center;
-	background-color: #FFF;
+
 }
 .title_itinerary .hdr span {
 	border-right:1px solid #CCC ;
 	padding-right: 10px;
 	margin-right: 10px;
+	font: bold 18px Helvetica;
 }
 .trip-details {
 	background: url(https://static.tripfab.com/images2/g-3.png) repeat-x scroll 0 0 #FFFFFF;
@@ -6748,9 +6749,10 @@ h2.title .back:hover,
 	font-size: 11px;
 	font-weight: bold;
 	position: absolute;
-	line-height: 45px;
-	top: -231px;
+	line-height: 20px;
+	top: -214px;
 	z-index: 100;
+	height: 20px;
 }
 .slider-controls a:hover {
 	color: ;
@@ -6762,11 +6764,15 @@ h2.title .back:hover,
 .slider-controls a.next {
 	float: right;
 	right: 210px;
+	padding-right: 25px;
+	background: url(https://static.tripfab.com/images6/dragAndDropAw.png) no-repeat right bottom;
 }
 
 .slider-controls a.prev {
 	float: left;
 	left: 210px;
+	background: url(https://static.tripfab.com/images6/dragAndDropAw.png) no-repeat left top;
+	padding-left: 25px;
 }
 
 .offer {
@@ -6986,10 +6992,10 @@ h2.title .back:hover,
 }
 .title_itinerary {
 	overflow: hidden;
-	height: 17px;
+	height: 40px;
 	margin: 0 auto;
 	width: 960px;
-	padding-top: 15px;
+	padding-top: 5px;
 }
 .title_itinerary h3 {
 	color: #303030;

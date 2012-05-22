@@ -100,7 +100,7 @@
         <div class="hdr">
         	<?php $time = strtotime($this->trip->start); ?>
             <?php $daytime = $time + ($i * 86400) ?>
-        	<span>Day <?= $i+1 ?></span> <?= date('F jS, Y', $daytime) ?>
+        	<span>Day <?= $i+1 ?> of <?= $this->trip->days ?></span> <?= date('F jS, Y', $daytime) ?>
         </div><!-- closes hdr -->
     </div><!--title_itinerary-->
     <div class="w2">
@@ -163,8 +163,8 @@
                     <?php endfor ?>
                 </div><!-- closes activities-tab -->
                 <div class="slider-controls">	
-                    <a href="" class="next">Next Day &rarr;</a>
-                    <a href="" class="prev">&larr; Previous Day</a>
+                    <a href="" class="next">Next Day </a>
+                    <a href="" class="prev">Previous Day</a>
                 </div><!-- closes -->
                 <div class="slider">
                 	
