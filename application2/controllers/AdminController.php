@@ -77,7 +77,7 @@ class AdminController extends Zend_Controller_Action {
                 $this->places = new WS_PlacesService();
                 $this->accounts = new WS_AccountService();
                 $this->users = new WS_UsersService();
-                $this->trips = new WS_TripsService();
+                $this->trips = new WS_TripsService(false);
                 $this->reviewes = new WS_ReviewsService();
                 $this->vendors = new WS_VendorService();
 

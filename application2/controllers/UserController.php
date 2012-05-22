@@ -109,7 +109,7 @@ class UserController extends Zend_Controller_Action
                 $this->public_questions = new WS_PublicQuestionsService();
                 $this->reviews          = new WS_ReviewsService();
                 $this->users            = new WS_UsersService();
-                $this->trips            = new WS_TripsService();
+                $this->trips            = new WS_TripsService(false);
                 
                 $this->view->user       = $this->user->getData();
                 

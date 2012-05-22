@@ -64,7 +64,7 @@ class CartController extends Zend_Controller_Action {
             $this->billing  = new Model_Billing();
             $this->reservations = new WS_ReservationsService();
             $this->transactions = new Model_Transactions();
-            $this->trips        = new WS_TripsService();
+            $this->trips        = new WS_TripsService(false);
         }
         
         $this->view->cssVC = Zend_Registry::get('vc');

@@ -37,8 +37,14 @@ class WS_TripsService {
      * @var Zend_Db_Table_Abstract
      */
     protected $purchases;
+    
+    /**
+     *
+     * @var boolean
+     */
+    protected $use_cache;
 
-    public function __construct() {
+    public function __construct($use_cache = true) {
         $this->trips_db = new Model_Trips();
         $this->DB = Zend_Db_Table::getDefaultAdapter();
         $this->listings = new Model_TripListings();
@@ -49,6 +55,8 @@ class WS_TripsService {
         $this->itineraries = new Zend_Db_Table('itineraries');
 
         $this->purchases = new Zend_Db_Table('trip_purchases');
+        
+        $this->use_cache = $use_cache;
     }
 
     public function getPopularTrips() {
