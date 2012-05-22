@@ -461,6 +461,8 @@ $(function(){
             overlayColor:'#fff',
             centerOnScroll:1
         });
+        
+        return false;
     });
 })
 $(document).ready(function() {
