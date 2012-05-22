@@ -1,0 +1,356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<title><?= $this->trip->title ?> - Admin | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+        <link type="text/css" rel="stylesheet" href="/css5/reset.css?v=<?= $this->cssVC ?>" />
+        	<link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css5/all.css?v=<?= $this->cssVC ?>" />
+		<link type="text/css" rel="stylesheet" href="/css5/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />
+		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+  		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />
+  		<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]--> 
+    	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+		<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+    	<script type="text/javascript" src="/js2/admin/place-edit.js?v=<?= $this->cssVC ?>"></script>
+        <script type="text/javascript" src="/js2/jquery-ui-timepicker-addon.js?v=<?= $this->cssVC ?>"></script>
+		<script>
+            $(document).ready(function() {
+                $('a.lbc').fancybox({
+                    padding: 0,
+                    overlayColor: '#FFF',
+                    overlayOpacity: '0.7',
+                    showCloseButton: 'false',
+                });
+                $("#report_tabs").tabs();
+				
+				$('#activate .btn-1').click(function(){
+					$id = $(this).parents('form').find('input[name=tripid]').val();
+					$action = 1;
+					$.ajax({
+						url:'/ajax/tripstatus',
+						type:'post',
+						data: {
+							id:$id,
+							act:$action,
+						},
+						success:function(res){
+							if(res == 'success') {
+								$.cookie('alert','Changes saved');
+								window.location.reload();
+							} else {
+								showError('Something went wrong');
+							}
+						},
+						error:function(){
+							showError('Something went wrong');
+						}
+					});
+				});
+				
+				$('#deactivate .btn-1').click(function(){
+					$id = $(this).parents('form').find('input[name=tripid]').val();
+					$action = 0;
+					$.ajax({
+						url:'/ajax/tripstatus',
+						type:'post',
+						data: {
+							id:$id,
+							act:$action,
+						},
+						success:function(res){
+							if(res == 'success') {
+								$.cookie('alert','Changes saved');
+								window.location.reload();
+							} else {
+								showError('Something went wrong');
+							}
+						},
+						error:function(){
+							showError('Something went wrong');
+						}
+					});
+				});
+                
+            });
+        </script>
+	</head>
+	<body>
+		<div class="w1">
+    		<?php echo $this->partial('admin_partials/header.phtml', array()); ?>			
+			<div class="w3_admin">
+				<div class="sub_menu">
+                	<h2>
+                    <?php echo $this->doWhat?>. <span>Itinerary Item.</span></h2>
+					<a href="<?php echo $this->url(array('page'=>5, 'q'=>$this->day)); ?>" class="back">Back to Itinerary</a>
+				</div><!--SUB_MENU-->
+            </div><!--W3-->
+       
+               <form name="f1" method="post" enctype="multipart/form-data">
+				<div id="trips" class="listing-wrapper wrapper">
+					<div class="listing-content">
+						<div class="left">
+							<ul>
+							<ul>
+								<li><a href="<?php echo $this->url(array('page'=>1))?>">General Information</a></li>
+								<li><a href="<?php echo $this->url(array('page'=>2))?>">Trip Facts</a></li>
+								<li><a href="<?php echo $this->url(array('page'=>3))?>">Photos</a></li>
+								<li><a href="<?php echo $this->url(array('page'=>4))?>">Trip Details</a></li>
+								<li class="current"><a href="<?php echo $this->url(array('page'=>5))?>">Itinerary</a></li>
+							</ul>
+							</ul>
+						</div>
+						<!-- closes left -->
+						<div class="right">
+							<?php if($this->successMessage): ?>
+							<script type="text/javascript">
+                                showAlert("Your changes have been saved");
+                            </script>
+                            <?php endif ?>	
+            
+                            <?php if(count($this->errors)) : ?>
+                            <center>
+                            <div style="border:1px solid red; margin-left:22px; margin-right:22px; margin-bottom:10px;">
+                                <?php foreach($this->errors as $error):?>
+                                    <p><?php echo $error;?></p>
+                                <?php endforeach;?>
+                            </div>
+                            </center>
+                            <?php endif;?>
+							<div class="lstng-details">
+								<h3 class="title">Edit Itinerary</h3>
+								<div class="block">
+									<div class="item-ttl">Schedule</div>
+									<div class="item">
+										<p class="descrip name">
+										
+											<strong>Listing Name</strong>
+											Write the name of the listing
+										</p>
+										<input name="title" class="noclean name-in" value="<?php echo $this->title ?>" type="text" />
+									</div><!---ITEM-->
+									<div class="item">
+										<p class="descrip">
+											<strong>Listing Type</strong>
+											Select the type of listing 
+										</p>
+										<select name="type" id="type">
+											<?php foreach( $this->listingTypes as $listingType):?>
+                                            <option <?php echo $listingType->id == $this->type ? 'selected="selected"' : '';?> value="<?php echo $listingType->id?>"><?php echo $listingType->name?></option>
+                                            <?php endforeach;?>
+										</select>
+									</div><!---ITEM-->
+									
+									<div class="item">
+										<p class="descrip">
+											<strong>select country</strong>
+											 
+										</p>
+										<select id="country"  name="country">
+										<?php foreach($this->countries as $country):?>
+                                        <?php if(!empty($this->country) and $this->country == $country->id) $selected = 'selected="selected"'; 
+                                        elseif(empty($this->country) and $this->trip->country_id == $country->id) $selected = 'selected="selected"';
+                                        else $selected = ''; ?>
+                                        <option <?= $selected ?> value="<?php echo $country->id ?>"><?php echo $country->title?></option>
+                                        <?php endforeach;?>
+										</select>
+									</div><!---ITEM-->
+									
+									<div class="item">
+										<p class="descrip">
+											<strong>select city</strong>
+										</p>
+										<select  id="city"  name="city">
+											<option selected="selected">City</option>
+										</select>
+									</div><!---ITEM-->
+
+									<div class="item">
+										<p class="descrip">
+											<strong>Itinerary Day</strong>
+											Select the day of the activity 
+										</p>
+										<select  id="day"  name="day">
+											<?php for($i=1; $i<=max(1,$this->trip->days); $i++):?>
+                                            <option <?php echo $this->day == $i ? 'selected="selected"' : '';?>><?php echo $i?></option>
+                                            <?php endfor;?>
+										</select>
+									</div><!---ITEM-->
+									
+									<div class="item">
+										<p class="descrip">
+											<strong>Duration</strong>
+											Select how many days long
+										</p>
+										<select  id="duration"  name="duration">
+											<?php for($i=1; $i<=max(1,$this->trip->days); $i++):?>
+                                            <option <?php echo $this->duration == $i ? 'selected="selected"' : '';?>><?php echo $i?></option>
+                                            <?php endfor;?>
+										</select>
+										
+									</div><!---ITEM-->
+									
+									<div id="field-wrapper">
+                                        <div class="item">
+                                            <p class="descrip">
+                                                <input type="radio" name="time_type" id="fixed-radio" checked="checked" value="fixed"> <b>Fixed Hour</b>
+                                            </p>
+                                            From: <input style="width:50px;" type="text" name="start_hour" id="start_hour" value="<?php echo $this->start_hour?>" />
+                                            To: <input style="width:50px;" type="text" name="end_hour" id="end_hour" value="<?php echo $this->end_hour?>" />
+                                        </div><!---ITEM-->
+                                    
+                                    
+                                    <div class="item">
+										<p class="descrip">
+											<input type="radio"  value="flexi" name="time_type" id="flexi-radio" <?php if($this->flexi_hour) echo 'checked="checked"';?>> <b>Flexible Hour</b>
+										</p>
+										<select  id="flexi_time" name="flexi_time" >
+                                            <option value="1" <?php echo $this->timef == 1 ? 'selected="selected"' : '';?>>Morning</option>
+                                            <option value="2" <?php echo $this->timef == 2 ? 'selected="selected"' : '';?>>Afternoon</option>
+                                            <option value="3" <?php echo $this->timef == 3 ? 'selected="selected"' : '';?>>Evening</option>
+										</select>
+										
+									</div><!---ITEM-->
+
+									</div>
+                                    
+									<div class="item last">
+										<p class="descrip"><input <?php echo $this->featured ? 'checked="checked" "' : ''; ?> value="1" name="check" type="checkbox">Show this activity in the main page of the trip</p>
+									</div><!---ITEM-->
+									
+								</div><!--BLOCK-->
+								
+								<div class="block">
+									<h3 class="item-ttl">Description</h3>
+									<div class="item">
+										<div class="description_l">
+											<textarea class="noclean" rows="" cols="" name="description"><?php echo $this->description ?></textarea>
+										</div>
+									</div><!--ITEM-->
+								</div><!--BLOCK-->
+								
+								<div class="block">
+									<h3 class="item-ttl">Picture</h3>
+									<div class="item">
+										<table width="470" border="0">
+											<tbody><tr>
+												
+												<td width="270">
+													<h4>Picture Requeriments</h4>
+													<dl class="photo-limit">
+														<dt>Upload limit</dt>
+														<dd>10 photos per listing</dd>
+														<dt>Photo Dimention</dt>
+														<dd>640x425 pixels</dd>
+														<dt>File size</dt>
+														<dd>2MB or less</dd>
+													</dl>
+												</td>
+												<td class="picture" width="180">
+													<img src="<?php echo $this->image?>"  alt="" width="68" height="68">
+													<input type="hidden" name="hdn_image" value="<?php echo $this->image?>" />
+                                                    <input type="file" name="image">
+												</td>
+											</tr>
+										</tbody></table>
+									</div><!--ITEM-->
+								</div><!--BLOCK-->
+								<div class="block">
+									<div class="single last">
+										<p class="item-ttl">Map</p>
+										<input type="button" class="btn-10" value="Set Location"  id="setLocation" />
+                                        <input type="text" class="location" value="" name="address" />
+										<div class="map">
+                                            <div class="w-m">
+                                                <h5>Location Results</h5>
+                                                <ul id="maplocations">
+                                                </ul>
+                                            </div>
+											<div class="map_holder" id="mapcanvas"></div>
+                                        	<input type="hidden" name="lat" value="<? echo @$this->lat?>" />
+                                    		<input type="hidden" name="lng" value="<? echo @$this->lng ?>" />                
+										</div><!--MAP-->
+									</div><!--single-->								</div><!--BLOCK-->
+								
+							</div>
+							<!-- closes lstng-details -->
+							<div class="foot">
+								<input class="btn-1" value="Save Changes" type="submit">
+							</div>
+							<!-- closes foot -->
+						</div>
+						<!-- closes right -->
+					</div>
+					<!-- closes listing-content -->
+				</div>
+				</form>	
+			<div class="footer black">
+				<div class="wrapper">
+					<a href="" class="logo">Tripfab</a>
+				</div><!--WRAPPER-->
+			</div>
+			<!-- closes footer -->
+		</div>
+		<!-- closes w1 -->
+
+        <script>
+			$('#fixed-radio').click(function(){
+				$("#flexi_time").attr("disabled", "disabled");				
+				$("#start_hour").attr("disabled", false);
+				$("#end_hour").attr("disabled", false);
+			});
+
+			$('#flexi-radio').click(function(){
+				$("#flexi_time").attr("disabled", false);				
+				$("#start_hour").attr("disabled", "disabled");
+				$("#end_hour").attr("disabled", "disabled");
+			});
+			
+
+			$('#start_hour').timepicker({
+				ampm: true
+			});
+			$('#end_hour').timepicker({
+				ampm: true
+			});
+			var cityId = '<?php echo $this->city;?>';
+			fillCityTrip($('#country').val());
+			screenUpdate();
+			$('select#country').change(function(){
+				fillCityTrip($('#country').val());
+			});
+			
+			$('select#type').change(function(){
+				screenUpdate();
+			});
+			
+			function screenUpdate(){
+				if($('#type').val() == 5){
+					$("#field-wrapper").hide();
+				}
+				else{
+					$("#field-wrapper").show();
+				}
+			}
+			
+			function fillCityTrip(countryId){
+				var url = "/ajax/places/?type=city&c=" + countryId;
+				$("#city" ).children().remove();
+				$("#city" ).append(new Option('Select City', 0, true, true));
+				var selected = false;
+				$.getJSON(url, function(fsdata) {
+					$.each(fsdata.data, function(i,city){ 
+						selected = cityId == city.id ? true : false ;
+						$("#city" ).append(new Option(city.title, city.id, true, selected));
+						
+						
+					});
+				});	
+			}
+				
+		</script>
+
+</body></html>

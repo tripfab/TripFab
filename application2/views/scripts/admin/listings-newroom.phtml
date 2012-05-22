@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->listing->title ?> : New Room | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+	<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+	<script type="text/javascript" src="/js2/admin/listing-actions.js?v=<?= $this->cssVC ?>"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+			$bed = 1;
+			$('a#addNewBedType').click(function(){
+				$item = $('.bed.new').html();
+				$item = $('<div class="bed">'+$item+'</div>');
+				$('select[name=quantity]', $item).attr('name','beds['+$bed+'][quantity]');
+				$('select[name=type]', $item).attr('name','beds['+$bed+'][type]');
+				$('.bed.new').before($item);
+				$bed++;
+				return false;
+			});
+			$('a.removeBed').live('click',function(){
+				$bed = $(this).parent('.bed');
+				$bed.fadeOut('fast', function(){
+					$('select', $bed).attr('disabled', 'disabled');
+				});
+				return false;
+			});
+        });
+    </script>
+    <style type="text/css">
+	textarea.wysiwyg { width:730px; height:500px;}
+	</style>
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('admin_partials/header.phtml', array()); ?>
+    <div class="w3_admin">
+        <div class="sub_menu">
+            <h2>
+            	<?php if($this->listing->status == 1): ?>
+            	<span class="lstngActv">Active</span>
+                <?php else: ?>
+            	<span class="lstngInct">Inactive</span>
+                <?php endif ?>
+            	Editing. <span><?php echo $this->listing->title ?></span>
+            <em class="ed">by </em> <a href="/admin/users/view/partner/<?= $this->vendor->id ?>" class="partner"><?= $this->vendor->name ?></a></h2>
+            <?= $this->partial('admin_partials/listing_actions.phtml', array('active'=> $this->listing)); ?>
+        </div><!--SUB_MENU-->
+    </div><!--W3-->
+    <div class="w2">
+        <div class="listing-wrapper wrapper">
+            <div class="listing-content show">
+                <div class="left">
+                    <?= $this->partial('admin_partials/vendorlistingsmenu.phtml', array('active'=>'Rooms', 'id' => $this->listing->id, 
+									   'type'=>$this->listing->main_type)) ?>
+                </div><!-- closes left -->
+                <div class="right">
+                    <?= $this->partial('admin_listing/hotel/room.phtml', array('listing' => $this->listing,'amenities' => $this->amenities,
+					'errors'=>$this->errors, 'help' => $this->help,)); ?>
+                </div><!-- closes right -->
+                <div class="clear"></div>
+            </div><!-- closes listing-content -->
+        </div><!-- closes listing-wrapper -->
+    </div><!-- closes w2 -->
+	<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+</div><!-- closes w1 -->
+<?php echo $this->partial('admin_partials/listing_actions_lbs.phtml', array('listing'=>$this->listing, 'main_category' => $this->main_category)) ?>
+</body>
+</html>

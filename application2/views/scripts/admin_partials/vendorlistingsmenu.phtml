@@ -1,0 +1,131 @@
+<?php 
+switch($this->type){
+	case 2:
+		$items = array(
+			array(
+				'label'	=> 'General Information',
+				'url'	=> '/admin/listings/edit/'.$this->id,
+			),
+			array(
+				'label'	=> 'Photos',
+				'url'	=> '/admin/listings/photos/'.$this->id,
+			),
+		);
+		break;
+	case 4:
+		$items = array(
+			array(
+				'label'	=> 'General Information',
+				'url'	=> '/admin/listings/edit/'.$this->id,
+			),
+			array(
+				'label'	=> 'Description',
+				'url'	=> '/admin/listings/overview/'.$this->id,
+			),
+			array(
+				'label'	=> 'Photos',
+				'url'	=> '/admin/listings/photos/'.$this->id,
+			),
+			array(
+				'label' => 'How To Get There',
+				'url'	=> '/admin/listings/location/'.$this->id,
+			),
+		);
+		break;
+	case 5:
+		$items = array(
+			array(
+				'label'	=> 'General Information',
+				'url'	=> '/admin/listings/edit/'.$this->id,
+			),
+			array(
+				'label'	=> 'Overview',
+				'url'	=> '/admin/listings/overview/'.$this->id,
+			),
+			array(
+				'label'	=> 'Photos',
+				'url'	=> '/admin/listings/photos/'.$this->id,
+			),
+			array(
+				'label' => 'How To Get There',
+				'url'	=> '/admin/listings/location/'.$this->id,
+			),
+			array(
+				'label' => 'Details',
+				'url'	=> '/admin/listings/details/'.$this->id,
+			),
+			array(
+				'label' => 'Rooms',
+				'url'	=> '/admin/listings/rooms/'.$this->id,
+			),
+			array(
+				'label' => 'Calendar',
+				'url'	=> '/admin/listings/calendar/'.$this->id,
+			),
+			array(
+				'label'	=> 'Pricing',
+				'url'	=> '/admin/listings/pricing/'.$this->id,
+			),
+		);
+		break;
+	case 6:
+		$items = array(
+			array(
+				'label'	=> 'General Information',
+				'url'	=> '/admin/listings/edit/'.$this->id,
+			),
+			array(
+				'label'	=> 'Overview',
+				'url'	=> '/admin/listings/overview/'.$this->id,
+			),
+			array(
+				'label'	=> 'Photos',
+				'url'	=> '/admin/listings/photos/'.$this->id,
+			),
+			array(
+				'label' => 'How To Get There',
+				'url'	=> '/admin/listings/location/'.$this->id,
+			),
+			array(
+				'label' => 'Details',
+				'url'	=> '/admin/listings/details/'.$this->id,
+			),
+			array(
+				'label' => 'Tips',
+				'url'	=> '/admin/listings/tips/'.$this->id,
+			),
+			array(
+				'label' => 'Activity Types',
+				'url'	=> '/admin/listings/types/'.$this->id,
+			),
+			array(
+				'label' => 'Calendar',
+				'url'	=> '/admin/listings/calendar/'.$this->id,
+			),
+			array(
+				'label'	=> 'Pricing',
+				'url'	=> '/admin/listings/pricing/'.$this->id,
+			),
+		);
+		break;
+	case 7:
+		$items = array(
+			array(
+				'label'	=> 'General Information',
+				'url'	=> '/admin/listings/edit/'.$this->id,
+			),
+			array(
+				'label'	=> 'Photos',
+				'url'	=> '/admin/listings/photos/'.$this->id,
+			),
+		);
+		break;
+}
+?>
+<ul>
+	<?php foreach($items as $item): ?>
+    <?php $class = ($item['label'] == $this->active) ? 'current' : ''; ?>
+    <li class="<?= $class ?>"><a href="<?= $item['url'] ?>"><?= $item['label'] ?></a></li>
+    <?php endforeach ?>
+</ul>
+<a href="/admin/listings/activate/<?= $this->id ?>" id="pendingSteps" class="steps"></a>

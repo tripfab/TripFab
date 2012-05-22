@@ -3,31 +3,16 @@
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->user->name ?> : Reservations | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
-    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('textarea').elastic();				
-            $('input').ToggleInputValue();
-            $('form select').jqTransSelect();
-			
-			$('.reservation .top h2').click(function(){
-				$parent = $(this).parents('.reservation');
-				$('.bottom', $parent).slideToggle();
-			});
-			
-			
-        });
-    </script>
+    <title><?= $this->user->name ?> - Reservations | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1">
@@ -35,11 +20,10 @@
     <div class="w2">
         <div class="wrapper user-messages">
         	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Reservations','parentActive'=>'Confirmed')); ?>
+            <?php if(count($this->reservations) > 0): ?>
         	<div class="subttl">
         		<h4>You have <?= count($this->reservations) ?> confirmed reservations</h4>
-        	</div>
-        	<!-- closes subttl -->
-            <?php if(count($this->reservations) > 0): ?>
+        	</div><!-- closes subttl -->
             <div class="reservations">
             	<?php foreach($this->reservations as $reserve): ?>
                 <div class="reservation">							
@@ -49,9 +33,17 @@
                             <h2><?= $reserve->listing_name ?></h2>
                             <span><?= $reserve->listing_type ?></span>
                         </div><!-- closes meta -->
-                        <span class="remain">Remaining time: 2 months</span>
-                        <a href="">Send Message to Vendor</a>
+                        <div class="remaining">
+                            <span><img src="https://static.tripfab.com/images2/ico_146.png" width="14" height="15" alt="" />Remaining time: 20 days</span>
+                            <ul>
+                                <li><a href="/user/reservations/view/<?= $reserve->id ?>">Reservation Details</a></li>
+                                <li><a href="">Contact Partner</a></li>
+                                <?php $link = '/'.$reserve->listing_country.'/'.$reserve->listing_city.'/'.$reserve->listing_idf; ?>
+                                <li class="last"><a href="<?= $link ?>">View Activity</a></li>
+                            </ul>
+                        </div><!--REMAINING-->
                     </div><!-- closes top -->
+                    <div class="clear"></div>
                     <div class="bottom">
                         <div class="ttl">
                             <strong>Reserve Code: <?= $reserve->code ?></strong>
@@ -104,18 +96,29 @@
                             </tbody>
                         </table>
                     </div><!-- closes bottom -->
+                    <div class="clear"></div>
                 </div><!-- closes reservation -->
                 <?php endforeach ?>
             </div><!-- closes reservations -->
             <?php else: ?>
-            <div class="empty-container">
-                <img src="/images/empty-7.png" alt="" /><br />
-                You don't have confirmed reservations :(
-            </div><!-- closes empty -->
+            <div id="reservations">
+                <div class="no-reserv">
+                    <h3>You don't have confirmed reservations</h3>
+                </div><!--NO-PAYMENT-->
+            </div><!-- closes u-payments --> 
             <?php endif ?>
         </div><!-- closes user-messages -->
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+		$('.reservation .top h2').click(function(){
+			$parent = $(this).parents('.reservation');
+			$('.bottom', $parent).slideToggle();
+		});
+    });
+</script>
 </body>
 </html>

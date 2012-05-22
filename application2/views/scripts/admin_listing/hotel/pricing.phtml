@@ -1,0 +1,213 @@
+<?php $def_additional = 0;
+foreach($this->sch as $season) {
+	if($def_additional != 0) 
+		break;
+    foreach($season as $sch) {
+	    if($def_additional != 0) 
+			break;
+        if(!empty($sch['additional_after'])){
+        	$def_additional = $sch['additional_after']; 
+			break;
+}}}?>
+<form action="" method="post" id="form_pricing">
+	<div class="pricing-tabs">
+        <ul>
+            <li><a href="#tabs-1">Default Pricing</a></li>
+            <li><a href="#tabs-2">Seasonal Pricing</a></li>
+        </ul>
+        <div id="tabs-1" class="tab">
+	  		<?php if($this->help->hot_pricing1 == 0): ?>
+            <div class="desc">
+                <h3>What is the basic pricing?</h3>
+                <p>Some general details about the experience, listing name, contact information, categories and more.</p>
+                <a href="" rel="hot_pricing1" class="remove">Remove</a>
+            </div><!-- closes desc -->
+            <?php endif ?>
+            <h2>With the Basic Pricing the rates apply for all the unspecified dates.</h2>
+            <?php foreach($this->schedules as $sch): ?>
+            <div class="pricing-itm first">
+                <span><?= $sch->name ?></span>
+                <div class="right">
+                    <label>Rate per night</label>
+                    <input type="text" name="sch[0][<?= $sch->id ?>][price]" 
+                    value="<?= (isset($this->sch[0][$sch->id]['price'])) 
+                    ? $this->sch[0][$sch->id]['price'] : "0.00" ?>"/>
+                    <label>Additional Guests</label>											
+                    <input type="text" name="sch[0][<?= $sch->id ?>][additional]" 
+                    value="<?= (isset($this->sch[0][$sch->id]['additional'])) 
+                    ? $this->sch[0][$sch->id]['additional'] : "0.00" ?>"/>
+                    <label>Per night for each guest after</label>
+                    <select name="sch[0][<?= $sch->id ?>][additional_after]">
+                    	<option value="0">--</option>
+                        <?php foreach($this->persons as $i): ?>
+                        <?php if(!isset($this->sch[0][$sch->id]['additional_after']) || $this->sch[0][$sch->id]['additional_after'] == 0): ?>
+                        <?php if($def_additional == $i): ?>
+                        <option selected="selected" value="<?= $i ?>"><?= $i ?></option>
+                        <?php else: ?>
+                        <option value="<?= $i ?>"><?= $i ?></option>
+                        <?php endif ?>						
+						<?php else: ?>
+                        <?php if($this->sch[0][$sch->id]['additional_after'] == $i): ?>
+                        <option selected="selected" value="<?= $i ?>"><?= $i ?></option>
+                        <?php else: ?>
+                        <option value="<?= $i ?>"><?= $i ?></option>
+                        <?php endif ?>
+                        <?php endif ?>
+                        <?php endforeach ?>
+                    </select>
+                </div><!-- closes right -->
+            </div><!-- closes pricing-itm -->
+            <?php endforeach ?>								
+        </div><!-- closes tab -->
+        <div id="tabs-2" class="tab">
+        	<?php if($this->help->hot_pricing2 == 0): ?>
+            <div class="desc">
+                <h3>What is the seasonal pricing?</h3>
+                <p>Some general details about the experience, listing name, contact information, categories and more.</p>
+                <a href="" rel="hot_pricing2" class="remove">Remove</a>
+            </div><!-- closes desc -->
+            <?php endif ?>
+            <h2>With the Basic Pricing the rates apply for all the unspecified dates. <a href="#newSeasson" class="lb link-5">Add New Season</a></h2>
+            <div class="carrousel">
+				<?php if(count($this->seasons) > 0): ?>
+                <?php foreach($this->seasons as $season): ?>
+                <h3><img src="https://static.tripfab.com/images/cleardot.gif" alt="" /><?= $season->name ?></h3>
+                <div class="carrousel-itm">
+                    <div class="pricing-itm">
+                        This season goes from <strong><?= date('M jS,', strtotime($season->starting)) ?></strong> 
+                        to <strong><?= date('M jS', strtotime($season->ending)) ?></strong>
+                        <a href="#delete_season_<?= $season->id ?>" class="lb remove">Remove Season</a>
+                        <a href="#edit_season_<?= $season->id ?>" class="lb link-9">Edit Season</a>
+                    </div><!-- closes pricing-itm -->
+                    <?php foreach($this->schedules as $sch): ?>
+                    <div class="pricing-itm">
+                        <span><?= $sch->name ?></span>
+                        <div class="right">
+                            <label>Rate per night</label>
+                            <input type="text" name="sch[<?= $season->id ?>][<?= $sch->id ?>][price]" 
+                            value="<?= (isset($this->season[$season->id][$sch->id]['price'])) 
+                            ? $this->season[$season->id][$sch->id]['price'] : "0.00" ?>"/>
+                            <label>Additional Guests</label>											
+                            <input type="text" name="sch[<?= $season->id ?>][<?= $sch->id ?>][additional]" 
+                            value="<?= (isset($this->season[$season->id][$sch->id]['additional'])) 
+                            ? $this->season[$season->id][$sch->id]['additional'] : "0.00" ?>"/>
+                            <label>Per night for each guest after</label>
+                            <select name="sch[<?= $season->id ?>][<?= $sch->id ?>][additional_after]">
+		                    	<option value="0">--</option>
+                                <?php foreach($this->persons as $i): ?>
+                                <?php if(!isset($this->season[$season->id][$sch->id]['additional_after']) || 
+								$this->season[$season->id][$sch->id]['additional_after'] == 0): ?>
+								<?php if($def_additional == $i): ?>
+                                <option selected="selected" value="<?= $i ?>"><?= $i ?></option>
+                                <?php else: ?>
+                                <option value="<?= $i ?>"><?= $i ?></option>
+                                <?php endif ?>						
+                                <?php else: ?>
+                                <?php if($this->season[$season->id][$sch->id]['additional_after'] == $i): ?>
+                                <option selected="selected" value="<?= $i ?>"><?= $i ?></option>
+                                <?php else: ?>
+                                <option value="<?= $i ?>"><?= $i ?></option>
+                                <?php endif ?>
+                                <?php endif ?>
+                                <?php endforeach ?>
+                            </select>
+                        </div><!-- closes right -->
+                    </div><!-- closes pricing-itm -->
+                    <?php endforeach ?>
+                </div><!-- closes carrousel-itm -->
+                <?php endforeach ?>
+                <?php endif ?>
+            </div><!-- closes carrousel -->																	
+        </div><!-- closes tab -->
+    </div><!-- closes pricing tabs -->
+    <div class="pricing-itm terms">
+        <span>Terms</span>
+        <div class="right">
+            <strong>Cancellation Policy</strong><br />
+            <span>Choose the cancellation policy you want</span>
+            <select name="policy">
+            	<?php $selected = ($this->listing->policy == 1) ? 'selected="selected"' : ''; ?>
+                <option <?= $selected ?> value="1">Low</option>
+            	<?php $selected = ($this->listing->policy == 2) ? 'selected="selected"' : ''; ?>
+                <option <?= $selected ?> value="2">Medium</option>
+            	<?php $selected = ($this->listing->policy == 3) ? 'selected="selected"' : ''; ?>
+                <option <?= $selected ?> value="3">High</option>
+            </select>
+            <a href="/admin/cancellation-policies/hotels" target="_blank" class="learn">Learn More</a>									
+        </div><!-- closes right -->
+    </div><!-- closes pricing-itm -->
+    <div class="foot">
+        <input type="submit" class="btn-1 noclean" value="Save Changes" />
+    </div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token.'form_pricing') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('update_pricing') ?>" />
+    <input type="hidden" name="s" value="0" />
+</form>
+<div class="hidden">
+	<div id="newSeasson" class="lb-forgot season">
+        <form action="" method="post">
+            <div class="ttl">Create a Seasonal Pricing</div>
+            <div class="content">
+                <label for="">Season Name</label>
+                <input type="text" name="name" value="Ej: Green Season" />
+                <label for="">Starting Date</label>
+                <input type="text" name="starting" class="short" />
+                <label for="">Ending Date</label>
+                <input type="text" name="ending" class="short" />
+                <div class="clear"></div>
+            </div><!-- closes content -->
+            <div class="bottom">
+                <input type="submit" class="btn-1 noclean" value="Create Season" />
+                <span class="btn-4" onclick="$.fancybox.close()">Cancel</span>				
+            </div><!-- closes bottom -->
+            <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+            <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+            <input type="hidden" name="form_id" value="<?= md5($this->listing->token.'form_pricing') ?>" />
+            <input type="hidden" name="_task" value="<?= md5('add_season') ?>" />
+        </form>
+    </div><!-- closes lb-forgot -->
+    <?php foreach($this->seasons as $season): ?>
+    <div id="edit_season_<?= $season->id ?>" class="lb-forgot season">
+        <form action="" method="post">
+            <div class="ttl">Edit "<?= $season->name ?>" Season</div>
+            <div class="content">
+                <label for="">Season Name</label>
+                <input type="text" name="name" value="<?= $season->name ?>" />
+                <label for="">Starting Date</label>
+                <input type="text" name="starting" class="short" value="<?= date('M d, Y', strtotime($season->starting)) ?>" />
+                <label for="">Ending Date</label>
+                <input type="text" name="ending" class="short" value="<?= date('M d, Y', strtotime($season->ending)) ?>" />
+                <div class="clear"></div>
+            </div><!-- closes content -->
+            <div class="bottom">
+                <input type="submit" class="btn-1 noclean" value="Edit Season" />
+                <span class="btn-4" onclick="$.fancybox.close()">Cancel</span>				
+            </div><!-- closes bottom -->
+            <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+            <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+            <input type="hidden" name="season_id" value="<?= $season->id ?>" />
+            <input type="hidden" name="form_id" value="<?= md5($this->listing->token.'form_pricing') ?>" />
+            <input type="hidden" name="_task" value="<?= md5('edit_season') ?>" />
+        </form>
+    </div><!-- closes lb-forgot -->
+    <div id="delete_season_<?= $season->id ?>" class="lb-forgot delete">
+        <form action="" method="post" id="form_season_delete_<?= $list->id ?>">
+            <div class="ttl">Delete Season "<?= $season->name ?>"</div>
+            <div class="content">
+                <p>Are you sure you want to remove "<?= $season->name ?>"?</p>
+            </div><!-- closes content -->
+            <div class="bottom">
+                <input type="submit" class="btn-1 noclean" value="Delete" />
+                <span class="btn-4" onclick="$.fancybox.close()">Cancel</span>				
+            </div><!-- closes bottom -->     
+            <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+            <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+            <input type="hidden" name="season_id" value="<?= $season->id ?>" />
+            <input type="hidden" name="form_id" value="<?= md5($this->listing->token.'form_pricing') ?>" />
+            <input type="hidden" name="_task" value="<?= md5('delete_season') ?>" />
+        </form>
+    </div><!-- closes lb-forgot -->
+    <?php endforeach ?>
+</div>

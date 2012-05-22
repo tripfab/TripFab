@@ -3,57 +3,77 @@
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->user->name ?> : Reservations History | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-	<script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('textarea').elastic();				
-            $('input').ToggleInputValue();
-            $('form select').jqTransSelect();
-        });
-    </script>
+    <title><?= $this->user->name ?> - Reservations History | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
     <div class="w2">
         <div class="wrapper user-messages">
-            <?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'History','parentActive'=>'Reservations')); ?>
-            <div id="features">
-                <div class="top">
-                    <img src="/images2/img-50.png" alt="" class="der"/>
-                    <h2>Reservations</h2>
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lorem risus, malesuada et elementum sit amet.</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lorem risus, malesuada et elementum sit amet. Vivamus elementum ipsum sit amet purus venenatis sed lacinia arcu euismod. Integer ut dignissim ligula. Proin sed lorem enim. Aliquam fermentum lacus sed urna consequat pellentesque. Praesent tempor neque at velit sagittis sed euismod lacus euismod. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <img src="/images2/img-49.png" alt="" class="corner" />
-                </div>
-                <!-- closes top -->
-                <div class="bottom">
-                    <img src="/images2/img-51.png" alt="" class="der" />
-                    <h4>Lorem ipsum dolor sit amet</h4>
-                    <p>Consectetur adipiscing elit. In lorem risus, malesuada et elementum sit amet, varius quis tellus. Vivamus elementum ipsum sit amet purus venenatis sed lacinia arcu euismod. Consectetur adipiscing elit. In lorem risus, malesuada et elementum sit amet, varius quis tellus. Vivamus elementum ipsum sit amet purus venenatis sed.</p>
-                    <div class="clear"></div>
-                    <img src="/images2/img-52.png" alt="" class="izq" />
-                    <h4>Lorem ipsum dolor sit amet</h4>
-                    <p>Consectetur adipiscing elit. In lorem risus, malesuada et elementum sit amet, varius quis tellus. Vivamus elementum ipsum sit amet purus venenatis sed lacinia arcu euismod. Consectetur adipiscing elit. In lorem risus, malesuada et elementum sit amet, varius quis tellus. Vivamus elementum ipsum sit amet purus venenatis sed.</p>
-                    <div class="clear"></div>
-                    <img src="/images2/img-53.png" alt="" class="der" />
-                    <h4>Lorem ipsum dolor sit amet</h4>
-                    <p>Consectetur adipiscing elit. In lorem risus, malesuada et elementum sit amet, varius quis tellus. Vivamus elementum ipsum sit amet purus venenatis sed lacinia arcu euismod. Consectetur adipiscing elit. In lorem risus, malesuada et elementum sit amet, varius quis tellus. Vivamus elementum ipsum sit amet purus venenatis sed.</p>
-                </div>
-                <!-- closes bottom -->
+            <?= $this->partial('partials/vendormainmenu.phtml', array('active'=>'History','parentActive'=>'Reservations')); ?>
+            <div class="subttl">
+                <a href="/provider/reservations" class="link-4">Back to Reservations</a>
+            	<p>History Reservations</p>
             </div>
-            <!-- closes features -->
-        </div>
-        <!-- closes user-messages -->
-    </div>
-    <!-- closes w2 -->
+            <?php if(count($this->reservations) > 0): ?>
+            <div class="reservations past">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                        <tr>
+                            <th>Reservation Code</th>
+                            <th>Client Name</th>
+                            <th>Method</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                        <?php foreach($this->reservations as $reserve): ?>
+                        <tr>
+                            <td><?= $reserve->code ?></td>
+                            <td><?= $reserve->user_name ?></td>
+                            <td><img class="card-3" src="https://static.tripfab.com/images/cleardot.gif" alt=""/><?= $reserve->method ?></td>
+                            <td>$<?= $reserve->ammount ?></td>
+                            <td><?= date('d/m/Y', strtotime($reserve->checkin)) ?></td>
+                            <td><a href="/provider/reservations/view/<?= $reserve->id ?>">See details</a></td>
+                        </tr>
+                        <?php endforeach ?>					
+                    </tbody>
+                </table>
+            </div><!-- closes reservations -->
+            <?php else: ?>
+            <div class="empty-container">
+                <img src="https://static.tripfab.com/images/empty-7.png" alt="" /><br />
+                There are no incoming reservations :(
+            </div><!-- closes empty -->            
+            <?php endif ?>
+        </div><!-- closes user-messages -->
+    </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
-</div>
-<!-- closes w1 -->
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+		
+		$('.reservation .top h2').click(function(){
+			$parent = $(this).parents('.reservation');
+			$('.bottom', $parent).slideToggle();
+		});
+    });
+</script>
+<style type="text/css">
+.reservations.past {
+	background-color: #FFFFFF;
+	border: 1px solid #E7E7E7;
+	border-radius: 4px 4px 4px 4px;
+}
+</style>
 </body>
 </html>

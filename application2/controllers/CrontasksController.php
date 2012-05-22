@@ -5,9 +5,93 @@ class CrontasksController extends Zend_Controller_Action
 
     public function init()
     {
-
+        $this->view->cssVC = Zend_Registry::get('vc');
     }
     
+    public function deleteAction() {
+        //die;
+        $listings_db = new Zend_Db_Table('listings');
+        $select = $listings_db->select();
+        $select->where('country_id != 18');
+        $select->where('country_id != 65');
+        $select->where('country_id != 0');
+        $listings = $listings_db->fetchAll($select);
+        foreach ($listings as $list) {
+            if (!is_null($list)) {
+                echo $list->id . '<br>';
+                $this->deleteListing($list);
+            } else {
+                echo 'null<br>';
+                echo '------------------------ <br><br>';
+            }
+        }
+        die;
+    }
+
+    private function deleteListing($listing) {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        echo $db->delete('activity_types', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('calendar', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('favorites', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('itinerary_listings', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_amenities', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_attributes', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_faqs', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_getthere', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_landscapes', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_listingtypes', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_overviews', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_pictures', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_schedules', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_tabs', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('listing_tags', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('offers', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('prices', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('public_questions', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('reservations', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('reviews', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('seasons', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('specialities', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('transactions', 'listing_id = ' . $listing->id) . '<br>';
+        echo $db->delete('trip_listings', 'listing_id = ' . $listing->id) . '<br>';
+
+        $listing->delete();
+
+        echo '------------------------ <br><br>';
+    }
+	
+	public function assignimageAction()
+	{
+		$_listings = new Zend_Db_Table('listings');
+		$select = $_listings->select();
+		$select->where('main_type = ?', 2);
+		$select->orWhere('main_type = ?', 7);
+		
+		$listings = $_listings->fetchAll($select);
+		
+		$photos = new Zend_Db_Table('listing_pictures');
+		
+		foreach($listings as $list) {
+			if(empty($list->image)) {
+				$select = $photos->select();
+				$select->where('listing_id = ?', $list->id);
+				$photo = $photos->fetchRow($select);
+				if(!is_null($photo)) {
+					$list->image = $photo->url;
+					$list->save();
+					
+					echo $list->image.'<br>';
+				} else {
+					$list->status = 0;
+					$list->save();
+				}
+			}
+		}
+		
+		die;
+	}
+    
+    /**
     public function createimagesAction()
     {
         $cats = array('all','activities','entertaiment','tourist-sights','restaurants','hotels');
@@ -430,6 +514,195 @@ class CrontasksController extends Zend_Controller_Action
             }
         }
         die;
+    }
+    
+    public function deletevendorsAction()
+    {
+        /**
+        $vendors = new Zend_Db_Table('vendors');
+        $users   = new Zend_Db_Table('users');
+        $listings = new Zend_Db_Table('listings');
+        $db = Zend_Db_Table::getDefaultAdapter();
+        
+        $exclude = array(790,791,792,793,794,795,796,797,777,802,804,805,808,809,815,816,818,819,821);
+        $select = $vendors->select();
+        foreach($exclude as $id){
+            $select->orWhere('id = ?', $id);
+        }
+
+        $result = $vendors->fetchAll($select);
+        foreach($result as $vendor){
+            $select = $listings->select();
+            $select->where('vendor_id = ?', $vendor->id);
+            $result2 = $listings->fetchAll($select);
+            if(count($result2) == 0){
+                $select = $users->select();
+                $select->where('id = ?', $vendor->user_id);
+                $user = $users->fetchRow($select);
+                //$user->delete();
+                //$vendor->delete();
+            } else {
+                echo $vendor->id.'<br><br>';
+                foreach($result2 as $list){
+                    if($list->title == 'Untitle Listing'){
+                        $list->delete();
+                    } else {
+                        echo $list->title .'<br>';
+                        echo $list->description .'<br><br>';
+                    }
+                }
+                echo '----------------<br><br>';
+            }
+        }
+        
+        
+        
+        /**
+        $vendors = new Zend_Db_Table('vendors');
+        $places  = new Zend_Db_Table('places');
+        
+        $select = $vendors->select();
+        $select->where('user_id is NULL');
+        $results = $vendors->fetchAll($select);
+        foreach($results as $result){
+            $select = $places->select();
+            $select->where('id = ?', $result->place_id);
+            $city = $places->fetchRow($select);
+            
+            $select = $places->select();
+            $select->where('id = ?', $city->parent_id);
+            $country = $places->fetchRow($select);
+            
+            $result->listings = 0;
+            $result->save();
+            
+            echo $country->title .', '. $city->title .', '. $result->listings .', '. $result->name .'<br>';
+            //$result->delete();
+        }
+        */
+        
+        
+        /**
+        die;
+    }
+    
+    public function notificationsAction(){
+        die;
+        $users = new Zend_Db_Table('users');
+        $select = $users->select();
+        $select->limit(100, 500);
+        $result = $users->fetchAll($select);
+        
+        $notification = new Zend_Db_Table('users_emailsettings');
+        $defaults = new Zend_Db_Table('email_settings');
+        
+        $select = $defaults->select();
+        $select->orWhere('type = ?',1);
+        $select->orWhere('type = ?',3);
+        $defaultsUsr = $defaults->fetchAll($select);
+        
+        //var_dump($defaultsUsr); die;
+        
+        $select = $defaults->select();
+        $select->orWhere('type = ?',1);
+        $select->orWhere('type = ?',2);
+        $defaultsVdr = $defaults->fetchAll($select);
+        
+        foreach($result as $user){
+            echo $user->id .'<br>';
+            //$notification->delete("user_id = {$user->id}");
+            if($user->role_id == 2){
+                foreach($defaultsUsr as $n){
+                    echo $user->id.' - '.$n->label.'<br>';
+                    $new = $notification->fetchNew();
+                    $new->user_id = $user->id;
+                    $new->setting_id = $n->id;
+                    $new->save();
+                }
+            } elseif($user->role_id == 3){
+                foreach($defaultsVdr as $n){
+                    echo $user->id.' - '.$n->label.'<br>';
+                    $new = $notification->fetchNew();
+                    $new->user_id = $user->id;
+                    $new->setting_id = $n->id;
+                    $new->save();
+                }
+            }
+        }
+        
+        die;  
+    }
+         * 
+         */
+    
+    public function listingsAction()
+    {
+        $gena = array(792,793,794,795,796,797,802,805,808,809,815,816,818,819);
+        $ricardo = array(830,831,832,833,834,835,836,837,838,839,840,841,842,843,
+                         844,845,846,847,848,849,850,851,853,854,855,856,857,858,859,860,861,);
+                         
+        $vendors = new Zend_Db_Table('vendors');
+        $listings = new Zend_Db_Table('listings');
+        $overviews = new Zend_Db_Table('listing_overviews');
+        
+        $gena_lists = array();
+        $gena_count = 0;
+        
+        foreach($gena as $id){
+            if($gena_count < 5){
+                $select1 = $vendors->select();
+                $select1->where('id = ?', $id);
+                $vendor = $vendors->fetchRow($select1);
+                if(!is_null($vendor)){
+                    $select2 = $listings->select();
+                    $select2->where('vendor_id = ?', $vendor->id);
+                    $lists = $listings->fetchAll($select2);
+                    if(count($lists) > 0){
+                        foreach($lists as $list){
+                            if($gena_count < 5){
+                                $select3 = $overviews->select();
+                                $select3->where('listing_id = ?', $list->id);
+                                $overview = $overviews->fetchRow($select3);
+                                if(!is_null($overview->about)){
+                                    $gena_lists[] = array(
+                                        'vendor' => $vendor->toArray(),
+                                        'listing' => $list->toArray(),
+                                        'overview' => $overview->toArray()
+                                    );
+                                    $gena_count++;
+        }}}}}}}
+        
+        $ric_lists = array();
+        $ric_count = 0;
+        
+        foreach($ricardo as $id){
+            if($ric_count < 5){
+                $select1 = $vendors->select();
+                $select1->where('id = ?', $id);
+                $vendor = $vendors->fetchRow($select1);
+                if(!is_null($vendor)){
+                    $select2 = $listings->select();
+                    $select2->where('vendor_id = ?', $vendor->id);
+                    $lists = $listings->fetchAll($select2);
+                    if(count($lists) > 0){
+                        foreach($lists as $list){
+                            if($ric_count <= 5){
+                                $select3 = $overviews->select();
+                                $select3->where('listing_id = ?', $list->id);
+                                $overview = $overviews->fetchRow($select3);
+                                if(!is_null($overview->about)){
+                                    $ric_lists[] = array(
+                                        'vendor' => $vendor->toArray(),
+                                        'listing' => $list->toArray(),
+                                        'overview' => $overview->toArray()
+                                    );
+                                    $ric_count++;
+        }}}}}}}
+        
+        
+        
+        $this->view->genna = $gena_lists;
+        $this->view->ricardo = $ric_lists;
     }
 }
 

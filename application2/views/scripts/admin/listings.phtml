@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<title>Listings</title>
+	    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+        <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+  		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />   
+  		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+  		<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+		<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+		<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js?v=<?= $this->cssVC ?>"></script>
+		<script>
+        $(document).ready(function() {
+            $('a.lbc').fancybox({
+                padding: 0,
+                overlayColor: '#FFF',
+                overlayOpacity: '0.7',
+                showCloseButton: 'false',
+            });
+			
+			$('input[name=fdate]').each(function(){
+				$val = $(this).val();
+				$(this).datepicker({
+					dateFormat:'M dd, yy',
+					defaultDate:$val,
+					onSelect:function(date){
+						$('input[name=fdate]').datepicker('option','minDate', date);
+					},
+				});
+			});
+
+			$('input[name=to-date]').each(function(){
+				$val = $(this).val();
+				$(this).datepicker({
+					dateFormat:'M dd, yy',
+					defaultDate:$(this).val(),
+				});
+			});
+            $("#report_tabs").tabs();
+			$('#ui-datepicker-div').wrap('<div id="calendarContainer"></div>');
+			
+			$('.delete').click(function(){
+				return confirm('Are you sure?');
+			});
+
+        });
+    </script>
+
+	</head>
+	<body>
+		<div class="w1">
+    	<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
+
+			<div class="w3_admin">
+				<div class="sub_menu">
+					<h2><?php echo $this->title ?>. <span>There are <?php echo $this->numCount?></span></h2>
+					<a href="#new_listing" class="btn-1 lbc">Create New</a>
+					<ul class="sub_links">
+						<li <?php echo $this->listingContext=='all' ? 'class="select"' : '';?>><a href="/admin/listings/all">All</a></li>
+						<li <?php echo $this->listingContext=='activities' ? 'class="select"' : '';?>><a href="/admin/listings/activities">Activities</a></li>
+						<li <?php echo $this->listingContext=='hotels' ? 'class="select"' : '';?>><a href="/admin/listings/hotels">Hotels</a></li>
+						<li <?php echo $this->listingContext=='restaurants' ? 'class="select"' : '';?>><a href="/admin/listings/restaurants">Restaurants</a></li>
+						<li <?php echo $this->listingContext=='entertainments' ? 'class="select"' : '';?>><a href="/admin/listings/entertainments">Entertainments</a></li>
+						<li <?php echo $this->listingContext=='tourist' ? 'class="select"' : '';?>><a href="/admin/listings/tourist">Tourist Sights</a></li>
+					</ul>
+				</div><!--SUB_MENU-->
+            </div><!--W3-->
+
+
+			<div class="all_listing">
+				<div class="search_list">
+					<form action="" onsubmit="return false">
+						<input type="text" placeholder="Search Listings by Title" name="q" id="q" value="<?php echo $this->searchText?>" />
+						<input type="button" class="btn-1" value="Search" onclick="searchSubmit()" />
+					</form>
+					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
+				</div><!--SEARCH_LIST-->
+				<div class="list_content">
+					<table width="100%" border="0">
+						<tr>
+							<th width="250"><a href="<?php echo $this->url(array('sort'=>0, 'seq'=>$this->paramSort == 0 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Listing Name</a></th>
+							<th width="110"><a href="<?php echo $this->url(array('sort'=>1, 'seq'=>$this->paramSort == 1 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Partner Name</a></th>
+							<th width="120"><a href="<?php echo $this->url(array('sort'=>2, 'seq'=>$this->paramSort == 2 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Type</a></th>
+							<th width="96"><a href="<?php echo $this->url(array('sort'=>3, 'seq'=>$this->paramSort == 3 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Status</a></th>
+							<th width="150"><a href="<?php echo $this->url(array('sort'=>4, 'seq'=>$this->paramSort == 4 && $this->paramSequence !='desc' ? 'desc':'default'));?>">City</a></th>
+							<th width="139"><a href="<?php echo $this->url(array('sort'=>5, 'seq'=>$this->paramSort == 5 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Country</a></th>
+							<th width="67" class="last">&nbsp;</th>
+						</tr>
+						<?php foreach($this->paginator as $key=>$listing):?>
+                        <tr <?php echo $key==0 ? 'class="first"' : ''?>>
+							<td><?php echo $listing->title?></td>
+							<td><a href="/admin/users/view/partner/<?php echo $listing->vendor_id ?> "><?php echo $listing->vendor_name?></a></td>
+							<td><?php echo $listing->type_name?></td>
+							<td><?php echo $listing->status ? 'Active' : 'Inactive' ?></td>
+							<td><a href="<?php echo $this->url(array('ct'=>$listing->city_id, 'co'=>''));?>"><?php echo $listing->city_name?></a></td>
+							<td><a href="<?php echo $this->url(array('co'=>$listing->country_id, 'ct'=>''));?>"><?php echo $listing->country_name?></a></td>
+<!--							<td><a href="/admin/listings/edit/<?= $listing->id ?>" class="edit">Edit</a></td>-->
+							<td class="drp_dn">
+								<a href="" class="btn-10"><span>Actions</span></a>
+								<ul>
+									<li class="arrow"></li>
+									<li><a href="/admin/listings/edit/<?= $listing->id ?>">Edit Listing</a></li>
+									<li><a target="_blank" href="/admin/listings/preview/<?= $listing->id ?>">View Preview</a></li>
+									<li><a href="/admin/listings/delete/<?= $listing->id ?>" class="delete">Delete Listing</a></li>
+								</ul> 
+							</td>
+						</tr>
+                        <?php endforeach;?>
+					</table>
+				</div><!--LIST-CONTENT-->
+				<div class="paging_bottom">
+					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort)); ?>
+				</div><!--PAGING_BOTTOM-->
+			</div><!--ALL_LISTING-->
+			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+		</div>
+		<!-- closes w1 -->
+    	
+		<?php echo $this->partial('admin_partials/report.phtml', array('main_categories'=>$this->main_categories, 'countries'=>$this->countries)); ?>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('.drp_dn .btn-10').click(function() {
+		            $pref = $(this).parents('.drp_dn');
+		            $('ul', $pref).toggleClass('show');
+		            return false
+		        });
+			});
+		</script>
+        <script>
+			function searchSubmit(){
+				location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
+			}
+			$("#q").keypress(function(e) {
+				var keycode;
+				if (window.event) keycode = window.event.keyCode;
+				else if (e) keycode = e.which;
+				else return true;
+				if (keycode == 13) {
+				   searchSubmit();
+				   return false;
+				}
+				else
+				   return true;
+			});
+		</script>
+		
+	</body>
+</html>

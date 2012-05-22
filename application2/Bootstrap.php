@@ -12,6 +12,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router = $frontController->getRouter();
         $router->removeDefaultRoutes();
         
+        $languages = array('en'=>'en-US','es'=>'es-ES');
+        $lang = $this->getDefaultLanguage();
+        $lang = strtolower($lang[0].$lang[1]);
+        $lang = (isset($languages[$lang])) ? $languages[$lang] : 'es-US';
+        
         $router->addRoute(
             'index',
             new Zend_Controller_Router_Route(
@@ -20,197 +25,271 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     'controller' => 'index',
                     'action'     => 'index',
                     'module'     => 'default',
+                    'lang'       => $lang
+                )
+            )
+        );
+        $router->addRoute(
+            'indexLang',
+            new Zend_Controller_Router_Route(
+                '/:lang',
+                array(
+                    'controller' => 'index',
+                    'action'     => 'index',
+                    'module'     => 'default',
+                    'lang'       => $lang
+                )
+            )
+        );
+        $router->addRoute(
+            'country',
+            new Zend_Controller_Router_Route(
+                '/:lang/:country',
+                array(
+                    'controller' => 'index',
+                    'action'     => 'city',
+                    'module'     => 'default',
+                    'city'       => 'default'
                 )
             )
         );
         $router->addRoute(
             'login',
             new Zend_Controller_Router_Route(
-                '/login',
+                '/:lang/login',
                 array(
                     'controller' => 'session',
                     'action'     => 'login',
                     'module'     => 'default',
+                    'lang'       => $lang
                 )
             )
         );
         $router->addRoute(
             'logout',
             new Zend_Controller_Router_Route(
-                '/logout',
+                '/:lang/logout',
                 array(
                     'controller' => 'session',
                     'action'     => 'logout',
                     'module'     => 'default',
-                )
-            )
-        );
-        /*$router->addRoute(
-            'signup',
-            new Zend_Controller_Router_Route(
-                '/signup',
-                array(
-                    'controller' => 'session',
-                    'action'     => 'signup',
-                    'module'     => 'default',
+                    'lang'       => $lang
                 )
             )
         );
         $router->addRoute(
-            'vendor-signup',
+            'signup',
             new Zend_Controller_Router_Route(
-                '/vendor-signup',
+                '/:lang/signup',
                 array(
                     'controller' => 'session',
-                    'action'     => 'vendor',
+                    'action'     => 'signup',
                     'module'     => 'default',
+                    'lang'       => $lang
+                )
+            )
+        );
+        $router->addRoute(
+            'about',
+            new Zend_Controller_Router_Route(
+                '/:lang/about',
+                array(
+                    'controller' => 'index',
+                    'action'     => 'about',
+                    'module'     => 'default',
+                    'lang'       => $lang
+                )
+            )
+        );
+        $router->addRoute(
+            'faqs',
+            new Zend_Controller_Router_Route(
+                '/:lang/faqs',
+                array(
+                    'controller' => 'index',
+                    'action'     => 'faqs',
+                    'module'     => 'default',
+                    'lang'       => $lang
                 )
             )
         );
         $router->addRoute(
             'terms',
             new Zend_Controller_Router_Route(
-                '/terms',
+                '/:lang/terms',
                 array(
                     'controller' => 'index',
                     'action'     => 'terms',
                     'module'     => 'default',
+                    'lang'       => $lang
                 )
             )
         );
         $router->addRoute(
-            'policy',
+            'policies',
             new Zend_Controller_Router_Route(
-                '/policy',
+                '/:lang/policies',
                 array(
                     'controller' => 'index',
-                    'action'     => 'policy',
+                    'action'     => 'policies',
                     'module'     => 'default',
+                    'lang'       => $lang
                 )
             )
         );
         $router->addRoute(
-            'reward-store',
+            'contact',
             new Zend_Controller_Router_Route(
-                '/store',
+                '/:lang/contact',
                 array(
-                    'controller' => 'store',
-                    'action'     => 'index',
+                    'controller' => 'index',
+                    'action'     => 'contact',
                     'module'     => 'default',
+                    'lang'       => $lang
+                )
+            )
+        );
+        $router->addRoute(
+            'thanks',
+            new Zend_Controller_Router_Route(
+                '/:lang/thanks',
+                array(
+                    'controller' => 'session',
+                    'action'     => 'thanks',
+                    'module'     => 'default',
+                    'lang'       => $lang
+                )
+            )
+        );
+        $router->addRoute(
+            'mytrips',
+            new Zend_Controller_Router_Route(
+                '/:lang/mytrips',
+                array(
+                    'controller' => 'index',
+                    'action'     => 'mytrips',
+                    'module'     => 'default',
+                    'lang'       => $lang
                 )
             )
         );
         $router->addRoute(
             'city',
             new Zend_Controller_Router_Route(
-                '/:country/:city',
+                '/:lang/:country/:city',
                 array(
                     'controller' => 'index',
                     'action'     => 'city',
                     'module'     => 'default',
+                    'lang'       => $lang
                 )
             )
         );
         $router->addRoute(
             'signup_facebook',
             new Zend_Controller_Router_Route(
-                '/signup/facebook',
+                '/:lang/signup/facebook',
                 array(
                     'controller' => 'session',
                     'action'     => 'signupfacebook',
                     'module'     => 'default',
+                    'lang'       => $lang
                 )
             )
         );
         $router->addRoute(
             'signup_friends',
             new Zend_Controller_Router_Route(
-                '/signup/friends',
+                '/:lang/signup/friends',
                 array(
                     'controller' => 'session',
                     'action'     => 'signupfriends',
                     'module'     => 'default',
+                    'lang'       => $lang
                 )
             )
         );
         $router->addRoute(
             'signup_places',
             new Zend_Controller_Router_Route(
-                '/signup/places',
+                '/:lang/signup/places',
                 array(
                     'controller' => 'session',
                     'action'     => 'signupplaces',
                     'module'     => 'default',
+                    'lang'       => $lang
                 )
             )
-        );*/
+        );
         $router->addRoute(
             'signup-vendor',
             new Zend_Controller_Router_Route(
-                '/signup/vendor',
+                '/:lang/signup/vendor',
                 array(
                     'controller' => 'session',
                     'action'     => 'vendorsignup',
                     'module'     => 'default',
+                    'lang'       => $lang
                 )
             )
-        );/*
+        );
         $router->addRoute(
             'crontasks',
             new Zend_Controller_Router_Route(
-                '/crontasks/:action',
+                '/:lang/crontasks/:action',
                 array(
                     'controller' => 'crontasks',
                     'action'     => ':action',
                     'module'     => 'default',
+                    'lang'       => $lang
                 )
             )
         );
         $router->addRoute(
             'listing',
             new Zend_Controller_Router_Route(
-                '/:country/:city/:listing',
+                '/:lang/:country/:city/:listing',
                 array(
                     'controller' => 'index',
                     'action'     => 'listing',
                     'module'     => 'default',
+                    'lang'       => $lang
                 )
             )
         );
         $router->addRoute(
-            'city_filter',
+            'reset',
             new Zend_Controller_Router_Route(
-                '/:country/:city/filter/:cat/:subcat/:sort/:stars',
+                '/:lang/reset/:email/:token/',
                 array(
                     'controller' => 'index',
-                    'action'     => 'city',
+                    'action'     => 'reset',
                     'module'     => 'default',
-                    'cat'        => 'all',
-                    'subcat'     => 'all',
-                    'sort'       => 'newest',
-                    'stars'      => 'all',
+                    'email'      => 'default',
+                    'token'      => 'default',
+                    'lang'       => $lang
                 )
             )
         );
         $router->addRoute(
-            'listing_search',
+            'confirmemail',
             new Zend_Controller_Router_Route(
-                '/search/',
+                '/:lang/confirmemail/:email/:token/',
                 array(
-                    'controller' => 'index',
-                    'action'     => 'search',
+                    'controller' => 'session',
+                    'action'     => 'confirmemail',
                     'module'     => 'default',
-                    'cat'        => 'all',
-                    'subcat'     => 'all',
-                    'sort'       => 'newest',
-                    'stars'      => 'all',
+                    'email'      => 'default',
+                    'token'      => 'default',
+                    'lang'       => $lang
                 )
             )
-        );*/
+        );
+        
         $router->addRoute(
             'provider',
             new Zend_Controller_Router_Route(
-                '/provider/:action/:task/:id/:tab',
+                '/:lang/provider/:action/:task/:id/:tab',
                 array(
                     'controller' => 'provider',
                     'action'     => 'listings',
@@ -218,6 +297,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     'task'       => 'default',
                     'id'         => 'default',
                     'tab'        => 'default',
+                    'lang'       => $lang
                 )
             )
         );
@@ -230,119 +310,215 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     'action'     => ':action',
                     'module'     => 'default',
                     'id'         => 'default',
+                    'lang'       => $lang
                 )
             )
-        );/*
+        );
         $router->addRoute(
             'user',
             new Zend_Controller_Router_Route(
-                '/user/:action/:task/:id',
+                '/:lang/user/:action/:task/:id',
                 array(
                     'controller' => 'user',
                     'action'     => 'account',
                     'module'     => 'default',
                     'task'       => 'default',
                     'id'         => 'default',
+                    'lang'       => $lang
                 )
             )
-        );*/
+        );
         $router->addRoute(
             'cart',
             new Zend_Controller_Router_Route(
-                '/cart/:action/:task/:id',
+                '/:lang/cart/:action/:task/:id',
                 array(
                     'controller' => 'cart',
                     'action'     => 'index',
                     'module'     => 'default',
                     'task'       => 'default',
-                    'id'         => 'default'
+                    'id'         => 'default',
+                    'lang'       => $lang
                 )
             )
-        );/*
+        );
         $router->addRoute(
             'passports',
             new Zend_Controller_Router_Route(
-                '/users/:username/:action/:task/:id',
+                '/:lang/users/:username/:action/:task/:id',
                 array(
                     'controller' => 'passport',
                     'action'     => 'index',
                     'module'     => 'default',
                     'username'   => '_default',
                     'task'       => 'default',
-                    'id'         => 'default'
+                    'id'         => 'default',
+                    'lang'       => $lang
+                )
+            )
+        );
+        $router->addRoute(
+            'phone',
+            new Zend_Controller_Router_Route(
+                '/phone/:action',
+                array(
+                    'controller' => 'calls',
+                    'action'     => 'index',
+                    'module'     => 'default',
+                )
+            )
+        );
+        $router->addRoute(
+            'chat',
+            new Zend_Controller_Router_Route(
+                '/chat/:action',
+                array(
+                    'controller' => 'chat',
+                    'action'     => 'index',
+                    'module'     => 'default',
                 )
             )
         );
         $router->addRoute(
             'trips_country',
             new Zend_Controller_Router_Route(
-                '/trips/:country',
+                '/:lang/trips/:country',
                 array(
                     'controller' => 'trips',
                     'action'     => 'country',
                     'module'     => 'default',
                     'country'    => 'default',
+                    'lang'       => $lang
                 )
             )
         );
         $router->addRoute(
             'trips_index',
             new Zend_Controller_Router_Route(
-                '/trips',
+                '/:lang/trips',
                 array(
                     'controller' => 'trips',
                     'action'     => 'index',
-                    'module'     => 'default'
+                    'module'     => 'default',
+                    'lang'       => $lang
                 )
             )
         );
         $router->addRoute(
             'trips_view',
             new Zend_Controller_Router_Route(
-                '/trips/view/:task',
+                '/:lang/trips/view/:task',
                 array(
                     'controller' => 'trips',
                     'action'     => 'view',
                     'module'     => 'default',
-                    'task'    => 'default',
+                    'task'       => 'default',
+                    'lang'       => $lang
                 )
             )
         );
         $router->addRoute(
             'trips_itinerary',
             new Zend_Controller_Router_Route(
-                '/trips/itinerary/:task',
+                '/:lang/trips/itinerary/:task',
                 array(
                     'controller' => 'trips',
                     'action'     => 'itinerary',
                     'module'     => 'default',
-                    'task'    => 'default',
+                    'task'       => 'default',
+                    'lang'       => $lang
                 )
             )
         );
         $router->addRoute(
             'trips_search',
             new Zend_Controller_Router_Route(
-                '/trips/search',
+                '/:lang/trips/search',
                 array(
                     'controller' => 'trips',
                     'action'     => 'search',
                     'module'     => 'default',
+                    'lang'       => $lang
                 )
             )
         );
         $router->addRoute(
             'trips_check',
             new Zend_Controller_Router_Route(
-                '/trips/checkprice/:id',
+                '/:lang/trips/checkprice/:id',
                 array(
                     'controller' => 'trips',
                     'action'     => 'checkprice',
                     'module'     => 'default',
-                    'id'         => 'default'
+                    'id'         => 'default',
+                    'lang'       => $lang
                 )
             )
-        );*/
+        );
+        $router->addRoute(
+            'admin',
+            new Zend_Controller_Router_Route(
+                '/admin/:action/:task/:page/:sort/:seq/:q/:co/:ct',
+                array(
+                    'controller' => 'admin',
+                    'action'     => 'listings',
+                    'module'     => 'default',
+                    'task'       => 'all',
+                    'page'       => 1,
+                    'sort'       => 'default',
+                    'seq'	 => 'default',
+                    'q'		 => null,
+                    'co'         => null,
+                    'ct'         => null
+                )
+            )
+        );
+        
+    }
+    
+    
+    
+    private function getDefaultLanguage() {
+       if (isset($_SERVER["HTTP_ACCEPT_LANGUAGE"]))
+          return $this->parseDefaultLanguage($_SERVER["HTTP_ACCEPT_LANGUAGE"]);
+       else
+          return $this->parseDefaultLanguage(NULL);
+    }
+
+    private function parseDefaultLanguage($http_accept, $deflang = "en") {
+        if(isset($http_accept) && strlen($http_accept) > 1)  
+        {
+            $x = explode(",",$http_accept);
+            foreach ($x as $val) {
+                if(preg_match("/(.*);q=([0-1]{0,1}\.\d{0,4})/i",$val,$matches))
+                    $lang[$matches[1]] = (float)$matches[2];
+                else
+                    $lang[$val] = 1.0;
+            }
+
+        
+            $qval = 0.0;
+            foreach ($lang as $key => $value) {
+                if ($value > $qval) {
+                    $qval = (float)$value;
+                    $deflang = $key;
+                }
+            }
+        }
+        return strtolower($deflang);
+    }
+    
+    protected function _initLogger()
+    {
+        $writer = new Zend_Log_Writer_Stream(APPLICATION_PATH.'/logs/activity.log');
+        $logger = new Zend_Log($writer);
+        Zend_Registry::set('activity_logger', $logger);
+    }
+    
+    protected function _initStripeConfig()
+    {
+        $config = $this->getOption('stripe');
+        Zend_Registry::set('stripe', $config);
     }
     
     protected function _initCache()
@@ -351,7 +527,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $back = new Zend_Cache_Backend_Memcached(array(
             'servers'  => array(array(
                 'host' => $config['host'],
-                'port' => $config['port'],  
+                'port' => $config['port'],
             )),
             'compression' => $config['compression'],
         ));
@@ -366,6 +542,54 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         
         $Cache = Zend_Cache::factory($front, $back);
         Zend_Registry::set('cache', $Cache);
+    }
+    
+    protected function _initTwilioConfig()
+    {
+        $config = $this->getOption('twilio');
+        Zend_Registry::set('twilio', $config);
+    }
+    
+    protected function _initSSL()
+    {
+        $auth = Zend_Auth::getInstance();
+        if($auth->hasIdentity()){
+            if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on') {
+                header("HTTP/1.1 301 Moved Permanently");
+                header("Location: https://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"]);
+            }
+        }
+    }
+    
+    protected function _initThumbnailSettings()
+    {
+        $convert = $this->getOption('convert');
+        Zend_Registry::set('convert',$convert['path']);
+    }
+    
+    protected function _initNewsletterDb()
+    {
+        $confing = $this->getOption('newslater');
+        $adapter = new Zend_Db_Adapter_Mysqli($confing);
+        Zend_Registry::set('newsletter_db', $adapter);
+    }
+    
+    protected function _initFacebook()
+    {
+        $config = $this->getOption('facebook');
+        Zend_Registry::set('facebook', $config);
+    }
+    
+    protected function _initVersionControl() 
+    {
+        $conf = $this->getOption('css');
+        Zend_Registry::set('vc',$conf['version_control']);
+    }
+    
+    protected function _initGoogle()
+    {
+        $conf = $this->getOption('googleapis');
+        Zend_Registry::set('gl', $conf);
     }
 }
 

@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->trip->title ?>, <?= $this->trip->country ?> : Itinerary | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" media="screen" />
+	<link type="text/css" rel="stylesheet" href="/css2/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
+	<link rel="stylesheet" href="/css2/datepicker.css?v=<?= $this->cssVC ?>" type="text/css" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>    
+	<div class="w2">
+    	<div class="w3 itinerary">
+        	<div class="wrapper">
+        	    <a href="#dates_lb" class="lb btn-1">Buy Itinerary</a>
+        	    <h2><?= $this->trip->title ?></h2>
+        	</div><!-- closes ttl -->
+        </div>
+        <div class="wrapper trip-itinerary">
+            <div class="box days">
+            	<ul class="menu">
+                    <li><a href="/admin/trips/preview/<?= $this->trip->id ?>">Overview</a></li>
+                    <li class="active"><a href="/admin/trips/itinerary/<?= $this->trip->id ?>">Itinerary</a></li>
+                    <li class="back"><a href="/admin/trips/edit/1/<?= $this->trip->id ?>">&larr; Back to Edit Trip</a></li>
+            	</ul>
+                <a href="" class="prev">Previous Day</a>
+                <a href="" class="next">Next Day</a>
+                <div class="days-cycle">
+                	<?php $times = array('Stay','Morning','Afternoon','Night','Stay') ?>
+                	<?php for($i=1;$i<=count($this->listingsbyday);$i++): ?>
+                    <div class="day">
+                        <div class="day-ttl">
+                            <strong>Day <?= $i ?> of <?= $this->trip->days ?></strong>
+                            <h2><?= $this->trip->title ?></h2>
+                        </div><!-- closes day-ttl -->
+                        <?php foreach($this->listingsbyday[$i] as $time => $listings): ?>
+                        <div class="day-section">
+                            <span class="sub-ttl"><?= ucfirst($time) ?> Itinerary</span>
+                            <div class="clear"></div>
+                            <?php foreach($listings as $listing): ?>
+                            <div class="day-item">
+                                <div class="left">
+                                    <?= $this->thumbnail(array('width'=>267,'height'=>168), $listing->image, '', '267:168') ?>
+                                </div><!-- closes left -->
+                                <div class="right">
+                                	<?php if($listing->start != '00:00:00'): ?>
+                                    <strong><?= date('g:i A',strtotime($listing->start)) ?> - <?= date('g:i A',strtotime($listing->end)) ?></strong>
+                                    <?php else: ?>
+                                    <strong><?= $times[$listing->time] ?></strong>
+                                    <?php endif ?>
+                                    <h4><?= $listing->title ?></h4>
+                                    <ul>
+                                    	<?php $desc = explode("\n",$listing->description) ?>
+                                        <?php foreach($desc as $d): ?>
+                                        <?php $d = trim($d); if(!empty($d)): ?>
+                                        <li><?= $d ?></li>
+                                        <?php endif ?>
+                                        <?php endforeach ?>
+                                    </ul>
+                                </div><!-- closes right -->
+                            </div><!-- closes day-item -->
+                            <?php endforeach ?>
+                        </div><!-- closes day-section -->
+                        <?php endforeach ?>
+                    </div><!-- closes day -->
+                    <?php endfor ?>
+                </div><!-- closes day-cycle -->
+                <div class="result">
+                    <a href="#dates_lb" class="lb btn-1">Buy Itinerary</a>
+                    <span><sup>$</sup><?= $this->trip->price ?> <em>per person</em></span>
+                </div><!--RESULT-->
+            </div><!-- closes days -->
+        </div><!-- closes wrapper -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->	
+<div class="hidden">
+	<div id="dates_lb">
+    	<div class="lb-dates">
+			<div class="left">
+				<h2>First, select the dates you want to go on your vacation.</h2>
+				<ul>
+					<li>Your trip is going to be <?= $this->trip->days ?> days long.</li>
+					<li>This trip is available for children.</li>
+					<li>Maximum occupation is <?= $this->trip->max ?> people.</li>
+                    <?php if($this->trip->min > 1): ?>
+                    <li>Minimum occupation is <?= $this->trip->min ?> people.</li>
+                    <?php else: ?>
+					<li>No minimum  required.</li>
+                    <?php endif ?>
+                    <li><em>The price listed is an estimation, you will get a final price depending on your dates and ocupation requirements</em></li>
+				</ul>
+			</div><!-- closes left -->
+			<div class="right">
+				<div id="datepicker"></div>
+                <form action="/en-US/cart/purchasetrip" method="post">
+                    <div class="occ">
+                        <label>Adults</label>
+                        <select name="adults">
+							<?php for($i=$this->trip->min; $i<=$this->trip->max; $i++): ?>
+                            <?php if($i==$this->trip->min): ?>
+                            <option value="<?= $i ?>">min <?= $i ?></option>
+                            <?php elseif($i==$this->trip->max): ?>
+                            <option value="<?= $i ?>">max <?= $i ?></option>
+                            <?php else: ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                            <?php endif ?>
+                        	<?php endfor ?>
+                        </select>
+                        <?php if($this->trip->kids): ?>
+                        <label>Children</label>
+                        <select name="kids">
+                        	<option value="0">None</option>
+                        	<?php for($i=$this->trip->min; $i<=$this->trip->max; $i++): ?>
+                            <?php if($i==$this->trip->min): ?>
+                            <option value="<?= $i ?>">min <?= $i ?></option>
+                            <?php elseif($i==$this->trip->max): ?>
+                            <option value="<?= $i ?>">max <?= $i ?></option>
+                            <?php else: ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                            <?php endif ?>
+                        	<?php endfor ?>
+                        </select>
+                        <?php endif ?>
+                    </div><!-- closes occ -->
+                    <div class="occ">
+                        <input type="submit" class="btn-1 noclean" value="Check Availability" />
+                        <span onclick="$.fancybox.close()" class="btn-4">Cancel</span>
+                    </div><!-- closes occ -->
+                    <input type="hidden" name="checkin" value="" />
+                    <input type="hidden" name="token" value="<?= $this->trip->token ?>" />
+                    <input type="hidden" name="trip" value="<?= $this->trip->id ?>" />
+                    <input type="hidden" name="triptoken" value="<?= $this->trip->token ?>" />
+                </form>
+			</div><!-- closes right -->
+		</div><!-- closes dates -->
+    </div>
+</div>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/datepicker.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/trips/view.js?v=<?= $this->cssVC ?>"></script>
+<input type="hidden" id="tripDates" value="<?= $this->trip->days ?>" />
+<style type="text/css">
+.desc-wrapper #pager a { width:<?= (100 / count($this->images)) . '%'; ?>;} .hidden { display:none;}
+.datepicker a.ui-state-active { background-color: #60B5F7; color: #FFFFFF;}
+</style>
+</body>
+</html>

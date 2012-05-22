@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+	<meta content="noindex,nofollow" name="robots" />
+	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+	<title>Thanks for joining, Check your email | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+	<link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+	<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+</head>
+<body>
+<div class="w1 profile">
+	<?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>
+    <div class="w2">
+        <div class="wrapper">
+            <div id="check_email">
+                <div class="graphic">
+                    <h2>You've got mail!</h2>
+                    <h3>Our messengers just left you a confirmation request in your Inbox.</h3>
+                    <h4>What happens after I activate my account?</h4>
+                    <p>After you active your account, you'll gain access to our amazing application, meaning that you'll be able to create custom trips, browse itineraries and locations you may want to visit. Sounds good right?</p>
+                </div><!--GRAPHIC-->
+                <div class="features">
+                    <h5>Getting Started with TripFab</h5>
+                    <div class="single discover">
+                        <h6>Discover Destinations</h6>
+                        <p>Explore new and exciting travel destinations, all around the globe. Read about recommended things to do, and look over reviews and advice written by travelers who have actually been there.</p>
+                    </div><!--SINGLE-->
+                    <div class="single create">
+                        <h6>Create Custom Trips</h6>
+                        <p>Create your own custom trip to perfectly suit your needs. Day by day, you can build your very own itinerary, choosing where you want to stay, what you want to do, and where you want to eat.</p>
+                    </div><!--SINGLE-->
+                    <div class="single buy">
+                        <h6>Buy Pre-planned Trips</h6>
+                        <p>Don't feel like doing any research? If creating a custom trip feels like a hassle, choose from our immense collection of pre-made trips, which have been designed with the utmost ease and comfort in mind. </p>
+                    </div><!--SINGLE-->
+                </div><!--FEAUTURES-->
+            </div><!--CHECK_EMAIL-->
+        </div><!-- closes user-backend --> 
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+</body>
+</html>

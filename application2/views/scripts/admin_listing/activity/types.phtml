@@ -1,0 +1,59 @@
+<?php if(is_null($this->listing->min) and is_null($this->listing->max)): ?>
+<div class="lstng-details rooms">
+	<div class="main-ttl">
+		<p><strong>Activity types</strong><a href="/admin/listings" class="back_btn">&larr; Back to Listings</a></p>    		
+	</div><!-- closes main-ttl -->
+	<div class="lstng-detail">
+	    <div class="inner-ttl">
+	        <a href="/admin/listings/newtype/<?= $this->listing->id ?>" class="link-5">Add a New Activity Type</a>
+	        <?= $this->listing->title ?> has <?= count($this->types) ?> Types 
+	    </div><!-- closes inner-ttl -->
+	</div><!--LSTNG-DETAIL-->
+    <?php if(count($this->types) > 0): ?>
+    <ul>
+    	<?php foreach($this->types as $type): ?>
+        <li>
+            <strong><?= $type->name ?></strong>
+            <div>
+                <a href="#remove_type_<?= $type->id ?>" class="lb remove">Remove</a>
+                <a href="/admin/listings/type/<?= $type->id ?>">Edit Activity Type</a>
+            </div>
+        </li>
+        <?php endforeach ?>
+    </ul>
+    <?php endif ?>
+</div><!-- closes lstng-details -->
+<?php else: ?>
+<div class="lstng-details rooms">
+	<div class="main-ttl">
+		<p><strong>Activity types</strong><a href="/admin/listings" class="back_btn">&larr; Back to Listings</a></p>    		
+	</div><!-- closes main-ttl -->
+    <div class="inner-ttl">
+	    This tab is disabled. To enabled this tab go to <a href="/admin/listings/edit/<?= $this->listing->id ?>">General Information</a>, under Capacity Options select multiple
+    </div><!-- closes inner-ttl -->
+</div>
+<?php endif ?>
+<div class="hidden">
+	<?php if(count($this->types) > 0): ?>
+	<?php foreach($this->types as $room): ?>
+    <div id="remove_type_<?= $room->id ?>" class="lb-forgot delete">
+        <form action="" method="post" id="form_listing_delete_<?= $room->id ?>">
+            <div class="ttl">Delete "<?= $room->name ?>"</div>
+            <div class="content">
+                <p>Are you sure you want to remove "<?= $room->name ?>"?</p>
+            </div><!-- closes content -->
+            <div class="bottom">
+                <input type="submit" class="btn-1" value="Delete" />
+                <span class="btn-4" onclick="$.fancybox.close()">Cancel</span>				
+            </div><!-- closes bottom -->        
+            <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+            <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+            <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'delete-type') ?>" />
+            <input type="hidden" name="_task" value="<?= md5('delete_type') ?>" />
+            <input type="hidden" name="typetoken" value="<?= md5($room->id) ?>" />
+            <input type="hidden" name="typeid" value="<?= $room->id ?>" />
+        </form>
+    </div>
+	<?php endforeach ?>
+    <?php endif ?>
+</div>

@@ -3,35 +3,15 @@
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->listing->title ?> : New Room | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-	<script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-			$bed = 1;
-			$('a#addNewBedType').click(function(){
-				$item = $('.bed.new').html();
-				$item = $('<div class="bed">'+$item+'</div>');
-				$('select[name=quantity]', $item).attr('name','beds['+$bed+'][quantity]');
-				$('select[name=type]', $item).attr('name','beds['+$bed+'][type]');
-				$('.bed.new').before($item);
-				$bed++;
-				return false;
-			});
-			$('a.removeBed').live('click',function(){
-				$bed = $(this).parent('.bed');
-				$bed.fadeOut('fast', function(){
-					$('select', $bed).attr('disabled', 'disabled');
-				});
-				return false;
-			});
-        });
-    </script>
-    <style type="text/css">
-	textarea.wysiwyg { width:730px; height:500px;}
-	</style>
+    <title><?= $this->listing->title ?> - New Room | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1">
@@ -55,5 +35,30 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+		$bed = 1;
+		$('a#addNewBedType').click(function(){
+			$item = $('.bed.new').html();
+			$item = $('<div class="bed">'+$item+'</div>');
+			$('select[name=quantity]', $item).attr('name','beds['+$bed+'][quantity]');
+			$('select[name=type]', $item).attr('name','beds['+$bed+'][type]');
+			$('.bed.new').before($item);
+			$bed++;
+			return false;
+		});
+		$('a.removeBed').live('click',function(){
+			$bed = $(this).parent('.bed');
+			$bed.fadeOut('fast', function(){
+				$('select', $bed).attr('disabled', 'disabled');
+			});
+			return false;
+		});
+    });
+</script>
+<style type="text/css">
+textarea.wysiwyg { width:730px; height:500px;}
+</style>
 </body>
 </html>

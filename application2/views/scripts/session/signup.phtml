@@ -3,40 +3,32 @@
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title>Sign Up | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('input:not(.noclean)').ToggleInputValue();
-        });
-    </script>
-    <style type="text/css">
-	.error { border:1px solid #F00; padding:5px; margin-bottom:10px; color:#F00; font-style:italic;}
-	.hidden { display:none;}
-	</style>
+    <title>Join us! | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>        
     <div class="w2">
         <div class="small-wrapper">
-            <div class="sign-box">
-                <div class="ttl">
-                    Join Tripfab
-                </div><!-- closes ttl -->
-                <a href="<?= $this->fbLoginUrl ?>" class="fb"><img src="/images2/t-28.png" alt="" /></a>
+            <div class="sign-box signLog">
+                <div class="top">
+                	<h2>Sign up for TripFab. <span>It’s Free!</span></h2>
+                	<p>You need to create an account to continue</p>
+                </div><!--TOP-->
+                <a href="#" class="fb js-fb-signup"></a>
                 <div class="content">
                     <span>Or</span>
                     <?php if($this->errors): ?>
                     <div class="error">
                     	<?php foreach($this->errors as $err): ?>
-	                    	<?= $err ?><br />
+                        <p><?= $err ?></p>
                         <?php endforeach ?>
                     </div>
                     <?php endif ?>
@@ -45,50 +37,77 @@
                     	<?= $this->alerts ?>
                     </div>
                     <?php endif ?>
-                    <form method="post">
+                    <form method="post" id="js-main-signup-form">
                         <fieldset>
-                        	<?php if($this->name): ?>
-                            <input name="name" type="text" value="<?= $this->name ?>" class="noclean in-1 name required" />
+                        	<?php if($this->name): ?>                          
+                            <div class="">
+                            	<input name="name" type="text" value="<?= $this->name ?>" placeholder="Name" class="noclean in-1 name required" />
+                            </div>
                             <?php else: ?>
-                            <input name="name" type="text" value="Name" class="in-1 name required" />
+                            <div class="">
+                            	<input name="name" type="text" value="" placeholder="Name" class="in-1 name required" />
+                            </div><!--ERRORIN-->
                             <?php endif ?>
-                            <?php if($this->lname): ?>
-                            <input name="lname" type="text" value="<?= $this->lname ?>" class="noclean in-1 lastname required" />
-                            <?php else: ?>
-                            <input name="lname" type="text" value="Last Name" class="in-1 lastname required" />
-                            <?php endif ?>
+                            <div class="">
                             <?php if($this->email): ?>
-                            <input name="email" type="text" value="<?= $this->email ?>" class="noclean in-2 email required" />
+                            <input name="email" type="text" placeholder="E-Mail" value="<?= $this->email ?>" class="noclean in-2 email required" />
                             <?php else: ?>
-                            <input name="email" type="text" value="E-Mail" class="in-2 email required" />
+                            <input name="email" type="text" value="" placeholder="E-Mail" class="in-2 email required" />
                             <?php endif ?>
-                            <input name="password" type="password" value="Password" class="in-3 password required" />
-                            <input name="password2" type="password" value="Confirm Password" class="in-4 password required" />
-                            <select name="country_id">
-                                <option value="">Select your country</option>
-                                <?php foreach($this->countries as $c): ?>
-                                <?php $selected = ($this->country == $c->id) ? 'selected="selected"' : ''; ?>
-                                <option <?= $selected ?> value="<?= $c->id ?>"><?= $c->title ?></option>
-                                <?php endforeach ?>
-                            </select>
+                            </div>
+                            <div class="">
+                            <input id="password" name="password" type="password" placeholder="Password" value="" class="in-3 password required" />
+                            </div>
+                            <div class="">
+                            <input name="password2" type="password" placeholder="Re-enter Password" value="" class="in-4 password required" />
+                            </div>                            
                         </fieldset>
                         <fieldset>
-                            <input type="checkbox" />
-                            <label>Remember me next time</label>
-                            <input type="submit" value="Create Account" class="btn-1" />
+                            <p>By clicking "Create Account" or "Sign up with Facebook," <br /> you confirm that you accept the <a target="_blank" href="/terms">Terms of Service</a>.</p>
                         </fieldset>
-                    </form>
-                </div><!-- closes content -->
-                <div class="foot">
-                    By clicking "Create Account" or "Sign up with Facebook," <br /> you confirm that you accept the <a href="">Terms of Service</a>.
-                </div><!-- closes foot -->
+                    
+		                </div><!-- closes content -->
+		                <div class="foot">
+		                	<label><input type="checkbox" /> Remember me next time</label>
+		                	<input type="submit" value="Create Account" class="btn-1 noclean" />
+		                    
+		                </div><!-- closes foot -->
+	                </form>
             </div><!-- closes sign-box -->
-            <div class="sign-box">
+            <div class="sign-box last">
                 <p>Already a Tripfab member? <a href="/login">Sign In Now!</a></p>
             </div><!-- closes sign-box -->
         </div><!-- closes small-wrapper -->
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
-</div><!-- closes w1 -->	
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+$(function(){
+	$('#js-main-signup-form').submit(function(){
+		$isValid = $(this).validate({
+			rules: {
+				name:'required',
+				email:'required email',
+				password:'required',
+				password2:{
+					equalTo:'#password'
+				},				
+			},
+			errorPlacement:function(error, element) {
+				if(error.text() == "") {
+					element.parent('div').removeClass('errorIn');
+					element.parent('div').find('p').remove();
+				} else {
+					element.parent('div').addClass('errorIn');
+					element.parent('div').append('<p><em></em>'+error.text()+'</p>');
+				}
+			}
+		});
+		
+		return $isValid.form();
+	});
+});
+</script>
 </body>
 </html>

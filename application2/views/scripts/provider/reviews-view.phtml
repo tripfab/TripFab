@@ -3,61 +3,144 @@
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->user->name ?> : Reviews | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-	<script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('textarea').elastic();				
-            $('input, textarea').ToggleInputValue();
-            $('form select').jqTransSelect();
-        });
-    </script>
+    <title><?= $this->user->name ?> - Reviews for listings | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
     <div class="w2">
         <div class="wrapper user-messages">
-            <?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'Reviews','parentActive'=>'Reviews \&amp; Questions')); ?>			
-            <div id="features">
-                <div class="top">
-                    <img src="/images2/img-54.png" alt="" class="izq" />
-                    <h2>Reviews &amp; Questions.</h2>
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lorem risus, malesuada et elementum sit amet.</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lorem risus, malesuada et elementum sit amet. Vivamus elementum ipsum sit amet purus venenatis sed lacinia arcu euismod. Integer ut dignissim ligula. Proin sed lorem enim. Aliquam fermentum lacus sed urna consequat pellentesque. Praesent tempor neque at velit sagittis sed euismod lacus euismod. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <img src="/images2/img-49.png" alt="" class="corner" />
-                </div>
-                <!-- closes top -->
-                <div class="bottom">
-                    <div class="box">
-                        <img src="/images2/img-55.png" alt="" />
-                        <h4>Lorem ipsum dolor sit amet</h4>
-                        <p>Cconsectetur adipiscing elit. In lorem risus, malesuada et elementum sit amet, varius quis tellus. Vivamus elementum ipsum sit amet purus venenatis sed lacinia arcu euismod.</p>
-                    </div>
-                    <div class="box">
-                        <img src="/images2/img-56.png" alt="" />
-                        <h4>Lorem ipsum dolor sit amet</h4>
-                        <p>Cconsectetur adipiscing elit. In lorem risus, malesuada et elementum sit amet, varius quis tellus. Vivamus elementum ipsum sit amet purus venenatis sed lacinia arcu euismod.</p>
-                    </div>
-                    <div class="box">
-                        <img src="/images2/img-57.png" alt="" />
-                        <h4>Lorem ipsum dolor sit amet</h4>
-                        <p>Cconsectetur adipiscing elit. In lorem risus, malesuada et elementum sit amet, varius quis tellus. Vivamus elementum ipsum sit amet purus venenatis sed lacinia arcu euismod.</p>
-                    </div>
-                </div>
-                <!-- closes bottom -->
-            </div>
-            <!-- closes features -->
-        </div>
-        <!-- closes user-messages -->
-    </div>
-    <!-- closes w2 -->
+            <?= $this->partial('partials/vendormainmenu.phtml', array('active'=>'Reviews','parentActive'=>'Reviews \&amp; Questions')); ?>			
+            <div class="subttl">
+                <a href="" class="link-4">Back to Reviews</a>
+                You have <?= count($this->reviews) ?> new reviews for this listing
+            </div><!-- closes bc -->
+            <?php if(count($this->reviews) > 0): ?>
+            <div class="reviews-questions rev">
+            	<?php foreach($this->reviews as $review): ?>
+                <div class="s-qa new">
+                    <div class="q">
+                        <div class="left">
+                            <strong><?= $review->user_name ?></strong>
+                            <span>Posted on <?= date('M d, Y', strtotime($review->created)) ?></span>
+                        </div><!-- closes left -->
+                        <div class="right">
+                            <?= $this->escape($review->text) ?>
+                        </div><!-- closes right -->
+                    </div><!-- closes q -->
+                    <div class="bottom">
+                        <div class="right">
+                            <a href="" class="reportAbuse">Report Abuse</a>
+                        </div><!-- closes right -->
+                    </div><!-- closes bottom -->
+                    <?php if($review->new == 1): ?>
+                    <div class="timespan">
+                        <span>New</span>
+                    </div><!-- closes timespan -->
+                    <?php endif ?>
+                </div><!-- closes s-qa -->
+                <?php endforeach ?>			
+            </div><!-- closes reviews-questions -->
+            <?php else: ?>
+            <div class="empty-container">
+                <img src="https://static.tripfab.com/images/empty-10.png" alt="" /><br />
+                There are no reviews for this listing :(
+            </div><!-- closes empty -->
+            <?php endif ?>
+        </div><!-- closes user-messages -->
+    </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+<div class="hidden">
+	<?php $users = array(); ?>
+	<?php foreach($this->reviews as $review): ?>
+    <?php if(!in_array($review->user_id, $users)): $users[] = $review->user_id ?>
+	<div id="send_message_<?= $review->user_id ?>">
+        <form action="" class="sendMessageForm">
+            <div class="lb-forgot">
+                <div class="ttl">Send a message to <?= $review->user_name ?></div>
+                <div class="content">
+                    <textarea cols="30" name="message" rows="1"></textarea>
+                </div><!-- closes content -->
+                <div class="bottom">
+                    <input type="submit" class="btn-1" value="Send Message" />
+                    <span onclick="$.fancybox.close()" class="btn-4">Cancel</span>				
+                </div><!-- closes bottom -->
+            </div><!-- closes lb-forgot -->
+            <input type="hidden" name="user" value="<?= $review->user_id ?>" />
+        </form>
+    </div>
+    <?php endif ?>
+    <?php endforeach ?>
 </div>
-<!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('textarea').elastic();
+        $('form select').jqTransSelect();
+		
+		$('.s-qa a.reportAbuse').click(function(){
+			showAlert('This review has been successfuly reported');
+			return false;
+		});
+		$('.s-qa a.btn-4').fancybox({
+			padding:0,
+			showCloseButton:0,
+			overlayColor:'#fff',
+		});
+		$('.sendMessageForm').submit(function(){
+			$form = $(this);
+			$data = {
+				message:$('textarea[name=message]', $form).val(),
+				user:$('input[name=user]', $form).val(),
+			};
+			if($data.message == ''){
+				showError('Enter a message');
+				return false;
+			}
+			
+			$.ajax({
+				url:'/ajax/sendmsguser',
+				data:$data,
+				type:'post',
+				success:function(response){
+					$.fancybox.close();
+					if(response.type == 'success'){
+						showAlert(response.message);
+						$('textarea[name=message]', $form).val('');
+					} else {
+						showError(response.message);
+						$('textarea[name=message]', $form).val('');
+					}
+				},
+				error:function(){
+					$.fancybox.close();
+					showError('Something went wrong, Please try again later');
+					$('textarea[name=message]', $form).val('');
+				}
+			});
+			return false;
+		});
+		$('.s-qa a.btn-1').click(function(){
+			$(this).fadeOut('slow');
+			$parent = $(this).parents('.s-qa');
+			$('.timespan', $parent).fadeOut('slow');
+			showAlert('This review has been marked as read');
+			return false;
+		});
+    });
+</script>
+<style type="text/css">
+.hidden { display:none;}
+</style>
 </body>
 </html>

@@ -1,170 +1,256 @@
 $(document).ready(function() {
-	$('#mapcanvas').data('lat', $('input[name=listlat]').val());
-	$('#mapcanvas').data('lng', $('input[name=listlng]').val());
-	$('body').data('listing_title', $('input[name=listtitle]').val());
+    $('#mapcanvas').data('lat', $('input[name=listlat]').val());
+    $('#mapcanvas').data('lng', $('input[name=listlng]').val());
+    $('body').data('listing_title', $('input[name=listtitle]').val());
 	
-	$('input, textarea').ToggleInputValue();
-	$('.tabs-wrapper-2, .reviews-wrapper').tabs();
-	$('textarea').elastic(); 
+    $('.tabs-wrapper-2, .reviews-wrapper').tabs();
+    $('textarea').elastic(); 
 	
-	var $lat = $('#mapcanvas').data('lat');
-	var $lng = $('#mapcanvas').data('lng');
+    var $lat = $('#mapcanvas').data('lat');
+    var $lng = $('#mapcanvas').data('lng');
 	
-	var $title = $('body').data('listing_title');
-	
-	if($lat != 'none' && $lng != 'none'){
-		var latlng = new google.maps.LatLng($lat,$lng);
+    var $title = $('body').data('listing_title');
+    
+    var latlng, myOptions, map, marker;
+    
+    if($lat != 'none' && $lng != 'none'){
+        latlng = new google.maps.LatLng($lat,$lng);
 		
-		var myOptions = {
-		  zoom: 12,
-		  center: latlng,
-		  mapTypeId: google.maps.MapTypeId.ROADMAP,
-		};
+        myOptions = {
+            zoom: 12,
+            center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
 		
-		var map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
+        map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
 		
-		var marker = new google.maps.Marker({
-			position: latlng,
-			title:$title,
-		}); 
-		marker.setMap(map);
-	} else {
-		var latlng = new google.maps.LatLng(40,0);
+        marker = new google.maps.Marker({
+            position: latlng,
+            title:$title
+        }); 
+        marker.setMap(map);
+    } else {
+        latlng = new google.maps.LatLng(40,0);
 		
-		var myOptions = {
-		  zoom: 2,
-		  center: latlng,
-		  mapTypeId: google.maps.MapTypeId.ROADMAP,
-		};
-		var map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
-	}		
+        myOptions = {
+            zoom: 2,
+            center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
+    }		
 });
 
 $(function(){
-	$('.listing-gallery ul li a').click(function(){
-		if($(this).hasClass('active'))
-			return false;
-		
-		$('.listing-gallery ul li.active').removeClass('active');
-		$(this).parent().addClass('active');
-		
-		$('.listing-gallery .img-wrapper.active').removeClass('active');
-		$($(this).attr('href'), '.listing-gallery').addClass('active');
-		
-		return false;
+	$(".photos").jcarousel({
+	    scroll: 1
 	});
+	$('a.lbc').fancybox({
+	    padding: 0,
+	    overlayColor: '#FFF',
+	    overlayOpacity: '0.7',
+	    showCloseButton: 'false',
+	    centerOnScroll: 'true',
+	    titlePosition: 'inside'
+	});
+	$('#fancybox-title').addClass('tittle');
+	$('#fancybox-left-ico').addClass('lfarrow');
+	$('#fancybox-right-ico').addClass('rgarrow');
+    $(".single a").click(function() {
+    	$id = $(this).attr('href');
+    	$(".single a").removeClass('active');
+    	$(this).addClass('active');
+    	$(".slideshow img" ).removeClass('show');
+    	$($id).addClass('show');
+    	return false
+    });
 });
 
 $(function(){
-	$('.qa .qa-box .questions a.btn-3').click(function(){
-		$(this).parent().parent().parent().find('div.message').toggleClass('show');
-		return false;
-	});
+    $('.qa .qa-box .questions a.btn-3').click(function(){
+        $(this).parent().parent().parent().find('div.message').toggleClass('show');
+        return false;
+    });
 });
 
 $(function(){
-	$('.listing-gallery .listing-ttl .been').live('click', function(){
-		$(this).parent().find('.dd-2').toggleClass('show');
-		return false;
-	});
-	
-	$('.dd-2 select').live('change', function(){
-		if($(this).val() == 'new'){
-			$(this).next('input').removeClass('hidden');
-		} else {
-			$(this).next('input').addClass('hidden');
-		}
-	});
-	
-	$('.addtotrip .btn-4').live('click', function(){
-		$(this).parents('.dd-2').removeClass('show');
-		$('.addtotrip input[type=text]').addClass('hidden');
-		$('.addtotrip select option:first').attr('selected','selected');
-		return false;
-	});
-	
-	$('.addtotrip').live('submit', function(){
-		$form = $(this);
-		$data = {
-			listing:$('input[name=listing]', $form).val(),
-			trip:$('select[name=trip]', $form).val(),
-			title:$('input[name=title]', $form).val(),
-		};
-		
-		if($data.trip == '')
-			return false;
+    $('.addToTripBtn:not(.not)').live('click', function(){
+        $data = {
+            listing:$(this).data('listing')
+        };
 			
-		$('input, select').attr('disabled','disabled');
-		$.ajax({
-			url:'/ajax/addtotrip2',
-			data:$data,
-			type:'post',
-			success:function(response){
-				if(response.type == 'success'){
-					$('input, select').removeAttr('disabled');
-					$('.dd-2').removeClass('show');
-					showAlert(response.message);
-				} else if(response.type == 'newtrip'){
-					$('input, select').removeAttr('disabled');
-					$('.dd-2').removeClass('show');
-					showAlert(response.message);
-					$('.dd-2 select').append('<option value="'+response.tripid+'">'+response.triptitle+'</option>');
-				} else {
-					$('input, select').removeAttr('disabled');
-					showError(response.message);
-				}
-			},
-			error:function(){
-				$('input, select').removeAttr('disabled');
-				showError('Somehing went wrong please try later');
-			}
-		});
-		return false;
-	});
+        $('input, select').attr('disabled','disabled');
+        
+        $.ajax({
+            url:'/ajax/addtotrip2',
+            data:$data,
+            type:'post',
+            success:function(response){
+                console.log(response);
+                if(response.type == 'success'){
+                    $('input, select').removeAttr('disabled');
+                    $('.addTrip').removeClass('show');
+                    $.fancybox.close();
+                    showAlert(response.message);
+                } else if(response.type == 'newtrip'){
+                    $('input, select').removeAttr('disabled');
+                    $('.addTrip').removeClass('show');
+                    $.fancybox.close();
+                    showAlert(response.message);
+                    $('.addTrip select').append('<option value="'+response.tripid+'">'+response.triptitle+'</option>');
+                } else {
+                    $('input, select').removeAttr('disabled');
+                    showError(response.message);
+                }
+                $(window).trigger('addtotrip');
+            },
+            error:function(){
+                $('input, select').removeAttr('disabled');
+                showError('Somehing went wrong please try later');
+            }
+        });
+        $.fancybox.close();
+        return false;
+    });
+    
+    $('.js-new-trip').live('click',function(){
+        $.fancybox({
+            href:'#newtrip',
+            padding:0,
+            overlayColor:'#fff',
+            showCloseButton:false,
+            modal:true,
+            centerOnScroll:true
+        });
+        
+        return false;
+    });
+	
+    $('.addTrip select').live('change', function(){
+        if($(this).val() == 'new'){
+            $form = $(this).parents('form');
+            $listing = $('input[name=listing]', $form).val();
+            $('#newtrip form input[name=listing]').val($listing);
+            $.fancybox({
+                href:'#newtrip',
+                padding:0,
+                overlayColor:'#fff',
+                showCloseButton:false,
+                modal:true,
+                centerOnScroll:true
+            });
+        } else {
+            $(this).next('input').addClass('hidden');
+        }
+    });
+	
+    $('input.nodatesyet').change(function(){
+        $parent = $(this).parents('.item');
+        if($(this).attr('checked') == 'checked'){
+            $('input[name=start]', $parent).attr('disabled', 'disabled');
+            $('input[name=end]', $parent).attr('disabled', 'disabled');
+        } else {
+            $('input[name=start]', $parent).removeAttr('disabled');
+            $('input[name=end]', $parent).removeAttr('disabled');
+        }
+    });
+	
+    $('.addtotrip .btn-10').live('click', function(){
+        $(this).parents('.addTrip').removeClass('show');
+        $('.addtotrip select option:first').attr('selected','selected');
+        return false;
+    });
+	
+    $('.addtotrip').live('submit', function(){
+        $form = $(this);
+        $data = {
+            listing:$('input[name=listing]', $form).val(),
+            trip:$('select[name=trip]', $form).val(),
+            title:$('input[name=title]', $form).val()
+        };
+		
+        if($data.trip == '')
+            return false;
+			
+        $('input, select').attr('disabled','disabled');
+        $.ajax({
+            url:'/ajax/addtotrip2',
+            data:$data,
+            type:'post',
+            success:function(response){
+                if(response.type == 'success'){
+                    $('input, select').removeAttr('disabled');
+                    $('.addTrip').removeClass('show');
+                    showAlert(response.message);
+                } else if(response.type == 'newtrip'){
+                    $('input, select').removeAttr('disabled');
+                    $('.addTrip').removeClass('show');
+                    showAlert(response.message);
+                    $('.addTrip select').append('<option value="'+response.tripid+'">'+response.triptitle+'</option>');
+                } else {
+                    $('input, select').removeAttr('disabled');
+                    showError(response.message);
+                }
+            },
+            error:function(){
+                $('input, select').removeAttr('disabled');
+                showError('Somehing went wrong please try later');
+            }
+        });
+        return false;
+    });
 });
 
 $(function(){	
-	$('#showQuestionForm').click(function(){
-		$('#askQuestion').removeClass('hidden');
-		return false;
-	});
+    $('#showQuestionForm').click(function(){
+        $('#askQuestion').removeClass('hidden');
+        return false;
+    });
 	
-	$('#askQuestionForm .btn-4').click(function(){
-		$('#askQuestion').addClass('hidden');
-		return false;
-	});
+    $('#askQuestionForm .btn-4').click(function(){
+        $('#askQuestion').addClass('hidden');
+        return false;
+    });
 	
-	$('#askQuestionForm').submit(function(){
-		$form = $(this);
-		$data = {
-			question : $('textarea[name=question]', $form).val(),
-			listing  : $('input[name=listing]', $form).val()
-		};
-		if($data.question == ''){
-			showError('Write your question');
-			return false;
-		}
-		$.ajax({
-			url:'/ajax/postquestion',
-			type:'post',
-			data:$data,
-			success:function(response){
-				if(response.type == 'success'){
-					showAlert(response.message);
-					$('textarea[name=question]', $form).val('');
-					$('#askQuestion').parents('.qa').after(response.html);
-					$('#askQuestion').addClass('hidden');
-				} else {
-					showError(response.message);
-				}
-			},
-			error:function(){
-				showError('Something went worng, Please try later');
-			}
-		});
+    $('#askQuestionForm').submit(function(){
+        $form = $(this);
+        $data = {
+            question : $('textarea[name=question]', $form).val(),
+            listing  : $('input[name=listing]', $form).val()
+        };
+        if($data.question == ''){
+            showError('Write your question');
+            return false;
+        }
+        $.ajax({
+            url:'/ajax/postquestion',
+            type:'post',
+            data:$data,
+            success:function(response){
+                if(response.type == 'success'){
+                    showAlert(response.message);
+                    $('textarea[name=question]', $form).val('');
+                    $('#askQuestion').parents('.qa').after(response.html);
+                    $('#askQuestion').addClass('hidden');
+                } else {
+                    showError(response.message);
+                }
+            },
+            error:function(){
+                showError('Something went worng, Please try later');
+            }
+        });
 		
-		return false;
-	});
+        return false;
+    });
 	
-	
+    $('#ui-datepicker-div').wrap('<div id="calendarContainer"></div>');
+    
+    $('#tooltipHelpList').submit(function(){
+        if($('input[type=checkbox]', this).is(':checked')) {
+            $.cookie('tooltipHelpList','yes',{expires:365,path:'/'});
+        }
+        $('.firstime_tip').fadeOut();
+        return false;        
+    });
 });

@@ -1,0 +1,164 @@
+<?php $_imgloading = 'https://static.tripfab.com/images2/listing_loading.gif'; ?>
+<?php $_classes = array(
+		2 => 'restaurant',
+		4 => 'sights',
+		5 => 'hotel',
+		6 => 'activity',
+		7 => 'entertaiment'
+) ;
+
+$css_name = array(
+		2 => 'gen',
+		4 => 'gen',
+		5 => 'hotel',
+		6 => 'activity',
+		7 => 'gen'
+) ;
+
+$cat_name = array(
+		2 => 'Restaurant',
+		4 => 'Tourist Sight',
+		5 => 'Hotel',
+		6 => 'Activity',
+		7 => 'Entertainment'
+); 
+$icons = array(
+		2 => 'rest',
+		4 => 'sght',
+		5 => 'htl',
+		6 => 'act',
+		7 => 'ent'
+) ;
+$per_night = array(
+		2 => 'per person',
+		4 => 'per person',
+		5 => 'per night',
+		6 => '',
+		7 => 'per person'
+); 
+
+
+?>
+<?php if(count($this->listings) > 0): ?>
+<?php foreach($this->listings as $i => $list): ?>	
+    <div class="single <?=$css_name[$list->main_type] ?>-1">
+        <?php if($list->main_type == 2 || $list->main_type == 4 || $list->main_type == 7):?>
+        <div class="image">
+			<?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
+                <?php if(count($this->trips) > 0): ?>
+                <a href="#" class="add been" data-listing="<?= $list->id ?>"></a>
+                <?php else: ?>
+                <a href="#" class="add been js-new-trip not" data-listing="<?= $list->id ?>"></a>
+                <?php endif ?>
+            <?php elseif(is_null($this->user)): ?>
+                <a href="/signup" class="add been not js-signup"></a>
+			<?php endif ?>
+            <?= $this->lazylisting(array('width'=>'241', 'height'=>'183'), $list->image, '','241:241',null,$_imgloading) ?>
+            <ul class="rating">
+                <li><a href="" class="slct"></a></li>
+                <li><a href="" class="slct"></a></li>
+                <li><a href="" class="slct"></a></li>
+                <li><a href="" class="nrml"></a></li>
+                <li><a href="" class="nrml"></a></li>
+            </ul>
+            <div class="hvr">
+            	<a class="restaurant" href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+                View <?=$cat_name[$list->main_type] ?>
+                <span> </span>
+                </a>
+			</div><!--HVR-->
+        </div><!--IMAGE-->
+        <h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+		<?= (strlen($list->title) > 40) ? substr($list->title, 0, 39) . '...' : $list->title ?></a></h4>
+
+        <div class="info">
+            <span class="location"><span></span>Location <strong><?= $list->city ?>, <?= $list->countrycode ?></strong></span>
+           <!-- <div class="price"><span><?= $list->price ?></span><sup>$</sup><span><?= $list->price ?></span> <sub><?=$per_night[$list->main_type] ?></sub></div>-->
+            <div class="clear"></div>
+        </div><!--INFO-->
+ 		
+ 		
+ 		<?php else: ?>
+ 		<?php if ($list->main_type == 5): ?>
+ 		<div class="image">
+ 			<?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
+                <?php if(count($this->trips) > 0): ?>
+                <a href="#" class="add been" data-listing="<?= $list->id ?>"></a>
+                <?php else: ?>
+                <a href="#" class="add been js-new-trip not" data-listing="<?= $list->id ?>"></a>
+                <?php endif ?>
+            <?php elseif(is_null($this->user)): ?>
+                <a href="/signup" class="add been not js-signup"></a>
+			<?php endif ?>
+ 		    <?= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124',null,$_imgloading) ?>
+ 		    
+ 		    <ul class="rating">
+ 		        <li><a href="" class="slct"></a></li>
+ 		        <li><a href="" class="slct"></a></li>
+ 		        <li><a href="" class="slct"></a></li>
+ 		        <li><a href="" class="nrml"></a></li>
+ 		        <li><a href="" class="nrml"></a></li>
+ 		    </ul>
+ 		    <div class="hvr">
+            	<a class="restaurant" href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+                View <?=$cat_name[$list->main_type] ?>
+                <span> </span>
+                </a>
+ 			</div><!--HVR-->
+ 		</div><!--IMAGE-->
+ 		<h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+		<?= (strlen($list->title) > 40) ? substr($list->title, 0, 39) . '...' : $list->title ?></a></h4>
+ 			<?php if($list->main_type == 6):?>
+ 		    <span>by <?= $list->vendor_name?></span>
+ 		<?php endif;?>
+ 		<p><?= substr($list->description, 0, 100) ?>...</p>      
+ 		<div class="info">
+ 		    <span class="location"><span></span>Location <strong><?= $list->city ?>, <?= $list->countrycode ?></strong></span>
+ 		    <div class="price"><span><?= $this->formatnumber($list->price) ?></span><sup>$</sup> <sub><?=$per_night[$list->main_type] ?></sub></div>
+ 		    <div class="clear"></div>
+ 		</div><!--INFO-->
+ 		
+ 		
+        <?php else:?>
+        <div class="image">
+ 			<?php if(!is_null($this->user) && $this->user->role_id == 2): ?>
+                <?php if(count($this->trips) > 0): ?>
+                <a href="#" class="add been" data-listing="<?= $list->id ?>"></a>
+                <?php else: ?>
+                <a href="#" class="add been js-new-trip not" data-listing="<?= $list->id ?>"></a>
+                <?php endif ?>
+            <?php elseif(is_null($this->user)): ?>
+                <a href="/signup" class="add been not js-signup"></a>
+			<?php endif ?>
+            <?= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124',null,$_imgloading) ?>
+            <ul class="rating">
+                <li><a href="" class="slct"></a></li>
+                <li><a href="" class="slct"></a></li>
+                <li><a href="" class="slct"></a></li>
+                <li><a href="" class="nrml"></a></li>
+                <li><a href="" class="nrml"></a></li>
+            </ul>
+            <div class="hvr">
+            	<a class="restaurant" href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+                View <?=$cat_name[$list->main_type] ?>
+                <span> </span>
+                </a>
+			</div><!--HVR-->
+        </div><!--IMAGE-->
+        <h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+		<?= (strlen($list->title) > 40) ? substr($list->title, 0, 39) . '...' : $list->title ?></a></h4>
+   		<?php if($list->main_type == 6):?>
+            <span>by <?= $list->vendor_name?></span>
+        <?php endif;?>
+        <p><?= substr($list->description, 0, 100) ?>...</p>      
+        <div class="info">
+            <span class="location"><span></span>Location <strong><?= $list->city ?>, <?= $list->countrycode ?></strong></span>
+            <div class="price"><span><?= $this->formatnumber($list->price) ?></span><sup>$</sup><sub><?=$per_night[$list->main_type] ?></sub></div>
+            <div class="clear"></div>
+        </div><!--INFO-->
+        <?php endif;?>
+        <?php endif;?>
+    </div><!--SINGLE-->
+<?php endforeach ?>
+<div class="clear"></div>
+<?php endif ?>

@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<title>Partners - Admin | Tripfab.com</title>
+	    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+        <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+  		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />
+  		<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]--> 
+		<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+		<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js?v=<?= $this->cssVC ?>"></script>
+		<script>
+        $(document).ready(function() {
+            $('a.lbc').fancybox({
+                padding: 0,
+                overlayColor: '#FFF',
+                overlayOpacity: '0.7',
+                showCloseButton: 'false'
+            });
+            $("#report_tabs").tabs();
+        });
+    </script>
+
+		</head>
+		<body>
+			<div class="w1">
+    		<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
+			<div class="w3_admin">
+				<div class="sub_menu">
+					<h2>Partners. <span>There are <?php echo $this->numCount?>.</span></h2>
+					<a href="#new_partner" class="btn-1 lbc">Create a Partner</a>
+					<ul class="sub_links">
+						<li><a href="/admin/users/travellers">Travelers</a></li>
+						<li class="select"><a href="/admin/users/partners">Partners</a></li>
+					</ul>
+				</div><!--SUB_MENU-->
+            </div><!--W3-->
+			<div class="all_listing">
+				<div class="search_list">
+					<form action="" onsubmit="return false">
+						<input type="text" placeholder="Search Users by email" name="q" id="q" value="<?php echo $this->searchText?>" />
+						<input type="button" class="btn-1" value="Search" onclick="searchSubmit()" />
+					</form>
+					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
+				</div><!--SEARCH_LIST-->
+				<div class="list_content">
+					<table width="100%" border="0">
+						<tr>
+							<th width="210"><a href="<?php echo $this->url(array('sort'=>0, 'seq'=>$this->paramSort == 0 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Partner Name</a></th>
+							<th width="210"><a href="<?php echo $this->url(array('sort'=>1, 'seq'=>$this->paramSort == 1 && $this->paramSequence !='desc' ? 'desc':'default'));?>">E-mail</a></th>
+							<th width="210"><a href="<?php echo $this->url(array('sort'=>2, 'seq'=>$this->paramSort == 2 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Contact</a></th>
+							<th width="135"><a href="<?php echo $this->url(array('sort'=>3, 'seq'=>$this->paramSort == 3 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Country</a></th>
+							<th width="70"><a href="<?php echo $this->url(array('sort'=>4, 'seq'=>$this->paramSort == 4 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Listings</a></th>
+							<th width="80"><a href="<?php echo $this->url(array('sort'=>5, 'seq'=>$this->paramSort == 5 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Status</a></th>
+							<th width="65" class="last">&nbsp;</th>
+						</tr>
+						<?php foreach($this->paginator as $key=>$listing):?>
+						<tr  <?php echo $key==0 ? 'class="first"' : ''?>>
+							<td><?php echo $listing->partnerName?></td>
+							<td><?php echo $listing->partnerEmail?></td>
+							<td><?php echo $listing->contact_name?></td>
+							<td><?php echo $listing->countryName?></td>
+							<td><?php echo $listing->listings?></td>
+							<td>
+								
+                                <div id="d<?php echo $key?>" <?php echo $listing->active ? 'style="display:none"': '';?>>
+                                	<a href="#activate" class="deactivate lbc" onclick="initParam(<?php echo $listing->id?>, 1, <?php echo $key?>);">Inactive</a>
+                                </div>
+                                <div id="a<?php echo $key?>" <?php echo $listing->active ? '' : 'style="display:none"';?>>
+                            		<a href="#deactivate" class="activate lbc" onclick="initParam(<?php echo $listing->id?>, 0, <?php echo $key?>);">Active</a> 
+                                </div>
+                                </div>
+                            </td>
+							<td><a href="/admin/users/view/partner/<?php echo $listing->vendorId?>" class="view">View</a></td>
+						</tr>
+                        <?php endforeach;?>
+					</table>
+				</div><!--LIST-CONTENT-->
+				<div class="paging_bottom">
+					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
+				</div><!--PAGING_BOTTOM-->
+			</div><!--ALL_LISTING-->
+					
+			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+
+		</div>
+		<!-- closes w1 -->
+        
+      <div class="hidden">
+	<div class="lb" id="request_info">
+    	<div class="lb activation" id="activate">
+		<div class="top">Activate Partner </div><!--TOP-->
+		<form method="post" action="">
+			<fieldset>
+				<div class="cont">
+					<p>Are you sure activate partner ?</p>
+				</div><!--CONT-->
+				<div class="bottom">
+					<a href="javascript://" class="btn-1" id="btn-activate-326">Activate</a>
+					<a href="javascript://" class="btn-10" id="btn-cancel-326">Cancel</a>
+				</div><!--BOTTOM-->
+			</fieldset>
+		</form>
+	</div><!--ACTIVATE-->
+	
+	<div class="lb activation" id="deactivate">
+		<div class="top">Desactivate Partner </div><!--TOP-->
+		<form method="post" action="">
+			<fieldset>
+				<div class="cont">
+					<p>Are you sure desactivate partner?</p>
+				</div><!--CONT-->
+				<div class="bottom">
+					<a href="javascript://" class="btn-1" id="btn-deactivate-327">Deactivate</a>
+					<a href="javascript://" class="btn-10" id="btn-cancel-327">Cancel</a>
+				</div><!--BOTTOM-->
+			</fieldset>
+		</form>
+	</div><!--ACTIVATE-->
+
+    
+	</div><!--HIDDEN-->
+    
+      
+    	
+		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+         <script>
+			var userId=null;
+			var action = null;
+			var divNo = null;
+			function initParam(uid, act, d){
+				userId=uid;
+				action=act;
+				divNo =d;
+			}
+			$('#btn-activate-326').click(function(){
+				changeUserStatus();
+			});
+			$('#btn-deactivate-327').click(function(){
+				changeUserStatus();
+			});
+			
+			$('#btn-cancel-326').click(function(){
+				$.fancybox.close();
+			});
+			$('#btn-cancel-327').click(function(){
+				$.fancybox.close();
+			});
+
+
+			$('#c-vendor').click(function(){
+				$('.errdiv').hide();
+				$.ajax({ 
+				   type: "POST", 
+				   url: "/admin/vendors/add", 
+				   data: $("#partner-form").serialize() ,
+				   success: function(json, status){
+					   if(json.attempt=='success'){
+							showAlert("Partner added successfully. Redirecting...");
+							$.fancybox.close();
+							location.href = "/admin/users/view/partner/" + json.data +"/2";
+						   return;
+					   }
+					   
+					   if(json.error_code == "validation_error"){
+							$.each(json.data, function(i,validationError){ 
+								$("#_" + validationError.field).show();
+								$("#_" + validationError.field).text(validationError.message);
+							});
+					   }
+				   }, 
+				   error:function(jqXHR, textStatus, errorThrown){ 
+						alert(textStatus);
+				   }
+				});
+			});
+	
+	
+	
+	function changeUserStatus(){
+		$.ajax({ 
+		   type: "POST", 
+		   url: "/ajax/usertatus/", 
+		   data: 'id=' + userId + '&act=' + action ,
+		   success: function(json, status){
+				$.fancybox.close();
+				if(json=="success"){
+					 showAlert("Partner has been updated successfully");
+					 if(action==0){
+						$("#d"+divNo).show(); 
+						$("#a"+divNo).hide(); 
+					 }
+					 else{
+						$("#d"+divNo).hide(); 
+						$("#a"+divNo).show(); 
+					 }
+				}
+		   }, 
+		   error:function(jqXHR, textStatus, errorThrown){ 
+				alert(textStatus);
+		   }
+		});
+	}
+
+
+
+
+			function searchSubmit(){
+				location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
+			}
+			$("#q").keypress(function(e) {
+				var keycode;
+				if (window.event) keycode = window.event.keyCode;
+				else if (e) keycode = e.which;
+				else return true;
+				if (keycode == 13) {
+				   location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
+				   return false;
+				}
+				else
+				   return true;
+			});
+		</script>
+
+
+	</body>
+</html>

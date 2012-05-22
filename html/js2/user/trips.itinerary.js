@@ -1,31 +1,73 @@
 $(document).ready(function() {
     
-    $('a.lb').fancybox({
+    
+    
+    
+    var assigned_listings = 0;
+    $('.itinerary-wrapper .slider .slide .itinerary-items ul li:not(.empty)').each(function(){
+        assigned_listings++;
+    });    
+    
+    $('input.calendar1').datepicker({
+		minDate:new Date(),
+		onSelect:function(date){
+			$end = $(this).parents('.cont').find('input.calendar2');
+			$end.datepicker('option','minDate', date);
+		},
+		dateFormat:'D M d yy'
+	});
+	
+	$('input.calendar2').datepicker({
+		minDate:new Date(),
+		dateFormat:'D M d yy'
+	});
+	
+	$('#ui-datepicker-div').wrap('<div id="calendarContainer"></div>');
+    
+    
+    $('a.lb, .lbc').fancybox({
         padding:0,
         overlayColor:'#fff',
         centerOnScroll:1,
-        showCloseButton:0
+        showCloseButton: true
     });
-    
     $('.lbox .btn-2, .lbox .btn-11').click(function(){
         $(this).parents('form').submit();
+    });
+    
+    $('.activities-tabs > ul > li').each(function(){
+        $('em',this).text('('+$('ul li', $('a', this).attr('href')).length+')');
     });
 
     $fancybox = true;
     $drop     = false;
-
-    $('#mycarousel-1, #mycarousel-2, #mycarousel-3, #mycarousel-4, #mycarousel-5').jcarousel({
-        start:0
+    
+    $('.activities-tabs').tabs({
+        select:function(event, ui){
+            $ca  = $('.jcarousel-list',ui.panel);
+            $num = $('> li', $ca).length;
+            if($num == 1) {
+                $prev = $('.jcarousel-prev',ui.panel);
+                $prev.click();
+            }
+        }
     });
-    
-    $('.activities-tabs').tabs();
-    
+    function onAfter(curr, next, opts, fwd) {
+        var index = opts.currSlide;
+        //get the height of the current slide
+        var $ht = $(this).height();
+        //set the container's height to that of the current slide
+        $(this).parent().animate({
+        	height: $ht
+        });
+    }
     $('.slider').cycle({
         fx:     'fade', 
         speed:  'fast', 
         timeout: 0,
         next:   '.next', 
-        prev:   '.prev'
+        prev:   '.prev',
+        after: onAfter
     });
 	
     $( ".tab ul li" ).each(function(){
@@ -34,8 +76,9 @@ $(document).ready(function() {
             country	: $(this).data('country'),
             city	: $(this).data('city'),
             type	: $(this).data('type'),
-            'class'	: $(this).data('class'),
-            trip	: $(this).data('trip')
+            clas	: $(this).data('class'),
+            trip	: $(this).data('trip'),
+            url         : '/'+$(this).data('coidf')+'/'+$(this).data('ciidf')+'/'+$(this).data('idf')
         };
         $(this).data('values',$values);
     });
@@ -46,8 +89,9 @@ $(document).ready(function() {
             country	: $(this).data('country'),
             city	: $(this).data('city'),
             type	: $(this).data('type'),
-            'class'	: $(this).data('class'),
-            trip	: $(this).data('trip')
+            clas	: $(this).data('class'),
+            trip	: $(this).data('trip'),
+            url         : '/'+$(this).data('coidf')+'/'+$(this).data('ciidf')+'/'+$(this).data('idf')
         };
         $(this).data('values',$values);
     });
@@ -63,6 +107,8 @@ $(document).ready(function() {
 
     $( ".tab ul li" ).draggable({
         revert: 'invalid',
+        helper: "clone",
+        cursor:'move',
         start:function(){
             $clip = $(this).parents('div.jcarousel-clip');
             $clip.css({
@@ -77,13 +123,11 @@ $(document).ready(function() {
             $clip.removeClass('unhidden');
             if(!$drop)
                 $fancybox = true;
-				
         }
     });
 	
     $( ".itinerary-items .item ul li" ).draggable({
         revert:'invalid'
-		
     });
     
     $( ".itinerary-items .item ul li" ).sortable({
@@ -97,18 +141,18 @@ $(document).ready(function() {
         hoverClass: "ui-state-hover",
         drop: function( event, ui ) {
             $drop	  = true;
-            $fancybox = false;
+            $fancybox     = false;
             var values 	  = ui.draggable.data('values');
             var li    	  = $("<li></li>");
             var $dropable = $(this).find('ul');
             var daytimevalues = $(this).data('values');
 			
             var $data = {
-                trip:values.trip,
-                listing:values.id,
-                day:daytimevalues.day,
-                date:daytimevalues.date,
-                time:daytimevalues.time
+                trip    : values.trip,
+                listing : values.id,
+                day     : daytimevalues.day,
+                date    : daytimevalues.date,
+                time    : daytimevalues.time
             }
 			
             var $empty = $( this ).find('.empty');
@@ -119,7 +163,7 @@ $(document).ready(function() {
                 type:'post',
                 success:function(response){
                     li.data('values',values);
-                    li.addClass(values.class);
+                    li.addClass(values.clas);
                     li.html(ui.draggable.html());
                     li.append('<a href="" class="delete">Delete</a>');
 					
@@ -130,6 +174,7 @@ $(document).ready(function() {
                     $( ".itinerary-items .item ul li" ).draggable({
                         revert: 'invalid'
                     });
+                    
                     $( ".itinerary-items .item ul li" ).sortable({
                         revert: true,
                         placeholder: "ui-state-highlight",
@@ -139,13 +184,20 @@ $(document).ready(function() {
                     });
                     updateSort('onDrop not stay');
                     $fancybox = true;
-                    $drop	  = false;
+                    $drop     = false;
                     $('#tripprice').text('$'+response);
+                    
+                    if(assigned_listings == 0) {
+                        $('.tocheckout').removeClass('deny');
+                    }
+                    
+                    assigned_listings++;
+                    
                 },
                 error:function(){
-                    alert('Something went wrong');
+                    showError('Something went wrong');
                     $fancybox = true;
-                    $drop	  = false;
+                    $drop     = false;
                 }
             });
         }
@@ -156,36 +208,46 @@ $(document).ready(function() {
         activeClass: "ui-state-default",
         hoverClass: "ui-state-hover",
         drop: function( event, ui ) {
-            $drop	  = true;
+            $drop     = true;
             $fancybox = false;
-            var values 	  = ui.draggable.data('values');
+            var values 	  = ui.draggable.data('values');                
             var li    	  = $("<li></li>");
             var $dropable = $(this).find('ul');
             var daytimevalues = $(this).data('values');
+            
+            if($dropable.data('hashotel') == "1") {
+                showError('There is one hotel for this night');
+                return;
+            }
 			
             var $data = {
-                trip:values.trip,
-                listing:values.id,
-                day:daytimevalues.day,
-                date:daytimevalues.date,
-                time:daytimevalues.time
+                trip    : values.trip,
+                listing : values.id,
+                day     : daytimevalues.day,
+                date    : daytimevalues.date,
+                time    : daytimevalues.time
             }
 			
             var $empty = $( this ).find('.empty');
-			
+
             $.ajax({
                 url:'/ajax/updatetriplisting',
                 data:$data,
                 type:'post',
                 success:function(response){
+                    
+                    ui.draggable.data('hashotel', 1);
+                    
                     li.data('values',values);
-                    li.addClass(values.class);
+                    li.addClass(values.clas);
                     li.html(ui.draggable.html());
                     li.append('<a href="" class="delete">Delete</a>');
 					
                     $empty.remove();
                     li.appendTo($dropable);
-                    ui.draggable.remove();
+                    //ui.draggable.remove();
+                    
+                    $dropable.data('hashotel', "1");
 					
                     $( ".itinerary-items .item ul li" ).draggable({
                         revert: 'invalid'
@@ -194,37 +256,43 @@ $(document).ready(function() {
                         revert: true,
                         placeholder: "ui-state-highlight",
                         update: function(){
-                            updateSort('onSort not stay');
+                            updateSort('onSort stay');
                         }
                     });
-                    updateSort('onDrop not stay');
+                    updateSort('onDrop stay');
                     $fancybox = true;
-                    $drop	  = false;
+                    $drop     = false;
                     $('#tripprice').text('$'+response);
+                    
+                    if(assigned_listings == 0) {
+                        $('.tocheckout').removeClass('deny');
+                    }
+                    
+                    assigned_listings++;
                 },
                 error:function(){
-                    alert('Something went wrong');
+                    showError('Something went wrong');
                     $fancybox = true;
-                    $drop	  = false;
+                    $drop     = false;
                 }
             });
         }
     });
     
-    $('.itinerary-items .item a.delete').live('click', function(){
+    $('.itinerary-items .item:not(.stay) a.delete').live('click', function(){
         var $element = $(this).parents('li');
-        var values = $element.data('values');
+        var values   = $element.data('values');
         $.ajax({
             url:'/ajax/removefromtrip',
             type:'post',
             data:{
-                listing:values.id,
-                trip:values.trip
+                listing : values.id,
+                trip    : values.trip
             },
             success:function(response){
                 $element.fadeOut('normal', function(){
                     $ul = $('#mycarousel-1');
-                    switch(values.class){
+                    switch(values.clas){
                         case 'cat-activity':
                             $ul = $('#mycarousel-1');
                             break;
@@ -243,13 +311,19 @@ $(document).ready(function() {
                     }
                     $li = $('<li></li>');
                     $li.data('values', values);
-                    $li.addClass(values.class);
+                    $li.addClass(values.clas);
                     $li.html($element.html());
+                    
                     $('a.delete', $li).remove();
+                    
                     $li.appendTo($ul);
+                    
                     $element.remove();
+                    
                     $li.draggable({
                         revert:'invalid',
+                        helper: "clone",
+                        cursor:'move',
                         start:function(){
                             $clip = $(this).parents('div.jcarousel-clip');
                             $clip.css({
@@ -265,6 +339,40 @@ $(document).ready(function() {
                     });
                 });
                 $('#tripprice').text('$'+response);
+                    
+                assigned_listings--;
+                
+                if(assigned_listings == 0) {
+                    $('.tocheckout').addClass('deny');
+                }
+            }
+        });		
+        return false;
+    });
+    
+    $('.itinerary-items .item.stay a.delete').live('click', function(){
+        var $element = $(this).parents('li');
+        var $dropable = $element.parents('ul');
+        var values   = $element.data('values');
+        $.ajax({
+            url:'/ajax/removefromtrip',
+            type:'post',
+            data:{
+                listing : values.id,
+                trip    : values.trip
+            },
+            success:function(response){
+                $dropable.data('hashotel',"0");
+                $element.fadeOut('normal', function(){
+                    $element.remove();
+                });
+                $('#tripprice').text('$'+response);
+                    
+                assigned_listings--;
+                
+                if(assigned_listings == 0) {
+                    $('.tocheckout').addClass('deny');
+                }
             }
         });		
         return false;
@@ -275,9 +383,9 @@ $(document).ready(function() {
         $( ".itinerary-items .item ul li:not(.empty)").each(function(index){
             var values = $(this).data('values');
             var aux = {
-                listingid:values.id,
-                sort:index,
-                trip:values.trip
+                listingid : values.id,
+                sort      : index,
+                trip      : values.trip
             }
             sorts.push(aux);
         });
@@ -290,11 +398,39 @@ $(document).ready(function() {
         });
     }
 	
-    $('.activities-tabs .tab ul li img').live('click', function(){
+    $('.activities-tabs .tab ul li img, '+
+      '.slider .slide .itinerary-items .item ul li:not(.empty) img, '+
+      '.slider .slide .itinerary-items .item ul li:not(.empty) h2').live('click', function(){
         if($fancybox) {
             $values = $(this).parent().data('values')
-            alert($values.id);
+            window.location = $values.url;
         }
     });
-	
+    
+    $('#mycarousel-1, #mycarousel-2, #mycarousel-3, #mycarousel-4, #mycarousel-5').jcarousel({
+        start:1,
+        wrap:'both'
+    });	
+    
+    $('#tooltipHelpItn').submit(function(){
+        if($('input[type=checkbox]', this).is(':checked')) {
+            $.cookie('tooltipHelpItn','yes',{expires:365});
+        }
+        $('.firstime_tip').fadeOut();
+        return false;
+    });
+    $('#start, #end').datepicker({
+    	dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+    	showOtherMonths: true
+    });
+    $(".w3.browseTrips .tocheckout.deny").live('hover', function() {
+    	$(".w3.browseTrips .warning").toggleClass('hidden');
+    	return false
+    });
+    
+    $(".bottom .tocheckout.deny").live('hover', function() {
+    	$(".bottom .warning").toggleClass('hidden');
+    	return false
+    });
+    
 });

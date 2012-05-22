@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+	<title>Withdraw | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-messages">
+            <?= $this->partial('partials/vendormainmenu.phtml', array()); ?>
+            <div class="vendor-withdraw">
+                <div class="left">
+                    <h4>Withdraw Funds</h4>
+                    <p>Use this page to withdraw funds from your account. For withdrawal options and processing times 
+                    <a href="">click here.</a> </p>
+                    <div class="method">
+                        <h2>Withdrawal Method</h2>
+                        <select>
+                            <option>Paypal</option>
+                            <option>Paypal</option>
+                            <option>Paypal</option>
+                        </select>
+                    </div><!--METHOD-->
+                    <div class="details">
+                        <h2>Withdrawal Details</h2>
+                        <table width="348" border="0">
+                            <tr valign="middle" height="50">
+                                <td valign="middle">Available Balance</td>
+                                <td valign="middle">US $</td>
+                                <td align="right">0.00</td>
+                            </tr>
+                              <tr class="active">
+                                <td valign="middle">Withdrawal Amount</td>
+                                <td valign="middle">US $</td>
+                                <td align="right"><input type="text" value="0.00" /></td>
+                            </tr>
+                            <tr>
+                                <td valign="middle">New Balance</td>
+                                <td>US $</td>
+                                <td align="right">$0.00</td>
+                            </tr>
+                        </table>
+                    </div><!--DETAILS-->
+                    <div class="button">
+                        <input type="button" id="withdrawBTN" value="Withdraw" />
+                    </div><!--BUTTON-->
+                </div><!--LEFT-->
+                <div class="right">
+                    <div class="funds">
+                        <h2>Available Funds</h2>
+                        <h3>$0.00</h3>
+                    </div><!--FUNDS-->
+                    <div class="methods">
+                        <h2>Withdrawal Methods</h2>
+                        <p><strong>Check</strong>
+                            Get a paper check sent to you by mail.</p>
+
+                        <p><strong>Bank Transfer</strong>
+                            Get your money transferred directly to your bank account.</p>
+
+                        <p><strong>PayPal</strong>
+                            Get your money deposited directly to your PayPal account.</p>
+                        <a href="/provider/account/payments" class="add">Add a Withdrawal Method</a>
+                    </div><!--METHODS-->
+                </div><!--RIGHT-->
+            </div><!--VENDOR-WITHDRAW-->
+        </div><!-- closes user-messages -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+		$('input#withdrawBTN').click(function(){
+			showAlert('The transfer has been successful');
+			return false;
+		});
+    });
+</script>
+<style type="text/css">
+.vendor-withdraw .left .details input {
+	text-align:right;}
+</style>
+</body>
+</html>

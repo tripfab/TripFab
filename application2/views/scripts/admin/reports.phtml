@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<title>Reports - Admin | Tripfab.com</title>
+	    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+        <link type="text/css" rel="stylesheet" href="/css5/reset.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css5/all.css?v=<?= $this->cssVC ?>" />
+		<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+  		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />
+  		<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+		<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js?v=<?= $this->cssVC ?>"></script>
+    	<script type="text/javascript" src="/js2/admin/traveller-view.js?v=<?= $this->cssVC ?>"></script>
+			<script>
+				$(document).ready(function() {
+					$('a.lbc').fancybox({
+						padding: 0,
+						overlayColor: '#FFF',
+						overlayOpacity: '0.7',
+						showCloseButton: 'false',
+					});
+            		$("#report_tabs").tabs();
+					
+					panel(<?php echo $this->user->id?>, 1, 'partner');
+				});
+			</script>
+	</head>
+		<body>
+			<div class="w1">
+    		<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
+			<div class="w3_admin">
+				<div class="sub_menu">
+					<h2>Payment Receipt Report </h2>
+				</div><!--SUB_MENU-->
+            </div><!--W3-->
+			<div class="all_listing">
+				<div class="search_list">
+					<ul class="get-report">
+						<li><a href="" class="btn-10"><span class="pdf">Download .pdf</span></a></li>
+						<li><a href="" class="btn-10"><span class="excel">Download .xls</span></a></li>
+					</ul>
+					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
+				</div><!--SEARCH_LIST-->
+				<div class="list_content">
+					<table width="100%" border="0">
+						<tr>
+							<th width="112"><a href="<?php echo $this->url(array('sort'=>0, 'seq'=>$this->paramSort == 0 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Code</a></th>
+							<th width="174"><a href="<?php echo $this->url(array('sort'=>1, 'seq'=>$this->paramSort == 1 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Listing</a></th>
+							<th width="155"><a href="<?php echo $this->url(array('sort'=>2, 'seq'=>$this->paramSort == 2 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Partner</a></th>
+							<th width="155"><a href="<?php echo $this->url(array('sort'=>3, 'seq'=>$this->paramSort == 3 && $this->paramSequence !='desc' ? 'desc':'default'));?>">User</a></th>
+							<th width="125"><a href="<?php echo $this->url(array('sort'=>4, 'seq'=>$this->paramSort == 4 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Check In / Date</a></th>
+							<th width="110"><a href="<?php echo $this->url(array('sort'=>5, 'seq'=>$this->paramSort == 5 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Check Out</a></th>
+							<th width="70" class="last">&nbsp;</th>
+						</tr>
+						<?php foreach($this->paginator as $key=>$listing):?>
+                        <tr <?php echo $key==0 ? 'class="first"' : ''?>>
+							<td><?php echo $listing->code?></td>
+							<td><?php echo $listing->listing_name?></td>
+							<td><?php echo $listing->vendor_name?></td>
+							<td><?php echo $listing->user_name?></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+                        <?php endforeach;?>
+					</table>
+				</div><!--LIST-CONTENT-->
+				<div class="paging_bottom">
+					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
+				</div><!--PAGING_BOTTOM-->
+			</div><!--ALL_LISTING-->
+					
+			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+		</div>
+		<!-- closes w1 -->
+		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+        <script>
+			function searchSubmit(){
+				location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
+			}
+		</script>
+
+
+	</body>
+</html>

@@ -1,6 +1,144 @@
 <style type="text/css">
 .photo object { float:right;}
 .photo .text { float:left;}
+.photos .empty {
+	text-align:center;
+	padding-top:100px;
+	padding-bottom:100px;}
+	.photos .empty img {
+		margin-bottom:10px;
+		float:none;
+		display:inline;
+		background:none; }
+	.photos .empty p {
+		font-family:Helvetica;
+		font-size:18px;
+		line-height:26px;
+		font-weight:bold;
+		color:#d7d7d7;}
+		.photos .empty p a {
+			color:#60b5f7;}
+.main_pic {
+    float: right;
+    margin-right: 25px;}
+	.main_pic input {
+		margin:0 0 0 0;}
+
+.photo { position:relative; overflow:visible;}
+.photo .help {
+	position:absolute;
+	top:25px;
+	left:155px;}
+.photo .help a.eye {
+	display:block;
+	background:url(/images2/eye.png) no-repeat top left;
+	width:18px;
+	height:12px;
+	text-indent:-9999px;
+	cursor:pointer;}
+	.photo .help:hover a.eye {
+		background-position:left -12px;}
+.photo.first .help {
+	top:0px;}
+	.photo .help a.tooltip3 {
+		background:url(/images2/help-tooltip-bg.png) top left no-repeat;
+		left: 17px;
+		padding:11px 12px;
+		position:absolute;
+		top:-102px;
+		z-index:1000;
+		display:none;}
+	.photo .help:hover a.tooltip3 {
+		display:block;}
+
+.profile-items {
+	overflow:visible;}
+	#photoQueue {
+		float:right;
+		width:400px;
+		border:1px solid #CCC;
+		display:none;}
+		#photoQueue .uploadifyQueueItem {
+			border-bottom:1px solid #CCC;
+			position:relative;
+			height:40px;}
+			#photoQueue .uploadifyQueueItem .cancel {
+				position:absolute;
+				right:5px;
+				top:12px;}
+			#photoQueue .uploadifyQueueItem .fileName {
+				position:absolute;
+				bottom:5px;
+				left:5px;}
+			#photoQueue .uploadifyQueueItem .uploadifyProgress {
+				position:absolute;
+				left:5px;
+				top:5px;
+				height:10px;
+				width:370px;
+				background:#CCC;}
+				#photoQueue .uploadifyQueueItem .uploadifyProgress .uploadifyProgressBar {
+					position:absolute;
+					height:10px;
+					top:0px;
+					left:0px;
+					background:#09C;}
+			#photoQueue .uploadifyQueueItem .percentage { display:none;}
+	#photoQueue .photoQueueMeta { position:relative; height:30px;}
+	#photoQueue .photoQueueMeta .count { position:absolute; top:0; left:5px; line-height:30px; }
+	#photoQueue .photoQueueMeta .size { position:absolute; top:0; right:5px; line-height:30px; }
+	a.deny { 
+		height: 36px;
+		position: absolute;
+		right: 20px;
+		top: 12px;
+		width: 128px;
+		z-index:10000;}
+	
+	#file_upload3 { float:right;}
+	.qq-upload-button {
+		background:url(/images2/upload-btn.gif) top left no-repeat;
+		text-indent:-9999px;
+		width:124px;
+		height:34px;}
+		
+		#qqPhotoQueueUL {
+			float:right;
+			width:400px;
+			padding:10px;
+			list-style:none;}
+			#qqPhotoQueueUL li {
+				border-bottom:1px solid #CCC;
+				overflow:hidden;
+				padding-bottom:5px;
+				margin-bottom:5px;
+				line-height:18px;}
+				#qqPhotoQueueUL li.qq-upload-fail span.qq-upload-progress-range { 
+					background:#F00;}
+			#qqPhotoQueueUL li:last-child {
+				border:none;
+				padding-bottom:0;
+				margin-bottom:0;}
+				#qqPhotoQueueUL li span.qq-upload-progress {
+					float:left;
+					height:18px;
+					background:#CCC;
+					position:relative;
+					width:350px;
+					clear:none;}
+					#qqPhotoQueueUL li span.qq-upload-progress-range {
+						position:absolute;
+						top:0; left:0;
+						height:18px;
+						background:#7CCBFF;}
+				#qqPhotoQueueUL li span.qq-upload-size {
+					clear:none;
+					float:right;
+					widows:50px;}
+				#qqPhotoQueueUL li a.qq-upload-cancel {
+					display:none;}
+				#qqPhotoQueueUL li span.qq-upload-failed-text {
+					display:none;}
 </style>
 <form action="" method="post">
     <div class="photos">
@@ -17,7 +155,8 @@
         	<div class="text">
                 <strong>Photos</strong>
             </div>
-            <input style="float:right;" id="file_upload" name="file_upload" type="file" />
+            <a href="#" id="file_upload3"></a>
+            <div class="clear"></div>
         </div>
         <div class="photo">        	
             <div class="text req">
@@ -26,27 +165,40 @@
                 <span><em>Photo Dimension</em> 640x425 pixels</span>
                 <span><em>File size</em> 2MB or less</span>
             </div>
+            <div class="help">
+                <a href="/images2/help/big-act-photos.png" class="eye">help</a>
+                <a href="/images2/help/big-act-photos.png" class="tooltip3">
+                <img src="https://static.tripfab.com/images2/help/small-act-photos.png" /></a>
+            </div>
+            <div id="qqPhotoQueue"><ul id="qqPhotoQueueUL"></ul></div>
+            <div class="clear"></div>
         </div><!-- closes photo -->
+        <?php if(count($this->pictures) > 0): ?>
         <?php foreach($this->pictures as $pic): ?>
         <div class="photo">
             <?= $this->thumbnail(array('width'=>133,'height'=>92), $pic->url, '','133:92') ?>
             <strong>Photo Description</strong>
             <input class="noclean" placeholder="Add a nice description of this photo" type="text" name="pic[<?= $pic->id ?>][location]" value="<?= $pic->location ?>" />
             <a href="#img_delete_<?= $pic->id ?>" class="lb remove">Remove Picture</a>
+            <div class="main_pic">
+            	<?php $checked = ($pic->main == 1) ? 'checked="checked"' : '' ?>
+            	<input type="radio" id="main_pic_<?= $pic->id ?>" <?= $checked ?> name="main" value="<?= $pic->id ?>" />
+	            <label for="main_pic_<?= $pic->id ?>">This is the Main Picture</label>
+            </div>
+            <div class="clear"></div>
         </div><!-- closes photo -->
         <?php endforeach ?>
-        <?php if(count($this->pictures) < 10): ?>
-        <?php for($i=0;$i<(10 - count($this->pictures));$i++): ?>
-        <div class="photo">
-        	<img src="/images2/photo-placeholder.gif" width="133" height="92" />
-            <strong>Photo Description</strong>
-            <input type="text" class="noclean" value="Add a photo before writing a description" />
+        <?php else: ?>
+        <div class="photo empty">
+        	<img src="https://static.tripfab.com/images/empty-5.png" />
+            <p>You don't have photos for this listing<br />
+            <a href="#" class="uploadTrigger">Upload some pictures now</a>
+            </p>
         </div>
-        <?php endfor ?>
         <?php endif ?>
     </div><!-- closes photos -->
     <div class="foot">
-        <input type="submit" class="btn-1" value="Save Changes" />
+        <input type="submit" class="noclean btn-1" value="Save Changes" />
     </div><!-- closes foot -->
 	<input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />

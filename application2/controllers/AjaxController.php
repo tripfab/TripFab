@@ -2,11 +2,37 @@
 
 class AjaxController extends Zend_Controller_Action
 {
+    
+    const CLIENT_ID     = 'UAZO1NP00B4BHVHJGONXBEKHMARCCDXUCIBRYIKVXJIYDWQU';
+    const CLIENT_SECRET = 'C5DMAZR3H4PKNSYD4DHGVV0HV2HWBU2R3EW2FHXZPKI0PIRX';
+    
     protected $places_db;
     protected $landscapes_db;
     protected $pictures_db;
     protected $listings_db;
     protected $trips;
+    /**
+     *
+     * @var WS_ListingService
+     */
+    protected $listings;
+    protected $user;
+    protected $accounts;
+    
+    /**
+     *
+     * @var WS_UsersService
+     */
+    protected $users;
+    protected $reviewes;
+    protected $vendors;
+    protected $reservations;
+    
+    /**
+     *
+     * @var WS_PlacesService
+     */
+    protected $places;
 
 
     public function init()
@@ -21,11 +47,443 @@ class AjaxController extends Zend_Controller_Action
         
         $this->trips = new WS_TripsService();
         
+        $this->accounts = new WS_AccountService();
+        $this->users = new WS_UsersService();
+        $this->reviewes = new WS_ReviewsService();
+        $this->vendors = new WS_VendorService();
+        
+        $this->reservations = new WS_ReservationsService();
+        
+        $this->user = null;
+        
         $headers = getallheaders();
-        if(array_key_exists('X-Requested-With', $headers) === false){
+        if((array_key_exists('X-Requested-With', $headers) === false) and 
+                (array_key_exists('x-requested-with', $headers) === false)){
             error_log('Wrong request');
             echo 'Wrong request'; die;
-        }        
+        }
+        
+        $this->view->cssVC = Zend_Registry::get('vc');
+    }
+    
+    public function activateAction()
+    {
+        if($this->getRequest()->isPost()){
+            $auth = Zend_Auth::getInstance();
+            if($auth->hasIdentity()){
+                $this->user = new WS_User($auth->getIdentity());
+                $validate = array(
+                    'profile' => array(
+                        'url' => '/provider/account',
+                        'label' => 'Set company picture/logo',
+                        'description' => 'Add your company\'s logo, so people can recognize you',
+                        'done'  => false,
+                    ),
+                    'title' => array(
+                        'url' => '/provider/listings/edit/',
+                        'label' => 'Listing Title',
+                        'desription' => 'Change the listing title or Assign one',
+                        'done' => false,
+                    ),
+                    'description' => array(
+                        'url' => '/provider/listings/overview/',
+                        'label' => 'Listing Description',
+                        'desription' => 'Add a listing short description',
+                        'done' => false,
+                    ),
+                    'country' => array(
+                        'url' => '/provider/listings/location/',
+                        'label' => 'Listing Country',
+                        'desription' => 'Assign a country to the listing',
+                        'done' => false,
+                    ),
+                    'city' => array(
+                        'url' => '/provider/listings/location/',
+                        'label' => 'Listing City',
+                        'desription' => 'Assign a city to the listing',
+                        'done' => false,
+                    ),
+                    'location' => array(
+                        'url' => '/provider/listings/location/',
+                        'label' => 'Listing Map',
+                        'desription' => 'Localize your listing in the map',
+                        'done' => false,
+                    ),
+                    'photos' => array(
+                        'url' => '/provider/listings/photos/',
+                        'label' => 'Listing Photos',
+                        'desription' => 'Add photos to the listing',
+                        'done' => false,
+                    ),
+                    'overview' => array(
+                        'url' => '/provider/listings/overview/',
+                        'label' => 'Listing Overview',
+                        'desription' => 'Add the Overview Information',
+                        'done' => false,
+                    ),
+                );
+
+
+                $ids = $_POST['listing'];
+
+                $listing = $this->listings->getListing($ids, $this->user->getVendorId());
+
+                $user = $this->user->getData();
+                if(!empty($user->image))
+                        $validate['profile']['done'] = true;
+                if($listing->title != "Untitle Listing" and !empty($listing->title))
+                        $validate['title']['done'] = true;
+                if($listing->description != "")
+                        $validate['description']['done'] = true;
+                if($listing->country_id != 0)
+                        $validate['country']['done'] = true;
+                if($listing->city_id != 0)
+                        $validate['city']['done'] = true;
+                if(!is_null($listing->lat))
+                        $validate['location']['done'] = true;
+
+                $photos = $this->listings->getPictures($listing->id);
+                if(count($photos) > 0)
+                        $validate['photos']['done'] = true;
+
+                $overview = $this->listings->getOverviewOf($listing->id);
+                if(!empty($overview->about))
+                        $validate['overview']['done'] = true;
+
+                switch($listing->main_type)
+                {
+                    case 5:
+                        $validate['price'] = array(
+                            'url' => '/provider/listings/pricing/',
+                            'label' => 'Listing Pricing',
+                            'desription' => 'Add the listing pricing',
+                            'done' => false,
+                        );
+                        $validate['options'] = array(
+                            'url' => '/provider/listings/rooms/',
+                            'label' => 'Listing Rooms',
+                            'desription' => 'Add at leaat one room type',
+                            'done' => false,
+                        );
+
+                        $price = $this->listings->getBasicPrice($listing->id);
+                        if(!is_null($price) and $price->price != 0)
+                                $validate['price']['done'] = true;
+
+                        $rooms = $this->listings->getHotelRooms($listing->id);
+                        $done = true;
+                        if(count($rooms) > 0) {
+                            foreach($rooms as $room) {
+                                if($room->people == 0 and $done) {
+                                    $done = false;
+                                }
+                            }
+                            if($done) {
+                                $validate['options']['done'] = true;
+                            } else {
+                                $validate['options']['desription'] = 'Some of the roooms do not have the maximun of people allowed on the room';
+                            }
+                        }
+
+                        break;
+                    case 6:
+                        $validate['price'] = array(
+                            'url' => '/provider/listings/pricing/',
+                            'label' => 'Listing Pricing',
+                            'desription' => 'Add the listing pricing',
+                            'done' => false,
+                        );
+                        $validate['capacity'] = array(
+                            'url' => '/admin/listings/edit/',
+                            'label' => 'Activity Capacity',
+                            'description' => 'Define the activity maximun and minimun capacity required',
+                            'done' => false
+                        );
+                        $price = $this->listings->getBasicPrice($listing->id);
+                        if(!is_null($price) and $price->price != 0)
+                                $validate['price']['done'] = true;  
+                        
+                        if(!is_null($listing->min) and !is_null($listing->max)) {
+                            $validate['capacity']['done'] = true;
+                        } else {
+                            $capacities = $this->listings->getActivityTypes($listing->id);
+                            $done=true;
+                            if(count($capacities) > 0) {
+                                foreach($capacities as $c) {
+                                    if(($c->min == 0 or $c->max ==0) and $done) {
+                                        $done = false;
+                                    }
+                                }
+                                if($done) {
+                                    $validate['capacity']['done'] = true;
+                                } else {
+                                    $validate['capacity']['description'] = 'Some of the Activity Types do not have a minimun or maximun capacity defined';
+                                    $validate['capacity']['url'] = 'admin/listings/types/';
+                                }
+                            }
+                        }
+
+                        break;
+                    default: break;
+                }
+
+                $errors = array();
+                foreach($validate as $val){
+                    if(!$val['done'])
+                        $errors[] = 1;
+                }
+
+                if(count($errors) > 0){
+                    $response = array(
+                        'success' => 1,
+                        'status'  => 'warning',
+                        'text'    => count($errors).' step(s) remaining before activating',
+                        'missing' => 'missing',
+                        'id'      => $listing->id,
+                    );
+                }
+                else {
+                    $response = array(
+                        'success' => 1,
+                        'status'  => 'approve',
+                        'text'    => 'This listing is ready to be activated!',
+                        'missing' => '',
+                        'id'      => $listing->id,
+                    );
+                }
+                header('Content-type: application/json');
+                echo json_encode($response); die;
+            }
+        }
+    }
+    
+    public function activate2Action()
+    {
+        if($this->getRequest()->isPost()){
+            $auth = Zend_Auth::getInstance();
+            if($auth->hasIdentity()){
+                $this->user = new WS_User($auth->getIdentity());
+                $validate = array(
+                    'profile' => array(
+                        'url' => '/provider/account',
+                        'label' => 'Set company picture/logo',
+                        'description' => 'Add your company\'s logo, so people can recognize you',
+                        'done'  => false,
+                    ),
+                    'title' => array(
+                        'url' => '/provider/listings/edit/',
+                        'label' => 'Listing Title',
+                        'desription' => 'Change the listing title or Assign one',
+                        'done' => false,
+                    ),
+                    'description' => array(
+                        'url' => '/provider/listings/overview/',
+                        'label' => 'Listing Description',
+                        'desription' => 'Add a listing short description',
+                        'done' => false,
+                    ),
+                    'country' => array(
+                        'url' => '/provider/listings/location/',
+                        'label' => 'Listing Country',
+                        'desription' => 'Assign a country to the listing',
+                        'done' => false,
+                    ),
+                    'city' => array(
+                        'url' => '/provider/listings/location/',
+                        'label' => 'Listing City',
+                        'desription' => 'Assign a city to the listing',
+                        'done' => false,
+                    ),
+                    'location' => array(
+                        'url' => '/provider/listings/location/',
+                        'label' => 'Listing Map',
+                        'desription' => 'Localize your listing in the map',
+                        'done' => false,
+                    ),
+                    'photos' => array(
+                        'url' => '/provider/listings/photos/',
+                        'label' => 'Listing Photos',
+                        'desription' => 'Add photos to the listing',
+                        'done' => false,
+                    ),
+                    'overview' => array(
+                        'url' => '/provider/listings/overview/',
+                        'label' => 'Listing Overview',
+                        'desription' => 'Add the Overview Information',
+                        'done' => false,
+                    ),
+                );
+
+
+                $ids = $_POST['listing'];
+
+                $listing = $this->listings->getListing($ids);
+                
+                if($listing->status == 1) {
+                    $response = array(
+                        'success' => 1,
+                        'status'  => 'active',
+                        'text'    => '',
+                        'missing' => '',
+                        'id'      => $listing->id,
+                    );
+                    
+                    header('Content-type: application/json');
+                    echo json_encode($response); die;
+                }
+
+                $user = $this->users->getVendor($listing->vendor_id);
+                if(!empty($user->image))
+                        $validate['profile']['done'] = true;
+                if($listing->title != "Untitle Listing" and !empty($listing->title))
+                        $validate['title']['done'] = true;
+                if($listing->description != "")
+                        $validate['description']['done'] = true;
+                if($listing->country_id != 0)
+                        $validate['country']['done'] = true;
+                if($listing->city_id != 0)
+                        $validate['city']['done'] = true;
+                if(!is_null($listing->lat))
+                        $validate['location']['done'] = true;
+
+                $photos = $this->listings->getPictures($listing->id);
+                if(count($photos) > 0)
+                        $validate['photos']['done'] = true;
+
+                $overview = $this->listings->getOverviewOf($listing->id);
+                if(!empty($overview->about))
+                        $validate['overview']['done'] = true;
+
+                switch($listing->main_type)
+                {
+                    case 5:
+                        $validate['price'] = array(
+                            'url' => '/provider/listings/pricing/',
+                            'label' => 'Listing Pricing',
+                            'desription' => 'Add the listing pricing',
+                            'done' => false,
+                        );
+                        $validate['options'] = array(
+                            'url' => '/provider/listings/rooms/',
+                            'label' => 'Listing Rooms',
+                            'desription' => 'Add at leaat one room type',
+                            'done' => false,
+                        );
+
+                        $price = $this->listings->getBasicPrice($listing->id);
+                        if(!is_null($price) and $price->price != 0)
+                                $validate['price']['done'] = true;
+
+                        $rooms = $this->listings->getHotelRooms($listing->id);
+                        $done = true;
+                        if(count($rooms) > 0) {
+                            foreach($rooms as $room) {
+                                if($room->people == 0 and $done) {
+                                    $done = false;
+                                }
+                            }
+                            if($done) {
+                                $validate['options']['done'] = true;
+                            } else {
+                                $validate['options']['desription'] = 'Some of the roooms do not have the maximun of people allowed on the room';
+                            }
+                        }
+
+                        break;
+                    case 6:
+                        $validate['price'] = array(
+                            'url' => '/provider/listings/pricing/',
+                            'label' => 'Listing Pricing',
+                            'desription' => 'Add the listing pricing',
+                            'done' => false,
+                        );
+                        $validate['capacity'] = array(
+                            'url' => '/admin/listings/edit/',
+                            'label' => 'Activity Capacity',
+                            'description' => 'Define the activity maximun and minimun capacity required',
+                            'done' => false
+                        );
+                        $price = $this->listings->getBasicPrice($listing->id);
+                        if(!is_null($price) and $price->price != 0)
+                                $validate['price']['done'] = true;  
+                        
+                        if(!is_null($listing->min) and !is_null($listing->max)) {
+                            $validate['capacity']['done'] = true;
+                        } else {
+                            $capacities = $this->listings->getActivityTypes($listing->id);
+                            $done=true;
+                            if(count($capacities) > 0) {
+                                foreach($capacities as $c) {
+                                    if(($c->min == 0 or $c->max ==0) and $done) {
+                                        $done = false;
+                                    }
+                                }
+                                if($done) {
+                                    $validate['capacity']['done'] = true;
+                                } else {
+                                    $validate['capacity']['description'] = 'Some of the Activity Types do not have a minimun or maximun capacity defined';
+                                    $validate['capacity']['url'] = 'admin/listings/types/';
+                                }
+                            }
+                        }
+                        break;
+                    default: break;
+                }
+
+                $errors = array();
+                foreach($validate as $val){
+                    if(!$val['done'])
+                        $errors[] = 1;
+                }
+
+                if(count($errors) > 0){
+                    $response = array(
+                        'success' => 1,
+                        'status'  => 'warning',
+                        'text'    => count($errors).' step(s) remaining',
+                        'missing' => 'missing',
+                        'id'      => $listing->id,
+                    );
+                }
+                else {
+                    $response = array(
+                        'success' => 1,
+                        'status'  => 'approve',
+                        'text'    => 'This listing is ready',
+                        'missing' => '',
+                        'id'      => $listing->id,
+                    );
+                }
+                header('Content-type: application/json');
+                echo json_encode($response); die;
+            }
+        }
+    }
+    
+    public function sendrequestAction()
+    {
+        if($this->getRequest()->isPost())
+        {
+            try {
+                $notifier = new WS_Notifier();
+                $to      = 'cristian@tripfab.com';
+                $subject = 'New Invitation Request';
+                $message = 'New signup from: '.$_POST['company']."\n\n";
+                $message.= 'Company: '.$_POST['company']."\n";
+                $message.= 'Email: '.$_POST['email']."\n";
+                $message.= 'Phone: ('.$_POST['code'].') '.$_POST['phone']."\n";
+                $message.= 'Website: '.$_POST['website']."\n";
+                $message.= 'Business: '.$_POST['business']."\n";
+                $message.= 'Country: '.$_POST['country']."\n";
+
+                $notifier->sendEmail($to, $subject, $message);
+
+                echo 'Success';
+            } catch(Exception $e) {
+                echo $e->getMessage();
+            }
+        }
+        die;
     }
     
     public function getcontactAction()
@@ -35,6 +493,16 @@ class AjaxController extends Zend_Controller_Action
             $user = new WS_User($auth->getIdentity());
             if($user->getRole() == 'provider'){
                 $vendor = $user->getVendorData();
+                $result = array(
+                    'phone' => $vendor->phone,
+                    'email' => $vendor->email,
+                    'website' => $vendor->website
+                );
+                
+                header('Content-type:text/json');
+                echo json_encode($result); die;
+            } elseif($user->getRole() == 'admin') {
+                $vendor = $this->users->getVendor($this->_getParam('provider'));
                 $result = array(
                     'phone' => $vendor->phone,
                     'email' => $vendor->email,
@@ -109,6 +577,7 @@ class AjaxController extends Zend_Controller_Action
             $parent_id = $_POST['parent_id'];
             $select = $this->places_db->select();
             $select->where('parent_id = ?', $parent_id);
+            $select->order('title ASC');
             $places = $this->places_db->fetchAll($select);
             if(!count($places))
                 $places = array();
@@ -246,16 +715,24 @@ class AjaxController extends Zend_Controller_Action
         $user = $auth->getIdentity();
         $messages = new WS_MessagesService();
         $con = $messages->getConversationById($id, $user->id);
+        
+        $users = new WS_UsersService();
+        
         if($con->starter == $user->id){
             //$con->snew = 0;
-            $_sender = $con->wname;
+            $_sender = $users->get($con->wwith);
+            if(is_null($_sender))
+                throw new Exception();
+            
             $con->snew = 0;
             $con->save();
+            $image  = $_sender->image;
         }else {
             //$con->wnew = 0;
-            $_sender = $con->sname;
+            $_sender = $users->get($con->starter);
             $con->wnew = 0;
             $con->save();
+            $image  = $_sender->image;
         }
         
         $_messages = $messages->getConversationMessages($con->id);
@@ -266,15 +743,21 @@ class AjaxController extends Zend_Controller_Action
         $result['conversation'] = $con->toArray();
         $result['user'] = $user->id;
         foreach($_messages as $m){
-            if($m->user_id == $user->id)
+            $image2 = '';
+            if($m->user_id == $user->id) {
                 $sender = 'Me';
-            else
-                $sender = $_sender;
+                $image2  = $user->image;
+            }
+            else {
+                $sender = $_sender->name;
+                $image2  = $image;
+            }
                 
             $result['messages'][] = array(
                 'sender' => $sender,
                 'text'   => nl2br(stripslashes($m->text)),
                 'date'   => date('M jS \a\t g:i a', strtotime($m->created)),
+                'image'  => $image2
             );
         }
         
@@ -291,7 +774,7 @@ class AjaxController extends Zend_Controller_Action
             try {
                 $auth = Zend_Auth::getInstance();
                 if(!$auth->hasIdentity())
-                        throw new Exception ('You need to loginbefore sending a message');
+                        throw new Exception ('You need to login before sending a message');
                 
                 $user = $auth->getIdentity();
                 if($user->role_id != 2)
@@ -341,8 +824,76 @@ class AjaxController extends Zend_Controller_Action
                 $msg->created           = $con->created;
                 $msg->save();
                 
+                $notifier = new WS_Notifier($vendor->user_id);
+                $notifier->newMessage($user);
+                
                 $result['type'] = 'success';
                 $result['message'] = 'Your message to '.$vendor->name.' has been sent';
+            } catch(Exception $e) {
+                //throw $e;
+                $result['type'] = 'error';
+                $result['message'] = $e->getMessage();
+            }
+        }
+        
+        header('Content-type: application/json');
+        echo json_encode($result); die;
+    }
+    
+    public function sendmsguserAction()
+    {
+        $result = array();
+        $result['type'] = 'error';
+        $result['message'] = 'Wrong Request';
+        if($this->getRequest()->isPost()){
+            try {
+                $auth = Zend_Auth::getInstance();
+                if(!$auth->hasIdentity())
+                        throw new Exception ('You need to login before sending a message');
+                
+                $vendor = $auth->getIdentity();
+                if($vendor->role_id != 3)
+                        throw new Exception ('You dont have anough permissions to contact vendors');
+                
+                $message = $_POST['message'];
+                if(empty($message))
+                        throw new Exception('Message cannot be empty');
+                
+                $users = new Model_Users();
+                $select = $users->select();
+                $select->where('id = ?', $_POST['user']);
+                $user = $users->fetchRow($select);
+                if(is_null($user))
+                        throw new Exception('User Not Found');
+                
+                $conversations = new Model_Conversations();
+                $con = $conversations->fetchNew();
+                $con->starter   = $vendor->id;
+                $con->sname     = $vendor->name;
+                $con->simage    = $vendor->image;
+                $con->wwith     = $user->id;
+                $con->wname     = $user->name;
+                $con->wimage    = $user->image;
+                $con->wnew      = 1;
+                $con->msgcount  = 1;
+                $con->created   = date('Y-m-d H:i:s');
+                $con->updated   = date('Y-m-d H:i:s');
+                
+                $con->save();
+                
+                $messages = new Model_Messages();
+                $msg = $messages->fetchNew();
+                $msg->user_id           = $vendor->id;
+                $msg->conversation_id   = $con->id;
+                $msg->text              = $message;
+                $msg->created           = $con->created;
+                $msg->save();
+                
+                $notifier = new WS_Notifier($user->id);
+                $notifier->newMessage($vendor);
+                
+                $result['type'] = 'success';
+                $result['message'] = 'Your message to '.$user->name.' has been sent';
             } catch(Exception $e) {
                 //throw $e;
                 $result['type'] = 'error';
@@ -378,16 +929,30 @@ class AjaxController extends Zend_Controller_Action
                 $select->where('email = ?', $_POST['email']);
                 $user = $users->fetchRow($select);
                 
-                $password = substr(md5(time().$_POST['email']), 3, 10);
+                $tokens = new Zend_Db_Table('resetpass_tokens');
+                $token  = $tokens->fetchNew();
+                $token->user_id = $user->id;
+                $token->token   = md5($user->email.time());
+                $token->created = date('Y-m-d H:i:s');
+                $token->save();
                 
-                $user->password = md5($password);
-                $user->save();
+                $url = "https://".$_SERVER['HTTP_HOST']."/reset/".$user->email."/".$token->token;
                 
-                $notifier = new WS_Notifier();
-                $notifier->passwordReset($user->name, $user->email, $password);
+                $to = $user->email;
+                $subject = 'Password Reset Request';
+                
+                $message = "Hi ".$user->name."\n\n"
+                         . "We have receive a new request to reset your passowrd\n"
+                         . "If you made the request please confirm by clicking in trhe link\n\n"
+                         . $url . "\n\n"
+                         . "If you did not request this change please ognore this message";
+                        
+                
+                $notifier = new WS_Notifier($user->id);
+                $notifier->passwordReset($url);
                 
                 $result['type'] = 'success';
-                $result['message'] = 'The password has been reset. We emailed you the new password';
+                $result['message'] = 'We have sent you confirmation message to the provided email address';
             } catch (Exception $e) {
                 $result['type'] = 'error';
                 $result['message'] = $e->getMessage();
@@ -606,63 +1171,224 @@ class AjaxController extends Zend_Controller_Action
                         $select = $listings->select();
                         $select->where('id = ?', $_POST['listing']);
                         $listing = $listings->fetchRow($select);
-                        if(is_null($listing))
-                                throw new Exception('Listing not found');
-                        
+						
                         $trip = $trips->fetchNew();
                         $trip->title = $_POST['title'];
                         $trip->user_id = $user->id;
-                        $trip->country_id = $listing->country_id;
-                        $trip->start = '0000-00-00';
-                        $trip->end = '0000-00-00';
+                        $trip->country_id = (is_null($listing)) ? 0 : $listing->country_id;
+						
+                        if((isset($_POST['start']) and !empty($_POST['start']) and $_POST['start'] != 'Starting Date') and
+                                        (isset($_POST['end']) and !empty($_POST['end']) and $_POST['end'] != 'Ending Date')){
+
+                            $start = date('M j Y', strtotime($_POST['start']));
+                            $end   = date('M j Y', strtotime($_POST['end']));
+                            if($start != $_POST['start'] || $end != $_POST['end'])
+                                    throw new Exception("Sorry, we couldn't understand the date Formats");
+
+                            $trip->start = date('Y-m-d', strtotime($start));;
+                            $trip->end = date('Y-m-d', strtotime($end));
+
+                            $fday = strtotime($start);
+                            $lday = strtotime($end);
+                            $days = $lday - $fday;
+                            $days = $days / 86400;
+
+                            $trip->days         = $days + 1;
+                        } else {
+                            $trip->start = '0000-00-00';
+                            $trip->end   = '0000-00-00';
+                        }
+                        
+                        $trip->adults = (!empty($_POST['adults'])) ? $_POST['adults'] : 1;
+                        $trip->kids = (!empty($_POST['kids'])) ? $_POST['kids'] : 0;
+						
                         $trip->created = date('Y-m-d H:i:s');
                         $trip->updated = date('Y-m-d H:i:s');
                         $trip->save();
+						
                         $trip->token = md5($trip->id.$user->id.time());
                         $trip->save();
 
-                        $row = $trip_listings->fetchNew();
-                        $row->user_id       = $user->id;
-                        $row->itinerary_id  = $trip->id;
-                        $row->listing_id    = $listing->id;
-                        $row->city_id       = $listing->city_id;
-                        $row->country_id    = $listing->country_id;
-                        $row->save();
-
-                        $trip->listings = $trip->listings + 1;
-
-                        $cities = new Zend_Db_Table('itinerary_cities');
-                        $select = $cities->select();
-                        $select->where('itinerary_id = ?', $trip->id);
-                        $select->where('city_id = ?', $row->city_id);
-                        $city = $cities->fetchRow($select);
-                        if(is_null($city)){
+                        if(!is_null($listing)) {
+                            $row = $trip_listings->fetchNew();
+                            $row->user_id       = $user->id;
+                            $row->itinerary_id  = $trip->id;
+                            $row->listing_id    = $listing->id;
+                            $row->city_id       = $listing->city_id;
+                            $row->country_id    = $listing->country_id;
+                            $row->save();
+                            
+                            $trip->listings = $trip->listings + 1;
+                            
+                            $cities = new Zend_Db_Table('itinerary_cities');
                             $select = $cities->select();
                             $select->where('itinerary_id = ?', $trip->id);
-                            $select->where('country_id = ?', $row->country_id);
-                            $country = $cities->fetchRow($select);
-                            if(is_null($country)){
-                                $trip->countries = $trip->countries + 1;
+                            $select->where('city_id = ?', $row->city_id);
+                            $city = $cities->fetchRow($select);
+                            if(is_null($city)){
+                                $select = $cities->select();
+                                $select->where('itinerary_id = ?', $trip->id);
+                                $select->where('country_id = ?', $row->country_id);
+                                $country = $cities->fetchRow($select);
+                                if(is_null($country)){
+                                    $trip->countries = $trip->countries + 1;
+                                }
+
+                                $city = $cities->fetchNew();
+                                $city->itinerary_id = $trip->id;
+                                $city->city_id = $row->city_id;
+                                $city->country_id = $row->country_id;
+                                $city->save();
+
+                                $trip->cities = $trip->cities + 1;
                             }
 
-                            $city = $cities->fetchNew();
-                            $city->itinerary_id = $trip->id;
-                            $city->city_id = $row->city_id;
-                            $city->country_id = $row->country_id;
-                            $city->save();
+                            if(!$trip->image)
+                                $trip->image = $listing->image;
 
-                            $trip->cities = $trip->cities + 1;
+                            $trip->save();
+                        }
+                        
+                        $_listings = $this->trips->getItnListingOf($trip->id, false, null, true, true);
+                        $bookings = array();
+            
+                        foreach($_listings as $list) {
+                            if($list->main_type == 6 || $list->main_type == 5){
+                                $bookings[$list->id] = array(
+                                    'adults' => $trip->adults,
+                                    'child'  => $trip->kids,
+                                );
+                            }
+                        }
+                        
+                        $date = date('Y-m-d G:i:s', strtotime($trip->start));
+                        
+                        $items  = array();
+                        $items2 = array();
+                        $options = array();
+
+                        $caculated = array();
+
+                        foreach($_listings as $u => $listing){
+                            if($listing->main_type == 6 || $listing->main_type == 5){
+                                if($listing->main_type == 5) {
+                                    if(!@in_array($listing->triplisting_id, $caculated)) {
+                                        $j = 2;
+                                        $listing->day = (is_null($listing->day)) ? 1 : $listing->day; 
+                                        for($i = $listing->day; $i <= $trip->days; $i++){
+                                            $_diff = false; $found = false;
+                                            foreach($_listings as $list2) {
+                                                $list2->day = (is_null($list2->day)) ? 1 : $list2->day;
+                                                if($list2->day == ($i+1) && $list2->main_type == 5) {
+                                                    if($list2->listing_id == $listing->listing_id) {
+                                                        $j++;
+                                                        $caculated[] = $list2->triplisting_id;
+                                                        $found = true;
+                                                    } else {
+                                                        $_diff = true;
+                                                    } break;
+                                                }
+                                            }
+                                            if($_diff) break;
+                                            elseif(!$found and ($trip->days - 1) > $i) $j++;
+                                        }
+
+                                        $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                                        $checkin = date('Y-m-d', $checkin);
+
+                                        $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                                        $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                                        $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                                        $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                                        $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $j, $option, $capacity);
+
+                                        $item->day = $listing->day;
+                                        $item->listing_city = $listing->city;
+                                        $item->listing_country = $listing->country;
+                                        $item->triplistingid = $listing->triplisting_id;
+                                        $item->ciidf = $listing->cityurl;
+                                        $item->coidf = $listing->countryurl;
+                                        $item->idf   = $listing->identifier;
+
+                                        $items[] = $item;
+
+                                        $options[$listing->id]['options'] = $this->listings->getHotelRooms($listing->id);
+
+                                        $prices = $this->listings->getSchPrices($listing);
+                                        $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+
+                                        $caculated[] = $listing->id;
+                                    }
+                                } 
+                                else {
+                                    $listing->day = (is_null($listing->day)) ? 1 : $listing->day; 
+                                    
+                                    $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                                    $checkin = date('Y-m-d', $checkin);
+
+                                    $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                                    $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                                    $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                                    $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                                    $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $trip->days, $option, $capacity);
+
+                                    $item->day = $listing->day;
+                                    $item->listing_city = $listing->city;
+                                    $item->listing_country = $listing->country;
+                                    $item->triplistingid = $listing->triplisting_id;
+                                    $item->ciidf = $listing->cityurl;
+                                    $item->coidf = $listing->countryurl;
+                                    $item->idf   = $listing->identifier;
+
+                                    $items[] = $item;
+
+                                    $options[$listing->id]['options'] = $this->listings->getSchedulesOf($listing->id);
+
+                                    if(is_null($listing->min) or is_null($listing->max)){
+                                        $options[$listing->id]['capacity'] = $this->listings->getActivityTypes($listing->id);
+
+                                        $prices = $this->listings->getSchPrices($listing);
+                                        $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+                                    }
+                                }
+                            }
                         }
 
-                        if(!$trip->image)
-                            $trip->image = $listing->image;
+                        foreach($_listings as $listing){
+                            if($listing->main_type != 6 && $listing->main_type != 5){
+                                $item = new stdClass();
+                                $item->available = true;
+                                $item->listing_title = $listing->title;
+                                $item->listing_image = $listing->image;
+                                $item->listing_type  = $listing->main_type;
+                                $item->listing_city = $listing->city;
+                                $item->listing_country = $listing->country;
+                                $item->ciidf = $listing->cityurl;
+                                $item->coidf = $listing->countryurl;
+                                $item->idf   = $listing->identifier;
+                                $items2[] = $item;
+                            }
+                        }
 
+                        $total = 0;
+                        foreach($items as $cart){
+                            if($cart->available)
+                                $total = $total + $cart->total;
+                        }
+                        
+                        $trip->price = $total; 
                         $trip->save();
-
+                        
                         $result['type']     = 'newtrip';
                         $result['message']  = $trip->title.' trip has been created and listing '.$listing->title.' has been added to it';
                         $result['tripid']   = $trip->id;
                         $result['triptitle']= $trip->title;
+                        $result['price']= $trip->price;
+                        
                     } catch(Exception $e){
                         $result['type']     = 'error';
                         $result['message']  = $e->getMessage();
@@ -675,8 +1401,8 @@ class AjaxController extends Zend_Controller_Action
                         $trip_listings = new Zend_Db_Table('itinerary_listings');
 
                         $select = $trips->select();
-                        $select->where('id = ?', $_POST['trip']);
                         $select->where('user_id = ?', $user->id);
+                        $select->where('status = 1');
                         $trip = $trips->fetchRow($select);
                         if(is_null($trip))
                                 throw new Exception('Trip not found');
@@ -731,11 +1457,150 @@ class AjaxController extends Zend_Controller_Action
 
                         if(!$trip->image)
                             $trip->image = $listing->image;
+                        
+                        if($trip->country_id == 0) {
+                            $trip->country_id = $listing->country_id;
+                        }
 
+                        $trip->save();
+                        
+                        $_listings = $this->trips->getItnListingOf($trip->id, false, null, true, true);
+                        $bookings = array();
+            
+                        foreach($_listings as $list) {
+                            if($list->main_type == 6 || $list->main_type == 5){
+                                $bookings[$list->id] = array(
+                                    'adults' => $trip->adults,
+                                    'child'  => $trip->kids,
+                                );
+                            }
+                        }
+                        
+                        $date = date('Y-m-d G:i:s', strtotime($trip->start));
+                        
+                        $items  = array();
+                        $items2 = array();
+                        $options = array();
+
+                        $caculated = array();
+
+                        foreach($_listings as $u => $listing){
+                            if($listing->main_type == 6 || $listing->main_type == 5){
+                                if($listing->main_type == 5) {
+                                    if(!@in_array($listing->triplisting_id, $caculated)) {
+                                        $j = 2;
+                                        $listing->day = (is_null($listing->day)) ? 1 : $listing->day; 
+                                        for($i = $listing->day; $i <= $trip->days; $i++){
+                                            $_diff = false; $found = false;
+                                            foreach($_listings as $list2) {
+                                                $list2->day = (is_null($list2->day)) ? 1 : $list2->day;
+                                                if($list2->day == ($i+1) && $list2->main_type == 5) {
+                                                    if($list2->listing_id == $listing->listing_id) {
+                                                        $j++;
+                                                        $caculated[] = $list2->triplisting_id;
+                                                        $found = true;
+                                                    } else {
+                                                        $_diff = true;
+                                                    } break;
+                                                }
+                                            }
+                                            if($_diff) break;
+                                            elseif(!$found and ($trip->days - 1) > $i) $j++;
+                                        }
+
+                                        $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                                        $checkin = date('Y-m-d', $checkin);
+
+                                        $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                                        $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                                        $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                                        $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                                        $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $j, $option, $capacity);
+
+                                        $item->day = $listing->day;
+                                        $item->listing_city = $listing->city;
+                                        $item->listing_country = $listing->country;
+                                        $item->triplistingid = $listing->triplisting_id;
+                                        $item->ciidf = $listing->cityurl;
+                                        $item->coidf = $listing->countryurl;
+                                        $item->idf   = $listing->identifier;
+
+                                        $items[] = $item;
+
+                                        $options[$listing->id]['options'] = $this->listings->getHotelRooms($listing->id);
+
+                                        $prices = $this->listings->getSchPrices($listing);
+                                        $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+
+                                        $caculated[] = $listing->id;
+                                    }
+                                } 
+                                else {
+                                    $listing->day = (is_null($listing->day)) ? 1 : $listing->day; 
+                                    
+                                    $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                                    $checkin = date('Y-m-d', $checkin);
+
+                                    $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                                    $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                                    $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                                    $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                                    $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $trip->days, $option, $capacity);
+
+                                    $item->day = $listing->day;
+                                    $item->listing_city = $listing->city;
+                                    $item->listing_country = $listing->country;
+                                    $item->triplistingid = $listing->triplisting_id;
+                                    $item->ciidf = $listing->cityurl;
+                                    $item->coidf = $listing->countryurl;
+                                    $item->idf   = $listing->identifier;
+
+                                    $items[] = $item;
+
+                                    $options[$listing->id]['options'] = $this->listings->getSchedulesOf($listing->id);
+
+                                    if(is_null($listing->min) or is_null($listing->max)){
+                                        $options[$listing->id]['capacity'] = $this->listings->getActivityTypes($listing->id);
+
+                                        $prices = $this->listings->getSchPrices($listing);
+                                        $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+                                    }
+                                }
+                            }
+                        }
+
+                        foreach($_listings as $listing){
+                            if($listing->main_type != 6 && $listing->main_type != 5){
+                                $item = new stdClass();
+                                $item->available = true;
+                                $item->listing_title = $listing->title;
+                                $item->listing_image = $listing->image;
+                                $item->listing_type  = $listing->main_type;
+                                $item->listing_city = $listing->city;
+                                $item->listing_country = $listing->country;
+                                $item->ciidf = $listing->cityurl;
+                                $item->coidf = $listing->countryurl;
+                                $item->idf   = $listing->identifier;
+                                $items2[] = $item;
+                            }
+                        }
+
+                        $total = 0;
+                        foreach($items as $cart){
+                            if($cart->available)
+                                $total = $total + $cart->total;
+                        }
+                        
+                        $trip->price = $total; 
                         $trip->save();
 
                         $result['type']     = 'success';
                         $result['message']  = 'The listing '.$listing->title.' has been added to '.$trip->title;
+                        $result['price']    = $trip->price;
                     } catch(Exception $e){
                         $result['type']     = 'error';
                         $result['message']  = $e->getMessage();
@@ -762,20 +1627,19 @@ class AjaxController extends Zend_Controller_Action
         if($auth->hasIdentity()){
             $user = $auth->getIdentity();
             if($user->role_id == 2){
-                $this->view->user = $user;         
-
                 $trips = $this->trips->getFutureTripsBy($user->id, true);
                 $this->view->trips = $trips; 
             }
-         
+            $this->view->user  = $user;
         }
         
         $cat      = $this->_getParam('category', 'activities');
-        $subcat   = $this->_getParam('subcat', 'all');
-        $sort     = $this->_getParam('sort', 'newest');
+        $subcat   = $this->_getParam('cats', 'all');
+        $sort     = $this->_getParam('sort', 'random');
         $stars    = $this->_getParam('stars', 'all');
-        $pricemax = $this->_getParam('pricemax', 3000);
+        $pricemax = $this->_getParam('pricemax', 1500);
         $pricemin = $this->_getParam('pricemin', 0);
+        $page = $this->_getParam('page', 1);
         
         $images = array(
             'all' => 'All-Small-0',
@@ -794,31 +1658,147 @@ class AjaxController extends Zend_Controller_Action
         $city_idf    = $this->getRequest()->getParam('city');
         $country     = $this->places->getPlaceByIdf($country_idf);
         $region      = $this->places->getPlaceById($country->parent_id);
-        $city        = $this->places->getPlaceByIdf($city_idf, 3, $country->id);
+        
+        $city = null;
+        if($city_idf != 'default')
+            $city = $this->places->getPlaceByIdf($city_idf, 3, $country->id);
         
         $categories  = $this->listings->getMainCategories(true);
         
         $sortOptions = array(
-            'newest' => 'Newest',
+            '' => 'Select',
             'popular' => 'Most Popular',
-            'name' => 'Name',
-            'free' => 'Free',
             'lowest' => 'Lowest Price',
             'highest' => 'Highest Price',
-            'rating' => 'Rating' 
+            'free' => 'Free',
         );
         
+        $this->view->activeSort = $sort;
+        
+        $subcategories = null;
+        $category = null;
         if($cat != 'all'){
             $category = $this->listings->getCategoryByIdf($cat);
             $subcategories = $this->listings->getSubCategoriesOf($category->id);
         }
         
-        $ls_count = $this->listings->countListings($city->id);
+        $this->view->categ = ($cat == 'all') ? 'things to do' : $category->name; 
         
-        $listings = $this->listings->getListings2($city->id, $cat, $subcat, $sort, $stars, $pricemin, $pricemax);
+        if(!is_null($city))
+            $ls_count = $this->listings->countListings($city);
+        else
+            $ls_count = $this->listings->countListings(null, null, $country->id);
         
-        if($this->user)
-            $favorites = $this->user->getFavotites();
+        if(!is_null($city)) {
+            $listings = $this->listings->getListings2($city, $cat, $subcat, $sort, $stars, $pricemin, $pricemax, null, $page);
+            $this->view->listing_count = $this->listings->getListingsCount($city, $cat, $subcat, $sort, $stars, $pricemin, $pricemax, null, $page);
+        }
+        else {
+            $listings = $this->listings->getListings2(null, $cat, $subcat, $sort, $stars, $pricemin, $pricemax, $country->id,$page);
+            $this->view->listing_count = $this->listings->getListingsCount(null, $cat, $subcat, $sort, $stars, $pricemin, $pricemax, $country->id,$page);
+        }
+        
+        //var_dump($this->view->listing_count); die;
+        
+        $this->view->class  = 'landscape-1';
+        $this->view->cat    = $cat;
+        $this->view->subcat = $subcat;
+        $this->view->sort   = $sort;
+        $this->view->stars  = $stars;
+        
+        $this->view->countries = $countries;
+        
+        $this->view->region  = $region;
+        $this->view->country = $country;
+        $this->view->city    = $city;
+        
+        $this->view->categories    = $categories;
+        $this->view->sortOptions   = $sortOptions;
+        $this->view->subcategories = $subcategories;
+        $this->view->ls_count      = $ls_count;
+        
+        $this->view->listings = $listings;
+    }
+    
+    public function getlistings2Action()
+    {
+        $auth = Zend_Auth::getInstance();
+        if($auth->hasIdentity()){
+            $user = $auth->getIdentity();
+            if($user->role_id == 2){
+                $trips = $this->trips->getFutureTripsBy($user->id, true);
+                $this->view->trips = $trips; 
+            }
+            $this->view->user  = $user;
+         
+        }
+        
+        $cat      = $this->_getParam('category', 'activities');
+        $subcat   = $this->_getParam('cats', 'all');
+        $sort     = $this->_getParam('sort', 'random');
+        $stars    = $this->_getParam('stars', 'all');
+        $pricemax = $this->_getParam('pricemax', 3000);
+        $pricemin = $this->_getParam('pricemin', 0);
+        
+        $page = $this->_getParam('page', 1);
+        $images = array(
+            'all' => 'All-Small-0',
+            'activities' => 'All-Activities-0',
+            'entertaiment' => 'Entertainment-Small-0',
+            'tourist-sights' => 'Sights-Small-0',
+            'restaurants' => 'Restaurant-Small-0',
+            'hotels' => 'Hotels-Small-0'
+        );
+        
+        $this->view->image = $images[$cat];
+        
+        $countries   = $this->places->getPlaces(2);
+        
+        $country_idf = $this->getRequest()->getParam('country');
+        $city_idf    = $this->getRequest()->getParam('city');
+        $country     = $this->places->getPlaceByIdf($country_idf);
+        $region      = $this->places->getPlaceById($country->parent_id);
+        
+        $city = null;
+        if($city_idf != 'default')
+            $city = $this->places->getPlaceByIdf($city_idf, 3, $country->id);
+        
+        $categories  = $this->listings->getMainCategories(true);
+        
+        $sortOptions = array(
+            '' => 'Select',
+            'popular' => 'Most Popular',
+            'lowest' => 'Lowest Price',
+            'highest' => 'Highest Price',
+            'free' => 'Free',
+        );
+        
+        $subcategories = null;
+        $category = null;
+        if($cat != 'all'){
+            $category = $this->listings->getCategoryByIdf($cat);
+            $subcategories = $this->listings->getSubCategoriesOf($category->id);
+        }
+        
+        $this->view->categ = ($cat == 'all') ? 'things to do' : $category->name; 
+        
+        if(!is_null($city))
+            $ls_count = $this->listings->countListings($city);
+        else
+            $ls_count = $this->listings->countListings(null, null, $country->id);
+        
+        if(!is_null($city)) 
+            $listings = $this->listings->getListings2($city, $cat, $subcat, $sort, $stars, $pricemin, $pricemax, null, $page);
+        else
+            $listings = $this->listings->getListings2(null, $cat, $subcat, $sort, $stars, $pricemin, $pricemax, $country->id,$page);
+        
+        
+        if(count($listings) == 0){
+            echo ''; die;
+        }
+            
+        $this->view->listing_count = count($listings);
+        //var_dump($this->view->listing_count); die;
         
         $this->view->class  = 'landscape-1';
         $this->view->cat    = $cat;
@@ -839,7 +1819,7 @@ class AjaxController extends Zend_Controller_Action
         
         $this->view->listings = $listings;
         
-        $this->view->favorites = $favorites;            
+        //echo 'asd'; die;
     }
     
     public function gettripsAction()
@@ -862,14 +1842,47 @@ class AjaxController extends Zend_Controller_Action
         );
         $people   = $this->_getParam('people');
         
-        $trips = $trips->getTripsOf($country->id, $price, $days, $people);
+        $category = $this->_getParam('category');
+        
+        $page = $this->_getParam('page', 1);
+        
+        $trips = $trips->getTripsOf($country->id, $price, $days, $people, $category, $page);
+        $this->view->country = $country;
+        $this->view->trips   = $trips;
+    }
+    
+    public function gettrips2Action()
+    {
+        $places = new WS_PlacesService();
+        $trips  = new WS_TripsService();
+        
+        $id = $this->_getParam('country');
+        $country = $places->getPlaceById($id);
+        if(is_null($country))
+                throw new Exception();
+        
+        $price = array(
+            'min' => $this->_getParam('pricemin'),
+            'max' => $this->_getParam('pricemax'),
+        );
+        $days = array(
+            'min' => $this->_getParam('daymin'),
+            'max' => $this->_getParam('daymax'),
+        );
+        $people   = $this->_getParam('people');
+        
+        $category = $this->_getParam('category');
+        
+        $page = $this->_getParam('page', 1);
+        
+        $trips = $trips->getTripsOf($country->id, $price, $days, $people, $category,$page);
         $this->view->country = $country;
         $this->view->trips   = $trips;
     }
     
     public function getsearchtagsAction()
     {
-        $search = new Model_Search();
+	    $search = new Model_Search();
         $tags = $search->fetchAll();
         $tags = $tags->toArray();
         
@@ -939,42 +1952,68 @@ class AjaxController extends Zend_Controller_Action
     }
     
     public function getquoteAction(){
-        if(!isset($_GET['option']))
-            echo 'Option Missing';
-        else {
-            if(!isset($_GET['checkin']) || empty($_GET['checkin'])){
-                echo 'Checking Missing'; die; }
-            
-            $id = $_GET['id'];
-            $listings = new WS_ListingService();
-            $listing = $listings->getListing($id);
-            if($listing->token != $_GET['token']){
-                if(md5($listing->token) != $_GET['token']){
-                    echo 'Error, try later'; die; } }
-            
-            if($listing->main_type == 5){
-                if(!isset($_GET['checkout']) || empty($_GET['checkout'])){
-                    echo 'Checkout Missing'; die; }
+        try {
+            if(!isset($_GET['option']))
+                throw new Exception ("Option Missing", 1);
+            else {
+
+                $id = $_GET['id'];
+                $listings = new WS_ListingService();
+                $listing = $listings->getListing($id);
+                if($listing->token != $_GET['token']){
+                    if(md5($listing->token) != $_GET['token'])
+                        throw new Exception ("Error, try later", 1);
+                }
+                
+                if($listing->main_type == 6) {
+                    if((is_null($listing->min) || is_null($listing->max)) && 
+                            (!isset($_GET['capacity']) || empty($_GET['capacity']))){
+                        throw new Exception ("Capacity Missing", 1);
+                    }
+                }
+                $adults   = $_GET['adults'];
+                $kids     = $_GET['kids'];
+                $checkin  = $_GET['checkin'];
+                if(($checkin == 'dd/mm/yyyy') || empty($checkin)) {
+                    $checkin = date('Y-m-d');
+                }
+                
+                if($listing->main_type == 5 and $_GET['checkout'] != 'dd/mm/yyyy')
+                    $checkout = $_GET['checkout'];
+                else
+                    $checkout = null;
+                
+                $option = $_GET['option'];
+                
+                if($listing->main_type == 6)
+                    $capacity = $_GET['capacity'];
+                else
+                    $capacity = null;
+                
+                if(is_null($checkout)) {
+                    $quote  = $listings->getQuote(
+                                $listing, $adults, $kids, $checkin, null, 2, $option, $capacity);
+                } else {
+                    $quote  = $listings->getQuote(
+                                $listing, $adults, $kids, $checkin, $checkout, null, $option, $capacity);
+                }
+                
+                if($quote->available) {
+                    echo $this->view->formatnumber($quote->subtotal);
+                }
+                else 
+                    throw new Exception($quote->error, 1);
+                die;
             }
-            $adults   = $_GET['adults'];
-            $kids     = $_GET['kids'];
-            $checkin  = $_GET['checkin'];
-            if($listing->main_type == 5)
-                $checkout = $_GET['checkout'];
-            else
-                $checkout = null;
-            $option   = $_GET['option'];
-            
-            $quote = $listings->getQuote(
-                        $listing, $adults, $kids, $checkin, $checkout, null, $option);
-            
-            if($quote->available)
-                echo '$'.$quote->subtotal;
-            else
-                echo $quote->error;
-            die;
+            die;  
+        } catch(Exception $e) {
+            //if($e->getCode() == 1){
+                
+            //} else {
+                
+            //}
+            throw $e;
         }
-        die;        
     }
     
     public function postmessageAction()
@@ -999,14 +2038,14 @@ class AjaxController extends Zend_Controller_Action
                 if($conversation->starter != $user->id && $conversation->wwith != $user->id)
                         throw new Exception();
                 
+                $users = new WS_UsersService();
                 if($conversation->starter == $user->id)
                 {
                     $conversation->wnew     = 1;
                     $conversation->updated  = date('Y-m-d G:i:s');
                     $conversation->msgcount = $conversation->msgcount + 1;
                     
-                    $conversation->save();
-                    
+                    $conversation->save();                    
                     
                     $messages = new Model_Messages();
                     $message  = $messages->fetchNew();
@@ -1018,7 +2057,11 @@ class AjaxController extends Zend_Controller_Action
                     
                     $message->save();
                     
-                    $_sender = $conversation->wname;
+                    $notifier = new WS_Notifier($conversation->wwith);
+                    $notifier->newMessage($user);
+                    
+                    $_sender = $users->get($conversation->wwith);
+                    $image   = $_sender->image;
                 } 
                 elseif($conversation->wwith == $user->id) 
                 {
@@ -1038,7 +2081,11 @@ class AjaxController extends Zend_Controller_Action
                     
                     $message->save();
                     
-                    $_sender = $con->sname;
+                    $notifier = new WS_Notifier($conversation->starter);
+                    $notifier->newMessage($user);
+                    
+                    $_sender = $users->get($conversation->starter);
+                    $image   = $_sender->image;
                 }
                 else 
                 {
@@ -1054,9 +2101,10 @@ class AjaxController extends Zend_Controller_Action
                 $result['user'] = $user->id;
                 foreach($_messages as $m){
                     $result['messages'][] = array(
-                        'sender' => ($m->user_id == $user->id) ? 'Me' : $_sender,
+                        'sender' => ($m->user_id == $user->id) ? 'Me' : $_sender->name,
                         'text'   => nl2br(stripslashes($m->text)),
                         'date'   => date('M jS \a\t g:i a', strtotime($m->created)),
+                        'image'  => ($m->user_id == $user->id) ? $user->image : $_sender->image
                     );
                 }
 
@@ -1065,6 +2113,37 @@ class AjaxController extends Zend_Controller_Action
                         
             }
         }    
+        die;
+    }
+    
+    public function removemessagesAction()
+    {
+        if($this->getRequest()->isPost())
+        {
+            $auth = Zend_Auth::getInstance();
+            if($auth->hasIdentity())
+            {
+                $user = $auth->getIdentity();
+                $id   = $_POST['message'];
+                
+                $conversations = new Model_Conversations();
+                $select = $conversations->select();
+                $select->where('id = ?', $id);
+                $con = $conversations->fetchRow($select);
+                if(is_null($con))
+                        throw new Exception('Conversation not found');
+                
+                if($con->starter == $user->id){
+                    $con->sdelete = 1;
+                    $con->save();
+                } else {
+                    $con->wdelete = 1;
+                    $con->save();
+                }
+                
+                echo $id;
+            }
+        }
         die;
     }
     
@@ -1081,7 +2160,7 @@ class AjaxController extends Zend_Controller_Action
                 $select->where('user_id = ?', $user->id);
                 $trip = $trips->fetchRow($select);
                 if(is_null($trip))
-                        throw new Exception();
+                        throw new Exception('Trip not found');
                 
                 $triplistings = new Zend_Db_Table('itinerary_listings');
                 $select = $triplistings->select();
@@ -1093,34 +2172,176 @@ class AjaxController extends Zend_Controller_Action
                         throw new Exception();
                 
                 $times = array(
-                    'Morning'=>1,
-                    'Afternoon'=>2,
-                    'Night'=>3,
-                    'stay'=>4,
+                    'Morning'   => 1,
+                    'Afternoon' => 2,
+                    'Night'     => 3,
+                    'stay'      => 4,
                 );
                 
+                $updatePrice = false;
+                if(is_null($listing->day) || is_null($listing->time))
+                    $updatePrice = true;                
+                
                 if($_POST['time'] == 'stay'){
-                    $listing->day = 1;
-                    $listing->time = $times[$_POST['time']];
+                    $listin2 = $triplistings->fetchNew();
+                    $listin3 = $listing->toArray();
+                    unset($listin3['id']);
+                    $listin2->setFromArray($listin3);
+                    
+                    $listin2->day  = $_POST['day'];
+                    $listin2->time = $times[$_POST['time']];
+                    
+                    $listin2->save();
                 } else {
-                    $listing->day = $_POST['day'];
+                    $listing->day  = $_POST['day'];
                     $listing->time = $times[$_POST['time']];
+                    
+                    $listing->save();
                 }
                 
-                $listing->save();
-                
-                $listings = new Model_Listings();
-                $list = $listings->fetchRow("id = {$listing->listing_id}");
-                
-                $trip->price = $trip->price + $list->price;
-                $trip->save();
+                if($updatePrice){
+                    $_listings = $this->trips->getItnListingOf($trip->id, false, null, true, true);
+                    $bookings = array();
+
+                    foreach($_listings as $list) {
+                        if($list->main_type == 6 || $list->main_type == 5){
+                            $bookings[$list->id] = array(
+                                'adults' => $trip->adults,
+                                'child'  => $trip->kids,
+                            );
+                        }
+                    }
+
+                    $date = date('Y-m-d G:i:s', strtotime($trip->start));
+
+                    $items  = array();
+                    $items2 = array();
+                    $options = array();
+
+                    $caculated = array();
+
+                    foreach($_listings as $u => $listing){
+                        if($listing->main_type == 6 || $listing->main_type == 5){
+                            if($listing->main_type == 5) {
+                                if(!@in_array($listing->triplisting_id, $caculated)) {
+                                    $j = 2;
+                                    $listing->day = (is_null($listing->day)) ? 1 : $listing->day; 
+                                    for($i = $listing->day; $i <= $trip->days; $i++){
+                                        $_diff = false; $found = false;
+                                        foreach($_listings as $list2) {
+                                            $list2->day = (is_null($list2->day)) ? 1 : $list2->day;
+                                            if($list2->day == ($i+1) && $list2->main_type == 5) {
+                                                if($list2->listing_id == $listing->listing_id) {
+                                                    $j++;
+                                                    $caculated[] = $list2->triplisting_id;
+                                                    $found = true;
+                                                } else {
+                                                    $_diff = true;
+                                                } break;
+                                            }
+                                        }
+                                        if($_diff) break;
+                                        elseif(!$found and ($trip->days - 1) > $i) $j++;
+                                    }
+
+                                    $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                                    $checkin = date('Y-m-d', $checkin);
+
+                                    $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                                    $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                                    $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                                    $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                                    $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $j, $option, $capacity);
+
+                                    $item->day = $listing->day;
+                                    $item->listing_city = $listing->city;
+                                    $item->listing_country = $listing->country;
+                                    $item->triplistingid = $listing->triplisting_id;
+                                    $item->ciidf = $listing->cityurl;
+                                    $item->coidf = $listing->countryurl;
+                                    $item->idf   = $listing->identifier;
+
+                                    $items[] = $item;
+
+                                    $options[$listing->id]['options'] = $this->listings->getHotelRooms($listing->id);
+
+                                    $prices = $this->listings->getSchPrices($listing);
+                                    $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+
+                                    $caculated[] = $listing->id;
+                                }
+                            } 
+                            else {
+                                $listing->day = (is_null($listing->day)) ? 1 : $listing->day; 
+
+                                $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                                $checkin = date('Y-m-d', $checkin);
+
+                                $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                                $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                                $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                                $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                                $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $trip->days, $option, $capacity);
+
+                                $item->day = $listing->day;
+                                $item->listing_city = $listing->city;
+                                $item->listing_country = $listing->country;
+                                $item->triplistingid = $listing->triplisting_id;
+                                $item->ciidf = $listing->cityurl;
+                                $item->coidf = $listing->countryurl;
+                                $item->idf   = $listing->identifier;
+
+                                $items[] = $item;
+
+                                $options[$listing->id]['options'] = $this->listings->getSchedulesOf($listing->id);
+
+                                if(is_null($listing->min) or is_null($listing->max)){
+                                    $options[$listing->id]['capacity'] = $this->listings->getActivityTypes($listing->id);
+
+                                    $prices = $this->listings->getSchPrices($listing);
+                                    $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+                                }
+                            }
+                        }
+                    }
+
+                    foreach($_listings as $listing){
+                        if($listing->main_type != 6 && $listing->main_type != 5){
+                            $item = new stdClass();
+                            $item->available = true;
+                            $item->listing_title = $listing->title;
+                            $item->listing_image = $listing->image;
+                            $item->listing_type  = $listing->main_type;
+                            $item->listing_city = $listing->city;
+                            $item->listing_country = $listing->country;
+                            $item->ciidf = $listing->cityurl;
+                            $item->coidf = $listing->countryurl;
+                            $item->idf   = $listing->identifier;
+                            $items2[] = $item;
+                        }
+                    }
+
+                    $total = 0;
+                    
+                    foreach($items as $cart){
+                        if($cart->available)
+                            $total = $total + $cart->total;
+                    }
+
+                    $trip->price = $total; 
+                    $trip->save();
+                }
                 
                 echo $trip->price; die;
             } else {
-                throw new Exception();
+                throw new Exception('No access allowed');
             }
         } else {
-            throw new Exception();
+            throw new Exception('Wrong request');
         }
     }
     
@@ -1147,20 +2368,18 @@ class AjaxController extends Zend_Controller_Action
                     $select->where('user_id = ?', $user->id);
                     $listing = $triplistings->fetchRow($select);
                     if(is_null($listing))
-                            throw new Exception();
+                            throw new Exception('Listing not found');
                     
                     $listing->sort = $data['sort'];
                     $listing->save();
                 }
                 
                 echo 'Success'; die;
-                
-                
             } else {
-                throw new Exception();
+                throw new Exception('No access allowed');
             }
         } else {
-            throw new Exception();
+            throw new Exception('Wrong Request');
         }
     }
     
@@ -1177,7 +2396,7 @@ class AjaxController extends Zend_Controller_Action
                 $select->where('user_id = ?', $user->id);
                 $trip = $trips->fetchRow($select);
                 if(is_null($trip))
-                        throw new Exception();
+                        throw new Exception('Trip not found');
                 
                 $triplistings = new Zend_Db_Table('itinerary_listings');
                 $select = $triplistings->select();
@@ -1186,35 +2405,1563 @@ class AjaxController extends Zend_Controller_Action
                 $select->where('user_id = ?', $user->id);
                 $listing = $triplistings->fetchRow($select);
                 if(is_null($listing))
-                        throw new Exception();
+                        throw new Exception('Listing not found');
                 
                 $times = array(
-                    'Morning'=>1,
-                    'Afternoon'=>2,
-                    'Night'=>3,
+                    'Morning'   => 1,
+                    'Afternoon' => 2,
+                    'Night'     => 3,
                 );
-                
-                $listing->day = NULL;
-                $listing->time = NULL;
-                
-                $listing->save();
                 
                 $listings = new Model_Listings();
                 $list = $listings->fetchRow("id = {$listing->listing_id}");
                 
                 $trip->price = $trip->price - $list->price;
+                if($trip->price < 0) {
+                    $trip->price = 0;
+                }
+                $trip->save();
+                
+                if($listing->time == 4) {
+                    $listing->delete();
+                } else {
+                    $listing->day = NULL;
+                    $listing->time = NULL;
+
+                    $listing->save();
+                }
+                
+                $_listings = $this->trips->getItnListingOf($trip->id, false, null, true, true);
+                $bookings = array();
+
+                foreach($_listings as $list) {
+                    if($list->main_type == 6 || $list->main_type == 5){
+                        $bookings[$list->id] = array(
+                            'adults' => $trip->adults,
+                            'child'  => $trip->kids,
+                        );
+                    }
+                }
+
+                $date = date('Y-m-d G:i:s', strtotime($trip->start));
+
+                $items  = array();
+                $items2 = array();
+                $options = array();
+
+                $caculated = array();
+
+                foreach($_listings as $u => $listing){
+                    if($listing->main_type == 6 || $listing->main_type == 5){
+                        if($listing->main_type == 5) {
+                            if(!@in_array($listing->triplisting_id, $caculated)) {
+                                $j = 2;
+                                $listing->day = (is_null($listing->day)) ? 1 : $listing->day; 
+                                for($i = $listing->day; $i <= $trip->days; $i++){
+                                    $_diff = false; $found = false;
+                                    foreach($_listings as $list2) {
+                                        $list2->day = (is_null($list2->day)) ? 1 : $list2->day;
+                                        if($list2->day == ($i+1) && $list2->main_type == 5) {
+                                            if($list2->listing_id == $listing->listing_id) {
+                                                $j++;
+                                                $caculated[] = $list2->triplisting_id;
+                                                $found = true;
+                                            } else {
+                                                $_diff = true;
+                                            } break;
+                                        }
+                                    }
+                                    if($_diff) break;
+                                    elseif(!$found and ($trip->days - 1) > $i) $j++;
+                                }
+
+                                $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                                $checkin = date('Y-m-d', $checkin);
+
+                                $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                                $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                                $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                                $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                                $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $j, $option, $capacity);
+
+                                $item->day = $listing->day;
+                                $item->listing_city = $listing->city;
+                                $item->listing_country = $listing->country;
+                                $item->triplistingid = $listing->triplisting_id;
+                                $item->ciidf = $listing->cityurl;
+                                $item->coidf = $listing->countryurl;
+                                $item->idf   = $listing->identifier;
+
+                                $items[] = $item;
+
+                                $options[$listing->id]['options'] = $this->listings->getHotelRooms($listing->id);
+
+                                $prices = $this->listings->getSchPrices($listing);
+                                $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+
+                                $caculated[] = $listing->id;
+                            }
+                        } 
+                        else {
+                            $listing->day = (is_null($listing->day)) ? 1 : $listing->day; 
+
+                            $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                            $checkin = date('Y-m-d', $checkin);
+
+                            $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                            $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                            $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                            $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                            $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $trip->days, $option, $capacity);
+
+                            $item->day = $listing->day;
+                            $item->listing_city = $listing->city;
+                            $item->listing_country = $listing->country;
+                            $item->triplistingid = $listing->triplisting_id;
+                            $item->ciidf = $listing->cityurl;
+                            $item->coidf = $listing->countryurl;
+                            $item->idf   = $listing->identifier;
+
+                            $items[] = $item;
+
+                            $options[$listing->id]['options'] = $this->listings->getSchedulesOf($listing->id);
+
+                            if(is_null($listing->min) or is_null($listing->max)){
+                                $options[$listing->id]['capacity'] = $this->listings->getActivityTypes($listing->id);
+
+                                $prices = $this->listings->getSchPrices($listing);
+                                $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+                            }
+                        }
+                    }
+                }
+
+                foreach($_listings as $listing){
+                    if($listing->main_type != 6 && $listing->main_type != 5){
+                        $item = new stdClass();
+                        $item->available = true;
+                        $item->listing_title = $listing->title;
+                        $item->listing_image = $listing->image;
+                        $item->listing_type  = $listing->main_type;
+                        $item->listing_city = $listing->city;
+                        $item->listing_country = $listing->country;
+                        $item->ciidf = $listing->cityurl;
+                        $item->coidf = $listing->countryurl;
+                        $item->idf   = $listing->identifier;
+                        $items2[] = $item;
+                    }
+                }
+
+                $total = 0;
+                foreach($items as $cart){
+                    if($cart->available)
+                        $total = $total + $cart->total;
+                }
+
+                $trip->price = $total; 
                 $trip->save();
                 
                 echo $trip->price; die;
-                
-                echo 'Success'; die;
-                
-                
             } else {
-                throw new Exception();
+                throw new Exception('No access allowed');
             }
         } else {
-            throw new Exception();
+            throw new Exception('Wrong request');
         }
+    }
+    
+    public function placesAction() {
+        switch (@$_GET['type']) {
+            case 'region':
+                $regions = $this->places->getPlaces(1);
+                self::jsonEcho(json_encode(array('attempt' => 'success', 'error_code' => '0', 'description' => '', 'data' => $regions->toArray())));
+                break;
+            case 'country':
+                $countries = $this->places->getPlaces(2);
+                self::jsonEcho(json_encode(array('attempt' => 'success', 'error_code' => '0', 'description' => '', 'data' => $countries->toArray())));
+                break;
+            case 'city':
+                $countryId = $_GET['c'];
+                $cities = $this->places->getPlaces(3, $countryId);
+                self::jsonEcho(json_encode(array('attempt' => 'success', 'error_code' => '0', 'description' => '', 'data' => $cities->toArray())));
+                break;
+            default:
+                self::jsonEcho(json_encode(array('attempt' => 'fail', 'error_code' => '404', 'description' => 'Invalid API call')));
+        }
+    }
+
+    public function listingsAction() {
+        switch (@$_GET['type']) {
+            case 'type':
+                $listingTypes = $this->listings->getMainCategories(true);
+                self::jsonEcho(json_encode(array('attempt' => 'success', 'error_code' => '0', 'description' => '', 'data' => $listingTypes)));
+                break;
+            default:
+                self::jsonEcho(json_encode(array('attempt' => 'fail', 'error_code' => '404', 'description' => 'Invalid API call')));
+        }
+    }
+
+    public function travellerAction() {
+        $userId = $_GET['user'];
+        $panel = $_GET['page'];
+        switch ($panel) {
+            case 1:
+                $user = $this->users->getFull($userId);
+                $this->view->user = $user;
+                $this->render('admin/travellerview1');
+                break;
+            case 2:
+                $trips = $this->trips->getTripsBy($userId);
+                $this->view->trips = $trips;
+                $this->render('admin/travellerview2');
+                break;
+            case 3:
+                $reservations = $this->reservations->getUserHistory($userId);
+                $this->view->reservations = $reservations;
+                $this->render('admin/travellerview3');
+                break;
+            case 4:
+                $reviewes = $this->reviewes->getReviewsBy($userId);
+                $this->view->reviewes = $reviewes;
+                $this->render('admin/travellerview4');
+                break;
+            default:
+                throw new Exception("Invalid panel type");
+        }
+    }
+
+    public function partnerAction() {
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+
+        if($user->getRole() != 'admin')
+                throw new Exception('No access allowed');
+
+        $userId = $_GET['user'];
+        $panel = $_GET['page'];
+        switch ($panel) {
+            case 1:
+                $user = $this->vendors->getVendorDetailsById($userId);
+                $this->view->user = $user;
+				$countries = $this->places->getPlaces(2);
+				$this->view->countries = $countries;
+                $this->render('admin/partnerview1');
+                break;
+            case 2:
+                $listings = $this->listings->getVendorListings($userId);
+                $this->view->listings = $listings;
+                $this->render('admin/partnerview2');
+                break;
+            case 3:
+                $reservations = $this->reservations->getHistory($userId);
+                $this->view->reservations = $reservations;
+                $this->render('admin/partnerview3');
+                break;
+            case 4:
+                $offers = $this->vendors->getOffersBy($userId);
+                $this->view->offers = $offers;
+                $this->render('admin/partnerview4');
+                break;
+            case 5:
+                $banks = $this->vendors->getBanksBy($userId);
+                $this->view->banks = $banks;
+                $this->render('admin/partnerview5');
+                break;
+            default:
+                throw new Exception("Invalid panel type");
+        }
+    }
+	
+	public function saveAction(){
+	$name=$_POST['name'];
+	echo($name);die;
+	
+	}
+
+    static function jsonEcho($jsonString) {
+        header("content-type:text/json");
+        echo $jsonString;
+        exit;
+    }
+    
+    private function _getTrip($var = 'id', $user = false, $obj = false)
+    {
+        $id   = $this->_getParam('id');
+        $trip = $this->trips->getItn($id, $obj);
+        if($user){
+            if($trip->user_id != $this->user->getId()){
+                throw new Exception();
+        }}
+        return $trip;
+    }
+    
+    public function loaditineraryAction()
+    {
+        $trip = $this->_getTrip($obj = true);
+        $this->view->trip = $trip;
+        
+        //var_dump($trip); die;
+        
+        //$listings = $this->trips->getItnListingOf($trip->id, false);
+        $listings = $this->trips->getItnListingOf($trip->id, false);
+        $this->view->listings = $listings;
+        
+        $images = array();
+        foreach($listings as $list){
+            if(!empty($list->image)){
+                if(!in_array($list->image, $images))
+                    $images[] = $list->image;
+            }
+        }
+        
+        $labels = array('','Morning','Afternoon', 'Night');
+        $times = array();
+        $days  = array();
+        $results = array();
+        foreach($listings as $day){
+          if(!in_array($day->day, $days)){
+            $days[] = $day->day;
+            $times[$day->day] = array();
+            foreach($listings as $time){
+              if($time->day == $day->day){
+                if(!in_array($time->time, $times[$day->day])){
+                  $times[$day->day][] = $time->time;
+                  $results[$day->day][$labels[$time->time]] = array();
+                  foreach($listings as $listing){
+                    if(($listing->day == $day->day) and ($listing->time == $time->time)){
+                      $results[$day->day][$labels[$time->time]][] = $listing;
+        }}}}}}}
+        
+        $this->view->listingsbyday = $results;
+        
+        $listingtypes = array(2,4,5,6,7);
+        $counter      = array();
+        foreach($listingtypes as $type){
+            $count = 0;
+            foreach($listings as $list){
+                if($list->main_type == $type){
+                    $count++;
+                }
+            }
+            $counter[$type] = $count;
+        }
+        
+        $this->view->counter = $counter;
+        
+        //var_dump($results); die; 
+        
+        
+        $this->view->images = $images;
+    }
+    
+    public function acceptreservationAction()
+    {
+        if(!$this->getRequest()->isPost())
+                throw new Exception('Wrong Request');
+        
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+
+        if($user->getRole() != 'provider')
+                throw new Exception('No access allowed');
+
+        $reservation  = $this->reservations->get($_POST['id']);
+        if($reservation->vendor_id != $user->getVendorId())
+                throw new Exception('Reservation not found');
+        
+        if($reservation->status_id != 1) 
+                throw new Exception('Reservation not found');
+        
+        $lising = $this->listings->getListing($reservation->listing_id);
+        
+        $transaction = $this->reservations->getTransaction($reservation->transaction_id);
+        $account = $this->users->getAccount($transaction->paywith);
+        
+        require "Stripe/Stripe.php";
+        
+        $keys = Zend_Registry::get('stripe');
+        Stripe::setApiKey($keys['secret_key']);
+        
+        try {
+            $charge = Stripe_Charge::create(array(
+                'amount'      => $transaction->ammount * 100,
+                'currency'    => 'usd',
+                'customer'    => $account->stripe_id,
+                'description' => $lising->title . ' Reservation'
+            ));
+
+            $transaction->status = 1;
+            $transaction->charge_id = $charge->id;
+
+            $transaction->save();
+
+            $reservation->status_id = 2;
+            $reservation->save();
+            
+            $notifier = new WS_Notifier($reservation->user_id);
+            $notifier->reservationApproved($lising, $user->getData());
+            
+        } catch(Exception $e) {
+
+            throw new Exception();
+
+        }
+        
+        
+        echo 'success'; die;        
+    }
+    
+    public function cancelreservationAction()
+    {
+        if(!$this->getRequest()->isPost())
+                throw new Exception('Wrong Request');
+        
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+
+        if($user->getRole() != 'user')
+                throw new Exception('No access allowed');
+
+        $reservation  = $this->reservations->get($_POST['id']);
+        if($reservation->user_id != $user->getId())
+                throw new Exception('No access allowed');
+        
+        $listing = $this->listings->getListing($reservation->listing_id);
+        
+        $vendor = $this->users->getVendor($reservation->vendor_id);
+        
+        $transaction = $this->reservations->getTransaction($reservation->transaction_id);
+        
+        $transaction->delete();
+        $reservation->delete();
+        
+        $notifier = new WS_Notifier($vendor->user_id);
+        $notifier->reservationCancelled($listing, $user->getData());
+        
+        echo 'success'; die;
+    }
+    
+    public function newssignupAction()
+    {
+        if($this->getRequest()->isPost()){
+            $emails = new Zend_Db_Table(array(
+                'name' => 'emails',
+                'db'   => 'newsletter_db'
+            ));
+            
+            $email = $emails->fetchNew();
+            $email->email = $_POST['email'];
+            $email->date  = date('Y-m-d H:i:s');
+            $email->save();
+            
+            echo 1; die;
+        }
+        throw new Exception();
+    }
+	
+	public function tripitemAction(){
+       
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+        if($user->getRole() != 'admin')
+                throw new Exception('No access allowed');
+		
+		$this->trips->deleteListing(@$_GET['item']);
+        self::jsonEcho(json_encode(array('attempt' => 'success', 'error_code' => '0', 'description' => '', 'data' => '')));
+		
+	}
+	
+	public function ttitleAction(){
+       
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+        if($user->getRole() != 'admin')
+                throw new Exception('No access allowed');
+		
+		$db = Zend_Db_Table::getDefaultAdapter();
+		$tripId = $_POST['trip'];
+		$day = $_POST['day'];
+		$title = addslashes($_POST['text']);
+		$sql = "INSERT INTO trip_days (trip_id, day, title) VALUES ($tripId, $day, '$title') ON DUPLICATE KEY UPDATE title='$title'";
+		$db->query($sql);
+
+        self::jsonEcho(json_encode(array('attempt' => 'success', 'error_code' => '0', 'description' => '', 'data' => '')));
+		
+	}
+
+
+	public function requestinfoAction(){
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+        if($user->getRole() != 'admin')
+                throw new Exception('No access allowed');
+		
+		// Listing ID is here inside  $_POST['listing_id']
+		// Get Request info as an array using $_POST['info']
+		
+                $listing = $this->listings->getListing($_POST['listing_id']);
+                $vendor = $this->users->getVendor($listing->vendor_id);
+
+                $notifier = new WS_Notifier($vendor->user_id);
+		$notifier->listingPendingInformation($listing, $_POST['info']);
+                
+		echo "success";
+		die;
+	}
+	
+	public function listingstatusAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+        if($user->getRole() != 'admin')
+                throw new Exception('No access allowed');
+
+        $id = $_POST['id'];
+        $action = $_POST['act'];
+        $listing = $this->listings->getListing($id);
+        $listing->status = $action;
+        $listing->save();
+        
+        $vendor = $this->users->getVendor($listing->vendor_id);
+        
+        if($action == 1) {
+            $notifier = new WS_Notifier($vendor->user_id);
+            $notifier->listingApproved($listing);
+        }
+        echo "success"; die;
+    }
+
+	public function usertatusAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+        if($user->getRole() != 'admin')
+                throw new Exception('No access allowed');
+
+        $id = $_POST['id'];
+        $action = $_POST['act'];
+		$user = $this->users->get($id);
+		if($user){
+			$user->active = $action;
+			$user->save();
+                        
+                        if($action == 1 and $user->role_id == 3) {
+                            $notifier = new WS_Notifier($user->id);
+                            $notifier->welcomePartner();
+                        }
+                        
+			echo "success";
+		}
+		else{
+			echo "fail";
+		}
+		die;
+   }
+   
+   
+   	public function tripstatusAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+        if($user->getRole() != 'admin')
+                throw new Exception('No access allowed');
+
+        $id = $_POST['id'];
+        $action = $_POST['act'];
+		$trip = $this->trips->getRow($id);
+		if($trip){
+			$trip->active = $action;
+			$trip->save();
+                        
+			echo "success";
+		}
+		else{
+			echo "fail";
+		}
+		die;
+   }
+
+    
+    public function getrecomendationsAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $id = $this->_getParam('id', 'default');
+        if($id == "default")
+                throw new Exception('Listing not found');
+        
+        $listings = $this->listings->getAlternativesTo($id);
+        
+        $this->view->listings = $listings;
+        $this->view->trip     = $this->_getParam('trip');
+        $this->view->triplisting = $id;
+    }
+    
+    public function getvendorsoptionsAction(){
+        $vendors = new Zend_Db_Table('users');
+        $select = $vendors->select();
+        $select->where('city_id = ?', $this->_getParam('city'));
+        $select->where('role_id = ?', 3);
+        $select->order('name ASC');
+        $results = $vendors->fetchAll($select);
+        $this->view->results = $results;
+    }
+    
+    public function getpartnerlistingsAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $user = new WS_User($auth->getIdentity());
+        
+        $status = $this->_getParam('get','all');
+        $page   = $this->_getParam('page','1');
+        $sort   = $this->_getParam('sort','created');
+        $order  = $this->_getParam('order','');
+        
+        if($sort == 'created' and empty($order)) {
+            $order = 'DESC';
+        } elseif($sort == 'title' and empty($order)) {
+            $order = 'ASC';
+        }
+        
+        $this->view->selected = ($sort == 'created') ? (($order == 'DESC') ? 1 : 2) : (($order == 'ASC') ? 3 : 4);
+        
+        switch($status){
+            case 'all':
+                $listings = $this->listings->getListingsOf($user->getVendorId(), null, $page, $sort, $order);
+                $this->view->listings = $listings;
+                $this->view->title = "All Listings";
+                $this->view->count = $this->listings->countListingsOf($user->getVendorId());
+                break;
+            case 'active':
+                $listings = $this->listings->getListingsOf($user->getVendorId(), 1, $page, $sort, $order);
+                $this->view->listings = $listings;
+                $this->view->title = "Active Listings";
+                $this->view->count = $this->listings->countListingsOf($user->getVendorId(), 1);
+                break;
+            case 'inactive':
+                $listings = $this->listings->getListingsOf($user->getVendorId(), 0, $page, $sort, $order);
+                $this->view->listings = $listings;
+                $this->view->title = "Inactive Listings";
+                $this->view->count = $this->listings->countListingsOf($user->getVendorId(), 0);
+                break;
+            default: throw new Exception('Page not found');
+        }
+    }
+    
+    public function restrictionsAction()
+    {
+        $id = $this->_getParam('id');
+        $details = $this->listings->getDetails($id);
+        
+        $this->view->details = $details;
+    }
+    
+    public function getadminplacesAction(){
+        $places = $this->fqrequest('/venues/search', array(
+            'll'         => $this->_getParam('center'),
+            'intent'     =>'browse',
+            'radius'     => 4000,
+            'categoryId' => $this->_getParam('cat')
+        ));
+        
+        $places = $places->response->venues;
+        
+        $fqplaces = new Zend_Db_Table('fq');
+        foreach($places as $place) {
+            $select = $fqplaces->select();
+            $select->where('fq_id = ?', $place->id);
+            $fq = $fqplaces->fetchRow($select);
+            if(!is_null($fq)) {
+                if($fq->added) {
+                    $place->done = true;
+                } else {
+                    $place->done = false;
+                }
+            } else {
+                $place->done = false;
+            }
+        }
+        
+        $this->view->places = $places;
+        $this->view->city   = $this->_getParam('city');
+    }
+    
+    private function fqrequest($url, $data) {
+        $data['client_id'] = self::CLIENT_ID;
+        $data['client_secret'] = self::CLIENT_SECRET;
+        $data['v'] = '20120321';
+        
+        $url = 'https://api.foursquare.com/v2'.$url;
+        
+        $client = new Zend_Http_Client($url);
+        foreach($data as $param => $value) {
+            $client->setParameterGet($param, $value);
+        }
+        
+        $response = $client->request();
+        
+        return json_decode($response->getBody());
+    }
+    
+    public function saveplaceAction(){
+        $result = array();
+        try {
+            
+            $id = $_GET['id'];
+            $city = $_GET['city'];
+            $type = 2;
+
+            $fqs = new Zend_Db_Table('fq');
+            $select = $fqs->select();
+            $select->where('fq_id = ?',$id);
+            $fq = $fqs->fetchRow($select);
+            if(is_null($fq)) {
+                $client = new Zend_Http_Client('https://api.foursquare.com/v2/venues/'.$id);
+                $client->setParameterGet('client_id', self::CLIENT_ID);
+                $client->setParameterGet('client_secret', self::CLIENT_SECRET);
+                $client->setParameterGet('v', date('Ymd'));
+
+                $response = $client->request();
+                $fq = $fqs->fetchNew();
+                $fq->fq_id = $id;
+                $fq->fq_data = $response->getBody();
+                $fq->created = date('Y-m-d H:i:s');
+                $fq->city    = $city;
+                $fq->type    = $type;
+                $fq->country = 18;
+
+                $fq->save();
+            }
+            
+            $fq->fb_page = $_GET['url'];
+
+            $url = parse_url($this->_getParam('url'));
+            $url = @split('/', $url['path']);
+            $id = ($url[1] == 'pages') ? $url[3] : $url[1];
+
+                            //echo $id; die;
+
+            $client = new Zend_Http_Client('https://graph.facebook.com/'.$id);
+            $client->setParameterGet('access_token', $_GET['token']);
+
+            $response = $client->request();
+
+            $body = json_decode($response->getBody());
+
+            if(isset($body->error)) 
+                throw new Exception($body->error->message);
+            
+            $client = new Zend_Http_Client('https://graph.facebook.com/'.$id.'/albums');
+            $client->setParameterGet('access_token', $_GET['token']);
+
+            $response = $client->request();
+
+            $albums = json_decode($response->getBody());
+
+            if(isset($albums->error)) 
+                throw new Exception($albums->error->message);
+
+            $photos = array();
+
+            foreach($albums->data as $alb) {
+                $client = new Zend_Http_Client('https://graph.facebook.com/'.$alb->id.'/photos');
+                $client->setParameterGet('access_token', $_GET['token']);
+
+                $response = $client->request();
+
+                $pics = json_decode($response->getBody());
+
+                if(!isset($pics->error)) {
+
+                    foreach($pics->data as $pic) {
+                        $_pic = new stdClass();
+                        $_pic->thumb = $pic->picture;
+                        $_pic->url = $pic->source;
+
+                        $photos[] = $_pic;
+                    }
+
+                }
+            }
+
+            $body->photos = $photos;
+
+            $fq->fb_data = json_encode($body);
+            $fq->save();
+            
+            $__fq = json_decode($fq->fq_data);
+            $venue = $__fq->response->venue;
+            $page  = json_decode($fq->fb_data);
+            
+            //var_dump($fq->fq_data); die;
+            
+            $data = array(
+                'country_id'=>18,
+                'city_id'=>$fq->city,
+                'main_type'=>$type,
+                'title'=>$venue->name,
+                'description' => (isset($page->about)) ? $page->about : '',
+                'address'=>(isset($venue->location->address)) ? $venue->location->address : '',
+                'lat'=>$venue->location->lat,
+                'lng'=>$venue->location->lng,
+                'phone'=>(isset($venue->contact->phone)) ? $venue->contact->phone : (isset($page->phone) ? $page->phone : ''),
+                'email'=>(isset($venue->contact->email)) ? $venue->contact->email : (isset($page->email) ? $page->email : ''),
+                'website'=>(isset($venue->contact->website)) ? $venue->contact->website : (isset($page->website) ? $page->website : ''),
+                'sch'=>array(
+                    0 => array(
+                        'starting' => $page->hours->mon_1_open,
+                        'ending'   => $page->hours->mon_1_close,
+                        'name'     => 'Monday'
+                    ),
+                    1 => array(
+                        'starting' => $page->hours->tue_1_open,
+                        'ending'   => $page->hours->tue_1_close,
+                        'name'     => 'Tuesday'
+                    ),
+                    2 => array(
+                        'starting' => $page->hours->wed_1_open,
+                        'ending'   => $page->hours->wed_1_close,
+                        'name'     => 'Wednesday'
+                    ),
+                    3 => array(
+                        'starting' => $page->hours->thu_1_open,
+                        'ending'   => $page->hours->thu_1_close,
+                        'name'     => 'Thursday'
+                    ),
+                    4 => array(
+                        'starting' => $page->hours->fri_1_open,
+                        'ending'   => $page->hours->fri_1_close,
+                        'name'     => 'Friday'
+                    ),
+                    5 => array(
+                        'starting' => $page->hours->sat_1_open,
+                        'ending'   => $page->hours->sat_1_close,
+                        'name'     => 'Saturday'
+                    ),
+                    6 => array(
+                        'starting' => $page->hours->sun_1_open,
+                        'ending'   => $page->hours->sun_1_close,
+                        'name'     => 'Sunday'
+                    ),
+                ),
+                'place' => array(
+                    'facebook' => $page->link,
+                    'twitter' => (isset($venue->contact->twitter)) ? $venue->contact->twitter : '',
+                    'info' => (isset($page->description)) ? $page->description : '',
+                    'specials',
+                    'tips',
+                    'tags' => (isset($venue->tags[0])) ? $venue->tags[0] : '',
+                    'services'
+                ),
+                'fqid'
+            );
+            
+            $data['cards'] = array();
+            if(isset($page->payment_options->cash_only) and $page->payment_options->cash_only == 1)
+                $data['cards'][] = 'cash';
+            if(isset($page->payment_options->visa) and $page->payment_options->visa == 1)
+                $data['cards'][] = 'visa';
+            if(isset($page->payment_options->amex) and $page->payment_options->amex == 1)
+                $data['cards'][] = 'amex';
+            if(isset($page->payment_options->mastercard) and $page->payment_options->mastercard == 1)
+                $data['cards'][] = 'mastercard';
+            if(isset($page->payment_options->discover) and $page->payment_options->discover == 1)
+                $data['cards'][] = 'discover';
+            
+            $services = '';
+            $__services = array(
+                'breakfast' => 'Breakfast',
+                'lunch'     => 'Lunch',
+                'dinner'    => 'Dinner',
+                'coffee'    => 'Coffee Break',
+                'drinks'    => 'Drinks',
+            );
+            $_services = get_object_vars($page->restaurant_specialties);
+            foreach($_services as $k => $v)
+                if($v == 1)
+                    $services .= $__services[$k]."\n";
+
+            $data['place']['specials'] = $services;
+            
+            $info = "";
+            foreach($venue->tips->groups as $g)
+                foreach($g->items as $t)
+                    $info .= $t->text ."\n";
+            
+            $data['place']['tips'] = $info;
+            
+            $services = '';
+            $__services = array(
+                'reserve'  => 'Take reservations',
+                'walkins'  => 'No reservation needed',
+                'groups'   => 'Good for groups',
+                'kids'     => 'Good for kids',
+                'takeout'  => 'Able to take out',
+                'delivery' => 'Express service',
+                'catering' => 'Catering Service',
+                'waiter'   => 'Waiter Service',
+                'outdoor'  => 'Outdoor Tables'
+            );
+            $_services = get_object_vars($page->restaurant_services);
+            foreach($_services as $k => $v)
+                if($v == 1)
+                    $services .= $__services[$k]."\n";
+                
+            $data['place']['services'] = $services;
+            
+            $listings = new Zend_Db_Table('listings');
+            
+            $listing  = $listings->fetchNew();
+            
+            $listing->country_id  = $data['country_id'];
+            $listing->city_id     = $data['city_id'];
+            $listing->vendor_id   = 0;
+            $listing->main_type   = $data['main_type'];
+            $listing->title       = $data['title'];
+            $listing->description = $data['description'];
+            $listing->identifier  = str_replace(' ','_',strtolower($data['title']));
+            $listing->address     = $data['address'];
+            $listing->lat         = $data['lat'];
+            $listing->lng         = $data['lng'];
+            $listing->status      = 0;
+            $listing->phone       = $data['phone'];
+            $listing->email       = $data['email'];
+            $listing->website     = $data['website'];
+            $listing->created     = date('Y-m-d H:i:s');
+            $listing->updated     = date('Y-m-d H:i:s');
+            $listing->save();
+            $listing->token = md5($listing->id.time().rand(0,100000));
+            $listing->save();
+            
+            $schedules = new Zend_Db_Table('listing_schedules');
+            foreach($data['sch'] as $sch){
+                if(!empty($sch['starting'])) {
+                    $schedule = $schedules->fetchNew();
+                    $schedule->listing_id = $listing->id;
+                    $schedule->name = $sch['name'];
+                    $schedule->starting = $sch['starting'];
+                    $schedule->ending = $sch['ending'];
+                    $schedule->save();
+                }
+            }
+            
+            $cards = implode(', ', $data['cards']);
+            if(is_null($cards)) $cards = '';
+            
+            $places = new Zend_Db_Table('listing_place');
+            $place  = $places->fetchNew();
+            $place->setFromArray($data['place']);
+            
+            $place->cards = $cards;
+            $place->created = date('Y-m-d H:i:s');
+            $place->updated = date('Y-m-d H:i:s');
+            $place->listing_id = $listing->id;
+            $place->fqid = $fq->id;
+            
+            $place->save();
+            
+            $fq->added = 1;
+            $fq->save();
+            
+            $result = array(
+                'status' => 'success',
+                'id'     => $listing->id
+            );
+            
+        } catch(Exception $e) {
+            $result = array(
+                'status' => 'error',
+                'error'  => $e->getMessage()
+            );
+        }
+        
+        header('Content-type: application/json');
+        echo json_encode($result); die;
+    }
+    
+    public function updateplaceAction(){
+        $result = array();
+        try {
+            
+            $id = $_GET['id'];
+            $type = 2;
+
+            $fqs = new Zend_Db_Table('fq');
+            $select = $fqs->select();
+            $select->where('id = ?',$id);
+            $fq = $fqs->fetchRow($select);
+            if(is_null($fq)) 
+                throw new Exception('Foursquare place info not found');
+            
+            $fq->fb_page = $_GET['url'];
+
+            $url = parse_url($this->_getParam('url'));
+            $url = @split('/', $url['path']);
+            $id = ($url[1] == 'pages') ? $url[3] : $url[1];
+
+                            //echo $id; die;
+
+            $client = new Zend_Http_Client('https://graph.facebook.com/'.$id);
+            $client->setParameterGet('access_token', $_GET['token']);
+
+            $response = $client->request();
+
+            $body = json_decode($response->getBody());
+
+            if(isset($body->error)) 
+                throw new Exception($body->error->message);
+            
+            $client = new Zend_Http_Client('https://graph.facebook.com/'.$id.'/albums');
+            $client->setParameterGet('access_token', $_GET['token']);
+
+            $response = $client->request();
+
+            $albums = json_decode($response->getBody());
+
+            if(isset($albums->error)) 
+                throw new Exception($albums->error->message);
+
+            $photos = array();
+
+            foreach($albums->data as $alb) {
+                $client = new Zend_Http_Client('https://graph.facebook.com/'.$alb->id.'/photos');
+                $client->setParameterGet('access_token', $_GET['token']);
+
+                $response = $client->request();
+
+                $pics = json_decode($response->getBody());
+
+                if(!isset($pics->error)) {
+
+                    foreach($pics->data as $pic) {
+                        $_pic = new stdClass();
+                        $_pic->thumb = $pic->picture;
+                        $_pic->url = $pic->source;
+
+                        $photos[] = $_pic;
+                    }
+
+                }
+            }
+
+            $body->photos = $photos;
+
+            $fq->fb_data = json_encode($body);
+            $fq->save();
+            
+            $__fq = json_decode($fq->fq_data);
+            $venue = $__fq->response->venue;
+            $page  = json_decode($fq->fb_data);
+            
+            //var_dump($fq->fq_data); die;
+            
+            $data = array(
+                'country_id'=>18,
+                'city_id'=>$fq->city,
+                'main_type'=>$type,
+                'title'=>$venue->name,
+                'description' => (isset($page->about)) ? $page->about : '',
+                'address'=>(isset($venue->location->address)) ? $venue->location->address : '',
+                'lat'=>$venue->location->lat,
+                'lng'=>$venue->location->lng,
+                'phone'=>(isset($venue->contact->phone)) ? $venue->contact->phone : (isset($page->phone) ? $page->phone : ''),
+                'email'=>(isset($venue->contact->email)) ? $venue->contact->email : (isset($page->email) ? $page->email : ''),
+                'website'=>(isset($venue->contact->website)) ? $venue->contact->website : (isset($page->website) ? $page->website : ''),
+                'sch'=>array(
+                    0 => array(
+                        'starting' => $page->hours->mon_1_open,
+                        'ending'   => $page->hours->mon_1_close,
+                        'name'     => 'Monday'
+                    ),
+                    1 => array(
+                        'starting' => $page->hours->tue_1_open,
+                        'ending'   => $page->hours->tue_1_close,
+                        'name'     => 'Tuesday'
+                    ),
+                    2 => array(
+                        'starting' => $page->hours->wed_1_open,
+                        'ending'   => $page->hours->wed_1_close,
+                        'name'     => 'Wednesday'
+                    ),
+                    3 => array(
+                        'starting' => $page->hours->thu_1_open,
+                        'ending'   => $page->hours->thu_1_close,
+                        'name'     => 'Thursday'
+                    ),
+                    4 => array(
+                        'starting' => $page->hours->fri_1_open,
+                        'ending'   => $page->hours->fri_1_close,
+                        'name'     => 'Friday'
+                    ),
+                    5 => array(
+                        'starting' => $page->hours->sat_1_open,
+                        'ending'   => $page->hours->sat_1_close,
+                        'name'     => 'Saturday'
+                    ),
+                    6 => array(
+                        'starting' => $page->hours->sun_1_open,
+                        'ending'   => $page->hours->sun_1_close,
+                        'name'     => 'Sunday'
+                    ),
+                ),
+                'place' => array(
+                    'facebook' => $page->link,
+                    'twitter' => (isset($venue->contact->twitter)) ? $venue->contact->twitter : '',
+                    'info' => (isset($page->description)) ? $page->description : '',
+                    'specials',
+                    'tips',
+                    'tags' => (isset($venue->tags[0])) ? $venue->tags[0] : '',
+                    'services'
+                ),
+                'fqid'
+            );
+            
+            $data['cards'] = array();
+            if(isset($page->payment_options->cash_only) and $page->payment_options->cash_only == 1)
+                $data['cards'][] = 'cash';
+            if(isset($page->payment_options->visa) and $page->payment_options->visa == 1)
+                $data['cards'][] = 'visa';
+            if(isset($page->payment_options->amex) and $page->payment_options->amex == 1)
+                $data['cards'][] = 'amex';
+            if(isset($page->payment_options->mastercard) and $page->payment_options->mastercard == 1)
+                $data['cards'][] = 'mastercard';
+            if(isset($page->payment_options->discover) and $page->payment_options->discover == 1)
+                $data['cards'][] = 'discover';
+            
+            $services = '';
+            $__services = array(
+                'breakfast' => 'Breakfast',
+                'lunch'     => 'Lunch',
+                'dinner'    => 'Dinner',
+                'coffee'    => 'Coffee Break',
+                'drinks'    => 'Drinks',
+            );
+            $_services = get_object_vars($page->restaurant_specialties);
+            foreach($_services as $k => $v)
+                if($v == 1)
+                    $services .= $__services[$k]."\n";
+
+            $data['place']['specials'] = $services;
+            
+            $info = "";
+            foreach($venue->tips->groups as $g)
+                foreach($g->items as $t)
+                    $info .= $t->text ."\n";
+            
+            $data['place']['tips'] = $info;
+            
+            $services = '';
+            $__services = array(
+                'reserve'  => 'Take reservations',
+                'walkins'  => 'No reservation needed',
+                'groups'   => 'Good for groups',
+                'kids'     => 'Good for kids',
+                'takeout'  => 'Able to take out',
+                'delivery' => 'Express service',
+                'catering' => 'Catering Service',
+                'waiter'   => 'Waiter Service',
+                'outdoor'  => 'Outdoor Tables'
+            );
+            $_services = get_object_vars($page->restaurant_services);
+            foreach($_services as $k => $v)
+                if($v == 1)
+                    $services .= $__services[$k]."\n";
+                
+            $data['place']['services'] = $services;
+            
+            $listing = $this->listings->getListing($_GET['listing']);
+            
+            $listing->title       = $data['title'];
+            $listing->description = $data['description'];
+            $listing->identifier  = str_replace(' ','_',strtolower($data['title']));
+            $listing->address     = $data['address'];
+            $listing->lat         = $data['lat'];
+            $listing->lng         = $data['lng'];
+            $listing->status      = 0;
+            $listing->phone       = $data['phone'];
+            $listing->email       = $data['email'];
+            $listing->website     = $data['website'];
+            $listing->updated     = date('Y-m-d H:i:s');
+            $listing->save();
+            
+            $schedules = new Zend_Db_Table('listing_schedules');
+            $schedules->delete(array('listing_id' =>$listing->id));
+            foreach($data['sch'] as $sch){
+                if(!empty($sch['starting'])) {
+                    $schedule = $schedules->fetchNew();
+                    $schedule->listing_id = $listing->id;
+                    $schedule->name = $sch['name'];
+                    $schedule->starting = $sch['starting'];
+                    $schedule->ending = $sch['ending'];
+                    $schedule->save();
+                }
+            }
+            
+            $cards = implode(', ', $data['cards']);
+            if(is_null($cards)) $cards = '';
+            
+            $place  = $this->listings->getPlaceInfo($listing->id);
+            $place->setFromArray($data['place']);
+            
+            $place->cards = $cards;
+            $place->updated = date('Y-m-d H:i:s');
+            $place->fqid = $fq->id;
+            
+            $place->save();
+            
+            $fq->added = 1;
+            $fq->save();
+            
+            $result = array(
+                'status' => 'success',
+                'id'     => $listing->id
+            );
+            
+        } catch(Exception $e) {
+            $result = array(
+                'status' => 'error',
+                'error'  => $e->getMessage()
+            );
+        }
+        
+        header('Content-type: application/json');
+        echo json_encode($result); die;
+    }
+    
+    public function loginAction(){
+        $this->auth = Zend_Auth::getInstance();
+        if($this->auth->hasIdentity()){
+            $result = array(
+                'type'=>'error',
+                'message' => 'You are already logged in'
+            );
+        } else {
+            try {
+                if(empty($_POST['email'])) 
+                    throw new Exception('Email cannot be empty');
+                if(empty($_POST['password']))
+                    throw new Exception('Password cannot be empty');
+
+                $email = new Zend_Validate_EmailAddress();
+                if(!$email->isValid($_POST['email']))
+                    throw new Exception('Invalid Email Address');
+
+                $this->accounts = new WS_AccountService();
+                $_result = $this->accounts->login($_POST['email'], $_POST['password']);
+                if($_result === true){
+                    $result = array(
+                        'type'=>'success'
+                    );
+                } else {
+                    $result = array(
+                        'type' => 'error',
+                        'message' => 'Incorrect Email or Password'
+                    );
+                }
+            } 
+            catch (Exception $e) {
+                $result = array(
+                    'type' => 'error',
+                    'message' => $e->getMessage()
+                );
+            }
+        }
+        
+        header('Content-type: application/json');
+        echo json_encode($result); die;
+    }
+    
+    public function signupAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if($auth->hasIdentity()){
+            $result = array(
+                'type'=>'error',
+                'message' => 'You are already logged in'
+            );
+        } else {
+            if($this->getRequest()->isPost()){
+                $errors = array();
+                if(empty($_POST['name']) || $_POST['name'] == 'Name')
+                    $errors['js-input-name'] = 'Name cannot be empty';
+                if(empty($_POST['email']) || $_POST['email'] == 'E-Mail')
+                    $errors['js-input-email'] = 'Email cannot be empty';
+                if(empty($_POST['password']) || $_POST['password'] == 'Password')
+                    $errors['js-input-password'] = 'Password cannot be empty';
+                if($_POST['password2'] != $_POST['password'])
+                    $errors['js-input-confirm'] = 'Password confirmation fallure';
+
+                $email = new Zend_Validate_EmailAddress();
+                if(!empty($_POST['email']) and !$email->isValid($_POST['email']))
+                    $errors['js-input-email'] = 'Invalid Email Address';
+
+                if(count($errors) > 0) {
+                    $result = array(
+                        'type'=>'error',
+                        'errors' => $errors
+                    );
+                } else {
+
+                    $this->accounts = new WS_AccountService();
+                    if($this->accounts->validateEmail($_POST['email'])){
+                        $this->accounts->signup($_POST);
+                        $result = array(
+                            'type' => 'success'
+                        );
+                    } else {
+                        $result = array(
+                            'type' => 'exists'
+                        );
+                    }
+                }
+            } else {
+                die('Wrong request');
+            }
+        }
+        header('Content-type: application/json');
+        echo json_encode($result); die;
+    }
+    
+    public function resendverificationAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity()) 
+            throw new Exception('No access allowed');
+        
+        $user = $auth->getIdentity();
+        
+        $activations = new Zend_Db_Table('activation_tokens');
+        $token = $activations->fetchNew();
+        $token->user_id = $user->id;
+        $token->token   = hash('sha256',$user->email.time().rand(0,1000000));
+        $token->created = date('Y-m-d H:i:s');
+        $token->updated = date('Y-m-d H:i:s');
+        $token->save();
+
+        $notifier = new WS_Notifier($user->id);
+        $notifier->emailVerification($token);
+        
+        echo 'done'; die;
+    }
+    
+    public function contactAction()
+    {
+        if($this->getRequest()->isPost()) {
+            $data = $_POST; $errors = 0;
+            
+            if(empty($data['name']))
+                $errors++;
+            
+            if(empty($data['email']))
+                $errors++;
+            
+            if(empty($data['subject']))
+                $errors++;
+            
+            if(empty($data['message']))
+                $errors++;
+            
+            if($errors == 0) {
+                $auth = Zend_Auth::getInstance();
+                if($auth->hasIdentity())
+                    $user = $auth->getIdentity();
+                else {
+                    $user = new stdClass();
+                }
+                $contacts = new Zend_Db_Table('contact_form');
+                $new = $contacts->fetchNew();
+                $new->user_id = $user->id;
+                $new->type = $data['type'];
+                $new->name = $data['name'];
+                $new->company = $data['company'];
+                $new->email = $data['email'];
+                $new->subject = $data['subject'];
+                $new->message = $data['message'];
+                $new->created = date('Y-m-d H:i:s');
+                $new->save();
+                
+                $notifier = new WS_Notifier();
+                $notifier->sendContactForm($new);
+                
+                echo json_encode(array('sent')); die;
+            }
+            throw new Exception('ERRORS');
+        }
+        throw new Exception('WRONG REQUEST');
+    }
+    
+    public function fbsignupAction()
+    {
+        if($this->getRequest()->isPost()) {
+            $auth = Zend_Auth::getInstance();
+            if($auth->hasIdentity()) {
+                $result = array(
+                    'type' => 'error',
+                    'error' => 'You are already logged in',
+                );
+            } else {
+                $token = $_POST['token'];
+                if(empty($token) || is_null($token)) {
+                    $result = array(
+                        'type' => 'error',
+                        'error' => 'Wrong Request'
+                    );
+                } else {
+                    try {
+                        
+                        $conf = Zend_Registry::get('facebook');
+        
+                        $facebook = new Fb_Facebook(array(
+                            'appId' => $conf['id'],
+                            'secret'=> $conf['secret'],
+                        ));
+                        
+                        $facebook->setAccessToken($token);
+                        
+                        $user = $facebook->getUser();
+                        
+                        if(!$user) {
+                            $result = array(
+                                'type' => 'error',
+                                'error' => "We couldn't fecth your information from facebook Not User",
+                            );
+                        } else {
+                            $user_profile = $facebook->api('/me');
+                            if($this->accounts->validateEmail($user_profile['email'], true)){
+                                $this->accounts->signup($user_profile, true);
+                                $result = array('type'=>'success');
+                            } else {
+                                $this->accounts->login($user_profile, null, true);
+                                $result = array('type'=>'success');
+                            }
+                        }
+                    } catch(Exception $e) {
+                        $result = array(
+                            'type' => 'error',
+                            'error' => "We couldn't fecth your information from facebook Not User"
+                        );
+                    }
+                }
+            }
+        } else {
+            $result = array(
+                'type' => 'error',
+                'error'=>'Wrong Request'
+            );
+        }
+        
+        header('Content-type: application/json');
+        echo json_encode($result); die;
+    }
+    
+    public function translateAction(){
+        if(Zend_Registry::isRegistered('cache'))
+            $cache = Zend_Registry::get('cache');
+        
+        echo $this->_getParam('text'); die;
+        
+        $cacheId = 'translates_'.md5($text);
+        
+        if(!is_null($cache)) {
+            if($cache->test($cacheId) !== false) {
+                header('Content-type: text/plain');
+                echo $cache->load($cacheId); die;
+            }
+        }
+        
+        $conf   = Zend_Registry::get('gl');
+        $client = new Zend_Http_Client($conf['translate']);
+        $client->setParameterGet('key',$conf['key']);
+        $client->setParameterGet('userOd','50.56.241.127');
+        $client->setParameterGet('source', 'es');
+        $client->setParameterGet('target', 'en');
+        $client->setParameterGet('q',$text);
+        
+        $respomse   = $client->request();
+        $traslation = json_decode($respomse->getBody());
+        
+        var_dump($traslation); die;
+        
+        if(isset($traslation->error)) {
+            header('Content-type: text/plain');
+            echo $text; die;
+        }
+        
+        if(!is_null($cache)) 
+            $cache->save($traslation->data->translations->translatedText, $cacheId);
+        
+        header('Content-type: text/plain');
+        echo $traslation->data->translations->translatedText; die;
+    }
+    
+    public function getusertripinfoAction(){
+        $result = array('type'=>'error');
+        $auth = Zend_Auth::getInstance();
+        if(!$auth->hasIdentity())
+            throw new Exception('No access allowed');
+        
+        $user = $auth->getIdentity();
+        if($user->role_id != 2) 
+            throw new Exception('No access allowed');
+        
+        $trips = new Zend_Db_Table('itineraries');
+        $select = $trips->select();
+        $select->where('user_id = ?', $user->id);
+        $select->where('status = 1');
+        $trip = $trips->fetchRow($select);
+
+        if(!is_null($trip))
+            $result = array(
+                'type'=>'success',
+                'html' => '<div class="cart-B js-cart-B"><a href="/user/trips/itinerary/'.$trip->id.'" class="icon"><span>'.$this->view->formatnumber($trip->listings).'</span></a><div class="info"><h3>$'.$trip->price.'</h3><span>'.$trip->listings.' listings in your trip</span><a href="/user/trips/itinerary/'.$trip->id.'" class="organize"><span>Organize Trip</span></a></div></div>',
+                'count' => $trip->listings,
+                'trip'=>$trip->id
+            );
+        else
+            $result = array(
+                'type'=>'success',
+                'html' => '<div class="cart-B js-cart-B"><a href="#" class="icon js-new-trip"><span>0</span></a><div class="info"><h3>$0</h3><span>0 listings in your trip</span><a href="#" class="organize js-new-trip"><span>Create Trip</span></a></div></div>',
+                'count' => 0,
+                'trip'=> 0
+            );
+        
+        header('Content-type: application/json');
+        echo json_encode($result); die;
     }
 }

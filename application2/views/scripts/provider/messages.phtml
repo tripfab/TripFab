@@ -3,51 +3,103 @@
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->user->name ?> : Messages | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/messages.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-	<script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript" src="/js2/user/messages.js"></script>
+    <title><?= $this->user->name ?> - Messages | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/messages.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
     <div class="w2">
         <div class="wrapper user-messages">
-            <?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'All Messages','parentActive'=>'Messages')); ?>
-            <div id="features">
-                <div class="top centered">
-                    <h2>Messages</h2>
-                    <h3>On this tab you will be able to check and manage all the messages <br />you will receive from travelers all over the world.</h3>
-                    <img src="/images2/img-59.png" alt="" />
-                    <img src="/images2/img-49.png" alt="" class="corner" />
+            <?= $this->partial('partials/vendormainmenu.phtml', array('active'=>'All Messages','parentActive'=>'Messages')); ?>
+            <?php if(count($this->conversations) > 0): ?>
+            <div class="left">
+                <div class="ttl">
+                    <ul>
+						<li class="current"><a class="btn-10 selectAll" href="">Select All</a></li>
+						<li><a class="btn-10 removeSelected" href="">Remove Selected</a></li>
+					</ul>
+                </div><!-- closes ttl -->
+                <div class="messages-wrapper">
+                	<?php foreach($this->conversations as $message): ?>
+					<?php if($message->starter == $this->user->id): ?>
+                    <?php $class = ($message->snew == 1) ? 'new' : ''; ?>
+                    <div class="s-message <?= $class ?>">
+                    	<?php if($message->snew == 1): ?>
+                    	<span class="new"></span>
+                        <?php endif ?>
+                        <span class="number"><?= $message->msgcount ?></span>
+                        <div>
+	                        <input type="checkbox" name="message_id" class="message_id" value="<?= $message->id ?>" />                        
+                            <img alt="" src="https://static.tripfab.com/images/cleardot.gif" class="star">
+                            <?php $image = (!empty($message->wimage)) ? $message->wimage : '/images/default-profile.gif' ?>
+                            <?= $this->thumbnail(47, $image, 'user', '1:1') ?>
+                        </div>
+                        <strong><?= $message->wname ?></strong>
+                        <span class="time"><?= date('F jS, Y g:i A', strtotime($message->updated)) ?></span>
+                    </div><!-- closes message -->                    
+                    <?php else: ?>
+                    <?php $class = ($message->wnew == 1) ? 'new' : ''; ?>
+                    <div class="s-message <?= $class ?>">
+                    	<?php if($message->wnew == 1): ?>
+                    	<span class="new"></span>
+                        <?php endif ?>
+                        <span class="number"><?= $message->msgcount ?></span>
+                        <div>
+                            <input type="checkbox" name="message_id" class="message_id" value="<?= $message->id ?>" />
+                            <img alt="" src="https://static.tripfab.com/images/cleardot.gif" class="star">
+                            <?php $image = (!empty($message->simage)) ? $message->simage : '/images/default-profile.gif' ?>
+                            <?= $this->thumbnail(47, $image, 'user', '1:1') ?>
+                        </div>
+                        <strong><?= $message->sname ?></strong>
+                        <span class="time"><?= date('F jS, Y g:i A', strtotime($message->updated)) ?></span>
+                    </div><!-- closes message -->
+                    <?php endif ?>
+                    <?php endforeach ?>
+                    <!--
+                    <div class="load-more">
+                    	<a href="" class="btn-10">Load Earlier Messages</a>
+                    </div>
+                    -->
+					<!-- <a href="" class="btn-5">Older messages</a> -->
+                </div><!-- closet messages-wrapper -->
+            </div><!-- closes left -->
+            <div class="right">
+            	<div class="waiting" style="height:300px;">
+                    <p style="text-align:center; line-height:50px; margin-top:125px;">
+                    No message selected
+                    </p>
                 </div>
-                <!-- closes top -->
-                <div class="bottom">
-                    <img src="/images2/img-46.png" alt="" class="izq" />
-                    <h4>Sending a message</h4>
-                    <p>Sending a message is easy: all you need to do is choose the person you want to communicate with, write your message and click on the "Send" button. The message will arrive promptly to your recipient. What a great way to communicate with your future travelers!</p>
-                    <div class="clear"></div>
-                    <img src="/images2/img-47.png" alt="" class="der" />
-                    <h4>Receiving a Message</h4>
-                    <p>On this page you can keep track of received and sent messages at all times. Also these messages will be archived and organized for you to get easy access to them and perform the necessary actions. Travelers asking prices or availability? Answer them right away with the messages system!</p>
-                    <div class="clear"></div>
-                    <img src="/images2/img-48.png" alt="" class="izq" />
-                    <h4>Checking your Messages</h4>
-                    <p>By clicking on the bubble text boxes at the top on the main menu, you can easily access your inbox in just one click and perform different actions such as respond, ignore or delete your messages at all times. Keeping communication channels with your travelers organized and efficient with TripFab.</p>
+                <div class="loading">Some Text</div>
+                <div class="conversation" style="width: 525px;">
+                    <div class="sendMessageFormWrapper">
+                        <h4>Send a message</h4>
+                        <textarea name="message" rows="" cols=""></textarea>
+                        <input class="btn-1" type="submit" id="sendmessage" value="Send Message">
+                    </div>
+                    <ul></ul>
                 </div>
-                <!-- closes bottom -->
-            </div>
-            <!-- closes features -->
-        </div>
-        <!-- closes user-messages -->
-    </div>
-    <!-- closes w2 -->
+            </div><!-- closes right -->
+            <?php else: ?>
+            <div id="messages">
+                <div class="no-messages">
+                    <h3>You don't have any messages</h3>
+                </div><!--NO-PAYMENT-->
+            </div><!-- closes u-payments --> 
+            <?php endif ?>
+        </div><!-- closes user-messages -->
+    </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
-</div>
-<!-- closes w1 -->
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/user/messages.js?v=<?= $this->cssVC ?>"></script>
 </body>
 </html>

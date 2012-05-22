@@ -1,0 +1,166 @@
+<style type="text/css">
+.photo object { float:right;}
+.photo .text { float:left;}
+.photos .empty {
+	text-align:center;
+	padding-top:100px;
+	padding-bottom:100px;}
+	.photos .empty img {
+		margin-bottom:10px;
+		float:none;
+		display:inline;
+		background:none; }
+	.photos .empty p {
+		font-family:Helvetica;
+		font-size:18px;
+		line-height:26px;
+		font-weight:bold;
+		color:#d7d7d7;}
+		.photos .empty p a {
+			color:#60b5f7;}
+.main_pic {
+    float: right;
+    margin-right: 25px;}
+	.main_pic input {
+		margin:0 0 0 0;}
+
+.photo { position:relative; overflow:visible;}
+.photo .help {
+	position:absolute;
+	top:25px;
+	left:155px;}
+.photo .help a.eye {
+	display:block;
+	background:url(/images2/eye.png) no-repeat top left;
+	width:18px;
+	height:12px;
+	text-indent:-9999px;
+	cursor:pointer;}
+	.photo .help:hover a.eye {
+		background-position:left -12px;}
+.photo.first .help {
+	top:0px;}
+	.photo .help a.tooltip3 {
+		background:url(/images2/help-tooltip-bg.png) top left no-repeat;
+		left: 17px;
+		padding:11px 12px;
+		position:absolute;
+		top:-102px;
+		z-index:1000;
+		display:none;}
+	.photo .help:hover a.tooltip3 {
+		display:block;}
+
+.profile-items {
+	overflow:visible;}
+	
+	#file_upload3 { float:right;}
+	.qq-upload-button {
+		background:url(/images2/upload-btn.gif) top left no-repeat;
+		text-indent:-9999px;
+		width:124px;
+		height:34px;}
+		
+		#qqPhotoQueueUL {
+			float:right;
+			width:400px;
+			padding:10px;
+			list-style:none;}
+			#qqPhotoQueueUL li {
+				border-bottom:1px solid #CCC;
+				overflow:hidden;
+				padding-bottom:5px;
+				margin-bottom:5px;
+				line-height:18px;}
+				#qqPhotoQueueUL li.qq-upload-fail span.qq-upload-progress-range { 
+					background:#F00;}
+			#qqPhotoQueueUL li:last-child {
+				border:none;
+				padding-bottom:0;
+				margin-bottom:0;}
+				#qqPhotoQueueUL li span.qq-upload-progress {
+					float:left;
+					height:18px;
+					background:#CCC;
+					position:relative;
+					width:350px;
+					clear:none;}
+					#qqPhotoQueueUL li span.qq-upload-progress-range {
+						position:absolute;
+						top:0; left:0;
+						height:18px;
+						background:#7CCBFF;}
+				#qqPhotoQueueUL li span.qq-upload-size {
+					clear:none;
+					float:right;
+					widows:50px;}
+				#qqPhotoQueueUL li a.qq-upload-cancel {
+					display:none;}
+				#qqPhotoQueueUL li span.qq-upload-failed-text {
+					display:none;}
+</style>
+<form action="" method="post">
+    <div class="photos">
+    	<?php if($this->help->com_photos == 0): ?>
+    	<div class="desc">
+    		<h3>What is the Photos Section?</h3>
+    		<p>This is where you add the beautiful pictures of your listing, you can add pictures of your hotel, hotel rooms, surroundings, people taking your tour, your restaurant, restaurant foot and pretty much anything you want related to your listing. Remember the most beautiful the pictures are the most attractive your listing is.</p>
+    		<p>You can add a maximum of 10 pictures and we recommend the size is 640x425 pixels.</p>
+    		<p>Note: You need to own the pictures you post here.</p>
+    		<a href="" rel="com_photos" class="remove">Remove</a>
+    	</div><!-- closes desc -->
+        <?php endif ?>
+        <div class="photo ttl">
+        	<div class="text">
+                <strong>Photos</strong>
+            </div>
+            <a href="#" id="file_upload3"></a>
+            <div class="clear"></div>
+        </div>
+        <div class="photo">        	
+            <div class="text req">
+                <strong>Picture Requriments</strong>
+                <span><em>Upload limit</em> 10 photos per listing</span>
+                <span><em>Photo Dimension</em> 930x746  pixels</span>
+                <span><em>File size</em> 2MB or less</span>
+            </div>
+            <div class="help">
+                <a href="/images2/help/big-act-photos.png" class="eye">help</a>
+                <a href="/images2/help/big-act-photos.png" class="tooltip3">
+                <img src="https://static.tripfab.com/images2/help/small-act-photos.png" /></a>
+            </div>
+            <div id="qqPhotoQueue"><ul id="qqPhotoQueueUL"></ul></div>
+            <div class="clear"></div>
+        </div><!-- closes photo -->
+        <?php if(count($this->pictures) > 0): ?>
+        <?php foreach($this->pictures as $pic): ?>
+        <div class="photo">
+            <?= $this->thumbnail(array('width'=>133,'height'=>92), $pic->url, '','133:92') ?>
+            <strong>Photo Description</strong>
+            <input class="noclean" placeholder="Add a nice description of this photo" type="text" name="pic[<?= $pic->id ?>][location]" value="<?= $pic->location ?>" />
+            <a href="#img_delete_<?= $pic->id ?>" class="lb remove">Remove Picture</a>
+            <div class="main_pic">
+            	<?php $checked = ($pic->main == 1) ? 'checked="checked"' : '' ?>
+            	<input type="radio" id="main_pic_<?= $pic->id ?>" <?= $checked ?> name="main" value="<?= $pic->id ?>" />
+	            <label for="main_pic_<?= $pic->id ?>">This is the Main Picture</label>
+            </div>
+            <div class="clear"></div>
+        </div><!-- closes photo -->
+        <?php endforeach ?>
+        <?php else: ?>
+        <div class="photo empty">
+        	<img src="https://static.tripfab.com/images/empty-5.png" />
+            <p>You don't have photos for this listing<br />
+            <a href="#" class="uploadTrigger">Upload some pictures now</a>
+            </p>
+        </div>
+        <?php endif ?>
+    </div><!-- closes photos -->
+    <div class="foot">
+        <input type="submit" class="noclean btn-1" value="Save Changes" />
+    </div><!-- closes foot -->
+	<input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token.'edit_picture') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_picture') ?>" />
+</form>

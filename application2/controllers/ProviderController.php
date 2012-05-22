@@ -49,17 +49,28 @@ class ProviderController extends Zend_Controller_Action
     {
         $auth = Zend_Auth::getInstance();
         if(!$auth->hasIdentity()){
-            if($this->_getParam('action') != 'signup')
-                $this->_redirect ('login');
-        } else {
-            $this->user = new WS_User($auth->getStorage()->read());
-            if($this->user->getRole() != 'provider'){
-                throw new Exception();
-            } else {
+            if($this->_getParam('action') != 'signup' && $this->_getParam('task') != 'preview' )
+                $this->_redirect('/en-US/login?b='.$_SERVER['REQUEST_URI']);
+            else {
                 $this->messages     = new WS_MessagesService();
                 $this->reservations = new WS_ReservationsService();
                 $this->feeds        = new WS_FeedsService();
-                $this->listings     = new WS_ListingService();
+                $this->listings     = new WS_ListingService(false);
+                $this->places       = new WS_PlacesService();
+                $this->accounts     = new WS_AccountService();
+            }
+        } else {
+            $this->user = new WS_User($auth->getStorage()->read());
+            if($this->user->getRole() != 'provider'){
+                die('asd');
+                //throw new Exception();
+            } else {
+                
+            
+                $this->messages     = new WS_MessagesService();
+                $this->reservations = new WS_ReservationsService();
+                $this->feeds        = new WS_FeedsService();
+                $this->listings     = new WS_ListingService(false);
                 $this->places       = new WS_PlacesService();
                 $this->accounts     = new WS_AccountService();
                 
@@ -73,6 +84,8 @@ class ProviderController extends Zend_Controller_Action
             $this->view->help   = $this->listings->getHelpSettings($this->user->getId());
         }
         $this->places = new WS_PlacesService();
+        
+        $this->view->cssVC = Zend_Registry::get('vc');
     }
     
     public function listingsAction()
@@ -211,6 +224,7 @@ class ProviderController extends Zend_Controller_Action
             if($this->getRequest()->isPost()){
                 $type = $_POST['typeid'];
                 $this->listings->deleteActivityType($type);
+                setcookie('alert', 'Your changes have been saved');
                 $this->_redirect('provider/listings/types/'.$listing->id);
             }
             
@@ -250,7 +264,7 @@ class ProviderController extends Zend_Controller_Action
                     $type->max = $data['max'];
                     $type->kids = $data['kids'];
                     $type->kid_age_max = $data['kid_age_max'];
-                    $type->kid_age_min = $data['kid_age_min'];
+                    $type->kid_age_min = 1;
                     $type->updated = date('Y-m-d H:i:s');
                     
                     $type->save();
@@ -273,7 +287,7 @@ class ProviderController extends Zend_Controller_Action
                             $tip->save();
                         }
                     }
-                    
+                    setcookie('alert', 'Your changes have been saved');
                     $this->_redirect('provider/listings/type/'.$type->id);
                 }
             }
@@ -309,7 +323,7 @@ class ProviderController extends Zend_Controller_Action
                     $type->max = $data['max'];
                     $type->kids = $data['kids'];
                     $type->kid_age_max = $data['kid_age_max'];
-                    $type->kid_age_min = $data['kid_age_min'];
+                    $type->kid_age_min = 1;
                     $type->listing_id = $listing->id;
                     $type->created = date('Y-m-d H:i:s');
                     $type->updated = date('Y-m-d H:i:s');
@@ -324,7 +338,7 @@ class ProviderController extends Zend_Controller_Action
                             $tip->save();
                         }
                     }
-                    
+                    setcookie('alert', 'Your changes have been saved');
                     $this->_redirect('provider/listings/types/'.$listing->id);
                 }
             }
@@ -385,6 +399,9 @@ class ProviderController extends Zend_Controller_Action
                 
                 $sch->delete();
                 $room->delete();
+                
+                setcookie('alert', 'Your changes have been saved');
+                $this->_redirect('/provider/listings/rooms/'.$listing->id);
             }
             
             $rooms = $this->listings->getSchedulesOf($listing->id);
@@ -417,6 +434,7 @@ class ProviderController extends Zend_Controller_Action
                     $this->view->errors = $errors;
                 else {
                     $this->listings->updateRoom($listing->id, $_POST);
+                    setcookie('alert', 'Your changes have been saved');
                     $this->_redirect('/provider/listings/room/'.$sch->id);
                 }
                 
@@ -463,6 +481,7 @@ class ProviderController extends Zend_Controller_Action
                     $this->view->errors = $errors;
                 else {
                     $this->listings->addScheduleTo($listing, $_POST);
+                    setcookie('alert', 'Your changes have been saved');
                     $this->_redirect('/provider/listings/rooms/'.$listing->id);
                 }
             }
@@ -507,7 +526,7 @@ class ProviderController extends Zend_Controller_Action
                 }
                 
                 $tips = $this->listings->getDetails($listing->id);
-                
+                setcookie('alert', 'Your changes have been saved');
                 $this->_redirect('provider/listings/tips/'.$listing->id);
             }
             
@@ -523,62 +542,78 @@ class ProviderController extends Zend_Controller_Action
             $listing = $this->listings->getListing($ids, $this->user->getVendorId());
             $getthere = $this->listings->getLocationOf($listing->id);
             if($this->getRequest()->isPost()){
-                //echo '<pre>'; print_r($_POST); echo '</pre>'; die;
-                
-                $getthere->plane = $_POST['plane'];
-                $getthere->car   = $_POST['car'];
-                $getthere->train = $_POST['train'];
-                $getthere->boat = $_POST['boat'];
-                
-                $getthere->save();
-                
-                $errors = array();
-                if(empty($_POST['country_id']))
-                    $errors[] = 'Select the country';
-                if(empty($_POST['city_id']))
-                    $errors[] = 'Select the city';
-                if(empty($_POST['address']))
-                    $errors[] = 'Address can not be empty';
-                if(empty($_POST['lat']) || empty($_POST['lng']))
-                    $errors[] = 'You need to localize the listing in the map';
-                
-                if(count($errors) > 0){
-                    $this->view->errors = $errors;
-                } else {
-                    $data = $_POST;
-                    if($data['country_id'] != $listing->country_id){
-                        $db = Zend_Db_Table::getDefaultAdapter();
-
-                        if($listing->country_id != 0 && !is_null($listing->country_id))
-                            $db->query('Update places set listings = listings - 1 where id = '.$listing->country_id);
-
-                        $db->query('Update places set listings = listings + 1 where id = '.$data['country_id']);
-                        $listing->country_id = $data['country_id'];
-                    }
-                    if($data['city_id'] != $listing->city_id){
-                        $db = Zend_Db_Table::getDefaultAdapter();
-
-                        if($listing->city_id != 0 && !is_null($listing->city_id))
-                            $db->query('Update places set listings = listings - 1 where id = '.$listing->city_id);
-
-                        $db->query('Update places set listings = listings + 1 where id = '.$data['city_id']);
-                        $listing->city_id    = $data['city_id']; 
-                    }
-
-                    $listing->address = $data['address'];
-                    $listing->lat     = $data['lat'];
-                    $listing->lng     = $data['lng'];
-                    
-                    $listing->save();
-                    
+                if($_POST['_task'] === md5('add_location')){
+                    $getthere->$_POST['location'] = ' ';
+                    $getthere->save();
+                    setcookie('alert', 'Your changes have been saved');
                     $this->_redirect('provider/listings/location/'.$listing->id);
-                }
+                } else {
+                    //echo '<pre>'; print_r($_POST); echo '</pre>'; die;
                 
+                    $getthere->plane = trim($_POST['plane']);
+                    $getthere->car   = trim($_POST['car']);
+                    $getthere->train = trim($_POST['train']);
+                    $getthere->boat  = trim($_POST['boat']);
+                    $getthere->bus   = trim($_POST['bus']);
+
+                    $getthere->save();
+
+                    $errors = array();
+                    if(empty($_POST['country_id']))
+                        $errors[] = 'Select the country';
+                    if(empty($_POST['city_id']))
+                        $errors[] = 'Select the city';
+                    //if(empty($_POST['address']))
+                        //$errors[] = 'Address can not be empty';
+                    //if(empty($_POST['lat']) || empty($_POST['lng']))
+                        //$errors[] = 'You need to localize the listing in the map';
+
+                    if(count($errors) > 0){
+                        $this->view->errors = $errors;
+                    } else {
+                        $data = $_POST;
+                        if($data['country_id'] != $listing->country_id){
+                            $db = Zend_Db_Table::getDefaultAdapter();
+
+                            if($listing->country_id != 0 && !is_null($listing->country_id))
+                                $db->query('Update places set listings = listings - 1 where id = '.$listing->country_id);
+
+                            $db->query('Update places set listings = listings + 1 where id = '.$data['country_id']);
+                            $listing->country_id = $data['country_id'];
+                        }
+                        if($data['city_id'] != $listing->city_id){
+                            $db = Zend_Db_Table::getDefaultAdapter();
+
+                            if($listing->city_id != 0 && !is_null($listing->city_id))
+                                $db->query('Update places set listings = listings - 1 where id = '.$listing->city_id);
+
+                            $db->query('Update places set listings = listings + 1 where id = '.$data['city_id']);
+                            $listing->city_id    = $data['city_id']; 
+                        }
+
+                        $listing->address = $data['address'];
+                        $listing->lat     = (!empty($data['lat'])) ? $data['lat'] : null;
+                        $listing->lng     = (!empty($data['lng'])) ? $data['lng'] : null;
+
+                        $listing->save();
+                        
+                        //var_dump($listing->toArray()); die;
+                        
+                        setcookie('alert', 'Your changes have been saved');
+                        $this->_redirect('provider/listings/location/'.$listing->id);
+                    }
+                }                
             }
             
             $countries = $this->places->getPlaces(2);
-            if($listing->country_id)
-                $cities = $this->places->getPlaces (3, $listing->country_id);
+            if($this->getRequest()->isPost()){
+                if(!empty($_POST['country_id']))
+                    $cities = $this->places->getPlaces (3, $_POST['country_id']);
+            }
+            else {
+                if($listing->country_id)
+                    $cities = $this->places->getPlaces (3, $listing->country_id);
+            }
             
             $this->view->countries = $countries;
             $this->view->cities    = $cities;
@@ -603,6 +638,15 @@ class ProviderController extends Zend_Controller_Action
                 $overview->love    = $_POST['love'];
                 $overview->updated = date('Y-m-d H:i:s');
                 $overview->save();
+                
+                if(!empty($_POST['about'])){
+                    if(strlen($_POST['about']) > 200){
+                        $listing->description = substr(str_replace("\n","",$_POST['about']), 0, 197).'...';
+                    } else {
+                        $listing->description = $_POST['about'];
+                    }
+                    $listing->save();
+                }
                 
                 foreach($details as $detail){
                     if($detail->type != 4) {
@@ -629,7 +673,7 @@ class ProviderController extends Zend_Controller_Action
                     }
                 }
                 $details = $this->listings->getDetails($listing->id);
-                
+                setcookie('alert','Your changes have been saved');
                 $this->_redirect('provider/listings/overview/'.$listing->id);
             }
             $this->view->overview = $overview;
@@ -702,25 +746,42 @@ class ProviderController extends Zend_Controller_Action
                     $getthere = $this->listings->getLocationOf($listing->id);
                     
                     $rooms = $this->listings->getHotelRooms($listing->id);
+                    $rooms2 = $this->listings->getHotelRooms($listing->id, true);
+                    $amenities = $this->listings->getDefaultAmenities(true);
                     $beds = array();
                     foreach($rooms as $room){
                         $beds[$room->id] = $this->listings->getBeds($room->id);
                     }
+                    $room_amenities = array();
+                    foreach($rooms as $room){
+                        $room_amenities[$room->id] = $this->listings->getAmenities($room->id);
+                    }
+                    
+                    $listing_amenities = $this->listings->getGenAmenities($listing->id);
+                    $def_amenities     = $this->listings->getDefaultGenAmenities(true);
                     
                     $this->view->overview = $overview;
                     $this->view->details  = $details;
                     $this->view->getthere = $getthere;
                     $this->view->rooms    = $rooms;
+                    $this->view->rooms2   = $rooms2;
                     $this->view->beds     = $beds;
+                    $this->view->room_amenities = $room_amenities;
+                    $this->view->amenities = $amenities;
+                    
+                    $this->view->def_amenities = $def_amenities;
+                    $this->view->listing_amenities = $listing_amenities;
+                    
+                    
                     
                     break;
-                case 2    : 
+                case 2: 
                     $template = 'listing-restaurant';    
                     $overview = $this->listings->getOverviewOf2($listing->id);
                     
                     $this->view->overview = $overview;
                     break;
-                case 4 : 
+                case 4: 
                     $template = 'listing-touristsight'; 
                     $overview = $this->listings->getOverviewOf2($listing->id);
                     
@@ -741,12 +802,6 @@ class ProviderController extends Zend_Controller_Action
             $reviews = $this->reviews->getReviewsFor($listing->id);
             if(count($reviews) > 0)
                 $this->view->reviews = $reviews;
-
-            $questions = $this->questions->getQuestionsOn($listing->id);
-            if(count($questions) > 0)
-                $this->view->questions = $questions;
-
-            $this->view->answer_allow = false;
 
             if(!is_null($this->user)){
                 $this->view->form_action = '/cart/add';
@@ -798,7 +853,6 @@ class ProviderController extends Zend_Controller_Action
             $this->view->country         = $country;
             $this->view->city            = $city;
             $this->view->listing         = $listing;
-            $this->view->tabs            = $tabs;
             $this->view->faqs            = $faqs;
             $this->view->vendor          = $vendor;
             $this->view->attributes      = $attributes;
@@ -817,6 +871,12 @@ class ProviderController extends Zend_Controller_Action
     public function listingsActiveteTask()
     {
         $validate = array(
+            'profile' => array(
+                'url' => '/provider/account',
+                'label' => 'Set company picture/logo',
+                'description' => 'Add your company\'s logo, so people can recognize you',
+                'done'  => false,
+            ),
             'title' => array(
                 'url' => '/provider/listings/edit/',
                 'label' => 'Listing Title',
@@ -824,7 +884,7 @@ class ProviderController extends Zend_Controller_Action
                 'done' => false,
             ),
             'description' => array(
-                'url' => '/provider/listings/edit/',
+                'url' => '/provider/listings/overview/',
                 'label' => 'Listing Description',
                 'desription' => 'Add a listing short description',
                 'done' => false,
@@ -866,6 +926,9 @@ class ProviderController extends Zend_Controller_Action
         if($this->isValidId($ids)){    
             $listing = $this->listings->getListing($ids, $this->user->getVendorId());
             
+            $user = $this->user->getData();
+            if(!empty($user->image))
+                    $validate['profile']['done'] = true;
             if($listing->title != "Untitle Listing" and !empty($listing->title))
                     $validate['title']['done'] = true;
             if($listing->description != "")
@@ -900,15 +963,26 @@ class ProviderController extends Zend_Controller_Action
                         'desription' => 'Add at leaat one room type',
                         'done' => false,
                     );
-                    
+
                     $price = $this->listings->getBasicPrice($listing->id);
                     if(!is_null($price) and $price->price != 0)
                             $validate['price']['done'] = true;
-                    
-                    $schedules = $this->listings->getSchedulesOf($listing->id);
-                    if(count($schedules) > 0)
+
+                    $rooms = $this->listings->getHotelRooms($listing->id);
+                    $done = true;
+                    if(count($rooms) > 0) {
+                        foreach($rooms as $room) {
+                            if($room->people == 0 and $done) {
+                                $done = false;
+                            }
+                        }
+                        if($done) {
                             $validate['options']['done'] = true;
-                    
+                        } else {
+                            $validate['options']['desription'] = 'Some of the roooms do not have the maximun of people allowed on the room';
+                        }
+                    }
+
                     break;
                 case 6:
                     $validate['price'] = array(
@@ -917,10 +991,35 @@ class ProviderController extends Zend_Controller_Action
                         'desription' => 'Add the listing pricing',
                         'done' => false,
                     );
+                    $validate['capacity'] = array(
+                        'url' => '/admin/listings/edit/',
+                        'label' => 'Activity Capacity',
+                        'description' => 'Define the activity maximun and minimun capacity required',
+                        'done' => false
+                    );
                     $price = $this->listings->getBasicPrice($listing->id);
                     if(!is_null($price) and $price->price != 0)
-                            $validate['price']['done'] = true;                    
-                    
+                            $validate['price']['done'] = true;  
+
+                    if(!is_null($listing->min) and !is_null($listing->max)) {
+                        $validate['capacity']['done'] = true;
+                    } else {
+                        $capacities = $this->listings->getActivityTypes($listing->id);
+                        $done=true;
+                        if(count($capacities) > 0) {
+                            foreach($capacities as $c) {
+                                if(($c->min == 0 or $c->max ==0) and $done) {
+                                    $done = false;
+                                }
+                            }
+                            if($done) {
+                                $validate['capacity']['done'] = true;
+                            } else {
+                                $validate['capacity']['description'] = 'Some of the Activity Types do not have a minimun or maximun capacity defined';
+                                $validate['capacity']['url'] = 'admin/listings/types/';
+                            }
+                        }
+                    }
                     break;
                 default: break;
             }
@@ -936,9 +1035,8 @@ class ProviderController extends Zend_Controller_Action
                 $this->view->validate = $validate;
             }
             else {
-                $listing->status = 1; 
-                $listing->save();
-                $this->_redirect('provider/listings');
+                $this->view->validate = $validate;
+                $this->view->ready = true;
             }            
         }
     }
@@ -974,11 +1072,16 @@ class ProviderController extends Zend_Controller_Action
                             throw new Exception('type');
 
                     $vendor = $this->user->getVendorData();
+                    $user   = $this->user->getData();
                     
                     $listing = $this->listings->createNew();
-                    $listing->title      = 'Untitle Listing';
-                    $listing->country_id = 'Untitle Listing';
-                    $listing->city_id    = 'Untitle Listing';
+                    $listing->title      = 'Untitled Listing';
+                    $listing->country_id = $user->country_id;
+                    if($listings > 0){
+                        $dft_listing = $this->listings->getDefaultListing($this->user->getVendorId());
+                        if(!is_null($dft_listing))
+                            $listing->city_id = $dft_listing->city_id;
+                    }
                     $listing->vendor_id  = $this->user->getVendorId();
                     $listing->main_type  = $main_cat->id;
                     $listing->created    = date('Y-m-d H:i:s');
@@ -999,10 +1102,16 @@ class ProviderController extends Zend_Controller_Action
                             $listing->image = '/images2/ico-101.png';
                             break;
                         case 5:
-                            $listing->image = '/images2/ico-98.png';
+                            $listing->image    = '/images2/ico-98.png';
+                            $listing->checkin  = '14:00:00';
+                            $listing->checkout = '12:00:00';
                             break;
                         case 6:
                             $listing->image = '/images2/ico-97.png';
+                            $listing->departure_country_id = $listing->country_id;
+                            $listing->return_country_id = $listing->country_id;
+                            $listing->departure = $listing->city_id;
+                            $listing->return = $listing->city_id;
                             break;
                         case 7:
                             $listing->image = '/images2/ico-100.png';
@@ -1141,21 +1250,12 @@ class ProviderController extends Zend_Controller_Action
                                     if(empty($sch['end']['hour']))
                                         $errors[] = $sch['name'] . ', Close hour cannot be empty';
                                 }
-                            } else {
-                                if(!isset($data['schs'])) {
-                                    if(empty($data['sch'][0]['start']['hour']))
-                                        $errors[] = 'You need to set at least one atarting time';
-                                    if(empty($data['sch'][0]['end']['hour']))
-                                        $errors[] = 'You need to set at least one ending time';
-                                }
-                            }
+                            } 
                         }
                         if(!isset($data['schs'])) {
                             if(empty($data['sch'][0]['name']) || $data['sch'][0]['name'] == 'Morning, Afternoon....'){
                                 if($listing->main_type == 5)
                                     $errors[] = 'You need to add at least one room';
-                                else
-                                    $errors[] = 'You need to set at least one schedule';
                             }
                         }
                         
@@ -1194,12 +1294,14 @@ class ProviderController extends Zend_Controller_Action
                             }
                             
                             foreach($data['sch'] as $sch){
-                                if(isset($sch['same'])){
-                                    $sch['duration'] = 1;
-                                    $sch['duration_lb'] = 'days';
-                                    $this->listings->addScheduleTo2($listing, $sch);
-                                } else {
-                                    $this->listings->addScheduleTo2($listing, $sch);
+                                if(!empty($sch['name'])){
+                                    if(isset($sch['same'])){
+                                        $sch['duration'] = 1;
+                                        $sch['duration_lb'] = 'days';
+                                        $this->listings->addScheduleTo2($listing, $sch);
+                                    } else {
+                                        $this->listings->addScheduleTo2($listing, $sch);
+                                    }
                                 }
                             }
                             
@@ -1269,8 +1371,14 @@ class ProviderController extends Zend_Controller_Action
                             if($data['price'] == '0.00' || empty($data['price']))
                                 $errors[] = 'Rate cannot be 0';
                         }
-                        if(count($errors) > 0)
-                            $this->view->errors = $errors;
+                        if(count($errors) > 0) {
+                            $listings = 1;//$this->listings->countListings(null, $this->user->getVendorId());
+                            if($listings == 1){
+                                $this->view->congrats = true;
+                            } else {
+                                $this->_redirect ('/provider/listings/');
+                            }
+                        }
                         else {
 							$data['additional'] = $data['price'];
 							$data['additional_after'] = 1;
@@ -1279,7 +1387,7 @@ class ProviderController extends Zend_Controller_Action
                             if($listings == 1){
                                 $this->view->congrats = true;
                             } else {
-                                $this->_redirect ('provider/listings/edit/'.$listing->id);
+                                $this->_redirect ('/provider/listings/');
                             }
                         }
                     }
@@ -1317,25 +1425,6 @@ class ProviderController extends Zend_Controller_Action
                     break;
             }
         }
-        
-        switch($this->_getParam('task')){
-            case 'default':
-                $listings = $this->listings->getListingsOf($this->user->getVendorId());  
-                $this->view->listings = $listings;
-                $this->view->title = "All Listings";
-                break;
-            case 'active':
-                $listings = $this->listings->getListingsOf($this->user->getVendorId(), 1);
-                $this->view->listings = $listings;
-                $this->view->title = "Active Listings";
-                break;
-            case 'inactive':
-                $listings = $this->listings->getListingsOf($this->user->getVendorId(), 0);  
-                $this->view->listings = $listings;
-                $this->view->title = "Inactive Listings";
-                break;
-            default: throw new Exception('Page not found');
-        }
     }
     
     public function listingsEditTask()
@@ -1357,14 +1446,19 @@ class ProviderController extends Zend_Controller_Action
             $tags       = $this->listings->getTagsFor($main_cat);
             $countries  = $this->places->getPlaces(2);
             
-            if($listing->country_id != 0)
-                $cities     = $this->places->getPlaces(3, $listing->country_id);
-            
-            if($listing->departure_country_id != 0)
-                $cities2    = $this->places->getPlaces (3, $listing->departure_country_id);
-            
-            if($listing->return_country_id != 0)
-                $cities3    = $this->places->getPlaces (3, $listing->return_country_id);
+            if($this->getRequest()->isPost()){
+                if(!empty($_POST['departure_country_id']))
+                    $cities2 = $this->places->getPlaces (3, $_POST['departure_country_id']);
+                if(!empty($_POST['return_country_id']))
+                    $cities3 = $this->places->getPlaces (3, $_POST['return_country_id']);
+            } else {
+                if($listing->country_id != 0)
+                    $cities  = $this->places->getPlaces(3, $listing->country_id);
+                if($listing->departure_country_id != 0)
+                    $cities2 = $this->places->getPlaces (3, $listing->departure_country_id);
+                if($listing->return_country_id != 0)
+                    $cities3 = $this->places->getPlaces (3, $listing->return_country_id);
+            }
             
             $schedules  = $this->listings->getSchedulesOf($listing->id);
             if($listing->main_type == 2 and count($schedules) == 0)
@@ -1583,8 +1677,8 @@ class ProviderController extends Zend_Controller_Action
         if($data['title'] == 'Untitle Listing' || empty($data['title']))
             $errors[] = 'Title cannot be empty';
         
-        if(empty($data['description']))
-            $errors[] = 'Description cannot be empty';
+        //if(empty($data['description']))
+            //$errors[] = 'Description cannot be empty';
         
         if($listing->main_type == 6) {
             if(empty($data['departure']))
@@ -1618,7 +1712,6 @@ class ProviderController extends Zend_Controller_Action
             //echo '<pre>'; print_r($data); echo '</pre>'; die;
             
             $listing->title = $data['title'];
-            $listing->description = $data['description'];
             
             /**
             if($data['country_id'] != $listing->country_id){
@@ -1656,7 +1749,7 @@ class ProviderController extends Zend_Controller_Action
                 
                 $listing->kids = $data['kids'];
                 $listing->kid_age_max = $data['kid_age_max'];
-                $listing->kid_age_min = $data['kid_age_min'];
+                $listing->kid_age_min = 1;
 
                 if(!isset($data['returnEqual']) or $data['returnEqual'] != 1){
                     $listing->return = $data['return'];
@@ -1756,6 +1849,8 @@ class ProviderController extends Zend_Controller_Action
 
             $listing->save();
             
+            setcookie('alert','Your changes have been saved');
+            
             $this->_redirect('provider/listings/edit/'.$listing->id);
         }
     }
@@ -1816,7 +1911,7 @@ class ProviderController extends Zend_Controller_Action
             $img = $this->listings->getPhoto($listing->id, $pic_id);
             if(is_null($img))
                 throw new Exception('Img not found');
-            
+
             if($data['main'] == $img->id){
                 $db = Zend_Db_Table::getDefaultAdapter();
                 $db->query('Update listing_pictures set main = 0 where listing_id = '.$listing->id);
@@ -1830,7 +1925,7 @@ class ProviderController extends Zend_Controller_Action
         }
         
         $this->view->activephoto = $img->id;
-        
+        setcookie('alert','Your changes have been saved');
         $this->_redirect('provider/listings/photos/'.$listing->id);
     }
     
@@ -1887,12 +1982,33 @@ class ProviderController extends Zend_Controller_Action
                         }
                     }
                 }
-                $details = $this->listings->getDetails($listing->id);
                 
+                if($listing->main_type == 5) {
+                    $listing_amenities = new Zend_Db_Table('listing_amenities');
+                    $listing_amenities->delete("listing_id = {$listing->id}");
+                    foreach($_POST['amm'] as $amm) {
+                        $row = $listing_amenities->fetchNew();
+                        $row->listing_id = $listing->id;
+                        $row->amenitie_id = $amm;
+                        $row->save();
+                    }
+                }
+                
+                $details = $this->listings->getDetails($listing->id);
+                setcookie('alert', 'Your changes have been saved');
                 $this->_redirect('provider/listings/details/'.$listing->id);
             }
             
             //$tabs    = $this->listings->getTabsOf($listing->id);
+            
+            if($listing->main_type == 5) 
+            {
+                $amenities = $this->listings->getDefaultGenAmenities();
+                $list_amenities = $this->listings->getGenAmenities($listing->id);
+                
+                $this->view->amenities = $amenities;
+                $this->view->list_amenities = $list_amenities;
+            }
             
             $this->view->listing = $listing;
             $this->view->details = $details;
@@ -1957,13 +2073,9 @@ class ProviderController extends Zend_Controller_Action
         
         if(!empty($data['question']) && !empty($data['answer'])){
             $this->listings->addFAQsTo($listing->id, $data);
-        } else {
-            if(empty($data['question']) && !empty($data['answer'])){
-                throw new Exception('Question cannot be empty');
-            } elseif(!empty($data['question']) && empty($data['answer'])) {
-                throw new Exception('answer cannot be empty');
-            }
         }
+        setcookie('alert', 'Your changes have been saved');
+        $this->_redirect('/provider/listings/faqs/'.$listing->id);
         
     }
     
@@ -2056,7 +2168,7 @@ class ProviderController extends Zend_Controller_Action
                 'num'   => date('j', $start_at),
                 'date'  => date('Y-m-d', $start_at)
             );
-            if($listing->main_type == 6){
+            
                 $schedules = $this->listings->getSchedulesOf($listing->id);
                 
                 foreach($schedules as $sch){
@@ -2069,7 +2181,7 @@ class ProviderController extends Zend_Controller_Action
                     $arr[$sch->id]['class'] = $aux3;
                 }
                 //echo '<pre>'; var_dump($arr); echo '</pre>'; die;
-            }
+            
             if(!in_array($arr, $days)){
                 $days[] = $arr;
             }
@@ -2077,10 +2189,10 @@ class ProviderController extends Zend_Controller_Action
             //echo $start_at.'<br>';
             //echo date('Y-m-d', $start_at).'<br>';
         }
-        if($listing->main_type == 6){
-            $schedules = $this->listings->getSchedulesOf($listing->id);
-            $this->view->schedules = $schedules;
-        }
+       
+        $schedules = $this->listings->getSchedulesOf($listing->id);
+        $this->view->schedules = $schedules;
+
         
         $this->view->prevmonth    = $p_months[$month];
         $this->view->prevmonth_lb = $labels[$p_months[$month]];
@@ -2104,6 +2216,8 @@ class ProviderController extends Zend_Controller_Action
             throw new Exception('Form id violated');
         
         $this->listings->saveDayInCalendar($listing, $data);
+        setcookie('alert', 'Your changes have been saved');
+        $this->_redirect('/provider/listings/calendar/'.$listing->id);
     }
     
     public function listingsPricingTask()
@@ -2212,6 +2326,8 @@ class ProviderController extends Zend_Controller_Action
             $season->ending = date('Y-m-d', strtotime($data['ending']));
             $season->save();
             
+            setcookie('alert', 'Your changes have been saved');
+            setcookie('season','active');
             $this->_redirect('provider/listings/pricing/'.$listing->id);
         }
     }
@@ -2255,6 +2371,8 @@ class ProviderController extends Zend_Controller_Action
             $season->ending = date('Y-m-d', strtotime($data['ending']));
             $season->save();
             
+            setcookie('alert', 'Your changes have been saved');
+            setcookie('season','active');
             $this->_redirect('provider/listings/pricing/'.$listing->id);
         }
     }
@@ -2280,6 +2398,8 @@ class ProviderController extends Zend_Controller_Action
 
         $season->delete();
         
+        setcookie('alert', 'Your changes have been saved');
+        setcookie('season','active');
         $this->_redirect('provider/listings/pricing/'.$listing->id);
     }
     
@@ -2321,6 +2441,13 @@ class ProviderController extends Zend_Controller_Action
         }
         $this->listings->updatePricesOf($listing, $data);
         
+        $listing->policy = $data['policy'];
+        $listing->save();
+        
+        setcookie('alert', 'Your changes have been saved');
+        if($data['s'] == 1){
+            setcookie('season','active');
+        }
         $this->_redirect('provider/listings/pricing/'.$listing->id);
     }
     
@@ -2413,8 +2540,7 @@ class ProviderController extends Zend_Controller_Action
                 $template = 'account-password';
                 break;
             case 'payments':
-                $this->accountPaymentsTask();
-                $template = 'account-payments';
+                $template = $this->accountPaymentsTask();
                 break;
             case 'notifications':
                 $this->accountNotificationsTask();
@@ -2431,14 +2557,45 @@ class ProviderController extends Zend_Controller_Action
     {
         if($this->getRequest()->isPost()){
             try {
-                $this->accountDefaultPostHandler();
-                $this->view->successmessage = 'Your changes has been applied';}
+                switch($_POST['_task']){
+                    case md5('add_contact'):
+                        //var_dump($_POST); die;
+                        $data = $_POST;
+                        $this->user->addContact($data);
+                        setcookie('alert','Your changes have been saved');
+                        $this->_redirect('/provider/account');
+                        break;
+                    case md5('update_contact'):
+                        $data = $_POST;
+                        $id = $data['id'];
+                        unset($data['id']);
+                        $this->user->updateContact($id, $data);
+                        setcookie('alert','Your changes have been saved');
+                        $this->_redirect('/provider/account');
+                        break;
+                    case md5('update_im'):
+                        $data = $_POST;
+                        //var_dump($data); die;
+                        $this->accountUpdetaIMPostHandler($data);
+                        setcookie('alert','Your changes have been saved');
+                        $this->_redirect('/provider/account');                        
+                        break;
+                    default:
+                        $this->accountDefaultPostHandler();
+                        setcookie('alert','Your changes have been saved');
+                        $this->_redirect('/provider/account');
+                        break;
+                }}
             catch(Exception $e){
                 $this->view->errormessage = $e->getMessage();}
-            
-            $this->view->user = $this->user->getData(true);
-            $this->view->vendor = $this->user->getVendorData(true);
         }
+        
+        $this->view->user = $this->user->getData(true);
+        $this->view->vendor = $this->user->getVendorData(true);
+        $this->view->contacts = $this->user->getContacts();
+        
+        $this->view->ims = $this->user->getIMsConfig();
+        
         $countries = $this->places->getPlaces(2);
         $this->view->countries = $countries;
     }
@@ -2473,7 +2630,8 @@ class ProviderController extends Zend_Controller_Action
         //    if(!$this->accounts->validateUsername($data['username']))
         //        throw new Exception ('This username its being user for another user');
         
-        
+        $this->user->updateContacts($data['contacts']);           
+            
         $vendor->name = $data['name'];
         $vendor->email = $data['email'];
         $vendor->place_id = $data['place_id'];
@@ -2485,6 +2643,7 @@ class ProviderController extends Zend_Controller_Action
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->phone = $data['phone'];
+        $user->lang  = $data['lang'];
         
         $vendor->image = $user->image;
         
@@ -2501,6 +2660,29 @@ class ProviderController extends Zend_Controller_Action
             throw new Exception('vids From Corrupted');
         if($data['user_token'] != $this->user->getToken())
             throw new Exception('user_token From Corrupted');
+    }
+    
+    private function accountUpdetaIMPostHandler($data)
+    {
+        $invite = false;
+        if($data['id'] == 'new') {
+            $accounts = new Zend_Db_Table('livechat_accounts');
+            $account = $accounts->fetchNew();
+            $account->user_id = $this->user->getId();
+            $account->email   = $data['email'];
+            $account->service = $data['service'];
+            $account->save();
+            
+            $invite = true;
+        } else {
+            $account = $this->user->getIMsConfig();
+            if($account->email != $data['email']) {
+                $invite = true;
+                $account->email = $data['email'];
+                $account->service = $data['service'];
+                $account->save();
+            }
+        }
     }
     
     public function accountPasswordTask()
@@ -2553,7 +2735,122 @@ class ProviderController extends Zend_Controller_Action
 
     public function accountPaymentsTask()
     {
+        switch($this->_getParam('id','default')) {
+            case 'default':
+                $user = $this->user->getData(true);
+                
+                if($this->getRequest()->isPost())
+                {
+                    $id = $_POST['account'];
+                    $account = $this->user->getBankAccount($id);
+                    $account->delete();
+                    
+                    setcookie('alert', 'The bank account has been deleted');
+                    $this->_redirect('/provider/account/payments');
+                }
+
+                $accounts = $this->user->getBankAccounts();
+                
+                $this->view->banks = $this->_getBanks($user->country_id, true);
+
+                $this->view->user         = $user;
+                $this->view->accounts     = $accounts;
+                
+                return 'account-payments';
+                break;
+            case 'new':
+                return $this->addPaymentAccountTask();
+                break;
+            default:
+                return $this->editPaymentsAccountTask();
+                break;
+        }
+    }
+    
+    public function addPaymentAccountTask()
+    {
+        if($this->getRequest()->isPost())
+                $this->addPaymentsAccountPostHandler();
         
+        $user = $this->user->getData(true);
+        
+        $this->view->user  = $user;
+        $this->view->banks = $this->_getBanks($user->country_id);
+        
+        return 'account-newpayment';
+    }
+    
+    public function addPaymentsAccountPostHandler()
+    {   
+        $bankaccounts = new Zend_Db_Table('bankaccounts');
+        $account = $bankaccounts->fetchNew();
+        $account->bank_id   = $_POST['bank_id'];
+        $account->legalid   = $_POST['legalid'];
+        $account->holder    = $_POST['holder'];
+        $account->number    = $_POST['number'];
+        $account->vendor_id = $this->user->getId();
+        $account->created   = date('Y-m-d H:i:s');
+        $account->updated   = date('Y-m-d H:i:s');
+        
+        $account->save();
+        
+        setcookie('alert', 'The new bank account has been added');
+        $this->_redirect('/provider/account/payments');
+    }
+    
+    public function editPaymentsAccountTask()
+    {
+        if($this->getRequest()->isPost())
+                $this->editPaymentsAccountPostHandler();
+        
+        $user = $this->user->getData(true);
+        
+        $id = $this->_getParam('id');
+        $account = $this->user->getBankAccount($id);
+        
+        $this->view->user    = $user;
+        $this->view->account = $account;
+        $this->view->banks   = $this->_getBanks($user->country_id);
+        
+        return 'account-editpayment';
+    }
+    
+    public function editPaymentsAccountPostHandler()
+    {
+        $id = $this->_getParam('id');
+        $account = $this->user->getBankAccount($id);
+        $account->bank_id   = $_POST['bank_id'];
+        $account->legalid   = $_POST['legalid'];
+        $account->holder    = $_POST['holder'];
+        $account->number    = $_POST['number'];
+        $account->updated   = date('Y-m-d H:i:s');
+        
+        $account->save();
+        
+        setcookie('alert', 'The bank account has been updated');
+        $this->_redirect('/provider/account/payments');
+    }
+    
+    private function _getBanks($country, $assoc = false) 
+    {
+        if($assoc) {
+            $db = Zend_Db_Table::getDefaultAdapter();
+            $select = $db->select();
+            $select->from('banks');
+            $select->where('country_id = ?', $country);
+            $select->order('name ASC');
+            
+            $banks = $db->fetchAssoc($select);
+        } else {
+            $accounts = new Zend_Db_Table('banks');
+            $select = $accounts->select();
+            $select->where('country_id = ?', $country);
+            $select->order('name ASC');
+            
+            $banks = $accounts->fetchAll($select);
+        }
+        
+        return $banks;
     }
     
     public function accountNotificationsTask()
@@ -2568,7 +2865,6 @@ class ProviderController extends Zend_Controller_Action
             } catch(Exception $e){
                 $this->view->errorsmessage  = 'Something went wrong';
             }
-            
             
         $usersettings  = $this->user->getNotificationsSettings();
         //echo '<pre>'; var_dump($notifications); echo '</pre>'; die;
@@ -2621,7 +2917,8 @@ class ProviderController extends Zend_Controller_Action
     
     public function questionsDefaultTask()
     {
-        
+        $listings = $this->listings->getListingsOf($this->user->getVendorId());
+        $this->view->listings = $listings;
     }
     
     public function questionsViewTask()
@@ -2654,12 +2951,22 @@ class ProviderController extends Zend_Controller_Action
     
     public function reviewsDefaultTask()
     {
-        
+        $listings = $this->listings->getReviewedListings($this->user->getVendorId());
+        $this->view->listings = $listings;
     }
     
     public function reviewsViewTask()
     {
-        
+        $id = $this->_getParam('id');
+        if($this->isValidId($id)){
+            $listing = $this->listings->getListing($id);
+            $service = new WS_ReviewsService();
+            $reviews = $service->getReviewsFor($listing->id);
+            
+            $this->view->reviews = $reviews;
+            
+            $service->markReviewsAsRead($listing->id);
+        }
     }
     
     
@@ -2686,6 +2993,10 @@ class ProviderController extends Zend_Controller_Action
                 $this->transactionsTask();
                 $template = 'reservations-transactions';
                 break;
+            case 'view':
+                $this->viewReservationTask();
+                $template = 'reservations-view';
+                break;
             default:
                 throw new Exception(); break;
         }
@@ -2711,6 +3022,23 @@ class ProviderController extends Zend_Controller_Action
         $this->view->reservations = $_reservs;
     }
     
+    public function viewReservationTask()
+    {
+        $id = $this->_getParam('id');
+        $reservation = $this->reservations->get($id, $this->user->getVendorId(), true);
+        $listing = $this->listings->getListing($reservation->listing_id);
+
+        $this->transactions = new Model_Transactions();
+        $select = $this->transactions->select();
+        $select->where('id = ?', $reservation->transaction_id);
+        $transaction = $this->transactions->fetchRow($select);
+
+        $this->view->transaction = $transaction;
+        $this->view->listing     = $listing;
+        $this->view->user        = $this->user->getData();
+        $this->view->reservation = $reservation;
+    }
+    
     public function transactionsTask()
     {
         
@@ -2721,12 +3049,16 @@ class ProviderController extends Zend_Controller_Action
     
     public function signupAction()
     {
+        $auth = Zend_Auth::getInstance();
+        if($auth->hasIdentity())
+                $this->_redirect ('/logout');
+        
         if($this->getRequest()->isPost())
         {
             $errors = array();
             //var_dump($_POST); die;
             if(empty($_POST['name']))
-                $errors[] = 'Name cannot be empty';
+                $errors[] = 'Company name cannot be empty';
                 
             if(empty($_POST['email']))
                 $errors[] = 'Email cannot be empty';
@@ -2748,22 +3080,22 @@ class ProviderController extends Zend_Controller_Action
                 
 
             $email = new Zend_Validate_EmailAddress();
-            if(!$email->isValid($_POST['email']))
+            if(!$email->isValid(trim($_POST['email'])))
                 $errors[] = 'Invalid Emil Address';
             
-            if(!Zend_Uri::check($_POST['website']))
+            if(!Zend_Uri::check(trim($_POST['website'])))
                 $errors[] = 'Invalid Website try adding http://';
             
             if(count($errors) > 0)
                 $this->view->errors = $errors;
             else {
                 $this->accounts = new WS_AccountService();
-                if($this->accounts->validateEmail($_POST['email'])){
+                if($this->accounts->validateEmail(trim($_POST['email']))){
                     $this->accounts->signupVendor($_POST);
                     $this->_redirect('/provider/listings/new');
                 }
 
-                $this->_helper->flashMessenger('Seem like you already have an account');
+                $this->_helper->flashMessenger('Seems like you already have an account.');
                 $this->_redirect('/login');
             }
         }
@@ -2771,7 +3103,97 @@ class ProviderController extends Zend_Controller_Action
         $this->view->countries = $countries;
     }
     
-    public function cancellationPoliciesAction(){}
+    public function withdrawAction()
+    {
+        
+    }
     
-    public function offersAction(){}
+    public function cancellationPoliciesAction()
+    {
+        $template = '';
+        switch($this->_getParam('task')){
+            case 'activities':
+                $template = 'cancellation-policiesAct';
+                break;
+            case 'hotels':
+                $template = 'cancellation-policiesHot';
+                break;
+            default:
+                throw new Exception('Page not found');
+                break;
+        }
+        $this->render($template);
+    }
+    
+    public function offersAction()
+    {
+        switch($this->_getParam('task')){
+            case 'default':
+                $db = Zend_Db_Table::getDefaultAdapter();
+                $select = $db->select();
+                $select->from('itineraries',array('id','country_id','start','end','adults'));
+                $select->join('itinerary_cities', 'itinerary_cities.itinerary_id = itineraries.id', array('city_id'));
+                $select->join('users','itineraries.user_id = users.id', array('name','image'));
+                $select->where('itinerary_cities.city_id = ?', '25');
+                $result = $db->fetchAll($select, array(), 5);
+
+                $this->view->offers = $result;
+
+                //var_dump($result); die;
+                $listings = $this->listings->getListingsOf2($this->user->getVendorId());
+                $this->view->listings = $listings;
+                break;
+            case 'new':
+                if($this->getRequest()->isPost())
+                {    
+                    if($_POST['_task'] == md5('create')){
+                        $offers = new Zend_Db_Table('offers');
+                        $offer  = $offers->fetchNew();
+                        $offer->listing_id = $_POST['listing_id'];
+                        $offer->room       = (!empty($_POST['room']) and $_POST['room'] != 'null') ? $_POST['room'] : null;
+                        $offer->price      = $_POST['price'];
+                        $offer->start      = date('Y-m-d', strtotime($_POST['start']));
+                        $offer->end        = date('Y-m-d', strtotime($_POST['end']));
+                        $offer->regular    = $_POST['regular'];
+                        $offer->people     = $_POST['people'];
+                        $offer->people_ammount = $_POST['people_ammount'];
+                        $offer->created    = date('Y-m-d H:i:s');
+                        
+                        $offer->save();
+                        
+                        $this->_redirect('/en-US/provider/offers?success');
+                    } else {
+                        $ids = $_POST['listing'];
+                        if($this->isValidId($ids))
+                        {
+                            $listing = $this->listings->getListing($ids, $this->user->getVendorId());
+                            if(is_null($listing))
+                                $this->_redirect('/provider/offers');
+
+                            $this->view->listing = $listing;
+
+                            $price = $this->listings->getBasicPrice($listing->id);
+                            $this->view->price = $price;
+
+                            if($listing->main_type == 6)
+                                $this->render('offers-newact');
+                            else {
+                                $rooms = $this->listings->getSchedulesOf($listing->id);
+                                $this->view->rooms = $rooms;
+                                $this->render('offers-newhot');
+                            }
+                        } 
+                        else 
+                            $this->_redirect('/provider/offers');
+                    }
+                }
+                else 
+                {
+                    $this->_redirect('/provider/offers');
+                }
+                
+                break;
+            default: throw new Exception('Page Not Found');
+        }
+    }
 }

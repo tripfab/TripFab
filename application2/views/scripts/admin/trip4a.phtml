@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<title><?= $this->trip->title ?> - Admin | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+        <link type="text/css" rel="stylesheet" href="/css5/reset.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css5/all.css?v=<?= $this->cssVC ?>" />
+		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+  		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />
+  		<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+		<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+    	<script type="text/javascript" src="/js2/admin/traveller-view.js?v=<?= $this->cssVC ?>"></script>
+			<script>
+				$(document).ready(function() {
+					$('a.lbc').fancybox({
+						padding: 0,
+						overlayColor: '#FFF',
+						overlayOpacity: '0.7',
+						showCloseButton: 'false',
+					});
+					
+            		$("#report_tabs").tabs();
+					panel(<?php echo $this->user->id?>, 1, 'partner');
+					
+					$('#activate .btn-1').click(function(){
+						$id = $(this).parents('form').find('input[name=tripid]').val();
+						$action = 1;
+						$.ajax({
+							url:'/ajax/tripstatus',
+							type:'post',
+							data: {
+								id:$id,
+								act:$action,
+							},
+							success:function(res){
+								if(res == 'success') {
+									$.cookie('alert','Changes saved');
+									window.location.reload();
+								} else {
+									showError('Something went wrong');
+								}
+							},
+							error:function(){
+								showError('Something went wrong');
+							}
+						});
+					});
+					
+					$('#deactivate .btn-1').click(function(){
+						$id = $(this).parents('form').find('input[name=tripid]').val();
+						$action = 0;
+						$.ajax({
+							url:'/ajax/tripstatus',
+							type:'post',
+							data: {
+								id:$id,
+								act:$action,
+							},
+							success:function(res){
+								if(res == 'success') {
+									$.cookie('alert','Changes saved');
+									window.location.reload();
+								} else {
+									showError('Something went wrong');
+								}
+							},
+							error:function(){
+								showError('Something went wrong');
+							}
+						});
+					});
+				});
+			</script>
+		</head>
+		<body>
+			<div class="w1">
+    		<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
+			
+			<div class="w3_admin">
+				<div class="sub_menu">
+					<h2>
+					<?php if($this->trip->active == 1): ?>
+                    <span class="lstngActv">Active</span>
+                    <?php else: ?>
+                    <span class="lstngInct">Inactive</span>
+                    <?php endif ?>
+                    Create. <span>New Trip.</span></h2>
+					<a class="btn-10" href="/admin/trips/preview/<?php echo $this->trip->id?>" target="_blank">Trip Preview</a>	
+				</div><!--SUB_MENU-->
+            </div><!--W3-->
+				
+				<div id="trips" class="listing-wrapper wrapper">
+					<div class="listing-content">
+						<div class="left">
+							<ul>
+								<li><a href="<?php echo $this->url(array('page'=>1))?>">General Information</a></li>
+								<li><a href="<?php echo $this->url(array('page'=>2))?>">Trip Facts</a></li>
+								<li><a href="<?php echo $this->url(array('page'=>3))?>">Photos</a></li>
+								<li><a href="<?php echo $this->url(array('page'=>4))?>">Trip Details</a></li>
+								<li><a href="<?php echo $this->url(array('page'=>5))?>">Itinerary</a></li>
+							</ul>
+						</div>
+						<!-- closes left -->
+						<div class="right">
+							<div class="lstng-details">
+								<h3 class="title">Edit Itinerary</h3>
+								<div class="block">
+									<div class="item-ttl">Schedule</div>
+									<div class="item">
+										<p class="descrip">
+											<strong>Name</strong>
+											Your company name
+										</p>
+										<select>
+											<option>Day 2</option>
+										</select>
+									</div><!---ITEM-->
+									
+									<div class="item">
+										<p class="descrip">
+											<strong>Duration</strong>
+											Select how many days long
+										</p>
+										<select>
+											<option>Concludes Same Day</option>
+										</select>
+									</div><!---ITEM-->
+									
+									<div class="item">
+										<p class="descrip">
+											<strong>Starting Hour</strong>
+											Select the hour activity starts
+										</p>
+										<select class="time">
+											<option>AM</option>
+										</select>
+										<select class="hour">
+											<option>08:00</option>
+										</select>
+									</div><!---ITEM-->
+									
+									<div class="item">
+										<p class="descrip">
+											<strong>Ending Hour</strong>
+											Select the hour activity ends
+										</p>
+										<select class="time">
+											<option>AM</option>
+										</select>
+										<select class="hour">
+											<option>10:00</option>
+										</select>
+									</div><!---ITEM-->
+									
+									<div class="item last">
+										<p class="descrip"><input type="checkbox" value="" />Show this activity in the main page of the trip</p>
+										<select class="time">
+											<option>AM</option>
+										</select>
+										<select class="hour">
+											<option>10:00</option>
+										</select>
+									</div><!---ITEM-->
+									
+								</div><!--BLOCK-->
+								
+								<div class="block">
+									<h3 class="title">Highlights</h3>
+									<div class="item">
+										<textarea cols="" rows=""></textarea>
+										<textarea cols="" rows=""></textarea>
+										<textarea cols="" rows=""></textarea>
+										<div class="delete"><a href=""></a><textarea cols="" rows=""></textarea></div>
+										<div class="delete"><a href=""></a><textarea cols="" rows=""></textarea></div>
+										<a href="" class="add">Add New Highlight</a>
+									</div><!--ITEM-->
+								</div>
+							</div>
+							<!-- closes lstng-details -->
+							<div class="foot">
+								<input type="submit" class="btn-1" value="Save Changes" />
+							</div>
+							<!-- closes foot -->
+						</div>
+						<!-- closes right -->
+					</div>
+					<!-- closes listing-content -->
+				</div>
+					
+			<div class="footer black">
+				<div class="wrapper">
+					<a href="" class="logo">Tripfab</a>
+				</div><!--WRAPPER-->
+			</div>
+			<!-- closes footer -->
+		</div>
+		<!-- closes w1 -->
+	</body>
+</html>

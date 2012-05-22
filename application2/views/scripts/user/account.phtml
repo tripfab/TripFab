@@ -3,100 +3,69 @@
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->user->name ?> : Profile | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/calendar/jquery-ui-1.8.16.custom.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
-    <script type="text/javascript" src="/uploadify/swfobject.js"></script>
-	<script type="text/javascript" src="/uploadify/jquery.uploadify.v2.1.4.min.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
-    <script type="text/javascript">
-		$(document).ready(function() {
-			$('#file_upload').uploadify({
-				'uploader' 	: '/uploadify/uploadify.swf',
-				'script' 	: '/phpscripts/uploadUserPicture.php',
-				'cancelImg' : '/uploadify/cancel.png',
-				'folder' 	: '/uploads',
-				'buttonImg' : '/images2/file-1.png',
-				'height' 	: 27,
-				'width' 	: 92,
-				'auto' 		: true,
-				'fileExt'	: '*.jpg;*.gif;*.png',
-				'onError':function(e,a,c,d){
-					console.log(e);
-					console.log(a);
-					console.log(c);
-					console.log(d);
-				},
-				'onComplete':function(a,b,c,image){
-					console.log(a);
-					console.log(b);
-					console.log(c);
-					console.log(image);
-					if(image != 'error'){
-						$('img#userimage68').attr('width',68);
-						$('img#userimage68').attr('height',68);
-						$('img#userimage68').attr('src',image);
-					}
-				},
-				'scriptData':{
-					'userids':<?= $this->user->id ?>,
-					'formtoken':'<?= $this->user->token ?>',
-					'usertoken':'<?= md5($this->user->token.'change_picture') ?>',
-				},
-			});
-			//$('input').ToggleInputValue();
-			$('form select').jqTransSelect();
+    <title><?= $this->user->name ?> - Profile | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/calendar/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <style type="text/css">
+	#file_upload3 .qq-upload-button {
+		width:92px;
+		height:27px;
+		background:url(/images2/file-1.png);
+		text-indent:-9999px;
+		float:right;}
+	#qqPhotoQueue li {
+		clear:both;
+		list-style:none;}
+		#qqPhotoQueue li .qq-upload-file {
+			display:none;}
+		#qqPhotoQueue li .qq-upload-progress {
+			height:15px;
+			background:#eee;
+			width:100%;
+			display:block;
+			position:relative;}
+			#qqPhotoQueue li .qq-upload-progress .qq-upload-progress-range {
+				position:absolute;
+				top:0; left:0;
+				height:15px;
+				background:#9CF;}
+		#qqPhotoQueue li.qq-upload-fail .qq-upload-progress {
+			background:#F00;}
+		#qqPhotoQueue li .qq-upload-size {
+			display:none !important;}
+		#qqPhotoQueue li .qq-upload-failed-text {
+			display:none;}
 			
-			$('input.calendar').datepicker({
-                dateFormat: 'MM d, yy',
-                defaultDate:$(this).val(),
-            });
-		});
-    </script>
+	</style>
 </head>
 <body>
-<div class="w1">
+<div class="w1 profile">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
     <div class="w2">
         <div class="wrapper user-backend">
         	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Account','parentActive'=>'Profile')); ?>
+            <h2 class="title">Profile</h2>
             <div class="vendor-profile">
                 <form id="user_account" method="post" action="">
                     <?php if($this->errormessage): ?>
-                    <div class="errormessage">
-                        <p><?= $this->errormessage ?></p>
-                    </div>
+                    <script type="text/javascript">
+					showError("<?= $this->errormessage ?>");
+					</script>
                     <?php endif ?>
                     <?php if($this->successmessage): ?>
-                    <div class="green-message">
-                        <div class="wrapper">
-                            <img src="/images/ico-115.png" alt="" /> Your changes have been saved!
-                        </div><!-- closes wrapper -->
-                    </div><!-- closes green-message -->
+                    <script type="text/javascript">
+					showAlert("Your changes have been saved!");
+					</script>
                     <?php endif ?>
-                    <div class="profile-items">							
-                        <div class="item-wrppr">
-                            <div class="item-ttl">
-                                Profile Picture
-                            </div><!-- closes item ttl -->
-                            <div class="item last">
-                                <div class="picture">
-                                	<?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
-                                	<?= $this->thumbnail(68,$image,'','1:1'); ?>
-                                    <input type="file" name="file_upload" id="file_upload"/>
-                                </div>
-                                <h4>Picture Requirements</h4>
-                                <span>Should be square, preferably 100x100 pixels, <br />and in JPEG, GIF, or PNG format.</span>
-                            </div><!-- closes item -->
-                            <div class="clear"></div>
-                        </div><!-- closes item-wrppr -->
+                    <div class="profile-items">	
                         <div class="item-wrppr">
                             <div class="item-ttl">
                                 Required Information
@@ -141,22 +110,28 @@
                                 <span>The country where you live</span>
                             </div><!-- closes item -->
                             <div class="clear"></div>									
+                        </div><!-- closes item-wrppr -->						
+                        <div class="item-wrppr">
+                            <div class="item-ttl">
+                                Profile Picture
+                            </div><!-- closes item ttl -->
+                            <div class="item last">
+                                <div class="picture">
+                                	<?php $image = (!empty($this->user->image)) ? $this->user->image : '/images/default-profile.gif' ?>
+                                	<?= $this->thumbnail(68,$image,'','1:1'); ?>
+                                    <div id="file_upload3"></div>
+                                    <div id="qqPhotoQueue">
+                                    </div>
+                                </div>
+                                <h4>Picture Requirements</h4>
+                                <span>Should be square, preferably 100x100 pixels, <br />and in JPEG, GIF, or PNG format.</span>
+                            </div><!-- closes item -->
+                            <div class="clear"></div>
                         </div><!-- closes item-wrppr -->
                         <div class="item-wrppr">
                             <div class="item-ttl">
                                 Optional Information
                             </div><!-- closes item ttl -->
-                            <div class="item">
-                                <select name="languages">
-	                                <option value="">Select one</option>
-                                    <?php $selected = ($this->user->languages == 'English') ? 'selected="selected"' : '' ?>
-                                    <option <?= $selected ?> value="English">English</option>
-                                    <?php $selected = ($this->user->languages == 'Spanish') ? 'selected="selected"' : '' ?>
-                                    <option <?= $selected ?> value="Spanish">Spanish</option>
-                                </select>
-                                <h4>Language</h4>
-                                <span>Select the language of your choice</span>
-                            </div><!-- closes item -->
                             <div class="item">
                                 <select name="gender">
                                 	<option value="">Select</option>
@@ -190,6 +165,22 @@
                             </div><!-- closes item -->
                             <div class="clear"></div>									
                         </div><!-- closes item-wrppr -->
+                        <div class="item-wrppr">
+                            <div class="item-ttl">
+                                Language
+                            </div><!-- closes item ttl -->
+                            <div class="item">
+                                <select name="languages">
+	                                <option value="">Select one</option>
+                                    <?php $selected = ($this->user->languages == 'English') ? 'selected="selected"' : '' ?>
+                                    <option <?= $selected ?> value="English">English</option>
+                                    <?php $selected = ($this->user->languages == 'Spanish') ? 'selected="selected"' : '' ?>
+                                    <option <?= $selected ?> value="Spanish">Spanish</option>
+                                </select>
+                                <h4>Choose Language</h4>
+                                <span>Select the language of your choice</span>
+                            </div><!-- closes item -->
+                        </div>
                     </div><!-- closes profile-items -->
                     <div class="foot">
                         <input type="submit" class="btn-1" value="Save Changes" />
@@ -204,6 +195,42 @@
         </div><!-- closes user-backend -->
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
-</div><!-- closes w1 -->	
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+	
+		var uploader = new qq.FileUploader({
+			element: document.getElementById('file_upload3'),
+			listElement:document.getElementById('qqPhotoQueue'),
+			action: '/phpscripts/uploadUserPicture.php',
+			multiple:false,  
+			fileTemplate: '<li>' +
+							  '<span class="qq-upload-file"></span>' +
+							  '<span class="qq-upload-progress"><span class="qq-upload-progress-range"></span></span>' +
+							  '<span class="qq-upload-size"></span>' +
+							  '<span class="qq-upload-spinner"></span>' +
+							  '<a class="qq-upload-cancel" href="#">Cancel</a>' +
+							  '<span class="qq-upload-failed-text">Failed</span>' +
+						  '</li>',    
+			params:{
+				'userids':<?= $this->user->id ?>,
+				'formtoken':'<?= $this->user->token ?>',
+				'usertoken':'<?= md5($this->user->token.'change_picture') ?>'		
+			},
+			allowedExtensions:['jpg', 'jpeg', 'png', 'gif'],
+			sizeLimit:2097152,
+			onProgress: function(id, fileName, loaded, total){
+				var _w = loaded * 100 / total; _w = _w + "%";
+				$('#qqPhotoQueueUL li:eq('+id+') .qq-upload-progress-range').css({
+					width:_w
+				});
+			},
+			showMessage:function(err) {
+				showError(err);
+			}
+		}); 
+	});
+</script>	
 </body>
 </html>

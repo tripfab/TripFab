@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->trip->title ?>, Reservation Invoice | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    
+</head>
+<body>
+<div class="w1">
+	<?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>
+    <div class="w2">
+        <div class="main wrapper">
+            <div id="confirmation"> 
+            	<img src="https://static.tripfab.com/images2/confirmation-img.png" width="" height="" alt="" />
+                <div class="wrap"> <span class="stamp"></span>
+                    <h2>Thank You <?= $this->user->name ?></h2>
+                    <h3>We wish you the best trip ever!</h3>
+                    <a href="#" class="btn-10 js-print">Print your Reservation</a>
+                    <div class="warning">
+                        <p><strong>We'll confirm your reservations in the next 24 hours</strong> 
+                        You will only be charged if the partner accepts your request. If our partner declines 
+                        or does not respond, no charge is made.</p>
+                    </div><!--WARNING-->
+                    <div class="overview"> 
+                    	<span class="name"><?= $this->trip->title ?></span> 
+                    </div><!--OVERVIEW-->
+                    
+                    <div class="details">
+                        <h4>Payment</h4>
+                        <ul>
+                            <li><strong>Credit Card</strong><?= $this->transaction->method ?></li>
+                        </ul>
+                    </div>
+                    <!--DETAILS-->
+                    
+                    <div class="details">
+                        <h4>Reservations Dettails</h4>
+                        <ul>
+                            <li><strong>Trip Starts </strong> <?= date('F jS, Y', strtotime($this->trip->start)) ?></li>
+                            <li><strong>Trips Ends </strong> <?= date('F jS, Y', strtotime($this->trip->end)) ?></li>
+                            <li><strong>Trip Duration</strong> <?= $this->trip->days ?> Days</li>
+                        </ul>
+                    </div><!--DETAILS-->
+                    
+                    <div class="details">
+                        <h4>Total Paid</h4>
+                        <dl>
+                        	<?php $total = 0 ?>
+                        	<?php foreach($this->listings as $list): ?>
+                            <dt><?= $list->title ?></dt>
+                            <dd>$<?= ($list->ammount) ? $list->ammount : '0.00' ?></dd>
+                            <?php $total = $total + $list->ammount ?>
+                            <?php endforeach ?>
+                            <dt class="total">Total</dt>
+                            <dd class="total">$<?= $this->formatnumber($total) ?></dd>
+                        </dl>
+                    </div><!--DETAILS-->
+                    
+                    <div class="bottom">
+                        <p><strong>Questions?</strong> Contact service@tripfab.com </p>
+                        <a href="/user/reservations/pending">Reservations Details</a> <a href="#" class="js-print">Print Reservation</a> 
+                    </div><!--BOTTOM-->                     
+                </div><!--WRAP--> 
+            </div><!--CONFIRMATION--> 
+        </div><!-- closes main --> 
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+$(function(){
+	$('.js-print').click(function(){
+		window.print();
+		return false;
+	});
+});
+</script>
+<!-- Google Code for Itinerary Order Conversion Page -->
+<img height="1" width="1" alt="" src="https://www.googleadservices.com/pagead/conversion/956485843/imp.gif?label=WmYFCJ2g8gMQ06GLyAM&amp;guid=ON&amp;script=0"/>
+</body>
+</html>

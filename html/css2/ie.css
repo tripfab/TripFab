@@ -1,0 +1,268 @@
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus, textarea:hover, input[type="text"]:hover, input[type="password"]:hover {
+	border-color: 1px solid #CCC;
+}
+/*HOME---------------------------------------------------------------------*/
+#newsletter input.btn-1 {
+	width: 100px;
+}
+
+#wrapper-top .main h2 {
+	filter: progid:DXImageTransform.Microsoft.Chroma(Color=#000000)
+		    progid:DXImageTransform.Microsoft.DropShadow(OffX=0, OffY=1, Color=#000000);
+}
+#search-box {
+	border-color: #FFFFFF;
+	
+	padding-bottom: 0;
+}
+#search-box input[type="text"] {
+	text-shadow: none;
+	filter: none;
+	text-shadow: none !important;
+	filter: none;
+}
+#wrapper-top .main h4 span {
+	filter: progid:DXImageTransform.Microsoft.Chroma(Color=#000000)
+		    progid:DXImageTransform.Microsoft.DropShadow(OffX=0, OffY=2, Color=#3D3D3D);
+}
+/*END HOME-----------------------------------------------------------------*/
+/*HEADER-------------------------------------------------------------------*/
+#header {
+	position: relative;
+	z-index: 0;
+}
+#header .header-search input {
+	position: relative;
+	z-index: 1;
+}
+#header .header-search input:hover{
+	background: #777777 url(https://static.tripfab.com/images2/ico-1.png) no-repeat 100% 50% ;
+	
+}
+/*END HEADER---------------------------------------------------------------*/
+/*RESULT PAGE--------------------------------------------------------------*/
+#search_result ul.cat-menu {
+	position: relative;
+	z-index: 0;
+}
+#search_result {
+	position: relative;
+	z-index: 0;
+}
+#search_result ul.cat-menu li a {
+	text-shadow: none;
+	fiter: dropshadow(none);
+}
+.header-login .dd.login .facebook {
+	padding-bottom: 10px;
+}
+
+/*END RESULT PAGE----------------------------------------------------------*/
+
+
+.lb-forgot .bottom {
+	position: relative;
+	z-index: 0;
+}
+.small-wrapper {
+	margin-bottom: 30px;
+}
+.small-wrapper .sign-box {
+	position: relative;
+	top: 20px;
+	margin: 0;
+}
+.small-wrapper .sign-box .foot {
+	padding-top: 10px;
+}
+.small-wrapper .sign-box.last {
+	margin: 20px 0;
+}
+.sign-box > p {
+	line-height: 115px;
+}
+
+.trip-itinerary .overview {
+	padding-bottom: 15px;
+}
+#browse_search .time-stamp-2 {
+	background: url(https://static.tripfab.com/images2/aw_02.png) no-repeat;
+	width: 74px;
+	height: 18px;
+	top: 10px;
+	left: 0;
+	text-align: left;
+	margin: 0;
+	display: block;
+	text-transform: uppercase;
+	font: bold 11px/18px Helvetica;
+}
+#browse_search .time-stamp-2 span{
+	display: block;
+   margin: 0;
+   text-indent: 10px;
+}
+#browse_search .search-item .meta {
+	padding-top: 30px;
+	padding-bottom: 0;
+}
+
+.w3_itinerary {
+	background-color: #FFFFFF;
+    border-bottom: 1px solid #E0E0E0;
+    height: 51px;
+    position: relative;
+    z-index: 0;
+}
+.w3_itinerary .wrapper {
+	position: relative;
+	z-index: 0;
+}
+#errorpage .bottom .search .btn-1 {
+padding: 0 5px;
+}
+
+.checkout-wrapper .bottom .btn-1 {
+	padding: 0 5px;
+}
+.checkout-wrapper .bottom  {
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+.checkout-wrapper .bottom {
+	margin-top: 20px;
+}
+
+
+
+
+
+.results-wrapper {
+	border-radius: 0px 4px 4px 0px;
+	behavior: url(/PIE.htc);
+}
+.trip-itinerary .overview .image .info h4 {
+	line-height: 40px;
+	top: 10px;
+}
+
+#header .header-login {
+	width: auto;
+}
+
+#all_trips .single {
+	position: relative;
+	z-index: 0;
+}
+
+
+
+
+
+
+
+.dd-2 > div + div {
+	position: relative;
+	z-index: 0;
+}
+
+.itinerary-wrapper {
+	position: relative;
+	z-index: 0;
+}
+.slider-controls {
+	position: relative;
+	z-index: 10000;
+}
+.slider-controls a {
+	z-index: 100;
+}
+.itinerary-items .item {
+	position: relative;
+	z-index: 1000;
+}
+.itinerary-items {
+	position: relative;
+	z-index: 100;
+}
+.itinerary-wrapper .slider {
+	z-index: 0;
+}
+.user-messages .lstng .right .preferences {
+	z-index: 1000;
+}
+.user-messages .lstng .right .preferences ul {
+	z-index: 1000;
+	right: 5px;
+	top: 18px;
+}
+.lstng .right .state {
+	z-index: 10;
+}
+
+
+.user-messages .lstng .right .preferences a span {
+	background:url("https://static.tripfab.com/images2/ico-121.png") no-repeat;
+	width: 33px;
+	height: 17px;
+	display: block;
+	margin: 7px 0 0 0px;
+}
+
+.reservation .top, .reservation {
+	z-index: 1000;
+}
+.profile .w2 h2.title, .password .w2 h2.title{
+	overflow: hidden;
+}
+h2.title span.cont {
+	display: block;
+	float:left;
+	width: 400px; 
+}
+.reservations .top a.btn-10 {
+	z-index: 10;
+}
+.user-messages .lstng .right .preferences > a {
+	position: relative;
+	z-index: 0;
+}
+.lstng .right .warning, .lstng .right .approve {
+	top: 15px; 
+}
+
+#dialpad .middle .control input {
+	position: relative;
+	z-index: 1;
+}
+.right-sidebar .widget.book .summary .btn-1 {
+	position: relative;
+	z-index: 1;
+}
+.right-sidebar .widget.talk > ul {
+	position: relative;
+	z-index: 1;
+}
+#dialpad .middle .control .cancel {
+	position: relative;
+	z-index: 1;
+}
+#dialpad .middle .numbers {
+	margin-bottom: 20px;
+}
+#start_call {
+	width: 281px;
+}
+#newtrip {
+	width: 340px;
+}
+#create_trip .bottom .btn-1,
+#create_trip .bottom .btn-10 {
+	position: relative;
+	z-index: 1; 
+}
+
+#create_trip .item input[type="text"] {
+	position: relative;
+	z-index: 1;
+}

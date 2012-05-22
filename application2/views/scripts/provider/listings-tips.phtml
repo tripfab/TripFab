@@ -3,31 +3,14 @@
 <head>
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
     <title><?= $this->listing->title ?> : Tips | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-	<script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('textarea').elastic();	
-            $('select').jqTransSelect();
-            $('#header .header-login a.user').click(function(){
-                $(this).next().toggleClass('show');
-                return false;
-            });
-			
-			$tip = 10;
-			$('#addTip').click(function(){
-				$item = $('.hidden.tip.detail').html();
-				$item = $('<div class="item">'+$item+'</div>');
-				$('input',$item).attr('name','tips['+$tip+'][text]');
-				$('.hidden.tip.detail').before($item);
-				$tip++;
-				return false;
-			});
-        });
-    </script>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+	<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+	<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1">
@@ -72,10 +55,25 @@
 								break;
 						endswitch ?>
                 </div><!-- closes right -->
+                <div class="clear"></div>
             </div><!-- closes listing-content -->
         </div><!-- closes listing-wrapper -->
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+		$tip = 10;
+		$('#addTip').click(function(){
+			$item = $('.hidden.tip.detail').html();
+			$item = $('<div class="item">'+$item+'</div>');
+			$('input',$item).attr('name','tips['+$tip+'][text]');
+			$('.hidden.tip.detail').before($item);
+			$tip++;
+			return false;
+		});
+    });
+</script>
 </body>
 </html>

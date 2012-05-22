@@ -1,0 +1,65 @@
+<style type="text/css">
+
+.lstng-detail { position:relative;}
+.lstng-detail .help {
+	position:absolute;
+	top:20px;
+	left:240px;}
+.lstng-detail .help a.eye {
+	display:block;
+	background:url(/images2/eye.png) no-repeat top left;
+	width:18px;
+	height:12px;
+	text-indent:-9999px;
+	cursor:pointer;}
+	.lstng-detail .help:hover a.eye {
+		background-position:left -12px;}
+.lstng-detail.first .help {
+	top:0px;}
+	.lstng-detail .help a.tooltip3 {
+		background:url(/images2/help-tooltip-bg.png) top left no-repeat;
+		left: 17px;
+		padding:11px 12px;
+		position:absolute;
+		top:-102px;
+		z-index:1000;
+		display:none;}
+	.lstng-detail .help:hover a.tooltip3 {
+		display:block;}
+
+.lstng-detail {
+	overflow:visible;}
+	.listing-content {
+		overflow:visible;}
+</style>
+<form action="" method="post">
+    <div class="lstng-details pricing overview">
+  		<?php if($this->help->sig_overview == 0): ?>
+    	<div class="desc">
+    		<h3>What is the Overview Section?</h3>
+    		<p>Let people know about this sight, how is the experience, what to expect, things they'll love.</p>
+    		<a href="" rel="sig_overview" class="remove">Remove</a>
+    	</div><!-- closes desc -->
+        <?php endif ?>
+    	<div class="main-ttl">
+    		<p><strong>Description</strong></p>    		
+    	</div><!-- closes main-ttl -->								
+        <div class="lstng-detail">
+            <textarea placeholder="Write a nice overview about this sight" class="noclean" name="about" cols="30" rows="1"><?= stripslashes($this->overview->about) ?></textarea>
+            <strong>About the sight</strong>
+            <span>Write a detail description</span>
+            <!--<span class="counter">500</span>-->
+            
+            <div class="clear"></div>
+        </div><!-- closes lstng-detail -->
+        
+        
+    </div><!-- closes lstng-details -->
+    <div class="foot">
+        <input type="submit" class="btn-1 noclean" value="Save Changes" />
+    </div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'edit-overview') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_overview') ?>" />
+</form>

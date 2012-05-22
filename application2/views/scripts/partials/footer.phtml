@@ -1,14 +1,177 @@
-<div class="footer">
-    <div class="wrapper">
-        <p><img src="/images2/logo-2.png" alt="" /><strong>Tripfab</strong> is lovely designed in a <strong>tropical paradise</strong></p>
-        <ul>
-            <li><a href="">Contact</a></li>
-            <li><a href="">Blog</a></li>
-            <li><a href="">Twitter</a></li>
-            <li><a href="">Facebook</a></li>
-            <li><a href="">Terms</a></li>
-            <li><a href="">Privacy</a></li>
-        </ul>
-    </div><!-- closes wrapper -->
-</div><!-- closes footer -->
+<div id="wp_footer">
+	<div id="footer">
+		<div class="wrap">
+			<span class="flag"></span>
+			<div class="left">
+				<div class="number"><span></span>Toll Free: +1-866-401-0382</div>
+				<span>&copy; Copyright  2012 Tripfab. All rights reserved.</span>
+			</div><!--LEFT-->
+			
+			<div class="right">
+				<ul>
+					<li>Connect with TripFab</li>
+					<li><a target="_blank" href="https://twitter.com/tripfab"><em class="tw"></em>Twitter</a></li>
+					<li><a target="_blank" href="https://facebook.com/tripfab"><em class="fb"></em>Facebook</a></li>
+					<li><a target="_blank" href="https://plus.google.com/108576021199856132768/"><em class="gl"></em>Google+</a></li>
+				</ul>
+				<ul>
+					<li>Boring Stuff</li>
+					<li><a href="/terms">Terms of Use</a></li>
+					<li><a href="/policies">Privacy</a></li>
+				</ul>
+				<ul>
+					<li>Company</li>
+					<li><a href="/contact">Contact Us</a></li>
+					<li><a target="_blank" href="http://blog.tripfab.com">Blog</a></li>
+				</ul>
+			</div><!--RIGHT-->
+			<div class="bot"><p><em></em>Tripfab is lovingly designed in a tropical paradise</p></div>
+		</div><!--WRAP-->
+	</div><!--FOOTER-->
+</div><!--WP_FOOTER-->
 <div id="citiesAutocompleteContainer"></div>
+
+<div class="hidden">
+	<div id="signUp" class="lgbx_login">
+		<div class="login js-form-container js-div-signin">
+			<h6>Sign in</h6>
+			<p>Welcome back to TripFab! Enter your e-mail address and password below to access to your account</p>
+            <form method="post" action="/en-US/login">
+                <div class="">
+                <input class="email js-input-email" type="text" name="email" placeholder="E-mail" value="" />
+                </div>
+                <div class="">
+                <input class="password js-input-password" type="password" name="password" placeholder="Password" value="" />
+                </div>
+				<a href="" class="link1 js-forgot">Forgot your password?</a>
+                <div class="cntrl">
+                    <label><input type="checkbox" class="js-input-remember" name="remenber" value="1" /> Keep me log in</label>
+                    <input type="submit" class="btn-1 noclean" value="Sign in" />
+                </div><!--CNTRL-->
+            </form>
+			<span class="sep"><em>or</em></span>
+			<a href="/signup/facebook" class="fb js-fb-sigup">Sign in with Facebook</a>
+		</div><!--LOGIN-->
+        
+		<div class="signUp js-div-signup js-form-container">
+			<span class="free"></span>
+			<h6>Join TripFab</h6>
+			<p>It only takes <em>15 seconds</em> to sign up.</p>
+			<form method="post" action="/en-US/signup">
+            	<div class="">
+				<input class="name js-input-name" type="text" name="name" placeholder="Full Name" />
+                </div>
+            	<div class="">
+				<input class="email js-input-email" type="text" name="email" placeholder="E-mail" value="" />
+                </div>
+            	<div class="">
+				<input class="pass js-input-password" id="js-password" type="password" name="password" placeholder="Password" value="" />
+                </div>
+            	<div class="">
+				<input class="pass js-input-confirm" type="password" name="password2" placeholder="Confirm Password" value="" />
+                </div>
+				<p>By clicking "Create Account" or "Sign up with Facebook,"
+					you confirm that you accept the <a href="/terms" class="link1">Terms of Service.</a> </p>
+				<div class="cntrl">
+					
+					<input type="submit" class="btn-1" name="" value="Create Account" />
+				</div><!--CNTRL-->	
+			</form>
+			<span class="sep"><em>or</em></span>
+			<a href="/signup/facebook" class="fb js-fb-sigup">Sign up with Facebook</a>
+		</div><!--SIGNUP-->
+	</div><!--LGBX_LOGIN-->
+    
+	<div id="forgot" class="js-div-forgot">
+        <div class="lb-forgot">
+            <div class="ttl">Reset Password</div>
+            <form action="" method="post">
+                <div class="content">
+                    <p>Enter your e-mail address to have the password associated with that account reset. 
+                    A new password will be e-mailed to the address. </p>
+                    <input type="text" name="resetemail" value="Enter your e-mail" />
+                </div><!-- closes content -->
+                <div class="bottom">
+                    <input type="submit" class="btn-1" value="Send Request" />
+                    <span onclick="$.fancybox.close()" class="btn-10">Cancel</span>				
+                </div><!-- closes bottom -->
+            </form>
+        </div><!-- closes lb-forgot -->
+    </div>
+    
+	<div id="newtrip">
+    	<div id="create_trip">
+			<form action="">
+                <div class="top">
+                    <h3>Create a New Trip</h3>
+                    <p>Complete the information below to start your next trip</p>
+                </div><!--TOP-->
+                <div class="cont">
+                    <fieldset>
+                        <div class="item">
+                            <label class="trip">Trip Name</label>
+                            <input type="text" name="title" value="" />
+                        </div><!--ITEM-->
+                        <div class="item">
+                            <label class="dates">Trip Dates</label>
+                            <input class="start" type="text" name="start" value="Starting Date" />
+                            <input class="end"type="text" name="end" value="Ending Date" />
+                            <label class="check">
+                                <input type="checkbox" class="nodatesyet"/>
+                                I don't know the travel dates yet
+                            </label>
+                        </div><!--ITEM-->
+                        <div class="item temp">
+                        	<label class="travelers">Travelers</label>
+                        	<select name="adults">
+                        		<option value="1">1 Adult</option>
+                                <?php for($i=2;$i<=20;$i++): ?>
+                                <option value="<?= $i ?>"><?= $i ?> Adults</option>
+                                <?php endfor ?>
+                        	</select>
+                        	<select name="kids">
+                        		<option value="">None</option>
+                        		<option value="1">1 Kid</option>
+                                <?php for($i=2;$i<=20;$i++): ?>
+                                <option value="<?= $i ?>"><?= $i ?> Kids</option>
+                                <?php endfor ?>
+                        	</select>
+                        </div><!--ITEM-->
+                    </fieldset>
+                </div><!--CONT-->
+                <div class="bottom">
+                    <input type="submit" class="btn-1 noclean" value="Create Trip" />
+                    <input type="button" onclick="$.fancybox.close(); return false;" class="btn-10 noclean" value="Cancel" />
+                </div><!--BOTTOM-->
+                <input type="hidden" name="trip" value="new" />
+                <input type="hidden" name="listing" value="" />
+            </form>
+		</div><!--CREATE_TRIP-->
+    </div>
+</div><!--HIDDEN-->
+<input type="hidden" name="fbappid" value="<?= $this->facebookid() ?>"/>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24981182-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 956485843;
+var google_conversion_language = "en";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "bejuCMXWuAMQ06GLyAM";
+var google_conversion_value = 0;
+/* ]]> */
+</script>
+<script type="text/javascript">
+document.write(unescape("%3Cscript src='" + ((document.location.protocol=="https:")?"https://snapabug.appspot.com":"http://www.snapengage.com") + "/snapabug.js' type='text/javascript'%3E%3C/script%3E"));</script><script type="text/javascript">
+SnapABug.addButton("12926583-ebae-4874-8f3e-57cbe2114ebc","0","55%");
+</script>

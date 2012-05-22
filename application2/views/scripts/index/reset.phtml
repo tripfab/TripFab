@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title>Password Reset Request | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link href="/css6/calendar.css?v=<?= $this->cssVC ?>" rel="stylesheet" type="text/css">
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+	<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+	<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+</head>
+<body>
+<div class="w1 profile">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper">
+            <div id="new_password">
+            	<?php if(!$this->caducated): ?>
+                <div class="top">
+                    <h3>Enter your new password</h3>
+                </div>
+                <form method="post" action="">
+                <div class="mid">
+                    <label>Password</label>
+                    <input type="password" name="npassword" value="" />
+                    <label>Re-enter Password</label>
+                    <input type="password" name="rpassword" value="" />
+                </div><!--MID-->
+                <div class="bottom">
+                    <input type="submit" class="btn-1" value="Update Password" />
+                </div><!--BOTTOM--> 
+                </form>
+                <?php else: ?>
+                <div class="top">
+                    <h3>Caducated Request</h3>
+                </div>
+                <div class="mid">
+                    <center>
+                        Sorry your request has die. <br />
+                        Please submit anitherpassword reset request
+                    </center>
+                </div><!--MID-->
+                <div class="bottom">
+                    <a href="/login" class="btn-1">Login</a>
+                </div><!--BOTTOM-->                 
+                <?php endif ?>
+            </div><!--NEW_PASSWORD--> 
+        </div><!-- closes user-backend --> 
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>    
+<?php if(isset($this->error)): ?>
+<script type="text/javascript">
+$(function(){ showError("<?= $this->error ?>") })
+</script>
+<?php endif ?>
+<style type="text/css">
+	.profile-items .item input[type="password"] {
+		border: 1px solid #D8D8D8;
+		border-radius: 2px 2px 2px 2px;
+		color: #303030;
+		float: right;
+		font-size: 12px;
+		height: 27px;
+		padding: 0 5px;
+		width: 203px;
+	}
+	.profile-items .item input[type="password"]:focus {
+		border-color: #ADDEFF;
+		box-shadow: 0 0 5px #ADDEFF;
+	}
+</style>
+</body>
+</html>

@@ -3,6 +3,36 @@
 .errors { border:1px solid #F00; padding:5px; margin-bottom:10px;}
 .errors p { font-size:12px; font-weight:normal; font-style:italic; color:#F00;}
 .w-m { display:none;}
+.lstng-detail { position:relative;}
+.lstng-detail .help {
+	position:absolute;
+	top:20px;
+	left:240px;}
+.lstng-detail .help a.eye {
+	display:block;
+	background:url(/images2/eye.png) no-repeat top left;
+	width:18px;
+	height:12px;
+	text-indent:-9999px;
+	cursor:pointer;}
+	.lstng-detail .help:hover a.eye {
+		background-position:left -12px;}
+.lstng-detail.first .help {
+	top:0px;}
+	.lstng-detail .help a.tooltip3 {
+		background:url(/images2/help-tooltip-bg.png) top left no-repeat;
+		left: 17px;
+		padding:11px 12px;
+		position:absolute;
+		top:-102px;
+		z-index:1000;
+		display:none;}
+	.lstng-detail .help:hover a.tooltip3 {
+		display:block;}
+
+.lstng-detail {
+	overflow:visible;}
+.listing-content { overflow:visible;}
 </style>
 <?php if($_POST): ?>
 <form action="" method="post">
@@ -21,32 +51,11 @@
             <p><?= $err ?></p>
             <?php endforeach ?>
         </div><!-- closes item -->
-        <?php endif ?>						
+        <?php endif ?>
         <div class="main-ttl">
-        	<p><strong>Listing Location</strong></p>        	
-        </div>
-        <!-- closes main-ttl -->
-		<div class="lstng-detail">
-			<textarea placeholder="Nice description about to how to get to your place by plane" cols="30" class="noclean limitcc" rel="1000" name="plane" rows="1"><?= $_POST['plane'] ?></textarea>
-			<strong>By Plane</strong>
-			<span>Write a detailed description</span>
-		</div><!-- closes lstng-detail -->
-		<div class="lstng-detail">
-			<textarea placeholder="Nice description about to how to get to your place by car" cols="30" class="noclean limitcc" rel="1000" name="car" rows="1"><?= $_POST['car'] ?></textarea>
-			<strong>By Car</strong>
-			<span>Write a detailed description</span>
-		</div><!-- closes lstng-detail -->
-		<div class="lstng-detail">
-			<textarea placeholder="Nice description about to how to get to your place by train" cols="30" class="noclean limitcc" rel="1000" name="train" rows="1"><?= $_POST['train'] ?></textarea>
-			<strong>By Train</strong>
-			<span>Write a detailed description</span>
-		</div><!-- closes lstng-detail -->
-        <div class="lstng-detail">
-			<textarea placeholder="Nice description about to how to get to your place by boat" cols="30" class="noclean limitcc" rel="1000" name="boat" rows="1"><?= $_POST['boat'] ?></textarea>
-			<strong>By Boat</strong>
-			<span>Write a detailed description</span>
-		</div><!-- closes lstng-detail -->
-    
+        	<p><strong>How to Get There</strong></p>        	
+        </div><!-- closes main-ttl -->
+        <!-- closes main-ttl -->    
     	<div class="lstng-detail">
         	<div class="selects">
                 <select id="country2" name="country_id">
@@ -69,7 +78,13 @@
                 </select>
             </div><!-- closes selects -->
             <strong>Location</strong>
-			<span>Select country and city</span>						
+			<span>Select country and city</span>	
+            <div class="help">
+                <a href="/images2/help/big-act-howto-map.png" class="eye">help</a>
+                <a href="/images2/help/big-act-howto-map.png" class="tooltip3">
+                <img src="https://static.tripfab.com/images2/help/small-act-howto-map.png" /></a>
+            </div>
+            <div class="clear"></div>					
         </div><!-- closes item-wrppr -->
     
         <div class="lstng-detail">
@@ -89,11 +104,71 @@
             </div><!-- closes map -->
             <strong>Map</strong>
             <span>This is how your address appears <br /> on the public listing</span>
+            <div class="clear"></div>
         </div><!-- closes lstng-detail -->
+        
+        <div class="lstng-detail">
+        	<?php if(empty($_POST['plane']) and
+					 empty($_POST['car']) and
+					 empty($_POST['train']) and
+					 empty($_POST['boat'])): ?>
+			<div class="direction">
+                <div class="cont">
+                    <p>There are no directions yet</p>
+                </div><!--CONT-->
+                <a href="#new_direction" class="add_direc">Add a New Direction</a>
+            </div><!--DIRECTION-->
+			<?php else: ?>
+            <div class="direction">
+				<div class="cont">
+                    <?php if(!empty($_POST['plane'])): ?>
+                    <div class="top">
+                        <strong>By Plane</strong>
+                        <a href="" class="delete">Remove</a>
+                    </div><!--TOP-->
+                    <textarea placeholder="Nice description about to how to get to your place by plane" cols="" class="noclean limitcc" rel="1000" name="plane" rows="1"><?= stripslashes(trim($_POST['plane'])) ?></textarea>
+                    <?php endif; if(!empty($_POST['car'])): ?>
+                    <div class="top">
+                        <strong>By Car</strong>
+                        <a href="" class="delete">Remove</a>
+                    </div><!--TOP-->
+                    <textarea placeholder="Nice description about to how to get to your place by car" cols="" class="noclean limitcc" rel="1000" name="car" rows="1"><?= stripslashes(trim($_POST['car'])) ?></textarea>
+                    <?php endif; if(!empty($_POST['train'])): ?>
+                    <div class="top">
+                        <strong>By Train</strong>
+                        <a href="" class="delete">Remove</a>
+                    </div><!--TOP-->
+                    <textarea placeholder="Nice description about to how to get to your place by train" cols="" class="noclean limitcc" rel="1000" name="train" rows="1"><?= stripslashes(trim($_POST['train'])) ?></textarea>
+                    <?php endif; if(!empty($_POST['boat'])): ?>
+                    <div class="top">
+                        <strong>By Boat</strong>
+                        <a href="" class="delete">Remove</a>
+                    </div><!--TOP-->
+                    <textarea placeholder="Nice description about to how to get to your place by boat" cols="" class="noclean limitcc" rel="1000" name="boat" rows="1"><?= stripslashes(trim($_POST['boat'])) ?></textarea>
+                    <?php endif; if(!empty($_POST['bus'])): ?>
+                    <div class="top">
+                        <strong>By Bus</strong>
+                        <a href="" class="delete">Remove</a>
+                    </div><!--TOP-->
+                    <textarea placeholder="Nice description about to how to get to your place by bus" cols="" class="noclean limitcc" rel="1000" name="bus" rows="1"><?= stripslashes(trim($_POST['bus'])) ?></textarea>
+                    <?php endif; ?>
+                </div><!--CONT-->
+                <a href="#new_direction" class="add_direc">Add a New Direction</a>
+            </div><!--DIRECTION-->
+            <?php endif ?>
+            <strong>Directions</strong> 
+            <span>Define the way to get there</span>
+            <div class="help">
+                <a href="/images2/help/big-act-howto-info.png" class="eye">help</a>
+                <a href="/images2/help/big-act-howto-info.png" class="tooltip3">
+                <img src="https://static.tripfab.com/images2/help/small-act-howto-info.png" /></a>
+            </div>
+            <div class="clear"></div>
+		</div><!-- closes lstng-detail -->
     </div>
     
 	<div class="foot">
-		<input type="submit" class="btn-1" value="Save Changes" />
+		<input type="submit" class="btn-1 noclean" value="Save Changes" />
 	</div><!-- closes foot -->
     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
@@ -118,30 +193,9 @@
         </div><!-- closes desc -->	
         <?php endif ?>						
         <div class="main-ttl">
-        	<p><strong>Listing Location</strong></p>        	
+        	<p><strong>How to Get There</strong></p>        	
         </div><!-- closes main-ttl -->
-		<div class="lstng-detail">
-			<textarea placeholder="Nice description about to how to get to your place by plane" cols="30" class="noclean limitcc" rel="1000" name="plane" rows="1"><?= stripslashes($this->location->plane) ?></textarea>
-			<strong>By Plane</strong>
-			<span>Write a detailed description</span>
-		</div><!-- closes lstng-detail -->
-		<div class="lstng-detail">
-			<textarea placeholder="Nice description about to how to get to your place by car" cols="30" class="noclean limitcc" rel="1000" name="car" rows="1"><?= stripslashes($this->location->car) ?></textarea>
-			<strong>By Car</strong>
-			<span>Write a detailed description</span>
-		</div><!-- closes lstng-detail -->
-		<div class="lstng-detail">
-			<textarea placeholder="Nice description about to how to get to your place by train" cols="30" class="noclean limitcc" rel="1000" name="train" rows="1"><?= stripslashes($this->location->train) ?></textarea>
-			<strong>By Train</strong>
-			<span>Write a detailed description</span>
-		</div><!-- closes lstng-detail -->
         <div class="lstng-detail">
-			<textarea placeholder="Nice description about to how to get to your place by boat" cols="30" class="noclean limitcc" rel="1000" name="boat" rows="1"><?= stripslashes($this->location->boat) ?></textarea>
-			<strong>By Boat</strong>
-			<span>Write a detailed description</span>
-		</div><!-- closes lstng-detail -->
-    
-    	<div class="lstng-detail">
         	<div class="selects">
                 <select id="country2" name="country_id">
                     <option value="">Select Country</option>
@@ -163,7 +217,13 @@
                 </select>
             </div><!-- closes selects -->
             <strong>Location</strong>
-			<span>Select country and city</span>						
+			<span>Select country and city</span>	
+            <div class="help">
+                <a href="/images2/help/big-act-howto-map.png" class="eye">help</a>
+                <a href="/images2/help/big-act-howto-map.png" class="tooltip3">
+                <img src="https://static.tripfab.com/images2/help/small-act-howto-map.png" /></a>
+            </div>
+            <div class="clear"></div>					
         </div><!-- closes item-wrppr -->
     
         <div class="lstng-detail">
@@ -183,11 +243,70 @@
             </div><!-- closes map -->
             <strong>Map</strong>
             <span>This is how your address appears <br /> on the public listing</span>
+            <div class="clear"></div>
         </div><!-- closes lstng-detail -->
+		<div class="lstng-detail">
+        	<?php if(empty($this->location->plane) and
+					 empty($this->location->car) and
+					 empty($this->location->train) and
+					 empty($this->location->boat) and
+					 empty($this->location->bus)): ?>
+			<div class="direction">
+                <div class="cont">
+                    <p>There is no any direction yet</p>
+                </div><!--CONT-->
+                <a href="#new_direction" class="add_direc">Add a New Direction</a>
+            </div><!--DIRECTION-->
+			<?php else: ?>
+            <div class="direction">
+				<div class="cont">
+                    <?php if(!empty($this->location->plane)): ?>
+                    <div class="top">
+                        <strong>By Plane</strong>
+                        <a href="" class="delete">Remove</a>
+                    </div><!--TOP-->
+                    <textarea placeholder="Nice description about to how to get to your place by plane" cols="" class="noclean limitcc" rel="1000" name="plane" rows="1"><?= stripslashes(trim($this->location->plane)) ?></textarea>
+                    <?php endif; if(!empty($this->location->car)): ?>
+                    <div class="top">
+                        <strong>By Car</strong>
+                        <a href="" class="delete">Remove</a>
+                    </div><!--TOP-->
+                    <textarea placeholder="Nice description about to how to get to your place by car" cols="" class="noclean limitcc" rel="1000" name="car" rows="1"><?= stripslashes(trim($this->location->car)) ?></textarea>
+                    <?php endif; if(!empty($this->location->train)): ?>
+                    <div class="top">
+                        <strong>By Train</strong>
+                        <a href="" class="delete">Remove</a>
+                    </div><!--TOP-->
+                    <textarea placeholder="Nice description about to how to get to your place by train" cols="" class="noclean limitcc" rel="1000" name="train" rows="1"><?= stripslashes(trim($this->location->train)) ?></textarea>
+                    <?php endif; if(!empty($this->location->boat)): ?>
+                    <div class="top">
+                        <strong>By Boat</strong>
+                        <a href="" class="delete">Remove</a>
+                    </div><!--TOP-->
+                    <textarea placeholder="Nice description about to how to get to your place by boat" cols="" class="noclean limitcc" rel="1000" name="boat" rows="1"><?= stripslashes(trim($this->location->boat)) ?></textarea>
+                    <?php endif; if(!empty($this->location->bus)): ?>
+                    <div class="top">
+                        <strong>By Bus</strong>
+                        <a href="" class="delete">Remove</a>
+                    </div><!--TOP-->
+                    <textarea placeholder="Nice description about to how to get to your place by bus" cols="" class="noclean limitcc" rel="1000" name="bus" rows="1"><?= stripslashes(trim($this->location->bus)) ?></textarea>
+                    <?php endif; ?>
+                </div><!--CONT-->
+                <a href="#new_direction" class="add_direc">Add a New Direction</a>
+            </div><!--DIRECTION-->
+            <?php endif ?>
+            <strong>Directions</strong> 
+            <span>Define the way to get there</span>
+            <div class="help">
+                <a href="/images2/help/big-act-howto-info.png" class="eye">help</a>
+                <a href="/images2/help/big-act-howto-info.png" class="tooltip3">
+                <img src="https://static.tripfab.com/images2/help/small-act-howto-info.png" /></a>
+            </div>
+            <div class="clear"></div>
+		</div><!-- closes lstng-detail -->    
     </div>
-    
 	<div class="foot">
-		<input type="submit" class="btn-1" value="Save Changes" />
+		<input type="submit" class="btn-1 noclean" value="Save Changes" />
 	</div><!-- closes foot -->
     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />

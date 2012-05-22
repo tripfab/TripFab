@@ -1,0 +1,31 @@
+<div class="img_logo">
+    <?php if(!empty($this->vendor->image)): ?>
+    <?= $this->logo($this->vendor->image, '114:94') ?>
+    <?php else: ?>
+    <div class="upload">
+        <a href="/provider/account" class="link1"><span></span>Upload Logo</a>
+    </div><!--UPLOAD-->
+    <?php endif ?>
+</div><!--LOGOS-->
+<div class="ttl">
+    <h2><?= $this->vendor->name ?> <a href="/provider/account/" class="link1">Edit Name</a></h2>
+    <span><em></em>132 Reservations since April 2012</span>
+</div><!--TTL-->
+<p class="qz">
+    <strong>Questions about this listing?</strong>
+    Talk directly with <?= $this->vendor->name ?>
+</p>
+<?php if($this->user): ?>
+<ul>
+    <li><a href="#start_call" class="phone lbc">Phone Call</a></li>
+    <li><a href="https://<?= $_SERVER['HTTP_HOST'] ?>/chat?provider=<?= $this->vendor->user_id ?>" class="chat livechat">Live Chat</a></li>
+    <li><a href="#send_message" class="msj lbc phonecall">Message</a></li>
+</ul>
+<?php else: ?>
+<ul>
+    <li><a href="/login" class="phone">Phone Call</a></li>
+    <li><a href="/login" class="chat">Live Chat</a></li>
+    <li><a href="/login" class="msj">Message</a></li>
+</ul>
+<?php endif ?>
+<div class="clear"></div>

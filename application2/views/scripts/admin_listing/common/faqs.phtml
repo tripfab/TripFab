@@ -1,0 +1,89 @@
+<style type="text/css">
+.main-ttl .help {
+	position:absolute;
+	top:18px;
+	left:160px;}
+.main-ttl .help a.eye {
+	display:block;
+	background:url(/images2/eye.png) no-repeat top left;
+	width:18px;
+	height:12px;
+	text-indent:-9999px;
+	cursor:pointer;}
+	.main-ttl .help:hover a.eye {
+		background-position:left -12px;}
+.main-ttl.first .help {
+	top:0px;}
+	.main-ttl .help a.tooltip3 {
+		background:url(/images2/help-tooltip-bg.png) top left no-repeat;
+		left: 17px;
+		padding:11px 12px;
+		position:absolute;
+		top:-102px;
+		z-index:1000;
+		display:none;}
+	.main-ttl .help:hover a.tooltip3 {
+		display:block;}
+
+.main-ttl {
+	overflow:visible;
+	position:relative;}
+.listing-content { overflow:visible;}
+</style>
+<form action="" method="post" id="form_faq">
+    <div class="lstng-details">
+    	<?php if($this->help->com_faqs == 0): ?>
+    	<div class="desc">
+    		<h3>What is the FAQ's Section?</h3>
+    		<p>We are pretty sure you get the same questions all the time so this is the area to answer the most frequently asked questions. Just click on "Add a New FAQ" and start adding them. You can add as many as you want.</p>
+    		<p>Example: Is your hotel handicap accessible?</p>
+    		<a href="" rel="com_faqs" class="remove">Remove</a>
+    	</div>
+    	<!-- closes desc -->
+        <?php endif ?>
+		<div class="main-ttl">
+			<p><strong>Write some FAQ's</strong><a href="/admin/listings" class="back_btn">&larr; Back to Listings</a></p>
+            <div class="help">
+                <a href="/images2/help/big-act-faqs.png" class="eye">help</a>
+                <a href="/images2/help/big-act-faqs.png" class="tooltip3">
+                <img src="https://static.tripfab.com/images2/help/small-act-faqs.png" /></a>
+            </div>		
+		</div><!-- closes main-ttl -->
+        <?php foreach($this->faqs as $faq): ?>
+        <div class="lstng-detail faq">
+            <textarea placeholder="Write the frequent asked question here..." cols="30" class="noclean limitcc" rel="300" rows="1" name="faq[<?= $faq->id ?>][question]"><?= stripslashes($faq->question) ?></textarea>
+            <strong>Frequent question</strong>
+            <div class="clear"></div>
+            <textarea placeholder="Write its answer here..." cols="30" class="noclean limitcc" rel="1000" name="faq[<?= $faq->id ?>][answer]" rows="1"><?= stripslashes($faq->answer) ?></textarea>
+            <strong>Your Answer</strong>
+        </div><!-- closes lstng-detail -->
+        <?php endforeach ?>
+        <?php if(count($this->faqs) > 0): ?>
+        <div id="addFAQ" class="lstng-detail faq hidden">
+            <textarea placeholder="Write the frequent asked question here..." cols="30" class="noclean limitcc" rel="300" name="question" rows="1"></textarea>
+            <strong>Frequent question</strong>
+            <div class="clear"></div>
+            <textarea placeholder="Write its answer here..." cols="30" class="noclean limitcc" name="answer" rel="1000" rows="1"></textarea>
+            <strong>Your Answer</strong>
+        </div><!-- closes lstng-detail -->
+		<div class="lstng-detail last">
+			<a href="" id="addmewfaq" class="link-5">Add a New FAQ</a>
+		</div><!-- closes lstng-detail -->
+        <?php else: ?>
+        <div id="addFAQ" class="lstng-detail faq">
+            <textarea placeholder="Write the frequent asked question here..." cols="30" class="noclean limitcc" rel="300" name="question" rows="1"></textarea>
+            <strong>Frequent question</strong>
+            <div class="clear"></div>
+            <textarea placeholder="Write its answer here..." cols="30" class="noclean limitcc" name="answer" rel="1000" rows="1"></textarea>
+            <strong>Your Answer</strong>
+        </div><!-- closes lstng-detail -->
+        <?php endif ?>
+	</div><!-- closes lstng-details -->
+	<div class="foot">
+		<input type="submit" class="btn-1 noclean" value="Save Changes" />
+	</div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token.'form_faq') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('update_faq') ?>" />
+</form>

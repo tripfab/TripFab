@@ -84,6 +84,10 @@ class IndexController extends Zend_Controller_Action
         
         $this->json = new WS_JsonService();
         $this->view->tags = $this->json->getSerchTerms();
+        
+        $this->view->lang = $this->_getParam('lang');
+        
+        $this->view->cssVC = Zend_Registry::get('vc');
     }
 
     public function indexAction()
@@ -92,25 +96,53 @@ class IndexController extends Zend_Controller_Action
         $country   = $this->places->getPlaceById(18);
         $cities    = $this->places->getPlaces(3, $country->id);
         
+        $hotels = $this->listings->getRandom(self::HOTEL, 5);
+        $activities = $this->listings->getRandom(self::ACTIVITY, 5);
+        $trips = $this->trips->getRamdom(5);
+        
+        if(!is_null($this->user) and $this->user->getRole() == 'user') {
+            $userTrips = $this->trips->getFutureTripsBy($this->user->getId());
+        } else {
+            $userTrips = $this->trips->getRamdom(15);
+        }
+        
+        $this->view->hotels = $hotels;
+        $this->view->activities = $activities;
+        $this->view->trips = $trips;
+        $this->view->userTrips = $userTrips;
+        
         $this->view->countries = $countries;
         $this->view->cities    = $cities;
         $this->view->country   = $country;
     }
     
-    public function cityAction()
-    {       
-        $cat    = $this->_getParam('cat', 'all');
-        $subcat = $this->_getParam('subcat', 'all');
-        $sort   = $this->_getParam('sort', 'newest');
-        $stars  = $this->_getParam('stars', 'all');
+    public function aboutAction()
+    {
+        if($this->view->lang == 'es-ES')
+            $this->render('about-es');
+    }
+    
+    public function faqsAction()
+    {
+        $faqs = new Zend_Db_Table('faqs');
+        $select = $faqs->select();
+        $select->where('lang = ?', $this->view->lang);
         
+        $this->view->faqs = $faqs->fetchAll($select);
+    }
+    
+    public function cityAction()
+    {   
         $countries   = $this->places->getPlaces(2);
         
         $country_idf = $this->getRequest()->getParam('country');
         $city_idf    = $this->getRequest()->getParam('city');
         $country     = $this->places->getPlaceByIdf($country_idf);
         $region      = $this->places->getPlaceById($country->parent_id);
-        $city        = $this->places->getPlaceByIdf($city_idf, 3, $country->id);
+        
+        $city = null;
+        if($city_idf != 'default') 
+            $city    = $this->places->getPlaceByIdf($city_idf, 3, $country->id);
         
         $categories  = $this->listings->getMainCategories(true);
         foreach($categories as $c => $a){
@@ -119,120 +151,40 @@ class IndexController extends Zend_Controller_Action
                 $subcats[$s] = $this->listings->getSubCategoriesOf($c);
         }
         
-        $sortOptions = array(
-            'newest' => 'Newest',
-            'popular' => 'Most Popular',
-            'name' => 'Name',
-            'free' => 'Free',
-            'lowest' => 'Lowest Price',
-            'highest' => 'Highest Price',
-            'rating' => 'Rating' 
-        );
-        
-        if($cat != 'all'){
-            $category = $this->listings->getCategoryByIdf($cat);
-            $subcategories = $this->listings->getSubCategoriesOf($category->id);
+        if(!is_null($city)) {
+            $ls_count = $this->listings->countListings($city);
         }
-        
-        $ls_count = $this->listings->countListings($city->id);
-        
-        $listings = $this->listings->getListings2($city->id, $cat, $subcat, $sort, $stars);
-        
-        if($this->user)
-            $favorites = $this->user->getFavotites();
-        
-        $this->view->class  = 'landscape-1';
-        $this->view->cat    = $cat;
-        $this->view->subcat = $subcat;
-        $this->view->sort   = $sort;
-        $this->view->stars  = $stars;
+        else {
+            $ls_count = $this->listings->countListings(null, null, $country->id);
+            $cities = $this->places->getPlaces(3, $country->id);
+            $this->view->cities = $cities;
+        }
         
         $this->view->countries = $countries;
         
         $this->view->region  = $region;
         $this->view->country = $country;
         $this->view->city    = $city;
+        $this->view->categories = $categories;
+        $this->view->subcats    = $subcats;
         
-        $this->view->categories    = $categories;
-        $this->view->sortOptions   = $sortOptions;
-        $this->view->subcategories = $subcategories;
-        $this->view->ls_count      = $ls_count;
+        $this->view->ls_count = $ls_count;
         
-        $this->view->listings = $listings;
-        
-        $this->view->favorites = $favorites;
-        
-        $this->view->subcats = $subcats;
-        
-        if($this->user){
-            $trips = $this->trips->getFutureTripsBy($this->user->getId(), true);
-            $this->view->trips = $trips; 
-        }
-        
-        
+        //var_dump($ls_count); die;
     }
     
     public function searchAction()
     {
-        $q = $_GET['q'];
         
-        $cat    = $this->_getParam('cat', 'activities');
-        $subcat = $this->_getParam('subcat', 'all');
-        $sort   = $this->_getParam('sort', 'newest');
-        $stars  = $this->_getParam('stars', 'all');
-        
-        $google = new WS_Googlemap();
-        $address = $google->findAddress($q);
-        
-        $place = $address->Placemark[0];
-        
-        $north = $place->ExtendedData->LatLonBox->north;
-        $south = $place->ExtendedData->LatLonBox->south;
-        $west  = $place->ExtendedData->LatLonBox->west;
-        $east  = $place->ExtendedData->LatLonBox->east;
-        
-        $ratio = ($east - $west) * 111;
-        if($ratio < 10){
-            $west  = $place->Point->coordinates[0] - (10 / 111);
-            $east  = $place->Point->coordinates[0] + (10 / 111);
-        }
-        
-        $ratio = ($north - $south) * 111;
-        if($ratio < 5){
-            $north  = $place->Point->coordinates[1] + (5 / 111);
-            $south  = $place->Point->coordinates[1] - (5 / 111);
-        }
+    }
     
+    public function collectionsAction()
+    {
         
-        $db = Zend_Db_Table::getDefaultAdapter();
-        $select = $db->select();
-        $select->from('listings');
-        $select->where("listings.lat BETWEEN {$south} and {$north}");
-        $select->where("listings.lng BETWEEN {$west} and {$east}");
-        //$select->where('main_type = 4');
-        $select->join('vendors','listings.vendor_id = vendors.id',array('vendor_name'=>'name'));
-        $select->join('places','listings.city_id = places.id',array('city_idf'=>'title'));
-        $select->join(array('places2'=>'places'),'listings.country_id = places2.id',array('country_idf'=>'title'));
-        
-        $bounds = array($north, $south, $east, $west);
-        
-        $result = $db->fetchAll($select, array(), 5);
-        
-        $categories  = $this->listings->getMainCategories(true);
-        if($cat != 'all'){
-            $category = $this->listings->getCategoryByIdf($cat);
-            $subcategories = $this->listings->getSubCategoriesOf($category->id);
-        }
-        
-        $this->view->listings    = $result;
-        $this->view->class       = 'landscape-1';
-        $this->view->cat         = $cat;
-        $this->view->subcat      = $subcat;
-        $this->view->sort        = $sort;
-        $this->view->stars       = $stars;
-        $this->view->categories  = $categories;
-        
-        
+    }
+    
+    public function resultsAction()
+    {
         
     }
     
@@ -248,31 +200,150 @@ class IndexController extends Zend_Controller_Action
         $city        = $this->places->getPlaceByIdf($city_idf, 3, $country->id);
         $listing     = $this->listings->getListingByIdf($listing_idf, $city->id, $country->id);
         
-        $tabs        = $this->listings->getTabsOf($listing->id);
-        $faqs        = $this->listings->getFAQsOf($listing->id);
-        $vendor      = $this->vendors->getVendorById($listing->vendor_id);
-        
-        $attributes  = $this->listings->getAttributesOf($listing->id);
-        
         $pictures    = $this->listings->getPictures($listing->id);
         
+        $trips = null;
         if($this->user)
             $trips = $this->trips->getFutureTripsBy($this->user->getId());
         
         switch($listing->main_type){
             case self::ACTIVITY: 
+                $keys = Zend_Registry::get('stripe');
                 $template = 'listing-activity';      
                 $options = $this->listings->getSchedulesOf($listing->id);
                 $this->view->options = $options;
-                break;
-            case self::ENTERTAIMENT  : $template = 'listing-entertaiment';  break;
+                $overview = $this->listings->getOverviewOf2($listing->id);
+                $departure_city = null;
+                if($listing->departure)
+                    $departure_city = $this->places->getPlaceById($listing->departure);
+                $return_city = null;
+                if($listing->departure != $listing->return){
+                    if($listing->return)
+                        $return_city = $this->places->getPlaceById($listing->return);
+                }
+                
+                if(is_null($listing->min) or is_null($listing->max)){
+                    $capacities = $this->listings->getActivityTypes($listing->id);
+                    $this->view->capacities = $capacities;
+                    
+                    $prices = $this->listings->getSchPrices($listing);
+                    if(!is_null($prices) and isset($prices[0]))
+                        $prices = $prices[0];
+                    
+                    $this->view->prices = $prices;
+                }
+
+                $details = $this->listings->getDetails($listing->id);
+
+                $getthere = $this->listings->getLocationOf($listing->id);
+                
+                $faqs        = $this->listings->getFAQsOf($listing->id);
+                $vendor      = $this->vendors->getVendorById($listing->vendor_id);
+
+                $attributes  = $this->listings->getAttributesOf($listing->id);
+
+                $this->view->overview       = $overview;
+                $this->view->departure_city = $departure_city;
+                $this->view->return_city    = $return_city;
+                $this->view->details        = $details;
+                $this->view->getthere       = $getthere;
+                $this->view->key            = $keys['public_key'];
+            break;
+            case self::ENTERTAIMENT  : 
+                $template = 'listing-entertaiment';
+
+                $place = $this->listings->getPlaceInfo($listing->id);
+                $this->view->place = $place;
+                
+                $options = $this->listings->getSchedulesOf($listing->id);
+                $this->view->schedules = $options;
+
+                //var_dump($details->toArray()); die;
+                $creditcards = array(
+                    'visa'             => '/images2/checkout-card1.png',
+                    'mastercard'       => '/images2/checkout-card2.png',
+                    'amex'             => '/images2/checkout-card3.png',
+                    'discover'         => '/images2/checkout-card5.png',
+                );
+                
+                $this->view->cards = $creditcards;
+            break;
             case self::HOTEL: 
+                $keys = Zend_Registry::get('stripe');
                 $template = 'listing-hotel';         
                 $options = $this->listings->getSchedulesOf($listing->id);
                 $this->view->options = $options;
-                break;
-            case self::RESTAURANT    : $template = 'listing-restaurant';    break;
-            case self::TOURIST_SIGHT : $template = 'listing-touristsight'; break;
+
+                $overview = $this->listings->getOverviewOf2($listing->id);
+                $details = $this->listings->getDetails($listing->id);
+                $getthere = $this->listings->getLocationOf($listing->id);
+
+                $rooms = $this->listings->getHotelRooms($listing->id);
+                $rooms2 = $this->listings->getHotelRooms($listing->id, true);
+                $amenities = $this->listings->getDefaultAmenities(true);
+                $beds = array();
+                foreach($rooms as $room){
+                    $beds[$room->id] = $this->listings->getBeds($room->id);
+                }
+                $room_amenities = array();
+                foreach($rooms as $room){
+                    $room_amenities[$room->id] = $this->listings->getAmenities($room->id);
+                }
+
+                $listing_amenities = $this->listings->getGenAmenities($listing->id);
+                $def_amenities     = $this->listings->getDefaultGenAmenities(true);
+                
+                
+                $prices = $this->listings->getSchPrices($listing);
+                if(!is_null($prices))
+                    $prices = $prices[0];
+
+                $this->view->prices = $prices;
+
+                $faqs        = $this->listings->getFAQsOf($listing->id);
+                $vendor      = $this->vendors->getVendorById($listing->vendor_id);
+
+                $attributes  = $this->listings->getAttributesOf($listing->id);
+                //var_dump($rooms2); die;
+
+                $this->view->overview = $overview;
+                $this->view->details  = $details;
+                $this->view->getthere = $getthere;
+                $this->view->rooms    = $rooms;
+                $this->view->rooms2   = $rooms2;
+                $this->view->beds     = $beds;
+                $this->view->room_amenities = $room_amenities;
+                $this->view->amenities = $amenities;
+
+                $this->view->def_amenities = $def_amenities;
+                $this->view->listing_amenities = $listing_amenities;
+                $this->view->key            = $keys['public_key'];
+            break;
+            case self::RESTAURANT    : 
+                $template = 'listing-restaurant';
+                
+                $place = $this->listings->getPlaceInfo($listing->id);
+                $this->view->place = $place;
+                
+                $options = $this->listings->getSchedulesOf($listing->id);
+                $this->view->schedules = $options;
+
+                //var_dump($details->toArray()); die;
+                $creditcards = array(
+                    'visa'             => '/images2/checkout-card1.png',
+                    'mastercard'       => '/images2/checkout-card2.png',
+                    'amex'             => '/images2/checkout-card3.png',
+                    'discover'         => '/images2/checkout-card5.png',
+                );
+                
+                $this->view->cards = $creditcards;
+            break;
+            case self::TOURIST_SIGHT : 
+                $template = 'listing-touristsight'; 
+                $overview = $this->listings->getOverviewOf2($listing->id);
+
+                $this->view->overview = $overview;
+            break;
             default: break;
         }
         
@@ -289,14 +360,8 @@ class IndexController extends Zend_Controller_Action
         if(count($reviews) > 0)
             $this->view->reviews = $reviews;
         
-        $questions = $this->questions->getQuestionsOn($listing->id);
-        if(count($questions) > 0)
-            $this->view->questions = $questions;
-        
-        $this->view->answer_allow = false;
-        
         if(!is_null($this->user)){
-            $this->view->form_action = '/cart/add';
+            $this->view->form_action = 'cart/add';
             $fields = array(
                 'userids'       => $this->user->getId(),
                 'userstoken'    => md5($this->user->getToken()),
@@ -311,7 +376,7 @@ class IndexController extends Zend_Controller_Action
             $this->view->form_fields = $fields;
         }
         else{
-            $this->view->form_action = '/login';
+            $this->view->form_action = 'login';
             $fields = array(
                 'redirect[task]'          => md5('bookit'),
                 'redirect[listingids]'    => $listing->id,
@@ -326,37 +391,108 @@ class IndexController extends Zend_Controller_Action
             $this->view->form_fields = $fields;
         }
         
-        $prices = $this->listings->getBasicPrice($listing->id);
-        if(!is_null($prices))
-            $prices = $prices->toArray();
-        
-        if($listing->main_type == 5){
-            $prices = $this->listings->getSchPrices($listing);
-            if(!is_null($prices))
-                $prices = $prices[0];
-        }
-        
-        if($this->user)
-            $favorites = $this->user->getFavotites();
-        
-        
         //var_dump($listing); die;
-        $this->view->region          = $region;
-        $this->view->country         = $country;
-        $this->view->city            = $city;
-        $this->view->listing         = $listing;
-        $this->view->tabs            = $tabs;
-        $this->view->faqs            = $faqs;
-        $this->view->vendor          = $vendor;
-        $this->view->attributes      = $attributes;
-        $this->view->prices          = $prices;
-        $this->view->pictures        = $pictures;
-        $this->view->trips           = $trips;
-        $this->view->favorites       = $favorites;
+        @$this->view->region          = $region;
+        @$this->view->country         = $country;
+        @$this->view->city            = $city;
+        @$this->view->listing         = $listing;
+        @$this->view->faqs            = $faqs;
+        @$this->view->vendor          = $vendor;
+        @$this->view->attributes      = $attributes;
+        @$this->view->pictures        = $pictures;
+        @$this->view->trips           = $trips;
+        
+        $places = $this->places->getPlaces(2);
+        $this->view->countries = $places;
         
         if(!is_null($this->user))
                 $this->view->user = $this->user->getData();
         
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->update('listings', array('views'=>$listing->views + 1),'id = '.$listing->id);
+        
         $this->render($template);     
+    }
+    
+    public function termsAction()
+    {
+        
+    }
+    
+    public function policiesAction()
+    {
+        
+    }
+    public function contactAction()
+    {
+        
+    }
+    
+    public function mytripsAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if($auth->hasIdentity())
+                $this->_redirect('/user/trips');
+    }
+    
+    public function resetAction()
+    {
+        $auth = Zend_Auth::getInstance();
+        if($auth->hasIdentity())
+                throw new Exception('No access allowed');
+        
+        $email = $this->_getParam('email','default');
+        if($email == 'default') 
+                throw new Exception('No email provided');
+        
+        $_token = $this->_getParam('token','default');
+        if($_token == 'default') 
+                throw new Exception('No token provided');
+        
+        $users = new Model_Users();
+        $select = $users->select();
+        $select->where('email = ?', $email);
+        $user = $users->fetchRow($select);
+        
+        if(is_null($user)) 
+                throw new Exception('Email not found');
+        
+        $tokens = new Zend_Db_Table('resetpass_tokens');
+        $select = $tokens->select();
+        $select->where('user_id = ?', $user->id);
+        $select->where('token = ?', $_token);
+        $token = $tokens->fetchRow($select);
+        
+        if(is_null($token)) 
+                throw new Exception('Token not found');
+        
+        $created = strtotime($token->created);
+        $diff    = time() - $created;
+        
+        $caducated = false;
+        if($diff > (60 * 60)) {
+            $caducated = true;            
+            $token->delete();
+        }
+        
+        if($this->getRequest()->isPost()){
+            if(!$caducated){
+                if(($_POST['npassword'] == $_POST['rpassword']) and !empty($_POST['npassword'])) {
+                    $user->password = md5($_POST['npassword']);
+                    $user->save();
+                    
+                    $token->delete();
+                    
+                    $notifier = new WS_Notifier($user->id);
+                    $notifier->passwordResetSuccess();
+                    
+                    setcookie('alert','Your password has been change. Please Login');
+                    $this->_redirect('/login');
+                } else {
+                    $this->view->error = "Password verification incorrect";
+                }
+            }
+        }
+        $this->view->caducated = $caducated;
     }
 }

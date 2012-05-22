@@ -3,6 +3,35 @@
 .profile-items .item p.check label { float: none; }
 .profile-items .item p.check input { vertical-align:baseline }
 input.schname { float:none !important; width:90px !important; }
+.item { position:relative;}
+.item .help {
+	position:absolute;
+	top:13px;
+	left:-35px;}
+.item .help a.eye {
+	display:block;
+	background:url(/images2/eye.png) no-repeat top left;
+	width:18px;
+	height:12px;
+	text-indent:-9999px;
+	cursor:pointer;}
+	.item .help:hover a.eye {
+		background-position:left -12px;}
+.item.first .help {
+	top:0px;}
+	.item .help a.tooltip3 {
+		background:url(/images2/help-tooltip-bg.png) top left no-repeat;
+		left: 17px;
+		padding:11px 12px;
+		position:absolute;
+		top:-102px;
+		z-index:1000;
+		display:none;}
+	.item .help:hover a.tooltip3 {
+		display:block;}
+
+.profile-items {
+	overflow:visible;}
 </style>
 <?php $durations = array(1,2,3,4,5,6,7,8,9,10,15,30,45,); ?>
 <form action="" method="post">
@@ -30,34 +59,19 @@ input.schname { float:none !important; width:90px !important; }
 			<div class="item-ttl">
 				Basic Information
 			</div><!-- closes item ttl -->
-			<div class="item first">
-				<input type="text" placeholder="The Restaurant name" class="noclean limitcc" name="title" rel="60" value="<?= $this->listing->title ?>" />
+			<div class="item first last">
+            	<?php $title = ($this->listing->title == "Untitled Listing") ? '' : $this->listing->title; ?>
+				<input tabindex="1" placeholder="The Restaurant's name" type="text" class="noclean limitcc" name="title" rel="60" value="<?= $title ?>" />
 				<h4>Title</h4>
 				<span>Restaurant name<br />
                 <span class="charsLeftInp"></span> Character Left</span>
-			</div><!-- closes item -->
-			<div class="item last">         
-	            <textarea placeholder="Write a nice description about your restaurant" name="description" class="noclean limitcc" rel="200" cols="30" rows="1"><?= $this->listing->description ?></textarea>
-				<h4>Short Description</h4>
-				<span>Write a description for your restaurant<br /><br />
-                You have <span class="charsLeftTxt"></span> Character left</span>
+                <div class="help">
+                    <a href="/images2/help/big-res-general-name.png" class="eye">help</a>
+                    <a href="/images2/help/big-res-general-name.png" class="tooltip3">
+                    <img src="https://static.tripfab.com/images2/help/small-res-general-name.png" /></a>
+                </div>
 			</div><!-- closes item -->
 			<div class="clear"></div>									
-		</div><!-- closes item-wrppr -->
-		
-		<div class="item-wrppr">
-			<div class="item-ttl">
-				Main Picture
-			</div><!-- closes item ttl -->
-			<div class="item last first">
-				<div class="picture">
-                	<?= $this->thumbnail('58', $this->listing->image, '','1:1') ?>
-					<input type="file" id="file_upload" name="file_upload" />
-				</div>
-				<h4>Picture Requirements</h4>
-				<span>Should be square, preferably 100x100 pixels, <br />and in JPEG, GIF, or PNG format.</span>
-			</div><!-- closes item -->
-			<div class="clear"></div>
 		</div><!-- closes item-wrppr -->
 		
 		<div class="item-wrppr">
@@ -162,6 +176,13 @@ input.schname { float:none !important; width:90px !important; }
                     <!-- closes meta -->
 				</div><!-- closes selects -->
 				<h4><?= $type->name ?></h4>
+                <?php if($yy == 0): ?>
+                <div class="help">
+                    <a href="/images2/help/big-res-general-schedules.png" class="eye">help</a>
+                    <a href="/images2/help/big-res-general-schedules.png" class="tooltip3">
+                    <img src="https://static.tripfab.com/images2/help/small-res-general-schedules.png" /></a>
+                </div>
+                <?php endif ?>
 			</div><!-- closes item -->
             <?php endforeach ?>
 			<div class="clear"></div>									
@@ -192,6 +213,11 @@ input.schname { float:none !important; width:90px !important; }
 				</div><!-- closes inner-container -->
 				<h4>Category</h4>
 				<span>Select categories</span>
+                <div class="help">
+                    <a href="/images2/help/big-res-general-category.png" class="eye">help</a>
+                    <a href="/images2/help/big-res-general-category.png" class="tooltip3">
+                    <img src="https://static.tripfab.com/images2/help/small-res-general-category.png" /></a>
+                </div>
 			</div><!-- closes item -->
             <!--
 			<div class="item last">
@@ -234,12 +260,17 @@ input.schname { float:none !important; width:90px !important; }
 				</div><!-- closes inner-container -->
 				<h4>Landscapes</h4>
 				<span>Select Landscapes</span>
+                <div class="help">
+                    <a href="/images2/help/big-res-general-landscape.png" class="eye">help</a>
+                    <a href="/images2/help/big-res-general-landscape.png" class="tooltip3">
+                    <img src="https://static.tripfab.com/images2/help/small-res-general-landscape.png" /></a>
+                </div>
 			</div><!-- closes item -->
 			<div class="clear"></div>									
 		</div><!-- closes item-wrppr -->
     </div><!-- closes profile-items -->
     <div class="foot">
-        <input type="submit" class="btn-1" value="Save Changes" />
+        <input type="submit" class="btn-1 noclean" value="Save Changes" />
         <a href="/provider/listings/desactivate/<?= $this->listing->id ?>">Delete Listing</a>
     </div><!-- closes foot -->
     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />

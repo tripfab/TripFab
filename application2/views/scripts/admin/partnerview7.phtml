@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<title><?= $this->user->name ?> : Partners - Admin | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+        <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+		<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+	    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+  		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />
+  		<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+	    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+		<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js?v=<?= $this->cssVC ?>"></script>
+    	<script type="text/javascript" src="/js2/admin/traveller-view.js?v=<?= $this->cssVC ?>"></script>
+			<script>
+				$(document).ready(function() {
+					$('a.lbc').fancybox({
+						padding: 0,
+						overlayColor: '#FFF',
+						overlayOpacity: '0.7',
+						showCloseButton: 'false'
+					});
+            		$("#report_tabs").tabs();
+				});
+			</script>
+		</head>
+		<body>
+			<div class="w1">
+    		<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
+			
+			<div class="w3_admin">
+				<div class="sub_menu">
+					<h2><?php echo $this->user->name?>. <span>Staffs</span></h2>
+					<a href="#password-reset" class="btn-10 lbc">Reset Password</a>
+                    <a href="#activate" class="btn-10 act lbc" id="act-btn-342"<?php echo $this->user->active==1 ? 'style="display:none"' : '';?> >Activate Partner</a>
+            		<a href="#deactivate" class="btn-10 deact lbc" id="deact-btn-342" <?php echo $this->user->active==0 ? 'style="display:none"' : '';?>>Deactivate Partner</a>
+				</div><!--SUB_MENU-->
+            </div><!--W3-->
+			<div class="all_listing">
+				<div id="user_view" class="listing-wrapper wrapper">
+					<div class="listing-content">
+						<div class="left">
+							<ul>
+								<li id="nav1"><a href="<?php echo $this->url(array('seq'=>1))?>">General Information</a></li>
+								<li id="nav2"><a href="<?php echo $this->url(array('seq'=>2))?>">Listings</a></li>
+								<li id="nav3"><a href="<?php echo $this->url(array('seq'=>3))?>">Reservations</a></li>
+								<li id="nav4"><a href="<?php echo $this->url(array('seq'=>4))?>">Offers</a></li>
+								<li id="nav5"><a href="<?php echo $this->url(array('seq'=>5))?>">Bank Accounts</a></li>
+								<li id="nav7" class="current"><a href="<?php echo $this->url(array('seq'=>7))?>">Staff</a></li>
+							</ul>
+						</div><!-- closes left -->
+						<div class="right">
+                        
+                        
+							<?php if($this->successMessage): ?>
+							<script type="text/javascript">
+                                showAlert("Your changes have been saved");
+                            </script>
+                            <?php endif ?>	
+                        
+							<div class="lstng-details" id="content">
+
+    <h3 class="title">Staffs <a href="/admin/users/partners" class="back">Back to Partners</a></h3>
+	<div class="block">
+	 <?php if(count($this->staffs)): ?>
+		<?php foreach($this->staffs as $staff):?>
+		<div class="bank-account">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+                    <td width="250">
+						<?php echo $staff->fname . ' ' . $staff->lname;?>
+					</td>
+					<td width="210">
+						Position: <strong><?php echo $staff->position ?></strong>
+                        <br/>Email: <strong><?php echo $staff->email ?></strong>
+					</td>
+					<td width="90"><a href="<?php echo $this->url(array('seq'=>8, 'q'=>$staff->id));?>" class="edit">Edit Info</a></td>
+					<td width="120"><a href="#confirm-delete" identifier="<?php echo $staff->id;?>"  class="remove lbc">Delete Staff</a>
+				</tr>
+			</table>
+		</div><!--BANK-ACCOUNT-->
+		<?php endforeach;?>
+       <?php else:?>
+		<div class="bank-account">
+       	<center>No staff added </center>
+		</div><!--BANK-ACCOUNT-->
+       <?php endif;?>
+		
+		
+		<a href="<?php echo $this->url(array('seq'=>8, 'q'=>0));?>" class="add_accnt">Add Staff</a>
+		
+											
+	</div><!--BLOCK-->
+
+
+							</div>
+							<!-- closes lstng-details -->
+						</div>
+						<!-- closes right -->
+					</div>
+					<!-- closes listing-content -->
+				</div><!--USER_VIEW-->
+
+			</div><!--ALL_LISTING-->
+					
+			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+			<?php echo $this->partial('admin_partials/partner.phtml', array('name'=>$this->user->name, 'userId'=>$this->user->user_id)); ?>
+            
+            
+            <div class="hidden">
+            
+                <div class="lb activation" id="activate">
+                <div class="top">Activate Listing </div><!--TOP-->
+                <form method="post" action="">
+                    <fieldset>
+                        <div class="cont">
+                            <p>Are you sure activate <?php echo $this->user->name?>?</p>
+                        </div><!--CONT-->
+                        <div class="bottom">
+                            <a href="javascript://" class="btn-1" id="btn-activate-326">Activate</a>
+                            <a href="javascript://" class="btn-10" id="btn-cancel-326">Cancel</a>
+                        </div><!--BOTTOM-->
+                    </fieldset>
+                </form>
+            </div><!--ACTIVATE-->
+            
+            <div class="lb activation" id="deactivate">
+                <div class="top">Desactivate Listing </div><!--TOP-->
+                <form method="post" action="">
+                    <fieldset>
+                        <div class="cont">
+                            <p>Are you sure deactivate the <?php echo $this->user->name?>?</p>
+                        </div><!--CONT-->
+                        <div class="bottom">
+                            <a href="javascript://" class="btn-1" id="btn-deactivate-327">Deactivate</a>
+                            <a href="javascript://" class="btn-10" id="btn-cancel-327">Cancel</a>
+                        </div><!--BOTTOM-->
+                    </fieldset>
+                </form>
+            </div><!--ACTIVATE-->
+        
+            
+            </div><!--HIDDEN-->
+            
+            
+            
+		</div>
+		<!-- closes w1 -->
+		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+		
+<div class="hidden">
+	<div class="lightbox-2" id="password-reset">
+		<h2>Reset Password</h2>
+		<h3>Do you want to reset the password to Karina Romaine123</h3>
+		<div class="buttons">
+			<ul>
+				<li><a href="" class="btn-1">Reset</a></li>
+				<li><a href="javascript://" class="btn-10" id="btnf123">Cancel</a></li>
+			</ul>
+		</div><!--BUTTONS-->
+	</div><!--PASSWORD-RESET-->
+</div><!--HIDDEN--> 
+
+<div class="hidden">
+	<div class="lightbox-2" id="confirm-delete">
+		<h2>Delete Staff</h2>
+		<h3>Do you want to delete staff?</h3>
+		<div class="buttons">
+			<ul>
+				<li><a href="javascript://" class="btn-1" id="btn103">Yes</a></li>
+				<li><a href="javascript://" class="btn-10" id="btn102">No</a></li>
+			</ul>
+		</div><!--BUTTONS-->
+	</div><!--PASSWORD-RESET-->
+</div><!--HIDDEN--> 
+
+
+<script type="text/javascript">
+	var listingId = '<?php echo $this->user->user_id?>';
+	var staffId = null;
+	var basedurl = '<?php echo $this->url(array('seq'=>'7a', 'q'=>null));?>';
+	
+	$(".remove").click(function(){
+		staffId = $(this).attr('identifier');
+	});
+	
+	$("#btnf123").click(function(){
+		$.fancybox.close();
+	});
+	$("#btn103").click(function(){
+		location.href=basedurl + '/' +  staffId;
+	});
+	$("#btn102").click(function(){
+		$.fancybox.close();
+	});
+	$("#btn-cancel-327").click(function(){
+		$.fancybox.close();
+	});
+	
+	$("#btn-cancel-326").click(function(){
+		$.fancybox.close();
+	});
+	$("#btn-activate-326").click(function(){
+		changeListingStatus(listingId, 1);
+	});
+	
+	$("#btn-deactivate-327").click(function(){
+		changeListingStatus(listingId, 0);
+	});
+	
+	function changeListingStatus(listingId, action){
+		$.ajax({ 
+		   type: "POST", 
+		   url: "/ajax/usertatus/", 
+		   data: 'id=' + listingId + '&act=' + action ,
+		   success: function(json, status){
+				$.fancybox.close();
+				if(json=="success"){
+					 showAlert("Listing has been updated successfully");
+					 if(action==1){
+						$("#act-btn-342").hide(); 
+						$("#deact-btn-342").show(); 
+					 }
+					 else{
+						$("#act-btn-342").show(); 
+						$("#deact-btn-342").hide(); 
+					 }
+				}
+		   }, 
+		   error:function(jqXHR, textStatus, errorThrown){ 
+				alert(textStatus);
+		   }
+		});
+	}
+</script>
+	</body>
+</html>

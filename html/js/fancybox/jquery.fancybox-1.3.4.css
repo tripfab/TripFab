@@ -70,6 +70,13 @@
 	width: 100%;
 	height: 100%;
 	background: none;
+	-webkit-box-shadow: 0px 0px 4px 0px #b3b3b3;
+	-moz-box-shadow: 0px 0px 4px 0px #b3b3b3;
+	box-shadow: 0px 0px 4px 0px #b3b3b3;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	behavior: url(/PIE.htc);
 }
 
 #fancybox-content {
@@ -95,11 +102,11 @@
 
 #fancybox-close {
 	position: absolute;
-	top: -15px;
+	top: -18px;
 	right: -15px;
-	width: 30px;
-	height: 30px;
-	background: transparent url('fancybox.png') -40px 0px;
+	width: 42px;
+	height: 43px;
+	background: url(https://developer.tripfab.com/images6/fancyboxclose.png) no-repeat 0 0;
 	cursor: pointer;
 	z-index: 1103;
 	display: none;
@@ -196,61 +203,61 @@
 }
 
 #fancybox-bg-n {
-	top: -20px;
+	/*top: -20px;
 	left: 0;
 	width: 100%;
-	background-image: url('fancybox-x.png');
+	background-image: url('fancybox-x.png');*/
 }
 
 #fancybox-bg-ne {
-	top: -20px;
+	/*top: -20px;
 	right: -20px;
 	background-image: url('fancybox.png');
-	background-position: -40px -162px;
+	background-position: -40px -162px;*/
 }
 
 #fancybox-bg-e {
-	top: 0;
+	/*top: 0;
 	right: -20px;
 	height: 100%;
 	background-image: url('fancybox-y.png');
-	background-position: -20px 0px;
+	background-position: -20px 0px;*/
 }
 
 #fancybox-bg-se {
-	bottom: -20px;
+	/*bottom: -20px;
 	right: -20px;
 	background-image: url('fancybox.png');
-	background-position: -40px -182px; 
+	background-position: -40px -182px; */
 }
 
 #fancybox-bg-s {
-	bottom: -20px;
+	/*bottom: -20px;
 	left: 0;
 	width: 100%;
 	background-image: url('fancybox-x.png');
-	background-position: 0px -20px;
+	background-position: 0px -20px;*/
 }
 
 #fancybox-bg-sw {
-	bottom: -20px;
+	/*bottom: -20px;
 	left: -20px;
 	background-image: url('fancybox.png');
-	background-position: -40px -142px;
+	background-position: -40px -142px;*/
 }
 
 #fancybox-bg-w {
-	top: 0;
+	/*top: 0;
 	left: -20px;
 	height: 100%;
-	background-image: url('fancybox-y.png');
+	background-image: url('fancybox-y.png');*/
 }
 
 #fancybox-bg-nw {
-	top: -20px;
+	/*top: -20px;
 	left: -20px;
 	background-image: url('fancybox.png');
-	background-position: -40px -122px;
+	background-position: -40px -122px;*/
 }
 
 #fancybox-title {

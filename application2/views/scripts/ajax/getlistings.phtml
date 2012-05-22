@@ -1,34 +1,225 @@
+<?php $_imgloading = 'https://static.tripfab.com/images2/listing_loading.gif'; ?>
+<?php $_classes = array(
+		2 => 'restaurant',
+		4 => 'sights',
+		5 => 'hotel',
+		6 => 'activity',
+		7 => 'entertaiment'
+); 
+
+$css_name = array(
+		2 => 'gen',
+		4 => 'gen',
+		5 => 'hotel',
+		6 => 'activity',
+		7 => 'gen'
+) ;
+$icons = array(
+		2 => 'rest',
+		4 => 'sght',
+		5 => 'htl',
+		6 => 'act',
+		7 => 'ent'
+) ;
+$cat_name = array(
+		2 => 'Restaurant',
+		4 => 'Tourist Sight',
+		5 => 'Hotel',
+		6 => 'Activity',
+		7 => 'Entertainment'
+); 
+$per_night = array(
+		2 => 'per person',
+		4 => 'per person',
+		5 => 'per night',
+		6 => 'per person',
+		7 => 'per person'
+); 
+
+
+?>
+<?php if(!is_null($this->city)): ?>
 <?php $url = $this->baseUrl() .'/'. $this->country->identifier .'/'. $this->city->identifier .'/filter';
 $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this->stars; ?>
+
+<div style="top: 0pt;" class="sort">
+    <h3>There are <strong><?= $this->listing_count ?> <?= $this->categ ?> in <?= $this->city->title ?>, <?= $this->country->title ?></strong></h3>
+    <div class="filter">
+        <form action="">
+            <fieldset>
+                <select class="js-search-sort">
+                    <?php foreach($this->sortOptions as $optkey => $opt):?>
+                    <?php $selected = ($optkey == $this->activeSort) ? 'selected="selected"' : '' ?>
+                    <option <?= $selected ?> value="<?= $optkey ?>"><?= $opt ?></option>
+                    <?php endforeach;?>
+                </select>
+                <label>Sort by:</label>
+                <div class="clear"></div>
+            </fieldset>
+        </form>
+    </div><!--FILTER-->
+    <span class="shw"></span>
+</div><!--SORT-->
+<?php else: ?>
+<?php $url = $this->baseUrl() .'/'. $this->country->identifier .'/filter';
+$cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this->stars; ?>
+<div class="sort"><h3>There are <strong><?= $this->listing_count ?> <?= $this->categ ?> in <?= $this->country->title ?></strong></h3><span class="shw"></span></div><!--SORT-->
+<?php endif ?>
+<div class="results-wrapper">
+	
+<?php if(!$this->city): ?>
+<div class="no_city">
+	<p><strong>Too many listings?</strong> You can narrow these down by selecting a specific city instead of a whole country.</p>
+	<a href="#cityExplore" class="js-filter-cities">Select a Costa Rica City</a>
+</div><!--NO_CITY-->
+<?php endif ?>	
+	
+<?php if(count($this->listings) > 0): ?>
+<?php if(!isset($_COOKIE['tooltipHelpSearch'])): ?>
+<div class="firstime_tip">
+	<img class="arrow" src="https://developer.tripfab.com/images6/arrow-24.png" alt="">
+	<div class="cont">
+		<img src="https://developer.tripfab.com/images6/stamp.png" width="75" height="75" alt="" />
+		<p><strong>Planning a Trip?</strong>
+            Hey! If you're planning a trip, you can create your own customized trip, add things to do there and book it when you're ready to travel.
+        </p>
+	</div><!--CONT-->
+	<div class="bot">
+		<form action="post" id="tooltipHelpSearch">
+			<fieldset>
+				<label><input checked="checked" type="checkbox" name="" value="" />Don’t show again</label>
+				<input type="submit" value="Okay" class="btn-1" />
+			</fieldset>
+		</form>
+	</div><!--BOT-->
+</div><!--FIRSTIME_TIP-->
+<?php endif ?>
+<?php endif ?>
+
 <div class="loading"><div class="load">Loading...</div></div>
 <?php if(count($this->listings) > 0): ?>
-<?php foreach($this->listings as $i => $list): ?>
-<?php $class = ((($i+1) % 3) == 0) ? 'last' : '' ?>
-<div class="result <?= $class ?>">
-	<div class="img-wrapper">
-    	<?php if($this->user->role_id == 2): ?>
-		<a href="#" class="been">Been there</a>
+<?php foreach($this->listings as $i => $list): ?>	
+    <div class="single <?=$css_name[$list->main_type] ?>-1">
+        <?php if($list->main_type == 2 || $list->main_type == 4 || $list->main_type == 7):?>
+        <div class="image">
+        	<?php if((!is_null($this->user)) && $this->user->role_id == 2): ?>
+                <?php if(count($this->trips) > 0): ?>
+                <a href="#" class="add been" data-listing="<?= $list->id ?>"></a>
+                <?php else: ?>
+                <a href="#" class="add been js-new-trip not" data-listing="<?= $list->id ?>"></a>
+                <?php endif ?>
+            <?php elseif(!$this->user): ?>
+                <a href="/signup" class="add been not js-signup"></a>
+        	<?php endif ?>
+            <?= $this->lazylisting(array('width'=>'241', 'height'=>'183'), $list->image, '','241:241',null,$_imgloading) ?>
+            <ul class="rating">
+                <li><a href="" class="slct"></a></li>
+                <li><a href="" class="slct"></a></li>
+                <li><a href="" class="slct"></a></li>
+                <li><a href="" class="nrml"></a></li>
+                <li><a href="" class="nrml"></a></li>
+            </ul>
+            <div class="hvr">
+            	<a class="restaurant" href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+                View <?=$cat_name[$list->main_type] ?>
+                <span> </span>
+                </a>
+			</div><!--HVR-->
+        </div><!--IMAGE-->
+        <h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+		<?= (strlen($list->title) > 40) ? substr($list->title, 0, 39) . '...' : $list->title ?></a></h4>
+
+        <div class="info">
+            <span class="location"><span></span>Location <strong><?= $list->city ?>, <?= $list->countrycode ?></strong></span>
+            <!--<div class="price"><sup>$</sup><?= $list->price ?> <sub><?=$per_night[$list->main_type] ?></sub></div>-->
+            <div class="clear"></div>
+        </div><!--INFO-->
+ 
+         <?php else:?>
+         <?php if ($list->main_type == 5): ?>
+        <div class="image">
+        	<?php if((!is_null($this->user)) && $this->user->role_id == 2): ?>
+                <?php if(count($this->trips) > 0): ?>
+                <a href="#" class="add been" data-listing="<?= $list->id ?>"></a>
+                <?php else: ?>
+                <a href="#" class="add been js-new-trip not" data-listing="<?= $list->id ?>"></a>
+                <?php endif ?>
+            <?php elseif(!$this->user): ?>
+                <a href="/signup" class="add been not js-signup"></a>
+        	<?php endif ?>
+            <?= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124',null,$_imgloading) ?>
+            
+            <ul class="rating">
+                <li><a href="" class="slct"></a></li>
+                <li><a href="" class="slct"></a></li>
+                <li><a href="" class="slct"></a></li>
+                <li><a href="" class="nrml"></a></li>
+                <li><a href="" class="nrml"></a></li>
+            </ul>
+            <div class="hvr">
+            	<a class="restaurant" href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+                View <?=$cat_name[$list->main_type] ?>
+                <span> </span>
+                </a>
+			</div><!--HVR-->
+        </div><!--IMAGE-->
+        <h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+		<?= (strlen($list->title) > 40) ? substr($list->title, 0, 39) . '...' : $list->title ?></a></h4>
+   		<?php if($list->main_type == 6):?>
+            <span>by <?= $list->vendor_name?></span>
+        <?php endif;?>
+        <p><?= substr($list->description, 0, 100) ?>...</p>      
+        <div class="info">
+            <span class="location"><span></span>Location <strong><?= $list->city ?>, <?= $list->countrycode ?></strong></span>
+            <div class="price"><span><?= $this->formatnumber($list->price) ?></span><sup>$</sup> <sub><?=$per_night[$list->main_type] ?></sub></div>
+            <div class="clear"></div>
+        </div><!--INFO-->
+        <?php else: ?>
+        <div class="image">
+        	<?php if((!is_null($this->user)) && $this->user->role_id == 2): ?>
+                <?php if(count($this->trips) > 0): ?>
+                <a href="#" class="add been" data-listing="<?= $list->id ?>"></a>
+                <?php else: ?>
+                <a href="#" class="add been js-new-trip not" data-listing="<?= $list->id ?>"></a>
+                <?php endif ?>
+            <?php elseif(!$this->user): ?>
+                <a href="/signup" class="add been not js-signup"></a>
+        	<?php endif ?>
+            <?= $this->lazylisting(array('width'=>'241', 'height'=>'124'), $list->image, '','241:124',null,$_imgloading) ?>
+            
+            <ul class="rating">
+                <li><a href="" class="slct"></a></li>
+                <li><a href="" class="slct"></a></li>
+                <li><a href="" class="slct"></a></li>
+                <li><a href="" class="nrml"></a></li>
+                <li><a href="" class="nrml"></a></li>
+            </ul>
+            <div class="hvr">
+            	<a class="restaurant" href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+                View <?=$cat_name[$list->main_type] ?>
+                <span> </span>
+                </a>
+        	</div><!--HVR-->
+        </div><!--IMAGE-->
+        <h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+		<?= (strlen($list->title) > 40) ? substr($list->title, 0, 39) . '...' : $list->title ?></a></h4>
+        	<?php if($list->main_type == 6):?>
+            <span>by <?= $list->vendor_name?></span>
+        <?php endif;?>
+        <p><?= substr($list->description, 0, 100) ?>...</p>      
+        <div class="info">
+            <span class="location"><span></span>Location <strong><?= $list->city ?>, <?= $list->countrycode ?></strong></span>
+            <div class="price"><span><?= $this->formatnumber($list->price) ?></span><sup>$</sup> <sub><?=$per_night[$list->main_type] ?></sub></div>
+            <div class="clear"></div>
+        </div><!--INFO-->
         <?php endif ?>
-        <a href="<?= str_replace('filter', $list->identifier, $url) ?>">
-		<?php // $this->thumbnail(array('width'=>'225', 'height'=>'167'), $list->image, '','225:167') ?>
-        <img width="225" height="167" src="/images/lph/th/<?= $this->image ?><?= $i + 1 ?>.jpg" />
-        
-		<h4><?= $list->title ?></h4>
-        </a>
-        <?php if($this->user->role_id == 2): ?>
-        <?= $this->partial('partials/trips.phtml', array('trips'=> $this->trips, 'id'=>$list->id)); ?>
-        <?php endif ?>
-	</div><!-- closes img-wrapper -->
-	<div class="meta">
-		<span class="cat-1"><img src="/images2/cleardot.gif" alt="" /><?= $this->categories[$list->main_type]['name'] ?></span>
-		<?php if($list->price > 0): ?>
-		<strong>$<?= $list->price ?><em> / person</em></strong>
-		<?php endif ?>
-	</div><!-- closes meta -->
-	<p class="listing_description"><?= $list->description ?></p>
-	<a href="<?= str_replace('filter', $list->identifier, $url) ?>" class="btn-1">View activity</a>
-</div><!-- closes result -->
+        <?php endif;?>
+    </div><!--SINGLE-->
 <?php endforeach ?>
+<div class="clear"></div>
 <?php else: ?>
 <p>No Listings Found</p>
+<div class="clear"></div>
 <?php endif ?>
+</div><!-- closes results-wrapper -->
+<div class="loading2"></div>

@@ -1,107 +1,184 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-	<title>Plan the perfect trip, in one place | Tripfab.com</title>
-	<link type="image/png" rel="icon" href="/images2/favicon3.ico" />
-    <link type="text/css"  rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
-    <link type="text/css"  rel="stylesheet" href="/css6/home2.css?v=<?= $this->cssVC ?>" />
-    <link type="text/css"  rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
-    <link type="text/css"  rel="stylesheet" href="/css2/index/index.css?v=<?= $this->cssVC ?>" />
-    <link type="text/css"  rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
-    <link href="/css6/calendar.css?v=<?= $this->cssVC ?>" rel="stylesheet" type="text/css">
-	<!--[if IE 7]><link type="text/css" rel="stylesheet" href="css2/ie.css" /><![endif]-->
-	<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
-	<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
-    <style type="text/css">
-	.cart-B { display:none !important;}
-	</style>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+	<title>Tripfab - Making your trip fabulous!</title>
+    <link type="text/css" rel="stylesheet" href="/css3/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css3/all2.css" />
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
 </head>
-<body id="home2">
-<div id="wp_all">
-	<?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>
-	<div id="wp_content">
-		<div id="wrapper-top">
-		<div class="pattern"></div>
-		<div class="top"> 
-			<?php $rand = mt_rand(1,2) ?>
-			<img class="high background" src="https://static.tripfab.com/images6/home_top<?= $rand ?>.jpg"  style="display:none;" />
-        </div><!--TOP-->
-		<div class="wrap">
-			<div class="main">
-				<div class="left">
-					<h2>Plan your whole trip<br /> all in one place</h2>
-					<h3>From things to do and everything in between -<br /> directly from businesses.</h3>
-					<div id="search-box">
-						<div class="search">
-                            <form action="/costa_rica">
-                                <input id="tags" type="text" name="" value="Search for city" />
-                                <input type="submit" name="" value="Search" class="btn-1 noclean" />
-                                <div id="note1" class="note"><em></em>
-	                               	<p class="flag">We have listings only in <strong>Costa Rica</strong>, other countries coming soon.</p>
-                               	</div><!--NOTE1-->
-	                            <div id="note2" class="note"><em></em>
-	                            	<p><strong>0 Results. </strong>You know we work just in Costa Rica. Right?</p>
-	                            </div><!--NOTE2-->
-                            </form>	
-							<div class="clear"></div>
-						</div><!--SEARCH--> 
-					</div><!--SEARCH-BOX-->
-				</div><!--LEFT-->				
-				<div class="right">
-					<div class="video">
-						<a href=""></a>
-					</div>
-				</div><!--RIGHT-->
-				<div class="clear"></div>
-			</div><!--MAIN-->
-		</div><!--WRAP-->
-		<div class="bottom">
-			<div class="wrap">
-				<div class="each">
-					<span class="things"></span>
-					<div class="inner">
-						<h4><a href="/costa_rica" class="link1">Discover Costa Rica</a></h4>
-						<p>Discover amazing hotels, restaurants, places to see and things to do.</p>
-					</div><!--INNER-->
-				</div><!--EACH-->
-				<div class="each">
-					<span class="create"></span>
-					<div class="inner">
-						<h4><a href="/trips/costa_rica" class="link1">Buy Pre-Planned Trips</a></h4>
-						<p>Effortlessly book preplanned trips with the click of a button.</p>
-					</div>
-				</div><!--EACH-->
-				<div class="each last">
-					<span class="build"></span>
-					<div class="inner">
-                    	<?php if($this->user): ?>
-						<h4><a href="/user/trips" class="link1">Create Custom Trips</a></h4>
-                        <?php else: ?>
-						<h4><a href="/mytrips" class="link1">Create Custom Trips</a></h4>
-                        <?php endif ?>
-						<p>Custom create your dream vacation à la carte – whatever you want, whenever you want.</p>
-					</div>
-				</div><!--EACH-->
-				<div class="clear"></div>
-			</div><!--WRAP--> 
-		</div><!--BOTTOM--> 
-	</div><!--WRAPPER-TOP-->
-	<div id="popular-cities">
-		<div class="wrap">
-			<h5>Hot Cities in Costa Rica</h5>
-			<div class="all">
-				<?= $this->partial('partials/indexcities.phtml', array('cities'=>$this->cities, 'country'=>$this->country)) ?>
-			</div><!--ALL-->
-		</div><!--WRAP-->
-	</div><!--POPULAR-CITIES-->
-	</div><!--wp_content-->
-	<div id="wp_footer">
-		<?= $this->partial('partials/footer.phtml'); ?>
-	</div><!--WP_FOOTER-->
-</div><!--WP_ALL-->
-<div id="citiesAutocompleteContainer"></div>
-<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
-<script type="text/javascript" src="/js2/index/index.js?v=<?= $this->cssVC ?>"></script>
+<body>
+<div id="main">
+    <div class="cont">
+    	<div class="top">
+    		<h1>Tripfab</h1>
+    		<h2>
+    		Our revolutionary new way to travel is finally here. <br />
+    		Are you ready?</h2>
+    	</div><!--TOP-->
+    	<div class="mid">
+    		<h3>LAUNCH IN</h3>
+            <div class="inner">
+                <div class="counter">
+                    
+                </div><!--COUNTER-->
+            </div>
+    	</div><!--MID-->
+    	<div class="features">
+    		<div class="single ">
+    			<h4><span class="commission"></span>Save Money</h4>
+    			<p>When you book with TripFab you book <em>directly</em> from businesses with no middlemen involved – saving the 20-40% commission you pay using Expedia, Orbitz, Viator or any other travel site.</p>
+    		</div><!--SINGLE-->
+    		<div class="single">
+	    		<h4><span class="location"></span>Be your <em>own</em> travel agent</h4>
+	    		<p>With TripFab you discover, plan and book your entire trip all in one place and one transaction. From activities, tours, hotels, transportation and anything else you can think of – it's all here, and it's all free.</p>
+    		</div><!--SINGLE-->
+    		<div class="single last">
+    			<h4><span class="create"></span>Create and Manage Trips</h4>
+    			<p>TripFab has a one-of-a-kind tool that helps you plan and organize your entire trip. We make it easy, organized, and simple so you can plan the perfect trip day-by-day. It's awesome.</p>
+    		</div><!--SINGLE-->
+    	</div><!--FEATURES-->
+    	
+    	<div class="form-wrapper">
+    	    <div class="bg_mail"></div>
+    	    <div class="w3">
+    	        <form action="" class="email-form">
+    	            <fieldset>
+    	                <label><img src="https://www.tripfab.com/images3/title-curiosity.png" width="101" height="37" alt="" /></label>
+    	                <input name="email" type="text" class="required email" value="Get news and updates..." />
+    	                <input class="send" type="submit" value="" />
+    	                <div class="popUp">
+    	                    <h4>Why should I enter my email?</h4>
+    	                    <p>Enter your email and be our first BETA testers, along with getting some cool surprise stuff from us as a thank you.</p>
+    	                </div>
+    	            </fieldset>
+    	        </form>
+    	        <div class="message-sent">
+    	            <h4>Thanks! You'll know more about us soon :)</h4>
+    	        </div><!--MESSAGE-SENT-->
+    	    </div><!-- closes w3-->
+    	</div><!-- closes form-wrapper -->
+    </div><!--CONT-->
+    <div id="footer">
+        <div class="w1">
+    
+            <div class="bottom">
+                <div class="wrapper">
+                    <p><img src="https://www.tripfab.com/images3/logo_footer.png" width="36" height="32" alt="" />
+                    Tripfab is lovingly designed in a tropical paradise
+                    <span>Copyright &copy; 2012 Tripfab</span></p>
+                    <ul>
+                        <li><a href="http://www.facebook.com/TripFab">Facebook</a></li>
+                        <li><a href="http://twitter.com/#!/TripFab">Twitter</a></li>
+                        <li><a href="http://plus.google.com/108576021199856132768">Google+</a></li>
+                        <li><a href="mailto:hello@tripfab.com">eMail</a></li>
+                        <li><a href="http://blog.tripfab.com/">Blog</a></li>
+                    </ul>
+                </div><!-- closes wrapper -->
+            </div><!--WRAPPER-->
+        </div><!-- closes w1 -->
+    </div><!-- closes footer -->
+</div><!-- closes main -->
+
+<script type="text/javascript" src="/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/js3/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js3/jquery.countdown.js"></script>
+<script type="text/javascript" src="/js3/main2.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24981182-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 </body>
 </html>
+<?php /**
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title>Tripfab - Making your trip fabulous!</title>
+    <link type="text/css" rel="stylesheet" href="/css3/reset.css" />
+    <link type="text/css" rel="stylesheet" href="/css3/all2.css" />
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+</head>
+
+<body>
+<div id="main">
+    <div class="wrapper">
+        <div class="left">
+            <div class="bg_stars">
+                <img class="icon" src="images3/ico-1.png" alt="" />
+                <img class="logo" src="images3/logo.png" alt="" />
+            </div>
+        </div><!-- closes left -->
+        <div class="right">
+            <img src="images3/ico-2.png" alt="" />
+            <p>The travel industry <br />is going to <img src="images3/ico-3.png" alt="" /> their pants. <span>Seriously.</span></p> 
+        </div><!-- closes right -->
+        <div class="clear"></div>
+    </div><!-- closes wrapper -->
+    <div id="footer">
+        <div class="w1">
+            <div class="form-wrapper">
+                <div class="bg_mail"></div>
+                <div class="w3">
+                    <form action="" class="email-form">
+                        <fieldset>
+                            <label><img src="images3/title-curiosity.png" width="72" height="28" alt="" /></label>
+                            <input name="email" type="text" class="required email" value="Get news and updates..." />
+                            <input class="send" type="submit" value="" />
+                            <div class="popUp">
+                                <h4>Why should I enter my email?</h4>
+                                <p>Enter your email and be our first BETA testers, along with getting some cool surprise stuff from us as a thank you.</p>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <div class="message-sent">
+                        <h4>Thanks! You'll know more about us soon :)</h4>
+                    </div><!--MESSAGE-SENT-->
+                </div><!-- closes w3-->
+            </div><!-- closes form-wrapper -->
+            <div class="bottom">
+                <div class="wrapper">
+                    <p><img src="images3/logo_footer.png" width="36" height="32" alt="" />
+                    Tripfab is lovingly designed in a tropical paradise
+                    <span>Copyright &copy; 2012 Tripfab</span></p>
+                    <ul>
+                        <li><a href="http://www.facebook.com/TripFab">Facebook</a></li>
+                        <li><a href="http://twitter.com/#!/TripFab">Twitter</a></li>
+                        <li><a href="http://plus.google.com/108576021199856132768">Google+</a></li>
+                        <li><a href="mailto:hello@tripfab.com">eMail</a></li>
+                        <li><a href="http://blog.tripfab.com/">Blog</a></li>
+                    </ul>
+                </div><!-- closes wrapper -->
+            </div><!--WRAPPER-->
+        </div><!-- closes w1 -->
+    </div><!-- closes footer -->
+</div><!-- closes main -->
+<script type="text/javascript" src="/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/js3/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js3/main2.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24981182-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>
+*/ ?>

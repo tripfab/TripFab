@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<title>Countries - Admin | Tripfab.com</title>
+	    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+        <link type="text/css" rel="stylesheet" href="/css5/reset.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css5/all.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+  		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />
+  		<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+		<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+		<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js?v=<?= $this->cssVC ?>"></script>
+		<script>
+        $(document).ready(function() {
+            $('a.lbc').fancybox({
+                padding: 0,
+                overlayColor: '#FFF',
+                overlayOpacity: '0.7',
+                showCloseButton: 'false',
+            });
+            $("#report_tabs").tabs();
+        });
+    </script>
+	</head>
+	<body>
+		<div class="w1">
+    	<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
+			
+			<div class="w3_admin">
+				<div class="sub_menu">
+					<h2>Countries. <span>There are <?php echo $this->numCount?>.</span></h2>
+					<a href="/admin/places/add/country" class="btn-1">Create New Country</a>
+					<ul class="sub_links">
+						<li><a href="/admin/places/regions">Regions</a></li>
+						<li class="select"><a href="/admin/places/countries">Countries</a></li>
+						<li><a href="/admin/places/cities">Cities</a></li>
+					</ul>
+				</div><!--SUB_MENU-->
+            </div><!--W3-->
+			<div class="all_listing">
+				<div class="search_list">
+					<form action="" onsubmit="return false">
+						<input type="text" placeholder="Search places by Name" name="q" id="q" value="<?php echo $this->searchText?>"/>
+						<input type="button" class="btn-1" value="Search" onclick="searchSubmit()" />
+					</form>
+					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
+				</div><!--SEARCH_LIST-->
+				<div class="list_content">
+					<table width="100%" border="0">
+						<tr>
+							<th width="130"><a href="<?php echo $this->url(array('sort'=>0, 'seq'=>$this->paramSort == 0 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Country Name</a></th>
+							<th width="70"><a href="<?php echo $this->url(array('sort'=>1, 'seq'=>$this->paramSort == 1 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Region</a></th>
+							<th width="70"><a href="<?php echo $this->url(array('sort'=>1, 'seq'=>$this->paramSort == 2 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Cities</a></th>
+							<th width="90"><a href="">Partners</a></th>
+							<th width="80"><a href="<?php echo $this->url(array('sort'=>3, 'seq'=>$this->paramSort == 4 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Hotels</a></th>
+							<th width="90"><a href="<?php echo $this->url(array('sort'=>4, 'seq'=>$this->paramSort == 5 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Activities</a></th>
+							<th width="105"><a href="<?php echo $this->url(array('sort'=>5, 'seq'=>$this->paramSort == 6 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Restaurants</a></th>
+							<th width="125"><a href="<?php echo $this->url(array('sort'=>6, 'seq'=>$this->paramSort == 7 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Entertainments</a></th>
+							<th width="105"><a href="<?php echo $this->url(array('sort'=>7, 'seq'=>$this->paramSort == 8 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Tourist Sighs</a></th>
+							<th width="65" class="last">&nbsp;</th>
+						</tr>
+						<?php foreach($this->paginator as $key=>$listing):?>
+						<tr  <?php echo $key==0 ? 'class="first"' : ''?>>
+							<td><?php echo $listing->countryName?></td>
+							<td><a href="<?php echo $this->url(array('q'=>'','co'=>$listing->region_id));?>"><?php echo $listing->region_name ?></a></td>
+							<td><a href="<?php echo $this->url(array('controller'=>'admin', 'action'=>'places', 'task'=>'cities','q'=>'','co'=>$listing->id)); ?>"><?php echo $listing->cityTotal?></td>
+							<td><?php echo @$listing->partnerTotal?></td>
+							<td><a href="<?php echo $this->url(array('controller'=>'admin', 'action'=>'listings', 'task'=>'hotels','q'=>'', 'ct'=>'', 'page'=>'default','co'=>$listing->id)); ?>"><?php echo $listing->hotelsTotal?></a></td>
+							<td><a href="<?php echo $this->url(array('controller'=>'admin', 'action'=>'listings', 'task'=>'activities','q'=>'', 'ct'=>'', 'page'=>'default','co'=>$listing->id)); ?>"><?php echo $listing->activityTotal?></a></td>
+							<td><a href="<?php echo $this->url(array('controller'=>'admin', 'action'=>'listings', 'task'=>'restaurants','q'=>'', 'ct'=>'', 'page'=>'default','co'=>$listing->id)); ?>"><?php echo $listing->restaurantTotal?></a></td>
+							<td><a href="<?php echo $this->url(array('controller'=>'admin', 'action'=>'listings', 'task'=>'entertainments','q'=>'', 'ct'=>'', 'page'=>'default','co'=>$listing->id)); ?>"><?php echo $listing->entertainmentTotal?></a></td>
+							<td><a href="<?php echo $this->url(array('controller'=>'admin', 'action'=>'listings', 'task'=>'tourist','q'=>'', 'ct'=>'', 'page'=>'default','co'=>$listing->id)); ?>"><?php echo $listing->touristTotal?></a></td>
+							<td><a href="/admin/places/edit/<?php echo $listing->id?>" class="edit">Edit</a></td>
+						</tr>
+                        <?php endforeach;?>
+					
+					</table>
+				</div><!--LIST-CONTENT-->
+				<div class="paging_bottom">
+					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
+				</div><!--PAGING_BOTTOM-->
+			</div><!--ALL_LISTING-->
+					
+		<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+		</div>
+		<!-- closes w1 -->
+		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+        <script>
+			function searchSubmit(){
+				location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
+			}
+			
+			$("#q").keypress(function(e) {
+				var keycode;
+				if (window.event) keycode = window.event.keyCode;
+				else if (e) keycode = e.which;
+				else return true;
+				if (keycode == 13) {
+				   location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
+				   return false;
+				}
+				else
+				   return true;
+			});
+
+		</script>
+
+
+	</body>
+</html>

@@ -3,36 +3,24 @@
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->user->name ?> : Change Password | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('input').ToggleInputValue();
-            $('form select').jqTransSelect();
-            $('#header .header-login a.user').click(function(){
-                $(this).next().toggleClass('show');
-                return false;
-            });
-        });
-    </script>
-</head>
+    <title><?= $this->user->name ?> - Notifications | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+   </head>
 <body>
-<div class="w1">
+<div class="w1 profile">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
     <div class="w2">
         <div class="wrapper user-backend">
             <?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Notifications','parentActive'=>'Account')); ?>
-            <div class="subttl">
-                <h4>Set up your notifications</h4>
-            </div><!-- closes subttl -->
+            <h2 class="title">Notifications</h2>
             <div class="vendor-profile">
             	<form action="" id="user_form_notifications" method="post">
                     <div class="profile-items">
@@ -71,7 +59,6 @@
                     </div><!-- closes profile-items -->
                     <div class="foot">
                         <input type="submit" class="btn-1" value="Save Changes" />
-                        <a href="">Deactivate Account</a>
                     </div><!-- closes foot -->
                     <input type="hidden" name="userids" value="<?= $this->user->id ?>" />
                     <input type="hidden" name="usertokens" value="<?= $this->user->token ?>" />
@@ -83,5 +70,7 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+
 </body>
 </html>

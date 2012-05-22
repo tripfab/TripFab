@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<title>Payments History - Admin | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+        <link type="text/css" rel="stylesheet" href="/css5/reset.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css5/all.css?v=<?= $this->cssVC ?>" />
+		<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+  		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />
+  		<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]--> 
+		<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js?v=<?= $this->cssVC ?>"></script>
+			<script>
+				$(document).ready(function() {
+					$('a.lbc').fancybox({
+						padding: 0,
+						overlayColor: '#FFF',
+						overlayOpacity: '0.7',
+						showCloseButton: 'false'
+					});
+            		$("#report_tabs").tabs();
+					
+				});
+			</script>
+		</head>
+	</head>
+	<body>
+		<div class="w1">
+                        
+    		<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
+			<div class="w3_admin">
+				<div class="sub_menu">
+					<h2>Partner Payments. <span>There are <?php echo $this->numCount?> Payments Done.</span></h2>
+					<ul class="sub_links">
+						<li <?php echo $this->renderContext=='pending' ? 'class="select"' : ''?>><a href="/admin/payments/pending">Pending to Pay</a></li>
+						<li <?php echo $this->renderContext=='history' ? 'class="select"' : ''?>><a href="/admin/payments/history">History</a></li>
+					</ul>
+				</div><!--SUB_MENU-->
+            </div><!--W3-->
+			<div class="all_listing">
+				<div class="search_list">
+					<form action="" onsubmit="return false">
+						<input type="text" placeholder="Search for partner" name="q" id="q" value="<?php echo $this->searchText?>" />
+						<input type="button" class="btn-1" value="Search" onclick="searchSubmit()" />
+					</form>
+					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
+				</div><!--SEARCH_LIST-->
+				<div class="list_content">
+					<table width="100%" border="0">
+						<tr>
+							<th width="350"><a href="<?php echo $this->url(array('sort'=>0, 'seq'=>$this->paramSort == 0 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Partner Name</a></th>
+							<th width="90"><a href="<?php echo $this->url(array('sort'=>1, 'seq'=>$this->paramSort == 1 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Partner ID</a></th>
+							<th width="90"><a href="<?php echo $this->url(array('sort'=>2, 'seq'=>$this->paramSort == 2 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Reservations</a></th>
+							<th width="90"><a href="<?php echo $this->url(array('sort'=>3, 'seq'=>$this->paramSort == 3 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Paid Date</a></th>
+							<th width="90"><a href="<?php echo $this->url(array('sort'=>4, 'seq'=>$this->paramSort == 4 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Total to Paid</a></th>
+							<th width="130" colspan="2" class="last"></th>
+						</tr>
+						<?php foreach($this->paginator as $key=>$listing):?>
+						<tr  <?php echo $key==0 ? 'class="first"' : ''?>>
+							<td><?php echo $listing->vendor_name?></td>
+							<td><?php echo $listing->vendor_id?></td>
+							<td><?php echo $listing->reservation_count?></td>
+							<td><?php echo date('M d, Y', strtotime($listing->paid_date))?></td>
+							<td align="right">$ <?php echo round($listing->paid_total, 2)?>&nbsp;&nbsp;&nbsp;</td>
+							<td><a class="view" href="/admin/payments/view/<?php echo $listing->vendor_id?>/<?php echo $this->mode == 'pending' ? date('Y-m-d', strtotime($listing->due_date)) : date('Y-m-d', strtotime($listing->paid_date))?>/<?php echo $this->mode?>">View Details</a></td>
+                        </tr>
+                        <?php endforeach;?>
+						</table>
+				</div><!--LIST-CONTENT-->
+				<div class="paging_bottom">
+					<ul class="get-report">
+						<li><a href="<?php echo $this->url(array('page' => 'pdf')); ?>" class="btn-10"><span class="pdf">Download .pdf</span></a></li>
+						<li><a href="<?php echo $this->url(array('page' => 'xls')); ?>" class="btn-10"><span class="excel">Download .xls</span></a></li>
+					</ul>
+					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
+				</div><!--PAGING_BOTTOM-->
+			</div><!--ALL_LISTING-->
+					
+			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+		</div>
+		<!-- closes w1 -->
+ 			<?php if($this->successMessage): ?>
+            <script type="text/javascript">
+                showAlert("Your changes have been saved");
+            </script>
+            <?php endif ?>	
+       
+		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+        <script>
+			function searchSubmit(){
+				location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
+			}
+			$("#q").keypress(function(e) {
+				var keycode;
+				if (window.event) keycode = window.event.keyCode;
+				else if (e) keycode = e.which;
+				else return true;
+				if (keycode == 13) {
+				   location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
+				   return false;
+				}
+				else
+				   return true;
+			});
+		</script>
+
+		
+	</body>
+</html>

@@ -1,0 +1,333 @@
+<?php if($_POST): ?>
+<form action="" method="post">
+    <div class="profile-items">
+        <div class="main-ttl">
+            <p><strong>General information</strong> <a href="/admin/listings" class="back_btn">&larr; Back to Listings</a></p>
+        </div><!-- closes main-ttl -->
+        <div class="item-wrppr facebook">
+            <div class="item-ttl">Upload Information URL</div>
+            <div class="url">
+                <input type="text" class="noclean" name="url" value="<?= $this->fq->fb_page ?>" />
+                <input type="button" name="reloadinfo" value="Reload Data" class="btn-1" />
+            </div><!--URL-->
+        </div><!--ITEM-WRPPR-->
+        <div class="item-wrppr">
+            <div class="item-ttl"> Basic Information </div>
+            <div class="item first">
+                <h4>Title <span>Write your restaurant name</span></h4>
+                <input placeholder="Place's name" type="text" class="noclean limitcc" name="title" rel="60" value="<?= stripslashes($_POST['title']) ?>" />
+            </div>
+            <div class="item">
+                <h4>Category <span>Select the category</span></h4>
+                <select class="category" name="main_type">
+                	<?php $selected = ($_POST['main_type'] == 2) ? 'selected="selected"' : '' ?>
+                    <option <?= $selected ?> value="2">Restaurant</option>
+                	<?php $selected = ($_POST['main_type'] == 7) ? 'selected="selected"' : '' ?>
+                    <option <?= $selected ?> value="7">Entertaiment</option>
+                </select>
+            </div>
+            <div class="item">
+                <h4>Subcategory <span>Select the subcategory</span></h4>
+                <?php if($_POST['main_type'] == 2): ?>
+                <select class="category ent hidden" name="types">
+                    <option value="">Select One</option>
+                    <?php foreach($this->ent_categories as $cat): ?>
+                    <?php $selected = $_POST['types'] == $cat->id ? 'selected="selected"' : '' ?>
+                    <option <?= $selected ?> value="<?= $cat->id ?>"><?= $cat->name ?></option>
+                    <?php endforeach ?>
+                </select>
+                <select class="category rest" name="types">
+                    <option value="">Select One</option>
+                    <?php foreach($this->rest_categories as $cat): ?>
+                    <?php $selected = $_POST['types'] == $cat->id ? 'selected="selected"' : '' ?>
+                    <option <?= $selected ?> value="<?= $cat->id ?>"><?= $cat->name ?></option>
+                    <?php endforeach ?>
+                </select>
+                <?php else: ?>
+                <select class="category ent" name="types">
+                    <option value="">Select One</option>
+                    <?php foreach($this->ent_categories as $cat): ?>
+                    <?php $selected = $_POST['types'] == $cat->id ? 'selected="selected"' : '' ?>
+                    <option <?= $selected ?> value="<?= $cat->id ?>"><?= $cat->name ?></option>
+                    <?php endforeach ?>
+                </select>
+                <select class="category rest hidden" name="types">
+                    <option value="">Select One</option>
+                    <?php foreach($this->rest_categories as $cat): ?>
+                    <?php $selected = $_POST['types'] == $cat->id ? 'selected="selected"' : '' ?>
+                    <option <?= $selected ?> value="<?= $cat->id ?>"><?= $cat->name ?></option>
+                    <?php endforeach ?>
+                </select>
+                <?php endif ?>
+            </div>
+            <div class="item">
+                <h4>Description <span>Place description</span></h4>
+                <textarea name="description" class="noclean" rows="" cols=""><?= stripslashes($_POST['description']) ?></textarea>
+            </div>
+            <div class="item last">
+                <h4>Information <span>Place information</span></h4>
+                <textarea name="place[info]" class="noclean" rows="" cols=""><?= stripslashes($_POST['place']['info']) ?></textarea>
+            </div><!-- closes item -->
+            <div class="clear"></div>
+        </div><!-- closes item-wrppr -->
+        
+        <div class="item-wrppr">
+            <div class="item-ttl"> Contact Information </div>
+            <div class="item first">
+                <h4>Facebook <span> The Facebook URL</span></h4>
+                <input type="text" name="place[facebook]" class="noclean" value="<?= stripslashes($_POST['place']['facebook']) ?>" />
+            </div><!-- closes item -->
+            <div class="item">
+                <h4>Twitter <span> The Twitter URL</span></h4>
+                <input type="text" name="place[twitter]" class="noclean" value="<?= stripslashes($_POST['place']['twitter']) ?>" />
+            </div><!-- closes item -->
+            <div class="item">
+                <h4>Phone <span> Contact Phone</span></h4>
+                <input type="text" name="phone" class="noclean" value="<?= stripslashes($_POST['phone']) ?>" />
+            </div><!-- closes item -->
+            <div class="item">
+                <h4>E-mail <span> Company e-mail</span></h4>
+                <input type="text" name="email" class="noclean" value="<?= stripslashes($_POST['email']) ?>" />
+            </div><!-- closes item -->
+            <div class="item">
+                <h4>Website <span> Website URL</span></h4>
+                <input type="text" name="website" class="noclean" value="<?= stripslashes($_POST['website']) ?>" />
+            </div><!-- closes item -->
+            <div class="item">
+                <h4>Location <span> The place where is located</span></h4>
+                <textarea name="address" class="noclean" rows="" cols=""><?= stripslashes($_POST['noclean']) ?></textarea>
+            </div><!-- closes item -->
+            <div class="clear"></div>
+        </div><!-- closes item-wrppr -->
+        
+        <div class="item-wrppr">
+            <div class="item-ttl">Details</div>
+            <div class="item first">
+                <h4>Hours <span>Set the schedule</span></h4>
+                <div class="schedule">
+                	<?php foreach($_POST['sch'] as $id => $sch): ?>
+                    <label>
+                        <strong><?= $sch->name ?></strong>
+                        <input type="text" class="noclean" name="sch[<?= $id ?>][starting]" value="<?= $sch[''] ?>" />
+                        <span>to</span>
+                        <input type="text" class="noclean" name="sch[<?= $id ?>][ending]" value="<?= $sch[''] ?>" />
+                        <input type="hidden" name="sch[<?= $id ?>][name]" value="<?= $sch[''] ?>" />
+                    </label>
+                    <?php endforeach ?>
+                </div><!--SCHEDULE-->
+            </div><!-- closes item -->
+            
+            <div class="item">
+                <h4>Credit Cards <span> Select the Payment Options</span></h4>
+                <?php $cards = array_keys($_POST['card']) ?>
+                <ul>
+                    <?php $c = (in_array('cash', $cards)) ? 'checked="checked"' : '' ; ?>
+                    <li><label><input <?= $c ?> type="checkbox" name="card[cash]" value="1" />Cash Only</label></li>
+                    <?php $c = (in_array('visa', $cards)) ? 'checked="checked"' : '' ; ?>
+                    <li><label><input <?= $c ?> type="checkbox" name="card[visa]" value="1" />Visa</label></li>
+                    <?php $c = (in_array('amex', $cards)) ? 'checked="checked"' : '' ; ?>
+                    <li><label><input <?= $c ?> type="checkbox" name="card[amex]" value="1" />American Express</label></li>
+                    <?php $c = (in_array('mastercard', $cards)) ? 'checked="checked"' : '' ; ?>
+                    <li><label><input <?= $c ?> type="checkbox" name="card[mastercard]" value="1" />Mastercard</label></li>
+                    <?php $c = (in_array('discover', $cards)) ? 'checked="checked"' : '' ; ?>
+                    <li><label><input <?= $c ?> type="checkbox" name="card[discover]" value="1" />Discover</label></li>	
+                </ul>
+            </div><!--ITEM-->
+            <div class="item">
+                <h4>Specials <span> One per line</span></h4>
+                <textarea name="place[specials]" class="noclean" rows="" cols=""><?= stripslashes($_POST['place']['specials']) ?></textarea>
+            </div><!--ITEM-->
+            <div class="item">
+                <h4>Services <span>Like services, one per line</span></h4>
+                <textarea name="place[services]" class="noclean" rows="" cols=""><?= stripslashes($_POST['place']['services']) ?></textarea>
+            </div><!--ITEM-->
+            <div class="item">
+                <h4>Tips <span>Comments from people. One per line.</span></h4>
+                <textarea name="place[tips]" class="noclean" rows="" cols=""><?= stripslashes($_POST['place']['tips']) ?></textarea>
+            </div><!--ITEM-->
+            <div class="item last">
+                <h4>Tags <span>Separated by ","</span></h4>
+                <textarea name="place[tags]" class="noclean" rows="" cols=""><?= stripslashes($_POST['place']['tags']) ?></textarea>
+            </div><!--ITEM-->
+            <div class="clear"></div>
+        </div><!-- closes item-wrppr -->
+    </div><!-- closes profile-items -->
+    <div class="foot">
+        <input type="submit" class="btn-1 noclean" value="Save Changes" />
+        <a class="confirmDeleteListing" href="/admin/listings/delete/<?= $this->listing->id ?>">Delete Listing</a>
+    </div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'edit-listing') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_listing') ?>" />
+    <input type="hidden" name="city_id" value="<?= $this->listing->city_id ?>" />
+    <input type="hidden" name="country_id" value="<?= $this->listing->country_id ?>" />
+    <input type="hidden" name="fqid" value="<?= $this->fq->id ?>" />
+</form>
+<?php else: ?>
+<form action="" method="post">
+    <div class="profile-items">
+        <div class="main-ttl">
+            <p><strong>General information</strong> <a href="/admin/listings" class="back_btn">&larr; Back to Listings</a></p>
+        </div><!-- closes main-ttl -->
+        <div class="item-wrppr facebook">
+            <div class="item-ttl">Upload Information URL</div>
+            <div class="url">
+                <input type="text" class="noclean" name="url" value="<?= $this->fq->fb_page ?>" />
+                <input type="button" name="reloadinfo" value="Reload Data" class="btn-1" />
+            </div><!--URL-->
+        </div><!--ITEM-WRPPR-->
+        <div class="item-wrppr">
+            <div class="item-ttl"> Basic Information </div>
+            <div class="item first">
+                <h4>Title <span>Write your restaurant name</span></h4>
+                <input placeholder="Place's name" type="text" class="noclean limitcc" name="title" rel="60" value="<?= stripslashes($this->listing->title) ?>" />
+            </div>
+            <div class="item">
+                <h4>Category <span>Select the category</span></h4>
+                <select class="category" name="main_type">
+                	<?php $selected = ($this->listing->main_type == 2) ? 'selected="selected"' : '' ?>
+                    <option <?= $selected ?> value="2">Restaurant</option>
+                	<?php $selected = ($this->listing->main_type == 7) ? 'selected="selected"' : '' ?>
+                    <option <?= $selected ?> value="7">Entertaiment</option>
+                </select>
+            </div>
+            <div class="item">
+                <h4>Subcategory <span>Select the subcategory</span></h4>
+                <?php if($this->listing->main_type == 2): ?>
+                <select disabled="disabled" class="category ent hidden" name="types">
+                    <option value="">Select One</option>
+                    <?php foreach($this->ent_categories as $cat): ?>
+                    <?php $s = (in_array($cat->id, $this->listing_types)) ? 'selected="selected"' : '' ?>
+                    <option <?= $s ?> value="<?= $cat->id ?>"><?= $cat->name ?></option>
+                    <?php endforeach ?>
+                </select>
+                <select class="category rest" name="types">
+                    <option value="">Select One</option>
+                    <?php foreach($this->rest_categories as $cat): ?>
+                    <?php $s = (in_array($cat->id, $this->listing_types)) ? 'selected="selected"' : '' ?>
+                    <option <?= $s ?> value="<?= $cat->id ?>"><?= $cat->name ?></option>
+                    <?php endforeach ?>
+                </select>
+                <?php else: ?>
+                <select class="category ent" name="types">
+                    <option value="">Select One</option>
+                    <?php foreach($this->ent_categories as $cat): ?>
+                    <?php $s = (in_array($cat->id, $this->listing_types)) ? 'selected="selected"' : '' ?>
+                    <option <?= $s ?> value="<?= $cat->id ?>"><?= $cat->name ?></option>
+                    <?php endforeach ?>
+                </select>
+                <select disabled="disabled" class="category rest hidden" name="types">
+                    <option value="">Select One</option>
+                    <?php foreach($this->rest_categories as $cat): ?>
+                    <?php $s = (in_array($cat->id, $this->listing_types)) ? 'selected="selected"' : '' ?>
+                    <option <?= $s ?> value="<?= $cat->id ?>"><?= $cat->name ?></option>
+                    <?php endforeach ?>
+                </select>
+                <?php endif ?>
+            </div>
+            <div class="item">
+                <h4>Description <span>Place description</span></h4>
+                <textarea name="description" class="noclean" rows="" cols=""><?= stripslashes($this->listing->description) ?></textarea>
+            </div>
+            <div class="item last">
+                <h4>Information <span>Place information</span></h4>
+                <textarea name="place[info]" class="noclean" rows="" cols=""><?= stripslashes($this->place->info) ?></textarea>
+            </div><!-- closes item -->
+            <div class="clear"></div>
+        </div><!-- closes item-wrppr -->
+        
+        <div class="item-wrppr">
+            <div class="item-ttl"> Contact Information </div>
+            <div class="item first">
+                <h4>Facebook <span> The Facebook URL</span></h4>
+                <input type="text" name="place[facebook]" class="noclean" value="<?= stripslashes($this->place->facebook) ?>" />
+            </div><!-- closes item -->
+            <div class="item">
+                <h4>Twitter <span> The Twitter URL</span></h4>
+                <input type="text" name="place[twitter]" class="noclean" value="<?= stripslashes($this->place->twitter) ?>" />
+            </div><!-- closes item -->
+            <div class="item">
+                <h4>Phone <span> Contact Phone</span></h4>
+                <input type="text" name="phone" class="noclean" value="<?= stripslashes($this->listing->phone) ?>" />
+            </div><!-- closes item -->
+            <div class="item">
+                <h4>E-mail <span> Company e-mail</span></h4>
+                <input type="text" name="email" class="noclean" value="<?= stripslashes($this->listing->email) ?>" />
+            </div><!-- closes item -->
+            <div class="item">
+                <h4>Website <span> Website URL</span></h4>
+                <input type="text" name="website" class="noclean" value="<?= stripslashes($this->listing->website) ?>" />
+            </div><!-- closes item -->
+            <div class="item">
+                <h4>Location <span> The place where is located</span></h4>
+                <textarea name="address" class="noclean" rows="" cols=""><?= stripslashes($this->listing->address) ?></textarea>
+            </div><!-- closes item -->
+            <div class="clear"></div>
+        </div><!-- closes item-wrppr -->
+        
+        <div class="item-wrppr">
+            <div class="item-ttl">Details</div>
+            <div class="item first">
+                <h4>Hours <span>Set the schedule</span></h4>
+                <div class="schedule">
+                	<?php foreach($this->schedules as $sch): ?>
+                    <label>
+                        <strong><?= $sch->name ?></strong>
+                        <input type="text" class="noclean" name="sch[<?= $sch->id ?>][starting]" value="<?= ($sch->starting != '00:00:00') ? $sch->starting : '' ?>" />
+                        <span>to</span>
+                        <input type="text" class="noclean" name="sch[<?= $sch->id ?>][ending]" value="<?= ($sch->ending != '00:00:00') ? $sch->ending : '' ?>" />
+                        <input type="hidden" name="sch[<?= $sch->id ?>][name]" value="<?= $sch->name ?>" />
+                    </label>
+                    <?php endforeach ?>
+                </div><!--SCHEDULE-->
+            </div><!-- closes item -->
+            
+            <div class="item">
+                <h4>Credit Cards <span> Select the Payment Options</span></h4>
+                <?php $cards = explode(', ',$this->place->cards); ?>
+                <ul>
+                    <?php $c = (in_array('cash', $cards)) ? 'checked="checked"' : '' ; ?>
+                    <li><label><input <?= $c ?> type="checkbox" name="card[cash]" value="1" />Cash Only</label></li>
+                    <?php $c = (in_array('visa', $cards)) ? 'checked="checked"' : '' ; ?>
+                    <li><label><input <?= $c ?> type="checkbox" name="card[visa]" value="1" />Visa</label></li>
+                    <?php $c = (in_array('amex', $cards)) ? 'checked="checked"' : '' ; ?>
+                    <li><label><input <?= $c ?> type="checkbox" name="card[amex]" value="1" />American Express</label></li>
+                    <?php $c = (in_array('mastercard', $cards)) ? 'checked="checked"' : '' ; ?>
+                    <li><label><input <?= $c ?> type="checkbox" name="card[mastercard]" value="1" />Mastercard</label></li>
+                    <?php $c = (in_array('discover', $cards)) ? 'checked="checked"' : '' ; ?>
+                    <li><label><input <?= $c ?> type="checkbox" name="card[discover]" value="1" />Discover</label></li>	
+                </ul>
+            </div><!--ITEM-->
+            <div class="item">
+                <h4>Specials <span> One per line</span></h4>
+                <textarea name="place[specials]" class="noclean" rows="" cols=""><?= stripslashes($this->place->specials) ?></textarea>
+            </div><!--ITEM-->
+            <div class="item">
+                <h4>Services <span>Like services, one per line</span></h4>
+                <textarea name="place[services]" class="noclean" rows="" cols=""><?= stripslashes($this->place->services) ?></textarea>
+            </div><!--ITEM-->
+            <div class="item">
+                <h4>Tips <span>Comments from people. One per line.</span></h4>
+                <textarea name="place[tips]" class="noclean" rows="" cols=""><?= stripslashes($this->place->tips) ?></textarea>
+            </div><!--ITEM-->
+            <div class="item last">
+                <h4>Tags <span>Separated by ","</span></h4>
+                <textarea name="place[tags]" class="noclean" rows="" cols=""><?= stripslashes($this->place->tags) ?></textarea>
+            </div><!--ITEM-->
+            <div class="clear"></div>
+        </div><!-- closes item-wrppr -->
+    </div><!-- closes profile-items -->
+    <div class="foot">
+        <input type="submit" class="btn-1 noclean" value="Save Changes" />
+        <a class="confirmDeleteListing" href="/admin/listings/delete/<?= $this->listing->id ?>">Delete Listing</a>
+    </div><!-- closes foot -->
+    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+    <input type="hidden" name="form_id" value="<?= md5($this->listing->token .'edit-listing') ?>" />
+    <input type="hidden" name="_task" value="<?= md5('edit_listing') ?>" />
+    <input type="hidden" name="city_id" value="<?= $this->listing->city_id ?>" />
+    <input type="hidden" name="country_id" value="<?= $this->listing->country_id ?>" />
+    <input type="hidden" name="fqid" value="<?= $this->fq->id ?>" />
+</form>
+<?php endif ?>

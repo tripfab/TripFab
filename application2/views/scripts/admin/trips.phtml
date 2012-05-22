@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title>Trips - Admin | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css5/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+    <script type="text/javascript" src="/js2/admin/traveller-view.js?v=<?= $this->cssVC ?>"></script>
+    <script>
+        $(document).ready(function() {
+            $('a.lbc').fancybox({
+                padding: 0,
+                overlayColor: '#FFF',
+                overlayOpacity: '0.7',
+                showCloseButton: 'true'
+            });
+            $('.drp_dn .btn-10').click(function() {
+                $pref = $(this).parents('.drp_dn');
+                $('ul', $pref).toggleClass('show');
+                return false
+            });
+        
+            $("#report_tabs").tabs();
+            
+            panel(<?php echo $this->user->id?>, 1, 'partner');
+            
+            $('a.delete').click(function(){
+                return confirm('Are you sure?');
+            });
+        });
+    </script>
+    <style>
+        .triplabel{
+            background-position: 0 -51px;
+            margin-right: 25px;
+            width:42px;
+        }		 
+        .triplabel1{
+            background-position: 0 -51px;
+            margin-right: 25px;
+            width:32px;
+        }		 
+    </style>   
+</head>
+<body>
+    <div class="w1">
+    <?php echo $this->partial('admin_partials/header.phtml', array()); ?>
+    <div class="w3_admin">
+        <div class="sub_menu">
+            <h2>Trips.<span>There are <?php echo $this->numCount?>.</span></h2>
+            <a href="#create_trip" class="btn-1 lbc" id="create_nt">Create New Trip</a>
+            
+        </div><!--SUB_MENU-->
+    </div><!--W3-->
+    <div class="all_listing">
+        <div class="search_list">
+            <form action="" onsubmit="return false">
+                <input type="text" placeholder="Search Trips by by Title" name="q" id="q" value="<?php echo $this->searchText?>" />
+                <input type="button" class="btn-1" value="Search" onclick="searchSubmit()" />
+            </form>
+            <?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
+        </div><!--SEARCH_LIST-->
+        <div class="list_content">
+            <table width="100%" border="0">
+                <tr>
+                    <th width="310"><a href="<?php echo $this->url(array('sort'=>0, 'seq'=>$this->paramSort == 0 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Trip Name</a></th>
+                    <th width="100"><a href="<?php echo $this->url(array('sort'=>1, 'seq'=>$this->paramSort == 1 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Duration</a></th>
+                    <th width="90"><a href="<?php echo $this->url(array('sort'=>2, 'seq'=>$this->paramSort == 2 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Price</a></th>
+                    <th width="86"><a href="<?php echo $this->url(array('sort'=>3, 'seq'=>$this->paramSort == 3 && $this->paramSequence !='desc' ? 'desc':'default'));?>">People</a></th>
+                    <th width="100"><a href="<?php echo $this->url(array('sort'=>4, 'seq'=>$this->paramSort == 4 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Category</a></th>
+                    <th width="114"><a href="<?php echo $this->url(array('sort'=>5, 'seq'=>$this->paramSort == 5 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Country</a></th>
+                    <th width="114"><a href="<?php echo $this->url(array('sort'=>6, 'seq'=>$this->paramSort == 6 && $this->paramSequence !='desc' ? 'desc':'default'));?>">Status</a></th>
+                    <th width="67" class="last">&nbsp;</th>
+                </tr>
+                <?php foreach($this->paginator as $key=>$listing):?>
+                <tr  <?php echo $key==0 ? 'class="first"' : ''?>>
+                    <td><?php echo $listing->title?></td>
+                    <td><?php echo $listing->days?> Days</td>
+                    <td>$<?php echo $listing->price?></td>
+                    <td><?php echo $listing->min?> - <?php echo $listing->max?> </td>
+                    <td><?php echo $listing->category_name?></td>
+                    <td><?php echo $listing->country_name?></td>
+                    <td><?php echo $listing->active ? 'Active' : 'Inactive'?></td>
+                    <td class="drp_dn">
+                        <a href="" class="btn-10"><span>Actions</span></a>
+                        <ul>
+                            <li class="arrow"></li>
+                            <li><a href="/admin/trips/edit/1/<?php echo $listing->id?>">Edit Trip</a></li>
+                            <li><a target="_blank" href="/admin/trips/preview/<?php echo $listing->id?>">View Preview</a></li>
+                            <li><a href="/admin/trips/delete/<?php echo $listing->id?>" class="delete">Delete Trip</a></li>
+                        </ul> 
+                    </td>
+                </tr>
+                <?php endforeach;?>
+            </table>
+        </div><!--LIST-CONTENT-->
+        <div class="paging_bottom">
+            <?php echo $this->paginationControl($this->paginator, 'Sliding', 'admin_partials/paginator.phtml', array('sort'=>$this->paramSort, 'seq'=>$this->paramSequence, 'q'=>$this->paramQuery)); ?>
+        </div><!--PAGING_BOTTOM-->
+    </div><!--ALL_LISTING-->
+            
+    <?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+</div>
+<!-- closes w1 -->
+<div class="hidden">
+
+    <div id="create_trip">
+        <div class="top">
+            <h3>Create a New Trip</h3>
+            <p>Complete the information below to start your next trip</p>
+        </div><!--TOP-->
+        <div class="cont">
+            <form name="trip_form" id="trip_form" action="">
+                <fieldset>
+                    <div class="item">
+                        <label class="trip">Trip Name</label>
+                        <input type="text" name="t_name" value="" />
+                        <div id="_t_name" class="errdiv" style="float:right; margin-right:15px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div>
+                    </div><!--ITEM-->
+                    <div class="item">
+                        <label class="triplabel">Country</label>
+                        <select id="trip_country"  name="trip_country">
+                            <option>Select Country</option>
+                        </select>
+                        <div id="_trip_country" class="errdiv" style="float:right; margin-right:130px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div>
+                    </div><!--ITEM-->
+                    <div class="item">
+                        <label class="triplabel">City</label>
+                        <select  id="trip_scity"  name="trip_scity">
+                            <option>Start</option>
+                        </select>
+                        <select id="trip_ecity"  name="trip_ecity">
+                            <option>End</option>
+                        </select>
+                        <div id="_trip_scity" class="errdiv" style="float:right; margin-right:15px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div>
+                    </div><!--ITEM-->
+                    <div class="item">
+                        <label class="triplabel1">Traveller</label>
+                        <input class="start" type="text" name="trip_min" value="" placeholder="Min" />
+                        <input class="end"type="text" name="trip_max" value="" placeholder="Max" />
+                        <div id="_trip_min" class="errdiv" style="float:right; margin-right:15px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div>
+                    </div><!--ITEM-->
+                    <div class="item">
+                        <label class="triplabel1">Price</label>
+                        <input class="start" type="text" name="trip_price" value=""/>
+                        <div id="_trip_price" class="errdiv" style="float:right; margin-right:130px; background: none repeat scroll 0 0 #FF0000; color: #FFFFFF;font-size: 10px;font-weight: bold; display:none"></div>
+                    </div><!--ITEM-->
+                </fieldset>
+            </form>
+        </div><!--CONT-->
+        <div class="bottom">
+            <input type="button" id="t-create" class="btn-1" value="Create Trip" onclick=/admin/trips/add>
+            <input type="button" class="btn-10" value="Cancel" onclick="$.fancybox.close()" />
+        </div><!--BOTTOM-->
+    </div><!--CREATE_TRIP-->
+</div>
+
+<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+<script type="text/javascript">
+    function searchSubmit(){
+        location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
+    }
+    $("#q").keypress(function(e) {
+        var keycode;
+        if (window.event) keycode = window.event.keyCode;
+        else if (e) keycode = e.which;
+        else return true;
+        if (keycode == 13) {
+           location.href="<?php echo $this->baseUrl?>/" + $("#q").val();
+           return false;
+        }
+        else
+           return true;
+    });
+    
+    $('#t-create').click(function(){
+        $('.errdiv').hide();
+        $.ajax({ 
+           type: "POST", 
+           url: "/admin/trips/add", 
+           data: $("#trip_form").serialize() ,
+           success: function(json, status){
+               if(json.attempt=='success'){
+                    document.location.href = "/admin/trips/edit/1/"+json.data;
+               }
+               
+               if(json.error_code == "validation_error"){
+                    $.each(json.data, function(i,validationError){ 
+                        $("#_" + validationError.field).show();
+                        $("#_" + validationError.field).text(validationError.message);
+                    });
+               }
+           }, 
+           error:function(jqXHR, textStatus, errorThrown){ 
+                alert(textStatus);
+           }
+        });
+    });
+    
+    $('#create_nt').click(function(){
+        fillTripCountry();
+    });
+    $('select#trip_country').change(function(){
+        fillTripCity($('#trip_country').val());
+    });
+    
+    function fillTripCountry(){
+        var url = "/ajax/places/?type=country";
+        $("#trip_country" ).children().remove();
+        $("#trip_country" ).append(new Option('Select Country', 0, true, true));
+        $.getJSON(url, function(fsdata) {
+            $.each(fsdata.data, function(i,country){ 
+                $("#trip_country" ).append(new Option(country.title, country.id, true, false));
+            });
+            fillTripCity($('#trip_country').val());
+        });	
+    }
+    
+    function fillTripCity(countryId){
+        var url = "/ajax/places/?type=city&c=" + countryId;
+        $("#trip_scity" ).children().remove();
+        $("#trip_ecity" ).children().remove();
+        $("#trip_scity" ).append(new Option('Start', 0, true, true));
+        $("#trip_ecity" ).append(new Option('End', 0, true, true));
+        $.getJSON(url, function(fsdata) {
+            $.each(fsdata.data, function(i,city){ 
+                $("#trip_scity" ).append(new Option(city.title, city.id, true, false));
+                $("#trip_ecity" ).append(new Option(city.title, city.id, true, false));
+            });
+        });	
+    }
+
+</script>
+</body>
+</html>

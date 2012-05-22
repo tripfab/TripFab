@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+	<title>Plan the perfect trip, in one place | Tripfab.com</title>
+	<link type="image/png" rel="icon" href="/images2/favicon3.ico" />
+    <link type="text/css"  rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css"  rel="stylesheet" href="/css6/home2.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css"  rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css"  rel="stylesheet" href="/css2/index/index.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css"  rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+    <link href="/css6/calendar.css?v=<?= $this->cssVC ?>" rel="stylesheet" type="text/css">
+	<!--[if IE 7]><link type="text/css" rel="stylesheet" href="css2/ie.css" /><![endif]-->
+	<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
+	<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
+    <style type="text/css">
+	.cart-B { display:none !important;}
+	</style>
+</head>
+<body id="home2">
+<div id="wp_all">
+	<?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>
+	<div id="wp_content">
+		<div id="wrapper-top">
+		<div class="pattern"></div>
+		<div class="top"> 
+			<?php $rand = mt_rand(1,2) ?>
+			<img class="high background" src="https://static.tripfab.com/images6/home_top<?= $rand ?>.jpg"  style="display:none;" />
+        </div><!--TOP-->
+		<div class="wrap">
+			<div class="main">
+				<div class="left">
+					<h2>Plan your whole trip<br /> all in one place</h2>
+					<h3>From things to do and everything in between -<br /> directly from businesses.</h3>
+					<div id="search-box">
+						<div class="search">
+                            <form action="/costa_rica">
+                                <input id="tags" type="text" name="" value="Search for city" />
+                                <input type="submit" name="" value="Search" class="btn-1 noclean" />
+                                <div id="note1" class="note"><em></em>
+	                               	<p class="flag">We have listings only in <strong>Costa Rica</strong>, other countries coming soon.</p>
+                               	</div><!--NOTE1-->
+	                            <div id="note2" class="note"><em></em>
+	                            	<p><strong>0 Results. </strong>You know we work just in Costa Rica. Right?</p>
+	                            </div><!--NOTE2-->
+                            </form>	
+							<div class="clear"></div>
+						</div><!--SEARCH--> 
+					</div><!--SEARCH-BOX-->
+				</div><!--LEFT-->				
+				<div class="right">
+					<div class="video">
+						<a href=""></a>
+					</div>
+				</div><!--RIGHT-->
+				<div class="clear"></div>
+			</div><!--MAIN-->
+		</div><!--WRAP-->
+		<div class="bottom">
+			<div class="wrap">
+				<div class="each">
+					<span class="things"></span>
+					<div class="inner">
+						<h4><a href="/costa_rica" class="link1">Discover Costa Rica</a></h4>
+						<p>Discover amazing hotels, restaurants, places to see and things to do.</p>
+					</div><!--INNER-->
+				</div><!--EACH-->
+				<div class="each">
+					<span class="create"></span>
+					<div class="inner">
+						<h4><a href="/trips/costa_rica" class="link1">Buy Pre-Planned Trips</a></h4>
+						<p>Effortlessly book preplanned trips with the click of a button.</p>
+					</div>
+				</div><!--EACH-->
+				<div class="each last">
+					<span class="build"></span>
+					<div class="inner">
+                    	<?php if($this->user): ?>
+						<h4><a href="/user/trips" class="link1">Create Custom Trips</a></h4>
+                        <?php else: ?>
+						<h4><a href="/mytrips" class="link1">Create Custom Trips</a></h4>
+                        <?php endif ?>
+						<p>Custom create your dream vacation à la carte – whatever you want, whenever you want.</p>
+					</div>
+				</div><!--EACH-->
+				<div class="clear"></div>
+			</div><!--WRAP--> 
+		</div><!--BOTTOM--> 
+	</div><!--WRAPPER-TOP-->
+	<div id="popular-cities">
+		<div class="wrap">
+			<h5>Hot Cities in Costa Rica</h5>
+			<div class="all">
+				<?= $this->partial('partials/indexcities.phtml', array('cities'=>$this->cities, 'country'=>$this->country)) ?>
+			</div><!--ALL-->
+		</div><!--WRAP-->
+	</div><!--POPULAR-CITIES-->
+	</div><!--wp_content-->
+	<div id="wp_footer">
+		<?= $this->partial('partials/footer.phtml'); ?>
+	</div><!--WP_FOOTER-->
+</div><!--WP_ALL-->
+<div id="citiesAutocompleteContainer"></div>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/index/index.js?v=<?= $this->cssVC ?>"></script>
+</body>
+</html>

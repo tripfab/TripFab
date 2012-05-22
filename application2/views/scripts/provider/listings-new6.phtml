@@ -2,52 +2,14 @@
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title>Create New Listing : Set Pricing | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
-	<script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('input').ToggleInputValue();
-			
-			<?php if($this->congrats): ?>
-			$.fancybox({
-				href:'#congrats',
-				padding:0,
-				overlayColor:'#fff',
-				centerOnScroll:1,
-				overlayOpacity:0.7,
-				showCloseButton:0,
-				modal:1,	
-			});
-			<?php endif ?>
-			
-        });
-    </script>
-    <style type="text/css">
-	.sign-box.vendor.first .profile-items.prcng select {
-		float:right;
-		border:1px solid #ccc;
-		padding:5px;
-		margin-top:2px;
-		margin-left:5px;}
-	.sign-box.vendor.first .profile-items.prcng input.short {
-		width:40px;}
-	.error {
-		border:1px solid #F00;
-		padding:5px;
-		margin-bottom:30px;}
-		.error p {
-			text-align:left;
-			line-height:18px;
-			font-style:italic;
-			font-size:12px;
-			font-weight:normal;
-			color:#F00 !important;}
-	.hidden { display:none;}
-	.lb-congrats { background:#F3F3F3;}
-	</style>
+    <title>Create New Listing - Set Pricing | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+	
 </head>
 <body>
 <div class="w1">
@@ -170,13 +132,13 @@
                                         </div>
                                         <input name="price" value="0.00" type="text" class="short" />
                                         <label>Min</label>                                        
-                                        <select name="min">
+                                        <select name="min" class="min">
                                         <?php foreach($persons as $p): ?>
                                             <option value="<?= $p ?>"><?= $p ?></option>
                                         <?php endforeach ?>
                                         </select>
                                         <label>Max</label>
-                                        <select name="max">
+                                        <select name="max" class="max"> 
 										<?php foreach($persons as $p): ?>
                                         <?php if($p == 50): ?>
                                             <option selected="selected" value="<?= $p ?>"><?= $p ?></option>
@@ -192,7 +154,7 @@
                         <?php endif ?>
                     </div><!-- closes content -->
                     <div class="foot">							
-                        <input type="submit" class="btn-1" value="Finish" />
+                        <input type="submit" class="btn-1 noclean" value="Finish" />
                         <a class="link-4" href="/provider/listings/new/<?= $this->listing->id ?>/step5">Back</a>
                     </div><!-- closes foot -->
                     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
@@ -217,5 +179,49 @@
 		</div><!-- closes lb-congrats -->
     </div>
 </div>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+		
+		<?php if($this->congrats): ?>
+		$.fancybox({
+			href:'#congrats',
+			padding:0,
+			overlayColor:'#fff',
+			centerOnScroll:1,
+			overlayOpacity:0.7,
+			showCloseButton:0,
+			modal:1
+		});
+		<?php endif ?>
+		
+    });
+</script>
+<style type="text/css">
+.sign-box.vendor.first .profile-items.prcng select {
+	float:right;
+	border:1px solid #ccc;
+	padding:5px;
+	margin-top:2px;
+	margin-left:5px;}
+.sign-box.vendor.first .profile-items.prcng input.short {
+	width:40px;}
+.error {
+	border:1px solid #F00;
+	padding:5px;
+	margin-bottom:30px;}
+	.error p {
+		text-align:left;
+		line-height:18px;
+		font-style:italic;
+		font-size:12px;
+		font-weight:normal;
+		color:#F00 !important;}
+.hidden { display:none;}
+.lb-congrats { background:#F3F3F3;}
+.sign-box.vendor .content.prcng .prcng-item .right ul li input[type="text"] {
+	background: url("/images2/ico-95.png") no-repeat scroll 5px 50% transparent;
+	padding: 0 5px 0 16px;}
+</style>
 </body>
 </html>

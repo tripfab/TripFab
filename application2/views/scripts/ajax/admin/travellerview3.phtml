@@ -1,0 +1,46 @@
+<h3 class="title">Reservations <a href="/admin/users/travellers" class="back">Back to Travelers</a></h3>
+<div class="block">
+<?php if(count($this->reservations)): ?>
+	<?php foreach($this->reservations as $reservation) : ?>
+    
+    <div class="single_trip">
+        <table width="460" border="0" class="info">
+            <tr>
+                <td width="180"><?php echo $reservation->listing_type?></td>
+                <td width="280"><?php echo $reservation->listing_name?></td>
+            </tr>
+            <tr>
+                <td>Reservation Code</td>
+                <td><?php echo $reservation->code?></td>
+            </tr>
+            <tr>
+                <td>Provider</td>
+                <td><?php echo $reservation->vendor_name?></td>
+            </tr>
+            <tr>
+                <td><?php echo $reservation->listing_type == 'Hotels' ? 'Check In' : 'Date'?> </td>
+                <td><?php echo date('M d, Y', strtotime($reservation->checkin))?></td>
+            </tr>
+    
+            <?php if($reservation->listing_type == 'Hotels'): ?>
+            <tr>
+                <td>Check Out</td>
+                <td><?php echo date('M d, Y', strtotime($reservation->checkout))?></td>
+            </tr>
+            <?php endif;?>
+            <tr>
+                <td><?php echo $reservation->listing_type == 'Hotels' ? 'Guests' : 'Travelers'?> </td>
+                <td><?php echo $reservation->adults?> People</td>
+            </tr>
+            <tr>
+                <td>Payment Method</td>
+                <td><?php echo $reservation->method?> </td>
+            </tr>
+        </table>
+    </div><!--SINGLE_TRIP-->
+    
+    <?php endforeach;?>
+<?php else: ?>
+	<center><h1>User haven't made any reservation yet</h1></center>
+<?php endif;?>
+</div><!--BLOCK-->

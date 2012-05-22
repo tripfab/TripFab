@@ -1,74 +1,492 @@
-.s-message { cursor:pointer;}
-.right { position:relative;z-index:1;}
-.s-message.current {
-	position:relative;
-	z-index:2;}
-	.conversation {
-		display:none;}
-	
-.loading {
-	position:absolute;
-	background:#FF9 !important;
-	color:#000 !important;
-	line-height:normal !important;
-	padding:2px 4px !important;
-	right: 0px !important;
-	top: 0px !important;
-	display:none;
+.user-messages {
+	overflow: hidden;
+	margin-top: 11px;
+	position: relative;
+	padding-bottom: 50px;
 }
-.user-messages > .right > div {
-	background-color:#fff;
-	border: 0px none;
-	border-radius: 0 0 0 0;
+.user-messages.no-over {
 	overflow: visible;
+} 
+.user-messages .lstng .right > ul {
+	padding:0;
+	position:absolute;
+	bottom:10px;
+	left:14px;
+}
+.user-messages .lstng .right > ul li {
+	padding:0;
+	list-style:none;
+	border:none;
+	float:left;
+}
+.user-messages .lstng .right ul li.active a,
+.user-messages .lstng .right ul li.deactive a  {
+	width:115px;
 	padding:0;
 }
-.user-messages > .right .conversation div {
-	background-color: #F3F3F3;
-	border: 1px solid #FFFFFF;
-	border-radius: 2px 2px 2px 2px;
+.user-messages .lstng .right a {
+	margin:0 6px 0 0;
+	color:#464646;
+	font:bold 11px/32px Helvetica, Arial, sans-serif;
+}
+.user-messages .lstng .right div a {
+	display:block;
+    float:left;
+    position:relative;
+    right:50%;
+    font:bold 11px/26px Helvetica, Arial, sans-serif;
+    height: 26px;
+} 
+.user-messages .lstng .right div a span {
+	height: 26px;
+	font:bold 11px/26px Helvetica, Arial, sans-serif;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+.user-messages .lstng .right a span{
+	text-align:center;
+	display:block;
+	line-height:32px;
+}
+.user-messages .lstng .right .active a span{
+	background:url(https://static.tripfab.com/images2/ico-118.png) no-repeat 7px 11px;
+}
+.user-messages .lstng .right .deactive a span{
+	background:url(https://static.tripfab.com/images2/ico-119.png) no-repeat 7px 11px;
+}
+.user-messages .lstng .right .edit a {
+	padding:0;
+	width:114px;
+}
+.user-messages .lstng .right .edit a span {
+	background:url(https://static.tripfab.com/images2/ico-120.png) no-repeat 10px 9px;
+}
+.user-messages .lstng .right a.btn-10 {
+	background:url(https://static.tripfab.com/images2/btn-10.gif) top left repeat-x !important;
+}
+.user-messages .lstng .right a.btn-10:hover {
+	background-position:bottom left!important;
+	border:1px solid #dbdbdb;
+	box-shadow:0px 1px 1px #AAA;
+} 
+.user-messages .lstng .right .preferences > a {
+	padding:0;
+	width:50px;
+	margin:0;
+}
+.user-messages .lstng .right .preferences a span {
+	background:url("https://static.tripfab.com/images2/ico-121.png") no-repeat 7px 50% transparent;
+	text-indent:-99999px;
+}
+.user-messages .lstng .right .preferences ul {
+	display:none;
+	position:absolute;
+	background-color:#FFF;
+	box-shadow:0 0 6px #acacac;
+	top:30px;
+	right:5px;
+	width:110px;
+	padding:8px 0;
+	z-index:1000;
+	behavior: url(/PIE.htc);
+}
+.user-messages .lstng .right .preferences ul li {
+	width:110px;
+	height:23px;
+}
+.user-messages .lstng .right .preferences ul li:hover {
+	background-color:#5ab2e5;
+}
+.user-messages .lstng .right .preferences ul li a {
+	font:bold 11px/23px Helvetica, Arial, sans-serif;
+	text-indent:10px;
+	display:block;
+	color:#303030;
+	text-shadow:-1px 1px #FFF;
+}
+.user-messages .lstng .right .preferences ul li:hover a{
+	text-decoration:none;
+	text-shadow:-1px 1px #2573b4;
+	color:#FFF;
+}
+.user-messages .lstng .right .preferences {
+	position:relative;
+}
+.user-messages .lstng .right .preferences ul.show{
+	display:block;
+} 
+.user-messages > .left {
+	background-color: #FFFFFF;
+	border: 1px solid #E7E7E7;
+	box-shadow: 0 0 2px #EAEAEA;
+	float: left;
+	width: 431px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	min-height: 656px;
+}
+.user-messages .left .ttl {
+	padding: 0 23px;
+	line-height: 36px;
 	overflow: hidden;
-	padding: 12px 35px;
 }
-.user-messages > .right .conversation div h4 {
-	margin-bottom: 10px;
+
+.user-messages .left .ttl select {
+	float: right;
+	margin-top: 10px;
 }
-.user-messages .right  textarea {
-	border: 1px solid #DDDDDD;
-	box-shadow: -1px 0 0 #FFFFFF;
+
+.user-messages .left .ttl ul {
+	list-style: none;
+	overflow: hidden;
+	float: left;
+}
+
+.user-messages .left .ttl ul li {
+	float: left;
+	margin-right: 15px;
+}
+.user-messages .left .ttl ul li .btn-10 {
+	height: 30px;
+	font: bold 11px/30px Helvetica;
+	color: #464646;
+	display: block;
+	margin: 7px 0;
+}
+.user-messages .left .ttl ul li:last-child {
+	margin-right: 0;
+}
+
+.user-messages .left .ttl ul li a {
+	color: #898989;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.user-messages .left .ttl ul li.current a {
+	color: #303030;
+}
+
+.messages-wrapper {
+	border-top: 1px solid #dcdcdc;	
+}
+
+.s-message {
+	padding: 9px 23px;
+	overflow: hidden;
+	position: relative;
+	border-bottom: 1px solid #dcdcdc;
+	text-shadow: 0 0 1px #FFFFFF;
+}
+.s-message.new {
+	background-color: #e8f5fd;
+	margin: 0 1px;
+	/*border-bottom: 1px solid #FFF;*/
+}
+.s-message:hover {
+	background-color: #e8f5fd;
+}
+.s-message:hover span.number {
+	color: #82b6e0;
+}
+.s-message.last {
+	border-bottom: none;
+}
+
+.s-message.new {
+	background-color: #e8f5fd;
+	border-bottom-color: #FFFFFF;
+}
+
+.s-message.new span.number {
+	color: #82b6e0;	
+}
+
+.s-message.new span.time {
+	color: #303030;
+}
+
+.s-message.current {
+	background: url(https://static.tripfab.com/images2/arrow-13.png) no-repeat 0 0;
+	border-bottom: medium none;
+	height: 50px;
+	text-shadow: none;
+	width: 402px;
+}
+
+.s-message.current span.number {
+	right: 41px;
+}
+
+.s-message.current span.time, .s-message.current span.number, .s-message.current strong {
+	color: #FFFFFF;
+}
+
+.s-message > div {
+	line-height: 45px;
+	float: left;
+	margin-right: 15px;
+}
+
+.s-message input[type="checkbox"] {
+	margin: 0;
+	margin-right: 10px;
+	vertical-align: middle;
+}
+
+.s-message img.user {
+	width: 47px;
+	height: 47px;	
+	vertical-align: middle;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-webkit-box-shadow: 0px 0px 0px 1px #ececec;
+	-moz-box-shadow: 0px 0px 0px 1px #ececec;
+	box-shadow: 0px 0px 0px 1px #ececec; 
+	behavior: url(/PIE.htc);
+	border-bottom: 1px solid #c5c5c5;
+}
+.s-message.current img.user {
+	-webkit-box-shadow: 0px 0px 0px 1px #549ed8;
+	-moz-box-shadow: 0px 0px 0px 1px #549ed8;
+	box-shadow: 0px 0px 0px 1px #549ed8; 
+	border-bottom: 1px solid #3c719a;
+}
+.s-message span.number {
+	color: #c2c2c2;
+	font-size: 20px;
+	position: absolute;
+	top: 9px;
+	right: 24px;
+}
+
+.s-message > strong {
+	display: block;
 	color: #303030;
 	font-size: 12px;
-	min-height: 41px;
-	padding: 5px;
-	resize: none;
-	width: 443px;
 }
-.user-messages .right input[type="submit"] {
-	border: medium none;
-	float: right;
-	height: 24px;
-	margin-top: 9px;
+
+.s-message span.time {
+	display: block;
+	color: #7d7d7d;
+	font-size: 11px;
+	margin-top: 21px;
 }
-.user-messages .right .conversation ul {
-	list-style: none outside none;
+.user-messages > .right {
+	float: left;
+	width: 525px;
+	margin-top: 14px;
+    min-height: 1px;
+    padding-top: 0;
+}
+
+.user-messages > .right > div {
+	background-color: #f3f3f3;
+	border:  1px solid #FFFFFF;
+	padding: 12px 35px;
+	overflow: hidden;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
+	height: 450px !important;
+}
+
+.user-messages > .right > div h4 {
+	margin-bottom: 10px;
+}
+
+.user-messages .right > h4 {
+	color: #303030;
+	font-size: 13px;
+	line-height: 36px;
+	margin-top: -12px;
+}
+
+
+.user-messages .right > ul {
+	list-style: none;
 	padding: 0 35px;
 }
-.user-messages .right .conversation ul li {
-	border-bottom: 1px dotted #B2B2B2;
-	color: #303030;
+
+.user-messages .right > ul li {
 	padding: 17px 0;
+	border-bottom: 1px dotted #b2b2b2;
+	color: #303030;
 }
-.user-messages .right .conversation ul li:last-child {
-	border-bottom:0 none;}
-.user-messages .right .conversation ul li h4 {
+
+.user-messages .right > ul li:last-child {
+	border: none;
+}
+
+.user-messages .right > ul li h4 {
 	font-size: 13px;
 	line-height: 20px;
 	margin: 0;
 }
-.user-messages .right .conversation ul li p {
+
+.user-messages .right > ul li p {
 	line-height: 20px;
 }
-.user-messages .right .conversation ul li span {
-	font-size: 11px;
+
+.user-messages .right > ul li span {
 	line-height: 20px;
+	font-size: 11px;
+}
+
+.user-messages .left a.btn-5 {
+	display: block;
+	margin: 23px;
+	text-align: center;
+}
+
+
+
+
+
+.s-message { cursor:pointer;}
+.right { position:relative;z-index:1;}
+.s-message.current {
+    position:relative;
+    z-index:2;}
+.conversation {
+    display:none;}
+
+.loading {
+    position:absolute;
+    background: url(https://developer.tripfab.com/images6/Loading-Messages.gif) no-repeat 229px 197px #FFF !important;
+    color:#000 !important;
+    line-height:normal !important;
+    padding:2px 4px !important;
+    right: 0px !important;
+    top: 0px !important;
+    display:none;
+    text-indent: -99999px;
+}
+.user-messages > .right > div {
+    background: url(https://static.tripfab.com/images2/g_68.png) repeat-y -2px 0 #FFF;
+    border: 0px none;
+    padding:0;
+    -moz-border-radius-topleft: 0px;
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-bottomright: 4px;
+    -moz-border-radius-bottomleft: 0px;
+    -webkit-border-radius: 0px 4px 4px 0px;
+    border-radius: 0px 4px 4px 0px;
+    height: 641px;
+    border: 1px solid #E7E7E7;
+}
+.user-messages > .right > .waiting {
+    display: none;
+}
+.user-messages > .right .conversation div {
+    background: url(https://static.tripfab.com/images2/g_68.png) repeat-y 0 0 #F3F3F3;
+    border-top: 1px solid #FFF;
+    border-right: 1px solid #FFF;
+    overflow: hidden;
+    padding: 12px 21px 12px 35px;
+    -moz-border-radius-topleft: 0px;
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-bottomright: 0px;
+    -moz-border-radius-bottomleft: 0px;
+    -webkit-border-radius: 0px 4px 0px 0px;
+    border-radius: 0px 4px 0px 0px;
+    behavior: url(/PIE.htc);
+}
+.user-messages > .right .conversation div h4 {
+    margin-bottom: 10px;
+}
+.user-messages > .right .conversation div h4 em {
+	font-weight: 300;
+}
+.user-messages .right textarea {
+    border: 1px solid #DDDDDD;
+    box-shadow: 0 1px 0 0 #FFFFFF;
+    color: #303030;
+    font: 12px/15px Helvetica;
+    height: 21px;
+    padding: 5px;
+    resize: none;
+    width: 339px;
+}
+.user-messages .right input[type="submit"] {
+    border: medium none;
+    float: right;
+    font: 500 12px/32px Helvetica;
+    height: 32px;
+    margin-top: 1px;
+}
+.user-messages .right .conversation ul {
+    list-style: none outside none;
+    padding: 0 35px;
+    background: url(https://static.tripfab.com/images2/g-54.png) repeat-x 0 0;
+    overflow-y: auto;
+    height: 363px !important;
+}
+.user-messages .right .conversation ul li {
+    border-bottom: 1px solid #e4e4e4;
+    color: #303030;
+    padding: 10px 0 5px;
+    overflow: hidden;
+}
+.user-messages .right .conversation ul li .info {
+    background: none repeat scroll 0 0 transparent;
+    float: left;
+    padding: 0;
+    width: 365px;
+}
+.user-messages .right .conversation ul li img {
+    float: left;
+    margin-right: 20px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -webkit-box-shadow: 0px 1px 0px 0px #ececec;
+	-moz-box-shadow: 0px 1px 0px 0px #ececec;
+	box-shadow: 0px 1px 0px 0px #ececec; 
+	behavior: url(/PIE.htc);
+	border-bottom: 1px solid #c5c5c5;
+}
+.user-messages .right .conversation ul li:last-child {
+    border-bottom:0 none;}
+.user-messages .right .conversation ul li h4 {
+    font-size: 13px;
+    line-height: 20px;
+    margin: 0;
+}
+.user-messages .right .conversation ul li p {
+    line-height: 20px;
+}
+.user-messages .right .conversation ul li span {
+    font-size: 11px;
+    line-height: 20px;
+    color: #898989;
+}
+
+.user-messages > .right.fixed {
+    position: fixed;
+    right: 0px;
+}
+.user-messages .load-more {
+	background: url("https://static.tripfab.com/images2/g-54.png") repeat-x scroll 0 -1px;
+	height: 52px;
+	padding-top: 15px;
+}
+.user-messages .load-more a {
+	display: block;
+	margin: 0 20px;
+}
+.user-messages .right .conversation.fixed {
+	position: fixed;
+	top: 0;
+}
+.s-message span.new {
+	display: block;
+	position: absolute;
+	top: 1px ;
+	left: 1px;
+	width: 36px;
+	height: 36px;
+	background: url(https://static.tripfab.com/images2/new-msj.png) no-repeat 0 0;
 }

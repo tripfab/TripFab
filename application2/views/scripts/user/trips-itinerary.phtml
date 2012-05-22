@@ -3,100 +3,174 @@
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->user->name ?> :: <?= $this->trip->title ?>, Trip Itinerary | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/lightboxes.css" />
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
-    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
-    <script type="text/javascript" src="/js/jquery.jcarousel.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.cycle.all.js"></script>
-    <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-    <script type="text/javascript" src="/js2/user/trips.itinerary.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
-    <style type="text/css">
-	.jcarousel-clip.unhidden {
-		position:static !important;
-		overflow:visible !important;
-	}
-	.jcarousel-clip { min-height:100px;}
-	.ui-draggable-dragging {
-		z-index:10000;
-		padding:5px !important; }
-	.activities-tabs .tab ul li {
-		background:#303030;}
-	.itinerary-items .item.ui-state-default {
-		background:#e7e7e7;}
-	.itinerary-items .item.ui-state-hover {
-		background:#fbfbfb;}
-		.itinerary-items .item ul li img {
-			height:auto;}
-	</style>
+    <title><?= $this->user->name ?> - <?= $this->trip->title ?>, Trip Itinerary | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/lightboxes.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
-<div class="w1">
+<div class="w1 itineraries">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    
+    <div class="w3 browseTrips">
+        <div class="wrapper">
+        	<div class="cntrl">
+        	    <ul class="breadcrump">
+        	        <li class="first"><a href="/" class="home"></a></li>
+        	        <li><a href="/trips/costa_rica#/all">Pre-Planned Trips</a></li>
+        	        <li class="last"><a class="active" href="/costa_rica">Costa Rica</a></li>
+        	    </ul>
+        	    <a href="/trips/costa_rica" class="link1">&larr; Back to Browse Itineraries</a>
+        	    <div class="clear"></div>
+        	</div><!--CNTRL-->
+        	
+        	<div class="cont">
+        		<div class="left">
+        			<h3 class="ttl1"><?= $this->trip->title ?> <a href="#rename-trip" class="lbc link1">Rename Itinerary</a></h3>
+        		</div><!--LEFT-->
+        		<div class="right">
+        			<?php if($this->tocheckout): ?>
+        			<a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1 tocheckout">Proceed to Checkout</a>
+        			 <div class="warning hidden">
+        			 	<h3>You can't checkout</h3>
+        			 	<p>You must to add something to do to your itinerary before checkout</p>
+        			 </div><!--WARNING-->
+        			<?php else: ?>
+        			<a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1 deny tocheckout">Proceed to Checkout</a>
+        			 <div class="warning hidden">
+        			 	<h3>You can't checkout</h3>
+        			 	<p>You must to add something to do to your itinerary before checkout</p>
+        			 </div><!--WARNING-->
+        			 <?php endif ?>
+        			<div class="price">	
+        				<span><?= $this->formatnumber($this->trip->price) ?></span>
+        				<sup>$</sup>
+        				<sub class="tripCost">Trip Cost</sub>
+        			</div><!--PRICE-->
+        			<div class="clear"></div>
+        		</div><!--RIGHT-->
+        		<div class="clear"></div>
+        	</div><!--CONT-->
+        </div><!--WRAPPER-->
+    </div><!--W3 BROWSE TRIPS-->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!--<div class="w3_itinerary">
+        <div class="wrapper">
+            <h2><?= $this->trip->title ?> <a href="#rename-trip" class="lbc">Rename Itinerary</a></h2>
+            <?php if($this->tocheckout): ?>
+            <a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1 tocheckout">Proceed to Checkout</a>
+             <div class="warning hidden">
+             	<h3>You can't checkout</h3>
+             	<p>You must to add something to do to your itinerary before checkout</p>
+             </div><!--WARNING--*>
+            <?php else: ?>
+            <a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1 deny tocheckout">Proceed to Checkout</a>
+             <div class="warning hidden">
+             	<h3>You can't checkout</h3>
+             	<p>You must to add something to do to your itinerary before checkout</p>
+             </div><!--WARNING--*>
+             <?php endif ?>
+             <a href="#dates_lbx" class="btn-10 lb dates">Change Travel Dates</a>
+        </div><!--WRAPPER--*>
+    </div><!--w3_itinerary--*>-->
+    
+    
+    
+    
+    
+    
+    
+    <div class="title_itinerary">
+        <div class="hdr">
+        	<?php $time = strtotime($this->trip->start); ?>
+            <?php $daytime = $time + ($i * 86400) ?>
+        	<span>Day <?= $i+1 ?> of <?= $this->trip->days ?></span> <?= date('F jS, Y', $daytime) ?>
+        	<a href="#dates_lbx" class="lb dates">Change Travel Dates</a>
+        </div><!-- closes hdr -->
+    </div><!--title_itinerary-->
     <div class="w2">
-        <div class="wrapper user-messages user-trips">
-        	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Future Trips','parentActive'=>'My Trips')); ?>
-        	<div class="tripttl">
-        		<div>
-        			<a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1">Proceed to Checkout</a>
-                    <?php if(!$this->trip->offers): ?>
-                    <a class="btn-8" href="/user/trips/activateoffers/<?= $this->trip->id ?>">Request Offers</a>
-                    <?php endif ?>
-        			<?= $this->thumbnail(50, $this->trip->image, '', '1:1'); ?>
-        			<h2><?= $this->trip->title ?></h2>
-                    <a class="rename lb" href="#delete_trip_<?= $this->trip->id ?>">Rename Trip</a>
-        		</div>
-        	</div>
-        	<!-- closes tripttl -->
-            <?= $this->partial('partials/usertripinfomenu.phtml', array('active'=>'Itinerary Manager', 'id'=>$this->trip->id, 'offers'=> $this->trip->offers)); ?>
+        <div class="wrapper user-messages user-trips no-over">
             <div class="itinerary-wrapper">
                 <div class="activities-tabs">
                     <ul>
-                        <li><a href="#tab-1">Activities</a></li>
-                        <li><a href="#tab-2">Entertainment</a></li>
-                        <li><a href="#tab-3">Tourist Sights</a></li>
-                        <li><a href="#tab-4">Restaurants</a></li>
-                        <li><a href="#tab-5">Hotels</a></li>
+                        <li class="activity"><a href="#tab-1">Activities <em></em></a></li>
+                        <li class="entertaiment"><a href="#tab-2">Entertainment <em></em></a></li>
+                        <li class="sights"><a href="#tab-3">Tourist Sights <em></em></a></li>
+                        <li class="restaurants"><a href="#tab-4">Restaurants <em></em></a></li>
+                        <li class="hotels"><a href="#tab-5">Hotels <em></em></a></li>
                     </ul>
                     <?php $class = array('','cat-activity','cat-entertainment','cat-sight','cat-restaurant','cat-hotel'); ?>
                     <?php for($i=1; $i<=5; $i++): ?>
                     <div class="tab" id="tab-<?= $i ?>">
+                    	<?php if(isset($this->favorites[$i]) and count($this->favorites[$i]) > 0): ?>
+                    	<?php if(!isset($_COOKIE['tooltipHelpItn'])): ?>
+                    	<div class="firstime_tip">
+                    		<img class="arrow" src="https://static.tripfab.com/images6/tooltiparrow.png" alt="">
+                    		<div class="cont">
+                    			<img src="https://static.tripfab.com/images6/tooltipimg2.png" width="75" height="75" alt="" />
+                    			<p><strong>Customize your Trip</strong>
+                    				Drag and drop the activities, hotels, restaurants, tourist sights and entertainments you want to add to your trip.
+                    			</p>
+                    		</div><!--CONT-->
+                    		<div class="bot">
+                    			<form action="post" id="tooltipHelpItn">
+                    				<fieldset>
+                    					<label><input checked="checked" type="checkbox" name="" value="" />Don’t show again</label>
+                    					<input type="submit" value="Okay" class="btn-1" />
+                    				</fieldset>
+                    			</form>
+                    		</div><!--BOT-->
+                    	</div><!--FIRSTIME_TIP-->
+                    	<?php endif ?>
+                    	<?php endif ?>
                         <ul id="mycarousel-<?= $i ?>">
+                        	<?php if(isset($this->favorites[$i]) and count($this->favorites[$i]) > 0): ?>
                         	<?php foreach($this->favorites[$i] as $listing): ?>
+                            <?php if(($listing->main_type != 5) or (is_null($listing->day) and is_null($listing->time))): ?>
                             <li data-id="<?= $listing->id ?>" data-city="<?= $listing->city_id ?>" data-class="<?= $class[$i] ?>"
-                            data-country="<?= $listing->country_id ?>" data-type="<?= $i ?>" class="<?= $class[$i] ?>" data-trip="<?= $this->trip->id ?>">
+                            data-country="<?= $listing->country_id ?>" data-type="<?= $i ?>" class="<?= $class[$i] ?>" data-trip="<?= $this->trip->id ?>"
+                            data-coidf="<?= $listing->countryurl ?>" data-ciidf="<?= $listing->cityurl ?>" data-idf="<?= $listing->identifier ?>">
                                 <?= ($listing->image) ? 
 										$this->thumbnail(65, $listing->image, '','1:1') :
 										$this->thumbnail(65, '/images/img-70.png', '','1:1'); ?>
                                 <h2><?= $listing->title ?></h2>
-                                <span>$<?= $listing->price ?></span>
+                                <?php if($listing->price > 0): ?>
+                                <span>$<?= $this->formatnumber($listing->price) ?> <em>/person</em></span>
+                                <?php else: ?>
+								<span><h2>Price Not charged</h2></span>
+                                <?php endif ?>
                             </li>
+                            <?php endif ?>
                             <?php endforeach ?>
+                            <?php endif ?>
                         </ul>
                     </div><!-- tab  -->
                     <?php endfor ?>
                 </div><!-- closes activities-tab -->
                 <div class="slider-controls">	
-                    <a href="" class="next">Next Day</a>
+                    <a href="" class="next">Next Day </a>
                     <a href="" class="prev">Previous Day</a>
                 </div><!-- closes -->
                 <div class="slider">
                 	<?php for($i=0; $i<$this->trip->days; $i++): ?>
                     <div class="slide">
-                        <div class="hdr">
-                        	<?php $time = strtotime($this->trip->start); ?>
-                            <?php $daytime = $time + ($i * 86400) ?>
-							Day <?= $i+1 ?>: <?= date('F jS, Y', $daytime) ?>
-                        </div><!-- closes hdr -->
+                        
                         <div class="itinerary-items">
                         	<?php foreach($this->days[$i+1] as $time => $listings): ?>
                             <?php if(!empty($time) and $time != 'stay'): ?>
@@ -107,18 +181,26 @@
                                     <?php foreach($listings as $list): ?>
                                     <li data-id="<?= $list->id ?>" data-city="<?= $list->city_id ?>" data-class="<?= $class[$i] ?>"
 		                            data-country="<?= $list->country_id ?>" data-type="<?= $list->main_type ?>" class="<?= $class[$i] ?>" 
-                                    data-trip="<?= $this->trip->id ?>">
+                                    data-trip="<?= $this->trip->id ?>"
+                                    data-coidf="<?= $list->countryurl ?>" 
+                                    data-ciidf="<?= $list->cityurl ?>" 
+                                    data-idf="<?= $list->identifier ?>">
                                         <?= ($list->image) ? 
 												$this->thumbnail(45, $list->image, '','1:1') :
 												$this->thumbnail(45, '/images/img-70.png', '','1:1'); ?>
-                                        <h2><?= $list->title ?></h2>
-                                        <span>$<?= $list->price ?></span>
+                                        <h2><?= substr($list->title, 0, 19) ?>...</h2>
+										<?php if($list->price > 0): ?>
+										<span class="location"><?= $list->city ?> ,CR</span>
+                                        <span>$<?= $this->formatnumber($list->price) ?><em>/ person</em></span>
+                                        <?php else: ?>
+								<span><h2>Price Not charged</h2></span>                            
+                                        <?php endif ?>
                                         <a href="" class="delete">Delete</a>
                                     </li>
                                     <?php endforeach ?>
                                     <?php else: ?>
                                     <li class="empty">
-                                        <img src="/images2/arrow-17.png" alt="" />
+                                        <img src="https://static.tripfab.com/images2/arrow-17.png" alt="" />
                                         Drop here the things you want to do this Morning
                                     </li>
                                     <?php endif ?>
@@ -128,35 +210,60 @@
                             <?php endforeach ?>
                             <div class="item last stay" data-time="stay" data-day="<?= $i+1 ?>" data-date="<?= date('F jS, Y', $daytime) ?>">
                                 <h4>Stay</h4>
-                                <ul>
-                                    <?php if(count($this->days[$i+1]['stay']) > 0): ?>
+								<?php if(count($this->days[$i+1]['stay']) > 0): ?>
+                                <ul data-hashotel="1">
                                     <?php foreach($this->days[$i+1]['stay'] as $list): ?>
-                                    <li>
+                                    <li data-id="<?= $list->id ?>" data-city="<?= $list->city_id ?>" data-class="<?= $class[5] ?>"
+		                            data-country="<?= $list->country_id ?>" data-type="<?= $list->main_type ?>" class="<?= $class[5] ?>" 
+                                    data-trip="<?= $this->trip->id ?>"
+                                    data-coidf="<?= $list->countryurl ?>" 
+                                    data-ciidf="<?= $list->cityurl ?>" 
+                                    data-idf="<?= $list->identifier ?>">
                                         <?= ($list->image) ? 
 												$this->thumbnail(45, $list->image, '','1:1') :
 												$this->thumbnail(45, '/images/img-70.png', '','1:1'); ?>
-                                        <h2><?= $list->title ?></h2>
-                                        <span>$<?= $list->price ?></span>
+                                        <h2><?= substr($list->title, 0, 19) ?>...</h2>
+                                        <span class="location"><?= $list->city ?>, CR</span>
+										<?php if($list->price > 0): ?>
+                                        <span>$<?= $this->formatnumber($list->price) ?><em>/ person</em></span>
+                                        <?php else: ?>
+										<span><h2>Price Not charged</h2></span>
+                                        <?php endif ?>
                                         <a href="" class="delete">Delete</a>
                                     </li>
                                     <?php endforeach ?>
-                                    <?php else: ?>
+                                </ul>
+								<?php else: ?>
+                                <ul>
                                     <li class="empty">
-                                        <img src="/images2/arrow-17.png" alt="" />
+                                        <img src="https://static.tripfab.com/images2/arrow-17.png" alt="" />
                                         Drop here the places you want to stay this day
                                     </li>
-                                    <?php endif ?>
                                 </ul>
+								<?php endif ?>
                             </div><!-- closes item -->
+                            <div class="clear"></div>
                         </div><!-- closes itinerary-items -->
                     </div><!-- closes slide -->
                     <?php endfor ?>
                 </div><!-- closes slider -->	
-                <div class="bottom">
+               <!-- <div class="bottom">
                     <span>Trip Estimate</span>
-                    <strong id="tripprice">$<?= $this->trip->price ?></strong>
-                    <a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1">Proceed to Checkout</a>
-                </div><!-- closes bottom -->
+                    <strong id="tripprice">$<?= $this->formatnumber($this->trip->price) ?></strong>
+                    <?php if($this->tocheckout): ?>
+                    <a href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1 tocheckout">Proceed to Checkout</a>
+                    <div class="warning hidden">
+                    	<h3>You can't checkout</h3>
+                    	<p>You must to add something to do to your itinerary before checkout</p>
+                    </div><!--WARNING--*>
+                    <?php else: ?>
+                    <a  href="/user/trips/checkprices/<?= $this->trip->id ?>" class="btn-1 deny tocheckout">Proceed to Checkout</a>
+                    <div class="warning hidden">
+                    	<h3>You can’t checkout</h3>
+                    	<p>You must to add something to do to your itinerary before checkout</p>
+                    </div><!--WARNING--*>
+                    <?php endif ?>
+                </div><!-- closes bottom --*>-->
             </div><!-- closes itinerary-wrapper -->
         </div><!-- closes user-messages -->
     </div><!-- closes w2 -->
@@ -185,6 +292,84 @@
             <input type="hidden" name="_task" value="<?= md5('delete_trip') ?>" />
         </form>
     </div>
+         
+    <div class="dates_lbx lb" id="dates_lbx">
+		<form method="post" action="">
+			<div class="top">Change Trip Dates<span class="label"><?= $this->trip->days ?> Days</span></div><!--TOP-->
+			<div class="cont">
+				<label>Start</label>
+                <input name="start" class="calendar1" type="text" />
+				<label>End</label>
+                <input name="end" class="calendar2" type="text" />
+			</div><!--CONT-->
+			<div class="bottom">
+				<input class="btn-1" type="submit" value="Update dates" />
+                <a href="#" onclick="$.fancybox.close(); return false;" class="btn-10">Cancel</a>
+			</div><!--BOTTOM-->
+            <input type="hidden" name="ids" value="<?= $this->trip->id ?>" />
+            <input type="hidden" name="token" value="<?= $this->trip->token ?>" />
+            <input type="hidden" name="_task" value="<?= md5('assign_dates') ?>" />
+		</form>
+	</div><!--DATES_LBX-->
+	
+	<div class="renameTrip lb" id="rename-trip">
+		<div class="top">Rename Trip</div>
+		<form method="post" action="">
+            <div class="cont">
+                <label for="">Trip Name</label>
+                <input type="text" name="title" class="noclean" value="<?= $this->trip->title ?>" />
+            </div><!--CONT-->
+            <div class="bottom">
+                <input class="btn-1" type="submit" name="" value="Rename" />
+                <a class="btn-10" onclick="$.fancybox.close(); return false;" href="#">Cancel</a>
+            </div><!--BOTTOM-->
+            <input type="hidden" name="ids" value="<?= $this->trip->id ?>" />
+            <input type="hidden" name="token" value="<?= $this->trip->token ?>" />
+            <input type="hidden" name="_task" value="<?= md5('update_title') ?>" />
+		</form>
+	</div><!--RENAMETRIP-->
+	
 </div>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/user/trips.itinerary.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+$(function(){
+	$('input.calendar1').datepicker({
+		minDate:new Date(),
+		onSelect:function(date){
+			$end = $(this).parents('.cont').find('input.calendar2');
+			$end.datepicker('option','minDate', date);
+		},
+		dateFormat:'D M d yy'
+	});
+	
+	$('input.calendar2').datepicker({
+		minDate:new Date(),
+		dateFormat:'D M d yy'
+	});
+	
+	$('a.deny').live('click', function(){
+		return false;
+	});
+});
+</script>
+<style type="text/css">
+.jcarousel-clip.unhidden {
+	position:static !important;
+	overflow:visible !important;
+}
+.jcarousel-clip { min-height:100px;}
+.ui-draggable-dragging {
+	z-index:10000;
+	padding:5px !important; }
+.activities-tabs .tab ul li {
+	background:#303030;}
+.itinerary-items .item.ui-state-default {
+	background:#e7e7e7;}
+.itinerary-items .item.ui-state-hover {
+	background:#fbfbfb;}
+	.itinerary-items .item ul li img {
+		height:auto;}
+</style>
 </body>
 </html>

@@ -1,0 +1,129 @@
+<?php if($this->help->com_calendar == 0): ?>
+<div class="desc">
+	<h3>What is the Calendar Availability Section?</h3>
+	<p>On this section you have full control of your availability. Change the availability of your activity or hotel in the calendar. You can set as booked, blocked or available day. Please make sure you maintain this section up to date so you can always provide the best service and the most accurate information to potential clients.</p>
+	<a href="" rel="com_calendar" class="remove">Remove</a>
+</div><!-- closes desc -->
+<?php endif ?>
+<div class="main-ttl pad">
+	<p><strong>Calendar Availability</strong> <a href="/admin/listings" class="back_btn">&larr; Back to Listings</a></p>	
+</div><!-- closes main-ttl -->
+<div class="calendar">
+    <div class="month">
+        <a href="?month=<?= $this->prev['month'] ?>&year=<?= $this->prev['year'] ?>" class="prev"> &laquo; <?= $this->prev['month_lb'] ?></a>
+        <?= $this->currentMonth ?> 
+        <a href="?month=<?= $this->next['month'] ?>&year=<?= $this->next['year'] ?>" class="next"><?= $this->next['month_lb'] ?> &raquo; </a>
+    </div><!-- closes month -->
+    <ul class="days">
+        <li>Sunday</li>
+        <li>Monday</li>
+        <li>Tuesday</li>
+        <li>Wednesday</li>
+        <li>Thursday</li>
+        <li>Friday</li>
+        <li>Saturday</li>
+    </ul>
+    <ul class="calendar-items">
+        <?php foreach($this->days as $day): ?>
+        <?php if($day['class'] == 'disabled'): ?>
+        <li class="disabled"><span class="day"><?= $day['num'] ?></span></li>
+        <?php else: ?>
+        <li class="<?= $day['class'] ?>">
+            <span class="day"><?= $day['num'] ?></span>
+            <?php if($day['class'] == 'booked'): ?>
+            <p>Day Booked</p>
+            <?php elseif($day['class'] == 'blocked'): ?>
+            <p>Day Blocked</p>
+            <?php endif ?>
+   			<?php if(count($this->schedules) > 0): ?>
+            <div class="tooltip tooltip2">
+                <form id="form_calendar_<?= $day['date'] ?>" method="post" action="">
+                    <h5>Availability</h5>
+                    <span class="arrow">&gt;</span>
+                    <div class="tooltip-wrapper">
+                        <ul>
+                            <?php foreach($this->schedules as $sch): ?>
+                            <li>
+                            	<?php if($this->listing->main_type == 5): ?>
+                                <label><?= $sch->name ?></label>                                
+                                <?php else: ?>
+                                <label><?= date('g:i A', strtotime($sch->starting)) ?> - 
+								<?= date('g:i A', strtotime($sch->ending)) ?></label>
+                                <?php endif ?>
+                                <select name="sch[<?= $sch->id ?>][state]">
+                                    <option value="">Available</option>
+                                    <?php if($day[$sch->id]['class'] == 'booked'): ?>
+                                    <option selected="selected" value="booked">Booked</option>
+                                    <?php else: ?>
+                                    <option value="booked">Booked</option>
+                                    <?php endif ?>
+                                    <?php if($day[$sch->id]['class'] == 'blocked'): ?>
+                                    <option selected="selected" value="blocked">Blocked</option>
+                                    <?php else: ?>
+                                    <option value="blocked">Blocked</option>
+                                    <?php endif ?>
+                                </select>
+                            </li>
+                            <?php endforeach ?>
+                        </ul>
+                    </div><!-- closes tooltip-wrapper -->
+                    <div class="all-day">
+                    	<div class="book">
+                        	<?php $cond = ($day['class'] == 'booked'); ?>
+                            <?php $class = ($cond) ? 'checked' : '' ?>
+                            <?php $checked = ($cond) ? 'checked="checked"' : '' ?>
+                        	<input type="radio" id="stateOpt1_<?= $day['num'] ?>" name="state" value="booked" class="stateOPT <?= $class ?>" <?= $checked ?> />
+                            <label for="stateOpt1_<?= $day['num'] ?>">Day Booked</label>
+                        </div>
+                        <div class="block">
+                        	<?php $cond = ($day['class'] == 'blocked'); ?>
+                            <?php $class = ($cond) ? 'checked' : '' ?>
+                            <?php $checked = ($cond) ? 'checked="checked"' : '' ?>
+                        	<input type="radio" id="stateOpt2_<?= $day['num'] ?>" name="state" value="blocked" class="stateOPT <?= $class ?>" <?= $checked ?> />
+                            <label for="stateOpt2_<?= $day['num'] ?>">Day Blocked</label>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn-7 noclean" value="Done" />
+                    <input type="button" class="btn-7 cancel noclean" value="Cancel" />
+                    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+                    <input type="hidden" name="day" value="<?= $day['date'] ?>" />
+                    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+                    <input type="hidden" name="form_id" value="<?= md5($this->listing->token.'form_calendar_'.$day['date']) ?>" />
+                    <input type="hidden" name="_task" value="<?= md5('update_calendar') ?>" />
+                </form>
+            </div><!-- closes tooltip -->            
+            <?php else: ?>
+            <div class="tooltip">
+                <form id="form_calendar_<?= $day['date'] ?>" method="post" action="">
+                    <span class="arrow">&gt;</span>
+                    <div class="tooltip-wrapper">
+                        <h5>Availability</h5>
+                        <select name="state">
+                            <option value="">Available</option>
+                            <?php if($day['class'] == 'booked'): ?>
+                            <option selected="selected" value="booked">Booked</option>
+                            <?php else: ?>
+                            <option value="booked">Booked</option>
+                            <?php endif ?>
+                            <?php if($day['class'] == 'blocked'): ?>
+                            <option selected="selected" value="blocked">Blocked</option>
+                            <?php else: ?>
+                            <option value="blocked">Blocked</option>
+                            <?php endif ?>
+                        </select>
+                    </div><!-- closes tooltip-wrapper -->
+                    <input type="submit" class="btn-7 noclean" value="Done" />
+                    <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
+                    <input type="hidden" name="day" value="<?= $day['date'] ?>" />
+                    <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
+                    <input type="hidden" name="form_id" value="<?= md5($this->listing->token.'form_calendar_'.$day['date']) ?>" />
+                    <input type="hidden" name="_task" value="<?= md5('update_calendar') ?>" />
+                </form>
+            </div><!-- closes tooltip -->
+            <?php endif ?>
+        </li>
+        <?php endif ?>
+        <?php endforeach ?>
+    </ul>
+    <div class="clear">&nbsp;</div>
+</div><!-- closes calendar -->

@@ -3,36 +3,15 @@
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->user->name ?>: Notifications | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-    <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('input').ToggleInputValue();
-			<?php if($this->successmessage): ?>
-			showAlert("Your changes have been saved");
-		    <?php endif ?>
-        });
-    </script>
-    <style type="text/css">
-	.profile-items .item input[type="password"] {
-		border: 1px solid #D8D8D8;
-		border-radius: 2px 2px 2px 2px;
-		color: #303030;
-		float: right;
-		font-size: 12px;
-		height: 27px;
-		padding: 0 5px;
-		width: 203px;
-	}
-	.profile-items .item input[type="password"]:focus {
-		border-color: #ADDEFF;
-		box-shadow: 0 0 5px #ADDEFF;
-	}
-	</style>
+    <title><?= $this->user->name ?> - Notifications | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1">
@@ -98,5 +77,29 @@
     <?= $this->partial('partials/footer.phtml'); ?>
 </div>
 <!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+    <?php if($this->successmessage): ?>
+        showAlert("Your changes have been saved");
+    <?php endif ?>
+    });
+</script>
+<style type="text/css">
+.profile-items .item input[type="password"] {
+	border: 1px solid #D8D8D8;
+	border-radius: 2px 2px 2px 2px;
+	color: #303030;
+	float: right;
+	font-size: 12px;
+	height: 27px;
+	padding: 0 5px;
+	width: 203px;
+}
+.profile-items .item input[type="password"]:focus {
+	border-color: #ADDEFF;
+	box-shadow: 0 0 5px #ADDEFF;
+}
+</style>
 </body>
 </html>

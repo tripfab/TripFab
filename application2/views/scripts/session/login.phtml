@@ -4,76 +4,26 @@
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
     <title>Login to your account | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
-    <script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-			$('a.lb').fancybox({
-				padding:0,
-				overlayColor:'#ffffff',
-				centerOnScroll:1,
-				padding: 0,
-				overlayOpacity: 0.8,
-				showCloseButton: false
-			});
-			$('#forgot form').submit(function(){
-				$form = $(this);
-				$data = { email:$('input[name=resetemail]', $form).val() };
-				if($data.email == 'Enter your e-mail' || $data.email == '')
-					return false;
-					
-				$.ajax({
-					url:'/ajax/resetpassword',
-					type:'post',
-					data:$data,
-					success:function(response){
-						if(response.type == 'success'){
-							$.fancybox.close();
-							showAlert(response.message);
-						} else {
-							$.fancybox.close();
-							showError(response.message);
-						}
-					},
-					error:function(){
-						$.fancybox.close();
-						showError('Something went wrong. Please try again later');
-					}
-				});
-				
-				return false;
-			});
-			$('form input').focus(function() {
-				$(this).prev('label').addClass('hide');
-				$(this).addClass('focus');
-			});
-			$('form input').focusout(function() {
-				if (!$(this).val()) {
-					$(this).prev('label').removeClass('hide');
-					$(this).removeClass('focus');
-				}
-			});
-        });
-    </script>
-    <style type="text/css">
-	.error { border:1px solid #F00; padding:5px; margin-bottom:10px; color:#F00; font-style:italic;}
-	.alert { border:1px solid #0C0; padding:5px; margin-bottom:10px; color:#0C0; font-style:italic;}
-	.hidden { display:none;}
-	</style>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>    
     <div class="w2">
         <div class="small-wrapper">
-            <div class="sign-box">
-                <div class="ttl">
-                    Sign in into your Tripfab account
-                </div><!-- closes ttl -->
-                <a href="/signup/facebook" class="fb"><img src="/images2/t-29.png" alt="" /></a>
+            <div class="sign-box signLog">
+                <div class="top">
+                	<h2>Sign into your TripFab account</h2>
+                	<p>Welcome back, we love you :)</p>
+                </div><!--TOP-->
+                <a href="#" class="fb js-fb-sigup"></a>
                 <div class="content su">
                     <span>Or</span>
                     <?php if($this->errors): ?>
@@ -90,54 +40,69 @@
                         <?php endforeach ?>
                     </div>
                     <?php endif ?>
-                    <form action="" method="post">
+                    <form action="" method="post" id="js-main-login-form">
                         <fieldset>
                         	<?php if($this->email): ?>
-                            <input type="text" name="email" value="<?= $this->email ?>" class="focus noclean in-2 required email" />
+                            <div class="">
+                            	<input type="text" name="email" value="<?= $this->email ?>" class="noclean in-2" />
+                            </div>
                             <?php else: ?>
-                            <input type="text" name="email" value="E-Mail" class="in-2 required email" />
+                            <div class="">
+                            	<input type="text" name="email" placeholder="E-Mail" class="in-2" />
+                            </div><!--ERRORIN-->
                             <?php endif ?>
-                            <span>
-                            	<label for="password">Password</label>
-                            	<input type="password" name="password" class="in-3 required password" />
-                            </span>                            
+                            <div class="">
+                                <span>
+                                    <input type="password" name="password" placeholder="Password" class="in-3 password" />
+                                </span>
+                            </div>
                         </fieldset>
                         <fieldset>
-                            <input id="rememberme" name="remember" value="1" class="noclean" type="checkbox" />
-                            <label for="rememberme">Remember me next time</label>
+                            <label for="rememberme"><input id="rememberme" name="remember" value="1" type="checkbox" /> Remember me next time</label>
                             <input type="submit" value="Sign In" class="btn-1 noclean" />
-                            <input type="hidden" value="<?= $_GET['return_url'] ?>" name="return_url" />
                         </fieldset>
+                        <input type="hidden" value="<?= $this->returnUrl ?>" name="returnURL" />
                     </form>
                 </div><!-- closes content -->
                 <div class="foot">
-                    <a href="#forgot" class="lb">Forgot password?</a>
+                    <a href="#forgot" class="js-forgot">Forgot pasword?</a>
                 </div><!-- closes foot -->
             </div><!-- closes sign-box -->
-            <div class="sign-box">
+            <div class="sign-box last">
                 <p>New on Tripfab? <a href="/signup">Sign Up Now!</a></p>
             </div><!-- closes sign-box -->
         </div><!-- closes small-wrapper -->
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
-<div class="hidden">
-	<div id="forgot">
-        <div class="lb-forgot">
-            <div class="ttl">Reset Password</div>
-            <form action="" method="post">
-                <div class="content">
-                    <p>Enter your e-mail address to have the password associated with that account reset. 
-                    A new password will be e-mailed to the address. </p>
-                    <input type="text" name="resetemail" value="Enter your e-mail" />
-                </div><!-- closes content -->
-                <div class="bottom">
-                    <input type="submit" class="btn-1" value="Reset Password" />
-                    <span onclick="$.fancybox.close()" class="btn-4">Cancel</span>				
-                </div><!-- closes bottom -->
-            </form>
-        </div><!-- closes lb-forgot -->
-    </div>
-</div>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+    $(document).ready(function() {		
+		$('#js-main-login-form').submit(function(){
+			$isValid = $(this).validate({
+				rules:{
+					email:'required email',
+					password:'required'
+				},
+				errorPlacement:function(error, element) {
+					if(error.text() == "") {
+						element.parents('div:eq(0)').removeClass('errorIn');
+						element.parents('div:eq(0)').find('p').remove();
+					} else {
+						element.parents('div:eq(0)').addClass('errorIn');
+						element.parents('div:eq(0)').append('<p><em></em>'+error.text()+'</p>');
+					}
+				}
+			});
+			
+			return $isValid.form();
+		});
+    });
+</script>
+<style type="text/css">
+.error { border:1px solid #F00; padding:5px; margin-bottom:10px; color:#F00; font-style:italic;}
+.alert { border:1px solid #0C0; padding:5px; margin-bottom:10px; color:#0C0; font-style:italic;}
+.hidden { display:none;}
+</style>
 </body>
 </html>

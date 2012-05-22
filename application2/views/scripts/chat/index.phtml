@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title>Adventure Inn, Reservation Checkout | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+    <script type="text/javascript" src="/js2/jquery.resizeHeight.js?v=<?= $this->cssVC ?>"></script>
+    <?php if($this->online): ?>
+    <script type="text/javascript">
+	$userimage = "";
+	$vendorimage = "";
+	
+    $(function(){
+        $('.mid').resizeHeight({
+            head:'.top',
+            foot:'.bottom',
+            minheight:200
+        });
+		
+		listen();
+                setInterval('read()', 2000);
+		$userimage = $('.userimage img').attr('src');
+		$vendorimage = $('.vendorimage img').attr('src');
+		
+		$('input[name=Send]').click(function(){
+			$text = $('textarea').val();
+			if($text != '') {
+				send($text);
+				$('textarea').val('');
+			}
+			return false;
+		});
+    });
+	
+	function listen() {
+		$.ajax({
+			url:'/chat/listen',
+			data:{provider:<?= $this->vendor->id ?>},
+			success:function(response){
+				if(response > 0) {
+					read();
+				} else {
+					listen();
+				}
+			},
+			error:function(response){
+				listen();
+			}
+		});
+	}
+	
+	function read(){
+		$.ajax({
+			url:'/chat/read',
+			data:{provider:<?= $this->vendor->id ?>},
+			success:function(response){
+				//listen();
+				for(i in response) {
+					$lastMsg = $('.message:last');
+					if($lastMsg.html() != null) {
+						if($lastMsg.hasClass('provider')) {
+							$msg = $lastMsg;
+						} else {
+							$lastMsg.after('<div class="message provider"><img src="'+$vendorimage+'" /><div class="text">' +
+							'<span class="title"><?= $this->vendor->name ?></span></div></div>');
+							$msg = $('.message.provider:last');
+						}
+					} else {
+						$('.welcome').after('<div class="message provider"><img src="'+$vendorimage+'" /><div class="text">'+
+						'<span class="title"><?= $this->vendor->name ?></span></div></div>');
+						$msg = $('.message.provider:last');
+					}
+					
+					$text = $('.single-message:last', $msg);
+					if($text.html() != null) {
+						$text.removeClass('first');
+						$text.removeClass('last');
+						$text.after('<div class="single-message last">'+response[i]+'</div>');
+					} else {
+						$('.title', $msg).after('<div class="single-message first">'+response[i]+'</div>');
+					}
+				}
+                                
+                                $("#livechat .mid").prop({ scrollTop: $("#livechat .mid").prop("scrollHeight")});
+			},
+			error:function(response){
+				listen();
+			}
+		});
+	}
+	
+	function send($message) {
+		$.ajax({
+			url:'/chat/send',
+			type:'post',
+			data: {
+				provider:<?= $this->vendor->id ?>,
+				message:$message
+			}
+		});
+		
+		$lastMsg = $('.message:last');
+		if($lastMsg.html() != null) {
+			if($lastMsg.hasClass('user')) {
+				$msg = $lastMsg;
+			} else {
+				$lastMsg.after('<div class="message user"><img src="'+$userimage+'" /><div class="text">' +
+				'<span class="title"><?= $this->user->name ?></span></div></div>');
+				$msg = $('.message.user:last');
+			}
+		} else {
+			$('.welcome').after('<div class="message user"><img src="'+$userimage+'" /><div class="text">'+
+			'<span class="title"><?= $this->user->name ?></span></div></div>');
+			$msg = $('.message.user:last');
+		}
+		
+		$text = $('.single-message:last', $msg);
+		if($text.html() != null) {
+			$text.removeClass('first');
+			$text.removeClass('last');
+			$text.after('<div class="single-message last">'+$message+'</div>');
+		} else {
+			$('.title', $msg).after('<div class="single-message first">'+$message+'</div>');
+		}
+                                
+                $("#livechat .mid").prop({ scrollTop: $("#livechat .mid").prop("scrollHeight")});
+	}
+    </script>
+    <?php endif ?>
+    <style type="text/css">
+    body {
+        overflow:hidden;}
+    #livechat .mid {
+        padding: 0;
+        margin-bottom:165px !important;}
+    </style>
+</head>
+<body style="background-color:#FFF;">
+<div class="lb" id="livechat">
+    <div class="top"><h2>Live Chat with <?= $this->vendor->name ?></h2></div><!--TOP-->
+    <div class="status">
+    	<?php if($this->online): ?>
+        <div class="online"><?= $this->vendor->name ?> <strong>online</strong></div>
+        <?php else: ?>
+        <div class="offline"><?= $this->vendor->name ?> <strong>Offline</strong></div>
+        <?php endif ?>
+    </div>
+    <?php if($this->online): ?>
+    <div class="mid">
+        <div class="welcome">
+            <p><strong>Welcome to the Tripfab Live Chat</strong>
+                Please ask your question to our partner</p>
+        </div><!--WELCOME-->
+        <div class="bottom">
+            <div class="container">
+                <textarea rows="2" cols="" style="height:auto"></textarea>
+                <input type="submit" name="Send" class="btn-1" value="Send" />
+            </div><!--CONTAINER-->
+        </div><!--BOTTOM-->
+        <div class="hidden">
+            <div class="userimage">
+            	<?= $this->thumbnail(48, $this->user->image, '','1:1'); ?>
+            </div>
+            <div class="vendorimage">
+            	<?= $this->thumbnail(48, $this->vendor->image, '','1:1'); ?>
+            </div>
+        </div>
+    </div><!--MID-->
+    
+    <?php else: ?>
+    <div class="mid">
+        <div class="welcome off">
+            <p>But you can still send them a direct message.</p>
+        </div><!--WELCOME-->
+        <div class="hidden">
+            <div class="userimage">
+            	<?= $this->thumbnail(48, $this->user->image, '','1:1'); ?>
+            </div>
+            <div class="vendorimage">
+            	<?= $this->thumbnail(48, $this->vendor->image, '','1:1'); ?>
+            </div>
+        </div>
+    <div class="bottom">
+        <div class="container">
+            <textarea rows="2" cols="" style="height:auto"></textarea>
+            <input type="submit" name="Send" class="btn-1" value="Send" />
+        </div><!--CONTAINER-->
+    </div><!--BOTTOM-->
+    <?php endif ?>
+</div><!--LIVECHAT-->
+
+</body>
+</html>

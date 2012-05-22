@@ -1,5 +1,8 @@
 #citiesAutocompleteContainer {
-	height:0px;}
+	height:0px;
+	position: relative;
+	z-index: 10000000;
+	}
 #citiesAutocompleteContainer .ui-autocomplete { 
 	background:#fff; 
 	border:1px solid #D8D8D8; 
@@ -20,7 +23,7 @@
 	padding: 0 20px 0 10px;
 	text-shadow:none;}
 #citiesAutocompleteContainer .ui-autocomplete li a.ui-state-hover {
-	background: url(/images2/arrow-25.png) no-repeat 98% 50% #60b6e8;
+	background: url(https://static.tripfab.com/images2/arrow-25.png) no-repeat 98% 50% #60b6e8;
 	color: #FFFFFF;
 	text-decoration:none;}
 #citiesAutocompleteContainer2 {
@@ -45,7 +48,7 @@
 	display:block;
 	font-size: 14px;}
 #citiesAutocompleteContainer2 .ui-autocomplete li a.ui-state-hover { 
-	background: url(/images2/arrow-25.png) no-repeat 98% 50% #60b6e8;
+	background: url(https://static.tripfab.com/images2/arrow-25.png) no-repeat 98% 50% #60b6e8;
 	color: #FFFFFF;
 	text-decoration:none;}
 	.subttl h4 a {
@@ -57,3 +60,90 @@
     padding-right: 30px;
     width: 161px;
 }
+/*FIRST TIME TOOLTIPS----------------------------------------*/
+.firstime_tip{
+	width: 281px;
+	background-color: #FFF;
+	display: block;
+	position: absolute;
+	-webkit-box-shadow: 0px 0px 3px 1px #8c8c8c;
+	-moz-box-shadow: 0px 0px 3px 1px #8c8c8c;
+	box-shadow: 0px 0px 3px 1px #8c8c8c;
+	z-index: 999;
+	behavior: url(/PIE.htc);
+}
+.firstime_tip > img.arrow {
+    position: absolute;
+    right: 136px;
+    top: -7px; 
+}
+.firstime_tip .cont {
+	padding: 20px 10px 5px 15px;
+	overflow: hidden;
+}
+.firstime_tip .cont img {
+	float: left;
+	margin-right: 15px;
+}
+.firstime_tip .cont p {
+	float: left;
+	width: 160px;
+}
+.firstime_tip .cont p {
+	font: 11px/16px Helvetica;
+	color: #303030;
+}
+.firstime_tip .cont p strong {
+	display: block;
+	font-weight: bold;
+}
+.firstime_tip .bot {
+	background: url(https://static.tripfab.com/images6/lstng_htl_sh2.png) repeat-x 0 0;
+	position: relative;
+	height: 43px;
+	width: 100%;
+	overflow: hidden;
+}
+.firstime_tip .bot label {
+	color: #303030;
+	font: bold 11px/21px Helvetica;
+	display: block;
+	margin: 10px 0 0 15px;
+	height: 20px;
+}
+.firstime_tip .bot label input {
+	margin:0 5px 0 0;
+	vertical-align: middle;
+}
+.firstime_tip .bot .btn-1 {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	width: 56px;
+	padding: 0;
+	height: 24px;
+	font: bold 11px/24px Helvetica;
+}
+.checkEmail {
+	background: url(https://static.tripfab.com/images6/checkMailBG.png) repeat-x left bottom;
+	height: 46px;
+	overflow: hidden;
+	-moz-box-shadow: 0px 1px 0px 0px #000;
+	-webkit-box-shadow: 0px 1px 0px 0px #000;
+	box-shadow: 0px 1px 0px 0px #000; 
+}
+.checkEmail h2 {
+	background: url(https://static.tripfab.com/images6/checkMail.png) no-repeat 0 14px;
+	padding-left: 40px;
+	height: 46px;
+	font: bold 13px/46px Helvetica;
+	width: 750px;
+	float: left;
+}
+.checkEmail .btn-10 {
+	float: right;
+	display: block;
+	height: 28px;
+	margin-top: 7px;
+}
+/*END FIRST TIME TOOLTIPS------------------------------------*/

@@ -1,363 +1,755 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-    <meta content="noindex,nofollow" name="robots" />
-    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->listing->title ?> - <?= $this->city->title ?>, <?= $this->country->title ?> | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/jquery-ui-1.8.16.custom.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/index/listing-activity.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
-    <script type="text/javascript" src="/js2/jquery.cycle.all.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js2/jquery.jcarousel.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
-    <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-    <script type="text/javascript" src="/js2/index/listing-hotel.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
+	<meta content="noindex,nofollow" name="robots" />
+	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->listing->title ?>, <?= $this->city->title ?>, <?= $this->country->title ?> | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+	<link type="text/css" rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/section1.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />	
+	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
 </head>
-<body>
-<div class="w1">
-	<?= $this->partial('partials/header.phtml', 
-	array('user'=>$this->user,'full'=>true)); ?>
-    <div class="w2">
-        <div class="main wrapper">
-            <div class="content-2">
-                <div class="box">
-                    <?= $this->partial('partials/gallery.phtml', 
-					array('user'=>$this->user, 'listing' => $this->listing, 'city' => $this->city, 
-						  'country' => $this->country,'pictures' => $this->pictures,'trips'=>$this->trips)); ?>
-                    <?php // $this->partial('partials/tabs.phtml',  array('listing' => $this->listing, 'tabs' => $this->tabs, 'faqs' => $this->faqs, 'map' => true)); ?>
-                </div><!-- closes box -->
-                <div class="tabs-wrapper-2">
-                    <ul>
-                        <li><a href="#tabs-1">Overview</a></li>
-                        <li><a href="#tabs-2">Amenities</a></li>
-                        <li><a href="#tabs-3">Rooms</a></li>
-                        <li><a href="#tabs-4">FAQ's</a></li>
-                        <li><a href="#tabs-5">How to Get There</a></li>
-                    </ul>
-                    <div class="tab" id="tabs-1">
-                        <div class="tab-ttl">
-                            About the activity
-                        </div>
-                        <!-- closes tab-ttl -->
-                        <div class="tab-content">
-                            <p>bibendum elementum tincidunt commodo, feugiat quis quam. Duis feugiat, purus nec mollis pulvinar, felis diam imperdiet justo, id consequat massa libero ac velit. Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam. Fusce neque mauris, semper et aliquam et, ornare non tortor. Phasellus po, id consequat massa libero ac velit. Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam. Fusce neque mauris, semper et aliquam et, ornare non tortor. Phasellus p o, id consequat massa libero ac velit. </p>
-                            <p>Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam. Fusce neque mauris, semper et aliquam et, ornare non tortor. Phasellus pellentesque viverra accumsan. bibendum elementum tincidunt commodo, feugiat quis quam. Duis feugiat, purus nec mollis pulvinar, felis diam imperdiet justo, id consequat massa libero ac velit. Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam.</p>
-                            <h2>What to Expect</h2>
-                            <p>Aenean auctor, leo congue vehicula dictum, purus orci eleifend lacus, sit amet eleifend neque ipsum eu magna. Sed a tellus nisl.</p>
-                            <p>Nam ut nibh id est condimentum imperdiet at non massa. Pellentesque ac congue ipsum. Sed porta lacus non libero hendrerit ultrices. Quisque ac nisi ac purus feugiat mollis sed ut diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam sit amet aliquam ligula. Integer ac dolor sed urna lacinia vulputate et sed nibh.</p>
-                            <h2>Things you'll love</h2>
-                            <p>bibendum elementum tincidunt commodo, feugiat quis quam. Duis feugiat, purus nec mollis pulvinar, felis diam imperdiet justo, id consequat massa libero ac velit. Nulla commodo, elit vitae consectetur viverra, ipsum neque volutpat eros, et faucibus arcu turpis eu quam. Fusce neque mauris, semper et aliquam et, ornare non tortor. Phasellus pellentesque viverra accumsan.</p>										
-                        </div>
-                        <!-- closes tab-content -->
-                        <div class="message">
-                            <div>
-                                <p><strong>Check in</strong></p>
-                                <p>2:00 PM</p>
+<body class="bg_hl">
+<div id="wp_all">
+    <div id="wp_header">
+		<?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>
+        <div class="sub_header" id="lstng_header">
+        	<div class="cntrl">
+        	    <ul class="breadcrump">
+        	        <li class="first"><a href="/" class="home"></a></li>
+        	        <li><a href="/<?= $this->country->identifier ?>"><?= $this->country->title ?></a></li>
+        	        <li><a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>"><?= $this->city->title ?></a></li>
+        	        <li class="last"><a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>/#/hotels" class="active">Hotels</a></li>
+        	    </ul>
+        	    <a href="/<?= $this->country->identifier ?>/<?= $this->city->identifier ?>/" class="link1">&larr; Back to Results</a>
+        	    <div class="clear"></div>
+        	</div><!--CNTRL-->
+            <div class="cont">
+                <?= $this->partial('partials/headerVendorInfo.phtml', array('vendor'=>$this->vendor, 'user'=> $this->user)) ?>
+            </div><!--CONT-->
+        </div><!--SUB_HEADER-->
+    </div><!--WP_HEADER-->
+    <div id="wp_content">
+        <div id="cont_bl">
+            <div id="lstng_htl">
+                <div class="img_bg">
+                    <div class="photo"><?= $this->blur($this->listing->image) ?></div><!--PHOTO-->
+                    <div class="wrap">
+                        <div class="dscript">
+                            <div class="inner">
+                                <h3><?= $this->listing->title ?></h3>
+                                <span class="location"><em></em><?= $this->city->title ?>, <?= $this->country->title ?></span>
+                                <p><?= $this->listing->description ?>...</p>
+                                <div class="price">
+                                    <em>From</em>
+                                    <sup>$</sup>
+                                    <span><?= $this->formatnumber($this->listing->price) ?> <sub>per night</sub></span>
+                                </div><!--PRICE-->
+                                <!--
+                                <div class="reviews">
+                                    <ul class="rating">
+                                        <li><a href="" class="slct"></a></li>
+                                        <li><a href="" class="slct"></a></li>
+                                        <li><a href="" class="slct"></a></li>
+                                        <li><a href="" class="nrml"></a></li>
+                                        <li><a href="" class="nrml"></a></li>
+                                    </ul>
+                                    <span>5 Reviews</span>
+                                </div>--><!--REVIEWS-->
+                            </div><!--INNER-->
+                        </div><!--DSCRIPT-->
+                        <div class="clear"></div>
+                    </div><!--WRAP-->
+                </div><!--IMAGE_BG-->
+                <div class="wrap">
+                    <div class="cont">
+                        <div class="container">
+                        <?= $this->partial('partials/addtomytrip.phtml', array(
+							'user' => $this->user,
+							'trips' => $this->trips,
+							'listing' => $this->listing,
+							'class'  => 'btn-2',
+							'class2' => 'one')) ?>	
+                            <?php if(!isset($_COOKIE['tooltipHelpList'])): ?>
+							<div class="firstime_tip">
+								<img class="arrow" src="https://static.tripfab.com/images6/arrow-24.png" alt="">
+								<div class="cont">
+									<img src="https://static.tripfab.com/images6/stamp.png" width="75" height="75" alt="" />
+									<p><strong>Planning a Trip?</strong>
+                            			Hey! If you're planning a trip, you can create your own customized trip, add things to do there and book it when you're ready to travel.
+                            		</p>
+								</div><!--CONT-->
+								<div class="bot">
+									<form action="post" id="tooltipHelpList">
+										<fieldset>
+											<label><input checked="checked" type="checkbox" name="" value="" />Don’t show again</label>
+											<input type="submit" value="Okay" class="btn-1" />
+										</fieldset>
+									</form>
+								</div><!--BOT-->
+							</div><!--FIRSTIME_TIP-->
+                            <?php endif ?>
+							
+                            <div class="carousel">
+                                <p><span></span>Photos & Video</p>
+                                <a href="" class="lf-arrow"></a>
+                                <div class="imgs">
+                                	<ul>
+                                    <?php for($i=0;$i<=count($this->pictures);$i=$i+6): ?>
+										<?php for($j=$i;($j<($i+6)) and ($j<count($this->pictures));$j++): ?>
+                                        <?php $pic = $this->pictures[$j] ?>
+                                        <li>
+                                            <a rel="group1" title="<?= $pic->location ?>" class="lbc" href="#grande<?= $j ?>" data-tip="#small<?= $j ?>">
+                                            <?= $this->thumbnail(65,$pic->url,'','1:1') ?><span class="arrow"></span></a>
+                                        </li>
+                                        <?php endfor ?>
+                                    <?php endfor ?>
+                                    </ul>	
+                                </div><!--IMGS-->
+                                
+                                <div class="bigImages">
+                                	<?php foreach($this->pictures as $j => $pic): ?>
+                                	<div class="hover" id="small<?= $j ?>">
+                                        <a href="#grande<?= $j ?>" class="lbc">
+                                        <?= $this->thumbnail(array('width'=>391,'height'=>254),$pic->url,'','391:254') ?>
+                                        <?php if(!empty($pic->location)): ?>
+                                        <span><?= $pic->location ?></span>
+                                        <?php endif ?></a>
+                                        <a href="#grande<?= $j ?>" class="view lbc"><em></em>See Full Size</a>
+                                    </div>
+                                    <?php endforeach ?>
+                                </div><!--BIGIMAGES-->
+                                
+                            </div><!--CAROUSEL-->
+                            <div class="hidden">
+                                <?php for($i=0;$i<count($this->pictures);$i++): ?>
+                                <?= $this->image($this->pictures[$i]->url, 'lgbox_img','grande'.$i) ?>
+                                <?php endfor ?>
                             </div>
-                            <div>
-                                <p><strong>Check out</strong></p>
-                                <p>11:00 AM</p>
-                            </div>
-                            <div>
-                                <p><strong>Category</strong></p>
-                                <p>Boutique</p>
-                            </div>
-                            <div>
-                                <p><strong>Room Types</strong></p>
-                                <p>3</p>
-                            </div>
-                        </div>
-                        <!-- closes message -->
-                    </div>
-                    <!-- closes tab -->
-                    <div class="tab" id="tabs-2">
-                        <div class="tab-ttl">
-                            Some details about the hotel
-                        </div>
-                        <!-- closes tab-ttl -->
-                        <div class="tab-content">
-                            <h2>Hotel Amenities</h2>
-                            <ul>
-                                <li>USA Today (weekdays only) available in Lobby and Java Coast coffee shop</li>
-                                <li>In-Room High-Speed Internet Access</li>
-                                <li>Wireless internet access in the guestrooms, dining outlets and atriums</li>
-                                <li>Fitness Center access</li>
-                                <li>2 bottles of water per day in guestroom</li>
-                                <li>Local phone calls (1st 20 minutes per call)</li>
-                                <li>800 access and toll free calls (1st 20 minutes per call)</li>
-                                <li>Fax services, nominal fee</li>
-                                <li>Dataports</li>
-                                <li>Photocopy, nominal fee</li>
-                                <li>Photocopy machine</li>
-                                <li>Audio/visual equipment</li>
-                                <li>Conference services</li>
-                                <li>Outdoor parking, open air lot</li>
-                                <li>Restaurant on-site</li>
-                                <li>Multilingual staff (English and Spanish)</li>
-                                <li>Doctor on call After Hours Clinic, Ambulance, Hospital Emergency</li>
-                                <li>Interior corridor</li>
-                                <li>Mail services Available through front desk</li>
-                                <li>Wedding services Catering, planning onsite for small weddings under 80 people</li>
-                                <li>Guest laundry, MacIntosh Drycleaners - Third Party</li>
-                                <li>Guest laundry facility, 8:00 a.m. to 10:00 p.m.</li>
-                            </ul>
-                            <h2>Policies</h2>
-                            <ul>
-                                <li>Minimum Check-In Age: 18</li>
-                                <li>Parking Policy: Complimentary underground heated self-parking is available.</li>
-                                <li>Transfer Policy: Transfers to/from Salt Lake City International Airport (SLC), which is about 36 miles
-                                   away, are approximately $44 per person, each way, and can be arranged through the property.</li>
-                                <li>Pet Policy: Pets are not permitted.</li>
-                                <li>Smoking Policy: Smoking is not permitted.</li>
-                            </ul>
-                            <h2>Policies</h2>
-                            <ul>
-                                <li>One or two-hour surf lesson with a qualified instructor</li>
-                                <li>Rash-guard shirt (rental)</li>
-                                <li>Surfboard equipment (rental)</li>
-                                <li>Rubberized fins (rental)</li>
-                                <li>Optional water shoes (rental)</li>
-                                <li>Hotel pickup and drop-off for private and semi-private lesson participants staying in Waikiki hotels.</li>
-                                <li>Stand up paddle lesson participants requesting hotel pickup and drop-off will be charged an 
-                                    additional $10 per person on the day of lesson.</li>
-                            </ul>
-                        </div>
-                        <!-- closes tab-content -->
-                    </div>
-                    <!-- closes tab -->
-                    <div class="tab" id="tabs-3">
-                        <div class="tab-ttl">
-                            Some recommendations before take the trip
-                        </div>
-                        <!-- closes tab-ttl -->
-                        <div class="tab-content">
-                            <h2>Garden View Junior Suite</h2>
-                            <ul>
-                                <li>Daily continental breakfast is included.</li>
-                                <li>Garden View Junior Suites are 620 square feet and feature a kitchenette.</li>
-                                <li>Maximum Occupancy: 2 (Rates are quoted for 2 people.)</li>
-                                <li>Bed Type: 1 King</li>
-                                <li>Children Policy: Children are permitted at no additional cost using existing bedding within maximum 
-                                   occupancy.</li>
-                                <li>Handicap-Accessible: No</li>
-                            </ul>
-                            <h2>Ocean Front Junior Suite</h2>
-                            <ul>
-                                <li>Daily continental breakfast is included.</li>
-                                <li>Ocean Front Junior Suites are 700 square feet and feature a furnished terrace and views of the 
-                                   ocean.</li>
-                                <li>Maximum Occupancy: 2 (Rates are quoted for 2 people.)</li>
-                                <li>Bed Type: 1 King</li>
-                                <li>Children Policy: Children are permitted at no additional cost using existing bedding within maximum 
-                                   occupancy.</li>
-                                <li>Handicap-Accessible: No</li>
-                            </ul>
-                            <h2>Premier Oceanfront Two-Bedroom</h2>
-                            <ul>
-                                <li>Daily continental breakfast is included.</li>
-                                <li>Two-Bedroom Oceanfront Suites are 2,150 square feet and feature a full kitchen, living area, ocean 
-                                   views from the master bedroom and garden views from the second bedroom.</li>
-                                <li>Maximum Occupancy: 4 (Rates are quoted for 4 people.)</li>
-                                <li>Bed Type: 1 King, plus 2 Twin</li>
-                                <li>Children Policy: Children are permitted at no additional cost using existing bedding within maximum 
-                                   occupancy.</li>
-                                <li>Handicap-Accessible: No</li>
-                            </ul>
-                        </div>
-                        <!-- closes tab-content -->
-                    </div>
-                    <!-- closes tab -->
-                    <div class="tab" id="tabs-4">
-                        <div class="tab-ttl">
-                            Frequently Asked Questions
-                        </div>
-                        <!-- closes tab-ttl -->
-                        <div class="tab-content faqs">
-                            <ul>
-                                <li>
-                                    <strong>Can children take this tour?</strong>
-                                    Yes, people of all ages can take and enjoy this tour.
-                                </li>
-                                <li>
-                                    <strong>Can I be picked up in Liberia?</strong>
-                                    For different pick ups other than San Jose, please contact tour operator for details and/or possible arrangements.
-                                </li>
-                                <li>
-                                    <strong>When is the best time to take this tour?</strong>
-                                    This tour can be taken and enjoyed year round.
-                                </li>
-                                <li>
-                                    <strong>What is the temperature on these locations?</strong>
-                                    Tortuguero and Guanacaste are hot and sunny, although it rains more in Tortuguero. Arenal on the other hand might get a bit chilly.
-                                </li>
-                                <li>
-                                    <strong>Where is the pick up for this tour?</strong>
-                                    The pick up and drop off for this tour is at the Juan Santamaria Airport.
-                                </li>
-                                <li>
-                                    <strong>At what time can I do this tour?</strong>
-                                    Tropical Bungee offers this tour twice a day. Their departure times daily can be found on the Tour Details tab.
-                                </li>
-                                <li>
-                                    <strong>Do I have to own and/or bring my own equipment?</strong>
-                                    No, this tour includes all certified equipment necessary to jump and it is carefully verified for safety.
-                                </li>
-                                <li>
-                                    <strong>How old do I have to be to do this activity?</strong>
-                                    There is no age limit. Tropical Bungee has had jumpers as young as 4 years old and as old as 80 years old.
-                                </li>
-                                <li>
-                                    <strong>At what time can I do this tour?</strong>
-                                    Tropical Bungee offers this tour twice a day. Their departure times daily can be found on the Tour Details tab.
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- closes tab-content -->
-                    </div>
-                    <!-- closes tab -->
-                    <div class="tab" id="tabs-5">
-                        <div class="tab-ttl">
-                            How to get there
-                        </div>
-                        <!-- closes tab-ttl -->
-                        <div class="tab-content there">										
-                            <h2>By plane</h2>
-                            <p>Flights are available to John F. Kennedy International Airport (JFK) and LaGuardia Airport (LGA) from major U.S. cities on a variety of carriers</p>
-                            <h2>By car</h2>
-                            <p>Taxis to/from LGA, about 12 miles from the property, are approximately $40 per car, each way.</p>
-                            <h2>By train</h2>
-                            <p>Flights are available to John F. Kennedy International Airport (JFK) and LaGuardia Airport (LGA) from major U.S. cities on a variety of carriers</p>
-                            <div id="mapcanvas"></div>
-                        </div>
-                        <!-- closes tab-content -->
-                        <div class="message">
-                            <address>
-                                <p><strong>Detailed Address</strong></p>
-                                <p>9 Crosby Street</p>
-                                <p>New York, NY 10013</p>
-                                <p>United States</p>
-                            </address>
-                        </div>
-                        <!-- closes message -->
-                    </div>
-                    <!-- closes tab -->
-                </div>
-                <!-- closes tabs-wrapper -->	                
-                <div class="reviews-wrapper">
-                    <?= $this->partial('partials/reviews.phtml', 
-					array('reviews' => $this->reviews, 'questions' => $this->questions, 'answer_allow' => false,
-						  'user'=>$this->user, 'listing' => $this->listing->id)); ?>
-                </div><!-- closes reviews-wrapper -->
-            </div><!-- closes content-2 -->
-            
-            <div class="right-sidebar">               
-                <form id="booking" method="post" action="<?= $this->form_action ?>">
-                    <div class="widget book">
-                        <div class="ttl">
-                            <span>From only</span>
-                            <strong>$<?= $this->listing->price ?> <span>/ person</span></strong>
-                        </div><!-- closes ttl -->
-                        <ul>
-                            <li id="acordion">                            
-                                <a href=""><span>Select the date</span><img src="/images/arrow-46.png" alt="" class="arrow" />
-                                <strong id="checkinlabel"></strong></a>
-                                <div id="datepicker" class="datepicker"></div>
-                                <a href=""><span>Checkout</span><img src="images/arrow-7.png" alt="" class="arrow" />
-                                <strong id="checkoutlabel"></strong></a>
-	                            <div id="datepicker-2" class="datepicker"></div>
-                                <a href=""><span>Occupation</span><img src="/images/arrow-46.png" alt="" class="arrow" /></a>
-                                <div class="occupation">
-                                	<div class="room-types">
-                                        <strong>Choose a room type</strong>
+                            <div class="tabs">
+                                <ul>
+                                    <li><a href="#description" class="ui-tabs-selected ui-state-active">Description</a></li>
+                                    <li><a href="#room_types">Room Types</a></li>
+                                    <li><a href="#directions">How to Get There</a></li>
+                                </ul>
+                                <div class="description" id="description">
+                                    <div class="info">
                                         <ul>
-											<?php foreach($this->options as $option): ?>
-                                            <li>
-                                                <input id="sch<?= $option->id ?>" name="option" value="<?= $option->id ?>" type="radio" />
-                                                <label for="sch<?= $option->id ?>"><?= $option->name ?></label>
-                                                <span><strong>$<?= $this->prices[$option->id]['price'] ?></strong> / night
-                                                <strong>Max <?= $this->prices[$option->id]['max'] ?> people</strong> per room</span>
+                                			<?php if(!empty($this->listing->checkin) and $this->listing->checkin != '00:00:00'): ?>
+                                            <li><span class="ck_in"></span><strong>Check In</strong> 
+											<?= date('g:i a', strtotime($this->listing->checkin)) ?></li>
+                                            <?php endif ?>
+                                			<?php if(!empty($this->listing->checkout) and $this->listing->checkout != '00:00:00'): ?>
+                                            <li><span class="ck_out"></span><strong>Check Out</strong> 
+											<?= date('g:i a', strtotime($this->listing->checkout)) ?></li>
+                                            <?php endif ?>
+											<?php switch($this->listing->policy): case 1: ?>
+                                            <li><span class="cancel"></span><strong>Cancellation</strong> 
+                                            <p><a class="lb" href="#cancel_policy">Low Restrictions</a> </p></li>
+                                            <?php break; case 2: ?>
+                                            <li><span class="cancel"></span><strong>Cancellation</strong> 
+                                            <p><a class="lb" href="#cancel_policy">Medium Restrictions</a> </p></li>
+                                            <?php break; default: ?>
+                                            <li><span class="cancel"></span><strong>Cancellation</strong> 
+                                            <p><a class="lb" href="#cancel_policy">High Restrictions</a> </p></li>
+                                            <?php endswitch ?>
                                             </li>
+                                        </ul>
+                                    </div><!--INFO-->
+                                    <h4><span class="hotel"></span><?= $this->listing->title ?></h4>
+                                    <?php $ok = true ?>
+                                    <?php if(!empty($this->overview->about)): ?>
+                                    <?php $ok = false; ?>
+                                    <p><?= nl2br($this->overview->about) ?></p>
+                                    <?php endif; if(!empty($this->overview->expect)): ?>
+                                    <?php $ok = false; ?>
+                                    <h5>What to Expect</h5>
+                                    <p><?= nl2br($this->overview->expect) ?></p>
+                                    <?php endif; if(!empty($this->overview->love)): ?>
+                                    <?php $ok = false; ?>
+                                    <h5>Things you'll love</h5>
+                                    <p><?= nl2br($this->overview->love) ?></p>
+                                    
+                                    <div class="amenities">
+                                        <h4><span class="icon"></span>Amenities</h4>
+                                        <ul>
+                                            <?php foreach($this->listing_amenities  as $amm): ?>
+                                            <li><?= $this->def_amenities[$amm]->name ?></li>
+                                            <?php endforeach ?>
+                                            <?php foreach($this->details as $detail): ?>
+                                            <?php if($detail->type == 1): ?>
+                                            <li><?= stripslashes($detail->text) ?></li>
+                                            <?php endif ?>
                                             <?php endforeach ?>
                                         </ul>
-                                    </div><!-- closes room-types -->
-                                    <p>
-                                        <label>Adults</label>
-                                        <select class="ocp adt"  name="adults">
-                                            <?php for($i=1; $i<=12; $i++): ?>
-                                            <option value="<?= $i ?>"><?= $i ?></option>
-                                            <?php endfor ?>
-                                        </select>
-                                    </p>
-                                    <p>
-                                        <label>Kids</label>
-                                        <select class="ocp kid" name="kids">
-                                            <option value="0">0</option>
-                                            <?php for($i=1; $i<=12; $i++): ?>
-                                            <option value="<?= $i ?>"><?= $i ?></option>
-                                            <?php endfor ?>
-                                        </select>
-                                    </p>
+                                    </div><!--AMENITIES-->
+                                    <?php endif ?>
+                                    <?php $ok3=true; foreach($this->details as $d): if($d->type == 3 and $ok3): $ok3 = false; endif; endforeach ?>
+                                    <?php if(!$ok3): ?>
+                                    <div class="policies">
+                                        <h5>Policies</h5>
+                                        <ul>
+											<?php foreach($this->details as $detail): ?>
+                                            <?php if($detail->type == 3): ?>
+                                            <li><?= stripslashes($detail->text) ?></li>
+                                            <?php endif ?>
+                                            <?php endforeach ?>
+                                        </ul>
+                                    </div><!--POLICIES-->
+                                    <?php endif ?>
+                                </div><!--DESCRIPTION-->
+                                <div class="room_types" id="room_types">
+                                	<?php foreach($this->rooms as $room): ?>
+                                    <div class="single">
+                                        <h4><?= $room->name ?></h4>
+                                        <?php if(!empty($room->image)): ?>
+                                        <?= $this->thumbnail(array('width'=>220,'height'=>136), $room->image, '','220:136'); ?>
+                                        <?php endif ?>
+                                        <ul>
+											<?php if(!empty($room->description)): ?>
+                                            <li><?= $room->description ?></li>
+                                            <?php endif ?>
+                                            <?php if($room->nights > 0):?>
+                                            <li>Minimum Stay: <?= $room->nights ?> <?= (count($room->nights) > 1) ? "nights" : 'night' ?>   </li>
+                                            <?php endif ?>
+                                            <?php if($room->people > 0): ?>
+                                            <li>Maximum Accommodation: <?= $room->people ?> <?= (count($room->people) > 1) ? "people" : 'person' ?></li>
+                                            <?php endif ?>
+                                            <?php if($room->bedrooms > 0): ?>
+                                            <li>
+                                                <?= $room->bedrooms ?> <?= (count($room->bedrooms) > 1) ? "Bedrooms" : 'Bedroom' ?>  
+                                            </li>
+                                            <?php endif ?>
+                                            <?php foreach($this->beds[$room->id] as $bed): ?>
+                                            <li><?= $bed->quantity ?> <?= $bed->type ?> <?= (count($room->quantity) > 1) ? "Beds" : 'Bed' ?></li>
+                                            <?php endforeach ?>
+                                            <?php if(count($this->room_amenities[$room->id]) > 0): ?>
+                                            <li><b>Amenities</b>
+                                            <?php foreach($this->room_amenities[$room->id] as $amm): ?>
+                                            <br /><?= $this->amenities[$amm]->name ?>
+                                            <?php endforeach ?></li>
+                                            <?php endif ?>
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </div><!--SINGLE-->
+                                    <?php endforeach ?>
+                                </div><!--ROOM_TYPES-->
+                                
+                                <div id="directions">
+                                    <?php if(!empty($this->getthere->plane)): ?>
+                                    <div class="dflt">
+                                        <h4><span class="plane"></span>By Plane</h4>
+                                        <p><?= stripslashes(nl2br($this->getthere->plane)) ?></p>
+                                    </div><!--DFLT-->
+                                    <?php endif; if(!empty($this->getthere->car)): ?>
+                                    <div class="dflt">
+                                        <h4><span class="car"></span>By Car</h4>
+                                        <p><?= stripslashes(nl2br($this->getthere->car)) ?></p>
+                                    </div><!--DFLT-->
+                                    <?php endif; if(!empty($this->getthere->bus)): ?>
+                                    <div class="dflt">
+                                        <h4><span class="bus"></span>By Bus</h4>
+                                        <p><?= stripslashes(nl2br($this->getthere->bus)) ?></p>
+                                    </div><!--DFLT-->
+                                    <?php endif; if(!empty($this->getthere->train)): ?>
+                                    <div class="dflt">
+                                        <h4><span class="train"></span>By Train</h4>
+                                        <p><?= stripslashes(nl2br($this->getthere->train)) ?></p>
+                                    </div><!--DFLT-->
+                                    <?php endif; if(!empty($this->getthere->boat)): ?>
+                                    <div class="dflt">
+                                        <h4><span class="boat"></span>By Boat</h4>
+                                        <p><?= stripslashes(nl2br($this->getthere->boat)) ?></p>
+                                    </div><!--DFLT-->
+                                    <?php endif ?>
+                                    
+                                    <div class="map">
+                                        <h4><span></span>Location</h4>
+                                        <p><strong><?= $this->listing->title ?></strong>
+                                        <?= $this->listing->address ?></p>
+                                        <div class="map_canvas">
+                                            <div class="cont">
+                                                <div id="mapcanvas"></div>
+                                            </div><!--CONT-->
+                                            <span class="sw"></span>
+                                        </div><!--MAP_CANVAS-->
+                                    </div><!--MAP-->
+                                </div><!--DIRECTIONS-->
+                            </div><!--TABS-->
+                            
+                            <div class="reviews">
+                            	<?php if(count($this->reviews) > 0): ?>
+                                <div class="ttl"><span></span><?= count($this->reviews) ?> Reviews 
+                                <!--<a href="#writeReview" class="btn-10 lbc">Write Review</a>--></div><!--TTL-->
+                                <?php foreach($this->reviews as $rev): ?>
+                                <div class="single">
+	                                <?php if(!empty($rev->user_image)): ?>
+                                	<?= $this->thumbnail(58,$review->user_image, '', '1:1') ?>
+	                                <?php else: ?>
+	                                <?= $this->thumbnail(58,'/images/default-profile.gif','', '1:1') ?>                                    
+                                    <?php endif ?>
+                                    <div class="message">
+                                        <div class="subject"><?= $rev->title ?> <em>by</em> <span><?= $rev->user_name ?></span></div>                                        <div class="text">
+                                            <p><?= stripslashes(nl2br($rev->text)) ?></p>
+                                            <!--
+                                            <div class="social">
+                                                <a href="" class="not"></a>
+                                                <a href="" class="like"></a>
+                                                <span class="pos">+4</span>
+                                                <span class="neg">-4</span>
+                                                <p>Did you find this review helpful?</p>
+                                                <span class="date">Apr 26, 2011</span>
+                                                <div class="clear"></div>												
+                                            </div>--> <!--SOCIAL-->
+                                            <span class="help"><em></em>Helpful</span>
+                                            <span class="n-help"><em></em>Not Helpful</span>
+                                        </div><!--TEXT-->
+                                    </div><!--MESSAGE-->
                                     <div class="clear"></div>
-                                </div><!-- closes ocupation -->
-                            </li>
-                        </ul>
-                        <div class="summary">
-                            <span>Subtotal <strong id="Subtotal">$<?= $this->listing->price ?></strong></span>
-                            <input type="submit" value="Book Now!" class="btn-1" />
-                        </div><!-- closes summary -->
-                	</div><!-- closes widget -->
-                	<?php foreach($this->form_fields as $name => $value): ?>
-                    <input type="hidden" name="<?= $name ?>" value="<?= $value ?>" />
-                    <?php endforeach ?>
-                    <input type="hidden" name="checkin" id="inputCheckin" value="" />
-                    <input type="hidden" name="checkout" id="inputCheckout" value="" />
+                                </div><!--SINGLE-->
+                                <?php endforeach ?>
+                                <!--
+                                <div class="paging">
+                                    <span class="total">20 - 25 of 126 Reviews</span>
+                                    <ul>
+                                        <li class="prev"><a href="" class="" class="prev">Previous</a></li>
+                                        <li><a href="" class="">1</a></li>
+                                        <li><a class="active" href="" class="">2</a></li>
+                                        <li><a href="" class="">3</a></li>
+                                        <li class="next"><a href="" class="" class="next">Next</a></li>
+                                    </ul>
+                                </div>--><!--PAGING-->
+                                <?php else: ?>
+                                <?php // Agregue los reviews aqui ?>
+                                <?php endif ?>
+                            </div><!--REVIEWS-->
+                        </div><!--CONTAINER-->
+                        <div class="sidebar">
+                            <div class="cont">
+	                        	<form id="booking" method="post" action="/en-US/<?= $this->form_action ?>">
+                                    <h5>Select the Dates <span class="i_date"></span></h5>
+                                    <div class="dates">
+                                    	<span class="line"></span>
+                                        <div class="check">
+                                            <label>Check In</label>
+                                            <input id="checkIn" type="text" name="checkin" placeholder="dd/mm/yyyy" />
+                                        </div><!--CHECK-->
+                                        <div class="check">
+                                            <label>Check Out</label>
+                                            <input id="checkOut" type="text" name="checkout" placeholder="dd/mm/yyyy" />
+                                        </div><!--CHECK-->
+                                    </div><!--DATES-->
+                                    <h5><span class="i_room"></span>Select the Room Details</h5>
+                                    <div class="type">
+                                    	<span class="line"></span>
+                                        <?php foreach($this->options as $n => $option): ?>
+	                                        <div class="details">
+	                                        
+	                                        	<table width="262">
+	                                        		<tr>
+                                                    	<?php $c=($n==0)?'checked="checked"':''?>
+	                                        			<td width="32"><input <?= $c ?> type="radio" id="room<?= $option->id ?>" 
+                                                        name="option" value="<?= $option->id ?>" /></td>
+	                                        			<td width="175"><label for="room<?= $option->id ?>"><?= $option->name ?> 
+                                                        (<?= $this->rooms2[$option->id]['people'] ?>/room)</label></td>
+	                                        			<td width="55"><em>$<?= $this->formatnumber($this->prices[$option->id]['price']) ?> </em></td>
+	                                        		</tr>
+	                                        	</table>
+                                        		<!--<label for="room<?= $option->id ?>">
+													<input type="radio" id="room<?= $option->id ?>" name="option" value="<?= $option->id ?>" />
+													<span><?= $option->name ?> (<?= $this->rooms2[$option->id]['people'] ?>/room)</span> 
+													<em>$<?= $this->formatnumber($this->prices[$option->id]['price']) ?> </em>
+												</label>-->
+
+												<div class="room_tip">
+													<span class="rw"></span>
+													<h6><?= $option->name ?></h6>
+													<div class="text">
+														<p><?= $this->rooms2[$option->id]['description'] ?></p>
+													</div><!--TEXT-->
+													<ul>
+                                                    	<?php if($this->rooms2[$option->id]['nights'] > 0): ?>
+														<li><strong>Minimum Stay:</strong> 
+                                                        <?= count($this->rooms2[$option->id]['nights'] > 1) ? 
+														$this->rooms2[$option->id]['nights'] . ' nights' :
+														$this->rooms2[$option->id]['nights'] . ' night' ?></li>
+                                                        <?php endif ?>
+                                                        <?php if($this->rooms2[$option->id]['people'] > 0): ?>
+														<li><strong>Maximum Accommodation:</strong> 
+                                                        <?= count($this->rooms2[$option->id]['people'] > 1) ? 
+														$this->rooms2[$option->id]['people'] . ' people' :
+														$this->rooms2[$option->id]['people'] . ' person' ?></li>
+                                                        <?php endif ?>
+													</ul>
+												</div><!--ROOM_TIP-->												
+                                        	</div><!--DETAILS-->
+                                        <?php endforeach ?>
+                                    </div><!--TYPE-->
+                                    <div class="selects">
+                                        <label class="rooms">
+                                            Adults
+                                            <select class="ocp adt"  name="adults">
+                                                <?php for($i=1; $i<=12; $i++): ?>
+                                                <option value="<?= $i ?>"><?= $i ?></option>
+                                                <?php endfor ?>
+                                            </select>
+                                        </label>
+                                        <label>
+                                            Kids
+                                            <select class="ocp kid" name="kids">
+                                                <option value="0">0</option>
+                                                <?php for($i=1; $i<=12; $i++): ?>
+                                                <option value="<?= $i ?>"><?= $i ?></option>
+                                                <?php endfor ?>
+                                            </select>
+                                        </label>
+                                        <div class="clear"></div>
+                                    </div><!--SELECTS-->
+                                    <div class="price">
+                                         <div>
+                                         	<span><sup>$</sup>
+                                         	<abbr id="sumaryPrice"><?= $this->formatnumber($this->listing->price) ?></abbr> 
+                                         	<sub>Subtotal</sub></span>
+                                         </div>
+                                    </div><!--PRICE-->
+                                    <?php if($this->user): ?>
+                                    <a href="#choiceLB" class="btn-1 js-book">Book Now!</a>
+                                    <?php else: ?>
+                                    <a href="/signup" class="btn-1 js-signup">Book Now!</a>
+                                    <?php endif ?>
+                                    <?php foreach($this->form_fields as $name => $value): ?>
+                                    <input type="hidden" name="<?= $name ?>" value="<?= $value ?>" />
+                                    <?php endforeach ?>
+                                </form>                     
+                            </div><!--CONT-->
+                        </div><!--SIDEBAR-->
+                        <div class="clear"></div>
+                    </div><!--CONT-->
+                </div><!--WRAP-->
+            </div><!--LSTNG_HTL-->
+        </div><!--CONT_BL-->
+    </div><!--WP_CONTENT-->
+    <div id="wp_footer">
+	    <?= $this->partial('partials/footer.phtml'); ?>  
+    </div><!--WP_FOOTER-->
+    <div class="hidden">
+    	<div id="choiceLB">
+            <div class="spacer">
+                <div class="choiceLB">
+                    <div class="top"><h6>Great! Now, what do you want to do?</h6></div>
+                    <div class="cont">
+                        <input class="btn-1 js-submit-bookin" type="submit" name="" value="Go to Checkout" />
+                        <?= $this->partial('partials/addtomytrip.phtml', array(
+                                'user' => $this->user,
+                                'trips' => $this->trips,
+                                'listing' => $this->listing,
+                                'class'	=> 'btn-1',
+                                'class2' => 'two'
+                        )) ?>
+                        <em>or</em>
+                    </div><!--CONT-->
+                </div><!--CHOICELB-->
+            </div>
+        </div>
+    	
+        <div id="send_message">
+            <form action="" id="sendMessageForm">
+                <div class="lb-forgot">
+                    <div class="ttl">Send a message <em>to</em> <?= $this->vendor->name ?></div>
+                    <div class="intro_m">
+                        <p><strong>Questions or concerns about the activity?</strong>
+                            Please write a message and you'll get an answer very soon.</p>
+                    </div><!--INTRO-->
+                    <div class="content">
+                        <textarea cols="30" name="message" rows="1"></textarea>
+                    </div><!-- closes content -->
+                    <div class="bottom">
+                        <input type="submit" class="btn-1" value="Send Message" />
+                        <span onclick="$.fancybox.close()" class="btn-10">Cancel</span>	
+                    </div><!-- closes bottom -->
+                </div><!-- closes lb-forgot -->
+                <input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+            </form>
+        </div>
+        <div id="live_chat">
+            <img src="https://static.tripfab.com/images2/chat.png" />
+        </div>
+        <div id="start_call">
+            <div id="dialpad" class="lb">
+                <div class="top">Dial your phone number</div><!--TOP-->
+                <div class="middle">
+                    <p>We'll connect you with the vendor in few minutes. Directly.</p>
+                    <div class="number-display">
+                        <a href="#" class="flag"><img src="https://static.tripfab.com/images2/flags/us.png" width="16" height="16" alt="" /></a>
+                        <div class="all_flags">
+                            <a href="#" class="up" onMouseover="move('container',10)" onMouseout="clearTimeout(move.to)"></a>
+                            <a href="#" class="down" onMouseover="move('container',-10)" onMouseout="clearTimeout(move.to)"></a>
+                            <div class="holder">
+                                <div id="container" style="position:absolute;width:282px;left:0;top:0">
+                                    <p>ALL COUNTRIES</p>
+                                    <?php foreach($this->countries as $c): ?>
+                                    <a href="#" data-code="<?= $c->phone ?>"><img src="https://static.tripfab.com/images2/flags/<?= strtolower($c->code) ?>.png" width="16" height="16" alt="" />
+                                    <?= $c->title ?> <strong>(+<?= $c->phone ?>)</strong></a>
+                                    <?php endforeach ?> 
+                                </div><!--CONTAINER-->
+                            </div><!--HOLDER-->
+                        </div><!--ALL_FLAGS-->
+                        <span class="code">(+1)</span>
+                        <a href="" class="close"></a>
+                        <input type="text" name="number" value="" />
+                        <input type="hidden" name="code" value="1" />
+                        <div class="clear"></div>
+                    </div><!--NUMBER-DISPLAY-->
+                    <div class="numbers">
+                        <a data-num="1" href="">1</a>
+                        <a data-num="2" href="">2<span>ABC</span></a>
+                        <a data-num="3" href="">3<span>DEF</span></a>
+                        <a data-num="4" href="">4<span>GHI</span></a>
+                        <a data-num="5" href="">5<span>JKL</span></a>
+                        <a data-num="6" href="">6<span>MNO</span></a>
+                        <a data-num="7" href="">7<span>PQRS</span></a>
+                        <a data-num="8" href="">8<span>TUV</span></a>
+                        <a data-num="9" href="">9<span>WXYZ</span></a>
+                        <a data-num="*" href="">*</a>
+                        <a data-num="0" href="">0</a>
+                        <a data-num="#" href="">#</a>
+                    </div><!--NUMBERS-->
+                    <div class="control">
+                        <input type="button" name="start" class="btn-1" value="Start Call" />
+                        <input type="button" name="Cancel"  class="cancel" value="Cancel" />
+                    </div><!--CONTROL-->
+                </div><!--MIDDLE-->
+            </div><!--DIALPAD-->
+        </div>
+        <div id="newtrip">
+            <div id="create_trip">
+                <form action="">
+                    <div class="top">
+                        <h3>Create a New Trip</h3>
+                        <p>Complete the information below to start your next trip</p>
+                    </div><!--TOP-->
+                    <div class="cont">
+                        <fieldset>
+                            <div class="item">
+                                <label class="trip">Trip Name</label>
+                                <input type="text" name="title" value="" />
+                            </div><!--ITEM-->
+                            <div class="item">
+                                <label class="dates">Trip Dates</label>
+                                <input class="start" type="text" name="start" value="Starting Date" />
+                                <input class="end"type="text" name="end" value="Ending Date" />
+                                <label class="check">
+                                    <input type="checkbox" class="nodatesyet"/>
+                                    I don't know the travel dates yet
+                                </label>
+                            </div><!--ITEM-->
+                            <div class="item temp">
+                                <label class="travelers">Travelers</label>
+                                <select name="adults">
+                                    <option value="1">1 Adult</option>
+                                    <?php for($i=2;$i<=20;$i++): ?>
+                                    <option value="<?= $i ?>"><?= $i ?> Adults</option>
+                                    <?php endfor ?>
+                                </select>
+                                <select name="kids">
+                                    <option value="">None</option>
+                                    <option value="1">1 Kid</option>
+                                    <?php for($i=2;$i<=20;$i++): ?>
+                                    <option value="<?= $i ?>"><?= $i ?> Kids</option>
+                                    <?php endfor ?>
+                                </select>
+                            </div><!--ITEM-->
+                        </fieldset>
+                    </div><!--CONT-->
+                    <div class="bottom">
+                        <input type="submit" class="btn-1 noclean" value="Create Trip" />
+                        <input type="button" onclick="$.fancybox.close(); return false;" class="btn-10 noclean" value="Cancel" />
+                    </div><!--BOTTOM-->
+                    <input type="hidden" name="trip" value="new" />
+                    <input type="hidden" name="listing" value="" />
                 </form>
-                <div class="widget talk">
-                    <?= $this->partial('partials/talk.phtml', array('vendor'=>$this->vendor,'user' => $this->user)); ?>
-                </div><!-- closes widget -->
-            </div><!-- closes right-sidebar -->
-        </div><!-- closes main -->
-    </div><!-- closes w2 -->
-    <?= $this->partial('partials/footer.phtml'); ?>
-</div><!-- closes w1 -->
-<div id="citiesAutocompleteContainer"></div>
+            </div><!--CREATE_TRIP-->
+        </div>
+        
+        <div class="error_ph" id="errorA">
+            <div class="cont">
+                <span class="icon2"></span>
+                <h3>Missed Call</h3>
+                <p>An error ocurred and we can’t connect you with the partner, please try later.</p>
+                <div class="clear"></div>
+            </div><!--CONT-->
+            <div class="bottom">
+                <input onclick="$.fancybox.close(); return false;" class="btn-1" type="submit" name="" value="Got it!" />
+            </div><!--BOTTOM-->
+        </div><!--ERROR_PH-->
+        
+        <div class="error_ph" id="errorB">
+            <div class="cont">
+                <span class="icon2"></span>
+                <h3>Wrong Number</h3>
+                <p>An error ocurred because you entered a wrong phone number, please dial again</p>
+            </div><!--CONT-->
+            <div class="bottom">
+                <input class="btn-1 phonecall" href="#start_call" type="submit" name="" value="Dial Again" />
+                <a href="" onclick="$.fancybox.close(); return false;" class="btn-10">Cancel</a>
+                <div class="clear"></div>
+            </div><!--BOTTOM-->
+        </div><!--ERROR_PH-->
+        
+        <div class="error_ph" id="errorC">
+            <div class="cont">
+                <span class="icon1"></span>
+                <h3>Successfully Connected!</h3>
+                <p>You’ll receive a phone call from our partner in a few minutes</p>
+                <div class="clear"></div>
+            </div><!--CONT-->
+            <div class="bottom">
+                <input class="btn-1" type="submit" name="" value="Got it!" onclick="$.fancybox.close(); return false;" />
+            </div><!--BOTTOM-->
+        </div><!--CONECTED_PH-->
+        
+        <div class="load_ph" id="load_ph">
+            <img src="https://static.tripfab.com/images6/loadCall.gif" width="50" height="50" alt="" />
+            <h3>Connecting with the Business...</h3>
+        </div><!--PHONE-PH-->
+        
+        
+        <div id="policy">
+            <?php switch($this->listing->policy): case 1: ?>
+            <div id="cancel_policy" class="cancel_policy lb">
+                <div class="top">Low Restrictions Cancellation Policy</div>
+                <div class="mid">
+                    <h3>Full refund 1 day prior to arrival, except fees</h3>
+                    <ul>
+                        <li>Cleaning fees are always refunded if the guest did not check in</li>
+                        <li>The Tripfab service fee is refundable.</li>
+                        <li>If there is a complaint from either party, notice must be given to Tripfab 
+                        Resolution Center within 24 hours of check-in</li>
+                        <li>Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                        <li>A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                        e-mail from Tripfab Resolution Center.</li>
+                    </ul>
+                    <div class="inner">
+                        <img src="https://static.tripfab.com/images2/img-65-hotel.png" alt="" />
+                        <div class="specs">
+                            <div class="column">
+                                <p>Must be made a full 24 hours prior to listing's local check in time (or 2:00 PM 
+                                if not specified) on the day of check in. For example, if check-in is on Friday, 
+                                cancel by Thursday of that week before check in time.</p>
+                            </div><!--COLUMN-->
+                            <div class="column">
+                                <p>If the guest cancels less than 24 hours before check-in, the first night is non-refundable.</p>
+                            </div><!--COLUMN-->
+                            <div class="column last">
+                                <p>If the guest arrives and decides to leave early, the nights not spent 24 hours after 
+                                the official cancellation are 100% refunded.</p>
+                            </div><!--COLUMN-->
+                            <div class="clear"></div>
+                        </div><!--SPECS-->
+                    </div><!--INNER-->
+                </div><!--MID-->
+            </div><!--CANCEL_POLICY-->
+            <?php break; case 2: ?>
+            <div id="cancel_policy" class="cancel_policy lb">
+                <div class="top">Medium Restrictions Cancellation Policy</div>
+                <div class="mid">
+                    <h3>Full refund 3 days prior to arrival, except fees</h3>
+                    <ul>
+                        <li>Cleaning fees are always refunded if the guest did not check in.
+                        <li>The Tripfab service fee is refundable.</li></li>
+                        <li>If there is a complaint from either party, notice must be given to 
+                        Tripfab Resolution Center within 24 hours of check-in.</li>
+                        <li>Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                        <li>A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                        e-mail from Tripfab Resolution Center.</li>
+                    </ul>
+                    <div class="inner">
+                        <img src="https://static.tripfab.com/images2/img-66-hotel.png" width="    " height="" alt="" />
+                        <div class="specs">
+                            <div class="column">
+                                <p>Must be made three full days prior to listing's local check in time (or 2:00 PM if not specified) on the day of check in. For example, if check-in is on Friday, cancel by the previous Tuesday before check in time.</p>
+                            </div><!--COLUMN-->
+                            <div class="column">
+                                <p>If the guest cancels less than 3 days in advance, the first night is 
+                                non-refundable but the remaining nights will be 50% refunded.</p>
+                            </div><!--COLUMN-->
+                            <div class="column last">
+                                <p>If the guest arrives and decides to leave early, the nights not spent 24 hours 
+                                after the cancellation occurs are 50% refunded.</p>
+                            </div><!--COLUMN-->
+                            <div class="clear"></div>
+                        </div><!--SPECS-->
+                    </div><!--INNER-->
+                </div><!--MID-->
+            </div><!--CANCEL_POLICY-->
+            <?php break; default: ?>
+            <div id="cancel_policy" class="cancel_policy lb">
+                <div class="top">High Restrictions Cancellation Policy</div>
+                <div class="mid">
+                    <h3>50% refund up until 1 week prior to arrival, except fees</h3>
+                    <ul>
+                        <li>Cleaning fees are always refunded if the guest did not check in.</li>
+                        <li>The Tripfab service fee is non-refundable.</li>
+                        <li>If there is a complaint from either party, notice must be given to Tripfab 
+                        Resolution Center within 24 hours of check-in.</li>
+                        <li>Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                        <li>A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                        e-mail from Tripfab Resolution Center.</li>
+                    </ul>
+                    <div class="inner">
+                        <img src="https://static.tripfab.com/images2/img-67-hotel.png" width="    " height="" alt="" />
+                        <div class="specs">
+                            <div class="column">
+                                <p>Must be made seven full days prior to listing's local check in time (or 2:00 PM 
+                                if not specified) on the day of check in, otherwise no refund. For example, 
+                                if check-in is on Friday, cancel by Friday of the previous</p>
+                            </div><!--COLUMN-->
+                            <div class="column">
+                                <p>If the guest cancels less than 7 days in advance, the nights not spent are not refunded.</p>
+                            </div><!--COLUMN-->
+                            <div class="column last">
+                                <p>If the guest arrives and decides to leave early, the nights not spent are not refunded.</p>
+                            </div><!--COLUMN-->
+                            <div class="clear"></div>
+                        </div><!--SPECS-->
+                    </div><!--INNER-->
+                </div><!--MID-->
+            </div><!--CANCEL_POLICY-->
+            <?php endswitch ?>
+        </div>
+    </div><!--HIDDEN-->
+</div><!--WRAPPER_ALL-->
 <input type="hidden" value="<?= ($this->listing->lat) ? $this->listing->lat : 'none' ?>" name="listlat" />
 <input type="hidden" value="<?= ($this->listing->lng) ? $this->listing->lng : 'none' ?>" name="listlng" />
 <input type="hidden" value="<?= $this->listing->title ?>" name="listtitle" />
 <input type="hidden" value="<?php foreach($this->disabledDates as $d): ?><?= $d ?>,<?php endforeach ?>" name="diableddates" />
-
-<div class="hidden">
-	<div id="send_message">
-        <form action="" id="sendMessageForm">
-            <div class="lb-forgot">
-                <div class="ttl">Send a message to <?= $this->vendor->name ?></div>
-                <div class="content">
-                    <textarea cols="30" name="message" rows="1"></textarea>
-                </div><!-- closes content -->
-                <div class="bottom">
-                    <input type="submit" class="btn-1" value="Send Message" />
-                    <span onclick="$.fancybox.close()" class="btn-4">Cancel</span>				
-                </div><!-- closes bottom -->
-            </div><!-- closes lb-forgot -->
-            <input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
-        </form>
-    </div>
-    <div id="live_chat">
-    	<img src="/images2/chat.png" />
-    </div>
-    <div id="start_call">
-    	<img src="/images2/phone.png" />
-    </div>
-</div>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/jquery.popupWindow.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/index/listing-hotel.js?v=<?= $this->cssVC ?>"></script>
+<style type="text/css"> 
+#mapcanvas {width:638px; height:354px;}
+#dialpad .middle .number-display input[type="text"] {
+	float: right;
+	width: 110px;} 
+span.code {
+	color: #999;
+	margin-left: 10px;
+	width: 35px;
+	float: left;
+	text-align: right;}
+.spacer { padding:100px 50px;;}
+#fancybox-outer.noshadow { 
+-webkit-box-shadow:0px 0px 0px 0px #b3b3b3;
+-moz-box-shadow:0px 0px 0px 0px #b3b3b3;
+box-shadow::0px 0px 0px 0px #b3b3b3; }
+#fancybox-outer.noshadow #fancybox-close { 
+top: 80px;
+right: 30px;}
+.choiceLB {
+	border:1px #b3b3b3 solid; }
+</style>
 </body>
 </html>

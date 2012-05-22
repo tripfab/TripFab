@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<title><?= $this->user->name ?> : Partners - Admin | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+        <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+		<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+	    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+  		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />
+  		<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+	    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+		<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js?v=<?= $this->cssVC ?>"></script>
+    	<script type="text/javascript" src="/js2/admin/traveller-view.js?v=<?= $this->cssVC ?>"></script>
+			<script>
+				$(document).ready(function() {
+					$('a.lbc').fancybox({
+						padding: 0,
+						overlayColor: '#FFF',
+						overlayOpacity: '0.7',
+						showCloseButton: 'false'
+					});
+            		$("#report_tabs").tabs();
+				});
+			</script>
+		</head>
+		<body>
+			<div class="w1">
+    		<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
+			
+			<div class="w3_admin">
+				<div class="sub_menu">
+					<h2><?php echo $this->user->name?>. <span>Bank Accounts</span></h2>
+					<a href="#password-reset" class="btn-10 lbc">Reset Password</a>
+                    <a href="#activate" class="btn-10 act lbc" id="act-btn-342"<?php echo $this->user->active==1 ? 'style="display:none"' : '';?> >Activate Partner</a>
+            		<a href="#deactivate" class="btn-10 deact lbc" id="deact-btn-342" <?php echo $this->user->active==0 ? 'style="display:none"' : '';?>>Deactivate Partner</a>
+				</div><!--SUB_MENU-->
+            </div><!--W3-->
+			<div class="all_listing">
+				<div id="user_view" class="listing-wrapper wrapper">
+					<div class="listing-content">
+						<div class="left">
+							<ul>
+								<li id="nav1"><a href="<?php echo $this->url(array('seq'=>1))?>">General Information</a></li>
+								<li id="nav2"><a href="<?php echo $this->url(array('seq'=>2))?>">Listings</a></li>
+								<li id="nav3"><a href="<?php echo $this->url(array('seq'=>3))?>">Reservations</a></li>
+								<li id="nav4"><a href="<?php echo $this->url(array('seq'=>4))?>">Offers</a></li>
+								<li id="nav5" class="current"><a href="<?php echo $this->url(array('seq'=>5))?>">Bank Accounts</a></li>
+								<li id="nav7"><a href="<?php echo $this->url(array('seq'=>7))?>">Staff</a></li>
+							</ul>
+						</div><!-- closes left -->
+						<div class="right">
+                        
+                        
+							<?php if($this->successMessage): ?>
+							<script type="text/javascript">
+                                showAlert("Your changes have been saved");
+                            </script>
+                            <?php endif ?>	
+                        
+							<div class="lstng-details" id="content">
+<h3 class="title">Bank Account<a href="/admin/users/partners" class="back">Back to Partners</a></h3>
+<div class="block">
+
+<form id="general" name="general" method="POST">
+<div class="single_trip">
+    <div class="image"><img src="<?php echo $this->user->image?>" width="134" height="134" alt="" /></div><!--IMAGE-->
+    <table width="520" border="0" class="info">
+        <tr>            
+            <td width="180">Bank</td>
+			<td width="340">
+             <select id="bank"  name="bank">
+				<?php foreach($this->banks as $bank):?>
+                <option <?php echo $this->bankId == $bank->id ? ' selected="selected"' : ''; ?> value="<?php echo $bank->id?>"><?php echo $bank->name?></option>
+                <?php endforeach;?>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td width="180">Account Holder Name</td>
+			<td width="340"><input type="text" class="noclean" name="holder_name" value="<?php echo $this->holderName?>" /></td>
+        </tr>
+        <tr>
+            <td width="180">Account Number</td>
+			<td width="340"><input type="text" class="noclean" name="ac_num" value="<?php echo $this->accountNumber?>" /></td>
+        </tr>
+        <tr>
+            <td width="180">Legal ID</td>
+			<td width="340"><input type="text" class="noclean" name="legal_id" value="<?php echo $this->legalId?>" /></td>
+        </tr>
+    </table>
+</div><!--SINGLE_TRIP-->
+<input class="btn-1" type="submit" value="Upadate"/>
+</form>
+<br/>
+</div><!--BLOCK-->
+
+
+							</div>
+							<!-- closes lstng-details -->
+						</div>
+						<!-- closes right -->
+					</div>
+					<!-- closes listing-content -->
+				</div><!--USER_VIEW-->
+
+			</div><!--ALL_LISTING-->
+					
+			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+			<?php echo $this->partial('admin_partials/partner.phtml', array('name'=>$this->user->name, 'userId'=>$this->user->user_id)); ?>
+            
+            
+            
+            
+		</div>
+		<!-- closes w1 -->
+		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+		
+<div class="hidden">
+	<div class="lightbox-2" id="password-reset">
+		<h2>Reset Password</h2>
+		<h3>Do you want to reset the password to Karina Romaine</h3>
+		<div class="buttons">
+			<ul>
+				<li><a href="" class="btn-1">Reset</a></li>
+				<li><a href="" class="btn-10">Cancel</a></li>
+			</ul>
+		</div><!--BUTTONS-->
+	</div><!--PASSWORD-RESET-->
+</div><!--HIDDEN--> 
+
+
+<script>
+		var cityId = '<?php echo $this->city;?>';
+		fillCityTrip($('#country').val());
+		screenUpdate();
+		$('select#country').change(function(){
+			fillCityTrip($('#country').val());
+		});
+		
+		$('select#type').change(function(){
+			screenUpdate();
+		});
+		
+		function screenUpdate(){
+			if($('#type').val() == 5){
+				$("#field-wrapper").hide();
+			}
+			else{
+				$("#field-wrapper").show();
+			}
+		}
+		
+		function fillCityTrip(countryId){
+			var url = "/ajax/places/?type=city&c=" + countryId;
+			$("#city" ).children().remove();
+			$("#city" ).append(new Option('Select City', 0, true, true));
+			var selected = false;
+			$.getJSON(url, function(fsdata) {
+				$.each(fsdata.data, function(i,city){ 
+					selected = cityId == city.id ? true : false ;
+					$("#city" ).append(new Option(city.title, city.id, true, selected));
+					
+					
+				});
+			});	
+		}
+				
+		</script>
+
+
+
+
+	</body>
+</html>

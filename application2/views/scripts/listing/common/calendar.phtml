@@ -35,18 +35,21 @@
             <?php elseif($day['class'] == 'blocked'): ?>
             <p>Day Blocked</p>
             <?php endif ?>
-            <?php if($this->listing->main_type == 6): ?>
+            <?php if(count($this->schedules) > 0): ?>
             <div class="tooltip tooltip2">
                 <form id="form_calendar_<?= $day['date'] ?>" method="post" action="">
                     <h5>Availability</h5>
                     <span class="arrow">&gt;</span>
                     <div class="tooltip-wrapper">
-                    	<?php if(count($this->schedules) > 0): ?>
                         <ul>
                             <?php foreach($this->schedules as $sch): ?>
                             <li>
+                            	<?php if($this->listing->main_type == 5): ?>
+                                <label><?= $sch->name ?></label>                                
+                                <?php else: ?>
                                 <label><?= date('g:i A', strtotime($sch->starting)) ?> - 
 								<?= date('g:i A', strtotime($sch->ending)) ?></label>
+                                <?php endif ?>
                                 <select name="sch[<?= $sch->id ?>][state]">
                                     <option value="">Available</option>
                                     <?php if($day[$sch->id]['class'] == 'booked'): ?>
@@ -63,26 +66,25 @@
                             </li>
                             <?php endforeach ?>
                         </ul>
-                        <?php endif ?>
                     </div><!-- closes tooltip-wrapper -->
                     <div class="all-day">
                     	<div class="book">
                         	<?php $cond = ($day['class'] == 'booked'); ?>
                             <?php $class = ($cond) ? 'checked' : '' ?>
                             <?php $checked = ($cond) ? 'checked="checked"' : '' ?>
-                        	<input type="radio" id="stateOpt1_<?= $day['num'] ?>" name="state" value="booked" class="<?= $class ?>" <?= $checked ?> />
+                        	<input type="radio" id="stateOpt1_<?= $day['num'] ?>" name="state" value="booked" class="stateOPT <?= $class ?>" <?= $checked ?> />
                             <label for="stateOpt1_<?= $day['num'] ?>">Day Booked</label>
                         </div>
                         <div class="block">
                         	<?php $cond = ($day['class'] == 'blocked'); ?>
                             <?php $class = ($cond) ? 'checked' : '' ?>
                             <?php $checked = ($cond) ? 'checked="checked"' : '' ?>
-                        	<input type="radio" id="stateOpt2_<?= $day['num'] ?>" name="state" value="blocked" class="<?= $class ?>" <?= $checked ?> />
+                        	<input type="radio" id="stateOpt2_<?= $day['num'] ?>" name="state" value="blocked" class="stateOPT <?= $class ?>" <?= $checked ?> />
                             <label for="stateOpt2_<?= $day['num'] ?>">Day Blocked</label>
                         </div>
                     </div>
-                    <input type="submit" class="btn-7" value="Done" />
-                    <input type="button" class="btn-7 cancel" value="Cancel" />
+                    <input type="submit" class="btn-7 noclean" value="Done" />
+                    <input type="button" class="btn-7 cancel noclean" value="Cancel" />
                     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
                     <input type="hidden" name="day" value="<?= $day['date'] ?>" />
                     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />
@@ -110,7 +112,7 @@
                             <?php endif ?>
                         </select>
                     </div><!-- closes tooltip-wrapper -->
-                    <input type="submit" class="btn-7" value="Done" />
+                    <input type="submit" class="btn-7 noclean" value="Done" />
                     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
                     <input type="hidden" name="day" value="<?= $day['date'] ?>" />
                     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />

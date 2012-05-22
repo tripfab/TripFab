@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> - New Activity Offer | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/calendar3/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+</head>
+<body>
+<div class="w1">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-messages">
+            <?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'Offers','parentActive'=>'Offers')); ?>
+            <div class="description-offer">
+                <h2>Make an Offer</h2>
+                <a href="/provider/offers" class="back">Back to Offers</a>
+            </div><!--DESCRIPTION-OFFER-->
+            <form action="" method="post">
+            <div class="offer-activity">
+                <div class="description">
+                    <table width="670" border="1">
+                        <tr>
+                            <td>
+                                <span>1</span><strong>Choose the special rate</strong>
+                                <p>Write the special price you want to offer</p>
+                            </td>
+                            <td class="rate">
+                                <input type="text" data-val="<?= $this->price->price ?>" style="text-align:right;" name="price" value="" 
+                                placeholder="<?= $this->price->price ?>" /><label>per person</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>2</span><strong>Offer avalability</strong>
+                                <p>Select the dates when the offer starts and ends.</p>
+                            </td>
+                            <td class="avalability">
+                                <input type="text" name="start" class="datepicker1" value="Start Date" />
+                                <label>to</label>
+                                <input type="text" name="end" class="datepicker2" placeholder="End Date" value="" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>3</span><strong>People Requeriments</strong>
+                                <p>Select how many people can enjoy the offer</p>
+                            </td>
+                            <td>
+                            	<?php $people = array('2','3','4','5','6','7','8','9','10','15','20','30','50',) ?>
+                                <select class="amount" name="people">
+                                    <option value="1">1 Person</option>
+                                	<?php foreach($people as $p): ?>
+                                    <option value="<?= $p ?>"><?= $p ?> People</option>
+                                    <?php endforeach ?>
+                                </select>
+                                <select class="people_ammount" name="people_ammount">
+                                	<option value="Exact">No less, no more</option>
+                                    <option value="Min">Minimun</option>
+                                    <option value="Max">Maximun</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div><!--DESCRIPTION-->
+                <div class="summary">
+                    <table border="1" width="247" class="t-sum">
+                        <tr class="top">
+                            <td>
+                            	<?= $this->thumbnail(79,$this->listing->image, '', '1:1') ?>
+                                <h4>Summary</h4>
+                                <span class="percentageLabel"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="name"><strong><?= $this->listing->title ?></strong>
+                                Tamarindo, Costa Rica</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table width="100%" border="1">
+                                    <tr>
+                                        <td class="travelers">Travelers</td>
+                                        <td align="right" class="numbers travelersLabel">Exact 1 person</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table width="100%" border="1">
+                                    <tr>
+                                        <td class="descrip">Offer Starts</td>
+                                        <td class="date" id="startLabel"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Offer Ends</td>
+                                        <td class="date" id="endLabel"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table width="100%" border="1">
+                                    <tr>
+                                        <td class="descrip">Regular Pricing</td>
+                                        <td class="results">$<?= $this->price->price ?></td>
+                                    </tr>
+                                    <tr class="s-price">
+                                        <td class="descrip">Special Pricing</td>
+                                        <td class="results priceLabel"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="descrip">Discount Percent</td>
+                                        <td class="results percentageLabel"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="descrip">Travelers Total</td>
+                                        <td class="results travelersLabel">Exact 1 person</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="btn-12" type="button" value="Cancel" />
+                                <input class="btn-1" type="submit" value="Ok, Send Offers!" />
+                            </td>
+                        </tr>
+                    </table>
+                </div><!--SUMMARY-->
+            </div><!--OFFER-ACTIVITY-->
+            <input type="hidden" name="_task" value="<?= md5('create') ?>" />
+            <input type="hidden" name="listing_id" value="<?= $this->listing->id ?>" />
+            <input type="hidden" name="listing_token" value="<?= md5($this->listing->token) ?>" />
+            <input type="hidden" name="regular" value="<?= $this->price->price ?>" />
+            </form>
+        </div><!-- closes user-messages -->
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+$(function(){
+	
+	$price = $('input[name=price]');
+	$price.data('value',parseFloat($price.data('val')));
+	$price.keyup(function(){
+		$p = $(this).val();
+		$p = parseFloat($p);
+		$percentaje = (100 - (($p * 100) / $price.data('value')));
+		$('.percentageLabel').text($percentaje+'%');
+		$('.priceLabel').text('$'+$p);
+	});
+	
+	$('.datepicker1').datepicker({
+		minDate:new Date(),
+		dateFormat:'M dd, yy',
+		onSelect:function(date){
+			$('#startLabel').text(date);
+			$('.datepicker2').datepicker('option','minDate',new Date(date));
+		}
+	}).keyup(function(){
+		$('#startLabel').text($(this).val());
+	});
+	$('.datepicker2').datepicker({
+		dateFormat:'M dd, yy',
+		onSelect:function(date){
+			$('#endLabel').text(date);				
+		}
+	}).keyup(function(){
+		$('#endLabel').text($(this).val());
+	});
+	
+	$('select[name=people]').change(function(){
+		$val = $('select[name=people_ammount]').val() + ' ' + $('option:selected', this).text();
+		$('.travelersLabel').text($val);
+	});
+	$('select[name=people_ammount]').change(function(){
+		$val = $(this).val() + ' ' + $('select[name=people] option:selected').text();
+		$('.travelersLabel').text($val);
+	});
+	$('.btn-12').click(function(){
+		window.location.href = '/provider/offers';
+		return false;
+	});
+});
+</script>
+</body>
+</html>

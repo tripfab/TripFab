@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<title><?= $this->user->name ?> - Admin | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+        <link type="text/css" rel="stylesheet" href="/css5/reset.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css5/all.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+  		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />
+  		<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+		<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+		<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js?v=<?= $this->cssVC ?>"></script>
+    	<script type="text/javascript" src="/js2/admin/traveller-view.js?v=<?= $this->cssVC ?>"></script>
+			<script>
+				$(document).ready(function() {
+					$('a.lbc').fancybox({
+						padding: 0,
+						overlayColor: '#FFF',
+						overlayOpacity: '0.7',
+						showCloseButton: 'false',
+					});
+            		$("#report_tabs").tabs();
+					
+					panel(<?php echo $this->user->id?>, 1);
+				});
+			</script>
+		</head>
+		<body>
+			<div class="w1">
+    		<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
+			
+			<div class="w3_admin">
+				<div class="sub_menu">
+					<h2><?php echo $this->user->name?>. <span>Personal Information.</span></h2>
+					<a href="#password-reset" class="btn-1 lbc">Reset Password</a>
+				</div><!--SUB_MENU-->
+            </div><!--W3-->
+			<div class="all_listing">
+				<div id="user_view" class="listing-wrapper wrapper">
+					<div class="listing-content">
+						<div class="left">
+							<ul>
+								<li id="nav1" class="current"><a href="javascript://" onclick="panel(<?php echo $this->user->id?>, 1)">General Information</a></li>
+								<li id="nav2"><a href="javascript://" onclick="panel(<?php echo $this->user->id?>, 2)">Trip</a></li>
+								<li id="nav3"><a href="javascript://" onclick="panel(<?php echo $this->user->id?>, 3)">Reservations</a></li>
+								<li id="nav4"><a href="javascript://" onclick="panel(<?php echo $this->user->id?>, 4)">Reviews</a></li>
+							</ul>
+						</div><!-- closes left -->
+						<div class="right">
+                        
+							<div class="lstng-details" id="content">
+							</div>
+							<!-- closes lstng-details -->
+						</div>
+						<!-- closes right -->
+					</div>
+					<!-- closes listing-content -->
+				</div><!--USER_VIEW-->
+
+			</div><!--ALL_LISTING-->
+					
+			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+		</div>
+		<!-- closes w1 -->
+		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+		
+<div class="hidden">
+	<div class="lightbox-2" id="password-reset">
+		<h2>Reset Password</h2>
+		<h3>Do you want to reset the password to Karina Romaine</h3>
+		<div class="buttons">
+			<ul>
+				<li><a href="" class="btn-1">Reset</a></li>
+				<li><a href="" class="btn-10">Cancel</a></li>
+			</ul>
+		</div><!--BUTTONS-->
+	</div><!--PASSWORD-RESET-->
+</div><!--HIDDEN-->
+	</body>
+</html>

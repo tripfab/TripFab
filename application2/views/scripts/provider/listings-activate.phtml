@@ -2,12 +2,16 @@
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->listing->title ?> : Missing Information | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <link rel="stylesheet" href="guiders/guiders.css" type="text/css" />
-	<script type="text/javascript" src="/js2/jquery.js"></script>
+    <title><?= $this->listing->title ?> - Missing Information | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link rel="stylesheet" href="guiders/guiders.css?v=<?= $this->cssVC ?>" type="text/css" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1">
@@ -28,7 +32,7 @@
                             <h3>There are <span> steps remaining</span> before activate your listing</h3>
                         </div><!-- closes ttl -->
                         <ul>
-                        	<?php foreach($this->validate as $val): ?>
+                        	<?php foreach($this->validate as $key => $val): ?>
                             <?php if($val['done']): ?>
                             <li class="done">
                                 <img src="/images2/cleardot.gif" alt="" />
@@ -38,7 +42,11 @@
                             <?php else: ?>
                             <li>
                                 <img src="/images2/cleardot.gif" alt="" />
+                                <?php if($key == "profile"): ?>
+                                <a href="<?= $val['url'] ?>"><?= $val['label'] ?></a>
+                                <?php else: ?>
                                 <a href="<?= $val['url'] . $this->listing->id ?>"><?= $val['label'] ?></a>
+                                <?php endif ?>
                                 <?= $val['desription'] ?>
                             </li>
                             <?php endif ?>
@@ -51,5 +59,32 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<div class="hidden">
+	<div id="finish_listing">
+        <h3>Your listing is ready!</h3>
+        <p>Tripfab it's going to review your listing. We must check everything is ok. We'll notify you when it's ready to hit the entire world. Thanks!</p>
+        <div class="bottom">
+            <a href="/provider/listings" class="btn-1">Okay</a>
+        </div><!--BUTTONS-->
+    </div><!--FINISH_LISTING-->
+</div>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<?php if($this->ready): ?>
+<script type="text/javascript">
+$(function(){
+	$.fancybox({
+		href:'#finish_listing',
+		padding:0,
+		overlayColor:'#fff',
+		showCloseButton:0,
+		modal:1,
+		centerOnScroll:1
+	});
+});
+</script>
+<style type="text/css">
+#fancybox-content { background:#fff;}
+</style>
+<?php endif ?>
 </body>
 </html>

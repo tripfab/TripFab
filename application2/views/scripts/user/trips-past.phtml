@@ -1,187 +1,162 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-    <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->user->name ?> : Trips | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/lightboxes.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/calendar/jquery-ui-1.8.16.custom.css" />
-    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
-    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
-    <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('textarea').elastic();				
-            $('input').ToggleInputValue();
-            $('form select').jqTransSelect();
-			$('a.lb').fancybox({
-				padding:0,
-				overlayColor:'#000',
-				centerOnScroll:1,
-				showCloseButton:0,
-			});
-			$('.lbox .btn-2, .lbox .btn-11').click(function(){
-				$(this).parents('form').submit();
-			});
-			
-			$('input.calendar1').datepicker({
-				minDate:new Date(),
-				onSelect:function(date){
-					$end = $(this).parents('.content').find('input.calendar2');
-					$end.datepicker('option','minDate', date);
-				},
-				dateFormat:'D M d yy',
-			});
-			
-			$('input.calendar2').datepicker({
-				minDate:new Date(),
-				dateFormat:'D M d yy',
-			});
-			
-			<?php if($this->alert): ?>
-			showAlert("<?= $this->alert ?>");
-			<?php endif ?>
-			
-			<?php if($this->error): ?>
-			showError("<?= $this->error ?>");
-			<?php endif ?>
-        });
-    </script>
+    <title><?= $this->user->name ?> : Past Trips | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/lightboxes.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
-    <div class="w2">
-        <div class="wrapper user-messages">
-        	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Future Trips','parentActive'=>'My Trips')); ?>
-            <?php if(count($this->trips) > 0): ?>
-            <div class="subttl">
-            	<a href="/user/trips/create" class="btn-1">Plan a New Trip</a>
-            	<h4>You are planning 3 trips</h4>
-            </div>
-            <div class="past-trips">
-                <div class="left">
-                    <?php foreach($this->trips as $trip): ?>
-                    <div class="past-trip">
-                        <div class="top">
-                            <?= $this->thumbnail(102, $trip->image, '','1:1'); ?>
-                            <div class="right">
-                                <h2><?= $trip->title ?></h2>
-                                <?php if($trip->start != '0000-00-00' && $trip->end != '0000-00-00'): ?>
-                                <span>Enjoyed from: 
-								<?= date('F j, Y', strtotime($trip->start)) ?> - 
-                                <?= date('F j, Y', strtotime($trip->end)) ?></span>
-                                <?php else: ?>
-                                <span>Enjoyed from: Undefined</span>
-                                <?php endif ?>
-                                <ol>
-                                    <li><img src="/images2/ico-70.png" alt="" /><?= $this->listingCounter[$trip->id][6] ?>
-                                    <span>Activities</span></li>
-                                    <li><img src="/images2/ico-71.png" alt="" /><?= $this->listingCounter[$trip->id][5] ?>
-                                    <span>Hotels</span></li>
-                                    <li><img src="/images2/ico-72.png" alt="" /><?= $this->listingCounter[$trip->id][2] ?>
-                                    <span>Restaurants</span></li>
-                                    <li><img src="/images2/ico-73.png" alt="" /><?= $this->listingCounter[$trip->id][7] ?>
-                                    <span>Entertainments</span></li>
-                                    <li><img src="/images2/ico-74.png" alt="" /><?= $this->listingCounter[$trip->id][4] ?>
-                                    <span>Tourist Sights</span></li>
-                                </ol>
-                            </div><!-- closes right -->
-                        </div><!-- closes top -->
-                        <div class="meta">
-                            <span>Trips Price</span>
-                            <strong>$<?= $trip->price ?></strong>
-                            <a href="/user/trips/view/<?= $trip->id ?>" class="btn-1">View Trip</a>
-                            <div class="clear"></div>
-                        </div><!-- closes meta -->
-                        <div class="time">
-                            <span><?= $trip->days ?> DAYS TRIP</span>								
-                        </div><!-- closes time -->
-                    </div><!-- closes past-trip -->
-                    <?php endforeach ?>
-                </div><!-- closes left -->
-                <div class="right">
-                    <?= $this->partial('partials/usertriprightmenu.phtml', array('future'=>$this->pastTrips, 'past'=>$this->trips)); ?>
-                </div><!-- closes right -->
-            </div><!-- closes past-trips -->
-            <?php else: ?>
-            <div class="empty-container">
-                <img src="/images/empty-4.png" alt="" /><br />
-                You don't have future trips :( <br /><br />
-                <a href="" class="btn-1">Create a New Trip Now</a>
-            </div><!-- closes empty -->
-            <?php endif ?>
-        </div><!-- closes user-messages -->
-    </div><!-- closes w2 -->
+    <div class="w3_admin">
+        <div class="sub_menu">
+            <h2><span>You have purchased <?= count($this->trips) ?> Trips</span></h2>
+            <ul class="sub_links">
+                <li><a href="/user/trips">Future Trips</a></li>
+                <li class="select"><a href="/user/trips/past">Past Trips</a></li>
+            </ul>
+        </div><!--SUB_MENU-->
+    </div><!--W3-->
+    
+    <?php if(count($this->trips) > 0): ?>
+    <div id="all_trips">
+    	<?php foreach($this->trips as $trip): ?>
+        <div class="single">
+            <div class="image">
+                <div class="slideshow">
+                	<?= $this->thumbnail(134, $trip->image, '','1:1'); ?>
+                </div><!--SLIDESHOW-->
+            </div><!--image-->
+            <div class="info">
+                <div class="title">
+                    <h3><a href=""><span class="icon"></span><?= $trip->title ?></a></h3>
+                    <span class="days_left"> <?= $trip->days ?> Days Trip</span>
+                </div><!--TITLE-->
+                <div class="description">
+                    <div class="data">
+                        <dl>
+                            <dt>Travel Started</dt>
+                            <?php if(!is_null($trip->start) && $trip->start != '0000-00-00'): ?>
+                            <dd><?= date('M j, Y', strtotime($trip->start)) ?></dd>
+                            <?php else: ?><dd>--</dd><?php endif; ?>
+                            <dt>Travel Ended</dt>
+                            <?php if(!is_null($trip->start) && $trip->end != '0000-00-00'): ?> 
+                            <dd><?= date('M j, Y', strtotime($trip->end)) ?></dd>
+                            <?php else: ?><dd>--</dd><?php endif ?>
+                        </dl>
+                    </div><!--DATA-->
+                    <div class="data last">
+                        <dl>
+                        </dl>
+                    </div><!--DATA-->
+                    <div class="listings">
+                        <ul>
+                        	
+                        	<?php $class = ($this->listingCounter[$trip->id][6] == 0) ? 'not-active' : '' ?>
+                            <li class="<?= $class ?>"><span><img src="https://static.tripfab.com/images2/ico_128.png" alt="" /></span>
+							<?= $this->listingCounter[$trip->id][6] ?>
+                            <em><span>activities</span></em></li>
+                            <?php $class = ($this->listingCounter[$trip->id][5] == 0) ? 'not-active' : '' ?>
+                            <li class="<?= $class ?>"><span><img src="https://static.tripfab.com/images2/ico_129.png" alt="" /></span>
+                            <?= $this->listingCounter[$trip->id][5] ?>
+                            <em class="hotels"><span>Hotels</span></em></li>
+                            <?php $class = ($this->listingCounter[$trip->id][2] == 0) ? 'not-active' : '' ?>
+                            <li class="<?= $class ?>"><span><img src="https://static.tripfab.com/images2/ico_130.png" alt="" /></span>
+                            <?= $this->listingCounter[$trip->id][2] ?>
+                            <em class="restaurants"><span>Restaurants</span></em></li>
+                            <?php $class = ($this->listingCounter[$trip->id][7] == 0) ? 'not-active' : '' ?>
+                            <li class="<?= $class ?>"><span><img src="https://static.tripfab.com/images2/ico_131.png" alt="" /></span>
+                            <?= $this->listingCounter[$trip->id][7] ?>
+                            <em class="entertaiment"><span>ENTERTAINMENT</span></em></li>
+                            <?php $class = ($this->listingCounter[$trip->id][4] == 0) ? 'not-active' : '' ?>
+                            <li class="<?= $class ?> last"><span><img src="https://static.tripfab.com/images2/ico_132.png" alt="" /></span>
+                            <?= $this->listingCounter[$trip->id][4] ?>
+                            <em><span>TOURIST SIGHTS</span></em></li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div><!--LISTINGS-->
+                    <div class="clear"></div>
+                </div><!--DESCRIPTION-->
+                <div class="summary">
+                    <div class="price">
+                        <em>Total paid</em><h4> $<?= $this->formatnumber($trip->price) ?> </h4>
+                    </div><!--PRICE-->
+                    <div class="controls">
+                        <a href="/user/trips/view/<?= $trip->id ?>" class="btn-1">View Trip</a>
+                    </div><!--CONTROLS-->
+                </div><!--SUMMARY-->
+            </div><!--INFO-->
+        </div><!--single-->
+        <?php endforeach ?>
+    </div><!-- ALL_TRIPS -->
+    <?php else: ?>
+    	<div class="no_trips">
+    		<div class="icon">You don't have any past trip yet</div>
+    	</div><!--NO_TRIPS-->    
+    <?php endif ?>
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
-<div class="hidden">
-	<?php foreach($this->trips as $trip): ?>
-    <div id="delete_trip_<?= $trip->id ?>">
-    	<form action="" method="post" id="form_delete_trip_<?= $trip->id ?>">
-            <div class="lbox lb-size-1">
-                <div class="lb-wrapper">
-                    <div class="inner-wrapper">
-                        <div class="lb-ttl">
-                            Are you sure you want to delete "<?= $trip->title ?>" ?
-                        </div><!-- closes lb-ttl -->
-                        <div class="lb-content">
-                            <div class="btns">
-                                <span class="btn-8" onclick="$.fancybox.close()">Cancel</span>
-                                <span class="btn-11">Delete</span>
-                            </div><!-- closes btns -->
-                        </div><!-- closes content -->
-                    </div><!-- closes inner-wrapper -->
-                </div><!-- closes lb-wrapper -->
-            </div><!-- closes lb-size-1 -->
-            <input type="hidden" name="ids" value="<?= $trip->id ?>" />
-            <input type="hidden" name="token" value="<?= $trip->token ?>" />
-            <input type="hidden" name="_task" value="<?= md5('delete_trip') ?>" />
-        </form>
-    </div>
-    <?php endforeach ?>
-    <?php foreach($this->trips as $trip): ?>
-    <?php if($trip->start == '0000-00-00' or $trip->end == '0000-00-00'): ?>
-    <div id="set_dates_<?= $trip->id ?>">
-    	<form method="post" action="">
-            <div class="lb-forgot trip-dates">
-                <div class="ttl">
-                    Ready to travel?
-                    <span>We need some information about your trip to make it fabuluos!</span>
-                </div><!-- closes ttl -->
-                <div class="content">
-                    <div class="left">
-                        <span>Set the starting date</span>
-                        <input name="start" class="calendar1" type="text" />
-                    </div><!-- closes left -->
-                    <div class="right">
-                        <span>Set the ending date</span>
-                        <input type="text" name="end" class="calendar2" />
-                    </div><!-- closes right -->				
-                    <input type="checkbox" />
-                    <label>Receive special offers from vendors near the places I'll visit</label>
-                </div><!-- closes content -->
-                <div class="bottom">
-                    <input type="submit" class="btn-1" value="Manage Itinerary" />
-                    <span class="btn-4" onclick="$.fancybox.close()">Cancel</span>
-                </div><!-- closes bottom -->
-            </div><!-- closes lb-forgot -->
-            <input type="hidden" name="ids" value="<?= $trip->id ?>" />
-            <input type="hidden" name="token" value="<?= $trip->token ?>" />
-            <input type="hidden" name="_task" value="<?= md5('assign_dates') ?>" />
-        </form>
-    </div>
-    <?php endif ?>
-    <?php endforeach ?>
-</div>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+		$('a.lb').fancybox({
+			padding:0,
+			overlayColor:'#fff',
+			centerOnScroll:1,
+			showCloseButton:0
+		});
+		
+		$('a.delete_btn').click(function(){
+			$form = $(this).parents('form');
+			$form.submit();
+			return false;
+		});
+		$('.lbox .btn-2, .lbox .btn-11').click(function(){
+			$(this).parents('form').submit();
+		});
+		
+		$('input.calendar1').datepicker({
+			minDate:new Date(),
+			onSelect:function(date){
+				$end = $(this).parents('.content').find('input.calendar2');
+				$end.datepicker('option','minDate', date);
+			},
+			dateFormat:'D M d yy'
+		});
+		
+		$('input.calendar2').datepicker({
+			minDate:new Date(),
+			dateFormat:'D M d yy'
+		});
+		
+		$('#ui-datepicker-div').wrap('<div id="calendarContainer"></div>');
+		
+		<?php if($this->alert): ?>
+		showAlert("<?= $this->alert ?>");
+		<?php endif ?>
+		
+		<?php if($this->error): ?>
+		showError("<?= $this->error ?>");
+		<?php endif ?>
+    });
+</script>    
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.slideshow').cycle({
+            fx: 'fade'
+        });
+    });
+</script>
 </body>
 </html>

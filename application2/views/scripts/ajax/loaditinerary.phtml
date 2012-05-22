@@ -1,0 +1,47 @@
+<script type="text/javascript">
+$('.lb-itinerary .days').cycle({
+	timeout:0,
+	prev:'.prevday',
+	next:'.nextday'
+});
+$('.lb-itinerary .days .tabs').tabs();
+</script>
+<div id="itinerary" class="lb-itinerary">
+    <div class="lb-title">
+        <?= $this->trip->user_name ?> Itinerary 
+        <span>9 Days Trip</span>
+    </div>
+    <div class="itinerary">
+        <a href="#" class="prev prevday">Previous Day</a>
+        <a href="#" class="next nextday">Next Day</a>
+        <div class="days">
+        	<?php foreach($this->listingsbyday as $daynumber=>$daytimes): ?>
+            <div class="day">
+                <h4>Day <?= $daynumber ?></h4>
+                <div class="tabs">
+                    <ul class="tab-menu">
+                    	<?php foreach($daytimes as $time => $listings): ?>
+                        <li><a href="#<?= strtolower($time).'-'.$daynumber ?>"><?= ucfirst($time) ?></a></li>
+                        <?php endforeach ?>
+                    </ul> 
+                    <?php foreach($daytimes as $time => $listings): ?>
+                    <div class="tab" id="<?= strtolower($time).'-'.$daynumber ?>"> 
+                    	<?php foreach($listings as $list): ?> 
+                        <div class="row">
+                        	<?= $this->thumbnail(45, $list->image, '', '1:1'); ?>
+                            <p><strong><?= $list->title ?></strong><br />
+                            <?= $list->city ?>, <?= $list->country ?></p>
+                            <a href="#">View Listing</a>
+                        </div>
+                        <?php endforeach ?>
+                    </div>
+                    <?php endforeach ?>
+                </div>
+            </div>
+            <?php endforeach ?>
+        </div>
+        <div class="lb-foot">
+            <a href="#" onclick="$.fancybox.close(); return false;" class="btn-1">Done</a>
+        </div>
+    </div>
+</div>

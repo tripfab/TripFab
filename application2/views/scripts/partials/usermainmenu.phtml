@@ -1,19 +1,5 @@
 <?php $items = array(
 	array(
-		'label' => 'My Trips',
-		'url'	=> '/user/trips/',
-		'submenu' => array(
-			array(
-				'label' => 'Future Trips',
-				'url'	=> '/user/trips/',
-			),
-			array(
-				'label' => 'Past Trips',
-				'url'	=> '/user/trips/past',
-			),
-		),
-	),
-	array(
 		'label' => 'Messages',
 		'url'	=> '/user/messages/',
 	),
@@ -62,20 +48,21 @@
     <ul>
     	<?php foreach($items as $i => $item): ?>
         <?php $class = ($item['label'] == $this->parentActive) ? 'active' : '' ; ?>
-        <?php $class.= ($item['submenu']) ? ' sub-menu' : ''; ?>
+        <?php $class.= (isset($item['submenu'])) ? ' sub-menu' : ''; ?>
         <li class="<?= $class ?>">
             <a href="<?= $item['url'] ?>"><?= $item['label'] ?></a>
-            <?php if($item['submenu']): ?>
+            <?php if(isset($item['submenu'])): ?>
             <ul>
             	<?php foreach($item['submenu'] as $subitem): ?>
                 <?php $class = ($subitem['label'] == $this->active) ? 'active' : '' ; ?>
                 <li class="<?= $class ?>"><a href="<?= $subitem['url'] ?>"><?= $subitem['label'] ?></a></li>
                 <?php endforeach ?>
             </ul>
-            <img src="/images2/g-27.png" alt="" class="g-right" />
-            <?php if($i != 0): ?><img src="/images2/g-28.png" alt="" class="g-left" /><?php endif ?>
+            <img src="https://static.tripfab.com/images2/g-27.png" alt="" class="g-right" />
+            <?php if($i != 0): ?><img src="https://static.tripfab.com/images2/g-28.png" alt="" class="g-left" /><?php endif ?>
             <?php endif ?>
         </li>
         <?php endforeach ?>
-    </ul>    <div class="clear"></div>
+    </ul>
+    <div class="clear"></div>
 </div><!-- closes menu -->

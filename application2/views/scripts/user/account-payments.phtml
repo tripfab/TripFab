@@ -3,146 +3,85 @@
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->user->name ?> : Payment Methods | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            //$('input').ToggleInputValue();
-            $('form select').jqTransSelect();
-        });
-    </script>
+    <title><?= $this->user->name ?> - Payment Methods | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
-<div class="w1">
+<div class="w1 profile">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
     <div class="w2">
         <div class="wrapper user-backend">
         	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Account','parentActive'=>'Payments')); ?>
-            <div class="vendor-profile">
-                <form action="">
-                    <?php if($this->errormessage): ?>
-                    <div class="errormessage">
-                        <p><?= $this->errormessage ?></p>
-                    </div>
-                    <?php endif ?>
-                    <?php if($this->successmessage): ?>
-                    <div class="green-message">
-                        <div class="wrapper">
-                            <img src="/images/ico-115.png" alt="" /> Your changes have been saved!
-                        </div><!-- closes wrapper -->
-                    </div><!-- closes green-message -->
-                    <?php endif ?>
-                    <div class="profile-items">
-                        <div class="item-wrppr">
-                            <div class="item-ttl">
-                                Credit Cards
-                            </div><!-- closes item ttl -->
-                            <div class="card">
-                                <div class="item">
-                                    <a href="" class="delete">Delete Credit Card</a>									
-                                    <img class="card" src="images/ico-21.png" alt="" />
-                                    <h4>Mastercard</h4>
-                                </div><!-- closes item -->
-                                <div class="item short">
-                                    <input type="text" value="5258478549654036" />
-                                    <h4>Card Number</h4>
-                                    <span>Your credit card number</span>
-                                </div><!-- closes item -->
-                                <div class="item short">
-                                    <input type="text" value="Karina Romaine" />
-                                    <h4>Cardholder Name</h4>
-                                    <span>As it appears on the credit card</span>
-                                </div><!-- closes item -->
-                                <div class="item short">
-                                    <select>
-                                        <option>1985</option>
-                                        <option>1985</option>
-                                        <option>1985</option>
-                                    </select>
-                                    <select>
-                                        <option>April</option>
-                                        <option>April</option>
-                                        <option>April</option>
-                                    </select>
-                                    <h4>Expiration Date</h4>
-                                    <span>Only month and year required</span>
-                                </div>
-                            </div><!-- closes card -->
-                            <div class="card">
-                                <div class="item">
-                                    <a href="" class="delete">Delete Credit Card</a>									
-                                    <img class="card" src="images/ico-22.png" alt="" />
-                                    <h4>Visa</h4>
-                                </div><!-- closes item -->
-                                <div class="item short">
-                                    <input type="text" value="5258478549654036" />
-                                    <h4>Card Number</h4>
-                                    <span>Your credit card number</span>
-                                </div><!-- closes item -->
-                                <div class="item short">
-                                    <input type="text" value="Karina Romaine" />
-                                    <h4>Cardholder Name</h4>
-                                    <span>As it appears on the credit card</span>
-                                </div><!-- closes item -->
-                                <div class="item short">
-                                    <select>
-                                        <option>1985</option>
-                                        <option>1985</option>
-                                        <option>1985</option>
-                                    </select>
-                                    <select>
-                                        <option>April</option>
-                                        <option>April</option>
-                                        <option>April</option>
-                                    </select>
-                                    <h4>Expiration Date</h4>
-                                    <span>Only month and year required</span>
-                                </div>										
-                            </div><!-- closes card -->
-                            <div class="item short last">
-                                <a href="" class="add">Add a New Credit Card</a>
-                            </div><!-- closes item -->
-                            <div class="clear"></div>									
-                        </div><!-- closes item-wrppr -->
-                        <div class="item-wrppr">
-                            <div class="item-ttl">
-                                Payment Services
-                            </div><!-- closes item ttl -->
-                            <div class="card">										
-                                <div class="item">
-                                    <a href="" class="delete">Delete Payment Service</a>									
-                                    <img class="card" src="images/ico-25.png" alt="" />
-                                    <h4>Paypal</h4>
-                                </div><!-- closes item -->
-                                <div class="item short">
-                                    <input type="text" value="karina@gmail.com" />
-                                    <h4>Account</h4>
-                                    <span>To what e-mail should we send the money?</span>
-                                </div><!-- closes item -->										
-                            </div><!-- closes card -->
-                            <div class="item last">
-                                <a href="" class="add">Add a New Payment Service</a>
-                            </div><!-- closes item -->
-                            <div class="clear"></div>									
-                        </div><!-- closes item-wrppr -->
-                    </div><!-- closes profile-items -->
-                    <div class="foot">
-                        <input type="submit" class="btn-1" value="Save Changes" />
-                        <a href="">Deactivate Account</a>
-                    </div><!-- closes foot -->
-                </form>
-            </div><!-- closes vendor-profile -->
+            <h2 class="title">Payments <a href="/user/account/payments/new" class="add">Add a New Account</a></h2><!-- closes subttl -->
+            <?php if(count($this->accounts) > 0): ?>
+            <div id="u-payments">
+	            <?php foreach($this->accounts as $a): ?>
+                <div class="each">
+                    <span class="type"><img src="<?= $this->cards[$a->type] ?>" alt="" /> <?= $a->type ?></span>
+                    <span class="number">Card Number <strong>************<?= $a->last4 ?></strong></span>
+                    <span class="expiration">Added <strong><?= date('F jS, Y', strtotime($a->created)) ?></strong></span>
+                    <a class="delete lbc" href="#delete_card_<?= $a->id ?>">Delete Card</a>
+                    <a class="edit" href="/user/account/payments/<?= $a->id ?>">Edit</a>						
+                </div><!--EACH-->
+                <?php endforeach ?>
+            </div><!-- closes u-payments --> 
+            <?php else: ?>
+            <div id="u-payments">
+                <div class="no-payment">
+                    <h3>You don't have any credit card yet</h3>
+                    <a href="/user/account/payments/new">Add a credit card now</a>
+                </div><!--NO-PAYMENT-->
+            </div><!-- closes u-payments -->
+            <?php endif ?>
         </div><!-- closes user-backend -->
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
-</div><!-- closes w1 -->	
+</div><!-- closes w1 -->
+<div class="hidden">
+	<?php foreach($this->accounts as $a): ?>
+    <div id="delete_card_<?= $a->id ?>" class="lb delete_card_lb">
+    	<form action="" method="post">
+            <div class="mid">
+                <h3>Are you sure you want to remove this card from your account?</h3>
+                <p>You will loose all the information for this credit card</p>
+            </div>
+            <div class="bottom">
+                <a href="#" class="btn-1 delete_btn">Delete</a>
+                <a href="#" onclick="$.fancybox.close(); return false;" class="btn-10">Cancel</a>
+            </div><!--BOTTOM-->
+            <input type="hidden" name="card" value="<?= $a->id ?>" />
+            <input type="hidden" name="user" value="<?= $this->user->id ?>" />
+            <input type="hidden" name="usertoken" value="<?= $this->user->token ?>" />
+            <input type="hidden" name="_task" value="<?= md5('delete_card') ?>" />
+        </form>
+    </div><!--DELETE_CARD-->
+    <?php endforeach ?>
+</div><!--HIDDEN-->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('a.lbc').fancybox({
+        	padding: 0,
+        	overlayColor: '#FFF',
+        	overlayOpacity: '0.7',
+			centerOnScroll:true
+        });
+		
+		$('a.delete_btn').click(function(){
+			$form = $(this).parents('form');
+			$form.submit();
+			return false;
+		});
+    });
+</script>
 </body>
 </html>

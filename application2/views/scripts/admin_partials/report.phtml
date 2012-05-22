@@ -1,0 +1,365 @@
+		<div class="hidden">
+		<div id="getReport">
+				<div class="top">
+					<h3>Get a Report</h3>
+				</div><!--TOP-->
+				<div class="cont">
+					<div id="report_tabs">
+						<ul>
+							<li><a href="#report-1" class="active">Sales Reports</a></li>
+							<li><a href="#report-2">Finance Reports</a></li>
+						</ul>
+						<div id="report-1">
+							<div class="type">
+								<label>Select an Report</label>
+								<select id="sales-s">
+									<option>User Log time by date</option>
+									<option>User account by date</option>
+									<option>Partner pending information</option>
+									<option>Partner account change by user</option>
+									<option>Partner account activity by date</option>
+								</select>
+							</div>
+							<div class="filter">
+								<span>Filter results</span>
+							</div><!--FILTER-->
+							<div class="item" id="r-dates">
+								<label>Select Dates</label>
+								<input type="text" value="" id="s-to-date" name="s-to-date"/>
+								<strong>to</strong>
+								<input type="text" value="" id="s-from-date" name="s-from-date"/>
+							</div><!--ITEM-->
+							
+							<div class="item hidden" id="r-country">
+								<label>Select a Country</label>
+								<select id="s-country">
+									<option>Select Country</option>
+								</select>
+							</div><!--ITEM-->
+
+                            <div class="item hidden" id="r-city">
+                                <label>Select City</label>
+                                <select id="s-city">
+                                    <option>Select City</option>
+                                </select>
+                            </div><!--ITEM-->
+                            
+                            <div class="item last hidden" id="r-listing-type">
+                                <label>Select Listing Type</label>
+                                <select id="s-listing-type">
+                                    <option>Select Listing Type</option>
+                                </select>
+                            </div><!--ITEM-->
+
+							
+						</div><!--REPORT-1-->
+						
+                        <div id="report-2">
+							<div class="type">
+								<label>Select an Report</label>
+								<select id="finance-s">
+									<option>Partner Balance by Date</option>
+									<option>Transactions by Date</option>
+									<option>Reservations by Date</option>
+									<option>Payment Receipt Report</option>
+								</select>
+							</div>
+							<div class="filter">
+								<span>Filter results</span>
+							</div><!--FILTER-->
+							<div class="item">
+								<label>Select Dates</label>
+								<input type="text" id="to-date" name="to-date" value=""/>
+								<strong>to</strong>
+								<input type="text" value="" id="from-date" name="from-date"/>
+							</div><!--ITEM-->
+							
+                            <div class="item hidden" id="flt-1">
+                                <label>Reservation Status</label>
+                                <select id="r-status">
+                                    <option value='-1'>All Status</option>
+									<option value='0'>Completed</option>
+									<option value='1'>In Progress...</option>
+                                </select>
+                            </div><!--ITEM-->
+							
+                            <div class="item hidden" id="flt-2">
+								<label>Payment Method</label>
+								<select id="p-method">
+									<option>All Methods</option>
+								</select>
+							</div><!--ITEM-->
+							
+							<div class="item last hidden" id="flt-3">
+								<label>Status</label>
+								<select id="status">
+                                    <option value='-1'>All Status</option>
+									<option value='0'>Completed</option>
+									<option value='1'>In Progress...</option>
+								</select>
+							</div><!--ITEM--> 
+							
+							
+							
+						</div><!--REPORT-2-->
+					</div><!--TABS-->
+				</div><!--CONT-->
+				
+				<div class="bottom">
+					<input type="button" id="report-btn" class="btn-1" value="Get Report" />
+					<input type="button" class="btn-10" value="Cancel" onclick="$.fancybox.close()" />
+				</div><!--BOTTOM-->
+			</div><!--GETREPORT-->
+            
+            <div id="new_listing">
+               <div class="lb NewListing">
+               	<div class="top">Create a New Listing</div><!--TOP-->
+               	<form action="/admin/listings/new" method="post">
+               		<fieldset>
+               			<div class="mid">
+               				<select name="main_type">
+               					<option value="">Select a Listing Type</option>
+                                <?php foreach($this->main_categories as $cat): ?>
+                                <option value="<?= $cat->id ?>"><?= $cat->name ?></option>
+                                <?php endforeach ?>
+               				</select>
+               				<select name="country_id">
+               					<option value="">Select a Country</option>
+                                <?php foreach($this->countries as $c): ?>
+                                <option value="<?= $c->id ?>"><?= $c->title ?></option>
+                                <?php endforeach ?>
+               				</select>
+               				<select name="city_id">
+               					<option value="">Select a City</option>
+               				</select>
+               				<select name="vendor_id">
+               					<option value="">Select a Partner</option>
+               				</select>
+               			</div><!--MID-->
+               			<div class="bottom">
+               				<input type="submit" value="Create Listing" class="btn-1" />
+               				<input type="button" onclick="$.fancybox.close(); return false;" value="Cancel" class="btn-10" />
+               			</div><!--BOTTOM-->
+               		</fieldset>
+               	</form>
+               </div><!--NEWLISTING-->
+            </div><!--NEW-LISTING-->
+            <div id="new_listing2">
+               <div class="lb NewListing">
+               	<div class="top">Create a New Listing</div><!--TOP-->
+                <?php $listings = new WS_ListingService(); ?>
+                <?php $this->main_categories = $listings->getMainCategories(); ?>
+               	<form action="/admin/listings/new" method="post">
+               		<fieldset>
+               			<div class="mid">
+               				<select name="main_type">
+               					<option value="">Select a Listing Type</option>
+                                <?php foreach($this->main_categories as $cat): ?>
+                                <option value="<?= $cat->id ?>"><?= $cat->name ?></option>
+                                <?php endforeach ?>
+               				</select>
+               			</div><!--MID-->
+               			<div class="bottom">
+               				<input type="submit" value="Create Listing" class="btn-1" />
+               				<input type="button" onclick="$.fancybox.close(); return false;" value="Cancel" class="btn-10" />
+               			</div><!--BOTTOM-->
+               		</fieldset>
+                    <input type="hidden" name="vendor_id" value="<?= $this->user->user_id ?>" />
+                    <input type="hidden" name="country_id" value="<?= $this->user->country_id ?>" />
+                    <input type="hidden" name="city_id" value="<?= $this->user->city_id ?>" />
+               	</form>
+               </div><!--NEWLISTING-->
+            </div><!--NEW-LISTING-->
+		</div><!--HIDDEN-->
+        
+   <script>
+    $('#rpt-link').click(function(){
+		fillCountry();
+		fillListingType();
+	});
+	$('select#s-country').change(function(){
+		fillCity($('#s-country').val());
+	});
+	
+	function fillCountry(){
+		var url = "/ajax/places/?type=country";
+		$("#s-country" ).children().remove();
+		$.getJSON(url, function(fsdata) {
+			$.each(fsdata.data, function(i,country){ 
+				$("#s-country" ).append(new Option(country.title, country.id, true, false));
+			});
+			fillCity($('#s-country').val());
+		});	
+	}
+	
+	function fillCity(countryId){
+		var url = "/ajax/places/?type=city&c=" + countryId;
+		$("#s-city" ).children().remove();
+		$.getJSON(url, function(fsdata) {
+			$.each(fsdata.data, function(i,city){ 
+				$("#s-city" ).append(new Option(city.title, city.id, true, false));
+			});
+		});	
+	}
+
+	function fillListingType(){
+		var url = "/ajax/listings/?type=type" ;
+		$("#s-listing-type" ).children().remove();
+		$.getJSON(url, function(fsdata) {
+			$.each(fsdata.data, function(i,type){ 
+				$("#s-listing-type" ).append(new Option(type.name, type.id, true, false));
+			});
+		});	
+	}
+
+
+   	$('#report-btn').click(function(){
+		if($('#report-1').is(":hidden")){ // Finance Report
+			switch($('option:selected', '#finance-s').index()){
+				case 0: var type='f1'; var q= 's=' + $('#from-date').val().replace(/\s/g,"") + '&e=' + $('#to-date').val().replace(/\s/g,""); break;
+				case 1:	var type='f2'; var q= 's=' + $('#from-date').val().replace(/\s/g,"") + '&e=' + $('#to-date').val().replace(/\s/g,""); break;
+				case 2:	var type='f3'; var q= 's=' + $('#from-date').val().replace(/\s/g,"") + '&e=' + $('#to-date').val().replace(/\s/g,"") + '&pmethod=' + $('#from-date').val()+ '&rstatus=' + $('#r-status').val(); break;
+				case 3: var type='f4'; var q= 's=' + $('#from-date').val().replace(/\s/g,"") + '&e=' + $('#to-date').val().replace(/\s/g,"") + '&pmethod=' + $('#p-method').val()+ '&status=' + $('#status').val(); break;
+			}
+		}
+		else{			// sales report
+			switch($('option:selected', '#sales-s').index()){
+				case 0:	var type='s1'; var q= 's=' + $('#s-from-date').val().replace(/\s/g,"") + '&e=' + $('#s-to-date').val().replace(/\s/g,"") + '&city=' + $('#s-city').val() + '&listingt=' + $('#s-listing-type').val();	break;
+				case 1:	var type='s2'; var q= 'country=' + $('#s-country').val() + '&city=' + $('#s-city').val() + '&listingt=' + $('#s-listing-type').val();	break;
+				case 2:	var type='s3'; var q= 'country=' + $('#s-country').val() + '&city=' + $('#s-city').val() + '&listingt=' + $('#s-listing-type').val();	break;
+				case 3:	var type='s4'; var q= 's=' + $('#s-from-date').val().replace(/\s/g,"") + '&e=' + $('#s-to-date').val().replace(/\s/g,"") + '&country=' + $('#s-country').val();	break;
+				case 4:	var type='s5'; var q= 's=' + $('#s-from-date').val().replace(/\s/g,"") + '&e=' + $('#s-to-date').val().replace(/\s/g,"") + '&country=' + $('#s-country').val();	break;
+			}
+		}
+		
+		var url = '/admin/reports/' + type + '/1/default/default/' + q;
+		//alert(url);
+		location.href=url;
+	});
+	$('select#finance-s').change(function(){
+		//alert($("#finance-s").val());
+		switch($('option:selected', '#finance-s').index()){
+			case 0:
+			case 1:
+				$("#flt-1").hide();
+				$("#flt-2").hide();
+				$("#flt-3").hide();
+				break;
+			case 2:
+				$("#flt-1").show();
+				$("#flt-2").hide();
+				$("#flt-3").hide();
+			
+				break;
+			case 3:
+				$("#flt-1").hide();
+				$("#flt-2").show();
+				$("#flt-3").show();
+		}
+
+	});
+
+	$('select#sales-s').change(function(){
+		//alert($("#finance-s").val());
+		switch($('option:selected', '#sales-s').index()){
+			case 0:
+				$("#r-dates").show();
+				$("#r-country").hide();
+				$("#r-city").hide();
+				$("#r-listing-type").hide();
+				break;
+			case 1:
+			case 2:
+				$("#r-dates").hide();
+				$("#r-country").show();
+				$("#r-city").show();
+				$("#r-listing-type").show();
+				break;
+			case 3:
+			case 4:
+				$("#r-dates").show();
+				$("#r-country").show();
+				$("#r-city").hide();
+				$("#r-listing-type").hide();
+		}
+
+	});
+	
+	$(document).ready(function() {
+		$('input[name=from-date]').each(function(){
+			$val = $(this).val();
+			$(this).datepicker({
+				dateFormat:'M dd, yy',
+				defaultDate:$val,
+				onSelect:function(date){
+					$('input[name=to-date]').datepicker('option','minDate', date);
+				},
+			});
+		});
+
+		$('input[name=to-date]').each(function(){
+			$val = $(this).val();
+			$(this).datepicker({
+				dateFormat:'M dd, yy',
+				defaultDate:$(this).val(),
+			});
+		});
+
+
+		$('input[name=s-from-date]').each(function(){
+			$val = $(this).val();
+			$(this).datepicker({
+				dateFormat:'M dd, yy',
+				defaultDate:$val,
+				onSelect:function(date){
+					$('input[name=s-to-date]').datepicker('option','minDate', date);
+				},
+			});
+		});
+
+		$('input[name=s-to-date]').each(function(){
+			$val = $(this).val();
+			$(this).datepicker({
+				dateFormat:'M dd, yy',
+				defaultDate:$(this).val(),
+			});
+		});
+
+
+		$("#report_tabs").tabs();
+		$('#ui-datepicker-div').wrap('<div id="calendarContainer"></div>');
+
+	});
+	
+	$(function(){
+		$('#new_listing select[name=country_id]').change(function(){
+			$id = $(this).val();
+			if($id == "")
+				return;
+			
+			$.ajax({
+				url:'/ajax/getplacesoptions',
+				type:'post',
+				data:{parent_id:$id},
+				success:function(res){
+					$('#new_listing select[name=city_id]').html(res);
+				}
+			});
+		});
+		
+		$('#new_listing select[name=city_id]').change(function(){
+			$id = $(this).val();
+			if($id == "")
+				return;
+			
+			$.ajax({
+				url:'/ajax/getvendorsoptions',
+				data:{city:$id},
+				success:function(res){
+					$('#new_listing select[name=vendor_id]').html(res);
+				}
+			});
+		});
+	});
+	
+   </script>

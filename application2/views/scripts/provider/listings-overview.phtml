@@ -2,39 +2,16 @@
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->listing->title ?> : Overview | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-	<script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('textarea').elastic();	
-            //$('input').ToggleInputValue();
-            $('select').jqTransSelect();
-            $('#header .header-login a.user').click(function(){
-                $(this).next().toggleClass('show');
-                return false;
-            });
-			$restrict = 10; 
-			$('#addRestriction').click(function(){
-				$item = $('.hidden.restriction.detail').html();
-				$item = $('<div class="item">'+$item+'</div>');
-				$('input',$item).attr('name','details[3]['+$restrict+'][text]');
-				$('.hidden.restriction.detail').before($item);
-				$restrict++;
-				return false;
-			});
-			$('.lstng-detail a.remove').live('click', function(){
-				$detail = $(this).parent('.item');
-				$detail.fadeOut('fast', function(){
-					$('input', $detail).attr('disabled','disabled');
-				});
-				return false;
-			});
-        });
-    </script>
+    <title><?= $this->listing->title ?> - Overview | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+	<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+	<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1">
@@ -89,10 +66,36 @@
 								break;
 						endswitch ?>
                 </div><!-- closes right -->
+                <div class="clear"></div>
             </div><!-- closes listing-content -->
         </div><!-- closes listing-wrapper -->
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+		$restrict = 10; 
+		$('#addRestriction').click(function(){
+			$item = $('.hidden.restriction.detail').html();
+			$item = $('<div class="item">'+$item+'</div>');
+			$('input',$item).attr('name','details[3]['+$restrict+'][text]');
+			$('.hidden.restriction.detail').before($item);
+			$restrict++;
+			return false;
+		});
+		$('.lstng-detail a.remove').live('click', function(){
+			$detail = $(this).parent('.item');
+			$detail.fadeOut('fast', function(){
+				$('input', $detail).attr('disabled','disabled');
+			});
+			return false;
+		});
+		$('textarea').elastic();
+    });
+</script>
+<style type="text/css">
+.listing-content { overflow:visible;}
+</style>
 </body>
 </html>

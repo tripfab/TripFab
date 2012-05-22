@@ -1,0 +1,261 @@
+<?php $page = isset($_GET['page']) ? $_GET['page'] : 1 ?>
+<?php if(count($this->listings) > 0): ?>
+<div class="listings-main">
+	<div class="sub-ttl">
+		<div class="sort">
+			<label>Sort:</label>
+			<select name="sort">
+            	<?php $select = ($this->selected == 1) ? 'selected="selected"' : '' ?>
+				<option <?= $select ?> data-sort="created" data-order="" value="">Newest</option>
+            	<?php $select = ($this->selected == 2) ? 'selected="selected"' : '' ?>
+				<option <?= $select ?> data-sort="created" data-order="ASC" value="">Oldest</option>
+            	<?php $select = ($this->selected == 3) ? 'selected="selected"' : '' ?>
+				<option <?= $select ?> data-sort="title" data-order="" value="">Name A-Z</option>
+            	<?php $select = ($this->selected == 4) ? 'selected="selected"' : '' ?>
+				<option <?= $select ?> data-sort="title" data-order="DESC" value="">Name Z-A</option>
+			</select>
+		</div>
+		<a href="#new_listing" class="lb btn-1 sorting">Create A New Listing</a>
+		<h3 class="sorting"><?= $this->title ?></h3>
+	</div><!-- closes sub-ttl -->
+	<?php $statuses = array('inactive', 'active'); ?>
+	<?php foreach($this->listings as $listing): ?>
+	<div class="lstng <?= $statuses[$listing->status] ?> listing<?= $listing->id ?>" <?= ($listing->status == 0) ? 'data-id="'.$listing->id.'"' : '' ?> >
+		<div class="left">
+			<?= $this->thumbnail(97, $listing->image, '','1:1'); ?>
+			<h2><a href="/provider/listings/edit/<?= $listing->id ?>"><img class="listing<?= $listing->main_type ?>" src="https://static.tripfab.com/images2/cleardot.gif" alt="" /><?= $listing->title ?></a></h2>
+			<p><?= stripslashes($listing->description) ?></p>
+		</div><!-- closes left -->
+		<div class="right">
+			<p class="date">Created on <?= date('M j, Y', strtotime($listing->created)) ?></p>
+			<p class="state"><span class="<?= $statuses[$listing->status] ?>">Currently Inactive</span></p>
+			<ul>
+				<?php if($listing->status == 0): ?>
+				<li class="active"><a href="/provider/listings/activate/<?= $listing->id ?>" class="btn-10"><span>Active Now</span></a></li>
+				<?php else: ?>
+				<li class="deactive"><a href="/provider/listings/desactivate/<?= $listing->id ?>" class="btn-10"><span>Desactive Now</span></a></li>
+				<?php endif ?>
+				<li class="edit"><a href="/provider/listings/edit/<?= $listing->id ?>" class="btn-10"><span>Edit Listing</span></a></li>
+				<li class="preferences">
+					<a href="" class="btn-10"><span><img src="https://static.tripfab.com/images2/cleardot.gif" /></span></a>
+					<ul>
+						<li><a target="_blank" href="/provider/listings/preview/<?= $listing->id ?>">View Preview</a></li>
+						<li><a href="#listing_delete_<?= $listing->id ?>" class="lb">Delete Listing</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div><!-- closes right -->
+		<div class="clear"></div>
+	</div><!-- closes lstng -->
+	<?php endforeach ?>
+	<div class="bottom">
+        <?php $show1 = ($page == 1) ? 1 : ((($page - 1) * 5) + 1); ?>
+        <?php $show2 = (($page * 5) > $this->count) ? $this->count : ($page * 5); ?>
+		<div class="results"><strong><?= $show1 ?> - <?= $show2 ?></strong> of <?= $this->count ?> Listings</div><!--RESULTS-->
+        <?php $pages = 0;
+				if($this->count > 5) {
+					$rest = $this->count % 5;
+					$brut = $this->count - $rest;
+					$pages = $brut / 5;
+					if($rest > 0)
+						$pages++;
+				} ?>
+        <?php if($pages > 1): ?>
+		<ul class="paging">
+        	<?php for($i=1;$i<=$pages;$i++): ?>
+            <?php if($i==$page): ?>
+            <?php if($i==1): ?>
+			<li><a rel="1" class="active" href="">1</a></li>
+            <?php elseif($i==$pages): ?>
+			<li><a rel="<?= $i ?>" class="active" href=""><?= $i ?></a></li>
+            <?php else: ?>
+			<li><a rel="<?= $i ?>" href="" class="active"><?= $i ?></a></li>            
+            <?php endif ?>	
+            <?php else: ?>
+            <?php if($i==1): ?>
+			<li class="prev"><a href="">Previous</a></li>
+			<li><a rel="1" href="">1</a></li>
+            <?php elseif($i==$pages): ?>
+			<li><a rel="<?= $i ?>" href=""><?= $i ?></a></li>
+			<li class="next"><a href="">Next</a></li>
+            <?php else: ?>
+			<li><a rel="<?= $i ?>" href=""><?= $i ?></a></li>
+            <?php endif ?>
+            <?php endif ?>
+            <?php endfor ?>
+		</ul>
+        <?php endif ?>
+	</div><!--BOTTOM-->
+</div><!-- closes listings-main -->
+<?php else: ?>
+<div class="listings-main">
+	<div class="sub-ttl">
+		<a href="#new_listing" class="lb btn-1">Create A New Listing</a>
+		<?= $this->title ?>
+	</div><!-- closes sub-ttl -->
+</div>
+<div class="empty-container">
+	<img src="https://static.tripfab.com/images/empty-1.png" alt="" /><br />
+    <?php if($page == 1): ?>
+	There are no listings in this section :(
+    <?php else: ?>
+	There are no more listings to show :(
+    <?php endif ?>
+</div><!-- closes empty -->
+<?php endif ?>
+
+<div class="hidden">
+	<?php foreach($this->listings as $list): ?>
+    <div id="listing_delete_<?= $list->id ?>" class="listing_delete">
+    	<form action="" method="post" id="form_listing_delete_<?= $list->id ?>">
+            <div class="delete_name">
+                <h2>Are you sure you want to delete the listing "<?= $list->title ?>"?</h2>
+                <p>You will loose all the information for this listing</p>
+            </div><!--DELETE_NAME-->
+            <ul>
+                <li><a class="btn-1" onclick="$(this).parents('form').submit(); return false;" href="">Delete</a></li>
+                <li><a class="btn-13" onclick="$.fancybox.close(); return false;" href="">Cancel</a></li>
+            </ul>      
+            <input type="hidden" name="ids" value="<?= $list->id ?>" />
+            <input type="hidden" name="listing_token" value="<?= $list->token ?>" />
+            <input type="hidden" name="form_id" value="<?= md5($list->token .'form_listing_delete_'.$list->id) ?>" />
+            <input type="hidden" name="_task" value="<?= md5('delete_listing') ?>" />
+	    </form>
+    </div><!--LISTING-DELETE-->
+    <?php endforeach ?>
+    <div id="new_listing">
+    	<!--<div class="lightbox_listing">
+            <h1>What kind of listing do you want to create?</h1>
+            <ul class="listing">
+                <li class="select">
+                	<form method="post" action="/en-US/provider/listings/new">
+                        <a href="" onclick="$(this).parents('form').submit(); return false;">
+                            <span><img src="https://static.tripfab.com/images2/ico-105.png" width="35" height="87" alt="" /></span>
+                            <h2>Activity</h2>
+                            <p>Fun activities that can done: sight seeing, boat tours, guided visits, etc.</p>
+                        </a>
+                        <input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+                        <input type="hidden" name="vendortoken" value="<?= $this->vendor->token ?>" />
+                        <input type="hidden" name="type" value="6" />
+                    </form>
+                </li>
+                <li>
+                	<form method="post" action="/en-US/provider/listings/new">
+                        <a href="" onclick="$(this).parents('form').submit(); return false;">
+                            <span><img src="https://static.tripfab.com/images2/ico-106.png" width="35" height="87" alt="" /></span>
+                            <h2>Hotel</h2>
+                            <p>Types of rooms and accomodations available, amenities included, etc.</p>
+                        </a>
+                        <input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+                        <input type="hidden" name="vendortoken" value="<?= $this->vendor->token ?>" />
+                        <input type="hidden" name="type" value="5" />
+                    </form>
+                </li>
+                <li>
+                	<form method="post" action="/en-US/provider/listings/new">
+                        <a href="" onclick="$(this).parents('form').submit(); return false;">
+                            <span><img src="https://static.tripfab.com/images2/ico-107.png" width="35" height="87" alt="" /></span>
+                            <h2>Restaurant</h2>
+                            <p>Types of cuisine, specials and dining options available.</p>
+                        </a>
+                        <input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+                        <input type="hidden" name="vendortoken" value="<?= $this->vendor->token ?>" />
+                        <input type="hidden" name="type" value="2" />
+                    </form>
+                </li>
+                <li>
+                	<form method="post" action="/en-US/provider/listings/new">
+                        <a href="" onclick="$(this).parents('form').submit(); return false;">
+                            <span><img src="https://static.tripfab.com/images2/ico-108.png" width="35" height="87" alt="" /></span>
+                            <h2>Entertainment</h2>
+                            <p>Shows, concerts, events and activities that visitors can experience.</p>
+                        </a>
+                        <input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+                        <input type="hidden" name="vendortoken" value="<?= $this->vendor->token ?>" />
+                        <input type="hidden" name="type" value="7" />
+                    </form>
+                </li>
+                <li>
+                	<form method="post" action="/en-US/provider/listings/new">
+                        <a href="" onclick="$(this).parents('form').submit(); return false;">
+                            <span><img src="https://static.tripfab.com/images2/ico-109.png" width="35" height="87" alt="" /></span>
+                            <h2>Tourist Sight</h2>
+                            <p>Impressive locations, sceneries and places that visitors will enjoy.</p>
+                        </a>
+                        <input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+                        <input type="hidden" name="vendortoken" value="<?= $this->vendor->token ?>" />
+                        <input type="hidden" name="type" value="4" />
+                    </form>
+                </li>
+            </ul><!--LISTING--*>
+        </div><!--LIGHTBOX_LISTING--*>-->
+        <div class="lbox_listing">
+        	<h1>What kind of listing do you want to create?</h1>
+        	<ul class="listing">
+        		<li class="select">
+        			<form method="post" action="/en-US/provider/listings/new">
+	        			<a href="" onclick="$(this).parents('form').submit(); return false;">
+	        				<span><img src="https://static.tripfab.com/images2/ico-105.png" width="35" height="87" alt="" /></span>
+	        				<h2>Activity</h2>
+	        				<p>Fun activities that can done: sight seeing, boat tours, guided visits, etc.</p>
+	        			</a>
+	        			<input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+	        			<input type="hidden" name="vendortoken" value="<?= $this->vendor->token ?>" />
+	        			<input type="hidden" name="type" value="6" />
+	        		</form>
+        		</li>
+        		<li>
+        			<form method="post" action="/en-US/provider/listings/new">
+	        			<a href="" onclick="$(this).parents('form').submit(); return false;">
+	        				<span><img src="https://static.tripfab.com/images2/ico-106.png" width="35" height="87" alt="" /></span>
+	        				<h2>Hotel</h2>
+	        				<p>Types of rooms and accomodations available, amenities included, etc.</p>
+	        				<input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+	        				<input type="hidden" name="vendortoken" value="<?= $this->vendor->token ?>" />
+	        				<input type="hidden" name="type" value="5" />
+	        			</a>
+        			</form>
+        		</li>
+        		<li>
+        			<form method="post" action="/en-US/provider/listings/new">
+	        			<a href="" onclick="$(this).parents('form').submit(); return false;">
+	        				<span><img src="https://static.tripfab.com/images2/ico-107.png" width="35" height="87" alt="" /></span>
+	        				<h2>Restaurant</h2>
+	        				<p>Types of cuisine, specials and dining options available.</p>
+	        			</a>
+	        			<input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+	        			<input type="hidden" name="vendortoken" value="<?= $this->vendor->token ?>" />
+	        			<input type="hidden" name="type" value="2" />
+	        		</form>
+        		</li>
+        		<li>
+        			<form method="post" action="/en-US/provider/listings/new">
+	        			<a href="" onclick="$(this).parents('form').submit(); return false;">
+	        				<span><img src="https://static.tripfab.com/images2/ico-108.png" width="35" height="87" alt="" /></span>
+	        				<h2>Entertainment</h2>
+	        				<p>Shows, concerts, events and activities that visitors can experience.</p>
+	        			</a>
+	        			<input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+	        			<input type="hidden" name="vendortoken" value="<?= $this->vendor->token ?>" />
+	        			<input type="hidden" name="type" value="7" />
+        			</form>
+        		</li>
+        		<li>
+        			<form method="post" action="/en-US/provider/listings/new">
+	        			<a href="" onclick="$(this).parents('form').submit(); return false;">
+	        				<span><img src="https://static.tripfab.com/images2/ico-109.png" width="35" height="87" alt="" /></span>
+	        				<h2>Tourist Sight</h2>
+	        				<p>Impressive locations, sceneries and places that visitors will enjoy.</p>
+	        			</a>
+	        			<input type="hidden" name="vendor" value="<?= $this->vendor->id ?>" />
+	        			<input type="hidden" name="vendortoken" value="<?= $this->vendor->token ?>" />
+	        			<input type="hidden" name="type" value="4" />
+	        		</form>
+        		</li>
+        	</ul><!--LISTING-->
+        	<div class="create">
+        		<a class="btn-1" href="">Create Selected</a>
+        	</div><!--CREATE-->
+        </div><!--LIGHTBOX_LISTING-->
+    </div>
+</div>

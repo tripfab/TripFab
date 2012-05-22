@@ -20,7 +20,7 @@ class UserController extends Zend_Controller_Action
     
     /**
      *
-     * @var WS_MessagesService 
+     * @var WS_MessagesService
      */
     protected $messages;
     
@@ -78,11 +78,23 @@ class UserController extends Zend_Controller_Action
      */
     protected $trips;
     
+    /**
+     *
+     * @var Zend_Db_Table_Abstract
+     */
+    protected $cart;
+    
+    /**
+     *
+     * @var Zend_Db_Table_Abstract
+     */
+    protected $cartitems;
+    
     public function init()
     {
         $auth = Zend_Auth::getInstance();
         if(!$auth->hasIdentity()){
-            $this->_redirect('login');
+            $this->_redirect('/en-US/login?b='.$_SERVER['REQUEST_URI']);
             //var_dump($_SESSION); die;
         } else {
             $this->user = new WS_User($auth->getStorage()->read());
@@ -100,8 +112,13 @@ class UserController extends Zend_Controller_Action
                 $this->trips            = new WS_TripsService();
                 
                 $this->view->user       = $this->user->getData();
+                
+                $this->cart = new Model_Cart();
+                $this->cartitems = new Zend_Db_Table('cartitems');
             }
         }
+        
+        $this->view->cssVC = Zend_Registry::get('vc');
     }
     
     
@@ -123,8 +140,7 @@ class UserController extends Zend_Controller_Action
                 $template = 'account-password';
                 break;
             case 'payments':
-                $this->paymentsAccountTask();
-                $template = 'account-payments';
+                $template = $this->paymentsAccountTask();
                 break;
             case 'notifications':
                 $this->notificationsAccountTask();
@@ -315,24 +331,146 @@ class UserController extends Zend_Controller_Action
             $user->password = md5($data['npassword']);
         }
         
-        if(empty($data['question']))
-            throw new Exception ('Select a Security Question');
-        if(empty($data['answer']))
-            throw new Exception ('Write an answer for your security question');
-        
-        $user->question = $data['question'];
-        $user->answer   = $data['answer'];
-        
         $user->save();
     }
     
     public function paymentsAccountTask()
     {
-        $user             = $this->user->getData(true);
-        $new_messages     = $this->messages->countNew($this->user->getId());
+        switch($this->_getParam('id','default')) {
+            case 'default':
+                $user             = $this->user->getData(true);
+                $new_messages     = $this->messages->countNew($this->user->getId());
+                
+                if($this->getRequest()->isPost())
+                {
+                    $id = $_POST['card'];
+                    $account = $this->user->getAccount($id);
+                    $account->delete();
+                    
+                    setcookie('alert', 'The credit card has been deleted');
+                    $this->_redirect('/user/account/payments');
+                }
+
+                $accounts = $this->user->getAccounts();
+                
+                $creditcards = array(
+                    'Visa'             => '/images2/checkout-card1.png',
+                    'MasterCard'       => '/images2/checkout-card2.png',
+                    'American Express' => '/images2/checkout-card3.png',
+                    'Diners Club'      => '/images2/checkout-card4.png',
+                    'Discover'         => '/images2/checkout-card5.png',
+                    'JCB'              => '/images2/checkout-card6.png',
+                );
+
+                $this->view->new_messages = $new_messages;
+                $this->view->user         = $user;
+                $this->view->accounts     = $accounts;
+                
+                $this->view->cards        = $creditcards;
+                
+                return 'account-payments';
+                break;
+            case 'new':
+                return $this->addPaymentAccountTask();
+                break;
+            default:
+                return $this->editPaymentsAccountTask();
+                break;
+        }
+    }
+    
+    public function addPaymentAccountTask()
+    {
+        if($this->getRequest()->isPost())
+                $this->addPaymentsAccountPostHandler();
         
-        $this->view->new_messages = $new_messages;
-        $this->view->user         = $user;
+        $this->view->user = $this->user->getData();
+        
+        $keys = Zend_Registry::get('stripe');
+        $this->view->pkey = $keys['public_key'];
+        
+        return 'account-newpayment';
+    }
+    
+    public function addPaymentsAccountPostHandler()
+    {
+        require_once "Stripe/Stripe.php";
+        // set your secret key: remember to change this to your live secret key in production
+        // see your keys here https://manage.stripe.com/account
+        $keys = Zend_Registry::get('stripe');
+        Stripe::setApiKey($keys['secret_key']);
+
+        // get the credit card details submitted by the form
+        $token = $_POST['stripeToken'];
+
+        // create a Customer
+        $customer = Stripe_Customer::create(array(
+          "card" => $token,
+          "description" => $this->user->email)
+        );
+        
+        $strip_accounts = new Zend_Db_Table('stripe_accounts');
+        $account = $strip_accounts->fetchNew();
+        $account->stripe_id = $customer->id;
+        $account->user_id   = $this->user->getId();
+        $account->type      = $customer->active_card->type;
+        $account->last4     = $customer->active_card->last4;
+        $account->created   = date('Y-m-d H:i:s');
+        $account->updated   = date('Y-m-d H:i:s');
+
+        $account->save();
+        
+        setcookie('alert', 'The new credit card has been added');
+        $this->_redirect('/user/account/payments');
+    }
+    
+    public function editPaymentsAccountTask()
+    {
+        if($this->getRequest()->isPost())
+                $this->editPaymentsAccountPostHandler();
+        
+        $id = $this->_getParam('id');
+        $account = $this->user->getAccount($id);
+        
+        $this->view->user    = $this->user->getData();
+        $this->view->account = $account;
+        
+        $keys = Zend_Registry::get('stripe');
+        $this->view->pkey = $keys['public_key'];
+        
+        return 'account-editpayment';
+    }
+    
+    public function editPaymentsAccountPostHandler()
+    {
+        $id = $this->_getParam('id');
+        $account = $this->user->getAccount($id);
+        
+        require_once "Stripe/Stripe.php";
+        // set your secret key: remember to change this to your live secret key in production
+        // see your keys here https://manage.stripe.com/account
+        $keys = Zend_Registry::get('stripe');
+        Stripe::setApiKey($keys['secret_key']);
+
+        // get the credit card details submitted by the form
+        $token = $_POST['stripeToken'];
+
+        // create a Customer
+        $customer = Stripe_Customer::create(array(
+          "card" => $token,
+          "description" => $this->user->email)
+        );
+        
+        
+        $account->stripe_id = $customer->id;
+        $account->type      = $customer->active_card->type;
+        $account->last4     = $customer->active_card->last4;
+        $account->updated   = date('Y-m-d H:i:s');
+        
+        $account->save();
+        
+        setcookie('alert', 'The credit card has been updated');
+        $this->_redirect('/user/account/payments');
     }
     
     public function notificationsAccountTask()
@@ -562,48 +700,170 @@ class UserController extends Zend_Controller_Action
     
     public function checkpricesTripsTask()
     {
-        if($this->getRequest()->isPost()){            
+        if($this->getRequest()->isPost()){
             $ids = $_POST['ids'];
             $id  = $this->_getParam('id');
             if($ids != $id)
                     throw new Exception();
             
-            $trip = $this->trips->getItn($id);
-            if($trip->token != $_POST['token'])
-                    throw new Exception();
+            if($_POST['_task'] == md5('recalculate')) {
+                $trip = $this->trips->getItn($id);
+                if($trip->token != $_POST['token'])
+                        throw new Exception();
+
+                $listings = $this->trips->getItnListingOf($trip->id, false, 'null', true, true);
+
+                $bookings = $_POST['bookings'];
+            } elseif($_POST['_task'] == md5('proceed')) {
+                $this->purchaseItinerary();
+            } elseif($_POST['_task'] == md5('replace')){
+                $trip = $this->trips->getItn($id);
+                
+                $this->trips->replaceListing($trip->id, $_POST['triplisting'], $_POST['listing']);
+                
+                $listings = $this->trips->getItnListingOf($trip->id, false, 'null', true, true);
+                
+                $bookings = array();
             
-            $adults = $_POST['adultss'];
-            $kids   = $_POST['kids'];
+                foreach($listings as $list) {
+                    if($list->main_type == 6 || $list->main_type == 5){
+                        $bookings[$list->id] = array(
+                            'adults' => $trip->adults,
+                            'child'  => $trip->kids
+                        );
+                    }
+                }
+                
+            } else {
+                throw new Exception('Form corrupted');
+            }
         }
         else {
             $id  = $this->_getParam('id');
             $trip = $this->trips->getItn($id);
-            $adults = 1;
-            $kids   = 0;
+            
+            $listings = $this->trips->getItnListingOf($trip->id, false, 'null', true, true);
+            
+            $bookings = array();
+            
+            foreach($listings as $list) {
+                if($list->main_type == 6 || $list->main_type == 5){
+                    $bookings[$list->id] = array(
+                        'adults' => $trip->adults,
+                        'child'  => $trip->kids
+                    );
+                }
+            }
         }
-            
-            
-        $listings = $this->trips->getItnListingOf($trip->id, false, 'null', true);
 
         $date = date('Y-m-d G:i:s', strtotime($trip->start));
+        
+        $main_types = $this->listings->getMainCategories(true);
+        $this->view->types = $main_types;
 
         $items  = array();
         $items2 = array();
-        foreach($listings as $listing){
+        $options = array();
+        
+        $caculated = array();
+        
+        foreach($listings as $u => $listing){
             if($listing->main_type == 6 || $listing->main_type == 5){
-                $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
-                $checkin = date('Y-m-d', $checkin);
-                $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $trip->days);
-                $item->day = $listing->day;
-                $items[] = $item;
+                if($listing->main_type == 5) {
+                    if(!@in_array($listing->triplisting_id, $caculated)) {
+                        $j = 2;
+                        for($i = $listing->day; $i <= $trip->days; $i++){
+                            $_diff = false; $found = false;
+                            foreach($listings as $list2) {
+                                if($list2->day == ($i+1) && $list2->main_type == 5) {
+                                    if($list2->listing_id == $listing->listing_id) {
+                                        $j++;
+                                        $caculated[] = $list2->triplisting_id;
+                                        $found = true;
+                                    } else {
+                                        $_diff = true;
+                                    } break;
+                                }
+                            }
+                            if($_diff) break;
+                            elseif(!$found and ($trip->days - 1) > $i) $j++;
+                        }
+                        
+                        $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                        $checkin = date('Y-m-d', $checkin);
+
+                        $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                        $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                        $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                        $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                        $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $j, $option, $capacity);
+
+                        $item->day = $listing->day;
+                        $item->listing_city = $listing->city;
+                        $item->listing_country = $listing->country;
+                        $item->triplistingid = $listing->triplisting_id;
+                        $item->ciidf = $listing->cityurl;
+                        $item->coidf = $listing->countryurl;
+                        $item->idf   = $listing->identifier;
+
+                        $items[] = $item;
+                        
+                        $options[$listing->id]['options'] = $this->listings->getHotelRooms($listing->id);
+
+                        $prices = $this->listings->getSchPrices($listing);
+                        $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+                        
+                        $caculated[] = $listing->id;
+                    }
+                } 
+                else {
+                    $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                    $checkin = date('Y-m-d', $checkin);
+
+                    $adults = (isset($bookings[$listing->id]['adults'])) ? $bookings[$listing->id]['adults'] : null;
+                    $kids   = (isset($bookings[$listing->id]['kids'])) ? $bookings[$listing->id]['kids'] : null;
+
+                    $option = (isset($bookings[$listing->id]['option'])) ? $bookings[$listing->id]['option'] : null;
+                    $capacity = (isset($bookings[$listing->id]['capacity'])) ? $bookings[$listing->id]['capacity'] : null;
+
+                    $item = $this->listings->getQuote($listing, $adults, $kids, $checkin, null, $trip->days, $option, $capacity);
+
+                    $item->day = $listing->day;
+                    $item->listing_city = $listing->city;
+                    $item->listing_country = $listing->country;
+                    $item->triplistingid = $listing->triplisting_id;
+                    $item->ciidf = $listing->cityurl;
+                    $item->coidf = $listing->countryurl;
+                    $item->idf   = $listing->identifier;
+
+                    $items[] = $item;
+
+                    $options[$listing->id]['options'] = $this->listings->getSchedulesOf($listing->id);
+
+                    if(is_null($listing->min) or is_null($listing->max)){
+                        $options[$listing->id]['capacity'] = $this->listings->getActivityTypes($listing->id);
+
+                        $prices = $this->listings->getSchPrices($listing);
+                        $options[$listing->id]['prices'] = (isset($prices[0])) ? $prices[0] : $prices;
+                    }
+                }
             }
         }
+        
         foreach($listings as $listing){
             if($listing->main_type != 6 && $listing->main_type != 5){
                 $item = new stdClass();
                 $item->available = true;
                 $item->listing_title = $listing->title;
                 $item->listing_image = $listing->image;
+                $item->listing_type  = $listing->main_type;
+                $item->listing_city = $listing->city;
+                $item->listing_country = $listing->country;
+                $item->ciidf = $listing->cityurl;
+                $item->coidf = $listing->countryurl;
+                $item->idf   = $listing->identifier;
                 $items2[] = $item;
             }
         }
@@ -616,8 +876,197 @@ class UserController extends Zend_Controller_Action
 
         $this->view->trip = $trip;
         $this->view->items = $items;
+        //print_r($items); die;
         $this->view->items2 = $items2;
         $this->view->bigtotal = $total;
+        
+        $country = $this->places->getPlaceById($trip->country_id);
+        $this->view->country = $country;
+        
+        $this->view->options = $options;
+    }
+    
+    protected function purchaseItinerary()
+    {
+        $id    = $_POST['ids'];
+
+        $trip = $this->trips->getItn($id);
+        if($trip->token != $_POST['token'])
+                throw new Exception();
+        
+        $user = $this->user->getData(true);
+        
+        $date = date('Y-m-d', strtotime($trip->start));
+
+        $cart = $this->cart->fetchNew();
+        $cart->user_id  = $user->id;
+        $cart->listing_id = $trip->id;
+        $cart->checkin  = $date;
+        $cart->adults   = 0;
+        $cart->kids     = 0;
+        $cart->rate     = 0;
+        $cart->rate_description = $trip->title . ' - Itinerary Purchase';
+        $cart->subtotal = 0;
+        $cart->taxes    = 0;
+        $cart->total    = 0;
+        $cart->token    = md5($user->token . time());
+        $cart->type     = 3;
+        $cart->created  = date('Y-m-d H:i:s');
+
+        $cart->save();
+
+        $cartitems = new Zend_Db_Table('cartitems');            
+
+        $listings = $this->trips->getItnListingOf($trip->id, false, 'null', true, true);
+
+        $items  = array();
+        
+        $caculated = array();
+        
+        foreach($listings as $listing){
+            if($listing->main_type == 6){
+                $checkin   = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                $checkin   = date('Y-m-d', $checkin);
+                
+                $data = $_POST['bookings'][$listing->id];
+                
+                $rowR = $this->listings->getQuote(
+                            $listing, 
+                            $data['adults'], 
+                            $data['kids'], 
+                            $checkin,
+                            null,
+                            $trip->days,
+                            $data['option'],
+                            $data['capacity']);
+                
+                if($rowR->available) {
+                    $row = $this->cartitems->fetchNew();
+                    $row->cart_id     = $cart->id;
+                    $row->checkin     = date('Y-m-d', strtotime($rowR->checkin));
+                    $row->listing_id  = $listing->id;
+                    $row->option_id   = $rowR->option_id;
+                    $row->adults      = $rowR->adults;
+                    $row->kids        = $rowR->kids;
+                    $row->rate        = $rowR->rate;
+                    $row->additional  = $rowR->additional;
+                    $row->subtotal    = $rowR->subtotal;
+                    $row->taxes       = $rowR->taxes;
+                    $row->total       = $rowR->total;
+                    $row->created     = date('Y-m-d H:i:s');
+                    $row->triplisting = $listing->triplisting_id;
+
+                    $row->rate_description       = $rowR->rate_description;
+                    $row->additional_description = $rowR->additional_description;
+
+                    $row->save();
+                    
+                    $items[] = $row;
+                }
+            }
+            elseif($listing->main_type == 5)
+            {
+                if(!@in_array($listing->triplisting_id, $caculated)) {
+                    $j = 2;
+                    for($i = $listing->day; $i <= $trip->days; $i++){
+                        $_diff = false; $found = false;
+                        foreach($listings as $list2) {
+                            if($list2->day == ($i+1) && $list2->main_type == 5) {
+                                if($list2->listing_id == $listing->listing_id) {
+                                    $j++;
+                                    $caculated[] = $list2->triplisting_id;
+                                    $found = true;
+                                } else {
+                                    $_diff = true;
+                                } break;
+                            }
+                        }
+                        if($_diff) break;
+                        elseif(!$found and ($trip->days - 1) > $i) $j++;
+                    }
+                    
+                    $checkin   = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                    $checkin   = date('Y-m-d', $checkin);
+                
+                    $data = $_POST['bookings'][$listing->id];
+
+                    $rowR = $this->listings->getQuote(
+                                $listing, 
+                                $data['adults'], 
+                                $data['kids'], 
+                                $checkin,
+                                null, 
+                                $j, $data['option']);
+
+                    if($rowR->available) {
+
+                        $row = $this->cartitems->fetchNew();
+                        $row->cart_id     = $cart->id;
+                        $row->checkin     = date('Y-m-d', strtotime($rowR->checkin));
+                        $row->checkout    = date('Y-m-d', strtotime($rowR->checkout));
+                        $row->listing_id  = $listing->id;
+                        $row->option_id   = $rowR->option_id;
+                        $row->adults      = $rowR->adults;
+                        $row->kids        = $rowR->kids;
+                        $row->rate        = $rowR->rate;
+                        $row->additional  = $rowR->additional;
+                        $row->rooms       = $rowR->rooms;
+                        $row->nights      = $rowR->nights;
+                        $row->subtotal    = $rowR->subtotal;
+                        $row->taxes       = $rowR->taxes;
+                        $row->total       = $rowR->total;
+                        $row->created     = date('Y-m-d H:i:s');
+                        $row->triplisting = $listing->triplisting_id;
+
+                        $row->rate_description       = $rowR->rate_description;
+                        $row->additional_description = $rowR->additional_description;
+
+                        $row->save();
+
+                        $items[] = $row;
+
+                    }
+                }
+            }
+        }
+        
+        $items2 = array();
+
+        foreach($listings as $listing){
+            if($listing->main_type != 6 && $listing->main_type != 5){                    
+                $checkin = ($listing->day > 1) ? (strtotime($date) + (($listing->day - 1) * 86400)) : strtotime($date);
+                $cartitem = $this->cartitems->fetchNew();
+                $cartitem->cart_id      = $cart->id;
+                $cartitem->checkin      = date('Y-m-d',$checkin);
+                $cartitem->listing_id   = $listing->id;
+                $cartitem->rate         = 0;
+                $cartitem->additional   = 0;
+                $cartitem->subtotal     = 0;
+                $cartitem->taxes        = 0;
+                $cartitem->total        = 0;
+                $cartitem->created      = date('Y-m-d H:i:s');
+                $cartitem->rate_description = 'Price not charget';
+                $cartitem->save();
+
+                $items2[] = $cartitem;
+            }
+        }
+
+        $total = 0; $subtotal = 0; $taxes  = 0;
+        
+        foreach($items as $c){
+            $total = $total + $c->total;
+            $subtotal = $subtotal + $c->subtotal;
+            $taxes = $c->taxes;
+        }
+
+        $cart->total    = $total;
+        $cart->subtotal = $subtotal;
+        $cart->taxes    = $taxes;
+        
+        $cart->save();
+
+        $this->_redirect('cart/checkout/'.$cart->id);
     }
     
     public function activateoffersTripsTask()
@@ -626,7 +1075,6 @@ class UserController extends Zend_Controller_Action
         $trip->offers = 1;
         $trip->save();
         $this->_redirect('/user/trips/itinerary/'.$trip->id);
-        
     }
     
     public function defaultTripsTask()
@@ -646,6 +1094,26 @@ class UserController extends Zend_Controller_Action
         foreach($trips as $trip){
             $listingCounter[$trip->id] = $this->trips->countListings($trip->id);
         }
+        
+        $missed = array();
+        $missedIds = array();
+        $showProximity = false;
+        foreach($trips as $trip) {
+            if($trip->start != '0000-00-00') {
+                $start = strtotime($trip->start);
+                if($start <= time()) {
+                    $missed[] = $trip;
+                    $missedIds[$trip->id] = 'yes';
+                } elseif(($start - time()) <= 1296000) {
+                    $showProximity = true;
+                }
+            }
+        }
+        
+        $this->view->missed = $missed;
+        $this->view->missedIds = $missedIds;
+        
+        $this->view->showProximity = $showProximity;
         
         $this->view->listingCounter = $listingCounter;
         $this->view->trips     = $trips;
@@ -681,8 +1149,8 @@ class UserController extends Zend_Controller_Action
                 if(empty($_POST['start']) || empty($_POST['end']))
                     throw new Exception('Please Insert the dates');
                 
-                $start = date('D M j Y', strtotime($_POST['start']));
-                $end   = date('D M j Y', strtotime($_POST['end']));
+                $start = date('M j Y', strtotime($_POST['start']));
+                $end   = date('M j Y', strtotime($_POST['end']));
                 
                 if($start != $_POST['start'] || $end != $_POST['end'])
                     throw new Exception("Sorry, we couldn't understand the date Formats");
@@ -699,7 +1167,7 @@ class UserController extends Zend_Controller_Action
                 
                 $trip->save();
                 
-                
+                setcookie('alert', 'Trip dates updated');
                 $this->_redirect('/user/trips/itinerary/'.$trip->id);
                 break;
             default:
@@ -753,7 +1221,7 @@ class UserController extends Zend_Controller_Action
             }
         }
         
-        $labels = array('','Morning','Afternoon', 'Night');
+        $labels = array('','Morning','Afternoon', 'Night','Hotel');
         $times = array();
         $days  = array();
         $results = array();
@@ -905,6 +1373,54 @@ class UserController extends Zend_Controller_Action
     public function itineraryTripsTask()
     {
         $trip = $this->_getTrip('id', true);
+        
+        if($this->_request->isPost()) {
+            
+            $trip = $this->trips->getItn($_POST['ids'], true);
+            if($trip->token != $_POST['token'])
+                throw new Exception('Form Corrupted');
+            if($trip->user_id != $this->user->getId())
+                throw new Exception("The trip you're trying to delete isn't yours");
+            
+            switch($_POST['_task']) {
+                case md5('assign_dates'):
+                    if(empty($_POST['start']) || empty($_POST['end']))
+                        throw new Exception('Please Insert the dates');
+
+                    $start = date('D M j Y', strtotime($_POST['start']));
+                    $end   = date('D M j Y', strtotime($_POST['end']));
+
+                    if($start != $_POST['start'] || $end != $_POST['end'])
+                        throw new Exception("Sorry, we couldn't understand the date Formats");
+
+                    $trip->start = date('Y-m-d', strtotime($start));
+                    $trip->end   = date('Y-m-d', strtotime($end));
+
+                    $fday = strtotime($start);
+                    $lday = strtotime($end);
+                    $days = $lday - $fday;
+                    $days = $days / 86400;
+
+                    $trip->days         = $days + 1;
+
+                    $trip->save();
+
+                    setcookie('alert', 'Trip dates updated');
+                    $this->_redirect('/user/trips/itinerary/'.$trip->id);
+                    
+                    break;
+                case md5('update_title'): 
+                    if(!empty($_POST['title'])) {
+                        $trip->title = $_POST['title'];
+                        $trip->save();
+
+                        setcookie('alert', 'Trip dates updated');
+                        $this->_redirect('/user/trips/itinerary/'.$trip->id);
+                    }
+                    break;
+            }
+        }
+        
         $this->view->trip = $trip;
         
         if($trip->start == '0000-00-00' || $trip->end == '0000-00-00'){
@@ -913,9 +1429,9 @@ class UserController extends Zend_Controller_Action
             $this->_redirect('/user/trips/');
         }
         
-        $listings = $this->trips->getItnListingOf($trip->id, false, 'notnull');
-        $days     = $this->trips->getItnListingOf($trip->id, true, 'null');
-        
+        $listings  = $this->trips->getItnListingOf($trip->id, false, 'notnull');
+        $days      = $this->trips->getItnListingOf($trip->id, true, 'null');
+        $listings2 = $this->trips->getItnListingOf($trip->id, false);
         $ids = array(2=>4,4=>3,5=>5,6=>1,7=>2); $used = array(); $result = array();
         foreach($listings as $listing){
             if(!in_array($listing->main_type, $used)){
@@ -929,6 +1445,14 @@ class UserController extends Zend_Controller_Action
         
         $this->view->favorites = $result;
         $this->view->days     = $days;
+        
+        $tocheckout = false;
+        foreach($listings2 as $list) {
+            if(!$tocheckout) {
+                $tocheckout = (is_null($list->day)) ? false : true;
+            }
+        }
+        $this->view->tocheckout = $tocheckout;
     }
     
     public function offersTripsTask()
@@ -961,11 +1485,58 @@ class UserController extends Zend_Controller_Action
                 $this->historyReservationsTask();
                 $template = 'reservations-history';
                 break;
+            case 'view':
+                $this->viewReservationTask();
+                $template = 'reservations-view';
+                break;
+            case 'review':
+                $this->reviewReservationTask();
+                $template = 'reservations-review';
+                break;
             default:
                 throw new Exception('Page not found'); break;
         }
         
         $this->render($template);
+    }
+    
+    public function reviewReservationTask()
+    {
+        $id = $this->_getParam('id','default');
+        if($id == 'default') 
+            throw new Exception('Page not found');
+        
+        $listing = $this->listings->getListing($id);
+        $reservation = $this->reservations->getUserReservation($this->user->getId(), $listing->id, 3);
+        if(is_null($reservation)) 
+            throw new Exception('Page not found');
+        
+        $review = $this->reviews->getReview($this->user->getId(), $listing->id);
+        
+        $vendor = $this->users->getVendor($listing->vendor_id);
+        
+        if($this->getRequest()->isPost())
+        {
+            $text = $_POST['text'];
+            if(is_null($review)) {
+                $review = $this->reviews->save($listing->id, $this->user->getId(), $text);
+            } else {
+                $review->text    = $text;
+                $review->title   = substr($text, 0, 10).'...';
+                $review->updated = date('Y-m-d H:i:s');
+                $review->new     = 1;
+                
+                $review->save();
+            }
+            
+            $notifier = new WS_Notifier($vendor->user_id);
+            $notifier->newReview($listing, $this->user->getData());
+            
+            setcookie('alert', 'Your changes have been saved');
+            $this->_redirect('/user/reservations/history');
+        }
+        
+        $this->view->review = (!is_null($review)) ? $review : false;
     }
     
     public function defaultReservationsTask()
@@ -1002,5 +1573,22 @@ class UserController extends Zend_Controller_Action
         
         $this->view->reservations = $_reservs;
         $this->view->confirmed    = $confirmed;
+    }
+    
+    public function viewReservationTask()
+    {
+        $id = $this->_getParam('id');
+        $reservation = $this->reservations->get($id, $this->user->getId());
+        $listing = $this->listings->getListing($reservation->listing_id);
+
+        $this->transactions = new Model_Transactions();
+        $select = $this->transactions->select();
+        $select->where('id = ?', $reservation->transaction_id);
+        $transaction = $this->transactions->fetchRow($select);
+
+        $this->view->transaction = $transaction;
+        $this->view->listing     = $listing;
+        $this->view->user        = $this->user->getData();
+        $this->view->reservation = $reservation;
     }
 }

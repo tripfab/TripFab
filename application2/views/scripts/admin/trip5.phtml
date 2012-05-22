@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<title><?= $this->trip->title ?> - Admin | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+        <link type="text/css" rel="stylesheet" href="/css5/reset.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+  		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />
+  		<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]--> 
+		<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+    	<script type="text/javascript" src="/js2/jquery.jeditable.mini.js?v=<?= $this->cssVC ?>"></script>
+        
+ <style>
+ .editable input[type=text] {
+  color: #F00;
+  font-weight: bold;
+  width:200px;
+}
+ </style>       
+			<script>
+				$(document).ready(function() {
+					$('a.lbc').fancybox({
+						padding: 0,
+						overlayColor: '#FFF',
+						overlayOpacity: '0.7',
+						showCloseButton: 'false',
+					});
+            		$("#report_tabs").tabs();
+					
+					$('#activate .btn-1').click(function(){
+						$id = $(this).parents('form').find('input[name=tripid]').val();
+						$action = 1;
+						$.ajax({
+							url:'/ajax/tripstatus',
+							type:'post',
+							data: {
+								id:$id,
+								act:$action,
+							},
+							success:function(res){
+								if(res == 'success') {
+									$.cookie('alert','Changes saved');
+									window.location.reload();
+								} else {
+									showError('Something went wrong');
+								}
+							},
+							error:function(){
+								showError('Something went wrong');
+							}
+						});
+					});
+					
+					$('#deactivate .btn-1').click(function(){
+						$id = $(this).parents('form').find('input[name=tripid]').val();
+						$action = 0;
+						$.ajax({
+							url:'/ajax/tripstatus',
+							type:'post',
+							data: {
+								id:$id,
+								act:$action,
+							},
+							success:function(res){
+								if(res == 'success') {
+									$.cookie('alert','Changes saved');
+									window.location.reload();
+								} else {
+									showError('Something went wrong');
+								}
+							},
+							error:function(){
+								showError('Something went wrong');
+							}
+						});
+					});
+					
+				});
+			</script>
+	</head>
+	<body>
+		<div class="w1">
+    		<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
+			
+			<div class="w3_admin">
+				<div class="sub_menu">
+					<h2>
+					<?php if($this->trip->active == 1): ?>
+                    <span class="lstngActv">Active</span>
+                    <?php else: ?>
+                    <span class="lstngInct">Inactive</span>
+                    <?php endif ?>
+                    Manage. <span>Itinerary Items</span></h2>
+					<a class="btn-10" href="/admin/trips/preview/<?php echo $this->trip->id?>" target="_blank">Trip Preview</a>	
+                    <a href="#activate" class="btn-10 act lbc" id="act-btn-342"<?php echo $this->trip->active ? 'style="display:none"' : '';?> >Activate Trip</a>
+            		<a href="#deactivate" class="btn-10 deact lbc" id="deact-btn-342" <?php echo !$this->trip->active ? 'style="display:none"' : '';?>>Deactivate Trip</a>
+				</div><!--SUB_MENU-->
+            </div><!--W3-->
+				
+				<div id="trips" class="listing-wrapper wrapper">
+					<div class="listing-content">
+						<div class="left">
+							<ul>
+								<li><a href="<?php echo $this->url(array('page'=>1))?>">General Information</a></li>
+								<li><a href="<?php echo $this->url(array('page'=>2))?>">Trip Facts</a></li>
+								<li><a href="<?php echo $this->url(array('page'=>3))?>">Photos</a></li>
+								<li><a href="<?php echo $this->url(array('page'=>4))?>">Trip Details</a></li>
+								<li class="current"><a href="<?php echo $this->url(array('page'=>5))?>">Itinerary</a></li>
+							</ul>
+						</div>
+						<!-- closes left -->
+						<div class="right">
+							<?php if($this->successMessage): ?>
+							<script type="text/javascript">
+                                showAlert("Your changes have been saved");
+                            </script>
+                            <?php endif ?>	
+							<div class="lstng-details">
+								<div class="profile-items">
+								<div class="item-wrppr">
+									<h3>Trip Facts <a href="/admin/trips" class="back">Back to Trips</a></h3>								
+								</div><!-- closes item-wrppr -->
+								</div><!--PROFILE-ITEMS-->	
+								
+								<div class="heading">
+									<a href="" class="previous" id="slide_prev">Previous Day</a>
+									<div class="day">
+										<span id="day_title"><h3>Day 1</h3></span>
+										<p><div class="editable" id="day_1"><?php echo $this->tripDays[1]?></div></p>
+									</div><!--DAY-->
+									<a href="" class="next" id="slide_next">Next Day</a>
+								</div><!--HEADING-->
+								<div id="slider">
+                                <?php if(count($this->items)):?>
+                                	<?php $slide =0;?>
+									<?php foreach($this->items as $day=>$listings):?>
+                                        <div class="itinerary" id="<?php echo $day?>">
+                                		<?php if(count($listings)):?>
+											<?php foreach($listings as $listing):?>
+                                            <div class="single" id="d<?php echo $listing->id?>">
+                                                <span class="star"><?php echo $this->thumbnail(38, $listing->image, '', '1:1'); ?><!--<img src="<?php echo $listing->image?>" width="38" height="38" alt="" />--></a></span>
+                                                <span class="name"><?php echo $listing->title?></span>
+                                                <span class="type"><?php echo $listing->type_name?></span>
+                                                <span class="time"><?php echo $listing->start == '00:00:00' ? 'N/A' : @date("h:i A", strtotime($listing->start))?> - <?php echo $listing->end == '00:00:00' ? 'N/A' : @date("h:i A", strtotime($listing->end))?></span>
+                                                <a href="javascript://" onclick="deleteItem(<?php echo $listing->id?>)" class="delete">Delete</a>
+                                                <a href="<?php echo $this->url(array('page'=>6, 'sort'=>$this->trip->id, 'seq'=>$listing->id))?>" class="edit">Edit Info</a>
+                                            </div><!--SINGLE-->
+                                            <?php endforeach;?>
+										<?php else:?>
+                                                <div class="single" id="d1">
+                                                <center>No listing added for this day</center>
+                                                </div>
+                                       	<?php endif;?>
+                                        <div class="add-listing">
+                                            <a href="<?php echo $this->url(array('task'=>'edit','page'=>6, 'sort'=>$this->trip->id, 'seq'=>0, 'q'=>$day))?>" class="btn">Add Listing</a>
+                                        </div>
+	                                	</div><!--ITINERARY-->
+                                    <?php endforeach;?>
+                                <?php else:?>
+                                    <div class="itinerary" id="1">
+                                        <div class="single" id="d1">
+                                   		<center>No Listing added</center>
+                                        </div>
+                                        <div class="add-listing">
+                                            <a href="<?php echo $this->url(array('task'=>'edit','page'=>6, 'sort'=>$this->trip->id, 'seq'=>0, 'q'=>@$day))?>" class="btn">Add Listing</a>
+                                        </div>
+	                                </div><!--ITINERARY-->
+                                    
+								<?php endif;?>
+
+
+
+                                </div> <!-- slider-->
+                                
+							</div>
+							<!-- closes lstng-details -->
+							<div class="foot">
+								<input type="submit" class="btn-1 noclean" value="Save Changes" />
+								<a href="">Deactivate Listing</a>
+							</div>
+							<!-- closes foot -->
+						</div>
+						<!-- closes right -->
+					</div>
+					<!-- closes listing-content -->
+				</div>
+					
+			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+			<?php echo $this->partial('admin_partials/trip.phtml', array('title'=>$this->trip->title, 'tripId'=>$this->trip->id)); ?>
+		</div>
+		<!-- closes w1 -->
+		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+        
+        <script>
+			var dayTitle = <?php echo json_encode($this->tripDays)?>;
+			var slide = <?php echo $this->slide?>;
+			$('#slider').cycle({
+				fx:     'scrollRight',
+				timeout: 0,
+				speed:  'fast',
+				next: '#slide_next',
+				prev: '#slide_prev',
+				after: onAfter, 
+				startingSlide: slide
+			});
+			function onAfter() { 
+				$('#day_title').html("<h3> Day " + this.id + "</h3>"); 
+				$('.editable').html(dayTitle[this.id]);
+				$('.editable').attr('id', 'day_' +this.id);
+			}
+			
+			function deleteItem(item){
+				if(confirm('Are you sure you want to delete this listing')) {
+					var url;
+					url = '/ajax/tripitem/?item='+ item;
+			
+					$.getJSON(url, function(jsonData) {
+						if(jsonData.attempt == 'success'){
+							$("#d"+item).hide();
+						}
+					});
+				}
+			}
+			
+			
+			$(document).ready(function() {
+				$('.editable').editable(function(value, settings) {
+					var id = $(this).attr('id').split('_').pop();
+					$.post('/ajax/ttitle', { day: id, text: value, trip:<?php echo $this->trip->id?> } ); 
+					dayTitle[id] = value;
+					 
+					 
+					return(value);
+				  }, { 
+					 style: 'display: inline',
+					 width:200,
+					 tooltip   : 'Click to edit...',
+					 submit    : 'Edit',
+				 });
+				 
+				 
+
+			});
+		</script>
+	</body>
+</html>

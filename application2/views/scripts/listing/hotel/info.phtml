@@ -3,6 +3,35 @@
 .profile-items .item p.check label { float: none; }
 .profile-items .item p.check input { vertical-align:baseline }
 input.schname { float:none !important; width:90px !important; }
+.item { position:relative;}
+.item .help {
+	position:absolute;
+	top:13px;
+	left:-35px;}
+.item .help a.eye {
+	display:block;
+	background:url(/images2/eye.png) no-repeat top left;
+	width:18px;
+	height:12px;
+	text-indent:-9999px;
+	cursor:pointer;}
+	.item .help:hover a.eye {
+		background-position:left -12px;}
+.item.first .help {
+	top:0px;}
+	.item .help a.tooltip3 {
+		background:url(/images2/help-tooltip-bg.png) top left no-repeat;
+		left: 17px;
+		padding:11px 12px;
+		position:absolute;
+		top:-102px;
+		z-index:1000;
+		display:none;}
+	.item .help:hover a.tooltip3 {
+		display:block;}
+
+.profile-items {
+	overflow:visible;}
 </style>
 <?php $durations = array(1,2,3,4,5,6,7,8,9,10,15,30,45,); ?>
 <?php $hours	 = array('1:00','2:00','3:00','4:00','5:00','6:00','7:00','8:00','9:00','10:00','11:00','12:00',); ?>
@@ -32,34 +61,18 @@ input.schname { float:none !important; width:90px !important; }
 			<div class="item-ttl">
 				Basic Information
 			</div><!-- closes item ttl -->
-			<div class="item first">
+			<div class="item first last">
 				<input placeholder="Hotel's name" type="text" class="noclean limitcc" name="title" rel="60" value="<?= $_POST['title'] ?>" />
 				<h4>Title</h4>
 				<span>Hotel name<br />
                 <span class="charsLeftInp"></span> Character Left</span>
-			</div><!-- closes item -->
-			<div class="item last">
-                <textarea placeholder="Write a nice description about the hotel" name="description" class="noclean limitcc" rel="200" cols="30" rows="1"><?= $_POST['description'] ?></textarea>
-				<h4>Short Description</h4>
-				<span>Write a brief description for your hotel<br /><br />
-                You have <span class="charsLeftTxt">200</span> character left</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-name.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-name.png" class="tooltip3">
+                    <img src="https://static.tripfab.com/images2/help/small-hot-general-name.png" /></a>
+                </div>
 			</div><!-- closes item -->
 			<div class="clear"></div>									
-		</div><!-- closes item-wrppr -->
-		
-		<div class="item-wrppr">
-			<div class="item-ttl">
-				Main Picture
-			</div><!-- closes item ttl -->
-			<div class="item last first">
-				<div class="picture">
-                	<?= $this->thumbnail('58', $this->listing->image, '','1:1') ?>
-					<input type="file" id="file_upload" name="file_upload" />
-				</div>
-				<h4>Picture Requirements</h4>
-				<span>Should be square, preferably 100x100 pixels, <br />and in JPEG, GIF, or PNG format.</span>
-			</div><!-- closes item -->
-			<div class="clear"></div>
 		</div><!-- closes item-wrppr -->
         
         <div class="item-wrppr">
@@ -122,6 +135,11 @@ input.schname { float:none !important; width:90px !important; }
                 </div><!-- closes selects -->
                 <h4>Check In</h4>
                 <span>Select the checkin hour</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-checkin.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-checkin.png" class="tooltip3">
+                    <img src="https://static.tripfab.com/images2/help/small-hot-general-checkin.png" /></a>
+                </div>
             </div><!-- closes item -->
             <div class="item">
                 <div class="selects">                    
@@ -149,6 +167,11 @@ input.schname { float:none !important; width:90px !important; }
                 </div><!-- closes selects -->
                 <h4>Check Out</h4>
                 <span>Select the checkout hour</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-checkout.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-checkout.png" class="tooltip3">
+                    <img src="https://static.tripfab.com/images2/help/small-hot-general-checkout.png" /></a>
+                </div>
             </div><!-- closes item -->
             <div class="item">
 				<div class="inner-container">
@@ -189,6 +212,11 @@ input.schname { float:none !important; width:90px !important; }
 				</div><!-- closes inner-container -->
 				<h4>Category</h4>
 				<span>Select categories</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-category.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-category.png" class="tooltip3">
+                    <img src="https://static.tripfab.com/images2/help/small-hot-general-category.png" /></a>
+                </div>
 			</div><!-- closes item -->
             <!--
 			<div class="item last">
@@ -256,12 +284,17 @@ input.schname { float:none !important; width:90px !important; }
 				</div><!-- closes inner-container -->
 				<h4>Landscapes</h4>
 				<span>Select Landscapes</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-landscape.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-landscape.png" class="tooltip3">
+                    <img src="https://static.tripfab.com/images2/help/small-hot-general-landscape.png" /></a>
+                </div>
 			</div><!-- closes item -->
 			<div class="clear"></div>								
         </div><!-- closes item-wrppr -->
     </div><!-- closes profile-items -->
     <div class="foot">
-        <input type="submit" class="btn-1" value="Save Changes" />
+        <input type="submit" class="btn-1 noclean" value="Save Changes" />
         <a href="/provider/listings/desactivate/<?= $this->listing->id ?>">Delete Listing</a>
     </div><!-- closes foot -->
     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
@@ -295,34 +328,19 @@ input.schname { float:none !important; width:90px !important; }
 			<div class="item-ttl">
 				Basic Information
 			</div><!-- closes item ttl -->
-			<div class="item first">
-				<input placeholder="Hotel's name" type="text" class="noclean limitcc" name="title" rel="60" value="<?= $this->listing->title ?>" />
+			<div class="item first last">
+            	<?php $title = ($this->listing->title == "Untitled Listing") ? '' : $this->listing->title; ?>
+				<input tabindex="1" placeholder="Hotel's name" type="text" class="noclean limitcc" name="title" rel="60" value="<?= $title ?>" />
 				<h4>Title</h4>
 				<span>Hotel name<br />
                 <span class="charsLeftInp"></span> Character Left</span>
-			</div><!-- closes item -->
-			<div class="item last">
-                <textarea placeholder="Write a nice description about your hotel" name="description" class="noclean limitcc" rel="200" cols="30" rows="1"><?= $this->listing->description ?></textarea>
-				<h4>Short Description</h4>
-				<span>Write a nice brief for your hotel<br /><br />
-                You have <span class="charsLeftTxt"></span> Character left</span>
-			</div><!-- closes item -->
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-name.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-name.png" class="tooltip3">
+                    <img src="https://static.tripfab.com/images2/help/small-hot-general-name.png" /></a>
+                </div>
+			</div><!-- closes item --> 
 			<div class="clear"></div>									
-		</div><!-- closes item-wrppr -->
-		
-		<div class="item-wrppr">
-			<div class="item-ttl">
-				Main Picture
-			</div><!-- closes item ttl -->
-			<div class="item last first">
-				<div class="picture">
-                	<?= $this->thumbnail('58', $this->listing->image, '','1:1') ?>
-					<input type="file" id="file_upload" name="file_upload" />
-				</div>
-				<h4>Picture Requirements</h4>
-				<span>Should be square, preferably 100x100 pixels, <br />and in JPEG, GIF, or PNG format.</span>
-			</div><!-- closes item -->
-			<div class="clear"></div>
 		</div><!-- closes item-wrppr -->
         
         <div class="item-wrppr">
@@ -360,10 +378,16 @@ input.schname { float:none !important; width:90px !important; }
                 Details
             </div><!-- closes item ttl -->
             <div class="item first">
-                <div class="selects">                	
+                <div class="selects">
                     <select name="checkin_hour">
                     	<?php foreach($hours as $h): ?>
-                        <?php if($h == (date('g:i', strtotime($this->listing->checkin)))): ?>
+                        <?php if(!is_null($this->listing->checkin) and $this->listing->checkin != '00:00:00'): ?>
+							<?php if($h == (date('g:i', strtotime($this->listing->checkin)))): ?>
+                            <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                            <?php else: ?>
+                            <option value="<?= $h ?>"><?= $h ?></option>
+                            <?php endif ?>
+                        <?php elseif($h == '2:00'): ?>
                         <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
                         <?php else: ?>
                         <option value="<?= $h ?>"><?= $h ?></option>
@@ -371,26 +395,39 @@ input.schname { float:none !important; width:90px !important; }
                         <?php endforeach ?>
                     </select>
                     <select name="checkin_time">
-                    	<?php if('AM' == (date('A', strtotime($this->listing->checkin)))): ?>
+                    	<?php if(!is_null($this->listing->checkin) and $this->listing->checkin != '00:00:00' and 
+									'AM' == (date('A', strtotime($this->listing->checkin)))): ?>
                         <option selected="selected" value="AM">AM</option>
                         <option value="PM">PM</option>
-                        <?php elseif('PM' == (date('A', strtotime($this->listing->checkin)))): ?>
+                        <?php elseif(!is_null($this->listing->checkin) and $this->listing->checkin != '00:00:00' and 
+										'PM' == (date('A', strtotime($this->listing->checkin)))): ?>
                         <option value="AM">AM</option>
                         <option selected="selected" value="PM">PM</option>
                         <?php else: ?>
                         <option value="AM">AM</option>
-                        <option value="PM">PM</option>                        
+                        <option selected="selected" value="PM">PM</option>                        
                         <?php endif ?>
                     </select>
                 </div><!-- closes selects -->
                 <h4>Check In</h4>
                 <span>Select the checkin hour</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-checkin.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-checkin.png" class="tooltip3">
+                    <img src="https://static.tripfab.com/images2/help/small-hot-general-checkin.png" /></a>
+                </div>
             </div><!-- closes item -->
             <div class="item">
-                <div class="selects">                    
+                <div class="selects">
                     <select name="checkout_hour">
                     	<?php foreach($hours as $h): ?>
-                        <?php if($h == (date('g:i', strtotime($this->listing->checkout)))): ?>
+                        <?php if(!is_null($this->listing->checkout) and $this->listing->checkout != '00:00:00'): ?>
+							<?php if($h == (date('g:i', strtotime($this->listing->checkout)))): ?>
+                            <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
+                            <?php else: ?>
+                            <option value="<?= $h ?>"><?= $h ?></option>                        
+                            <?php endif ?>
+                        <?php elseif($h == '12:00'): ?>
                         <option selected="selected" value="<?= $h ?>"><?= $h ?></option>
                         <?php else: ?>
                         <option value="<?= $h ?>"><?= $h ?></option>
@@ -398,20 +435,27 @@ input.schname { float:none !important; width:90px !important; }
                         <?php endforeach ?>
                     </select>
                     <select name="checkout_time">
-                        <?php if('AM' == (date('A', strtotime($this->listing->checkout)))): ?>
+                        <?php if(!is_null($this->listing->checkout) and $this->listing->checkout != '00:00:00' and 
+									'AM' == (date('A', strtotime($this->listing->checkout)))): ?>
                         <option selected="selected" value="AM">AM</option>
                         <option value="PM">PM</option>
-                        <?php elseif('PM' == (date('A', strtotime($this->listing->checkout)))): ?>
+                        <?php elseif(!is_null($this->listing->checkout) and $this->listing->checkout != '00:00:00' and 
+										'PM' == (date('A', strtotime($this->listing->checkout)))): ?>
                         <option value="AM">AM</option>
                         <option selected="selected" value="PM">PM</option>
                         <?php else: ?>
                         <option value="AM">AM</option>
-                        <option value="PM">PM</option>                        
+                        <option selected="selected" value="PM">PM</option>                        
                         <?php endif ?>
                     </select>
                 </div><!-- closes selects -->
                 <h4>Check Out</h4>
                 <span>Select the checkout hour</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-checkout.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-checkout.png" class="tooltip3">
+                    <img src="https://static.tripfab.com/images2/help/small-hot-general-checkout.png" /></a>
+                </div>
             </div><!-- closes item -->
             <div class="item">
 				<div class="inner-container">
@@ -434,6 +478,11 @@ input.schname { float:none !important; width:90px !important; }
 				</div><!-- closes inner-container -->
 				<h4>Category</h4>
 				<span>Select categories</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-category.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-category.png" class="tooltip3">
+                    <img src="https://static.tripfab.com/images2/help/small-hot-general-category.png" /></a>
+                </div>
 			</div><!-- closes item -->
 			<!--
 			<div class="item last">
@@ -476,12 +525,17 @@ input.schname { float:none !important; width:90px !important; }
 				</div><!-- closes inner-container -->
 				<h4>Landscapes</h4>
 				<span>Select Landscapes</span>
+                <div class="help">
+                    <a href="/images2/help/big-hot-general-landscape.png" class="eye">help</a>
+                    <a href="/images2/help/big-hot-general-landscape.png" class="tooltip3">
+                    <img src="https://static.tripfab.com/images2/help/small-hot-general-landscape.png" /></a>
+                </div>
 			</div><!-- closes item -->
 			<div class="clear"></div>								
         </div><!-- closes item-wrppr -->
     </div><!-- closes profile-items -->
     <div class="foot">
-        <input type="submit" class="btn-1" value="Save Changes" />
+        <input type="submit" class="btn-1 noclean" value="Save Changes" />
         <a href="/provider/listings/desactivate/<?= $this->listing->id ?>">Delete Listing</a>
     </div><!-- closes foot -->
     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />

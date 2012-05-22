@@ -4,19 +4,16 @@
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
     <title>Trips to <?= $this->country->title ?> | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/trips/country.css" />
-    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js/scrollElement.jQuery.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js2/trips.country.js"></script>
-    <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
-    <script type="text/javascript" src="/js2/trips/country.js"></script>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/trips/country.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1">
@@ -57,7 +54,7 @@
                 <div class="search-item">
                 	<a class="img" href="/trips/view/<?= $trip->id ?>">
                 	<?php // $this->thumbnail(array('width'=>200,'height'=>164), $trip->image, '', '200:164') ?>
-                    <img src="/images/tph/th/Trips-Small-0<?= $i + 1 ?>.jpg" />
+                    <img src="https://static.tripfab.com/images/tph/th/Trips-Small-0<?= $i + 1 ?>.jpg" />
                     </a>
                     <div class="info">
                         <h2><?= $trip->title ?></h2>
@@ -100,7 +97,7 @@
             <div class="sidebar">
             	<div class="scrollContainer">
                 	<div class="widget menu">
-                        <h2><img src="/images2/ico-5.png" alt="" />Categories</h2>
+                        <h2><img src="https://static.tripfab.com/images2/ico-5.png" alt="" />Categories</h2>
                         <ul>
                             <?php for($i=0;$i<4;$i++): ?>
                             <li><a href="/trips/search?cat=<?= $this->categories[$i]->id ?>"><?= $this->categories[$i]->label ?></a></li>
@@ -109,7 +106,7 @@
                         </ul>
                     </div><!-- closes widget -->
                     <div class="widget menu">
-                        <h2><img src="/images2/ico-6.png" alt="" />Landscapes</h2>
+                        <h2><img src="https://static.tripfab.com/images2/ico-6.png" alt="" />Landscapes</h2>
                         <ul>
                             <?php for($i=0;$i<4;$i++): ?>
                             <li><a href="/trips/search?land=<?= $this->landscapes[$i]->id ?>"><?= $this->landscapes[$i]->name ?></a></li>
@@ -118,7 +115,7 @@
                         </ul>
                     </div><!-- closes widget -->
                     <div class="widget menu">
-                        <h2><img src="/images2/ico-6.png" alt="" />Regions</h2>
+                        <h2><img src="https://static.tripfab.com/images2/ico-6.png" alt="" />Regions</h2>
                         <ul>
                             <?php for($i=0;$i<4;$i++): ?>
                             <li><a href="/trips/search?region=<?= $this->regions[$i]->id ?>"><?= $this->regions[$i]->title ?></a></li>
@@ -140,7 +137,7 @@
 		<ul>
         	<?php foreach($this->categories as $c): ?>
         	<li><a href="/trips/search?cat=<?= $c->id ?>">
-            <img src="/images2/placeholder-icon.gif" />
+            <img src="https://static.tripfab.com/images2/placeholder-icon.gif" />
             <span><?= $c->label ?></span></a></li>
             <?php endforeach ?>
         </ul>
@@ -149,7 +146,7 @@
 		<ul>
         	<?php foreach($this->landscapes as $c): ?>
         	<li><a href="/trips/search?land=<?= $c->id ?>">
-            <img src="/images2/placeholder-icon.gif" />
+            <img src="https://static.tripfab.com/images2/placeholder-icon.gif" />
             <span><?= $c->name ?></span></a></li>
             <?php endforeach ?>
         </ul>
@@ -158,12 +155,20 @@
 		<ul>
         	<?php foreach($this->regions as $c): ?>
         	<li><a href="/trips/search?region=<?= $c->id ?>">
-            <img src="/images2/placeholder-icon.gif" />
+            <img src="https://static.tripfab.com/images2/placeholder-icon.gif" />
             <span><?= $c->title ?></span></a></li>
             <?php endforeach ?>
         </ul>
     </div>
 </div>
+<script type="text/javascript" src="/js/jquery.min.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js/jquery-ui.min.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js/scrollElement.jQuery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/jquery.input.value.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/trips.country.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/common.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/trips/country.js?v=<?= $this->cssVC ?>"></script>
 
 </body>
 </html>

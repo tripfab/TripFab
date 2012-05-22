@@ -1,0 +1,18 @@
+<?php $yes = false; ?>
+<?php foreach($this->details as $d) if($d->type == 3) $yes = true; ?>
+<div id="all-restrictions" class="lb">
+    <div class="top">Hotel Restrictions</div>
+    <div class="mid">
+        <ul>
+        	<?php if($yes): ?>
+            <?php foreach($this->details as $d): ?>
+			<?php if($d->type == 3): ?>
+            <li><?= $d->text ?></li>
+            <?php endif ?>
+            <?php endforeach ?>
+            <?php else: ?>
+            <li>No restriction defined by the owner</li>
+            <?php endif ?>
+        </ul>
+    </div><!--MID-->
+</div><!--ALL-RESTRICTIONS-->

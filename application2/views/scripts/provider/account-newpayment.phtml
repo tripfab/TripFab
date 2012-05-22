@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content="noindex,nofollow" name="robots" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title><?= $this->user->name ?> - New Bank Account | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+</head>
+<body>
+<div class="w1 profile">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
+    <div class="w2">
+        <div class="wrapper user-backend">
+            <?= $this->partial('partials/vendormainmenu.phtml', 
+			array('notifications'=> $this->pendingSettings,'active'=>'Password','parentActive'=>'Account')); ?>            
+            <h2 class="title">Add Bank Account <a href="/provider/account/payments" class="back">&larr; Back to Bank Accounts</a></h2>
+
+            <div class="vendor-profile" id="u-payments">
+                <form method="post" action="">
+                    <div class="profile-items">
+                        <div class="item-wrppr">
+                            <div class="item-ttl"> 
+                            	Banck Account Information <p>Please enter your bank account information below.</p> 
+                            </div><!-- closes item ttl -->
+                            <div class="item">
+                                <select name="bank_id">
+                                	<?php foreach($this->banks as $bank): ?>
+                                    <option value="<?= $bank->id ?>"><?= $bank->name ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                                <h4>Bank Name</h4>
+                                <span>Select the bank you want to add an account</span> 
+                            </div><!-- closes item -->
+                            <div class="item">
+                                <input type="text" name="legalid" />
+                                <h4>Legal ID</h4>
+                                <span>No dashes or spaces</span> 
+                            </div><!-- closes item -->
+                            <div class="item">
+                                <input type="text" name="holder" />
+                                <h4>Account Holder</h4>
+                                <span>Enter your name exactly as it appears on your bank account</span> 
+                            </div><!-- closes item -->
+                            <div class="item">
+                                <input type="text" name="number" />
+                                <h4>Account Number</h4>
+                                <span>No dashes or spaces</span>			
+                            </div><!-- closes item -->
+                            <div class="clear"></div>
+                        </div><!-- closes item-wrppr -->
+                    </div><!-- closes profile-items -->
+                    <div class="foot">
+                        <input type="submit" class="btn-1" value="Add Bank Account" />
+                    </div><!-- closes foot -->
+                    <input type="hidden" name="userids" value="<?= $this->user->id ?>" />
+                    <input type="hidden" name="usertokens" value="<?= $this->user->token ?>" />
+                    <input type="hidden" name="formid" value="<?= md5('add_bankaccount_form') ?>" />
+                    <input type="hidden" name="_task" value="<?= md5('add_account') ?>" />
+                </form>
+            </div><!-- closes vendor-profile --> 
+        </div><!-- closes user-backend --> 
+    </div><!-- closes w2 -->
+    <?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('a.lbc').fancybox({
+		padding: 0,
+		overlayColor:'#FFF',
+		overlayOpacity:0.7
+	});
+});
+</script>
+</body>
+</html>

@@ -12,7 +12,7 @@
                     <span>Days</span>
                 </div><!-- closes ball -->
                 <div class="ball">
-                    <strong><?= $this->trip->days ?></strong>
+                    <strong><?= $this->trip->adults + $this->trip->kids ?></strong>
                     <span>People</span>
                 </div><!-- closes ball -->
                 <div class="ball last">
@@ -25,28 +25,31 @@
                 <table cellpadding="0" cellspacing="0" border="0">
                     <tbody>
                         <tr>
-                            <td><img src="images/ico-26.png" alt="" /><span>Activities</span></td>
+                            <td><img src="https://static.tripfab.com/images/ico-26.png" alt="" /><span>Activities</span></td>
                             <td><strong><?= $this->counter[5] ?></strong></td>
                         </tr>
                         <tr>
-                            <td><img src="images/ico-27.png" alt="" /><span>Entertainment</span></td>
+                            <td><img src="https://static.tripfab.com/images/ico-27.png" alt="" /><span>Entertainment</span></td>
                             <td><strong><?= $this->counter[7] ?></strong></td>
                         </tr>
                         <tr>
-                            <td><img src="images/ico-28.png" alt="" /><span>Tourists Sights</span></td>
+                            <td><img src="https://static.tripfab.com/images/ico-28.png" alt="" /><span>Tourists Sights</span></td>
                             <td><strong><?= $this->counter[4] ?></strong></td>
                         </tr>
                         <tr>
-                            <td><img src="images/ico-29.png" alt="" /><span>Restaurants</span></td>
+                            <td><img src="https://static.tripfab.com/images/ico-29.png" alt="" /><span>Restaurants</span></td>
                             <td><strong><?= $this->counter[2] ?></strong></td>
                         </tr>
                         <tr>
-                            <td><img src="images/ico-30.png" alt="" /><span>Hotels</span></td>
+                            <td><img src="https://static.tripfab.com/images/ico-30.png" alt="" /><span>Hotels</span></td>
                             <td><strong><?= $this->counter[5] ?></strong></td>
                         </tr>
                     </tbody>
-                </table>                <div class="clear"></div>
+                </table>
+                <div class="clear"></div>
             </li>
-        </ul>        <strong>$<?= $this->trip->price ?></strong>        <span>Grand Total</span>
+        </ul>
+        <strong>$<?= $this->trip->price ?></strong>
+        <span>Grand Total</span>
     </div><!-- closes content -->
 </div><!-- closes smmr -->

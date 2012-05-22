@@ -4,20 +4,17 @@
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
     <title><?= $this->trip->title ?> : Check Availability and Price | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
-	<link type="text/css" rel="stylesheet" href="/css2/calendar/jquery-ui-1.8.16.custom.css" />
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.scrollTo.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
-    <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-    <script type="text/javascript" src="/js/scrollElement.jQuery.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
-    <script type="text/javascript" src="/js2/trips/checkprices.js"></script>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" media="screen" />
+	<link type="text/css" rel="stylesheet" href="/css2/calendar/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+
 </head>
 <body>
 <div class="w1">
@@ -37,7 +34,7 @@
             </div><!-- closes checkout-header -->
             <div class="checkout-wrapper">
                 <div class="trip-settings">
-                    <form action="/trips/checkprice/<?= $this->trip->id ?>" method="post">
+                    <form action="/en-US/trips/checkprice/<?= $this->trip->id ?>" method="post">
                         <fieldset>
                             <label>Start Date</label>
                             <input type="text" value="<?= $_POST['date'] ?>" class="calendar_start" name="date" />
@@ -128,22 +125,22 @@
                                         <strong>$<?= $cart->rate ?></strong>
                                         <span><?= $cart->rate_description ?></span>
                                     </li>
-                                    <?php if($cart->additional > 0): ?>
+                                    <?php if(isset($cart->additional) && $cart->additional > 0): ?>
                                     <li>
                                         <strong>$<?= $cart->additional ?></strong>
                                         <span><?= $cart->additional_description ?></span>
                                     </li>
-                                    <?php endif ?>
+                                    <?php endif ?>                                    
                                     <li>
-                                    	<strong>$<?= $cart->subtotal ?></strong>
+                                    	<strong>$<?= $this->formatnumber($cart->subtotal) ?></strong>
                                         <span>Subtotal</span>
                                     </li>
                                     <li>
-                                    	<strong>$<?= $cart->taxes ?></strong>
+                                    	<strong>$<?= $this->formatnumber($cart->taxes) ?></strong>
                                         <span>Taxes and Fees</span>
                                     </li>
                                     <li>
-                                    	<strong>$<?= $cart->total ?></strong>
+                                    	<strong>$<?= $this->formatnumber($cart->total) ?></strong>
                                         <span>Total</span>
                                     </li>
                                 </ul>
@@ -189,7 +186,7 @@
                                 <?php $class = ($cart->available) ? '' : 'error' ?>
                                 <li class="<?= $class ?>">
                                     <a href="#item-<?= $key ?>"><span>&larr;</span> <?= $cart->listing_title ?>
-                                    <?php if($cart->available): ?><strong>$<?= $cart->total ?></trong><?php endif ?></a>
+                                    <?php if($cart->available):?> <strong>$<?= $this->formatnumber($cart->total) ?></strong><?php endif ?></a>
                                 </li>
                                 <?php endforeach ?>
                                 <?php foreach($this->items2 as $key => $cart): ?>
@@ -199,9 +196,9 @@
                                 <?php endforeach ?>
                             </ul>
                             <div class="total">
-                            <form action="/cart/purchasetrip" method="post">
+                            <form action="/en-US/cart/purchasetrip" method="post">
                                 <input type="submit" class="btn-2" value="Process to Checkout" />
-                                <span>Trip Total <strong>$<?= $this->bigtotal ?></strong></span>
+                                <span>Trip Total <strong>$<?= $this->formatnumber($this->bigtotal) ?></strong></span>
                                 <input type="hidden" name="checkin" value="<?= $_POST['date'] ?>" />
                                 <input type="hidden" name="kids" value="<?= $_POST['kids'] ?>" />
                                 <input type="hidden" name="adults" value="<?= $_POST['adults'] ?>" />
@@ -218,5 +215,14 @@
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript" src="/js/jquery.min.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js/jquery-ui.min.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/jquery.scrollTo.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/jquery.input.value.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/jquery.elastic.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js/scrollElement.jQuery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/common.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/trips/checkprices.js?v=<?= $this->cssVC ?>"></script>
 </body>
 </html>

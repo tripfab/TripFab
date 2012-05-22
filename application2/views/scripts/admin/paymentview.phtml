@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+<title>Payment Details - Admin | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+<link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+<link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+<link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />
+<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+
+</head>
+<body>
+<div class="w1">
+<div class="big-message green">
+	<div class="wrapper"><img src="https://static.tripfab.com/images2/cleardot.gif" alt=""> <span>Your changes have been saved!</span></div>
+	<!-- closes wrapper --> 
+</div>
+<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
+<div class="w3_admin">
+	<div class="sub_menu">
+		<h2><?php echo $this->vendorName?>. <span> Reservation Details</span></h2>
+		<?php if($this->mode == 'pending'):?>
+        	<a href="<?php echo $this->url(array('task'=>'paid'))?>" class="btn-10">Mark as Paid</a>
+        <?php endif;?>
+		<span class="pending_amount"><?php echo $this->mode=='pending'? 'Pending Payment': 'Paid Payment'?> $<?php echo $this->amount?></span>
+	</div><!--SUB_MENU-->
+</div>
+<!--W3-->
+<div class="all_listing">
+	<div class="detailsPayments">
+		<div class="ttl">
+			<?php if($this->mode=='pending'):?>
+            <h4>There are <?php echo $this->total?> reservations pending to pay</h4>
+            <?php else:?>
+             <h4>There are <?php echo $this->total?> reservations paid on <?php echo date('M d, Y', strtotime($this->date))?></h4>
+            <?php endif;?>
+			<a href="javascript:history.back(1);"> &larr; Back to Payments</a>
+		</div><!--TTL-->
+		<?php foreach($this->reservations as $reservation):?>
+		<div class="pending_reservation">
+			<div class="left">
+            <?php echo $reservation->listing_name ?>
+			</div><!--LEFT-->
+			<div class="details">
+				<table cellpadding="0" width="300" border="0">
+					<tr>
+						<td>Type</td>
+						<td class="res"><?php echo $reservation->listing_type ?></td>
+					</tr>
+					<tr>
+						<td>Reserve Code</td>
+						<td class="res"><?php echo $reservation->code ?></td>
+					</tr>
+					<tr>
+						<td>Traveler</td>
+						<td class="res"><?php echo $reservation->vendor_name ?></td>
+					</tr>
+
+					<tr>
+						<td>Check in</td>
+						<td class="res"><?php echo date('M d, Y', strtotime($reservation->checkin)) ?></td>
+					</tr>
+					<tr>
+						<td>Check out</td>
+						<td class="res"><?php echo date('M d, Y', strtotime($reservation->checkout)) ?></td>
+					</tr>
+					<tr>
+						<td>Total</td>
+						<td class="res">$<?php echo ($reservation->ammount - ($reservation->ammount * 0.075)) ?></td>
+					</tr>
+				</table>
+				</div><!--DETAILS-->
+			<div class="clear"></div>
+		</div><!--PENDING_RESERVATION-->
+		<?php endforeach;?>
+	</div><!--DETAILSPAYMENTS-->
+	
+</div>
+<!--ALL_LISTING-->
+
+			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+		</div>
+
+</body>
+</html>

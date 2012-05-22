@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<title><?= $this->user->name ?> : Partners - Admin | Tripfab.com</title>
+	    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+        <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+        <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+		<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+	    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+		<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+  		<link type="text/css" rel="stylesheet" href="/css2/calendar2/jquery-ui-1.8.16.custom.css?v=<?= $this->cssVC ?>" />
+  		<!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+  		<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
+	    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+		<script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.js?v=<?= $this->cssVC ?>"></script>
+    	<script type="text/javascript" src="/js2/admin/traveller-view.js?v=<?= $this->cssVC ?>"></script>
+			<script>
+				$(document).ready(function() {
+					$('a.lbc').fancybox({
+						padding: 0,
+						overlayColor: '#FFF',
+						overlayOpacity: '0.7',
+						showCloseButton: 'false'
+					});
+            		$("#report_tabs").tabs();
+				});
+			</script>
+		</head>
+		<body>
+			<div class="w1">
+    		<?php echo $this->partial('admin_partials/header.phtml', array()); ?>
+			
+			<div class="w3_admin">
+				<div class="sub_menu">
+					<h2><?php echo $this->user->name?>. <span>Personal Information</span></h2>
+					<a href="#password-reset" class="btn-10 lbc">Reset Password</a>
+                    <a href="#activate" class="btn-10 act lbc" id="act-btn-342"<?php echo $this->user->active==1 ? 'style="display:none"' : '';?> >Activate Partner</a>
+            		<a href="#deactivate" class="btn-10 deact lbc" id="deact-btn-342" <?php echo $this->user->active==0 ? 'style="display:none"' : '';?>>Deactivate Partner</a>
+				</div><!--SUB_MENU-->
+            </div><!--W3-->
+			<div class="all_listing">
+				<div id="user_view" class="listing-wrapper wrapper">
+					<div class="listing-content">
+						<div class="left">
+							<ul>
+								<li id="nav1" class="current"><a href="<?php echo $this->url(array('seq'=>1))?>">General Information</a></li>
+								<li id="nav2"><a href="<?php echo $this->url(array('seq'=>2))?>">Listings</a></li>
+								<li id="nav3"><a href="<?php echo $this->url(array('seq'=>3))?>">Reservations</a></li>
+								<li id="nav4"><a href="<?php echo $this->url(array('seq'=>4))?>">Offers</a></li>
+								<li id="nav5"><a href="<?php echo $this->url(array('seq'=>5))?>">Bank Accounts</a></li>
+								<li id="nav7"><a href="<?php echo $this->url(array('seq'=>7))?>">Staff</a></li>
+							</ul>
+						</div><!-- closes left -->
+						<div class="right">
+                        
+                        
+							<?php if($this->successMessage): ?>
+							<script type="text/javascript">
+                                showAlert("Your changes have been saved");
+                            </script>
+                            <?php endif ?>	
+                        
+							<div class="lstng-details" id="content">
+<h3 class="title">General Information <a href="/admin/users/partners" class="back">Back to Partners</a></h3>
+<div class="block">
+
+<form id="general" name="general" method="POST">
+<div class="single_trip">
+    <div style="float:right; text-align:center;">
+    <div class="image"><img src="<?php echo $this->partnerPhoto?>" width="134" height="134" alt="" id="vendor-photo" /></div><!--IMAGE-->
+    <div class="clear"></div>
+    <a style="color: #60B5F7;" href="javascript://" onclick="$('#fileToUpload').trigger('click');">Change Photo</a>
+    <div style="width:1px; overflow:hidden"><input type="file" name="fileToUpload" id="fileToUpload" onchange="uploadFile();"/></div>
+    <a href="#upload" id="upload_opener" class="lbc"></a>
+
+    </div>
+    <table width="520" border="0" class="info">
+        <tr>
+            <td width="180">Company Name</td>
+			<td width="340"><input type="text" class="noclean"  name="name" value="<?php echo $this->user->name?>" /></td>
+        </tr>
+        <tr>
+            <td width="180">E-mail</td>
+			<td width="340"><input type="text" class="noclean" name="email" value="<?php echo $this->user->email?>" /></td>
+        </tr>
+        <tr>
+            <td width="180">Contact Name</td>
+			<td width="340"><input type="text" class="noclean" name="contact_name" value="<?php echo $this->user->contact_name?>" /></td>
+        </tr>
+        <tr>
+            <td width="180">Partner Since</td>
+			<td width="340"><input type="text" class="noclean" name="created" id="created" value="<?php echo substr($this->user->created, 0, 4) =='0000' ? '' : date('M d, Y', strtotime($this->user->created))?>" /></td>
+        </tr>
+        <tr>            
+            <td width="180">Country</td>
+			<td width="340">
+             <select id="country"  name="country">
+                    <?php foreach($this->countries as $country):?>
+                    <option <?php echo $this->user->country_id == $country->id ? ' selected="selected"' : ''; ?> value="<?php echo @$country->id?>"><?php echo $country->title?></option>
+                    <?php endforeach;?>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td width="180">City</td>
+			<td width="340">           
+                    <select  id="city"  name="city">
+                        <option selected="selected">City</option>
+                    </select>
+			</td>
+        </tr>
+        <tr>
+            <td width="180">Phone</td>
+			<td width="340"><input type="text" class="noclean" name="phone" value="<?php echo $this->user->phone?>" /></td>
+        </tr>
+        <tr>
+            <td width="180">Website</td>
+			<td width="340"><input type="text" class="noclean" name="website" value="<?php echo $this->user->website?>" /></td>
+        </tr>
+
+        
+        
+        <tr>
+            <td width="180">Live Chat (Yahoo!)</td>
+			<td width="340"><input type="text" class="noclean" name="yahoo" value="<?php echo @$this->yahoo?>" /></td>
+        </tr>
+        <tr>
+            <td width="180">Live Chat (Google)</td>
+			<td width="340"><input type="text" class="noclean" name="gmail" value="<?php echo @$this->gmail?>" /></td>
+        </tr>
+        <tr>
+            <td width="180">Language</td>
+			<td width="340">
+            <select name="language" class="language valid">
+                <option value="en-US" <?php echo $this->language=='en-US' ? 'selected="selected"' : ''?>>English</option>
+                <option value="en-ES" <?php echo $this->language=='en-ES' ? 'selected="selected"' : ''?>>Spanish</option>
+			</select>
+            </td>
+        </tr>
+
+
+    </table>
+</div><!--SINGLE_TRIP-->
+<input type="hidden" name="user_id" value="<?php echo $this->user->user_id ?>"/>
+<input class="btn-1" type="submit" value="Update"/>
+</form>
+<br/>
+</div><!--BLOCK-->
+
+
+							</div>
+							<!-- closes lstng-details -->
+						</div>
+						<!-- closes right -->
+					</div>
+					<!-- closes listing-content -->
+				</div><!--USER_VIEW-->
+
+			</div><!--ALL_LISTING-->
+					
+			<?php echo $this->partial('admin_partials/footer.phtml', array()); ?>
+			<?php echo $this->partial('admin_partials/partner.phtml', array('name'=>$this->user->name, 'userId'=>$this->user->user_id)); ?>
+            
+            
+            
+            
+		</div>
+		<!-- closes w1 -->
+		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
+		
+<div class="hidden">
+	<div class="lightbox-2" id="password-reset">
+		<h2>Reset Password</h2>
+		<h3>Do you want to reset the password to Karina Romaine</h3>
+		<div class="buttons">
+			<ul>
+				<li><a href="" class="btn-1">Reset</a></li>
+				<li><a href="" class="btn-10" id="c98">Cancel</a></li>
+			</ul>
+		</div><!--BUTTONS-->
+	</div><!--PASSWORD-RESET-->
+</div><!--HIDDEN--> 
+
+<div class="hidden">
+ <div class="lb activation" id="upload">
+    <div class="top">Partner Photo</div><!--TOP-->
+        <div class="cont" id="marquee">
+            <span>Uploading...</span> <div>15%</div>
+        </div><!--CONT-->
+        <div class="bottom">
+            <a href="javascript://" class="btn-1" id="uc33">Cancel</a>
+        </div><!--BOTTOM-->
+ </div><!--UPLOAD-->
+</div><!--HIDDEN--> 
+
+<script>
+		
+		$("#uc33").click(function(){
+			$.fancybox.close();
+		});
+		$("#c98").click(function(){
+			$.fancybox.close();
+		});
+
+		var cityId = '<?php echo $this->user->city_id;?>';
+		fillCityTrip($('#country').val());
+		screenUpdate();
+		$('select#country').change(function(){
+			fillCityTrip($('#country').val());
+		});
+		
+		$('select#type').change(function(){
+			screenUpdate();
+		});
+		
+		function screenUpdate(){
+			if($('#type').val() == 5){
+				$("#field-wrapper").hide();
+			}
+			else{
+				$("#field-wrapper").show();
+			}
+		}
+		
+		function fillCityTrip(countryId){
+			var url = "/ajax/places/?type=city&c=" + countryId;
+			$("#city" ).children().remove();
+			$("#city" ).append(new Option('Select City', 0, true, true));
+			var selected = false;
+			$.getJSON(url, function(fsdata) {
+				$.each(fsdata.data, function(i,city){ 
+					selected = cityId == city.id ? true : false ;
+					$("#city" ).append(new Option(city.title, city.id, true, selected));
+					
+					
+				});
+			});	
+		}
+		
+		$(document).ready(function() {
+			$('input[name=created]').each(function(){
+				$val = $(this).val();
+				$(this).datepicker({
+					dateFormat:'M dd, yy',
+					defaultDate:$val,
+				});
+			});
+		})
+				
+
+	function fileSelected() {
+	  var file = document.getElementById('fileToUpload').files[0];
+	  if (file) {
+		var fileSize = 0;
+		if (file.size > 1024 * 1024)
+		  fileSize = (Math.round(file.size * 100 / (1024 * 1024)) / 100).toString() + 'MB';
+		else
+		  fileSize = (Math.round(file.size * 100 / 1024) / 100).toString() + 'KB';
+			  
+		document.getElementById('invFileName').innerHTML = file.name + "(" + fileSize + ")";
+	  }
+	}
+	
+	function uploadFile() {
+	  $("#upload_opener").trigger('click');	
+
+	  var fd = new FormData();
+      fd.append("image", document.getElementById('fileToUpload').files[0]);	
+	  
+	  var xhr = new XMLHttpRequest();
+	  xhr.upload.addEventListener("progress", uploadProgress, false);
+	  xhr.addEventListener("load", uploadComplete, false);
+	  xhr.addEventListener("error", uploadFailed, false);
+	  xhr.addEventListener("abort", uploadCanceled, false);
+	  xhr.open("POST", "/admin/users/upload/partner/<?php echo $this->vendorId?>");
+	  xhr.send(fd);
+	}
+	
+	
+	function uploadProgress(evt) {
+	  if (evt.lengthComputable) {
+		var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+		$('#marquee').html(percentComplete.toString() + '%');
+	  }
+	}
+	
+	 function uploadComplete(evt) {
+        /* This event is raised when the server send back a response */
+		var response = JSON.parse(evt.target.responseText);
+		if(response.attempt=='success'){
+			d = new Date();
+			$("#vendor-photo").attr('src', response.desc + '?' + d.getTime());
+			$('#marquee').html('Image uploaded successfully');
+			$('#uc33').text('Close');
+
+		}
+		else{
+			$('#marquee').html('Unable to upload ');
+		}
+     }
+
+     function uploadFailed(evt) {
+		//document.getElementById('invFileName').innerHTML = 'There was an error attempting to upload the file.';
+     }
+
+     function uploadCanceled(evt) {
+		//document.getElementById('invFileName').innerHTML = 'Upload canceled';
+     }
+
+	</script>
+
+
+
+
+	</body>
+</html>

@@ -52,14 +52,12 @@ class TripsController extends Zend_Controller_Action {
         $this->view->json_countries  = $this->json->getCountries();
         
         $this->trips = new WS_TripsService();
-        
         $this->listings = new WS_ListingService();
-        
         $this->users = new WS_UsersService();
-        
         $this->places = new WS_PlacesService();
-        
         $this->view->tags = $this->json->getSerchTerms();
+        
+        $this->view->cssVC = Zend_Registry::get('vc');
     }
     
     public function indexAction()
@@ -113,7 +111,7 @@ class TripsController extends Zend_Controller_Action {
     
     public function countryAction()
     {
-        $this->view->countries = $this->json->getCountryTerms();
+        $this->view->countries  = $this->json->getCountryTerms();
         $this->view->categories = $this->trips->getCategories();
         $this->view->landscapes = $this->trips->getLandscapes();
         $this->view->regions    = $this->places->getPlaces(1);
@@ -121,10 +119,12 @@ class TripsController extends Zend_Controller_Action {
         $idf = $this->_getParam('country');
         $country = $this->places->getPlaceByIdf($idf);
         
-        $trips = $this->trips->getTripsOf($country->id);
+        $trips_count = $this->trips->countTrips($country->id);
+        $this->view->trips_count = $trips_count;
+        
+        $this->view->max = $this->trips->getHighestPrice($country->id);
         
         $this->view->country = $country;
-        $this->view->trips   = $trips;
     }
     
     public function futureAction()
@@ -141,44 +141,24 @@ class TripsController extends Zend_Controller_Action {
     
     public function viewAction()
     {        
-        $trip = $this->_getTrip();
-        $this->view->trip = $trip;
+        $trip            = $this->_getTrip();
+        $trip_highlights = $this->trips->getHighlights($trip->id);
+        $trip_facts      = $this->trips->getFacts($trip->id);
+        $trip_includes   = $this->trips->getIncludes($trip->id); 
+        $cities          = $this->trips->getCities($trip->id);
+        $info            = $this->trips->getInfo($trip->id);
+        $pictures        = $this->trips->getPictures($trip->id);
+        
+        $this->view->trip       = $trip;
+        $this->view->highlights = $trip_highlights;
+        $this->view->facts      = $trip_facts;
+        $this->view->includes   = $trip_includes;
+        $this->view->cities     = $cities;        
+        $this->view->info       = $info;
+        $this->view->pictures   = $pictures;
 
-        $listings = $this->trips->getListingOf($trip->id, false);
+        $listings = $this->trips->getListingOf3($trip->id, false);
         $this->view->listings = $listings;
-        
-        $images = array();
-        foreach($listings as $list){
-            if(!empty($list->image)){
-                if(!in_array($list->image, $images))
-                    $images[] = $list->image;
-            }
-        }
-        
-        $labels = array('','Morning','Afternoon', 'Night');
-        $times = array();
-        $days  = array();
-        $results = array();
-        foreach($listings as $day){
-          if(!in_array($day->day, $days)){
-            $days[] = $day->day;
-            $times[$day->day] = array();
-            foreach($listings as $time){
-              if($time->day == $day->day){
-                if(!in_array($time->time, $times[$day->day])){
-                  $times[$day->day][] = $time->time;
-                  $results[$day->day][$labels[$time->time]] = array();
-                  foreach($listings as $listing){
-                    if(($listing->day == $day->day) and ($listing->time == $time->time)){
-                      $results[$day->day][$labels[$time->time]][] = $listing;
-        }}}}}}}
-        
-        $this->view->listingsbyday = $results;
-        
-        //var_dump($results); die; 
-        
-        
-        $this->view->images = $images;
     }
     
     public function itineraryAction()
@@ -186,21 +166,14 @@ class TripsController extends Zend_Controller_Action {
         $trip = $this->_getTrip();
         $this->view->trip = $trip;
 
-        $listings = $this->trips->getListingOf($trip->id, false);
+        $listings = $this->trips->getListingOf3($trip->id, false);
         $this->view->listings = $listings;
         
-        $images = array();
-        foreach($listings as $list){
-            if(!empty($list->image)){
-                if(!in_array($list->image, $images))
-                    $images[] = $list->image;
-            }
-        }
-        
-        $labels = array('','Morning','Afternoon', 'Night');
-        $times = array();
-        $days  = array();
+        $labels  = array('Stay','Morning','Afternoon', 'Night','Stay');
+        $times   = array();
+        $days    = array();
         $results = array();
+        $stay    = array();
         foreach($listings as $day){
           if(!in_array($day->day, $days)){
             $days[] = $day->day;
@@ -208,19 +181,30 @@ class TripsController extends Zend_Controller_Action {
             foreach($listings as $time){
               if($time->day == $day->day){
                 if(!in_array($time->time, $times[$day->day])){
+                  if(is_null($time->time)) {
+                    $start = explode(':', $time->start); $start = $start[0];
+                    if($start >= 05 and $start <= 11) $time->time = 1;
+                    if($start >= 12 and $start <= 18) $time->time = 2;
+                    if($start >= 18 and $start <= 04) $time->time = 3;
+                  }
                   $times[$day->day][] = $time->time;
                   $results[$day->day][$labels[$time->time]] = array();
                   foreach($listings as $listing){
+                    if(is_null($time->time)) {
+                      $start = explode(':', $listing->start); $start = $start[0];
+                      if($start >= 05 and $start <= 11) $listing->time = 1;
+                      if($start >= 12 and $start <= 18) $listing->time = 2;
+                      if($start >= 18 and $start <= 04) $listing->time = 3;
+                    }
                     if(($listing->day == $day->day) and ($listing->time == $time->time)){
                       $results[$day->day][$labels[$time->time]][] = $listing;
         }}}}}}}
         
+        $this->view->stay = $stay;
+        
         $this->view->listingsbyday = $results;
         
-        //var_dump($results); die; 
-        
-        
-        $this->view->images = $images;
+        //var_dump($results); die;
     }
     
     public function newAction()
@@ -360,7 +344,7 @@ class TripsController extends Zend_Controller_Action {
             
             $listings = $this->trips->getListingOf($trip->id, false);
             
-            $date = date('Y-m-d G:i:s', strtotime($_POST['date']));
+            $date = date('Y-m-d H:i:s', strtotime($_POST['date']));
             $adults = $_POST['adults'];
             $kids   = $_POST['kids'];
             $items  = array();
@@ -394,6 +378,9 @@ class TripsController extends Zend_Controller_Action {
             $this->view->items = $items;
             $this->view->items2 = $items2;
             $this->view->bigtotal = $total;
+            
+            $country = $this->places->getPlaceById($trip->country_id);
+            $this->country = $country;
         }
         else {
             $id  = $this->_getParam('id');
@@ -401,5 +388,6 @@ class TripsController extends Zend_Controller_Action {
             
             $this->view->trip = $trip;
         }
+        //var_dump($_POST); die;
     }
 }

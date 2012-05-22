@@ -1,5 +1,35 @@
 <style type="text/css">
 .hidden { display:none;}
+.lstng-detail { position:relative;}
+.lstng-detail .help {
+	position:absolute;
+	top:20px;
+	left:240px;}
+.lstng-detail .help a.eye {
+	display:block;
+	background:url(/images2/eye.png) no-repeat top left;
+	width:18px;
+	height:12px;
+	text-indent:-9999px;
+	cursor:pointer;}
+	.lstng-detail .help:hover a.eye {
+		background-position:left -12px;}
+.lstng-detail.first .help {
+	top:0px;}
+	.lstng-detail .help a.tooltip3 {
+		background:url(/images2/help-tooltip-bg.png) top left no-repeat;
+		left: 17px;
+		padding:11px 12px;
+		position:absolute;
+		top:-102px;
+		z-index:1000;
+		display:none;}
+	.lstng-detail .help:hover a.tooltip3 {
+		display:block;}
+
+.lstng-detail {
+	overflow:visible;}
+.listing-content { overflow:visible;}
 </style>
 <form action="" method="post">
     <div class="lstng-details">
@@ -8,58 +38,59 @@
     		<h3>What is the Details Section?</h3>
     		<p>Let people know what the activity includes, what is not included and policies and restrictions people should keep in mind.</p>
     		<a href="" rel="act_details" class="remove">Remove</a>
-    	</div>
-    	<!-- closes desc -->
+    	</div><!-- closes desc -->
         <?php endif ?>
     	<div class="main-ttl">
     		<p><strong>Write some details about the activity</strong></p>    		
-    	</div>
-    	<!-- closes main-ttl -->
+    	</div><!-- closes main-ttl -->
         <div class="lstng-detail faq">
             <strong>Includes</strong>
             <span>Write a detailed description</span><br />
             <?php $exist = false; ?>
+            <?php $tab = 1 ?>
             <?php foreach($this->details as $detail): ?>
             <?php if($detail->type == 1): ?>
             <?php $exist = true; ?>
             <div class="item">
                 <a href="#delete_detail_<?= $detail->id ?>" class="remove">remove</a>
-                <input type="text" class="noclean" name="detail[<?= $detail->id ?>][text]" value="<?= $detail->text ?>" />
+                <input tabindex="<?= $tab ?>" type="text" class="noclean" name="detail[<?= $detail->id ?>][text]" value="<?= $detail->text ?>" />
                 <div class="clear"></div>
             </div>
+            <?php $tab++ ?>
             <?php endif ?>
             <?php endforeach ?>
             
             <?php if($exist): ?>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input placeholder="Enter include text here" type="text" name="details[1][0][text]" value="" />
+                <input tabindex="<?= $tab ?>" placeholder="Enter include text here" type="text" name="details[1][0][text]" value="" />
                 <div class="clear"></div>
             </div>
+            <?php $tab++ ?>
             <?php else: ?>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input placeholder="Enter include text here" type="text" name="details[1][0][text]" value="" />
+                <input tabindex="<?= $tab ?>" placeholder="Enter include text here" type="text" name="details[1][0][text]" value="" />
                 <div class="clear"></div>
             </div>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input placeholder="Enter include text here" type="text" name="details[1][1][text]" value="" />
+                <input tabindex="<?= $tab++ ?>" placeholder="Enter include text here" type="text" name="details[1][1][text]" value="" />
                 <div class="clear"></div>
             </div>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input placeholder="Enter include text here" type="text" name="details[1][2][text]" value="" />
+                <input tabindex="<?= $tab++ ?>" placeholder="Enter include text here" type="text" name="details[1][2][text]" value="" />
                 <div class="clear"></div>
             </div>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input placeholder="Enter include text here" type="text" name="details[1][3][text]" value="" />
+                <input tabindex="<?= $tab++ ?>" placeholder="Enter include text here" type="text" name="details[1][3][text]" value="" />
                 <div class="clear"></div>
             </div>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input placeholder="Enter include text here" type="text" name="details[1][4][text]" value="" />
+                <input tabindex="<?= $tab++ ?>" placeholder="Enter include text here" type="text" name="details[1][4][text]" value="" />
                 <div class="clear"></div>
             </div>
             <?php endif ?>
@@ -70,110 +101,126 @@
                 <div class="clear"></div>
             </div>
             <a href="" id="addInclude" class="link-5">Add another item</a>
+            <div class="help">
+                <a href="/images2/help/big-act-details-inclusions.png" class="eye">help</a>
+                <a href="/images2/help/big-act-details-inclusions.png" class="tooltip3">
+                <img src="https://static.tripfab.com/images2/help/small-act-details-inclusions.png" /></a>
+            </div>
         </div><!-- closes lstng-detail -->
         <div class="lstng-detail faq">
-            <strong>Non-Includes</strong>
+            <strong>Excludes</strong>
             <span>Write a detailed description</span><br />
             
             <?php $exist = false; ?>
+            <?php $tab++ ?>
             <?php foreach($this->details as $detail): ?>
             <?php if($detail->type == 2): ?>
             <?php $exist = true; ?>
             <div class="item">
                 <a href="#delete_detail_<?= $detail->id ?>" class="remove">remove</a>
-                <input type="text" class="noclean" name="detail[<?= $detail->id ?>][text]" value="<?= $detail->text ?>" />
+                <input tabindex="<?= $tab ?>" type="text" class="noclean" name="detail[<?= $detail->id ?>][text]" value="<?= $detail->text ?>" />
                 <div class="clear"></div>
             </div>
+            <?php $tab++ ?>
             <?php endif ?>
             <?php endforeach ?>
             
             <?php if($exist): ?>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input type="text" placeholder="Enter non-include text here" name="details[2][0][text]" value="" />
+                <input tabindex="<?= $tab ?>" type="text" placeholder="Enter exclude text here" name="details[2][0][text]" value="" />
                 <div class="clear"></div>
             </div>
+            <?php $tab++ ?>
             <?php else: ?>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input type="text" placeholder="Enter non-include text here" name="details[2][0][text]" value="" />
+                <input tabindex="<?= $tab ?>" type="text" placeholder="Enter exclude text here" name="details[2][0][text]" value="" />
                 <div class="clear"></div>
             </div>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input type="text" placeholder="Enter non-include text here" name="details[2][1][text]" value="" />
+                <input tabindex="<?= $tab++ ?>" type="text" placeholder="Enter exclude text here" name="details[2][1][text]" value="" />
                 <div class="clear"></div>
             </div>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input type="text" placeholder="Enter non-include text here" name="details[2][2][text]" value="" />
+                <input tabindex="<?= $tab++ ?>" type="text" placeholder="Enter exclude text here" name="details[2][2][text]" value="" />
                 <div class="clear"></div>
             </div>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input type="text" placeholder="Enter non-include text here" name="details[2][3][text]" value="" />
+                <input tabindex="<?= $tab++ ?>" type="text" placeholder="Enter exclude text here" name="details[2][3][text]" value="" />
                 <div class="clear"></div>
             </div>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input type="text" placeholder="Enter non-include text here" name="details[2][4][text]" value="" />
+                <input tabindex="<?= $tab++ ?>" type="text" placeholder="Enter exclude text here" name="details[2][4][text]" value="" />
                 <div class="clear"></div>
             </div>
             <?php endif ?>
             
             <div class="hidden noninclude detail">
             	<a href="" class="remove"></a>
-                <input type="text" placeholder="Enter non-include text here" name="text" value="" />
+                <input type="text" placeholder="Enter exclude text here" name="text" value="" />
                 <div class="clear"></div>
             </div>
             <a href="" id="addNonInclude" class="link-5">Add another item</a>
+            <div class="help">
+                <a href="/images2/help/big-act-details-exclusions.png" class="eye">help</a>
+                <a href="/images2/help/big-act-details-exclusions.png" class="tooltip3">
+                <img src="https://static.tripfab.com/images2/help/small-act-details-exclusions.png" /></a>
+            </div>
         </div><!-- closes lstng-detail -->
         <div class="lstng-detail faq last">								
             <strong>Restrictions</strong>
             <span>Write a detailed description</span><br />
             
+            <?php $tab++ ?>
             <?php $exist = false; ?>
             <?php foreach($this->details as $detail): ?>
             <?php if($detail->type == 3): ?>
             <?php $exist = true; ?>
             <div class="item">
                 <a href="#delete_detail_<?= $detail->id ?>" class="remove">remove</a>
-                <input type="text" class="noclean" name="detail[<?= $detail->id ?>][text]" value="<?= $detail->text ?>" />
+                <input tabindex="<?= $tab ?>" type="text" class="noclean" name="detail[<?= $detail->id ?>][text]" value="<?= $detail->text ?>" />
                 <div class="clear"></div>
             </div>
+            <?php $tab++ ?>
             <?php endif ?>
             <?php endforeach ?>
             
             <?php if($exist): ?>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input type="text" placeholder="Enter the restriction text here" name="details[3][0][text]" value="" />
+                <input tabindex="<?= $tab ?>" type="text" placeholder="Enter the restriction text here" name="details[3][0][text]" value="" />
                 <div class="clear"></div>
             </div>
+            <?php $tab++ ?>
             <?php else: ?>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input type="text" placeholder="Enter the restriction text here" name="details[3][0][text]" value="" />
+                <input tabindex="<?= $tab ?>" type="text" placeholder="Enter the restriction text here" name="details[3][0][text]" value="" />
                 <div class="clear"></div>
             </div>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input type="text" placeholder="Enter the restriction text here" name="details[3][1][text]" value="" />
+                <input tabindex="<?= $tab++ ?>" type="text" placeholder="Enter the restriction text here" name="details[3][1][text]" value="" />
                 <div class="clear"></div>
             </div>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input type="text" placeholder="Enter the restriction text here" name="details[3][2][text]" value="" />
+                <input tabindex="<?= $tab++ ?>" type="text" placeholder="Enter the restriction text here" name="details[3][2][text]" value="" />
                 <div class="clear"></div>
             </div>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input type="text" placeholder="Enter the restriction text here" name="details[3][3][text]" value="" />
+                <input tabindex="<?= $tab++ ?>" type="text" placeholder="Enter the restriction text here" name="details[3][3][text]" value="" />
                 <div class="clear"></div>
             </div>
             <div class="item">
                 <a href="" class="remove"></a>
-                <input type="text" placeholder="Enter the restriction text here" name="details[3][4][text]" value="" />
+                <input tabindex="<?= $tab++ ?>" type="text" placeholder="Enter the restriction text here" name="details[3][4][text]" value="" />
                 <div class="clear"></div>
             </div>
             <?php endif ?>
@@ -184,10 +231,15 @@
                 <div class="clear"></div>
             </div>
             <a href="" id="addRestriction" class="link-5">Add another item</a>
+            <div class="help">
+                <a href="/images2/help/big-act-details-policies.png" class="eye">help</a>
+                <a href="/images2/help/big-act-details-policies.png" class="tooltip3">
+                <img src="https://static.tripfab.com/images2/help/small-act-details-policies.png" /></a>
+            </div>
         </div><!-- closes lstng-detail -->
     </div><!-- closes lstng-details -->
     <div class="foot">
-        <input type="submit" class="btn-1" value="Save Changes" />
+        <input type="submit" class="noclean btn-1" value="Save Changes" />
     </div><!-- closes foot -->
     <input type="hidden" name="ids" value="<?= $this->listing->id ?>" />
     <input type="hidden" name="listing_token" value="<?= $this->listing->token ?>" />

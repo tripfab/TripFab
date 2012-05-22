@@ -1,0 +1,45 @@
+<h3 class="title">Trips <a href="/admin/users/travellers" class="back">Back to Travelers</a></h3>
+<div class="block">
+<?php if(count($this->trips)): ?>
+	<?php foreach($this->trips as $trip) : ?>
+    <div class="single_trip">
+        <table width="360" border="0" class="info">
+            <tr>
+                <td width="180">Trip Name</td>
+                <td width="180"><?php echo $trip->title?></td>
+            </tr>
+            <tr>
+                <td>Travelers</td>
+                <td><?php echo $trip->adults?> Adults, <?php echo $trip->kids?> Children</td>
+            </tr>
+            <tr>
+                <td>Start Date</td>
+                <td><?php echo date('M d, Y', strtotime($trip->start))?></td>
+            </tr>
+            <tr>
+                <td>End Date</td>
+                <td><?php echo date('M d, Y', strtotime($trip->end))?></td>
+            </tr>
+            <tr>
+                <td>Days</td>
+                <td><?php echo $trip->days?></td>
+            </tr>
+            <tr>
+                <td>Things to Do Added</td>
+                <td><?php echo $trip->listings?></td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td>$<?php echo $trip->price?></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a href="#explore-itinerary" class="lbc">Explore Itinerary</a></td>
+            </tr>
+        </table>
+    </div><!--SINGLE_TRIP-->
+    <?php endforeach;?>
+<?php else: ?>
+	<center><h1>User haven't create any trip yet.</h1></center>
+<?php endif;?>
+</div><!--BLOCK-->

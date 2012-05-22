@@ -3,61 +3,52 @@
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->user->name ?> : Reviews | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-	<script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('textarea').elastic();				
-            $('input').ToggleInputValue();
-            $('form select').jqTransSelect();
-        });
-    </script>
+    <title><?= $this->user->name ?> - Reviews | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+	<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+	<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
     <div class="w2">
         <div class="wrapper user-messages">
-            <?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'Reviews','parentActive'=>'Reviews \&amp; Questions')); ?>
-            <div id="features">
-                <div class="top">
-                    <img src="/images2/img-54.png" alt="" class="izq" />
-                    <h2>Reviews &amp; Questions</h2>
-                    <h3>Your business can receive and check questions and reviews by real users on real time.</h3>
-                    <p>TripFab allows you to receive real reviews written by real users on real time which provides future clients with a sense of confidence when they book with you. Also you are able to see real questions posted by potential customers and provide them with a prompt answer. </p>
-                    <img src="/images2/img-49.png" alt="" class="corner" />
-                </div>
-                <!-- closes top -->
-                <div class="bottom">
-                    <div class="box">
-                        <img src="/images2/img-55.png" alt="" />
-                        <h4>See Real Questions</h4>
-                        <p>Through TripFab you can actually search for and watch questions made by potential customers and answer them right on the spot, making it easier for both, you and the customers, to make reservations and choose exactly what is needed. </p>
-                    </div>
-                    <div class="box">
-                        <img src="/images2/img-56.png" alt="" />
-                        <h4>Answer Questions From Potential Customers</h4>
-                        <p>Since you get access to the questions people have about your business, you can easily respond to potential customers in public with a single click, making customer assistance really easy and accessible. </p>
-                    </div>
-                    <div class="box">
-                        <img src="/images2/img-57.png" alt="" />
-                        <h4>Full Customer Reviews</h4>
-                        <p>You will be notified when a review of your business has been published and  not only check it, but also respond to it immediately. This allows your business to create fame and position yourself as a trustable business. </p>
-                    </div>
-                </div>
-                <!-- closes bottom -->
-            </div>
-            <!-- closes features -->
-        </div>
-        <!-- closes user-messages -->
-    </div>
-    <!-- closes w2 -->
+        	<?php $icons = array(
+				2 => 'ico-11.png',
+				4 => 'ico-10.png',
+				5 => 'ico-12.png',
+				6 => 'ico-8.png',
+				7 => 'ico-9.png',
+			) ?>
+            <?= $this->partial('partials/vendormainmenu.phtml', array('active'=>'Reviews','parentActive'=>'Reviews \&amp; Questions')); ?>
+            <div class="reviews-questions">
+            	<?php foreach($this->listings as $listing): ?>
+                <div class="s-question">
+                    <div class="right">
+                        <div><a href="/provider/reviews/view/<?= $listing->id ?>" class="btn-4">See Reviews</a></div>
+                        <?php if($this->new[$listing->id] > 0): ?>
+                        <div><span><?= $this->new[$listing->id] ?></span> New Reviews</div>
+                        <?php endif ?>
+                    </div><!-- closes right -->
+                    <?= $this->thumbnail(97, $listing->image, '','1:1') ?>
+                    <h2><img src="https://static.tripfab.com/images2/<?= $icons[$listing->main_type] ?>" alt="" /><?= $listing->title ?></h2>
+                </div><!-- closes s-question -->
+                <?php endforeach ?>
+            </div><!-- closes reviews-questions -->
+        </div><!-- closes user-messages -->
+    </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
-</div>
-<!-- closes w1 -->
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('textarea').elastic();
+    });
+</script>
 </body>
 </html>

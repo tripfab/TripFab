@@ -2,65 +2,16 @@
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title>Create a New Listing : Upload photos | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link href="/uploadify/uploadify.css" type="text/css" rel="stylesheet" />	
-    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css" />
-	<script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-			$('#file-input').uploadify({
-				'uploader'		  : '/uploadify/uploadify.swf',
-				'script'   		  : '/phpscripts/uploadListingPhotos.php',
-				'cancelImg'		  : '/uploadify/cancel.png',
-				'folder'  		  : '/uploads',
-				'buttonImg' 	  : '/images2/file-2.png',
-				'height' 		  : 37,
-				'width' 		  : 128,
-				//'auto'      	  : true,
-				'multi' 		  : true,
-				'removeCompleted' : false,
-				'onError':function(e,a,c,d){
-					console.log(e);
-					console.log(a);
-					console.log(c);
-					console.log(d);
-				},
-				'onComplete':function(a,b,c,image){
-					console.log(image);
-				},
-				'scriptData':{
-					'userids':<?= $this->user->id ?>,
-					'vendorid':<?= $this->vendor->id ?>,
-					'listings':<?= $this->listing->id ?>,
-					'listtoken':'<?= $this->listing->token ?>',
-					'formtoken':'<?= $this->user->token ?>',
-					'usertoken':'<?= md5($this->user->token.'upload_listing_pictures') ?>',
-				}
-			});
-			<?php if($this->congrats): ?>
-			$.fancybox({
-				href:'#congrats',
-				padding:0,
-				overlayColor:'#fff',
-				centerOnScroll:1,
-				overlayOpacity:0.7,
-				showCloseButton:0,
-				modal:1,	
-			});
-			<?php endif ?>
-        });
-		
-    </script>
-    <style type="text/css">
-	.sign-box.vendor.first .photos-wrapper .uploadifyQueue {
-		border-top: 1px solid #E8E8E8;
-		clear: both;
-		padding-top: 6px;}
-	.hidden { display:none;}
-	.lb-congrats { background:#F3F3F3;}
-	</style>
+    <title>Create a New Listing - Upload photos | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link href="/uploadify/uploadify.css?v=<?= $this->cssVC ?>" type="text/css" rel="stylesheet" />	
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+	<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+	<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1">
@@ -105,7 +56,7 @@
                 </div><!-- closes content -->
                 <div class="foot">
                 	<form id="uploadphotos" method="post">
-	                    <input id="uploadphotos" type="submit" class="btn-1" value="Continue" />
+	                    <input id="uploadphotos" type="submit" class="btn-1 noclean" value="Continue" />
                     </form>
                     <?php if($this->listing->main_type == 5 || $this->listing->main_type == 6): ?>
                     <a class="skip" href="/provider/listings/new/<?= $this->listing->id ?>/step6">Skip Step</a>                    
@@ -135,5 +86,58 @@
 		</div><!-- closes lb-congrats -->
     </div>
 </div>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+		$('#file-input').uploadify({
+			'uploader'		  : '/uploadify/uploadify.swf',
+			'script'   		  : '/phpscripts/uploadListingPhotos.php',
+			'cancelImg'		  : '/uploadify/cancel.png',
+			'folder'  		  : '/uploads',
+			'buttonImg' 	  : '/images2/file-2.png',
+			'height' 		  : 37,
+			'width' 		  : 128,
+			//'auto'      	  : true,
+			'multi' 		  : true,
+			'removeCompleted' : false,
+			'onError':function(e,a,c,d){
+			},
+			'onComplete':function(a,b,c,image){
+				
+			},
+			'scriptData':{
+				'userids':<?= $this->user->id ?>,
+				'vendorid':<?= $this->vendor->id ?>,
+				'listings':<?= $this->listing->id ?>,
+				'listtoken':'<?= $this->listing->token ?>',
+				'formtoken':'<?= $this->user->token ?>',
+				'usertoken':'<?= md5($this->user->token.'upload_listing_pictures') ?>'
+			},
+			'sizeLimit': 2097152,
+		    'fileExt'  : '*.jpg;*.gif;*.png',
+		    'fileDesc' : 'Image Files'
+		});
+		<?php if($this->congrats): ?>
+		$.fancybox({
+			href:'#congrats',
+			padding:0,
+			overlayColor:'#fff',
+			centerOnScroll:1,
+			overlayOpacity:0.7,
+			showCloseButton:0,
+			modal:1
+		});
+		<?php endif ?>
+    });
+	
+</script>
+<style type="text/css">
+.sign-box.vendor.first .photos-wrapper .uploadifyQueue {
+	border-top: 1px solid #E8E8E8;
+	clear: both;
+	padding-top: 6px;}
+.hidden { display:none;}
+.lb-congrats { background:#F3F3F3;}
+</style>
 </body>
 </html>

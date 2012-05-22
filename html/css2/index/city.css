@@ -1,10 +1,15 @@
 .result { height:340px; }
 .results-wrapper { position:relative;}
+.results-wrapper .firstime_tip {
+	left: 110px;
+	    top: 24px;
+	    z-index: 99;
+}
 .results-wrapper .loading { 
 	position:absolute; 
 	width:100%; 
 	height:100%; 
-	background:url('/images2/loading-bg.png');
+	background:url('https://static.tripfab.com/images2/loading-bg.png');
 	top:0; 
 	left:0px; 
 	z-index:10;
@@ -27,7 +32,35 @@ ul.cat-menu li a {
 	z-index:11;}
 .main.wrapper .left-sidebar { min-height:1px; }
 .btn-1 { height:25px; border:0 none; }
-.img-wrapper .dd-2 { min-width:150px; background:#fff;}
+.img-wrapper .dd-2 { min-width:180px; background:#fff;}
 .img-wrapper .dd-2 .btn-1 { float:right;}
 .widget.destinations { display:none;}
 .scrollcontainer { width:191px }
+
+
+/*
+
+.ui-slider-horizontal .ui-slider-range {
+    height:6px;
+    top: 0;
+}
+
+.ui-slider .ui-slider-range {
+	background: url(https://static.tripfab.com/images2/g-6.png) repeat-x scroll 50% 50% #F6A828;
+    border: 0 none;
+    display: block;
+    font-size: 0.7em;
+    position: absolute;
+    z-index: 1;
+}
+
+.ui-slider .ui-slider-handle {
+	background: url(https://static.tripfab.com/images2/t-3.png) no-repeat 0 0;
+	cursor: default;
+	height: 18px;
+	margin-left: -8px;
+	position: absolute;
+	top: -5px;
+	width: 17px;
+	z-index: 2;
+}*/

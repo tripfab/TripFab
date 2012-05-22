@@ -5,15 +5,15 @@
 		'submenu' => array(
 			array(
 				'label' => 'All Listings',
-				'url'	=> '/provider/listings/',
+				'url'	=> '/provider/listings/#/all',
 			),
 			array(
 				'label' => 'Active',
-				'url'	=> '/provider/listings/active',
+				'url'	=> '/provider/listings/#/active',
 			),
 			array(
 				'label' => 'Inactive',
-				'url'	=> '/provider/listings/inactive',
+				'url'	=> '/provider/listings/#/inactive',
 			),
 		),
 	),
@@ -24,7 +24,7 @@
 	array(
 		'label' => 'Reservations',
 		'url'	=> '/provider/reservations/',
-		/*'submenu' => array(
+		'submenu' => array(
 			array(
 				'label' => 'Incoming',
 				'url'	=> '/provider/reservations/',
@@ -37,14 +37,10 @@
 				'label' => 'History',
 				'url'	=> '/provider/reservations/history',
 			),
-			/*array(
-				'label' => 'Transactions',
-				'url'	=> '/provider/reservations/transactions',
-			),*/		
-		//),
+		),
 	),
 	array(
-		'label' => 'Reviews &amp; Questions',
+		'label' => 'Reviews',
 		'url'	=> '/provider/reviews/',
 	),
 	array(
@@ -77,22 +73,26 @@
 <div class="main-menu">
     <ul>
     	<?php foreach($items as $i => $item): ?>
-        <?php $class = ($item['label'] == $this->parentActive) ? 'active' : '' ; ?>
-        <?php $class.= ($item['submenu']) ? ' sub-menu' : ''; ?>
+        <?php $class = (isset($item['label']) && $item['label'] == $this->parentActive) ? 'active' : '' ; ?>
+        <?php $class.= (isset($item['submenu']) && $item['submenu']) ? ' sub-menu' : ''; ?>
         <li class="<?= $class ?>">
             <a href="<?= $item['url'] ?>"><?= $item['label'] ?></a>
-            <?php if($item['submenu']): ?>
+            <?php if(isset($item['submenu'])): ?>
             <ul>
             	<?php foreach($item['submenu'] as $subitem): ?>
                 <?php $class = ($subitem['label'] == $this->active) ? 'active' : '' ; ?>
                 <li class="<?= $class ?>"><a href="<?= $subitem['url'] ?>"><?= $subitem['label'] ?></a></li>
                 <?php endforeach ?>
             </ul>
-            <img src="/images2/g-27.png" alt="" class="g-right" />
-            <?php if($i != 0): ?><img src="/images2/g-28.png" alt="" class="g-left" /><?php endif ?>
+            <img src="https://static.tripfab.com/images2/g-27.png" alt="" class="g-right" />
+            <?php if($i != 0): ?><img src="https://static.tripfab.com/images2/g-28.png" alt="" class="g-left" /><?php endif ?>
             <?php endif ?>
         </li>
         <?php endforeach ?>
+        <li class="avaible-balance">
+            <p>Available Balance: <span class="total">$0.00</span></p>
+            <a href="/provider/withdraw" class="btn-1">Withdraw</a>
+        </li>
     </ul>
     <div class="clear"></div>
 </div><!-- closes menu -->

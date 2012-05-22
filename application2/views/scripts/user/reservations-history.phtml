@@ -3,69 +3,70 @@
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->user->name ?> : Reservations History | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js/jquery.jqtransform.js"></script>
-    <script type="text/javascript" src="/js2/jquery.elastic.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('textarea').elastic();				
-            $('input').ToggleInputValue();
-            $('form select').jqTransSelect();
-        });
-    </script>
+    <title><?= $this->user->name ?> - Reservations History | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
     <div class="w2">
-        <div class="wrapper user-messages">
+        <div class="reserv_history">
         	<?= $this->partial('partials/usermainmenu.phtml', array('active'=>'Reservations','parentActive'=>'History')); ?>
-        	<div class="subttl">
-        		<h4>You have <?= count($this->reservations) ?> confirmed reservations</h4>
-        	</div>
-        	<!-- closes subttl -->
             <?php if(count($this->reservations) > 0): ?>
-            <div class="reservations past">
-                <table cellpadding="0" cellspacing="0" border="0">
-                	<tr>
-                        <th>Reservation Code</th>
-                        <th>Vendor</th>
-                        <th>Method</th>
-                        <th>Amount</th>
-                        <th>Date</th>
-                        <th>Kind</th>
-                        <th>&nbsp;</th>
-                    </tr>
-					<?php foreach($this->reservations as $reserve): ?>
+        	<div class="subttl show">
+        		<h4>You have <?= count($this->reservations) ?> hostoric reservations</h4>
+        		<label>Show
+        			<select>
+        				<option value="">This year</option>
+        			</select>
+        		</label>
+        	</div><!-- closes subttl -->
+            <div class="list_content">
+                <table width="100%" border="0">
                     <tr>
+                        <th width="120"><a href="">Reservation Code</a></th>
+                        <th width="125"><a href="">Activity</a></th>
+                        <th width="80"><a href="">Kind</a></th>
+                        <th width="130"><a href="">Partner</a></th>
+                        <th width="120"><a href="">Reservation Date</a></th>
+                        <th width="70"><a href="">Amount</a></th>
+						<th width="110">&nbsp;</th>
+                        <th width="110" class="last">&nbsp;</th>
+                    </tr>
+					<?php foreach($this->reservations as $i => $reserve): ?>
+                    <?php $class = ($i == 0) ? 'first' : '' ?>
+                    <tr class="<?= $class ?>">
                         <td><?= $reserve->code ?></td>
-                        <td><?= $reserve->vendor_name ?></td>
-                        <td><?= $reserve->method ?></td>
-                        <td>$<?= $reserve->ammount ?></td>
-                        <td><?= date('d/m/Y', strtotime($reserve->created)) ?></td>
+                        <td><?= $reserve->listing_name ?></td>
                         <td><?= $reserve->listing_type ?></td>
-                        <td><a href="">See details</a></td>
+                        <td><?= $reserve->vendor_name ?></td>
+                        <td><?= date('d/m/Y', strtotime($reserve->created)) ?></td>
+                        <td>$<?= $reserve->ammount ?></td>
+                        <td><a href="/user/reservations/view/<?= $reserve->id ?>" class="view">Details</a></td>
+						<td><a href="/user/reservations/review/<?= $reserve->listing_id ?>" class="edit">Review</a></td>
                     </tr>
                     <?php endforeach ?>
                 </table>
-            </div><!-- closes reservations -->
+            </div>
             <?php else: ?>
-            <div class="empty-container">
-                <img src="/images/empty-8.png" alt="" /><br />
-                You don't have past reservations :(
-            </div><!-- closes empty -->
+            <div id="reservations">
+                <div class="no-reserv">
+                    <h3>You don't have reservations history</h3>
+                </div><!--NO-PAYMENT-->
+            </div><!-- closes u-payments --> 
             <?php endif ?>
         </div><!-- closes user-messages -->
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 </body>
 </html>

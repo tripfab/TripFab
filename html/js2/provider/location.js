@@ -25,35 +25,37 @@ $(function(){
 	
 	var $title = $('input[name=title]').val();
 	
+        var latlng, myOptions, map, marker;
+        
 	if($lat != '' && $lng != ''){
-		var latlng = new google.maps.LatLng($lat,$lng);
+		latlng = new google.maps.LatLng($lat,$lng);
 		
-		var myOptions = {
+		myOptions = {
 		  zoom: 12,
 		  center: latlng,
-		  mapTypeId: google.maps.MapTypeId.ROADMAP,
+		  mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
 		
-		var map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
+		map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
 		
-		var marker = new google.maps.Marker({
+		marker = new google.maps.Marker({
 			position: latlng,
 			title:$title,
 			draggable:true
 		}); 
 		marker.setMap(map);
 	} else {
-		var latlng = new google.maps.LatLng(40,0);
+		latlng = new google.maps.LatLng(40,0);
 		
-		var myOptions = {
+		myOptions = {
 		  zoom: 2,
 		  center: latlng,
-		  mapTypeId: google.maps.MapTypeId.ROADMAP,
+		  mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
 		
-		var map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
+		map = new google.maps.Map(document.getElementById("mapcanvas"),myOptions);
 		
-		var marker = new google.maps.Marker({
+		marker = new google.maps.Marker({
 			map: map,
 			draggable:true
 		});

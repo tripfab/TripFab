@@ -3,96 +3,102 @@
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title>Congratulations | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/js2/jquery.input.value.js"></script>
-    <script type="text/javascript" src="/js2/common.js"></script>
+    <title><?= $this->listing->title ?>, Reservation Invoice | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    
 </head>
 <body>
 <div class="w1">
-    <?= $this->partial('partials/header.phtml', 
-	array('user'=>$this->user,'full'=>true)); ?>    
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>    
     <div class="w2">
         <div class="main wrapper">
-            <div class="confirmation-header">
-                <span class="code">Code: <?= $this->reservation->code ?></span>
-                <h4>Congratulations <?= $this->user->name ?>!</h4>
-                <p>Your reservation in <?= $this->listing->title ?> has been booked!</p>
-            </div><!-- closes confirmation-header -->
-            <div class="confirmation-wrapper">
-            	<?= $this->thumbnail(117, $this->listing->image); ?>
-                <div class="detail">
-                    <h3>Payment</h3>
-                    <strong>Payment Method</strong>
-                    <p><?= $this->transaction->method ?></p>
-                    <strong>Billing Address</strong>
-                    <address>
-                        <p><?= $this->user->name ?></p>
-                        <p><?= $this->billing->street1 ?></p>
-                        <p><?= $this->billing->street2 ?></p>
-                        <p><?= $this->billing->city ?></p>
-                        <p><?= $this->billing->country ?></p>
-                    </address>
-                </div><!-- closes detail -->
-                <div class="detail">
-                    <h3>Purchase Details</h3>
-                    <strong>Check In</strong>
-                    <p><?= date('D, F jS Y', strtotime($this->reservation->checkin)) ?></p>
-                    <?php if($this->reservation->checkout): ?>
-                    <strong>Check Out</strong>
-                    <p><?= date('D, F jS Y', strtotime($this->reservation->checkout)) ?></p>
+            <div id="confirmation"> <img src="https://static.tripfab.com/images2/confirmation-img.png" width="" height="" alt="" />
+                <div class="wrap"> <span class="stamp"></span>
+                    <h2>Thank You <?= $this->user->name ?></h2>
+                    <?php if($this->listing->main_type == 5): ?>
+                    <h3>We wish you the best stay ever!</h3>
+                    <?php else: ?>
+                    <h3>We wish you the best day of your life!</h3>
                     <?php endif ?>
-                    <strong>Ocupation</strong>
-                    <p><?= $this->reservation->adults ?> Adults
-                    <?php if($this->reservation->kids): ?>
-                    , <?= $this->reservation->kids ?> Children,
-                    <?php endif; if($this->reservation->rooms): ?>
-                    , <?= $this->reservation->rooms ?> Rooms <?php endif ?></p>
-                </div>
-                <!-- closes detail -->
-                <div class="detail last">
-                    <h3>Total Paid</h3>
-                    <strong>Charges</strong>
-                    <table cellpadding="0" cellspacing="0" border="0">
-                        <tbody>
-                            <tr>
-                                <td><?= $this->reservation->rate_description ?></td>
-                                <td>$<?= $this->reservation->rate ?></td>
-                            </tr>
-                           	<?php if($this->reservation->additional > 0): ?>
-                            <tr>
-                                <td><?= $this->reservation->additional_description ?></td>
-                                <td><?= $this->reservation->additional ?></td>
-                            </tr>
-                            <?php endif ?>
-                            <tr>
-                                <td>Subtotal</td>
-                                <td>$<?= $this->reservation->subtotal ?></td>
-                            </tr>
-                            <tr>
-                                <td>Taxes &amp; Fees</td>
-                                <td>$<?= $this->reservation->taxes ?></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Total</strong></td>
-                                <td><strong>$<?= $this->reservation->ammount ?></strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div><!-- closes detail -->
-                <div class="clear"></div>
-                <div class="confirmation-footer">
-                    <p><strong>Questions?</strong> Contact <a href="">service@tripfab.com</a></p>
-                    <p><a href="">Contact Operator</a><a href="">Print Reservation</a></p>
-                </div><!-- closes conformation-footer -->
-            </div><!-- closes confirmation-wrapper -->
-        </div><!-- closes main -->
+                    <a href="/user/reservations/print/<?= $this->reservation->id ?>" class="btn-10">Print your Reservation</a>
+                    <div class="warning">
+                        <p><strong>We'll confirm your reservation in the next 24 hours</strong> You will only be charged if the partner accepts your request. If our partner declines or does not respond, no charge is made.</p>
+                    </div><!--WARNING-->
+                    <div class="overview"> 
+                        <span class="name"><?= $this->listing->title ?></span> 
+                        <span class="code">Reservation Code: <?= $this->reservation->code ?></span> 
+                    </div>
+                    <div class="details">
+                        <h4>Payment</h4>
+                        <ul>
+                            <li><strong>Credit Card</strong><?= $this->transaction->method ?></li>
+                        </ul>
+                    </div><!--DETAILS-->                    
+                    <div class="details">
+                    	<?php if($this->listing->main_type == 6): ?>
+                        <h4>Reservation Dettails</h4>
+                        <ul>
+                            <li><strong>Activity Date </strong><?= date('F jS, Y', strtotime($this->reservation->checkin)) ?></li>
+                            <li><strong>Travelers </strong><?= $this->reservation->adults ?> Adults
+                            <?php if($this->reservation->kids > 0): ?>
+                            , 1 Child<?php endif ?></li>
+                        </ul>
+                        <?php else: ?>
+						<h4>Reservation Dettails</h4>
+						<ul>
+							<li><strong>Check In</strong> <?= date('F jS, Y', strtotime($this->reservation->checkin)) ?></li>
+							<li><strong>Check Out</strong> <?= date('F jS, Y', strtotime($this->reservation->checkout)) ?></li>
+							<li><strong>Rooms</strong> <?= $this->reservation->rooms ?> Rooms, 
+                            <?= $this->reservation->nights ?> Nights</li>
+							<li><strong>Ocupation</strong> <?= $this->reservation->adults ?> Adults
+                            <?php if($this->kids > 0): ?>, 2 Children<?php endif ?></li>
+						</ul>
+                        <?php endif ?>
+                    </div><!--DETAILS-->                    
+                    <div class="details">
+                        <h4>Total Paid</h4>
+                        <dl>
+                            <dt class="total">Total</dt>
+                            <dd class="total">$<?= $this->formatnumber($this->transaction->ammount) ?></dd>
+                        </dl>
+                    </div><!--DETAILS-->
+                    <div class="bottom">
+                        <p><strong>Questions?</strong> Contact service@tripfab.com </p>
+                        <a href="/user/reservations/view/<?= $this->reservation->id ?>">Reservation Details</a> 
+                        <a href="#" class="js-print">Print Reservation</a>
+                    </div><!--BOTTOM-->
+                </div><!--WRAP--> 
+            </div><!--CONFIRMATION-->             
+        </div><!-- closes main --> 
     </div><!-- closes w2 -->
-    <?= $this->partial('partials/footer.phtml'); ?>
-</div><!-- closes w1 -->	
+	<?= $this->partial('partials/footer.phtml'); ?>
+</div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+$(function(){
+	$('.js-print').click(function(){
+		window.print();
+		return false;
+	});
+});
+</script>
+<!-- Google Code for Single Order Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+google_conversion_id = 956485843;
+google_conversion_label = "BBo6CPWk8gMQ06GLyAM";
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="https://www.googleadservices.com/pagead/conversion/956485843/?label=BBo6CPWk8gMQ06GLyAM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
 </body>
 </html>

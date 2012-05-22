@@ -3,54 +3,58 @@
 <head>
     <meta content="noindex,nofollow" name="robots" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <title><?= $this->user->name ?> : Reservations | Tripfab.com</title>
-    <link type="text/css" rel="stylesheet" href="/css2/reset.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/all.css" />
-    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css" />
-    <link type="text/css" rel="stylesheet" href="/css2/common.css" />
-	<script type="text/javascript" src="/js2/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('textarea').elastic();				
-            $('input').ToggleInputValue();
-            $('form select').jqTransSelect();
-        });
-    </script>
+    <title><?= $this->user->name ?> - Reservations | Tripfab.com</title>
+    <link rel="icon" type="image/png" href="/images3/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="/css2/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css/jqtransform.css?v=<?= $this->cssVC ?>" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+	<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+	<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1">
     <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>false)); ?>
     <div class="w2">
         <div class="wrapper user-messages">
-            <?= $this->partial('partials/vendormainmenu.phtml', array('notifications'=> $this->pendingSettings,'active'=>'Incoming','parentActive'=>'Reservations')); ?>
-            <div id="features">
-                <div class="top">
-                    <img src="/images2/img-50.png" alt="" class="der"/>
-                    <h2>Reservations</h2>
-                    <h3>Keep track of your past and present reservations in an efficient and carefully customized way.</h3>
-                    <p>Through TripFab's reservation platform  you can really keep all your past and present reservations organized, making it easier for you to prepare for each customer, check current events, special requests and  analyze each one on real time.</p>
-                    <img src="/images2/img-49.png" alt="" class="corner" />
-                </div>
-                <!-- closes top -->
-                <div class="bottom">
-                    <img src="/images2/img-51.png" alt="" class="izq" />
-                    <h4>Payment Methods</h4>
-                    <p>On each reservation you can see which payment method was used, the amount of each payment and check for cancellations or missing payments. TripFab does everything else for you and gives you all the information you may need in order to plan your business.</p>
-                    <div class="clear"></div>
-                    <img src="/images2/img-52.png" alt="" class="der" />
-                    <h4>Communicate Efficiently With Your Customers</h4>
-                    <p>The Reservations Platform allows you to accept , reject or postpone reservation by sending a message to your customer and letting him or her know the different options you offer according to your services and the amount of reservations you currently have.  You will never lose a client again due to lack of communication.</p>
-                    <div class="clear"></div>
-                    <img src="/images2/img-53.png" alt="" class="izq" />
-                    <h4>Total Earnings Available</h4>
-                    <p>Through the Incoming Reservations page you can clearly see what your earnings are on real time and request withdrawals at any time. You have complete control of your finance and earnings made via TripFab's platform at all times.</p>
-                </div>
-                <!-- closes bottom -->
+            <?= $this->partial('partials/vendormainmenu.phtml', array('active'=>'Incoming','parentActive'=>'Reservations')); ?>
+            <div class="subttl">
+            	<p>Incoming Reservations</p>
             </div>
-            <!-- closes features -->
+            <?php if(count($this->reservations) > 0): ?>
+            <div class="reservations">
+                <?php foreach($this->reservations as $date => $reservations): ?>
+                <div class="reservation in">
+                	<strong><?= date('F jS, Y', strtotime($date)) ?></strong>
+                    <div class="right">
+                    	<?php foreach($reservations['listings'] as $listing): ?>
+                        <ul>
+                            <li><h2><?= $listing['name'] ?></h2></li>
+                            <?php foreach($listing['bookings'] as $booking): ?>
+                            <li>
+                                <div><?= $this->thumbnail(34, $booking['image'], '','1:1'); ?><?= $booking['user'] ?></div>
+                                <div><span>Reserve Code: <?= $booking['code'] ?></span></div>
+                                <div><a href="/provider/reservations/view/<?= $booking['id'] ?>">Order Details</a></div>
+                            </li>
+                            <?php endforeach ?>
+                        </ul>
+                        <?php endforeach ?>
+                    </div><!-- closes right -->
+                    <div class="clear"></div>
+                </div><!-- closes reservation -->
+                <?php endforeach ?>
+            </div><!-- closes reservations -->
+            <?php else: ?>
+            <div class="empty-container">
+                <img src="https://static.tripfab.com/images/empty-7.png" alt="" /><br />
+                There are no incoming reservations :(
+            </div><!-- closes empty -->
+            <?php endif ?>
         </div><!-- closes user-messages -->
     </div><!-- closes w2 -->
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 </body>
 </html>

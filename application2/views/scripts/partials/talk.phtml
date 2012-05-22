@@ -1,19 +1,23 @@
 <div class="ttl">Talk with the vendor</div>
 <div class="widget-content">
-    <img src="/images2/img-28.png" alt="" />
+    <?php if(!empty($this->vendor->image)): ?>
+    <?= $this->thumbnail(67, $this->vendor->image, '', '1:1') ?>
+    <?php else: ?>
+    <?= $this->thumbnail(67, '/images/default-profile.gif', '', '1:1') ?>
+    <?php endif ?>
     <h2><?= $this->vendor->name ?></h2>
-    <a href="" class="online"><img src="/images2/cleardot.gif" alt="" />Online</a>
+    <a href="" class="online"><img src="https://static.tripfab.com/images2/cleardot.gif" alt="" />Online</a>
 </div><!-- closes widget-content -->
 <?php if($this->user): ?>
 <ul>
-    <li class="item-1"><a class="lb" href="#send_message"><img src="/images2/cleardot.gif" alt="" /><br />Send Message</a></li>
-    <li class="item-2"><a class="lb" href="#live_chat"><img src="/images2/cleardot.gif" alt="" /><br />Live Chat</a></li>
-    <li class="item-3"><a class="lb" href="#start_call"><img src="/images2/cleardot.gif" alt="" /><br />Start Call</a></li>
+    <li class="item-1"><a class="lb" href="#send_message"><img src="https://static.tripfab.com/images2/cleardot.gif" alt="" /><br />Send Message</a></li>
+    <li class="item-2"><a class="livechat" href="https://<?= $_SERVER['HTTP_HOST'] ?>/chat?provider=<?= $this->vendor->user_id ?>"><img src="https://static.tripfab.com/images2/cleardot.gif" alt="" /><br />Live Chat</a></li>
+    <li class="item-3"><a class="phonecall" href="#start_call"><img src="https://static.tripfab.com/images2/cleardot.gif" alt="" /><br />Start Call</a></li>
 </ul>
 <?php else: ?>
 <ul>
-    <li class="item-1"><a href="/login"><img src="/images2/cleardot.gif" alt="" /><br />Send Message</a></li>
-    <li class="item-2"><a href="/login"><img src="/images2/cleardot.gif" alt="" /><br />Live Chat</a></li>
-    <li class="item-3"><a href="/login"><img src="/images2/cleardot.gif" alt="" /><br />Start Call</a></li>
+    <li class="item-1"><a href="/login"><img src="https://static.tripfab.com/images2/cleardot.gif" alt="" /><br />Send Message</a></li>
+    <li class="item-2"><a href="/login"><img src="https://static.tripfab.com/images2/cleardot.gif" alt="" /><br />Live Chat</a></li>
+    <li class="item-3"><a href="/login"><img src="https://static.tripfab.com/images2/cleardot.gif" alt="" /><br />Start Call</a></li>
 </ul>
 <?php endif ?>
