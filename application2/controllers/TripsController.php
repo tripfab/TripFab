@@ -124,6 +124,11 @@ class TripsController extends Zend_Controller_Action {
         
         $this->view->max = $this->trips->getHighestPrice($country->id);
         
+        $ls_count = $this->listings->countListings(null, null, $country->id);
+        
+        $this->view->totallistings = $ls_count[75];
+        $this->view->totaltrips    = $trips_count['all'];
+        
         $this->view->country = $country;
     }
     

@@ -145,6 +145,11 @@ class IndexController extends Zend_Controller_Action
             $this->view->cities = $cities;
         }
         
+        $tr_count = $this->trips->countTrips($country->id);
+        
+        $this->view->totallistings = $ls_count[75];
+        $this->view->totaltrips    = $tr_count['all'];
+        
         $this->view->countries = $countries;
         
         $this->view->region  = $region;
