@@ -148,6 +148,22 @@
             </form>
 		</div><!--CREATE_TRIP-->
     </div>
+    
+    <div class="dates_lbx lb js-trip-dates" id="set_trip_dates">
+		<form method="post" action="">
+			<div class="top">Set Trip Dates<span class="label">When?</span></div><!--TOP-->
+			<div class="cont">
+				<label>Start</label>
+                <input name="start" class="calendar1" placeholder="M d YYYY" type="text" />
+				<label>End</label>
+                <input name="end" class="calendar2"  placeholder="M d YYYY" type="text" />
+			</div><!--CONT-->
+			<div class="bottom">
+				<input class="btn-1" type="submit" value="Update dates" />
+                <a href="#" onclick="$.fancybox.close(); return false;" class="btn-10">Cancel</a>
+			</div><!--BOTTOM-->
+		</form>
+	</div><!--DATES_LBX-->
 </div><!--HIDDEN-->
 <input type="hidden" name="fbappid" value="<?= $this->facebookid() ?>"/>
 <script type="text/javascript">

@@ -1656,3 +1656,75 @@
 	margin-right: 10px;
 	line-height: 30px;
 }
+
+.dates_lbx {
+	width: 320px;
+}
+.dates_lbx .top {
+text-indent: 20px;
+}
+.dates_lbx .label {
+	background: url(https://static.tripfab.com/images6/trips-label.png) no-repeat;
+	position: absolute;
+	top: 10px;
+	right: 0;
+	width: 90px;
+	height: 22px;
+	font: bold 12px/22px Helvetica;
+	color: #FFF;
+	text-align: right;
+	padding-right: 15px;
+}
+.dates_lbx .cont {
+	padding: 15px 0 15px 20px;
+	background-color: #FFF;
+}
+.dates_lbx .cont input[type="text"] {
+	width: 79px;
+	height: 30px;
+	margin-right:23px;
+	margin-left: 6px;
+	color: #898989;
+	font: normal 13px/30px Helvetica;
+}
+.dates_lbx .cont input[type="text"]:focus{
+	color: #303030;
+	font-weight: bold;
+ }
+ 
+ .lb {
+	overflow: hidden;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px; 
+	behavior: url(/PIE.htc);
+}
+.lb .top {
+	background: url("https://static.tripfab.com/images2/g-13.png") repeat-x scroll 0 0 transparent;
+    color: #FFFFFF;
+    font: bold 12px/44px Helvetica,Arial,sans-serif;
+    height: 44px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 0px;
+    -moz-border-radius-bottomleft: 0px;
+    -webkit-border-radius: 5px 5px 0px 0px;
+    border-radius: 5px 5px 0px 0px; 
+}
+.lb .bottom {
+	background: url("https://static.tripfab.com/images2/g-52.gif") repeat-x scroll 0 0 #F6F6F6;
+    height: 45px;
+    overflow: hidden;
+    padding: 15px 20px 0 0;
+    -moz-border-radius-topleft: 0px;
+    -moz-border-radius-topright: 0px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -webkit-border-radius: 0px 0px 5px 5px;
+    border-radius: 0px 0px 5px 5px;
+}
+.lb .bottom .btn-10,
+.lb .bottom .btn-1 {
+	float: right;
+	height: 30px;
+}

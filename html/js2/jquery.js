@@ -5377,8 +5377,14 @@ $(document).ready(function() {
                     $('.js-cart-placeholder').html(res.html);
                     $('.js-cart .num').text(res.count);
                     if(res.trip != 0) {
-                        $('.js-new-trip').attr('href','/user/trips/itinerary/'+res.trip);
-                        $('.js-new-trip').removeClass('js-new-trip');
+                        if(res.start == 0 || res.end == 0){
+                            $('.js-new-trip').addClass('js-set-trip-dates');
+                            $('.js-new-trip').data('trip',res.trip);
+                            $('.js-new-trip').removeClass('js-new-trip');
+                        } else {
+                            $('.js-new-trip').attr('href','/user/trips/itinerary/'+res.trip);
+                            $('.js-new-trip').removeClass('js-new-trip');
+                        }
                     }
                 } else {
                     $('.js-cart .num').remove();
@@ -5392,13 +5398,81 @@ $(document).ready(function() {
     }
     
     $('.js-new-trip').live('click',function(){
-		$val =  $(this).data('listing');
-		$('#newtrip input[name=listing]').val($val);
+        $val =  $(this).data('listing');
+        
+        $('#newtrip input[name=listing]').val($val);
+        
         $.fancybox({
             href:'#newtrip',
             overlayColor:'#fff',
             centerOnScroll:1,
             padding:0
+        });
+        
+        return false;
+    });
+    
+    $('.js-set-trip-dates').live('click',function(){
+         $.fancybox({
+            href:'#set_trip_dates',
+            overlayColor:'#fff',
+            centerOnScroll:1,
+            padding:0
+        });
+        
+        return false;
+    });
+    
+    $('#set_trip_dates input.calendar1').datepicker({
+        minDate:new Date(),
+        onSelect:function(date){
+            $end = $(this).parents('.cont').find('input.calendar2');
+            $end.datepicker('option','minDate', date);
+        },
+        dateFormat:'M d yy'
+    });
+
+    $('#set_trip_dates input.calendar2').datepicker({
+        minDate:new Date(),
+        dateFormat:'M d yy'
+    });
+    
+    $('.js-trip-dates form').submit(function(){
+        $start = $('input[name=start]',this).val();
+        $end = $('input[name=end]',this).val();
+        
+        if($start == '') {
+            showError('Please select a start date');
+            return false;
+        }
+        if($end == '') {
+            showError('Please select an end date');
+            return false;
+        }
+        
+        $('input, select, textarea').attr('disabled','disabled');
+        
+        $.ajax({
+            url:'/ajax/setdates',
+            data:{
+                start:$start,
+                end:$end
+            },
+            type:'post',
+            dataType:'json',
+            success:function(res){
+                if(res.type == 'success')
+                    window.location.href = '/user/trips/itinerary/'.res.id;
+                else {
+                    showError(res.error);
+                }
+                $('input, select, textarea').removeAttr('disabled');
+            },
+            error:function(res){
+                $.fancybox.close();
+                $('input, select, textarea').removeAttr('disabled');
+                showError('Something went wrong. Please try later');
+            }
         });
         
         return false;
@@ -5479,4 +5553,5 @@ $(window).bind('addtotrip', function(){
             $('.js-cart').click(function(){return false;})
         }
     });
+    
 });

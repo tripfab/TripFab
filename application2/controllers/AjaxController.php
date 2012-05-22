@@ -3946,13 +3946,32 @@ class AjaxController extends Zend_Controller_Action
         $select->where('status = 1');
         $trip = $trips->fetchRow($select);
 
-        if(!is_null($trip))
-            $result = array(
-                'type'=>'success',
-                'html' => '<div class="cart-B js-cart-B"><a href="/user/trips/itinerary/'.$trip->id.'" class="icon"><span>'.$this->view->formatnumber($trip->listings).'</span></a><div class="info"><h3>$'.$trip->price.'</h3><span>'.$trip->listings.' listings in your trip</span><a href="/user/trips/itinerary/'.$trip->id.'" class="organize"><span>Organize Trip</span></a></div></div>',
-                'count' => $trip->listings,
-                'trip'=>$trip->id
-            );
+        if(!is_null($trip)) {
+            if((is_null($trip->start) or empty($trip->start) or $trip->start == '0000-00-00') or 
+                (is_null($trip->end) or empty($trip->end) or $trip->end == '0000-00-00')) {
+                
+                $result = array(
+                    'type'=>'success',
+                    'html' => '<div class="cart-B js-cart-B"><a href="#" class="icon js-set-trip-dates"><span>'.$trip->listings.'</span></a><div class="info"><h3>$'.$this->view->formatnumber($trip->price).'</h3><span>'.$trip->listings.' listings in your trip</span><a href="#" class="organize js-set-trip-dates"><span>Organize Trip</span></a></div></div>',
+                    'count' => $trip->listings,
+                    'trip'=>$trip->id
+                );
+                
+                $result['start'] = 0;
+                $result['end'] = 0;
+            } else {
+                
+                $result = array(
+                    'type'=>'success',
+                    'html' => '<div class="cart-B js-cart-B"><a href="/user/trips/itinerary/'.$trip->id.'" class="icon"><span>'.$trip->listings.'</span></a><div class="info"><h3>$'.$this->view->formatnumber($trip->price).'</h3><span>'.$trip->listings.' listings in your trip</span><a href="/user/trips/itinerary/'.$trip->id.'" class="organize"><span>Organize Trip</span></a></div></div>',
+                    'count' => $trip->listings,
+                    'trip'=>$trip->id
+                );
+                
+                $result['start'] = 1;
+                $result['end'] = 1;
+            }
+        }
         else
             $result = array(
                 'type'=>'success',
@@ -3960,6 +3979,62 @@ class AjaxController extends Zend_Controller_Action
                 'count' => 0,
                 'trip'=> 0
             );
+        
+        header('Content-type: application/json');
+        echo json_encode($result); die;
+    }
+    
+    public function setdatesAction()
+    {
+        try {
+            $auth = Zend_Auth::getInstance();
+            if(!$auth->hasIdentity()) 
+                throw new Exception('You are not logged in');
+
+            $user = $auth->getIdentity();
+            if($user->role_id != 2) 
+                throw new Exception('You are logeed in as a traveler');
+
+            $trips = new Zend_Db_Table('itineraries');
+            $select = $trips->select();
+            $select->where('user_id = ?', $user->id);
+            $select->where('status = 1');
+            $trip = $trips->fetchRow($select);
+
+            if(is_null($trip))
+                throw new Exception('We couldn\'t find your trip');
+
+            $start = $_POST['start'];
+            $end   = $_POST['end'];
+
+            if(is_null($start) || empty($start) || $start == '0000-00-00' || $start == 'M d YYYY')
+                throw new Exception("We couldn't understand the dates. Please use the calendar");
+
+            if(is_null($end) || empty($end) || $end == '0000-00-00' || $end == 'M d YYYY')
+                throw new Exception("We couldn't understand the dates. Please use the calendar");
+
+            $trip->start = date('Y-m-d', strtotime($start));;
+            $trip->end = date('Y-m-d', strtotime($end));
+
+            $fday = strtotime($start);
+            $lday = strtotime($end);
+            $days = $lday - $fday;
+            $days = $days / 86400;
+
+            $trip->days = $days + 1;
+
+            $trip->save();
+
+            $result = array(
+                'type'=>'success',
+                'trip'=>$trip->id
+            );
+        } catch(Exception $e) {
+            $result = array(
+                'type'=>'error',
+                'error'=>$e->getMessage()
+            );
+        }
         
         header('Content-type: application/json');
         echo json_encode($result); die;
