@@ -4867,6 +4867,17 @@ this.$clip[0]['scroll' + this.scrollPos] = this.resetPosition;
 
 (function($){$.fn.extend({limit:function(limit,element){var interval,f;var self=$(this);$(this).focus(function(){interval=window.setInterval(substring,100)});$(this).blur(function(){clearInterval(interval);substring()});substringFunction="function substring(){ var val = $(self).val();var length = val.length;if(length > limit){$(self).val($(self).val().substring(0,limit));}";if(typeof element!='undefined')substringFunction+="if($(element).html() != limit-length){$(element).html((limit-length<=0)?'0':limit-length);}";substringFunction+="}";eval(substringFunction);substring()}})})(jQuery);
 
+(function( $ ){
+    $.fn.serializeJSON=function() {
+        var json = {};
+        jQuery.map($(this).serializeArray(), function(n, i){
+            json[n['name']] = n['value'];
+        });
+        return json;
+    };
+})( jQuery );
+
+
 $(function() {
     var input = document.createElement("input");
     if(('placeholder' in input)==false) { 
@@ -5365,6 +5376,10 @@ $(document).ready(function() {
                 if(res.type == "success"){
                     $('.js-cart-placeholder').html(res.html);
                     $('.js-cart .num').text(res.count);
+                    if(res.trip != 0) {
+                        $('.js-new-trip').attr('href','/user/trips/itinerary/'+res.trip);
+                        $('.js-new-trip').removeClass('js-new-trip');
+                    }
                 } else {
                     $('.js-cart .num').remove();
                     $('.js-cart').click(function(){return false;})
@@ -5375,10 +5390,71 @@ $(document).ready(function() {
             }
         });
     }
+    
+    $('.js-new-trip').live('click',function(){
+        $.fancybox({
+            href:'#newtrip',
+            overlayColor:'#fff',
+            centerOnScroll:1,
+            padding:0
+        });
+        
+        return false;
+    });
+    
+    $('#newtrip input[name=start]').datepicker({
+        minDate:new Date(),
+        onSelect:function(date){
+            $('#newtrip input[name=end]').datepicker('option', 'minDate', new Date(date));
+        },
+        dateFormat:'M d yy'
+    });
+    $('#newtrip input[name=end]').datepicker({
+        minDate:new Date(),
+        dateFormat:'M d yy'
+    });
+    
+    $('#newtrip form').submit(function(){
+        $data = $(this).serializeJSON();
+        if($data.title == ""){
+            showError('You need to add a name to the trip');
+            return false;
+        }
+        $.ajax({
+            url:'/ajax/addtotrip2',
+            data:$data,
+            type:'post',
+            success:function(response){
+                if(response.type == 'success'){
+                    $.fancybox.close();
+                    $('input, select').removeAttr('disabled');
+                    $('.addTrip').removeClass('show');
+                    showAlert(response.message);
+                } else if(response.type == 'newtrip'){
+                    $('.js-new-trip').removeClass('not');
+                    $('.js-new-trip').removeClass('js-new-trip');
+                    $.fancybox.close();
+                    $('input, select').removeAttr('disabled');
+                    $('.addTrip').removeClass('show');
+                    showAlert(response.message);
+                    $('.addTrip select').append('<option value="'+response.tripid+'">'+response.triptitle+'</option>');
+                } else {
+                    $.fancybox.close();
+                    $('input, select').removeAttr('disabled');
+                    showError(response.message);
+                }
+            },
+            error:function(){
+                $.fancybox.close();
+                $('input, select').removeAttr('disabled');
+                showError('Somehing went wrong please try later');
+            }
+        });
+        return false;
+    });
 });
 
 function hideCart(){
-    alert('asd');
     $('.js-cart-B').trigger('mouseleave');
 }
 
@@ -5401,4 +5477,3 @@ $(window).bind('addtotrip', function(){
         }
     });
 });
-                    

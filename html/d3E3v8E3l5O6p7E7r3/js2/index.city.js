@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
     var aboveHeight = 0;
     $(window).scroll(function(){
@@ -154,62 +153,6 @@ $(function(){
             $('input[name=start]', $parent).removeAttr('disabled');
             $('input[name=end]', $parent).removeAttr('disabled');
         }
-    });
-	
-    $('#newtrip input[name=start]').datepicker({
-        minDate:new Date(),
-        onSelect:function(date){
-            $('#newtrip input[name=end]').datepicker('option', 'minDate', new Date(date));
-        },
-        dateFormat:'M d yy'
-    });
-    $('#newtrip input[name=end]').datepicker({
-        minDate:new Date(),
-        dateFormat:'M d yy'
-    });
-	
-    $('#newtrip form').submit(function(){
-        $data = $(this).serializeJSON();
-        if($data.listing == ""){
-            $.fancybox.close();
-            showError('Somehing went wrong please try later');
-            return false;
-        }
-        if($data.title == ""){
-            showError('You need to add a name to the trip');
-            return false;
-        }
-        $.ajax({
-            url:'/ajax/addtotrip2',
-            data:$data,
-            type:'post',
-            success:function(response){
-                if(response.type == 'success'){
-                    $.fancybox.close();
-                    $('input, select').removeAttr('disabled');
-                    $('.dd-2').removeClass('show');
-                    showAlert(response.message);
-                } else if(response.type == 'newtrip'){
-                    $.fancybox.close();
-                    $('input, select').removeAttr('disabled');
-                    $('.dd-2').removeClass('show');
-                    showAlert(response.message);
-                    $('.js-new-trip').removeClass('not');
-                    $('.js-new-trip').removeClass('js-new-trip');
-                } else {
-                    $.fancybox.close();
-                    $('input, select').removeAttr('disabled');
-                    showError(response.message);
-                }
-                $(window).trigger('addtotrip');
-            },
-            error:function(){
-                $.fancybox.close();
-                $('input, select').removeAttr('disabled');
-                showError('Somehing went wrong please try later');
-            }
-        });
-        return false;
     });
 	
     $('.addtotrip .btn-4').live('click', function(){

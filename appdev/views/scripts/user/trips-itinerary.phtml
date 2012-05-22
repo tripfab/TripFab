@@ -168,7 +168,6 @@
                     <a href="" class="prev">Previous Day</a>
                 </div><!-- closes -->
                 <div class="slider">
-                	
                 	<?php for($i=0; $i<$this->trip->days; $i++): ?>
                     <div class="slide">
                         
@@ -322,7 +321,7 @@
             </div><!--CONT-->
             <div class="bottom">
                 <input class="btn-1" type="submit" name="" value="Rename" />
-                <a class="btn-10" href="$.fancybox.close()">Cancel</a>
+                <a class="btn-10" onclick="$.fancybox.close(); return false;" href="#">Cancel</a>
             </div><!--BOTTOM-->
             <input type="hidden" name="ids" value="<?= $this->trip->id ?>" />
             <input type="hidden" name="token" value="<?= $this->trip->token ?>" />
