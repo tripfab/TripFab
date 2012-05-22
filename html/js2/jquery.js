@@ -5462,7 +5462,7 @@ $(document).ready(function() {
             dataType:'json',
             success:function(res){
                 if(res.type == 'success')
-                    window.location.href = '/user/trips/itinerary/'.res.id;
+                    window.location.href = '/user/trips/itinerary/'+res.id;
                 else {
                     showError(res.error);
                 }
