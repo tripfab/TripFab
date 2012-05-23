@@ -77,9 +77,9 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
 <?php if(count($this->listings) > 0): ?>
 <?php if(!isset($_COOKIE['tooltipHelpSearch'])): ?>
 <div class="firstime_tip">
-	<img class="arrow" src="https://developer.tripfab.com/images6/arrow-24.png" alt="">
+	<img class="arrow" src="https://static.tripfab.com/images6/arrow-24.png" alt="">
 	<div class="cont">
-		<img src="https://developer.tripfab.com/images6/stamp.png" width="75" height="75" alt="" />
+		<img src="https://static.tripfab.com/images6/stamp.png" width="75" height="75" alt="" />
 		<p><strong>Planning a Trip?</strong>
             Hey! If you're planning a trip, you can create your own customized trip, add things to do there and book it when you're ready to travel.
         </p>
@@ -120,13 +120,13 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
                 <li><a href="" class="nrml"></a></li>
             </ul>
             <div class="hvr">
-            	<a class="restaurant" href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+            	<a class="restaurant" href="/en-US/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
                 View <?=$cat_name[$list->main_type] ?>
                 <span> </span>
                 </a>
 			</div><!--HVR-->
         </div><!--IMAGE-->
-        <h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+        <h4><a href="/en-US/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
 		<?= (strlen($list->title) > 40) ? substr($list->title, 0, 39) . '...' : $list->title ?></a></h4>
 
         <div class="info">
@@ -157,13 +157,13 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
                 <li><a href="" class="nrml"></a></li>
             </ul>
             <div class="hvr">
-            	<a class="restaurant" href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+            	<a class="restaurant" href="/en-US/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
                 View <?=$cat_name[$list->main_type] ?>
                 <span> </span>
                 </a>
 			</div><!--HVR-->
         </div><!--IMAGE-->
-        <h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+        <h4><a href="/en-US/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
 		<?= (strlen($list->title) > 40) ? substr($list->title, 0, 39) . '...' : $list->title ?></a></h4>
    		<?php if($list->main_type == 6):?>
             <span>by <?= $list->vendor_name?></span>
@@ -195,13 +195,13 @@ $cat = $this->cat; $subcat = $this->subcat; $sort = $this->sort; $stars  = $this
                 <li><a href="" class="nrml"></a></li>
             </ul>
             <div class="hvr">
-            	<a class="restaurant" href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+            	<a class="restaurant" href="/en-US/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
                 View <?=$cat_name[$list->main_type] ?>
                 <span> </span>
                 </a>
         	</div><!--HVR-->
         </div><!--IMAGE-->
-        <h4><a href="/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
+        <h4><a href="/en-US/<?= $list->countryidf ?>/<?= $list->cityidf ?>/<?= $list->identifier ?>">
 		<?= (strlen($list->title) > 40) ? substr($list->title, 0, 39) . '...' : $list->title ?></a></h4>
         	<?php if($list->main_type == 6):?>
             <span>by <?= $list->vendor_name?></span>
