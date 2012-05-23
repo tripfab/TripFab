@@ -3863,13 +3863,21 @@ class AjaxController extends Zend_Controller_Action
                             );
                         } else {
                             $user_profile = $facebook->api('/me');
-                            if($this->accounts->validateEmail($user_profile['email'], true)){
-                                $this->accounts->signup($user_profile, true);
-                                $result = array('type'=>'success');
-                            } else {
-                                $this->accounts->login($user_profile, null, true);
-                                $result = array('type'=>'success');
-                            }
+							
+							if(isset($user_profile['error'])) {
+								$result = array(
+									'type' => 'error',
+									'error' => "We couldn't fecth your information from facebook Not User",
+								);
+							} else {
+								if($this->accounts->validateEmail($user_profile['email'], false)){
+									$this->accounts->signup($user_profile, true);
+									$result = array('type'=>'success');
+								} else {
+									$this->accounts->login($user_profile, null, true);
+									$result = array('type'=>'success');
+								}
+							}
                         }
                     } catch(Exception $e) {
                         $result = array(

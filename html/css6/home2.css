@@ -263,12 +263,12 @@
 }
 #wrapper-top .bottom .each {
 	float: left;
-	margin-right: 39px;
 	padding-top: 32px;
+	width: 300px;
 }
 #wrapper-top .bottom .each .inner {
 	float: left;
-	width: 220px;
+	width: 218px;
 }
 #wrapper-top .bottom .each span {
 	display: block;
@@ -307,6 +307,7 @@
 }
 #wrapper-top .bottom .each.last {
 	margin-right: 0;
+	width: auto;
 }
 #wrapper-top .bottom .each.last .inner {
 	width: 280px;

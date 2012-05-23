@@ -256,6 +256,10 @@ $(function(){
                 
                 $('#search_result .content').html(results);
                 
+                if( $('.results-wrapper .no_city').length) {
+                	$('.firstime_tip').css({top:88});
+                }
+                
                 $("img.lazy").lazyload({ 
                     effect : "fadeIn",
                     load:function(){
@@ -504,12 +508,12 @@ $(document).ready(function() {
     });
 });
 
-//$(document).ready(function() {
-//	if( $('.no_city').is(":visible")) {
-//		$('.firstime_tip').css('top', '88px');
-//	}
-//});
-
+$(document).ready(function() {
+	if( $('.results-wrapper').has(".no_city") ) {
+		$('.firstime_tip').css({top:88});
+		
+	}
+});
 
 
 

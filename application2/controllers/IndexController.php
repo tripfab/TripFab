@@ -124,7 +124,7 @@ class IndexController extends Zend_Controller_Action
         $city_idf    = $this->getRequest()->getParam('city');
         $country     = $this->places->getPlaceByIdf($country_idf);
         $region      = $this->places->getPlaceById($country->parent_id);
-        
+		
         $city = null;
         if($city_idf != 'default') 
             $city    = $this->places->getPlaceByIdf($city_idf, 3, $country->id);

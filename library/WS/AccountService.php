@@ -71,7 +71,20 @@ class WS_AccountService {
                 $user->save();
             } else {
                 $user = $this->getUser($data['email']);
-            }            
+            } 
+			
+			$activations = new Zend_Db_Table('activation_tokens');
+			$token = $activations->fetchNew();
+			$token->user_id = $user->id;
+			$token->token   = hash('sha256',$user->email.time().rand(0,1000000));
+			$token->created = date('Y-m-d H:i:s');
+			$token->updated = date('Y-m-d H:i:s');
+			$token->save();
+	
+			$notifier = new WS_Notifier($user->id);
+			$notifier->emailVerification($token);   
+        
+	        $this->login($user->email, null, true);
         } else {
             if($this->validateEmail($data['email'])) {
                 $user->name       = $data['name'];
@@ -89,19 +102,19 @@ class WS_AccountService {
             } else {
                 $user = $this->getUser($data['email']);
             }
-        }
-        $activations = new Zend_Db_Table('activation_tokens');
-        $token = $activations->fetchNew();
-        $token->user_id = $user->id;
-        $token->token   = hash('sha256',$user->email.time().rand(0,1000000));
-        $token->created = date('Y-m-d H:i:s');
-        $token->updated = date('Y-m-d H:i:s');
-        $token->save();
-
-        $notifier = new WS_Notifier($user->id);
-        $notifier->emailVerification($token);
+			$activations = new Zend_Db_Table('activation_tokens');
+			$token = $activations->fetchNew();
+			$token->user_id = $user->id;
+			$token->token   = hash('sha256',$user->email.time().rand(0,1000000));
+			$token->created = date('Y-m-d H:i:s');
+			$token->updated = date('Y-m-d H:i:s');
+			$token->save();
+	
+			$notifier = new WS_Notifier($user->id);
+			$notifier->emailVerification($token);
         
-        $this->login($user->email, $password);
+	        $this->login($user->email, $password);
+        }
     }
     
     public function signupVendor($data, $flag = true, $new = false)
