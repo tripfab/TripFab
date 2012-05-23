@@ -161,7 +161,7 @@
                             <ul>
                                 <li><strong>Website</strong></li>
                                 <?php $website = $this->listing->website ?>
-                                <?php if(!(strpos($website, "http://") === false) && !(strpos($website, "https://") === false)) 'http://'.$website ?>
+                                <?php if((strpos($website, "http://") === false) && (strpos($website, "https://") === false)) 'http://'.$website ?>
                                 <li><a href="<?= $website ?>" target="_blank" class="link1"><?= $website ?></a></li>
                             </ul>
                             <?php endif ?>
