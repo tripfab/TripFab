@@ -4,7 +4,7 @@ ini_set('desplay_errors', 1);
 
 // Define path to application directory
 defined('APPLICATION_PATH')
-        || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../../../application2'));
+        || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../../application2'));
 
 // Ensure library/ is on include_path
 set_include_path(implode(PATH_SEPARATOR, array(
