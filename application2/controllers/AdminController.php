@@ -3251,7 +3251,7 @@ class AdminController extends Zend_Controller_Action {
 					self::jsonEcho(json_encode(array("attempt"=>"fail", "desc"=>"No files data was received")));
 				}
 		
-				$mediaPath = $_SERVER['DOCUMENT_ROOT'] . "/images/vendors";
+				$mediaPath = APPLICATION_PATH . "/../html/images/vendors";
 				if (!file_exists($mediaPath)) {
 					@mkdir($mediaPath, 0777);
 				}
@@ -4578,7 +4578,7 @@ class AdminController extends Zend_Controller_Action {
             return false;
         }
 
-        $mediaPath = $_SERVER['DOCUMENT_ROOT'] . "/images/trips";
+        $mediaPath = APPLICATION_PATH."/../html/images/trips";	
         if (!file_exists($mediaPath)) {
             @mkdir($mediaPath, 0777);
         }
@@ -4590,8 +4590,8 @@ class AdminController extends Zend_Controller_Action {
 
         $path_parts = pathinfo($_FILES['image']['name']);
         $extension = $path_parts['extension'];
-        $targetPath = $tripMediaPath . '/' . $tripId . '.' . $extension;
-        $htmlFileName = '/images/trips/' . "/$tripId/" . $tripId . '.' . $extension;
+        $targetPath = $tripMediaPath . '/' . $tripId . time() . '.' . $extension;
+        $htmlFileName = '/images/trips/' . "/$tripId/" . $tripId . time() . '.' . $extension;
 
         $tmp_name = $_FILES['image']['tmp_name'];
         @move_uploaded_file($tmp_name, $targetPath);
@@ -4975,7 +4975,7 @@ class AdminController extends Zend_Controller_Action {
             return false;
         }
 
-        $mediaPath = $_SERVER['DOCUMENT_ROOT'] . "/images/trips";
+        $mediaPath = APPLICATION_PATH . "/../html/images/trips";
         if (!file_exists($mediaPath)) {
             @mkdir($mediaPath, 0777);
         }

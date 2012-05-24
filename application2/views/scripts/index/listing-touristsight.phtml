@@ -13,7 +13,10 @@
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
     <script type="text/javascript" src="/js2/index/listing-touristsight.js?v=<?= $this->cssVC ?>"></script>
-    <style type="text/css"> #mapcanvas { width:285px;  height:171px; }</style>   
+    <style type="text/css"> 
+	#mapcanvas { width:285px;  height:171px; }
+	#fancybox-img { max-width:900px;}
+    </style>   
 </head>
 <body class="bg_ts">
 <div id="wp_all">
@@ -93,7 +96,9 @@
                             		<?php $pic = $this->pictures[$j] ?>
                             		<?php $class = ($j == 0) ? 'active' : '' ?>
                             	   	<li>
-                            			<a rel="group1" title="<?= $pic->location ?>" class="<?= $class ?> lbc" href="#imgs<?= $j ?>" data-tip="#small<?= $j ?>"><?= $this->thumbnail(65, $pic->url, '', '1:1') ?></a>
+                            			<a rel="group1" title="<?= $pic->location ?>" class="<?= $class ?> lbc" 
+                                        href="<?= $this->image($pic->url, 'lgbox_img','imgs'.$i) ?>" 
+                                        data-tip="#small<?= $j ?>"><?= $this->thumbnail(65, $pic->url, '', '1:1') ?></a>
                             		</li>
                             		<?php else: ?>
                             		<li><img src="https://static.tripfab.com/images2/empty-small-photo.png" width="65" height="65" /></li>
@@ -101,11 +106,6 @@
                             		<?php endfor ?>
                             	<?php endfor ?>
                             	</ul>
-                                <div class="hidden">
-                                    <?php for($i=0;$i<count($this->pictures);$i++): ?>
-                                    <?= $this->image($this->pictures[$i]->url, 'lgbox_img','imgs'.$i) ?>
-                                    <?php endfor ?>
-                                </div>
                             </div><!--PHOTOS-->
                         </div><!--INFO-->
                         <div class="clear"></div>

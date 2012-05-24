@@ -4887,7 +4887,7 @@ $(function() {
                 i.val('').removeClass('placeholder');
                 if(i.hasClass('password')) {
                     i.removeClass('password');
-                    this.type='password';
+                    //this.type='password';
                 }			
             }
         }).blur(function() {
@@ -4895,7 +4895,7 @@ $(function() {
             if(i.val() == '' || i.val() == i.attr('placeholder')) {
                 if(this.type=='password') {
                     i.addClass('password');
-                    this.type='text';
+                    //this.type='text';
                 }
                 i.addClass('placeholder').val(i.attr('placeholder'));
             }
@@ -5158,6 +5158,7 @@ $(function(){
     
     $('.js-div-forgot form').submit(function(){
         $form = $(this);
+		$inp  = $('input[name=resetemail]', $form);
         $data = {
             email:$('input[name=resetemail]', $form).val()
         };
@@ -5172,11 +5173,16 @@ $(function(){
             data:$data,
             success:function(response){
                 if(response.type == 'success'){
+					$inp.val('Enter your e-mail');
+					$inp.parent('div').removeClass('error');
+					$inp.parent('div').find('p').remove();
                     $.fancybox.close();
                     showAlert(response.message);
                 } else {
-                    $.fancybox.close();
-                    showError(response.message);
+					$inp.parent('div').addClass('error');
+					$inp.parent('div').append('<p><em></em>'+response.message+'</p>');
+                    //$.fancybox.close();
+                    //showError(response.message);
                 }
             },
             error:function(){
@@ -5258,15 +5264,22 @@ $(function(){
         
         $form = $(this).parents('.js-form-container').find('form');
         $('input, select, textarea',$form).attr('disabled','disabled');
+		
+		FB.getLoginStatus(function(response) {
+			if (response.authResponse) {
+				facebookLogin(response.authResponse.accessToken);
+			} else {
         
-        FB.login(function(response2) {
-            if (response2.authResponse) {
-                facebookLogin(response2.authResponse.accessToken);
-            } else {
-                $('input, select, textarea',$form).removeAttr('disabled');
-                showError('We need your permission in order to log you in');
-            }
-        },{scope: 'email'});
+				FB.login(function(response2) {
+					if (response2.authResponse) {
+						facebookLogin(response2.authResponse.accessToken);
+					} else {
+						$('input, select, textarea',$form).removeAttr('disabled');
+						showError('We need your permission in order to log you in');
+					}
+				},{scope: 'email'});
+			}
+		});
         
         function facebookLogin($token) {
             $.ajax({

@@ -21,7 +21,7 @@ $(document).ready(function() {
     var creditCard = $('#checkout .cnum');
     creditCard.cardcheck({
         iconLocation: 'ul.cards',
-        iconDir:'/images/'
+        iconDir:'https://static.tripfab.com/images/'
     });
     
     $('a.high-r').hover(function() {

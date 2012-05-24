@@ -1030,6 +1030,9 @@
 #lstng_htl .dscript .price sup {
 	font: bold 20px Helvetica;
 	vertical-align: top;
+	float: left;
+	padding: 5px 2px 0 0;
+	display: block;
 }
 #lstng_htl .dscript .price span {
 	font: bold 37px Helvetica;
@@ -1082,7 +1085,7 @@
 	padding-top:3px;
 	margin-bottom: 40px;
 }
-#lstng_htl .cont .container .btn-2 {
+#lstng_htl .cont .container > .btn-1 {
 	position: absolute;
 	top: 57px;
 	right: 0;
@@ -1091,7 +1094,7 @@
     padding: 0;
     width: 132px;
 }
-#lstng_htl .cont .container .btn-2 span {
+#lstng_htl .cont .container > .btn-1 span {
 	background: url("https://static.tripfab.com/images6/lstng_htl.png") no-repeat scroll -38px -196px transparent;
     display: inline-block;
     float: left;
@@ -2717,6 +2720,9 @@ background: url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat -407
 	float: right;
 	margin:16px 0 0 17px;
 	height: 49px;
+	behavior: url(/PIE.htc);
+	position: relative;
+	z-index: 10;
 }
 #src_map .links a span {
 	font: normal 11px Helvetica;
@@ -3083,7 +3089,18 @@ ul.cat-menu li.item-1 a img {
 	margin-left: 13px;
 	line-height: 25px;
 }
-
+.ui-slider-horizontal a.ui-slider-handle{
+	background: url("https://static.tripfab.com/images2/t-3.png") no-repeat scroll 0 0 transparent;
+    cursor: default;
+    height: 18px;
+    margin-left: -8px;
+    position: absolute;
+    top: -5px;
+    width: 17px;
+    z-index: 2;
+    border: none;
+    border-radius: 0;
+}
 /*End Search Result Sidebar-----------------------*/
 .srchBG {
 	background-color: #FFF;
@@ -3137,7 +3154,7 @@ ul.cat-menu li.item-1 a img {
 }
 #search_result .results-wrapper {
 	padding-bottom: 20px !important	;
-	margin-top: 16px;
+	margin-top: 30px;
 	border-left: 1px solid #e3e3e3;
 }
 #search_result .results-wrapper > p {
@@ -3166,6 +3183,10 @@ ul.cat-menu li.item-1 a img {
 	-webkit-box-shadow: 0px 0px 4px 3px #cbdbf0;
 	-moz-box-shadow: 0px 0px 4px 3px #cbdbf0;
 	box-shadow: 0px 0px 4px 3px #cbdbf0;
+}
+#search_result .results-wrapper .single.activity-2 p{
+	height: 25px;
+	overflow: hidden;
 }
 #search_result .single .image {
 	width: 241px;
@@ -3795,7 +3816,32 @@ margin-top: 72px;
 .load_ph h3 {
 	text-align: center;
 	font: bold 15px Helvetica;
+}
+#dialpad .middle .number-display input[type="text"] {
+	float: left;
+	width: 110px;
 } 
+span.code {
+	color: #999;
+	margin-left: 5px;
+	float: left;
+	text-align: left;
+}
+.spacer { 
+	padding:100px 50px;
+}
+#fancybox-outer.noshadow { 
+	-webkit-box-shadow:0px 0px 0px 0px #b3b3b3;
+	-moz-box-shadow:0px 0px 0px 0px #b3b3b3;
+	box-shadow::0px 0px 0px 0px #b3b3b3; 
+}
+#fancybox-outer.noshadow #fancybox-close { 
+	top: 80px;
+	right: 30px;
+}
+.choiceLB {
+	border:1px #b3b3b3 solid; 
+}
 /*END DIALPAD--------------------------------------------------------------*/
 /*LIVE CHAT----------------------------------------------------------------*/
 #livechat {

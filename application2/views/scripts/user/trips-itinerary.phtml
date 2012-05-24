@@ -121,9 +121,11 @@
                         <li class="hotels"><a href="#tab-5">Hotels <em></em></a></li>
                     </ul>
                     <?php $class = array('','cat-activity','cat-entertainment','cat-sight','cat-restaurant','cat-hotel'); ?>
+                    <?php $show = true; ?>
                     <?php for($i=1; $i<=5; $i++): ?>
                     <div class="tab" id="tab-<?= $i ?>">
-                    	<?php if(isset($this->favorites[$i]) and count($this->favorites[$i]) > 0): ?>
+                    	<?php if(isset($this->favorites[$i]) and count($this->favorites[$i]) > 0 and $show): ?>
+                        <?php $show = false; ?>
                     	<?php if(!isset($_COOKIE['tooltipHelpItn'])): ?>
                     	<div class="firstime_tip">
                     		<img class="arrow" src="https://static.tripfab.com/images6/tooltiparrow.png" alt="">
@@ -136,7 +138,7 @@
                     		<div class="bot">
                     			<form action="post" id="tooltipHelpItn">
                     				<fieldset>
-                    					<label><input checked="checked" type="checkbox" name="" value="" />Don’t show again</label>
+                    					<label><input checked="checked" type="checkbox" name="" value="" />Don't show again</label>
                     					<input type="submit" value="Okay" class="btn-1" />
                     				</fieldset>
                     			</form>

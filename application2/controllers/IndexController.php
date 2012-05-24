@@ -96,6 +96,14 @@ class IndexController extends Zend_Controller_Action
         $country   = $this->places->getPlaceById(18);
         $cities    = $this->places->getPlaces(3, $country->id);
         
+        $hotels = $this->listings->getRandom(self::HOTEL, 4);
+        $activities = $this->listings->getRandom(self::ACTIVITY, 4);
+        $trips = $this->trips->getRamdom(4);
+        
+        $this->view->hotels = $hotels;
+        $this->view->activities = $activities;
+        $this->view->trips = $trips;
+        
         $this->view->countries = $countries;
         $this->view->cities    = $cities;
         $this->view->country   = $country;
@@ -124,7 +132,7 @@ class IndexController extends Zend_Controller_Action
         $city_idf    = $this->getRequest()->getParam('city');
         $country     = $this->places->getPlaceByIdf($country_idf);
         $region      = $this->places->getPlaceById($country->parent_id);
-        
+		
         $city = null;
         if($city_idf != 'default') 
             $city    = $this->places->getPlaceByIdf($city_idf, 3, $country->id);

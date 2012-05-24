@@ -17,105 +17,137 @@
 	.cart-B { display:none !important;}
 	</style>
 </head>
-<body id="home2">
+<body id="home">
 <div id="wp_all">
-	<?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>
-	<div id="wp_content">
-		<div id="wrapper-top">
-		<div class="pattern"></div>
-		<div class="top"> 
-			<?php $rand = mt_rand(1,2) ?>
-			<img class="high background" src="https://static.tripfab.com/images6/home_top<?= $rand ?>.jpg"  style="display:none;" />
-        </div><!--TOP-->
-		<div class="wrap">
-			<div class="main">
-				<div class="left">
-					<h2>Plan your whole trip<br /> all in one place</h2>
-					<h3>From things to do and everything in between -<br /> directly from businesses.</h3>
-					<div id="search-box">
-						<div class="search">
-                            <form action="/costa_rica">
-                                <input id="tags" type="text" name="" value="Search for a city..." />
-                                <input type="submit" name="" value="Search" class="btn-1 noclean" />
-                                <div id="note1" class="note"><em></em>
-	                               	<p class="flag">We have listings only in <strong>Costa Rica</strong>, other countries coming soon.</p>
-                               	</div><!--NOTE1-->
-	                            <div id="note2" class="note"><em></em>
-	                            	<p><strong>0 Results. </strong>You know we work just in Costa Rica. Right?</p>
-	                            </div><!--NOTE2-->
-                            </form>	
-							<div class="clear"></div>
-						</div><!--SEARCH--> 
-					</div><!--SEARCH-BOX-->
-				</div><!--LEFT-->				
-				<div class="right">
-					<div class="video">
-						<a href="#vimeo_video" class="js-intro-video"></a>
-					</div>
-				</div><!--RIGHT-->
-				<div class="clear"></div>
-			</div><!--MAIN-->
-		</div><!--WRAP-->
-		<div class="bottom">
-			<div class="wrap">
-				<div class="each">
-					<span class="things"></span>
-					<div class="inner">
-						<h4><a href="/costa_rica" class="link1">Discover Places</a></h4>
-						<p>Discover amazing hotels, restaurants, places to see and things to do.</p>
-					</div><!--INNER-->
-				</div><!--EACH-->
-				<div class="each">
-					<span class="create"></span>
-					<div class="inner">
-						<h4><a href="/trips/costa_rica" class="link1">Buy Pre-Planned Trips</a></h4>
-						<p>Effortlessly book preplanned trips with the click of a button.</p>
-					</div>
-				</div><!--EACH-->
-				<div class="each last">
-					<span class="build"></span>
-					<div class="inner">
-                    	<?php if($this->user): ?>
-						<h4><a href="#" class="link1 js-new-trip">Create Custom Trips</a></h4>
-                        <?php else: ?>
-						<h4><a href="#" class="link1 js-signup">Create Custom Trips</a></h4>
-                        <?php endif ?>
-						<p>Custom create your dream vacation à la carte – whatever you want, whenever you want.</p>
-					</div>
-				</div><!--EACH-->
-				<div class="clear"></div>
-			</div><!--WRAP--> 
-		</div><!--BOTTOM--> 
-	</div><!--WRAPPER-TOP-->
-	<div id="popular-cities">
-		<div class="wrap">
-			<h5>Hot Cities in Costa Rica</h5>
-			<div class="all">
-				<?= $this->partial('partials/indexcities.phtml', array('cities'=>$this->cities, 'country'=>$this->country)) ?>
-			</div><!--ALL-->
-		</div><!--WRAP-->
-	</div><!--POPULAR-CITIES-->
-	</div><!--wp_content-->
-	<div id="wp_footer">
+    <div id="wp_header">
+		<?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true, 'hidesearch'=>true)); ?>
+    </div><!--WP_HEADER-->
+    <div id="wp_content">
+        <div id="main">
+            <div class="wrap">
+                <h2>Be Your Own Travel Agent</h2>
+                <div class="steps">
+                    <div class="first">
+                        <h3>Tell us where<br /> you want to go</h3>
+                    </div><!--FIRST-->
+                    <div class="mid">
+                        <h3>Create a trip and start adding listings of hotels, tours, and everything else.</h3>
+                    </div><!--MID-->
+                    <div class="last">
+                        <h3>Book it directly from<br /> business owners.</h3> 
+                    </div><!--LAST-->
+                    <div class="clear"></div>
+                </div><!--STEPS-->
+                <div id="search">
+                    <form action="/costa_rica">
+                        <fieldset>
+                            <div class="box"><input id="tags" type="text" name="" value="Search for a city..." /></div>
+                            <div id="note1" class="note"><em></em>
+                                <p class="flag">We have listings only in <strong>Costa Rica</strong>, other countries coming soon.</p>
+                            </div><!--NOTE1-->
+                            <div id="searchResultsAutoComplete"></div>
+                        </fieldset>
+                    </form>	
+                </div><!--SEARCH-->
+            </div><!--WRAP-->
+        </div><!--MAIN-->
+        <div id="featured">
+            <div class="tabs">
+                <ul>
+                    <li><a href="#hotels"><em class="i1"></em>Featured Hotels</a></li>
+                    <li><a href="#activities"><em class="i2"></em>Featured Activities</a></li>
+                    <li><a href="#trips"><em class="i3"></em>Featured Trips</a></li>
+                </ul>
+                <div id="hotels" class="cycle">
+                    <div class="inner">
+                    	<?php foreach($this->hotels as $i => $h): ?>
+                        <div class="single <?= ($i == 3) ? 'last' : '' ?>">
+                        	<a href="/en-US/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>">
+							<?= $this->thumbnail(array('width'=>223, 'height'=>152), $h->image, '','223:152'); ?></a>
+                            <h5 class="two"><?= $h->title ?></h5>
+                            <span class="meta"><em></em><?= $h->city ?>, <?= $h->countrycode ?></span>
+                            <div class="info">
+                                <div class="price">
+                                    <sup>$</sup>
+                                    <span><?= $this->formatnumber($h->price) ?></span>
+                                    <sub>per night</sub>
+                                    <div class="clear"></div>
+                                </div><!--PRICE-->
+                                <a href="/en-US/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>"><span>Visit Listing</span></a>
+                                <div class="clear"></div>
+                            </div><!--INFO-->
+                        </div><!--SINGLE-->
+                        <?php endforeach ?>
+                        <div class="clear"></div>
+                    </div><!--INNER-->					
+                </div><!--HOTELS-->
+                
+                <div id="activities" class="cycle">
+                    <div class="inner">
+                    	<?php foreach($this->activities as $i => $h): ?>
+                        <div class="single <?= ($i == 3) ? 'last' : '' ?>">
+                        	<a href="/en-US/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>">
+							<?= $this->thumbnail(array('width'=>223, 'height'=>152), $h->image, '','223:152'); ?></a>
+                            <h5 class="two"><?= $h->title ?></h5>
+                            <span class="meta"><em></em><?= $h->city ?>, <?= $h->countrycode ?></span>
+                            <div class="info">
+                                <div class="price">
+                                    <sup>$</sup>
+                                    <span><?= $this->formatnumber($h->price) ?></span>
+                                    <sub>per person</sub>
+                                    <div class="clear"></div>
+                                </div><!--PRICE-->
+                                <a href="/en-US/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>"><span>Visit Listing</span></a>
+                                <div class="clear"></div>
+                            </div><!--INFO-->
+                        </div><!--SINGLE-->
+                        <?php endforeach ?>
+                        <div class="clear"></div>
+                    </div><!--INNER-->	
+                </div><!--ACTIVITIES-->
+                
+                <div id="trips">
+                    <div class="inner">
+                    	<?php foreach($this->trips as $i => $h): ?>
+                        <div class="single <?= ($i == 3) ? 'last' : '' ?>">
+                        	<a href="/en-US/trips/view/<?= $h->id ?>">
+							<?= $this->thumbnail(array('width'=>223, 'height'=>152), $h->image, '','223:152'); ?></a>
+                            <h5 class="two"><?= $h->title ?></h5>
+                            <span class="meta"><em class="trip"></em><?= $h->days ?> Days Trip</span>
+                            <div class="info">
+                                <div class="price">
+                                    <sup>$</sup>
+                                    <span><?= $this->formatnumber($h->price) ?></span>
+                                    <sub>per person</sub>
+                                    <div class="clear"></div>
+                                </div><!--PRICE-->
+                                <a href="/en-US/trips/view/<?= $h->id ?>"><span>Visit Trip</span></a>
+                                <div class="clear"></div>
+                            </div><!--INFO-->
+                        </div><!--SINGLE-->
+                        <?php endforeach ?>
+                        <div class="clear"></div>
+                    </div><!--INNER-->	
+                </div><!--TRIPS-->
+            </div><!--TABS-->
+        </div><!--FEATURED-->
+        <div id="recommend">
+            <div class="ttl"><span><em></em>Recommend Cities in Costa Rica</span></div><!--TTL-->
+			<?= $this->partial('partials/indexcities.phtml', array('cities'=>$this->cities, 'country'=>$this->country)) ?>                  
+            <div class="clear"></div>
+        </div><!--RECOMMEND-->
+    </div><!--WP_CONTENT-->
+    <div id="wp_footer">
 		<?= $this->partial('partials/footer.phtml'); ?>
-	</div><!--WP_FOOTER-->
-</div><!--WP_ALL-->
+    </div><!--WP_FOOTER-->
+</div><!--WRAPPER_ALL-->
 <div id="citiesAutocompleteContainer"></div>
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript" src="/js2/index/index.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript">
-$(function(){
-	$('.js-intro-video').fancybox({
-		padding:5,
-		overlayColor:'#fff',
-		centerOnScroll:1,
-	});
+$(document).ready(function() {
+    $(".tabs").tabs();
 });
 </script>
-<div class="hidden">
-	<div id="vimeo_video">
-    <iframe src="https://player.vimeo.com/video/42602824" width="800" height="500" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-    </div>
-</div>
 </body>
 </html>

@@ -1266,6 +1266,7 @@
 	display: block;
 	background: url(https://static.tripfab.com/images6/lgbx_signinLine.png) repeat-x 0 50%;
 	height: 37px;
+	margin-right: 47px;
 }
 .lgbx_login .login .sep em {
 	display: block;
@@ -1494,7 +1495,7 @@
 }
 
 .lb-forgot .content {
-	padding: 12px 29px 16px;
+	padding: 12px 0 16px 29px;
 	color: #898989;
 	font-size: 12px;
 	background-color: #FFF;
@@ -1513,7 +1514,9 @@
 	height: 80px;
 }
 .lb-forgot .content p {
-	line-height:18px;}
+	line-height:18px;
+	padding-right: 29px;
+}
 
 .lb-forgot .bottom {
 	background: url(https://static.tripfab.com/images2/g-3.png) repeat-x scroll 0 0 ;
@@ -1532,8 +1535,8 @@
 .lb-forgot .bottom span, .lb-forgot .bottom input {
 	float: right;
 	cursor: pointer;
-	height: 32px;
-	line-height: 32px;
+	height: 30px;
+	line-height: 30px;
 }
 .lb-forgot .bottom .btn-1 {
 	border: 1px solid #7AB130;
@@ -1541,7 +1544,38 @@
 	height: 31px;
 	line-height: 31px;
 }
-
+.lb-forgot .error {
+	background: url("https://static.tripfab.com/images6/contactUsError.png") no-repeat scroll 369px 23px;
+	position: relative;
+	padding-right: 29px;
+}
+.lb-forgot .error input[type="text"] {
+	border-color: #F26522;
+}
+.lb-forgot div div p {
+	display: none;
+}
+.lb-forgot .error p {
+	background-color: #F26522;
+	border-radius: 3px 3px 3px 3px;
+	bottom: -7px;
+	color: #FFFFFF;
+	font: 500 11px/18px Helvetica;
+	padding: 0 5px;
+	position: absolute;
+	left: -7px;
+	z-index: 10;
+	display: block;
+}
+.lb-forgot .error p em {
+	background: url("https://static.tripfab.com/images6/errorAw.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 5px;
+    position: absolute;
+    left: 9px;
+    top: -5px;
+    width: 11px;
+}
 #create_trip {
 	width:340px;
 	background-color: #FFF;

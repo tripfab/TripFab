@@ -8,7 +8,7 @@ class Zend_View_Helper_Image {
         $imagePath = $image;
 
         if (!file_exists($imagePath)) {
-            $imagePath = APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3' . $imagePath;
+            $imagePath = APPLICATION_PATH . '/../html' . $imagePath;
             if (!file_exists($imagePath)) {
                 $purl = parse_url($image);
                 $finfo = pathinfo($image);
@@ -21,7 +21,7 @@ class Zend_View_Helper_Image {
             }
         }
 
-        $cacheFolder = APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3/cache/'; # path to your cache folder, must be writeable by web server
+        $cacheFolder = APPLICATION_PATH . '/../html/cache/'; # path to your cache folder, must be writeable by web server
         $remoteFolder = $cacheFolder . 'remote/'; # path to the folder you wish to download remote images into
 
         $purl = parse_url($imagePath);
@@ -56,14 +56,14 @@ class Zend_View_Helper_Image {
         if (file_exists($imagePath) == false):
             $imagePath = $_SERVER['DOCUMENT_ROOT'] . $imagePath;
             if (file_exists($imagePath) == false):
-                return '<img src="' . $imagePath . '" class="'.$class.'" id="'.$id.'"/>';
+                return $imagePath;
             endif;
         else:
             $size = getimagesize($imagePath);
             if($size[0] > 900) {
                 $width = 'width="900"';
             }
-            return '<img '.$width.' src="' . str_replace(APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3', '', $imagePath) . '" class="'.$class.'" id="'.$id.'"/>';
+            return str_replace(APPLICATION_PATH . '/../html', '', $imagePath);
         endif;
         
     }

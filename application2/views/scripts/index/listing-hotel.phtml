@@ -70,7 +70,7 @@
 							'user' => $this->user,
 							'trips' => $this->trips,
 							'listing' => $this->listing,
-							'class'  => 'btn-2',
+							'class'  => 'btn-1',
 							'class2' => 'one')) ?>	
                             <?php if(!isset($_COOKIE['tooltipHelpList'])): ?>
 							<div class="firstime_tip">
@@ -101,33 +101,29 @@
 										<?php for($j=$i;($j<($i+6)) and ($j<count($this->pictures));$j++): ?>
                                         <?php $pic = $this->pictures[$j] ?>
                                         <li>
-                                            <a rel="group1" title="<?= $pic->location ?>" class="lbc" href="#grande<?= $j ?>" data-tip="#small<?= $j ?>">
+                                            <a rel="group1" title="<?= $pic->location ?>" class="lbc" 
+                                            href="<?= $this->image($pic->url, 'lgbox_img','grande'.$j) ?>" data-tip="#small<?= $j ?>">
                                             <?= $this->thumbnail(65,$pic->url,'','1:1') ?><span class="arrow"></span></a>
                                         </li>
                                         <?php endfor ?>
                                     <?php endfor ?>
                                     </ul>	
-                                </div><!--IMGS-->
+                                </div><!--IMGS--> 
                                 
                                 <div class="bigImages">
                                 	<?php foreach($this->pictures as $j => $pic): ?>
                                 	<div class="hover" id="small<?= $j ?>">
-                                        <a href="#grande<?= $j ?>" class="lbc">
+                                        <a href="<?= $this->image($this->pictures[$j]->url, 'lgbox_img','grande'.$j) ?>" class="lbc">
                                         <?= $this->thumbnail(array('width'=>391,'height'=>254),$pic->url,'','391:254') ?>
                                         <?php if(!empty($pic->location)): ?>
                                         <span><?= $pic->location ?></span>
                                         <?php endif ?></a>
-                                        <a href="#grande<?= $j ?>" class="view lbc"><em></em>See Full Size</a>
+                                        <a href="<?= $this->image($this->pictures[$j]->url, 'lgbox_img','grande'.$j) ?>" 
+                                        class="view lbc"><em></em>See Full Size</a>
                                     </div>
                                     <?php endforeach ?>
                                 </div><!--BIGIMAGES-->
-                                
                             </div><!--CAROUSEL-->
-                            <div class="hidden">
-                                <?php for($i=0;$i<count($this->pictures);$i++): ?>
-                                <?= $this->image($this->pictures[$i]->url, 'lgbox_img','grande'.$i) ?>
-                                <?php endfor ?>
-                            </div>
                             <div class="tabs">
                                 <ul>
                                     <li><a href="#description" class="ui-tabs-selected ui-state-active">Description</a></li>
@@ -743,27 +739,7 @@
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript" src="/js2/jquery.popupWindow.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript" src="/js2/index/listing-hotel.js?v=<?= $this->cssVC ?>"></script>
-<style type="text/css"> 
-#mapcanvas {width:638px; height:354px;}
-#dialpad .middle .number-display input[type="text"] {
-	float: right;
-	width: 110px;} 
-span.code {
-	color: #999;
-	margin-left: 10px;
-	width: 35px;
-	float: left;
-	text-align: right;}
-.spacer { padding:100px 50px;;}
-#fancybox-outer.noshadow { 
--webkit-box-shadow:0px 0px 0px 0px #b3b3b3;
--moz-box-shadow:0px 0px 0px 0px #b3b3b3;
-box-shadow::0px 0px 0px 0px #b3b3b3; }
-#fancybox-outer.noshadow #fancybox-close { 
-top: 80px;
-right: 30px;}
-.choiceLB {
-	border:1px #b3b3b3 solid; }
-</style>
+<style type="text/css">#mapcanvas {width:638px; height:354px;}
+	#fancybox-img { max-width:900px;}</style>
 </body>
 </html>

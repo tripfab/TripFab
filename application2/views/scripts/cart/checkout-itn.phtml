@@ -9,6 +9,7 @@
     <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
     <link type="text/css" rel="stylesheet" href="/css2/all.css?v=<?= $this->cssVC ?>" />
     <link type="text/css" rel="stylesheet" href="/css2/cart/checkout.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
     <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
@@ -121,7 +122,7 @@
                             </div><!-- closes payment-item -->                             
                         </div><!-- closes checkout-item -->
                         <div class="bottom"> <span>Grand Total<strong>$<?= $this->formatnumber($this->cartitem->total) ?></strong></span>
-                            <input type="submit" class="btn-1 noclean" value="Book Trip" />
+                            <input type="submit" class="btn-1 noclean" value="Book Now" />
                         </div><!-- closes bottom -->
                         <input type="hidden" name="userids" value="<?= $this->user->id ?>" />
                         <input type="hidden" name="userstoken" value="<?= $this->user->token ?>" />
