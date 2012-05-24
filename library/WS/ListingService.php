@@ -2501,6 +2501,7 @@ class WS_ListingService {
             ));
             $select->join(array('places2'=>'places'),'listings.country_id = places2.id',array(
                 'country' => 'title',
+                'countrycode' => 'code',
                 'countryidf' => 'identifier'
             ));
             $select->where('listings.status = ?',1);

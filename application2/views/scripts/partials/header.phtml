@@ -10,6 +10,7 @@
 <div id="header">
     <div class="wrapper">
         <h1 class="logo"><a href="/">Tripfab</a></h1>
+        <?php if(!$this->hidesearch): ?>
         <div class="top_search">
             <form method="post" action="/costa_rica">
                 <fieldset>
@@ -24,6 +25,7 @@
                 </fieldset>
             </form>
         </div><!--TOP_SEARCH-->
+        <?php endif ?>
         <div class="rg">
             <?php if(!$this->user): ?>
             <a href="#" id="cart" class="js-cart js-signup"><span class="num">0</span></a>
