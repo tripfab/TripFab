@@ -19,7 +19,7 @@ class Zend_View_Helper_Lazylisting {
 
     public function lazylisting($size, $image, $class='', $cropratio='1:1', $id = null, $loading = 'https://partners.tripfab.com/images2/listing_loading.gif') {
 
-        $this->cacheFolder = APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3/cache/';
+        $this->cacheFolder = APPLICATION_PATH . '/../html/cache/';
         $this->remoteFolder = $this->cacheFolder . 'remote/';
         
         $imagePath = $this->getImage($image);
@@ -266,7 +266,7 @@ class Zend_View_Helper_Lazylisting {
 
         # return cache file path
         $id = (is_null($id)) ? '' : 'id="'.$id.'"';
-        return '<img '.$id.' class="lazy ' . $class . '" src="'.$loading.'" data-original="' . str_replace(APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3', '', $newPath) . '" width="' . $opts['w'] . '" height="' . $opts['h'] . '" />';
+        return '<img '.$id.' class="lazy ' . $class . '" src="'.$loading.'" data-original="' . str_replace(APPLICATION_PATH . '/../html', '', $newPath) . '" width="' . $opts['w'] . '" height="' . $opts['h'] . '" />';
     }
     
     protected function findSharp($orig, $final) // function from Ryan Rud (http://adryrun.com)
@@ -287,7 +287,7 @@ class Zend_View_Helper_Lazylisting {
         $imagePath = $image;
 
         if (!file_exists($imagePath)) {
-            $imagePath = APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3' . $imagePath;
+            $imagePath = APPLICATION_PATH . '/../html' . $imagePath;
             if (!file_exists($imagePath)) {
                 $purl = parse_url($image);
                 $finfo = pathinfo($image);
@@ -319,7 +319,7 @@ class Zend_View_Helper_Lazylisting {
         $imagePath = $image;
 
         if (!file_exists($imagePath)) {
-            $imagePath = APPLICATION_PATH . '/../html/d3E3v8E3l5O6p7E7r3' . $imagePath;
+            $imagePath = APPLICATION_PATH . '/../html' . $imagePath;
             if (!file_exists($imagePath)) {
                 $purl = parse_url($image);
                 $finfo = pathinfo($image);
