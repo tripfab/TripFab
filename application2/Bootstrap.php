@@ -530,6 +530,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 'port' => $config['port'],
             )),
             'compression' => $config['compression'],
+			'compatibility' => true
         ));
         
         $front = new Zend_Cache_Core(array(
