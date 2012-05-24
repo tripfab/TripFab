@@ -901,6 +901,7 @@ class WS_TripsService {
         
         if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
             $select = $this->trips_db->select();
+			$select->where('active = 1');
             $select->limit($count);
             $select->order('rand()');
 

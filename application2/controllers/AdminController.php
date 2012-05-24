@@ -4591,7 +4591,7 @@ class AdminController extends Zend_Controller_Action {
         $path_parts = pathinfo($_FILES['image']['name']);
         $extension = $path_parts['extension'];
         $targetPath = $tripMediaPath . '/' . $tripId . time() . '.' . $extension;
-        $htmlFileName = '/images/trips/' . "/$tripId/" . $tripId . '.' . $extension;
+        $htmlFileName = '/images/trips/' . "/$tripId/" . $tripId . time() . '.' . $extension;
 
         $tmp_name = $_FILES['image']['tmp_name'];
         @move_uploaded_file($tmp_name, $targetPath);

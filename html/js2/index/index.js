@@ -105,6 +105,7 @@ $(function(){
         success:function(tags){
             $( "#tags" ).autocomplete({
                 source:tags,
+				appendTo:'#searchResultsAutoComplete',
                 select:function(e, ui){
                 window.location = ui.item.url
                 }
@@ -118,23 +119,23 @@ $(function(){
     });	
 });
 $(document).ready(function() {
-    $('#tags').one('click', function() {
+    $('#search').one('click', function() {
         $('#note1').fadeIn('slow');
         return false;
     });
-    $('#tags').keypress(function() {
+    $('#search').keypress(function() {
         $('#citiesAutocompleteContainer2 ul').css('display', 'block');
     });
-    $('#tags').keypress("autocompleteclose", function() {
+    $('#search').keypress("autocompleteclose", function() {
         $('#note1').fadeOut('fast');
     });
-    $( "#tags" ).bind( "autocompleteclose", function() {
+    $( "#search" ).bind( "autocompleteclose", function() {
         $('#note2').fadeIn('slow');
     });
-    $( "#tags" ).bind( "autocompleteopen", function() {
+    $( "#search" ).bind( "autocompleteopen", function() {
         $('#note2').fadeOut('slow');
     });
-    $( "#tags" ).focusout(function() {
+    $( "#search" ).focusout(function() {
         $('#note2').fadeOut('slow');
     });
 });

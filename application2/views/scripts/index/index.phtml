@@ -45,9 +45,7 @@
                             <div id="note1" class="note"><em></em>
                                 <p class="flag">We have listings only in <strong>Costa Rica</strong>, other countries coming soon.</p>
                             </div><!--NOTE1-->
-                            <div id="note2" class="note"><em></em>
-                                <p><strong>0 Results. </strong>You know we work just in Costa Rica. Right?</p>
-                            </div><!--NOTE2-->
+                            <div id="searchResultsAutoComplete"></div>
                         </fieldset>
                     </form>	
                 </div><!--SEARCH-->
@@ -66,7 +64,7 @@
                         <div class="single <?= ($i == 3) ? 'last' : '' ?>">
                         	<a href="/en-US/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>">
 							<?= $this->thumbnail(array('width'=>223, 'height'=>152), $h->image, '','223:152'); ?></a>
-                            <h5><?= $h->title ?></h5>
+                            <h5 class="two"><?= $h->title ?></h5>
                             <span class="meta"><em></em><?= $h->city ?>, <?= $h->countrycode ?></span>
                             <div class="info">
                                 <div class="price">
@@ -75,7 +73,7 @@
                                     <sub>per night</sub>
                                     <div class="clear"></div>
                                 </div><!--PRICE-->
-                                <a href="/en-US/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>">Visit Listing</a>
+                                <a href="/en-US/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>"><span>Visit Listing</span></a>
                                 <div class="clear"></div>
                             </div><!--INFO-->
                         </div><!--SINGLE-->
@@ -90,7 +88,7 @@
                         <div class="single <?= ($i == 3) ? 'last' : '' ?>">
                         	<a href="/en-US/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>">
 							<?= $this->thumbnail(array('width'=>223, 'height'=>152), $h->image, '','223:152'); ?></a>
-                            <h5><?= $h->title ?></h5>
+                            <h5 class="two"><?= $h->title ?></h5>
                             <span class="meta"><em></em><?= $h->city ?>, <?= $h->countrycode ?></span>
                             <div class="info">
                                 <div class="price">
@@ -99,7 +97,7 @@
                                     <sub>per person</sub>
                                     <div class="clear"></div>
                                 </div><!--PRICE-->
-                                <a href="/en-US/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>">Visit Listing</a>
+                                <a href="/en-US/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>"><span>Visit Listing</span></a>
                                 <div class="clear"></div>
                             </div><!--INFO-->
                         </div><!--SINGLE-->
@@ -112,10 +110,10 @@
                     <div class="inner">
                     	<?php foreach($this->trips as $i => $h): ?>
                         <div class="single <?= ($i == 3) ? 'last' : '' ?>">
-                        	<a href="/en-US/trips/views/<?= $h->id ?>">
+                        	<a href="/en-US/trips/view/<?= $h->id ?>">
 							<?= $this->thumbnail(array('width'=>223, 'height'=>152), $h->image, '','223:152'); ?></a>
-                            <h5><?= $h->title ?></h5>
-                            <span class="meta"><em></em>Costa Rica</span>
+                            <h5 class="two"><?= $h->title ?></h5>
+                            <span class="meta"><em class="trip"></em><?= $h->days ?> Days Trip</span>
                             <div class="info">
                                 <div class="price">
                                     <sup>$</sup>
@@ -123,7 +121,7 @@
                                     <sub>per person</sub>
                                     <div class="clear"></div>
                                 </div><!--PRICE-->
-                                <a href="/en-US/trips/views/<?= $h->id ?>">Visit Listing</a>
+                                <a href="/en-US/trips/view/<?= $h->id ?>"><span>Visit Trip</span></a>
                                 <div class="clear"></div>
                             </div><!--INFO-->
                         </div><!--SINGLE-->

@@ -241,7 +241,7 @@
                         <ul>
                         	<?php foreach($this->pictures as $picture): ?>
                             <li><?= $this->thumbnail(array('width'=>176,'height'=>118),$picture->url,'','176:118') ?>
-                            <a href="#pic<?= $picture->id ?>" rel="group-1" class="lbc"></a></li>
+                            <a href="<?= $this->image($picture->url, 'lgbox_img', 'pic'.$picture->id) ?>" rel="group-1" class="lbc"></a></li>
                             <?php endforeach ?>
                         </ul>
                     </div><!--CONT-->
@@ -330,9 +330,6 @@
     <?= $this->partial('partials/footer.phtml'); ?>
 </div><!-- closes w1 -->
 <div class="hidden">
-    <?php foreach($this->pictures as $picture): ?>
-    <?= $this->image($picture->url, 'lgbox_img', 'pic'.$picture->id) ?>
-    <?php endforeach ?>
 	<div id="dates_lb">
     	<div class="lb-dates">
 			<div class="left">
