@@ -20,6 +20,7 @@
 <body id="home">
 <div id="wp_all">
     <div id="wp_header">
+		<?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true, 'hidesearch'=>true)); ?>
     </div><!--WP_HEADER-->
     <div id="wp_content">
         <div id="main">
