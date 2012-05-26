@@ -1,3 +1,4 @@
+/*TRIPS 1--------------------------------------------------------------------------------*/
 .loading {
     background: url("https://static.tripfab.com/images2/loading-bg.png") repeat scroll 0 0 transparent;
     display: none;
@@ -265,14 +266,13 @@
 
 
 #trips1 .trip {
-	display: none;
 	background-color: #FFF;
 	height: 206px;
 	margin-bottom: 26px;
 	-webkit-box-shadow: 0px 0px 3px 1px rgba(204, 204, 204, 0.4);
 	box-shadow: 0px 0px 3px 1px rgba(204, 204, 204, 0.4); 
 }
-#trips1 .trip > img {
+#trips1 .trip > a {
 	display: block;
 	float: left;
 }
@@ -451,7 +451,30 @@
 	font: 500 18px Helvetica;
 	margin-top: 5px;
 }
-
-
-
-
+/*END TRIPS 1----------------------------------------------------------------------------*/
+/*TRIPS 2--------------------------------------------------------------------------------*/
+.tripsHeader {
+	height: 65px;
+	border-bottom: 1px solid #e8e8e8;
+	background-color: #FFF;
+}
+.tripsHeader .wrap {
+	width: 960px;
+	margin: 0 auto;
+}
+.tripsHeader h2 {
+	font: bold 16px Helvetica;
+	color: #303030;
+	padding-top: 16px;
+	float: left;
+}
+.tripsHeader h2 span {
+	display: block;
+	margin-top: 5px;
+	font: normal 13px Helvetica;
+}
+.tripsHeader p {
+	font: bold 13px Helvetica;
+	float: right;
+}
+/*END TRIPS 2----------------------------------------------------------------------------*/
