@@ -413,12 +413,16 @@
     float: right;
     margin-right: 15px;
 }
+
 #support {
 	width: 990px;
 	height: 60px;
 	background: url(https://static.tripfab.com/images6/SupportG1.png) repeat-x left bottom;
 	border: 1px solid #000;
 	margin:20px 0 20px -20px;
+}
+#support.fixed {
+	position: fixed;
 }
 #support .lf {
 	width: 222px;
@@ -540,4 +544,5 @@
 	display: block;
 	float: right;
 }
+
 /*END TRIPS 2----------------------------------------------------------------------------*/
