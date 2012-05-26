@@ -200,6 +200,7 @@
 #trips1 .main {
 	float: right;
 	width: 760px;
+	position: relative;
 }
 #trips1 .filters {
 	height: 50px;
@@ -264,6 +265,7 @@
 
 
 #trips1 .trip {
+	display: none;
 	background-color: #FFF;
 	height: 206px;
 	margin-bottom: 26px;
