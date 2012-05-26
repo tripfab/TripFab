@@ -1,3 +1,25 @@
+.loading {
+    background: url("https://static.tripfab.com/images2/loading-bg.png") repeat scroll 0 0 transparent;
+    display: none;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 101;
+}
+.loading .load {
+    background: none repeat scroll 0 0 #303030;
+    color: #FFFFFF;
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 50px;
+    margin: 0 0 0 283px;
+    position: fixed;
+    text-align: center;
+    top: 310px;
+    width: 200px;
+}
 #trips1 {
 	width: 960px;
 	margin: 0 auto;
