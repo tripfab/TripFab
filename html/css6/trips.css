@@ -276,6 +276,7 @@
 #trips1 .trip > a {
 	display: block;
 	float: left;
+	width: 220px;
 }
 #trips1 .trip .descrip {
 	float: left;
@@ -421,22 +422,22 @@
 	background: url(https://static.tripfab.com/images6/SupportG1.png) repeat-x left bottom;
 	border: 1px solid #000;
 	margin:20px 0 20px -20px;
+	position: relative;
+}
+#support .close {
+	display: block;
+	width: 31px;
+	height: 31px;
+	background: url(https://static.tripfab.com/images6/tripsClose.png) no-repeat 0 0 ;
+	position: absolute;
+	top: -15px;
+	left: -15px;
 }
 #support.fixed {
 	position: fixed;
 	bottom: 0;
 	margin: 0;
 	z-index: 1000;
-}
-#support .lf {
-	width: 222px;
-	height: 60px;
-	background: url(https://static.tripfab.com/images6/SupportG1.png) repeat-x left top;
-	float: left;
-	font: 500 14px/60px Helvetica;
-	color: #FFF;
-	text-shadow: 0 1px 0 #2771b7;
-	text-align: center;
 }
 #support .rg {
 	float: left;
@@ -448,19 +449,25 @@
 	font: 200 14px/60px Helvetica;
 	color: #ebebeb;
 }
-#support .rg .number {
+#support .rg p strong {
+	color: #bee3ff;
+}
+#support .number {
 	position: absolute;
 	top: 14px;
 	right: 10px;
 	background: url(https://static.tripfab.com/images6/SupportPh.png) no-repeat left 4px;
 	padding-left: 34px;
 }
-#support .rg .number h6 {
+#support .number strong {
+	color: #bee3ff;
+}
+#support .number h6 {
 	font: 100 11px Helvetica;
 	color: #FFF;
 	text-transform: uppercase;
 }
-#support .rg .number h6 span {
+#support .number h6 span {
 	display: block;
 	font: 500 18px Helvetica;
 	margin-top: 5px;
@@ -535,9 +542,15 @@
 	 margin-right: 20px;
 	 margin-top: 10px;
 }
+#trips2 .content {
+	background: url("https://static.tripfab.com/images6/trips2Side.png") repeat-y scroll -94px 0 #FFFFFF;
+	-webkit-box-shadow: 0px 0px 2px 0px rgba(162, 162, 162, 0.3);
+	-moz-box-shadow: 0px 0px 2px 0px rgba(162, 162, 162, 0.3);
+	box-shadow: 0px 0px 2px 0px rgba(162, 162, 162, 0.3); 
+}
 #trips2 .content .filters {
 	height: 62px;
-	background-color: #fefefe;
+	background-color: #f7f7f7;
 }
 #trips2 .content .filters span {
 	display: block;
@@ -547,6 +560,272 @@
 #trips2 .content .filters > div {
 	display: block;
 	float: right;
+	padding-top: 23px;
+	padding-right: 20px;
+	margin-left: 30px;
 }
+#trips2 .filters .ttl {
+	color:#969696;
+	font: bold 16px Helvetica;
+	padding-top: 27px;
+}
+#trips2 .filters div > span {
+	display: block;
+	background: url(https://static.tripfab.com/images6/trips2icons.png) no-repeat 0 0 ;
+	height: 16px;
+	padding-left: 20px;
+	color: #464646;
+	font: bold 10px/16px Helvetica;
+	text-transform: uppercase;
+	float: left;
+}
+#trips2 .filters .price span {
+	background-position: 0 -47px;
+
+}
+#trips2 .filters .tags span {
+	background-position: 0 -145px;
+
+}
+#trips2 .filters .duration span {
+	background-position: 0 -97px;
+
+}
+#trips2 .filters .price select{
+	width: 165px;
+	height: 18px;
+}
+#trips2 .filters .tags select{
+	width: 205px;
+}
+#trips2 .filters .duration select{
+	width: 156px;
+}
+#trips2 .side {
+	width: 218px;
+	float: left;
+}
+#trips2 .side .widget {
+	background: url(https://static.tripfab.com/images6/trips2Side2.png) repeat-x 0 0;
+	margin-right: 2px;
+	padding: 0 0 20px 24px;
+}
+#trips2 .side .widget h4 {
+	font: bold 15px Helvetica;
+	color: #4f4f4f;
+	padding-top: 30px;
+	margin-bottom: 5px;
+}
+#trips2 .side .widget p {
+	font: normal 12px Helvetica;
+	color: #4f4f4f;
+	margin-bottom: 10px;
+}
+#trips2 .side .widget .phone {
+	background: url(https://static.tripfab.com/images6/trips1icons.png) no-repeat 0 -76px;
+	padding-left: 30px;
+	height: 22px;
+	font: bold 19px/22px Helvetica;
+	display: block;
+	margin-bottom: 10px;
+	color: #4f4f4f;
+}
+#trips2 .side .widget h3 {
+	background: url(https://static.tripfab.com/images6/trips2icons2.png) no-repeat left bottom;
+	width: 103px;
+	height: 156px;
+	margin: 0 auto;
+	text-indent: -99999px;
+	margin-bottom: 20px;
+}
+#trips2 .side .widget ul li {
+	background: url(https://static.tripfab.com/images6/trips2icons.png) no-repeat scroll 0 bottom;
+    color: #909090;
+    font: 12px/16px Helvetica;
+    height: 16px;
+    margin-bottom: 12px;
+    padding-left: 25px;
+}
+
+
+
+#trips2 .main {
+	width: 718px;
+	float: left;
+	padding: 22px 0 0 22px;
+}
+#trips2 .trip {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px; 
+	background-color: #f3f3f3;
+	height: 221px;
+	margin-bottom: 26px;
+	position: relative;
+	width: 696px;
+	border: 1px solid #f3f3f3;
+}
+#trips2 .trip:hover {
+	border: 1px solid #80c326;
+	background-color: #FFF;
+}
+#trips2 .trip .days {
+	background: url("https://static.tripfab.com/images6/trips2label.png") no-repeat scroll left bottom #80c326;
+    color: #FFFFFF;
+    font: 11px/18px Helvetica;
+    height: 18px;
+    margin-top: 10px;
+    padding: 0 20px;
+    position: absolute;
+    top: 32px;
+    right: 0;
+}
+#trips2 .trip:hover .days {
+	background-position: left top;
+}
+#trips2 .trip > a {
+	display: block;
+	float: left;
+}
+#trips2 .trip .hvr {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 237px;
+	height: 221px;
+	background: url(https://static.tripfab.com/images6/trips2Hvr.png) repeat 0 0;
+}
+#trips2 .trip .hvr a {
+	display: block;
+	font: bold 13px/37px Helvetica;
+	width: 144px;
+	margin: 92px auto 0;
+	height: 37px;
+}
+#trips2 .trip:hover .hvr {
+	display: block;
+}
+#trips2 .trip .descrip {
+	float: left;
+	margin: 0 0 10px 36px;
+	width: 400px;	
+}
+#trips2 .trip h2 {
+	margin-top: 30px;
+	float: left;
+	margin-left: 15px;
+	width: 400px;
+	margin-bottom: 2px;
+}
+#trips2 .trip h2 a{
+	color: #303030;
+	font: bold 19px Helvetica;
+	background: url(https://static.tripfab.com/images2/ico_127.gif) no-repeat left 2px;
+	padding-left: 20px;
+	display: block;
+	overflow: hidden;
+}
+#trips2 .trip:hover h2 a {
+	color: #80c326;
+	text-decoration: none;
+}
+#trips2 .trip .descrip span {
+	background: url(https://static.tripfab.com/images2/ico-3.png) no-repeat;
+	color: #898989;
+	font: 11px Helvetica ;
+	display: block;
+	line-height: 15px;
+	padding-left: 21px;
+	margin-bottom: 10px;
+	margin-left: -20px;
+}
+
+#trips2 .trip .descrip span strong {
+	font-weight: bold;
+}
+#trips2 .trip .descrip span a{
+	color: #80c326;
+}
+#trips2 .trip .descrip p {
+	color: #303030;
+	line-height: 17px;
+	margin-bottom: 10px;
+}
+
+#trips2 .trip .descrip .btn-1 {
+	float: left;
+}
+#trips2 .trip .descrip .specs {
+	overflow: hidden;
+	border-top: 1px solid #e3e3e3;
+	padding-top: 10px;
+}
+
+#trips2 .trip .descrip .price {
+	clear: both;
+	height: 59px;
+	padding:5px 15px 0 0;
+	float: left;
+}
+#trips2 .trip .descrip .price sup {
+	font: bold 15px Helvetica;
+	float: right;
+	display: block;
+	margin-top: 3px;
+}
+#trips2 .trip .descrip .price strong {
+	font: bold 25px Helvetica;
+	float: right;
+	display: block;
+}
+#trips2 .trip .descrip .price sub {
+	clear: both;
+	font: normal 11px Helvetica;
+	display: block;
+	text-align: right;
+}
+
+#trips2 .trip .descrip .specs dl {
+	float: right;
+	font: normal 11px/25px Helvetica;
+	color: #303030;
+	width: 165px;
+}
+#trips2 .trip .descrip .specs dl.first {
+	width: 140px;
+}
+#trips2 .trip .descrip .specs dl.first dt {
+	width: 	60px;
+}
+#trips2 .trip .descrip .specs dl.first dd {
+	width: 80px;
+	padding: 0;
+}
+#trips2 .trip .descrip .specs dl dt {
+	float: left;
+	width: 70px;
+	height: 25px;
+}
+#trips2 .trip .descrip .specs dl dd {
+	float: left;
+	height: 25px;
+	font-weight: bold;
+	padding-right: 5px;
+    width: 80px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*END TRIPS 2----------------------------------------------------------------------------*/
