@@ -1,4 +1,7 @@
 /*NEW HOME-----------------------------------------------------------------*/
+#home {
+	background-color: #FFF;
+}
 #home #searchResultsAutoComplete .ui-autocomplete {
 	left: 21px !important;
 	position: absolute;
@@ -100,6 +103,7 @@
 	width: 181px;
 	text-align: center;
 	margin-left: 200px;
+	text-shadow: 0px 1px 0px #0a69ca;
 }
 #home #featured {
 	background: url(https://static.tripfab.com/images6/HomeTabsBG.gif) repeat-x 0 0 #f1f1f1;
@@ -268,6 +272,9 @@
 	background: url(https://static.tripfab.com/images6/HomeLstngH.png) repeat-x 0 0;
 }
 #home #recommend {
+	background-color: #f1f1f1;
+}
+#home #recommend .wrap{
 	width: 960px;
 	margin: 0 auto;
 	padding-bottom: 60px;
@@ -347,6 +354,120 @@
 #home #note2 {
     text-align: left;
     text-indent: 15px;
+}
+#home #expanded {
+	height:0px;
+	overflow: hidden;
+	background-color: #FFF;
+	background: url(https://static.tripfab.com/images6/HomeSh.png) no-repeat center bottom;
+}
+#home #expanded .wrap {
+	width: 960px;
+	margin: 0 auto;
+}
+#home #expanded .ttl {
+	border-bottom: 1px solid #eaeaea;
+	width: 960px;
+	padding-bottom: 20px;
+}
+#home #expanded .ttl > h4 {
+	font: 200 33px Helvetica;
+	color: #303030;
+	text-align: center;
+	margin-bottom: 10px;
+	padding-top: 20px;
+}
+#home #expanded .ttl > p {
+	font: 200 17px Helvetica;
+	color: #555555;
+	text-align: center;
+}
+#home #expanded .cycle > h5 {
+	overflow: hidden;
+	font: 200 21px Helvetica;
+	color: #303030;
+	margin-bottom: 10px;
+	text-align: center;
+	width: 620px;
+	margin: 0 auto;
+	border-bottom: 1px solid #eaeaea;
+	padding: 15px 0;
+}
+#home #expanded h5 span {
+	display: block;
+	font: 200 14px Helvetica;
+	margin-top: 5px;
+}
+#home #expanded h5 a{
+	background: url(https://static.tripfab.com/images6/HomeArrows.png) no-repeat 0 0;
+	display: block;
+	width: 41px;
+	height: 41px;
+}
+#home #expanded h5 a.prev {
+	background-position: 0 -47px;
+	float: left;
+}
+#home #expanded h5 a.prev:hover {
+	background-position: 0 0px;
+}
+#home #expanded h5 a.next {
+	background-position: 0 -145px;
+	float: right;
+}
+#home #expanded h5 a.next:hover {
+	background-position: 0 -96px;
+}
+#home #expanded .single {
+	padding-top: 30px;
+}
+#home #expanded .each {
+	width: 280px;
+	float: left;
+	margin-right: 49px;
+}
+#home #expanded .each.last {
+	margin-right: 0;
+}
+#home #expanded .each .icon {
+	background: url("https://static.tripfab.com/images6/HomeLine.png") repeat-x scroll 0 23px transparent;
+	height: 47px;
+	margin-bottom: 10px;
+}
+#home #expanded .each .icon span{
+	background: url(https://static.tripfab.com/images6/HomeSprite.png) no-repeat 0 0;
+	width: 48px;
+	height: 47px;
+	display: block;
+	margin: 0 auto;
+}
+#home #expanded .each .icon .st1 {
+	background-position: -111px -56px;
+}
+#home #expanded .each .icon .st2 {
+	background-position: -55px -56px;
+}
+#home #expanded .each .icon .st3 {
+	background-position: -167px -56px;
+}
+#home #expanded .each .info {
+	text-align: center;
+}
+#home #expanded .each .info span {
+	color: #b7b7b7;
+	text-transform: uppercase;
+	font: normal 13px Helvetica;
+	display: block;
+	margin-bottom: 5px;
+}
+#home #expanded .each .info h5 {
+	font: 500 15px Helvetica;
+	margin-bottom: 15px;
+}
+#home #expanded .each .info p {
+	margin-bottom: 5px;
+	color: #898989;
+	font: normal 13px/18px Helvetica;
 }
 /*END NEW HOME-------------------------------------------------------------*/
 
