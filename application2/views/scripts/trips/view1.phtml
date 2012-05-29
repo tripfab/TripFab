@@ -73,7 +73,7 @@
                     </div><!--CAROUSEL-->
                     
                     <div class="price">
-                        <span><?= $this->formatnumber($this->price) ?></span>
+                        <span><?= $this->formatnumber($this->trip->price) ?></span>
                         <sup>$</sup>
                         <sub>per person</sub>
                     </div><!--PRICE--></div>
@@ -337,33 +337,71 @@
 <script type="text/javascript" src="/js2/datepicker.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript" src="/js2/trips/view.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $(".carousel").jcarousel();	
-        $(".cycleDates").cycle({
-	        fx: 'scrollHorz',
-	        timeout: 0,
-            prev: '.prev',
-            next: '.next'	        
-        });
-        $(".cycle").cycle({
-            fx: 'scrollHorz',
-            timeout: 0,
-            prev: '.prev',
-            next: '.next',
-			after:onAfter
-        });
-        $(".lbc").fancybox({
-	       padding: 10,
-		    showCloseButton: true,
-		    centerOnScroll: true,
-		    overlayOpacity: '0.7',
-		    titlePosition: 'inside',
-		    overlayColor: '#FFF' 
-        });
-        $('#fancybox-title').addClass('tittle');
-		$('#fancybox-left-ico').addClass('lfarrow').css('display', 'block');
-		$('#fancybox-right-ico').addClass('rgarrow');
+$(document).ready(function() {
+	$(".carousel").jcarousel();	
+	$(".cycleDates").cycle({
+		fx: 'scrollHorz',
+		timeout: 0,
+		prev: '.prev',
+		next: '.next'	        
+	});
+	$(".cycle").cycle({
+		fx: 'scrollHorz',
+		timeout: 0,
+		prev: '.prev',
+		next: '.next',
+		after:onAfter
+	});
+	$(".lbc").fancybox({
+	   padding: 10,
+		showCloseButton: true,
+		centerOnScroll: true,
+		overlayOpacity: '0.7',
+		titlePosition: 'inside',
+		overlayColor: '#FFF' 
+	});
+	$('#fancybox-title').addClass('tittle');
+	$('#fancybox-left-ico').addClass('lfarrow').css('display', 'block');
+	$('#fancybox-right-ico').addClass('rgarrow');
+});
+	
+$(document).ready(function(){
+    img_ready($('img.background'));
+});
+
+function img_ready($obj){
+    resizeImg($obj);
+    $(window).resize(function() {
+       resizeImg($obj);
     });
+    $obj.fadeIn();
+}
+function resizeImg($bgImg) {
+    var imgwidth  = 1400;
+    var imgheight = 223;
+    
+    var winwidth  = $(window).width();
+    var winheight = $(window).height();
+    
+    var winCenter = winwidth / 2;
+    var imgCenter = imgwidth / 2;
+    
+    var left = (winwidth > imgwidth) ? 0 : (winCenter - imgCenter);
+    
+    var width = (winwidth > imgwidth) ? winwidth : imgwidth;
+    
+    var height = (winwidth > imgwidth) ? ((imgheight * winwidth) / imgwidth) : height;
+    
+    var winCenter2 = imgheight / 2;
+    var imgCenter2 = height / 2;
+    
+    var top = (winwidth > imgwidth) ? (winCenter2 - imgCenter2) : 0;
+    
+    $bgImg.css('left',left);
+    $bgImg.css('width',width);
+    $bgImg.css('height',height);
+    $bgImg.css('top',top);
+}
 </script>
 <style type="text/css">
 .mapCanvas { width:260px; height:103px;}
