@@ -352,6 +352,17 @@
             next: '.next',
 			after:onAfter
         });
+        $(".lbc").fancybox({
+	       padding: 10,
+		    showCloseButton: true,
+		    centerOnScroll: true,
+		    overlayOpacity: '0.7',
+		    titlePosition: 'inside',
+		    overlayColor: '#FFF' 
+        });
+        $('#fancybox-title').addClass('tittle');
+		$('#fancybox-left-ico').addClass('lfarrow').css('display', 'block');
+		$('#fancybox-right-ico').addClass('rgarrow');
     });
 </script>
 <style type="text/css">

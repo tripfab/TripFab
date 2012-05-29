@@ -1609,4 +1609,48 @@
 #tripsView .itinerary .single .picture .mapCanvas.show {
 	display: block;
 }
+
+#fancybox-left-ico.lfarrow, 
+#fancybox-right-ico.rgarrow {
+	background: url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat;
+	width: 24px;
+	height: 51px;
+	display: block;
+	position: absolute;
+	top: 50%;
+	z-index: 10;
+	margin: -18px 0 0 0;
+}
+
+#fancybox-left-ico.lfarrow{
+	background-position: -577px -71px;
+	left: 20px;
+}
+#fancybox-left-ico.lfarrow:hover {
+	background-position: -577px -14px;
+	left: 20px;
+}
+#fancybox-right-ico.rgarrow{
+	background-position: -612px -71px;
+	right: 20px;
+	left: auto;
+}
+#fancybox-right-ico.rgarrow:hover {
+	background-position: -612px -14px;
+}
+#fancybox-title-inside {
+	position: absolute;
+	background: url(https://static.tripfab.com/images6/src_result-shw2.png) repeat;
+	height: 42px;
+	width: 678px;
+	text-align: left;
+	color: #FFF;
+	font: normal 12px/42px Helvetica;
+	bottom: 7px;
+	left: 7px;
+	text-indent: 20px;
+}
+.fancybox-title-inside {
+	padding-bottom: 0 !important;
+}
 /*END LIGHTBOX SELECT DATES -------------------------------------------------------------*/
