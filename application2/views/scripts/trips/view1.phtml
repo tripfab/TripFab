@@ -8,7 +8,10 @@
     <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
     <link type="text/css"  rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
-	<link rel="stylesheet" href="/css2/datepicker.css?v=000000000000079" type="text/css" />
+	<link rel="stylesheet" href="/css2/datepicker.css?v=<?= $this->cssVC ?>" type="text/css" />
+    <!--[if IE 7]><link type="text/css" rel="stylesheet" href="/css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css?v=<?= $this->cssVC ?>" /><![endif]-->
+    <!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body id="tripsView">
 <div id="wp_all">
@@ -126,12 +129,13 @@
                 
                 <div class="itinerary">
                     <div class="top">
+                        <a href="" class="prev">Previous Day</a>
+                        <a href="" class="next">Next Day</a>
 	                    <div class="cycleDates">
-	                    	<h4>Day 2 of 9 <strong>Cocos Island Diving Trip</strong></h4>
-	                    	<h4>Day 3 of 9 <strong>Cocos Island Diving Trip</strong></h4>
+                        	<?php for($i=1;$i<=$this->trip->days;$i++): ?>
+	                    	<h4>Day <?= $i ?> of <?= $this->trip->days ?> <strong><?= $this->trip->title ?></strong></h4>
+                            <?php endfor ?>
 	                    </div>
-                        <a href="" class="prev"></a>
-                        <a href="" class="next"></a>
                     </div><!--TOP-->
                     <div class="cycle">
 						<?php $times = array('Stay','Morning','Afternoon','Night','Stay') ?>
@@ -335,23 +339,23 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $(".carousel").jcarousel();	
+        $(".cycleDates").cycle({
+	        fx: 'scrollHorz',
+	        timeout: 0,
+            prev: '.prev',
+            next: '.next'	        
+        });
         $(".cycle").cycle({
             fx: 'scrollHorz',
             timeout: 0,
             prev: '.prev',
             next: '.next'
         });
-        $(".cycleDates").cycle({
-	        fx: 'fade',
-	        timeout: 0,
-            prev: '.prev',
-            next: '.next'
-	        
-        })
     });
 </script>
 <style type="text/css">
 .mapCanvas { width:260px; height:103px;}
+##fancybox-img { max-width:900px;}
 </style>
 </body>
 </html>
