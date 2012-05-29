@@ -996,15 +996,15 @@
 	margin: 0 auto;
 }
 #tripsView .specs .pictures {
-	width: 115px;
+	width: 110px;
 	float: left;
 	display: block;
 	background: url(https://static.tripfab.com/images6/tripsView2.png) no-repeat left -35px;
 	height: 45px;
-	padding-left: 30px;
+	padding-left: 35px;
 	font: bold 11px/16px Helvetica;
 	color: #898989;
-	margin: 25px 0 0 0;
+	margin: 32px 0 0 0;
 }
 #tripsView .specs strong {
 	font:bold 13px Helvetica;
@@ -1087,6 +1087,7 @@
 	font: bold 25px Helvetica;
 	display: block;
 	float: right;
+	margin-top: 3px;
 }
 #tripsView .specs .price span {
 	display: block;
@@ -1103,7 +1104,7 @@
 	margin: 0 auto;
 }
 #tripsView .overview {
-	padding:40px 0 30px
+	padding:38px 0 30px
 }
 #tripsView .overview h4 {
 	width:580px;
@@ -1116,18 +1117,19 @@
 	color: #60b5f7;
 	display: block;
 	text-align: center;
-	margin: 0 auto;
+	margin: 0 auto 30px;
 	background-color: #f3f3f3;
 	width:235px;
 }
 #tripsView .overview .descrip{
 	width: 653px;
 	float: left;
+	margin-bottom: 10px
 }
-#tripsView .overview .descrip .ttl{
+#tripsView .overview .descrip .ttl {
 	font: bold 16px Helvetica;
 	display: block;
-	margin-bottom: 10px
+	margin-bottom: 12px
 }
 #tripsView .overview .descrip p {
 	font: normal 13px/20px Helvetica;
@@ -1138,6 +1140,10 @@
 	float: right;
 	padding: 0 0 0 25px;
 	border-left: 1px solid #fcfcfc;
+	margin-bottom: 10px;
+	-moz-box-shadow: -1px 0px 0px 0px #d7d7d7;
+	-webkit-box-shadow: -1px 0px 0px 0px #d7d7d7;
+	box-shadow: -1px 0px 0px 0px #d7d7d7; 
 }
 #tripsView .cities .ttl {
 	font: bold 13px Helvetica;
@@ -1157,7 +1163,7 @@
 	font: 13px/17px Helvetica;
 }
 #tripsView .includes {
-	padding-bottom: 20px;
+	padding-bottom: 8px;
 }
 #tripsView .includes .first {
 	width: 444px;
@@ -1224,25 +1230,33 @@
 }
 #tripsView .itinerary .top a {
 	display: block;
-	width:37px;
+	width:233px;
 	height: 50px;
 	background: url(https://static.tripfab.com/images6/tripsViewAw.png) no-repeat 0 0;
 	position: absolute;
 	top:15px;
+	color: #FFF;
+	font: bold 14px/50px Helvetica;
+}
+#tripsView .itinerary .top a:hover {
+	color: #60b5f7;
 }
 #tripsView .itinerary .top a.prev {
 	left:0;
 	background-position: 0 0;
+	text-indent: 55px
 }
 #tripsView .itinerary .top a.prev:hover {
 	background-position: 0 -49px
 }
 #tripsView .itinerary .top a.next {
 	right:0;
-	background-position: 0 -98px;
+	background-position: right -98px;
+	text-align: left;
+	width: 110px
 }
 #tripsView .itinerary .top a.next:hover {
-	background-position: 0 -147px;
+	background-position: right -147px;
 }
 #tripsView .itinerary .content {
 	width:960px;
@@ -1251,7 +1265,7 @@
 	width: 319px;
 	border-right: 1px solid #eaeaea;
 	float: left;
-	margin-top: 20px
+	margin-top: 21px
 }
 #tripsView .itinerary .single {
 	border-bottom: 1px solid #eaeaea;
@@ -1275,7 +1289,7 @@
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	margin-bottom: 20px;
+	margin-bottom: 25px;
 	text-shadow: 0 1px 0 #FFF;
 }
 #tripsView .itinerary .single .ttl em {
@@ -1288,13 +1302,17 @@
 #tripsView .itinerary .single h5 {
 	font: bold 15px/18px Helvetica;
 	color: #303030;
+	margin-bottom: 4px
 }
 #tripsView .itinerary .single .time {
-	background: url(https://static.tripfab.com/images6/tripsView2.png) no-repeat 0 -181px;
+	background: url(https://static.tripfab.com/images6/tripsView2.png) no-repeat 0 -178px;
 	padding-left: 16px;
 	height: 20px;
 	font: bold 12px/20px Helvetica;
 	color: #898989;
+	display:block;
+	margin-bottom: 10px;
+	height: 20px
 }
 #tripsView .itinerary .single .picture {
 	width: 260px;
@@ -1325,12 +1343,12 @@
     margin: 0 0 0 5px;
 }
 #tripsView .itinerary .single ul {
-	padding-bottom: 10px
+	padding-bottom: 2px
 }
 #tripsView .itinerary .single li {
 	font: 12px/17px Helvetica;
 	color: #464646;
-	margin-bottom: 10px;
+	margin-bottom: 14px;
 }
 #tripsView .details {
 	padding-top: 30px
@@ -1397,3 +1415,151 @@
 
 
 /*END TRIPS VIEW 1-----------------------------------------------------------------------*/
+
+/* LIGHTBOX SELECT DATES ----------------------------------------------------------------*/
+.lb-dates {
+	background: url(https://static.tripfab.com/images6/g-14.png) repeat-y;
+	width: 627px;
+	border: 1px solid #d4d4d4;
+	box-shadow: 0 0 5px #d4d4d4;
+	overflow: hidden;
+	height: 400px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px; 
+}
+
+.lb-dates .left {
+	overflow: hidden;
+	width: 272px;
+	float: left;
+	padding: 20px 30px;
+}
+
+.lb-dates .left h2 {
+	color: #030303;
+	font-size: 20px;
+	border-bottom: 1px solid #d4e8f7;
+	padding-bottom: 10px;
+}
+.lb-dates .left p {
+	border-top: 1px solid #f5fbff;
+	padding: 15px 20px 0 0;
+	font: bold 13px/18px Helvetica;
+	margin-bottom: 20px;
+}
+.lb-dates .left ul {
+	list-style: square;	
+	padding-left: 14px;
+	color: #4f4f4f;
+	font-size: 13px;
+	line-height: 18px;
+}
+
+.lb-dates .left ul li {
+	margin-bottom: 12px;
+}
+
+.lb-dates .right {
+	float: right;
+	width: 295px;
+}
+
+.lb-dates .right .datepicker {
+	margin: 0;
+}
+
+.lb-dates .right .datepicker .ui-datepicker {
+	padding: 0;
+}
+
+.lb-dates .right .ui-datepicker table {
+	margin: 0 25px;
+	width: 245px;
+}
+.lb-dates .right .ui-datepicker table th {
+	text-align: center;
+	color: #acacac;
+	font:bold 11px Helvetica;
+	text-transform: uppercase;
+}
+.lb-dates .right .ui-datepicker table td {
+	height: 27px;
+	width: 30px;
+	font: bold 12px/27px Helvetica;
+	padding: 2px;
+	text-align: center;
+}
+.datepicker td.ui-datepicker-other-month span.ui-state-default {
+	background-color: #b7b7b7;
+	color: #464646;
+	font-size: 13px;
+	font-weight: bold;
+	display: block;
+	padding: 0.2em;
+	    text-align: center;
+	    text-decoration: none;
+}
+.lb-dates .right .ui-datepicker table td.ui-datepicker-other-month span{
+	background-color:#e1e1e1;
+	color: #acacac !important;
+}
+.lb-dates .right .ui-datepicker table td.ui-datepicker-unselectable span{
+ 	color: #464646;
+ 	background-color: #e1e1e1;
+ 	display: block;
+ 	font-size: 13px;
+ 	font-weight: bold;
+ 	display: block;
+ 	padding: 0.2em;
+    text-align: center;
+    text-decoration: none;
+ }
+.lb-dates .right .ui-datepicker .ui-datepicker-header {
+	background: url(https://static.tripfab.com/images2/g-15.png) repeat-x;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	color: #FFFFFF;
+	height: 44px;
+	line-height: 44px;
+	margin-bottom: 10px;
+	padding: 0;
+	position: relative;
+}
+
+.lb-dates .right .datepicker .ui-datepicker .ui-datepicker-prev, .lb-dates .right .datepicker .ui-datepicker .ui-datepicker-next {
+	height: 44px;
+	line-height: 44px;
+	top: 0;
+	position: absolute;
+}
+
+.lb-dates .right .datepicker .ui-datepicker .ui-datepicker-next {
+	right: 28px;
+}
+
+.lb-dates .right .datepicker .ui-datepicker .ui-datepicker-prev {
+	left: 28px;
+}
+
+.lb-dates .right .ui-datepicker .ui-datepicker-title {
+	height: 44px;
+	color: #FFF;
+	text-align: center;
+	font: bold 12px/44px Helvetica;
+	text-transform: uppercase;
+}
+.lb-dates .occ  {
+	background: url(https://static.tripfab.com/images2/dot2.png) repeat-x left top;
+	margin-top: 13px;
+	padding:23px 20px 16px;
+	overflow: hidden;
+}
+.lb-dates .occ .btn-4 {
+	float: right;
+	height: 32px;
+	line-height: 32px;
+	width: 85px;
+	text-align: center;
+}
+/*END LIGHTBOX SELECT DATES -------------------------------------------------------------*/
