@@ -2,13 +2,13 @@
 
 class Zend_View_Helper_Blur {
     
-    public function blur($image){
+    public function blur($image, $_h = 250){
         
         $imagePath = $image;
         
         $opts = array(
             'w' => 1400,
-            'h' => 250,
+            'h' => $_h,
             'crop' => true,
             //'scale' => true,
         );

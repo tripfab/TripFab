@@ -465,6 +465,20 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 )
             )
         );
+        
+        $router->addRoute(
+            'tripview_landing_1',
+            new Zend_Controller_Router_Route(
+                '/:lang/l1/trips/view/:task',
+                array(
+                    'controller' => 'trips',
+                    'action'     => 'view1',
+                    'module'     => 'default',
+                    'lang'       => $lang
+                )
+            )
+        );
+        
         $router->addRoute(
             'admin',
             new Zend_Controller_Router_Route(

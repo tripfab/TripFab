@@ -3,11 +3,11 @@
 <?php if(count($this->trips) > 0): ?>
 <?php foreach($this->trips as $i => $trip): ?>
 <div class="trip">
-	<a href="/trips/view/<?= $trip->id ?>">
+	<a href="/l1/trips/view/<?= $trip->id ?>">
 	<?= $this->lazylisting(array('width'=>220,'height'=>206), $trip->image, '', '220:206', '',$_imgloading) ?></a>
-	<h2><a href="/trips/view/<?= $trip->id ?>"><?= $trip->title ?></a></h2>
+	<h2><a href="/l1/trips/view/<?= $trip->id ?>"><?= $trip->title ?></a></h2>
     <div class="descrip">
-        <span>Jacó, Tamarindo, Monteverde, and other <a href="/trips/view/<?= $trip->id ?>" class="link1"> cities</a></span>
+        <span>Jacó, Tamarindo, Monteverde, and other <a href="/l1/trips/view/<?= $trip->id ?>" class="link1"> cities</a></span>
         <p><?= substr($trip->description,0,150) ?>...</p>
         <div class="specs">
             <dl>
@@ -31,7 +31,7 @@
             <sup>$</sup>
             <sub>per person</sub>
         </div><!--PRICE-->
-        <a href="/trips/view/<?= $trip->id ?>">Read More & Buy <span></span></a>
+        <a href="/l1/trips/view/<?= $trip->id ?>">Read More & Buy <span></span></a>
     </div><!--META-->
 </div><!--TRIP-->
 <?php endforeach ?>

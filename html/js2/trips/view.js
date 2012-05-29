@@ -124,17 +124,19 @@ $(document).ready(function() {
     }
     
     $aaa = false;
-    $('.box.days .day .day-section .left > a').live('click', function(){
+    $('.box.days .day .day-section .left > a, .js-show-map').live('click', function(){
         $('.mapCanvas').removeClass('hidden');
         $(this).parent().find('.mapCanvas').toggleClass('show');
         $aaa = $(this).data('aaa');
-        if(!$aaa) {
+        if(!$aaa) { 
             $(this).html('Hide Map <span>&darr;</span>');
             $(this).data('aaa', true);
+            //$(this).parent().find('img').hide();
             if(!$(this).data('done')) {
                 showMap($(this));
             }
         } else {
+            //$(this).parent().find('img').show();
             $(this).html('Show Map <span>&uarr;</span>');
             $(this).data('aaa', false);
         }
