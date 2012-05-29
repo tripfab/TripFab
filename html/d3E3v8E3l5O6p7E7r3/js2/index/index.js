@@ -117,27 +117,27 @@ $(function(){
         }
     });	
 });
-$(document).ready(function() {
-    $('#tags').one('click', function() {
-        $('#note1').fadeIn('slow');
-        return false;
-    });
-    $('#tags').keypress(function() {
-        $('#citiesAutocompleteContainer2 ul').css('display', 'block');
-    });
-    $('#tags').keypress("autocompleteclose", function() {
-        $('#note1').fadeOut('fast');
-    });
-    $( "#tags" ).bind( "autocompleteclose", function() {
-        $('#note2').fadeIn('slow');
-    });
-    $( "#tags" ).bind( "autocompleteopen", function() {
-        $('#note2').fadeOut('slow');
-    });
-    $( "#tags" ).focusout(function() {
-        $('#note2').fadeOut('slow');
-    });
-});
+//$(document).ready(function() {
+//    $('#tags').one('click', function() {
+//        $('#note1').fadeIn('slow');
+//        return false;
+//    });
+//    $('#tags').keypress(function() {
+//        $('#citiesAutocompleteContainer2 ul').css('display', 'block');
+//    });
+//    $('#tags').keypress("autocompleteclose", function() {
+//        $('#note1').fadeOut('fast');
+//    });
+//    $( "#tags" ).bind( "autocompleteclose", function() {
+//        $('#note2').fadeIn('slow');
+//    });
+//    $( "#tags" ).bind( "autocompleteopen", function() {
+//        $('#note2').fadeOut('slow');
+//    });
+//    $( "#tags" ).focusout(function() {
+//        $('#note2').fadeOut('slow');
+//    });
+//});
 $(function(){
     $('.lazy').lazyload({ 
         effect : "fadeIn",

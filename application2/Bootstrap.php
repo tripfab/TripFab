@@ -25,7 +25,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     'controller' => 'index',
                     'action'     => 'index',
                     'module'     => 'default',
-                    'lang'       => $lang
                 )
             )
         );
@@ -37,7 +36,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     'controller' => 'index',
                     'action'     => 'index',
                     'module'     => 'default',
-                    'lang'       => $lang
                 )
             )
         );
