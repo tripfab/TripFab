@@ -132,6 +132,29 @@ class TripsController extends Zend_Controller_Action {
         $this->view->country = $country;
     }
     
+    public function country1Action()
+    {
+        $this->view->countries  = $this->json->getCountryTerms();
+        $this->view->categories = $this->trips->getCategories();
+        $this->view->landscapes = $this->trips->getLandscapes();
+        $this->view->regions    = $this->places->getPlaces(1);
+        
+        $idf = $this->_getParam('country','costa_rica');
+        $country = $this->places->getPlaceByIdf($idf);
+        
+        $trips_count = $this->trips->countTrips($country->id);
+        $this->view->trips_count = $trips_count;
+        
+        $this->view->max = $this->trips->getHighestPrice($country->id);
+        
+        $ls_count = $this->listings->countListings(null, null, $country->id);
+        
+        $this->view->totallistings = $ls_count[75];
+        $this->view->totaltrips    = $trips_count['all'];
+        
+        $this->view->country = $country;
+    }
+    
     public function futureAction()
     {
         $trips = $this->trips->getFutureTripsBy($this->user->getId());
