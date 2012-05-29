@@ -1602,7 +1602,9 @@
 	margin-left: 0;
 }
 #tripsView .itinerary .single .picture .mapCanvas {
-	display: none
+	display: none;
+	position: absolute !important;
+	top:0;
 }
 #tripsView .itinerary .single .picture .mapCanvas.show {
 	display: block;

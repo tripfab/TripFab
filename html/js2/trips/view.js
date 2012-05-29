@@ -129,7 +129,7 @@ $(document).ready(function() {
         $(this).parent().find('.mapCanvas').toggleClass('show');
         $aaa = $(this).data('aaa');
         if(!$aaa) { 
-            $(this).html('Hide Map <span>&darr;</span>');
+            $(this).html('Hide Map <span class="aw">&darr;</span>');
             $(this).data('aaa', true);
             //$(this).parent().find('img').hide();
             if(!$(this).data('done')) {
@@ -137,7 +137,7 @@ $(document).ready(function() {
             }
         } else {
             //$(this).parent().find('img').show();
-            $(this).html('Show Map <span>&uarr;</span>');
+            $(this).html('Show Map <span class="aw">&uarr;</span>');
             $(this).data('aaa', false);
         }
         return false;       	
