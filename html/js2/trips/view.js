@@ -1,14 +1,13 @@
+function onAfter(curr, next, opts, fwd) {
+    var index = opts.currSlide;
+    //get the height of the current slide
+    var $ht = $(this).height();
+    //set the container's height to that of the current slide
+    $(this).parent().animate({
+        height: $ht
+    });
+}
 $(document).ready(function() {
-	
-	function onAfter(curr, next, opts, fwd) {
-	var index = opts.currSlide;
-	//get the height of the current slide
-	var $ht = $(this).height();
-	//set the container's height to that of the current slide
-	$(this).parent().animate({
-		height: $ht
-	});
-	}
 	
 	$("a.lb, a.lbc").fancybox({
 	    padding: 0,
@@ -244,10 +243,3 @@ $(document).ready(function() {
 		
     });
 });
-
-
-
-
-
-
-
