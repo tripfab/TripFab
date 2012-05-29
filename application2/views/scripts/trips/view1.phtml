@@ -1,0 +1,346 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title>Tripfab.com</title>
+    <link type="text/css" rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/trips.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>"  >
+</head>
+<body id="tripsView">
+<div id="wp_all">
+    <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?> 
+    <div id="wp_header"> 
+        <div class="browseTrips">
+            <div class="wrapper">
+                <div class="cntrl">
+                    <ul class="breadcrump">
+                        <li class="first"><a class="home" href="/"></a></li>
+                        <li><a href="/l1/trips/costa_rica/#/all">Pre-Planned Trips</a></li>
+                        <li class="last"><a href="/l1/trips/costa_rica/#/all" class="active">Costa Rica</a></li>
+                    </ul>
+                    <a class="link1" href="/l1/trips/costa_rica/#/all">← Back to Browse Itineraries</a>
+                    <div class="clear"></div>
+                </div><!--CNTRL-->
+                <div class="cont">
+                    <div class="left">
+                        <h3><?= $this->trip->title ?></h3>
+                        <span class="time"><?= $this->trip->days ?> Days / <?= $this->trip->nights ?> Nights Trip</span>
+                    </div><!--LEFT-->
+                    <div class="right">
+	        			<?php if($this->user): ?>
+	        			<a href="#dates_lb" class="lb btn-1">Buy Trip</a>
+	        			<?php else: ?>
+	        			<a href="/signup" class="js-signup btn-1">Buy Trip</a>
+	        			<?php endif ?>
+                        <div class="price">
+                            <sub>per person</sub>
+                            <span><?= $this->formatnumber($this->trip->price) ?></span>
+                            <sup>$</sup>
+                        </div><!--PRICE-->
+                        <div class="clear"></div>
+                    </div><!--RIGHT-->
+                    <div class="clear"></div>
+                </div><!--CONT-->
+            </div><!--WRAPPER-->
+        </div><!--BROWSETRIPS-->
+    </div><!--WP_HEADER-->
+    
+    <div id="wp_content">
+        <div class="photo">
+        	<?= $this->blur($this->trip->image, 258) ?>
+            <!--<img src="https://static.tripfab.com/images6/tripsViewBig.png" width="" height="258" alt="" />-->
+            <h3><?= $this->trip->title ?></h3>
+            <h4>COSTA RICA EXCLUSIVE TRIP</h4>
+            <div class="line"></div>
+        </div><!--PHOTO-->
+        <div class="main">
+            <div class="specs">
+                <div class="wrap"><span class="pictures"><strong>Trip Pictures</strong> <?= count($this->pictures) ?> Photos</span>
+                    <div class="carousel">
+                        <ul>
+                        	<?php foreach($this->pictures as $pic): ?>
+                            <li><a href="<?= $this->image($pic->url, 'lgbox_img', 'pic'.$pic->id) ?>" rel="group-1" class="lbc">
+							<?= $this->thumbnail(60,$pic->url,'','1:1') ?></a></li>
+                            <?php endforeach ?>
+                        </ul>
+                    </div><!--CAROUSEL-->
+                    
+                    <div class="price">
+                        <span><?= $this->formatnumber($this->price) ?></span>
+                        <sup>$</sup>
+                        <sub>per person</sub>
+                    </div><!--PRICE--></div>
+                    <div class="clear"></div>
+            </div><!--SPECS-->
+            <div class="maintop">
+                
+                <div class="overview">
+                    <h4><span>Package Overview</span></h4>
+                    <div class="descrip">
+                        <span class="ttl"> <?= $this->trip->days ?> Days / <?= $this->trip->nights ?> Nights Trip</span>
+                        <p><?= nl2br($this->trip->description) ?></p>
+                    </div><!--DESCRIP-->
+                    <div class="cities">
+                        <span class="ttl">Some cities you'll explore</span>
+                        <ul>
+                        	<?php foreach($this->cities as $c): ?>
+                            <li><?= $c->title ?></li>
+                            <?php endforeach ?>
+                        </ul>
+                    </div><!--CITIES-->
+                    <div class="clear"></div>
+                    <div class="includes">
+                        <div class="first">
+                            <span class="ttl"><em>Included</em></span>
+                            <?php $includes = array(); foreach($this->includes as $in) if($in->included == 1) $includes[] = $in; ?>
+                            <?php $rest = count($includes) % 2; ?>
+							<?php $limit = ($rest > 0) ? ((count($includes) - $rest) / 2) + $rest : (count($includes) / 2) ?>
+                            <?php for($i=0; $i<count($includes); $i=$i+$limit): ?>
+                            <ul>
+                                <?php for($j=$i;(($j<count($includes)) and ($j<($i+$limit))); $j++): ?>
+                                <li><em></em><?= $includes[$j]->text ?></li>
+                                <?php endfor ?>
+                            </ul>
+                            <?php endfor ?>
+                        </div><!--FIRST-->
+                        <div class="second">
+                            <span class="ttl"><em>Not Included</em></span>
+                            <?php $includes = array(); foreach($this->includes as $in) if($in->included == 0) $includes[] = $in; ?>
+                            <?php $rest = count($includes) % 2; ?>
+							<?php $limit = ($rest > 0) ? ((count($includes) - $rest) / 2) + $rest : (count($includes) / 2) ?>
+                            <?php for($i=0; $i<count($includes); $i=$i+$limit): ?>
+                            <ul>
+                                <?php for($j=$i;(($j<count($includes)) and ($j<($i+$limit))); $j++): ?>
+                                <li><span></span><?= $includes[$j]->text ?></li>
+                                <?php endfor ?>
+                            </ul>
+                            <?php endfor ?>
+                        </div><!--SECOND-->
+                        <div class="clear"></div>
+                    </div><!--INCLUDES-->
+                </div><!--OVERVIEW-->
+                
+                <div class="itinerary">
+                    <div class="top">
+	                    <h4>Day 2 of 9 <strong>Cocos Island Diving Trip</strong></h4>
+                        <a href="" class="prev"></a>
+                        <a href="" class="next"></a>
+                    </div><!--TOP-->
+                    <div class="cycle">
+						<?php $times = array('Stay','Morning','Afternoon','Night','Stay') ?>
+                        <?php for($i=1;$i<=count($this->listingsbyday);$i++): ?>
+                        <div class="content">
+                        	<?php foreach($this->listingsbyday[$i] as $time => $listings): ?>
+                            <div class="column">
+                            	<div class="single ttl">
+	                                <span class="ttl"><?= ucfirst($time) ?> <em></em></span>
+                                </div>
+	                            <?php foreach($listings as $listing): ?>
+                                <div class="single">
+                                    <h5><?= $listing->title ?></h5>
+                                	<?php if($listing->start != '00:00:00'): ?>
+                                    <span class="time">
+									<?= date('g:i A',strtotime($listing->start)) ?> - <?= date('g:i A',strtotime($listing->end)) ?></span>
+                                    <?php else: ?>
+                                    <span class="time"><?= $times[$listing->time] ?></span>
+                                    <?php endif ?>
+                                    <div class="picture">
+                                    	<?= $this->thumbnail(array('width'=>260,'height'=>103), $listing->image, '', '267:168') ?>
+                                        <a href="mapcanvas<?= $listing->id ?>" class="mos js-show-map"
+                                        data-lat="<?= $listing->lat ?>" data-lng="<?= $listing->lng ?>" 
+                                        data-title="<?= $listing->title ?>">Show Map <span>&uarr;</span></a>
+                                        <div id="mapcanvas<?= $listing->id ?>" class="mapCanvas hidden"></div><!--MAPCANVAS-->                                    </div>
+                                    <ul>
+                                    	<?php $desc = explode("\n",$listing->description) ?>
+                                        <?php foreach($desc as $d): ?>
+                                        <?php $d = trim($d); if(!empty($d)): ?>
+                                        <li>• <?= $d ?></li>
+                                        <?php endif ?>
+                                        <?php endforeach ?>
+                                    </ul>
+                                </div><!--SINGLE-->
+                                <?php $last = end(end($this->listingsbyday[$i])) ?>
+								<?php if(($last->id == $listing->id) and (count($this->hotelsbyday[$i])> 0)): ?>
+                                    <div class="single ttl">
+                                        <span class="ttl">Stay <em></em></span>
+                                    </div>
+									<?php foreach($this->hotelsbyday[$i] as $listing): ?>
+                                    <div class="single">
+                                        <h5><?= $listing->title ?></h5>
+                                        <?php if($listing->start != '00:00:00'): ?>
+                                        <span class="time">
+                                        <?= date('g:i A',strtotime($listing->start)) ?> - <?= date('g:i A',strtotime($listing->end)) ?></span>
+                                        <?php else: ?>
+                                        <span class="time"><?= $times[$listing->time] ?></span>
+                                        <?php endif ?>
+                                        <div class="picture">
+                                            <?= $this->thumbnail(array('width'=>260,'height'=>103), $listing->image, '', '267:168') ?>
+                                            <a href="mapcanvas<?= $listing->id ?>" class="mos js-show-map"
+                                            data-lat="<?= $listing->lat ?>" data-lng="<?= $listing->lng ?>" 
+                                            data-title="<?= $listing->title ?>">Show Map <span>&uarr;</span></a>
+                                            <div id="mapcanvas<?= $listing->id ?>" class="mapCanvas hidden"></div><!--MAPCANVAS-->                                    	</div>
+                                        <ul>
+                                            <?php $desc = explode("\n",$listing->description) ?>
+                                            <?php foreach($desc as $d): ?>
+                                            <?php $d = trim($d); if(!empty($d)): ?>
+                                            <li>• <?= $d ?></li>
+                                            <?php endif ?>
+                                            <?php endforeach ?>
+                                        </ul>
+                                    </div><!--SINGLE-->
+                                    <?php endforeach ?>
+                                <?php endif ?>
+                                <?php endforeach ?>
+                            </div><!--COLUMN-->
+                            <?php endforeach ?>
+                        </div><!--CONTENT-->
+                        <?php endfor ?>
+                    </div><!--CYCLE-->
+                </div><!--ITINERARY-->
+                
+                <div class="details">
+                    <span class="ttl"><em>More details about the package</em></span>
+                    <?php if(count($this->info['facts']) > 0): ?>
+                    <div class="single">
+                        <h6><em class="facts"></em>Fast Facts</h6>
+						<?php $includes = $this->info['facts'] ?>
+                        <?php $rest = count($includes) % 2; ?>
+                        <?php $limit = ($rest > 0) ? ((count($includes) - $rest) / 2) + $rest : (count($includes) / 2) ?>
+                        <?php for($i=0; $i<count($includes); $i=$i+$limit): ?>
+                        <ul <?= ($i!=0) ? 'class="last"':'' ?> >
+                            <?php for($j=$i;(($j<count($includes)) and ($j<($i+$limit))); $j++): ?>
+                            <li>• <?= $includes[$j] ?></li>
+                            <?php endfor ?>
+                        </ul>
+                        <?php endfor ?>
+                        <div class="clear"></div>
+                    </div><!--SINGLE-->
+                    <?php endif ?>
+                    
+                    <div class="single">
+                        <h6><em class="love"></em>Things You'll Love</h6>
+						<?php $includes = $this->info['love'] ?>
+                        <?php $rest = count($includes) % 2; ?>
+                        <?php $limit = ($rest > 0) ? ((count($includes) - $rest) / 2) + $rest : (count($includes) / 2) ?>
+                        <?php for($i=0; $i<count($includes); $i=$i+$limit): ?>
+                        <ul <?= ($i!=0) ? 'class="last"':'' ?> >
+                            <?php for($j=$i;(($j<count($includes)) and ($j<($i+$limit))); $j++): ?>
+                            <li>• <?= $includes[$j] ?></li>
+                            <?php endfor ?>
+                        </ul>
+                        <?php endfor ?>
+                        <div class="clear"></div>
+                    </div><!--SINGLE-->
+                    
+                    <div class="single">
+                        <h6><em class="tips"></em>Tips & Recommendations</h6>
+						<?php $includes = $this->info['tips'] ?>
+                        <?php $rest = count($includes) % 2; ?>
+                        <?php $limit = ($rest > 0) ? ((count($includes) - $rest) / 2) + $rest : (count($includes) / 2) ?>
+                        <?php for($i=0; $i<count($includes); $i=$i+$limit): ?>
+                        <ul <?= ($i!=0) ? 'class="last"':'' ?> >
+                            <?php for($j=$i;(($j<count($includes)) and ($j<($i+$limit))); $j++): ?>
+                            <li>• <?= $includes[$j] ?></li>
+                            <?php endfor ?>
+                        </ul>
+                        <?php endfor ?>
+                        <div class="clear"></div>
+                    </div><!--SINGLE-->	
+                </div><!--DETAILS-->
+            </div><!--MAINTOP-->					
+        </div><!--MAIN-->					
+    </div><!--WP_CONTENT-->
+    <div id="wp_footer">
+	    <?= $this->partial('partials/footer.phtml'); ?>
+    </div><!--WP_FOOTER-->
+</div><!--WRAPPER_ALL-->
+<div class="hidden">
+	<div id="dates_lb">
+    	<div class="lb-dates">
+			<div class="left">
+				<h2>First, select the dates you want to go on your vacation.</h2>
+				<p>Select the dates you want to take the trip and the number of travelers</p>
+				<ul>
+					<li>Your trip is going to be <?= $this->trip->days ?> days long.</li>
+                    <?php if($this->trip->kids): ?>
+					<li>This trip is available for children.</li>
+                    <?php else: ?>
+					<li>This trip is not available for children.</li>                    
+                    <?php endif ?>
+					<li>Maximum occupation is <?= $this->trip->max ?> people.</li>
+                    <?php if($this->trip->min > 1): ?>
+                    <li>Minimum occupation is <?= $this->trip->min ?> people.</li>
+                    <?php else: ?>
+					<li>No minimum  required.</li>
+                    <?php endif ?>
+				</ul>
+			</div><!-- closes left -->
+			<div class="right">
+				<div id="datepicker"></div>
+                <form action="/en-US/cart/purchasetrip" method="post">
+                    <div class="occ">
+                        <label>Adults</label>
+                        <select name="adults">
+							<?php for($i=$this->trip->min; $i<=$this->trip->max; $i++): ?>
+                            <?php if($i==$this->trip->min): ?>
+                            <option value="<?= $i ?>">min <?= $i ?></option>
+                            <?php elseif($i==$this->trip->max): ?>
+                            <option value="<?= $i ?>">max <?= $i ?></option>
+                            <?php else: ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                            <?php endif ?>
+                        	<?php endfor ?>
+                        </select>
+                        <?php if($this->trip->kids): ?>
+                        <label>Children</label>
+                        <select name="kids">
+                        	<option value="0">None</option>
+                        	<?php for($i=$this->trip->min; $i<=$this->trip->max; $i++): ?>
+                            <?php if($i==$this->trip->min): ?>
+                            <option value="<?= $i ?>">min <?= $i ?></option>
+                            <?php elseif($i==$this->trip->max): ?>
+                            <option value="<?= $i ?>">max <?= $i ?></option>
+                            <?php else: ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                            <?php endif ?>
+                        	<?php endfor ?>
+                        </select>
+                        <?php endif ?>
+                    </div><!-- closes occ -->
+                    <div class="occ">
+                        <input type="submit" class="btn-1 noclean" value="Check Availability" />
+                        <span onclick="$.fancybox.close()" class="btn-4">Cancel</span>
+                    </div><!-- closes occ -->
+                    <input type="hidden" name="checkin" value="<?= date('Y-m-d') ?>" />
+                    <input type="hidden" name="token" value="<?= $this->trip->token ?>" />
+                    <input type="hidden" name="trip" value="<?= $this->trip->id ?>" />
+                    <input type="hidden" name="triptoken" value="<?= $this->trip->token ?>" />
+                </form>
+			</div><!-- closes right -->
+		</div><!-- closes dates -->
+    </div>
+</div><!--HIDDEN-->
+<input type="hidden" id="tripDates" value="<?= $this->trip->days ?>" />
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/datepicker.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/trips/view.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".carousel").jcarousel();	
+        $(".cycle").cycle({
+            fx: 'scrollHorz',
+            timeout: 0,
+            prev: '.prev',
+            next: '.next'
+        });
+    });
+</script>
+<style type="text/css">
+.mapCanvas { width:260px; height:103px;}
+</style>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title>Tripfab.com</title>
+    <link type="text/css"  rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css"  rel="stylesheet" href="/css6/trips.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css"  rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css"  rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+    <link href="/css6/calendar.css?v=<?= $this->cssVC ?>" rel="stylesheet" type="text/css">
+    <style type="text/css">
+	.js-footer-fixed {
+		height: 60px;
+		margin: 20px 0 20px -20px;}
+		#support { margin:0;}
+	</style>
+</head>
+<body>
+<div id="wp_all">
+    <div id="wp_header">
+        <div class="header">
+            <?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true)); ?>
+        </div><!--HEADER-->
+    </div><!--WP_HEADER-->
+    <div id="wp_content">
+        <div id="trips1">
+            <div class="cntrl">
+                <ul class="breadcrump">
+                    <li class="first"><a class="home" href="/"></a></li>
+                    <li><a href="/trips/costa_rica">Preplanned Packages</a></li>
+                    <li><a href="/trips/costa_rica">Costa Rica</a></li>
+                    <li class="last"><a class="active" href="/l1/trips/costa_rica/#/adventure">Adventure</a></li>
+                </ul>
+                <a class="link1" href="/trips/costa_rica">← Back to Results</a>
+                <div class="clear"></div>
+            </div><!--CNTRL-->
+            
+            <div class="head">
+                <span></span>
+                <h2>Adventure Packages in Costa Rica</h2>
+                <a href="/trips/costa_rica" class="btn-10">Explore more packages <em></em></a>
+            </div><!--HEAD-->
+            <div class="content">
+                <div class="side">
+                    <h3>Best Price 100% Guaranteed</h3>
+                    <h4>Why Book with Tripfab?</h4>
+                    <ul>
+                        <li>Customer Care</li>
+                        <li>Lowest prices guaranteed</li>
+                        <li>No extra fees</li>
+                        <li>Save 20% - 40%</li>
+                    </ul>
+                    <h4>Questions?</h4>
+                    <p>Our <strong>Costa Rica travel experts</strong> are on the phone waiting to answer all the questions you have.</p>
+                    <strong class="phone">+1-866-401-0382</strong>
+                    <span class="line"><em>or</em></span>
+                    <a href="#" onclick="return SnapABug.startLink();" class="btn-10"><em></em>Live Chat Now</a>
+                </div><!--SIDE-->
+                
+                <div class="main">
+                    <div class="filters">
+                        <span class="ttl">FILTER OPTIONS</span>
+                        <div class="price">
+                            <span>Price</span>
+                            <select id="js-price">
+                                <option value="500">$500 or less</option>
+                                <option value="1000">$1,000 or less</option>
+                                <option value="2000">$2,000 or less</option>
+                                <option value="3000">$3,000 or less</option>
+                                <option value="4000">$4,000 or less</option>
+                                <option value="5000">$5,000 or less</option>
+                                <option value="6000" selected="selected">$6,000 or less</option>
+                            </select>
+                        </div><!--PRICE-->
+                        
+                        <div class="travelers">
+                            <span>Travelers</span>
+                            <select id="js-people">
+                                <option value="0" selected="selected">Any</option>
+                                <option value="1">1 person</option>
+                                <option value="2">2 people</option>
+                                <option value="3">3 people</option>
+                                <option value="4">4 people</option>
+                                <option value="5">5 people</option>
+                                <option value="6">6 people</option>
+                                <option value="7">7 people</option>
+                                <option value="8">8 people</option>
+                                <option value="9">9 people</option>
+                                <option value="10">10 people</option>
+                            </select>
+                        </div><!--TRAVELERS-->
+                        
+                        <div class="duration">
+                            <span>Duration</span>
+                            <select id="js-days">
+                                <option value="1">1 or more</option>
+                                <option value="2">2 or more</option>
+                                <option value="3">3 or more</option>
+                                <option value="4">4 or more</option>
+                                <option value="5">5 or more</option>
+                                <option value="6">6 or more</option>
+                                <option value="7">7 or more</option>
+                                <option value="15">15 or more</option>
+                                <option value="30">30 or more</option>
+                            </select>
+                        </div><!--TRAVELERS-->
+                    </div><!--FILTERS-->
+                    
+                    <div class="js-search-results">
+						<div class="loading js-loading"><div class="load">Loading...</div></div>
+                    </div>
+                </div><!--MAIN-->
+                <div class="clear"></div>
+                <div class="js-footer-fixed">
+                    <div id="support" class="fixed">
+                        <a href="" class="close"></a>
+                        <div class="rg">
+                            <p>Need help? Want a custom package? Is something not clear? Contact our <strong>Costa Rica travel experts</strong> and let us help.</p>
+                        </div><!--RG-->
+                        <div class="number"><h6>Toll Free <span>1-866-401-0382</span></h6></div><!--NUMBER-->
+                    </div><!--SUPPORT-->
+                </div>
+            </div><!--CONTENT-->
+        </div><!--TRIPS1-->		
+    </div><!--WP_CONTENT-->
+    <div id="wp_footer">
+        <?= $this->partial('partials/footer.phtml'); ?>
+    </div><!--WP_FOOTER-->
+</div><!--WRAPPER_ALL-->
+<input type="hidden" id="hddCountryId" name="hddCountryId" value="<?= $this->country->id ?>" />
+<div id="tripsAutocompleteContainerTop"></div>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/trips/country2.js?v=<?= $this->cssVC ?>"></script>
+</body>
+</html>

@@ -28,8 +28,7 @@ class WS_Controller_Plugin_Language
                     if(!in_array($finfo['extension'], $this->extensions)) {
                         $this->setLanguage($request); }
                     else {
-                        if(!file_exists($_SERVER['REDIRECT_URL'])) {
-                            header('Location: https://tripfab.com'.$_SERVER['REDIRECT_URL']); exit; } }
+                        return; }
                 } else {
                     $this->setLanguage($request);}
             }
@@ -41,6 +40,11 @@ class WS_Controller_Plugin_Language
     {
         $lang = $request->getParam('lang');
         $languages = array('en'=>'en-US','es'=>'es-ES');
+        
+        if(is_null($lang)) {
+            header( "HTTP/1.1 301 Moved Permanently" );             
+            header( "Location: /en-US/" );
+        }
 
         if(in_array($lang, $languages)){
             $locale     = new Zend_Locale($lang);
