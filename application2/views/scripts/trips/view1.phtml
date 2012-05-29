@@ -7,7 +7,8 @@
     <link type="text/css" rel="stylesheet" href="/css6/trips.css?v=<?= $this->cssVC ?>" />
     <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
     <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
-    <link type="text/css" rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>"  >
+    <link type="text/css"  rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
+	<link rel="stylesheet" href="/css2/datepicker.css?v=000000000000079" type="text/css" />
 </head>
 <body id="tripsView">
 <div id="wp_all">
@@ -125,7 +126,10 @@
                 
                 <div class="itinerary">
                     <div class="top">
-	                    <h4>Day 2 of 9 <strong>Cocos Island Diving Trip</strong></h4>
+	                    <div class="cycleDates">
+	                    	<h4>Day 2 of 9 <strong>Cocos Island Diving Trip</strong></h4>
+	                    	<h4>Day 3 of 9 <strong>Cocos Island Diving Trip</strong></h4>
+	                    </div>
                         <a href="" class="prev"></a>
                         <a href="" class="next"></a>
                     </div><!--TOP-->
@@ -151,7 +155,7 @@
                                     	<?= $this->thumbnail(array('width'=>260,'height'=>103), $listing->image, '', '267:168') ?>
                                         <a href="mapcanvas<?= $listing->id ?>" class="mos js-show-map"
                                         data-lat="<?= $listing->lat ?>" data-lng="<?= $listing->lng ?>" 
-                                        data-title="<?= $listing->title ?>">Show Map <span>&uarr;</span></a>
+                                        data-title="<?= $listing->title ?>">Show Map <span class="aw">&uarr;</span></a>
                                         <div id="mapcanvas<?= $listing->id ?>" class="mapCanvas hidden"></div><!--MAPCANVAS-->                                    </div>
                                     <ul>
                                     	<?php $desc = explode("\n",$listing->description) ?>
@@ -337,6 +341,13 @@
             prev: '.prev',
             next: '.next'
         });
+        $(".cycleDates").cycle({
+	        fx: 'fade',
+	        timeout: 0,
+            prev: '.prev',
+            next: '.next'
+	        
+        })
     });
 </script>
 <style type="text/css">

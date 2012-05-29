@@ -1221,7 +1221,13 @@
 	color: #FFF;
 	font: bold 18px Helvetica;
 	text-align: center;
-	padding-top: 15px
+	padding-top: 15px;
+	position: static !important;
+	height: 65px;
+}
+#tripsView .itinerary .top .cycleDates {
+	width: 670px !important;
+	margin: 0 auto !important;
 }
 #tripsView .itinerary .top h4 strong {
 	display: block;
@@ -1336,7 +1342,7 @@
     text-align: center;
     z-index: 10;
 }
-#tripsView .itinerary .single .picture a span{
+#tripsView .itinerary .single .picture a .aw{
 	color: #60B5F7;
     display: inline-block;
     font-size: 15px;
@@ -1596,6 +1602,9 @@
 	margin-left: 0;
 }
 #tripsView .itinerary .single .picture .mapCanvas {
-	display: none;
+	display: none
+}
+#tripsView .itinerary .single .picture .mapCanvas.show {
+	display: block;
 }
 /*END LIGHTBOX SELECT DATES -------------------------------------------------------------*/
