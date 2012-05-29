@@ -47,7 +47,7 @@
                                     <label for="card-1">
                                     	<?php $checked = ($i == 0) ? 'checked="checked"' : '' ?>
                                         <input <?= $checked ?> type="radio" name="account" value="<?= $a->id ?>" />
-                                        <span class="card-name"><img src="<?= $this->creditcards[$a->type] ?>" width="30" height="20" alt="" />
+                                        <span class="card-name"><img src="https://static.tripfab.com/<?= $this->creditcards[$a->type] ?>" width="30" height="20" alt="" />
                                         <?= $a->type ?></span> <span class="card-number">************<?= $a->last4 ?></span> </label>
                                 </div><!--SAVED-CARD-->
                                 <?php endforeach ?>
