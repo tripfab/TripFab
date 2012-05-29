@@ -456,6 +456,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             )
         );
         $router->addRoute(
+            'trips_landing_1',
+            new Zend_Controller_Router_Route(
+                '/:lang/l1/trips/costa_rica',
+                array(
+                    'controller' => 'trips',
+                    'action'     => 'country1',
+                    'module'     => 'default',
+                    'lang'       => $lang
+                )
+            )
+        );
+        $router->addRoute(
             'admin',
             new Zend_Controller_Router_Route(
                 '/admin/:action/:task/:page/:sort/:seq/:q/:co/:ct',

@@ -1,0 +1,40 @@
+<?php $_imgloading = 'https://static.tripfab.com/images2/listing_loading.gif'; ?>
+<div class="loading js-loading"><div class="load">Loading...</div></div>
+<?php if(count($this->trips) > 0): ?>
+<?php foreach($this->trips as $i => $trip): ?>
+<div class="trip">
+	<a href="/trips/view/<?= $trip->id ?>">
+	<?= $this->lazylisting(array('width'=>220,'height'=>206), $trip->image, '', '220:206', '',$_imgloading) ?></a>
+	<h2><a href="/trips/view/<?= $trip->id ?>"><?= $trip->title ?></a></h2>
+    <div class="descrip">
+        <span>Jacó, Tamarindo, Monteverde, and other <a href="/trips/view/<?= $trip->id ?>" class="link1"> cities</a></span>
+        <p><?= substr($trip->description,0,150) ?>...</p>
+        <div class="specs">
+            <dl>
+                <dt>Capacity</dt>
+                <dd><?= $trip->min ?> - <?= $trip->max ?> People</dd>
+                <dt>Category</dt>
+                <dd><?= $trip->category ?></dd>
+            </dl>
+            <dl>
+				<dt>Tour Begins</dt>
+				<dd><?= $trip->start_city_name ?></dd>
+				<dt>Tour Ends</dt>
+				<dd><?= $trip->end_city_name ?></dd>
+            </dl>
+        </div><!--SPECS-->
+    </div><!--DESCRIP-->
+    <div class="meta">
+        <div class="days"><?= ($trip->days > 1) ? $trip->days . ' DAYS' : '1 DAY' ?>2 DAYS</div>
+        <div class="price">
+            <span><?= $this->formatnumber($trip->price) ?></span>
+            <sup>$</sup>
+            <sub>per person</sub>
+        </div><!--PRICE-->
+        <a href="/trips/view/<?= $trip->id ?>">Read More & Buy <span></span></a>
+    </div><!--META-->
+</div><!--TRIP-->
+<?php endforeach ?>
+<?php else: ?>
+<p>No trips found</p>
+<?php endif ?>

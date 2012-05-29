@@ -1851,6 +1851,35 @@ class AjaxController extends Zend_Controller_Action
         $this->view->trips   = $trips;
     }
     
+    public function gettrips3Action()
+    {
+        $places = new WS_PlacesService();
+        $trips  = new WS_TripsService();
+        
+        $id = $this->_getParam('country',18);
+        $country = $places->getPlaceById($id);
+        if(is_null($country))
+                throw new Exception();
+        
+        $price = array(
+            'min' => $this->_getParam('pricemin',0),
+            'max' => $this->_getParam('pricemax',10000),
+        );
+        $days = array(
+            'min' => $this->_getParam('daymin',1),
+            'max' => $this->_getParam('daymax',100),
+        );
+        $people   = $this->_getParam('people',0);
+        
+        $category = $this->_getParam('category','all');
+        
+        $page = $this->_getParam('page', 1);
+        
+        $trips = $trips->getTripsOf($country->id, $price, $days, $people, $category, $page);
+        $this->view->country = $country;
+        $this->view->trips   = $trips;
+    }
+    
     public function gettrips2Action()
     {
         $places = new WS_PlacesService();
@@ -1876,6 +1905,35 @@ class AjaxController extends Zend_Controller_Action
         $page = $this->_getParam('page', 1);
         
         $trips = $trips->getTripsOf($country->id, $price, $days, $people, $category,$page);
+        $this->view->country = $country;
+        $this->view->trips   = $trips;
+    }
+    
+    public function gettrips4Action()
+    {
+        $places = new WS_PlacesService();
+        $trips  = new WS_TripsService();
+        
+        $id = $this->_getParam('country',18);
+        $country = $places->getPlaceById($id);
+        if(is_null($country))
+                throw new Exception();
+        
+        $price = array(
+            'min' => $this->_getParam('pricemin',0),
+            'max' => $this->_getParam('pricemax',10000),
+        );
+        $days = array(
+            'min' => $this->_getParam('daymin',1),
+            'max' => $this->_getParam('daymax',100),
+        );
+        $people   = $this->_getParam('people',0);
+        
+        $category = $this->_getParam('category','all');
+        
+        $page = $this->_getParam('page', 1);
+        
+        $trips = $trips->getTripsOf($country->id, $price, $days, $people, $category, $page);
         $this->view->country = $country;
         $this->view->trips   = $trips;
     }
