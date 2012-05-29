@@ -132,9 +132,11 @@
             </div><!--TABS-->
         </div><!--FEATURED-->
         <div id="recommend">
-            <div class="ttl"><span><em></em>Recommend Cities in Costa Rica</span></div><!--TTL-->
-			<?= $this->partial('partials/indexcities.phtml', array('cities'=>$this->cities, 'country'=>$this->country)) ?>                  
-            <div class="clear"></div>
+            <div class="wrap">
+            	<div class="ttl"><span><em></em>Recommend Cities in Costa Rica</span></div><!--TTL-->
+            	<?= $this->partial('partials/indexcities.phtml', array('cities'=>$this->cities, 'country'=>$this->country)) ?>				  
+            	<div class="clear"></div>
+            </div><!--WRAP-->
         </div><!--RECOMMEND-->
     </div><!--WP_CONTENT-->
     <div id="wp_footer">

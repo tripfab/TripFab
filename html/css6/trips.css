@@ -957,7 +957,8 @@
 #tripsView .photo {
 	margin-top: -8px;
 	height: 258px;
-	position: relative
+	position: relative;
+	overflow: hidden;
 }
 #tripsView .photo img {
 	display: block;
@@ -1160,7 +1161,6 @@
 	background: url(https://static.tripfab.com/images6/tripsView2.png) no-repeat 0 -78px;
 	padding-left: 17px;
 	margin-bottom: 5px;
-	height: 17px;
 	font: 13px/17px Helvetica;
 }
 #tripsView .includes {
