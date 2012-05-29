@@ -256,10 +256,19 @@
                         </ul>
                         <?php endfor ?>
                         <div class="clear"></div>
-                    </div><!--SINGLE-->	
-                </div><!--DETAILS-->
-            </div><!--MAINTOP-->					
-        </div><!--MAIN-->					
+                    </div><!--SINGLE-->
+                </div><!--DETAILS-->    
+                <div class="js-footer-fixed">
+                    <div id="support" class="fixed">
+                        <a href="" class="close"></a>
+                        <div class="rg">
+                            <p>Need hel	p? Want a custom package? Is something not clear? Contact our <strong>Costa Rica travel experts</strong> and let us help.</p>
+                        </div><!--RG-->
+                        <div class="number"><h6>Toll Free <span>1-866-401-0382</span></h6></div><!--NUMBER-->
+                    </div><!--SUPPORT-->
+                </div>
+            </div><!--MAINTOP-->
+        </div><!--MAIN-->    
     </div><!--WP_CONTENT-->
     <div id="wp_footer">
 	    <?= $this->partial('partials/footer.phtml'); ?>
@@ -367,6 +376,17 @@ $(document).ready(function() {
 	
 $(document).ready(function(){
     img_ready($('img.background'));
+	
+	$(window).scroll(function(){
+        $height = $(window).height();
+        $top = $(window).scrollTop() + $height - 60;
+        
+        if($top >= $('.js-footer-fixed').offset().top) {
+            $('#support').removeClass('fixed');
+        } else {
+            $('#support').addClass('fixed');
+        }
+    });
 });
 
 function img_ready($obj){
@@ -405,7 +425,12 @@ function resizeImg($bgImg) {
 </script>
 <style type="text/css">
 .mapCanvas { width:260px; height:103px;}
-##fancybox-img { max-width:900px;}
+#fancybox-img { max-width:900px;}
+.cart-B { display:none;}
+.js-footer-fixed {
+	height: 60px;
+	margin: 20px 0 20px -20px;
+	margin-left: -19px;}
 </style>
 </body>
 </html>
