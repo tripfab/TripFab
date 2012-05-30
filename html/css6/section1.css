@@ -2095,8 +2095,8 @@ background: url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat -407
 	background-color: #303030;
 	display: block;
 	position: absolute;
-	bottom: 6px;
-	right: 6px;
+	bottom: 7px;
+	right: 7px;
 	width: 125px;
 	height: 31px;
 	color: #FFF;
@@ -2126,9 +2126,9 @@ background: url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat -407
 }
 #fancybox-left-ico.lfarrow, 
 #fancybox-right-ico.rgarrow {
-	background: url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat;
-	width: 24px;
-	height: 51px;
+	background: url(https://static.tripfab.com/images6/tripsViewAw.png) no-repeat 0 0;
+	width: 64px;
+	height: 68px;
 	display: block;
 	position: absolute;
 	top: 50%;
@@ -2137,20 +2137,20 @@ background: url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat -407
 }
 
 #fancybox-left-ico.lfarrow{
-	background-position: -577px -71px;
+	background-position: 0 0;
 	left: 20px;
 }
 #fancybox-left-ico.lfarrow:hover {
-	background-position: -577px -14px;
+	background-position: 0 -68px;
 	left: 20px;
 }
 #fancybox-right-ico.rgarrow{
-	background-position: -612px -71px;
+	background-position: 0 -136px;
 	right: 20px;
 	left: auto;
 }
 #fancybox-right-ico.rgarrow:hover {
-	background-position: -612px -14px;
+	background-position: 0 -204px;
 }
 #fancybox-title-inside {
 	position: absolute;
