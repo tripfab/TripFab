@@ -2138,19 +2138,19 @@ background: url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat -407
 
 #fancybox-left-ico.lfarrow{
 	background-position: 0 0;
-	left: 0;
+	left: 0 !important;
 }
 #fancybox-left-ico.lfarrow:hover {
 	background-position: 0 -68px;
-	left: 0;
+	left: 0 !important;
 }
 #fancybox-right-ico.rgarrow{
 	background-position: 0 -136px;
-	right: 0;
-	left: auto;
+	right: 0 !important;
 }
 #fancybox-right-ico.rgarrow:hover {
 	background-position: 0 -204px;
+	right: 0 !important;
 }
 #fancybox-title-inside {
 	position: absolute;
@@ -4498,10 +4498,6 @@ span.code {
 #faqs #faqs_tabs .cont {
 	background: url(https://static.tripfab.com/images6/faqBG.png) repeat-x 0 0;
 	padding: 30px;
-}
-#faqs #faqs_tabs h5 {
-	
-	
 }
 
 
