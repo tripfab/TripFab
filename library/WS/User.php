@@ -79,6 +79,12 @@ class WS_User {
     {
         return $this->vendor->id;
     }
+
+
+    public function getVendor()
+    {
+        return $this->vendor;
+    }
     
     /**
      *
