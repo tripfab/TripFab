@@ -172,6 +172,9 @@ class UserController extends Zend_Controller_Action
         $this->view->new_messages = $new_messages;
         $this->view->user         = $user;
         $this->view->countries    = $countries;
+		$this->view->day = $user->birthdate ? date('d', strtotime($user->birthdate)) : 0;
+		$this->view->month = $user->birthdate ? date('m', strtotime($user->birthdate)) : 0;
+		$this->view->year = $user->birthdate ? date('Y', strtotime($user->birthdate)) : 0;
         if($cities)
             $this->view->cities = $cities;
     }
@@ -211,8 +214,8 @@ class UserController extends Zend_Controller_Action
                 $data['location'] = $country->title;
         } else 
             $data['location'] = '';
-        if(!empty($data['birthdate']))
-            $data['birthdate'] = date('Y-m-d', strtotime($data['birthdate']));
+        if($data['day'] && $data['month'] && $data['year'])
+            $data['birthdate'] = "{$data['year']}-" . str_pad($data['month'], 2, '0', STR_PAD_LEFT) . "-" . str_pad($data['day'],2,'0', STR_PAD_LEFT);
         
         $completeFacts = array('location', 'languages', 'work', 'birthdate', 'phone','gender');
         $complete = $user->complete;
@@ -244,7 +247,11 @@ class UserController extends Zend_Controller_Action
         }
         
         $users = new Model_Users();
-        $users->update($data, "id = {$user->id}");
+		unset($data['file']);
+		unset($data['year']);
+		unset($data['day']);
+		unset($data['month']);
+		$users->update($data, "id = {$user->id}");
     }
     
     private function _validateData($data, $user)

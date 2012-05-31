@@ -86,7 +86,7 @@
                                 <span>Set your email contact information</span>
                             </div><!-- closes item -->
                             <div class="item last">
-                            	<select name="city_id" class="city">
+                            	<select id="city_id" name="city_id" class="city">
                                     <option value="">Which City</option>
                                     <?php foreach($this->cities as $c): ?>
                                     <?php if($this->user->city_id ==  $c->id):?>
@@ -96,7 +96,7 @@
                                     <?php endif ?>
                                     <?php endforeach ?>
                                 </select>
-                                <select name="country_id" class="country">
+                                <select id="country_id" name="country_id" class="country">
                                     <option value="">Select your Country</option>
                                     <?php foreach($this->countries as $c): ?>
                                     <?php if($this->user->country_id == $c->id): ?>
@@ -149,12 +149,36 @@
                                 <span>Your Contact Phone</span>
                             </div><!-- closes item -->
                             <div class="item">
-                                <input type="text" name="birthdate" class="calendar" 
-								<?php if(!empty($this->user->birthdate)): ?>
-                                value="<?= date('F j, Y', strtotime($this->user->birthdate)) ?>" />
-                                <?php else: ?>
-                                value="" />
-                                <?php endif ?>
+                                <select id="year" name="year" class="country">
+                                    <option value="">Year</option>
+                                    <?php for($i=date('Y')-60; $i<=date('Y');$i++): ?>
+										<?php if($this->year ==  $i):?>
+                                            <option value="<?= $i ?>" selected="selected"><?= $i ?></option>
+                                        <?php else: ?>
+                                            <option value="<?= $i ?>"><?= $i ?></option>
+                                        <?php endif ?>
+                                    <?php endfor; ?>
+                                </select>
+                                <select id="day" name="day" class="country">
+                                    <option value="">Day</option>
+                                    <?php for($i=1; $i<=31;$i++): ?>
+										<?php if($this->day ==  $i):?>
+                                            <option value="<?= $i ?>" selected="selected"><?= $i ?></option>
+                                        <?php else: ?>
+                                            <option value="<?= $i ?>"><?= $i ?></option>
+                                        <?php endif ?>
+                                    <?php endfor; ?>
+                                </select>
+                            	<select id="month" name="month" class="city">
+                                    <option value="">Month</option>
+                                    <?php for($i=1; $i<=12;$i++): ?>
+										<?php if($this->month ==  $i):?>
+                                            <option value="<?= $i ?>" selected="selected"><?= $i ?></option>
+                                        <?php else: ?>
+                                            <option value="<?= $i ?>"><?= $i ?></option>
+                                        <?php endif ?>
+                                    <?php endfor; ?>
+                                </select>
                                 <h4>Birthday</h4>
                                 <span>The magical day you were dropped <br /> from the sky by a stork</span>
                             </div><!-- closes item -->
@@ -198,6 +222,7 @@
 </div><!-- closes w1 -->
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript">
+	var selectedCity = '<?php echo $this->user->city_id ?>';
 	$(document).ready(function() {
 	
 		var uploader = new qq.FileUploader({
@@ -229,8 +254,30 @@
 			showMessage:function(err) {
 				showError(err);
 			}
-		}); 
+		});
+			
+		fillCityTrip($('#country_id').val());
+		$('select#country_id').change(function(){
+			fillCityTrip($('#country_id').val());
+		});
+		 
 	});
+	
+	function fillCityTrip(countryId){
+		var url = "/ajax/places/?type=city&c=" + countryId;
+		$("#city_id" ).children().remove();
+		$("#city_id" ).append(new Option('Select City', 0, true, true));
+		var selected = false;
+		$.getJSON(url, function(fsdata) {
+			$.each(fsdata.data, function(i,city){ 
+				
+				selected = false;
+				if(typeof selectedCity != "undefined"){ selected = selectedCity == city.id ? true : false ;}
+				$("#city_id" ).append(new Option(city.title, city.id, true, selected));
+			});
+		});
+	}
+
 </script>	
 </body>
 </html>
