@@ -4442,7 +4442,7 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->trip->end_city = $_POST['end_city'];
                 $this->view->trip->category_id = isset($_POST['category_id']) ? $_POST['category_id'] : array();
 				$this->view->tripCategories = isset($_POST['category_id']) ? $_POST['category_id'] : array();
-				
+				/* error send back to form again */
 	            $this->render('trip1');
                 return;
             }

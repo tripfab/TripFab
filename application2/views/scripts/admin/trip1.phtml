@@ -375,7 +375,7 @@
 		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
         <script>
 			var selectedCities = <?php echo $this->cities ?>;
-			var startCity = '<?php echo $this->trip->start_city ?>';
+			var startCity = '<?php echo $this->trip->start_city ?>';		// initial start city value
 			var endCity = '<?php echo $this->trip->end_city ?>';
 			fillCityTrip($('#trip_country').val());
 			$('select#trip_country').change(function(){
