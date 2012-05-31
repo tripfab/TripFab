@@ -1062,7 +1062,6 @@ class ProviderController extends Zend_Controller_Action
                 $listings = $this->listings->countListings(null, $this->user->getVendorId());
                 $this->view->title = ($listings == 0) ? 'Create your first listing' : 'Create a new listing';
                 if($this->getRequest()->isPost()){
-                    //var_dump($this->user->getVendorId());echo $_POST['vendor'] .',  ' . $this->user->getVendorId(); die;
 					if($_POST['vendor'] != $this->user->getVendorId())
                             throw new Exception('vendor_id');
                     if($_POST['vendortoken'] != $this->user->getVendorToken())
