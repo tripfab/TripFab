@@ -356,31 +356,9 @@
                     <div class="occ">
                         <label>Adults</label>
                         <select name="adults">
-							<?php for($i=$this->trip->min; $i<=$this->trip->max; $i++): ?>
-                            <?php if($i==$this->trip->min): ?>
-                            <option value="<?= $i ?>">min <?= $i ?></option>
-                            <?php elseif($i==$this->trip->max): ?>
-                            <option value="<?= $i ?>">max <?= $i ?></option>
-                            <?php else: ?>
-                            <option value="<?= $i ?>"><?= $i ?></option>
-                            <?php endif ?>
-                        	<?php endfor ?>
+							<option>asd</option>
                         </select>
-                        <?php if($this->trip->kids): ?>
-                        <label>Children</label>
-                        <select name="kids">
-                        	<option value="0">None</option>
-                        	<?php for($i=$this->trip->min; $i<=$this->trip->max; $i++): ?>
-                            <?php if($i==$this->trip->min): ?>
-                            <option value="<?= $i ?>">min <?= $i ?></option>
-                            <?php elseif($i==$this->trip->max): ?>
-                            <option value="<?= $i ?>">max <?= $i ?></option>
-                            <?php else: ?>
-                            <option value="<?= $i ?>"><?= $i ?></option>
-                            <?php endif ?>
-                        	<?php endfor ?>
-                        </select>
-                        <?php endif ?>
+                        
                     </div><!-- closes occ -->
                     <div class="occ">
                         <input type="submit" class="btn-1 noclean" value="Check Availability" />
