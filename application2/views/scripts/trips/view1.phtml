@@ -137,76 +137,47 @@
                             <?php endfor ?>
 	                    </div>
                     </div><!--TOP-->
-                    <div class="cycle">
-						<?php $times = array('Stay','Morning','Afternoon','Night','Stay') ?>
-                        <?php for($i=1;$i<=count($this->listingsbyday);$i++): ?>
-                        <div class="content">
-                        	<?php foreach($this->listingsbyday[$i] as $time => $listings): ?>
-                            <div class="column">
-                            	<div class="single ttl">
-	                                <span class="ttl"><?= ucfirst($time) ?> <em></em></span>
-                                </div>
-	                            <?php foreach($listings as $listing): ?>
-                                <div class="single">
-                                    <h5><?= $listing->title ?></h5>
-                                	<?php if($listing->start != '00:00:00'): ?>
-                                    <span class="time">
-									<?= date('g:i A',strtotime($listing->start)) ?> - <?= date('g:i A',strtotime($listing->end)) ?></span>
-                                    <?php else: ?>
-                                    <span class="time"><?= $times[$listing->time] ?></span>
-                                    <?php endif ?>
-                                    <div class="picture">
-                                    	<?= $this->thumbnail(array('width'=>260,'height'=>103), $listing->image, '', '267:168') ?>
-                                        <a href="mapcanvas<?= $listing->id ?>" class="mos js-show-map"
-                                        data-lat="<?= $listing->lat ?>" data-lng="<?= $listing->lng ?>" 
-                                        data-title="<?= $listing->title ?>">Show Map <span class="aw">&uarr;</span></a>
-                                        <div id="mapcanvas<?= $listing->id ?>" class="mapCanvas hidden"></div><!--MAPCANVAS-->                                    </div>
-                                    <ul>
-                                    	<?php $desc = explode("\n",$listing->description) ?>
-                                        <?php foreach($desc as $d): ?>
-                                        <?php $d = trim($d); if(!empty($d)): ?>
-                                        <li>• <?= $d ?></li>
-                                        <?php endif ?>
-                                        <?php endforeach ?>
-                                    </ul>
-                                </div><!--SINGLE-->
-                                <?php $last = end(end($this->listingsbyday[$i])) ?>
-								<?php if(($last->id == $listing->id) and (count($this->hotelsbyday[$i])> 0)): ?>
-                                    <div class="single ttl">
-                                        <span class="ttl">Stay <em></em></span>
-                                    </div>
-									<?php foreach($this->hotelsbyday[$i] as $listing): ?>
-                                    <div class="single">
-                                        <h5><?= $listing->title ?></h5>
-                                        <?php if($listing->start != '00:00:00'): ?>
-                                        <span class="time">
-                                        <?= date('g:i A',strtotime($listing->start)) ?> - <?= date('g:i A',strtotime($listing->end)) ?></span>
-                                        <?php else: ?>
-                                        <span class="time"><?= $times[$listing->time] ?></span>
-                                        <?php endif ?>
-                                        <div class="picture">
-                                            <?= $this->thumbnail(array('width'=>260,'height'=>103), $listing->image, '', '267:168') ?>
-                                            <a href="mapcanvas<?= $listing->id ?>" class="mos js-show-map"
-                                            data-lat="<?= $listing->lat ?>" data-lng="<?= $listing->lng ?>" 
-                                            data-title="<?= $listing->title ?>">Show Map <span>&uarr;</span></a>
-                                            <div id="mapcanvas<?= $listing->id ?>" class="mapCanvas hidden"></div><!--MAPCANVAS-->                                    	</div>
-                                        <ul>
-                                            <?php $desc = explode("\n",$listing->description) ?>
-                                            <?php foreach($desc as $d): ?>
-                                            <?php $d = trim($d); if(!empty($d)): ?>
-                                            <li>• <?= $d ?></li>
-                                            <?php endif ?>
-                                            <?php endforeach ?>
-                                        </ul>
-                                    </div><!--SINGLE-->
-                                    <?php endforeach ?>
-                                <?php endif ?>
-                                <?php endforeach ?>
-                            </div><!--COLUMN-->
-                            <?php endforeach ?>
-                        </div><!--CONTENT-->
-                        <?php endfor ?>
-                    </div><!--CYCLE-->
+                    
+                    <div class="box days">
+                    	<div class="days-cycle not js-cycle">
+                    		<?php $times = array('Stay','Morning','Afternoon','Night','Stay') ?>
+                    		<?php for($i=1;$i<=count($this->listingsbyday);$i++): ?>
+                    		<div class="day">
+                    			<?php foreach($this->listingsbyday[$i] as $time => $listings): ?>
+                    			<div class="day-section">
+                    				<span class="sub-ttl"><?= ucfirst($time) ?> Itinerary</span>
+                    				<div class="clear"></div>
+                    				<?php foreach($listings as $listing): ?>
+                    				<div class="day-item">
+                    					<div class="left">
+                    						<?= $this->thumbnail(array('width'=>267,'height'=>168), $listing->image, '', '267:168') ?>
+                    					</div><!-- closes left -->
+                    					<div class="right">
+                    						<?php if($listing->start != '00:00:00'): ?>
+                    						<strong><?= date('g:i A',strtotime($listing->start)) ?> - <?= date('g:i A',strtotime($listing->end)) ?></strong>
+                    						<?php else: ?>
+                    						<strong><?= $times[$listing->time] ?></strong>
+                    						<?php endif ?>
+                    						<h4><?= $listing->title ?></h4>
+                    						<ul>
+                    							<?php $desc = explode("\n",$listing->description) ?>
+                    							<?php foreach($desc as $d): ?>
+                    							<?php $d = trim($d); if(!empty($d)): ?>
+                    							<li><?= $d ?></li>
+                    							<?php endif ?>
+                    							<?php endforeach ?>
+                    						</ul>
+                    					</div><!-- closes right -->
+                    				</div><!-- closes day-item -->
+                    				<?php endforeach ?>
+                    			</div><!-- closes day-section -->
+                    			<?php endforeach ?>
+                    		</div><!-- closes day -->
+                    		<?php endfor ?>
+                    	</div><!-- closes day-cycle -->
+                    </div>
+                    
+                    
                 </div><!--ITINERARY-->
                 
                 <div class="details">
@@ -258,22 +229,29 @@
                         <div class="clear"></div>
                     </div><!--SINGLE-->
                 </div><!--DETAILS-->    
-                <div class="js-footer-fixed">
-                    <div id="support" class="fixed">
-                        <a href="" class="close"></a>
-                        <div class="rg">
-                            <p>Need hel	p? Want a custom package? Is something not clear? Contact our <strong>Costa Rica travel experts</strong> and let us help.</p>
-                        </div><!--RG-->
-                        <div class="number"><h6>Toll Free <span>1-866-401-0382</span></h6></div><!--NUMBER-->
-                    </div><!--SUPPORT-->
-                </div>
+                
             </div><!--MAINTOP-->
         </div><!--MAIN-->    
     </div><!--WP_CONTENT-->
-    <div id="wp_footer">
+    
 	    <?= $this->partial('partials/footer.phtml'); ?>
-    </div><!--WP_FOOTER-->
+    
+    <?php if(!isset($_COOKIE['nohelp'])): ?>
+    <div class="js-footer-fixed">
+        <div id="support" class="fixed">
+            <div class="wrap">
+            	<a href="" class="js-close close"></a>
+            	<div class="rg">
+            		<p>Need help? Want a custom package? Is something not clear? Contact our <strong>Costa Rica travel experts</strong> and let us help.</p>
+            	</div><!--RG-->
+            	<div class="number"><h6>Toll Free <span>1-866-401-0382</span></h6></div><!--NUMBER-->
+            </div><!--WRAP-->
+        </div><!--SUPPORT-->
+    </div>
+    <?php endif ?>
+    
 </div><!--WRAPPER_ALL-->
+
 <div class="hidden">
 	<div id="dates_lb">
     	<div class="lb-dates">
@@ -354,7 +332,7 @@ $(document).ready(function() {
 		prev: '.prev',
 		next: '.next'	        
 	});
-	$(".cycle").cycle({
+	$(".js-cycle").cycle({
 		fx: 'scrollHorz',
 		timeout: 0,
 		prev: '.prev',
@@ -382,11 +360,19 @@ $(document).ready(function(){
         $top = $(window).scrollTop() + $height - 60;
         
         if($top >= $('.js-footer-fixed').offset().top) {
-            $('#support').removeClass('fixed');
+            $('#wp_footer').css('bottom','0');
+            $('#wp_content').css('padding-bottom', '150px');
         } else {
-            $('#support').addClass('fixed');
+            $('#wp_footer').css('bottom','45px');
+            $('#wp_content').css('padding-bottom', '195px');
         }
     });
+	
+	$('.js-close').click(function(){
+		$('.js-footer-fixed').hide();
+		$.cookie('nohelp','please',{expires:365});	
+		return false;
+	});
 });
 
 function img_ready($obj){
@@ -427,10 +413,7 @@ function resizeImg($bgImg) {
 .mapCanvas { width:260px; height:103px;}
 #fancybox-img { max-width:900px;}
 .cart-B { display:none;}
-.js-footer-fixed {
-	height: 60px;
-	margin: 20px 0 20px -20px;
-	margin-left: -19px;}
+
 </style>
 </body>
 </html>

@@ -8,12 +8,6 @@
     <link type="text/css"  rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
     <link type="text/css"  rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
     <link href="/css6/calendar.css?v=<?= $this->cssVC ?>" rel="stylesheet" type="text/css">
-    <style type="text/css">
-	.js-footer-fixed {
-		height: 60px;
-		margin: 20px 0 20px -20px;}
-		#support { margin:0;}
-	</style>
 </head>
 <body>
 <div id="wp_all">
@@ -111,25 +105,37 @@
                     </div>
                 </div><!--MAIN-->
                 <div class="clear"></div>
-                <div class="js-footer-fixed">
-                    <div id="support" class="fixed">
-                        <a href="" class="close"></a>
-                        <div class="rg">
-                            <p>Need help? Want a custom package? Is something not clear? Contact our <strong>Costa Rica travel experts</strong> and let us help.</p>
-                        </div><!--RG-->
-                        <div class="number"><h6>Toll Free <span>1-866-401-0382</span></h6></div><!--NUMBER-->
-                    </div><!--SUPPORT-->
-                </div>
+               
             </div><!--CONTENT-->
         </div><!--TRIPS1-->		
     </div><!--WP_CONTENT-->
-    <div id="wp_footer">
-        <?= $this->partial('partials/footer.phtml'); ?>
-    </div><!--WP_FOOTER-->
+    <?= $this->partial('partials/footer.phtml'); ?>
+    <?php if(!isset($_COOKIE['nohelp2'])): ?>
+    <div class="js-footer-fixed">
+        <div id="support" class="fixed">
+            <div class="wrap">
+            	<a href="" class="js-close close"></a>
+            	<div class="rg">
+            		<p>Need help? Want a custom package? Is something not clear? Contact our <strong>Costa Rica travel experts</strong> and let us help.</p>
+            	</div><!--RG-->
+            	<div class="number"><h6>Toll Free <span>1-866-401-0382</span></h6></div><!--NUMBER-->
+            </div><!--WRAP-->
+        </div><!--SUPPORT-->
+    </div>
+    <?php endif ?>
 </div><!--WRAPPER_ALL-->
 <input type="hidden" id="hddCountryId" name="hddCountryId" value="<?= $this->country->id ?>" />
 <div id="tripsAutocompleteContainerTop"></div>
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript" src="/js2/trips/country2.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+$(function(){
+	$('.js-close').click(function(){
+		$('.js-footer-fixed').hide();
+		$.cookie('nohelp2','please',{expires:365});	
+		return false;
+	});
+});
+</script>
 </body>
 </html>

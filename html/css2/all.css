@@ -3,37 +3,27 @@
 #sign-up {
 	background: url(https://static.tripfab.com/images2/g-1.png) repeat-x;
 	color: #FFFFFF;
-	font-size: 14px;
-	font-weight: bold;
+	font:bold 14px/52px Helvetica, Arial;
 	height: 52px;
-	line-height: 52px;
 	text-shadow: 0 1px 0 #000000;
 }
-
 #sign-up .btn-2 {
 	float: left;
 	margin-right: 17px;
 	margin-top: 13px;
 }
-
 #sign-up .btn-6 {
 	float: right;
-	line-height: 26px;
-	font-size: 11px;
-	font-weight: normal;
+	font:normal 11px/26px Helvetica;
 	margin-top: 14px;
 }
-
 #sign-up img {
 	vertical-align: middle;
 	margin-right: 5px;
 }
-
 /*- End of Sign Up Styles -----------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------*/
-
 /*- Browse Trips Page Styles -----------------------------------------------------------*/
-
 .wrapper.box {
 	background-color: #FFFFFF;
 	margin-top: 22px;
@@ -42,20 +32,16 @@
 	border-radius: 4px; 
 	behavior: url(/PIE.htc);
 }
-
 .intro {
 	overflow: hidden;
 	padding: 16px;
 }
-
 .intro > h2 {
 	color: #111111;
 	float: left;
-	font-size: 34px;
-	font-weight: bold;
+	font:bold 34px Helvetica;
 	margin-top: 80px;
 }
-
 .intro > p {
 	color: #555555;
 	float: left;
@@ -84,8 +70,7 @@
 	top: 0;
 	width: 115px;
 	color: #ffffff;
-	font-size: 11px;
-	font-weight: bold;
+	font:bold 11px;
 	transform: rotate(-90deg);
 	z-index: 100;
 }
@@ -115,7 +100,7 @@
 
 .intro .gallery-item .caption h3 {
 	color: #ffffff;
-	font-size: 15px;
+	font: 15px Helvetica;
 	margin-bottom: 4px;
 }
 
@@ -162,8 +147,7 @@
 .intro .search-options em {
 	background-color: #FFFFFF;
 	color: #898989;
-	font-size: 14px;
-	font-weight: bold;
+	font:bold 14px;
 	left: 402px;
 	padding: 0 5px;
 	position: absolute;
@@ -188,8 +172,7 @@
 .intro .search-options .option h4 {
 	text-transform: uppercase;
 	color: #555555;
-	font-size: 11px;
-	line-height: 19px;
+	font: normal 11px/19px Helvetica;
 	background: url(https://static.tripfab.com/images2/ico_134.png) no-repeat;
 	padding-left: 18px;
 }
@@ -270,8 +253,7 @@
 	text-align: center;
 	color: #f2f2f2;
 	display: block;
-	font-weight: bold;
-	font: 12px/33px Helvetica;
+	font: bold 12px/33px Helvetica;
 	width: 110px;
 	-moz-border-radius-topleft: 4px;
 	-moz-border-radius-topright: 4px;
@@ -312,8 +294,7 @@
 
 .trip-types .tab ul li h5 {
 	color: #000000;
-	font-size: 13px;
-	line-height: 18px;
+	font: 13px/18px Helvetica;
 	height: 50px;
 	display: table-cell;
 	vertical-align: middle;
@@ -355,8 +336,7 @@
 	width: 39px;
 }
 .trip-types > div {
-padding: 34px 59px;
-	
+	padding: 34px 59px;	
 }
 .trip-types .info-trip {
 	overflow: hidden;
@@ -387,8 +367,6 @@ padding: 34px 59px;
 	display: block;
 	font: italic 12px/14px Helvetica;
 }
-
-
 .trip-types .tab .jcarousel-next:hover {
 	background-position: 0 -147px;
 }
@@ -561,10 +539,8 @@ padding: 34px 59px;
 	color: #FFFFFF;
 	display: block;
 	float: right;
-	font-size: 24px;
-	font-weight: bold;
+	font: bold 24px/39px Helvetica;
 	height: 39px;
-	line-height: 39px;
 	margin-top: 10px;
 	text-align: center;
 	width: 205px;
@@ -582,8 +558,7 @@ padding: 34px 59px;
 
 .trip-description .right p {
 	color: #8f8f8f;
-	line-height: 18px;
-	font-size: 13px;
+	font: 13px/18px Helvetica;
 }
 
 .trip-description .right .bottom p {
@@ -596,8 +571,7 @@ padding: 34px 59px;
 	margin-right: 30px;
 	margin-top: 10px;
 	padding: 0 28px;
-	line-height: 34px;
-	font-size: 15px;
+	font: 15px/34px Helvetica;
 }
 
 .tabs-wrapper > ul {
@@ -620,8 +594,7 @@ padding: 34px 59px;
 	line-height: 50px;
 	display: block;
 	color: #636363;
-	font-weight: bold;
-	font-size: 13px;
+	font:bold 13px Helvetica;
 }
 
 .tabs-wrapper > ul > li > a:hover {
@@ -658,8 +631,7 @@ padding: 34px 59px;
 
 .tabs-wrapper .tab .section h3 {
 	color: #000000;	
-	font-size: 16px;
-	line-height: 17px;
+	font: 16px/17px Helvetica;
 	margin-bottom: 15px;
 }
 
@@ -675,8 +647,7 @@ padding: 34px 59px;
 
 .tabs-wrapper .tab .section h4 {
 	color: #464646;
-	font-size: 14px;
-	line-height: 19px;
+	font: 14px/19px Helvetica;
 	margin-bottom: 5px;
 }
 
@@ -696,8 +667,7 @@ padding: 34px 59px;
 
 .tabs-wrapper .tab .section p {
 	color: #464646;
-	font-size: 13px;
-	line-height: 19px;
+	font: 13px/19px Helvetica;
 }
 
 .tabs-wrapper .tab .section .item {
@@ -774,8 +744,7 @@ ul.days li {
 .tabs-wrapper .tab .jcarousel-next span {
 	color: #707070;
 	display: block;
-	font-size: 14px;
-	font-weight: bold;
+	font:bold 14px Helvetica;
 	left: -70px;
 	position: absolute;
 	text-indent: 0;
@@ -785,8 +754,7 @@ ul.days li {
 .tabs-wrapper .tab .jcarousel-prev span {
 	color: #707070;
 	display: block;
-	font-size: 14px;
-	font-weight: bold;
+	font: bold 14px Helvetica;
 	right: -100px;
 	position: absolute;
 	text-indent: 0;
@@ -814,16 +782,14 @@ ul.days li {
 .section.title {
 	text-align: center;
 	color: #000000;
-	font-size: 20px;
-	font-weight: bold;
+	font:bold 20px Helvetica;
 }
 
 .section div.left {
 	float: left;
 	width: 147px;
 	color: #000000;
-	font-size: 16px;
-	font-weight: bold;
+	font:bold 16px Helvetica;
 }
 
 .section div.right {
@@ -863,8 +829,7 @@ ul.days li {
 .section div.right .text strong {
 	display: block;
 	color: #464646;
-	font-size: 13px;
-	line-height: 21px;
+	font: 13px/21px Helvetica;
 }
 
 .section div.right .text ul {
@@ -941,8 +906,7 @@ ul.days li {
 	padding: 0 20px;
 	height: 35px;
 	color: #616161;
-	font-size: 14px;
-	font-weight: bold;
+	font: bold 14px Helvetica;
 	margin-right: 11px;
 	line-height: 35px;
 	-webkit-border-radius: 4px;
@@ -953,8 +917,7 @@ ul.days li {
 .filters .top form fieldset input[type="submit"] {
 	height: 35px;
 	border:  none;
-	font-size: 14px;
-	font-weight: bold;
+	font: bold 14px Helvetica;
 	padding: 0 20px;
 }
 .filters .top h3 {
@@ -1089,9 +1052,8 @@ body.bgWh {
 .search-item .info span {
 	background: url(https://static.tripfab.com/images2/ico-3.png) no-repeat;
 	color: #6f6f6f;
-	font-size: 11px;
+	font: 11px/15px Helvetica;
 	display: block;
-	line-height: 15px;
 	padding-left: 15px;
 	margin-bottom: 7px;
 }
@@ -1146,8 +1108,7 @@ border-top: 1px solid #e3e3e3;
 
 .search-item .meta > span {
 	color: #303030;
-	font-size: 24px;
-	font-weight: bold;
+	font:bold 24px Helvetica;
 	display: block;
 	margin-top: 19px;
 	text-shadow: 0px 1px 0px #FFF;
@@ -1211,8 +1172,7 @@ border-top: 1px solid #e3e3e3;
 }
 
 .sidebar .widget.menu ul li {
-	font-size: 13px;
-	line-height: 21px;
+	font: 13px/21px Helvetica;
 }
 .sidebar .widget.menu ul li.show-all a{
 	background-color: #60B5F7;
@@ -1442,9 +1402,8 @@ ul.cat-menu li {
 ul.cat-menu li a {
 	background: url(https://static.tripfab.com/images2/g-7.png) repeat-y;
 	display: block;
-	line-height: 32px;
 	color: #303030;
-	font-size: 13px;
+	font: 13px/32px Helvetica;
 	padding: 0 10px;
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
@@ -1582,8 +1541,7 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
     bottom: 0;
     color: #FFFFFF;
     display: table-cell;
-    font-size: 13px;
-    line-height: 17px;
+    font: 13px/17px Helvetica;
     padding: 5px 10px;
     position: absolute;
     vertical-align: middle;
@@ -1613,8 +1571,7 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 
 .result .meta > span {
 	color: #6f6f6f;
-	font-size: 11px;
-	font-weight: bold;
+	font: bold 11px Helvetica;
 	float: left;
 }
 
@@ -1832,9 +1789,7 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 	border: none;
 	height: 27px;
 	cursor: pointer;
-	line-height: 27px;
-	font-size: 12px;
-	font-weight: bold;
+	font:bold 12px/27px Helvetica;
 }
 
 .listing-gallery .listing-ttl a.add {
@@ -1934,11 +1889,9 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	line-height: 40px;
 	width: 606px;
-	color: #ffffff;
-	font-size: 13px;
-	font-weight: bold;
+	color: #FFF;
+	font:bold 13px/40px Helvetica;
 	padding: 0 22px;
 }
 
@@ -1957,9 +1910,7 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 .tabs-wrapper-2 > ul li a, .reviews-wrapper > ul li a {
 	color: #898989;
 	display: block;
-	font-size: 13px;
-	font-weight: bold;
-	line-height: 50px;
+	fon:bold 13px/50px Helvetica;
 	text-shadow: 0 1px 0 #FFFFFF;
 }
 
@@ -1974,8 +1925,7 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 }
 
 .tabs-wrapper-2 > div {
-	line-height: 18px;
-	font-size: 13px;	
+	font: 13px/18px Helvetica;
 	border: 1px solid #E7E7E7;
 	box-shadow: 0 0 2px #EAEAEA;
 	-webkit-border-radius: 4px;
@@ -2002,8 +1952,7 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 	padding: 0 30px;
 	line-height: 46px;
 	color: #464646;
-	font-size: 14px;
-	font-weight: bold;
+	font: bold 14px Helvetica;
 }
 
 .tabs-wrapper-2 div.tab-content {
