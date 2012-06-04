@@ -580,8 +580,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $auth = Zend_Auth::getInstance();
         if($auth->hasIdentity()){
             if(!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on') {
-                header("HTTP/1.1 301 Moved Permanently");
-                header("Location: https://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"]);
+                if($_SERVER["REQUEST_URI"] == '/' or $_SERVER["REQUEST_URI"] == '//')
+                    $request = '';
+                else
+                    $request = $_SERVER["REQUEST_URI"];
+                header("Location: https://" . $_SERVER["SERVER_NAME"] . $request);
             }
         }
     }
