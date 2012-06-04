@@ -62,7 +62,7 @@ $(document).ready(function() {
     	after: onAfter
     });
     
-    $('.days-cycle').cycle({
+    $('.days-cycle:not(.not)').cycle({
     	fx: 'cover',
     	next: '.next',
     	prev: '.prev',
