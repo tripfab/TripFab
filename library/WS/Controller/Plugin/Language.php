@@ -13,7 +13,7 @@
 class WS_Controller_Plugin_Language
         extends Zend_Controller_Plugin_Abstract {
     
-    protected $extensions = array('png','jpg','jpeg','gif','css','js','swf','php','html');
+    protected $extensions = array('png','jpg','jpeg','gif','css','js','swf','php','html','txt');
     
     public function preDispatch(Zend_Controller_Request_Abstract $request) 
     {
@@ -38,13 +38,8 @@ class WS_Controller_Plugin_Language
     
     private function setLanguage($request)
     {
-        $lang = $request->getParam('lang');
+        $lang = $request->getParam('lang','en-US');
         $languages = array('en'=>'en-US','es'=>'es-ES');
-        
-        if(is_null($lang)) {
-            header( "HTTP/1.1 301 Moved Permanently" );             
-            header( "Location: /en-US/" );
-        }
 
         if(in_array($lang, $languages)){
             $locale     = new Zend_Locale($lang);

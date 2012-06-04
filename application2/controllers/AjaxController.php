@@ -3100,7 +3100,7 @@ class AjaxController extends Zend_Controller_Action
     
     public function getpartnerlistingsAction()
     {
-        $auth = Zend_Auth::getInstance();
+		$auth = Zend_Auth::getInstance();
         if(!$auth->hasIdentity())
                 throw new Exception('No access allowed');
         
@@ -3118,7 +3118,7 @@ class AjaxController extends Zend_Controller_Action
         }
         
         $this->view->selected = ($sort == 'created') ? (($order == 'DESC') ? 1 : 2) : (($order == 'ASC') ? 3 : 4);
-        
+        $this->view->vendor = $user->getVendor();
         switch($status){
             case 'all':
                 $listings = $this->listings->getListingsOf($user->getVendorId(), null, $page, $sort, $order);

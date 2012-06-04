@@ -4438,10 +4438,12 @@ class AdminController extends Zend_Controller_Action {
                 $this->view->trip->country_id = $_POST['trip_country'];
                 $this->view->trip->min = $_POST['min'];
                 $this->view->trip->max = $_POST['max'];
-                $this->view->trip->category_id = $_POST['category_id'];
-				$this->view->tripCategories = $_POST['category_id'];
-
-                $this->render('trip1');
+                $this->view->trip->start_city = $_POST['start_city'];
+                $this->view->trip->end_city = $_POST['end_city'];
+                $this->view->trip->category_id = isset($_POST['category_id']) ? $_POST['category_id'] : array();
+				$this->view->tripCategories = isset($_POST['category_id']) ? $_POST['category_id'] : array();
+				/* error send back to form again */
+	            $this->render('trip1');
                 return;
             }
             $trip->title = $_POST['title'];
@@ -4452,6 +4454,8 @@ class AdminController extends Zend_Controller_Action {
             $trip->country_id = $_POST['trip_country'];
             $trip->min = $_POST['min'];
             $trip->max = $_POST['max'];
+			$trip->start_city = $_POST['start_city'];
+			$trip->end_city = $_POST['end_city'];
             $trip->category_id = $_POST['category_id'];
             $trip->save();
 			
@@ -4614,7 +4618,14 @@ class AdminController extends Zend_Controller_Action {
 
         if (!$postData['nights'])
             $errors['nights'] = 'Number of nights can not be blank';
-        return $errors;
+        
+		if (!$postData['start_city'])
+            $errors['start_city'] = 'Start city can not be blank';
+        
+		if (!$postData['end_city'])
+            $errors['end_city'] = 'End city can not be blank';
+        
+		return $errors;
     }
 
     private function tripEditTask2($trip) {

@@ -240,7 +240,7 @@
 										</div>
 										<!-- closes selects -->
 										<h4>Duration (No. of days)</h4>
-										<span>Description goes here</span>
+										<span><!--Description goes here--></span>
 									</div>
 									<!-- closes item -->
 									<div class="item">
@@ -253,9 +253,37 @@
 										</div>
 										<!-- closes selects -->
 										<h4>Country</h4>
-										<span>Description goes here</span>
+										<span><!--Description goes here--></span>
 									</div>
 									<!-- closes item -->
+
+									<div class="item">
+										<div class="selects big">
+											<select id="start_city"  name="start_city">
+												<option>Select City</option>
+											</select>
+										</div>
+										<!-- closes selects -->
+										<h4>Start City</h4>
+										<span><!--Description goes here--></span>
+									</div>
+									<!-- closes item -->
+									<div class="item">
+										<div class="selects big">
+											<select id="end_city"  name="end_city">
+												<option>Select City</option>
+											</select>
+										</div>
+										<!-- closes selects -->
+										<h4>End City</h4>
+										<span><!--Description goes here--></span>
+									</div>
+									<!-- closes item -->
+
+
+
+
+
 									<div class="item last">
 										<div class="selects big">
 											<select  id="trip_city1"  name="trip_city1">
@@ -347,6 +375,8 @@
 		<?php echo $this->partial('admin_partials/report.phtml', array()); ?>
         <script>
 			var selectedCities = <?php echo $this->cities ?>;
+			var startCity = '<?php echo $this->trip->start_city ?>';		// initial start city value
+			var endCity = '<?php echo $this->trip->end_city ?>';
 			fillCityTrip($('#trip_country').val());
 			$('select#trip_country').change(function(){
 				fillCityTrip($('#trip_country').val());
@@ -355,6 +385,8 @@
 			
 			function fillCityTrip(countryId){
 				var url = "/ajax/places/?type=city&c=" + countryId;
+				$("#start_city" ).children().remove();
+				$("#end_city" ).children().remove();
 				$("#trip_city1" ).children().remove();
 				$("#trip_city2" ).children().remove();
 				$("#trip_city3" ).children().remove();
@@ -365,6 +397,8 @@
 				$("#trip_city8" ).children().remove();
 				$("#trip_city9" ).children().remove();
 				$("#trip_city10" ).children().remove();
+				$("#start_city" ).append(new Option('Select City', 0, true, true));
+				$("#end_city" ).append(new Option('Select City', 0, true, true));
 				$("#trip_city1" ).append(new Option('Select City', 0, true, true));
 				$("#trip_city2" ).append(new Option('Select City', 0, true, true));
 				$("#trip_city3" ).append(new Option('Select City', 0, true, true));
@@ -379,6 +413,16 @@
 				$.getJSON(url, function(fsdata) {
 					$.each(fsdata.data, function(i,city){ 
 						
+						selected = false;
+						if(typeof startCity != "undefined"){ selected = startCity == city.id ? true : false ;}
+						$("#start_city" ).append(new Option(city.title, city.id, true, selected));
+						
+						selected = false;
+						if(typeof endCity != "undefined"){ selected = endCity == city.id ? true : false ;}
+						$("#end_city" ).append(new Option(city.title, city.id, true, selected));
+
+
+
 						selected = false;
 						if(typeof selectedCities[0] != "undefined"){ selected = selectedCities[0].city_id == city.id ? true : false ;}
 						$("#trip_city1" ).append(new Option(city.title, city.id, true, selected));
