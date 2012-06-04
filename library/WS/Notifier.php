@@ -131,6 +131,22 @@ class WS_Notifier extends Zend_Mail {
         $this->_view->listing = $listing;
         $this->_view->reservation = $reservation;
         $this->sendHTMLTemplate('reservation.phtml');
+        
+        $n = new WS_Notifier();
+        $n->_newReservation($listing, $reservation);
+    }
+    
+    public function _newReservation($listing, $reservation)
+    {
+        $this->setSubject('New Reservation');
+        $this->addTo('ricardo@tripfab.com');
+        $this->addCc('mike@tripfab.com');
+        $this->addBcc('cristian@tripfab.com');
+        
+        $this->_view->listing = $listing;
+        $this->_view->reservation = $reservation;
+        
+        $this->sendHTMLTemplate('reservation2.phtml');
     }
     
     /**
@@ -224,6 +240,20 @@ class WS_Notifier extends Zend_Mail {
         $this->addBcc('ricardo@tripfab.com');
         //$this->addTo('cristian@tripfab.com');
         $this->sendHTMLTemplate('trip.phtml');
+        
+        $n = new WS_Notifier();
+        $n->_tripPurchased($reservation, $trip);
+    }
+    
+    public function _tripPurchased($reservation, $trip)
+    {
+        $this->_view->reservation = $reservation;
+        $this->_view->trip        = $trip;
+        $this->setSubject('Preplaned Itinerary Purchase');
+        $this->addTo('ricardo@tripfab.com');
+        $this->addCc('mike@tripfab.com');
+        $this->addBcc('cristian@tripfab.com');
+        $this->sendHTMLTemplate('trip2.phtml');
     }
     
     /**
@@ -306,7 +336,9 @@ class WS_Notifier extends Zend_Mail {
     public function sendContactForm($info) 
     {
         $this->setSubject('New message from contact form');
-        $this->addTo('cristian@tripfab.com');
+        $this->addBcc('cristian@tripfab.com');
+        $this->addTo('ricardo@tripfab.com');
+        $this->addTo('mike@tripfab.com');
         
         $this->_view->info = $info;
         $this->sendHTMLTemplate('contact-form.phtml');
