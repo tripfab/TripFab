@@ -614,7 +614,7 @@ class CartController extends Zend_Controller_Action {
                         }
 
                         $charge = Stripe_Charge::create(array(
-                            'amount'    => 200,//$cartitem->total * 100,
+                            'amount'    => $cartitem->total * 100,
                             'currency'  => 'usd',
                             'customer'  => $account->stripe_id,
                             'description' => $cartitem->rate_description
