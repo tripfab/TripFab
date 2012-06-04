@@ -247,9 +247,11 @@ $(function(){
         $top = $(window).scrollTop() + $height - 60;
         
         if($top >= $('.js-footer-fixed').offset().top) {
-            $('#support').removeClass('fixed');
+            $('#wp_footer').css('bottom','0');
+            $('#wp_content').css('padding-bottom', '150px');
         } else {
-            $('#support').addClass('fixed');
+            $('#wp_footer').css('bottom','45px');
+            $('#wp_content').css('padding-bottom', '195px');
         }
     });
     

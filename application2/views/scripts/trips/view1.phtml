@@ -258,22 +258,27 @@
                         <div class="clear"></div>
                     </div><!--SINGLE-->
                 </div><!--DETAILS-->    
-                <div class="js-footer-fixed">
-                    <div id="support" class="fixed">
-                        <a href="" class="close"></a>
-                        <div class="rg">
-                            <p>Need hel	p? Want a custom package? Is something not clear? Contact our <strong>Costa Rica travel experts</strong> and let us help.</p>
-                        </div><!--RG-->
-                        <div class="number"><h6>Toll Free <span>1-866-401-0382</span></h6></div><!--NUMBER-->
-                    </div><!--SUPPORT-->
-                </div>
+                
             </div><!--MAINTOP-->
         </div><!--MAIN-->    
     </div><!--WP_CONTENT-->
-    <div id="wp_footer">
+    
 	    <?= $this->partial('partials/footer.phtml'); ?>
-    </div><!--WP_FOOTER-->
+    
+    <div class="js-footer-fixed">
+        <div id="support" class="fixed">
+            <div class="wrap">
+            	<a href="" class="close"></a>
+            	<div class="rg">
+            		<p>Need help? Want a custom package? Is something not clear? Contact our <strong>Costa Rica travel experts</strong> and let us help.</p>
+            	</div><!--RG-->
+            	<div class="number"><h6>Toll Free <span>1-866-401-0382</span></h6></div><!--NUMBER-->
+            </div><!--WRAP-->
+        </div><!--SUPPORT-->
+    </div>
+    
 </div><!--WRAPPER_ALL-->
+
 <div class="hidden">
 	<div id="dates_lb">
     	<div class="lb-dates">
@@ -382,9 +387,11 @@ $(document).ready(function(){
         $top = $(window).scrollTop() + $height - 60;
         
         if($top >= $('.js-footer-fixed').offset().top) {
-            $('#support').removeClass('fixed');
+            $('#wp_footer').css('bottom','0');
+            $('#wp_content').css('padding-bottom', '150px');
         } else {
-            $('#support').addClass('fixed');
+            $('#wp_footer').css('bottom','45px');
+            $('#wp_content').css('padding-bottom', '195px');
         }
     });
 });
@@ -427,10 +434,7 @@ function resizeImg($bgImg) {
 .mapCanvas { width:260px; height:103px;}
 #fancybox-img { max-width:900px;}
 .cart-B { display:none;}
-.js-footer-fixed {
-	height: 60px;
-	margin: 20px 0 20px -20px;
-	margin-left: -19px;}
+
 </style>
 </body>
 </html>
