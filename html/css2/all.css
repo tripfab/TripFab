@@ -5810,8 +5810,7 @@ h2.title .back:hover,
 
 .past-trip .top .right > span {
 	color: #898989;
-	font-size: 12px;
-	font-weight: bold;
+	font: bold 12px Helvetica;
 	border-bottom: 1px solid #e8e8e8;
 	display: block;
 	padding-bottom: 5px;
@@ -5826,8 +5825,7 @@ h2.title .back:hover,
 .past-trip .top .right ol li {
 	color: #898989;
 	float: left;
-	font-size: 21px;
-	font-weight: bold;
+	font: bold 21px Helvetica;
 	margin-right: 48px;
 	overflow: hidden;
 }
@@ -5857,20 +5855,16 @@ h2.title .back:hover,
 }
 
 .past-trip .meta a.delete {
-	line-height: 25px;
 	color: #f26522;
-	font-weight: bold;
-	font-size: 12px;
+	font:bold 12px/25px Helvetica;
 }
 
 .past-trip .meta > span {
 	background: url(https://static.tripfab.com/images2/t-24.png) no-repeat 100% 0 #e1e1e1;
 	color: #303030;
 	display: block;
-	font-size: 12px;
-	font-weight: bold;
+	font:bold 12px/26px Helvetica;
 	height: 26px;
-	line-height: 26px;
 	margin-left: -22px;
 	text-align: center;
 	padding: 0 30px;
@@ -5879,8 +5873,7 @@ h2.title .back:hover,
 
 .past-trip .meta > strong {
 	color: #303030;
-	font-size: 30px;
-	line-height: 26px;
+	font: 30px/26px Helvetica;
 	display: block;
 	float: left;
 	margin-left: 19px;
@@ -5909,8 +5902,7 @@ h2.title .back:hover,
 	writing-mode: tb-rl;
 	color: #FFFFFF;
 	display: block;
-	font-size: 11px;
-	font-weight: bold;
+	font: bold 11px Helvetica;
 	margin-left: 37px;
 	margin-top: 24px;
 	text-transform: uppercase;
@@ -5931,11 +5923,9 @@ h2.title .back:hover,
 }
 
 .past-trips .right .widget .ttl {
-	line-height: 45px;
 	padding: 0 21px;
 	color: #303030;
-	font-size: 13px;
-	font-weight: bold;
+	font:bold 13px/45px Helvetica;
 }
 
 .past-trips .right .widget.trip-menu h5 {
@@ -6079,9 +6069,7 @@ h2.title .back:hover,
 
 .wrapper.user-trips .left > a.prev, .wrapper.user-trips .left > a.next {
 	color: #60B5F7;
-	font-size: 12px;
-	font-weight: bold;
-	line-height: 45px;
+	font: bold 12px/45px;
 	position: absolute;
 	top: 0;
 	z-index: 100;
@@ -6095,14 +6083,9 @@ h2.title .back:hover,
 	right: 21px;
 }
 
-.trip-smmr {
-}
-
 .trip-smmr .ttl {
 	color: #303030;
-	font-size: 13px;
-	font-weight: bold;
-	line-height: 45px;
+	font: bold 13px/45px Helvetica;
 	padding: 0 27px;
 }
 
@@ -6133,9 +6116,8 @@ h2.title .back:hover,
 }
 
 .trip-smmr ul li {
-	line-height: 18px;
 	color: #303030;
-	font-size: 12px;
+	font: 12px/18px Helvetica;
 	border-bottom: 1px solid #e8e8e8;
 	padding: 16px 11px;
 }
@@ -6153,8 +6135,7 @@ h2.title .back:hover,
 .trip-smmr ul li .ball strong {
 	color: #FFFFFF;
 	display: block;
-	font-size: 26px;
-	line-height: 30px;
+	font: bold 26px/30px Helvetica;
 	margin-top: 11px;
 }
 
@@ -6171,8 +6152,7 @@ h2.title .back:hover,
 .trip-smmr ul li table {
 	width: 100%;
 	color: #636363;
-	font-size: 13px;
-	line-height: 26px;
+	font: 13px/26px Helvetica;
 }
 
 .trip-smmr ul li table td img {
@@ -6181,10 +6161,9 @@ h2.title .back:hover,
 }
 
 .trip-smmr .content > strong {
-	font-size: 31px;
+	font: 31px/26px Helvetica;
 	float: right;
 	margin: 10px 0;
-	line-height: 26px;
 	margin-right: 12px;
 }
 
@@ -6192,10 +6171,8 @@ h2.title .back:hover,
 	background: url(https://static.tripfab.com/images2/ic_01.png) no-repeat top right #303030;
 	color: #FFFFFF;
 	float: left;
-	font-size: 12px;
-	font-weight: bold;
+	font: 12px/26px Helvetica;
 	height: 26px;
-	line-height: 26px;
 	margin: 10px 0;
 	text-align: center;
 	width: 125px;
@@ -6215,9 +6192,8 @@ h2.title .back:hover,
 
 .wrapper.user-trips .left .item label {
 	float: right;
-	line-height: 27px;
 	color: #616161;
-	font-size: 12px;
+	font: 12px/27px Helvetica;
 	display: block;
 	margin: 0 7px 0 24px;
 }
@@ -6258,9 +6234,7 @@ h2.title .back:hover,
 	padding-top: 120px;
 	text-align: center;
 	color: #bebebe;
-	font-weight: bold;
-	font-size: 20px;
-	line-height: 26px;
+	font:bold 20px/26px Helvetica;
 }
 
 .itinerary-wrapper.empty input[type="text"] {
@@ -6361,9 +6335,7 @@ h2.title .back:hover,
 .activities-tabs > ul > li > a {
     color: #303030;
     display: block;
-    font-size: 11px;
-    font-weight: bold;
-    line-height: 19px;
+    font: bold 11px/19px Helvetica;
     padding: 0 11px 0 25px;
     background: url(https://static.tripfab.com/images2/ico_147.png) no-repeat;
     -webkit-border-radius: 10px;
@@ -6404,9 +6376,7 @@ h2.title .back:hover,
 .activities-tabs .tab ul li {
     color: #FFFFFF;
     float: left;
-    font-size: 10px;
-    font-weight: bold;
-    line-height: normal;
+    font: bold 10px/12px Helvetica;
     padding: 0 5px;
     text-align: center;
     width: 81px;
@@ -6507,9 +6477,7 @@ h2.title .back:hover,
 
 .itinerary-items .item h4 {
 	color: #303030;
-	font-size: 15px;
-	font-weight: bold;
-	line-height: 46px;
+	font: bold 15px/46px Helvetica;
 	text-align: center;
 }
 
@@ -6556,12 +6524,10 @@ h2.title .back:hover,
 }
 
 .itinerary-items .item ul li span {
-	font-size: 12px;
-	font-weight: bold;
+	font: bold 12px Helvetica
 }
 .itinerary-items .item ul li span h2 {	
-	font-size: 11px;
-	font-weight: normal;
+	font:normal 200 11px Helvetica;
 	color: #CCC;
 }
 .itinerary-items .item ul li span em {
@@ -6587,9 +6553,7 @@ h2.title .back:hover,
 	background-color: transparent;
 	border: 1px dashed #DBDBDB;
 	color: #60B5F7;
-	font-size: 11px;
-	font-weight: bold;
-	line-height: normal;
+	font:bold 11px/13px Helvetica;
 	margin: 10px 6px;
 	padding: 15px 12px !important;
 	position: static !important;
@@ -6621,10 +6585,7 @@ h2.title .back:hover,
 	color: #303030;
 	display: block;
 	float: left;
-	font-size: 12px;
-	font-weight: bold;
-	height: 26px;
-	line-height: 26px;
+	font: bold 12px/26px Helvetica;
 	margin-left: -21px;
 	text-align: center;
 	width: 126px;
@@ -6636,20 +6597,17 @@ h2.title .back:hover,
 }
 
 .itinerary-wrapper .bottom strong {
-	line-height: 26px;
 	display: block;
 	float: left;
-	font-size: 31px;
+	font: 31px/26px Helvetica;
 	color: #303030;
 	margin-left: 22px;
 }
 
 .slider-controls a {
 	color: #60b5f7;
-	font-size: 11px;
-	font-weight: bold;
+	font: bold 11px/20px Helvetica;
 	position: absolute;
-	line-height: 20px;
 	top: -195px;
 	z-index: 100;
 	height: 20px;
@@ -6740,18 +6698,15 @@ h2.title .back:hover,
 	color: #FFFFFF;
 	display: block;
 	float: right;
-	font-size: 12px;
-	font-weight: bold;
+	font: bold 12px/26px Helvetica;
 	height: 26px;
-	line-height: 26px;
 	text-align: center;
 	width: 103px;
 }
 
 .offer .content .meta strong {
 	float: left;
-	font-size: 33px;
-	line-height: 26px;
+	font:bold 33px/26px Helvetica;
 	margin-right: 10px;
 }
 
@@ -6766,10 +6721,8 @@ h2.title .back:hover,
 	color: #FFFFFF;
 	display: block;
 	float: left;
-	font-size: 12px;
-	font-weight: bold;
+	font: 12px/26px Helvetica;
 	height: 26px;
-	line-height: 26px;
 	text-align: center;
 	width: 116px;
 }
@@ -6778,17 +6731,15 @@ h2.title .back:hover,
 	color: #f26522;
 	display: block;
 	float: left;
-	font-size: 33px;
-	line-height: 26px;
+	font: 33px/26px Helvetica;
 	margin-left: 10px;
 }
 
 .offer .aside table {
 	width: 150px;
-	line-height: 22px;
 	margin: 0 8px;
 	color: #303030;
-	font-size: 13px;
+	font-size: 13px/22px Helvetica;
 }
 
 .offer .aside table td + td {
@@ -6806,9 +6757,8 @@ h2.title .back:hover,
 }
 
 .wrapper.user-trips > h2 {
-    line-height: 39px;
     color: #303030;
-    font-size: 13px;
+    font: 13px/39px Helvetica;
     padding: 0 30px;
 }
 
@@ -6838,9 +6788,7 @@ h2.title .back:hover,
 .trips-menu ul li a {
 	color: #636363;
 	display: block;
-	font-size: 13px;
-	font-weight: bold;
-	line-height: 50px;
+	font-size: bold 13px/50px Helvetica;
 }
 
 .trips-menu ul li.current a {
@@ -7009,9 +6957,7 @@ h2.title .back:hover,
 .sign-box .ttl {
 	background: url(https://static.tripfab.com/images2/g-18.png) repeat-x;
 	color: #FFFFFF;
-	font-size: 20px;
-	font-weight: bold;
-	line-height: 50px;
+	font:bold 20px/50px Helvetica;
 	text-align: center;
 	-moz-border-radius-topleft: 4px;
 	-moz-border-radius-topright: 4px;
@@ -7061,7 +7007,7 @@ h2.title .back:hover,
 	width: 355px;
 	height: 39px;
 	color: #898989;
-	font-size: 16px;
+	font: 16px/39px Helvetica;
 	padding: 0 40px 0 10px;
 	background-color: transparent;
 	position: relative;
@@ -7069,7 +7015,6 @@ h2.title .back:hover,
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
-	line-height: 39px;
 	behavior: (PIE.htc);
 }
 
@@ -7123,8 +7068,7 @@ h2.title .back:hover,
 	height: 39px;
 	line-height: 39px;
 	display: block;
-	font-size: 16px;
-	font-weight: normal;
+	font: 16px/39px Helvetica;
 	color: #898989;
 	position: absolute;
 	top: 0;
@@ -7140,8 +7084,7 @@ h2.title .back:hover,
 .sign-box .content > span {
 	background-color: #FFFFFF;
 	color: #C7C7C7;
-	font-size: 17px;
-	font-style: italic;
+	font:italic 17px Helvetica;
 	left: 202px;
 	padding: 0 10px;
 	position: absolute;
@@ -7169,9 +7112,7 @@ h2.title .back:hover,
 
 .sign-box .content label {
 	color: #616161;
-	font-size: 12px;
-	font-weight: bold;
-	line-height: 40px;
+	font: bold 12px/40px Helvetica;
 	vertical-align: middle;
 	display: block;
 	float: left;
@@ -7179,11 +7120,9 @@ h2.title .back:hover,
 
 .sign-box > p {
 	color: #242424;
-	font-size: 16px;
+	font:bold 16px/70px Helvetica;
 	text-align: center;
 	height: 70px;
-	line-height: 70px;
-	font-weight:bold;
 }
 
 .sign-box p a {
@@ -7195,7 +7134,6 @@ h2.title .back:hover,
 	padding: 10px 0 10px 0;
 	text-align: center;
 	color: #616161;
-	line-height: normal;
 	font-size: 12px;
 	padding:19px 0 19px 28px;
 	-moz-border-radius-topleft: 0px;
@@ -7212,9 +7150,7 @@ h2.title .back:hover,
 .listing-content .foot a,
 .vendor-profile .foot a {
 	color: #F26522;
-    font-size: 11px;
-    font-weight: bold;
-    line-height:32px;
+    font:bold 11px/32px Helvetica;
 }
 .sign-box .content p a {
 	color: #60b5f7;
@@ -7229,9 +7165,7 @@ h2.title .back:hover,
 	color: #616161;
     display: block;
     float: left;
-    font-size: 12px;
-    font-weight: bold;
-    line-height: 40px;
+    font:bold 12px/40px Helvetica;
     vertical-align: middle;
 }
 .sign-box .foot input[type="submit"] {
@@ -7310,9 +7244,8 @@ h2.title .back:hover,
 
 .transactions .left table {
 	width: 100%;
-	line-height: 29px;
 	color: #303030;
-	font-size: 12px;
+	font-size: 12px/29px Helvetica;
 }
 
 .transactions .left table th, .transactions .left table td {
@@ -7351,8 +7284,7 @@ h2.title .back:hover,
 }
 
 .transactions .right .widget .ttl {
-	font-size: 13px;
-	font-weight: bold;
+	font: bold 13px Helvetica;
 	padding: 0 22px;
 	line-height: 37px;
 }
@@ -7413,9 +7345,8 @@ h2.title .back:hover,
 
 .s-question h2 {
 	float: left;
-	line-height: 57px;
 	color: #303030;
-	font-size: 14px;
+	font: 14px/57px Helvetica;
 }
 
 .s-question h2 img {
@@ -7427,10 +7358,8 @@ h2.title .back:hover,
 	border-left: 1px dotted #B2B2B2;
 	color: #303033;
 	float: right;
-	font-size: 11px;
-	font-weight: bold;
+	font: bold 11px/87px Helvetica;
 	height: 87px;
-	line-height: 87px;
 	padding: 0 28px;
 }
 
@@ -7441,9 +7370,7 @@ h2.title .back:hover,
 .s-question .right > div > span {
 	background-color: #F85819;
 	color: #FFFFFF;
-	font-size: 11px;
-	font-weight: bold;
-	line-height: 15px;
+	font: bold 11px/15px Helvetica;
 	margin-left: 5px;
 	padding: 0 6px;
 	-webkit-border-radius: 10px;
@@ -7458,9 +7385,8 @@ h2.title .back:hover,
 .s-qa {
 	padding: 15px 25px;
 	overflow: hidden;
-	line-height: 18px;
 	color: #303030;
-	font-size: 13px;
+	font: 13px/18px Helvetica;
 	position: relative;	
 }
 
@@ -7506,8 +7432,7 @@ h2.title .back:hover,
 
 .s-qa .bottom a {
 	color: #f26522;
-	font-size: 12px;
-	font-weight: bold;
+	font: bold 12px Helvetica;
 }
 
 .s-qa.new .q .right {
@@ -7546,8 +7471,7 @@ h2.title .back:hover,
 	transform: rotate(31deg);
 	color: #FFFFFF;
 	display: block;
-	font-size: 11px;
-	font-weight: bold;
+	font: bold 11px Helvetica;
 	margin-left: 13px;
 	margin-top: 30px;
 	text-transform: uppercase;
@@ -7557,9 +7481,7 @@ h2.title .back:hover,
 	margin-top: 16px;
 	overflow: hidden;
 	color: #303030;
-	font-size: 14px;
-	font-weight: bold;
-	line-height: 18px;
+	font:bold 14px/18px Helvetica;
 }
 
 .bc a {
@@ -7628,9 +7550,7 @@ h2.title .back:hover,
 }
 .listings-main .sub-ttl {
 	overflow: hidden;
-	line-height: 25px;
-	font-weight: bold;
-	font-size: 15px;
+	font:bold 15px/25px Helvetica;
 	padding:0 0 0 23px;
 }
 .listings-main h3.sorting {
@@ -7687,8 +7607,7 @@ h2.title .back:hover,
 
 .lstng .left h2 {
 	color: #303030;
-	font-size: 16px;
-	line-height: 20px;
+	font: 16px/20px Helvetica;
 	padding-bottom:10px;
 }
 .lstng .left h2 a {
@@ -7738,8 +7657,7 @@ h2.title .back:hover,
 .lstng .left > span {
 	color: #707070;
 	display: block;
-	font-size: 11px;
-	line-height: 18px;
+	font: 11px/18px Helvetica;
 	margin-bottom: 5px;
 }
 
@@ -8027,8 +7945,7 @@ h2.title .back:hover,
 
 .user-messages .left .ttl ul li a {
 	color: #898989;
-	font-size: 12px;
-	font-weight: bold;
+	font: bold 12px Helvetica;
 }
 
 .user-messages .left .ttl ul li.current a {
@@ -8237,13 +8154,11 @@ h2.title .back:hover,
 }
 
 .listing-ttl h2 {
-	font-size: 19px;
-	line-height: 35px;
+	font: 19px/35px Helvetica;
 }
 
 .listing-ttl p {
-	font-size: 12px;
-	font-weight: bold;
+	font: bold 12px Helvetica;
 	float: left;
 }
 
@@ -8326,9 +8241,7 @@ h2.title .back:hover,
 }
 .listing-content .left ul li a {
 	color: #303030;
-	font-size: 13px;
-	font-weight: bold;
-	line-height: 30px;
+	font: bold 13px/30px Helvetica;
 	display: block;
 	padding-left: 26px;
 	width: 154px;
@@ -8384,7 +8297,6 @@ h2.title .back:hover,
 .main-ttl {
 	line-height: normal;
 	font-size: 13px;
-	font-weight: normal;
 	color: #303030;
 	padding: 20px 22px;
 	margin-bottom: 20px;
@@ -8410,12 +8322,11 @@ h2.title .back:hover,
 	border: 1px solid #D8D8D8;
 	color: #616161;
 	float: right;
-	font-size: 13px;
+	font: 13px/18px Helvetica;
 	width: 347px;
 	min-height: 80px;
 	padding: 5px;
 	resize: none;
-	line-height: 18px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px; 
@@ -8461,8 +8372,7 @@ h2.title .back:hover,
 .listing-content .profile-items .item .inner-container table td {
 	vertical-align: middle;
 	color: #303030;
-	font-size: 13px;
-	line-height: 23px;
+	font: 13px/23px Helvetica;
 	text-transform: capitalize;
 }
 
@@ -8526,9 +8436,7 @@ h2.title .back:hover,
 	padding-bottom: 5px;
 }
 .photo.ttl .text strong{
-	font-size:14px;
-	font-weight:bold;
-	line-height:20px;
+	font:bold 14px/:20px Helvetica;
 }
 .photo .text.req {
 	line-height:18px;
@@ -8585,10 +8493,8 @@ h2.title .back:hover,
 	background: #ebebeb url('https://static.tripfab.com/images2/arrow-38.png') no-repeat left top;
 	color: #898989;
 	display: block;
-	font-size: 11px;
-	font-weight: bold;
+	font:bold 11px/17px Helvetica;
 	height: 17px;
-	line-height: 17px;
 	padding: 0 17px;
 	position: absolute;
 	right: 499px;
@@ -8624,8 +8530,7 @@ h2.title .back:hover,
 
 .w-m ul li a {
 	color: #60b5f7;
-	font-size: 12px;
-	line-height: 20px;
+	font: 12px/20px Helvetica;
 }
 
 .lstng-detail .map input[type="text"] {
@@ -8650,9 +8555,8 @@ h2.title .back:hover,
 
 .photo strong, .lstng-detail strong {
 	display: block;
-	font-size: 12px;
+	font: 12px/16px Helvetica;
 	float: left;
-	line-height: 16px;
 	margin-bottom: 5px;
 }
 
@@ -8705,8 +8609,7 @@ h2.title .back:hover,
 	width: 586px;
 	float: right;
 	color: #616161;
-	font-size: 13px;
-	line-height: 18px;
+	font: 13px/18px Helvetica;
 	margin-bottom: 16px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -8757,8 +8660,7 @@ h2.title .back:hover,
 .lstng-detail.tabs > a {
 	color: #303030;
 	padding-left: 20px;
-	font-size: 13px;
-	font-weight: bold;
+	font:bold 13px;
 }
 
 .lstng-detail.tabs > a:hover {
@@ -8768,15 +8670,13 @@ h2.title .back:hover,
 .lstng-detail.tabs > a.link-5 {
 	float: right;
 	color: #8DC63F;
-	font-size: 11px;
-	font-weight: bold;
+	font: bold 11px Helvetica;
 }
 
 .lstng-detail.tabs > a.link-7 {
 	float: right;
 	color: #616161;
-	font-size: 11px;
-	font-weight: bold;
+	font: bold 11px Helvetica;
 	margin-right: 20px;
 	padding-left: 13px;
 }
@@ -8808,9 +8708,7 @@ h2.title .back:hover,
 	text-indent: 0;
 	width: auto;
 	color: #f26522;
-	font-size: 11px;
-	font-weight: bold;
-	line-height: 14px;
+	font: bold 11px/14px Helvetica;
 }
 
 .lstng-details.pricing .lstng-detail.policy select {
@@ -8861,8 +8759,7 @@ h2.title .back:hover,
 
 .lstng-details.pricing .lstng-detail > ul li > div label {
 	color: #303030;
-	font-size: 12px;
-	line-height: 27px;
+	font: 12px/27px Helvetica;
 	margin-right: 10px;
 }
 
@@ -8902,8 +8799,7 @@ h2.title .back:hover,
 	width: 362px;
 	float: right;
 	color: #616161;
-	font-size: 13px;
-	line-height: 18px;
+	font: 13px/18px Helvetica;
 	margin-bottom: 16px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -8933,9 +8829,7 @@ h2.title .back:hover,
 
 .inner-ttl {
 	color: #303030;
-	font-size: 13px;
-	font-weight: bold;
-	line-height: 42px;
+	font: 13px/42px Helvetica;
 }
 
 .lstng-details.rooms .inner-ttl {
@@ -8984,10 +8878,8 @@ h2.title .back:hover,
 	color: #F26522;
 	display: inline;
 	float: left;
-	font-size: 11px;
-	font-weight: bold;
+	font: bold 11px/48px;
 	height: auto;
-	line-height: 48px;
 	padding-left: 20px;
 	padding-right: 14px;
 	text-indent: 0;
@@ -8998,8 +8890,7 @@ h2.title .back:hover,
 	background: url(https://static.tripfab.com/images2/sep-6.png) no-repeat left top;
 	float: left;
 	color: #60b5f7;
-	font-size: 11px;
-	font-weight: bold;
+	font: bold 11px Helvetica;
 	padding: 0 14px;
 }
 
@@ -9033,8 +8924,7 @@ h2.title .back:hover,
 .profile-items .item-wrppr.schedules .item a {
 	float: right;
 	color: #60b5f7;
-	font-size: 12px;
-	font-weight: bold;
+	font:bold 12px Helvetica;
 }
 
 .lstng-details .lstng-detail a.remove.remove-2 {
@@ -9042,10 +8932,8 @@ h2.title .back:hover,
 	color: #F26522;
 	display: inline;
 	float: right;
-	font-size: 11px;
-	font-weight: bold;
+	font:bold 11px/14px Helvetica;
 	height: auto;
-	line-height: 14px;
 	padding-left: 20px;
 	text-indent: 0;
 	width: auto;
@@ -9141,8 +9029,7 @@ h2.title .back:hover,
 	position: absolute;
 	bottom: 8px;
 	left: 8px;
-	font-weight: bold;
-	font-size: 12px;
+	font:bold 12px Helvetica;
 }
 
 .calendar ul.calendar-items li > span {
@@ -9178,9 +9065,7 @@ h2.title .back:hover,
 .month {
     border-bottom: 1px dotted #b2b2b2;
     color: #000000;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 55px;
+    font: bold 14px/55px Helvetica;
     margin: 0 26px 10px 26px;
     overflow: hidden;
     text-align: center;
@@ -9202,9 +9087,8 @@ h2.title .back:hover,
 .calendar ul.calendar-items .tooltip .all-day {
 	background:url(https://static.tripfab.com/images2/cal-all-day.gif) repeat-x;
 	height:38px;
-	font-size:11px;
+	font:bold 11px Helvetica;
 	color:#303030;
-	font-weight:bold;
 	-moz-border-radius-topleft: 0px;
 	-moz-border-radius-topright: 0px;
 	-moz-border-radius-bottomright: 5px;
@@ -9317,8 +9201,7 @@ h2.title .back:hover,
 
 .tooltip2 .tooltip-wrapper ul li label {
 	color: #303030;
-	font-size: 11px;
-	font-weight: bold;
+	font: bold 11px Helvetica;
 }
 
 .tooltip2 .tooltip-wrapper ul li select {
@@ -9424,11 +9307,10 @@ h2.title .back:hover,
 }
 
 .plan-trip .box .bottom h3 {
-	line-height: 55px;
 	border-bottom: 1px dotted #424242;
 	text-align: center;
 	color: #ffffff;
-	font-size: 16px;
+	font: 16px/55px Helvetica;
 	margin-bottom: 20px;
 }
 
@@ -9452,8 +9334,7 @@ h2.title .back:hover,
 .plan-trip .box .bottom ul li span {
 	float: left;
 	color: #898989;
-	font-size: 28px;
-	font-weight: bold;
+	font:bold 28px Helvetica;
 	margin-right: 15px;
 }
 
@@ -9554,11 +9435,9 @@ h2.title .back:hover,
     display: block;
 }
 .reservations > strong {
-	line-height: 50px;
 	display: block;
 	color: #303030;
-	font-size: 14px;
-	font-weight: bold;	
+	font: bold14px/50px Helvetica;
 }
 
 .reservation {
@@ -9629,9 +9508,7 @@ h2.title .back:hover,
 .reservation .top .meta span {
 	color: #898989;
 	display: block;
-	font-size: 12px;
-	font-weight: bold;
-	line-height: 17px;
+	font: bold 12px/17px Helvetica;
 	padding-left: 15px;
 }
 
@@ -9645,21 +9522,17 @@ h2.title .back:hover,
 	display: block;
 	float: right;
 	height: 26px;
-	line-height: 26px;
 	padding-left: 38px;
 	padding-right: 17px;
 	margin-top: 12px;
 	margin-right: -23px;
 	color: #f26522;
-	font-size: 12px;
-	font-weight: bold;
+	font: bold 12px/26px Helvetica;
 }
 
 .reservation .top > a {
 	color: #60b5f7;
-	font-size: 12px;
-	font-weight: bold;
-	line-height: 26px;
+	font:bold 12px/26px Helvetica;
 	float: right;
 	margin-top: 6px;
 	margin-right: 10px;	
@@ -9693,8 +9566,7 @@ h2.title .back:hover,
 .reservation .bottom .ttl {
 	overflow: hidden;
 	color: #898989;
-	font-size: 12px;
-	font-weight: bold;
+	font:bold 12px Helvetica;
 	padding-bottom: 10px;
 	border-bottom: 1px solid #e6e6e6;
 	margin-bottom: 10px;
@@ -9731,8 +9603,7 @@ h2.title .back:hover,
 }
 .reservation .bottom table {
 	color: #303030;
-	font-size: 12px;
-	line-height: 20px;
+	font: 12px/20px Helvetica;
 	float: left;
 	width: 33%;
 }
@@ -9748,8 +9619,7 @@ h2.title .back:hover,
 .reservation.in > strong {
 	display: block;
 	float: left;
-	font-size: 13px;
-	line-height: normal;
+	font-size: 13px/15px Helvetica;
 	width: 152px;
 }
 
@@ -9770,11 +9640,10 @@ h2.title .back:hover,
 .reservation.in .right ul li {
 	padding: 0;
 	overflow: hidden;
-	line-height: 34px;
 	padding-bottom: 7px;
 	margin-bottom: 7px;
 	color: #616161;
-	font-size: 13px;
+	font-size: 13px/34px Helvetica;
 }
 
 .reservation.in .right ul li span {
@@ -9837,9 +9706,8 @@ h2.title .back:hover,
 
 .reservations.past .right .widget.withdraw h2 {
 	color: #303030;
-	font-size: 13px;
+	font: 13px/37px Helvetica;
 	padding: 0 22px;
-	line-height: 37px;
 }
 
 .reservations.past .right .widget.withdraw > div {
@@ -9847,8 +9715,7 @@ h2.title .back:hover,
 	border-top: 1px solid #E8E8E8;
 	padding: 13px 22px;
 	color: #303030;
-	font-size: 37px;
-	font-weight: bold;
+	font:bold 37px Helvetica;
 }
 
 .reservations.past .right .widget.withdraw .btn-1 {
@@ -9859,10 +9726,9 @@ h2.title .back:hover,
 
 .reservations.past table {
 	width: 100%;
-	line-height: 30px;
 	margin: 10px 0;
 	color: #303030;
-	font-size: 12px;
+	font: 12px/30px Helvetica;
 }
 
 .reservations.past table td {
@@ -10323,10 +10189,8 @@ h2.title .back:hover,
 	float: left;
 	height: 39px;
 	padding: 12px 0 12px 0;
-	line-height: 18px;
 	color: #898989;
-	font-size: 12px;
-	font-weight: bold;
+	font: bold 12px/18px Helvetica;
 	width: 150px;
 	margin-left: -20px; 
 }
@@ -10434,8 +10298,7 @@ h2.title .back:hover,
 	color: #303030;
 	display: block;
 	float: left;
-	font-size: 12px;
-	line-height: 18px;
+	font: 12px/18px Helvetica;
 	margin-right: 19px;
 	padding: 10px 10px 20px;
 	text-align: center;
@@ -10706,11 +10569,9 @@ h2.title .back:hover,
 
 .sign-box.vendor.first .profile-items.prcng label {
 	float: right;
-	line-height: 31px;
 	margin-left: 22px;
 	color: #303030;
-	font-size: 13px;
-	font-weight: normal;
+	font:normal 13px/31px Helvetica;
 }
 
 .sign-box.vendor.first .profile-items.prcng h4 {
@@ -10722,8 +10583,7 @@ h2.title .back:hover,
 .sign-box.vendor.first .profile-items.prcng h4 span {
 	color: #303030;
 	display: block;
-	font-size: 11px;
-	font-weight: normal;
+	font:normal 11px Helvetica;
 	margin-top: -15px;
 }
 
@@ -10755,8 +10615,7 @@ h2.title .back:hover,
 .sign-box.vendor.first .profile-items .text-left {
 	float: left;
 	width: 240px;
-	line-height: 18px;
-	font-size: 12px;
+	font-size: 12px/18px Helvetica;
 	color: #303030;
 }
 
@@ -10808,10 +10667,8 @@ h2.title .back:hover,
 	width: 20px;
 	background-color: #60b5f7;
 	color: #ffffff;
-	font-size: 13px;
-	font-weight: bold;
+	font:bold 13px/20px Helvetica;
 	text-align: center;
-	line-height: 20px;
 	margin-right: 11px;
 	margin-bottom: 30px;
 	-webkit-border-radius: 10px;
@@ -10892,10 +10749,8 @@ h2.title .back:hover,
 }
 
 .sign-box.vendor .content.prcng .prcng-item .right ul li label {
-	line-height: 32px;
 	color: #303030;
-	font-size: 12px;
-	font-weight: normal;
+	font: normal 12px/32px Helvetica;
 	margin: 0 10px;
 }
 
@@ -10906,8 +10761,7 @@ h2.title .back:hover,
 .sign-box.vendor .content.prcng.hours .prcng-item .left-ttl {
 	width: 280px;
 	color: #303030;
-	font-size: 12px;
-	font-weight: normal;
+	font:normal 12px;
 }
 
 .sign-box.vendor .content.prcng.hours .prcng-item .left-ttl strong {
@@ -10953,8 +10807,7 @@ h2.title .back:hover,
 
 .sign-box.vendor .content .prcng-item .right ul li a.remove {
 	color: #303030;
-	font-size: 12px;
-	font-weight: bold;
+	font:bold 12px Helvetica;
 	text-indent: 30px;
 	width: auto;
 }
@@ -10962,8 +10815,7 @@ h2.title .back:hover,
 .sign-box.vendor .content .prcng-item a.link-5 {
 	float: right;
 	color: #60b5f7;
-	font-weight: bold;
-	font-size: 13px;
+	font: bold 13px Helvetica;
 }
 
 .sign-box.vendor .content.prcng.hours.days .prcng-item .right ul li label {
@@ -10994,8 +10846,7 @@ h2.title .back:hover,
 .sign-box.vendor .content.prcng .prcng-item.main label {
 	float: left;
 	line-height: normal;	
-	font-size: 14px;
-	font-weight: bold;
+	font: bold 14px Helvetica;
 	color: #303030;
 	padding-left: 30px;
 }
@@ -11016,8 +10867,7 @@ h2.title .back:hover,
 	text-align: center;
 	padding: 100px 0;
 	color: #cccccc;
-	font-size: 25px;
-	font-weight: bold;
+	font:bold 25px Helvetica;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px; 
@@ -11037,8 +10887,7 @@ h2.title .back:hover,
 	width: 100%;
 	z-index: 10000000;
 	color: #FFFFFF;
-	font-size: 16px;
-	font-weight: bold;
+	font: bold 16px/61px Helvetica;
 	display: none;
 }
 
@@ -11091,8 +10940,7 @@ h2.title .back:hover,
 	line-height: 63px;
 }
 .w3.browseTrips .price sup{
-	font-size: 15px;
-	line-height: 59px;
+	font: 15px/59px Helvetica;
 	float: right;
 	display: block;
 }
@@ -11199,25 +11047,15 @@ h2.title .back:hover,
 .w3.browseTrips .cntrl .link1 {
 	float: right;
 }
- 
-
-
-
-
-
-
-
-
-
+/* --------------------------------------------------------------------------------------------------*/
 .trip-itinerary .ttl {
 	background:  url(https://static.tripfab.com/images2/g-33.png) repeat-x;
 	border: 1px solid #E7E7E7;
 	border-top: none;
 	color: #303030;
-	font-size: 25px;
+	font: 25px/32px Helvetica;
 	overflow: hidden;
 	padding: 15px 34px;
-	line-height: 32px;
 	margin-bottom: 17px;
 	z-index: 100;
 	width: 890px;
@@ -11231,9 +11069,7 @@ h2.title .back:hover,
 
 .trip-itinerary .ttl a.btn-1 {
 	float: right;
-	font-size: 14px;
-	font-weight: bold;
-	line-height: 32px;
+	font: bold 14px/32px Helvetica;
 	padding: 0 30px;
 }
 
@@ -11268,7 +11104,6 @@ h2.title .back:hover,
 	background:  url(https://static.tripfab.com/images2/g-35.png) repeat-x;
 	color: #60B5F7;
 	height: 39px;
-	line-height: 39px;
 	margin: 0;
 	position: relative;
 	z-index: 10;	
@@ -11276,8 +11111,7 @@ h2.title .back:hover,
 	display: block;
 	padding: 0 32px;
 	text-decoration: none;
-	font-size: 14px;
-	font-weight: bold;
+	font:bold 14px/39px Helvetica;
 	text-shadow: 0 1px 0 #FFFFFF;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -11305,8 +11139,7 @@ h2.title .back:hover,
 	background:  url(https://static.tripfab.com/images2/t-37.png) no-repeat left top;
 	color: #FFFFFF;
 	display: block;
-	font-size: 11px;
-	font-weight: bold;
+	font-size: bold 11px Helvetica;
 	height: 74px;
 	left: -50px;
 	padding-top: 27px;
@@ -11479,8 +11312,7 @@ h2.title .back:hover,
 	overflow: hidden;
 	padding: 20px 0  20px 30px;
 	color: #303030;
-	font-size: 13px;
-	line-height: 20px;
+	font-size: 13px/20px Helvetica;
 	background-color: #FFF;
 	-moz-border-radius-topleft: 4px;
 	-moz-border-radius-topright: 4px;
@@ -11588,8 +11420,7 @@ h2.title .back:hover,
 .trip-itinerary .tabs-wrapper .tab .content {
 	overflow: hidden;
 	color: #303030;
-	font-size: 13px;
-	line-height: 20px;
+	font: 13px/20px Helvetica;
 	margin-top: 20px;
 }
 
@@ -11608,9 +11439,7 @@ h2.title .back:hover,
 
 .trip-itinerary .tabs-wrapper .tab .content .left {
 	float: left;
-	font-size: 26px;
-	font-weight: bold;
-	line-height: normal;
+	font: 26px/28px Helvetica;
 	width: 320px;
 }
 
@@ -11783,13 +11612,11 @@ h2.title .back:hover,
 	width: 629px;
 	padding: 20px 55px 0 30px;
 	color: #464646;
-	font-size: 13px;
-	line-height: 21px;
+	font: 13px/21px Helvetica;
 }
 
 .trip-itinerary .box.tabs-bottom .tab h4 {
-	font-size: 26px;
-	line-height: normal;
+	font: 26px/28px Helvetica;
 	margin-bottom: 20px;
 }
 
@@ -11821,8 +11648,7 @@ h2.title .back:hover,
 .trip-itinerary .compare ul {
 	list-style: none;
 	color: #464646;
-	font-size: 13px;
-	line-height: 15px;
+	font: 13px/15px Helvetica;
 	width: 315px;
 }
 
@@ -12120,10 +11946,8 @@ h2.title .back:hover,
 .box.days .day .day-section .sub-ttl {
 	background: #303030 url(https://static.tripfab.com/images2/arrow-37.png) no-repeat 100% 0;
 	color: #ffffff;
-	font-size: 15px;
-	font-weight: bold;
+	font: bold 15px/31px Helvetica;
 	height: 31px;
-	line-height: 31px;
 	display: block;
 	float: left;
 	padding: 0 27px;
@@ -12245,10 +12069,8 @@ h2.title .back:hover,
 	display: block;
 	width: 39px;
 	color: #acacac;
-	font-size: 14px;
-	font-weight: bold;
+	font:bold 14px/47px Helvetica;
 	text-shadow: 0 1px 0 #000000;
-	line-height: 47px;
 }
 
 .box.days .bottom a:hover {
@@ -12281,9 +12103,7 @@ h2.title .back:hover,
 	position: absolute;	
 	top: 20px;
 	color: #60b5f7;
-	font-size: 14px;
-	font-weight: bold;
-	line-height: 49px;
+	font:bold 14px/49px Helvetica;
 	z-index: 20;
 }
 
@@ -12449,8 +12269,7 @@ h2.title .back:hover,
 	border: 1px solid #E7E7E7;
 	box-shadow: 0 0 2px #EAEAEA;
 	color: #303030;
-	font-size: 14px;
-	line-height: 22px;
+	font: 14px/22px Helvetica;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px; 
@@ -12492,9 +12311,7 @@ h2.title .back:hover,
 }
 
 #features .top h3 {
-	font-size: 16px;
-	font-weight: normal;
-	line-height: normal;
+	font:normal 16px/18px Helvetica;
 	color: #898989;
 	margin-bottom: 20px;
 }
@@ -12613,8 +12430,7 @@ h2.title .back:hover,
 	padding: 18px 0;
 	border-bottom: 1px solid #efefef;
 	color: #303030;
-	font-size: 12px;
-	line-height: 18px;
+	font: 12px/18px Helvetica;
 }
 
 .pending-steps ul li:last-child {
@@ -12646,8 +12462,7 @@ h2.title .back:hover,
 
 .pending-steps ul li a, .pending-steps ul li > span {
 	color: #60b5f7;
-	font-weight: bold;
-	font-size: 13px;
+	font: bold 13px Helvetica;
 	display: block;
 }
 
@@ -12670,10 +12485,8 @@ h2.title .back:hover,
 
 .pricing-tabs > ul > li > a {
 	display: block;
-	font-weight: bold;
-	font-size: 12px;
+	font:bold 12px/29px Helvetica;
 	padding: 0 23px;
-	line-height: 29px;
 	height: 29px;
 	border-top: 4px solid #eeeeee;
 	color: #898989;
@@ -12701,8 +12514,7 @@ h2.title .back:hover,
 	background-color: #FEFCE2;
 	border: 1px solid #FEEBB2;
 	color: #A3620A;
-	font-size: 13px;
-	line-height: 20px;
+	font: 13px/20px Helvetica;
 	margin: 22px 22px 0;
 	padding: 19px 19px 9px 19px;
 	position: relative;
@@ -12764,8 +12576,7 @@ h2.title .back:hover,
 .pricing-itm .link-9, .pricing-itm .remove {
 	float: right;
 	margin-left: 20px;
-	font-size: 11px;
-	font-weight: bold;
+	font: bold 11px Helvetica;
 }
 
 .pricing-itm .remove {
@@ -12798,8 +12609,7 @@ h2.title .back:hover,
 .pricing-itm .right input[type="text"] {
 	background: url(https://static.tripfab.com/images2/ico-95.png) no-repeat scroll 5px 50% transparent;
 	color: #ACACAC;
-	font-size: 15px;
-	font-weight: bold;
+	font:bold 15px;
 	padding: 0 5px 0 16px;
 	width: 45px;
 }
