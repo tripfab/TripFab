@@ -1962,8 +1962,7 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 
 .tabs-wrapper-2 .tab-content ul {
 	color: #616161;
-	font-size: 13px;
-	line-height: 18px;
+	font: 13px/18px Helvetica;
 	margin-left: 15px;
 	margin-bottom: 15px;
 }
@@ -2010,8 +2009,7 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 	float: left;
 	margin-right: 30px;
 	width: 124px;
-	line-height: 17px;
-	font-size: 12px;
+	font: 12px/17px Helvetica;
 }
 
 .message > div:last-child {
@@ -2025,8 +2023,7 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 .message > span {
 	display: block;
 	color: #303030;
-	font-size: 14px;
-	line-height: 18px;
+	font: 14px/18px Helvetica;
 	margin-bottom: 10px;
 }
 
@@ -2056,16 +2053,14 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 	text-align: center;
 	border: none;
 	height: 27px;
-	font-size: 12px;
-	font-weight: bold;
+	font:bold 12px Helvetica;
 	cursor: pointer;
 }
 
 .message h4 {
 	color: #464646;
-	font-size: 12px;
+	font: 12px/22px Helvetica;
 	float: left;
-	line-height: 22px;
 }
 
 .message ul {
@@ -2077,9 +2072,8 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 .message ul li {
 	background: url(https://static.tripfab.com/images2/ico-42.png) no-repeat 0 50%;
 	padding-left: 15px;
-	line-height: 22px;
 	color: #414141;
-	font-size: 12px;
+	font: 12px/22px Helvetica;
 }
 
 
@@ -2092,9 +2086,7 @@ ul.cat-menu li.item-6 a:hover img, ul.cat-menu li.item-6.active a img {
 
 .reviews-wrapper .tab .ttl {
 	color: #464646;
-	font-size: 14px;
-	font-weight: bold;
-	line-height: 25px;
+	font:bold 14px/25px Helvetica;
 	padding: 10px 20px;
 }
 
@@ -2202,8 +2194,7 @@ ul.reviews li > div div.meta em.red {
 .reviews-wrapper .tab p {
 	margin-bottom: 15px;
 	color: #616161;
-	font-size: 13px;
-	line-height: 18px;
+	font: 13px/18px Helvetica;
 }
 
 .right-sidebar {
@@ -2245,10 +2236,8 @@ ul.reviews li > div div.meta em.red {
 	color: #FFFFFF;
 	display: block;
 	float: left;
-	font-size: 12px;
-	font-weight: bold;
+	font:bold 12px/26px Helvetica;
 	height: 26px;
-	line-height: 26px;
 	margin-left: -25px;
 	text-align: center;
 	margin-top: 12px;
@@ -2286,10 +2275,8 @@ ul.reviews li > div div.meta em.red {
     border-bottom: 1px solid #E8E8E8;
     color: #464646;
     display: block;
-    font-size: 12px;
-    font-weight: bold;
+    font: bold 12px/43px Helvetica;
     height: 43px;
-    line-height: 43px;
     position: relative;
     padding: 0 17px;
     text-shadow: 0 1px 0 #FFFFFF;
@@ -2345,8 +2332,7 @@ ul.reviews li > div div.meta em.red {
 .datepicker a.ui-state-default {
 	background-color: #b7b7b7;
 	color: #464646;
-	font-size: 13px;
-	font-weight: bold;
+	font: bold 13px Helvetica;
 }
 
 .datepicker a.ui-state-default:hover {
@@ -2366,11 +2352,9 @@ ul.reviews li > div div.meta em.red {
 	text-decoration: none;
 	cursor: pointer;
 	height: 1.8em;
-	line-height: 1.8em;
 	color: #60b5f7;
 	text-transform: uppercase;
-	font-size: 10px;
-	font-weight: bold;
+	font: bold 10px/1.8em Helvetica;
 }
 
 .datepicker .ui-datepicker .ui-datepicker-next {
@@ -2391,9 +2375,7 @@ ul.reviews li > div div.meta em.red {
 .right-sidebar .widget.book .summary span {
     color: #303030;
     float: left;
-    font-size: 11px;
-    font-weight: bold;
-    font-size: 14px;
+    font-size: bold 14px Helvetica;
 }
 
 .right-sidebar .widget.book .summary strong {
@@ -2403,8 +2385,7 @@ ul.reviews li > div div.meta em.red {
 
 .right-sidebar .widget.book .summary .btn-1 {
 	float: right;
-	line-height: 31px;
-	font-size: 13px;
+	font: 13px/31px Helvetica;
 }
 
 .widget.book .occupation {
@@ -2420,8 +2401,7 @@ ul.reviews li > div div.meta em.red {
 
 .widget.book .occupation p label {
     display: block;
-    font-size: 12px;
-    font-weight: bold;
+    font: bold 12px Helvetica;
     margin-bottom: 7px;
 }
 
@@ -2443,8 +2423,7 @@ ul.reviews li > div div.meta em.red {
 .widget.book .occupation .room-types > strong {
 	color: #616161;
 	display: block;
-	font-size: 12px;
-	line-height: 20px;
+	font: 12px/20px Helvetica;
 	margin: 0 30px 14px;
 }
 
@@ -2465,8 +2444,7 @@ ul.reviews li > div div.meta em.red {
 .widget.book .occupation .room-types ul li label {
 	display: block;
 	color: #303030;
-	font-size: 12px;
-	font-weight: bold;
+	font: bold 12px Helvetica;
 }
 
 .widget.book .occupation .room-types ul li span {
@@ -2486,9 +2464,7 @@ ul.reviews li > div div.meta em.red {
 .right-sidebar .widget .ttl {
 	padding: 0 23px;
 	color: #303030;
-	font-size: 13px;
-	font-weight: bold;
-	line-height: 42px;
+	font: bold 13px/42px Helvetica;
 }
 
 .right-sidebar .widget .widget-content {
@@ -2526,10 +2502,8 @@ ul.reviews li > div div.meta em.red {
 
 .right-sidebar .widget.talk .widget-content a.online {
 	color: #8dc63f;
-	font-size: 12px;
-	font-weight: bold;
+	font: 12px/17px Helvetica;
 	float: left;
-	line-height: 17px;
 	display: block;
 	margin-top: 15px;
 }
@@ -2572,8 +2546,7 @@ ul.reviews li > div div.meta em.red {
 .right-sidebar .widget.talk > ul > li > a {
 	color: #898989;
 	display: block;
-	font-size: 11px;
-	font-weight: bold;
+	font:bold 11px Helvetica;
 	text-align: center;
 	padding: 12px 17px;
 }
@@ -2638,8 +2611,7 @@ ul.reviews li > div div.meta em.red {
 .qa .qa-box .questions, .qa .qa-box .answer {
     text-shadow: 1px 1px 0 #FFFFFF;
     color: #303030;
-    font-size: 13px;
-    line-height: 18px;
+    font: 13px/18px Helvetica;
     position: relative;
 }
 
@@ -2650,9 +2622,8 @@ ul.reviews li > div div.meta em.red {
 
 .qa .qa-box span {
     display: block;
-    font-size: 11px;
+    font: 11px/18px Helvetica;
     color: #a1a1a1;
-    line-height: 18px;
     display: block;
 }
 
@@ -2695,15 +2666,13 @@ ul.reviews li > div div.meta em.red {
 .widget.book .hours table {
 	width: 100%;
 	color: #555555;
-	font-size: 12px;
-	line-height: 20px;
+	font: 12px/20px Helvetica;
 }
 
 .map-wrapper h4, .widget.book .hours h4 {
 	color: #303030;
-	font-size: 13px;
+	font: 13px/20px Helvetica;
 	margin-bottom: 10px;
-	line-height: 20px;
 	overflow: hidden;
 }
 
@@ -2712,10 +2681,8 @@ ul.reviews li > div div.meta em.red {
 }
 
 .map-wrapper address {
-	font-style: normal;
-	line-height: 20px;
 	color: #303030;
-	font-size: 12px;
+	font:normal 12px/20px Helvetica;
 	margin-top: 5px;
 }
 
@@ -2726,9 +2693,7 @@ ul.reviews li > div div.meta em.red {
 
 .widget.near > div > h6 {
 	color: #303030;
-	font-size: 12px;
-	font-weight: bold;
-	line-height: 42px;
+	font: bold 12px/42px Helvetica;
 	padding: 0 10px 0 22px;
 	overflow: hidden;
 }
@@ -2781,8 +2746,7 @@ ul.reviews li > div div.meta em.red {
 
 .widget.near > div ul li a strong {
 	color: #303030;
-	font-size: 12px;
-	font-weight: bold;
+	font:bold 12px Helvetica;
 }
 
 .widget.near > div ul {
@@ -2800,9 +2764,7 @@ ul.reviews li > div div.meta em.red {
 	overflow: hidden;
 	padding: 15px 19px;
 	color: #303030;
-	font-size: 11px;
-	line-height: 14px;
-	width: ;
+	font-size: 11px/14px Helvetica;
 }
 .widget.near > div ul li p {
 	width: 255px;
@@ -2963,10 +2925,8 @@ ul.reviews li > div div.meta em.red {
 	background: url(https://static.tripfab.com/images2/checkout-circle.png) no-repeat;
 	color: #FFFFFF;
 	display: block;
-	font-size: 14px;
-	font-weight: bold;
+	font: bold 14px/21px Helvetica;
 	height: 21px;
-	line-height: 21px;
 	text-align: center;
 	width: 21px;
 	float: left;
@@ -2993,15 +2953,13 @@ ul.reviews li > div div.meta em.red {
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
-	line-height: 16px;
-	font-size: 12px;
+	font: 12px/16px Helvetica;
 	margin-bottom: 20px;
 }
 .checkout-item  .ttl > strong {
 	float: left;
-	line-height: 21px;
 	color: #303030;
-	font-size: 15px;
+	font: 15px/21px Helvetica;
 	margin-left: 9px;
 }
 
@@ -3361,9 +3319,7 @@ ul.reviews li > div div.meta em.red {
 
 .checkout-wrapper .right .widget .ttl {
     color: #303030;
-    font-size: 13px;
-    font-weight: bold;
-    line-height: 42px;
+    font:bold 13px/42px Helvetica;
     padding: 0 23px;
 }
 
@@ -3375,11 +3331,10 @@ ul.reviews li > div div.meta em.red {
 }
 
 .widget.summary ul li {
-	line-height: 20px;
 	padding: 9px 0;
 	border-bottom: 1px solid #e8e8e8;
 	color: #303030;
-	font-size: 12px;
+	font: 12px/20px Helvetica;
 }
 
 .widget.summary ul li:last-child {
@@ -3438,9 +3393,8 @@ ul.reviews li > div div.meta em.red {
 }
 .widget.summary .pricing_det dl {
 	overflow: hidden;
-	line-height: 20px;
 	color: #303030;
-	font-size: 12px;
+	font: 12px/20px Helvetica;
 }
 .widget.summary .pricing_det  dl dt {
 	float: left;
@@ -3524,9 +3478,8 @@ ul.reviews li > div div.meta em.red {
 	width: 193px;
 	display: block;
 	text-align: center;
-	line-height: 38px;
 	color: #ffffff;
-	font-size: 13px;
+	font: 13px/38px Helvetica;
 	float: left;
 }
 
@@ -3562,9 +3515,8 @@ ul.reviews li > div div.meta em.red {
 	background: url(https://static.tripfab.com/images2/t-16.png) no-repeat;
 	display: block;
 	float: right;
-	font-size: 15px;
+	font: 15px/28px Helvetica;
 	height: 28px;
-	line-height: 28px;
 	margin-right: -34px;
 	margin-top: 10px;
 	text-align: center;
@@ -3677,8 +3629,7 @@ ul.reviews li > div div.meta em.red {
 
 .widget.summary.trip ul li {
 	padding: 16px 19px;
-	font-size: 12px;
-	font-weight: normal;
+	font: normal 12px Helvetica;
 	overflow: hidden;
 }
 
@@ -3787,10 +3738,8 @@ ul.reviews li > div div.meta em.red {
 	border: 1px solid #E7E7E7;
 	box-shadow: 0 0 2px #EAEAEA;
 	padding: 19px 30px;
-	line-height: 32px;
 	color: #363636;
-	font-size: 13px;
-	font-weight: bold;
+	font:bold 13px/32px Helvetica;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px; 
@@ -3867,8 +3816,7 @@ ul.reviews li > div div.meta em.red {
 }
 
 .trip-item .top p {
-	font-size: 12px;
-	font-weight: bold;
+	font: bold 12px Helvetica;
 }
 
 .trip-item .top p strong {
@@ -3920,11 +3868,10 @@ ul.reviews li > div div.meta em.red {
 }
 
 .trip-item .bottom ul li {
-	line-height: 51px;
 	border-bottom: 1px dotted #adadad;
 	overflow: hidden;
 	color: #303030;
-	font-size: 12px;
+	font: 12px/51px Helvetica;
 }
 
 .trip-item .bottom ul li:last-child {
@@ -3975,15 +3922,12 @@ ul.reviews li > div div.meta em.red {
 
 .trip-item .bottom ul li.hotel div span {
 	color: #303030;
-	font-size: 12px;
-	font-weight: bold;
+	font: bold 12px/39px Helvetica;
 	float: right;
-	line-height: 39px;
 }
 
 .trip-item .bottom ul li.hotel div p {
-	font-size: 11px;
-	line-height: 16px;
+	font: 11px/16px Helvetica;
 	padding-left: 22px;
 }
 
@@ -3999,8 +3943,7 @@ ul.reviews li > div div.meta em.red {
 .trip-items .right .widget.summary ul li {
 	padding: 0;
 	color: #303030;
-	font-size: 12px;
-	font-weight: normal;
+	font: normal 12px Helvetica;
 }
 
 .trip-items .right .widget.summary ul li.error a {
@@ -4048,9 +3991,7 @@ ul.reviews li > div div.meta em.red {
 .lb-recommendations .header {
 	background: url(https://static.tripfab.com/images2/g-13.png) repeat-x;
 	color: #FFFFFF;
-	font-size: 16px;
-	font-weight: bold;
-	line-height: 44px;
+	font:bold 16px/44px Helvetica;
 	padding: 0 26px;
 	border-top-left-radius: 2px;
 	border-top-right-radius: 2px;
@@ -4118,8 +4059,7 @@ ul.reviews li > div div.meta em.red {
 .lb-recommendations .content span.location {
 	background: url(https://static.tripfab.com/images2/ico-3.png) no-repeat;
 	color: #a5a3a3;
-	font-size: 12px;
-	font-weight: bold;
+	font:bold 12px Helvetica;
 	padding-left: 15px;
 	border-bottom: 1px dotted #b2b2b2;
 	display: block;
@@ -4141,9 +4081,7 @@ ul.reviews li > div div.meta em.red {
 
 .lb-recommendations .content .meta > span {
 	color: #303030;
-	font-size: 37px;
-	font-weight: bold;
-	line-height: 28px;
+	font: bold 37px/28px Helvetica;
 }
 
 .lb-recommendations .content .meta > span em {
@@ -4228,8 +4166,7 @@ ul.reviews li > div div.meta em.red {
 	list-style: square;	
 	padding-left: 14px;
 	color: #4f4f4f;
-	font-size: 13px;
-	line-height: 18px;
+	font: 13px/18px Helvetica;
 }
 
 .lb-dates .left ul li {
@@ -4269,12 +4206,11 @@ ul.reviews li > div div.meta em.red {
 .datepicker td.ui-datepicker-other-month span.ui-state-default {
 	background-color: #b7b7b7;
 	color: #464646;
-	font-size: 13px;
-	font-weight: bold;
+	font:bold 13px Helvetica;
 	display: block;
 	padding: 0.2em;
-	    text-align: center;
-	    text-decoration: none;
+    text-align: center;
+    text-decoration: none;
 }
 .lb-dates .right .ui-datepicker table td.ui-datepicker-other-month span{
 	background-color:#e1e1e1;
@@ -4284,8 +4220,7 @@ ul.reviews li > div div.meta em.red {
  	color: #464646;
  	background-color: #e1e1e1;
  	display: block;
- 	font-size: 13px;
- 	font-weight: bold;
+ 	font:bold 13px Helvetica;
  	display: block;
  	padding: 0.2em;
     text-align: center;
@@ -4347,8 +4282,7 @@ ul.reviews li > div div.meta em.red {
 
 .occ label {
 	color: #7d7d7d;
-	font-size: 12px;
-	font-weight: bold;
+	font:bold 12px;
 	margin: 0 4px;
 }
 
@@ -4381,12 +4315,10 @@ ul.reviews li > div div.meta em.red {
 }
 
 .lb-payment .ttl {
-	background: url(https://static.tripfab.com/images2/g-20.png) repeat-x;
-	line-height: 39px;
+	background: url(https://static.tripfab.com/images2/g-20.png) repeat-x 0 0;
 	border-bottom: 1px solid #414141;
 	color: #FFFFFF;
-	font-size: 15px;
-	font-weight: bold;
+	font: bold 15px/39px Helvetica;
 	padding: 0 23px;
 }
 
@@ -4404,8 +4336,7 @@ ul.reviews li > div div.meta em.red {
 .lb-payment .container label {
 	float: left;
 	color: #616161;
-	font-size: 13px;
-	font-weight: bold;
+	font: bold 13px Helvetica;
 	margin-right: 12px;
 }
 
@@ -4449,10 +4380,8 @@ ul.reviews li > div div.meta em.red {
 .lb-forgot .ttl {
 	background: #303030 url(https://static.tripfab.com/images2/g-29.png) repeat-x 0 100%;
 	color: #FFFFFF;
-	font-size: 15px;
-	font-weight: bold;
+	font: bold 15px/39px Helvetica;
 	height: 39px;
-	line-height: 39px;
 	padding: 0 29px;
 	-moz-border-radius-topleft: 4px;
 	-moz-border-radius-topright: 0px;
@@ -4515,8 +4444,7 @@ ul.reviews li > div div.meta em.red {
 	border: 1px solid #E7E7E7;
 	box-shadow: 0 0 2px #EAEAEA;
 	color: #7C7C7C;
-	font-size: 12px;
-	line-height: 18px;
+	font: 12px/18px Helvetica;
 	overflow: hidden;
 	padding: 25px;
 	position: relative;
@@ -4583,8 +4511,7 @@ ul.reviews li > div div.meta em.red {
 }
 
 .lb-size-1 .bottom strong span {
-	font-weight: normal;
-	font-size: 16px;
+	font: normal 16px Helvetica;
 }
 
 .lb-size-1.offers .right .content {
@@ -4613,20 +4540,15 @@ ul.reviews li > div div.meta em.red {
 	color: #FFFFFF;
 	display: block;
 	float: left;
-	font-size: 12px;
-	font-weight: bold;
+	font:bold 12px/26px Helvetica;
 	height: 26px;
-	line-height: 26px;
 	margin-left: -25px;
 	padding: 0 21px;
 }
 
 .lb-size-1.offers .bottom > em {
-	font-style: normal;
-	line-height: 26px;
 	color: #f26522;
-	font-size: 34px;
-	font-weight: bold;
+	font:normal 500 34px/26px Helvetica;
 	float: left;
 	margin-left: 10px;
 }
@@ -4660,8 +4582,7 @@ ul.reviews li > div div.meta em.red {
 
 .lb-forgot.trip-dates .content > div span {
 	color: #464646;
-	font-weight: bold;
-	font-size: 13px;
+	font:bold 13px Helvetica;
 }
 
 .lb-forgot.trip-dates .content > div + div {
@@ -4695,8 +4616,7 @@ ul.reviews li > div div.meta em.red {
 }
 
 .lb-congrats p {
-	line-height: 20px;
-	font-size: 14px;
+	font: 14px/20px Helvetica;
 	margin-top: 10px;
 }
 
@@ -4757,9 +4677,8 @@ ul.reviews li > div div.meta em.red {
 .lb-forgot .sub-ttl {
 	background-color: #f2f2f2;
 	padding: 0 29px;
-	line-height: 40px;
 	color: #303030;
-	font-size: 13px;
+	font: 13px/40px Helvetica;
 }
 
 .manage-trip .content div.manage-item {
@@ -4779,8 +4698,7 @@ ul.reviews li > div div.meta em.red {
 	float: right;
 	margin: 0;
 	color: #303030;
-	font-size: 14px;
-	font-weight: bold;
+	font: bold 14px Helvetica;
 }
 
 .manage-trip .content div.manage-item.set-dates input[type="text"] {
@@ -4855,10 +4773,8 @@ ul.reviews li > div div.meta em.red {
 	border-top-left-radius: 2px;
 	border-top-right-radius: 2px;
 	color: #FFFFFF;
-	font-size: 15px;
-	font-weight: bold;
+	font: bold 15px/44px Helvetica;
 	height: 44px;
-	line-height: 44px;
 	overflow: hidden;
 	padding: 0 24px;
 }
@@ -4874,8 +4790,7 @@ ul.reviews li > div div.meta em.red {
 
 .user-backend .left .ttl ul li a {
 	color: #898989;
-	font-size: 13px;
-	font-weight: bold;
+	font: bold 13px Helvetica;
 	display: block;
 }
 
@@ -4918,8 +4833,7 @@ ul.reviews li > div div.meta em.red {
 
 .profile-items .item-wrppr .item-ttl, .profile-items .item h4 {
 	color: #303030;
-	font-size: 12px;
-	font-weight: bold;
+	font:bold 12px Helvetica;
 	margin-bottom:3px;
 }
 
@@ -4956,8 +4870,7 @@ ul.reviews li > div div.meta em.red {
 
 .profile-items .item > span a {
 	color: #60b5f7;
-	font-size: 12px;
-	font-weight: bold;
+	font: bold 12px Helvetica;
 }
 
 .profile-items .item > span + br + span {
@@ -5144,18 +5057,14 @@ ul.reviews li > div div.meta em.red {
 
 .profile-items .item-wrppr .item a.delete {
 	float: right;
-	line-height: 20px;
 	color: #f26522;
-	font-size: 12px;
-	font-weight: bold;
+	font:bold 12px/20px Helvetica;
 }
 
 .profile-items .item-wrppr .item a.add {
 	float: right;
-	line-height: 20px;
 	color: #487c06;
-	font-size: 11px;
-	font-weight: bold;
+	font: bold 11px/20px Helvetica;
 }
 
 .profile-items .item input[type="text"] {
@@ -5267,10 +5176,8 @@ ul.reviews li > div div.meta em.red {
 .foot input[type="submit"].btn-1 {
 	border: medium none;
 	float: right;
-	font-size: 13px;
-	font-weight: bold;
+	font: bold 13px/30px Helvetica;
 	height: 30px;
-	line-height: 30px;
 	padding: 0 18px;
 }
 
@@ -5339,8 +5246,7 @@ ul.reviews li > div div.meta em.red {
 	padding: 0 10px;
 	display: block;
 	color: #303030;
-	font-size: 13px;
-	font-weight: bold;
+	font: bold 13px Helvetica;
 	overflow: hidden;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -5357,8 +5263,7 @@ ul.reviews li > div div.meta em.red {
 	background-color: #F85819;
 	color: #FFFFFF;
 	float: right;
-	font-size: 11px;
-	line-height: 15px;
+	font: 11px/15px Helvetica;
 	margin: 12px 20px 0 0;
 	padding: 0 6px;
 	-webkit-border-radius: 10px;
@@ -5685,8 +5590,7 @@ h2.title .back:hover,
 .main-menu > ul > li > a {
 	color: #303030;
 	display: block;
-	font-size: 13px;
-	font-weight: bold;
+	font: bold 13px Helvetica;
 	padding: 0 22px;
 	text-shadow: 0 1px 0 #FFFFFF;
 }
@@ -5697,10 +5601,8 @@ h2.title .back:hover,
 
 .main-menu ul li a span {
 	background-color: #f85819;
-	line-height: 15px;
 	color: #ffffff;
-	font-size: 11px;
-	font-weight: bold;
+	font: bold 11px/15px Helvetica;
 	padding: 0 6px;
 	margin-left: 5px;
 	-webkit-border-radius: 10px;
@@ -5734,12 +5636,10 @@ h2.title .back:hover,
 }
 
 .main-menu ul li ul li a {
-	line-height: 25px;
 	color: #636363;
-	font-size: 11px;
+	font:bold 11px/25px Helvetica;
 	padding: 0 0 0 22px;
 	display: block;
-	font-weight: bold;
 }
 
 .main-menu ul li ul li a:hover {
@@ -5771,9 +5671,7 @@ h2.title .back:hover,
 }
 
 .subttl a.btn-1, .subttl a.btn-4, .subttl a.btn-10 {
-	font-size: 12px;
-	font-weight: bold;
-	line-height: 25px;
+	font:bold 12px/25px Helvetica;
 	height: auto;
 }
 
@@ -5843,14 +5741,12 @@ h2.title .back:hover,
 .tripttl a.rename {
 	float: left;
 	color: #60b5f7;
-	font-size: 12px;
-	font-weight: bold;
+	font: bold 12px Helvetica;
 }
 
 .tripttl > div > span {
 	color: #707070;
-	font-size: 12px;
-	font-weight: bold;
+	font:bold 12px Helvetica;
 }
 .w3.pasttrips h2 {
 	background: url(https://static.tripfab.com/images2/ico_127.gif) no-repeat left 18px;

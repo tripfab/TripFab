@@ -137,82 +137,13 @@
                             <?php endfor ?>
 	                    </div>
                     </div><!--TOP-->
-                    <!--<div class="cycle">
-						<?php $times = array('Stay','Morning','Afternoon','Night','Stay') ?>
-                        <?php for($i=1;$i<=count($this->listingsbyday);$i++): ?>
-                        <div class="content">
-                        	<?php foreach($this->listingsbyday[$i] as $time => $listings): ?>
-                            <div class="column">
-                            	<div class="single ttl">
-	                                <span class="ttl"><?= ucfirst($time) ?> <em></em></span>
-                                </div>
-	                            <?php foreach($listings as $listing): ?>
-                                <div class="single">
-                                    <h5><?= $listing->title ?></h5>
-                                	<?php if($listing->start != '00:00:00'): ?>
-                                    <span class="time">
-									<?= date('g:i A',strtotime($listing->start)) ?> - <?= date('g:i A',strtotime($listing->end)) ?></span>
-                                    <?php else: ?>
-                                    <span class="time"><?= $times[$listing->time] ?></span>
-                                    <?php endif ?>
-                                    <div class="picture">
-                                    	<?= $this->thumbnail(array('width'=>260,'height'=>103), $listing->image, '', '267:168') ?>
-                                        <a href="mapcanvas<?= $listing->id ?>" class="mos js-show-map"
-                                        data-lat="<?= $listing->lat ?>" data-lng="<?= $listing->lng ?>" 
-                                        data-title="<?= $listing->title ?>">Show Map <span class="aw">&uarr;</span></a>
-                                        <div id="mapcanvas<?= $listing->id ?>" class="mapCanvas hidden"></div><!--MAPCANVAS--*>                                    </div>
-                                    <ul>
-                                    	<?php $desc = explode("\n",$listing->description) ?>
-                                        <?php foreach($desc as $d): ?>
-                                        <?php $d = trim($d); if(!empty($d)): ?>
-                                        <li>• <?= $d ?></li>
-                                        <?php endif ?>
-                                        <?php endforeach ?>
-                                    </ul>
-                                </div><!--SINGLE--*>
-                                <?php $last = end(end($this->listingsbyday[$i])) ?>
-								<?php if(($last->id == $listing->id) and (count($this->hotelsbyday[$i])> 0)): ?>
-                                    <div class="single ttl">
-                                        <span class="ttl">Stay <em></em></span>
-                                    </div>
-									<?php foreach($this->hotelsbyday[$i] as $listing): ?>
-                                    <div class="single">
-                                        <h5><?= $listing->title ?></h5>
-                                        <?php if($listing->start != '00:00:00'): ?>
-                                        <span class="time">
-                                        <?= date('g:i A',strtotime($listing->start)) ?> - <?= date('g:i A',strtotime($listing->end)) ?></span>
-                                        <?php else: ?>
-                                        <span class="time"><?= $times[$listing->time] ?></span>
-                                        <?php endif ?>
-                                        <div class="picture">
-                                            <?= $this->thumbnail(array('width'=>260,'height'=>103), $listing->image, '', '267:168') ?>
-                                            <a href="mapcanvas<?= $listing->id ?>" class="mos js-show-map"
-                                            data-lat="<?= $listing->lat ?>" data-lng="<?= $listing->lng ?>" 
-                                            data-title="<?= $listing->title ?>">Show Map <span>&uarr;</span></a>
-                                            <div id="mapcanvas<?= $listing->id ?>" class="mapCanvas hidden"></div><!--MAPCANVAS--*>                                    	</div>
-                                        <ul>
-                                            <?php $desc = explode("\n",$listing->description) ?>
-                                            <?php foreach($desc as $d): ?>
-                                            <?php $d = trim($d); if(!empty($d)): ?>
-                                            <li>• <?= $d ?></li>
-                                            <?php endif ?>
-                                            <?php endforeach ?>
-                                        </ul>
-                                    </div><!--SINGLE--*>
-                                    <?php endforeach ?>
-                                <?php endif ?>
-                                <?php endforeach ?>
-                            </div><!--COLUMN--*>
-                            <?php endforeach ?>
-                        </div><!--CONTENT--*>
-                        <?php endfor ?>
-                    </div><!--CYCLE--*>-->
                     
                     <div class="box days">
                     	<div class="days-cycle">
                     		<?php $times = array('Stay','Morning','Afternoon','Night','Stay') ?>
                     		<?php for($i=1;$i<=count($this->listingsbyday);$i++): ?>
                     		<div class="day">
+                    			
                     			<?php foreach($this->listingsbyday[$i] as $time => $listings): ?>
                     			<div class="day-section">
                     				<span class="sub-ttl"><?= ucfirst($time) ?> Itinerary</span>
@@ -245,6 +176,11 @@
                     		</div><!-- closes day -->
                     		<?php endfor ?>
                     	</div><!-- closes day-cycle -->
+                    	
+                    	<div class="bot">
+                			<a href="" class="prev">Previous Day</a>
+							<a href="" class="next">Next Day</a>
+                		</div>
                     </div>
                     
                     
