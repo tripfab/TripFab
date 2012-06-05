@@ -110,7 +110,7 @@
                     <div class="inner">
                     	<?php foreach($this->trips as $i => $h): ?>
                         <div class="single <?= ($i == 3) ? 'last' : '' ?>">
-                        	<a href="/en-US/en-US/trips/view/?trip=<?= $h->id ?>">
+                        	<a href="/en-US/trips/view/<?= $h->id ?>">
 							<?= $this->thumbnail(array('width'=>223, 'height'=>152), $h->image, '','223:152'); ?></a>
                             <h5 class="two"><?= $h->title ?></h5>
                             <span class="meta"><em class="trip"></em><?= $h->days ?> Days Trip</span>
@@ -121,7 +121,7 @@
                                     <sub>per person</sub>
                                     <div class="clear"></div>
                                 </div><!--PRICE-->
-                                <a href="/en-US/en-US/trips/view/?trip=<?= $h->id ?>"><span>Visit Trip</span></a>
+                                <a href="/en-US/trips/view/<?= $h->id ?>"><span>Visit Trip</span></a>
                                 <div class="clear"></div>
                             </div><!--INFO-->
                         </div><!--SINGLE-->

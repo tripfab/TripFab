@@ -57,10 +57,12 @@ class AjaxController extends Zend_Controller_Action
         $this->user = null;
         
         $headers = getallheaders();
-        if((array_key_exists('X-Requested-With', $headers) === false) and 
-                (array_key_exists('x-requested-with', $headers) === false)){
-            error_log('Wrong request');
-            echo 'Wrong request'; die;
+        if($this->_getParam('action') != 'tripconversion') {
+            if((array_key_exists('X-Requested-With', $headers) === false) and 
+                    (array_key_exists('x-requested-with', $headers) === false)){
+                error_log('Wrong request');
+                echo 'Wrong request'; die;
+            }
         }
         
         $this->view->cssVC = Zend_Registry::get('vc');
@@ -4104,5 +4106,10 @@ class AjaxController extends Zend_Controller_Action
         
         header('Content-type: application/json');
         echo json_encode($result); die;
+    }
+    
+    public function tripconversionAction()
+    {
+        
     }
 }

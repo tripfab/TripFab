@@ -1,7 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
-    <head>
-    <meta content="noindex,nofollow" name="robots" />
+<head>
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
     <title><?= $this->trip->title ?>, <?= $this->trip->country ?> : Overview | Tripfab.com</title>
     <link rel="icon" type="image/png" href="/images3/favicon.png" />
@@ -12,7 +11,6 @@
 	<link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
 	<link type="text/css" rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
 	<link rel="stylesheet" href="/css2/datepicker.css?v=<?= $this->cssVC ?>" type="text/css" />
-	<!--[if IE 7]><link type="text/css" rel="stylesheet" href="css2/ie.css?v=<?= $this->cssVC ?>" /><![endif]-->
 </head>
 <body>
 <div class="w1 profile">
@@ -33,8 +31,8 @@
 	        		<div class="left">
 	        			<h3><?= $this->trip->title ?></h3>
 	        			<ul class="menu">
-	        				<li class="overview act"><a href="/en-US/trips/view/?trip=<?= $this->trip->id ?>"><span></span>Overview</a></li>
-	        				<li class="itinerary"><a href="/en-US/trips/itinerary/?trip=<?= $this->trip->id ?>"><span></span>Itinerary</a></li>
+	        				<li class="overview act"><a href="/trips/view/<?= $this->trip->id ?>"><span></span>Overview</a></li>
+	        				<li class="itinerary"><a href="/trips/itinerary/<?= $this->trip->id ?>"><span></span>Itinerary</a></li>
 	        			</ul>
 	        			<div class="clear"></div>
 	        		</div><!--LEFT-->
@@ -399,5 +397,7 @@
 <script type="text/javascript" src="/js2/datepicker.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript" src="/js2/trips/view.js?v=<?= $this->cssVC ?>"></script>
 <input type="hidden" id="tripDates" value="<?= $this->trip->days ?>" />
+<div style="width:1px; height:1px; position:absolute; top:-2px; left:-2px;">
+<iframe src="/ajax/tripconversion"></iframe></div>
 </body>
 </html>
