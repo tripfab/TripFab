@@ -405,12 +405,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute(
             'trips_view',
             new Zend_Controller_Router_Route(
-                '/:lang/trips/view/:task',
+                '/:lang/trips/view/',
                 array(
                     'controller' => 'trips',
                     'action'     => 'view',
                     'module'     => 'default',
-                    'task'       => 'default',
                     'lang'       => $lang
                 )
             )
@@ -418,12 +417,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute(
             'trips_itinerary',
             new Zend_Controller_Router_Route(
-                '/:lang/trips/itinerary/:task',
+                '/:lang/trips/itinerary/',
                 array(
                     'controller' => 'trips',
                     'action'     => 'itinerary',
                     'module'     => 'default',
-                    'task'       => 'default',
                     'lang'       => $lang
                 )
             )
@@ -469,7 +467,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router->addRoute(
             'tripview_landing_1',
             new Zend_Controller_Router_Route(
-                '/:lang/l1/trips/view/:task',
+                '/:lang/l1/trips/view/',
                 array(
                     'controller' => 'trips',
                     'action'     => 'view1',

@@ -169,7 +169,7 @@ class TripsController extends Zend_Controller_Action {
     
     public function viewAction()
     {        
-        $trip            = $this->_getTrip();
+        $trip            = $this->_getTrip('trip');
         $trip_highlights = $this->trips->getHighlights($trip->id);
         $trip_facts      = $this->trips->getFacts($trip->id);
         $trip_includes   = $this->trips->getIncludes($trip->id); 
@@ -191,7 +191,7 @@ class TripsController extends Zend_Controller_Action {
     
     public function view1Action()
     {        
-        $trip            = $this->_getTrip();
+        $trip            = $this->_getTrip('trip');
         $trip_highlights = $this->trips->getHighlights($trip->id);
         $trip_facts      = $this->trips->getFacts($trip->id);
         $trip_includes   = $this->trips->getIncludes($trip->id); 
@@ -246,7 +246,7 @@ class TripsController extends Zend_Controller_Action {
     
     public function itineraryAction()
     {        
-        $trip = $this->_getTrip();
+        $trip = $this->_getTrip('trip');
         $this->view->trip = $trip;
 
         $listings = $this->trips->getListingOf3($trip->id, false);
@@ -346,7 +346,7 @@ class TripsController extends Zend_Controller_Action {
     
     private function _getId($var = 'task')
     {
-        $id = $this->_getParam('task');
+        $id = $this->_getParam($var);
         if(!$this->_isValidId($id))
                 $this->_redirect('trips');
         
