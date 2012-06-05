@@ -143,6 +143,7 @@
                     		<?php $times = array('Stay','Morning','Afternoon','Night','Stay') ?>
                     		<?php for($i=1;$i<=count($this->listingsbyday);$i++): ?>
                     		<div class="day">
+                    			
                     			<?php foreach($this->listingsbyday[$i] as $time => $listings): ?>
                     			<div class="day-section">
                     				<span class="sub-ttl"><?= ucfirst($time) ?> Itinerary</span>
@@ -175,6 +176,11 @@
                     		</div><!-- closes day -->
                     		<?php endfor ?>
                     	</div><!-- closes day-cycle -->
+                    	
+                    	<div class="bot">
+                			<a href="" class="prev">Previous Day</a>
+							<a href="" class="next">Next Day</a>
+                		</div>
                     </div>
                     
                     

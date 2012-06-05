@@ -1580,14 +1580,12 @@
 	margin-top: 5px;
 	padding: 20px 26px 13px 0;
 }
-
 .occ label {
 	color: #7d7d7d;
 	font-size: 12px;
 	font-weight: bold;
 	margin: 0 4px;
 }
-
 .occ .btn-10, .occ input[type="submit"] {
 	cursor: pointer;
 	float: right;
@@ -1597,12 +1595,10 @@
 	text-align: center;
 	width: 116px;
 }
-
 .occ input[type="submit"] {
 	height: 32px;
 	border: none;
 }
-
 .occ .btn-10 {
 	margin-left: 0;
 }
@@ -1614,7 +1610,6 @@
 #tripsView .itinerary .single .picture .mapCanvas.show {
 	display: block;
 }
-
 #fancybox-left-ico.lfarrow, 
 #fancybox-right-ico.rgarrow {
 	background: url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat;
@@ -1626,7 +1621,6 @@
 	z-index: 10;
 	margin: -18px 0 0 0;
 }
-
 #fancybox-left-ico.lfarrow{
 	background-position: -577px -71px;
 	left: 20px;
@@ -1661,9 +1655,18 @@
 /*END LIGHTBOX SELECT DATES -------------------------------------------------------------*/
 .box.days {
 	position: relative;
-}
-.box.days {
 	margin-top: 30px;
+	-moz-border-radius: 0px 0px 3px 3px;
+	-webkit-border-radius: 0px 0px 3px 3px;
+	border-radius: 0px 0px 3px 3px;
+	-moz-box-shadow: 0px 0px 3px 0px #e7e7e7;
+	-webkit-box-shadow: 0px 0px 3px 0px #e7e7e7;
+	box-shadow: 0px 0px 3px 0px #e7e7e7; 
+}
+#tripsView .itinerary {
+	-moz-border-radius: 0px 0px 3px 3px;
+	-webkit-border-radius: 0px 0px 3px 3px;
+	border-radius: 0px 0px 3px 3px;
 }
 .box.days .day .day-section {
 	padding: 0 34px 34px;
@@ -1768,13 +1771,7 @@
 .box.days .bottom {
 	background: #303030 url(https://static.tripfab.com/images2/g-36.png) repeat-x 0 0;
 	padding: 12px 0;
-	overflow: hidden;
-	-moz-border-radius-topleft: 0px;
-	-moz-border-radius-topright: 0px;
-	-moz-border-radius-bottomright: 4px;
-	-moz-border-radius-bottomleft: 4px;
-	-webkit-border-radius: 0px 0px 4px 4px;
-	border-radius: 0px 0px 4px 4px; 
+	overflow: hidden; 
 }
 .box.days .bottom a {
 	height: 47px;
@@ -1805,7 +1802,7 @@
 .box.days .bottom .next:hover {
 	background-position: 0 -141px;
 }
-.box.days > a {
+.box.days .bot > a {
 	display: block;
 	height: 49px;
 	position: absolute;	
@@ -1816,26 +1813,37 @@
 	line-height: 49px;
 	z-index: 20;
 }
-.box.days > a:hover {
+.box.days .bot > a:hover {
 	text-decoration: none;
 }
-.box.days > a.prev {
+.box.days .bot > a.prev {
 	background: url(https://static.tripfab.com/images2/arrow-2.png) no-repeat 0 0;
 	left: 0;
 	text-align: right;
 	width: 136px;
 }
-.box.days > a.prev:hover {
+.box.days .bot > a.prev:hover {
 	background-position: 0 -98px;
 }
-.box.days > a.next {
+.box.days .bot > a.next {
 	background: url(https://static.tripfab.com/images2/arrow-2.png) no-repeat 100% -49px;
 	right: 0;
 	width: 105px;
 }
-.box.days > a.next:hover {
+.box.days .bot > a.next:hover {
 	background-position: 100% -147px;
 }
 .days-cycle, .days-cycle .day {
 	width: 100%!important;
 }
+.box.days .bot {
+	background: url("https://static.tripfab.com/images2/g-3.png") repeat-x scroll 0 0 #FFFFFF;
+    border-top: 1px solid #E8E8E8;
+    padding: 34px 34px 50px;
+    position: relative;
+    -moz-border-radius: 0px 0px 3px 3px;
+    -webkit-border-radius: 0px 0px 3px 3px;
+    border-radius: 0px 0px 3px 3px;
+}
+
+
