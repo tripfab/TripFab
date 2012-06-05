@@ -593,12 +593,12 @@ class CartController extends Zend_Controller_Action {
                     $transaction->save();
                     
                     $reservation = $this->reservations->create($transaction, $cartitem, $listing);
-
-                    $cartitem->delete();
                     
                     $notifier = new WS_Notifier($vendor->user_id);
                     $notifier->newReservation($listing, $reservation);
 
+                    $cartitem->delete();
+                    
                     $this->_redirect('cart/invoice/'.$reservation->id);
                 break;
                 case 2:

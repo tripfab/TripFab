@@ -139,7 +139,7 @@
                     </div><!--TOP-->
                     
                     <div class="box days">
-                    	<div class="days-cycle">
+                    	<div class="days-cycle not js-cycle">
                     		<?php $times = array('Stay','Morning','Afternoon','Night','Stay') ?>
                     		<?php for($i=1;$i<=count($this->listingsbyday);$i++): ?>
                     		<div class="day">
@@ -242,10 +242,11 @@
     
 	    <?= $this->partial('partials/footer.phtml'); ?>
     
+    <?php if(!isset($_COOKIE['nohelp'])): ?>
     <div class="js-footer-fixed">
         <div id="support" class="fixed">
             <div class="wrap">
-            	<a href="" class="close"></a>
+            	<a href="" class="js-close close"></a>
             	<div class="rg">
             		<p>Need help? Want a custom package? Is something not clear? Contact our <strong>Costa Rica travel experts</strong> and let us help.</p>
             	</div><!--RG-->
@@ -253,6 +254,7 @@
             </div><!--WRAP-->
         </div><!--SUPPORT-->
     </div>
+    <?php endif ?>
     
 </div><!--WRAPPER_ALL-->
 
@@ -336,7 +338,7 @@ $(document).ready(function() {
 		prev: '.prev',
 		next: '.next'	        
 	});
-	$(".cycle").cycle({
+	$(".js-cycle").cycle({
 		fx: 'scrollHorz',
 		timeout: 0,
 		prev: '.prev',
@@ -371,6 +373,12 @@ $(document).ready(function(){
             $('#wp_content').css('padding-bottom', '195px');
         }
     });
+	
+	$('.js-close').click(function(){
+		$('.js-footer-fixed').hide();
+		$.cookie('nohelp','please',{expires:365});	
+		return false;
+	});
 });
 
 function img_ready($obj){
