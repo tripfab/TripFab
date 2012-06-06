@@ -2492,6 +2492,7 @@ class WS_ListingService {
         $cacheId = "LS_getRandom_".md5(print_r($args,true));
         
         if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+            //var_dump($this->cache->test($cacheId)); die;
             $db = Zend_Db_Table::getDefaultAdapter();
             $select = $db->select();
             $select->from('listings');
@@ -2510,6 +2511,8 @@ class WS_ListingService {
             $select->order('rand()');
         
             $listings = $db->fetchAll($select,array(),5);
+            
+            $this->cache->save($listings, $cacheId);
         }
         else {
             $listings = $this->cache->load($cacheId);

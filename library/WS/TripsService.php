@@ -901,11 +901,13 @@ class WS_TripsService {
         
         if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
             $select = $this->trips_db->select();
-			$select->where('active = 1');
+            $select->where('active = 1');
             $select->limit($count);
             $select->order('rand()');
 
             $trips = $this->trips_db->fetchAll($select);
+            
+            $this->cache->save($trips, $cacheId);
         } else {
             $trips = $this->cache->load($cacheId);
         }
@@ -913,7 +915,7 @@ class WS_TripsService {
         return $trips;
     }
 	
-	public function getTripCategories($id) {
+    public function getTripCategories($id) {
         $db = Zend_Db_Table::getDefaultAdapter();
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
         $select = $db->select();
