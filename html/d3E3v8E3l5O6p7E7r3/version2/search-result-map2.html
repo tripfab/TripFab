@@ -1,0 +1,924 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+	<head>
+	<meta content="noindex,nofollow" name="robots" />
+	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+	<title>Tripfab.com</title>
+	<link type="text/css" rel="stylesheet" href="/css6/reset.css" />
+	<link type="text/css" rel="stylesheet" href="/css6/common.css" />
+	<link type="text/css" rel="stylesheet" href="/css6/section1.css" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		
+			var aboveHeight = $('#wp_header').outerHeight();
+		
+			$('a.maplink').click(function() {
+				$('.mapcanvas').slideToggle('medium', function(){
+					aboveHeight = $('#wp_header').outerHeight();
+				});
+				return false
+			});
+			
+		    $(window).scroll(function(){
+		        if ($(window).scrollTop() > aboveHeight){
+		            $('.sidebar').addClass('fixed').css('top','0').next().css('padding-top','60px');
+		            $('.sort').addClass('fixed').css('top','0').next().css('padding-top','60px');
+		            $('.filter').css('margin-right','225px');
+		        } 
+		        else {
+					
+		            $('.sidebar').removeClass('fixed').next().css('padding-top','0');
+		            $('.sort').removeClass('fixed').next().css('padding-top','0');
+		            $('.filter').css('margin-right','0');
+		        }
+		    });
+		    
+		    
+		    
+			$('.add').hover(function(){
+				$('.tooltip').toggleClass('hidden');
+				return false
+			});
+			$('.cont > ul > li > a').click(function() {
+				$parent = $(this).parent();
+				if($parent.hasClass('active')) {
+					$('ul.categories', $parent).slideUp();
+					$parent.removeClass('active');
+				} else {
+					$('.active ul.categories').slideUp();
+					$('.active').removeClass('active');
+					$('ul.categories', $parent).slideDown();
+					$parent.addClass('active');
+				}
+				return false
+			});
+			
+			$('.near').click(function(){
+				$('.near_cities').toggleClass('hidden');
+				return false
+			});
+		});
+	</script>
+	</head>
+	<body>
+		<div id="wp_all">
+			<div id="wp_header">
+				<div id="header">
+					<div class="cont">
+						<h1 class="logo"><a href="/">Tripfab</a></h1>
+						<ul>
+							<li><a href="/">Search</a></li>
+							<li><a href="/trips/costa_rica">Browse Itineraries</a></li>
+							<li><a href="/user/trips">My Trips</a></li>
+				
+						</ul>
+						<div class="header-search">
+							<form method="post" action="">
+								<fieldset>
+									<input id="citiesSearch" type="text" value="Search Places"/>
+								</fieldset>
+							</form>
+						</div><!--HEADER-SEARCH-->
+	
+						<div class="header-login">
+							<a href="/user/account" class="user">Cristian Andres Araya Jiménez<img src="/images2/cleardot.gif" alt="" /></a>
+							
+							<div class="dd">
+								<img src="/images2/arrow-12.png" alt="" class="arrow" />
+								<div class="dd-content">
+									<img class="" src="/cache/b407a8d6770536fc07e2e027427bffb7_w68_h68_cp.jpg" width="68" height="68" />
+									<ul>
+										<li><a href="/user/trips">Trips</a></li>
+										<li><a href="/user/messages">Messages</a></li>
+										<li><a href="/user/reservations">Reservations</a></li>
+									</ul>
+								</div><!--DD-CONTENT-->
+								<div class="dd-footer">
+									<a href="/user">Account</a>
+									<a href="/logout">Sign Out</a>
+								</div><!--DD-FOOTER-->
+							</div><!--DD-->
+							
+							<div class="links">
+								<a href="/user/trips" title="Trips" class="trips"><img src="/images2/cleardot.gif" alt="" /></a>
+								<!--<a href="/user/messages" title="Messages" class="messages"><img src="/images2/cleardot.gif" alt="" /></a>-->
+								<div class="dd messages">
+									<img src="/images2/arrow-12.png" alt="" class="arrow" />
+									<div class="ttl">Messages</div><!--TTL-->
+									<div class="content">
+										<ul>
+											<li class="new">
+												<a href="">
+													<img src="/images2/img-27.png" alt="" />
+													<strong>Linna Pratts</strong>
+													Hi!
+													<span>4 hours ago</span>
+												</a>										
+											</li>
+											<li>
+												<a href="">
+													<img src="/images2/img-27.png" alt="" />
+													<strong>Linna Pratts</strong>
+													Hey! I have some questions about...
+													<span>4 hours ago</span>
+												</a>										
+											</li>
+											<li>
+												<a href="">
+													<img src="/images2/img-27.png" alt="" />
+													<strong>Linna Pratts</strong>
+													Hi
+													<span>4 hours ago</span>
+												</a>										
+											</li>
+										</ul>
+									</div><!--CONTENT-->
+									
+									<div class="dd-footer">
+										<a href="/user/messages">See all messages</a>
+									</div><!--DD-FOOTER-->
+									
+								</div><!--DD-MESSAGES-->
+							</div><!--LINKS-->
+						</div><!--HEADER-LOGIN-->
+						<div class="clear"></div>
+					</div><!--CONT-->
+				</div><!--HEADER-->
+				
+				<div class="sub_header" id="src_map">
+					<div class="cont">
+						<div class="top">
+							<div class="ttl">
+								<img class="country" width="45" height="43" alt="" src="images6/map_cr.png">
+								<h2><strong>Guanacaste,</strong> Costa Rica <img width="" height="" alt="" src="images6/flagCR.png"></h2>
+								<a href="" class="link1 maplink">Show Map &rarr;</a>
+								<a href="" class="link1 near">View Nearby Cities &rarr;</a>
+								<div class="near_cities hidden">
+									<ul>
+										<li><a href="" class="active">Tamarindo<span>&larr;</span></a></li>
+										<li><a href="">Drake Bay</a></li>
+										<li><a href="">Jacó</a></li>
+										<li><a href="">Santa Teresa</a></li>
+										<li><a href="">Tamarindo</a></li>
+									</ul>
+									<ul>
+										<li><a href="">Tamarindo</a></li>
+										<li><a href="">Drake Bay</a></li>
+										<li><a href="">Jacó</a></li>
+										<li><a href="">Santa Teresa</a></li>
+										<li><a href="">Tamarindo</a></li>
+									</ul>
+								</div><!--NEAR_CITIES-->
+							</div><!--TTL-->
+							
+							<div class="src_bar">
+								<form action="">
+									<fieldset>
+										<input type="submit" name="" value="Search" class="btn-1" />
+										<input type="text" value="Search for a place, city, or anything..." />
+										<div class="clear"></div>
+									</fieldset>
+								</form>
+							</div><!--SRC_BAR-->
+							<div class="clear"></div>
+							
+						</div><!--TOP-->
+						
+						<div class="map less">
+							<div class="mapcanvas"><img src="images6/src_result-img2.png" width="" height="" alt="" /></div>						
+						</div><!--MAP-->
+						
+					</div><!--CONT-->
+				</div><!--SUB_HEADER-->
+				
+			</div><!--WP_HEADER-->
+			<div id="wp_content">
+				<div id="cont_bl">
+					<div id="src_rslt">
+					
+						<div class="sidebar">
+							<div class="cont">
+								<ul>
+									<li>
+										<a href="" class="hotels">Hotels</a><span class="count">1,425</span>
+										<ul class="categories">
+											<li><a href="">All Categories</a></li>
+											<li><a href="">Adventure</a></li>
+											<li><a href="">Family</a></li>
+											<li><a href="">Wildlife</a></li>
+											<li><a href="">Romance</a></li>
+											<li><a href="">Extreme</a></li>
+											<li><a href="">Adventure</a></li>
+											<li><a href="">Family</a></li>
+											<li><a href="">Wildlife</a></li>
+											<li><a href="">Romance</a></li>
+											<li><a class="show_more" href="">&darr;  Show More</a></li>
+										</ul>
+									</li>
+									<li>
+										<a href="" class="activities">Activities</a><span class="count">1,425</span>
+										<ul class="categories">
+											<li><a href="">All Categories</a></li>
+											<li><a href="">Adventure</a></li>
+											<li><a href="">Family</a></li>
+											<li><a href="">Wildlife</a></li>
+											<li><a href="">Romance</a></li>
+											<li><a href="">Extreme</a></li>
+											<li><a class="show_more" href="">&darr;  Show More</a></li>
+										</ul>	
+									</li>
+									<li><a href="" class="restaurants">Restaurants</a><span class="count">1,425</span>
+										<ul class="categories">
+											<li><a href="">All Categories</a></li>
+											<li><a href="">Adventure</a></li>
+											<li><a href="">Family</a></li>
+											<li><a class="show_more" href="">&darr;  Show More</a></li>
+										</ul>
+									</li>
+									<li>
+										<a href="" class="entertaiment">Entertainment</a><span class="count">1,425</span>
+										<ul class="categories">
+											<li><a href="">All Categories</a></li>
+											<li><a href="">Adventure</a></li>
+											<li><a href="">Family</a></li>
+											<li><a class="show_more" href="">&darr;  Show More</a></li>
+										</ul>
+									</li>
+									<li>
+										<a href="" class="sights">Tourist Sights</a><span class="count">1,425</span>
+										<ul class="categories">
+											<li><a href="">All Categories</a></li>
+											<li><a href="">Adventure</a></li>
+											<li><a href="">Family</a></li>
+											<li><a class="show_more" href="">&darr;  Show More</a></li>
+										</ul>
+									</li>
+								</ul>
+							</div><!--CONT-->
+						</div><!--SIDEBAR-->
+						
+						<div class="content">
+							<div class="sort">
+								<h3>There are 1258 listings in Guanacaste, Costa Rica</h3>
+								<div class="filter">
+									<form action="">
+										<fieldset>
+											<select>
+												<option>Relevance</option>
+											</select>
+											<label>Sort by:</label>
+											<div class="clear"></div>
+										</fieldset>
+									</form>
+								</div><!--FILTER-->
+								<span class="shw"></span>
+							</div><!--SORT-->
+							
+							<div class="listings">
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								<div class="single">
+									<div class="image">
+										<img src="images6/src_result-img1.png" width="241" height="124" alt="" />
+										<ul class="rating">
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="slct"></a></li>
+											<li><a href="" class="nrml"></a></li>
+											<li><a href="" class="nrml"></a></li>
+										</ul>
+										<div class="hvr">
+											<span class="cat"><em></em>Category <strong>Adventure</strong></span>
+											<span class="time"><em></em>Duration <strong>8 hours</strong></span>
+											<a href="" class="add"></a>
+											<div class="tooltip hidden">Add to My Trips<span></span></div>
+										</div><!--HVR-->
+									</div><!--IMAGE-->
+									
+									<h4><a href="">Adventure Bungee Jumping</a></h4>
+									<span>by <a href="" class="link1">Costa Rica Tours</a></span>
+									<p>You can never keep a good thing under wraps for long and though Costa Rica is no longer a well-kept secret hidden.</p>
+									
+									<div class="info">
+										<span class="location"><span></span>Location <strong>Tamarindo, CR</strong></span>
+										<div class="price"><sup>$</sup>229 <sub>per person</sub></div>
+										<div class="clear"></div>
+									</div><!--INFO-->
+									
+								</div><!--SINGLE-->
+								
+								
+								<div class="clear"></div>
+							</div><!--LISTINGS-->
+							
+						</div><!--CONTENT-->
+						<div class="clear"></div>
+						
+						
+					</div><!--SRC_RSLT-->
+				</div><!--CONT_BL-->
+			</div><!--WP_CONTENT-->
+			
+		</div><!--WRAPPER_ALL-->
+	</body>
+</html>
