@@ -63,7 +63,7 @@
                     	<?php foreach($this->hotels as $i => $h): ?>
                         <div class="single <?= ($i == 3) ? 'last' : '' ?>">
                         	<a href="/en-US/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>">
-							<?= $this->thumbnail(array('width'=>223, 'height'=>152), $h->image, '','223:152'); ?></a>
+							<?= $this->lazylisting(array('width'=>223, 'height'=>152), $h->image, '','223:152'); ?></a>
                             <h5 class="two"><?= $h->title ?></h5>
                             <span class="meta"><em></em><?= $h->city ?>, <?= $h->countrycode ?></span>
                             <div class="info">
@@ -87,7 +87,7 @@
                     	<?php foreach($this->activities as $i => $h): ?>
                         <div class="single <?= ($i == 3) ? 'last' : '' ?>">
                         	<a href="/en-US/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>">
-							<?= $this->thumbnail(array('width'=>223, 'height'=>152), $h->image, '','223:152'); ?></a>
+							<?= $this->lazylisting(array('width'=>223, 'height'=>152), $h->image, '','223:152'); ?></a>
                             <h5 class="two"><?= $h->title ?></h5>
                             <span class="meta"><em></em><?= $h->city ?>, <?= $h->countrycode ?></span>
                             <div class="info">
@@ -111,7 +111,7 @@
                     	<?php foreach($this->trips as $i => $h): ?>
                         <div class="single <?= ($i == 3) ? 'last' : '' ?>">
                         	<a href="/en-US/trips/view/<?= $h->id ?>">
-							<?= $this->thumbnail(array('width'=>223, 'height'=>152), $h->image, '','223:152'); ?></a>
+							<?= $this->lazylisting(array('width'=>223, 'height'=>152), $h->image, '','223:152'); ?></a>
                             <h5 class="two"><?= $h->title ?></h5>
                             <span class="meta"><em class="trip"></em><?= $h->days ?> Days Trip</span>
                             <div class="info">
@@ -146,10 +146,5 @@
 <div id="citiesAutocompleteContainer"></div>
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript" src="/js2/index/index.js?v=<?= $this->cssVC ?>"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    $(".tabs").tabs();
-});
-</script>
 </body>
 </html>

@@ -14,8 +14,9 @@ $(document).ready(function() {
 });
 var __a = 0;
 $(document).ready(function() {
+    //$(".featured .tabs").tabs();\
     
-    $(".featured .tabs").tabs({
+    $(".tabs").tabs({
         show:function(){
             $('.lazy').lazyload({ 
                 effect : "fadeIn",
@@ -142,7 +143,6 @@ $(function(){
 $(function(){
     $('.lazy').lazyload({ 
         effect : "fadeIn",
-        container:$('.slideshow .cont'),
         load:function(){
             $(this).removeClass('lazy');
         }

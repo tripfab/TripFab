@@ -17,7 +17,7 @@ class Zend_View_Helper_Lazylisting {
     
     protected $ext;
 
-    public function lazylisting($size, $image, $class='', $cropratio='1:1', $id = null, $loading = 'https://partners.tripfab.com/images2/listing_loading.gif') {
+    public function lazylisting($size, $image, $class='', $cropratio='1:1', $id = null, $loading = 'https://static.tripfab.com/images2/listing_loading.gif') {
 
         $this->cacheFolder = APPLICATION_PATH . '/../html/cache/';
         $this->remoteFolder = $this->cacheFolder . 'remote/';
