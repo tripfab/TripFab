@@ -5,137 +5,310 @@
 	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
 	<title>Tripfab.com</title>
 	<link type="text/css"  rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
-	<link type="text/css"  rel="stylesheet" href="/css6/trips.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css"  rel="stylesheet" href="/css6/trips3.css?v=<?= $this->cssVC ?>" />
 	<link type="text/css"  rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
 	<link type="text/css"  rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
-	<link href="/css6/calendar.css?v=<?= $this->cssVC ?>" rel="stylesheet" type="text/css">
+	<link type="text/css"  rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
+	<link rel="stylesheet" href="/css2/datepicker.css?v=000000000000079" type="text/css" />
 	</head>
-	<body>
+	<body id="tripsView">
 		<div id="wp_all">
 			<div id="wp_header">
-				<div class="header">
-					<h1><a href=""></a></h1>
-				</div><!--HEADER-->
-			</div><!--WP_HEADER-->
-			<div id="wp_content">
-				<div id="trips1">
-
-					<div class="cntrl">
-		        	    <ul class="breadcrump">
-		        	        <li class="first"><a class="home" href="/"></a></li>
-		        	        <li><a href="/costa_rica">Costa Rica</a></li>
-		        	        <li><a href="/costa_rica/san_jose">San Jose</a></li>
-		        	        <li class="last"><a class="active" href="/costa_rica/san_jose/#/hotels">Hotels</a></li>
-		        	    </ul>
-		        	    <a class="link1" href="/costa_rica/san_jose/">← Back to Results</a>
-		        	    <div class="clear"></div>
-		        	</div><!--CNTRL-->
-		        	
-		        	<div class="head">
-		        		<span></span>
-		        		<h2>Adventure Packages in Costa Rica</h2>
-		        		<a href="" class="btn-10">Explore more packages <em></em></a>
-		        	</div><!--HEAD-->
-		        	<div class="content">
-		        		<div class="side">
-		        			<h3>Best Price 100% Guaranteed</h3>
-		        			<h4>Why Book with Tripfab?</h4>
-		        			<ul>
-		        				<li>Customer Care 24/7</li>
-		        				<li>Lowest prices guaranteed</li>
-		        				<li>No extra fees</li>
-		        				<li>Save 20% - 40%</li>
-		        			</ul>
-		        			
-		        			<h4>Questions?</h4>
-		        			<p>Our <strong>Costa Rica travel experts</strong> are on the phone waiting to answer all the questions you have.</p>
-		        			<strong class="phone">+1-877-543-3435</strong>
-		        			<span class="line"><em>or</em></span>
-		        			<a href="" class="btn-10"><em></em>Live Chat Now</a>
-		        			
-		        		</div><!--SIDE-->
-		        		
-		        		<div class="main">
-		        			<div class="filters">
-		        			
-		        				<span class="ttl">FILTER OPTIONS</span>
-		        				<div class="price">
-		        					<span>Price</span>
-		        					<select>
-		        						<option>$1,000 or less</option>
-		        					</select>
-		        				</div><!--PRICE-->
-		        				
-		        				<div class="duration">
-		        					<span>Duration</span>
-		        					<select>
-		        						<option>2 Days Trip</option>
-		        					</select>
-		        				</div><!--DURATION-->
-		        				
-		        				<div class="travelers">
-		        					<span>Travelers</span>
-		        					<select>
-		        						<option>2 People</option>
-		        					</select>
-		        				</div><!--TRAVELERS-->
-		        				
-		        				
-		        			</div><!--FILTERS-->
-		        			<div class="loading"><div class="load">Loading...</div></div>
-		        			<div class="trip">
-		        				<a href=""><img src="https://static.tripfab.com/images6/trip1.jpg " width="" height="" alt="" /></a>
-		        				<h2><a href="">Tropical Triple Treat</a></h2>
-		        				<div class="descrip">
-        							<span>Jacó, Tamarindo, Monteverde, and other <a href="" class="link1"> cities</a></span>
-        							<p>Hit the highlights of Costa Rica with a trip designed to fill your senses with all Costa Rica has to offer. SEE the stunning scenery of the Monteverde...</p>
-        							<div class="specs">
-        								<dl>
-        									<dt>Capacity</dt>
-        									<dd>2 - 100 People</dd>
-        									<dt>Category</dt>
-        									<dd>Relaxation</dd>
-        								</dl>
-        								<dl>
-        									<dt>Tour Begins</dt>
-        									<dd>San Jose</dd>
-        									<dt>Tour Ends</dt>
-        									<dd>San Jose</dd>
-        								</dl>
-        							</div><!--SPECS-->
-		        				</div><!--DESCRIP-->
-		        				
-		        				<div class="meta">
-	        						<div class="days">2 DAYS</div>
-	        						<div class="price">
-	        							<span>2,360</span>
-	        							<sup>$</sup>
-	        							<sub>per person</sub>
-	        						</div><!--PRICE-->
-	        						<a href="">Read more & Buy <span></span></a>
-	        					</div><!--META-->
-		        				
-		        			</div><!--TRIP-->
-		        			
-		        			
-		        		</div><!--MAIN-->
-		        		<div class="clear"></div>
-		        		
-		        		<div id="support">
-		        			<a href="" class="close"></a>
-		        			<div class="rg">
-		        				<p>Need help? Want a custom package? Is something not clear? Contact our <strong>Costa Rica travel experts</strong> and let us help.</p>
-		        			</div><!--RG-->
-		        			<div class="number"><h6>Toll Free <span>1-866-401-0382</span></h6></div><!--NUMBER-->
-		        		</div><!--SUPPORT-->
-		        		
-		        	</div><!--CONTENT-->
 				
-				</div><!--TRIPS1-->		
+				<div class="browseTrips">
+		            <div class="wrapper">
+		            	<div class="cntrl">
+			        	    <ul class="breadcrump">
+			        	        <li class="first"><a class="home" href="/"></a></li>
+			        	        <li><a href="/trips/costa_rica#/all">Pre-Planned Trips</a></li>
+			        	        <li class="last"><a href="/costa_rica" class="active">Costa Rica</a></li>
+			        	    </ul>
+			        	    <a class="link1" href="/trips/costa_rica">← Back to Browse Itineraries</a>
+			        	    <div class="clear"></div>
+			        	</div><!--CNTRL-->
+			        	<div class="cont">
+			        		<div class="left">
+			        			<h3>Tropical Triple Treat</h3>
+			        			<span class="time"> 
+			        				<em class="day"> 9 Days</em>
+			        				<em class="night">Nights Trip</em>
+			        			</span>
+			        		</div><!--LEFT-->
+			        		<div class="right">
+			        			<a class="lbc btn-1" href="#dates_lb">Buy Trip</a>
+			        			<div class="price">
+			        				<sub>per person</sub>
+			        				<span>1,398</span>
+			        				<sup>$</sup>
+			        			</div><!--PRICE-->
+			        			<div class="clear"></div>
+			        		</div><!--RIGHT-->
+			        		<div class="clear"></div>
+			        	</div><!--CONT-->
+		            </div><!--WRAPPER-->
+		        </div><!--BROWSETRIPS-->
+				
+			</div><!--WP_HEADER-->
+			
+			<div id="wp_content">
+				<div class="photo">
+					<img src="https://static.tripfab.com/images6/tripsViewBig.png" width="" height="258" alt="" />
+					<h3>Tortuguero National Park</h3>
+					<h4>COSTA RICA EXCLUSIVE TRIP</h4>
+				</div><!--PHOTO-->
+				<div class="main">
+					
+					<div class="maintop">
+						
+						<div class="itinerary box days">
+							<ul class="links">
+								<li><a href=""><span>Day by day</span>Itinerary</a>
+								<li><a href="" class="active"><span>more info</span>Trip Details</a></li>
+							</ul>
+							<div class="left">
+								<div class="hdr">
+									<a href="" class="prev"></a>
+									<span>Day 3 of 9</span>
+									<a href="" class="next"></a>
+								</div><!--HDR-->
+								<div class="cycle">
+									<div class="day">
+										<div class="day-section"> 
+											<div class="clear"></div>
+											<div class="day-item">
+												<div class="left"> 
+													<img width="267" height="168" src="http://farm3.static.flickr.com/2093/2538168854_f75e408156_b.jpg" class="">                                    
+													<a data-title="Arrival and Welcome" data-lng="-84.208889000000000" data-lat="9.993611000000000" class="mos" href="mapcanvas2159">Show Map <span>&uarr;</span></a>
+												    <div class="mapCanvas hidden" id="mapcanvas2159"></div><!--MAPCANVAS-->
+												</div>
+												<!-- closes left -->
+												<div class="right"> <strong>Night</strong>
+													<h4>Evening in Tambor</h4>
+													<ul>
+														<li>Enjoy dinner at one of the resorts stunning restaurants (not included)</li>
+														<li>Or travel into town to get your first taste of local culture</li>
+														<li>Enjoy a stunning sunset over the water</li>
+														<li>Fall asleep to the sound of waves and jungle life</li>
+													</ul>
+												</div><!-- closes right --> 
+											</div><!-- closes day-item -->
+										</div><!-- closes day-section -->
+										<div class="day-section">
+											<div class="clear"></div>
+											<div class="day-item">
+												<div class="left"> <img width="267" height="168" src="http://farm3.static.flickr.com/2093/2538168854_f75e408156_b.jpg" class=""> </div>
+												<!-- closes left -->
+												<div class="right"> <strong>Morning</strong>
+													<h4>Travel to Tambor</h4>
+													<ul>
+														<li>Continental Breakfast (Included)</li>
+														<li>Wake up in San Jose and enjoy a quick continental breakfast</li>
+														<li>Board a plane for a quick trip to Tambor</li>
+														<li>Travel to the resort and get settled</li>
+													</ul>
+												</div><!-- closes right --> 
+											</div><!-- closes day-item --> 
+										</div><!-- closes day-section -->
+										<div class="day-section stay"> 
+											<div class="clear"></div>
+											<div class="day-item">
+												<div class="left"> <img width="267" height="168" src="http://farm3.static.flickr.com/2093/2538168854_f75e408156_b.jpg" class=""> </div>
+												<!-- closes left -->
+												<div class="right"> <strong>Stay</strong>
+													<h4>Hotel Tango Mar</h4>
+													<ul>
+														<li>Check in to Hotel Tango Mar</li>
+														<li>Take advantage of all that this beachfront hotel has to offer &ndash; including its golf course, spa and yoga studio</li>
+													</ul>
+												</div><!-- closes right --> 
+											</div><!-- closes day-item --> 
+										</div><!-- closes day-section --> 
+									</div><!--DAY-->
+									
+									<div class="day">
+										<div class="day-section"> 
+											<div class="clear"></div>
+											<div class="day-item">
+												<div class="left"> <img width="267" height="168" src="http://farm3.static.flickr.com/2093/2538168854_f75e408156_b.jpg" class=""> </div>
+												<!-- closes left -->
+												<div class="right"> <strong>Night</strong>
+													<h4>Evening in Tambor</h4>
+													<ul>
+														<li>Enjoy dinner at one of the resorts stunning restaurants (not included)</li>
+														<li>Or travel into town to get your first taste of local culture</li>
+														<li>Enjoy a stunning sunset over the water</li>
+														<li>Fall asleep to the sound of waves and jungle life</li>
+													</ul>
+												</div><!-- closes right --> 
+											</div><!-- closes day-item -->
+										</div><!-- closes day-section -->
+										<div class="day-section">
+											<div class="clear"></div>
+											<div class="day-item">
+												<div class="left"> <img width="267" height="168" src="http://farm3.static.flickr.com/2093/2538168854_f75e408156_b.jpg" class=""> </div>
+												<!-- closes left -->
+												<div class="right"> <strong>Morning</strong>
+													<h4>Travel to Tambor</h4>
+													<ul>
+														<li>Continental Breakfast (Included)</li>
+														<li>Wake up in San Jose and enjoy a quick continental breakfast</li>
+														<li>Board a plane for a quick trip to Tambor</li>
+														<li>Travel to the resort and get settled</li>
+													</ul>
+												</div><!-- closes right --> 
+											</div><!-- closes day-item --> 
+										</div><!-- closes day-section -->
+										<div class="day-section stay"> 
+											<div class="clear"></div>
+											<div class="day-item">
+												<div class="left"> <img width="267" height="168" src="http://farm3.static.flickr.com/2093/2538168854_f75e408156_b.jpg" class=""> </div>
+												<!-- closes left -->
+												<div class="right"> <strong>Stay</strong>
+													<h4>Hotel Tango Mar</h4>
+													<ul>
+														<li>Check in to Hotel Tango Mar</li>
+														<li>Take advantage of all that this beachfront hotel has to offer &ndash; including its golf course, spa and yoga studio</li>
+													</ul>
+												</div><!-- closes right --> 
+											</div><!-- closes day-item --> 
+										</div><!-- closes day-section --> 
+									</div><!--DAY-->
+									
+								</div><!--CYCLE-->
+								
+							</div><!--LEFT-->
+							<div class="right">
+								<ul>
+									<li><a href="">Day 1</a></li>
+									<li><a href="">Day 2</a></li>
+									<li><a href="" class="active">Day 3</a></li>
+									<li><a href="">Day 4</a></li>
+									<li><a href="">Day 5</a></li>
+									<li><a href="">Day 6</a></li>
+									<li><a href="">Day 7</a></li>
+									<li><a href="">Day 8</a></li>
+									<li><a href="">Day 9</a></li>
+									<li><a href="">Day 10</a></li>
+									<li><a href="">Day 11</a></li>
+									<li><a href="">Day 12</a></li>
+									<li><a href="">Day 13</a></li>
+									<li><a href="">Day 14</a></li>
+								</ul>
+								<a href="">Back to top &uarr;</a>
+							</div><!--RIGHT-->
+							
+							<div class="clear"></div>
+							
+							<div class="info">
+								<h3>Best Price 100% Guaranteed</h3>
+								<div class="widget1">
+									<h4>Why Book with Tripfab?</h4>
+									<ul>
+				        				<li>Customer Care 24/7</li>
+				        				<li>Lowest prices guaranteed</li>
+				        			</ul>
+				        			<ul>
+				        				<li>No extra fees</li>
+				        				<li>Save 20% - 40%</li>
+				        			</ul>
+								</div><!--WIDGET1-->
+								<div class="widget2">
+									<h4>Looking for custom packages?</h4>
+									<p>Our <strong>Costa Rica travel experts</strong> are waiting to build the perfect one</p>
+									<strong class="phone">+1-877-543-3435</strong>
+									<a class="btn-10" href=""><em></em>Live Chat Now</a>
+								</div><!--WIDGET2-->
+								
+								
+							</div><!--INFO-->
+							
+						</div><!--ITINERARY-->	
+						
+					</div><!--MAINTOP-->					
+				</div><!--MAIN-->					
 			</div><!--WP_CONTENT-->
-			<div id="wp_footer">
-				<div id="footer"></div><!--FOOTER-->
-			</div><!--WP_FOOTER-->
+			
 		</div><!--WRAPPER_ALL-->
+		<div class="hidden">
+			<div id="dates_lb">
+    	<div class="lb-dates">
+			<div class="left">
+				<h2>First, select the dates you want to go on your vacation.</h2>
+				<p>Select the dates you want to take the trip and the number of travelers</p>
+				<ul>
+					<li>Your trip is going to be <?= $this->trip->days ?> days long.</li>
+                    <?php if($this->trip->kids): ?>
+					<li>This trip is available for children.</li>
+                    <?php else: ?>
+					<li>This trip is not available for children.</li>                    
+                    <?php endif ?>
+					<li>Maximum occupation is <?= $this->trip->max ?> people.</li>
+                    <?php if($this->trip->min > 1): ?>
+                    <li>Minimum occupation is <?= $this->trip->min ?> people.</li>
+                    <?php else: ?>
+					<li>No minimum  required.</li>
+                    <?php endif ?>
+				</ul>
+			</div><!-- closes left -->
+			<div class="right">
+				<div id="datepicker"></div>
+                <form action="/en-US/cart/purchasetrip" method="post">
+                    <div class="occ">
+                        <label>Adults</label>
+                        <select name="adults">
+							<?php for($i=$this->trip->min; $i<=$this->trip->max; $i++): ?>
+                            <?php if($i==$this->trip->min): ?>
+                            <option value="<?= $i ?>">min <?= $i ?></option>
+                            <?php elseif($i==$this->trip->max): ?>
+                            <option value="<?= $i ?>">max <?= $i ?></option>
+                            <?php else: ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                            <?php endif ?>
+                        	<?php endfor ?>
+                        </select>
+                        <?php if($this->trip->kids): ?>
+                        <label>Children</label>
+                        <select name="kids">
+                        	<option value="0">None</option>
+                        	<?php for($i=$this->trip->min; $i<=$this->trip->max; $i++): ?>
+                            <?php if($i==$this->trip->min): ?>
+                            <option value="<?= $i ?>">min <?= $i ?></option>
+                            <?php elseif($i==$this->trip->max): ?>
+                            <option value="<?= $i ?>">max <?= $i ?></option>
+                            <?php else: ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                            <?php endif ?>
+                        	<?php endfor ?>
+                        </select>
+                        <?php endif ?>
+                    </div><!-- closes occ -->
+                    <div class="occ">
+                        <input type="submit" class="btn-1 noclean" value="Check Availability" />
+                        <span onclick="$.fancybox.close()" class="btn-4">Cancel</span>
+                    </div><!-- closes occ -->
+                    <input type="hidden" name="checkin" value="<?= date('Y-m-d') ?>" />
+                    <input type="hidden" name="token" value="<?= $this->trip->token ?>" />
+                    <input type="hidden" name="trip" value="<?= $this->trip->id ?>" />
+                    <input type="hidden" name="triptoken" value="<?= $this->trip->token ?>" />
+                </form>
+			</div><!-- closes right -->
+		</div><!-- closes dates -->
+    </div>
+		</div><!--HIDDEN-->
+		<script type="text/javascript" src="/js2/jquery.js?v=000000000000079"></script>
+		<script type="text/javascript" src="/js2/datepicker.js?v=000000000000079"></script>
+		<script type="text/javascript" src="/js2/trips/view.js?v=000000000000079"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$(".carousel").jcarousel();
+				$(".cycle").cycle({
+					fx: 'scrollHorz',
+					timeout: 0,
+					prev: '.prev',
+					next: '.next'
+				});
+				
+			});
+		</script>
 	</body>
 </html>
