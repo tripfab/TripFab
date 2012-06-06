@@ -61,7 +61,7 @@ class WS_Uploader_Service {
     /**
      * Returns array('success'=>true) or array('error'=>'error message')
      */
-    public function handleUpload($paths, $uploadDirectory, $replaceOldFile = FALSE){        
+    public function handleUpload($paths, $uploadDirectory = null, $replaceOldFile = FALSE){        
         if(!is_dir(str_replace('//','/',$paths['public']))){
             mkdir(str_replace('//','/',$paths['public']), 0777, true);
         }
