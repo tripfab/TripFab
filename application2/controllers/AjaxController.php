@@ -1849,8 +1849,15 @@ class AjaxController extends Zend_Controller_Action
         $page = $this->_getParam('page', 1);
         
         $trips = $trips->getTripsOf($country->id, $price, $days, $people, $category, $page);
+        
+        $cities = array();
+        foreach($trips as $trip) {
+            $cities[$trip->id] = $this->trips->getCities($truo->id);
+        }
+        
         $this->view->country = $country;
         $this->view->trips   = $trips;
+        $this->view->cities  = $cities;
     }
     
     public function gettrips3Action()
@@ -1878,8 +1885,13 @@ class AjaxController extends Zend_Controller_Action
         $page = $this->_getParam('page', 1);
         
         $trips = $trips->getTripsOf($country->id, $price, $days, $people, $category, $page);
+        $cities = array();
+        foreach($trips as $trip) {
+            $cities[$trip->id] = $this->trips->getCities($trip->id);
+        }
         $this->view->country = $country;
-        $this->view->trips   = $trips;
+        $this->view->trips   = $trips;    
+        $this->view->cities = $cities;
     }
     
     public function gettrips2Action()
@@ -1909,6 +1921,7 @@ class AjaxController extends Zend_Controller_Action
         $trips = $trips->getTripsOf($country->id, $price, $days, $people, $category,$page);
         $this->view->country = $country;
         $this->view->trips   = $trips;
+        
     }
     
     public function gettrips4Action()
@@ -1936,8 +1949,13 @@ class AjaxController extends Zend_Controller_Action
         $page = $this->_getParam('page', 1);
         
         $trips = $trips->getTripsOf($country->id, $price, $days, $people, $category, $page);
+        $cities = array();
+        foreach($trips as $trip) {
+            $cities[$trip->id] = $this->trips->getCities($trip->id);
+        }
         $this->view->country = $country;
-        $this->view->trips   = $trips;
+        $this->view->trips   = $trips;        
+        $this->view->cities = $cities;
     }
     
     public function getsearchtagsAction()

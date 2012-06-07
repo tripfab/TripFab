@@ -6,7 +6,9 @@
 	<?= $this->lazylisting(array('width'=>220,'height'=>206), $trip->image, '', '220:206', '',$_imgloading) ?></a>
 	<h2><a href="/en-US/l1/trips/view/<?= $trip->id ?>"><?= $trip->title ?></a></h2>
     <div class="descrip">
-        <span>Jacó, Tamarindo, Monteverde, and other <a href="/l1/trips/view/<?= $trip->id ?>" class="link1"> cities</a></span>
+        <span><?php for($i=0;$i<=3;$i++): ?>
+        <?= $this->cities[$trip->id][$i]->title ?>,
+        <?php endfor ?> and other <a href="/l1/trips/view/<?= $trip->id ?>" class="link1"> cities</a></span>
         <p><?= substr($trip->description,0,150) ?>...</p>
         <div class="specs">
             <dl>
