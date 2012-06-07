@@ -278,6 +278,7 @@
 	float: left;
 	width: 220px;
 	height: 206px;
+        background: #303030;
 }
 #trips1 .trip .descrip {
 	float: left;
@@ -1686,8 +1687,10 @@
 }
 .box.days .day .day-section .left {
 	width: 267px;
+        height: 168px;
 	float: left;
 	position: relative;
+        background: #303030;
 }
 .box.days .day .day-section .left > a {
 	display:block;

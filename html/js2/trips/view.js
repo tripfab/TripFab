@@ -6,6 +6,13 @@ function onAfter(curr, next, opts, fwd) {
     $(this).parent().animate({
         height: $ht
     });
+    
+    $('.lazy').lazyload({
+        effect : "fadeIn",
+        load:function(){
+                $(this).removeClass('lazy');
+        }
+    });
 }
 $(document).ready(function() {
 	
