@@ -54,8 +54,7 @@
     
     <div id="wp_content">
         <div class="photo">
-        	<?= $this->blur($this->trip->image, 258) ?>
-            <!--<img src="https://static.tripfab.com/images6/tripsViewBig.png" width="" height="258" alt="" />-->
+        	<?= $this->blur($this->trip->image, 258, true) ?>
             <h3><?= $this->trip->title ?></h3>
             <h4>COSTA RICA EXCLUSIVE TRIP</h4>
             <div class="line"></div>
@@ -151,7 +150,7 @@
                     				<?php foreach($listings as $listing): ?>
                     				<div class="day-item">
                     					<div class="left">
-                    						<?= $this->thumbnail(array('width'=>267,'height'=>168), $listing->image, '', '267:168') ?>
+                    						<?= $this->lazylisting(array('width'=>267,'height'=>168), $listing->image, '', '267:168') ?>
                     					</div><!-- closes left -->
                     					<div class="right">
                     						<?php if($listing->start != '00:00:00'): ?>
@@ -362,22 +361,37 @@ $(document).ready(function(){
     img_ready($('img.background'));
 	
 	$(window).scroll(function(){
-        $height = $(window).height();
-        $top = $(window).scrollTop() + $height - 60;
-        
-        if($top >= $('.js-footer-fixed').offset().top) {
-            $('#wp_footer').css('bottom','0');
-            $('#wp_content').css('padding-bottom', '150px');
-        } else {
-            $('#wp_footer').css('bottom','45px');
-            $('#wp_content').css('padding-bottom', '195px');
-        }
+		if($('.js-footer-fixed').lenght > 0) {
+			$height = $(window).height();
+			$top = $(window).scrollTop() + $height - 60;
+			
+			if($top >= $('.js-footer-fixed').offset().top) {
+				$('#wp_footer').css('bottom','0');
+				$('#wp_content').css('padding-bottom', '150px');
+			} else {
+				$('#wp_footer').css('bottom','45px');
+				$('#wp_content').css('padding-bottom', '195px');
+			}
+		}
     });
 	
 	$('.js-close').click(function(){
 		$('.js-footer-fixed').hide();
 		$.cookie('nohelp','please',{expires:365});	
 		return false;
+	});
+	
+	$('.lazy').lazyload({
+		effect : "fadeIn",
+		load:function(){
+			$(this).removeClass('lazy');
+			$('.lazy').lazyload({
+				effect : "fadeIn",
+				load:function(){
+					$(this).removeClass('lazy');
+				}
+			});
+		}
 	});
 });
 

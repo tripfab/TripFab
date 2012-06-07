@@ -2,7 +2,7 @@
 
 class Zend_View_Helper_Blur {
     
-    public function blur($image, $_h = 250){
+    public function blur($image, $_h = 250, $lazy = false){
         
         $imagePath = $image;
         
@@ -68,7 +68,11 @@ class Zend_View_Helper_Blur {
         if (file_exists($imagePath) == false):
             $imagePath = $_SERVER['DOCUMENT_ROOT'] . $imagePath;
             if (file_exists($imagePath) == false):
-                return '<img src="' . $imagePath . '" width="' . $opts['w'] . '" height="' . $opts['h'] . '" />';
+                if(!$lazy) {
+                    return '<img src="' . $imagePath . '" width="' . $opts['w'] . '" height="' . $opts['h'] . '" />';
+                } else {
+                    return '<img class="lazy" data-original="' . $imagePath . '" width="' . $opts['w'] . '" height="' . $opts['h'] . '" />';
+                }
             endif;
         endif;
 
@@ -287,7 +291,11 @@ class Zend_View_Helper_Blur {
         endif;
 
         # return cache file path
-        return '<img id="blur" class="background" src="'. str_replace(APPLICATION_PATH . '/../html', '', $newPath) . '" width="' . $opts['w'] . '" height="' . $opts['h'] . '" />';
+        if(!$lazy) {
+            return '<img id="blur" class="background" src="'. str_replace(APPLICATION_PATH . '/../html', '', $newPath) . '" width="' . $opts['w'] . '" height="' . $opts['h'] . '" />';
+        } else {
+            return '<img id="blur" class="background lazy" data-original="'. str_replace(APPLICATION_PATH . '/../html', '', $newPath) . '" width="' . $opts['w'] . '" height="' . $opts['h'] . '" />';
+        }
         
     }
     
