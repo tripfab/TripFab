@@ -43,6 +43,12 @@ class WS_TripsService {
      * @var boolean
      */
     protected $use_cache;
+    
+    /**
+     *
+     * @var Zend_Cache_Backend_Memcached
+     */
+    protected $cache;
 
     public function __construct($use_cache = true) {
         $this->trips_db = new Model_Trips();
@@ -144,22 +150,31 @@ class WS_TripsService {
 
 
     public function get($trip, $arr = false, $user = null) {
-        if (!$arr) {
-            $select = $this->DB->select();
-            $select->from('trips');
-            $select->join('places', 'trips.country_id = places.id', array('country' => 'title'));
-            $select->where('trips.id = ?', $trip);
-            $result = $this->DB->fetchRow($select, array(), 5);
-            if (is_null($result))
-                throw new Exception();
-        }
-        else {
-            $select = $this->DB->select();
-            $select->from('trips');
-            $select->where('trips.id = ?', $trip);
-            $result = $this->DB->fetchRow($select);
-            if (is_null($result))
-                throw new Exception();
+        $args = func_get_args();
+        $cacheId = "TS_get_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+            if (!$arr) {
+                $select = $this->DB->select();
+                $select->from('trips');
+                $select->join('places', 'trips.country_id = places.id', array('country' => 'title'));
+                $select->where('trips.id = ?', $trip);
+                $result = $this->DB->fetchRow($select, array(), 5);
+                if (is_null($result))
+                    throw new Exception();
+            }
+            else {
+                $select = $this->DB->select();
+                $select->from('trips');
+                $select->where('trips.id = ?', $trip);
+                $result = $this->DB->fetchRow($select);
+                if (is_null($result))
+                    throw new Exception();
+            }
+            
+            $this->cache->save($result, $cacheId);
+        } else {
+            $result = $this->cache->load($cacheId);
         }
         return $result;
     }
@@ -272,15 +287,24 @@ class WS_TripsService {
     }
 	
     public function getListingOf3($trip) {
-        $select = $this->DB->select();
-        $select->from('trip_listings')->
-        joinleft('places', 'trip_listings.city_id = places.id', array('city_id'=>'id', 'city' => 'title', 'cityurl' => 'identifier' )) ->
-        joinleft(array('places2' => 'places'), 'trip_listings.country_id = places2.id', array('country_id'=>'id', 'country' => 'title','countryurl' => 'identifier' ))->
-        joinleft('listing_types', 'trip_listings.main_type = listing_types.id', array('type_name'=>'name')) ->
-		where("trip_listings.itinerary_id = ?", $trip)->
-		order('trip_listings.day ASC')->
-		order('trip_listings.sort ASC');
-		$result = $this->DB->fetchAll($select, array(), Zend_Db::FETCH_OBJ);
+        $args = func_get_args();
+        $cacheId = "TS_getListingOf3_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+            $select = $this->DB->select();
+            $select->from('trip_listings')->
+            joinleft('places', 'trip_listings.city_id = places.id', array('city_id'=>'id', 'city' => 'title', 'cityurl' => 'identifier' )) ->
+            joinleft(array('places2' => 'places'), 'trip_listings.country_id = places2.id', array('country_id'=>'id', 'country' => 'title','countryurl' => 'identifier' ))->
+            joinleft('listing_types', 'trip_listings.main_type = listing_types.id', array('type_name'=>'name')) ->
+            where("trip_listings.itinerary_id = ?", $trip)->
+            order('trip_listings.day ASC')->
+            order('trip_listings.sort ASC');
+            $result = $this->DB->fetchAll($select, array(), Zend_Db::FETCH_OBJ);
+            
+            $this->cache->save($result, $cacheId);
+        } else {
+            $result = $this->cache->load($cacheId);
+        }
         return $result;
     }
 	
@@ -601,11 +625,21 @@ class WS_TripsService {
     }
 
     public function getHighlights($trip) {
-        $select = $this->DB->select();
-        $this->DB->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select->from('trip_highlights', array('*'));
-        $select->where('trip_id = ?', $trip);
-        $trips = $this->DB->fetchAll($select);
+        
+        $args = func_get_args();
+        $cacheId = "TS_getHighlights_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+            $select = $this->DB->select();
+            $this->DB->setFetchMode(Zend_Db::FETCH_OBJ);
+            $select->from('trip_highlights', array('*'));
+            $select->where('trip_id = ?', $trip);
+            $trips = $this->DB->fetchAll($select);
+            
+            $this->cache->save($trips, $cacheId);
+        } else {
+            $trips = $this->cache->load($cacheId);
+        }
         return $trips;
     }
 
@@ -635,11 +669,20 @@ class WS_TripsService {
     }
 
     public function getFacts($trip) {
-        $select = $this->DB->select();
-        $this->DB->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select->from('trip_facts', array('*'));
-        $select->where('trip_id = ?', $trip);
-        $facts = $this->DB->fetchAll($select);
+        $args = func_get_args();
+        $cacheId = "TS_getFacts_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+            $select = $this->DB->select();
+            $this->DB->setFetchMode(Zend_Db::FETCH_OBJ);
+            $select->from('trip_facts', array('*'));
+            $select->where('trip_id = ?', $trip);
+            $facts = $this->DB->fetchAll($select);
+            
+            $this->cache->save($facts, $cacheId);
+        } else {
+            $facts = $this->cache->load($cacheId);
+        }
         return $facts;
     }
 
@@ -684,10 +727,20 @@ class WS_TripsService {
     }
 
     public function getIncludes($trip) {
-        $db = Zend_Db_Table::getDefaultAdapter();
-        $db->setFetchMode(Zend_Db::FETCH_OBJ);
-        $result = $db->query("SELECT * FROM trip_includes WHERE trip_id='$trip'");
-        return $result->fetchAll();
+        $args = func_get_args();
+        $cacheId = "TS_ggetIncludes_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+            $db = Zend_Db_Table::getDefaultAdapter();
+            $db->setFetchMode(Zend_Db::FETCH_OBJ);
+            $sql = $db->query("SELECT * FROM trip_includes WHERE trip_id='$trip'");
+            $result = $sql->fetchAll();
+            
+            $this->cache->save($result, $cacheId);
+        } else {
+            $result = $this->cache->load($cacheId);
+        }
+        return $result;
 
         /* $select = $this->DB->select();
           $this->DB->setFetchMode(Zend_Db::FETCH_OBJ);
@@ -777,17 +830,27 @@ class WS_TripsService {
     }
     
     public function getCities($trip) {
-        $select = $this->DB->select();
-        $this->DB->setFetchMode(Zend_Db::FETCH_OBJ);
-        $select->from('trip_cities', array('*'));
-        $select->join('places','trip_cities.city_id = places.id', array('title'));
-        $select->where('trip_cities.trip_id = ?', $trip);
-        $select->order('id');
-        $cities = $this->DB->fetchAll($select);
+        $args = func_get_args();
+        $cacheId = "TS_getCities_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+            $select = $this->DB->select();
+            $this->DB->setFetchMode(Zend_Db::FETCH_OBJ);
+            $select->from('trip_cities', array('*'));
+            $select->join('places','trip_cities.city_id = places.id', array('title'));
+            $select->where('trip_cities.trip_id = ?', $trip);
+            $select->order('id');
+            $cities = $this->DB->fetchAll($select);
+            
+            $this->cache->save($cities, $cacheId);
+        } else {
+            $cities = $this->cache->load($cacheId);
+        }
         return $cities;
     }
 
     public function saveCities($trip, $country, $cities) {
+        
         $table = new Zend_Db_Table('trip_cities');
         $table->delete('trip_id = ' . $trip);
         foreach ($cities as $city) {
@@ -844,10 +907,21 @@ class WS_TripsService {
     
     public function getPictures($trip)
     {
-        $photos = new Zend_Db_Table('trip_photos');
-        $select = $photos->select();
-        $select->where('trip_id = ?', $trip);
-        return $photos->fetchAll($select);
+        $args = func_get_args();
+        $cacheId = "TS_getPictures_".md5(print_r($args,true));
+        
+        if(!$this->use_cache || ($this->cache->test($cacheId) === false)) {
+            $photos = new Zend_Db_Table('trip_photos');
+            $select = $photos->select();
+            $select->where('trip_id = ?', $trip);
+            $pics = $photos->fetchAll($select);
+            
+            $this->cache->save($pics, $cacheId);
+        } else {
+            $pics = $this->cache->load($cacheId);
+        }
+        
+        return $pics;
     }
     
     public function getInfo($trip)
@@ -969,5 +1043,9 @@ class WS_TripsService {
         
         return $trip->price;
     }
-
+    
+    public function setUseCache($useCache)
+    {
+        $this->use_cache = $useCache;
+    }
 }
