@@ -8,7 +8,7 @@
 	<h2><a href="/en-US/l1/trips/view/<?= $trip->id ?>"><?= $trip->title ?></a></h2>
     <div class="descrip">
         <span>
-        <?php for($i=0;$i<=3;$i++): ?>
+        <?php for($i=0;$i<3;$i++): ?>
         <?= $this->cities[$trip->id][$i]->title ?>,
         <?php endfor ?> and other <a href="/l1/trips/view/<?= $trip->id ?>" class="link1"> cities</a></span>
         <p><?= substr($trip->description,0,150) ?>...</p>
