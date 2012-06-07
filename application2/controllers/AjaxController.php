@@ -1829,7 +1829,7 @@ class AjaxController extends Zend_Controller_Action
         $places = new WS_PlacesService();
         $trips  = new WS_TripsService();
         
-        $id = $this->_getParam('country');
+        $id = $this->_getParam('country',18);
         $country = $places->getPlaceById($id);
         if(is_null($country))
                 throw new Exception();
@@ -1850,14 +1850,8 @@ class AjaxController extends Zend_Controller_Action
         
         $trips = $trips->getTripsOf($country->id, $price, $days, $people, $category, $page);
         
-        $cities = array();
-        foreach($trips as $trip) {
-            $cities[$trip->id] = $this->trips->getCities($truo->id);
-        }
-        
         $this->view->country = $country;
         $this->view->trips   = $trips;
-        $this->view->cities  = $cities;
     }
     
     public function gettrips3Action()
