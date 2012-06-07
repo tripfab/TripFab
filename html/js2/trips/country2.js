@@ -185,6 +185,12 @@ $(function(){
                 $('ul.breadcrump li:last a').text('Luxury');
                 $('ul.breadcrump li:last a').attr('href','/l1/trips/costa_rica/#/luxury');
             break;
+            case '#/all-inclusive':
+                $data.category = 18;
+                $('#trips1 .head h2').text('All-inclusive Packages in Costa Rica');
+                $('ul.breadcrump li:last a').text('All-Inclusive');
+                $('ul.breadcrump li:last a').attr('href','/l1/trips/costa_rica/#/all-inclusive');
+            break;
             case '#/all':
                 $data.category = 'all';
                 $('#trips1 .head h2').text('Preplanned Packages in Costa Rica');

@@ -56,7 +56,7 @@
         <div class="wrapper trip-itinerary">
             <div class="overview">
                 <div class="image">
-					<?= $this->thumbnail(array('width'=>930, 'height'=>476), $this->trip->image,'','930:746') ?>
+					<?= $this->lazylisting(array('width'=>930, 'height'=>476), $this->trip->image,'','930:746', null, '') ?>
                     <div class="info">
                         <h3><?= $this->trip->title ?></h3>
                         <span class="place"><?= $this->trip->country ?></span>
@@ -130,7 +130,9 @@
                         <?php if($listing->main_type == 6 or $listing->main_type == 7): ?>
                         <?php if(!in_array($listing->id, $used)): $used[] = $listing->id ?>
                         <div class="slide">
-                            <?= $this->thumbnail(array('width'=>855,'height'=>342), $listing->image, '', '855:342') ?>
+                        	<div class="imgcontainer">
+                            <?= $this->lazylisting(array('width'=>855,'height'=>342), $listing->image, '', '855:342', null, '') ?>
+                            </div>
                             <div class="content">
                                 <div class="left">
                                     <?= $listing->title ?>
@@ -157,7 +159,9 @@
                         <?php if($listing->main_type == 4): ?>
                         <?php if(!in_array($listing->id, $used)): $used[] = $listing->id ?>
                         <div class="slide">
-                            <?= $this->thumbnail(array('width'=>855,'height'=>342), $listing->image, '', '855:342') ?>
+                        	<div class="imgcontainer">
+                            <?= $this->lazylisting(array('width'=>855,'height'=>342), $listing->image, '', '855:342', null, '') ?>
+                            </div>
                             <div class="content">
                                 <div class="left">
                                     <?= $listing->title ?>
@@ -184,7 +188,9 @@
                         <?php if($listing->main_type == 5): ?>
                         <?php if(!in_array($listing->id, $used)): $used[] = $listing->id ?>
                         <div class="slide">
-                            <?= $this->thumbnail(array('width'=>855,'height'=>342), $listing->image, '', '855:342') ?>
+                        	<div class="imgcontainer">
+                            <?= $this->lazylisting(array('width'=>855,'height'=>342), $listing->image, '', '855:342', null, '') ?>
+                            </div>
                             <div class="content">
                                 <div class="left">
                                     <?= $listing->title ?>
@@ -211,7 +217,9 @@
                         <?php if($listing->main_type == 2): ?>
                         <?php if(!in_array($listing->id, $used)): $used[] = $listing->id ?>
                         <div class="slide">
-                           <?= $this->thumbnail(array('width'=>855,'height'=>342), $listing->image, '', '855:342') ?>
+                        	<div class="imgcontainer">
+                            <?= $this->lazylisting(array('width'=>855,'height'=>342), $listing->image, '', '855:342', null, '') ?>
+                            </div>
                             <div class="content">
                                 <div class="left">
                                     <?= $listing->title ?>
@@ -238,7 +246,7 @@
                     <div class="cont">
                         <ul>
                         	<?php foreach($this->pictures as $picture): ?>
-                            <li><?= $this->thumbnail(array('width'=>176,'height'=>118),$picture->url,'','176:118') ?>
+                            <li><?= $this->lazylisting(array('width'=>176,'height'=>118),$picture->url,'','176:118') ?>
                             <a href="<?= $this->image($picture->url, 'lgbox_img', 'pic'.$picture->id) ?>" rel="group-1" class="lbc"></a></li>
                             <?php endforeach ?>
                         </ul>
