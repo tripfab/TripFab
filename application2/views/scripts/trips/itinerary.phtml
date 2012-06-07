@@ -76,7 +76,7 @@
                             <?php foreach($listings as $listing): ?>
                             <div class="day-item">
                                 <div class="left">
-                                    <?= $this->thumbnail(array('width'=>267,'height'=>168), $listing->image, '', '267:168') ?>
+                                    <?= $this->lazylisting(array('width'=>267,'height'=>168), $listing->image, '', '267:168') ?>
                                     <a href="mapcanvas<?= $listing->id ?>" class="mos"
                                     data-lat="<?= $listing->lat ?>" data-lng="<?= $listing->lng ?>" 
                                     data-title="<?= $listing->title ?>">Show Map <span>&uarr;</span></a>

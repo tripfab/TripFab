@@ -11423,7 +11423,11 @@ h2.title .back:hover,
 	font: 13px/20px Helvetica;
 	margin-top: 20px;
 }
-
+.trip-itinerary .tabs-wrapper .tab .imgcontainer {
+    width: 855px;
+    height: 342px;
+    background: #E0E0E0;
+}
 .trip-itinerary .tabs-wrapper .tab .content p {
 	margin-bottom: 20px;
 }
@@ -11957,8 +11961,10 @@ h2.title .back:hover,
 
 .box.days .day .day-section .left {
 	width: 267px;
+        height: 168px;
 	float: left;
 	position: relative;
+        background:#303030;
 }
 
 .box.days .day .day-section .left > a {

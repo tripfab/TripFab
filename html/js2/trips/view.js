@@ -82,7 +82,15 @@ $(document).ready(function() {
     });
     
     $('.tabs-wrapper').tabs({
-    	autoHeight: true
+    	autoHeight: true,
+        show:function(){
+            $('.lazy').lazyload({
+                effect : "fadeIn",
+                load:function(){
+                        $(this).removeClass('lazy');
+                }
+            });
+        }
     });
     $('ul.days').jcarousel({ 
         scroll: 1,
@@ -248,5 +256,12 @@ $(document).ready(function() {
         for(i=1; i<=$limit; i++)
             $('select[name=kids]').append('<option value="'+i+'">'+i+'</option>');
 		
+    });
+    
+    $('.lazy').lazyload({
+        effect : "fadeIn",
+        load:function(){
+                $(this).removeClass('lazy');
+        }
     });
 });
