@@ -33,8 +33,32 @@
 		        	
 		        	<div class="head">
 		        		<span></span>
-		        		<h2>Adventure Packages in Costa Rica</h2>
-		        		<a href="" class="btn-10">Explore more packages <em></em></a>
+		        		<h2>Pre-Planned Packages in Costa Rica</h2>
+		        		<a href="">Select a Category <em></em></a>
+		        		<div class="categories">
+		        			<em></em>
+		        			<ul>
+		        				<li><a href="" class="active">All Categories<span>85</span></a></li>
+		        				<li><a href="">All-inclusive<span>85</span></a></li>
+		        				<li><a href="">Honeymoon<span>85</span></a></li>
+		        				<li><a href="">Relaxation<span>85</span></a></li>
+		        				<li><a href="">Family<span>85</span></a></li>
+		        				<li><a href="">Diving<span>85</span></a></li>
+		        				<li><a href="">Romance<span>85</span></a></li>
+		        				<li><a href="">Surfing<span>85</span></a></li>
+		        				<li><a href="">Holiday<span>85</span></a></li>
+		        				<li><a href="">Student Travel<span>85</span></a></li>
+		        				<li><a href="">Getaway<span>85</span></a></li>
+		        				<li><a href="">Birdwatching<span>85</span></a></li>
+		        				<li><a href="">Eco Adventure<span>85</span></a></li>
+		        				<li><a href="">Adventurev<span>85</span></a></li>
+		        				<li><a href="">Gay-friendly <span>85</span></a></li>
+		        				<li><a href="">Golf <span>85</span></a></li>
+		        				<li><a href="">Sports fishing <span>85</span></a></li>
+		        				<li><a href="">Scuba diving <span>85</span></a></li>
+		        				<li><a href="">Luxury <span>85</span></a></li>
+		        			</ul>
+		        		</div><!--CATEGORIES-->
 		        	</div><!--HEAD-->
 		        	<div class="content">
 		        		<div class="side">
@@ -137,5 +161,12 @@
 				<div id="footer"></div><!--FOOTER-->
 			</div><!--WP_FOOTER-->
 		</div><!--WRAPPER_ALL-->
+		<script type="text/javascript" src="/js2/jquery.js?v=000000000000079"></script>
+		<script type="text/javascript">
+			$(".head > a").click(function() {
+				$(".head .categories").toggleClass('show');
+				return false;
+			});
+		</script>
 	</body>
 </html>

@@ -471,14 +471,13 @@
 	height: 52px;
 	text-indent: 30px;
 	font: 100 16px/73px Helvetica;
-	color: #000;
-	background-color: #FFF;
 	border-radius: 3px 3px 0 0;
 	-moz-border-radius: 3px 3px 0 0;
 	-webkit-border-radius: 3px 3px 0 0;
 	position: relative;
-	border: 1px solid #E7E7E7;
-	border-bottom: none;
+	border: none;
+	color: #FFF;
+	background:url(https://static.tripfab.com/images6/tripsView3ico3.png) repeat 0 0;
 }
 .itinerary.box.days .links li a span {
 	display: block;
@@ -490,10 +489,11 @@
 	text-transform: uppercase;
 	font: normal 10px Helvetica;
 }
-.itinerary.box.days .links li a.active {
-	color: #FFF;
-	background:url(https://static.tripfab.com/images6/tripsView3ico3.png) repeat 0 0 ;
-	border: none;
+.itinerary.box.days .links li.ui-tabs-selected a{
+	color: #000;
+	background: #FFF;
+	border: 1px solid #E7E7E7;
+		border-bottom: none;
 }
 .itinerary.box.days .hdr a {
 	display: block;
@@ -505,20 +505,20 @@
 	top: 20px;
 }
 .itinerary.box.days .hdr a.prev {
-	background-position: 0 0;
+	background-position: 0 -19px;
 	left: 300px;
 }
 .itinerary.box.days .hdr a.prev:hover {
-	background-position: 0 -19px;
+	background-position: 0 0;
 }
 .itinerary.box.days .hdr a.next {
-	background-position: 0 -38px;
+	background-position: 0 -57px;
 	right: 300px;
 }
 .itinerary.box.days .hdr a.next:hover {
-	background-position: 0 -57px;
+	background-position: 0 -38px;
 }
-.itinerary.box.days > .left {
+.itinerary.box.days div > .left {
 	width: 863px;
 	float: left;
 	background-color: #FFF;
@@ -528,9 +528,12 @@
 	-moz-border-radius: 0 0 4px 4px;
 	-webkit-border-radius: 0 0 4px 4px;
 }
+.cycleD .day{
+	width: 100% !important;
+}
 .box.days .day .day-section {
 	margin: 15px 0 0 30px;
-	    padding: 15px 15px 0;
+	padding: 15px 15px 0;
 }
 .box.days .day .day-section.stay{
 	background-color: #f1f1f1;
@@ -538,7 +541,10 @@
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	padding: 15px;
-	margin-bottom: 15px;
+	margin:15px 15px 15px 30px;
+}
+.box.days .day .day-section.stay .right {
+	width: 464px;
 }
 .box.days .day .day-section .sub-ttl {
 	background: #303030 url(https://static.tripfab.com/images2/arrow-37.png) no-repeat 100% 0;
@@ -604,8 +610,8 @@
 	display: block;
 }
 .box.days .day .day-section .day-item {
-	overflow: hidden;
 	padding: 0;
+	position: relative;
 }
 .box.days .day .day-section .day-item:last-child {
 	margin-bottom: 0;
@@ -628,8 +634,8 @@
 }
 .box.days .day .day-section .right ul li {
 	margin-bottom: 10px;
-	font: normal 13px/18px Helvetica;
-	margin-bottom: 15px;
+	font: normal 13px/19px Helvetica;
+	margin-bottom: 9px;
 }
 .box.days .day .day-section .right > strong {
 	background: url(https://static.tripfab.com/images6/tripsView3ico1.png) no-repeat 1px top;
@@ -721,37 +727,44 @@
     -webkit-border-radius: 0px 0px 3px 3px;
     border-radius: 0px 0px 3px 3px;
 }
-.itinerary.box.days > .right {
+.itinerary.box.days div > .right {
 	width: 97px;
 	position: absolute;
 	right: 10px;
 	top: 0;
 	z-index: 10;
+	padding-top: 20px;
 }
-.itinerary.box.days > .right li a {
+.itinerary.box.days div > .right h6 {
+	text-transform: uppercase;
+	font:normal 11px Helvetica;
+	color: #a1a1a1;
+	text-indent: 19px;
+}
+.itinerary.box.days div > .right li a {
 	display: block;
 	height: 30px;
 	width: 109px;
 	font: normal 13px/30px Helvetica;
 	background: url(https://static.tripfab.com/images6/tripsView3aw1.png) no-repeat 0 50px ;
-	text-indent: 25px;
 	color: #898989;
+	text-indent: 19px;
 }
-.itinerary.box.days > .right li a:hover {
+.itinerary.box.days div > .right li a:hover {
 	background-position: left top;
 }
-.itinerary.box.days > .right li a.active {
+.itinerary.box.days div > .right li a.active {
 	background-position: left bottom;
 	color: #FFF;
 	font-weight: bold;
 }
-.itinerary.box.days > .right > a {
+.itinerary.box.days div > .right > a {
 	color: #60b5f7;
-	text-indent: 25px;
 	display: block;
 	margin-top: 10px;
+	text-indent: 19px;
 }
-.itinerary.box.days .info {
+#tripsView .maintop .info {
 	margin-top: 20px;
 	width: 863px;
 	height: 112px;
@@ -765,7 +778,7 @@
 	-webkit-box-shadow: inset 0px 0px 0px 1px #ebebeb;
 	box-shadow: inset 0px 0px 0px 1px #ebebeb; 
 }
-.itinerary.box.days .info h3 {
+#tripsView .maintop .info h3 {
 	background: url("https://static.tripfab.com/images6/trips1icons2.png") no-repeat scroll -302px top transparent;
     display: block;
     float: left;
@@ -774,7 +787,7 @@
     text-indent: -999999px;
     width: 135px;
 }
-.itinerary.box.days .info .widget1 {
+#tripsView .maintop .info .widget1 {
 	float: left;
 	padding-left: 20px;
 	background: url(https://static.tripfab.com/images6/tripsView3ico5.png) repeat-y 0 0;
@@ -783,23 +796,23 @@
 	overflow: hidden;
 	width: 310px;
 }
-.itinerary.box.days .info  h4 {
+#tripsView .maintop .info  h4 {
 	font: bold 13px Helvetica;
 	padding-top: 9px;
 	margin-bottom: 10px;
 }
-.itinerary.box.days .info .widget1 ul{
+#tripsView .maintop .info .widget1 ul{
 	float: left;
 	margin-right: 10px;
 }
-.itinerary.box.days .info .widget1 ul li{
+#tripsView .maintop .info .widget1 ul li{
 	background: url("https://static.tripfab.com/images6/tripsView3ico6.png") no-repeat scroll 0 3px transparent;
     color: #303030;
     font: 12px/19px Helvetica;
     height: 19px;
     padding-left: 25px;
 }
-.itinerary.box.days .info .widget2 {
+#tripsView .maintop .info .widget2 {
 	float: left;
 	padding-left: 25px;
 	background: url(https://static.tripfab.com/images6/tripsView3ico5.png) repeat-y 0 0;
@@ -807,7 +820,7 @@
 	margin-top: 10px;
 	overflow: hidden;
 }
-.itinerary.box.days .info .widget2 .phone{
+#tripsView .maintop .info .widget2 .phone{
 	background: url("https://static.tripfab.com/images6/tripsView3ico7.png") no-repeat scroll 0 0;
 	display: block;
 	font: bold 17px/22px Helvetica;
@@ -817,11 +830,11 @@
 	float: left;
 	margin-top: 5px;
 }
-.itinerary.box.days .info .widget2 p {
+#tripsView .maintop .info .widget2 p {
 	font: normal 12px Helvetica;
 	margin-bottom: 8px;
 }
-.itinerary.box.days .info .widget2 .btn-10 {
+#tripsView .maintop .info .widget2 .btn-10 {
 	border: 1px solid #A3A3A3;
 	    display: block;
 	    height: 30px;
@@ -831,13 +844,242 @@
 	    float: right;
 	    color: #303030;
 }
-.itinerary.box.days .info .widget2 .btn-10 em {
+#tripsView .maintop .info .widget2 .btn-10 em {
 	background: url("https://static.tripfab.com/images6/trips1icons.png") no-repeat scroll 0 -119px transparent;
     display: block;
     float: left;
     height: 16px;
     margin: 7px 10px 0 10px;
     width: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#tripsView .left .details {
+	padding: 20px 34px 0;
+}
+#tripsView .left h3{
+	height: 50px;
+	font: 100 19px/50px Helvetica;
+	border-bottom: 1px solid #e8e8e8;
+	margin-bottom: 25px;
+} 
+#tripsView .left p {
+	font: normal 13px/20px Helvetica;
+}
+#tripsView .left .highlight h4 {
+	font: 100 26px Helvetica;
+	width: 290px;
+	padding-right: 20px;
+	float: left;
+}
+#tripsView .left .highlight p {
+	float: right;
+	width: 480px;
+}
+#tripsView .left .pager {
+	text-align: center;
+	padding-top: 20px;
+}
+#tripsView .left .pager a{
+	display: inline-block;
+	width: 10px;
+	height: 11px;
+	background: url(https://static.tripfab.com/images6/tripsView3ico8.png) no-repeat left top;
+	text-indent: -99999px;
+	margin-right: 5px;
+}
+#tripsView .left .pager a.activeSlide {
+	background-position: left bottom;
+}
+
+
+#tripsView .left .overview {
+	position: relative;
+}
+#tripsView .left .overview .descrip{
+	padding-left: 90px;
+	width: 450px;
+	border-right: 1px solid #ebebeb;
+	float: left;
+}
+#tripsView .left .overview .duration{
+	width: 63px;
+	height: 71px;
+	background: url(https://static.tripfab.com/images6/tripsView3ico10.png) no-repeat 0 0;
+	position: absolute;
+	left: 0;
+	top:51px;
+	color: #FFF;
+	text-align: center;
+	text-transform: uppercase;
+	text-shadow: 0 -1px 0 #1b6dce;
+}
+#tripsView .left .overview .duration span {
+	display: block;
+	font: 100 36px Helvetica;
+	margin: 5px 0 2px;
+	height: 32px;
+}
+#tripsView .left .overview h4{
+	font: bold 13px Helvetica;
+	margin-bottom: 20px;
+}
+#tripsView .left .overview p {
+	width: 430px;
+}
+
+#tripsView .cities {
+    float: right;
+    margin-bottom: 10px;
+    width: 230px;
+    padding-left: 20px;
+}
+#tripsView .cities .ttl {
+    display: block;
+    font: bold 13px Helvetica;
+    margin-bottom: 15px;
+}
+#tripsView .cities ul {
+    background: url("https://static.tripfab.com/images6/tripsView1.png") no-repeat scroll -118px 0 transparent;
+    min-height: 100px;
+    padding-left: 101px;
+}
+#tripsView .cities ul li {
+    background: url("https://static.tripfab.com/images6/tripsView2.png") no-repeat scroll 0 -78px transparent;
+    font: 13px/17px Helvetica;
+    margin-bottom: 5px;
+    padding-left: 17px;
+}
+#tripsView .inclusions {
+	margin-bottom: 60px;
+}
+#tripsView .inclusions ul {
+	width: 268px;
+}
+#tripsView .inclusions .in {
+	float: left;
+	width: 390px;
+	border-right: 1px solid #dcdcdc;
+}
+#tripsView .inclusions .in h4 {
+	color: #8dc63f;
+	font: 100 15px Helvetica;
+	margin-bottom: 20px;
+}
+#tripsView .inclusions .in li{
+	list-style: square;
+	color: #8dc63f;
+	margin:0 0 10px 14px;
+}
+#tripsView .inclusions li span {
+	color: #303030;
+}
+#tripsView .inclusions .out {
+	float: right;
+	width: 360px;
+	padding-left: 30px;
+}
+#tripsView .inclusions .out h4 {
+	color: #f26522;
+	font: 100 15px Helvetica;
+	margin-bottom: 20px;
+}
+#tripsView .inclusions .out li{
+	list-style: square;
+	color: #f26522;
+	margin:0 0 10px 14px;
+	font: 13px/16px Helvetica;
+}
+
+
+#tripsView .facts {
+    padding-top: 30px;
+    color: #464646;
+}
+#tripsView .facts .single {
+    background: url("https://static.tripfab.com/images6/HomeLine.png") repeat-x scroll left bottom transparent;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+#tripsView .facts .single.last {
+	background: none;
+}
+#tripsView .facts .ttl {
+    background: url("https://static.tripfab.com/images6/HomeLine.png") repeat-x scroll left 50% transparent;
+    display: block;
+    margin: 0 auto 30px;
+    width: 740px;
+}
+#tripsView .facts .ttl em {
+    background-color: #F3F3F3;
+    color: #60B5F7;
+    display: block;
+    font: 100 25px Helvetica;
+    margin: 0 auto;
+    text-align: center;
+    width: 385px;
+}
+#tripsView .facts h6 {
+    float: left;
+    font: 100 15px/20px Helvetica;
+    padding: 0 20px 0 0;
+    width: 180px;
+}
+#tripsView .facts h6 em {
+    background: url("https://static.tripfab.com/images6/tripsView3ico9.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    float: left;
+    height: 30px;
+    margin: 0 0 20px;
+    width: 30px;
+}
+#tripsView .facts h6 .factTl {
+    background-position: 0 0;
+}
+#tripsView .facts h6 .love {
+    background-position: -38px 0px;
+}
+#tripsView .facts h6 .tips {
+    background-position: -82px 0px;	
+}
+#tripsView .facts ul {
+    float: right;
+    margin-left: 40px;
+    width: 260px;
+}
+#tripsView .facts ul.last {
+    margin: 0;
+    width: 270px;
+}
+#tripsView .facts ul li {
+    color: #464646;
+    font: 13px/21px Helvetica;
 }
 /*END TRIPS 3-------------------------------------------------------------------------------*/
 

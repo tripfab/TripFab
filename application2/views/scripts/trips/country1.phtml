@@ -44,7 +44,16 @@
             <div class="head">
                 <span></span>
                 <h2>Adventure Packages in Costa Rica</h2>
-                <a href="/trips/costa_rica" class="btn-10">Explore more packages <em></em></a>
+                <a href="">Select a Category <em></em></a>
+                <div class="categories">
+                    <em></em>
+                    <ul>
+                        <li><a href="#/all">All Categories<span><?= $this->trips_count['all'] ?></span></a></li>
+                    	<?php foreach($this->categories as $cat): ?>
+                        <li><a href="#/<?= strtolower(str_replace(' ','_', $cat->name)) ?>"><?= $cat->name ?> <span class="num">(<?= $this->trips_count[$cat->id] ?>)</span></a></li>
+                        <?php endforeach ?>
+                    </ul>
+                </div><!--CATEGORIES-->
             </div><!--HEAD-->
             <div class="content">
                 <div class="side">
@@ -144,6 +153,11 @@ $(function(){
 	$('.js-close').click(function(){
 		$('.js-footer-fixed').hide();
 		$.cookie('nohelp2','please',{expires:365});	
+		return false;
+	});
+	
+	$(".head > a").click(function() {
+		$(".head .categories").toggleClass('show');
 		return false;
 	});
 });

@@ -82,6 +82,11 @@ $(function(){
             $people.val($data.people);
         }
         
+        var $a = $('.head .categories a[href="'+$rel+'"]');
+        $(".head .categories a").removeClass('active');
+        $(".head .categories").removeClass('show');
+        $a.addClass('active');
+        
         switch($rel){
             case '#/honeymoon':
                 $data.category = 1;
@@ -249,15 +254,17 @@ $(function(){
     });
 
     $(window).scroll(function(){
-        $height = $(window).height();
-        $top = $(window).scrollTop() + $height - 60;
-        
-        if($top >= $('.js-footer-fixed').offset().top) {
-            $('#wp_footer').css('bottom','0');
-            $('#wp_content').css('padding-bottom', '150px');
-        } else {
-            $('#wp_footer').css('bottom','45px');
-            $('#wp_content').css('padding-bottom', '195px');
+        if($('.js-footer-fixed').lenght > 0) {
+            $height = $(window).height();
+            $top = $(window).scrollTop() + $height - 60;
+
+            if($top >= $('.js-footer-fixed').offset().top) {
+                $('#wp_footer').css('bottom','0');
+                $('#wp_content').css('padding-bottom', '150px');
+            } else {
+                $('#wp_footer').css('bottom','45px');
+                $('#wp_content').css('padding-bottom', '195px');
+            }
         }
     });
     

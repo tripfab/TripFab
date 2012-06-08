@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+	<title>Plan the perfect trip, in one place | Tripfab.com</title>
+	<link type="image/png" rel="icon" href="/images2/favicon3.ico" />
+    <link type="text/css"  rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css"  rel="stylesheet" href="/css6/home2.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css"  rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css"  rel="stylesheet" href="/css2/index/index.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css"  rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+    <link href="/css6/calendar.css?v=<?= $this->cssVC ?>" rel="stylesheet" type="text/css">
+	<!--[if IE 7]><link type="text/css" rel="stylesheet" href="css2/ie.css" /><![endif]-->
+	<!--[if IE 8]><link type="text/css" rel="stylesheet" href="/css2/ie8.css" /><![endif]-->
+	<!--[if IE 9]><link type="text/css" rel="stylesheet" href="/css2/ie9.css" /><![endif]-->
+    <style type="text/css">
+	.cart-B { display:none !important;}
+	</style>
+</head>
+<body id="home">
+<div id="wp_all">
+    <div id="wp_header">
+		<?= $this->partial('partials/header.phtml', array('user'=>$this->user,'full'=>true, 'hidesearch'=>true)); ?>
+    </div><!--WP_HEADER-->
+    <div id="wp_content">
+        <div id="main">
+            <div class="wrap">
+                <h2>Be Your Own Travel Agent</h2>
+                <div class="steps">
+                    <div class="first">
+                        <h3>Tell us where<br /> you want to go</h3>
+                    </div><!--FIRST-->
+                    <div class="mid">
+                        <h3>Create a trip and start adding listings of hotels, tours, and everything else.</h3>
+                    </div><!--MID-->
+                    <div class="last">
+                        <h3>Book it directly from<br /> business owners.</h3> 
+                    </div><!--LAST-->
+                    <div class="clear"></div>
+                </div><!--STEPS-->
+                <div id="search">
+                    <form action="/costa_rica">
+                        <fieldset>
+                            <div class="box"><input id="tags" type="text" name="" value="Search for a city..." /></div>
+                            <div id="note1" class="note"><em></em>
+                                <p class="flag">We have listings only in <strong>Costa Rica</strong>, other countries coming soon.</p>
+                            </div><!--NOTE1-->
+                            <div id="searchResultsAutoComplete"></div>
+                        </fieldset>
+                    </form>	
+                </div><!--SEARCH-->
+                <div class="btn">
+                	<span class="label">What do we do?</span>
+                	<a href="">Learn More</a>
+                </div><!--BTN-->
+            </div><!--WRAP-->
+        </div><!--MAIN-->
+        <div id="expanded">
+        	<div class="wrap">
+        		<div class="ttl">
+        			<h4>We help you to get the best possible travel experience</h4>
+        			<p>You can be your own travel agent, book single listings, manage your itinerary and save money</p>
+        		</div><!--TTL-->
+        		<div class="cycle">
+        			<h5>
+        				<a class="prev" href=""></a>
+        				<a href="" class="next"></a>
+        				Our listings pages 
+        				<span>The best information for your – one day – journeys</span>
+        			</h5>
+        			<div class="inner">
+        				<div class="single">
+        					<img src="http://static.tripfab.com/images6/HomeSlide1.png" width="" height="" alt="" />
+        				</div><!--SINGLE-->
+        				
+        				<div class="single">
+        				
+        					<div class="each">
+        						<img src="http://static.tripfab.com/images6/HomeDemo.png" width="" height="" alt="" />
+        						<div class="icon">
+        							<span class="st1"></span>
+        						</div><!--ICON-->
+        						
+        						<div class="info">
+        							<span>STEP 1</span>
+        							<h5>Browse listings where you want to go</h5>
+        							<p>Hotels, activities, tourist sites, <br />restaurants & more</p>
+        						</div><!--INFO-->
+        					</div><!--EACH-->
+        					
+        					<div class="each">
+        						<img src="http://static.tripfab.com/images6/HomeDemo.png" width="" height="" alt="" />
+        						<div class="icon">
+        							<span class="st2"></span>
+        						</div><!--ICON-->
+        						
+        						<div class="info">
+        							<span>STEP 2</span>
+        							<h5>Add those listings you love</h5>
+        							<p>Add your favorites to <br />your trip itinerary</p>
+        						</div><!--INFO-->
+        					</div><!--EACH-->
+        					
+        					<div class="each last">
+        						<img src="http://static.tripfab.com/images6/HomeDemo.png" width="" height="" alt="" />
+        						<div class="icon">
+        							<span class="st3"></span>
+        						</div><!--ICON-->
+        						
+        						<div class="info">
+        							<span>STEP 3</span>
+        							<h5>Organize Your Itinerary & Book it</h5>
+        							<p>Drag what you want to do <br />and when – day by day, Then book it.</p>
+        						</div><!--INFO-->
+        					</div><!--EACH-->	
+        					
+        				</div><!--SINGLE-->
+        			</div><!--INNER-->
+        		</div><!--CYCLE-->
+        	</div><!--WRAP-->
+        	
+        	
+        </div><!--EXPANDED-->
+        <div id="featured">
+            <div class="tabs">
+                <ul>
+                    <li><a href="#hotels"><em class="i1"></em>Featured Hotels</a></li>
+                    <li><a href="#activities"><em class="i2"></em>Featured Activities</a></li>
+                    <li><a href="#trips"><em class="i3"></em>Featured Trips</a></li>
+                </ul>
+                <div id="hotels" class="cycle">
+                    <div class="inner">
+                    	<?php foreach($this->hotels as $i => $h): ?>
+                        <div class="single <?= ($i == 3) ? 'last' : '' ?>">
+                        	<a href="/en-US/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>">
+							<?= $this->thumbnail(array('width'=>223, 'height'=>152), $h->image, '','223:152'); ?></a>
+                            <h5 class="two"><?= $h->title ?></h5>
+                            <span class="meta"><em></em><?= $h->city ?>, <?= $h->countrycode ?></span>
+                            <div class="info">
+                                <div class="price">
+                                    <sup>$</sup>
+                                    <span><?= $this->formatnumber($h->price) ?></span>
+                                    <sub>per night</sub>
+                                    <div class="clear"></div>
+                                </div><!--PRICE-->
+                                <a href="/en-US/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>"><span>Visit Listing</span></a>
+                                <div class="clear"></div>
+                            </div><!--INFO-->
+                        </div><!--SINGLE-->
+                        <?php endforeach ?>
+                        <div class="clear"></div>
+                    </div><!--INNER-->					
+                </div><!--HOTELS-->
+                
+                <div id="activities" class="cycle">
+                    <div class="inner">
+                    	<?php foreach($this->activities as $i => $h): ?>
+                        <div class="single <?= ($i == 3) ? 'last' : '' ?>">
+                        	<a href="/en-US/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>">
+							<?= $this->thumbnail(array('width'=>223, 'height'=>152), $h->image, '','223:152'); ?></a>
+                            <h5 class="two"><?= $h->title ?></h5>
+                            <span class="meta"><em></em><?= $h->city ?>, <?= $h->countrycode ?></span>
+                            <div class="info">
+                                <div class="price">
+                                    <sup>$</sup>
+                                    <span><?= $this->formatnumber($h->price) ?></span>
+                                    <sub>per person</sub>
+                                    <div class="clear"></div>
+                                </div><!--PRICE-->
+                                <a href="/en-US/<?= $h->countryidf ?>/<?= $h->cityidf ?>/<?= $h->identifier ?>"><span>Visit Listing</span></a>
+                                <div class="clear"></div>
+                            </div><!--INFO-->
+                        </div><!--SINGLE-->
+                        <?php endforeach ?>
+                        <div class="clear"></div>
+                    </div><!--INNER-->	
+                </div><!--ACTIVITIES-->
+                
+                <div id="trips">
+                    <div class="inner">
+                    	<?php foreach($this->trips as $i => $h): ?>
+                        <div class="single <?= ($i == 3) ? 'last' : '' ?>">
+                        	<a href="/en-US/trips/view/<?= $h->id ?>">
+							<?= $this->thumbnail(array('width'=>223, 'height'=>152), $h->image, '','223:152'); ?></a>
+                            <h5 class="two"><?= $h->title ?></h5>
+                            <span class="meta"><em class="trip"></em><?= $h->days ?> Days Trip</span>
+                            <div class="info">
+                                <div class="price">
+                                    <sup>$</sup>
+                                    <span><?= $this->formatnumber($h->price) ?></span>
+                                    <sub>per person</sub>
+                                    <div class="clear"></div>
+                                </div><!--PRICE-->
+                                <a href="/en-US/trips/view/<?= $h->id ?>"><span>Visit Trip</span></a>
+                                <div class="clear"></div>
+                            </div><!--INFO-->
+                        </div><!--SINGLE-->
+                        <?php endforeach ?>
+                        <div class="clear"></div>
+                    </div><!--INNER-->	
+                </div><!--TRIPS-->
+            </div><!--TABS-->
+        </div><!--FEATURED-->
+        
+        <div id="recommend">
+           <div class="wrap">
+            	<div class="ttl"><span><em></em>Recommend Cities in Costa Rica</span></div><!--TTL-->
+            		<?= $this->partial('partials/indexcities.phtml', array('cities'=>$this->cities, 'country'=>$this->country)) ?>				  
+            	<div class="clear"></div>
+            </div><!--WRAP-->
+        </div><!--RECOMMEND-->
+        
+    </div><!--WP_CONTENT-->
+    <div id="wp_footer">
+		<?= $this->partial('partials/footer.phtml'); ?>
+    </div><!--WP_FOOTER-->
+</div><!--WRAPPER_ALL-->
+<div id="citiesAutocompleteContainer"></div>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/index/index.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $(".tabs").tabs();
+    $("#expanded .cycle .inner").cycle({
+    	prev: '.prev',
+    	next: '.next',
+    	fx: 'fade',
+    	timeout: 0
+    });
+    $(".btn a").click(function() {
+    	$("#expanded").animate({
+    		height: "650px",
+    	});
+    	return false
+    });
+});
+</script>
+</body>
+</html>
