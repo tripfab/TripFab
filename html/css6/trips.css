@@ -166,10 +166,12 @@
 #trips1 .head .categories li a:hover {
 	background-color: #3a3a3a;
 }
-#trips1 .head .categories li a:active {
+#trips1 .head .categories li a:active,
+#trips1 .head .categories li a.active {
 	background-color: #60b5f7;
 }
-#trips1 .head .categories li a:active span{
+#trips1 .head .categories li a:active span,
+#trips1 .head .categories li a.active span {
 	color: #FFF;
 }
 #trips1 .head .categories li span{
