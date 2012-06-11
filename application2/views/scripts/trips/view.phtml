@@ -28,7 +28,7 @@
 	        	    <div class="clear"></div>
 	        	</div><!--CNTRL-->
 	        	<div class="cont">
-	        		<div class="left">
+	        		<div class="left save1">
 	        			<h3><?= $this->trip->title ?></h3>
 	        			<ul class="menu">
 	        				<li class="overview act"><a href="/trips/view/<?= $this->trip->id ?>"><span></span>Overview</a></li>
@@ -36,7 +36,9 @@
 	        			</ul>
 	        			<div class="clear"></div>
 	        		</div><!--LEFT-->
-	        		<div class="right">
+	        		<div class="right save2">
+	        			<a href="#SaveForLater" class="btn-1 lg">Save For Later</a>
+	        			<em class="sep">or</em>
 	        			<?php if($this->user): ?>
 	        			<a href="#dates_lb" class="lb btn-1">Buy Trip</a>
 	        			<?php else: ?>
@@ -48,6 +50,13 @@
 	        				<sup>$</sup>
 	        			</div><!--PRICE-->
 	        			<div class="clear"></div>
+	        			
+	        			<div class="saveLater">
+	        				<a href="#">x</a>
+	        				<h3>Love what you see?</h3>
+	        				<p>Get information about this trip via e-mail</p>
+	        			</div><!--SAVELATER-->
+	        			
 	        		</div><!--RIGHT-->
 	        		<div class="clear"></div>
 	        	</div><!--CONT-->
@@ -400,10 +409,52 @@
 			</div><!-- closes right -->
 		</div><!-- closes dates -->
     </div>
+    
+    <div id="SaveForLater" class="saveforlater">
+    	<div class="left">
+    		<h2>Want to review this trip again later?</h2>
+    		<h3>Reread all of the trip details, right in your inbox</h3>
+    		<p>Enter your email address to access everything you need to know about this trip. We'll send you all of the details including a day-by-day itinerary, what it includes/doesn't include and any other important information you'll want to know.
+    		</p>
+    	</div><!--LEFT-->
+    	<div class="right">
+    		<form method="post" action="">
+    			<label>Your e-mail</label>
+    			<div class="field">
+    				<input type="text" name="" value="Enter your e-mail" />
+    				<p><em></em>Please enter a valid e-mail here</p>
+    				<span class="icon"></span>
+    			</div><!--FIELD-->
+    			<div class="bot">
+    				<input class="btn-1" type="submit" name="" value="Save Trip" />
+    				<a href="" class="btn-10">Cancel</a>
+    			</div><!--BOT-->
+    		</form>
+    	</div><!--RIGHT-->
+    	<div class="clear"></div>
+    </div><!--SAVEFORLATER-->
+    
 </div><!--HIDDEN-->
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript" src="/js2/datepicker.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript" src="/js2/trips/view.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".lg").fancybox({
+		   padding: 0,
+			showCloseButton: true,
+			centerOnScroll: true,
+			overlayOpacity: '0.7',
+			titlePosition: 'inside',
+			overlayColor: '#FFF' 
+		});
+		$(".w3.browseTrips .left > h3").append("Very Big tittleeeeeeeee Very Big tittleeeeeeeee more text")
+		ttlHeight = $(".w3.browseTrips .left > h3").height(); 
+		if (ttlHeight > 63) {
+			$(".w3.browseTrips .left > h3").addClass("two");	
+		}
+	});
+</script>
 <input type="hidden" id="tripDates" value="<?= $this->trip->days ?>" />
 <div style="width:1px; height:1px; position:absolute; top:-2px; left:-2px;">
 <iframe src="/ajax/tripconversion"></iframe></div>
