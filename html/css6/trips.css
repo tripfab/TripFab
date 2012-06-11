@@ -900,17 +900,51 @@
 	border: none;
 }
 #tripsView .browseTrips .left {
-	width: 650px;
+	width: 510px;
 	float: left;
 }
 #tripsView .browseTrips .right {
-	width: 310px;
+	width:450px;
 	float: right;
 }
 #tripsView .browseTrips .right .price {
 	display: block;
 	float: right;
 	font-weight: bold;
+}
+#tripsView .browseTrips .right em.sep {
+	float: right;
+	display: block;
+	margin: 0 0 0 10px;
+	font:italic 13px/62px Helvetica;
+}
+#tripsView .browseTrips .right .saveLater {
+	width: 236px;
+	height: 66px;
+	display: block;
+	background: url(https://static.tripfab.com/images6/save4later.png) no-repeat 0 0;
+	position: absolute;
+	top: 75px;
+	right: -50px;
+	text-align: center;
+	z-index: 100;
+}
+#tripsView .browseTrips .right .saveLater h3 {
+	font: bold 11px Helvetica;
+	padding: 22px 0 5px;
+}
+#tripsView .browseTrips .right .saveLater a {
+	display: block;
+	position: absolute;
+	top: 15px;
+	right: 5px;
+	color: #f26522;
+	font: bold 13px/15px Helvetica;
+	width: 15px;
+	height: 15px;
+}
+#tripsView .browseTrips .right .saveLater p {
+	font: normal 11px Helvetica;
 }
 #tripsView .browseTrips .price sup{
 	font-size: 15px;
@@ -1721,6 +1755,109 @@
 	padding-bottom: 0 !important;
 }
 /*END LIGHTBOX SELECT DATES -------------------------------------------------------------*/
+/*LIGHTBOX SAVE FOR LATER  --------------------------------------------------------------*/
+.saveforlater {
+	width: 727px;
+	background-color: #FFF;
+	color: #303030;
+}
+.saveforlater .left {
+	width: 294px;
+	float: left;
+	background-color: #e1f2ff;
+	height: 197px;
+	padding: 35px 25px 0 30px;
+}
+.saveforlater .left h2 {
+	font: 100 18px Helvetica;
+	margin-bottom: 5px;
+	padding-top: 5px;
+}
+.saveforlater .left h3 {
+	font: bold 13px Helvetica;
+	margin-bottom: 10px;
+}
+.saveforlater .left p {
+	font: normal 13px/20px Helvetica;
+}
+.saveforlater .right {
+	padding: 60px 0 0 25px;
+	float: right;
+	position: relative;
+	width: 353px;
+	height: 172px;
+}
+.saveforlater .right label {
+	font: bold 13px Helvetica;
+	margin-bottom: 10px;
+	display: block;
+}
+.saveforlater .right .field {
+	position: relative;
+	width: 350px;
+}
+
+.saveforlater .right .field .icon {
+	position: absolute;
+	top: 10px;
+	right: 0;
+}
+.saveforlater .right .field p {
+	display: none;
+	background-color: #F26522;
+	border-radius: 3px 3px 3px 3px;
+	bottom: -12px;
+	color: #FFFFFF;
+	font: 500 11px/18px Helvetica;
+	padding: 0 5px;
+	position: absolute;
+	right: 38px;
+	z-index: 10;
+}
+.saveforlater .right .field p em {
+	background: url("https://static.tripfab.com/images6/errorAw.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 5px;
+    position: absolute;
+    right: 15px;
+    top: -5px;
+    width: 11px;
+}
+.saveforlater .right .error input[type="text"]{
+	border: 1px solid #f26522;
+}
+.saveforlater .right input[type="text"]{
+	width: 319px;
+	height: 37px;
+	font: normal 15px/37px Helvetica;
+	color: #898989;
+	display: block;
+	background: url(https://static.tripfab.com/images6/save4later3.png) no-repeat 300px 12px ;
+}
+.saveforlater .right .bot {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 377px;
+	background: url(https://static.tripfab.com/images6/save4later2.png) repeat-x 0 0;
+	height: 63px;
+}
+.saveforlater .right .btn-1,
+.saveforlater .right .btn-10 {
+	float: right;
+	margin: 19px 20px 0 0;
+}
+.saveforlater .right .field.error {
+	background: url("https://static.tripfab.com/images6/save4later4.png") no-repeat 324px 10px;
+}
+.saveforlater .right .field.error input[type="text"] {
+	width: 300px;
+	background-position: 282px 12px;
+}
+.saveforlater .right .field.error p {
+	display: block;
+}
+/*END LIGHTBOX SAVE FOR LATER  ----------------------------------------------------------*/
 .box.days {
 	position: relative;
 	margin-top: 30px;
