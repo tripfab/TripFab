@@ -185,6 +185,11 @@
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript" src="/js2/datepicker.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript" src="/js2/trips/view.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+$(function(){
+	setTimeout('SnapABug.openProactiveChat();', 2000);
+});
+</script>
 <input type="hidden" id="tripDates" value="<?= $this->trip->days ?>" />
 <style type="text/css">
 .desc-wrapper #pager a { width:<?= (100 / count($this->images)) . '%'; ?>;} .hidden { display:none;}

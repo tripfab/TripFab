@@ -363,6 +363,7 @@
 <script type="text/javascript" src="/js2/trips/view.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	setTimeout('SnapABug.openProactiveChat();', 2000);
 	$(".carousel").jcarousel();	
 	$(".cycleDates").cycle({
 		fx: 'scrollHorz',
@@ -475,7 +476,6 @@ function resizeImg($bgImg) {
 #fancybox-img, #fancybox-content { max-width:900px;}
 #fancybox-outer { max-width:920px;}
 .cart-B { display:none;}
-
 </style>
 <div style="width:1px; height:1px; position:absolute; top:-2px; left:-2px;">
 <iframe src="/ajax/tripconversion"></iframe></div>
