@@ -576,7 +576,7 @@ class WS_TripsService {
         
         $select->where('active = 1');
 
-        $select->order('trips.created DESC');
+        $select->order('rand(2)');
         
         $select->group('trips.id');
         
