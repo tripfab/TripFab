@@ -41,12 +41,19 @@
                         <div class="checkout-item">
                             <div class="ttl"><span>2</span><strong>Payment</strong></div>
                             <div class="payment-item">
+                            	<div class="saved-card">
+                                	<label for="paypal">
+                                    <?php $checked = (count($this->accounts) == 0) ? 'checked="checked"' : '' ?>
+                                    <input type="radio" <?= $checked ?> name="account" value="paypal" id="paypal" />
+                                    <span class="card-name"><img src="https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif" 
+                                    align="left" style="margin-right:7px;">The safer, easier way to pay</span></label>
+                                </div>
                                 <?php if(count($this->accounts) > 0): ?>
 	                            <?php foreach($this->accounts as $i => $a): ?>
                                 <div class="saved-card">
-                                    <label for="card-1">
+                                    <label for="card-<?= $i ?>">
                                     	<?php $checked = ($i == 0) ? 'checked="checked"' : '' ?>
-                                        <input <?= $checked ?> type="radio" name="account" value="<?= $a->id ?>" />
+                                        <input <?= $checked ?> type="radio" id="card-<?= $i ?>" name="account" value="<?= $a->id ?>" />
                                         <span class="card-name"><img src="https://static.tripfab.com/<?= $this->creditcards[$a->type] ?>" width="30" height="20" alt="" />
                                         <?= $a->type ?></span> <span class="card-number">************<?= $a->last4 ?></span> </label>
                                 </div><!--SAVED-CARD-->

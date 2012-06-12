@@ -619,5 +619,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $conf = $this->getOption('googleapis');
         Zend_Registry::set('gl', $conf);
     }
+    
+    protected function _initPaypal()
+    {
+        $conf = $this->getOption('paypal');
+        Zend_Registry::set('paypal', $conf);
+    }
 }
 
