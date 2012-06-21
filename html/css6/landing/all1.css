@@ -1,0 +1,807 @@
+#wp_header {
+	height: 92px;
+}
+.logo {
+	float: left;
+	width: 121px;
+	height: 31px;
+	margin-top: 30px;
+}
+.logo a {
+	display: block;
+	width: 121px;
+	height: 31px;
+	background: url(https://static.tripfab.com/images6/tripAll3.png) no-repeat 0 0;
+	text-indent: -99999px;
+}
+#wp_header .contact {
+	width: 379px;
+	float: right;
+	margin-top: 31px;
+}
+#wp_header .contact p {
+	color: #878787;
+	font: bold 11px/15px Helvetica;
+	float: right;
+	margin:0 0 0 20px;
+}
+#wp_header .contact p strong {
+	display: block;
+	color: #303030;
+	font: bold 21px Helvetica;
+}
+#wp_header .contact a {
+	height: 32px;
+	display: block;
+	width: 98px;
+	float: right;
+	font-size: 13px;
+	padding: 0;
+	margin-top: 2px;
+}
+#trip_all1 #content {
+	padding-bottom: 20px;
+	width: 960px;
+	margin: 0 auto;
+}
+#trip_all1 #content .top {
+	margin-bottom: 20px;
+}
+#trip_all1 .top .tripInfo {
+	background-color: #303030;
+	border-radius: 3px 3px 0 0;
+	-moz-border-radius: 3px 3px 0 0;
+	-webkit-border-radius: 3px 3px 0 0;
+	-o-border-radius: 3px 3px 0 0;
+	padding: 15px 0 0 0;
+	height: 40px;
+	color: #FFF;
+	font:  13px/25px Helvetica;
+}
+#trip_all1 .tripInfo .saleEnd {
+	background: url(https://static.tripfab.com/images6/tripAll2.png) no-repeat left bottom ;
+	width: 259px;
+	height: 25px;
+	font: bold 13px/25px Helvetica;
+	text-shadow:0 1px 0 #c65601;
+	float: left;
+	margin-right: 70px;
+}
+#trip_all1 .tripInfo .saleEnd em{
+	display: block;
+	background: url(https://static.tripfab.com/images6/tripAll1.png) no-repeat 0 0;
+	width: 17px;
+	height: 9px;
+	float: left;
+	margin: 8px 10px 0 10px;
+}
+#trip_all1 .tripInfo .rate {
+	width: 180px;
+	float: left;
+	color: #FFF;
+}
+#trip_all1 .tripInfo .rate ul {
+	margin: 5px 10px 0 0;
+	float: left;
+}
+#trip_all1 .tripInfo .rate ul li {
+	display: block;
+	float: left;
+	width: 14px;
+	height: 14px;
+}
+#trip_all1 .tripInfo .rate ul li a {
+	display: block;
+	width: 14px;
+	height: 14px;
+	background: url(https://static.tripfab.com/images6/tripAll1.png) no-repeat -2px -20px;	
+}
+#trip_all1 .tripInfo .rate ul li a.fill {
+	background-position: -2px -43px;
+}
+
+#trip_all1 .tripInfo .duration {
+	width: 160px;
+	float: left;
+}
+#trip_all1 .tripInfo .duration em {
+	display: block;
+	background: url(https://static.tripfab.com/images6/tripAll1.png) no-repeat -2px -65px;
+	width: 18px;
+	height: 13px;
+	float: left;
+	margin: 5px 4px 0 0;
+}
+#trip_all1 .tripInfo .location {
+	float: left;
+}
+#trip_all1 .tripInfo .location em {
+	display: block;
+	background: url(https://static.tripfab.com/images6/tripAll1.png) no-repeat -2px -87px;
+	width: 18px;
+	height: 13px;
+	float: left;
+	margin: 5px 4px 0 0;
+}
+#trip_all1 .trip {
+	border-radius: 0 0 3px 3px;
+	-moz-border-radius: 0 0 3px 3px;
+	-webkit-border-radius: 0 0 3px 3px;
+	-o-border-radius: 0 0 3px 3px;
+	background-color: #FFF;
+	box-shadow: 0px 0px 2px 0px #e7e7e7;
+	overflow: hidden;
+}
+#trip_all1 .trip .bookEasy {
+	float: left;
+	width: 240px;
+	padding: 10px;
+}
+#trip_all1 .trip .bookEasy .price{
+	background-color: #f0f0f0;
+	border: 1px solid #e0e0e0;
+	position: relative;
+	padding: 12px 12px 3px;
+}
+#trip_all1 .trip .bookEasy .price .save {
+	background: url(https://static.tripfab.com/images6/tripAll2.png) no-repeat 0 0;
+	width: 80px;
+	height: 20px;
+	text-align: right;
+	color: #535353;
+	font: bold 12px/20px Helvetica;
+	padding-right: 4px;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+#trip_all1 .trip .bookEasy .price p {
+	font: bold 13px Helvetica;
+	color: #000;
+	padding-bottom: 15px;
+}
+#trip_all1 .trip .bookEasy .price p em {
+	font: normal bold 16px Helvetica;
+	color: #e57004;
+	text-decoration: line-through;
+}
+#trip_all1 .trip .bookEasy .price .per {
+	font: bold 40px Helvetica;
+}
+#trip_all1 .trip .bookEasy .price .per sub {
+	font: 100 13px Helvetica;
+	color: #5d5d5d;
+}
+#trip_all1 .trip .bookEasy h2 {
+	border-bottom: 1px dotted #CCC;
+	height: 40px;
+	font: 100 14px/40px Helvetica;
+	color: #303030;
+	margin: 10px 10px 10px;
+}
+#trip_all1 .trip .bookEasy form {
+	margin: 0 10px;
+}
+#trip_all1 .trip .bookEasy label {
+	font: bold 13px Helvetica;
+	color: #494949;
+	display: block;
+	margin-bottom: 5px;
+}
+#trip_all1 .trip .bookEasy input[type="text"] {
+	background: url(https://static.tripfab.com/images6/tripAll1.png) no-repeat 7px -102px;
+	height: 30px;
+	width: 180px;
+	padding-left: 30px;
+	font: 100 13px/30px Helvetica;
+	color: #7d7d7d;
+	margin-bottom: 20px;
+}
+#trip_all1 .trip .bookEasy .travelers {
+	float: left;
+	width: 63px;
+	margin-right: 10px;
+}
+#trip_all1 .trip .bookEasy .days {
+	float: left;
+	width: 145px;
+}
+#trip_all1 .trip .bookEasy input[type="submit"] {
+	width: 100%;
+	margin: 0;
+	font-size: 15px;
+	margin-top: 20px;
+	clear: both;
+}
+#trip_all1 .trip .whole {
+	position: relative;
+	width: 700px;
+	float: right;
+	height: 363px;
+}
+#trip_all1 .trip .whole > a {
+	position: absolute;
+	width: 700px;
+	right: 0;
+	top: 0;
+	z-index: 2;
+}
+#trip_all1 .trip .whole > a .view {
+	width: 150px;
+	height: 28px;
+	display: block;
+	position: absolute;
+	top: 150px;
+	right: 100px;
+	background: url(https://static.tripfab.com/images6/tripAll4.png) repeat 0 0;
+	color: #FFF;
+	font: 500 12px/28px Helvetica;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-o-border-radius: 3px;
+}
+#trip_all1 .trip .whole > a .view:hover {
+	text-decoration: underline;
+}
+#trip_all1 .trip .whole > a .view em{
+	background: url(https://static.tripfab.com/images6/tripAll1.png) no-repeat 4px -202px;
+	display: block;
+	float: left;
+	margin: 7px 8px 0 0;
+	width: 18px;
+	height: 9px;
+}
+#trip_all1 .trip .info {
+	background: url(https://static.tripfab.com/images6/tripAll4.png) repeat 0 0;
+	width: 286px;
+	height: 363px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 3;
+	padding: 0 20px;
+	color: #FFF;
+}
+#trip_all1 .trip .info h2 {
+	font: bold 20px Helvetica;
+	margin: 20px 0 8px 0;
+	text-shadow: 0 1px 0 #000;
+}
+#trip_all1 .trip .info h3 {
+	font: bold 13px Helvetica;
+	text-transform: uppercase;
+	margin: 0 0 20px 0;
+	color: #e4e483;
+	text-shadow: 0 1px 0 #000;
+}
+#trip_all1 .trip .info h3 em {
+	width: 18px;
+	height: 14px;
+	display: block;
+	float: left;
+	margin: 0 8px 0 0;
+	background: url(https://static.tripfab.com/images6/tripAll1.png) no-repeat 0 -134px;
+}
+#trip_all1 .trip .info p {
+	font: 100 13px/20px Helvetica;
+	margin-bottom: 12px;
+}
+#trip_all1 .trip .info .warning {
+	color: #ef7f07;
+	font: 400 11px/13px Helvetica;
+}
+#trip_all1 .trip .info .share {
+	height: 47px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 326px;
+	background-color: #000;
+}
+#trip_all1 .trip .info .bookmark {
+	display: block;
+	float: left;
+	height: 30px;
+	font: 500 13px/30px Helvetica;
+	color: #FFF;
+	margin: 10px 0 0 20px;
+}
+#trip_all1 .trip .info .bookmark em {
+	display: block;
+	float: left;
+	background: url(https://static.tripfab.com/images6/tripAll1.png) no-repeat 0 -155px;
+	width: 18px;
+	height: 14px;
+	margin: 8px 10px 0 0;
+}
+#trip_all1 .trip .info .email {
+	display: block;
+	float: left;
+	height: 30px;
+	font: 500 13px/30px Helvetica;
+	color: #FFF;
+	margin: 10px 0 0 24px;
+}
+#trip_all1 .trip .info .email em {
+	display: block;
+	float: left;
+	background: url(https://static.tripfab.com/images6/tripAll1.png) no-repeat 0 -177px;
+	width: 18px;
+	height: 14px;
+	margin: 8px 10px 0 0;
+}
+#trip_all1 .main {
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	-o-border-radius:3px;
+	background: url(https://static.tripfab.com/images6/tripAll5.png) repeat-y -1px 0 #FFF;
+	box-shadow: 0px 0px 2px 0px #e7e7e7;
+}
+#trip_all1 .main .tabs > ul {
+	background-color: #e3e3e3;
+	height: 54px;
+	width: 700px;
+	overflow: hidden;
+	border-radius:3px 0px 0 0;
+	-moz-border-radius: 3px 0px 0 0;
+	-webkit-border-radius: 3px 0px 0 0;
+	-o-border-radius: 3px 0px 0 0;
+}
+#trip_all1 .main .tabs > ul li {
+	float: left;
+	height: 54px;
+}
+#trip_all1 .main .tabs > ul li a {
+	color: #646464;
+	font: bold 15px/54px Helvetica;
+	padding:0 40px;
+	display: block;
+}
+#trip_all1 .main .tabs > ul li.ui-tabs-selected a {
+	background-color: #FFF;
+	color: #303030;
+}
+#trip_all1 .main .tabs {
+	float: left;
+	width: 700px;
+}
+#trip_all1 .main .tabs #overview {
+	padding: 30px 17px;
+}
+#trip_all1 .main .tabs #overview .single {
+	border-bottom: 1px dotted #CCC;
+	padding-bottom: 15px;
+	clear: both;
+	margin-bottom: 20px;
+}
+#trip_all1 .main .tabs #overview .title {
+	float: left;
+	width: 140px;
+	padding-left: 20px;
+	font: bold 15px/18px Helvetica;
+	color: #303030;
+}
+#trip_all1 .main .tabs #overview .descrip {
+	float: left;
+	width: 460px;
+}
+#trip_all1 .main .tabs #overview .descrip p {
+	font: normal 13px/16px Helvetica;
+	color: #464646;
+	margin-bottom: 15px;
+}
+#trip_all1 .main .tabs #overview .descrip ul {
+	float: left;
+	width: 190px;
+	padding-right: 10px;
+	margin: 0 0 15px 14px;
+}
+#trip_all1 .main .tabs #overview .descrip ul li {
+	color: #60b5f7;
+	list-style: square;
+	margin: 0 0 5px 0;
+}
+#trip_all1 .main .tabs #overview .descrip ul li span {
+	color: #303030;
+	font: normal 13px/16px Helvetica;
+}
+#trip_all1 .main .sidebar {
+	float: left;
+	width: 260px;
+}
+#trip_all1 .main .sidebar h3 {
+	font: bold 15px Helvetica;
+	margin-bottom: 10px;
+}
+#trip_all1 .main .sidebar .features {
+	padding: 20px 22px 0;
+}
+#trip_all1 .main .sidebar .features ul {
+    margin: 0 0 15px 14px;
+    padding-right: 10px;
+    width: 190px;
+}
+#trip_all1 .main .sidebar .features ul li {
+	color: #60B5F7;
+    list-style: square outside none;
+    margin: 0 0 15px;
+}
+#trip_all1 .main .sidebar .features ul li span {
+	color: #303030;
+    font: 13px/16px Helvetica;
+}
+#trip_all1 .main .sidebar .bookEasy {
+	background: url(https://static.tripfab.com/images6/tripAll6.png) repeat-x 0 0 ;
+	padding-bottom: 20px;
+} 
+#trip_all1 .main .sidebar .talk {
+	background: url(https://static.tripfab.com/images6/tripAll6.png) repeat-x 0 0 ;
+	padding: 25px 22px 20px;
+} 
+#trip_all1 .main .sidebar .talk p {
+	color: #a6a6a6;
+	font: bold 13px Helvetica;
+}
+#trip_all1 .main .sidebar .talk p strong {
+	display: block;
+	font: bold 26px Helvetica;
+	color: #595959;
+	margin-top: 5px;
+}
+#trip_all1 .main .sidebar .talk a {
+	height: 32px;
+	display: block;
+	color: #717171;
+	font: bold 13px/32px Helvetica;
+	margin-top: 10px;
+}
+#trip_all1 .main .bookEasy h3 {
+	padding-top: 20px;
+	height: 20px;
+	color: #303030;
+	margin: 10px 22px 10px;
+}
+#trip_all1 .main .bookEasy form {
+	margin: 0 22px;
+}
+#trip_all1 .main .bookEasy label {
+	font: bold 13px Helvetica;
+	color: #494949;
+	display: block;
+	margin-bottom: 5px;
+}
+#trip_all1 .main .bookEasy input[type="text"] {
+	background: url(https://static.tripfab.com/images6/tripAll1.png) no-repeat 7px -102px;
+	height: 30px;
+	width: 175px;
+	padding-left: 30px;
+	font: 100 13px/30px Helvetica;
+	color: #7d7d7d;
+	margin-bottom: 20px;
+}
+#trip_all1 .main .bookEasy .travelers {
+	float: left;
+	width: 63px;
+	margin-right: 10px;
+}
+#trip_all1 .main .bookEasy .days {
+	float: left;
+	width: 135px;
+}
+#trip_all1 .main .bookEasy input[type="submit"] {
+	width: 100%;
+	margin: 0;
+	font-size: 15px;
+	margin-top: 20px;
+	clear: both;
+}
+#trip_all1 #addons {
+	padding: 40px 37px;
+}
+#trip_all1 #addons h3 {
+	font: bold 18px Helvetica;
+	color: #4c4c4c;
+	padding-bottom: 20px;
+	
+}
+#trip_all1 #addons h4 {
+	position: relative;
+	font: bold 13px Helvetica;
+	color: #4c4c4c;
+	border-top: 1px dotted #CCC;
+	padding: 15px 0 15px 0;
+}
+#trip_all1 #addons h4 a {
+	position: absolute;
+	top: 15px;
+	right: 0;
+	background: url(https://static.tripfab.com/images6/tripAll7.png) no-repeat right -26px;
+	padding-right: 10px;
+	display: block;
+}
+#trip_all1 #addons h4.ui-state-active a{
+	background: url(https://static.tripfab.com/images6/tripAll7.png) no-repeat right 3px;
+}
+#trip_all1 #addons .single {
+	padding:0 0 20px;
+}
+#trip_all1 #addons .single img {
+	display: block;
+	float: left;
+	margin: 0 10px 0 0;
+}
+#trip_all1 #addons .single .text {
+	float: left;
+	width: 480px;
+}
+#trip_all1 #addons .single p {
+	color: #4a4a4a;
+	font: 200 13px/20px Helvetica;
+	margin-bottom: 10px;
+}
+#trip_all1 #addons .single ul {
+	float: left;
+	color: #4a4a4a;
+}
+#trip_all1 #addons .single ul li {
+	float: left;
+	margin-right: 20px;
+}
+#trip_all1 #reviews {
+	padding: 20px 26px 0;
+}
+#trip_all1 #reviews {
+	
+}
+
+#trip_all1 #reviews .sort {
+	padding: 15px 0;
+	overflow: hidden;
+}
+#trip_all1 #reviews .sort form{
+	float: right;
+	width: 200px;
+}
+#trip_all1 #reviews .sort select {
+	float: right;
+	display: block;
+	height: 15px;
+}
+#trip_all1 #reviews .sort label {
+	float: right;
+	display: block;
+	margin-right: 20px;
+	height: 15px;
+	color: #585858;
+	font: bold 13px/15px Helvetica;
+}
+#trip_all1 #reviews .single {
+	border-top: 1px dotted #CCC;
+	padding: 20px 0 20px;
+}
+#trip_all1 #reviews .title {
+	color: #303030;
+	float: left;
+	font: bold 13px/18px Helvetica;
+	width: 140px;
+}
+#trip_all1 #reviews .title span {
+	font: normal 11px Helvetica;
+}
+#trip_all1 #reviews .descrip {
+	float: left;
+    width: 500px;
+}
+#trip_all1 #reviews .rate ul{
+	float: left;
+    margin: 5px 10px 0 0;
+}
+#trip_all1 #reviews .rate {
+	font: 13px/24px Helvetica;
+	color: #727272;
+}
+#trip_all1 #reviews h5 {
+	font: bold 15px Helvetica;
+}
+#trip_all1 #reviews .rate li {
+	display: block;
+    float: left;
+    height: 14px;
+    width: 14px;
+}
+#trip_all1 #reviews .rate li a {
+	background: url("https://static.tripfab.com/images6/tripAll1.png") no-repeat scroll -2px -227px transparent;
+    display: block;
+    height: 14px;
+    width: 14px;
+}
+#trip_all1 #reviews .rate li a.fill {
+	background-position: -2px -43px;
+}
+#trip_all1 #reviews .descrip p {
+	font: 300 13px/17px Helvetica;
+	color: #585858;
+	margin-bottom: 4px;
+}
+#trip_all1 .footer {
+	width: 960px;
+	margin: 0 auto;
+	padding-top: 10px;
+}
+#trip_all1 .footer .left {
+	background: url(https://static.tripfab.com/images6/tripAll8.png) no-repeat 0 0;
+	padding-left: 45px;
+	height: 35px;
+	width: 450px;
+	float: left;
+	color: #696969;
+}
+#trip_all1 .footer .left h6 {
+	font: bold 12px Helvetica;
+	margin-bottom: 4px;
+}
+#trip_all1 .footer .left span {
+	font: normal 11px Helvetica;
+	display: block;
+}
+#trip_all1 .footer ul {
+	float: right;
+	width: 400px;
+}
+#trip_all1 .footer ul li {
+	float: right;
+	margin-left: 10px;
+}
+#trip_all1 .footer ul li a {
+	color: #696969;
+	font: bold 11px Helvetica
+}
+#trip_all1 .footer ul li a:hover {
+	color: #60b5f7;
+	text-shadow: 0 1px 0 #FFF;
+}
+
+
+/*All INCLUSIVE VERSION 1 CHECKOUT-----------------------------------------------------------------------*/
+#trip_all1 #checkout{
+	width: 960px;
+	margin: 0 auto;
+}
+#trip_all1 #checkout .left{
+	width: 685px;
+	float: left;
+	background-color: #FFF;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+#trip_all1 #checkout .left .top {
+	height: 108px;
+	background-color: #303030;
+	border-radius: 4px 4px 0 0;
+	-moz-border-radius: 4px 4px 0 0;
+	-webkit-border-radius: 4px 4px 0 0;
+	-o-border-radius: 4px 4px 0 0;
+}
+#trip_all1 #checkout .left .top h2 {
+	color: #60b5f7;
+	padding: 30px 0 0 20px;
+	font: 600 21px Helvetica;
+	margin-bottom: 10px;
+	text-shadow: 0 1px 0 #000;
+}
+#trip_all1 #checkout .left .top ul {
+	margin: 0 0 0 20px;
+}
+#trip_all1 #checkout .left .top ul li {
+	color: #FFF;
+	float: left;
+	margin-right: 20px;
+	font: normal 13px/15px Helvetica;
+	height: 15px;
+}
+#trip_all1 #checkout .left .top .i1 {
+	background: url(https://static.tripfab.com/images6/tripAll9.png) no-repeat 0 0;
+	width: 14px;
+	height: 11px;
+	display: block;
+	float: left;
+	margin: 3px 10px 0 0;
+}
+#trip_all1 #checkout .left .top .i2 {
+	background: url(https://static.tripfab.com/images6/tripAll9.png) no-repeat -3px -38px;
+	width: 14px;
+	height: 14px;
+	display: block;
+	float: left;
+	margin: 1px 10px 0 0;
+}
+#trip_all1 #checkout .left .content h3{
+	font: bold 18px/70px Helvetica;
+	color: #4c4c4c;
+	margin:0 0 10px 0 ;
+	background: url(https://static.tripfab.com/images6/tripAll6.png) repeat-x bottom left;
+	height: 80px;
+}
+#trip_all1 #checkout .left .content h3 em {
+	background: url(https://static.tripfab.com/images6/tripAll9.png) no-repeat 0 -75px;
+	display: block;
+	width: 18px;
+	height: 18px;
+	float: left;
+	margin:25px 10px 0 20px ;
+}
+#trip_all1 #checkout .right{
+	width: 265px;
+	float: right;
+}
+#trip_all1 #checkout .accordion {
+	padding: 0 22px;
+}
+#trip_all1 #checkout .accordion h4 {
+	height: 45px;
+	font:bold 13px/45px Helvetica;
+	color: #4c4c4c;
+}
+#trip_all1 #checkout .accordion .single {
+	border-bottom: 1px dotted #CCC;
+	padding-bottom: 20px;
+}
+#trip_all1 #checkout .accordion label {
+	height: 35px;
+	font: normal 13px/35px Helvetica;
+	display: block;
+}
+#trip_all1 #checkout .accordion ul {
+	padding-left: 20px;
+}
+#trip_all1 #checkout .accordion ul li {
+	height: 20px;
+	font: normal 13px/20px Helvetica;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*END All INCLUSIVE VERSION 1 CHECKOUT-------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title>Tripfab.com</title>
+    <link type="text/css"  rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css"  rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css"  rel="stylesheet" href="/css6/landing/all1.css?v=<?= $this->cssVC ?>" />
+</head>
+<body id="trip_all1">
+<div id="wp_all">
+    <div id="wp_header">
+        <div class="wrapper">
+            <h1 class="logo"><a href="">Tripfab</a></h1>
+            <div class="contact">
+                <p>Call our Customer Service <strong>1-866-401-0382</strong></p>
+                <a href="#" onclick="SnapABug.startChat('How can I help you today?'); return false;" class="btn-10">Live Chat</a>
+            </div><!--CONTACT-->
+        </div><!--WRAPPER-->
+    </div><!--WP_HEADER-->
+    
+    <div id="wp_content">
+        <div id="content">
+            <div class="top">
+                <div class="tripInfo">
+                    <div class="saleEnd">
+                        <em></em>Sale ends in  8hrs 36 min 22 sec
+                    </div><!--SALEEND-->
+                    <div class="rate">
+                        <ul>
+                        	<?php for($d=1;$d<=5;$d++): ?>
+                            <?php $class = $d <= $this->info['rating'] ? 'fill' : '' ?>
+                            <li><a href="" class="<?= $class ?>"></a></li>
+                            <?php endfor ?>
+                        </ul>
+                        <?= count($this->info['reviews']) ?> Reviews
+                    </div><!--RATE-->
+                    <div class="duration">
+                        <em></em><strong>Duration:</strong> <?= $this->info['nights'] ?> Nights
+                    </div><!--DURATION-->
+                    <div class="location">
+                        <em></em><strong>Location:</strong> <?= $this->info['location'] ?>
+                    </div><!--LOCATION-->
+                </div><!--TRIPINFO-->
+                
+                <div class="trip">
+                    <div class="bookEasy">
+                        <div class="price">
+                            <div class="save">Save $<?= $this->info['save'] ?></div>
+                            <p>Was: <em>$<?= $this->info['price_before'] ?></em></p>
+                            <div class="per">
+                                <span>$<?= $this->info['price'] ?></span>
+                                <sub>Per Person</sub>
+                            </div><!--PER-->
+                        </div><!--PRICE-->
+                        <h2>Book in One Easy Step</h2>
+                        <form method="post" action="">
+                            <label>Travel Date</label>
+                            <input type="text" name="" value="" />
+                            <div class="travelers">
+                                <label>Travelers</label>
+                                <select>
+                                    <option>1</option>
+                                </select>
+                            </div><!--TRAVELERS-->
+                            <div class="days">
+                                <label>Need Extra Days?</label>
+                                <select>
+                                    <option>3 Nights (Included)</option>
+                                </select>
+                            </div><!--TRAVELERS-->
+                            <div class="clear"></div>
+                            <input type="submit" class="btn-1" name="" value="Book Now" />
+                        </form>	
+                    </div><!--BOOKEASY-->
+                    
+                    <div class="whole">
+                        <a href="">
+                            <img src="https://static.tripfab.com/images6/tripsView4ico3.png" width="700" height="363" alt="" />
+                            <span class="view"><em></em>Click to View Photos</span>
+                        </a>
+                        <div class="info">
+                            <h2><?= $this->info['title'] ?></h2>
+                            <h3><em></em>COSTA RICA ALL INCLUSIVE TRIP</h3>
+                            <p><?= $this->info['description'] ?></p>
+                            <span class="warning">You Need to Travel Between <br /><?= $this->info['sale_starts'] ?> 
+                            to <?= $this->info['sale_ends'] ?> to Apply Sale!</span>
+                            <div class="share">
+                                <a href="" class="bookmark js-bookmark"><em></em>Bookmark</a>
+                                <a href="" class="email"><em></em>Send to email</a>
+                            </div><!--SHARE-->
+                        </div><!--INFO-->
+                    </div><!--WHOLE-->
+                    <div class="clear"></div>
+                </div><!--TRIP-->
+            </div><!--TOP-->
+            
+            <div class="main">
+                <div class="tabs">
+                    <ul>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#addons">Addons</a></li>
+                        <li><a href="#reviews">Guest Reviews</a></li>
+                    </ul>
+                    <div id="overview">
+                    	<?php foreach($this->info['overview'] as $i): ?>
+                        <div class="single">
+                            <div class="title">
+                                <h4><?= $i['title'] ?></h4>
+                            </div><!--TITLE-->
+                            <div class="descrip">
+                            	<?php if(isset($i['description'])): ?>
+                                <p><?= $i['description'] ?></p>
+                                <?php endif ?>
+                                <?php if($i['points1']): ?>
+                                <ul>
+                                	<?php foreach($i['points1'] as $p): ?>
+                                    <li><span><?= $p ?></span></li>
+                                    <?php endforeach ?>
+                                </ul>
+                                <?php endif; if($i['points2']): ?>
+                                <ul>
+                                	<?php foreach($i['points2'] as $p): ?>
+                                    <li><span><?= $p ?></span></li>
+                                    <?php endforeach ?>
+                                </ul>
+                                <?php endif ?>
+                                <div class="clear"></div>
+                                <a href="#" class="link1">Show more<em></em></a>
+                            </div><!--DESCRIP-->
+                            <div class="clear"></div>
+                        </div><!--SINGLE-->
+                        <?php endforeach ?>
+                    </div><!--OVERVIEW-->
+                    
+                    <div id="addons">
+                        <h3>Trip Addons</h3>
+                        <div class="accordion">
+                        	<?php foreach($this->info['addons'] as $ii => $i): ?>
+                            <?php if($ii == 0): ?>
+                            <h4><?= $i['title'] ?><a href="" class="link1">Show Less</a></h4>
+                            <?php else: ?>
+                            <h4><?= $i['title'] ?><a href="" class="link1">Show More</a></h4>                            
+                            <?php endif ?>
+                            <div class="single">
+                                <img src="https://static.tripfab.com/images6/tripsView4ico7.png" width="135" height="87" alt="" />
+                                <div class="text">
+                                    <p><?= $i['description'] ?></p>
+                                    <?php if($i['tags']): ?>
+                                    <ul>
+                                    	<?php foreach($i['tags'] as $k => $v): ?>
+                                        <li><strong><?= $k ?>:</strong> <?= $v ?></li>
+                                        <?php endforeach ?>
+                                    </ul>
+                                    <?php endif ?>
+                                </div><!--TEXT-->
+                                <div class="clear"></div>
+                            </div><!--SINGLE-->
+                            <?php endforeach ?>
+                        </div><!--ACCORDION-->
+                    </div><!--ADDONS-->
+                    
+                    <div id="reviews">
+                    	<?php foreach($this->info['reviews'] as $r): ?>
+                        <div class="single">
+                            <div class="title">
+                                <h4><?= $r['user'] ?></h4>
+                                <span><?= $r['location'] ?></span>
+                            </div><!--TITLE-->
+                            <div class="descrip">
+                                <h5>"<?= $r['title'] ?>"</h5>
+                                <div class="rate">
+                                    <ul>
+                                    	<?php for($d=1;$d<=5;$d++): ?>
+                                        <?php $class = $d <= $r['rating'] ? 'fill' : '' ?>
+                                        <li><a class="<?= $class ?>" href=""></a></li>
+                                        <?php endfor ?>
+                                    </ul>
+                                    Reviewed <?= $r['date'] ?>
+                                    <div class="clear"></div>
+                                </div><!--RATE-->
+                                <p><?= $r['text'] ?></p>
+                            </div><!--DESCRIP-->
+                            <div class="clear"></div>
+                        </div><!--SINGLE-->
+                        <?php endforeach ?>
+                    </div><!--REVIEWS-->
+                </div><!--TABS-->
+                
+                <div class="sidebar">
+                    <div class="features">
+                        <h3>All Inclusive Features</h3>
+                        <ul>
+                        	<?php foreach($this->info['features'] as $f): ?>
+                            <li><span><?= $f ?></span></li>
+                            <?php endforeach ?>
+                        </ul>
+                    </div><!--FEATURES-->
+                    
+                    <div class="talk">
+                        <h3>Talk to Us</h3>
+                        <p>Call our Customer Service <strong>1-866-401-0382</strong></p>
+                        <a href="" onclick="SnapABug.startChat('How can I help you today?'); return false;" class="btn-10">Live Chat</a>
+                    </div><!--TALK-->
+                    
+                    <div class="bookEasy">
+                        <h3>Book in One Easy Step</h3>
+                        <form method="post" action="">
+                            <label>Travel Date</label>
+                            <input type="text" name="" value="" />
+                            <div class="travelers">
+                                <label>Travelers</label>
+                                <select>
+                                    <option>1</option>
+                                </select>
+                            </div><!--TRAVELERS-->
+                            
+                            <div class="days">
+                                <label>Need Extra Days?</label>
+                                <select>
+                                    <option>3 Nights (Included)</option>
+                                </select>
+                            </div><!--TRAVELERS-->
+                            <div class="clear"></div>
+                            <input type="submit" class="btn-1" name="" value="Book Now" />
+                        </form>
+                    </div><!--BOOKEASY-->
+                </div><!--SIDEBAR-->
+                <div class="clear"></div>
+            </div><!--MAIN-->
+        </div><!--CONTENT-->
+    </div><!--WP_CONTENT-->
+    
+    <div id="wp_footer">
+        <div class="footer">
+            <div class="left">
+                <h6>Tripfab is lovely designed in a tropical paradise</h6>
+                <span>Copyright &copy; 2011 Tripfab</span>
+            </div><!--LEFT-->
+            <ul>
+                <li><a target="_blank" href="mailto:hello@tripfab.com">eMail</a></li>
+                <li><a target="_blank" href="https://plus.google.com/108576021199856132768/">Google+</a></li>
+                <li><a target="_blank" href="https://twitter.com/tripfab">Twitter</a></li>
+                <li><a target="_blank" href="https://facebook.com/tripfab">Facebook</a></li>
+            </ul>
+        </div><!--FOOTER-->
+    </div><!--WP_FOOTER-->
+</div><!--WRAPPER_ALL-->
+<div class="hidden"></div>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".tabs").tabs({
+		selected: 0
+	});
+	$("#addons .accordion").accordion({
+		autoHeight: false,
+		collapsible: true,
+		change:function(e, ui){
+			$('a',ui.newHeader).text('Show Less');
+			$('a',ui.oldHeader).text('Show More');
+		}
+	});
+});
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24981182-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script type="text/javascript">
+document.write(unescape("%3Cscript src='" + ((document.location.protocol=="https:")?"https://snapabug.appspot.com":"http://www.snapengage.com") + "/snapabug.js' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">
+//SnapABug.setButton("https://static.tripfab.com/images/Live-Chat-Button.png");
+//SnapABug.addButton("12926583-ebae-4874-8f3e-57cbe2114ebc","0","55%");
+SnapABug.init("12926583-ebae-4874-8f3e-57cbe2114ebc");
+SnapABug.setCallback('StartChat', function(email, msg, type) {
+	var img = document.createElement('img');
+	img.src = "https://www.googleadservices.com/pagead/conversion/956485843/?value=0&amp;label=T64ECJWh8gMQ06GLyAM&amp;guid=ON&amp;script=0";
+	img.width = 1; img.height = 1;
+	document.body.appendChild(img);
+});
+</script>
+</body>
+</html>
