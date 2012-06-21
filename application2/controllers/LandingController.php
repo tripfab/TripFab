@@ -37,7 +37,11 @@ class LandingController extends Zend_Controller_Action {
                 'nights'   => 3,
                 'location' => 'Nicoya, Guanacaste, Costa Rica',
                 'price'    => 999,
+                'price_entero' => 998,
+                'price_decimal'=> 45,
                 'price_before' => 1499,
+                'price_before_entero'=>1498,
+                'price_before_decimal'=>48,
                 'save'     => 500,
                 'title'    => 'Allegro Papagayo Resort',
                 'description' => 'The All-Inclusive Allegro Papagayo Resort, 
@@ -279,7 +283,163 @@ class LandingController extends Zend_Controller_Action {
                     'Transportation from and to the Airport',
                     'Full open bar',
                     '3 restaurants',
+                    '1 snack bar & 4 bars',
                     '1 snack bar & 4 bars'
+                ),
+                'images' => array(
+                    array(
+                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'desc' => 'You will see beautiful birds in the hiking activities'
+                    ),
+                    array(
+                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'desc' => 'You will see beautiful birds in the hiking activities'
+                    ),
+                    array(
+                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'desc' => 'You will see beautiful birds in the hiking activities'
+                    ),
+                    array(
+                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'desc' => 'You will see beautiful birds in the hiking activities'
+                    ),
+                    array(
+                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'desc' => 'You will see beautiful birds in the hiking activities'
+                    ),
+                    array(
+                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'desc' => 'You will see beautiful birds in the hiking activities'
+                    ),
+                    array(
+                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'desc' => 'You will see beautiful birds in the hiking activities'
+                    ),
+                    array(
+                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'desc' => 'You will see beautiful birds in the hiking activities'
+                    ),
+                    array(
+                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'desc' => 'You will see beautiful birds in the hiking activities'
+                    ),
+                    array(
+                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
+                        'desc' => 'You will see beautiful birds in the hiking activities'
+                    ),
+                ),
+                'dining' => 'Occidental Allegro Papagayo is well known for its 
+                    two specialty a la carte restaurants and one buffet-style 
+                    restaurant. Themes vary nightly.',
+                'restaurants' => array(
+                    array(
+                        'title' => 'Los Corales',
+                        'description' => 'Los Corales is an international, 
+                            open-air buffet that is open for breakfast, lunch 
+                            and dinner. It includes a seafood buffet with nightly 
+                            lobster and jumbo shrimp. Dress code is casual.',
+                    ),
+                    array(
+                        'title' => 'Los Corales',
+                        'description' => 'Los Corales is an international, 
+                            open-air buffet that is open for breakfast, lunch 
+                            and dinner. It includes a seafood buffet with nightly 
+                            lobster and jumbo shrimp. Dress code is casual.',
+                    ),
+                    array(
+                        'title' => 'Los Corales',
+                        'description' => 'Los Corales is an international, 
+                            open-air buffet that is open for breakfast, lunch 
+                            and dinner. It includes a seafood buffet with nightly 
+                            lobster and jumbo shrimp. Dress code is casual.',
+                    ),
+                    array(
+                        'title' => 'Los Corales',
+                        'description' => 'Los Corales is an international, 
+                            open-air buffet that is open for breakfast, lunch 
+                            and dinner. It includes a seafood buffet with nightly 
+                            lobster and jumbo shrimp. Dress code is casual.',
+                    ),
+                ),
+                'overview2' => array(
+                    array(
+                        'title' => 'Activities',
+                        'points1' => array(
+                            'Ping Pong',
+                            'Darts',
+                            'Beach Soccer',
+                            'Volleyball Court',
+                        ),
+                        'points2' => array(
+                            'Ping Pong',
+                            'Darts',
+                            'Beach Soccer',
+                            'Volleyball Court',
+                            'Beach Soccer',
+                            'Volleyball Court',
+                        ),
+                    ),
+                    array(
+                        'title' => 'Activities',
+                        'points1' => array(
+                            'Ping Pong',
+                            'Darts',
+                            'Beach Soccer',
+                            'Volleyball Court',
+                        ),
+                        'points2' => array(
+                            'Ping Pong',
+                            'Darts',
+                            'Beach Soccer',
+                            'Volleyball Court',
+                            'Beach Soccer',
+                            'Volleyball Court',
+                        ),
+                    ),
+                    array(
+                        'title' => 'Activities',
+                        'points1' => array(
+                            'Ping Pong',
+                            'Darts',
+                            'Beach Soccer',
+                            'Volleyball Court',
+                        ),
+                        'points2' => array(
+                            'Ping Pong',
+                            'Darts',
+                            'Beach Soccer',
+                            'Volleyball Court',
+                            'Beach Soccer',
+                            'Volleyball Court',
+                        ),
+                    ),
+                    array(
+                        'title' => 'Activities',
+                        'points1' => array(
+                            'Ping Pong',
+                            'Darts',
+                            'Beach Soccer',
+                            'Volleyball Court',
+                        ),
+                        'points2' => array(
+                            'Ping Pong',
+                            'Darts',
+                            'Beach Soccer',
+                            'Volleyball Court',
+                            'Beach Soccer',
+                            'Volleyball Court',
+                        ),
+                    ),
                 ),
             ),
         );
