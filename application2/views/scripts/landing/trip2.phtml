@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title>Tripfab.com</title>
+    <link type="text/css"  rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css"  rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css"  rel="stylesheet" href="/css6/landing/all2.css?v=<?= $this->cssVC ?>" />
+</head>
+<body id="trip_all2">
+<div id="wp_all">
+    <div id="wp_header">
+        <div id="header" class="in2">
+            <div class="wrapper">
+                <h1 class="logo"><a href="">Tripfab</a></h1>
+                <div class="contact">
+                    <a href="#" onclick="SnapABug.startChat('How can I help you today?'); return false;" class="btn-1">Live Chat Now</a>
+                    <p>Questions?<strong>Call 1-866-401-0382</strong></p>
+                </div><!--CONTACT-->
+            </div><!--WRAPPER-->
+        </div><!--HEADER-->
+        
+        <div class="subHeader">
+            <div class="cntrl">
+                <ul class="breadcrump">
+                    <li class="first"><a class="home" href="/"></a></li>
+                    <li><a href="">All Inclusive Trips</a></li>
+                </ul>
+                <a class="link1" href="">&larr; Back to Results</a>
+                <div class="clear"></div>
+            </div>
+        </div><!--SUBHEADER-->
+    </div><!--WP_HEADER-->
+    
+    <div id="wp_content">
+        <div id="content">
+            <div class="left">
+                <div class="offer">
+                    <span class="hurry"></span>
+                    <div class="text">
+                        <h2>Offer of the week</h2>
+                        <h3>Time Remaining to Book this Trip</h3>
+                    </div>
+                    
+                    <div class="counter">
+                        <div class="each first">
+                            <strong>2</strong>
+                            <span>Days</span>
+                        </div><!--EACH-->
+                        <div class="each">
+                            <strong>2</strong>
+                            <span>HOURS</span>
+                        </div><!--EACH-->
+                        <div class="each">
+                            <strong>2</strong>
+                            <span>MINUTES</span>
+                        </div><!--EACH-->
+                        <div class="each last">
+                            <strong>2</strong>
+                            <span>SECONDS</span>
+                        </div><!--EACH-->								
+                    </div><!--COUNTER-->
+                </div><!--OFFER-->
+            
+                <div class="picture">
+                	<?php foreach($this->info['images'] as $id => $img): ?>
+                    <div class="image">
+                        <img src="<?= $img['url'] ?>" width="650" height="285" alt="" />
+                        <div class="title">
+                            <h2><?= $this->info['title'] ?> – <?= $this->info['nights'] ?> Nights</h2>
+                            <h3>All Inclusive</h3>
+                        </div><!--TITLE-->
+                        <div class="descrip"><?= $img['desc'] ?> <a href="<?= $img['url'] ?>" rel="group1" class="js-fancybox"></a></div><!--DESCRIP-->
+                    </div><!--IMAGES-->
+                    <?php endforeach ?>
+                    
+                    <div class="carousel">
+                        <div class="prev"></div>
+                        <ul>
+		                	<?php foreach($this->info['images'] as $id => $img): ?>
+                            <li><a href=""><img src="<?= $img['thumb'] ?>" width="59" height="59" alt="" /></a></li>
+                            <?php endforeach ?>
+                        </ul>
+                        <div href="" class="next"></div>	
+                    </div><!--CAROUSEL-->
+                </div><!--PICTURE-->
+                                    
+                <div class="features">
+                    <h4>All Inclusive Features</h4>
+                    <?php $count = count($this->info['features']); ?>
+                    <?php $aux 	 = $count % 2; ?>
+                    <?php $limit = ($aux > 0) ? ((($count - 1) / 2) + 1) : ($count / 2); ?>
+                    <?php for($i=0;$i<=$count;$i=$i+$limit): ?>
+                    <ul>
+                    	<?php for($j=$i;($j<($i+$limit)) and ($j<$count); $j++): ?>
+                        <li><?= $this->info['features'][$j] ?></li>
+                        <?php endfor ?>
+                    </ul>
+                    <?php endfor ?>
+                    <div class="clear"></div>
+                </div><!--FEATURES-->
+                
+                <div class="other">
+                    <div class="single">
+                        <h5><?= $this->info['title'] ?></h5>
+                        <p><?= $this->info['description'] ?></p>
+                    </div><!--DESCRIPTION-->
+                    
+                    
+                    <div class="single">
+                        <h5>Dining:</h5>
+                        <p><?= $this->info['dining'] ?></p>
+                        <dl>
+                        	<?php foreach($this->info['restaurants'] as $r): ?>
+                            <dt><?= $r['title'] ?></dt>
+                            <dd><?= $r['description'] ?></dd>
+                            <?php endforeach ?>
+                        </dl>
+                    </div><!--FOOD-->
+                    
+                    <?php foreach($this->info['overview2'] as $o): ?>
+                    <div class="single">
+                        <h5><?= $o['title'] ?></h5>
+                        <ul>
+                        	<?php foreach($o['points1'] as $p): ?>
+                            <li><?= $p ?></li>
+                            <?php endforeach ?>
+                        </ul>
+                        <ul>
+                            <?php foreach($o['points2'] as $p): ?>
+                            <li><?= $p ?></li>
+                            <?php endforeach ?>
+                        </ul>
+                        <div class="clear"></div>
+                    </div><!--ACTIVITIES-->
+                    <?php endforeach ?>
+                </div><!--OTHER-->
+            </div><!--LEFT-->
+            
+            <div class="right">
+                <div class="price">
+                    <div class="left">
+                        <span class="top">From</span>
+                        <span class="mid"><sup>$</sup><?= $this->info['price_entero'] ?><sub>.<?= $this->info['price_decimal'] ?></sub></span>
+                        <span class="bot">Per person</span>
+                        <p>Per person</p>
+                    </div><!--LEFT-->
+                    <div class="right">
+                        <sup>$</sup>
+                        <span><?= $this->info['price_before_entero'] ?></span>
+                        <sub><?= $this->info['price_before_decimal'] ?></sub>
+                    </div><!--RIGHT-->
+                    <div class="bot">
+                        <strong>Save $<?= $this->info['save'] ?></strong> per person
+                    </div><!--BOTTOM-->
+                </div><!--PRICE-->
+                
+                <div class="customize">
+                    <h5>Customize your Trip & Book</h5>
+                    <form method="post" action="">
+                        <div class="fields">
+                            <div class="block1">
+                                <div class="date">
+                                    <label>Travel Date</label>
+                                    <input type="text" name="" value="" />
+                                    <span></span>
+                                </div>
+                                <div class="select">
+                                    <label>Kids</label>
+                                    <select>
+                                        <option>1</option>
+                                    </select>
+                                </div><!--SELECT-->
+                                <div class="select">
+                                    <label>Adults</label>
+                                    <select>
+                                        <option>1</option>
+                                    </select>
+                                </div><!--SELECT-->
+                                <div class="clear"></div>
+                            </div><!--BLOCK1-->
+                            
+                            <div class="accordion">
+                                <h6>Room Type</h6>
+                                <div class="block2">
+                                    <table width="272" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td><label><input type="radio" name="roomType" value="" />Superior</label></td>
+                                            <td class="rg">Included</td>
+                                        </tr>
+                                        <tr>
+                                            <td><label><input type="radio" name="roomType" value="" />Superior Ocean View</label> </td>
+                                            <td class="rg">Add $120</td>
+                                        </tr>
+                                        <tr>
+                                            <td><label><input type="radio" name="roomType" value="" />Premium</label></td>
+                                            <td class="rg">Add $210</td>
+                                        </tr>
+                                    </table>
+                                    <span class="line"></span>
+                                </div><!--BLOCK2-->
+                                
+                                <h6>Trip Duration</h6>
+                                <div class="block2">
+                                    <table width="272" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td><label><input type="radio" name="nights" value="" />3 Nights</label></td>
+                                            <td class="rg">Included</td>
+                                        </tr>
+                                        <tr>
+                                            <td><label><input type="radio" name="nights" value="" />5 Nights</label> </td>
+                                            <td class="rg">Add $120</td>
+                                        </tr>
+                                        <tr>
+                                            <td><label><input type="radio" name="nights" value="" />10 Nights</label></td>
+                                            <td class="rg">Add $210</td>
+                                        </tr>
+                                    </table>
+                                    <span class="line"></span>
+                                </div><!--BLOCK2-->
+                                
+                                <h6>Trip Duration</h6>
+                                <div class="block2">
+                                    <table width="272" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td width="190">
+                                                <input type="checkbox" name="" value="" />
+                                                <label>Discover Scuba Diving PADI Certification </label>
+                                            </td>
+                                            <td class="rg">Add $210</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="" value="" />
+                                                <label>Scuba Diving Trip </label>
+                                            </td>
+                                            <td class="rg">Add $210</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="" value="" />
+                                                <label>Night Scuba Diving</label>
+                                            </td>
+                                            <td class="rg">Add $210</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="" value="" />
+                                                <label>Jet Sky Rental </label>
+                                            </td>
+                                            <td class="rg">Add $210</td>
+                                        </tr>
+                                    </table>
+                                    <span class="line"></span>
+                                </div><!--BLOCK2-->
+                            </div><!--ACCORDION-->
+                            
+                            <div class="total">
+                                <div class="left">
+                                    <span class="top">Trip Total </span>
+                                    <span class="mid"><sup>$</sup>2,589<sub>.60</sub></span>
+                                    <span class="bot">Per person</span>
+                                </div><!--LEFT-->
+                                <div class="right">
+                                    <sup>$</sup>
+                                    <span>2,925</span>
+                                    <sub>75</sub>
+                                </div><!--RIGHT-->
+                                <input class="btn-1" type="submit" name="" value="Book Now" />
+                                <div class="bot">
+                                    Total Saving $426
+                                </div>
+                            </div><!--TOTAL-->
+                        </div><!--FIELDS-->
+                    </form>
+                </div><!--CUSTOMIZE-->
+                <div class="talk">
+                    <strong>Questions about the trip?</strong>
+                    <span>Call 1-866-401-0382</span>
+                </div><!--TALK-->
+            </div><!--RIGHT-->
+            <div class="clear"></div>
+        </div><!--CONTENT-->
+    </div><!--WP_CONTENT-->
+</div><!--WRAPPER_ALL-->
+<div class="hidden"></div>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".tabs").tabs({
+            selected: 2
+        });
+        $("#addons .accordion").accordion({
+            autoHeight: false,
+            collapsible: true
+        });
+    });
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24981182-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script type="text/javascript">
+document.write(unescape("%3Cscript src='" + ((document.location.protocol=="https:")?"https://snapabug.appspot.com":"http://www.snapengage.com") + "/snapabug.js' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">
+//SnapABug.setButton("https://static.tripfab.com/images/Live-Chat-Button.png");
+//SnapABug.addButton("12926583-ebae-4874-8f3e-57cbe2114ebc","0","55%");
+SnapABug.init("12926583-ebae-4874-8f3e-57cbe2114ebc");
+SnapABug.setCallback('StartChat', function(email, msg, type) {
+	var img = document.createElement('img');
+	img.src = "https://www.googleadservices.com/pagead/conversion/956485843/?value=0&amp;label=T64ECJWh8gMQ06GLyAM&amp;guid=ON&amp;script=0";
+	img.width = 1; img.height = 1;
+	document.body.appendChild(img);
+});
+</script>
+</body>
+</html>

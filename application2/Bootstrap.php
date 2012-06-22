@@ -341,6 +341,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             )
         );
         $router->addRoute(
+            'landing',
+            new Zend_Controller_Router_Route(
+                '/:lang/landing/:version/:action/:idf',
+                array(
+                    'controller' => 'landing',
+                    'action'     => 'index',
+                    'module'     => 'default',
+                    'version'    => '1',
+                    'idf'        => 'default'
+                )
+            )
+        );
+        $router->addRoute(
             'passports',
             new Zend_Controller_Router_Route(
                 '/:lang/users/:username/:action/:task/:id',
