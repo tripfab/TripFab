@@ -33,7 +33,7 @@
         	
         	<div class="cont">
         		<div class="left">
-        			<h3 class="ttl1"><?= $this->trip->title ?> <a href="#rename-trip" class="lbc link1">Rename Itinerary</a></h3>
+        			<h3 class="ttl1"><?= $this->trip->title ?> <a href="#rename-trip" class="lbc link1">Change Trip Settings</a></h3>
         		</div><!--LEFT-->
         		<div class="right">
         			<?php if($this->tocheckout): ?>
@@ -326,8 +326,29 @@
                 <label for="">Trip Name</label>
                 <input type="text" name="title" class="noclean" value="<?= $this->trip->title ?>" />
             </div><!--CONT-->
+
+
+            <div class="cont">
+                <label for="">Travelers</label>
+
+					<select name="adults">
+                    	<?php for($i=1; $i<=20; $i++):?>
+                        <option <?php echo $this->trip->adults == $i ? 'selected="selected"' : '';?> value="<?php echo $i?>"><?php echo $i?> <?php echo $i == 1 ? 'Adult' : 'Adults'?></option>
+                        <?php endfor;?>
+                    </select> &nbsp;&nbsp;           
+            
+                    <select name="kids">
+                        <option value="">None</option>
+                    	<?php for($i=1; $i<=20; $i++):?>
+                        <option <?php echo $this->trip->kids == $i ? 'selected="selected"' : '';?> value="<?php echo $i?>"><?php echo $i?> <?php echo $i == 1 ? 'Kid' : 'Kids'?></option>
+                        <?php endfor;?>
+                    </select>
+            
+            </div><!--CONT-->
+
+
             <div class="bottom">
-                <input class="btn-1" type="submit" name="" value="Rename" />
+                <input class="btn-1" type="submit" name="" value="Change" />
                 <a class="btn-10" onclick="$.fancybox.close(); return false;" href="#">Cancel</a>
             </div><!--BOTTOM-->
             <input type="hidden" name="ids" value="<?= $this->trip->id ?>" />

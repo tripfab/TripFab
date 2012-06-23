@@ -1419,9 +1419,11 @@ class UserController extends Zend_Controller_Action
                 case md5('update_title'): 
                     if(!empty($_POST['title'])) {
                         $trip->title = $_POST['title'];
+						$trip->adults = $_POST['adults'];
+						$trip->kids = $_POST['kids'];
                         $trip->save();
 
-                        setcookie('alert', 'Trip dates updated');
+                        setcookie('alert', 'Trip updated');
                         $this->_redirect('/user/trips/itinerary/'.$trip->id);
                     }
                     break;
