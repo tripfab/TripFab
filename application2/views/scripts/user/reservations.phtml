@@ -34,7 +34,11 @@
                             <span><?= $reserve->listing_type ?></span>
                         </div><!-- closes meta -->
                         <div class="remaining">
-                            <span><img src="https://static.tripfab.com/images2/ico_146.png" width="14" height="15" alt="" />Remaining time: 20 days</span>
+                          <span>  
+						  <?php if ((strtotime($reserve->checkin) - strtotime(date("Y-m-d")))/ (3600 *24) >= 0): ?>
+                            <img src="https://static.tripfab.com/images2/ico_146.png" width="14" height="15" alt="" />Remaining time: <?php echo (strtotime($reserve->checkin) - strtotime(date("Y-m-d")))/ (3600 *24); ?> days
+						  <?php endif;?>
+                          </span>
                             <ul>
                                 <li><a href="/user/reservations/view/<?= $reserve->id ?>">Reservation Details</a></li>
                                 <li><a href="">Contact Partner</a></li>
