@@ -188,7 +188,7 @@ class IndexController extends Zend_Controller_Action
     
     public function listingAction()
     {
-        $template    = 'listing';
+		$template    = 'listing';
         
         $country_idf = $this->getRequest()->getParam('country');
         $city_idf    = $this->getRequest()->getParam('city');
@@ -270,7 +270,17 @@ class IndexController extends Zend_Controller_Action
                 $keys = Zend_Registry::get('stripe');
                 $template = 'listing-hotel';         
                 $options = $this->listings->getSchedulesOf($listing->id);
-                $this->view->options = $options;
+				$opt = array();
+				foreach($options as $option){
+                	$opt[] = (object) array('id'=>$option->id,
+						'listing_id'=>$option->listing_id,
+						'name'=>$option->name,
+						'starting'=>$option->starting,
+						'ending'=>$option->ending,
+						'duration'=>$option->duration, 
+						'duration_label'=>$option->duration_label); 
+				}
+				$this->view->options = $opt;
 
                 $overview = $this->listings->getOverviewOf2($listing->id);
                 $details = $this->listings->getDetails($listing->id);
@@ -295,8 +305,21 @@ class IndexController extends Zend_Controller_Action
                 $prices = $this->listings->getSchPrices($listing);
                 if(!is_null($prices))
                     $prices = $prices[0];
-
-                $this->view->prices = $prices;
+					
+				$this->view->prices = $prices;
+				
+				// sort the option as per price
+				if(count($this->view->options) > 1){
+					for($i=0; $i<count($this->view->options) -1; $i++){
+						for($j=1; $j<count($this->view->options); $j++){
+							if($this->view->prices[$this->view->options[$i]->id]['price'] > $this->view->prices[$this->view->options[$j]->id]['price']){
+								$temp = $this->view->options[$i];
+								$this->view->options[$i] = $this->view->options[$j]	;
+								$this->view->options[$j] = $temp;
+							}
+						}
+					} 
+				}
 
                 $faqs        = $this->listings->getFAQsOf($listing->id);
                 $vendor      = $this->vendors->getVendorById($listing->vendor_id);
