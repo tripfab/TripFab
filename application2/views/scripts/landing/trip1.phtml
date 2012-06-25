@@ -6,6 +6,7 @@
     <link type="text/css"  rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
     <link type="text/css"  rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
     <link type="text/css"  rel="stylesheet" href="/css6/landing/all1.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css"  rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
 </head>
 <body id="trip_all1">
 <div id="wp_all">
@@ -54,19 +55,24 @@
                             </div><!--PER-->
                         </div><!--PRICE-->
                         <h2>Book in One Easy Step</h2>
-                        <form method="post" action="">
+                        <form method="post" action="/en-US/landing/1/confirm/papagayo" class="js-confirm-form">
                             <label>Travel Date</label>
-                            <input type="text" name="" value="" />
+                            <input type="text" name="date" value="" class="js-calendar" />
                             <div class="travelers">
                                 <label>Travelers</label>
-                                <select>
-                                    <option>1</option>
+                                <select name="travelers">
+                                	<?php for($i=2;$i<=15;$i++): ?>
+                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                    <?php endfor ?>
                                 </select>
                             </div><!--TRAVELERS-->
                             <div class="days">
                                 <label>Need Extra Days?</label>
-                                <select>
-                                    <option>3 Nights (Included)</option>
+                                <select name="nights">
+                                    <option value="<?= $this->info['nights'] ?>"><?= $this->info['nights'] ?> Nights (Included)</option>
+                                	<?php for($i=($this->info['nights'] + 1); $i<=15; $i++): ?>
+                                    <option value="<?= $i ?>"><?= $i ?> Nights</option> 
+                                    <?php endfor ?>
                                 </select>
                             </div><!--TRAVELERS-->
                             <div class="clear"></div>
@@ -76,7 +82,7 @@
                     
                     <div class="whole">
                         <a href="">
-                            <img src="https://static.tripfab.com/images6/tripsView4ico3.png" width="700" height="363" alt="" />
+                            <img src="<?= $this->info['images'][0]['url'] ?>" width="700" height="363" alt="" />
                             <span class="view"><em></em>Click to View Photos</span>
                         </a>
                         <div class="info">
@@ -86,7 +92,6 @@
                             <span class="warning">You Need to Travel Between <br /><?= $this->info['sale_starts'] ?> 
                             to <?= $this->info['sale_ends'] ?> to Apply Sale!</span>
                             <div class="share">
-                                <a href="" class="bookmark js-bookmark"><em></em>Bookmark</a>
                                 <a href="" class="email"><em></em>Send to email</a>
                             </div><!--SHARE-->
                         </div><!--INFO-->
@@ -205,20 +210,24 @@
                     
                     <div class="bookEasy">
                         <h3>Book in One Easy Step</h3>
-                        <form method="post" action="">
+                        <form method="post" action="/en-US/landing/1/confirm/papagayo" class="js-confirm-form">
                             <label>Travel Date</label>
-                            <input type="text" name="" value="" />
+                            <input type="text" name="date" value="" class="js-calendar" />
                             <div class="travelers">
                                 <label>Travelers</label>
-                                <select>
-                                    <option>1</option>
+                                <select name="travelers">
+                                	<?php for($i=2;$i<=15;$i++): ?>
+                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                    <?php endfor ?>
                                 </select>
                             </div><!--TRAVELERS-->
-                            
                             <div class="days">
                                 <label>Need Extra Days?</label>
-                                <select>
-                                    <option>3 Nights (Included)</option>
+                                <select name="nights">
+                                    <option value="<?= $this->info['nights'] ?>"><?= $this->info['nights'] ?> Nights (Included)</option>
+                                	<?php for($i=($this->info['nights'] + 1); $i<=15; $i++): ?>
+                                    <option value="<?= $i ?>"><?= $i ?> Nights</option> 
+                                    <?php endfor ?>
                                 </select>
                             </div><!--TRAVELERS-->
                             <div class="clear"></div>
@@ -260,6 +269,21 @@ $(document).ready(function() {
 			$('a',ui.newHeader).text('Show Less');
 			$('a',ui.oldHeader).text('Show More');
 		}
+	});
+	$('.js-calendar').datepicker({
+		minDate:new Date(),
+		maxDate:new Date(2012,8,19),
+		dateFormat:'MM d, yy'
+	});
+	$('.js-confirm-form').submit(function(){
+		$isValid = $(this).validate({
+			rules:{
+				date:'required',
+				travelers:'required',
+				nights:'required'
+			}
+		});
+		return $isValid.form();
 	});
 });
 </script>
