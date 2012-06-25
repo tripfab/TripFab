@@ -464,8 +464,8 @@ class LandingController extends Zend_Controller_Action {
         $info = array(
             'papagayo' => array(
                 'title' => 'Alegro Papagayo (All Inclusive)',
-                '_price'    => 999,
-                '_price_before' => 1499,
+                '_price'    => 60,
+                '_price_before' => 70,
                 'room' => 'Deluxe',
             )
         );
