@@ -15872,3 +15872,36 @@ Stack trace:
     [module] => default
 )
 
+2012-06-26T20:10:53+05:30 NOTICE (5): Page not found, exception 'Zend_Controller_Router_Exception' with message 'No route matched the request' in C:\wamp\www\tf1\TripFab\library\Zend\Controller\Router\Rewrite.php:408
+Stack trace:
+#0 C:\wamp\www\tf1\TripFab\library\Zend\Controller\Front.php(911): Zend_Controller_Router_Rewrite->route(Object(Zend_Controller_Request_Http))
+#1 C:\wamp\www\tf1\TripFab\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\tf1\TripFab\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\tf1\TripFab\partners\index.php(26): Zend_Application->run()
+#4 {main}
+2012-06-26T20:10:53+05:30 NOTICE (5): Request Parameters, Array
+(
+)
+
+2012-06-26T20:10:53+05:30 NOTICE (5): Page not found, exception 'Zend_Controller_Router_Exception' with message 'No route matched the request' in C:\wamp\www\tf1\TripFab\library\Zend\Controller\Router\Rewrite.php:408
+Stack trace:
+#0 C:\wamp\www\tf1\TripFab\library\Zend\Controller\Front.php(911): Zend_Controller_Router_Rewrite->route(Object(Zend_Controller_Request_Http))
+#1 C:\wamp\www\tf1\TripFab\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\tf1\TripFab\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\tf1\TripFab\partners\index.php(26): Zend_Application->run()
+#4 {main}
+2012-06-26T20:10:53+05:30 NOTICE (5): Request Parameters, Array
+(
+)
+
+2012-06-26T20:10:53+05:30 NOTICE (5): Page not found, exception 'Zend_Controller_Router_Exception' with message 'No route matched the request' in C:\wamp\www\tf1\TripFab\library\Zend\Controller\Router\Rewrite.php:408
+Stack trace:
+#0 C:\wamp\www\tf1\TripFab\library\Zend\Controller\Front.php(911): Zend_Controller_Router_Rewrite->route(Object(Zend_Controller_Request_Http))
+#1 C:\wamp\www\tf1\TripFab\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 C:\wamp\www\tf1\TripFab\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 C:\wamp\www\tf1\TripFab\partners\index.php(26): Zend_Application->run()
+#4 {main}
+2012-06-26T20:10:53+05:30 NOTICE (5): Request Parameters, Array
+(
+)
+
