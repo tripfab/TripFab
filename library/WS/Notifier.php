@@ -387,7 +387,7 @@ class WS_Notifier extends Zend_Mail {
      *  @param string $message
      *  @param string $from 
      */
-    protected function sendEmail($to, $subject, $message, $from = null){
+    public function sendEmail($to, $subject, $message, $from = null){
         if(is_null($from))
             $from = 'From: TripFab <hello@tripfab.com>';
         
