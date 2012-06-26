@@ -597,4 +597,11 @@ class LandingController extends Zend_Controller_Action {
         $this->view->activities = $activities[$id];
         
     }
+    
+    public function checkoutAction()
+    {
+        $version = $this->_getParam('version');
+        
+        $this->render('checkout'.$version);
+    }
 }

@@ -166,7 +166,7 @@ $nights = array(3,4,5,7,10,15) ?>
                 
                 <div class="customize">
                     <h5>Customize your Trip & Book</h5>
-                    <form method="post" action="/en-US/landing/1/checkout">
+                    <form method="post" action="/en-US/landing/2/checkout">
                         <div class="fields">
                             <div class="block1">
                                 <div class="date">
@@ -339,34 +339,30 @@ $(document).ready(function() {
 			price = price + room;
 		}
 		
-		if(travelers > 2 || nights > <?= $this->info['nights'] ?>) {
-			$('.js-room-table tr').each(function(index){
-				var p = parseFloat($('input', this).data('price')) * travelers * nights;
-				if(p != 0) {
-					if(p > 0){
-						$('#js-room-'+index).text('+ $'+p);
-					} else {
-						$('#js-room-'+index).text('- $'+Math.abs(p));
-					}
+		$('.js-room-table tr').each(function(index){
+			var p = parseFloat($('input', this).data('price')) * travelers * nights;
+			if(p != 0) {
+				if(p > 0){
+					$('#js-room-'+index).text('+ $'+p);
 				} else {
-					$('#js-room-'+index).text('Included');
+					$('#js-room-'+index).text('- $'+Math.abs(p));
 				}
-			});
-			
-			if(nights > <?= $this->info['nights'] ?>) {
-				var n = (price * nights * travelers) - (price * <?= $this->info['nights'] ?> * travelers);
-				$('.js-nights-lb').text('+ $'+n);
 			} else {
-				$('.js-nights-lb').text('Included');
+				$('#js-room-'+index).text('Included');
 			}
-			
-			if(travelers > 2) {
-				$('.js-activity-table tr').each(function(index){
-					var z = parseFloat($('input',this).data('price')) * travelers;
-					$('#js-activity-'+index).text('+ $'+z);
-				});
-			}
+		});
+		
+		if(nights > <?= $this->info['nights'] ?>) {
+			var n = (price * nights * travelers) - (price * <?= $this->info['nights'] ?> * travelers);
+			$('.js-nights-lb').text('+ $'+n);
+		} else {
+			$('.js-nights-lb').text('Included');
 		}
+		
+		$('.js-activity-table tr').each(function(index){
+			var z = parseFloat($('input',this).data('price')) * travelers;
+			$('#js-activity-'+index).text('+ $'+z);
+		});
 		
 		var activities = 0;
 		$('tr.js-activity-tr').remove();	
