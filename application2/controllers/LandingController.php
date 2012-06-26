@@ -441,10 +441,60 @@ class LandingController extends Zend_Controller_Action {
                         ),
                     ),
                 ),
+                'expires'=>'2012-06-29 23:59:59'
             ),
         );
         
+        $rooms = array(
+            'papagayo' => array(
+                array(
+                    'id' => 'standard',
+                    'name' => 'Standard',
+                    'price_desc' => '- $20',
+                    'price' => -20
+                ),
+                array(
+                    'id' => 'deluxe',
+                    'name' => 'Deluxe',
+                    'price_desc' => 'Included',
+                    'price' => 0,
+                    'selected' => 1
+                ),
+                array(
+                    'id' => 'suite',
+                    'name' => 'Master Suite',
+                    'price_desc' => '+ $50',
+                    'price' => 50
+                ),
+            )
+        );
+        
+        $activities = array(
+            'papagayo' => array(
+                array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tour',
+                    'price_desc' => '+$25/person',
+                    'price' => 25
+                ),
+                array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tour',
+                    'price_desc' => '+$20/person',
+                    'price' => 20
+                ),
+                array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tour',
+                    'price_desc' => '+$32/person',
+                    'price' => 32
+                ),
+            )
+        );
+        
         $this->view->info = $info[$id];
+        $this->view->rooms = $rooms[$id];        
+        $this->view->activities = $activities[$id];
         
         $this->render('trip'.$version);
     }

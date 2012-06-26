@@ -1,11 +1,20 @@
+<?php $l = strtotime($this->info['expires']) - time();
+$d1 = ($l - ($l % 86400)); $h1 = $l - $d1; $h2 = $h1 - ($h1 % 3600); $m1 = $h1 - $h2; $m2 = $m1 - ($m1 % 60);
+$days = $d1 / 86400; $hours = $h2 / 3600; $minutes = $m2 / 60; $seconds = $m1 - $m2; 
+$nights = array(3,4,5,7,10,15) ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
     <title>Tripfab.com</title>
-    <link type="text/css"  rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
-    <link type="text/css"  rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
-    <link type="text/css"  rel="stylesheet" href="/css6/landing/all2.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/css6/landing/all2.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css"  rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
+    <style type="text/css">
+	.image { display:none;} .image.show { display:block;}
+	</style>
 </head>
 <body id="trip_all2">
 <div id="wp_all">
@@ -41,22 +50,21 @@
                         <h2>Offer of the week</h2>
                         <h3>Time Remaining to Book this Trip</h3>
                     </div>
-                    
                     <div class="counter">
                         <div class="each first">
-                            <strong>2</strong>
+                            <strong class="jsd"><?= $days ?></strong>
                             <span>Days</span>
                         </div><!--EACH-->
                         <div class="each">
-                            <strong>2</strong>
+                            <strong class="jsh"><?= $hours ?></strong>
                             <span>HOURS</span>
                         </div><!--EACH-->
                         <div class="each">
-                            <strong>2</strong>
+                            <strong class="jsm"><?= $minutes ?></strong>
                             <span>MINUTES</span>
                         </div><!--EACH-->
                         <div class="each last">
-                            <strong>2</strong>
+                            <strong class="jss"><?= $seconds ?></strong>
                             <span>SECONDS</span>
                         </div><!--EACH-->								
                     </div><!--COUNTER-->
@@ -64,13 +72,14 @@
             
                 <div class="picture">
                 	<?php foreach($this->info['images'] as $id => $img): ?>
-                    <div class="image">
+                    <div id="js-image<?= $id ?>" class="js-image image <?= ($id == 0) ? 'show' : '' ?>">
                         <img src="<?= $img['url'] ?>" width="650" height="285" alt="" />
                         <div class="title">
                             <h2><?= $this->info['title'] ?> – <?= $this->info['nights'] ?> Nights</h2>
                             <h3>All Inclusive</h3>
                         </div><!--TITLE-->
-                        <div class="descrip"><?= $img['desc'] ?> <a href="<?= $img['url'] ?>" rel="group1" class="js-fancybox"></a></div><!--DESCRIP-->
+                        <div class="descrip"><?= $id ?> - <?= $img['desc'] ?> 
+                        <a href="<?= $img['url'] ?>" rel="group1" class="js-fancybox"></a></div><!--DESCRIP-->
                     </div><!--IMAGES-->
                     <?php endforeach ?>
                     
@@ -78,7 +87,7 @@
                         <div class="prev"></div>
                         <ul>
 		                	<?php foreach($this->info['images'] as $id => $img): ?>
-                            <li><a href=""><img src="<?= $img['thumb'] ?>" width="59" height="59" alt="" /></a></li>
+                            <li><a class="js-change-image" href="#js-image<?= $id ?>"><img src="<?= $img['thumb'] ?>" width="59" height="59" alt="" /></a></li>
                             <?php endforeach ?>
                         </ul>
                         <div href="" class="next"></div>	
@@ -141,40 +150,44 @@
                 <div class="price">
                     <div class="left">
                         <span class="top">From</span>
-                        <span class="mid"><sup>$</sup><?= $this->info['price_entero'] ?><sub>.<?= $this->info['price_decimal'] ?></sub></span>
-                        <span class="bot">Per person</span>
-                        <p>Per person</p>
+                        <span class="mid"><sup>$</sup>
+                        <?= str_replace('.','<sub>.',number_format($this->info['price'],2,'.',',')) ?></sub></span>
+                        <span class="bot">Per person per night</span>
+                        <p>Per person per night</p>
                     </div><!--LEFT-->
                     <div class="right">
                         <sup>$</sup>
-                        <span><?= $this->info['price_before_entero'] ?></span>
-                        <sub><?= $this->info['price_before_decimal'] ?></sub>
+                        <span><?= str_replace('.','</span><sub>.',number_format($this->info['price_before'],2,'.',',')) ?></sub>
                     </div><!--RIGHT-->
                     <div class="bot">
-                        <strong>Save $<?= $this->info['save'] ?></strong> per person
+                        <strong>Save $<?= $this->info['save'] ?></strong> per person per night
                     </div><!--BOTTOM-->
                 </div><!--PRICE-->
                 
                 <div class="customize">
                     <h5>Customize your Trip & Book</h5>
-                    <form method="post" action="">
+                    <form method="post" action="/en-US/landing/1/checkout">
                         <div class="fields">
                             <div class="block1">
                                 <div class="date">
                                     <label>Travel Date</label>
-                                    <input type="text" name="" value="" />
+                                    <input type="text" name="date" value="" class="js-calendar" />
                                     <span></span>
                                 </div>
                                 <div class="select">
                                     <label>Kids</label>
-                                    <select>
-                                        <option>1</option>
+                                    <select name="kids" class="js-change js-kids">
+                                    	<?php for($i=0;$i<=10;$i++): ?>
+                                        <option value="<?= $i ?>"><?= $i ?></option>
+                                        <?php endfor ?>
                                     </select>
                                 </div><!--SELECT-->
                                 <div class="select">
                                     <label>Adults</label>
-                                    <select>
-                                        <option>1</option>
+                                    <select name="adults" class="js-adults js-change">
+                                    	<?php for($i=2;$i<=20;$i++): ?>
+                                        <option value="<?= $i ?>"><?= $i ?></option>
+                                        <?php endfor ?>
                                     </select>
                                 </div><!--SELECT-->
                                 <div class="clear"></div>
@@ -183,73 +196,58 @@
                             <div class="accordion">
                                 <h6>Room Type</h6>
                                 <div class="block2">
+                                    <table width="272" border="0" cellspacing="0" cellpadding="0" class="js-room-table">
+                                    	<?php foreach($this->rooms as $i => $room): ?>
+                                        <?php $checked = (isset($room['selected'])) ? 'checked="checked"': '' ?>
+                                        <tr>
+                                            <td><label><input data-included="<?= isset($room['selected']) ?>" type="radio" name="room" 
+                                            data-price="<?= $room['price'] ?>" value="<?= $room['id'] ?>" <?= $checked ?> class="js-room js-change" 
+                                            data-label="<?= $room['name'] ?>" /> <?= $room['name'] ?></label></td>
+                                            <td id="js-room-<?= $i ?>" class="rg">
+                                            <?php if($room['selected'] != 1): ?>
+                                            <?php $p = $room['price'] * 2 * $this->info['nights'] ?>
+                                            <?= ($p > 0) ? '+ $'.$p : '- $'.abs($p) ?>
+                                            <?php else: ?>
+                                            Included
+                                            <?php endif ?>
+                                            </td>
+                                        </tr>
+                                        <?php endforeach ?>
+                                    </table>
+                                    <span class="line"></span>
+                                </div><!--BLOCK2-->
+                                
+                                <h6>Extra Nights?</h6>
+                                <div class="block2">
                                     <table width="272" border="0" cellspacing="0" cellpadding="0">
                                         <tr>
-                                            <td><label><input type="radio" name="roomType" value="" />Superior</label></td>
-                                            <td class="rg">Included</td>
-                                        </tr>
-                                        <tr>
-                                            <td><label><input type="radio" name="roomType" value="" />Superior Ocean View</label> </td>
-                                            <td class="rg">Add $120</td>
-                                        </tr>
-                                        <tr>
-                                            <td><label><input type="radio" name="roomType" value="" />Premium</label></td>
-                                            <td class="rg">Add $210</td>
+                                            <td>
+                                            <select name="nights" class="js-change js-nights">
+                                                <option value="<?= $this->info['nights'] ?>"><?= $this->info['nights'] ?> Nights</option>
+                                                <?php for($i=($this->info['nights'] + 1); $i<=15; $i++): ?>
+                                                <option value="<?= $i ?>"><?= $i ?> Nights</option> 
+                                                <?php endfor ?>
+                                            </select>
+                                            </td>
+                                            <td class="rg js-nights-lb">Included</td>
                                         </tr>
                                     </table>
                                     <span class="line"></span>
                                 </div><!--BLOCK2-->
                                 
-                                <h6>Trip Duration</h6>
+                                <h6>Additional Activities</h6>
                                 <div class="block2">
-                                    <table width="272" border="0" cellspacing="0" cellpadding="0">
+                                    <table width="272" border="0" cellspacing="0" cellpadding="0" class="js-activity-table">
+	                                    <?php foreach($this->activities as $i=>$a): ?>
                                         <tr>
-                                            <td><label><input type="radio" name="nights" value="" />3 Nights</label></td>
-                                            <td class="rg">Included</td>
-                                        </tr>
-                                        <tr>
-                                            <td><label><input type="radio" name="nights" value="" />5 Nights</label> </td>
-                                            <td class="rg">Add $120</td>
-                                        </tr>
-                                        <tr>
-                                            <td><label><input type="radio" name="nights" value="" />10 Nights</label></td>
-                                            <td class="rg">Add $210</td>
-                                        </tr>
-                                    </table>
-                                    <span class="line"></span>
-                                </div><!--BLOCK2-->
-                                
-                                <h6>Trip Duration</h6>
-                                <div class="block2">
-                                    <table width="272" border="0" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td width="190">
-                                                <input type="checkbox" name="" value="" />
-                                                <label>Discover Scuba Diving PADI Certification </label>
+                                            <td width="190"><label><input type="checkbox" class="js-activity js-change" value="<?= $a['id'] ?>" 
+                                            data-price="<?= $a['price'] ?>" name="activities[]" data-label="<?= $a['name'] ?>" />
+											<?= $a['name'] ?></label></td>
+                                            <td id="js-activity-<?= $i ?>" class="rg">
+                                            <?= '+ $'.($a['price'] * 2) ?>
                                             </td>
-                                            <td class="rg">Add $210</td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" name="" value="" />
-                                                <label>Scuba Diving Trip </label>
-                                            </td>
-                                            <td class="rg">Add $210</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" name="" value="" />
-                                                <label>Night Scuba Diving</label>
-                                            </td>
-                                            <td class="rg">Add $210</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" name="" value="" />
-                                                <label>Jet Sky Rental </label>
-                                            </td>
-                                            <td class="rg">Add $210</td>
-                                        </tr>
+										<?php endforeach ?>
                                     </table>
                                     <span class="line"></span>
                                 </div><!--BLOCK2-->
@@ -258,20 +256,22 @@
                             <div class="total">
                                 <div class="left">
                                     <span class="top">Trip Total </span>
-                                    <span class="mid"><sup>$</sup>2,589<sub>.60</sub></span>
-                                    <span class="bot">Per person</span>
+                                    <span class="mid js-price-lb"><sup>$</sup>
+                                    <?= str_replace('.','<sub>.',number_format($this->info['price']*2*$this->info['nights'],2,'.',',')) ?></sub></span>
                                 </div><!--LEFT-->
-                                <div class="right">
-                                    <sup>$</sup>
-                                    <span>2,925</span>
-                                    <sub>75</sub>
+                                <div class="right js-before-lb">
+                                    <sup>$</sup><span><?= str_replace('.','</span><sub>.',
+									number_format($this->info['price_before']*2*$this->info['nights'],2,'.',',')) ?></sub>
                                 </div><!--RIGHT-->
                                 <input class="btn-1" type="submit" name="" value="Book Now" />
-                                <div class="bot">
-                                    Total Saving $426
+                                <div class="bot js-save-lb">
+                                    Total Saving $
+									<?= ($this->info['price_before']*2*$this->info['nights']) - ($this->info['price']*2*$this->info['nights']) ?>
                                 </div>
                             </div><!--TOTAL-->
                         </div><!--FIELDS-->
+                        <input type="hidden" class="js-price" value="<?= $this->info['price'] ?>"/>
+                        <input type="hidden" class="js-price-before" value="<?= $this->info['price_before'] ?>"/>
                     </form>
                 </div><!--CUSTOMIZE-->
                 <div class="talk">
@@ -286,15 +286,128 @@
 <div class="hidden"></div>
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $(".tabs").tabs({
-            selected: 2
-        });
-        $("#addons .accordion").accordion({
-            autoHeight: false,
-            collapsible: true
-        });
-    });
+$(document).ready(function() {
+	$(".tabs").tabs({
+		selected: 2
+	});
+	$("#addons .accordion").accordion({
+		autoHeight: false,
+		collapsible: true
+	});
+	$('.js-change-image').click(function(){
+		var href = $(this).attr('href');
+		$('.js-image').removeClass('show');
+		$(href).addClass('show');
+		return false;
+	});
+	$('.js-fancybox').fancybox({
+		overlayColor:'#fff',
+		padding:5,
+		centerOnScroll:1
+	});
+	
+	$expires = <?= strtotime($this->info['expires']) ?>;
+	$now	 = <?= time() ?>;
+	
+	setInterval(function(){
+		$now += 1; $l = $expires - $now;
+		$d1 = ($l - ($l % 86400)); $h1 = $l - $d1; $h2 = $h1 - ($h1 % 3600); $m1 = $h1 - $h2; $m2 = $m1 - ($m1 % 60);
+		$days = $d1 / 86400; $hours = $h2 / 3600; $minutes = $m2 / 60; $seconds = $m1 - $m2;
+		$('.jsd').text($days); $('.jsh').text($hours); $('.jsm').text($minutes); $('.jss').text($seconds);
+	},1000);
+	
+	$('.js-calendar').datepicker({
+		minDate:new Date(),
+		maxDate:new Date(2012,8,19),
+		dateFormat:'MM d, yy'
+	});
+	
+	$('.js-change').change(function(){
+		calculate();
+	});
+	function calculate(){
+		var price = parseFloat($('.js-price').val());
+		var before = parseFloat($('.js-price-before').val());
+		var _room  = $('.js-room:checked');
+		var _activities = $('.js-activity:checked');
+		var travelers  = parseInt($('.js-kids').val()) + parseInt($('.js-adults').val());
+		var nights	   = parseInt($('.js-nights').val());
+		
+		
+		if(_room.data('included') != 1) {
+			var room = parseFloat(_room.data('price'));
+			price = price + room;
+		}
+		
+		if(travelers > 2 || nights > <?= $this->info['nights'] ?>) {
+			$('.js-room-table tr').each(function(index){
+				var p = parseFloat($('input', this).data('price')) * travelers * nights;
+				if(p != 0) {
+					if(p > 0){
+						$('#js-room-'+index).text('+ $'+p);
+					} else {
+						$('#js-room-'+index).text('- $'+Math.abs(p));
+					}
+				} else {
+					$('#js-room-'+index).text('Included');
+				}
+			});
+			
+			if(nights > <?= $this->info['nights'] ?>) {
+				var n = (price * nights * travelers) - (price * <?= $this->info['nights'] ?> * travelers);
+				$('.js-nights-lb').text('+ $'+n);
+			} else {
+				$('.js-nights-lb').text('Included');
+			}
+			
+			if(travelers > 2) {
+				$('.js-activity-table tr').each(function(index){
+					var z = parseFloat($('input',this).data('price')) * travelers;
+					$('#js-activity-'+index).text('+ $'+z);
+				});
+			}
+		}
+		
+		var activities = 0;
+		$('tr.js-activity-tr').remove();	
+		
+		if(_activities.length > 0) {
+			$('.js-specsDiv').removeClass('hidden');
+			_activities.each(function(){
+				activities += ($(this).data('price') * travelers);
+				$('.js-specsDiv table').append(
+					'<tr class="js-activity-tr">'+
+						'<td>'+$(this).data('label')+'</td>'+
+						'<td class="rg">+ $'+($(this).data('price') * travelers)+'</td>'+
+					'</tr>'
+				);
+			});
+		} else {
+			$('.js-specsDiv').addClass('hidden');
+		}
+		
+		var total = (price * travelers * nights) + activities;
+		var totalBefore = (before * travelers * nights) + activities;
+		
+		var save = totalBefore - total;
+		
+		$('.js-price-lb').html('<sup>$</sup> '+format(total.toFixed(2)).replace('.','<sub>.')+'</sub>');
+		$('.js-before-lb').html('<sup>$</sup> <span>'+format(totalBefore.toFixed(2)).replace('.','</span><sub>.')+'</sub>');
+		$('.js-save-lb').html('Total Saving $ '+save);
+	}
+	
+	function format(nStr) {
+		nStr += '';
+		x = nStr.split('.');
+		x1 = x[0];
+		x2 = x.length > 1 ? '.' + x[1] : '';
+		var rgx = /(\d+)(\d{3})/;
+		while (rgx.test(x1)) {
+			x1 = x1.replace(rgx, '$1' + ',' + '$2');
+		}
+		return x1 + x2;
+	}
+});
 </script>
 <script type="text/javascript">
   var _gaq = _gaq || [];
