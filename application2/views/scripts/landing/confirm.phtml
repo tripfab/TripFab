@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+    <title>Tripfab.com</title>
+    <link type="text/css"  rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css"  rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css"  rel="stylesheet" href="/css6/landing/all1.css?v=<?= $this->cssVC ?>" />
+</head>
+<body id="trip_all1">
+<div id="wp_all">
+    <div id="wp_header">
+        <div class="wrapper">
+            <h1 class="logo"><a href="">Tripfab</a></h1>
+            <div class="contact">
+                <p>Call our Customer Service <strong>1-866-401-0382</strong></p>
+                <a href="#" onclick="SnapABug.startChat('How can I help you today?'); return false;" class="btn-10">Live Chat</a>
+            </div><!--CONTACT-->
+        </div><!--WRAPPER-->
+    </div><!--WP_HEADER-->
+    
+    <div id="wp_content">
+        <div id="checkout">
+        	<form method="post" action="/en-US/landing/1/checkout">
+                <div class="left">
+                    <div class="top">
+                        <h2><?= $this->info['title'] ?></h2>
+                        <ul>
+                            <li><em class="i1"></em><strong>Travelers:</strong> <?= $this->info['travelers'] ?> people</li>
+                            <li><em class="i2"></em><strong>Arrival Date:</strong> <?= $this->info['arrival'] ?></li>
+                            <li><em class="i2"></em><strong>Departure Date:</strong> <?= $this->info['departure'] ?></li>
+                        </ul>
+                    </div><!--TOP-->
+                    <div class="content">
+                        <h3><em></em>Customize your Reservation</h3>
+                        <div class="accordion">
+                            <h4>Want to Change your Room Type?</h4>
+                            <div class="single">
+                                <label><input class="js-change-room" type="radio" name="changeRoom" value="1" />Yes, Please</label>
+                                <ul>
+                                    <?php foreach($this->rooms as $room): ?>
+                                    <?php $checked = (isset($room['selected'])) ? 'checked="checked"': '' ?>
+                                    <li><input data-included="<?= isset($room['selected']) ?>" type="radio" name="room" data-price="<?= $room['price'] ?>" 
+                                    value="<?= $room['id'] ?>" <?= $checked ?> class="js-room" data-label="<?= $room['name'] ?>" /> <?= $room['name'] ?> 
+                                    (<?= $room['price_desc'] ?>)</li>
+                                    <?php endforeach ?>
+                                </ul>
+                                <label><input class="js-change-room-no" type="radio" checked="checked" name="changeRoom" value="0" />No, Thanks</label>
+                            </div><!--SINGLE-->
+                            
+                            <h4>Do you want to do any additional activities?</h4>
+                            <div class="single last">
+                                <label><input class="js-add-activities" type="radio" name="addActivities" value="1" />Yes, Please</label>
+                                <ul>
+                                    <?php foreach($this->activities as $a): ?>
+                                    <li><input type="checkbox" class="js-activity" value="<?= $a['id'] ?>" data-price="<?= $a['price'] ?>"
+                                    name="activities[]" data-label="<?= $a['name'] ?>" /><?= $a['name'] ?> (<?= $a['price_desc'] ?>)</li>
+                                    <?php endforeach ?>									
+                                </ul>
+                                <label><input  class="js-add-activities-no" type="radio" checked="checked" name="addActivities" value="0" />No, Thanks</label>
+                            </div><!--SINGLE-->
+                        </div><!--ACCORDION-->
+                    </div><!--CONTENT-->
+                </div><!--LEFT-->
+                
+                <div class="right">
+                    <div class="widget">
+                        <h4>Summary</h4>
+                        <table width="265" border="0" cellspacing="0" cellpadding="0">
+                            <tr class="before">
+                                <td>Package Regular Price</td>
+                                <td class="rg js-before-lb">$<?= $this->info['price_before'] ?></td>
+                            </tr>
+                            <tr>
+                                <td>Special Price</td>
+                                <td class="rg js-price-lb"><strong>$<?= $this->info['price'] ?></strong></td>
+                            </tr>
+                            <tr class="save">
+                                <td>Total Save</td>
+                                <td class="rg js-save-lb">$<?= $this->info['save'] ?></td>
+                            </tr>
+                            <tr class="total">
+                                <td>Trip Total</td>
+                                <td class="rg js-price-lb">$<?= $this->info['price'] ?></td>
+                            </tr>
+                        </table>
+                        <input class="btn-1" type="submit" name="" value="Go To Check Out" />
+                    </div><!--WIDGET-->
+                
+                    <div class="widget">
+                        <h4>Trip Specifications</h4>
+                        <table class="js-specific" width="265" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <th scope="col">All Inclusive Package</th>
+                                <th scope="col" class="rg">Rates</th>
+                            </tr>
+                            <tr>
+                                <td>Allegro Papagayo</td>
+                                <td class="rg">$<?= $this->info['price'] ?></td>
+                            </tr>
+                            <tr>
+                            	<td>From <?= $this->info['arrival'] ?></td>
+                                <td class="rg">--</td>
+                            </tr>
+                            <tr>
+                            	<td>to <?= $this->info['departure'] ?></td>
+                                <td class="rg">--</td>
+                            </tr>
+                            <tr>
+                            	<td class="js-room-lb"><?= $this->info['room'] ?></td>
+                                <td class="rg js-room-price-lb">--</td>
+                            </tr>
+                            <tr>
+                            	<td><?= $this->info['travelers'] ?> Travelers</td>
+                                <td class="rg">--</td>
+                            </tr>
+                        </table>
+                        <div class="js-specsDiv hidden">
+                            <span class="line"></span>
+                            <strong>Addons</strong>
+                            <table width="265" border="0" cellspacing="0" cellpadding="0"></table>
+                        </div>
+                    </div><!--WIDGET-->
+                    
+                    <div class="talk">
+                        <h4>Talk to Us</h4>
+                        <p>Call our Customer Service <strong>1-866-401-0382</strong></p>
+               			<a href="#" onclick="SnapABug.startChat('How can I help you today?'); return false;" class="btn-10">Live Chat</a>
+                    </div><!--TALK-->
+                </div><!--RIGHT-->
+                <input type="hidden" class="js-price" value="<?= $this->info['_price'] ?>"/>
+                <input type="hidden" class="js-price-before" value="<?= $this->info['_price_before'] ?>"/>
+                <input type="hidden" name="date" class="js-date" value="<?= $this->info['arrival'] ?>" />
+                <input type="hidden" name="nights" class="js-nights" value="<?= $this->info['nights'] ?>" />
+                <input type="hidden" name="travelers" class="js-travelers" value="<?= $this->info['travelers'] ?>" />
+            </form>
+            <div class="clear"></div>
+        </div><!--CHECKOUT-->
+    </div><!--WP_CONTENT-->
+    <div id="wp_footer">
+        <div class="footer">
+            <div class="left">
+                <h6>Tripfab is lovely designed in a tropical paradise</h6>
+                <span>Copyright &copy; 2011 Tripfab</span>
+            </div><!--LEFT-->
+            <ul>
+                <li><a target="_blank" href="mailto:hello@tripfab.com">eMail</a></li>
+                <li><a target="_blank" href="https://plus.google.com/108576021199856132768/">Google+</a></li>
+                <li><a target="_blank" href="https://twitter.com/tripfab">Twitter</a></li>
+                <li><a target="_blank" href="https://facebook.com/tripfab">Facebook</a></li>
+            </ul>
+        </div><!--FOOTER-->
+    </div><!--WP_FOOTER-->
+</div><!--WRAPPER_ALL-->
+<div class="hidden"></div>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".tabs").tabs({
+		selected: 2
+	});
+	$('.js-room').change(function(){
+		$('.js-change-room').attr('checked','checked');
+		calculate();
+	});
+	$('.js-change-room-no').change(function(){
+		$('.js-room[data-included=1]').attr('checked','checked');
+		calculate();
+	});
+	$('.js-activity').change(function(){
+		if($('.js-activity:checked').length > 0)
+			$('.js-add-activities').attr('checked','checked');
+		else
+			$('.js-add-activities-no').attr('checked','checked');
+		calculate();
+	});
+	$('.js-add-activities-no').change(function(){
+		if($('.js-activity:checked').length > 0)
+			$('.js-activity').removeAttr('checked');
+		calculate();
+	});
+	
+	function calculate(){
+		var price = parseFloat($('.js-price').val());
+		var before = parseFloat($('.js-price-before').val());
+		var _room  = $('.js-room:checked');
+		var _activities = $('.js-activity:checked');
+		var travelers  = parseInt($('.js-travelers').val());
+		var nights	   = parseInt($('.js-nights').val());
+		
+		if(_room.data('included') != 1) {
+			var room = parseFloat(_room.data('price'));
+			price = price + room;
+			$('.js-room-lb').text(_room.data('label'));
+			if(room > 0) {
+				$('.js-room-price-lb').text('+ $'+(room * nights * travelers));
+			} else {
+				$('.js-room-price-lb').text('- $'+Math.abs((room * nights * travelers)));
+			}
+		} else {
+			$('.js-room-lb').text(_room.data('label'));
+			$('.js-room-price-lb').text('--');
+		}
+		
+		var activities = 0;
+		$('tr.js-activity-tr').remove();	
+		
+		if(_activities.length > 0) {
+			$('.js-specsDiv').removeClass('hidden');
+			_activities.each(function(){
+				activities += ($(this).data('price') * travelers);
+				$('.js-specsDiv table').append(
+					'<tr class="js-activity-tr">'+
+						'<td>'+$(this).data('label')+'</td>'+
+						'<td class="rg">+ $'+($(this).data('price') * travelers)+'</td>'+
+					'</tr>'
+				);
+			});
+		} else {
+			$('.js-specsDiv').addClass('hidden');
+		}
+		
+		var total = (price * travelers * nights) + activities;
+		var totalBefore = (before * travelers * nights) + activities;
+		
+		var save = totalBefore - total;
+		
+		$('.js-price-lb').text('$'+total);
+		$('.js-before-lb').text('$'+totalBefore);
+		$('.js-save-lb').text('$'+save);
+	}
+});
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24981182-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script type="text/javascript">
+document.write(unescape("%3Cscript src='" + ((document.location.protocol=="https:")?"https://snapabug.appspot.com":"http://www.snapengage.com") + "/snapabug.js' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">
+//SnapABug.setButton("https://static.tripfab.com/images/Live-Chat-Button.png");
+//SnapABug.addButton("12926583-ebae-4874-8f3e-57cbe2114ebc","0","55%");
+SnapABug.init("12926583-ebae-4874-8f3e-57cbe2114ebc");
+SnapABug.setCallback('StartChat', function(email, msg, type) {
+	var img = document.createElement('img');
+	img.src = "https://www.googleadservices.com/pagead/conversion/956485843/?value=0&amp;label=T64ECJWh8gMQ06GLyAM&amp;guid=ON&amp;script=0";
+	img.width = 1; img.height = 1;
+	document.body.appendChild(img);
+});
+</script>
+</body>
+</html>

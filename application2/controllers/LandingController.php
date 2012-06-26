@@ -441,11 +441,167 @@ class LandingController extends Zend_Controller_Action {
                         ),
                     ),
                 ),
+                'expires'=>'2012-06-29 23:59:59'
             ),
         );
         
+        $rooms = array(
+            'papagayo' => array(
+                array(
+                    'id' => 'standard',
+                    'name' => 'Standard',
+                    'price_desc' => '- $20',
+                    'price' => -20
+                ),
+                array(
+                    'id' => 'deluxe',
+                    'name' => 'Deluxe',
+                    'price_desc' => 'Included',
+                    'price' => 0,
+                    'selected' => 1
+                ),
+                array(
+                    'id' => 'suite',
+                    'name' => 'Master Suite',
+                    'price_desc' => '+ $50',
+                    'price' => 50
+                ),
+            )
+        );
+        
+        $activities = array(
+            'papagayo' => array(
+                array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tour',
+                    'price_desc' => '+$25/person',
+                    'price' => 25
+                ),
+                array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tour',
+                    'price_desc' => '+$20/person',
+                    'price' => 20
+                ),
+                array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tour',
+                    'price_desc' => '+$32/person',
+                    'price' => 32
+                ),
+            )
+        );
+        
         $this->view->info = $info[$id];
+        $this->view->rooms = $rooms[$id];        
+        $this->view->activities = $activities[$id];
         
         $this->render('trip'.$version);
+    }
+    
+    public function confirmAction()
+    {
+        if(!$this->getRequest()->isPost())
+            throw new Exception('Page not found');
+        
+        $version = $this->_getParam('version');
+        if($version != 1) 
+            throw new Exception('Page not found');
+        
+        $id = $this->_getParam('idf');
+        $data = $_POST;
+        
+        $info = array(
+            'papagayo' => array(
+                'title' => 'Alegro Papagayo (All Inclusive)',
+                '_price'    => 60,
+                '_price_before' => 70,
+                'room' => 'Deluxe',
+            )
+        );
+        
+        $rooms = array(
+            'papagayo' => array(
+                array(
+                    'id' => 'standard',
+                    'name' => 'Standard',
+                    'price_desc' => 'Substract $20 per person per night',
+                    'price' => -20
+                ),
+                array(
+                    'id' => 'deluxe',
+                    'name' => 'Deluxe',
+                    'price_desc' => 'Included',
+                    'price' => 0,
+                    'selected' => 1
+                ),
+                array(
+                    'id' => 'suite',
+                    'name' => 'Master Suite',
+                    'price_desc' => 'Add $50 per persona per night',
+                    'price' => 50
+                ),
+            )
+        );
+        
+        $activities = array(
+            'papagayo' => array(
+                array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tour',
+                    'price_desc' => ' $25 per person',
+                    'price' => 25
+                ),
+                array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tour',
+                    'price_desc' => 'Add $20 per person',
+                    'price' => 20
+                ),
+                array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tour',
+                    'price_desc' => 'Add $32 per person',
+                    'price' => 32
+                ),
+            )
+        );
+        
+        
+        
+        
+        $arrival = strtotime($data['date']);
+        $nights  = $data['nights'];
+        $travelers = $data['travelers'];
+        
+        $departure = $arrival + (86400 * $nights);
+        
+        $info[$id]['arrival'] = date('F jS, Y', $arrival);
+        $info[$id]['departure'] = date('F jS, Y', $departure);
+        $info[$id]['travelers'] = $travelers;
+        $info[$id]['nights'] = $nights;
+        
+        $ppn = $info[$id]['_price'];
+        $ppn_before = $info[$id]['_price_before'];
+        $price = $ppn * $travelers * $nights;
+        $price_before = $ppn_before * $travelers * $nights;
+        
+        $save = $price_before - $price;
+        
+        $info[$id]['price'] = $price;
+        $info[$id]['price_before'] = $price_before;
+        $info[$id]['save'] = $save;
+        
+        $this->view->info = $info[$id];        
+        $this->view->rooms = $rooms[$id];        
+        $this->view->activities = $activities[$id];
+        
+    }
+    
+    public function checkoutAction()
+    {
+        $version = $this->_getParam('version');
+        
+        $this->render('checkout'.$version);
     }
 }

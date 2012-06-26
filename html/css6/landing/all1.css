@@ -669,6 +669,9 @@
 	width: 960px;
 	margin: 0 auto;
 }
+#trip_all1 #checkout .content {
+	padding-bottom: 30px;
+}
 #trip_all1 #checkout .left{
 	width: 685px;
 	float: left;
@@ -677,6 +680,7 @@
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	-o-border-radius: 4px;
+	box-shadow: 0px 0px 2px 0px #e7e7e7;
 }
 #trip_all1 #checkout .left .top {
 	height: 108px;
@@ -745,6 +749,10 @@
 	height: 45px;
 	font:bold 13px/45px Helvetica;
 	color: #4c4c4c;
+	background: url(https://static.tripfab.com/images6/tripAll10.png) no-repeat right -28px;
+}
+#trip_all1 #checkout .accordion h4.ui-state-active {
+	background-position: right 19px;
 }
 #trip_all1 #checkout .accordion .single {
 	border-bottom: 1px dotted #CCC;
@@ -754,6 +762,10 @@
 	height: 35px;
 	font: normal 13px/35px Helvetica;
 	display: block;
+	color: #4a4a4a;
+}
+#trip_all1 #checkout .accordion input {
+	margin: 0 8px 0 0;
 }
 #trip_all1 #checkout .accordion ul {
 	padding-left: 20px;
@@ -762,20 +774,103 @@
 	height: 20px;
 	font: normal 13px/20px Helvetica;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#trip_all1 .right .widget {
+	background-color: #FFF;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-o-border-radius: 3px;
+	margin-bottom: 20px;
+	box-shadow: 0px 0px 2px 0px #e7e7e7;
+	padding-bottom: 10px;
+}
+#trip_all1 .right .widget h4 {
+	height: 38px;
+	background-color: #303030;
+	border-radius: 3px 3px 0 0;
+	-moz-border-radius: 3px 3px 0 0;
+	-webkit-border-radius: 3px 3px 0 0;
+	-o-border-radius: 3px 3px 0 0;
+	color: #FFF;
+	font: bold 14px/38px Helvetica;
+	text-indent: 20px;
+	margin-bottom: 10px;
+}
+#trip_all1 .right .widget .before{
+	color: #ea7806;
+	text-decoration:line-through;
+}
+#trip_all1 .right .widget td {
+	padding: 0 10px 0 15px;
+	height: 30px;
+	vertical-align: middle;
+	font: normal 13px/16px Helvetica;
+}
+#trip_all1 .right .widget th {
+	text-align: left;
+	padding-left: 15px;
+}
+#trip_all1 .right .widget .rg {
+	text-align: right;
+	padding: 0 15px 0 0;
+}
+#trip_all1 .right .widget .save {
+	color: #EA7806;
+}
+#trip_all1 .right .widget .total td{
+	font: bold 20px Helvetica;
+	color: #303030;
+}
+#trip_all1 .right .widget .btn-1 {
+	width: 243px;
+	margin: 10px 10px 0;
+	font-size: 14px;
+}
+#trip_all1 .right .widget table {
+	margin: 0 auto 10px;
+}
+#trip_all1 .right .widget table strong{
+	display: block;
+}
+#trip_all1 .right .widget .line {
+	border-bottom: 1px dotted #CCC;
+	height: 1px;
+	display: block;
+	margin: 0 auto 10px;
+	width: 240px;
+}
+#trip_all1 .right .widget .line + strong {
+	padding: 0 10px 0 15px ;
+	display: block;
+}
+#trip_all1 .right .specs td{
+	height: 40px;
+}
+#trip_all1 .right .talk {
+	padding: 0 15px 30px;
+}
+#trip_all1 .right .talk h4 {
+	font: bold 15px Helvetica;
+	margin-bottom: 10px;
+}
+#trip_all1 .right .talk p {
+	color: #a6a6a6;
+	font: bold 11px Helvetica;
+}
+#trip_all1 .right .talk p strong {
+	color: #303030;
+	font: bold 24px Helvetica;
+	color: #84b83d;
+	display: block;
+	margin-top: 6px;
+}
+#trip_all1 .right .talk a {
+	display: block;
+	width:100%;
+	font-size: 13px;
+	margin: 10px 0 0 0;
+	padding: 0;
+}
 /*END All INCLUSIVE VERSION 1 CHECKOUT-------------------------------------------------------------------*/
 
 
