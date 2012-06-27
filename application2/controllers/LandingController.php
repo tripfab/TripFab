@@ -11,24 +11,21 @@
  * @author magentodeveloper
  */
 class LandingController extends Zend_Controller_Action {
-    
-    public function init()
-    {
+
+    public function init() {
         
     }
-    
-    public function indexAction()
-    {
+
+    public function indexAction() {
         
     }
-    
-    public function allinclusiveAction()
-    {
+
+    public function allinclusiveAction() {
         $version = $this->_getParam('version');
-        
+
         $trips = array(
             array(
-                'id'    => 'papagayo',
+                'id' => 'papagayo',
                 'image' => 'https://static.tripfab.com/trips/papagayo/main_thumb.jpg',
                 'title' => 'Allegro Papagayo Resort',
                 'rating' => 4,
@@ -37,13 +34,13 @@ class LandingController extends Zend_Controller_Action {
                 'travelers' => '2 - 100',
                 'price_before' => 110,
                 'price' => 75,
-                'save'  => 35,
+                'save' => 35,
                 'description' => 'Eat, drink and be merry – without having to 
                     worry about the bill. Enjoy all the freshly prepared meals, 
                     alcoholic'
             ),
             array(
-                'id'    => 'riu',
+                'id' => 'riu',
                 'image' => 'https://static.tripfab.com/trips/riu/main_thumb.jpg',
                 'title' => 'RIU Guanacaste',
                 'rating' => 4,
@@ -52,13 +49,13 @@ class LandingController extends Zend_Controller_Action {
                 'travelers' => '2 - 100',
                 'price_before' => 110,
                 'price' => 75,
-                'save'  => 35,
+                'save' => 35,
                 'description' => 'You can never keep a good thing under wraps 
                     for long and though Costa Rica is no longer a well-kept 
                     secret hidden'
             ),
             array(
-                'id'    => 'doubletree',
+                'id' => 'doubletree',
                 'image' => 'https://static.tripfab.com/trips/doubletree/main_thumb.jpg',
                 'title' => 'Double Tree Resort',
                 'rating' => 4,
@@ -67,13 +64,13 @@ class LandingController extends Zend_Controller_Action {
                 'travelers' => '2 - 100',
                 'price_before' => 110,
                 'price' => 75,
-                'save'  => 35,
+                'save' => 35,
                 'description' => 'You can never keep a good thing under wraps 
                     for long and though Costa Rica is no longer a well-kept 
                     secret hidden'
             ),
             array(
-                'id'    => 'langosta',
+                'id' => 'langosta',
                 'image' => 'https://static.tripfab.com/trips/langosta/main_thumb.jpg',
                 'title' => 'Barcelo Langosta',
                 'rating' => 4,
@@ -82,35 +79,34 @@ class LandingController extends Zend_Controller_Action {
                 'travelers' => '2 - 100',
                 'price_before' => 110,
                 'price' => 75,
-                'save'  => 35,
+                'save' => 35,
                 'description' => 'You can never keep a good thing under wraps 
                     for long and though Costa Rica is no longer a well-kept 
                     secret hidden'
             ),
         );
-        
+
         $this->view->trips = $trips;
-        
-        $this->render('allinclusive'.$version);
+
+        $this->render('allinclusive' . $version);
     }
-    
-    public function tripAction()
-    {
+
+    public function tripAction() {
         $id = $this->_getParam('idf');
         $version = $this->_getParam('version');
         $info = array(
             'papagayo' => array(
-                'rating'   => 4,
-                'nights'   => 3,
+                'rating' => 4,
+                'nights' => 3,
                 'location' => 'Guanacaste, Costa Rica',
-                'price'    => 75,
+                'price' => 75,
                 'price_entero' => 75,
-                'price_decimal'=> 00,
+                'price_decimal' => 00,
                 'price_before' => 110,
-                'price_before_entero'=>110,
-                'price_before_decimal'=>00,
-                'save'     => 35,
-                'title'    => 'Allegro Papagayo Resort',
+                'price_before_entero' => 110,
+                'price_before_decimal' => 00,
+                'save' => 35,
+                'title' => 'Allegro Papagayo Resort',
                 'description' => 'Eat, drink and be merry – without having to worry 
                     about the bill. Enjoy all the freshly prepared meals, alcoholic 
                     and nonalcoholic beverages you can handle, in addition to 
@@ -119,8 +115,8 @@ class LandingController extends Zend_Controller_Action {
                     rainforests and unspoiled beaches, this all-inclusive won’t 
                     disappoint.',
                 'sale_starts' => 'April 23th',
-                'sale_ends'   => 'July 20th',
-                'overview'    => array(
+                'sale_ends' => 'July 20th',
+                'overview' => array(
                     array(
                         'title' => 'General',
                         'description' => "Occidental Allegro Papagayo is a 
@@ -150,7 +146,7 @@ class LandingController extends Zend_Controller_Action {
                         'title' => 'Dining',
                         'description' => 'Occidental Allegro Papagayo is well
                             known for its two specialty a la carte restaurants 
-                            and one buffet-style restaurant. Themes vary nightly.',                        
+                            and one buffet-style restaurant. Themes vary nightly.',
                         'points1' => array(
                             'Los Corales is an international, open-air buffet',
                             'La Trattoria is an Italian a la carte restauran',
@@ -460,21 +456,20 @@ class LandingController extends Zend_Controller_Action {
                         'description' => 'Snack Bar and Beach Club offer snacks and lunch',
                     ),
                 ),
-                'expires'=>'2012-06-29 23:59:59'
+                'expires' => '2012-06-29 23:59:59'
             ),
-            
             'riu' => array(
-                'rating'   => 4,
-                'nights'   => 3,
+                'rating' => 4,
+                'nights' => 3,
                 'location' => 'Guanacaste, Costa Rica',
-                'price'    => 75,
+                'price' => 75,
                 'price_entero' => 75,
-                'price_decimal'=> 00,
+                'price_decimal' => 00,
                 'price_before' => 110,
-                'price_before_entero'=>110,
-                'price_before_decimal'=>00,
-                'save'     => 35,
-                'title'    => 'RIU Guanacaste',
+                'price_before_entero' => 110,
+                'price_before_decimal' => 00,
+                'save' => 35,
+                'title' => 'RIU Guanacaste',
                 'description' => 'With delicious food, beautiful beaches, 
                     relaxing jacuzzis, a gym, sauna, spa and an amazing 
                     all-inclusive plan, Hotel Riu Guanacaste is the perfect d
@@ -482,8 +477,8 @@ class LandingController extends Zend_Controller_Action {
                     property features 701 rooms,  3 specialty restaurants and an 
                     immense and luxurious swimming pool.',
                 'sale_starts' => 'April 23th',
-                'sale_ends'   => 'July 20th',
-                'overview'    => array(
+                'sale_ends' => 'July 20th',
+                'overview' => array(
                     array(
                         'title' => 'General',
                         'description' => "The all-inclusive Riu resort is situated 
@@ -513,7 +508,7 @@ class LandingController extends Zend_Controller_Action {
                             and a buffet-style main restaurant. Asian, Italian 
                             and the Steak House both offer to-order and buffet 
                             options. Check out the lobby bar or the pool bar for 
-                            a cocktail in the fresh air.',                        
+                            a cocktail in the fresh air.',
                         'points1' => array(
                             'Liberia Resaurant typical and international Food',
                             'La Toscana Italian sit-down restaurant',
@@ -806,30 +801,28 @@ class LandingController extends Zend_Controller_Action {
                             cuts of meat, ordered off of a menu. By reservation only. ',
                     ),
                 ),
-                'expires'=>'2012-06-29 23:59:59'
+                'expires' => '2012-06-29 23:59:59'
             ),
-            
-            
             'doubletree' => array(
-                'rating'   => 4,
-                'nights'   => 3,
+                'rating' => 4,
+                'nights' => 3,
                 'location' => 'Puntarenas, Costa Rica',
-                'price'    => 75,
+                'price' => 75,
                 'price_entero' => 75,
-                'price_decimal'=> 00,
+                'price_decimal' => 00,
                 'price_before' => 110,
-                'price_before_entero'=>110,
-                'price_before_decimal'=>00,
-                'save'     => 35,
-                'title'    => 'Double Tree Puntarenas',
+                'price_before_entero' => 110,
+                'price_before_decimal' => 00,
+                'save' => 35,
+                'title' => 'Double Tree Puntarenas',
                 'description' => 'From the fresh-out-of-the oven “welcome cookie”
                  to the afternoons kayaking on the Pacific, this is a guaranteed 
                  trip of a lifetime. Endless buffets, fresh smoothies and 
                  cocktails, and hours lounging poolside define the lifestyle of 
                  every guest.',
                 'sale_starts' => 'April 23th',
-                'sale_ends'   => 'July 20th',
-                'overview'    => array(
+                'sale_ends' => 'July 20th',
+                'overview' => array(
                     array(
                         'title' => 'General',
                         'description' => "The Doubletree experience is something 
@@ -858,7 +851,7 @@ class LandingController extends Zend_Controller_Action {
                         'title' => 'Dining',
                         'description' => 'The Doubletree Resort by Hilton in 
                         Puntarenas offers 13 different restaurants and bars 
-                        serving up an array international cuisine.',                        
+                        serving up an array international cuisine.',
                         'points1' => array(
                             'El Pelicano Bar and Snack Bar quick snacks and fast food.',
                             'Calypso The main restaurant, Calypso offers local and 
@@ -866,7 +859,6 @@ class LandingController extends Zend_Controller_Action {
                             different theme.',
                             'El Tucan Fruit Bar This eatery offers 
                             an assortment of fresh fruits, smoothies and shakes.',
-                            
                         ),
                         'points2' => array(
                             "Caña Brava Specializing in seafood, this outdoor
@@ -1105,29 +1097,26 @@ class LandingController extends Zend_Controller_Action {
                         ),
                     ),
                 ),
-                'expires'=>'2012-06-29 23:59:59'
+                'expires' => '2012-06-29 23:59:59'
             ),
-            
-            
-            
             'langosta' => array(
-                'rating'   => 4,
-                'nights'   => 3,
+                'rating' => 4,
+                'nights' => 3,
                 'location' => 'Tamarindo, Costa Rica',
-                'price'    => 75,
+                'price' => 75,
                 'price_entero' => 75,
-                'price_decimal'=> 00,
+                'price_decimal' => 00,
                 'price_before' => 110,
-                'price_before_entero'=>110,
-                'price_before_decimal'=>00,
-                'save'     => 35,
-                'title'    => 'Barcelo Langosta',
+                'price_before_entero' => 110,
+                'price_before_decimal' => 00,
+                'save' => 35,
+                'title' => 'Barcelo Langosta',
                 'description' => 'Be treated like royalty for a day – or as many days as you 
                 like. Indulge in some local fare with complimentary breakfast, lunch, dinner, 
                 and snack bar. When it comes time to play, there are no limits.',
                 'sale_starts' => 'April 23th',
-                'sale_ends'   => 'July 20th',
-                'overview'    => array(
+                'sale_ends' => 'July 20th',
+                'overview' => array(
                     array(
                         'title' => 'General',
                         'description' => "This is the life. Some trips keep travelers rushing 
@@ -1158,7 +1147,7 @@ class LandingController extends Zend_Controller_Action {
                         'description' => 'With such succulent dining options 
                         set amid one of the Gold Coast’s most stunning beaches, 
                         there will be no reason you’ll want to leave the hotel 
-                        to eat – or perhaps ever.',                        
+                        to eat – or perhaps ever.',
                         'points1' => array(
                             'A la carte restaurant',
                             'Buffet restaurant',
@@ -1316,7 +1305,6 @@ class LandingController extends Zend_Controller_Action {
                         'date' => 'June 17, 2012',
                         'text' => "I was there for a week and thought it was a very nice hotel. Would visit again. Beach was nice. Rainy season, so often showers in the afternoon.",
                     ),
-                    
                 ),
                 'features' => array(
                     'Transportation from and to the Airport',
@@ -1443,13 +1431,10 @@ class LandingController extends Zend_Controller_Action {
                         ),
                     ),
                 ),
-                'expires'=>'2012-06-29 23:59:59'
+                'expires' => '2012-06-29 23:59:59'
             ),
-            
-            
-            
         );
-        
+
         $rooms = array(
             'papagayo' => array(
                 array(
@@ -1536,7 +1521,7 @@ class LandingController extends Zend_Controller_Action {
                 ),
             )
         );
-        
+
         $activities = array(
             'papagayo' => array(
                 array(
@@ -1619,55 +1604,54 @@ class LandingController extends Zend_Controller_Action {
                 ),
             )
         );
-        
+
         $this->view->id = $id;
-        
+
         $this->view->info = $info[$id];
-        $this->view->rooms = $rooms[$id];        
+        $this->view->rooms = $rooms[$id];
         $this->view->activities = $activities[$id];
-        
-        $this->render('trip'.$version);
+
+        $this->render('trip' . $version);
     }
-    
-    public function confirmAction()
-    {
-        if(!$this->getRequest()->isPost())
+
+    public function confirmAction() {
+        if (!$this->getRequest()->isPost())
             throw new Exception('Page not found');
-        
+
         $version = $this->_getParam('version');
-        if($version != 1) 
+        if ($version != 1)
             throw new Exception('Page not found');
-        
+
         $id = $this->_getParam('idf');
         $data = $_POST;
-        
+
         $info = array(
             'papagayo' => array(
                 'title' => 'Alegro Papagayo (All Inclusive)',
-                '_price'    => 60,
+                '_price' => 60,
                 '_price_before' => 70,
                 'room' => 'Deluxe',
             ),
             'riu' => array(
                 'title' => 'Alegro Papagayo (All Inclusive)',
-                '_price'    => 60,
+                '_price' => 60,
                 '_price_before' => 70,
                 'room' => 'Deluxe',
             ),
             'langosta' => array(
                 'title' => 'Alegro Papagayo (All Inclusive)',
-                '_price'    => 60,
+                '_price' => 60,
                 '_price_before' => 70,
                 'room' => 'Deluxe',
             ),
             'doubletree' => array(
                 'title' => 'Alegro Papagayo (All Inclusive)',
-                '_price'    => 60,
+                '_price' => 60,
                 '_price_before' => 70,
                 'room' => 'Deluxe',
             )
         );
-        
+
         $rooms = array(
             'papagayo' => array(
                 array(
@@ -1754,7 +1738,7 @@ class LandingController extends Zend_Controller_Action {
                 ),
             )
         );
-        
+
         $activities = array(
             'papagayo' => array(
                 array(
@@ -1837,75 +1821,73 @@ class LandingController extends Zend_Controller_Action {
                 ),
             )
         );
-        
+
         $arrival = strtotime($data['date']);
-        $nights  = $data['nights'];
+        $nights = $data['nights'];
         $travelers = $data['travelers'];
-        
+
         $departure = $arrival + (86400 * $nights);
-        
+
         $info[$id]['arrival'] = date('F jS, Y', $arrival);
         $info[$id]['departure'] = date('F jS, Y', $departure);
         $info[$id]['travelers'] = $travelers;
         $info[$id]['nights'] = $nights;
-        
+
         $ppn = $info[$id]['_price'];
         $ppn_before = $info[$id]['_price_before'];
         $price = $ppn * $travelers * $nights;
         $price_before = $ppn_before * $travelers * $nights;
-        
+
         $save = $price_before - $price;
-        
+
         $info[$id]['price'] = $price;
         $info[$id]['price_before'] = $price_before;
         $info[$id]['save'] = $save;
-        
-        $this->view->info = $info[$id];        
-        $this->view->rooms = $rooms[$id];        
+
+        $this->view->info = $info[$id];
+        $this->view->rooms = $rooms[$id];
         $this->view->activities = $activities[$id];
         $this->view->id = $id;
-        
     }
-    
-    public function checkoutAction()
-    {
-         if(!$this->getRequest()->isPost())
+
+    public function checkoutAction() {
+        if (!$this->getRequest()->isPost())
             throw new Exception('Page not found');
-        
+
         $version = $this->_getParam('version');
-        
+
         $data = $_POST;
         $id = $data['package'];
-        
+
         //echo '<pre>'; print_r($data); echo '</pre>'; die;
-        
+
         $info = array(
             md5('papagayo') => array(
                 'title' => 'Alegro Papagayo (All Inclusive)',
-                '_price'    => 60,
+                '_price' => 60,
                 '_price_before' => 70,
                 'room' => $data['room'],
             ),
             md5('riu') => array(
                 'title' => 'Alegro Papagayo (All Inclusive)',
-                '_price'    => 60,
+                '_price' => 60,
                 '_price_before' => 70,
                 'room' => $data['room'],
             ),
             md5('langosta') => array(
                 'title' => 'Alegro Papagayo (All Inclusive)',
-                '_price'    => 60,
+                '_price' => 60,
                 '_price_before' => 70,
                 'room' => $data['room'],
             ),
             md5('doubletree') => array(
                 'title' => 'Alegro Papagayo (All Inclusive)',
-                '_price'    => 60,
+                '_price' => 60,
                 '_price_before' => 70,
                 'room' => $data['room'],
             )
         );
-        
+
         $rooms = array(
             md5('papagayo') => array(
                 'standard' => array(
@@ -1930,7 +1912,6 @@ class LandingController extends Zend_Controller_Action {
                     'selected' => ($data['room'] == 'suite')
                 ),
             ),
-            
             md5('riu') => array(
                 'standard' => array(
                     'id' => 'standard',
@@ -1954,7 +1935,6 @@ class LandingController extends Zend_Controller_Action {
                     'selected' => ($data['room'] == 'suite')
                 ),
             ),
-            
             md5('langosta') => array(
                 'standard' => array(
                     'id' => 'standard',
@@ -1978,7 +1958,6 @@ class LandingController extends Zend_Controller_Action {
                     'selected' => ($data['room'] == 'suite')
                 ),
             ),
-            
             md5('doubletree') => array(
                 'standard' => array(
                     'id' => 'standard',
@@ -2003,7 +1982,7 @@ class LandingController extends Zend_Controller_Action {
                 ),
             )
         );
-        
+
         $activities = array(
             md5('papagayo') => array(
                 'atv' => array(
@@ -2086,59 +2065,58 @@ class LandingController extends Zend_Controller_Action {
                 ),
             )
         );
-        
+
         $arrival = strtotime($data['date']);
-        $nights  = $data['nights'];
+        $nights = $data['nights'];
         $travelers = (isset($data['travelers'])) ? $data['travelers'] : $data['adults'] + $data['kids'];
-        
+
         $departure = $arrival + (86400 * $nights);
-        
+
         $info[$id]['arrival'] = date('F jS, Y', $arrival);
         $info[$id]['departure'] = date('F jS, Y', $departure);
         $info[$id]['travelers'] = $travelers;
         $info[$id]['nights'] = $nights;
-        
+
         $ppn = $info[$id]['_price'];
         $ppn_before = $info[$id]['_price_before'];
         $price = ($ppn + $rooms[$id][$data['room']]['price']) * $travelers * $nights;
         $price_before = ($ppn_before + $rooms[$id][$data['room']]['price']) * $travelers * $nights;
-        
+
         $addons = 0;
-        foreach($data['activities'] as $a) {
+        foreach ($data['activities'] as $a) {
             $addons += $activities[$id][$a]['price'] * $travelers;
         }
-        
+
         $price += $addons;
         $price_before += $addons;
-        
+
         $save = $price_before - $price;
-        
+
         $info[$id]['price'] = $price;
         $info[$id]['price_before'] = $price_before;
         $info[$id]['save'] = $save;
-        
+
         $info[$id]['adults'] = (isset($data['adults'])) ? $data['adults'] : $travelers;
-        $info[$id]['kids']   = (isset($data['kids'])) ? $data['kids'] : 0;
-        
-        $this->view->info = $info[$id];        
-        $this->view->rooms = $rooms[$id];        
+        $info[$id]['kids'] = (isset($data['kids'])) ? $data['kids'] : 0;
+
+        $this->view->info = $info[$id];
+        $this->view->rooms = $rooms[$id];
         $this->view->activities = $activities[$id];
         $this->view->id = $id;
         $this->view->addons = $data['activities'];
-        
+
         $places = new WS_PlacesService();
         $this->view->countries = $places->getPlaces(2);
-        
-        $this->render('checkout'.$version);
+
+        $this->render('checkout' . $version);
     }
-    
-    public function chargeAction()
-    {
+
+    public function chargeAction() {
         $this->_redirect('/en-US/landing/1/thanks');
     }
-    
-    public function thanksAction()
-    {
+
+    public function thanksAction() {
         
     }
+
 }
