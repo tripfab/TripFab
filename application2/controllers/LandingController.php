@@ -906,64 +906,11 @@ class LandingController extends Zend_Controller_Action {
                         'points2' => array(
                             '37” LCD TV with cable',
                             'Coffee maker',
-                            'Easy access to the pool complex and all of the hotels facilities'0
+                            'Easy access to the pool complex and all of the hotels facilities'
                         )
                     ),
                 ),
-                'addons' => array(
-                    array(
-                        'title' => 'Off-Site Golf course',
-                        'description' => 'Lorem ipsum dolor sit amet, consectetur 
-                            adipiscing elit. Suspendisse non leo sem, quis tempor 
-                            tortor. Cras eget adipiscing purus. Cum sociis 
-                            natoque penatibus et magnis dis parturient montes, 
-                            nascetur ridiculus',
-                        'tags' => array(
-                            'Price' => 'Free',
-                            'Duration' => 'Undefined',
-                            'Location' => '2 miles from Hotel',
-                        ),
-                    ),
-                    array(
-                        'title' => 'Scuba diving',
-                        'description' => 'Lorem ipsum dolor sit amet, consectetur 
-                            adipiscing elit. Suspendisse non leo sem, quis tempor 
-                            tortor. Cras eget adipiscing purus. Cum sociis 
-                            natoque penatibus et magnis dis parturient montes, 
-                            nascetur ridiculus',
-                        'tags' => array(
-                            'Price' => 'Free',
-                            'Duration' => 'Undefined',
-                            'Location' => '2 miles from Hotel',
-                        ),
-                    ),
-                    array(
-                        'title' => 'Excursions to Palo Verde, Arenal Volcano, rainforest, national parks, Liberia, deep-sea fishing & other tours',
-                        'description' => 'Lorem ipsum dolor sit amet, consectetur 
-                            adipiscing elit. Suspendisse non leo sem, quis tempor 
-                            tortor. Cras eget adipiscing purus. Cum sociis 
-                            natoque penatibus et magnis dis parturient montes, 
-                            nascetur ridiculus',
-                        'tags' => array(
-                            'Price' => 'Free',
-                            'Duration' => 'Undefined',
-                            'Location' => '2 miles from Hotel',
-                        ),
-                    ),
-                    array(
-                        'title' => 'Motorized water sports',
-                        'description' => 'Lorem ipsum dolor sit amet, consectetur 
-                            adipiscing elit. Suspendisse non leo sem, quis tempor 
-                            tortor. Cras eget adipiscing purus. Cum sociis 
-                            natoque penatibus et magnis dis parturient montes, 
-                            nascetur ridiculus',
-                        'tags' => array(
-                            'Price' => 'Free',
-                            'Duration' => 'Undefined',
-                            'Location' => '2 miles from Hotel',
-                        ),
-                    ),
-                ),
+                'addons' => array(),
                 'reviews' => array(
                     array(
                         'user' => 'Cara',
@@ -1039,60 +986,73 @@ class LandingController extends Zend_Controller_Action {
                         'text' => "The food was absolutely out of this world. I found that there were lots of things to do in the area. We found a really great combo tour that took us ziplining and whitewtaer rafting and we had a blast!! Highly recommend.",
                     ),
                 ),
+                /**
+                 *  Editar
+                 */
                 'features' => array(
                     'Full open bar',
                     '4 restaurants',
                 ),
                 'images' => array(
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/doubletree/main.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/doubletree/main_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/doubletree/main_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/doubletree/1.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/doubletree/1_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/doubletree/1_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/doubletree/2.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/doubletree/2_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/doubletree/2_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/doubletree/3.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/doubletree/3_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/doubletree/3_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/doubletree/4.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/doubletree/4_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/doubletree/4_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/doubletree/5.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/doubletree/5_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/doubletree/5_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/doubletree/6.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/doubletree/6_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/doubletree/6_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/doubletree/7.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/doubletree/7_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/doubletree/7_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/doubletree/8.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/doubletree/8_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/doubletree/8_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/doubletree/9.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/doubletree/9_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/doubletree/9_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                 ),
                 'dining' => 'With such succulent dining options set amid one of the Gold Coast’s most stunning beaches, there will be no reason you’ll want to leave the hotel to eat – or perhaps ever.',
@@ -1233,7 +1193,7 @@ class LandingController extends Zend_Controller_Action {
                             'Wide bed',
                             'Ceiling fan',
                             'Iron/Ironing board',
-                            'Minibar'
+                            'Minibar',
                             'Air conditioning',
                             'Coffee Machine',
                             'Safe',
@@ -1247,60 +1207,7 @@ class LandingController extends Zend_Controller_Action {
                         )
                     ),
                 ),
-                'addons' => array(
-                    array(
-                        'title' => 'Off-Site Golf course',
-                        'description' => 'Lorem ipsum dolor sit amet, consectetur 
-                            adipiscing elit. Suspendisse non leo sem, quis tempor 
-                            tortor. Cras eget adipiscing purus. Cum sociis 
-                            natoque penatibus et magnis dis parturient montes, 
-                            nascetur ridiculus',
-                        'tags' => array(
-                            'Price' => 'Free',
-                            'Duration' => 'Undefined',
-                            'Location' => '2 miles from Hotel',
-                        ),
-                    ),
-                    array(
-                        'title' => 'Scuba diving',
-                        'description' => 'Lorem ipsum dolor sit amet, consectetur 
-                            adipiscing elit. Suspendisse non leo sem, quis tempor 
-                            tortor. Cras eget adipiscing purus. Cum sociis 
-                            natoque penatibus et magnis dis parturient montes, 
-                            nascetur ridiculus',
-                        'tags' => array(
-                            'Price' => 'Free',
-                            'Duration' => 'Undefined',
-                            'Location' => '2 miles from Hotel',
-                        ),
-                    ),
-                    array(
-                        'title' => 'Excursions to Palo Verde, Arenal Volcano, rainforest, national parks, Liberia, deep-sea fishing & other tours',
-                        'description' => 'Lorem ipsum dolor sit amet, consectetur 
-                            adipiscing elit. Suspendisse non leo sem, quis tempor 
-                            tortor. Cras eget adipiscing purus. Cum sociis 
-                            natoque penatibus et magnis dis parturient montes, 
-                            nascetur ridiculus',
-                        'tags' => array(
-                            'Price' => 'Free',
-                            'Duration' => 'Undefined',
-                            'Location' => '2 miles from Hotel',
-                        ),
-                    ),
-                    array(
-                        'title' => 'Motorized water sports',
-                        'description' => 'Lorem ipsum dolor sit amet, consectetur 
-                            adipiscing elit. Suspendisse non leo sem, quis tempor 
-                            tortor. Cras eget adipiscing purus. Cum sociis 
-                            natoque penatibus et magnis dis parturient montes, 
-                            nascetur ridiculus',
-                        'tags' => array(
-                            'Price' => 'Free',
-                            'Duration' => 'Undefined',
-                            'Location' => '2 miles from Hotel',
-                        ),
-                    ),
-                ),
+                'addons' => array(),
                 'reviews' => array(
                     array(
                         'user' => 'Kari',
@@ -1420,54 +1327,64 @@ class LandingController extends Zend_Controller_Action {
                 ),
                 'images' => array(
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/langosta/main.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/langosta/main_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/langosta/main_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/langosta/1.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/langosta/1_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/langosta/1_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/langosta/2.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/langosta/2_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/langosta/2_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/langosta/3.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/langosta/3_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/langosta/3_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/langosta/4.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/langosta/4_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/langosta/4_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/langosta/5.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/langosta/5_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/langosta/5_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/langosta/6.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/langosta/6_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/langosta/6_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/langosta/7.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/langosta/7_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/langosta/7_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/langosta/8.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/langosta/8_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/langosta/8_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/langosta/9.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/langosta/9_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/langosta/9_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                 ),
                 'dining' => 'With such succulent dining options set amid one of the Gold Coast’s most stunning beaches, there will be no reason you’ll want to leave the hotel to eat – or perhaps ever.',
@@ -1520,7 +1437,7 @@ class LandingController extends Zend_Controller_Action {
                             'Safe',
                             'TV',
                             'Telephone',
-							'Fully equipped bathroom',
+                            'Fully equipped bathroom',
                             'Magnifying mirror',
                             'Hairdryer'
                         ),
@@ -1575,8 +1492,49 @@ class LandingController extends Zend_Controller_Action {
                     'price_desc' => '+ $50',
                     'price' => 50
                 ),
+            ),
+            'langosta' => array(
+                array(
+                    'id' => 'standard',
+                    'name' => 'Standard',
+                    'price_desc' => '- $20',
+                    'price' => -20
+                ),
+                array(
+                    'id' => 'deluxe',
+                    'name' => 'Deluxe',
+                    'price_desc' => 'Included',
+                    'price' => 0,
+                    'selected' => 1
+                ),
+                array(
+                    'id' => 'suite',
+                    'name' => 'Master Suite',
+                    'price_desc' => '+ $50',
+                    'price' => 50
+                ),
+            ),
+            'doubletree' => array(
+                array(
+                    'id' => 'standard',
+                    'name' => 'Standard',
+                    'price_desc' => '- $20',
+                    'price' => -20
+                ),
+                array(
+                    'id' => 'deluxe',
+                    'name' => 'Deluxe',
+                    'price_desc' => 'Included',
+                    'price' => 0,
+                    'selected' => 1
+                ),
+                array(
+                    'id' => 'suite',
+                    'name' => 'Master Suite',
+                    'price_desc' => '+ $50',
+                    'price' => 50
+                ),
             )
-            
         );
         
         $activities = array(
@@ -1619,7 +1577,47 @@ class LandingController extends Zend_Controller_Action {
                     'price_desc' => '+$32/person',
                     'price' => 32
                 ),
-            )            
+            ),
+            'langosta' => array(
+                array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tour',
+                    'price_desc' => '+$25/person',
+                    'price' => 25
+                ),
+                array(
+                    'id' => 'atv1',
+                    'name' => 'ATV Tour',
+                    'price_desc' => '+$20/person',
+                    'price' => 20
+                ),
+                array(
+                    'id' => 'atv2',
+                    'name' => 'ATV Tour',
+                    'price_desc' => '+$32/person',
+                    'price' => 32
+                ),
+            ),
+            'doubletree' => array(
+                array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tour',
+                    'price_desc' => '+$25/person',
+                    'price' => 25
+                ),
+                array(
+                    'id' => 'atv1',
+                    'name' => 'ATV Tour',
+                    'price_desc' => '+$20/person',
+                    'price' => 20
+                ),
+                array(
+                    'id' => 'atv2',
+                    'name' => 'ATV Tour',
+                    'price_desc' => '+$32/person',
+                    'price' => 32
+                ),
+            )
         );
         
         $this->view->id = $id;
@@ -1649,6 +1647,24 @@ class LandingController extends Zend_Controller_Action {
                 '_price'    => 60,
                 '_price_before' => 70,
                 'room' => 'Deluxe',
+            ),
+            'riu' => array(
+                'title' => 'Alegro Papagayo (All Inclusive)',
+                '_price'    => 60,
+                '_price_before' => 70,
+                'room' => 'Deluxe',
+            ),
+            'langosta' => array(
+                'title' => 'Alegro Papagayo (All Inclusive)',
+                '_price'    => 60,
+                '_price_before' => 70,
+                'room' => 'Deluxe',
+            ),
+            'doubletree' => array(
+                'title' => 'Alegro Papagayo (All Inclusive)',
+                '_price'    => 60,
+                '_price_before' => 70,
+                'room' => 'Deluxe',
             )
         );
         
@@ -1673,11 +1689,134 @@ class LandingController extends Zend_Controller_Action {
                     'price_desc' => 'Add $50 per persona per night',
                     'price' => 50
                 ),
+            ),
+            'riu' => array(
+                array(
+                    'id' => 'standard',
+                    'name' => 'Standard',
+                    'price_desc' => 'Substract $20 per person per night',
+                    'price' => -20
+                ),
+                array(
+                    'id' => 'deluxe',
+                    'name' => 'Deluxe',
+                    'price_desc' => 'Included',
+                    'price' => 0,
+                    'selected' => 1
+                ),
+                array(
+                    'id' => 'suite',
+                    'name' => 'Master Suite',
+                    'price_desc' => 'Add $50 per persona per night',
+                    'price' => 50
+                ),
+            ),
+            'langosta' => array(
+                array(
+                    'id' => 'standard',
+                    'name' => 'Standard',
+                    'price_desc' => 'Substract $20 per person per night',
+                    'price' => -20
+                ),
+                array(
+                    'id' => 'deluxe',
+                    'name' => 'Deluxe',
+                    'price_desc' => 'Included',
+                    'price' => 0,
+                    'selected' => 1
+                ),
+                array(
+                    'id' => 'suite',
+                    'name' => 'Master Suite',
+                    'price_desc' => 'Add $50 per persona per night',
+                    'price' => 50
+                ),
+            ),
+            'doubletree' => array(
+                array(
+                    'id' => 'standard',
+                    'name' => 'Standard',
+                    'price_desc' => 'Substract $20 per person per night',
+                    'price' => -20
+                ),
+                array(
+                    'id' => 'deluxe',
+                    'name' => 'Deluxe',
+                    'price_desc' => 'Included',
+                    'price' => 0,
+                    'selected' => 1
+                ),
+                array(
+                    'id' => 'suite',
+                    'name' => 'Master Suite',
+                    'price_desc' => 'Add $50 per persona per night',
+                    'price' => 50
+                ),
             )
         );
         
         $activities = array(
             'papagayo' => array(
+                array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tour',
+                    'price_desc' => ' $25 per person',
+                    'price' => 25
+                ),
+                array(
+                    'id' => 'atv1',
+                    'name' => 'ATV Tour',
+                    'price_desc' => 'Add $20 per person',
+                    'price' => 20
+                ),
+                array(
+                    'id' => 'atv2',
+                    'name' => 'ATV Tour',
+                    'price_desc' => 'Add $32 per person',
+                    'price' => 32
+                ),
+            ),
+            'riu' => array(
+                array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tour',
+                    'price_desc' => ' $25 per person',
+                    'price' => 25
+                ),
+                array(
+                    'id' => 'atv1',
+                    'name' => 'ATV Tour',
+                    'price_desc' => 'Add $20 per person',
+                    'price' => 20
+                ),
+                array(
+                    'id' => 'atv2',
+                    'name' => 'ATV Tour',
+                    'price_desc' => 'Add $32 per person',
+                    'price' => 32
+                ),
+            ),
+            'langosta' => array(
+                array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tour',
+                    'price_desc' => ' $25 per person',
+                    'price' => 25
+                ),
+                array(
+                    'id' => 'atv1',
+                    'name' => 'ATV Tour',
+                    'price_desc' => 'Add $20 per person',
+                    'price' => 20
+                ),
+                array(
+                    'id' => 'atv2',
+                    'name' => 'ATV Tour',
+                    'price_desc' => 'Add $32 per person',
+                    'price' => 32
+                ),
+            ),
+            'doubletree' => array(
                 array(
                     'id' => 'atv',
                     'name' => 'ATV Tour',
@@ -1746,6 +1885,24 @@ class LandingController extends Zend_Controller_Action {
                 '_price'    => 60,
                 '_price_before' => 70,
                 'room' => $data['room'],
+            ),
+            md5('riu') => array(
+                'title' => 'Alegro Papagayo (All Inclusive)',
+                '_price'    => 60,
+                '_price_before' => 70,
+                'room' => $data['room'],
+            ),
+            md5('langosta') => array(
+                'title' => 'Alegro Papagayo (All Inclusive)',
+                '_price'    => 60,
+                '_price_before' => 70,
+                'room' => $data['room'],
+            ),
+            md5('doubletree') => array(
+                'title' => 'Alegro Papagayo (All Inclusive)',
+                '_price'    => 60,
+                '_price_before' => 70,
+                'room' => $data['room'],
             )
         );
         
@@ -1772,11 +1929,143 @@ class LandingController extends Zend_Controller_Action {
                     'price' => 50,
                     'selected' => ($data['room'] == 'suite')
                 ),
+            ),
+            
+            md5('riu') => array(
+                'standard' => array(
+                    'id' => 'standard',
+                    'name' => 'Standard',
+                    'price_desc' => 'Substract $20 per person per night',
+                    'price' => -20,
+                    'selected' => ($data['room'] == 'standard')
+                ),
+                'deluxe' => array(
+                    'id' => 'deluxe',
+                    'name' => 'Deluxe',
+                    'price_desc' => 'Included',
+                    'price' => 0,
+                    'selected' => ($data['room'] == 'deluxe')
+                ),
+                'suite' => array(
+                    'id' => 'suite',
+                    'name' => 'Master Suite',
+                    'price_desc' => 'Add $50 per persona per night',
+                    'price' => 50,
+                    'selected' => ($data['room'] == 'suite')
+                ),
+            ),
+            
+            md5('langosta') => array(
+                'standard' => array(
+                    'id' => 'standard',
+                    'name' => 'Standard',
+                    'price_desc' => 'Substract $20 per person per night',
+                    'price' => -20,
+                    'selected' => ($data['room'] == 'standard')
+                ),
+                'deluxe' => array(
+                    'id' => 'deluxe',
+                    'name' => 'Deluxe',
+                    'price_desc' => 'Included',
+                    'price' => 0,
+                    'selected' => ($data['room'] == 'deluxe')
+                ),
+                'suite' => array(
+                    'id' => 'suite',
+                    'name' => 'Master Suite',
+                    'price_desc' => 'Add $50 per persona per night',
+                    'price' => 50,
+                    'selected' => ($data['room'] == 'suite')
+                ),
+            ),
+            
+            md5('doubletree') => array(
+                'standard' => array(
+                    'id' => 'standard',
+                    'name' => 'Standard',
+                    'price_desc' => 'Substract $20 per person per night',
+                    'price' => -20,
+                    'selected' => ($data['room'] == 'standard')
+                ),
+                'deluxe' => array(
+                    'id' => 'deluxe',
+                    'name' => 'Deluxe',
+                    'price_desc' => 'Included',
+                    'price' => 0,
+                    'selected' => ($data['room'] == 'deluxe')
+                ),
+                'suite' => array(
+                    'id' => 'suite',
+                    'name' => 'Master Suite',
+                    'price_desc' => 'Add $50 per persona per night',
+                    'price' => 50,
+                    'selected' => ($data['room'] == 'suite')
+                ),
             )
         );
         
         $activities = array(
             md5('papagayo') => array(
+                'atv' => array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tour',
+                    'price_desc' => ' $25 per person',
+                    'price' => 25
+                ),
+                'atv1' => array(
+                    'id' => 'atv1',
+                    'name' => 'ATV Tour',
+                    'price_desc' => 'Add $20 per person',
+                    'price' => 20
+                ),
+                'atv2' => array(
+                    'id' => 'atv2',
+                    'name' => 'ATV Tour',
+                    'price_desc' => 'Add $32 per person',
+                    'price' => 32
+                ),
+            ),
+            md5('langosta') => array(
+                'atv' => array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tour',
+                    'price_desc' => ' $25 per person',
+                    'price' => 25
+                ),
+                'atv1' => array(
+                    'id' => 'atv1',
+                    'name' => 'ATV Tour',
+                    'price_desc' => 'Add $20 per person',
+                    'price' => 20
+                ),
+                'atv2' => array(
+                    'id' => 'atv2',
+                    'name' => 'ATV Tour',
+                    'price_desc' => 'Add $32 per person',
+                    'price' => 32
+                ),
+            ),
+            md5('riu') => array(
+                'atv' => array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tour',
+                    'price_desc' => ' $25 per person',
+                    'price' => 25
+                ),
+                'atv1' => array(
+                    'id' => 'atv1',
+                    'name' => 'ATV Tour',
+                    'price_desc' => 'Add $20 per person',
+                    'price' => 20
+                ),
+                'atv2' => array(
+                    'id' => 'atv2',
+                    'name' => 'ATV Tour',
+                    'price_desc' => 'Add $32 per person',
+                    'price' => 32
+                ),
+            ),
+            md5('doubletree') => array(
                 'atv' => array(
                     'id' => 'atv',
                     'name' => 'ATV Tour',
