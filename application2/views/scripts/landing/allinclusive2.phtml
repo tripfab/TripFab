@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+	<meta content="noindex,nofollow" name="robots" />
+	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+	<title>Tripfab.com</title>
+	<link type="text/css"  rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css"  rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css"  rel="stylesheet" href="/css6/landing/landing5.css?v=<?= $this->cssVC ?>" />
+</head>
+<body id="trip5">
+<div id="wp_all">
+    <div id="wp_header">
+        <div class="wrapper">
+            <h1 class="logo"><a href="/">Tripfab</a></h1>
+            <div class="contact">
+                <p>Call our Customer Service <strong>1-866-401-0382</strong></p>
+                <a href="#" onclick="SnapABug.startChat('How can I help you today?'); return false;" class="btn-10">Live Chat</a>
+            </div><!--CONTACT-->
+        </div><!--WRAPPER-->            
+    </div><!--WP_HEADER-->
+    
+    <div id="wp_content">
+        <div class="bg_image">
+            <img class="background" src="https://static.tripfab.com/images6/land5-6.gif" width="" height="" alt="" />
+            <div class="info">
+                <div>
+                    <h2>All Inclusive Vacations <br />in Costa Rica</h2>
+                    <p>The Ultimate All Inclusive Vacations<br />
+                    in Costa Rica,With The Best prices on <br />
+                    the market.</p>
+                </div>
+            </div><!--INFO-->
+        </div><!--BG_IMAGE-->
+        <div id="content">
+            <div class="main">
+                <div class="left">
+                    <div class="side">
+                        <h2>Want to get the Best Deals In Costa Rica</h2>
+                        <div>
+                            <p>Subscribe to our Newsletter and receive the best travel deals in Costa Rica. <em>And it's Free!</em></p>
+                            <form method="post" action="/ajax/subscribe" id="js-subscribe">
+                                <label>Your Name</label>
+                                <input type="text" name="name" value="" />
+                                <label>Your E-mail</label>
+                                <input type="text" name="email" value="" />
+                                <input type="submit" class="btn-1" value="Subscribe" />
+                                <div class="clear"></div>
+                            </form>
+                        </div>
+                    </div><!--SIDE-->
+                    
+                    <div class="widget">
+                        <h4>What's different about Tripfab?</h4>
+                        <ul>
+                            <li>
+                                <span class="ico1"></span>
+                                <p><strong>Satisfaction Insurance</strong> If you aren't 100% satisfied with any part of your trip, we'll give you a full refund for that portion – no questions asked</p>
+                            </li>
+                            <li>
+                                <span class="ico2"></span><p><strong>Free Cellphone</strong> We send you off with a free iPhone phone to borrow. Make locals calls, take pictures and videos and upload them to our Facebook page for a chance to win cool prizes.</p>
+                            </li>
+                            <li>
+                                <span class="ico3"></span><p><strong>Best Price Guarantee</strong> If you find any of our trips cheaper elsewhere, we'll not only match that price – we'll beat it. Even more, if you send us a trip not offered on our site, we'll build you a similar trip at a lower price</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div><!--LEFT-->
+                
+                <div class="right">
+                    <div class="shadows"></div>                    
+                    <div class="sale">
+                        <h2>Deal of the Day Hurry Up!</h2>
+                        <div class="counter">
+                            <div><span>Sale Finish in</span> 01hrs</div> 
+                            <div> 36min</div>
+                            <div> 28 sec</div>
+                        </div><!--COUNTER-->
+                        <div class="clear"></div>
+                        <span class="stamp"></span>
+                        <div class="trip">
+                            <h3><a href="/landing/1/trip/<?= $this->trips[0]['id'] ?>"><?= $this->trips[0]['title'] ?></a></h3>
+                            <div class="meta">
+                                <ul class="reviews">
+                                	<?php for($i=1;$i<=5;$i++): ?>
+                                    <?php $class = ($i <= $this->trips[0]['rating']) ? 'fill' : ''; ?>
+                                    <li><a href="" class="<?= $class ?>"></a></li>
+                                    <?php endfor ?>
+                                </ul>
+                                <span><?= $this->trips[0]['reviews'] ?> reviews</span>
+                                <span class="location"><strong>Location:</strong> <?= $this->trips[0]['location'] ?></span>
+                                <div class="clear"></div>
+                            </div><!--META-->
+                            <a href="/landing/1/trip/<?= $this->trips[0]['id'] ?>"><span class="label"></span>
+                            <img width="175" height="131" src="<?= $this->trips[0]['image'] ?>"></a>
+                            <div class="inner">
+                                <div class="descrip">
+                                    <ul class="count">
+                                        <li>Sale Finish in</li>
+                                        <li>4 hrs</li>
+                                        <li>36 min</li>
+                                        <li>58 sec</li>
+                                    </ul>
+                                    <p><?= $this->trips[0]['description'] ?>...</p>
+                                    <div class="single">
+                                        <strong>DURATION</strong>
+                                        <p><?= $this->trips[0]['duration'] ?> Days</p>
+                                    </div>
+                                    <div class="single">
+                                        <strong>TRAVELERS</strong>
+                                        <p><?= $this->trips[0]['travelers'] ?> People</p>
+                                    </div>
+                                </div><!--DESCRIP-->
+                                <div class="price">
+                                    <sup>$<?= $this->formatnumber($this->trips[0]['price_before']) ?></sup>
+                                    <span class="total">$<?= $this->formatnumber($this->trips[0]['price']) ?></span>
+                                    <sub>per person</sub>
+                                    <div class="save">Save $<?= $this->formatnumber($this->trips[0]['save']) ?></div>
+                                </div><!--PRICE-->
+                                <div class="clear"></div>
+                            </div><!--INNER-->
+                            <div class="clear"></div>
+                        </div><!--TRIP-->
+                    </div><!--SALE-->
+                    
+                    <div class="allTrips">
+                    	<?php for($j=1;$j<4;$j++): ?>
+                        <div class="trip">
+                            <h3><a href="/landing/1/trip/<?= $this->trips[$j]['id'] ?>"><?= $this->trips[$j]['title'] ?></a></h3>
+                            <div class="meta">
+                                <ul class="reviews">
+                                	<?php for($i=1;$i<=5;$i++): ?>
+                                    <?php $class = ($i <= $this->trips[$j]['rating']) ? 'fill' : ''; ?>
+                                    <li><a href="" class="<?= $class ?>"></a></li>
+                                    <?php endfor ?>
+                                </ul>
+                                <span><?= $this->trips[$j]['reviews'] ?> reviews</span>
+                                <span class="location"><strong>Location:</strong> <?= $this->trips[$j]['location'] ?></span>
+                                <div class="clear"></div>
+                            </div><!--META-->
+                            <a href="/landing/1/trip/<?= $this->trips[$j]['id'] ?>"><span class="label"></span>
+                            <img width="175" height="131" src="<?= $this->trips[$j]['image'] ?>"></a>
+                            <div class="inner">
+                                <div class="descrip">
+                                    <ul class="count">
+                                        <li>Sale Finish in</li>
+                                        <li>4 hrs</li>
+                                        <li>36 min</li>
+                                        <li>58 sec</li>
+                                    </ul>
+                                    <p><?= $this->trips[$j]['description'] ?>...</p>
+                                    <div class="single">
+                                        <strong>DURATION</strong>
+                                        <p><?= $this->trips[$j]['duration'] ?> Days</p>
+                                    </div>
+                                    <div class="single">
+                                        <strong>TRAVELERS</strong>
+                                        <p><?= $this->trips[$j]['travelers'] ?> People</p>
+                                    </div>
+                                </div><!--DESCRIP-->
+                                <div class="price">
+                                    <sup>$<?= $this->formatnumber($this->trips[$j]['price_before']) ?></sup>
+                                    <span class="total">$<?= $this->formatnumber($this->trips[$j]['price']) ?></span>
+                                    <sub>per person</sub>
+                                    <div class="save">Save $<?= $this->formatnumber($this->trips[$j]['save']) ?></div>
+                                </div><!--PRICE-->
+                                <div class="clear"></div>
+                            </div><!--INNER-->
+                            <div class="clear"></div>
+                        </div><!--TRIP-->
+                        <?php endfor ?>
+                    </div><!--ALLTRIPS-->
+                </div><!--RIGHT-->
+                <div class="clear"></div>
+            </div><!--MAIN-->
+        </div><!--CONTENT-->
+    </div><!--WP_CONTENT-->
+    <div id="wp_footer">
+        <div class="footer">
+            <div class="left">
+                <h6>Tripfab is lovely designed in a tropical paradise</h6>
+                <span>Copyright &copy; 2011 Tripfab</span>
+            </div><!--LEFT-->
+            <ul>
+                <li><a target="_blank" href="mailto:hello@tripfab.com">eMail</a></li>
+                <li><a target="_blank" href="https://plus.google.com/108576021199856132768/">Google+</a></li>
+                <li><a target="_blank" href="https://twitter.com/tripfab">Twitter</a></li>
+                <li><a target="_blank" href="https://facebook.com/tripfab">Facebook</a></li>
+            </ul>
+        </div><!--FOOTER-->
+    </div><!--WP_FOOTER-->
+</div><!--WRAPPER_ALL-->
+<div class="hidden">
+    <div id="sendEmail" class="lb sendEmail">
+        <div class="top">Tell About Allegro Papagayo <em>to</em> Your Friends</div><!--TOP-->
+        <div class="text">
+            <h3>Send this listing page to your closest friends</h3>
+            <p>Let them know about our amazing savings and give them a chance
+            to be a Tripfab Traveler</p>
+        </div><!--TEXT-->
+        <form action="">
+            <div class="cont">
+                <input type="text" name="" value="Your Name" />	
+                <div class="error">
+                    <input type="text" name="" value="Your E-mail" />
+                    <p><em></em>Please enter a valid e-mail here</p>
+                    <span class="ico"></span>
+                </div>
+                <div class="error">
+                    <textarea cols="" rows="">Write a short description</textarea>
+                    <p><em></em>Please enter a valid e-mail here</p>
+                    <span class="ico"></span>
+                </div>
+                <input type="text" class="email" name="" value="Friend Email" />
+                <a href="" class="link1">+ Add More Friends</a>
+                <div class="clear"></div>
+            </div><!--CONT-->
+            <div class="bot">
+                <input type="submit" class="btn-1" name="" value="Send Message" />
+                <a href="" class="btn-10">Cancel</a>
+            </div><!--BOT-->
+        </form>
+    </div><!--SENDEMAIL-->
+</div><!--HIDDEN-->
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('a.lbc').fancybox({
+		padding: 0,
+		overlayColor: '#FFF',
+		overlayOpacity: '0.7',
+		showCloseButton: true,
+		centerOnScroll: true,
+		titlePosition: 'inside'
+	});
+	$(".tabs").tabs({
+		selected: 2
+	});
+	$("#addons .accordion").accordion({
+		autoHeight: false,
+		collapsible: true
+	}); 
+});
+$(document).ready(function(){
+	img_ready($('img.background'));
+});
+function img_ready($obj){
+	resizeImg($obj);
+	$(window).resize(function() {
+		resizeImg($obj);
+	});
+	$obj.fadeIn();
+}
+function resizeImg($bgImg) { 
+	var imgwidth = 1400;
+	var imgheight = 382;
+
+	var winwidth = $(window).width();
+	var winheight = $(window).height();
+
+	var winCenter = winwidth / 2;
+	var imgCenter = imgwidth / 2;
+
+	var left = (winwidth > imgwidth) ? 0 : (winCenter - imgCenter);
+
+	var width = (winwidth > imgwidth) ? winwidth : imgwidth;
+
+	var height = (winwidth > imgwidth) ? ((imgheight * winwidth) / imgwidth) : height;
+
+	var winCenter2 = imgheight / 2;
+	var imgCenter2 = height / 2;
+
+	var top = (winwidth > imgwidth) ? (winCenter2 - imgCenter2) : 0;
+
+	$bgImg.css('left',left);
+	$bgImg.css('width',width);
+	$bgImg.css('height',height);
+	$bgImg.css('top',top);
+}
+</script>
+</body>
+</html>

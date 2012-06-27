@@ -1,0 +1,472 @@
+#header.in2 {
+	height: 62px;
+}
+#header.in2 .logo {
+	padding-top: 14px;
+}
+#header.in2 .contact {
+	float: right;
+	width: 430px;
+	padding-top: 13px;
+}
+#header.in2 .contact a{
+	color: #17520f;
+	font: bold 14px/32px Helvetica;
+	height: 32px;
+	width: 114px;
+	padding: 0;
+	float: right;
+	text-shadow: 0 1px 0 #bddf8f;
+}
+#header.in2 .contact p {
+	color: #FFF;
+	float: left;
+	text-align: right;
+	width: 270px;
+	height: 22px;
+	font: bold 14px/22px Helvetica;
+	margin-top: 8px;
+}
+#header.in2 .contact p strong {
+	background: url("https://static.tripfab.com/images6/trip2All1.png") no-repeat -19px 0;
+	display: inline-block;
+	height: 22px;
+	padding-left: 35px;
+	margin-left: 10px;
+}
+.subHeader {
+	background-color: #FFF;
+    box-shadow: 0 1px 0px 0 #d8d8d8;
+    height: 29px;
+    position: relative;
+    width: 100%;
+    z-index: 900;
+}
+.subHeader .cntrl {
+    height: 18px;
+    margin: 0 auto;
+    padding-top: 9px;
+    width: 960px;
+}
+.subHeader .cntrl .home {
+	background: url("https://static.tripfab.com/images6/icons-llt.png") no-repeat scroll -346px -5px transparent;
+    display: block;
+    height: 11px;
+    width: 14px;
+} 
+.subHeader ul {
+	float: left;
+}
+.subHeader ul li {
+	background: url("https://static.tripfab.com/images6/slash.png") no-repeat scroll right 50% transparent;
+	float: left;
+	font: 11px Helvetica;
+	padding-left: 12px;
+	padding-right: 16px;
+}
+.subHeader ul li.first {
+	padding-left: 0;
+	padding-right: 14px;
+}
+.subHeader ul li a {
+	color: #959595 ;
+}
+.subHeader ul li a:hover {
+	color: #60B5F7;
+}
+.subHeader .link1 {
+	float: right;
+	font-size: 11px;
+}
+.tripExperience {
+	width: 580px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-o-border-radius: 5px;
+	background-color: #FFF;
+	position: relative;
+}
+.tripExperience h2 {
+	font: 100 24px Helvetica;
+	margin-bottom: 15px;
+	text-align: center;
+	padding: 20px 0 0;
+}
+.tripExperience h3 {
+	font: 100 15px Helvetica;
+	margin-bottom: 20px;
+	text-align: center;
+}
+.tripExperience .stamp {
+	width: 77px;
+	height: 79px;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: url(https://static.tripfab.com/images6/trip2All8.png) no-repeat 0 0;
+}
+.tripExperience .single {
+	width: 170px;
+	height: 247px;
+	padding-top: 15px;
+	background: url(https://static.tripfab.com/images6/trip2All9.png) repeat-x 0 0;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-o-border-radius: 5px;
+	float: left;
+	margin:0 0 20px 17px;
+}
+.tripExperience .single span {
+	display: block;
+	width: 61px;
+	height: 62px;
+	background: url(https://static.tripfab.com/images6/trip2All8.png) no-repeat -9px -85px;
+	margin: 0 auto 10px;
+}
+.tripExperience .single .icon1 {
+	background-position: -9px -85px;
+}
+.tripExperience .single .icon2 {
+	background-position: -9px -161px;
+}
+.tripExperience .single .icon3 {
+	background-position: -9px -236px;
+}
+.tripExperience .single h4 {
+	text-align: center;
+	color: #303030;
+	font: bold 12px Helvetica;
+	margin-bottom: 10px;
+}
+.tripExperience .single p {
+	text-align: center;
+	color: #303030;
+	font: 12px/18px Helvetica;
+	padding: 0 15px;
+}
+#confirm #content {
+	width: 960px;
+	margin: 0 auto;
+}
+#confirm #content > h2 {
+	font: 100 24px Helvetica;
+	color: #303030;
+	padding:10px 0 20px;
+}
+#confirm .top {
+	height: 112px;
+	width: 960px;
+	position:relative;
+	margin-bottom: 50px;
+}
+#confirm .top .icon{
+	display: block;
+	background: url(https://static.tripfab.com/images6/thankyou2.png) no-repeat 0 0;
+	width: 169px;
+	height: 145px;
+	float: left;
+}
+#confirm .inside {
+	width: 790px;
+	background-color: #FFF;
+	float: left;
+	margin: 14px 0 0 0;
+	border-radius: 0 5px 5px 0;
+	-moz-border-radius: 0 5px 5px 0;
+	-webkit-border-radius: 0 5px 5px 0;
+	-o-border-radius: 0 5px 5px 0;
+	height: 112px;
+}
+#confirm .inside h2 {
+	font: 100 30px Helvetica;
+	color: #303030;
+	padding: 25px 0 10px 20px;
+}
+
+#confirm .inside h3 {
+	font: 100 18px Helvetica;
+	color: #303030;
+	padding: 0 0 10px 20px;
+}
+#confirm .main {
+	width: 960px;
+	background-color: #FFF;
+	padding-top: 1px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-o-border-radius: 5px;
+	box-shadow: 0px 0px 2px 0px #e7e7e7; 
+	-o-box-shadow: 0px 0px 2px 0px #e7e7e7;
+	-moz-box-shadow: 0px 0px 2px 0px #e7e7e7;
+	-webkit-box-shadow: 0px 0px 2px 0px #e7e7e7;
+	margin-bottom: 20px;
+}
+#confirm .main .head {
+	margin: 0 1px 1px;
+	background-color: #ecf7ff;
+	border-radius: 5px 5px 0 0;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+	-o-border-radius: 5px 5px 0 0;
+	height: 81px;
+	margin-bottom: 15px;
+}
+#confirm .main .text {
+	background: url(https://static.tripfab.com/images6/thankyou1.png) no-repeat 20px 23px;
+	padding: 10px 0 0 70px;
+	height: 50px;
+	width: 700px;
+	float: left;
+}
+#confirm .main .text h4 {
+	font: bold 15px Helvetica;
+	margin:11px 0 5px;
+}
+#confirm .main .text p{
+	font: 13px Helvetica;
+}
+#confirm .main .btn-10 {
+	width: 158px;
+	height:30px;
+	float: right;
+	display: block;
+	padding: 0;
+	text-align: left;
+	margin: 25px 20px 0 0;
+	border-color: #c1c1c1;
+	color: #303030;
+}
+#confirm .main .btn-10 em {
+	background:  url(https://static.tripfab.com/images6/thankyou1.png) no-repeat -14px -70px;
+	display: block;
+	width: 19px;
+	height: 19px;
+	float: left;
+	margin: 5px 10px 0 15px;
+} 
+#confirm .cont {
+	padding: 0 28px 25px;
+}
+#confirm .single {
+	width: 280px;
+	float: left;
+	margin-right: 24px;	
+}
+#confirm .single.last {
+	margin: 0;
+}
+#confirm .single h6{
+	border-bottom: 3px solid #d7d7d7;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	font: bold 13px Helvetica;
+}
+#confirm .cont > h5 {
+	overflow: hidden;
+	padding-bottom: 20px;
+}
+#confirm .cont > h5 strong{
+	font: bold 13px Helvetica;
+	display: block;
+	float: left;
+}
+#confirm .cont .code{
+	font: bold 13px Helvetica;
+	display: block;
+	float: right;
+}
+#confirm .title {
+	background-color: #ebebeb;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-o-border-radius: 5px;
+	padding: 12px 12px 12px 15px;
+	margin-bottom: 20px;
+}
+#confirm .title img {
+	display: block;
+	float: left;
+	margin-right: 20px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-o-border-radius: 3px;
+	box-shadow: 0px 0px 1px 0px #939393; 
+	-o-box-shadow: 0px 0px 1px 0px #939393;
+	-moz-box-shadow: 0px 0px 1px 0px #939393;
+	-webkit-box-shadow: 0px 0px 1px 0px #939393;
+}
+#confirm .title h6 {
+	font: bold 15px Helvetica;
+	padding:8px 0 6px;
+}
+#confirm .title span {
+	background: url(https://static.tripfab.com/images6/thankyou1.png) no-repeat -18px -137px;
+	display: block;
+	float: left;
+	padding-left: 15px;
+	height: 20px;
+	font: normal 13px Helvetica;
+	color: #303030;
+}
+#confirm .single ul li {
+	margin-bottom: 15px;
+}
+#confirm .single ul li strong {
+	display: block;
+	font: bold 12px Helvetica;
+	margin-bottom: 4px;
+}
+#confirm .single ul li p {
+	font: normal 13px Helvetica;
+}
+
+#confirm .before {
+    color: #EA7806;
+    text-decoration: line-through;
+}
+#confirm .rg {
+    padding: 0 0 0 0;
+    text-align: right;
+}
+#confirm td {
+    font: 12px/16px Helvetica;
+    height: 25px;
+    padding: 0 10px 0 0;
+    vertical-align: middle;
+}
+#confirm .save {
+    color: #EA7806;
+}
+#confirm .total td {
+    color: #303030;
+    font: bold 15px Helvetica;
+    height: 35px;
+}
+#confirm .fr {
+    color: #8DC63F;
+    text-align: right;
+    font-weight: bold;
+    padding: 0;
+}
+#confirm .main .contact {
+	background: url(https://static.tripfab.com/images6/thankyou3.png) repeat-x 0 0;
+	height: 65px;
+	clear: both;
+}
+#confirm .main  .contact ul {
+	padding: 25px 0 0 30px;
+	overflow: hidden;
+}
+#confirm .main .contact ul li {
+	float: left;
+	margin-right: 20px;
+	font-size: 13px;
+}
+#confirm .main .contact ul li .ph {
+	background: url(https://static.tripfab.com/images6/thankyou1.png) no-repeat -13px -197px;
+	display: block;
+	width: 22px;
+	height: 22px;
+	float: left;
+	margin-right: 5px;
+}
+#confirm .main .contact ul li a {
+	background: url(https://static.tripfab.com/images6/thankyou1.png) no-repeat -9px -262px;
+	display: block;
+	height: 22px;
+	float: left;
+	margin-right: 8px;
+	color: #303030;
+	padding-left: 35px;
+}
+#confirm .contact ul li a.link1 {
+	background: url(https://static.tripfab.com/images6/thankyou1.png) no-repeat -9px -325px;
+	display: block;
+	height: 22px;
+	float: left;
+	color: #60b5f7;
+}
+#confirm .contact ul li a:hover {
+	text-decoration: underline;
+}
+#confirm .bot {
+	background: url(https://static.tripfab.com/images6/thankyou1.png) no-repeat 24px -355px #222222;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-o-border-radius: 5px;
+	height: 82px;
+	position: relative;
+	padding-left: 90px;
+}
+#confirm .bot h6 {
+	color: #FFF;
+	font: bold 14px Helvetica;
+	padding: 24px 0 6px;
+}
+#confirm .bot p {
+	color: #acacac;
+	font: 13px Helvetica;
+	margin-bottom: 6px;
+}
+#confirm .bot a {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	width: 150px;
+	height: 39px;
+	font: bold 17px/39px Helvetica;
+	color: #17520f;
+	text-shadow: 0 1px 0 #bddf8f;
+	border: 1px solid #679a21;
+	padding: 0;
+}
+#confirm .bot a:hover {
+	box-shadow: 0px 0px 2px 0px #000; 
+	-o-box-shadow: 0px 0px 2px 0px #000;
+	-moz-box-shadow: 0px 0px 2px 0px #000;
+	-webkit-box-shadow: 0px 0px 2px 0px #000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

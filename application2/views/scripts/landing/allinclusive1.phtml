@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+	<meta content="noindex,nofollow" name="robots" />
+	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+	<title>Tripfab.com</title>
+	<link type="text/css"  rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css"  rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css"  rel="stylesheet" href="/css6/landing/landing4.css?v=<?= $this->cssVC ?>" />
+</head>
+<body id="trip4">
+<div id="wp_all">
+    <div id="wp_header">        
+        <div class="wrapper">
+            <h1 class="logo"><a href="/">Tripfab</a></h1>
+            <div class="contact">
+                <p>Call our Customer Service <strong>1-866-401-0382</strong></p>
+                <a href="#" onclick="SnapABug.startChat('How can I help you today?'); return false;" class="btn-10">Live Chat</a>
+            </div><!--CONTACT-->
+        </div><!--WRAPPER-->
+    </div><!--WP_HEADER-->
+    
+    <div id="wp_content">
+        <div id="content">
+            <div class="top">
+                <div class="pic">
+                    <h2>All Inclusive <em>Vacations</em> in Costa Rica</h2>
+                    <h3>The ultimate All inclusive packages in Costa Rica <br />Best prices in the market</h3>
+                </div><!--PIC-->
+                <div class="side">
+                    <h2>Want to get the Best Deals In Costa Rica</h2>
+                    <p>Subscribe to our Newsletter and receive the best travel deals in Costa Rica. <em>And it's Free!</em></p>
+                    <form method="post" action="/ajax/subscribe" id="js-subscribe">
+                        <label>Your Name</label>
+                        <input type="text" name="name" value="" />
+                        <label>Your E-mail</label>
+                        <input type="text" name="email" value="" />
+                        <input type="submit" class="btn-1" value="Subscribe" />
+                    </form>
+                </div><!--SIDE-->
+            </div><!--TOP-->
+            
+            <div class="main">
+                <div class="left">
+                    <div class="sale">
+                        <h2>Deal of the Day Hurry Up!</h2>
+                        <div class="counter">
+                            <div><span>Sale Finish in</span> 01hrs</div>
+                            <div> 36min</div>
+                            <div> 28 sec</div>
+                        </div><!--COUNTER-->
+                        <div class="clear"></div>
+                        <span class="stamp"></span>
+                        <div class="trip">
+                            <a href="/landing/1/trip/<?= $this->trips[0]['id'] ?>"><span class="label"></span>
+                            <img width="220" height="206" src="<?= $this->trips[0]['image'] ?>"></a>
+                            <div class="inner">
+                                <h3><a href="/landing/1/trip/<?= $this->trips[0]['id'] ?>"><?= $this->trips[0]['title'] ?></a></h3>
+                                <div class="meta">
+                                    <ul class="reviews">
+                                    	<?php for($i=1;$i<=5;$i++): ?>
+                                        <?php $class = ($i<=$this->trips[0]['rating']) ? 'fill' : ''; ?>
+                                        <li><a href="" class="<?= $class ?>"></a></li>
+                                        <?php endfor ?>
+                                    </ul>
+                                    <span><?= $this->trips[0]['reviews'] ?> reviews</span>
+                                    <span class="location"><strong>Location:</strong> <?= $this->trips[0]['location'] ?></span>
+                                    <div class="clear"></div>
+                                </div><!--META-->
+                                <div class="descrip">
+                                    <ul class="count">
+                                        <li>Sale Finish in</li>
+                                        <li>4 hrs</li>
+                                        <li>36 min</li>
+                                        <li>58 sec</li>
+                                    </ul>
+                                    <p><?= $this->trips[0]['description'] ?>...</p>
+                                    <div class="single">
+                                        <strong>DURATION</strong>
+                                        <p><?= $this->trips[0]['duration'] ?> Days</p>
+                                    </div>
+                                    <div class="single">
+                                        <strong>TRAVELERS</strong>
+                                        <p><?= $this->trips[0]['travelers'] ?> People</p>
+                                    </div>
+                                </div><!--DESCRIP-->
+                                <div class="price">
+                                    <sup>$<?= $this->formatnumber($this->trips[0]['price_before']) ?></sup>
+                                    <span class="total">$<?= $this->formatnumber($this->trips[0]['price']) ?></span>
+                                    <sub>per person</sub>
+                                    <div class="save">Save $<?= $this->formatnumber($this->trips[0]['save']) ?></div>
+                                </div><!--PRICE-->
+                                <div class="clear"></div>
+                            </div><!--INNER-->
+                            <div class="clear"></div>
+                        </div><!--TRIP-->
+                    </div><!--SALE-->
+                    
+                    <div class="allTrips">
+                    	<?php for($i=1;$i<4;$i++): ?>
+                        <div class="trip">
+                            <a href="/landing/1/trip/<?= $this->trips[$i]['id'] ?>"><span class="label"></span>
+                            <img width="220" height="206" src="<?= $this->trips[$i]['image'] ?>"></a>
+                            <div class="inner">
+                                <h3><a href="/landing/1/trip/<?= $this->trips[$i]['id'] ?>"><?= $this->trips[$i]['title'] ?></a></h3>
+                                <div class="meta">
+                                    <ul class="reviews">
+                                    	<?php for($j=1;$j<=5;$j++): ?>
+                                        <?php $class = ($j<=$this->trips[$i]['rating']) ? 'fill' : ''; ?>
+                                        <li><a href="" class="<?= $class ?>"></a></li>
+                                        <?php endfor ?>
+                                    </ul>
+                                    <span><?= $this->trips[$i]['reviews'] ?> reviews</span>
+                                    <span class="location"><strong>Location:</strong> <?= $this->trips[$i]['location'] ?></span>
+                                    <div class="clear"></div>
+                                </div><!--META-->
+                                <div class="descrip">
+                                    <ul class="count">
+                                        <li>Sale Finish in</li>
+                                        <li>4 hrs</li>
+                                        <li>36 min</li>
+                                        <li>58 sec</li>
+                                    </ul>
+                                    <p><?= $this->trips[$i]['description'] ?>...</p>
+                                    <div class="single">
+                                        <strong>DURATION</strong>
+                                        <p><?= $this->trips[$i]['duration'] ?> Days</p>
+                                    </div>
+                                    <div class="single">
+                                        <strong>TRAVELERS</strong>
+                                        <p><?= $this->trips[$i]['travelers'] ?> People</p>
+                                    </div>
+                                </div><!--DESCRIP-->
+                                <div class="price">
+                                    <sup>$<?= $this->formatnumber($this->trips[$i]['price_before']) ?></sup>
+                                    <span class="total">$<?= $this->formatnumber($this->trips[$i]['price']) ?></span>
+                                    <sub>per person</sub>
+                                    <div class="save">Save $<?= $this->formatnumber($this->trips[$i]['save']) ?></div>
+                                </div><!--PRICE-->
+                                <div class="clear"></div>
+                            </div><!--INNER-->
+                            <div class="clear"></div>
+                        </div><!--TRIP-->
+                        <?php endfor ?>
+                    </div><!--ALLTRIPS-->
+                </div><!--LEFT-->
+                
+                <div class="right">
+                    <div class="widget">
+                        <h4>What's different about Tripfab?</h4>
+                        <p>Everything!</p>
+                        <ul>
+                            <li>
+                                <span class="ico1"></span>
+                                <p><strong>Satisfaction Insurance</strong> If you aren't 100% satisfied with any part 
+                                of your trip, we'll give you a full refund for that portion – no questions asked</p>
+                            </li>
+                            <li>
+                                <span class="ico2"></span><p><strong>Free Cellphone</strong> We send you off with a 
+                                free iPhone phone to borrow. Make locals calls, take pictures and videos and upload 
+                                them to our Facebook page for a chance to win cool prizes.</p>
+                            </li>
+                            <li>
+                                <span class="ico3"></span><p><strong>Best Price Guarantee</strong> If you find any 
+                                of our trips cheaper elsewhere, we'll not only match that price – we'll beat it. 
+                                Even more, if you send us a trip not offered on our site, we'll build you a similar 
+                                trip at a lower price</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="talk">
+                        <h3>Talk to Us</h3>
+                        <p>Call our Customer Service <strong>1-866-401-0382</strong></p>
+                        <a class="btn-10" href="" onclick="SnapABug.startChat('How can I help you today?'); return false;">Live Chat</a>
+                    </div>
+                </div><!--RIGHT-->
+                <div class="clear"></div>
+            </div><!--MAIN-->
+        </div><!--CONTENT-->
+    </div><!--WP_CONTENT-->
+    <div id="wp_footer">
+        <div class="footer">
+            <div class="left">
+                <h6>Tripfab is lovely designed in a tropical paradise</h6>
+                <span>Copyright &copy; 2011 Tripfab</span>
+            </div><!--LEFT-->
+            <ul>
+                <li><a target="_blank" href="mailto:hello@tripfab.com">eMail</a></li>
+                <li><a target="_blank" href="https://plus.google.com/108576021199856132768/">Google+</a></li>
+                <li><a target="_blank" href="https://twitter.com/tripfab">Twitter</a></li>
+                <li><a target="_blank" href="https://facebook.com/tripfab">Facebook</a></li>
+            </ul>
+        </div><!--FOOTER-->
+    </div><!--WP_FOOTER-->
+</div><!--WRAPPER_ALL-->
+<div class="hidden"></div>
+<script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('a.lbc').fancybox({
+		padding: 0,
+		overlayColor: '#FFF',
+		overlayOpacity: '0.7',
+		showCloseButton: true,
+		centerOnScroll: true,
+		titlePosition: 'inside'
+	});
+	$(".tabs").tabs({
+		selected: 2
+	});
+	$("#addons .accordion").accordion({
+		autoHeight: false,
+		collapsible: true
+	});
+});
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24981182-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script type="text/javascript">
+document.write(unescape("%3Cscript src='" + ((document.location.protocol=="https:")?"https://snapabug.appspot.com":"http://www.snapengage.com") + "/snapabug.js' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">
+//SnapABug.setButton("https://static.tripfab.com/images/Live-Chat-Button.png");
+//SnapABug.addButton("12926583-ebae-4874-8f3e-57cbe2114ebc","0","55%");
+SnapABug.init("12926583-ebae-4874-8f3e-57cbe2114ebc");
+SnapABug.setCallback('StartChat', function(email, msg, type) {
+	var img = document.createElement('img');
+	img.src = "https://www.googleadservices.com/pagead/conversion/956485843/?value=0&amp;label=T64ECJWh8gMQ06GLyAM&amp;guid=ON&amp;script=0";
+	img.width = 1; img.height = 1;
+	document.body.appendChild(img);
+});
+</script>
+</body>
+</html>

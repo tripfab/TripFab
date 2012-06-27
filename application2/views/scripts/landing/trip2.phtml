@@ -253,7 +253,7 @@ $nights = array(3,4,5,7,10,15) ?>
                                 </div><!--BLOCK2-->
                             </div><!--ACCORDION-->
                             
-                            <div class="total">
+                            <div class="total"> 
                                 <div class="left">
                                     <span class="top">Trip Total </span>
                                     <span class="mid js-price-lb"><sup>$</sup>
@@ -272,6 +272,7 @@ $nights = array(3,4,5,7,10,15) ?>
                         </div><!--FIELDS-->
                         <input type="hidden" class="js-price" value="<?= $this->info['price'] ?>"/>
                         <input type="hidden" class="js-price-before" value="<?= $this->info['price_before'] ?>"/>
+                        <input type="hidden" name="package" value="<?= md5($this->id) ?>" />
                     </form>
                 </div><!--CUSTOMIZE-->
                 <div class="talk">

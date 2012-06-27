@@ -133,6 +133,7 @@
                 <input type="hidden" name="date" class="js-date" value="<?= $this->info['arrival'] ?>" />
                 <input type="hidden" name="nights" class="js-nights" value="<?= $this->info['nights'] ?>" />
                 <input type="hidden" name="travelers" class="js-travelers" value="<?= $this->info['travelers'] ?>" />
+                <input type="hidden" name="package" value="<?= md5($this->id) ?>"/>
             </form>
             <div class="clear"></div>
         </div><!--CHECKOUT-->

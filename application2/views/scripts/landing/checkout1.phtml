@@ -3,18 +3,22 @@
 <head>
 	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
 	<title>Tripfab.com</title>
-	<link type="text/css"  rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
-	<link type="text/css"  rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
-	<link type="text/css"  rel="stylesheet" href="/css6/landing/all3.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+	<link type="text/css" rel="stylesheet" href="/css6/landing/all3.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
+    <style type="text/css">
+	.all { position:relative; } #errors { display:none;}
+	</style>
 </head>
 <body id="trip_all1">
 <div id="wp_all">
     <div id="wp_header">
         <div class="wrapper">
-            <h1 class="logo"><a href="">Tripfab</a></h1>
+            <h1 class="logo"><a href="/">Tripfab</a></h1>
             <div class="contact">
                 <p>Call our Customer Service <strong>1-866-401-0382</strong></p>
-                <a href="#" class="btn-10">Live Chat</a>
+                <a href="#" onclick="SnapABug.startChat('How can I help you today?'); return false;" class="btn-10">Live Chat</a>
             </div><!--CONTACT-->
         </div><!--WRAPPER-->
     </div><!--WP_HEADER-->
@@ -26,27 +30,30 @@
                     <div class="heading">
                         <h2>Booking Details</h2>
                         <div class="counter">
-                            <div>26s</div>
-                            <div>35m :</div>
-                            <div>23h :</div>
-                            <div>02d :</div> 
-                            <div>Sale ends in:</div> 
+                            <div><?= $seconds ?>s</div>
+                            <div><?= $minutes ?>m :</div>
+                            <div><?= $hours ?>h :</div>
+                            <div><?= $days ?>d :</div>
+                            <div>Sale ends in:</div>
                         </div><!--COUNTER-->
                     </div><!--HEADING-->
                     <h3>All Inclusive</h3>
-                    <img src="https://static.tripfab.com/images6/tripsView4ico3.png" width="95" height="95" alt="" />
+                    <img src="<?= $this->info['images'][0]['thumb'] ?>" width="95" height="95" alt="" />
                     <div class="text">
-                        <h2>Allegro Papagayo's</h2>
+                        <h2><?= $this->info['title'] ?></h2>
                         <ul>
                             <li><em class="ico1"></em>Costa Rica</li>
-                            <li><em class="ico2"></em>8 Days</li>
-                            <li><em class="ico3"></em>7 Nights</li>
+                            <li><em class="ico2"></em><?= $this->info['nights'] + 1 ?> Days</li>
+                            <li><em class="ico3"></em><?= $this->info['nights'] ?> Nights</li>
                         </ul>
                         <div class="specs">
                             <ul>
-                                <li><strong class="ico4">Trip Starts</strong>Fri, September 23rd 2011</li>
-                                <li><strong class="ico5">Trips Ends</strong>Sat, September 29th 2011</li>
-                                <li><strong class="ico6">Travelers</strong>2 Adults, 1 Child</li>
+                                <li><strong class="ico4">Trip Starts</strong><?= $this->info['arrival'] ?></li>
+                                <li><strong class="ico5">Trips Ends</strong><?= $this->info['departure'] ?></li>
+                                <li><strong class="ico6">Travelers</strong><?= $this->info['adults'] ?> 
+                                Adults<?php if($this->info['childs'] > 0): ?>
+                                , <?= $this->info['childs'] ?> Childs
+                                <?php endif ?></li>
                             </ul>
                             <div class="clear"></div>
                         </div><!--SPECS-->
@@ -54,49 +61,46 @@
                     <div class="clear"></div>
                 </div><!--RESUME-->
                 <div class="main">
-                    <div class="errors">
+                    <div id="errors" class="errors">
                         <h6>The following information is missing or wrong</h6>
-                        <ul>
-                            <li>- The Credit Card Number required</li>
-                            <li>- The Cardholder Name is wrong</li>
-                            <li>- The Expiration Date is wrong</li>
-                            <li>- The Security Code is wrong</li>
-                            <li>- Please accept the terms and conditions</li>
-                        </ul>
+                        <ul></ul>
                     </div><!--ERRORS-->
                     <div class="top">
                         <h3>How it works</h3>
-                        <p>Please provide your billing details now. <strong>You will not be charged unless we accept your request (within 48 hours).</strong> If we decline or do not accept, no charge is made and you can try booking another dates or search a different itinerary. </p>
+                        <p>Please provide your billing details now. <strong>You will not be charged unless we accept your request (within 48 hours).</strong> If we decline or do not accept, no charge is made and you can try booking another dates or search a different package. </p>
                     </div><!--TOP-->
-                    <form method="post" action="">
+                    <form method="post" action="/en-US/landing/1/charge/" class="js-checkout">
                         <div class="step">
                             <h4><span>1</span>Personal Information</h4>
                             <div class="fields">
-                                <div class="single error">
+                                <div class="single">
                                     <label><strong>Full Name</strong>Write your full name</label>
-                                    <input type="text" name="" value="" />
+                                    <input type="text" name="name" value="" />
                                     <span class="icnError"></span>
                                     <div class="clear"></div>
                                 </div><!--SINGLE-->
                                 
                                 <div class="single">
                                     <label><strong>E-Mail</strong>Give us a e-mail to contact you </label>
-                                    <input type="text" name="" value="" />
+                                    <input type="text" name="email" value="" />
                                     <span class="icnError"></span>
                                     <div class="clear"></div>
                                 </div><!--SINGLE-->
                                 
                                 <div class="single">
                                     <label><strong>Phone</strong>Write a contact phone number</label>
-                                    <input type="text" name="" value="" />
+                                    <input type="text" name="phone" value="" />
                                     <span class="icnError"></span>
                                     <div class="clear"></div>
                                 </div><!--SINGLE-->
                                 
                                 <div class="single last">
                                     <label><strong>Country</strong>Write a contact phone number</label>
-                                    <select>
-                                        <option>Costa Rica</option>
+                                    <select name="country">
+                                    	<option value="">Select your country</option>
+                                    	<?php foreach($this->countries as $c): ?>
+                                        <option value="<?= $c->title ?>"><?= $c->title ?></option>
+                                        <?php endforeach ?>
                                     </select>
                                     <span class="icnError"></span>
                                     <div class="clear"></div>
@@ -108,9 +112,6 @@
                             <h4><span>2</span>Payment Method</h4>
                             <div class="newCard2">
                                 <div class="each">
-                                    <label>
-                                        <span>Enter a New Credit Card</span>
-                                    </label>
                                     <ul class="cards">
                                         <li>
                                             <img id="card-visa1340318536530" src="https://static.tripfab.com/images/visa.png" class="card-icons1340318536530" />
@@ -134,12 +135,12 @@
                                     <div class="clear"></div>
                                 </div><!--EACH-->
                                 
-                                <div class="item error">
+                                <div class="item">
                                     <label>
                                         <strong>Credit Card Number</strong>
                                         No dashes or spaces
                                     </label>
-                                    <input type="text" name="" value="" />
+                                    <input type="text" name="cnum" value="" autocomplete="off" />
                                     <span class="icnError"></span>
                                     <div class="clear"></div>
                                 </div><!--ITEM-->
@@ -148,7 +149,7 @@
                                         <strong>Cardholder Name</strong>
                                         As it appears on the credit card
                                     </label>
-                                    <input type="text" name="" value="" />
+                                    <input type="text" name="cname" value="" autocomplete="off" />
                                     <span class="icnError"></span>
                                     <div class="clear"></div>
                                 </div><!--ITEM-->
@@ -157,11 +158,17 @@
                                         <strong>Expiration Date</strong>
                                         No dashes or spaces
                                     </label>
-                                    <select>
-                                        <option>1</option>
+                                    <select name="cyear">
+                                    	<option value="">----</option>
+                                        <?php for($i=2012;$i<=2025;$i++): ?>
+                                        <option value="<?= $i ?>"><?= $i ?></option>
+                                        <?php endfor ?>
                                     </select>
-                                    <select>
-                                        <option>1</option>
+                                    <select name="cmonth">
+                                    	<option value="">--</option>
+                                    	<?php for($i=1;$i<=12;$i++): ?>
+                                        <option value="<?= ($i < 10) ? '0'.$i : $i ?>"><?= ($i < 10) ? '0'.$i : $i ?></option>
+                                        <?php endfor ?>
                                     </select>
                                     <span class="icnError"></span>
                                     <div class="clear"></div>
@@ -172,108 +179,11 @@
                                         <a class="link1 helptip" href="">What's this?</a>
                                         <p class="tip hidden"><span></span> The 3 or 4 digit value printed on the card or signature strip</p>
                                     </label>
-                                    <input class="code" type="text" name="" value="" />
+                                    <input class="code" maxlength="4" type="text" name="ccode" value="" autocomplete="off" />
                                     <span class="icnError"></span>
                                     <div class="clear"></div>
                                 </div><!--ITEM-->
                             </div><!--NEWCARD2-->
-                            
-                            <h5>Choose a Credit Card</h5>
-                            <div class="each">
-                                <label>
-                                    <input type="radio" name="card" value="" />
-                                    <img src="https://static.tripfab.com/images/visa.png" width="" height="" alt="" />
-                                    <span>Visa</span>
-                                </label>
-                                <span class="saveNumber">************4036</span>
-                                <div class="clear"></div>
-                            </div><!--EACH-->
-                            
-                            <div class="each">
-                                <label>
-                                    <input type="radio" name="card" value="" />
-                                    <img src="https://static.tripfab.com/images/mastercard.png" width="" height="" alt="" />
-                                    <span>MasterCard</span>
-                                </label>
-                                <span class="saveNumber">************4036</span>
-                                <div class="clear"></div>
-                            </div><!--EACH-->
-                            
-                            <div class="newCard">
-                                <div class="each">
-                                    <label>
-                                        <input type="radio" name="card" value="" />
-                                        <span>Enter a New Credit Card</span>
-                                    </label>
-                                    <ul class="cards">
-                                        <li>
-                                            <img id="card-visa1340318536530" src="https://static.tripfab.com/images/visa.png" class="card-icons1340318536530" />
-                                        </li>
-                                        <li>
-                                            <img id="card-mastercard1340318536530" src="https://static.tripfab.com/images/mastercard.png" class="card-icons1340318536530">
-                                        </li>
-                                        <li>
-                                            <img id="card-amex1340318536530" src="https://static.tripfab.com/images/amex.png" class="card-icons1340318536530">
-                                        </li>
-                                        <li>
-                                            <img id="card-diners1340318536530" src="https://static.tripfab.com/images/diners.png" class="card-icons1340318536530">
-                                        </li>
-                                        <li>
-                                            <img id="card-discover1340318536530" src="https://static.tripfab.com/images/discover.png" class="card-icons1340318536530">
-                                        </li>
-                                        <li>
-                                            <img id="card-jcb1340318536530" src="https://static.tripfab.com/images/jcb.png" class="card-icons1340318536530">
-                                        </li>
-                                    </ul>
-                                    <div class="clear"></div>
-                                </div><!--EACH-->
-                                
-                                <div class="item error">
-                                    <label>
-                                        <strong>Credit Card Number</strong>
-                                        No dashes or spaces
-                                    </label>
-                                    <input type="text" name="" value="" />
-                                    <span class="icnError"></span>
-                                    <div class="clear"></div>
-                                </div><!--ITEM-->
-                                
-                                <div class="item">
-                                    <label>
-                                        <strong>Cardholder Name</strong>
-                                        As it appears on the credit card
-                                    </label>
-                                    <input type="text" name="" value="" />
-                                    <span class="icnError"></span>
-                                    <div class="clear"></div>
-                                </div><!--ITEM-->
-                                
-                                <div class="item">
-                                    <label>
-                                        <strong>Expiration Date</strong>
-                                        No dashes or spaces
-                                    </label>
-                                    <select>
-                                        <option>1</option>
-                                    </select>
-                                    <select>
-                                        <option>1</option>
-                                    </select>
-                                    <span class="icnError"></span>
-                                    <div class="clear"></div>
-                                </div><!--ITEM-->
-                                
-                                <div class="item">
-                                    <label>
-                                        <strong>Security Code</strong>
-                                        <a class="link1 helptip" href="">What's this?</a>
-                                        <p class="tip hidden"><span></span> The 3 or 4 digit value printed on the card or signature strip</p>
-                                    </label>
-                                    <input class="code" type="text" name="" value="" />
-                                    <span class="icnError"></span>
-                                    <div class="clear"></div>
-                                </div><!--ITEM-->
-                            </div><!--NEWCARD-->
                         </div><!--STEP-->
                         
                         <div class="step last">
@@ -282,11 +192,6 @@
                                 <div class="restriction">
                                     <strong>Cancellation</strong> 
                                     <a href="#cancel_policy" class="high-r lbc">High Restrictions &rarr;</a>
-                                    <div class="clear"></div>
-                                </div>
-                                <div class="restriction">
-                                    <strong>Activity Restrictions</strong> 
-                                    <a href="#cancel_policy" class="lbc">Read Activity Restrictions &rarr;</a>
                                     <div class="clear"></div>
                                 </div>
                                 <div class="restricction_tip hidden">
@@ -314,7 +219,16 @@
                             <span>Grand Total<strong> $1,902</strong></span>
                             <input type="submit" value="Book Now " class="btn-1 noclean">
                         </div><!--BOTTOM-->
-                    </form>			
+                        <input type="hidden" name="package" value="<?= $this->id ?>" />
+                        <input type="hidden" name="date" value="<?= $this->info['arrival'] ?>"/>
+                        <input type="hidden" name="adults" value="<?= $this->info['adults'] ?>"/>
+                        <input type="hidden" name="childs" value="<?= $this->info['childs'] ?>"/>
+                        <input type="hidden" name="room" value="<?= $this->info['room'] ?>"/>
+                        <input type="hidden" name="nights" value="<?= $this->info['nights'] ?>"/>
+                        <?php foreach($this->addons as $a): ?>
+                        <input type="hidden" name="activities[]" value="<?= $a ?>"/>
+                        <?php endforeach ?>
+                    </form>
                 </div><!--MAIN-->
             </div><!--LEFT-->
             
@@ -325,66 +239,74 @@
                         <tbody>
                             <tr class="before">
                                 <td>Package Regular Price</td>
-                                <td class="rg">$4510</td>
+                                <td class="rg">$<?= $this->info['price_before'] ?></td>
                             </tr>
                             <tr>
                                 <td>Special Price</td>
-                                <td class="rg"><strong>$4000</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Additional Experiences</td>
-                                <td class="rg"><strong>$300</strong></td>
+                                <td class="rg"><strong>$<?= $this->info['price'] ?></strong></td>
                             </tr>
                             <tr class="save">
                                 <td>Total Save</td>
-                                <td class="rg">$200</td>
+                                <td class="rg">$<?= $this->info['save'] ?></td>
                             </tr>
                             <tr class="total">
                                 <td>Trip Total</td>
-                                <td class="rg">$4300</td>
+                                <td class="rg">$<?= $this->info['price'] ?></td>
                             </tr>
                         </tbody>
                     </table>
                     <div class="btn">
-                        <input type="submit" class="btn-1" name="" value="Book Now" />
+                        <input type="submit" class="btn-1 js-booknow" name="" value="Book Now" />
                     </div><!--BTN-->
                     <div class="bot">
-                        <strong>Save $132</strong> per person
+                        <strong>Save $<?= $this->info['save'] / $this->info['travelers'] ?></strong> per person
                     </div>
                 </div><!--EASYBOOKING-->
                 
                 <div class="widget summary">
                     <h6>Trip Summary</h6>
-                    <table width="265" cellspacing="0" cellpadding="0" border="0">
-                        <tbody>
-                            <tr>
-                                <td>Allegro Papagayo</td>
-                                <td><strong>$4510</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Tripfab Experience. <a class="lbc link1" href="#tripExperience">What is this?</a></td>
-                                <td><strong class="fr">Free</strong></td>
-                            </tr>
-                            <tr>
-                                <td>7 nights</td>
-                                <td><strong>$300</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Scuba Diving Trip</td>
-                                <td><strong>$200</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Night Scuba Diving</td>
-                                <td><strong>$4300</strong></td>
-                            </tr>
-                        </tbody>
+                    <table class="js-specific" width="265" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th scope="col">All Inclusive Package</th>
+                            <th scope="col" class="rg">Rates</th>
+                        </tr>
+                        <tr>
+                            <td>Allegro Papagayo</td>
+                            <td class="rg">$<?= $this->info['_price'] * $this->info['travelers'] * $this->info['nights']; ?></td>
+                        </tr>
+                        <tr>
+                            <td>From <?= $this->info['arrival'] ?></td>
+                            <td class="rg">--</td>
+                        </tr>
+                        <tr>
+                            <td>to <?= $this->info['departure'] ?></td>
+                            <td class="rg">--</td>
+                        </tr>
+                        <tr>
+                            <td class="js-room-lb"><?= $this->rooms[$this->info['room']]['name'] ?></td>
+                            <?php $p = $this->rooms[$this->info['room']]['price'] * $this->info['travelers'] * $this->info['nights']; ?>
+                            <td class="rg js-room-price-lb"><?= $p > 0 ? '+ $'.$p : '- $'.$p ?></td>
+                        </tr>
+                        <tr>
+                            <td><?= $this->info['travelers'] ?> Travelers</td>
+                            <td class="rg">--</td>
+                        </tr>
+	                    <?php if(count($this->addons) > 0): ?>
+						<?php foreach($this->addons as $a): ?>
+                        <tr>
+                            <td><?= $this->activities[$a]['name'] ?></td>
+                            <?php $p = $this->activities[$a]['price'] * $this->info['travelers'] ?>
+                            <td class="rg">+ $<?= $p ?></td>
+                        </tr>
+                        <?php endforeach ?>
+                        <?php endif ?>
                     </table>
                 </div><!--SUMMARY-->
             
                 <div class="talk">
                     <h4>Talk to Us</h4>
                     <p>Call our Customer Service <strong>1-866-401-0382</strong></p>
-                    <a href="" class="btn-10">Live Chat</a>
+               		<a href="#" onclick="SnapABug.startChat('How can I help you today?'); return false;" class="btn-10">Live Chat</a>
                 </div><!--TALK-->
             </div><!--RIGHT-->
             <div class="clear"></div>
@@ -405,17 +327,162 @@
         </div><!--FOOTER-->
     </div><!--WP_FOOTER-->
 </div><!--WRAPPER_ALL-->
-<div class="hidden"></div><!--HIDDEN-->
+<div class="hidden">
+    <div id="tripExperience" class="tripExperience">
+        <span class="stamp"></span>
+        <h2>Enjoy the Tripfab Experience®</h2>
+        <h3>When you buy a trip with Tripfab you get a new travel experience</h3>
+        <div class="single">
+            <span class="icon1"></span>
+            <h4>Best Price Guarantee</h4>
+            <p>If you find any of our trips cheaper elsewhere, we'll not only match that price – we'll beat it. Even more, if you send us a trip not offered on our site, we'll build you a similar trip at a lower price</p>
+        </div><!--SINGLE-->
+        <div class="single">
+            <span class="icon2"></span>
+            <h4>Free Cell Phone</h4>
+            <p>We send you off with a free iPhone phone to borrow. Make locals calls, take pictures and videos and upload them to our Facebook page for a chance to win cool prizes</p>
+        </div><!--SINGLE-->
+        <div class="single">
+            <span class="icon3"></span>
+            <h4>Satisfaction Insurance</h4>
+            <p>If you aren't 100% satisfied with any part of your trip, we'll give you a full refund for that portion – no questions asked</p>
+        </div><!--SINGLE-->
+        <div class="clear"></div>
+    </div><!--TRIPEXPERIENCE-->
+    
+    <img id="img1" src="https://static.tripfab.com/images6/tripsView4ico3.png" width="" height="" alt="" /> 
+
+    <div id="cancel_policy" class="cancel_policy lb">
+        <div class="top">High Restrictions Cancellation Policy</div>
+        <div class="mid">
+            <h3>50% refund up until 1 week prior to arrival, except fees</h3>
+            <ul>
+                <li>Cleaning fees are always refunded if the guest did not check in.</li>
+                <li>The Tripfab service fee is non-refundable.</li>
+                <li>If there is a complaint from either party, notice must be given to Tripfab 
+                Resolution Center within 24 hours of check-in.</li>
+                <li>Tripfab Resolution Center will mediate when necessary, and has the final say in all disputes.</li>
+                <li>A reservation is not officially canceled until the guest receives a cancellation confirmation 
+                e-mail from Tripfab Resolution Center.</li>
+            </ul>
+            <div class="inner">
+                <img src="https://static.tripfab.com/images2/img-67-hotel.png" alt="" />
+                <div class="specs">
+                    <div class="column">
+                        <p>Must be made seven full days prior to listing's local check in time (or 2:00 PM 
+                        if not specified) on the day of check in, otherwise no refund. For example, 
+                        if check-in is on Friday, cancel by Friday of the previous</p>
+                    </div><!--COLUMN-->
+                    <div class="column">
+                        <p>If the guest cancels less than 7 days in advance, the nights not spent are not refunded.</p>
+                    </div><!--COLUMN-->
+                    <div class="column last">
+                        <p>If the guest arrives and decides to leave early, the nights not spent are not refunded.</p>
+                    </div><!--COLUMN-->
+                    <div class="clear"></div>
+                </div><!--SPECS-->
+            </div><!--INNER-->
+        </div><!--MID-->
+    </div><!--CANCEL_POLICY-->
+</div><!--HIDDEN-->
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	$(".tabs").tabs({
-		selected: 2
+	$('a.lbc').fancybox({
+		padding: 0,
+		overlayColor: '#FFF',
+		centerOnScroll:1
 	});
-	$(".accordion").accordion({
-		autoHeight: false,
-		collapsible: true
+	$('a.helptip').click(function() {
+		$('.tip').toggleClass('hidden');
+		return false;
 	});
+	$('a.high-r').hover(function() {
+		$('.restricction_tip').toggleClass('hidden');		
+	});
+	$('.js-booknow').click(function(){
+		$('.js-checkout').submit();
+		return false;
+	});
+	
+	$('.js-checkout').submit(function(){
+		$isValid = $(this).validate({
+			rules:{
+				name:'required',
+				email:'required email',
+				phone:'required',
+				country:'required',
+				cnum:'required creditcard',
+				cname:'required',
+				cmonth:'required',
+				cyear:'required',
+				ccode:{
+					required:true,
+					digits:true
+				}
+			},
+			messages:{
+				name:'Please enter your name',
+				email:{
+					'required':'Please provide your email address',
+					'email':'Please provide a valid email address'
+				},
+				phone:'Please enter your phone number',
+				country:'Please select your country',
+				cnum:{
+					'required':'Please enter your credit card number',
+					'creditcard':'Please enter a valid credit card number'
+				},
+				cname:'Please enter you credit card holder name',
+				cmonth:'Please select the credit card expiration month',
+				cyear:'Please select the credit card expiration year',
+				ccode:{
+					'required':'Security code is required',
+					'digits':'Security code must be a 3 to 4 digits number',
+					'min':'Security code must be a 3 to 4 digits number',
+					'max':'Security code must be a 3 to 4 digits number'
+				}
+			},
+			errorContainer:'#errors',
+			errorLabelContainer:'#errors ul',
+			wrapper:'li',
+		});
+		if($isValid.form()) {
+			$('.single').removeClass('error');
+			$('.item').removeClass('error');
+			return true;
+		}
+		
+		$('.single').removeClass('error');
+		$('.item').removeClass('error');
+		$('.error').parents('.single').addClass('error');
+		$('.error').parents('.item').addClass('error');
+		return false;
+	});
+});
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24981182-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script type="text/javascript">
+document.write(unescape("%3Cscript src='" + ((document.location.protocol=="https:")?"https://snapabug.appspot.com":"http://www.snapengage.com") + "/snapabug.js' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">
+//SnapABug.setButton("https://static.tripfab.com/images/Live-Chat-Button.png");
+//SnapABug.addButton("12926583-ebae-4874-8f3e-57cbe2114ebc","0","55%");
+SnapABug.init("12926583-ebae-4874-8f3e-57cbe2114ebc");
+SnapABug.setCallback('StartChat', function(email, msg, type) {
+	var img = document.createElement('img');
+	img.src = "https://www.googleadservices.com/pagead/conversion/956485843/?value=0&amp;label=T64ECJWh8gMQ06GLyAM&amp;guid=ON&amp;script=0";
+	img.width = 1; img.height = 1;
+	document.body.appendChild(img);
 });
 </script>
 </body>
