@@ -32,7 +32,7 @@ class LandingController extends Zend_Controller_Action {
                 'image' => 'https://static.tripfab.com/trips/papagayo/main_thumb.jpg',
                 'title' => 'Allegro Papagayo Resort',
                 'rating' => 4,
-                'reviews' => 98,
+                'reviews' => 9,
                 'location' => 'Guanacaste, Costa Rica',
                 'travelers' => '2 - 100',
                 'price_before' => 110,
@@ -257,175 +257,180 @@ class LandingController extends Zend_Controller_Action {
                 ),
                 'reviews' => array(
                     array(
-                        'user' => 'Susan Boyd',
-                        'location' => 'Virginia Beach, Virginia',
-                        'title' => 'All Pura Vida Hotel',
-                        'rating' => 2,
-                        'date' => 'June 17, 2012',
-                        'text' => "The all-inclusive Allegro Papagayo's 
-                            Spanish-style architecture situates each of 14 
-                            three-story buildingsinto the hillside descending to 
-                            the sightseeing tower, the large, freeform pool and 
-                            restaurants. A frequent, complimentary shuttle 
-                            conveniently delivers guests from their room to the 
-                            other buildings.",
-                    ),
-                    array(
-                        'user' => 'Susan Boyd',
-                        'location' => 'Virginia Beach, Virginia',
-                        'title' => 'All Pura Vida Hotel',
-                        'rating' => 1,
-                        'date' => 'June 17, 2012',
-                        'text' => "The all-inclusive Allegro Papagayo's 
-                            Spanish-style architecture situates each of 14 
-                            three-story buildingsinto the hillside descending to 
-                            the sightseeing tower, the large, freeform pool and 
-                            restaurants. A frequent, complimentary shuttle 
-                            conveniently delivers guests from their room to the 
-                            other buildings.",
-                    ),
-                    array(
-                        'user' => 'Susan Boyd',
-                        'location' => 'Virginia Beach, Virginia',
-                        'title' => 'All Pura Vida Hotel',
-                        'rating' => 3,
-                        'date' => 'June 17, 2012',
-                        'text' => "The all-inclusive Allegro Papagayo's 
-                            Spanish-style architecture situates each of 14 
-                            three-story buildingsinto the hillside descending to 
-                            the sightseeing tower, the large, freeform pool and 
-                            restaurants. A frequent, complimentary shuttle 
-                            conveniently delivers guests from their room to the 
-                            other buildings.",
-                    ),
-                    array(
-                        'user' => 'Susan Boyd',
-                        'location' => 'Virginia Beach, Virginia',
-                        'title' => 'All Pura Vida Hotel',
+                        'user' => 'Kristen',
+                        'location' => 'Bloomington, Indiana',
+                        'title' => 'Costa Rica is GOREOUS!!',
                         'rating' => 5,
                         'date' => 'June 17, 2012',
-                        'text' => "The all-inclusive Allegro Papagayo's 
-                            Spanish-style architecture situates each of 14 
-                            three-story buildingsinto the hillside descending to 
-                            the sightseeing tower, the large, freeform pool and 
-                            restaurants. A frequent, complimentary shuttle 
-                            conveniently delivers guests from their room to the 
-                            other buildings.",
+                        'text' => "Costa Rica is GOREOUS!! I saw so many animals 
+                            it wasn’t even FUNNY. There were black “Congo” monkeys 
+                            almost every single morning and they got SO CLOSE we
+                            took tons of pictures. There are a lot of steep hills 
+                            and my parents usually took the shuttle that is always 
+                            running, but I liked to walk for extra exercise. 
+                            Especially after eating so much at the buffet lol.",
                     ),
                     array(
-                        'user' => 'Susan Boyd',
-                        'location' => 'Virginia Beach, Virginia',
-                        'title' => 'All Pura Vida Hotel',
+                        'user' => 'Brandon',
+                        'location' => 'Tampa, Florida',
+                        'title' => 'Very nice hotel',
+                        'rating' => 5,
+                        'date' => 'June 17, 2012',
+                        'text' => "I was there for a week and thought it was a 
+                            very nice hotel. Would visit again. Beach was nice.
+                            Rainy season, so often showers in the afternoon.",
+                    ),
+                    array(
+                        'user' => 'Allison Suri',
+                        'location' => 'Kansas City, Kansas',
+                        'title' => 'love the pool',
                         'rating' => 4,
                         'date' => 'June 17, 2012',
-                        'text' => "The all-inclusive Allegro Papagayo's 
-                            Spanish-style architecture situates each of 14 
-                            three-story buildingsinto the hillside descending to 
-                            the sightseeing tower, the large, freeform pool and 
-                            restaurants. A frequent, complimentary shuttle 
-                            conveniently delivers guests from their room to the 
-                            other buildings.",
+                        'text' => "This was my first time out of the country and 
+                            i was nervous because i don’t speak any spanish, 
+                            but the staff was totally friendly and almost everyone 
+                            spoke perfect english. love the pool i got so sunburned 
+                            the first day do NOT forget your’e sunblock!",
                     ),
                     array(
-                        'user' => 'Susan Boyd',
-                        'location' => 'Virginia Beach, Virginia',
-                        'title' => 'All Pura Vida Hotel',
-                        'rating' => 3,
+                        'user' => 'Stephanie',
+                        'location' => 'New York, New York',
+                        'title' => 'This is a seriously gorgeous area',
+                        'rating' => 4,
                         'date' => 'June 17, 2012',
-                        'text' => "The all-inclusive Allegro Papagayo's 
-                            Spanish-style architecture situates each of 14 
-                            three-story buildingsinto the hillside descending to 
-                            the sightseeing tower, the large, freeform pool and 
-                            restaurants. A frequent, complimentary shuttle 
-                            conveniently delivers guests from their room to the 
-                            other buildings.",
+                        'text' => "I loved doing yoga on the beach every morning.
+                            This is a seriously gorgeous area. I found that there 
+                            were not a whole lot of vegetarian options for very 
+                            strict vegetarians, but the staff was super friendly 
+                            and always willing to make me something special.",
                     ),
                     array(
-                        'user' => 'Susan Boyd',
-                        'location' => 'Virginia Beach, Virginia',
-                        'title' => 'All Pura Vida Hotel',
+                        'user' => 'Thomas',
+                        'location' => 'Washington, D.C',
+                        'title' => 'I love almost every day I was there',
+                        'rating' => 4,
+                        'date' => 'June 17, 2012',
+                        'text' => "I’m an intermediate scuba diver, and found 
+                            the diving here phenomenal. We saw all kinds of fish,
+                            sea turtles, dolphins, and even a humpback whale!! 
+                            Also clown shrimp and a couple different kinds of 
+                            rays. I dove almost every day I was there. My wife 
+                            really liked the spa and came along on the boat to 
+                            snorkel a couple of times.",
+                    ),
+                    array(
+                        'user' => 'Signe',
+                        'location' => 'Orange County, California',
+                        'title' => 'WOW!!! I friggin’ love this place',
+                        'rating' => 5,
+                        'date' => 'June 17, 2012',
+                        'text' => "WOW!!! I friggin’ love this place. That’s all 
+                            I gotta say about that!!",
+                    ),
+                    array(
+                        'user' => 'Sinead',
+                        'location' => 'Cork, Ireland',
+                        'title' => 'Sunset sailing is a MUST',
+                        'rating' => 4,
+                        'date' => 'June 17, 2012',
+                        'text' => "I came for two weeks and had an amazing time. Sunset sailing is a MUST.",
+                    ),
+                    array(
+                        'user' => 'Olger',
+                        'location' => 'Los Angeles, CA',
+                        'title' => 'I liked the pool and the nighttime stuff',
                         'rating' => 2,
                         'date' => 'June 17, 2012',
-                        'text' => "The all-inclusive Allegro Papagayo's 
-                            Spanish-style architecture situates each of 14 
-                            three-story buildingsinto the hillside descending to 
-                            the sightseeing tower, the large, freeform pool and 
-                            restaurants. A frequent, complimentary shuttle 
-                            conveniently delivers guests from their room to the 
-                            other buildings.",
+                        'text' => "Meh. It was OK. Food was mediocre. 
+                            The beach was nice. I also liked the pool and the 
+                            nighttime stuff",
                     ),
                     array(
-                        'user' => 'Susan Boyd',
-                        'location' => 'Virginia Beach, Virginia',
-                        'title' => 'All Pura Vida Hotel',
-                        'rating' => 1,
+                        'user' => 'Alisande',
+                        'location' => 'Alpharetta, GA',
+                        'title' => 'Great staff, they were WONDERFUL with the kids',
+                        'rating' => 5,
                         'date' => 'June 17, 2012',
-                        'text' => "The all-inclusive Allegro Papagayo's 
-                            Spanish-style architecture situates each of 14 
-                            three-story buildingsinto the hillside descending to 
-                            the sightseeing tower, the large, freeform pool and 
-                            restaurants. A frequent, complimentary shuttle 
-                            conveniently delivers guests from their room to the 
-                            other buildings.",
+                        'text' => "Great staff, they were WONDERFUL with the 
+                            kids. My husband and I are usually a bit paranoid 
+                            with about who we leave them with (they are only 3 
+                            and 5), but we felt really comfortable here with the 
+                            daytime activities. They had so much fun. Licors they 
+                            put in the drinks were kinda nasty like in most 
+                            all-inclusives but other than that it was an ideal 
+                            vacation. ",
                     ),
                 ),
                 'features' => array(
-                    'Transportation from and to the Airport',
-                    'Full open bar',
+                    'Unlimited meals and snack',
+                    'Unlimited juice and soft drinks',
+                    'Unlimited alcoholic beverages',
+                    'Tranfers to and from the Liberia airport',
+                    '4 full open bars, plus a snack bar',
                     '3 restaurants',
-                    '1 snack bar & 4 bars',
-                    '1 snack bar & 4 bars'
+                    'Immense swimming pool with kiddie section',
+                    'Kids club with supervised activities',
                 ),
                 'images' => array(
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/papagayo/main.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/papagayo/main_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/papagayo/main_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/papagayo/1.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/papagayo/1_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/papagayo/1_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/papagayo/2.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/papagayo/2_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/papagayo/2_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/papagayo/3.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/papagayo/3_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/papagayo/3_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/papagayo/4.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/papagayo/4_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/papagayo/4_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/papagayo/5.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/papagayo/5_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/papagayo/5_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/papagayo/6.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/papagayo/6_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/papagayo/6_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/papagayo/7.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/papagayo/7_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/papagayo/7_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/papagayo/8.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/papagayo/8_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/papagayo/8_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                     array(
-                        'url' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'thumb' => 'https://static.tripfab.com/images6/tripsView4ico3.png',
-                        'desc' => 'You will see beautiful birds in the hiking activities'
+                        'url' => 'https://static.tripfab.com/trips/papagayo/9.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/papagayo/9_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/papagayo/9_big.jpg',
+                        'desc' => 'Description goes here'
                     ),
                 ),
                 'dining' => 'Occidental Allegro Papagayo is well known for its 
@@ -440,95 +445,365 @@ class LandingController extends Zend_Controller_Action {
                             lobster and jumbo shrimp. Dress code is casual.',
                     ),
                     array(
-                        'title' => 'Los Corales',
-                        'description' => 'Los Corales is an international, 
-                            open-air buffet that is open for breakfast, lunch 
-                            and dinner. It includes a seafood buffet with nightly 
-                            lobster and jumbo shrimp. Dress code is casual.',
+                        'title' => 'La Trattoria',
+                        'description' => 'La Trattoria is an Italian a la carte 
+                            restaurant where food is ordered off of a menu. Dress 
+                            code is a bit more formal than at Los Corales',
                     ),
                     array(
-                        'title' => 'Los Corales',
-                        'description' => 'Los Corales is an international, 
-                            open-air buffet that is open for breakfast, lunch 
-                            and dinner. It includes a seafood buffet with nightly 
-                            lobster and jumbo shrimp. Dress code is casual.',
+                        'title' => 'La Cantina',
+                        'description' => 'La Cantina is a casual, laid-back 
+                            restaurant with made-to-order, menu food',
                     ),
                     array(
-                        'title' => 'Los Corales',
-                        'description' => 'Los Corales is an international, 
-                            open-air buffet that is open for breakfast, lunch 
-                            and dinner. It includes a seafood buffet with nightly 
-                            lobster and jumbo shrimp. Dress code is casual.',
+                        'title' => 'Snack Bar and Beach Club',
+                        'description' => 'Snack Bar and Beach Club offer snacks and lunch',
                     ),
                 ),
-                'overview2' => array(
+                'expires'=>'2012-06-29 23:59:59'
+            ),
+            
+            'riu' => array(
+                'rating'   => 4,
+                'nights'   => 3,
+                'location' => 'Guanacaste, Costa Rica',
+                'price'    => 75,
+                'price_entero' => 75,
+                'price_decimal'=> 00,
+                'price_before' => 110,
+                'price_before_entero'=>110,
+                'price_before_decimal'=>00,
+                'save'     => 35,
+                'title'    => 'RIU Guanacaste',
+                'description' => 'With delicious food, beautiful beaches, 
+                    relaxing jacuzzis, a gym, sauna, spa and an amazing 
+                    all-inclusive plan, Hotel Riu Guanacaste is the perfect d
+                    estination for a carefree trip to Costa Rica. The expansive
+                    property features 701 rooms,  3 specialty restaurants and an 
+                    immense and luxurious swimming pool.',
+                'sale_starts' => 'April 23th',
+                'sale_ends'   => 'July 20th',
+                'overview'    => array(
                     array(
-                        'title' => 'Activities',
+                        'title' => 'General',
+                        'description' => "The all-inclusive Riu resort is situated 
+                            right on the dark sands of Playa Matapalo beach, where 
+                            sea turtles come to nest at certain times of year. 
+                            Only about 40 minutes from Liberia’s international 
+                            airport, its convenient location and isolated sands 
+                            make this a prime vacation destination.",
                         'points1' => array(
-                            'Ping Pong',
-                            'Darts',
-                            'Beach Soccer',
-                            'Volleyball Court',
+                            'Unlimited meals and snack',
+                            'Unlimited alcoholic beverages',
+                            'Tranfers to and from the Liberia airport',
+                            '3 full open bars, plus a sports bar and a pool bar',
+                            '4 restaurants and one snack bar'
                         ),
                         'points2' => array(
-                            'Ping Pong',
-                            'Darts',
-                            'Beach Soccer',
-                            'Volleyball Court',
-                            'Beach Soccer',
-                            'Volleyball Court',
+                            "5 conference rooms",
+                            "Immense swimming pool with integrated jacuzzi",
+                            "Kids pool",
+                            'Kids club',
+                            'Beach club',
+                        )
+                    ),
+                    array(
+                        'title' => 'Dining',
+                        'description' => 'Hotel Riu offers 3 speciality restaurants 
+                            and a buffet-style main restaurant. Asian, Italian 
+                            and the Steak House both offer to-order and buffet 
+                            options. Check out the lobby bar or the pool bar for 
+                            a cocktail in the fresh air.',                        
+                        'points1' => array(
+                            'Liberia Resaurant typical and international Food',
+                            'La Toscana Italian sit-down restaurant',
                         ),
+                        'points2' => array(
+                            "Furama Specializing in sushi",
+                            "The Steak House serves up succulent cuts of meat"
+                        )
                     ),
                     array(
                         'title' => 'Activities',
                         'points1' => array(
-                            'Ping Pong',
-                            'Darts',
-                            'Beach Soccer',
+                            'Gym',
+                            'Lighted Tennis Courts',
                             'Volleyball Court',
+                            'Billiards table',
+                            'Steam room & Jacuzzi',
+                            'Snorkeling and kayaking equipment',
+                            '1 Free Scuba Diving Lesson in the Pool',
                         ),
                         'points2' => array(
-                            'Ping Pong',
-                            'Darts',
-                            'Beach Soccer',
-                            'Volleyball Court',
-                            'Beach Soccer',
-                            'Volleyball Court',
-                        ),
+                            'Daily entertainment for children 4-12 years old',
+                            'Daily entertainment for adults',
+                            'Nighttime entertainment, live music and dance ensembles, comedy routine',
+                            'Entrance to the casino and dance club (does not include money spent at casino)',
+                            'Aquatic sports',
+                        )
                     ),
                     array(
-                        'title' => 'Activities',
+                        'title' => 'Amenities',
                         'points1' => array(
-                            'Ping Pong',
-                            'Darts',
-                            'Beach Soccer',
-                            'Volleyball Court',
+                            'Bathroom',
+                            'Hair Dryer',
+                            '110 V Outlets',
+                            'Telephone',
+                            'Central Air Conditioning',
+                            'Ceiling Fan',
+                            'Minibar'
                         ),
                         'points2' => array(
-                            'Ping Pong',
-                            'Darts',
-                            'Beach Soccer',
-                            'Volleyball Court',
-                            'Beach Soccer',
-                            'Volleyball Court',
+                            'Lico Dispensor',
+                            'Satellite TV (flat screen)',
+                            'Radio alarm clock',
+                            'Iron & Ironing Board',
+                            '2 Beds 125 x 200 cm or 2 bed 200 x 200 cm',
+                            'Terrace or Balcony'
+                        )
+                    ),
+                ),
+                'addons' => array(
+                    array(
+                        'title' => 'Off-Site Golf course',
+                        'description' => 'Lorem ipsum dolor sit amet, consectetur 
+                            adipiscing elit. Suspendisse non leo sem, quis tempor 
+                            tortor. Cras eget adipiscing purus. Cum sociis 
+                            natoque penatibus et magnis dis parturient montes, 
+                            nascetur ridiculus',
+                        'tags' => array(
+                            'Price' => 'Free',
+                            'Duration' => 'Undefined',
+                            'Location' => '2 miles from Hotel',
                         ),
                     ),
+                ),
+                'reviews' => array(
                     array(
-                        'title' => 'Activities',
-                        'points1' => array(
-                            'Ping Pong',
-                            'Darts',
-                            'Beach Soccer',
-                            'Volleyball Court',
-                        ),
-                        'points2' => array(
-                            'Ping Pong',
-                            'Darts',
-                            'Beach Soccer',
-                            'Volleyball Court',
-                            'Beach Soccer',
-                            'Volleyball Court',
-                        ),
+                        'user' => 'Henry',
+                        'location' => 'El Paso, Texas',
+                        'title' => 'love RIU hotels',
+                        'rating' => 5,
+                        'date' => 'June 17, 2012',
+                        'text' => " love RIU hotels, I’ve stayed in them all 
+                            over the world and RIU Costa Rico is one of my all 
+                            time favorites. Great food, beautiful hotel, great 
+                            weather. All around great experience. A+++",
+                    ),
+                    array(
+                        'user' => 'Sharon',
+                        'location' => 'Orlando, Florida',
+                        'title' => 'They loved the kiddie activities',
+                        'rating' => 4,
+                        'date' => 'June 17, 2012',
+                        'text' => "My daughter has food allergies and the chef 
+                            at the Liberia restaurant specially-cooked her food 
+                            each lunch and dinner. They loved the kiddie activities 
+                            during the day and the kid’s shows in teh evening. 
+                            Starlight was everyone’s favorite we watched him 
+                            every night. AMAZING STAFF!!!",
+                    ),
+                    array(
+                        'user' => 'CaMeRon',
+                        'location' => 'Atlanta, Georgia',
+                        'title' => 'Strong drinks, best spring break ever',
+                        'rating' => 5,
+                        'date' => 'June 17, 2012',
+                        'text' => "Strong drinks, best spring break ever. If your 
+                            a student this is a great place to come with all of 
+                            your friends. I didn’t really like the food at the 
+                            asian place but the rest of it was seriuosly awesome. 
+                            we can’t wait to come again",
+                    ),
+                    array(
+                        'user' => 'Rayda M',
+                        'location' => 'New York, New York',
+                        'title' => 'It was fun. Not the best Riu',
+                        'rating' => 3,
+                        'date' => 'June 17, 2012',
+                        'text' => "It was fun. Not the best Riu I’ve ever been 
+                            too, but I enjoyed my stay and the staff was friendly. 
+                            Really loved the scuba diving and got to see a sea 
+                            turtle and some dolphins. Not sure I’d go back to 
+                            that Riu again, but I’m glad we went once. ",
+                    ),
+                    array(
+                        'user' => 'Jonathon',
+                        'location' => 'Tom’s River, New Jersey',
+                        'title' => 'the food was amazing',
+                        'rating' => 4,
+                        'date' => 'June 17, 2012',
+                        'text' => "the food was amazing and i won like $100 this 
+                            one night in the casino lots of hot chicks at the 
+                            bar on the weekend but kinda slow during the week. 
+                            also a bit $$ to taxi into town at night, but most 
+                            nights we just stayed at the resort",
+                    ),
+                    array(
+                        'user' => 'Niall',
+                        'location' => 'Rochester, New York',
+                        'title' => 'Sushi restaurant is the best',
+                        'rating' => 4,
+                        'date' => 'June 17, 2012',
+                        'text' => "Sushi restaurant is the best, then Italian 
+                            then Liberia then the Steak House. This was our 
+                            family’s first all inclusive, and it was so nice not 
+                            having to worry about meals and money. Everyone could 
+                            always find something to do, even my 14 year old. 
+                            My wife and I felt comfortable leaving the kids to 
+                            do their own thing so we could do ours. Overall, a 
+                            wonderful experience.",
+                    ),
+                    array(
+                        'user' => 'Ruthie',
+                        'location' => 'Los Angeles, CA',
+                        'title' => 'LOVE LOVE LOVE!',
+                        'rating' => 5,
+                        'date' => 'June 17, 2012',
+                        'text' => "LOVE LOVE LOVE! Already planning a trip back 
+                            next year. I think next time I would NOT go during 
+                            Easter Week because it was really crowded. ",
+                    ),
+                    array(
+                        'user' => 'Kimberly H.',
+                        'location' => 'Los Angeles, CA',
+                        'title' => 'It was super romantic.',
+                        'rating' => 5,
+                        'date' => 'June 17, 2012',
+                        'text' => "My husband and I celebrated our honeymoon 
+                            here and it was phenomenal. The staff went out of 
+                            their way to make us feels special. There was 
+                            champagne in the room and rosepetals on the dinner 
+                            table at night. It was super romantic. ",
+                    ),
+                    array(
+                        'user' => 'Joan',
+                        'location' => 'Alpharetta, GA',
+                        'title' => 'The beach was pretty nice',
+                        'rating' => 2,
+                        'date' => 'June 17, 2012',
+                        'text' => "I did not like the food here at all. It was very greasy. 
+                            There were a few things at the Asian place that were ok. 
+                            The beach was pretty nice. Also, it took forever to check in. ",
+                    ),
+                    array(
+                        'user' => 'Patricia',
+                        'location' => '',
+                        'title' => 'Super friendly.',
+                        'rating' => 4,
+                        'date' => 'June 17, 2012',
+                        'text' => "The wait staff was so nice, and helped me 
+                            practice my Spanish. Super friendly. One of the 
+                            waiters told us that there were turtles nesting at 
+                            this time of year and we went and sure enough! saw 
+                            a momma turtle dig a big hole in the sand and lay 
+                            her eggs!!!!! It was one of the most amazing things 
+                            I’ve ever seen. he told us we couldn’t use flashlights 
+                            or cameras with a flash because it disturbs the 
+                            turtles but there was enough light from the stars 
+                            and moon to see.",
+                    ),
+                ),
+                'features' => array(
+                    'Unlimited meals and snack',
+                    'Unlimited alcoholic beverages',
+                    'Tranfers to and from the Liberia airport',
+                    '3 full open bars, plus a sports bar and a pool bar',
+                    '4 restaurants and one snack bar',
+                    '5 conference rooms',
+                ),
+                'images' => array(
+                    array(
+                        'url' => 'https://static.tripfab.com/trips/riu/main.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/riu/main_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/riu/main_big.jpg',
+                        'desc' => 'Description goes here'
+                    ),
+                    array(
+                        'url' => 'https://static.tripfab.com/trips/riu/1.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/riu/1_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/riu/1_big.jpg',
+                        'desc' => 'Description goes here'
+                    ),
+                    array(
+                        'url' => 'https://static.tripfab.com/trips/riu/2.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/riu/2_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/riu/2_big.jpg',
+                        'desc' => 'Description goes here'
+                    ),
+                    array(
+                        'url' => 'https://static.tripfab.com/trips/riu/3.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/riu/3_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/riu/3_big.jpg',
+                        'desc' => 'Description goes here'
+                    ),
+                    array(
+                        'url' => 'https://static.tripfab.com/trips/riu/4.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/riu/4_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/riu/4_big.jpg',
+                        'desc' => 'Description goes here'
+                    ),
+                    array(
+                        'url' => 'https://static.tripfab.com/trips/riu/5.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/riu/5_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/riu/5_big.jpg',
+                        'desc' => 'Description goes here'
+                    ),
+                    array(
+                        'url' => 'https://static.tripfab.com/trips/riu/6.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/riu/6_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/riu/6_big.jpg',
+                        'desc' => 'Description goes here'
+                    ),
+                    array(
+                        'url' => 'https://static.tripfab.com/trips/riu/7.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/riu/7_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/riu/7_big.jpg',
+                        'desc' => 'Description goes here'
+                    ),
+                    array(
+                        'url' => 'https://static.tripfab.com/trips/riu/8.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/riu/8_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/riu/8_big.jpg',
+                        'desc' => 'Description goes here'
+                    ),
+                    array(
+                        'url' => 'https://static.tripfab.com/trips/riu/9.jpg',
+                        'thumb' => 'https://static.tripfab.com/trips/riu/9_thumb.jpg',
+                        'big' => 'https://static.tripfab.com/trips/riu/9_big.jpg',
+                        'desc' => 'Description goes here'
+                    ),
+                ),
+                'dining' => 'Hotel Riu offers 3 speciality restaurants and a 
+                    buffet-style main restaurant. Asian, Italian and the Steak 
+                    House both offer to-order and buffet options. Check out the 
+                    lobby bar or the pool bar for a cocktail in the fresh air. ',
+                'restaurants' => array(
+                    array(
+                        'title' => 'Liberia Resaurant',
+                        'description' => 'This buffet offers everything you could 
+                            ever dream of – from typical Costa Rican fares to good 
+                            ‘ole Texan-style cheeseburgers. There are options for 
+                            vegans, vegetarians, meat and seafood lovers and, best 
+                            of all, a huge row delectable desserts to top it all off. ',
+                    ),
+                    array(
+                        'title' => 'La Toscana',
+                        'description' => 'This authentic Italian sit-down 
+                            restaurant requires a reservation. Dishes are made 
+                            to order, but there is a buffet-style salad bar.',
+                    ),
+                    array(
+                        'title' => 'Furama',
+                        'description' => 'Specializing in sushi, meals here are 
+                            mostly served buffet style; although the sushi chefs 
+                            are very friendly and open to making rolls to-order 
+                            if you want something special. ',
+                    ),
+                    array(
+                        'title' => 'Grill/Steak House',
+                        'description' => 'The Steak House serves up succulent 
+                            cuts of meat, ordered off of a menu. By reservation only. ',
                     ),
                 ),
                 'expires'=>'2012-06-29 23:59:59'
@@ -556,7 +831,29 @@ class LandingController extends Zend_Controller_Action {
                     'price_desc' => '+ $50',
                     'price' => 50
                 ),
+            ),
+            'riu' => array(
+                array(
+                    'id' => 'standard',
+                    'name' => 'Standard',
+                    'price_desc' => '- $20',
+                    'price' => -20
+                ),
+                array(
+                    'id' => 'deluxe',
+                    'name' => 'Deluxe',
+                    'price_desc' => 'Included',
+                    'price' => 0,
+                    'selected' => 1
+                ),
+                array(
+                    'id' => 'suite',
+                    'name' => 'Master Suite',
+                    'price_desc' => '+ $50',
+                    'price' => 50
+                ),
             )
+            
         );
         
         $activities = array(
@@ -579,7 +876,27 @@ class LandingController extends Zend_Controller_Action {
                     'price_desc' => '+$32/person',
                     'price' => 32
                 ),
-            )
+            ),
+            'riu' => array(
+                array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tour',
+                    'price_desc' => '+$25/person',
+                    'price' => 25
+                ),
+                array(
+                    'id' => 'atv1',
+                    'name' => 'ATV Tour',
+                    'price_desc' => '+$20/person',
+                    'price' => 20
+                ),
+                array(
+                    'id' => 'atv2',
+                    'name' => 'ATV Tour',
+                    'price_desc' => '+$32/person',
+                    'price' => 32
+                ),
+            )            
         );
         
         $this->view->id = $id;
@@ -658,9 +975,6 @@ class LandingController extends Zend_Controller_Action {
                 ),
             )
         );
-        
-        
-        
         
         $arrival = strtotime($data['date']);
         $nights  = $data['nights'];

@@ -79,7 +79,7 @@ $nights = array(3,4,5,7,10,15) ?>
                             <h3>All Inclusive</h3>
                         </div><!--TITLE-->
                         <div class="descrip"><?= $id ?> - <?= $img['desc'] ?> 
-                        <a href="<?= $img['url'] ?>" rel="group1" class="js-fancybox"></a></div><!--DESCRIP-->
+                        <a href="<?= $img['big'] ?>" rel="group1" class="js-fancybox"></a></div><!--DESCRIP-->
                     </div><!--IMAGES-->
                     <?php endforeach ?>
                     
@@ -127,7 +127,7 @@ $nights = array(3,4,5,7,10,15) ?>
                         </dl>
                     </div><!--FOOD-->
                     
-                    <?php foreach($this->info['overview2'] as $o): ?>
+                    <?php foreach($this->info['overview'] as $o): ?>
                     <div class="single">
                         <h5><?= $o['title'] ?></h5>
                         <ul>
