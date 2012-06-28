@@ -201,7 +201,7 @@ $nights = array(3,4,5,7,10,15) ?>
                                     	<?php foreach($this->rooms as $i => $room): ?>
                                         <?php $checked = (isset($room['selected'])) ? 'checked="checked"': '' ?>
                                         <tr>
-                                            <td><label><input data-included="<?= isset($room['selected']) ?>" type="radio" name="room" 
+                                            <td width="190"><label><input data-included="<?= isset($room['selected']) ?>" type="radio" name="room" 
                                             data-price="<?= $room['price'] ?>" value="<?= $room['id'] ?>" <?= $checked ?> class="js-room js-change" 
                                             data-label="<?= $room['name'] ?>" /> <?= $room['name'] ?></label></td>
                                             <td id="js-room-<?= $i ?>" class="rg">
@@ -222,7 +222,7 @@ $nights = array(3,4,5,7,10,15) ?>
                                 <div class="block2">
                                     <table width="272" border="0" cellspacing="0" cellpadding="0">
                                         <tr>
-                                            <td>
+                                            <td width="190">
                                             <select name="nights" class="js-change js-nights">
                                                 <option value="<?= $this->info['nights'] ?>"><?= $this->info['nights'] ?> Nights</option>
                                                 <?php for($i=($this->info['nights'] + 1); $i<=15; $i++): ?>
@@ -250,7 +250,6 @@ $nights = array(3,4,5,7,10,15) ?>
                                         </tr>
 										<?php endforeach ?>
                                     </table>
-                                    <span class="line"></span>
                                 </div><!--BLOCK2-->
                             </div><!--ACCORDION-->
                             
