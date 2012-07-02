@@ -2588,9 +2588,9 @@ class AdminController extends Zend_Controller_Action {
     
     private function listingPricingPostHandler($listing)
     {
-        switch($_POST['_task']){
+		switch($_POST['_task']){
             case md5('update_pricing'):
-                $this->listingPricingUpdate($listing);
+				$this->listingPricingUpdate($listing);
                 break;
             case md5('add_season'):
                 $this->listingAddSeason($listing);
@@ -2753,7 +2753,7 @@ class AdminController extends Zend_Controller_Action {
             }
             //var_dump($data); die;
         }
-        $this->listings->updatePricesOf($listing, $data);
+		$this->listings->updatePricesOf($listing, $data);
         
         $listing->policy = $data['policy'];
         $listing->save();
@@ -3514,7 +3514,7 @@ class AdminController extends Zend_Controller_Action {
         $seq = $this->view->paramSequence == 'desc' ? ' desc' : '';
         $this->view->paramQuery = $this->_getParam('q');
 
-        $reservationFields = array('code', 'listing_name', 'vendor_name', 'user_name', 'checkin', 'checkout');
+        $reservationFields = array('code', 'listing_name', 'vendor_name', 'user_name', 'checkin', 'checkout', 'created');
 
 
         $db = Zend_Db_Table::getDefaultAdapter();
