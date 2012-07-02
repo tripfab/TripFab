@@ -3514,7 +3514,7 @@ class AdminController extends Zend_Controller_Action {
         $seq = $this->view->paramSequence == 'desc' ? ' desc' : '';
         $this->view->paramQuery = $this->_getParam('q');
 
-        $reservationFields = array('code', 'listing_name', 'vendor_name', 'user_name', 'checkin', 'checkout', 'created');
+        $reservationFields = array('code', 'listing_name', 'vendor_name', 'user_name', 'status', 'checkin', 'checkout', 'created');
 
 
         $db = Zend_Db_Table::getDefaultAdapter();
@@ -3525,7 +3525,8 @@ class AdminController extends Zend_Controller_Action {
                 ->join('listings', 'reservations.listing_id = listings.id', array('listing_name' => 'title', 'listing_image' => 'image'))
                 ->join('listing_types', 'listings.main_type = listing_types.id', array('listing_type' => 'name'))
                 ->join('users', 'users.id=reservations.user_id', array('user_name' => 'name'))
-                ->join('vendors', 'vendors.id=reservations.vendor_id', array('vendor_name' => 'name'));
+                ->join('vendors', 'vendors.id=reservations.vendor_id', array('vendor_name' => 'name'))
+				->joinleft('reservation_status', 'reservation_status.id = reservations.status_id', array('status'=>'name'));
         if ($this->view->searchText) {
             $select->where("reservations.code like '{$this->view->searchText}' or listings.title like '{$this->view->searchText}%'");
         }
