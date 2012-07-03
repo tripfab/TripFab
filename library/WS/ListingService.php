@@ -1485,7 +1485,6 @@ class WS_ListingService {
     }
     
     public function updatePricesOf($listing, $data){   
-        //var_dump($data); die;
         if($listing->main_type == 5) {
             $__price = 100000;
             $__key;
@@ -1506,7 +1505,6 @@ class WS_ListingService {
             foreach($data['sch'] as $season => $_info){
                 foreach($_info as $sch => $info){
                     $ddata = $data['sch'][0][$sch];
-                    //var_dump($info); 
                     $this->_updatePrice ($listing->id, 4, $ddata, $info, null, $season, $sch);
                 }
             }
@@ -1549,7 +1547,6 @@ class WS_ListingService {
     
     private function _updatePrice(
             $listing, $type, $data, $info, $day = null, $season = null, $schedule = null){
-        
         $select = $this->prices_db->select();
         $select->where('listing_id = ?', $listing);
         if($type == 4 and $season != 0){
