@@ -4124,4 +4124,21 @@ class AjaxController extends Zend_Controller_Action
     {
         
     }
+    
+    public function subscribeAction()
+    {
+        if($this->getRequest()->isPost()) 
+        {
+            $emails = new Zend_Db_Table('subscriptions');
+            $email = $emails->fetchNew();
+            $email->name = $_POST['name'];
+            $email->email = $_POST['email'];
+            $email->created = date('Y-m-d G:i:s');
+            
+            $email->save();
+            
+            echo 'Success';
+        }
+        die;
+    }
 }
