@@ -1,4 +1,4 @@
-<?php $l = strtotime($this->info['expires']) - time();
+<?php $l = strtotime('Next Sunday') - time();
 $d1 = ($l - ($l % 86400)); $h1 = $l - $d1; $h2 = $h1 - ($h1 % 3600); $m1 = $h1 - $h2; $m2 = $m1 - ($m1 % 60);
 $days = $d1 / 86400; $hours = $h2 / 3600; $minutes = $m2 / 60; $seconds = $m1 - $m2; 
 $nights = array(3,4,5,7,10,15) ?>
@@ -305,7 +305,7 @@ $(document).ready(function() {
 		centerOnScroll:1
 	});
 	
-	$expires = <?= strtotime($this->info['expires']) ?>;
+	$expires = <?= strtotime('Next Sunday') ?>;
 	$now	 = <?= time() ?>;
 	
 	setInterval(function(){

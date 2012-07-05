@@ -1,3 +1,7 @@
+<?php $l = strtotime('Next Sunday') - time();
+$d1 = ($l - ($l % 86400)); $h1 = $l - $d1; $h2 = $h1 - ($h1 % 3600); $m1 = $h1 - $h2; $m2 = $m1 - ($m1 % 60);
+$days = $d1 / 86400; $hours = $h2 / 3600; $minutes = $m2 / 60; $seconds = $m1 - $m2; 
+$nights = array(3,4,5,7,10,15) ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
@@ -70,11 +74,13 @@
                 <div class="right">
                     <div class="shadows"></div>                    
                     <div class="sale">
-                        <h2>Deal of the Day Hurry Up!</h2>
+                        <h2>Deal of the Week Hurry Up!</h2>
                         <div class="counter">
-                            <div><span>Sale Finishes in</span> 01hrs</div> 
-                            <div> 36min</div>
-                            <div> 28 sec</div>
+                            <div><span>Sale Finishes in</span></div>
+                            <div class="jsd"><?= $days ?>d</div>
+                            <div class="jsh"><?= $hours ?>h</div>
+                            <div class="jsm"><?= $minutes ?>m</div>
+                            <div class="jss"><?= $seconds ?>s</div>
                         </div><!--COUNTER-->
                         <div class="clear"></div>
                         <span class="stamp"></span>
@@ -97,9 +103,10 @@
                                 <div class="descrip">
                                     <ul class="count">
                                         <li>Sale Finishes in</li>
-                                        <li>4 hrs</li>
-                                        <li>36 min</li>
-                                        <li>58 sec</li>
+                                        <li class="jsd"><?= $days ?>d</li>
+                                        <li class="jsh"><?= $hours ?>h</li>
+                                        <li class="jsm"><?= $minutes ?>m</li>
+                                        <li class="jss"><?= $seconds ?>s</li>
                                     </ul>
                                     <p><?= $this->trips[0]['description'] ?>...</p>
                                     <div class="single">
@@ -144,9 +151,10 @@
                                 <div class="descrip">
                                     <ul class="count">
                                         <li>Sale Finishes in</li>
-                                        <li>4 hrs</li>
-                                        <li>36 min</li>
-                                        <li>58 sec</li>
+                                        <li class="jsd"><?= $days ?>d</li>
+                                        <li class="jsh"><?= $hours ?>h</li>
+                                        <li class="jsm"><?= $minutes ?>m</li>
+                                        <li class="jss"><?= $seconds ?>s</li>
                                     </ul>
                                     <p><?= $this->trips[$j]['description'] ?>...</p>
                                     <div class="single">
@@ -190,38 +198,6 @@
         </div><!--FOOTER-->
     </div><!--WP_FOOTER-->
 </div><!--WRAPPER_ALL-->
-<div class="hidden">
-    <div id="sendEmail" class="lb sendEmail">
-        <div class="top">Tell About Allegro Papagayo <em>to</em> Your Friends</div><!--TOP-->
-        <div class="text">
-            <h3>Send this listing page to your closest friends</h3>
-            <p>Let them know about our amazing savings and give them a chance
-            to be a Tripfab Traveler</p>
-        </div><!--TEXT-->
-        <form action="">
-            <div class="cont">
-                <input type="text" name="" value="Your Name" />	
-                <div class="error">
-                    <input type="text" name="" value="Your E-mail" />
-                    <p><em></em>Please enter a valid e-mail here</p>
-                    <span class="ico"></span>
-                </div>
-                <div class="error">
-                    <textarea cols="" rows="">Write a short description</textarea>
-                    <p><em></em>Please enter a valid e-mail here</p>
-                    <span class="ico"></span>
-                </div>
-                <input type="text" class="email" name="" value="Friend Email" />
-                <a href="" class="link1">+ Add More Friends</a>
-                <div class="clear"></div>
-            </div><!--CONT-->
-            <div class="bot">
-                <input type="submit" class="btn-1" name="" value="Send Message" />
-                <a href="" class="btn-10">Cancel</a>
-            </div><!--BOT-->
-        </form>
-    </div><!--SENDEMAIL-->
-</div><!--HIDDEN-->
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -239,7 +215,44 @@ $(document).ready(function() {
 	$("#addons .accordion").accordion({
 		autoHeight: false,
 		collapsible: true
-	}); 
+	});
+	$('#js-subscribe').submit(function(){
+		var $form = $(this);
+		var $data = {
+			name:$('input[name=name]', $form).val(),
+			email:$('input[name=email]', $form).val(),
+		};
+		if($data.name == "") 
+			alert('Please enter your name');
+		else if($data.email == "") 
+			alert('Please enter your email');
+		else {
+			$.ajax({
+				url:'/ajax/subscribe',
+				type:'post',
+				data:$data,
+				success:function(){
+					$('input[type=text]', $form).val('');
+					alert('You have been subscribed\nExpec news from us in the next days');
+				},
+				error:function(){
+					$('input[type=text]', $form).val('');
+					alert('Sorry, There was a problem. Try again later');
+				}
+			});
+		}
+		return false;
+	});
+	
+	$expires = <?= strtotime('Next Sunday') ?>;
+	$now	 = <?= time() ?>;
+	
+	setInterval(function(){
+		$now += 1; $l = $expires - $now;
+		$d1 = ($l - ($l % 86400)); $h1 = $l - $d1; $h2 = $h1 - ($h1 % 3600); $m1 = $h1 - $h2; $m2 = $m1 - ($m1 % 60);
+		$days = $d1 / 86400; $hours = $h2 / 3600; $minutes = $m2 / 60; $seconds = $m1 - $m2;
+		$('.jsd').text($days+'d:'); $('.jsh').text($hours+'h:'); $('.jsm').text($minutes+'m:'); $('.jss').text($seconds+'s');
+	},1000);
 });
 $(document).ready(function(){
 	img_ready($('img.background'));
@@ -277,6 +290,30 @@ function resizeImg($bgImg) {
 	$bgImg.css('height',height);
 	$bgImg.css('top',top);
 }
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24981182-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script type="text/javascript">
+document.write(unescape("%3Cscript src='" + ((document.location.protocol=="https:")?"https://snapabug.appspot.com":"http://www.snapengage.com") + "/snapabug.js' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">
+//SnapABug.setButton("https://static.tripfab.com/images/Live-Chat-Button.png");
+//SnapABug.addButton("12926583-ebae-4874-8f3e-57cbe2114ebc","0","55%");
+SnapABug.init("12926583-ebae-4874-8f3e-57cbe2114ebc");
+SnapABug.setCallback('StartChat', function(email, msg, type) {
+	var img = document.createElement('img');
+	img.src = "https://www.googleadservices.com/pagead/conversion/956485843/?value=0&amp;label=T64ECJWh8gMQ06GLyAM&amp;guid=ON&amp;script=0";
+	img.width = 1; img.height = 1;
+	document.body.appendChild(img);
+});
 </script>
 </body>
 </html>
