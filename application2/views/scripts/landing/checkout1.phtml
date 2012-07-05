@@ -71,35 +71,35 @@ $nights = array(3,4,5,7,10,15) ?>
                     </div><!--ERRORS-->
                     <div class="top">
                         <h3>How it works</h3>
-                        <p>Please provide your billing details now. <strong>You will not be charged unless we accept your request (within 48 hours).</strong> If we decline or do not accept, no charge is made and you can try booking another dates or search a different package. </p>
+                        <p>Please provide your billing details now. <strong>You will not be charged unless we accept your request (within 48 hours).</strong> If we decline or do not accept, no charge will be made. You can try booking different dates or choose another trip package for the original dates. </p>
                     </div><!--TOP-->
                     <form method="post" action="/en-US/landing/1/charge/" class="js-checkout">
                         <div class="step">
                             <h4><span>1</span>Personal Information</h4>
                             <div class="fields">
                                 <div class="single">
-                                    <label><strong>Full Name</strong>Write your full name</label>
+                                    <label><strong>Full Name</strong>Your first, middle and last name</label>
                                     <input type="text" name="name" value="" />
                                     <span class="icnError"></span>
                                     <div class="clear"></div>
                                 </div><!--SINGLE-->
                                 
                                 <div class="single">
-                                    <label><strong>E-Mail</strong>Give us a e-mail to contact you </label>
+                                    <label><strong>E-Mail</strong>Please give us an email address to contact you</label>
                                     <input type="text" name="email" value="" />
                                     <span class="icnError"></span>
                                     <div class="clear"></div>
                                 </div><!--SINGLE-->
                                 
                                 <div class="single">
-                                    <label><strong>Phone</strong>Write a contact phone number</label>
+                                    <label><strong>Phone</strong>Your primary phone number</label>
                                     <input type="text" name="phone" value="" />
                                     <span class="icnError"></span>
                                     <div class="clear"></div>
                                 </div><!--SINGLE-->
                                 
                                 <div class="single last">
-                                    <label><strong>Country</strong>Write a contact phone number</label>
+                                    <label><strong>Country</strong>The country in which you reside </label>
                                     <select name="country">
                                     	<option value="">Select your country</option>
                                     	<?php foreach($this->countries as $c): ?>
@@ -231,7 +231,7 @@ $nights = array(3,4,5,7,10,15) ?>
                                 <td class="rg"><strong>$<?= $this->info['price'] ?></strong></td>
                             </tr>
                             <tr class="save">
-                                <td>Total Save</td>
+                                <td>Total Saved</td>
                                 <td class="rg">$<?= $this->info['save'] ?></td>
                             </tr>
                             <tr class="total">
