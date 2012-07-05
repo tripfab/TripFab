@@ -147,26 +147,7 @@ $nights = array(3,4,5,7,10,15) ?>
                             <h4><span>2</span>Payment Method</h4>
                             <div class="newCard2">
                                 <div class="each">
-                                    <ul class="cards">
-                                        <li>
-                                            <img id="card-visa1340318536530" src="https://static.tripfab.com/images/visa.png" class="card-icons1340318536530" />
-                                        </li>
-                                        <li>
-                                            <img id="card-mastercard1340318536530" src="https://static.tripfab.com/images/mastercard.png" class="card-icons1340318536530">
-                                        </li>
-                                        <li>
-                                            <img id="card-amex1340318536530" src="https://static.tripfab.com/images/amex.png" class="card-icons1340318536530">
-                                        </li>
-                                        <li>
-                                            <img id="card-diners1340318536530" src="https://static.tripfab.com/images/diners.png" class="card-icons1340318536530">
-                                        </li>
-                                        <li>
-                                            <img id="card-discover1340318536530" src="https://static.tripfab.com/images/discover.png" class="card-icons1340318536530">
-                                        </li>
-                                        <li>
-                                            <img id="card-jcb1340318536530" src="https://static.tripfab.com/images/jcb.png" class="card-icons1340318536530">
-                                        </li>
-                                    </ul>
+                                    <ul class="cards"></ul>
                                     <div class="clear"></div>
                                 </div><!--EACH-->
                                 
@@ -214,7 +195,7 @@ $nights = array(3,4,5,7,10,15) ?>
                                         <a class="link1 helptip" href="">What's this?</a>
                                         <p class="tip hidden"><span></span> The 3 or 4 digit value printed on the card or signature strip</p>
                                     </label>
-                                    <input class="code" maxlength="4" type="text" name="ccode" value="" autocomplete="off" />
+                                    <input maxlength="4" type="text" name="ccode" class="code" value="" autocomplete="off" />
                                     <span class="icnError"></span>
                                     <div class="clear"></div>
                                 </div><!--ITEM-->
@@ -286,7 +267,7 @@ $nights = array(3,4,5,7,10,15) ?>
                             </tr>
                             <tr class="total">
                                 <td>Trip Total</td>
-                                <td class="rg">$<?= $this->info['price'] ?></td>
+                                <td class="js-total-price rg" data-price="<?= $this->info['price'] ?>">$<?= $this->info['price'] ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -405,9 +386,18 @@ $nights = array(3,4,5,7,10,15) ?>
         </div><!--MID-->
     </div><!--CANCEL_POLICY-->
 </div><!--HIDDEN-->
+<script type="text/javascript">PUBLIC_KEY = "<?= $this->pkey ?>"; </script>
+<script type="text/javascript" src="https://js.stripe.com/v1/"></script>
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/cardcheck.min.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	$('body').data('secretAmmount', $('.js-total-price').data('price'));
+	var creditCard = $('#checkout input[name=cnum]');
+    creditCard.cardcheck({
+        iconLocation: 'ul.cards',
+        iconDir:'https://static.tripfab.com/images/'
+    });
 	$('a.lbc').fancybox({
 		padding: 0,
 		overlayColor: '#FFF',
@@ -432,14 +422,12 @@ $(document).ready(function() {
 				email:'required email',
 				phone:'required',
 				country:'required',
-				cnum:'required creditcard',
 				cname:'required',
-				cmonth:'required',
+				cnum:'required creditcard',
 				cyear:'required',
-				ccode:{
-					required:true,
-					digits:true
-				}
+				cmonth:'required',
+				ccode:'required digits',
+				terms:'required',
 			},
 			messages:{
 				name:'Please enter your name',
@@ -461,16 +449,52 @@ $(document).ready(function() {
 					'digits':'Security code must be a 3 to 4 digits number',
 					'min':'Security code must be a 3 to 4 digits number',
 					'max':'Security code must be a 3 to 4 digits number'
-				}
+				},
+				terms:'Please accept the terms of use'
 			},
 			errorContainer:'#errors',
 			errorLabelContainer:'#errors ul',
 			wrapper:'li',
 		});
-		if($isValid.form()) {
+		
+		if($isValid.form() ) {
 			$('.single').removeClass('error');
 			$('.item').removeClass('error');
-			return true;
+			Stripe.setPublishableKey(PUBLIC_KEY);
+			$data = {
+				number:    $('input[name=cnum]', this).val(),
+				name:    $('input[name=cname]', this).val(),
+				cvc: 	   $('input[name=ccode]', this).val(),
+				exp_month: $('select[name=cmonth]', this).val(),
+				exp_year:  $('select[name=cyear]', this).val()
+			};
+			$('input, select', this).attr('disabled', 'disabled');
+			var amount = $('body').data('secretAmmount') * 100; //amount you want to charge in cents
+			Stripe.createToken($data, amount, function(status, response){
+				
+				var $form = $('.js-checkout');
+				if (response.error) {
+					//show the errors on the form
+					$('input, select', $form).removeAttr('disabled');
+					alert(response.error.message);
+				} else {
+					// token contains id, last4, and card type
+					var token = response['id'];
+					
+					$('input, select', $form).removeAttr('disabled');
+					$('input[name=cnum]').removeAttr('name');
+					$('input[name=cname]').removeAttr('name');
+					$('select[name=cyear]').removeAttr('name');
+					$('select[name=cmonth]').removeAttr('name');
+					$('input[name=ccode]').removeAttr('name');
+					// insert the token into the form so it gets submitted to the server
+					$form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+					// and submit
+					$form.get(0).submit();
+				}
+			});
+			// prevent the form from submitting with the default action
+			return false;
 		}
 		
 		$('.single').removeClass('error');

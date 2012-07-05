@@ -2111,11 +2111,15 @@ class LandingController extends Zend_Controller_Action {
 
         $places = new WS_PlacesService();
         $this->view->countries = $places->getPlaces(2);
+        
+        $keys = Zend_Registry::get('stripe');
+        $this->view->pkey = $keys['public_key'];
 
         $this->render('checkout' . $version);
     }
 
     public function chargeAction() {
+        echo '<pre>'; print_r($_POST); echo '</pre>'; die;
         $this->_redirect('/en-US/landing/1/thanks');
     }
 

@@ -389,7 +389,10 @@ $nights = array(3,4,5,7,10,15) ?>
         </div><!--MID-->
     </div><!--CANCEL_POLICY-->
 </div><!--HIDDEN-->
+<script type="text/javascript">PUBLIC_KEY = "<?= $this->pkey ?>"; </script>
+<script type="text/javascript" src="https://js.stripe.com/v1/"></script>
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
+<script type="text/javascript" src="/js2/cardcheck.min.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	$('a.lbc').fancybox({
