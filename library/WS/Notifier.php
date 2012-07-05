@@ -344,6 +344,20 @@ class WS_Notifier extends Zend_Mail {
         $this->sendHTMLTemplate('contact-form.phtml');
     }
     
+    public function notifyAIpurchase($details, $hotels, $rooms)
+    {
+        $this->setSubject('New message from contact form');
+        $this->addTo($details->email);
+        $this->addBcc('cristian@tripfab.com');
+        $this->addBcc('ricardo@tripfab.com');
+        
+        $this->_view->details = $details;
+        $this->_view->hotels = $hotels;
+        $this->_view->rooms = $rooms;
+        
+        $this->sendHTMLTemplate('ai-purchase.phtml');
+    }
+    
     /**
      * 
      * Retunrs a Zend View instance

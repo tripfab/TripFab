@@ -13,9 +13,9 @@
     <div id="wp_header">
         <div id="header" class="in2">
             <div class="wrapper">
-                <h1 class="logo"><a href="">Tripfab</a></h1>
+                <h1 class="logo"><a href="/">Tripfab</a></h1>
                 <div class="contact">
-                    <a href="#" class="btn-1">Live Chat Now</a>
+                    <a href="#" onclick="SnapABug.startChat('How can I help you today?'); return false;" class="btn-1">Live Chat Now</a>
                     <p>Questions?<strong>Call 1-866-401-0382</strong></p>
                 </div><!--CONTACT-->
             </div><!--WRAPPER-->
@@ -25,9 +25,9 @@
             <div class="cntrl">
                 <ul class="breadcrump">
                     <li class="first"><a class="home" href="/"></a></li>
-                    <li><a href="">All Inclusive Trips</a></li>
+                    <li><a href="/landing/1/allinclusive">All Inclusive Trips</a></li>
                 </ul>
-                <a class="link1" href="/costa_rica/san_jose/">&larr; Back to Results</a>
+                <a class="link1" href="/landing/1/allinclusive">&larr; Back to Results</a>
                 <div class="clear"></div>
             </div>
         </div><!--SUBHEADER-->
@@ -39,7 +39,7 @@
             <div class="top">
                 <span class="icon"></span>
                 <div class="inside">
-                    <h2>Thank You Karina Romaine!</h2>
+                    <h2>Thank You <?= $this->info->name ?>!</h2>
                     <h3>We wish you the best trip in your life!</h3>
                 </div><!--INSIDE-->
             </div><!--TOP-->
@@ -49,16 +49,15 @@
                         <h4>Your payment is done!</h4>
                         <p>You will receive a confirmation in your e-mail. If we decline your request, no charge is made. </p>
                     </div><!--TEXT-->
-                    <a href="" class="btn-10"><em></em>Print Reservation</a>
+                    <a href="#" onclick="window.print(); return false;" class="btn-10"><em></em>Print Reservation</a>
                 </div><!--HEAD-->
                 <div class="cont">
                     <h5>
                         <strong>Reservation Details</strong>
-                        <span class="code">Reservation Code: AS231541</span>
                     </h5>
                     <div class="title">
                         <img src="https://static.tripfab.com/images6/tripsView4ico3.png" width="55" height="55" alt="" />
-                        <h6>Allegro Papagayo's All Inclusive</h6>
+                        <h6><?= $this->hotel ?></h6>
                         <span>Costa Rica</span>
                         <div class="clear"></div>
                     </div><!--TITLE-->
@@ -68,7 +67,7 @@
                         <ul>
                             <li>
                                 <strong>Credit Card</strong>
-                                <p>MasterCard | Last digits: 4028</p>
+                                <p><?= $this->card->type ?> | Last digits: <?= $this->card->last4 ?></p>
                             </li>
                             <li></li>
                         </ul>
@@ -77,20 +76,21 @@
                         <h6>Reservation Details</h6>
                         <ul>
                             <li>
-                                <strong>Trip Starts</strong>
-                                <p>Fri, September 23rd 2011</p>
+                                <strong>Arrival</strong>
+                                <p><?= date('D, F jS, Y', strtotime($this->info->arrival)) ?></p>
                             </li>
                             <li>
-                                <strong>Trips Ends</strong>
-                                <p>Sat, September 29th 2011</p>
+                                <strong>Departure</strong>
+                                <p><?= date('D, F jS, Y', strtotime($this->info->departure)) ?></p>
                             </li>
                             <li>
                                 <strong>Trip Duration</strong>
-                                <p>9 Days</p>
+                                <p><?= $this->info->nights ?> Nights</p>
                             </li>
                             <li>
                                 <strong>Travelers</strong>
-                                <p>2 Adults, 2 Children</p>
+                                <p><?= $this->info->adults ?> Adults<?php if($this->info->childs > 0): ?>, 
+								<?= $this->info->childs ?> Children<?php endif ?></p>
                             </li>
                         </ul>
                     </div><!--SINGLE-->
@@ -98,29 +98,30 @@
                         <h6>Charges</h6>
                         <table width="280" cellspacing="0" cellpadding="0" border="0">
                             <tbody>
-                                <tr class="before">
-                                    <td>Package Regular Price</td>
-                                    <td class="rg">$4510</td>
-                                </tr>
+                                <?php if($this->info->additional): ?>
                                 <tr>
                                     <td>Special Price</td>
-                                    <td class="rg"><strong>$4000</strong></td>
+                                    <td class="rg"><strong>$<?= $this->info->price - $this->info->additional ?></strong></td>
                                 </tr>
+                                <?php else: ?>
                                 <tr>
-                                    <td>Tripfab Experience. <a href="#tripExperience" class="lbc link1">What is this?</a></td>
+                                    <td>Special Price</td>
+                                    <td class="rg"><strong>$<?= $this->info->price ?></strong></td>
+                                </tr>                                
+                                <?php endif ?>
+                                <tr>
+                                    <td>Tripfab Experience</td>
                                     <td class="fr">Free</td>
                                 </tr>
+                                <?php if($this->info->additional): ?>
                                 <tr>
                                     <td>Additional Experiences</td>
-                                    <td class="rg"><strong>$300</strong></td>
+                                    <td class="rg"><strong>$<?= $this->info->additional ?></strong></td>
                                 </tr>
-                                <tr class="save">
-                                    <td>Total Save</td>
-                                    <td class="rg">$200</td>
-                                </tr>
+                                <?php endif ?>
                                 <tr class="total">
                                     <td>Total Paid</td>
-                                    <td class="rg">$4300</td>
+                                    <td class="rg">$<?= $this->info->price ?></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -130,15 +131,15 @@
                     <ul>
                         <li><strong>Questions?</strong></li>
                         <li><span class="ph"></span>1-866-401-0382</li>
-                        <li><a href="mailto:hello@tripfab.com">service@tripfab.com </a></li>
-                        <li><a href="" class="link1">Live Chat Now</a></li>
+                        <li><a href="mailto:service@tripfab.com">service@tripfab.com </a></li>
+                        <li><a href="" onclick="SnapABug.startChat('How can I help you today?'); return false;" class="link1">Live Chat Now</a></li>
                     </ul>
                 </div><!--CONTACT-->
             </div><!--MAIN-->
             <div class="bot">
                 <h6>Do you want to explore Costa Rica and get the best deals?</h6>
                 <p>We have tons of Hotels, exciting Activities, and amazing Pre-Planned Trips for your next vacation around Costa Rica</p>
-                <a href="#" class="btn-1">Take a Look</a>
+                <a href="/costa_rica" class="btn-1">Take a Look</a>
             </div><!--BOT-->
         </div><!--CONTENT-->
     </div><!--WP_CONTENT-->
@@ -146,26 +147,27 @@
 <div class="hidden"></div>
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript">
-$(document).ready(function() {
-	$(".tabs").tabs({
-		selected: 2
-	});
-	
-	$('.date input').datepicker({ 
-		showOtherMonths: true,
-		dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S']
-	});
-	$('a.lbc').fancybox({
-		padding: 10,
-		overlayColor: '#FFF',
-		overlayOpacity: '0.7',
-		showCloseButton: true,
-		centerOnScroll: true,
-		titlePosition: 'inside'
-	});
-	$('#fancybox-title').addClass('tittle');
-	$('#fancybox-left-ico').addClass('lfarrow');
-	$('#fancybox-right-ico').addClass('rgarrow');
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24981182-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script type="text/javascript">
+document.write(unescape("%3Cscript src='" + ((document.location.protocol=="https:")?"https://snapabug.appspot.com":"http://www.snapengage.com") + "/snapabug.js' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript">
+//SnapABug.setButton("https://static.tripfab.com/images/Live-Chat-Button.png");
+//SnapABug.addButton("12926583-ebae-4874-8f3e-57cbe2114ebc","0","55%");
+SnapABug.init("12926583-ebae-4874-8f3e-57cbe2114ebc");
+SnapABug.setCallback('StartChat', function(email, msg, type) {
+	var img = document.createElement('img');
+	img.src = "https://www.googleadservices.com/pagead/conversion/956485843/?value=0&amp;label=T64ECJWh8gMQ06GLyAM&amp;guid=ON&amp;script=0";
+	img.width = 1; img.height = 1;
+	document.body.appendChild(img);
 });
 </script>
 </body>
