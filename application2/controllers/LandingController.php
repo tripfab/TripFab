@@ -153,7 +153,7 @@ class LandingController extends Zend_Controller_Action {
                             and one buffet-style restaurant. Themes vary nightly.',
                         'points1' => array(
                             'Los Corales is an international, open-air buffet',
-                            'La Trattoria is an Italian a la carte restauran',
+                            'La Trattoria is an Italian a la carte restaurant',
                         ),
                         'points2' => array(
                             "La Cantina is a casual, laid-back restaurant",
