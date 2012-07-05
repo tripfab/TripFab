@@ -346,7 +346,7 @@ class WS_Notifier extends Zend_Mail {
     
     public function notifyAIpurchase($details, $hotels, $rooms)
     {
-        $this->setSubject('New message from contact form');
+        $this->setSubject('All Inclusive Trip Purchase Details');
         $this->addTo($details->email);
         $this->addBcc('cristian@tripfab.com');
         $this->addBcc('ricardo@tripfab.com');

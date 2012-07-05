@@ -2122,6 +2122,7 @@ class LandingController extends Zend_Controller_Action {
         if(!$this->getRequest()->isPost())
             throw new Exception();
         
+        $version = $this->_getParam('version');
         $data = $_POST;
         $id = $data['package'];
 
@@ -2383,6 +2384,7 @@ class LandingController extends Zend_Controller_Action {
         $pur->addons      = $addons_keys;
         $pur->stripeToken = $data['stripeToken'];
         $pur->created     = date('Y-m-d H:i:s');
+        $pur->version     = $version;
         
         $pur->save();
         
@@ -2391,7 +2393,7 @@ class LandingController extends Zend_Controller_Action {
         
         //echo '<pre>'; print_r($pur); echo '</pre>'; die;
         
-        $this->_redirect('/en-US/landing/1/thanks/?p='.$pur->id);
+        $this->_redirect('/en-US/landing/'.$version.'/thanks/?p='.$pur->id);
     }
 
     public function thanksAction() {
