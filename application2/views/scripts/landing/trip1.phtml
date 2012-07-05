@@ -1,3 +1,7 @@
+<?php $l = strtotime('Next Sunday') - time();
+$d1 = ($l - ($l % 86400)); $h1 = $l - $d1; $h2 = $h1 - ($h1 % 3600); $m1 = $h1 - $h2; $m2 = $m1 - ($m1 % 60);
+$days = $d1 / 86400; $hours = $h2 / 3600; $minutes = $m2 / 60; $seconds = $m1 - $m2; 
+$nights = array(3,4,5,7,10,15) ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
@@ -25,7 +29,11 @@
             <div class="top">
                 <div class="tripInfo">
                     <div class="saleEnd">
-                        <em></em>Sale ends in  8hrs 36 min 22 sec
+                        <em></em>Sale ends in  
+                        <span class="jsd"><?= $days ?>d:</span>
+                        <span class="jsh"><?= $hours ?>h:</span>
+                        <span class="jsm"><?= $minutes ?>m:</span>
+                        <span class="jss"><?= $seconds ?>s</span>
                     </div><!--SALEEND-->
                     <div class="rate">
                         <ul>
@@ -91,9 +99,11 @@
                             <p><?= $this->info['description'] ?></p>
                             <span class="warning">You Need to Travel Between <br /><?= $this->info['sale_starts'] ?> 
                             to <?= $this->info['sale_ends'] ?> to Apply Sale!</span>
+                            <!--
                             <div class="share">
                                 <a href="" class="email"><em></em>Send to email</a>
-                            </div><!--SHARE-->
+                            </div><!--SHARE--*> 
+                            -->
                         </div><!--INFO-->
                     </div><!--WHOLE-->
                     <div class="clear"></div>
@@ -131,7 +141,6 @@
                                 </ul>
                                 <?php endif ?>
                                 <div class="clear"></div>
-                                <a href="#" class="link1">Show more<em></em></a>
                             </div><!--DESCRIP-->
                             <div class="clear"></div>
                         </div><!--SINGLE-->
@@ -255,7 +264,39 @@
         </div><!--FOOTER-->
     </div><!--WP_FOOTER-->
 </div><!--WRAPPER_ALL-->
-<div class="hidden"></div>
+
+<div class="hidden">
+    <div id="sendEmail" class="lb sendEmail">
+        <div class="top">Tell About Allegro Papagayo <em>to</em> Your Friends</div><!--TOP-->
+        <div class="text">
+            <h3>Send this listing page to your closest friends</h3>
+            <p>Let them know about our amazing savings and give them a chance
+            to be a Tripfab Traveler</p>
+        </div><!--TEXT-->
+        <form action="">
+            <div class="cont">
+                <input type="text" name="" value="Your Name" />	
+                <div class="error">
+                    <input type="text" name="" value="Your E-mail" />
+                    <p><em></em>Please enter a valid e-mail here</p>
+                    <span class="ico"></span>
+                </div>
+                <div class="error">
+                    <textarea cols="" rows="">Write a short description</textarea>
+                    <p><em></em>Please enter a valid e-mail here</p>
+                    <span class="ico"></span>
+                </div>
+                <input type="text" class="email" name="" value="Friend Email" />
+                <a href="" class="link1">+ Add More Friends</a>
+                <div class="clear"></div>
+            </div><!--CONT-->
+            <div class="bot">
+                <input type="submit" class="btn-1" name="" value="Send Message" />
+                <a href="" class="btn-10">Cancel</a>
+            </div><!--BOT-->
+        </form>
+    </div><!--SENDEMAIL-->
+</div><!--HIDDEN-->
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -285,6 +326,16 @@ $(document).ready(function() {
 		});
 		return $isValid.form();
 	});
+	
+	$expires = <?= strtotime('Next Sunday') ?>;
+	$now	 = <?= time() ?>;
+	
+	setInterval(function(){
+		$now += 1; $l = $expires - $now;
+		$d1 = ($l - ($l % 86400)); $h1 = $l - $d1; $h2 = $h1 - ($h1 % 3600); $m1 = $h1 - $h2; $m2 = $m1 - ($m1 % 60);
+		$days = $d1 / 86400; $hours = $h2 / 3600; $minutes = $m2 / 60; $seconds = $m1 - $m2;
+		$('.jsd').text($days+'d:'); $('.jsh').text($hours+'h:'); $('.jsm').text($minutes+'m:'); $('.jss').text($seconds+'s');
+	},1000);
 });
 </script>
 <script type="text/javascript">

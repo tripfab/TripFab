@@ -1,3 +1,7 @@
+<?php $l = strtotime('Next Sunday') - time();
+$d1 = ($l - ($l % 86400)); $h1 = $l - $d1; $h2 = $h1 - ($h1 % 3600); $m1 = $h1 - $h2; $m2 = $m1 - ($m1 % 60);
+$days = $d1 / 86400; $hours = $h2 / 3600; $minutes = $m2 / 60; $seconds = $m1 - $m2; 
+$nights = array(3,4,5,7,10,15) ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
@@ -46,22 +50,22 @@
                         <h2>Sale of the week</h2>
                         <h3>Time Remaining to Book this Trip</h3>
                     </div>
-                    <div class="counter">							
+                    <div class="counter">	
                         <div class="each first">
-                            <strong>2</strong>
-                            <span><?= $days ?></span>
+                            <strong class="jsd"><?= $days ?></strong>
+                            <span>Days</span>
                         </div><!--EACH-->
                         <div class="each">
-                            <strong>2</strong>
-                            <span><?= $hours ?></span>
+                            <strong class="jsh"><?= $hours ?></strong>
+                            <span>HOURS</span>
                         </div><!--EACH-->
                         <div class="each">
-                            <strong>2</strong>
-                            <span><?= $minutes ?></span>
+                            <strong class="jsm"><?= $minutes ?></strong>
+                            <span>MINUTES</span>
                         </div><!--EACH-->
                         <div class="each last">
-                            <strong>2</strong>
-                            <span><?= $seconds ?></span>
+                            <strong class="jss"><?= $seconds ?></strong>
+                            <span>SECONDS</span>
                         </div><!--EACH-->
                     </div><!--COUNTER-->
                 </div><!--OFFER-->
@@ -475,6 +479,16 @@ $(document).ready(function() {
 		$('.error').parents('.item').addClass('error');
 		return false;
 	});
+	
+	$expires = <?= strtotime('Next Sunday') ?>;
+	$now	 = <?= time() ?>;
+	
+	setInterval(function(){
+		$now += 1; $l = $expires - $now;
+		$d1 = ($l - ($l % 86400)); $h1 = $l - $d1; $h2 = $h1 - ($h1 % 3600); $m1 = $h1 - $h2; $m2 = $m1 - ($m1 % 60);
+		$days = $d1 / 86400; $hours = $h2 / 3600; $minutes = $m2 / 60; $seconds = $m1 - $m2;
+		$('.jsd').text($days); $('.jsh').text($hours); $('.jsm').text($minutes); $('.jss').text($seconds);
+	},1000);
 });
 </script>
 <script type="text/javascript">

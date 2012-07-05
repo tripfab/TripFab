@@ -1,7 +1,10 @@
+<?php $l = strtotime('Next Sunday') - time();
+$d1 = ($l - ($l % 86400)); $h1 = $l - $d1; $h2 = $h1 - ($h1 % 3600); $m1 = $h1 - $h2; $m2 = $m1 - ($m1 % 60);
+$days = $d1 / 86400; $hours = $h2 / 3600; $minutes = $m2 / 60; $seconds = $m1 - $m2; 
+$nights = array(3,4,5,7,10,15) ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-	<meta content="noindex,nofollow" name="robots" />
 	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
 	<title>Tripfab.com</title>
 	<link type="text/css"  rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
@@ -45,9 +48,11 @@
                     <div class="sale">
                         <h2>Deal of the Day Hurry Up!</h2>
                         <div class="counter">
-                            <div><span>Sale Finish in</span> 01hrs</div>
-                            <div> 36min</div>
-                            <div> 28 sec</div>
+                            <div><span>Sale Finish in</span> </div>
+                            <div class="jsd"><?= $days ?>d</div>
+                            <div class="jsh"><?= $hours ?>h</div>
+                            <div class="jsm"><?= $minutes ?>m</div>
+                            <div class="jss"><?= $seconds ?>s</div>
                         </div><!--COUNTER-->
                         <div class="clear"></div>
                         <span class="stamp"></span>
@@ -70,9 +75,10 @@
                                 <div class="descrip">
                                     <ul class="count">
                                         <li>Sale Finish in</li>
-                                        <li>4 hrs</li>
-                                        <li>36 min</li>
-                                        <li>58 sec</li>
+                                        <li class="jsd"><?= $days ?>d</li>
+                                        <li class="jsh"><?= $hours ?>h</li>
+                                        <li class="jsm"><?= $minutes ?>m</li>
+                                        <li class="jss"><?= $seconds ?>s</li>
                                     </ul>
                                     <p><?= $this->trips[0]['description'] ?>...</p>
                                     <div class="single">
@@ -117,9 +123,10 @@
                                 <div class="descrip">
                                     <ul class="count">
                                         <li>Sale Finish in</li>
-                                        <li>4 hrs</li>
-                                        <li>36 min</li>
-                                        <li>58 sec</li>
+                                        <li class="jsd"><?= $days ?>d</li>
+                                        <li class="jsh"><?= $hours ?>h</li>
+                                        <li class="jsm"><?= $minutes ?>m</li>
+                                        <li class="jss"><?= $seconds ?>s</li>
                                     </ul>
                                     <p><?= $this->trips[$i]['description'] ?>...</p>
                                     <div class="single">
@@ -212,6 +219,44 @@ $(document).ready(function() {
 		autoHeight: false,
 		collapsible: true
 	});
+	
+	$('#js-subscribe').submit(function(){
+		var $form = $(this);
+		var $data = {
+			name:$('input[name=name]', $form).val(),
+			email:$('input[name=email]', $form).val(),
+		};
+		if($data.name == "") 
+			alert('Please enter your name');
+		else if($data.email == "") 
+			alert('Please enter your email');
+		else {
+			$.ajax({
+				url:'/ajax/subscribe',
+				type:'post',
+				data:$data,
+				success:function(){
+					$('input[type=text]', $form).val('');
+					alert('You have been subscribed\nExpec news from us in the next days');
+				},
+				error:function(){
+					$('input[type=text]', $form).val('');
+					alert('Sorry, There was a problem. Try again later');
+				}
+			});
+		}
+		return false;
+	});
+	
+	$expires = <?= strtotime('Next Sunday') ?>;
+	$now	 = <?= time() ?>;
+	
+	setInterval(function(){
+		$now += 1; $l = $expires - $now;
+		$d1 = ($l - ($l % 86400)); $h1 = $l - $d1; $h2 = $h1 - ($h1 % 3600); $m1 = $h1 - $h2; $m2 = $m1 - ($m1 % 60);
+		$days = $d1 / 86400; $hours = $h2 / 3600; $minutes = $m2 / 60; $seconds = $m1 - $m2;
+		$('.jsd').text($days+'d:'); $('.jsh').text($hours+'h:'); $('.jsm').text($minutes+'m:'); $('.jss').text($seconds+'s');
+	},1000);
 });
 </script>
 <script type="text/javascript">
