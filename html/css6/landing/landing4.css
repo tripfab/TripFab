@@ -100,7 +100,11 @@
 	height: 366px;
 	float: left;
 	background: url(https://static.tripfab.com/images6/land4-3.png) no-repeat 0 0;
-}
+	border-radius: 5px 0 0 5px;
+	-moz-border-radius: 5px 0 0 5px;
+	-webkit-border-radius: 5px 0 0 5px;
+	-o-border-radius: 5px 0 0 5px;
+	}
 #trip4 .top .pic h2 {
 	text-align: center;
 	color: #FFF;
@@ -250,6 +254,9 @@
 	padding-left: 30px;
 	font: bold 20px/24px Helvetica;
 	margin-bottom: 5px;
+}
+#trip4 .trip h3 > a:hover {
+	color: #9BD2FC;
 }
 #trip4 .meta {
 	border-bottom: 1px dotted #CCC;
