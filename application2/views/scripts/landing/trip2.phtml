@@ -79,7 +79,7 @@ $nights = array(3,4,5,7,10,15) ?>
                             <h3>All Inclusive</h3>
                         </div><!--TITLE-->
                         <div class="descrip"><?= $id ?> - <?= $img['desc'] ?> 
-                        <a href="<?= $img['url'] ?>" rel="group1" class="js-fancybox"></a></div><!--DESCRIP-->
+                        <a href="<?= $img['big'] ?>" rel="group1" class="js-fancybox"></a></div><!--DESCRIP-->
                     </div><!--IMAGES-->
                     <?php endforeach ?>
                     
@@ -127,7 +127,7 @@ $nights = array(3,4,5,7,10,15) ?>
                         </dl>
                     </div><!--FOOD-->
                     
-                    <?php foreach($this->info['overview2'] as $o): ?>
+                    <?php foreach($this->info['overview'] as $o): ?>
                     <div class="single">
                         <h5><?= $o['title'] ?></h5>
                         <ul>
@@ -152,14 +152,12 @@ $nights = array(3,4,5,7,10,15) ?>
                         <span class="top">From</span>
                         <span class="mid"><sup>$</sup>
                         <?= str_replace('.','<sub>.',number_format($this->info['price'],2,'.',',')) ?></sub></span>
-                        <span class="bot">Per person per night</span>
-                        <p>Per person per night</p>
+                        <span class="bot">Per person, per night</span>
                     </div><!--LEFT-->
                     <div class="right">
                         <sup>$</sup>
                         <span><?= str_replace('.','</span><sub>.',number_format($this->info['price_before'],2,'.',',')) ?></sub>
                     </div><!--RIGHT-->
-                    <div class="clear"></div>
                     <div class="bot">
                         <strong>Save $<?= $this->info['save'] ?></strong> per person per night
                     </div><!--BOTTOM-->
