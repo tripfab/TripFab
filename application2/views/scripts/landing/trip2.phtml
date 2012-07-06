@@ -115,7 +115,7 @@ $nights = array(3,4,5,7,10,15) ?>
                         <p><?= $this->info['description'] ?></p>
                     </div><!--DESCRIPTION-->
                     
-                    
+                    <?php if(!empty($this->info['dining'])): ?>
                     <div class="single">
                         <h5>Dining:</h5>
                         <p><?= $this->info['dining'] ?></p>
@@ -126,6 +126,7 @@ $nights = array(3,4,5,7,10,15) ?>
                             <?php endforeach ?>
                         </dl>
                     </div><!--FOOD-->
+                    <?php endif ?>
                     
                     <?php foreach($this->info['overview'] as $o): ?>
                     <div class="single">

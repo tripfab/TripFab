@@ -1051,21 +1051,6 @@ class LandingController extends Zend_Controller_Action {
                         'desc' => 'Easy beach access makes strolling along the beach all but too convenient'
                     ),
                 ),
-                'dining' => 'With such succulent dining options set amid one of the Gold Coast’s most stunning beaches, there will be no reason you’ll want to leave the hotel to eat – or perhaps ever.',
-                'restaurants' => array(
-                    array(
-                        'title' => 'A la carte restaurant',
-                        'description' => 'Food here is positively delicious, and prepared made-to-order.',
-                    ),
-                    array(
-                        'title' => 'Buffet restaurant',
-                        'description' => 'The hotel’s main restaurant, the buffet offers the widest variety of options.',
-                    ),
-                    array(
-                        'title' => 'Snack bar in the area near the beach',
-                        'description' => 'This snack bar offers up beach bites that you can eat on the sand and in your swimsuit.',
-                    ),
-                ),
                 'overview2' => array(
                     array(
                         'title' => 'Activities',
