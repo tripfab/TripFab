@@ -1760,24 +1760,28 @@ class LandingController extends Zend_Controller_Action {
                 '_price' => 164,
                 '_price_before' => 248,
                 'room' => $data['room'],
+                'image' => 'https://static.tripfab.com/trips/papagayo/main_thumb.jpg',
             ),
             md5('riu') => array(  
                 'title' => 'RIU Guanacaste (All Inclusive)',
                 '_price' => 166,
                 '_price_before' => 210,
                 'room' => $data['room'],
+                'image' => 'https://static.tripfab.com/trips/riu/main_thumb.jpg',
             ),
             md5('langosta') => array(
                 'title' => 'Barcelo Langosta (All Inclusive)',
                 '_price' => 120,
                 '_price_before' => 180,
                 'room' => $data['room'],
+                'image' => 'https://static.tripfab.com/trips/langosta/main_thumb.jpg',
             ),
             md5('doubletree') => array(
                 'title' => 'DoubleTree Puntarenas (All Inclusive)',
                 '_price' => 90,
                 '_price_before' => 133,
                 'room' => $data['room'],
+                'image' => 'https://static.tripfab.com/trips/doubletree/main_thumb.jpg',
             )
         );
 
