@@ -79,28 +79,28 @@ $nights = array(3,4,5,7,10,15) ?>
                             <div class="fields">
                                 <div class="single">
                                     <label><strong>Full Name</strong>Your first, middle and last name</label>
-                                    <input type="text" name="name" value="" />
+                                    <input tabindex="1" type="text" name="name" value="" />
                                     <span class="icnError"></span>
                                     <div class="clear"></div>
                                 </div><!--SINGLE-->
                                 
                                 <div class="single">
                                     <label><strong>E-Mail</strong>Please give us an email address to contact you</label>
-                                    <input type="text" name="email" value="" />
+                                    <input tabindex="2" type="text" name="email" value="" />
                                     <span class="icnError"></span>
                                     <div class="clear"></div>
                                 </div><!--SINGLE-->
                                 
                                 <div class="single">
                                     <label><strong>Phone</strong>Your primary phone number</label>
-                                    <input type="text" name="phone" value="" />
+                                    <input tabindex="3" type="text" name="phone" value="" />
                                     <span class="icnError"></span>
                                     <div class="clear"></div>
                                 </div><!--SINGLE-->
                                 
                                 <div class="single last">
                                     <label><strong>Country</strong>The country in which you reside </label>
-                                    <select name="country">
+                                    <select tabindex="4" name="country">
                                     	<option value="">Select your country</option>
                                     	<?php foreach($this->countries as $c): ?>
                                         <option value="<?= $c->title ?>"><?= $c->title ?></option>
@@ -125,7 +125,7 @@ $nights = array(3,4,5,7,10,15) ?>
                                         <strong>Credit Card Number</strong>
                                         No dashes or spaces
                                     </label>
-                                    <input type="text" name="cnum" value="" autocomplete="off" />
+                                    <input tabindex="5" type="text" name="cnum" value="" autocomplete="off" />
                                     <span class="icnError"></span>
                                     <div class="clear"></div>
                                 </div><!--ITEM-->
@@ -134,7 +134,7 @@ $nights = array(3,4,5,7,10,15) ?>
                                         <strong>Cardholder Name</strong>
                                         As it appears on the credit card
                                     </label>
-                                    <input type="text" name="cname" value="" autocomplete="off" />
+                                    <input tabindex="6" type="text" name="cname" value="" autocomplete="off" />
                                     <span class="icnError"></span>
                                     <div class="clear"></div>
                                 </div><!--ITEM-->
@@ -143,13 +143,13 @@ $nights = array(3,4,5,7,10,15) ?>
                                         <strong>Expiration Date</strong>
                                         No dashes or spaces
                                     </label>
-                                    <select name="cyear">
+                                    <select tabindex="8" name="cyear">
                                     	<option value="">----</option>
                                         <?php for($i=2012;$i<=2025;$i++): ?>
                                         <option value="<?= $i ?>"><?= $i ?></option>
                                         <?php endfor ?>
                                     </select>
-                                    <select name="cmonth">
+                                    <select tabindex="7" name="cmonth">
                                     	<option value="">--</option>
                                     	<?php for($i=1;$i<=12;$i++): ?>
                                         <option value="<?= ($i < 10) ? '0'.$i : $i ?>"><?= ($i < 10) ? '0'.$i : $i ?></option>
@@ -164,7 +164,7 @@ $nights = array(3,4,5,7,10,15) ?>
                                         <a class="link1 helptip" href="">What's this?</a>
                                         <p class="tip hidden"><span></span> The 3 or 4 digit value printed on the card or signature strip</p>
                                     </label>
-                                    <input maxlength="4" type="text" name="ccode" class="code" value="" autocomplete="off" />
+                                    <input tabindex="9" maxlength="4" type="text" name="ccode" class="code" value="" autocomplete="off" />
                                     <span class="icnError"></span>
                                     <div class="clear"></div>
                                 </div><!--ITEM-->
@@ -193,7 +193,7 @@ $nights = array(3,4,5,7,10,15) ?>
                                     <span></span>
                                 </div>
                                 <div class="restriction last">
-                                    <input type="checkbox" value="1" id="terms" name="terms">
+                                    <input tabindex="10" type="checkbox" value="1" id="terms" name="terms">
                                     <label for="terms">I agree to the cancellation policy, activity restrictions and 
                                     <a href="/terms" class="link1" target="_blank">terms of use</a>.</label>
                                     <div class="clear"></div>
@@ -202,7 +202,7 @@ $nights = array(3,4,5,7,10,15) ?>
                         </div><!--STEP-->
                         <div class="bottom"> 
                             <span>Grand Total<strong> $1,902</strong></span>
-                            <input type="submit" value="Book Now " class="btn-1 noclean">
+                            <input tabindex="11" type="submit" value="Book Now " class="btn-1 noclean">
                         </div><!--BOTTOM-->
                         <input type="hidden" name="package" value="<?= $this->id ?>" />
                         <input type="hidden" name="date" value="<?= $this->info['arrival'] ?>"/>
