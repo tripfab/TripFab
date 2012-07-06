@@ -9,6 +9,7 @@ $nights = array(3,4,5,7,10,15) ?>
     <title>Tripfab.com</title>
     <link type="text/css"  rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
     <link type="text/css"  rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
+    <link type="text/css" rel="stylesheet" href="/js/fancybox/jquery.fancybox-1.3.4.css?v=<?= $this->cssVC ?>" />
     <link type="text/css"  rel="stylesheet" href="/css6/landing/all1.css?v=<?= $this->cssVC ?>" />
     <link type="text/css"  rel="stylesheet" href="/css6/calendar.css?v=<?= $this->cssVC ?>" />
 </head>
@@ -89,7 +90,7 @@ $nights = array(3,4,5,7,10,15) ?>
                     </div><!--BOOKEASY-->
                     
                     <div class="whole">
-                        <a href="">
+                        <a href="<?= $this->info['images'][0]['big'] ?>" class="lbc" rel="group1">
                             <img src="<?= $this->info['images'][0]['url'] ?>" width="700" height="363" alt="" />
                             <span class="view"><em></em>Click to View Photos</span>
                         </a>
@@ -296,12 +297,23 @@ $nights = array(3,4,5,7,10,15) ?>
             </div><!--BOT-->
         </form>
     </div><!--SENDEMAIL-->
+    
+    <?php foreach($this->info['images'] as $kk => $img): ?>
+    <?php if($kk != 0): ?>
+    <a href="<?= $img['big'] ?>" class="lbc" rel="group1"></a>
+    <?php endif ?>
+    <?php endforeach ?>
 </div><!--HIDDEN-->
 <script type="text/javascript" src="/js2/jquery.js?v=<?= $this->cssVC ?>"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	$(".tabs").tabs({
 		selected: 0
+	});
+	$(".lbc").fancybox({
+		overlayColor:'#fff',
+		padding:5,
+		centerOnScroll:1
 	});
 	$("#addons .accordion").accordion({
 		autoHeight: false,
