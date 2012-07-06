@@ -67,7 +67,6 @@ input[type="text"], input[type="password"], textarea {
 	height: 27px;
 	padding: 0 5px;
 	resize:none;
-	behavior: url(/PIE.htc);
 	background-color: #FFF; 
 }
 
@@ -79,7 +78,6 @@ textarea {
 input[type="text"]:focus, input[type="password"]:focus, textarea:focus, textarea:hover, input[type="text"]:hover, input[type="password"]:hover {
 	border-color: #addeff!important;
 	box-shadow: 0 0 5px #addeff!important;	
-	behavior: url(/PIE.htc);
 }
 
 input[type="text"]:disabled, input[type="password"]:disabled {
@@ -131,7 +129,6 @@ body {
 	-moz-border-radius: 2px !important;
 	border-radius: 2px !important;
 	text-shadow: 0px 1px 0px #5C961F;
-	behavior: url(/PIE.htc);
 }
 
 .btn-1:hover {
@@ -159,7 +156,6 @@ body {
 	-moz-border-radius: 2px !important;
 	border-radius: 2px !important;
 	text-shadow: 0px 1px 0px #858585;
-	behavior: url(/PIE.htc);
 }
 
 .btn-2:hover {
@@ -189,7 +185,6 @@ body {
 	text-shadow: 0px 1px 0px #FFFFFF;
 	border: 1px solid #dbdbdb;
 	text-align: center;
-	behavior: url(/PIE.htc);
 }
 .btn-10:hover {
 	-webkit-box-shadow: 0px 1px 1px 0px #C5C5C5;
