@@ -1611,13 +1611,13 @@ class LandingController extends Zend_Controller_Action {
                 array(
                     'id' => 'supov',
                     'name' => 'Superior OV',
-                    'price_desc' => 'Add $12 per persona per night',
+                    'price_desc' => 'Add $12 per person per night',
                     'price' => 12,
                 ),
                 array(
                     'id' => 'supovprem',
                     'name' => 'Superior OV Premium',
-                    'price_desc' => 'Add $18 per persona per night',
+                    'price_desc' => 'Add $18 per person per night',
                     'price' => 18
                 ),
             ),
@@ -1632,13 +1632,13 @@ class LandingController extends Zend_Controller_Action {
                 array(
                     'id' => 'ocean',
                     'name' => 'Standard ocean view',
-                    'price_desc' => 'Add $50 per persona per night',
+                    'price_desc' => 'Add $50 per person per night',
                     'price' => 50
                 ),
                 array(
                     'id' => 'jacuzzi',
                     'name' => 'Jacuzzi Suite',
-                    'price_desc' => 'Add $145 per persona per night',
+                    'price_desc' => 'Add $145 per person per night',
                     'price' => 145
                 ),
             ),
@@ -1653,13 +1653,13 @@ class LandingController extends Zend_Controller_Action {
                 array(
                     'id' => 'deluxe',
                     'name' => 'Deluxe',
-                    'price_desc' => 'Add $35 per persona per night',
+                    'price_desc' => 'Add $35 per person per night',
                     'price' => 35
                 ),
                 array(
                     'id' => 'suite',
                     'name' => 'Suite',
-                    'price_desc' => 'Add $42 per persona per night',
+                    'price_desc' => 'Add $42 per person per night',
                     'price' => 42
                 )
             ),
@@ -1674,7 +1674,7 @@ class LandingController extends Zend_Controller_Action {
                 array(
                     'id' => 'deluxe',
                     'name' => 'Deluxe o Junior Suite',
-                    'price_desc' => 'Add $19 per persona per night',
+                    'price_desc' => 'Add $19 per person per night',
                     'price' => 19,
                 )
             )
@@ -1790,14 +1790,14 @@ class LandingController extends Zend_Controller_Action {
                 'supov' => array(
                     'id' => 'supov',
                     'name' => 'Superior OV',
-                    'price_desc' => 'Add $12 per persona per night',
+                    'price_desc' => 'Add $12 per person per night',
                     'price' => 12,
                     'selected' => ($data['room'] == 'supov')
                 ),
                 'supovprem' => array(
                     'id' => 'supovprem',
                     'name' => 'Superior OV Premium',
-                    'price_desc' => 'Add $18 per persona per night',
+                    'price_desc' => 'Add $18 per person per night',
                     'price' => 18,
                     'selected' => ($data['room'] == 'supovprem')
                 ),
@@ -1813,14 +1813,14 @@ class LandingController extends Zend_Controller_Action {
                 'ocean' => array(
                     'id' => 'ocean',
                     'name' => 'Standard ocean view',
-                    'price_desc' => 'Add $50 per persona per night',
+                    'price_desc' => 'Add $50 per person per night',
                     'price' => 50,
                     'selected' => ($data['room'] == 'ocean')
                 ),
                 'jacuzzi' => array(
                     'id' => 'jacuzzi',
                     'name' => 'Jacuzzi Suite',
-                    'price_desc' => 'Add $145 per persona per night',
+                    'price_desc' => 'Add $145 per person per night',
                     'price' => 145,
                     'selected' => ($data['room'] == 'jacuzzi')
                 ),
@@ -1836,14 +1836,14 @@ class LandingController extends Zend_Controller_Action {
                 'deluxe' => array(
                     'id' => 'deluxe',
                     'name' => 'Deluxe',
-                    'price_desc' => 'Add $35 per persona per night',
+                    'price_desc' => 'Add $35 per person per night',
                     'price' => 35,
                     'selected' => ($data['room'] == 'deluxe')
                 ),
                 'suite' => array(
                     'id' => 'suite',
                     'name' => 'Suite',
-                    'price_desc' => 'Add $42 per persona per night',
+                    'price_desc' => 'Add $42 per person per night',
                     'price' => 42,
                     'selected' => ($data['room'] == 'suite')
                 )
@@ -1859,7 +1859,7 @@ class LandingController extends Zend_Controller_Action {
                 'deluxe' => array(
                     'id' => 'deluxe',
                     'name' => 'Deluxe o Junior Suite',
-                    'price_desc' => 'Add $19 per persona per night',
+                    'price_desc' => 'Add $19 per person per night',
                     'price' => 19,
                     'selected' => ($data['room'] == 'deluxe')
                 )
@@ -2009,14 +2009,14 @@ class LandingController extends Zend_Controller_Action {
                 'supov' => array(
                     'id' => 'supov',
                     'name' => 'Superior OV',
-                    'price_desc' => 'Add $12 per persona per night',
+                    'price_desc' => 'Add $12 per person per night',
                     'price' => 12,
                     'selected' => ($data['room'] == 'supov')
                 ),
                 'supovprem' => array(
                     'id' => 'supovprem',
                     'name' => 'Superior OV Premium',
-                    'price_desc' => 'Add $18 per persona per night',
+                    'price_desc' => 'Add $18 per person per night',
                     'price' => 18,
                     'selected' => ($data['room'] == 'supovprem')
                 ),
@@ -2032,14 +2032,14 @@ class LandingController extends Zend_Controller_Action {
                 'ocean' => array(
                     'id' => 'ocean',
                     'name' => 'Standard ocean view',
-                    'price_desc' => 'Add $50 per persona per night',
+                    'price_desc' => 'Add $50 per person per night',
                     'price' => 50,
                     'selected' => ($data['room'] == 'ocean')
                 ),
                 'jacuzzi' => array(
                     'id' => 'jacuzzi',
                     'name' => 'Jacuzzi Suite',
-                    'price_desc' => 'Add $145 per persona per night',
+                    'price_desc' => 'Add $145 per person per night',
                     'price' => 145,
                     'selected' => ($data['room'] == 'jacuzzi')
                 ),
@@ -2055,14 +2055,14 @@ class LandingController extends Zend_Controller_Action {
                 'deluxe' => array(
                     'id' => 'deluxe',
                     'name' => 'Deluxe',
-                    'price_desc' => 'Add $35 per persona per night',
+                    'price_desc' => 'Add $35 per person per night',
                     'price' => 35,
                     'selected' => ($data['room'] == 'deluxe')
                 ),
                 'suite' => array(
                     'id' => 'suite',
                     'name' => 'Suite',
-                    'price_desc' => 'Add $42 per persona per night',
+                    'price_desc' => 'Add $42 per person per night',
                     'price' => 42,
                     'selected' => ($data['room'] == 'suite')
                 )
@@ -2078,7 +2078,7 @@ class LandingController extends Zend_Controller_Action {
                 'deluxe' => array(
                     'id' => 'deluxe',
                     'name' => 'Deluxe o Junior Suite',
-                    'price_desc' => 'Add $19 per persona per night',
+                    'price_desc' => 'Add $19 per person per night',
                     'price' => 19,
                     'selected' => ($data['room'] == 'deluxe')
                 )
@@ -2190,13 +2190,13 @@ class LandingController extends Zend_Controller_Action {
                 'supov' => array(
                     'id' => 'supov',
                     'name' => 'Superior OV',
-                    'price_desc' => 'Add $12 per persona per night',
+                    'price_desc' => 'Add $12 per person per night',
                     'price' => 12
                 ),
                 'supovprem' => array(
                     'id' => 'supovprem',
                     'name' => 'Superior OV Premium',
-                    'price_desc' => 'Add $18 per persona per night',
+                    'price_desc' => 'Add $18 per person per night',
                     'price' => 18,
                 ),
             ),
@@ -2210,13 +2210,13 @@ class LandingController extends Zend_Controller_Action {
                 'ocean' => array(
                     'id' => 'ocean',
                     'name' => 'Standard ocean view',
-                    'price_desc' => 'Add $50 per persona per night',
+                    'price_desc' => 'Add $50 per person per night',
                     'price' => 50,
                 ),
                 'jacuzzi' => array(
                     'id' => 'jacuzzi',
                     'name' => 'Jacuzzi Suite',
-                    'price_desc' => 'Add $145 per persona per night',
+                    'price_desc' => 'Add $145 per person per night',
                     'price' => 145,
                 ),
             ),
@@ -2230,13 +2230,13 @@ class LandingController extends Zend_Controller_Action {
                 'deluxe' => array(
                     'id' => 'deluxe',
                     'name' => 'Deluxe',
-                    'price_desc' => 'Add $35 per persona per night',
+                    'price_desc' => 'Add $35 per person per night',
                     'price' => 35
                 ),
                 'suite' => array(
                     'id' => 'suite',
                     'name' => 'Suite',
-                    'price_desc' => 'Add $42 per persona per night',
+                    'price_desc' => 'Add $42 per person per night',
                     'price' => 42
                 )
             ),
@@ -2250,7 +2250,7 @@ class LandingController extends Zend_Controller_Action {
                 'deluxe' => array(
                     'id' => 'deluxe',
                     'name' => 'Deluxe o Junior Suite',
-                    'price_desc' => 'Add $19 per persona per night',
+                    'price_desc' => 'Add $19 per person per night',
                     'price' => 19
                 )
             )
