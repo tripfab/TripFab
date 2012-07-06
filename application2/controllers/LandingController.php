@@ -1907,13 +1907,15 @@ class LandingController extends Zend_Controller_Action {
 
         $arrival = strtotime($data['date']);
         $nights = $data['nights'];
-        $travelers = (isset($data['travelers'])) ? $data['travelers'] : $data['adults'] + $data['kids'];
+        $travelers = (isset($data['travelers'])) ? $data['travelers'] : $data['adults'] + $data['childs'];
 
         $departure = $arrival + (86400 * $nights);
 
         $info[$id]['arrival'] = date('F jS, Y', $arrival);
         $info[$id]['departure'] = date('F jS, Y', $departure);
         $info[$id]['travelers'] = $travelers;
+        $info[$id]['adults'] = (isset($data['adults'])) ? $data['adults'] : $travelers;
+        $info[$id]['childs'] = (isset($data['childs'])) ? $data['childs'] : 0;
         $info[$id]['nights'] = $nights;
 
         $ppn = $info[$id]['_price'];
@@ -1934,9 +1936,6 @@ class LandingController extends Zend_Controller_Action {
         $info[$id]['price'] = $price;
         $info[$id]['price_before'] = $price_before;
         $info[$id]['save'] = $save;
-
-        $info[$id]['adults'] = (isset($data['adults'])) ? $data['adults'] : $travelers;
-        $info[$id]['kids'] = (isset($data['kids'])) ? $data['kids'] : 0;
 
         $this->view->info = $info[$id];
         $this->view->rooms = $rooms[$id];
