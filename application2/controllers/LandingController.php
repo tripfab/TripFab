@@ -376,61 +376,61 @@ class LandingController extends Zend_Controller_Action {
                         'url' => 'https://static.tripfab.com/trips/papagayo/main.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/papagayo/main_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/papagayo/main_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'The free-form pool is just one of many unique aspects of this beachside all-inclusive'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/papagayo/1.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/papagayo/1_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/papagayo/1_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'Sit back and relax on a lounge chair, drink in hand'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/papagayo/2.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/papagayo/2_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/papagayo/2_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'Views from the balcony are stunning'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/papagayo/3.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/papagayo/3_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/papagayo/3_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'World class scuba diving, snorkeling and sailing are just a short boat ride away'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/papagayo/4.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/papagayo/4_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/papagayo/4_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'Stroll down the quiet beach at sunrise or sunset for a real treat'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/papagayo/5.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/papagayo/5_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/papagayo/5_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'With various room types, there is something here for everyone'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/papagayo/6.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/papagayo/6_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/papagayo/6_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => "Families, couples or solo travelers alike won't be able to resist the free-form pool"
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/papagayo/7.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/papagayo/7_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/papagayo/7_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'The panoramic vistas of the Gulf of Papagayo are truly breathtaking'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/papagayo/8.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/papagayo/8_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/papagayo/8_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'At night, enjoy succulent food at one of the many restaurants – then dancing'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/papagayo/9.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/papagayo/9_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/papagayo/9_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'Laze about in a hammock, letting all of your cares dissolve into the cool breeze'
                     ),
                 ),
                 'dining' => 'Occidental Allegro Papagayo is well known for its 
@@ -716,61 +716,61 @@ class LandingController extends Zend_Controller_Action {
                         'url' => 'https://static.tripfab.com/trips/riu/main.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/riu/main_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/riu/main_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'Let your cares melt away at this opulent all-inclusive resort in Guanacaste'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/riu/1.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/riu/1_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/riu/1_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'The pool bar is the perfect place to relax and throw back a couple of cocktails'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/riu/2.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/riu/2_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/riu/2_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'Hotel Riu is one of the largest all-inclusives in the country'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/riu/3.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/riu/3_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/riu/3_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'The dark-sand beach attracts nesting sea turtles at various times of the year'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/riu/4.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/riu/4_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/riu/4_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'Buffet style and sit-down restaurants offer top notch dining'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/riu/5.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/riu/5_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/riu/5_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'Chefs are highly trained, and more than willing to accommodate food allergies and preferences'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/riu/6.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/riu/6_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/riu/6_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'Purely luxurious high thread-count sheets'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/riu/7.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/riu/7_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/riu/7_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => "It's tempting to sleep all day in the Riu's super-comfy beds"
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/riu/8.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/riu/8_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/riu/8_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'Have a romantic soak in the hot tub with someone special'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/riu/9.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/riu/9_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/riu/9_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'The enormous swimming pool just meters away from the beach is the perfect place to pass the day'
                     ),
                 ),
                 'dining' => 'Hotel Riu offers 3 speciality restaurants and a 
@@ -994,76 +994,61 @@ class LandingController extends Zend_Controller_Action {
                         'url' => 'https://static.tripfab.com/trips/doubletree/main.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/doubletree/main_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/doubletree/main_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'Sparkling pools, tropical weather and an unbeatable atmosphere are par for the course'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/doubletree/1.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/doubletree/1_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/doubletree/1_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => "Eat and drink to your heart's content!"
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/doubletree/2.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/doubletree/2_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/doubletree/2_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'It will be a tough choice between the beach and the sparkling swimming pool'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/doubletree/3.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/doubletree/3_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/doubletree/3_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'Melt into the plush bed'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/doubletree/4.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/doubletree/4_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/doubletree/4_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'Just steps away from the beach'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/doubletree/5.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/doubletree/5_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/doubletree/5_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'The nightly entertainment is legendary'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/doubletree/6.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/doubletree/6_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/doubletree/6_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => "There's something for everyone at the enormous swimming pool"
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/doubletree/7.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/doubletree/7_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/doubletree/7_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'Dine on an array of international foods at the open-air restaurant'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/doubletree/8.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/doubletree/8_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/doubletree/8_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => "Practice your game or grab a lesson at the property's private tennis courts"
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/doubletree/9.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/doubletree/9_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/doubletree/9_big.jpg',
-                        'desc' => 'Description goes here'
-                    ),
-                ),
-                'dining' => 'With such succulent dining options set amid one of the Gold Coast’s most stunning beaches, there will be no reason you’ll want to leave the hotel to eat – or perhaps ever.',
-                'restaurants' => array(
-                    array(
-                        'title' => 'A la carte restaurant',
-                        'description' => 'Food here is positively delicious, and prepared made-to-order.',
-                    ),
-                    array(
-                        'title' => 'Buffet restaurant',
-                        'description' => 'The hotel’s main restaurant, the buffet offers the widest variety of options.',
-                    ),
-                    array(
-                        'title' => 'Snack bar in the area near the beach',
-                        'description' => 'This snack bar offers up beach bites that you can eat on the sand and in your swimsuit.',
+                        'desc' => 'Easy beach access makes strolling along the beach all but too convenient'
                     ),
                 ),
                 'overview2' => array(
@@ -1325,61 +1310,61 @@ class LandingController extends Zend_Controller_Action {
                         'url' => 'https://static.tripfab.com/trips/langosta/main.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/langosta/main_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/langosta/main_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'Enjoy royal treatment at the beautiful Barcelo Langosta'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/langosta/1.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/langosta/1_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/langosta/1_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'Guests appreciate the meticulous landscaping while strolling the grounds'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/langosta/2.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/langosta/2_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/langosta/2_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'The pool is particularly beautiful in the evenings, when it is all lit up'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/langosta/3.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/langosta/3_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/langosta/3_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'Various national flags don the entrance to this international hotel'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/langosta/4.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/langosta/4_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/langosta/4_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'Poolside or beach? Life is full of tough decisions'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/langosta/5.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/langosta/5_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/langosta/5_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => "Enjoy fresh sea breezes and stunning views from your room's private balcony"
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/langosta/6.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/langosta/6_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/langosta/6_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'There are plenty of places to explore here, including the estuary'
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/langosta/7.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/langosta/7_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/langosta/7_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => "No matter what time of day, there's always something to see just outside your window"
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/langosta/8.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/langosta/8_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/langosta/8_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => "Howler monkeys and tropical birds are known to frequent the trees near the pool"
                     ),
                     array(
                         'url' => 'https://static.tripfab.com/trips/langosta/9.jpg',
                         'thumb' => 'https://static.tripfab.com/trips/langosta/9_thumb.jpg',
                         'big' => 'https://static.tripfab.com/trips/langosta/9_big.jpg',
-                        'desc' => 'Description goes here'
+                        'desc' => 'Original artwork and unique accents adorn each of the rooms'
                     ),
                 ),
                 'dining' => 'With such succulent dining options set amid one of the Gold Coast’s most stunning beaches, there will be no reason you’ll want to leave the hotel to eat – or perhaps ever.',
@@ -1449,6 +1434,10 @@ class LandingController extends Zend_Controller_Action {
                     'name' => 'Superior',
                     'price_desc' => 'Included',
                     'price' => 0,
+                    'description' => 'All the luxury and ammenities of a 4 star 
+                        hotel. Minibar, A/c, Satelite TV.',
+                    'min'         => 2,
+                    'max'         => 4,
                     'selected' => 1
                 ),
                 array(
@@ -1456,12 +1445,22 @@ class LandingController extends Zend_Controller_Action {
                     'name' => 'Superior OV',
                     'price_desc' => '+ 12',
                     'price' => 12,
+                    'description' => 'Same as the Superior but also including an
+                        astonishing ocean view',
+                    'min'         => 2,
+                    'max'         => 4,
                 ),
                 array(
                     'id' => 'supovprem',
                     'name' => 'Superior OV Premium',
                     'price_desc' => '+ $18',
-                    'price' => 18
+                    'price' => 18,
+                    'description' => 'Choice of a king bed and two queen beds. 
+                        Valcony with spectacular view of the Papagayo Bay. 
+                        Satelite TV , safe , refrigerator, A/C and coffeemaker. 
+                        Located close to the pool.',
+                    'min'         => 2,
+                    'max'         => 4,
                 ),
             ),
             'riu' => array(
@@ -1470,19 +1469,36 @@ class LandingController extends Zend_Controller_Action {
                     'name' => 'Standard',
                     'price_desc' => 'Included',
                     'price' => 0,
+                    'description' => 'With a choice of two double beds or one 
+                        king bed, these rooms can sleep up to four guests. A 
+                        private bathroom, central air and mini-bar are available 
+                        in all double rooms. Interconnecting rooms are available.',
+                    'min'         => 2,
+                    'max'         => 3,
                     'selected' => 1
                 ),
                 array(
                     'id' => 'ocean',
                     'name' => 'Standard ocean view',
                     'price_desc' => '+ $50',
-                    'price' => 50
+                    'price' => 50,
+                    'description' => 'Also available with two double beds or one 
+                        king bed, a private bathroom, central air and mini-bar . 
+                        With a breathtaking ocean view',
+                    'min'         => 2,
+                    'max'         => 3,
                 ),
                 array(
                     'id' => 'jacuzzi',
                     'name' => 'Jacuzzi Suite',
                     'price_desc' => '+ $145',
-                    'price' => 145
+                    'price' => 145,
+                    'description' => 'These suites combine all of the features 
+                        of the suite above with a private terrace and a jacuzzi. 
+                        Enjoy a romantic evening lounging in the hot tub with 
+                        your honey as you watch the sun sink below the horizon.',
+                    'min'         => 2,
+                    'max'         => 4,
                 ),
             ),
             'langosta' => array(
@@ -1491,19 +1507,40 @@ class LandingController extends Zend_Controller_Action {
                     'name' => 'Superior',
                     'price_desc' => 'Imcluded',
                     'price' => 0,
+                    'description' => 'These comfortable rooms measure 345 square 
+                        feet and feature views of Las Baulas National Marine Park. 
+                        Amenities include a king-sized bed, terrace or balcony,
+                        full bathroom, air-conditioning, TV, phone, minibar, 
+                        and in-room safe.',
+                    'min'         => 2,
+                    'max'         => 4,
                     'selected' => 1
                 ),
                 array(
                     'id' => 'deluxe',
                     'name' => 'Deluxe',
                     'price_desc' => '+ $35',
-                    'price' => 35
+                    'price' => 35,
+                    'description' => "The suite's 710 square feet are spread over 
+                        two levels and designed to accommodate families. You'll 
+                        enjoy gorgeous ocean views, and also a king bed, sofa bed, 
+                        balcony, living area, air-conditioning, full bathroom, 
+                        jacuzzi, minibar, cable TV, phone, and in-room safe.",
+                    'min'         => 2,
+                    'max'         => 4,
                 ),
                 array(
                     'id' => 'suite',
                     'name' => 'Suite',
                     'price_desc' => '+ $42',
-                    'price' => 42
+                    'price' => 42,
+                    'description' => "Enjoy the ultimate in luxury: a 1,065-square 
+                        foot master suite with two levels and breathtaking views. 
+                        You'll have at your disposal a king bed, sofa bed, living 
+                        area, terrace or balcony, jacuzzi, full bath, cable TV, 
+                        phone, air-conditioning, minibar, and in-room safe.",
+                    'min'         => 2,
+                    'max'         => 4,
                 ),
             ),
             'doubletree' => array(
@@ -1512,6 +1549,11 @@ class LandingController extends Zend_Controller_Action {
                     'name' => 'Standard',
                     'price_desc' => 'Included',
                     'price' => 0,
+                    'description' => ' Located in building one near the main pool, 
+                        these rooms feature a king size Sweet Dreams plush top 
+                        king bed, perfect for a couple or solo traveler.',
+                    'min'         => 2,
+                    'max'         => 4,
                     'selected' => 1
                 ),
                 array(
@@ -1519,12 +1561,43 @@ class LandingController extends Zend_Controller_Action {
                     'name' => 'Deluxe o Junior Suite',
                     'price_desc' => '+ $19',
                     'price' => 19,
+                    'description' => 'Located in building two close to the main
+                        restaurant and theater, these spacious suites feature a 
+                        king Sweet Dreams bed in an oversized bedroom and a 
+                        large jacuzzi tub.',
+                    'min'         => 2,
+                    'max'         => 4,
                 ),
             )
         );
 
         $activities = array(
-            'papagayo' => array(),
+            'langosta' => array(
+                array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tours',
+                    'price_desc' => '+$110/person',
+                    'price' => 110
+                ),
+                array(
+                    'id' => 'horseback',
+                    'name' => '2hr Horseback tour',
+                    'price_desc' => '+$60/person',
+                    'price' => 60
+                ),
+                array(
+                    'id' => 'canopy',
+                    'name' => 'Canopy tour',
+                    'price_desc' => '+$60/person',
+                    'price' => 60
+                ),
+                array(
+                    'id' => 'snorkeling',
+                    'name' => 'Snorkeling Tours',
+                    'price_desc' => '+$70/person',
+                    'price' => 70
+                ),
+            ),
             'riu' => array(
                 array(
                     'id' => 'atv',
@@ -1551,8 +1624,58 @@ class LandingController extends Zend_Controller_Action {
                     'price' => 80
                 ),
             ),
-            'langosta' => array(),
-            'doubletree' => array()
+            'papagayo' => array(
+                array(
+                    'id' => 'horseback',
+                    'name' => '2hr Horseback tour',
+                    'price_desc' => '+$60/person',
+                    'price' => 60
+                ),
+                array(
+                    'id' => 'shopping',
+                    'name' => 'Liberia Shopping Tour',
+                    'price_desc' => '+$80/person',
+                    'price' => 80
+                ),
+                array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tours',
+                    'price_desc' => '+$110/person',
+                    'price' => 110
+                ),
+                array(
+                    'id' => 'snorkeling',
+                    'name' => 'Snorkeling Tours',
+                    'price_desc' => '+$70/person',
+                    'price' => 70
+                ),
+            ),
+            'doubletree' => array(
+                array(
+                    'id' => 'horseback',
+                    'name' => '2hr Horseback tour',
+                    'price_desc' => '+$60/person',
+                    'price' => 60
+               ),
+                array(
+                    'id' => 'snorkeling',
+                    'name' => 'Snorkeling Tours',
+                    'price_desc' => '+$70/person',
+                    'price' => 70
+               ),
+                array(
+                    'id' => 'cruises',
+                    'name' => 'Tortuga Island Cruises Day Tour',
+                    'price_desc' => '+$120/person',
+                    'price' => 120
+               ),
+                array(
+                    'id' => 'kajak',
+                    'name' => 'Kajak Tour at Punta Coral',
+                    'price_desc' => '+$190/person',
+                    'price' => 190
+               ),
+            )
         );
 
         $this->view->id = $id;
@@ -1684,7 +1807,32 @@ class LandingController extends Zend_Controller_Action {
         );
 
         $activities = array(
-            'papagayo' => array(),
+            'langosta' => array(
+                array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tours',
+                    'price_desc' => '+$110/person',
+                    'price' => 110
+                ),
+                array(
+                    'id' => 'horseback',
+                    'name' => '2hr Horseback tour',
+                    'price_desc' => '+$60/person',
+                    'price' => 60
+                ),
+                array(
+                    'id' => 'canopy',
+                    'name' => 'Canopy tour',
+                    'price_desc' => '+$60/person',
+                    'price' => 60
+                ),
+                array(
+                    'id' => 'snorkeling',
+                    'name' => 'Snorkeling Tours',
+                    'price_desc' => '+$70/person',
+                    'price' => 70
+                )
+            ),
             'riu' => array(
                 array(
                     'id' => 'atv',
@@ -1711,8 +1859,58 @@ class LandingController extends Zend_Controller_Action {
                     'price' => 80
                 ),
             ),
-            'langosta' => array(),
-            'doubletree' => array()
+            'papagayo' => array(
+                array(
+                    'id' => 'horseback',
+                    'name' => '2hr Horseback tour',
+                    'price_desc' => '+$60/person',
+                    'price' => 60
+                ),
+                array(
+                    'id' => 'shopping',
+                    'name' => 'Liberia Shopping Tour',
+                    'price_desc' => '+$80/person',
+                    'price' => 80
+                ),
+                array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tours',
+                    'price_desc' => '+$110/person',
+                    'price' => 110
+                ),
+                array(
+                    'id' => 'snorkeling',
+                    'name' => 'Snorkeling Tours',
+                    'price_desc' => '+$70/person',
+                    'price' => 70
+                ),
+            ),
+            'doubletree' => array(
+                array(
+                    'id' => 'horseback',
+                    'name' => '2hr Horseback tour',
+                    'price_desc' => '+$60/person',
+                    'price' => 60
+               ),
+                array(
+                    'id' => 'snorkeling',
+                    'name' => 'Snorkeling Tours',
+                    'price_desc' => '+$70/person',
+                    'price' => 70
+               ),
+                array(
+                    'id' => 'cruises',
+                    'name' => 'Tortuga Island Cruises Day Tour',
+                    'price_desc' => '+$120/person',
+                    'price' => 120
+               ),
+                array(
+                    'id' => 'kajak',
+                    'name' => 'Kajak Tour at Punta Coral',
+                    'price_desc' => '+$190/person',
+                    'price' => 190
+               ),
+            )
         );
 
         $arrival = strtotime($data['date']);
@@ -1874,8 +2072,58 @@ class LandingController extends Zend_Controller_Action {
         );
 
         $activities = array(
-            md5('papagayo') => array(),
-            md5('langosta') => array(),
+            md5('langosta') => array(
+                'atv' => array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tours',
+                    'price_desc' => '+$110/person',
+                    'price' => 110
+                ),
+                'horseback' => array(
+                    'id' => 'horseback',
+                    'name' => '2hr Horseback tour',
+                    'price_desc' => '+$60/person',
+                    'price' => 60
+                ),
+                'canopy' => array(
+                    'id' => 'canopy',
+                    'name' => 'Canopy tour',
+                    'price_desc' => '+$60/person',
+                    'price' => 60
+                ),
+                'snorkeling' => array(
+                    'id' => 'snorkeling',
+                    'name' => 'Snorkeling Tours',
+                    'price_desc' => '+$70/person',
+                    'price' => 70
+                )
+            ),
+            md5('papagayo') => array(
+                'horseback' => array(
+                    'id' => 'horseback',
+                    'name' => '2hr Horseback tour',
+                    'price_desc' => '+$60/person',
+                    'price' => 60
+                ),
+                'shopping' => array(
+                    'id' => 'shopping',
+                    'name' => 'Liberia Shopping Tour',
+                    'price_desc' => '+$80/person',
+                    'price' => 80
+                ),
+                'atv' => array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tours',
+                    'price_desc' => '+$110/person',
+                    'price' => 110
+                ),
+                'snorkeling' => array(
+                    'id' => 'snorkeling',
+                    'name' => 'Snorkeling Tours',
+                    'price_desc' => '+$70/person',
+                    'price' => 70
+                ),
+            ),
             md5('riu') => array(
                 'atv' => array(
                     'id' => 'atv',
@@ -1902,7 +2150,32 @@ class LandingController extends Zend_Controller_Action {
                     'price' => 80
                 ),
             ),
-            md5('doubletree') => array()
+            md5('doubletree') => array(
+                'horseback' => array(
+                    'id' => 'horseback',
+                    'name' => '2hr Horseback tour',
+                    'price_desc' => '+$60/person',
+                    'price' => 60
+               ),
+               'snorkeling' => array(
+                    'id' => 'snorkeling',
+                    'name' => 'Snorkeling Tours',
+                    'price_desc' => '+$70/person',
+                    'price' => 70
+               ),
+               'cruises' => array(
+                    'id' => 'cruises',
+                    'name' => 'Tortuga Island Cruises Day Tour',
+                    'price_desc' => '+$120/person',
+                    'price' => 120
+               ),
+               'kajak' => array(
+                    'id' => 'kajak',
+                    'name' => 'Kajak Tour at Punta Coral',
+                    'price_desc' => '+$190/person',
+                    'price' => 190
+               ),
+            )
         );
 
         $arrival = strtotime($data['date']);
@@ -2092,8 +2365,58 @@ class LandingController extends Zend_Controller_Action {
         );
 
         $activities = array(
-            md5('papagayo') => array(),
-            md5('langosta') => array(),
+            md5('langosta') => array(
+                'atv' => array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tours',
+                    'price_desc' => '+$110/person',
+                    'price' => 110
+                ),
+                'horseback' => array(
+                    'id' => 'horseback',
+                    'name' => '2hr Horseback tour',
+                    'price_desc' => '+$60/person',
+                    'price' => 60
+                ),
+                'canopy' => array(
+                    'id' => 'canopy',
+                    'name' => 'Canopy tour',
+                    'price_desc' => '+$60/person',
+                    'price' => 60
+                ),
+                'snorkeling' => array(
+                    'id' => 'snorkeling',
+                    'name' => 'Snorkeling Tours',
+                    'price_desc' => '+$70/person',
+                    'price' => 70
+                )
+            ),
+            md5('papagayo') => array(
+                'horseback' => array(
+                    'id' => 'horseback',
+                    'name' => '2hr Horseback tour',
+                    'price_desc' => '+$60/person',
+                    'price' => 60
+                ),
+                'shopping' => array(
+                    'id' => 'shopping',
+                    'name' => 'Liberia Shopping Tour',
+                    'price_desc' => '+$80/person',
+                    'price' => 80
+                ),
+                'atv' => array(
+                    'id' => 'atv',
+                    'name' => 'ATV Tours',
+                    'price_desc' => '+$110/person',
+                    'price' => 110
+                ),
+                'snorkeling' => array(
+                    'id' => 'snorkeling',
+                    'name' => 'Snorkeling Tours',
+                    'price_desc' => '+$70/person',
+                    'price' => 70
+                ),
+            ),
             md5('riu') => array(
                 'atv' => array(
                     'id' => 'atv',
@@ -2120,7 +2443,32 @@ class LandingController extends Zend_Controller_Action {
                     'price' => 80
                 ),
             ),
-            md5('doubletree') => array()
+            md5('doubletree') => array(
+                'horseback' => array(
+                    'id' => 'horseback',
+                    'name' => '2hr Horseback tour',
+                    'price_desc' => '+$60/person',
+                    'price' => 60
+               ),
+               'snorkeling' => array(
+                    'id' => 'snorkeling',
+                    'name' => 'Snorkeling Tours',
+                    'price_desc' => '+$70/person',
+                    'price' => 70
+               ),
+               'cruises' => array(
+                    'id' => 'cruises',
+                    'name' => 'Tortuga Island Cruises Day Tour',
+                    'price_desc' => '+$120/person',
+                    'price' => 120
+               ),
+               'kajak' => array(
+                    'id' => 'kajak',
+                    'name' => 'Kajak Tour at Punta Coral',
+                    'price_desc' => '+$190/person',
+                    'price' => 190
+               ),
+            )
         );
 
         $arrival = strtotime($data['date']);

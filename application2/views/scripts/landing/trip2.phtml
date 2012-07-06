@@ -80,7 +80,7 @@ $nights = array(3,4,5,7,10,15) ?>
                             <h3>All Inclusive</h3>
                         </div><!--TITLE-->
                         <div class="descrip"><?= $id ?> - <?= $img['desc'] ?> 
-                        <a href="<?= $img['big'] ?>" rel="group1" class="js-fancybox"></a></div><!--DESCRIP-->
+                        <a title="<?= $img['desc'] ?>" href="<?= $img['big'] ?>" rel="group1" class="js-fancybox"></a></div><!--DESCRIP-->
                     </div><!--IMAGES-->
                     <?php endforeach ?>
                     
@@ -116,7 +116,7 @@ $nights = array(3,4,5,7,10,15) ?>
                         <p><?= $this->info['description'] ?></p>
                     </div><!--DESCRIPTION-->
                     
-                    
+                    <?php if(!empty($this->info['dining'])): ?>
                     <div class="single">
                         <h5>Dining:</h5>
                         <p><?= $this->info['dining'] ?></p>
@@ -127,6 +127,7 @@ $nights = array(3,4,5,7,10,15) ?>
                             <?php endforeach ?>
                         </dl>
                     </div><!--FOOD-->
+                    <?php endif ?>
                     
                     <?php foreach($this->info['overview'] as $o): ?>
                     <div class="single">
@@ -211,21 +212,24 @@ $nights = array(3,4,5,7,10,15) ?>
                                             Included
                                             <?php endif ?>
                                             </td>
+                                            <td width="0">
+                                            	<?php if(!empty($room['description'])): ?>
+                                                <div class="room_tip">
+                                                    <span class="rw"></span>
+                                                    <h3><?= $room['name'] ?></h3>
+                                                    <div class="text">
+                                                        <p><?= $room['description'] ?></p>
+                                                    </div><!--TEXT-->
+                                                    <ul>
+                                                        <li><strong>Minimum Stay:</strong>2 nights</li>
+                                                        <li><strong>Maximum Accommodation:</strong><?= $room['max'] ?> people</li>
+                                                    </ul>
+                                                </div><!--ROOM_TIP-->
+                                                <?php endif ?>
+                                            </td>
                                         </tr>
                                         <?php endforeach ?>
                                     </table>
-                                    
-									<div class="room_tip">
-										<span class="rw"></span>
-										<h3>One-Bedroom Apartment</h3>
-										<div class="text">
-											<p>These apartments are perfect for solo travelers or couples. They feature a double bed, cable and satellite TV and a ceiling fan.</p>
-										</div><!--TEXT-->
-										<ul>
-					                    	<li><strong>Minimum Stay:</strong>1 nights</li>
-					                        <li><strong>Maximum Accommodation:</strong>2 people</li>
-					                    </ul>
-                					</div><!--ROOM_TIP-->
                                     <span class="line"></span>
                                 </div><!--BLOCK2-->
                                 
@@ -417,6 +421,10 @@ $(document).ready(function() {
 		}
 		return x1 + x2;
 	}
+	
+	$('.js-room-table tr').hover(function(){
+		$(this).toggleClass('hover');
+	});
 });
 </script>
 <script type="text/javascript">

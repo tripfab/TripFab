@@ -90,7 +90,8 @@ $nights = array(3,4,5,7,10,15) ?>
                     </div><!--BOOKEASY-->
                     
                     <div class="whole">
-                        <a href="<?= $this->info['images'][0]['big'] ?>" class="lbc" rel="group1">
+                        <a href="<?= $this->info['images'][0]['big'] ?>" class="lbc" rel="group1"
+                         title="<?= $this->info['images'][0]['desc'] ?>">
                             <img src="<?= $this->info['images'][0]['url'] ?>" width="700" height="363" alt="" />
                             <span class="view"><em></em>Click to View Photos</span>
                         </a>
@@ -115,7 +116,6 @@ $nights = array(3,4,5,7,10,15) ?>
                 <div class="tabs">
                     <ul>
                         <li><a href="#overview">Overview</a></li>
-                        <li><a href="#addons">Addons</a></li>
                         <li><a href="#reviews">Guest Reviews</a></li>
                     </ul>
                     <div id="overview">
@@ -147,6 +147,7 @@ $nights = array(3,4,5,7,10,15) ?>
                         </div><!--SINGLE-->
                         <?php endforeach ?>
                     </div><!--OVERVIEW-->
+                    <!--
                     
                     <div id="addons">
                         <h3>Trip Addons</h3>
@@ -168,12 +169,12 @@ $nights = array(3,4,5,7,10,15) ?>
                                         <?php endforeach ?>
                                     </ul>
                                     <?php endif ?>
-                                </div><!--TEXT-->
+                                </div><!--TEXT--*>
                                 <div class="clear"></div>
-                            </div><!--SINGLE-->
+                            </div><!--SINGLE--*>
                             <?php endforeach ?>
-                        </div><!--ACCORDION-->
-                    </div><!--ADDONS-->
+                        </div><!--ACCORDION--*>
+                    </div><!--ADDONS--*> -->
                     
                     <div id="reviews">
                     	<?php foreach($this->info['reviews'] as $r): ?>
@@ -300,7 +301,7 @@ $nights = array(3,4,5,7,10,15) ?>
     
     <?php foreach($this->info['images'] as $kk => $img): ?>
     <?php if($kk != 0): ?>
-    <a href="<?= $img['big'] ?>" class="lbc" rel="group1"></a>
+    <a href="<?= $img['big'] ?>" title="<?= $img['desc'] ?>" class="lbc" rel="group1"></a>
     <?php endif ?>
     <?php endforeach ?>
 </div><!--HIDDEN-->
