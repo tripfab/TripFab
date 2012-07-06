@@ -22,7 +22,7 @@
 	color: #FFF;
 	float: left;
 	text-align: right;
-	width: 270px;
+	width: 300px;
 	height: 22px;
 	font: bold 14px/22px Helvetica;
 	margin-top: 8px;
@@ -455,20 +455,19 @@
 	border-bottom: 1px solid #e0e0e0;
 	padding-bottom: 10px;
 	margin-bottom: 10px;
-	
 }
 #trip_all2 .customize .block1 .date {
 	width: 120px;
 	float: left;
 }
 #trip_all2 .customize .block1 .date input[type="text"] {
-	width: 61px;
+	width: 70px;
 	height: 27px;
-	font: normal 13px/27px Helvetica;
+	font: normal 12px/27px Helvetica;
 	color: #303030;
 	float: left;
 }
-#trip_all2 .customize .block1 .date a {
+#trip_all2 .customize .block1 .date span {
 	display: block;
 	height: 24px;
 	width: 24px;
@@ -483,8 +482,9 @@
 }
 #trip_all2 .customize .block1 .select {
 	float: right;
-	width: 63px;
-}#trip_all2 .customize .block1 .select select {
+	width: 60px;
+}
+#trip_all2 .customize .block1 .select select {
 	margin-top: 5px;
 	height: 18px;
 }
@@ -553,7 +553,7 @@
 #trip_all2 .accordion .block2 label {
 	display: block;
 	float: left;
-	width: 150px;
+	/*width: 150px;*/
 	font-size: 12px;
 }
 #trip_all2 .accordion .block2 label input {
@@ -1369,12 +1369,94 @@
 
 
 
+#trip_all2 #content .right .customize .fields .room_tip {
+	display: none;
+	background-color: #303030;
+	color: #FFF;
+	padding: 10px 20px 20px;
+	width: 350px;
+	position: absolute;
+	top: -72px;
+	left: -380px;
+	z-index: 100;
+	-webkit-box-shadow: 0px 0px 3px 2px rgba(0,0,0, 0.6);
+	-moz-box-shadow: 0px 0px 3px 2px rgba(0,0,0, 0.6);
+	box-shadow: 0px 0px 3px 2px rgba(0,0,0, 0.6); 
+}
+#trip_all2 #content .right .customize .fields:hover .room_tip {
+	display: block;
+}
+#trip_all2 #content .right .customize .fields .room_tip .rw {
+	display: block;
+	background: url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat -210px -72px;
+	width: 6px;
+	height: 16px;
+	position: absolute;
+	right: -6px;
+	top: 78px;
+}
+#trip_all2 #content .right .customize .fields .room_tip h3 {
+	font: bold 13px/18px Helvetica;
+	padding: 8px 0;
+	border-bottom: 1px solid #1a1a1a;
+}
+#trip_all2 #content .right .customize .fields .room_tip .text {
+	border-top: 1px solid #404040;
+	font: normal 11px/16px Helvetica;
+	padding-top: 10px;
+}
+#trip_all2 #content .right .customize .fields .room_tip p{
+	margin-bottom: 15px;
+}
+#trip_all2 #content .right .customize .fields .room_tip li{
+	margin-bottom: 10px;
+	font: normal 11px Helvetica
+}
+#trip_all2 #content .right .customize .fields .room_tip a.details {
+	display: block;
+	background-color: #60b5f7;
+	font: bold 11px/26px Helvetica;
+	height: 26px;
+	padding: 0 10px;
+	color: #FFF;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+#trip_all2 #content .right .customize .fields .room_tip a.details:hover {
+	background-color: #9BD2FC;
+}
 
 
-
-
-
-
+#fancybox-left-ico, 
+#fancybox-right-ico {
+    background: url("https://static.tripfab.com/images6/LightboxArrows.png") no-repeat scroll 0 0 transparent;
+    display: block;
+    height: 68px;
+    margin: -18px 0 0;
+    position: absolute;
+    top: 50%;
+    width: 64px;
+    z-index: 10;
+    visibility: visible !important;
+}
+#fancybox-left-ico {
+    background-position: 0 0;
+    left: 5px !important;
+}
+#fancybox-right-ico {
+    background-position: 0 -136px;
+    left: auto !important;
+    right: 5px !important;
+}
+#fancybox-right:hover #fancybox-right-ico {
+    background-position: 0 -204px;
+    right: 5px;
+}
+#fancybox-left:hover #fancybox-left-ico {
+    background-position: 0 -68px;
+    left: 5px !important;
+}
 
 
 
