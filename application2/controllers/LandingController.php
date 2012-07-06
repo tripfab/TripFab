@@ -118,8 +118,8 @@ class LandingController extends Zend_Controller_Action {
                     beachside resort. Set amid some of Costa Rica’s most lush 
                     rainforests and unspoiled beaches, this all-inclusive won’t 
                     disappoint.',
-                'sale_starts' => 'April 23th',
-                'sale_ends' => 'July 20th',
+                'sale_starts' => 'July 1st',
+                'sale_ends' => 'August 31st',
                 'overview' => array(
                     array(
                         'title' => 'General',
@@ -480,8 +480,8 @@ class LandingController extends Zend_Controller_Action {
                     estination for a carefree trip to Costa Rica. The expansive
                     property features 701 rooms,  3 specialty restaurants and an 
                     immense and luxurious swimming pool.',
-                'sale_starts' => 'April 23th',
-                'sale_ends' => 'July 20th',
+                'sale_starts' => 'July 1st',
+                'sale_ends' => 'August 31st',
                 'overview' => array(
                     array(
                         'title' => 'General',
@@ -824,8 +824,8 @@ class LandingController extends Zend_Controller_Action {
                     trip of a lifetime. Endless buffets, fresh smoothies and 
                     cocktails, and hours lounging poolside define the lifestyle of 
                  every guest.',
-                'sale_starts' => 'April 23th',
-                'sale_ends' => 'July 20th',
+                'sale_starts' => 'July 1st',
+                'sale_ends' => 'August 31st',
                 'overview' => array(
                     array(
                         'title' => 'General',
@@ -1118,8 +1118,8 @@ class LandingController extends Zend_Controller_Action {
                 'description' => 'Be treated like royalty for a day – or as many days as you 
                 like. Indulge in some local fare with complimentary breakfast, lunch, dinner, 
                 and snack bar. When it comes time to play, there are no limits.',
-                'sale_starts' => 'April 23th',
-                'sale_ends' => 'July 20th',
+                'sale_starts' => 'July 1st',
+                'sale_ends' => 'August 31st',
                 'overview' => array(
                     array(
                         'title' => 'General',
