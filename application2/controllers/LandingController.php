@@ -28,14 +28,14 @@ class LandingController extends Zend_Controller_Action {
                 'id' => 'papagayo',
                 'image' => 'https://static.tripfab.com/trips/papagayo/main_thumb.jpg',
                 'title' => 'Allegro Papagayo Resort',
-                'duration'=>3,
+                'duration'=>2,
                 'rating' => 4,
                 'reviews' => 9,
                 'location' => 'Guanacaste, Costa Rica',
                 'travelers' => '2 - 100',
-                'price_before' => 110,
-                'price' => 75,
-                'save' => 35,
+                'price_before' => 248,
+                'price' => 164,
+                'save' => 84,
                 'description' => 'Eat, drink and be merry – without having to 
                     worry about the bill. Enjoy all the freshly prepared meals, 
                     alcoholic'
@@ -44,14 +44,14 @@ class LandingController extends Zend_Controller_Action {
                 'id' => 'riu',
                 'image' => 'https://static.tripfab.com/trips/riu/main_thumb.jpg',
                 'title' => 'RIU Guanacaste',
-                'duration'=>3,
+                'duration'=>2,
                 'rating' => 4,
                 'reviews' => 98,
                 'location' => 'Guanacaste, Costa Rica',
                 'travelers' => '2 - 100',
-                'price_before' => 110,
-                'price' => 75,
-                'save' => 35,
+                'price_before' => 210,
+                'price' => 166,
+                'save' => 44,
                 'description' => 'With delicious food, beautiful beaches, 
                     relaxing jacuzzis, a gym, sauna, spa and an amazing 
                     all-inclusive'
@@ -60,14 +60,14 @@ class LandingController extends Zend_Controller_Action {
                 'id' => 'doubletree',
                 'image' => 'https://static.tripfab.com/trips/doubletree/main_thumb.jpg',
                 'title' => 'Double Tree Resort',
-                'duration'=>3,
+                'duration'=>2,
                 'rating' => 4,
                 'reviews' => 98,
                 'location' => 'Puntarenas, Costa Rica',
                 'travelers' => '2 - 100',
-                'price_before' => 110,
-                'price' => 75,
-                'save' => 35,
+                'price_before' => 133,
+                'price' => 90,
+                'save' => 43,
                 'description' => 'From the fresh-out-of-the oven “welcome cookie”
                     to the afternoons kayaking on the Pacific, this is a guaranteed 
                     trip of a'
@@ -76,14 +76,14 @@ class LandingController extends Zend_Controller_Action {
                 'id' => 'langosta',
                 'image' => 'https://static.tripfab.com/trips/langosta/main_thumb.jpg',
                 'title' => 'Barcelo Langosta',
-                'duration'=>3,
+                'duration'=>2,
                 'rating' => 4,
                 'reviews' => 98,
                 'location' => 'Guanacaste, Costa Rica',
                 'travelers' => '2 - 100',
-                'price_before' => 110,
-                'price' => 75,
-                'save' => 35,
+                'price_before' => 180,
+                'price' => 120,
+                'save' => 60,
                 'description' => 'Be treated like royalty for a day – or as many 
                     days as you like. Indulge in some local fare with complimentary 
                     breakfast'
@@ -101,15 +101,15 @@ class LandingController extends Zend_Controller_Action {
         $info = array(
             'papagayo' => array(
                 'rating' => 4,
-                'nights' => 3,
+                'nights' => 2,
                 'location' => 'Guanacaste, Costa Rica',
-                'price' => 75,
-                'price_entero' => 75,
+                'price' => 164,
+                'price_entero' => 164,
                 'price_decimal' => 00,
-                'price_before' => 110,
-                'price_before_entero' => 110,
+                'price_before' => 248,
+                'price_before_entero' => 248,
                 'price_before_decimal' => 00,
-                'save' => 35,
+                'save' => 84,
                 'title' => 'Allegro Papagayo Resort',
                 'description' => 'Eat, drink and be merry – without having to worry 
                     about the bill. Enjoy all the freshly prepared meals, alcoholic 
@@ -464,15 +464,15 @@ class LandingController extends Zend_Controller_Action {
             ),
             'riu' => array(
                 'rating' => 4,
-                'nights' => 3,
+                'nights' => 2,
                 'location' => 'Guanacaste, Costa Rica',
-                'price' => 75,
-                'price_entero' => 75,
+                'price' => 166,
+                'price_entero' => 166,
                 'price_decimal' => 00,
-                'price_before' => 110,
-                'price_before_entero' => 110,
+                'price_before' => 210,
+                'price_before_entero' => 210,
                 'price_before_decimal' => 00,
-                'save' => 35,
+                'save' => 44,
                 'title' => 'RIU Guanacaste',
                 'description' => 'With delicious food, beautiful beaches, 
                     relaxing jacuzzis, a gym, sauna, spa and an amazing 
@@ -809,15 +809,15 @@ class LandingController extends Zend_Controller_Action {
             ),
             'doubletree' => array(
                 'rating' => 4,
-                'nights' => 3,
+                'nights' => 2,
                 'location' => 'Puntarenas, Costa Rica',
-                'price' => 75,
-                'price_entero' => 75,
+                'price' => 90,
+                'price_entero' => 90,
                 'price_decimal' => 00,
-                'price_before' => 110,
-                'price_before_entero' => 110,
+                'price_before' => 133,
+                'price_before_entero' => 133,
                 'price_before_decimal' => 00,
-                'save' => 35,
+                'save' => 43,
                 'title' => 'Double Tree Puntarenas',
                 'description' => 'From the fresh-out-of-the oven “welcome cookie”
                     to the afternoons kayaking on the Pacific, this is a guaranteed 
@@ -1105,15 +1105,15 @@ class LandingController extends Zend_Controller_Action {
             ),
             'langosta' => array(
                 'rating' => 4,
-                'nights' => 3,
+                'nights' => 2,
                 'location' => 'Tamarindo, Costa Rica',
-                'price' => 75,
-                'price_entero' => 75,
+                'price' => 120,
+                'price_entero' => 120,
                 'price_decimal' => 00,
-                'price_before' => 110,
-                'price_before_entero' => 110,
+                'price_before' => 180,
+                'price_before_entero' => 180,
                 'price_before_decimal' => 00,
-                'save' => 35,
+                'save' => 60,
                 'title' => 'Barcelo Langosta',
                 'description' => 'Be treated like royalty for a day – or as many days as you 
                 like. Indulge in some local fare with complimentary breakfast, lunch, dinner, 
@@ -1442,171 +1442,114 @@ class LandingController extends Zend_Controller_Action {
         $rooms = array(
             'papagayo' => array(
                 array(
-                    'id' => 'standard',
-                    'name' => 'Standard',
-                    'price_desc' => '- $20',
-                    'price' => -20
-                ),
-                array(
-                    'id' => 'deluxe',
-                    'name' => 'Deluxe',
+                    'id' => 'sup',
+                    'name' => 'Superior',
                     'price_desc' => 'Included',
                     'price' => 0,
                     'selected' => 1
                 ),
                 array(
-                    'id' => 'suite',
-                    'name' => 'Master Suite',
-                    'price_desc' => '+ $50',
-                    'price' => 50
+                    'id' => 'supov',
+                    'name' => 'Superior OV',
+                    'price_desc' => '+ 12',
+                    'price' => 12,
+                ),
+                array(
+                    'id' => 'supovprem',
+                    'name' => 'Superior OV Premium',
+                    'price_desc' => '+ $18',
+                    'price' => 18
                 ),
             ),
             'riu' => array(
                 array(
                     'id' => 'standard',
                     'name' => 'Standard',
-                    'price_desc' => '- $20',
-                    'price' => -20
-                ),
-                array(
-                    'id' => 'deluxe',
-                    'name' => 'Deluxe',
                     'price_desc' => 'Included',
                     'price' => 0,
                     'selected' => 1
                 ),
                 array(
-                    'id' => 'suite',
-                    'name' => 'Master Suite',
+                    'id' => 'ocean',
+                    'name' => 'Standard ocean view',
                     'price_desc' => '+ $50',
                     'price' => 50
+                ),
+                array(
+                    'id' => 'jacuzzi',
+                    'name' => 'Jacuzzi Suite',
+                    'price_desc' => '+ $145',
+                    'price' => 145
                 ),
             ),
             'langosta' => array(
                 array(
-                    'id' => 'standard',
-                    'name' => 'Standard',
-                    'price_desc' => '- $20',
-                    'price' => -20
-                ),
-                array(
-                    'id' => 'deluxe',
-                    'name' => 'Deluxe',
-                    'price_desc' => 'Included',
+                    'id' => 'superior',
+                    'name' => 'Superior',
+                    'price_desc' => 'Imcluded',
                     'price' => 0,
                     'selected' => 1
                 ),
                 array(
+                    'id' => 'deluxe',
+                    'name' => 'Deluxe',
+                    'price_desc' => '+ $35',
+                    'price' => 35
+                ),
+                array(
                     'id' => 'suite',
-                    'name' => 'Master Suite',
-                    'price_desc' => '+ $50',
-                    'price' => 50
+                    'name' => 'Suite',
+                    'price_desc' => '+ $42',
+                    'price' => 42
                 ),
             ),
             'doubletree' => array(
                 array(
                     'id' => 'standard',
                     'name' => 'Standard',
-                    'price_desc' => '- $20',
-                    'price' => -20
-                ),
-                array(
-                    'id' => 'deluxe',
-                    'name' => 'Deluxe',
                     'price_desc' => 'Included',
                     'price' => 0,
                     'selected' => 1
                 ),
                 array(
-                    'id' => 'suite',
-                    'name' => 'Master Suite',
-                    'price_desc' => '+ $50',
-                    'price' => 50
+                    'id' => 'deluxe',
+                    'name' => 'Deluxe o Junior Suite',
+                    'price_desc' => '+ $19',
+                    'price' => 19,
                 ),
             )
         );
 
         $activities = array(
-            'papagayo' => array(
-                array(
-                    'id' => 'atv',
-                    'name' => 'ATV Tour',
-                    'price_desc' => '+$25/person',
-                    'price' => 25
-                ),
-                array(
-                    'id' => 'atv1',
-                    'name' => 'ATV Tour',
-                    'price_desc' => '+$20/person',
-                    'price' => 20
-                ),
-                array(
-                    'id' => 'atv2',
-                    'name' => 'ATV Tour',
-                    'price_desc' => '+$32/person',
-                    'price' => 32
-                ),
-            ),
+            'papagayo' => array(),
             'riu' => array(
                 array(
                     'id' => 'atv',
-                    'name' => 'ATV Tour',
-                    'price_desc' => '+$25/person',
-                    'price' => 25
+                    'name' => '2 hr ATV',
+                    'price_desc' => '+$70/person',
+                    'price' => 70
                 ),
                 array(
-                    'id' => 'atv1',
-                    'name' => 'ATV Tour',
-                    'price_desc' => '+$20/person',
-                    'price' => 20
+                    'id' => 'canopy',
+                    'name' => 'Canopy tour',
+                    'price_desc' => '+$50/person',
+                    'price' => 50
                 ),
                 array(
-                    'id' => 'atv2',
-                    'name' => 'ATV Tour',
-                    'price_desc' => '+$32/person',
-                    'price' => 32
+                    'id' => 'horseback',
+                    'name' => '2hr Horseback tour',
+                    'price_desc' => '+$60/person',
+                    'price' => 60
+                ),
+                array(
+                    'id' => 'massage',
+                    'name' => '1hr Massage',
+                    'price_desc' => '+$80/person',
+                    'price' => 80
                 ),
             ),
-            'langosta' => array(
-                array(
-                    'id' => 'atv',
-                    'name' => 'ATV Tour',
-                    'price_desc' => '+$25/person',
-                    'price' => 25
-                ),
-                array(
-                    'id' => 'atv1',
-                    'name' => 'ATV Tour',
-                    'price_desc' => '+$20/person',
-                    'price' => 20
-                ),
-                array(
-                    'id' => 'atv2',
-                    'name' => 'ATV Tour',
-                    'price_desc' => '+$32/person',
-                    'price' => 32
-                ),
-            ),
-            'doubletree' => array(
-                array(
-                    'id' => 'atv',
-                    'name' => 'ATV Tour',
-                    'price_desc' => '+$25/person',
-                    'price' => 25
-                ),
-                array(
-                    'id' => 'atv1',
-                    'name' => 'ATV Tour',
-                    'price_desc' => '+$20/person',
-                    'price' => 20
-                ),
-                array(
-                    'id' => 'atv2',
-                    'name' => 'ATV Tour',
-                    'price_desc' => '+$32/person',
-                    'price' => 32
-                ),
-            )
+            'langosta' => array(),
+            'doubletree' => array()
         );
 
         $this->view->id = $id;
@@ -1632,198 +1575,141 @@ class LandingController extends Zend_Controller_Action {
         $info = array(
             'papagayo' => array(
                 'title' => 'Alegro Papagayo (All Inclusive)',
-                '_price' => 60,
-                '_price_before' => 70,
-                'room' => 'Deluxe',
+                '_price' => 164,
+                '_price_before' => 248,
+                'room' => 'Superior',
             ),
             'riu' => array(
                 'title' => 'RIU Guanacaste  (All Inclusive)',
-                '_price' => 60,
-                '_price_before' => 70,
-                'room' => 'Deluxe',
+                '_price' => 166,
+                '_price_before' => 210,
+                'room' => 'Standard',
             ),
             'langosta' => array(
                 'title' => 'Barcelo Langosta (All Inclusive)',
-                '_price' => 60,
-                '_price_before' => 70,
-                'room' => 'Deluxe',
+                '_price' => 120,
+                '_price_before' => 180,
+                'room' => 'Superior',
             ),
             'doubletree' => array(
                 'title' => 'Double Tree Puntarenas (All Inclusive)',
-                '_price' => 60,
-                '_price_before' => 70,
-                'room' => 'Deluxe',
+                '_price' => 90,
+                '_price_before' => 133,
+                'room' => 'Standard',
             )
         );
 
         $rooms = array(
             'papagayo' => array(
                 array(
-                    'id' => 'standard',
-                    'name' => 'Standard',
-                    'price_desc' => 'Substract $20 per person per night',
-                    'price' => -20
-                ),
-                array(
-                    'id' => 'deluxe',
-                    'name' => 'Deluxe',
+                    'id' => 'sup',
+                    'name' => 'Superior',
                     'price_desc' => 'Included',
                     'price' => 0,
                     'selected' => 1
                 ),
                 array(
-                    'id' => 'suite',
-                    'name' => 'Master Suite',
-                    'price_desc' => 'Add $50 per persona per night',
-                    'price' => 50
+                    'id' => 'supov',
+                    'name' => 'Superior OV',
+                    'price_desc' => 'Add $12 per persona per night',
+                    'price' => 12,
+                ),
+                array(
+                    'id' => 'supovprem',
+                    'name' => 'Superior OV Premium',
+                    'price_desc' => 'Add $18 per persona per night',
+                    'price' => 18
                 ),
             ),
             'riu' => array(
                 array(
                     'id' => 'standard',
                     'name' => 'Standard',
-                    'price_desc' => 'Substract $20 per person per night',
-                    'price' => -20
-                ),
-                array(
-                    'id' => 'deluxe',
-                    'name' => 'Deluxe',
                     'price_desc' => 'Included',
                     'price' => 0,
                     'selected' => 1
                 ),
                 array(
-                    'id' => 'suite',
-                    'name' => 'Master Suite',
+                    'id' => 'ocean',
+                    'name' => 'Standard ocean view',
                     'price_desc' => 'Add $50 per persona per night',
                     'price' => 50
+                ),
+                array(
+                    'id' => 'jacuzzi',
+                    'name' => 'Jacuzzi Suite',
+                    'price_desc' => 'Add $145 per persona per night',
+                    'price' => 145
                 ),
             ),
             'langosta' => array(
                 array(
-                    'id' => 'standard',
-                    'name' => 'Standard',
-                    'price_desc' => 'Substract $20 per person per night',
-                    'price' => -20
-                ),
-                array(
-                    'id' => 'deluxe',
-                    'name' => 'Deluxe',
-                    'price_desc' => 'Included',
+                    'id' => 'superior',
+                    'name' => 'Superior',
+                    'price_desc' => 'Imcluded',
                     'price' => 0,
                     'selected' => 1
                 ),
                 array(
-                    'id' => 'suite',
-                    'name' => 'Master Suite',
-                    'price_desc' => 'Add $50 per persona per night',
-                    'price' => 50
+                    'id' => 'deluxe',
+                    'name' => 'Deluxe',
+                    'price_desc' => 'Add $35 per persona per night',
+                    'price' => 35
                 ),
+                array(
+                    'id' => 'suite',
+                    'name' => 'Suite',
+                    'price_desc' => 'Add $42 per persona per night',
+                    'price' => 42
+                )
             ),
             'doubletree' => array(
                 array(
                     'id' => 'standard',
                     'name' => 'Standard',
-                    'price_desc' => 'Substract $20 per person per night',
-                    'price' => -20
-                ),
-                array(
-                    'id' => 'deluxe',
-                    'name' => 'Deluxe',
                     'price_desc' => 'Included',
                     'price' => 0,
                     'selected' => 1
                 ),
                 array(
-                    'id' => 'suite',
-                    'name' => 'Master Suite',
-                    'price_desc' => 'Add $50 per persona per night',
-                    'price' => 50
-                ),
+                    'id' => 'deluxe',
+                    'name' => 'Deluxe o Junior Suite',
+                    'price_desc' => 'Add $19 per persona per night',
+                    'price' => 19,
+                )
             )
         );
 
         $activities = array(
-            'papagayo' => array(
-                array(
-                    'id' => 'atv',
-                    'name' => 'ATV Tour',
-                    'price_desc' => ' $25 per person',
-                    'price' => 25
-                ),
-                array(
-                    'id' => 'atv1',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $20 per person',
-                    'price' => 20
-                ),
-                array(
-                    'id' => 'atv2',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $32 per person',
-                    'price' => 32
-                ),
-            ),
+            'papagayo' => array(),
             'riu' => array(
                 array(
                     'id' => 'atv',
-                    'name' => 'ATV Tour',
-                    'price_desc' => ' $25 per person',
-                    'price' => 25
+                    'name' => '2 hr ATV',
+                    'price_desc' => ' $70 per person',
+                    'price' => 70
                 ),
                 array(
-                    'id' => 'atv1',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $20 per person',
-                    'price' => 20
+                    'id' => 'canopy',
+                    'name' => 'Canopy tour',
+                    'price_desc' => ' $50 per person',
+                    'price' => 50
                 ),
                 array(
-                    'id' => 'atv2',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $32 per person',
-                    'price' => 32
+                    'id' => 'horseback',
+                    'name' => '2hr Horseback tour',
+                    'price_desc' => ' $60 per person',
+                    'price' => 60
+                ),
+                array(
+                    'id' => 'massage',
+                    'name' => '1hr Massage',
+                    'price_desc' => ' $80 per person',
+                    'price' => 80
                 ),
             ),
-            'langosta' => array(
-                array(
-                    'id' => 'atv',
-                    'name' => 'ATV Tour',
-                    'price_desc' => ' $25 per person',
-                    'price' => 25
-                ),
-                array(
-                    'id' => 'atv1',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $20 per person',
-                    'price' => 20
-                ),
-                array(
-                    'id' => 'atv2',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $32 per person',
-                    'price' => 32
-                ),
-            ),
-            'doubletree' => array(
-                array(
-                    'id' => 'atv',
-                    'name' => 'ATV Tour',
-                    'price_desc' => ' $25 per person',
-                    'price' => 25
-                ),
-                array(
-                    'id' => 'atv1',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $20 per person',
-                    'price' => 20
-                ),
-                array(
-                    'id' => 'atv2',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $32 per person',
-                    'price' => 32
-                ),
-            )
+            'langosta' => array(),
+            'doubletree' => array()
         );
 
         $arrival = strtotime($data['date']);
@@ -1868,206 +1754,148 @@ class LandingController extends Zend_Controller_Action {
         $info = array(
             md5('papagayo') => array(
                 'title' => 'Alegro Papagayo (All Inclusive)',
-                '_price' => 60,
-                '_price_before' => 70,
+                '_price' => 164,
+                '_price_before' => 248,
                 'room' => $data['room'],
             ),
             md5('riu') => array(  
                 'title' => 'RIU Guanacaste (All Inclusive)',
-                '_price' => 60,
-                '_price_before' => 70,
+                '_price' => 166,
+                '_price_before' => 210,
                 'room' => $data['room'],
             ),
             md5('langosta') => array(
                 'title' => 'Barcelo Langosta (All Inclusive)',
-                '_price' => 60,
-                '_price_before' => 70,
+                '_price' => 120,
+                '_price_before' => 180,
                 'room' => $data['room'],
             ),
             md5('doubletree') => array(
                 'title' => 'Double Tree Puntarenas (All Inclusive)',
-                '_price' => 60,
-                '_price_before' => 70,
+                '_price' => 90,
+                '_price_before' => 133,
                 'room' => $data['room'],
             )
         );
 
         $rooms = array(
             md5('papagayo') => array(
-                'standard' => array(
-                    'id' => 'standard',
-                    'name' => 'Standard',
-                    'price_desc' => 'Substract $20 per person per night',
-                    'price' => -20,
-                    'selected' => ($data['room'] == 'standard')
-                ),
-                'deluxe' => array(
-                    'id' => 'deluxe',
-                    'name' => 'Deluxe',
+                'sup' => array(
+                    'id' => 'sup',
+                    'name' => 'Superior',
                     'price_desc' => 'Included',
                     'price' => 0,
-                    'selected' => ($data['room'] == 'deluxe')
+                    'selected' => ($data['room'] == 'sup')
                 ),
-                'suite' => array(
-                    'id' => 'suite',
-                    'name' => 'Master Suite',
-                    'price_desc' => 'Add $50 per persona per night',
-                    'price' => 50,
-                    'selected' => ($data['room'] == 'suite')
+                'supov' => array(
+                    'id' => 'supov',
+                    'name' => 'Superior OV',
+                    'price_desc' => 'Add $12 per persona per night',
+                    'price' => 12,
+                    'selected' => ($data['room'] == 'supov')
+                ),
+                'supovprem' => array(
+                    'id' => 'supovprem',
+                    'name' => 'Superior OV Premium',
+                    'price_desc' => 'Add $18 per persona per night',
+                    'price' => 18,
+                    'selected' => ($data['room'] == 'supovprem')
                 ),
             ),
             md5('riu') => array(
                 'standard' => array(
                     'id' => 'standard',
                     'name' => 'Standard',
-                    'price_desc' => 'Substract $20 per person per night',
-                    'price' => -20,
-                    'selected' => ($data['room'] == 'standard')
-                ),
-                'deluxe' => array(
-                    'id' => 'deluxe',
-                    'name' => 'Deluxe',
                     'price_desc' => 'Included',
                     'price' => 0,
-                    'selected' => ($data['room'] == 'deluxe')
+                    'selected' => ($data['room'] == 'standard')
                 ),
-                'suite' => array(
-                    'id' => 'suite',
-                    'name' => 'Master Suite',
+                'ocean' => array(
+                    'id' => 'ocean',
+                    'name' => 'Standard ocean view',
                     'price_desc' => 'Add $50 per persona per night',
                     'price' => 50,
-                    'selected' => ($data['room'] == 'suite')
+                    'selected' => ($data['room'] == 'ocean')
+                ),
+                'jacuzzi' => array(
+                    'id' => 'jacuzzi',
+                    'name' => 'Jacuzzi Suite',
+                    'price_desc' => 'Add $145 per persona per night',
+                    'price' => 145,
+                    'selected' => ($data['room'] == 'jacuzzi')
                 ),
             ),
             md5('langosta') => array(
-                'standard' => array(
-                    'id' => 'standard',
-                    'name' => 'Standard',
-                    'price_desc' => 'Substract $20 per person per night',
-                    'price' => -20,
-                    'selected' => ($data['room'] == 'standard')
+                'superior' => array(
+                    'id' => 'superior',
+                    'name' => 'Superior',
+                    'price_desc' => 'Imcluded',
+                    'price' => 0,
+                    'selected' => ($data['room'] == 'superior')
                 ),
                 'deluxe' => array(
                     'id' => 'deluxe',
                     'name' => 'Deluxe',
-                    'price_desc' => 'Included',
-                    'price' => 0,
+                    'price_desc' => 'Add $35 per persona per night',
+                    'price' => 35,
                     'selected' => ($data['room'] == 'deluxe')
                 ),
                 'suite' => array(
                     'id' => 'suite',
-                    'name' => 'Master Suite',
-                    'price_desc' => 'Add $50 per persona per night',
-                    'price' => 50,
+                    'name' => 'Suite',
+                    'price_desc' => 'Add $42 per persona per night',
+                    'price' => 42,
                     'selected' => ($data['room'] == 'suite')
-                ),
+                )
             ),
             md5('doubletree') => array(
                 'standard' => array(
                     'id' => 'standard',
                     'name' => 'Standard',
-                    'price_desc' => 'Substract $20 per person per night',
-                    'price' => -20,
+                    'price_desc' => 'Included',
+                    'price' => 0,
                     'selected' => ($data['room'] == 'standard')
                 ),
                 'deluxe' => array(
                     'id' => 'deluxe',
-                    'name' => 'Deluxe',
-                    'price_desc' => 'Included',
-                    'price' => 0,
+                    'name' => 'Deluxe o Junior Suite',
+                    'price_desc' => 'Add $19 per persona per night',
+                    'price' => 19,
                     'selected' => ($data['room'] == 'deluxe')
-                ),
-                'suite' => array(
-                    'id' => 'suite',
-                    'name' => 'Master Suite',
-                    'price_desc' => 'Add $50 per persona per night',
-                    'price' => 50,
-                    'selected' => ($data['room'] == 'suite')
-                ),
+                )
             )
         );
 
         $activities = array(
-            md5('papagayo') => array(
-                'atv' => array(
-                    'id' => 'atv',
-                    'name' => 'ATV Tour',
-                    'price_desc' => ' $25 per person',
-                    'price' => 25
-                ),
-                'atv1' => array(
-                    'id' => 'atv1',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $20 per person',
-                    'price' => 20
-                ),
-                'atv2' => array(
-                    'id' => 'atv2',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $32 per person',
-                    'price' => 32
-                ),
-            ),
-            md5('langosta') => array(
-                'atv' => array(
-                    'id' => 'atv',
-                    'name' => 'ATV Tour',
-                    'price_desc' => ' $25 per person',
-                    'price' => 25
-                ),
-                'atv1' => array(
-                    'id' => 'atv1',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $20 per person',
-                    'price' => 20
-                ),
-                'atv2' => array(
-                    'id' => 'atv2',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $32 per person',
-                    'price' => 32
-                ),
-            ),
+            md5('papagayo') => array(),
+            md5('langosta') => array(),
             md5('riu') => array(
                 'atv' => array(
                     'id' => 'atv',
-                    'name' => 'ATV Tour',
-                    'price_desc' => ' $25 per person',
-                    'price' => 25
+                    'name' => '2 hr ATV',
+                    'price_desc' => ' $70 per person',
+                    'price' => 70
                 ),
-                'atv1' => array(
-                    'id' => 'atv1',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $20 per person',
-                    'price' => 20
+                'canopy' => array(
+                    'id' => 'canopy',
+                    'name' => 'Canopy tour',
+                    'price_desc' => ' $50 per person',
+                    'price' => 50
                 ),
-                'atv2' => array(
-                    'id' => 'atv2',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $32 per person',
-                    'price' => 32
+                'horseback' => array(
+                    'id' => 'horseback',
+                    'name' => '2hr Horseback tour',
+                    'price_desc' => ' $60 per person',
+                    'price' => 60
+                ),
+                'massage' => array(
+                    'id' => 'massage',
+                    'name' => '1hr Massage',
+                    'price_desc' => ' $80 per person',
+                    'price' => 80
                 ),
             ),
-            md5('doubletree') => array(
-                'atv' => array(
-                    'id' => 'atv',
-                    'name' => 'ATV Tour',
-                    'price_desc' => ' $25 per person',
-                    'price' => 25
-                ),
-                'atv1' => array(
-                    'id' => 'atv1',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $20 per person',
-                    'price' => 20
-                ),
-                'atv2' => array(
-                    'id' => 'atv2',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $32 per person',
-                    'price' => 32
-                ),
-            )
+            md5('doubletree') => array()
         );
 
         $arrival = strtotime($data['date']);
@@ -2145,206 +1973,148 @@ class LandingController extends Zend_Controller_Action {
         $info = array(
             md5('papagayo') => array(
                 'title' => 'Alegro Papagayo (All Inclusive)',
-                '_price' => 60,
-                '_price_before' => 70,
+                '_price' => 164,
+                '_price_before' => 248,
                 'room' => $data['room'],
             ),
             md5('riu') => array(
                 'title' => 'RIU Guanacaste (All Inclusive)',
-                '_price' => 60,
-                '_price_before' => 70,
+                '_price' => 166,
+                '_price_before' => 210,
                 'room' => $data['room'],
             ),
             md5('langosta') => array(
                 'title' => 'Barcelo Langosta (All Inclusive)',
-                '_price' => 60,
-                '_price_before' => 70,
+                '_price' => 120,
+                '_price_before' => 180,
                 'room' => $data['room'],
             ),
             md5('doubletree') => array(
                 'title' => 'Double Tree Puntarenas (All Inclusive)',
-                '_price' => 60,
-                '_price_before' => 70,
+                '_price' => 90,
+                '_price_before' => 133,
                 'room' => $data['room'],
             )
         );
 
         $rooms = array(
             md5('papagayo') => array(
-                'standard' => array(
-                    'id' => 'standard',
-                    'name' => 'Standard',
-                    'price_desc' => 'Substract $20 per person per night',
-                    'price' => -20,
-                    'selected' => ($data['room'] == 'standard')
-                ),
-                'deluxe' => array(
-                    'id' => 'deluxe',
-                    'name' => 'Deluxe',
+                'sup' => array(
+                    'id' => 'sup',
+                    'name' => 'Superior',
                     'price_desc' => 'Included',
                     'price' => 0,
-                    'selected' => ($data['room'] == 'deluxe')
+                    'selected' => ($data['room'] == 'sup')
                 ),
-                'suite' => array(
-                    'id' => 'suite',
-                    'name' => 'Master Suite',
-                    'price_desc' => 'Add $50 per persona per night',
-                    'price' => 50,
-                    'selected' => ($data['room'] == 'suite')
+                'supov' => array(
+                    'id' => 'supov',
+                    'name' => 'Superior OV',
+                    'price_desc' => 'Add $12 per persona per night',
+                    'price' => 12,
+                    'selected' => ($data['room'] == 'supov')
+                ),
+                'supovprem' => array(
+                    'id' => 'supovprem',
+                    'name' => 'Superior OV Premium',
+                    'price_desc' => 'Add $18 per persona per night',
+                    'price' => 18,
+                    'selected' => ($data['room'] == 'supovprem')
                 ),
             ),
             md5('riu') => array(
                 'standard' => array(
                     'id' => 'standard',
                     'name' => 'Standard',
-                    'price_desc' => 'Substract $20 per person per night',
-                    'price' => -20,
-                    'selected' => ($data['room'] == 'standard')
-                ),
-                'deluxe' => array(
-                    'id' => 'deluxe',
-                    'name' => 'Deluxe',
                     'price_desc' => 'Included',
                     'price' => 0,
-                    'selected' => ($data['room'] == 'deluxe')
+                    'selected' => ($data['room'] == 'standard')
                 ),
-                'suite' => array(
-                    'id' => 'suite',
-                    'name' => 'Master Suite',
+                'ocean' => array(
+                    'id' => 'ocean',
+                    'name' => 'Standard ocean view',
                     'price_desc' => 'Add $50 per persona per night',
                     'price' => 50,
-                    'selected' => ($data['room'] == 'suite')
+                    'selected' => ($data['room'] == 'ocean')
+                ),
+                'jacuzzi' => array(
+                    'id' => 'jacuzzi',
+                    'name' => 'Jacuzzi Suite',
+                    'price_desc' => 'Add $145 per persona per night',
+                    'price' => 145,
+                    'selected' => ($data['room'] == 'jacuzzi')
                 ),
             ),
             md5('langosta') => array(
-                'standard' => array(
-                    'id' => 'standard',
-                    'name' => 'Standard',
-                    'price_desc' => 'Substract $20 per person per night',
-                    'price' => -20,
-                    'selected' => ($data['room'] == 'standard')
+                'superior' => array(
+                    'id' => 'superior',
+                    'name' => 'Superior',
+                    'price_desc' => 'Imcluded',
+                    'price' => 0,
+                    'selected' => ($data['room'] == 'superior')
                 ),
                 'deluxe' => array(
                     'id' => 'deluxe',
                     'name' => 'Deluxe',
-                    'price_desc' => 'Included',
-                    'price' => 0,
+                    'price_desc' => 'Add $35 per persona per night',
+                    'price' => 35,
                     'selected' => ($data['room'] == 'deluxe')
                 ),
                 'suite' => array(
                     'id' => 'suite',
-                    'name' => 'Master Suite',
-                    'price_desc' => 'Add $50 per persona per night',
-                    'price' => 50,
+                    'name' => 'Suite',
+                    'price_desc' => 'Add $42 per persona per night',
+                    'price' => 42,
                     'selected' => ($data['room'] == 'suite')
-                ),
+                )
             ),
             md5('doubletree') => array(
                 'standard' => array(
                     'id' => 'standard',
                     'name' => 'Standard',
-                    'price_desc' => 'Substract $20 per person per night',
-                    'price' => -20,
+                    'price_desc' => 'Included',
+                    'price' => 0,
                     'selected' => ($data['room'] == 'standard')
                 ),
                 'deluxe' => array(
                     'id' => 'deluxe',
-                    'name' => 'Deluxe',
-                    'price_desc' => 'Included',
-                    'price' => 0,
+                    'name' => 'Deluxe o Junior Suite',
+                    'price_desc' => 'Add $19 per persona per night',
+                    'price' => 19,
                     'selected' => ($data['room'] == 'deluxe')
-                ),
-                'suite' => array(
-                    'id' => 'suite',
-                    'name' => 'Master Suite',
-                    'price_desc' => 'Add $50 per persona per night',
-                    'price' => 50,
-                    'selected' => ($data['room'] == 'suite')
-                ),
+                )
             )
         );
 
         $activities = array(
-            md5('papagayo') => array(
-                'atv' => array(
-                    'id' => 'atv',
-                    'name' => 'ATV Tour',
-                    'price_desc' => ' $25 per person',
-                    'price' => 25
-                ),
-                'atv1' => array(
-                    'id' => 'atv1',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $20 per person',
-                    'price' => 20
-                ),
-                'atv2' => array(
-                    'id' => 'atv2',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $32 per person',
-                    'price' => 32
-                ),
-            ),
-            md5('langosta') => array(
-                'atv' => array(
-                    'id' => 'atv',
-                    'name' => 'ATV Tour',
-                    'price_desc' => ' $25 per person',
-                    'price' => 25
-                ),
-                'atv1' => array(
-                    'id' => 'atv1',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $20 per person',
-                    'price' => 20
-                ),
-                'atv2' => array(
-                    'id' => 'atv2',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $32 per person',
-                    'price' => 32
-                ),
-            ),
+            md5('papagayo') => array(),
+            md5('langosta') => array(),
             md5('riu') => array(
                 'atv' => array(
                     'id' => 'atv',
-                    'name' => 'ATV Tour',
-                    'price_desc' => ' $25 per person',
-                    'price' => 25
+                    'name' => '2 hr ATV',
+                    'price_desc' => ' $70 per person',
+                    'price' => 70
                 ),
-                'atv1' => array(
-                    'id' => 'atv1',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $20 per person',
-                    'price' => 20
+                'canopy' => array(
+                    'id' => 'canopy',
+                    'name' => 'Canopy tour',
+                    'price_desc' => ' $50 per person',
+                    'price' => 50
                 ),
-                'atv2' => array(
-                    'id' => 'atv2',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $32 per person',
-                    'price' => 32
+                'horseback' => array(
+                    'id' => 'horseback',
+                    'name' => '2hr Horseback tour',
+                    'price_desc' => ' $60 per person',
+                    'price' => 60
+                ),
+                'massage' => array(
+                    'id' => 'massage',
+                    'name' => '1hr Massage',
+                    'price_desc' => ' $80 per person',
+                    'price' => 80
                 ),
             ),
-            md5('doubletree') => array(
-                'atv' => array(
-                    'id' => 'atv',
-                    'name' => 'ATV Tour',
-                    'price_desc' => ' $25 per person',
-                    'price' => 25
-                ),
-                'atv1' => array(
-                    'id' => 'atv1',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $20 per person',
-                    'price' => 20
-                ),
-                'atv2' => array(
-                    'id' => 'atv2',
-                    'name' => 'ATV Tour',
-                    'price_desc' => 'Add $32 per person',
-                    'price' => 32
-                ),
-            )
+            md5('doubletree') => array()
         );
 
         $arrival = strtotime($data['date']);
@@ -2411,84 +2181,78 @@ class LandingController extends Zend_Controller_Action {
         
         $rooms = array(
             'papagayo' => array(
-                'standard' => array(
-                    'id' => 'standard',
-                    'name' => 'Standard',
-                    'price_desc' => 'Substract $20 per person per night',
-                    'price' => -20
-                ),
-                'deluxe' => array(
-                    'id' => 'deluxe',
-                    'name' => 'Deluxe',
+                'sup' => array(
+                    'id' => 'sup',
+                    'name' => 'Superior',
                     'price_desc' => 'Included',
-                    'price' => 0
+                    'price' => 0,
                 ),
-                'suite' => array(
-                    'id' => 'suite',
-                    'name' => 'Master Suite',
-                    'price_desc' => 'Add $50 per persona per night',
-                    'price' => 50
+                'supov' => array(
+                    'id' => 'supov',
+                    'name' => 'Superior OV',
+                    'price_desc' => 'Add $12 per persona per night',
+                    'price' => 12
+                ),
+                'supovprem' => array(
+                    'id' => 'supovprem',
+                    'name' => 'Superior OV Premium',
+                    'price_desc' => 'Add $18 per persona per night',
+                    'price' => 18,
                 ),
             ),
             'riu' => array(
                 'standard' => array(
                     'id' => 'standard',
                     'name' => 'Standard',
-                    'price_desc' => 'Substract $20 per person per night',
-                    'price' => -20
-                ),
-                'deluxe' => array(
-                    'id' => 'deluxe',
-                    'name' => 'Deluxe',
                     'price_desc' => 'Included',
-                    'price' => 0
+                    'price' => 0,
                 ),
-                'suite' => array(
-                    'id' => 'suite',
-                    'name' => 'Master Suite',
+                'ocean' => array(
+                    'id' => 'ocean',
+                    'name' => 'Standard ocean view',
                     'price_desc' => 'Add $50 per persona per night',
-                    'price' => 50
+                    'price' => 50,
+                ),
+                'jacuzzi' => array(
+                    'id' => 'jacuzzi',
+                    'name' => 'Jacuzzi Suite',
+                    'price_desc' => 'Add $145 per persona per night',
+                    'price' => 145,
                 ),
             ),
             'langosta' => array(
-                'standard' => array(
-                    'id' => 'standard',
-                    'name' => 'Standard',
-                    'price_desc' => 'Substract $20 per person per night',
-                    'price' => -20
+                'superior' => array(
+                    'id' => 'superior',
+                    'name' => 'Superior',
+                    'price_desc' => 'Imcluded',
+                    'price' => 0
                 ),
                 'deluxe' => array(
                     'id' => 'deluxe',
                     'name' => 'Deluxe',
-                    'price_desc' => 'Included',
-                    'price' => 0
+                    'price_desc' => 'Add $35 per persona per night',
+                    'price' => 35
                 ),
                 'suite' => array(
                     'id' => 'suite',
-                    'name' => 'Master Suite',
-                    'price_desc' => 'Add $50 per persona per night',
-                    'price' => 50
-                ),
+                    'name' => 'Suite',
+                    'price_desc' => 'Add $42 per persona per night',
+                    'price' => 42
+                )
             ),
             'doubletree' => array(
                 'standard' => array(
                     'id' => 'standard',
                     'name' => 'Standard',
-                    'price_desc' => 'Substract $20 per person per night',
-                    'price' => -20,
+                    'price_desc' => 'Included',
+                    'price' => 0
                 ),
                 'deluxe' => array(
                     'id' => 'deluxe',
-                    'name' => 'Deluxe',
-                    'price_desc' => 'Included',
-                    'price' => 0,
-                ),
-                'suite' => array(
-                    'id' => 'suite',
-                    'name' => 'Master Suite',
-                    'price_desc' => 'Add $50 per persona per night',
-                    'price' => 50,
-                ),
+                    'name' => 'Deluxe o Junior Suite',
+                    'price_desc' => 'Add $19 per persona per night',
+                    'price' => 19
+                )
             )
         );
         
@@ -2508,9 +2272,7 @@ class LandingController extends Zend_Controller_Action {
             $pur->stripe_id = $customer->id;
             $pur->save();
         } else {
-            
-            $customer = Stripe_Customer::retrieve($pur->stripe_id);
-            
+            $customer = Stripe_Customer::retrieve($pur->stripe_id);            
         }
         
         $this->view->info = $pur;

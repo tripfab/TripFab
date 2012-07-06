@@ -48,6 +48,7 @@
                                 <label><input class="js-change-room-no" type="radio" checked="checked" name="changeRoom" value="0" />No, Thanks</label>
                             </div><!--SINGLE-->
                             
+                            <?php if(count($this->activities) > 0): ?>
                             <h4>Do you want to do any additional activities?</h4>
                             <div class="single last">
                                 <label><input class="js-add-activities" type="radio" name="addActivities" value="1" />Yes, Please</label>
@@ -59,6 +60,7 @@
                                 </ul>
                                 <label><input  class="js-add-activities-no" type="radio" checked="checked" name="addActivities" value="0" />No, Thanks</label>
                             </div><!--SINGLE-->
+                            <?php endif ?>
                         </div><!--ACCORDION-->
                     </div><!--CONTENT-->
                 </div><!--LEFT-->
