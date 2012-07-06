@@ -244,7 +244,7 @@ $nights = array(3,4,5,7,10,15) ?>
                         <input type="submit" class="btn-1 js-booknow" name="" value="Book Now" />
                     </div><!--BTN-->
                     <div class="bot">
-                        <strong>Save $<?= $this->info['save'] / $this->info['travelers'] ?></strong> per person
+                        <strong>Save $<?= $this->info['save'] ?></strong>
                     </div>
                 </div><!--EASYBOOKING-->
                 
@@ -270,7 +270,7 @@ $nights = array(3,4,5,7,10,15) ?>
                         <tr>
                             <td class="js-room-lb"><?= $this->rooms[$this->info['room']]['name'] ?></td>
                             <?php $p = $this->rooms[$this->info['room']]['price'] * $this->info['travelers'] * $this->info['nights']; ?>
-                            <td class="rg js-room-price-lb"><?= $p > 0 ? 'add $'.$p : 'subtract $'.$p ?></td>
+                            <td class="rg js-room-price-lb"><?= $p > 0 ? 'add $'.$p : 'subtract<strong></strong> $'.$p ?></td>
                         </tr>
                         <tr>
                             <td><?= $this->info['travelers'] ?> Travelers</td>
