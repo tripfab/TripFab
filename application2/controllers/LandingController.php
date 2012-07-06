@@ -59,7 +59,7 @@ class LandingController extends Zend_Controller_Action {
             array(
                 'id' => 'doubletree',
                 'image' => 'https://static.tripfab.com/trips/doubletree/main_thumb.jpg',
-                'title' => 'Double Tree Resort',
+                'title' => 'DoubleTree Resort',
                 'duration'=>2,
                 'rating' => 4,
                 'reviews' => 98,
@@ -818,7 +818,7 @@ class LandingController extends Zend_Controller_Action {
                 'price_before_entero' => 133,
                 'price_before_decimal' => 00,
                 'save' => 43,
-                'title' => 'Double Tree Puntarenas',
+                'title' => 'DoubleTree Puntarenas',
                 'description' => 'From the fresh-out-of-the oven “welcome cookie”
                     to the afternoons kayaking on the Pacific, this is a guaranteed 
                     trip of a lifetime. Endless buffets, fresh smoothies and 
@@ -1595,7 +1595,7 @@ class LandingController extends Zend_Controller_Action {
                 'room' => 'Superior',
             ),
             'doubletree' => array(
-                'title' => 'Double Tree Puntarenas (All Inclusive)',
+                'title' => 'DoubleTree Puntarenas (All Inclusive)',
                 '_price' => 90,
                 '_price_before' => 133,
                 'room' => 'Standard',
@@ -1774,7 +1774,7 @@ class LandingController extends Zend_Controller_Action {
                 'room' => $data['room'],
             ),
             md5('doubletree') => array(
-                'title' => 'Double Tree Puntarenas (All Inclusive)',
+                'title' => 'DoubleTree Puntarenas (All Inclusive)',
                 '_price' => 90,
                 '_price_before' => 133,
                 'room' => $data['room'],
@@ -1970,7 +1970,7 @@ class LandingController extends Zend_Controller_Action {
             'papagayo'   => 'Alegro Papagayo (All Inclusive)',
             'riu'        => 'RIU Guanacaste (All Inclusive)',
             'langosta'   => 'Barcelo Langosta (All Inclusive)',
-            'doubletree' => 'Double Tree Puntarenas (All Inclusive)',
+            'doubletree' => 'DoubleTree Puntarenas (All Inclusive)',
         );
 
         $info = array(
@@ -1993,7 +1993,7 @@ class LandingController extends Zend_Controller_Action {
                 'room' => $data['room'],
             ),
             md5('doubletree') => array(
-                'title' => 'Double Tree Puntarenas (All Inclusive)',
+                'title' => 'DoubleTree Puntarenas (All Inclusive)',
                 '_price' => 90,
                 '_price_before' => 133,
                 'room' => $data['room'],
@@ -2179,7 +2179,7 @@ class LandingController extends Zend_Controller_Action {
             'papagayo'   => 'Alegro Papagayo (All Inclusive)',
             'riu'        => 'RIU Guanacaste (All Inclusive)',
             'langosta'   => 'Barcelo Langosta (All Inclusive)',
-            'doubletree' => 'Double Tree Puntarenas (All Inclusive)',
+            'doubletree' => 'DoubleTree Puntarenas (All Inclusive)',
         );
         
         $rooms = array(
