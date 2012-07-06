@@ -1129,21 +1129,24 @@ class LandingController extends Zend_Controller_Action {
                         from one activity to another, but at Barcelo Langosta, everything is 
                         on guests’ terms.",
                         'points1' => array(
-                            'Unlimited meals and snack',
-                            'Unlimited juice and soft drinks',
-                            'Unlimited alcoholic beverages',
-                            'Tranfers to and from the Liberia airport',
-                            '4 full open bars, plus a snack bar',
-                            '3 restaurants',
-                            'Immense swimming pool with kiddie section'
+                            'Breakfast, lunch and dinner in the buffet restaurant',
+                            'Snack bar and fast food ',
+                            'Snack bar in the pool area',
+                            'Lobby bar',
+                            'Fitness, aerobics, dance classes',
+                            'Jacuzzi',
+                            'Daily entertainment program for children and adults',
+                            'Night time shows'
                         ),
                         'points2' => array(
-                            "Kids club with supervised activities",
-                            "Free babysitting",
-                            "Private beach club",
-                            'Shopping & mini-market',
-                            '24-hour medical services',
-                            'Car rental & taxi service'
+                            "Tennis courts",
+                            "Access to amphitheater",
+                            "Table tennis",
+                            'Concierge',
+                            'Free use of sun loungers in the pool area',
+                            'Pool and beach towels',
+                            'Safety deposit box',
+                            'Souvenir shop'
                         )
                     ),
                     array(
