@@ -63,7 +63,7 @@ $nights = array(3,4,5,7,10,15) ?>
                             </div><!--PER-->
                         </div><!--PRICE-->
                         <h2>Book in One Easy Step</h2>
-                        <form method="post" action="/en-US/landing/1/confirm/papagayo" class="js-confirm-form">
+                        <form method="post" action="/en-US/landing/1/confirm/<?= $this->id ?>" class="js-confirm-form">
                             <label>Travel Date</label>
                             <input type="text" name="date" value="" class="js-calendar" />
                             <div class="travelers">

@@ -234,6 +234,7 @@ $nights = array(3,4,5,7,10,15) ?>
                                     <span class="line"></span>
                                 </div><!--BLOCK2-->
                                 
+                                <?php if(count($this->activities) > 0): ?>
                                 <h6>Additional Activities</h6>
                                 <div class="block2">
                                     <table width="272" border="0" cellspacing="0" cellpadding="0" class="js-activity-table">
@@ -249,6 +250,7 @@ $nights = array(3,4,5,7,10,15) ?>
 										<?php endforeach ?>
                                     </table>
                                 </div><!--BLOCK2-->
+                                <?php endif ?>
                             </div><!--ACCORDION-->
                             
                             <div class="total"> 
