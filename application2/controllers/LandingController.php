@@ -119,7 +119,7 @@ class LandingController extends Zend_Controller_Action {
                     rainforests and unspoiled beaches, this all-inclusive won’t 
                     disappoint.',
                 'sale_starts' => 'July 1st',
-                'sale_ends' => 'August 31st',
+                'sale_ends' => 'December 31st',
                 'overview' => array(
                     array(
                         'title' => 'General',
@@ -481,7 +481,7 @@ class LandingController extends Zend_Controller_Action {
                     property features 701 rooms,  3 specialty restaurants and an 
                     immense and luxurious swimming pool.',
                 'sale_starts' => 'July 1st',
-                'sale_ends' => 'August 31st',
+                'sale_ends' => 'December 31st',
                 'overview' => array(
                     array(
                         'title' => 'General',
@@ -825,7 +825,7 @@ class LandingController extends Zend_Controller_Action {
                     cocktails, and hours lounging poolside define the lifestyle of 
                  every guest.',
                 'sale_starts' => 'July 1st',
-                'sale_ends' => 'August 31st',
+                'sale_ends' => 'December 31st',
                 'overview' => array(
                     array(
                         'title' => 'General',
@@ -1104,7 +1104,7 @@ class LandingController extends Zend_Controller_Action {
                 like. Indulge in some local fare with complimentary breakfast, lunch, dinner, 
                 and snack bar. When it comes time to play, there are no limits.',
                 'sale_starts' => 'July 1st',
-                'sale_ends' => 'August 31st',
+                'sale_ends' => 'December 31st',
                 'overview' => array(
                     array(
                         'title' => 'General',
