@@ -48,6 +48,7 @@
                                 <label><input class="js-change-room-no" type="radio" checked="checked" name="changeRoom" value="0" />No, Thanks</label>
                             </div><!--SINGLE-->
                             
+                            <?php if(count($this->activities) > 0): ?>
                             <h4>Do you want to do any additional activities?</h4>
                             <div class="single last">
                                 <label><input class="js-add-activities" type="radio" name="addActivities" value="1" />Yes, Please</label>
@@ -59,6 +60,7 @@
                                 </ul>
                                 <label><input  class="js-add-activities-no" type="radio" checked="checked" name="addActivities" value="0" />No, Thanks</label>
                             </div><!--SINGLE-->
+                            <?php endif ?>
                         </div><!--ACCORDION-->
                     </div><!--CONTENT-->
                 </div><!--LEFT-->
@@ -97,6 +99,10 @@
                             <tr>
                                 <td>Allegro Papagayo</td>
                                 <td class="rg">$<?= $this->info['price'] ?></td>
+                            </tr>
+                            <tr>
+                                <td>Tripfab Costumer Care</td>
+                                <td class="rg">Free</td>
                             </tr>
                             <tr>
                             	<td>From <?= $this->info['arrival'] ?></td>
@@ -194,9 +200,9 @@ $(document).ready(function() {
 			price = price + room;
 			$('.js-room-lb').text(_room.data('label'));
 			if(room > 0) {
-				$('.js-room-price-lb').text('+ $'+(room * nights * travelers));
+				$('.js-room-price-lb').text('add $'+(room * nights * travelers));
 			} else {
-				$('.js-room-price-lb').text('- $'+Math.abs((room * nights * travelers)));
+				$('.js-room-price-lb').text('subtract $'+Math.abs((room * nights * travelers)));
 			}
 		} else {
 			$('.js-room-lb').text(_room.data('label'));
@@ -213,7 +219,7 @@ $(document).ready(function() {
 				$('.js-specsDiv table').append(
 					'<tr class="js-activity-tr">'+
 						'<td>'+$(this).data('label')+'</td>'+
-						'<td class="rg">+ $'+($(this).data('price') * travelers)+'</td>'+
+						'<td class="rg">add $'+($(this).data('price') * travelers)+'</td>'+
 					'</tr>'
 				);
 			});
