@@ -270,7 +270,7 @@ $nights = array(3,4,5,7,10,15) ?>
                         <tr>
                             <td class="js-room-lb"><?= $this->rooms[$this->info['room']]['name'] ?></td>
                             <?php $p = $this->rooms[$this->info['room']]['price'] * $this->info['travelers'] * $this->info['nights']; ?>
-                            <td class="rg js-room-price-lb"><?= $p > 0 ? '+ $'.$p : '- $'.$p ?></td>
+                            <td class="rg js-room-price-lb"><?= $p > 0 ? 'add $'.$p : 'subtract $'.$p ?></td>
                         </tr>
                         <tr>
                             <td><?= $this->info['travelers'] ?> Travelers</td>

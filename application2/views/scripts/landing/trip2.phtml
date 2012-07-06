@@ -205,7 +205,7 @@ $nights = array(3,4,5,7,10,15) ?>
                                             <td id="js-room-<?= $i ?>" class="rg">
                                             <?php if($room['selected'] != 1): ?>
                                             <?php $p = $room['price'] * 2 * $this->info['nights'] ?>
-                                            <?= ($p > 0) ? '+ $'.$p : '- $'.abs($p) ?>
+                                            <?= ($p > 0) ? 'add $'.$p : 'subtract $'.abs($p) ?>
                                             <?php else: ?>
                                             Included
                                             <?php endif ?>
@@ -244,7 +244,7 @@ $nights = array(3,4,5,7,10,15) ?>
                                             data-price="<?= $a['price'] ?>" name="activities[]" data-label="<?= $a['name'] ?>" />
 											<?= $a['name'] ?></label></td>
                                             <td id="js-activity-<?= $i ?>" class="rg">
-                                            <?= '+ $'.($a['price'] * 2) ?>
+                                            <?= 'add $'.($a['price'] * 2) ?>
                                             </td>
                                         </tr>
 										<?php endforeach ?>
@@ -344,9 +344,9 @@ $(document).ready(function() {
 			var p = parseFloat($('input', this).data('price')) * travelers * nights;
 			if(p != 0) {
 				if(p > 0){
-					$('#js-room-'+index).text('+ $'+p);
+					$('#js-room-'+index).text('add $'+p);
 				} else {
-					$('#js-room-'+index).text('- $'+Math.abs(p));
+					$('#js-room-'+index).text('subtract $'+Math.abs(p));
 				}
 			} else {
 				$('#js-room-'+index).text('Included');
@@ -355,14 +355,14 @@ $(document).ready(function() {
 		
 		if(nights > <?= $this->info['nights'] ?>) {
 			var n = (price * nights * travelers) - (price * <?= $this->info['nights'] ?> * travelers);
-			$('.js-nights-lb').text('+ $'+n);
+			$('.js-nights-lb').text('add $'+n);
 		} else {
 			$('.js-nights-lb').text('Included');
 		}
 		
 		$('.js-activity-table tr').each(function(index){
 			var z = parseFloat($('input',this).data('price')) * travelers;
-			$('#js-activity-'+index).text('+ $'+z);
+			$('#js-activity-'+index).text('add $'+z);
 		});
 		
 		var activities = 0;
@@ -375,7 +375,7 @@ $(document).ready(function() {
 				$('.js-specsDiv table').append(
 					'<tr class="js-activity-tr">'+
 						'<td>'+$(this).data('label')+'</td>'+
-						'<td class="rg">+ $'+($(this).data('price') * travelers)+'</td>'+
+						'<td class="rg">add $'+($(this).data('price') * travelers)+'</td>'+
 					'</tr>'
 				);
 			});

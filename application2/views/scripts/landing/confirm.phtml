@@ -196,9 +196,9 @@ $(document).ready(function() {
 			price = price + room;
 			$('.js-room-lb').text(_room.data('label'));
 			if(room > 0) {
-				$('.js-room-price-lb').text('+ $'+(room * nights * travelers));
+				$('.js-room-price-lb').text('add $'+(room * nights * travelers));
 			} else {
-				$('.js-room-price-lb').text('- $'+Math.abs((room * nights * travelers)));
+				$('.js-room-price-lb').text('subtract $'+Math.abs((room * nights * travelers)));
 			}
 		} else {
 			$('.js-room-lb').text(_room.data('label'));
@@ -215,7 +215,7 @@ $(document).ready(function() {
 				$('.js-specsDiv table').append(
 					'<tr class="js-activity-tr">'+
 						'<td>'+$(this).data('label')+'</td>'+
-						'<td class="rg">+ $'+($(this).data('price') * travelers)+'</td>'+
+						'<td class="rg">add $'+($(this).data('price') * travelers)+'</td>'+
 					'</tr>'
 				);
 			});
