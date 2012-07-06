@@ -553,7 +553,7 @@
 #trip_all2 .accordion .block2 label {
 	display: block;
 	float: left;
-	width: 150px;
+	/*width: 150px;*/
 	font-size: 12px;
 }
 #trip_all2 .accordion .block2 label input {
@@ -1369,7 +1369,63 @@
 
 
 
-
+#trip_all2 #content .right .customize .fields .room_tip {
+	display: none;
+	background-color: #303030;
+	color: #FFF;
+	padding: 10px 20px 20px;
+	width: 350px;
+	position: absolute;
+	top: -72px;
+	left: -380px;
+	z-index: 100;
+	-webkit-box-shadow: 0px 0px 3px 2px rgba(0,0,0, 0.6);
+	-moz-box-shadow: 0px 0px 3px 2px rgba(0,0,0, 0.6);
+	box-shadow: 0px 0px 3px 2px rgba(0,0,0, 0.6); 
+}
+#trip_all2 #content .right .customize .fields:hover .room_tip {
+	display: block;
+}
+#trip_all2 #content .right .customize .fields .room_tip .rw {
+	display: block;
+	background: url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat -210px -72px;
+	width: 6px;
+	height: 16px;
+	position: absolute;
+	right: -6px;
+	top: 78px;
+}
+#trip_all2 #content .right .customize .fields .room_tip h3 {
+	font: bold 13px/18px Helvetica;
+	padding: 8px 0;
+	border-bottom: 1px solid #1a1a1a;
+}
+#trip_all2 #content .right .customize .fields .room_tip .text {
+	border-top: 1px solid #404040;
+	font: normal 11px/16px Helvetica;
+	padding-top: 10px;
+}
+#trip_all2 #content .right .customize .fields .room_tip p{
+	margin-bottom: 15px;
+}
+#trip_all2 #content .right .customize .fields .room_tip li{
+	margin-bottom: 10px;
+	font: normal 11px Helvetica
+}
+#trip_all2 #content .right .customize .fields .room_tip a.details {
+	display: block;
+	background-color: #60b5f7;
+	font: bold 11px/26px Helvetica;
+	height: 26px;
+	padding: 0 10px;
+	color: #FFF;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+#trip_all2 #content .right .customize .fields .room_tip a.details:hover {
+	background-color: #9BD2FC;
+}
 
 
 #fancybox-left-ico, 
