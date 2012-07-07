@@ -231,6 +231,8 @@ $(document).ready(function() {
 				type:'post',
 				data:$data,
 				success:function(){
+					$img = $('<img height="1" width="1" style="border-style:none;" alt="" src="https://www.googleadservices.com/pagead/conversion/956485843/?value=0&amp;label=ZvTtCK2KiwQQ06GLyAM&amp;guid=ON&amp;script=0"/>');
+					$('body').append($img);
 					$('input[type=text]', $form).val('');
 					alert('You have been subscribed\nExpec news from us in the next days');
 				},
