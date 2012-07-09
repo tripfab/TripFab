@@ -34,8 +34,8 @@ class LandingController extends Zend_Controller_Action {
                 'location' => 'Guanacaste, Costa Rica',
                 'travelers' => 'Min 2',
                 'price_before' => 248,
-                'price' => 164,
-                'save' => 84,
+                'price' => 109,
+                'save' => 139,
                 'description' => 'Eat, drink and be merry – without having to 
                     worry about the bill. Enjoy all the freshly prepared meals, 
                     alcoholic'
@@ -103,13 +103,13 @@ class LandingController extends Zend_Controller_Action {
                 'rating' => 4,
                 'nights' => 2,
                 'location' => 'Guanacaste, Costa Rica',
-                'price' => 164,
-                'price_entero' => 164,
+                'price' => 109,
+                'price_entero' => 109,
                 'price_decimal' => 00,
                 'price_before' => 248,
                 'price_before_entero' => 248,
                 'price_before_decimal' => 00,
-                'save' => 84,
+                'save' => 139,
                 'title' => 'Allegro Papagayo Resort',
                 'description' => 'Eat, drink and be merry – without having to worry 
                     about the bill. Enjoy all the freshly prepared meals, alcoholic 
@@ -1701,7 +1701,7 @@ class LandingController extends Zend_Controller_Action {
         $info = array(
             'papagayo' => array(
                 'title' => 'Alegro Papagayo (All Inclusive)',
-                '_price' => 164,
+                '_price' => 109,
                 '_price_before' => 248,
                 'room' => 'Superior',
             ),
@@ -1955,7 +1955,7 @@ class LandingController extends Zend_Controller_Action {
         $info = array(
             md5('papagayo') => array(
                 'title' => 'Alegro Papagayo (All Inclusive)',
-                '_price' => 164,
+                '_price' => 109,
                 '_price_before' => 248,
                 'room' => $data['room'],
                 'image' => 'https://static.tripfab.com/trips/papagayo/main_thumb.jpg',
@@ -2252,7 +2252,7 @@ class LandingController extends Zend_Controller_Action {
         $info = array(
             md5('papagayo') => array(
                 'title' => 'Alegro Papagayo (All Inclusive)',
-                '_price' => 164,
+                '_price' => 109,
                 '_price_before' => 248,
                 'room' => $data['room'],
             ),
