@@ -70,7 +70,7 @@ die;
 <title>Untitled Document</title>
 </head>
 
-<body>
+<!--<body>
 	<?php if(count($errores) > 0): ?>
     <div style="border:1px solid #F00; color:#F00; padding:5px;">
     	<?php foreach($errores as $key => $error): ?>
@@ -83,5 +83,8 @@ die;
         <input type="text" name="username" id="username" value="" />
         <input type="submit" value="enviar" />
     </form>
+</body>-->
+<body>
+	
 </body>
 </html>

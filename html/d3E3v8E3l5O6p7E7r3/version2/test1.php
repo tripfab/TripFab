@@ -272,7 +272,11 @@ $resultado = array(
 
 
 
-
+<script>
+	$(document).ready(function() {
+		
+	});
+</script>
 
 
 
