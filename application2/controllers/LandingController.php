@@ -34,8 +34,8 @@ class LandingController extends Zend_Controller_Action {
                 'location' => 'Guanacaste, Costa Rica',
                 'travelers' => 'Min 2',
                 'price_before' => 248,
-                'price' => 164,
-                'save' => 84,
+                'price' => 109,
+                'save' => 139,
                 'description' => 'Eat, drink and be merry – without having to 
                     worry about the bill. Enjoy all the freshly prepared meals, 
                     alcoholic'
@@ -46,7 +46,7 @@ class LandingController extends Zend_Controller_Action {
                 'title' => 'RIU Guanacaste',
                 'duration'=>2,
                 'rating' => 4,
-                'reviews' => 98,
+                'reviews' => 10,
                 'location' => 'Guanacaste, Costa Rica',
                 'travelers' => 'Min 2',
                 'price_before' => 210,
@@ -62,7 +62,7 @@ class LandingController extends Zend_Controller_Action {
                 'title' => 'DoubleTree Resort',
                 'duration'=>2,
                 'rating' => 4,
-                'reviews' => 98,
+                'reviews' => 9,
                 'location' => 'Puntarenas, Costa Rica',
                 'travelers' => 'Min 2',
                 'price_before' => 133,
@@ -78,7 +78,7 @@ class LandingController extends Zend_Controller_Action {
                 'title' => 'Barcelo Langosta',
                 'duration'=>2,
                 'rating' => 4,
-                'reviews' => 98,
+                'reviews' => 11,
                 'location' => 'Guanacaste, Costa Rica',
                 'travelers' => 'Min 2',
                 'price_before' => 180,
@@ -103,13 +103,13 @@ class LandingController extends Zend_Controller_Action {
                 'rating' => 4,
                 'nights' => 2,
                 'location' => 'Guanacaste, Costa Rica',
-                'price' => 164,
-                'price_entero' => 164,
+                'price' => 109,
+                'price_entero' => 109,
                 'price_decimal' => 00,
                 'price_before' => 248,
                 'price_before_entero' => 248,
                 'price_before_decimal' => 00,
-                'save' => 84,
+                'save' => 139,
                 'title' => 'Allegro Papagayo Resort',
                 'description' => 'Eat, drink and be merry – without having to worry 
                     about the bill. Enjoy all the freshly prepared meals, alcoholic 
@@ -119,7 +119,7 @@ class LandingController extends Zend_Controller_Action {
                     rainforests and unspoiled beaches, this all-inclusive won’t 
                     disappoint.',
                 'sale_starts' => 'July 1st',
-                'sale_ends' => 'August 31st',
+                'sale_ends' => 'December 31st',
                 'overview' => array(
                     array(
                         'title' => 'General',
@@ -481,7 +481,7 @@ class LandingController extends Zend_Controller_Action {
                     property features 701 rooms,  3 specialty restaurants and an 
                     immense and luxurious swimming pool.',
                 'sale_starts' => 'July 1st',
-                'sale_ends' => 'August 31st',
+                'sale_ends' => 'December 31st',
                 'overview' => array(
                     array(
                         'title' => 'General',
@@ -825,7 +825,7 @@ class LandingController extends Zend_Controller_Action {
                     cocktails, and hours lounging poolside define the lifestyle of 
                  every guest.',
                 'sale_starts' => 'July 1st',
-                'sale_ends' => 'August 31st',
+                'sale_ends' => 'December 31st',
                 'overview' => array(
                     array(
                         'title' => 'General',
@@ -1104,7 +1104,7 @@ class LandingController extends Zend_Controller_Action {
                 like. Indulge in some local fare with complimentary breakfast, lunch, dinner, 
                 and snack bar. When it comes time to play, there are no limits.',
                 'sale_starts' => 'July 1st',
-                'sale_ends' => 'August 31st',
+                'sale_ends' => 'December 31st',
                 'overview' => array(
                     array(
                         'title' => 'General',
@@ -1701,7 +1701,7 @@ class LandingController extends Zend_Controller_Action {
         $info = array(
             'papagayo' => array(
                 'title' => 'Alegro Papagayo (All Inclusive)',
-                '_price' => 164,
+                '_price' => 109,
                 '_price_before' => 248,
                 'room' => 'Superior',
             ),
@@ -1955,7 +1955,7 @@ class LandingController extends Zend_Controller_Action {
         $info = array(
             md5('papagayo') => array(
                 'title' => 'Alegro Papagayo (All Inclusive)',
-                '_price' => 164,
+                '_price' => 109,
                 '_price_before' => 248,
                 'room' => $data['room'],
                 'image' => 'https://static.tripfab.com/trips/papagayo/main_thumb.jpg',
@@ -2252,7 +2252,7 @@ class LandingController extends Zend_Controller_Action {
         $info = array(
             md5('papagayo') => array(
                 'title' => 'Alegro Papagayo (All Inclusive)',
-                '_price' => 164,
+                '_price' => 109,
                 '_price_before' => 248,
                 'room' => $data['room'],
             ),
