@@ -1,0 +1,409 @@
+#home {
+	background: url(https://static.tripfab.com/images6/mbta-7.png) repeat 0 0;
+}
+#wp_header {
+	background: url(https://static.tripfab.com/images6/mbta-4.png) repeat-x 0 0;
+	height: 86px;
+}
+#wp_header #header {
+	width: 960px;
+	margin: 0 auto;
+	height: 86px;
+}
+#wp_header h1 {
+	float: left;
+	width: 120px;
+	height: 31px;
+	margin: 30px 0 0 0;
+	opacity: 0.7;
+}
+#wp_header h1 a {
+	display: block;
+	width: 120px;
+	height: 31px;
+	background: url(https://static.tripfab.com/images6/mbta-logo.png) no-repeat 0 0;
+	text-indent: -99999px;
+}
+#wp_header nav {
+	float: right;
+	margin-top: 28px;
+}
+#wp_header nav li{
+	float: right;
+	margin-left: 20px;
+}
+#wp_header nav li a {
+	color: #3b4e5b;
+	font: bold 13px/33px Helvetica, Arial;
+}
+#wp_header nav li a:hover {
+	color:#638195;
+}
+#cont_bl.content {
+	background: url(https://static.tripfab.com/images6/Top-BG.png) repeat-x center top;
+}
+.content .top {
+	width: 960px;
+	margin: 0 auto;
+}
+.top .lf {
+	width: 460px;
+	float: left;
+	color: #FFF;
+	position: relative;
+	height: 420px;
+}
+.top .lf h2 {
+	font: bold 31px/35px Helvetica;
+	margin:70px 0 30px;
+}
+.top .lf p {
+	font: 100 14px/23px Helvetica;
+	margin-bottom: 20px;
+}
+.top .lf h3 {
+	font: 100 16px/20px Helvetica;
+}
+.top .lf strong {
+	font-weight: bold;
+}
+.top .lf a {
+	position: absolute;
+	bottom: 20px;
+	left: 0;
+}
+.top .lf .btn-2 {
+	left: 200px;
+}
+.top figure {
+	width: 500px;
+	float: right;
+	height: 410px;
+	margin-top: 10px;
+	position: relative;
+}
+.top figure img {
+	display: block;
+	position:absolute;
+	top: 0;
+	right: -30px;
+}
+.content > .main {
+	width: 960px;
+	margin: 0 auto 40px;
+	padding-bottom: 20px;
+	background-color: #FFF;
+	border-radius: 0 0 5px 5px;
+	-moz-border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+	-o-border-radius: 0 0 5px 5px;
+	box-shadow: 0px 0px 2px 0px #e7e7e7; 
+	-o-box-shadow: 0px 0px 2px 0px #e7e7e7;
+	-moz-box-shadow: 0px 0px 2px 0px #e7e7e7;
+	-webkit-box-shadow: 0px 0px 2px 0px #e7e7e7;
+}
+#home .main .lf{
+	width: 642px;
+	float: left;
+	padding-top: 20px;
+}
+.main .lf h3 {
+	background: url(https://static.tripfab.com/images6/mbta-10.png) no-repeat center 14px;
+	height: 50px;
+	text-align: center;
+	color: #323232;
+	font: bold 26px/50px Helvetica;
+	margin-bottom: 10px;
+}
+#home .main .lf > p {
+	font: 100 14px/20px Helvetica;
+	color: #8c8c8c;
+	text-align: center;
+	padding: 0 20px;
+	margin-bottom: 20px;
+}
+.main .slideshow {
+	width: 600px;
+	margin: 0 auto;
+	height: 471px;
+	overflow: hidden;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-o-border-radius: 5px;
+	position: relative;
+}
+.main figure {
+	height: 356px;
+}
+.main .slideshow .slide {
+	position: relative;
+	width: 600px;
+	height: 471px;
+}
+.main .slideshow figcaption {
+	display: block;
+	height: 73px;
+	background: url(https://static.tripfab.com/images6/mbta-9.png) repeat 0 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 600px;
+	font: 500 18px/73px Helvetica;
+	color: #FFF;
+	text-indent: 20px;
+}
+.main .slideshow .prices {
+	overflow: hidden;
+	border-left: 1px solid #e6e6e6;
+}
+.main .slideshow .prices li {
+	width: 148px;
+	height: 114px;
+	background-color: #FFF;
+	color: #4b4b4b;
+	text-align: center;
+	border-right: 1px solid #e6e6e6;
+	border-bottom: 1px solid #e6e6e6;
+	float: left;
+}
+.main .slideshow .prices h4 {
+	font: bold 13px Helvetica;
+	color: #c6c6c6;
+	margin-bottom: 5px;
+	padding-top: 20px;
+}
+.main .slideshow .prices span {
+	font: bold 46px Helvetica;
+}
+.main .slideshow .prices .last {
+	background: url(https://static.tripfab.com/images6/mbta-12.gif) repeat-x 0 0;
+	color: #FFF;
+	width: 150px;
+	border: 1px solid #2b7fbe;
+	border-top: none;
+}
+.main .slideshow .prices .last h4,
+.main .slideshow .prices .last span{
+	color: #FFF;
+	text-shadow: 0 1px 0 #1f62a0;
+}
+.main .slideshow > a {
+	display: block;
+	position: absolute;
+	width: 15px;
+	height: 24px;
+	top: 190px;
+	background: url(https://static.tripfab.com/images6/mbta-8.png) no-repeat 0 0;
+	z-index: 10;
+}
+.main .slideshow > a#prev1 {
+	background-position:-2px -61px;
+	left: 10px;           
+}
+.main .slideshow > a#prev1:hover {
+	background-position:-2px -91px;
+	left: 10px;           
+}
+.main .slideshow > a#next1 {
+	background-position:-2px -2px;
+	right: 10px;
+}
+.main .slideshow > a#next1:hover {
+	background-position: -2px -32px;
+}
+#home .main aside {
+	width: 315px;
+	float: right;
+	background-color: #f9f9f9;
+	border: 1px solid #e7eaeb;
+}
+.main aside h3 {
+	font: bold 16px/50px Helvetica;
+	color: #434343;
+	background: url(https://static.tripfab.com/images6/mbta-5.png) repeat-x left bottom;
+	height: 50px;
+	margin: 0 20px;
+	text-align: center;
+	margin-top: 20px;
+}
+#home .main aside p {
+	font: 100 13px/20px Helvetica;
+	color: #8e989d;
+	background: url(https://static.tripfab.com/images6/mbta-5.png) repeat-x left bottom;
+	text-align: center;
+	margin: 10px 20px 20px;
+	padding-bottom: 10px;
+}
+.main aside label {
+	display: block;
+	width: 278px;
+	margin: 0 auto;
+	color: #8e989d;
+	font: 200 13px Helvetica;
+	margin-bottom: 5px;
+}
+.main aside form > span {
+	display: block;
+	margin: 0 auto;
+	background-color: #f1f1f1;
+	width: 270px;
+	padding: 4px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-o-border-radius: 3px;
+	margin-bottom: 15px;
+}
+.main aside input[type="text"] {
+	width: 258px;
+	height: 35px;
+}
+#home .main .bot {
+	background-color: #ecf1f5;
+	border-top: 1px solid #e7eaeb;
+	height: 70px;
+	position: relative;
+}
+.main .bot .btn-1 {
+	position: absolute;
+	top: 18px;
+	right: 20px;
+}
+.main .bot .btn-1 input {
+	background: none;
+	border: none;
+	color: #FFF;
+	font: 500 13px/36px Helvetica;
+	text-shadow: 0 1px 0 #1f62a0;
+	height: 36px;
+}
+.main .features {
+	padding:30px 0 20px 20px;
+}
+.main .features article {
+	width: 290px;
+	float: left;
+	margin:0 20px 20px 0;
+}
+.main .features article > span {
+	width: 25px;
+	height: 25px;
+	display: block;
+	float: left;
+	margin-right: 10px;
+	background: url(https://static.tripfab.com/images6/mbta-6.png) no-repeat 0 0;
+}
+.main .features article > div {
+	float: left;
+	width: 235px;
+}
+.main .features article h4 {
+	font: bold 16px Helvetica;
+	color: #8b8f92;
+	margin-bottom: 5px;
+}
+.main .features article p {
+	font: 400 13px/20px Helvetica;
+	color: #8b8f92;
+}
+.main .request {
+	background: url(https://static.tripfab.com/images6/mbta-12.gif) repeat-x 0 0 #2b7fbe;
+	height: 103px;
+	width: 918px;
+	border-right: 1px solid #2b7fbe;
+	border-left: 1px solid #2b7fbe;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-o-border-radius: 3px;
+	margin: 0 auto 0;
+	position: relative;
+}
+.main .request h6 {
+	color: #FFF;
+	font: bold 21px Helvetica;
+	text-shadow: 0 1px 0 #1f62a0;
+	padding: 25px 0 10px 30px;
+}
+.main .request p {
+	color: #FFF;
+	font: 300 16px Helvetica;
+	text-shadow: 0 1px 0 #1f62a0;
+	padding: 0 0 0 30px;
+}
+.main .request .btn {
+	display: block;
+	position: absolute;
+	top: 25px;
+	right: 20px;
+	height: 53px;
+	line-height: 53px;
+	background: url(https://static.tripfab.com/images6/mbta-13.png) no-repeat 0 0;
+	text-align: center;
+	color: #FFF;
+	text-shadow: 0 1px 0 #1f62a0;
+	font: bold 18px/53px Helvetica;
+	width: 256px;
+}
+.main .request .btn:hover {
+	background-position: left bottom; 
+}
+footer {
+	width: 960px;
+	margin: 0 auto;
+	clear: both;
+	padding-bottom: 50px;
+}
+footer div {
+	float: left;
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+}
+footer ul {
+	left: 50%;
+	position: relative;
+	float: left;
+	clear: left;
+	text-align: center;
+}
+footer ul li {
+	margin-right: 10px;
+	padding-right: 10px;
+	border-right: 1px solid #97a1a6;
+	right: 50%;
+	position: relative;
+	float: left;
+	display: block;
+}
+footer ul li.last {
+	border: none;
+}
+footer ul li a {
+	 color: #97a1a6;
+}
+footer ul li a:hover {
+	color: #5c656a;
+}
+footer ul li a.active {
+	font-weight: bold;
+}
+/*MEMBERTA PRICING---------------------------------------------------------------*/
+#pricing #cont_bl.content {
+	background: url(https://static.tripfab.com/images6/Top-BG2.png) repeat-x center top;
+	padding-top: 30px;
+}
+#pricing .content > .main {
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+	padding: 30px 20px 20px;
+}
+/*END MEMBERTA PRICING------------------------------------------------------------*/
+
+
+
+
+
