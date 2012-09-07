@@ -14,6 +14,15 @@
 	background: url(https://static.tripfab.com/images6/tripAll3.png) no-repeat 0 0;
 	text-indent: -99999px;
 }
+.slogan {
+	float: left;
+	font: bold 16px/100px Helvetica, sans-serif;
+	color: #565656;
+	height: 92px;
+	padding: 0 0 0 20px;
+	margin-left: 20px;
+	background: url(https://static.tripfab.com/images6/header_division.png) no-repeat left 25px;
+}
 #trip5 .footer {
 	width: 960px;
 	margin: 0 auto;
@@ -21,8 +30,8 @@
 }
 #trip5 .footer .left {
 	background: url(https://static.tripfab.com/images6/tripAll8.png) no-repeat 0 0;
-	padding-left: 45px;
-	height: 35px;
+	padding:10px 0 0 115px;
+	height: 44px;
 	width: 450px;
 	float: left;
 	color: #696969;
@@ -37,7 +46,8 @@
 }
 #trip5 .footer ul {
 	float: right;
-	width: 400px;
+	width: 300px;
+	padding-top: 15px;
 }
 #trip5 .footer ul li {
 	float: right;
@@ -163,6 +173,23 @@
 	width: 243px;
 	height: 30px;
 	margin-bottom: 12px;
+}
+#trip5 .left .side .dates {
+	margin-bottom: 10px;
+}
+#trip5 .left .side .lf {
+	float: left;
+	width: 115px;
+}
+#trip5 .left .side .rg {
+	float: right;
+	width: 115px;
+	margin-right: 3px;
+}
+#trip5 .left .side .date input[type="text"] {
+	width: 105px;
+	padding: 0 5px;
+	background: url(https://static.tripfab.com/images6/land4_6.png) no-repeat 90px 50%;
 }
 #trip5 .left .side .btn-1 {
 	float: right;
@@ -548,7 +575,188 @@
 
 
 
+/*CALENDAR---------------------------------------------------------*/
 
+/* IE6 IFRAME FIX (taken from datepicker 1.5.3 */
+.ui-datepicker-cover {
+    display: none; /*sorry for IE5*/
+    display/**/: block; /*sorry for IE5*/
+    position: absolute; /*must have*/
+    z-index: -1; /*must have*/
+    filter: mask(); /*must have*/
+    top: -4px; /*must have*/
+    left: -4px; /*must have*/
+    width: 200px; /*must have*/
+    height: 200px; /*must have*/
+}
+.ui-state-disabled .undefined span {
+	color: #acacac;
+	font-size: 13px;
+}
+#ui-datepicker-div {
+	width: 214px;
+	background:url(https://static.tripfab.com/images6/lstng_htl_g1.png) repeat-x 0 30px #FFF;
+	-webkit-box-shadow: 0px 0px 3px 2px #8c8c8c;
+	-moz-box-shadow: 0px 0px 3px 2px #8c8c8c;
+	box-shadow: 0px 0px 3px 2px #8c8c8c;
+	padding: 5px 5px 5px 10px;
+	z-index: 15;
+	display: none;
+}
+#ui-datepicker-div .ui-datepicker td {
+	border: 0 none;
+    padding: 2px 0;
+    line-height: 0;
+}
+#ui-datepicker-div .ui-datepicker-prev {
+	color: #60b5f7;
+	font: bold 10px Helvetica;
+	left: 19px;
+    top: 11px;
+    background:url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat -460px -310px;
+    padding-left: 15px;
+    cursor: pointer;
+}
+#ui-datepicker-div .ui-datepicker-next  {
+	color: #60b5f7;
+	font: bold 10px Helvetica;
+	right: 19px;
+    top: 11px;
+    background:url(https://static.tripfab.com/images6/lstng_htl.png) no-repeat -378px -310px;
+    padding-right: 15px;
+    cursor: pointer;
+}
+#ui-datepicker-div .ui-datepicker-title {
+	color: #464646;
+	font: bold 12px/17px Helvetica;
+}
+#ui-datepicker-div a.ui-state-default {
+    background-color: #a9d9fb;
+    color: #FFF;
+    font: 12px/26px Helvetica;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    text-align: center;
+    text-shadow: 0 1px 0 #7bbce9;
+}
+#ui-datepicker-div .ui-datepicker-other-month span {
+    background-color: #d2eafc;
+    color: #60B5f7 !important;
+    font:normal 12px/27px Helvetica;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    text-align: center;
+    text-shadow: 0px 1px 0px #FFF;
+}
+#ui-datepicker-div a.ui-state-default:hover,
+#ui-datepicker-div a.ui-state-active{
+    background-color: #303030;
+    color: #FFFFFF;
+    text-shadow: 0 1px 0 #000;
+}
+#ui-datepicker-div .ui-datepicker-other-month a, #ui-datepicker-div .ui-datepicker-other-month span {
+    color: #ACACAC;
+    font-weight: bold;
+    padding: 0;
+}
+#ui-datepicker-div a.ui-state-highlight{
+	background-color: #60b5f7;
+	color: #FFF;
+	font-weight: bold;
+}
+.ui-datepicker .ui-datepicker-header {
+    color: #464646;
+    font-size: 12px;
+    margin-bottom: 12px;
+    padding: 0.2em 0;
+}
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {
+    position: absolute;
+    top: 2px;
+}
+.ui-datepicker .ui-datepicker-prev-hover, .ui-datepicker .ui-datepicker-next-hover {
+    top: 1px;
+}
+.ui-datepicker .ui-datepicker-prev {
+    left: 0;
+}
+.ui-datepicker .ui-datepicker-next {
+    right: 0;
+}
+.ui-datepicker-unselectable span {
+    background-color: #E1E1E1;
+    color: #6F6F6F !important;
+    font-weight: normal !important;
+    height: 26px;
+    padding: 0 !important;
+    text-shadow: 0 1px 0 #FFFFFF;
+    width: 26px;
+}
+.ui-datepicker .ui-datepicker-title {
+    color: #464646;
+    font: bold 15px Helvetica;
+    margin: 0 2.3em;
+    text-align: center;
+}
+.ui-datepicker .ui-datepicker-title select {
+    font-size: 1em;
+    margin: 1px 0;
+}
+.ui-datepicker select.ui-datepicker-month-year {
+    width: 100%;
+}
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
+    width: 49%;
+}
+.ui-datepicker table {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    width: 100%;
+    margin: 0;
+}
+.ui-datepicker th {
+    border: 0 none;
+    color: #ACACAC;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 1px;
+    text-align: center;
+}
+.ui-datepicker td {
+    border: 0 none;
+    line-height: 26px;
+    padding: 2px 0;
+}
+.ui-datepicker td span, .ui-datepicker td a {
+    color: #ACACAC;
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 0.2em;
+    text-align: center;
+    text-decoration: none;
+}
+.ui-datepicker .ui-datepicker-buttonpane {
+    background-image: none;
+    border-bottom: 0 none;
+    border-left: 0 none;
+    border-right: 0 none;
+    margin: 0.7em 0 0;
+    padding: 0 0.2em;
+}
+.ui-datepicker .ui-datepicker-buttonpane button {
+    cursor: pointer;
+    float: right;
+    margin: 0.5em 0.2em 0.4em;
+    overflow: visible;
+    padding: 0.2em 0.6em 0.3em;
+    width: auto;
+}
+
+/*END CALENDAR-----------------------------------------------------*/
 
 
 

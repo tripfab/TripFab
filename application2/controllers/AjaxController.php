@@ -4133,10 +4133,31 @@ class AjaxController extends Zend_Controller_Action
             $email = $emails->fetchNew();
             $email->name = $_POST['name'];
             $email->email = $_POST['email'];
-            $email->created = date('Y-m-d G:i:s');
+            $email->created = date('Y-m-d H:i:s');
+			$email->checkin = date('Y-m-d H:i:s', strtotime($_POST['checkin']));
+			$email->checkout = date('Y-m-d H:i:s', strtotime($_POST['checkout']));
+			$email->phone = $_POST['phone'];
             
             $email->save();
-            
+			
+			$smtpOptions = array(
+				'host' => 'smtp.mandrillapp.com',
+				'options' => array(
+					'auth' => 'login',
+					'username' => 'cristian@tripfab.com',
+					'password' => '4f9ed0d4-8add-4183-88a8-5e308f0bc3b7',
+					'port' => 587
+				)
+			);
+        	$transport = new Zend_Mail_Transport_Smtp($smtpOptions['host'], $smtpOptions['options']);
+			
+			$mail = new Zend_Mail();
+			$mail->addTo('mike@tripfab.com','Mike')
+				 ->setSubject('New Inquiry from landings')
+				 ->setBodyHtml("<pre>".print_r($email->toArray(), TRUE)."</pre>")
+				 ->setFrom('hello@triphut.com','Triphut')
+				 ->send($transport);
+			
             echo 'Success';
         }
         die;

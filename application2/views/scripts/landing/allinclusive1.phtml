@@ -5,22 +5,8 @@ $nights = array(3,4,5,7,10,15) ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'> 
 <head>
-	<!-- Google Analytics Content Experiment code -->
-	<script>function utmx_section(){}function utmx(){}(function(){var
-    k='49082712-1',d=document,l=d.location,c=d.cookie;
-    if(l.search.indexOf('utm_expid='+k)>0)return;
-    function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
-    indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
-    length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
-    '<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
-    '://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
-    '&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
-    valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
-    '" type="text/javascript" charset="utf-8"></sc'+'ript>')})();
-    </script><script>utmx('url','A/B');</script>
-    <!-- End of Google Analytics Content Experiment code -->
 	<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-	<title>Tripfab.com</title>
+	<title>Triphut.com</title>
 	<link type="text/css"  rel="stylesheet" href="/css6/reset.css?v=<?= $this->cssVC ?>" />
 	<link type="text/css"  rel="stylesheet" href="/css6/common.css?v=<?= $this->cssVC ?>" />
 	<link type="text/css"  rel="stylesheet" href="/css6/landing/landing4.css?v=<?= $this->cssVC ?>" />
@@ -29,10 +15,11 @@ $nights = array(3,4,5,7,10,15) ?>
 <div id="wp_all">
     <div id="wp_header">        
         <div class="wrapper">
-            <h1 class="logo"><a href="/">Tripfab</a></h1>
+            <h1 class="logo"><a href="/">Triphut</a></h1>
+            <h2 class="slogan">Let Us Plan Your Perfect Vacation!</h2>
             <div class="contact">
                 <p>Call our Customer Service <strong>1-866-401-0382</strong></p>
-                <a href="#" onclick="SnapABug.startChat('How can I help you today?'); return false;" class="btn-10">Live Chat</a>
+                <a href="" class="btn-10 js-chat">Live Chat</a>
             </div><!--CONTACT-->
         </div><!--WRAPPER-->
     </div><!--WP_HEADER-->
@@ -45,14 +32,27 @@ $nights = array(3,4,5,7,10,15) ?>
                     <h3>The ultimate All-Inclusive packages in Costa Rica <br />Best prices on the market</h3>
                 </div><!--PIC-->
                 <div class="side">
-                    <h2>Want to get the Best Deals In Costa Rica</h2>
-                    <p>Subscribe to our newsletter and receive the best travel deals in Costa Rica. <em>And best of all – it's free!</em></p>
+                    <h2>Quick Inquiry</h2>
+                    <p>Get one of our Travel Coordinator to help you plan your trip.</em></p>
                     <form method="post" action="/ajax/subscribe" id="js-subscribe">
                         <label>Your Name</label>
                         <input type="text" name="name" value="" />
                         <label>Your E-mail</label>
                         <input type="text" name="email" value="" />
-                        <input type="submit" class="btn-1" value="Subscribe" />
+                        <label>Phone Number</label>
+                        <input type="text" name="phone" value="" />
+                        <div class="date">
+                        	<div class="lf">
+                        		<label>Arrival</label>
+                        		<input class="js-checkin" type="text" name="checkin" value="" />
+                        	</div>
+                        	<div class="rg">
+                        		<label>Departure</label>
+                        		<input class="js-checkout" type="text" name="checkout" value="" />
+                        	</div>
+                        	<div class="clear"></div>
+                        </div><!--DATE-->
+                        <input type="submit" class="btn-1" value="Start your trip" />
                     </form>
                 </div><!--SIDE-->
             </div><!--TOP-->
@@ -168,18 +168,13 @@ $nights = array(3,4,5,7,10,15) ?>
                 
                 <div class="right">
                     <div class="widget">
-                        <h4>What's different about Tripfab?</h4>
+                        <h4>What's different about Triphut?</h4>
                         <p>Everything!</p>
                         <ul>
                             <li>
                                 <span class="ico1"></span>
                                 <p><strong>Satisfaction Insurance</strong> If you aren't 100% satisfied with any part 
                                 of your trip, we'll give you a full refund for that portion – no questions asked</p>
-                            </li>
-                            <li>
-                                <span class="ico2"></span><p><strong>Free Cellphone</strong> We send you off with a 
-                                free iPhone phone to borrow. Make locals calls, take pictures and videos and upload 
-                                them to our Facebook page for a chance to win cool prizes.</p>
                             </li>
                             <li>
                                 <span class="ico3"></span><p><strong>Best Price Guarantee</strong> If you find any 
@@ -192,7 +187,7 @@ $nights = array(3,4,5,7,10,15) ?>
                     <div class="talk">
                         <h3>Talk to Us</h3>
                         <p>Call our Customer Service <strong>1-866-401-0382</strong></p>
-                        <a class="btn-10" href="" onclick="SnapABug.startChat('How can I help you today?'); return false;">Live Chat</a>
+                        <a class="btn-10 js-chat" href="">Live Chat</a>
                     </div>
                 </div><!--RIGHT-->
                 <div class="clear"></div>
@@ -202,14 +197,13 @@ $nights = array(3,4,5,7,10,15) ?>
     <div id="wp_footer">
         <div class="footer">
             <div class="left">
-                <h6>Tripfab is lovingly designed in a tropical paradise</h6>
-                <span>Copyright &copy; 2011 Tripfab</span>
+                <h6>Triphut is lovingly designed in a tropical paradise</h6>
+                <span>Copyright &copy; 2011 Triphut</span>
             </div><!--LEFT-->
             <ul>
-                <li><a target="_blank" href="mailto:hello@tripfab.com">eMail</a></li>
-                <li><a target="_blank" href="https://plus.google.com/108576021199856132768/">Google+</a></li>
-                <li><a target="_blank" href="https://twitter.com/tripfab">Twitter</a></li>
-                <li><a target="_blank" href="https://facebook.com/tripfab">Facebook</a></li>
+                <li><a target="_blank" href="mailto:hello@Triphut.com">eMail</a></li>
+                <li><a target="_blank" href="https://twitter.com/Triphut">Twitter</a></li>
+                <li><a target="_blank" href="https://facebook.com/Triphut">Facebook</a></li>
             </ul>
         </div><!--FOOTER-->
     </div><!--WP_FOOTER-->
@@ -233,12 +227,27 @@ $(document).ready(function() {
 		autoHeight: false,
 		collapsible: true
 	});
-	
+	$('.js-checkin').datepicker({
+		minDate:'+3',
+        dateFormat:'M d, yy',
+        onSelect:function(date){
+            $date = $.datepicker.parseDate("M d, yy",date);
+            $time = $date.getTime() + (86400 * 1000);
+            $('.js-checkout').datepicker('option','minDate',$.datepicker.parseDate('@',$time));
+        }
+	});
+    $('.js-checkout').datepicker({
+        minDate:'+4',
+        dateFormat:'M d, yy'
+    });
 	$('#js-subscribe').submit(function(){
 		var $form = $(this);
 		var $data = {
 			name:$('input[name=name]', $form).val(),
 			email:$('input[name=email]', $form).val(),
+			phone:$('input[name=phone]', $form).val(),
+			checkin:$('input[name=checkin]', $form).val(),
+			checkout:$('input[name=checkout]', $form).val()
 		};
 		if($data.name == "") 
 			alert('Please enter your name');
@@ -250,10 +259,10 @@ $(document).ready(function() {
 				type:'post',
 				data:$data,
 				success:function(){
-					$img = $('<img height="1" width="1" style="border-style:none;" alt="" src="https://www.googleadservices.com/pagead/conversion/956485843/?value=0&amp;label=ZvTtCK2KiwQQ06GLyAM&amp;guid=ON&amp;script=0"/>');
+					$img = $('<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/956485843/?value=0&amp;label=5YoLCO29qwQQ06GLyAM&amp;guid=ON&amp;script=0"/>');
 					$('body').append($img);
 					$('input[type=text]', $form).val('');
-					alert('You have been subscribed\nExpec news from us in the next days');
+					alert('Your information has been submited. We\'ll get in touch ASAP');
 				},
 				error:function(){
 					$('input[type=text]', $form).val('');
@@ -273,6 +282,15 @@ $(document).ready(function() {
 		$days = $d1 / 86400; $hours = $h2 / 3600; $minutes = $m2 / 60; $seconds = $m1 - $m2;
 		$('.jsd').text($days+'d:'); $('.jsh').text($hours+'h:'); $('.jsm').text($minutes+'m:'); $('.jss').text($seconds+'s');
 	},1000);
+	
+	setTimeout(function(){
+		console.log('called');
+		SnapABug.openProactiveChat();
+	}, 3000)
+	
+	$('.js-chat').click(function(){
+		SnapABug.startLink(); return false;
+	});
 });
 </script>
 <script type="text/javascript">
@@ -289,12 +307,12 @@ $(document).ready(function() {
 <script type="text/javascript">
 document.write(unescape("%3Cscript src='" + ((document.location.protocol=="https:")?"https://snapabug.appspot.com":"http://www.snapengage.com") + "/snapabug.js' type='text/javascript'%3E%3C/script%3E"));</script>
 <script type="text/javascript">
-//SnapABug.setButton("https://static.tripfab.com/images/Live-Chat-Button.png");
+//SnapABug.setButton("https://static.Tripfab.com/images/Live-Chat-Button.png");
 //SnapABug.addButton("12926583-ebae-4874-8f3e-57cbe2114ebc","0","55%");
 SnapABug.init("12926583-ebae-4874-8f3e-57cbe2114ebc");
 SnapABug.setCallback('StartChat', function(email, msg, type) {
 	var img = document.createElement('img');
-	img.src = "https://www.googleadservices.com/pagead/conversion/956485843/?value=0&amp;label=T64ECJWh8gMQ06GLyAM&amp;guid=ON&amp;script=0";
+	img.src = "http://www.googleadservices.com/pagead/conversion/956485843/?value=0&amp;label=8ghrCPW8qwQQ06GLyAM&amp;guid=ON&amp;script=0";
 	img.width = 1; img.height = 1;
 	document.body.appendChild(img);
 });
